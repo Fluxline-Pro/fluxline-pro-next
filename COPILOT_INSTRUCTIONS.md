@@ -1,0 +1,396 @@
+# COPILOT_INSTRUCTIONS.md
+
+## Purpose
+
+This repository contains the Fluxline Resonance Group's web platform. It is built with **Next.js 16.0.0** using the **App Router** and **React 19.2.0**, following strict design, layout, and architectural guidelines for maintainability, UI consistency, and future integration with Azure backend services.
+
+---
+
+## General Development Guidelines
+
+### Framework & Architecture
+
+- **Always use Next.js App Router conventions**
+  - App Router directory structure (`/app` directory)
+  - Server Components by default, Client Components when needed
+  - File-based routing with `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`
+  - API routes in `/app/api` directory
+  - Leverage Next.js built-in optimizations (Image, Font, Bundle optimization)
+
+### Theme & Design System
+
+- **Use Tailwind CSS 4+ and component-based design patterns**
+  - All new components and features must utilize Tailwind utility classes
+  - Create reusable component libraries for consistency
+  - Support dark mode, light mode, and high-contrast mode
+  - Use CSS custom properties for theme variables
+
+### Package Management
+
+- **Use the `yarn` package manager exclusively** for all dependency management and scripts
+  - Do not use `npm`, `pnpm`, or `bun` for installs, scripts, or lockfiles
+  - Current Node.js requirement: **>= 20.0.0** (specified in `package.json`)
+  - Ensure all packages (Next.js, React, TypeScript, Tailwind, etc.) are kept up to date
+  - If a version upgrade is required for any packages, do so under a separate feature branch request for full testing
+
+### Node & Environment
+
+- The project uses **Node.js >= 20.0.0**
+- `.nvmrc` file should be maintained if Node version needs to be pinned for consistency
+- Environment variables should be configured in `.env.local` (see `.env.example` for reference)
+- Development server: `yarn dev`
+- Production build: `yarn build`
+- Production server: `yarn start`
+
+### Styling
+
+- **Priority order: Tailwind CSS → CSS Modules → Sass**
+  - Primary styling should be achieved with **Tailwind CSS** utility classes
+  - Use CSS Modules (`*.module.css`) for component-specific styles
+  - Use Sass (`*.module.scss`) for complex styling when needed
+  - Avoid excessive custom CSS and minimize the use of `!important`
+  - Follow responsive-first design principles
+  - Auto-generated CSS type definitions are ignored in git
+
+### Component Reuse & Layout
+
+- **Favor reusing existing components and Next.js patterns**:
+  - Use Next.js built-in components: `Image`, `Link`, `Font`
+  - Create reusable layout components in `/app` directory
+  - Implement consistent page layouts using `layout.tsx` files
+  - Use Server Components for static content, Client Components for interactivity
+- **Follow Next.js App Router conventions**
+- Use component generators when available: `yarn generate:component ComponentName`
+- **Component Development Workflow**:
+  1. Generate: `yarn generate:component ComponentName`
+  2. Generate SCSS types: `yarn scss-types` or `yarn scss-types:watch`
+  3. Develop in `src/theme/components/component-name/`
+  4. Test with: `yarn test component-name`
+  5. Document with Storybook: `yarn storybook`
+
+### State & Data Handling
+
+- **Use appropriate state management for Next.js**
+  - React Server Components for server-side data fetching
+  - React state hooks (`useState`, `useReducer`) for local component state
+  - Context API for shared client-side state
+  - Consider Zustand or similar for complex client-side state management
+  - Server Actions for form handling and mutations
+- **Data fetching patterns**:
+  - Server Components for initial data loading
+  - `fetch` API with Next.js caching for server-side requests
+  - SWR or TanStack Query for client-side data fetching when needed
+- Provide **mock data with complete schema** for new features to aid backend development
+
+### API Routes & Backend Integration
+
+- **Use Next.js API Routes for backend functionality**
+  - API routes in `/app/api` directory
+  - Follow RESTful conventions and proper HTTP status codes
+  - Implement proper error handling and validation
+  - Use TypeScript for request/response types
+- **Future Azure integration**:
+  - API routes can interface with Azure services
+  - Consider Azure Functions for complex backend logic
+  - Use Azure Storage for file uploads and media
+- **Environment variables for API configuration**:
+  - `NEXT_PUBLIC_API_BASE_URL` (for client-side API calls)
+  - `API_BASE_URL` (for server-side API calls)
+  - `AZURE_STORAGE_CONNECTION_STRING`
+  - `AZURE_CDN_BASE_URL`
+
+### Content & Routing
+
+- **Use Next.js App Router for all routing**
+  - File-based routing with proper `page.tsx` files
+  - Dynamic routes with `[param]` directories
+  - Route groups with `(group)` directories when needed
+  - Nested layouts for consistent page structure
+- **Content management**:
+  - Markdown content can be processed with MDX or similar
+  - Static content in `/public` directory
+  - Dynamic content through API routes or external APIs
+  - Use Next.js `generateStaticParams` for static generation when applicable
+
+---
+
+## Coding Best Practices
+
+### Next.js Best Practices
+
+- **Leverage Server Components by default**
+  - Use Client Components only when necessary (interactivity, browser APIs, state)
+  - Mark Client Components with `'use client'` directive at the top of files
+  - Keep Client Components small and focused
+- **Optimize performance**:
+  - Use Next.js `Image` component for all images
+  - Implement proper loading states with `loading.tsx`
+  - Use `Suspense` boundaries for progressive loading
+  - Optimize bundle size with dynamic imports when needed
+
+### TypeScript
+
+- Maintain **strict TypeScript typing** throughout the codebase
+- No implicit `any` types - define proper interfaces and types
+- Use Next.js TypeScript patterns for pages, layouts, and API routes
+- Type definitions for external libraries should be kept up to date
+
+### Component Development
+
+- Use **functional components and hooks exclusively**
+- Follow React 19.2.0 best practices and concurrent features
+- Prefer composition over inheritance
+- Keep components focused and single-responsibility
+- Use Server Components for static content, Client Components for interactivity
+
+### Styling Approach
+
+- **Use Tailwind CSS utility-first approach**
+  - Example: Use `bg-gray-900 text-white` instead of custom CSS classes
+  - Example: Use `px-4 py-2` for consistent spacing
+  - Create custom components for repeated patterns
+- **CSS Modules for component-specific styles**
+  - Use when Tailwind utilities are insufficient
+  - Follow BEM naming conventions
+  - Keep styles co-located with components
+
+### Accessibility & Responsiveness
+
+- Follow all **WCAG 2.1 AA accessibility guidelines**
+- Ensure keyboard navigation works throughout
+- Provide appropriate ARIA labels and roles
+- Test with screen readers when implementing interactive components
+- Use Tailwind's responsive utilities for mobile-first design
+- Support all breakpoints:
+  - sm: 640px+ (small devices)
+  - md: 768px+ (medium devices)
+  - lg: 1024px+ (large devices)
+  - xl: 1280px+ (extra large devices)
+  - 2xl: 1536px+ (2x extra large devices)
+
+### Theme Support
+
+- Ensure all pages/components work with theme modes:
+  - **Dark mode** (using Tailwind's dark mode utilities)
+  - **Light mode**: Clean, accessible design
+  - **System preference**: Respect user's OS theme setting
+- Use Tailwind's dark mode classes: `dark:bg-gray-900`, `dark:text-white`
+- Implement theme switching functionality
+
+### Documentation
+
+- **Document all new features, API routes, and components**:
+  - JSDoc comments for functions and components
+  - README updates for major features
+  - API documentation for route handlers
+  - Component usage examples
+- **API documentation**:
+  - Request/response schemas
+  - Authentication requirements
+  - Error handling patterns
+
+### Technical Debt & Quality
+
+- **Actively remove technical debt found along the way**
+  - Refactor outdated patterns when encountered
+  - Migrate from Pages Router patterns if any remain
+  - Test functionality after cleanup
+- **Testing strategy**:
+  - Unit tests for utility functions and API routes
+  - Component tests with React Testing Library
+  - Integration tests for critical user flows
+  - Use Jest and Testing Library ecosystem
+- Run tests with `yarn test` (when implemented)
+- Ensure linting passes with `yarn lint`
+
+---
+
+## Technology Stack
+
+### Core Framework
+
+- **Next.js 16.0.0** - React framework with App Router
+- **React 19.2.0** - Frontend library with concurrent features
+- **TypeScript 5+** - Type safety and developer experience
+
+### Styling & UI
+
+- **Tailwind CSS 4+** - Utility-first CSS framework
+- **Sass 1.93.2+** - CSS preprocessing (when needed)
+- **CSS Modules** - Component-scoped styling
+- **PostCSS** - CSS processing pipeline
+
+### Development Tools
+
+- **ESLint** - Code linting with Next.js configuration
+- **Prettier** - Code formatting (if configured)
+- **Babel React Compiler** - React optimization
+- **TypeScript** - Static type checking
+
+### Backend Integration (Planned)
+
+- **Next.js API Routes** - Server-side API endpoints
+- **Azure Static Web Apps** - Hosting platform
+- **Azure Storage** - Media and asset storage
+- **Azure CDN** - Content delivery network
+- **Azure Functions** - External serverless functions (if needed)
+
+---
+
+## Project Structure
+
+### Next.js App Router Structure
+
+```
+/
+├── app/                     # App Router directory
+│   ├── globals.css         # Global styles
+│   ├── layout.tsx          # Root layout
+│   ├── page.tsx            # Home page
+│   ├── loading.tsx         # Global loading UI
+│   ├── error.tsx           # Global error UI
+│   ├── not-found.tsx       # 404 page
+│   ├── api/                # API routes
+│   │   └── example/
+│   │       └── route.ts    # API endpoint
+│   └── (routes)/           # Route groups
+│       ├── about/
+│       │   ├── page.tsx    # About page
+│       │   └── layout.tsx  # About layout
+│       └── blog/
+│           ├── page.tsx    # Blog listing
+│           ├── [slug]/
+│           │   └── page.tsx # Blog post
+│           └── layout.tsx  # Blog layout
+├── components/             # Reusable components
+│   ├── ui/                # Basic UI components
+│   └── layout/            # Layout components
+├── lib/                   # Utility functions
+├── types/                 # TypeScript type definitions
+├── styles/                # Additional CSS files
+├── public/                # Static assets
+├── docs/                  # Documentation
+└── config files           # Next.js, TypeScript, etc.
+```
+
+### Key Configuration Files
+
+- `next.config.ts` - Next.js configuration
+- `tailwind.config.ts` - Tailwind CSS configuration
+- `tsconfig.json` - TypeScript configuration
+- `eslint.config.mjs` - ESLint configuration
+- `package.json` - Dependencies and scripts (use yarn only)
+- `.gitignore` - Excludes build artifacts, node_modules, .env files
+
+---
+
+## Development Workflow
+
+### Starting Development
+
+```bash
+yarn install              # Install dependencies
+yarn dev                  # Start development server
+```
+
+### Building for Production
+
+```bash
+yarn build               # Create optimized production build
+yarn start               # Start production server locally
+```
+
+### Code Quality
+
+```bash
+yarn lint                # Run ESLint
+yarn lint --fix          # Fix auto-fixable issues
+```
+
+### Component Development
+
+```bash
+# Generate new component with full structure
+yarn generate:component ComponentName
+# Creates:
+# - component-name.tsx (React component with Fluent UI integration)
+# - component-name.module.scss (SCSS styles with theme support)
+# - component-name.module.scss.d.ts (TypeScript definitions - auto-generated)
+# - component-name.test.tsx (Jest tests with React Testing Library)
+# - component-name.stories.tsx (Storybook stories)
+# - index.ts (barrel export)
+
+# Generate SCSS TypeScript definitions
+yarn scss-types              # One-time generation
+yarn scss-types:watch        # Watch mode for development
+
+# Testing
+yarn test                     # Run all tests
+yarn test component-name      # Run specific component tests
+
+# Storybook
+yarn storybook               # Start Storybook server
+yarn build-storybook         # Build for deployment
+```
+
+---
+
+## Issue & Pull Request Instructions
+
+### For New Issues and PRs
+
+1. **Reference this file** - Copy critical context into the issue body if needed
+2. **Tag related files** - Mention specific components, pages, or API routes affected
+3. **Document requirements clearly**:
+   - API endpoints needed and their schemas
+   - Component reuse opportunities
+   - Responsive design requirements
+   - Theme support (dark/light mode)
+4. **State integration needs**:
+   - Server vs. Client Component requirements
+   - Data fetching patterns needed
+   - State management approach
+5. **Specify UX/design**:
+   - Layout expectations and responsive behavior
+   - Accessibility requirements
+   - Performance considerations
+
+### Branching Strategy
+
+- Create feature branches from `main` or `develop`
+- Use descriptive branch names: `feature/add-blog-system`, `fix/mobile-navigation`
+- Ensure all linting and build checks pass before PR
+- Include tests for new features when applicable
+
+### Code Review Checklist
+
+- [ ] Follows Next.js App Router conventions
+- [ ] Uses yarn (not npm/pnpm/bun) for any dependency changes
+- [ ] TypeScript types are properly defined
+- [ ] Uses Tailwind CSS for styling
+- [ ] Server/Client Components used appropriately
+- [ ] Works in dark mode and light mode
+- [ ] Responsive across all breakpoints
+- [ ] Accessibility standards met (WCAG 2.1 AA)
+- [ ] API routes follow proper patterns (if applicable)
+- [ ] Documentation updated (code comments, README if needed)
+- [ ] Build passes: `yarn build`
+- [ ] Linting passes: `yarn lint`
+- [ ] No console errors or warnings in development
+
+---
+
+## Notes
+
+- This site is being migrated from a Create React App codebase to Next.js
+- API integration will initially use Next.js API routes, with potential Azure Functions for complex operations
+- Environment variables should be properly configured for different deployment environments
+- The project uses Next.js App Router (not Pages Router)
+- All routing uses Next.js file-based routing conventions
+- Build output is optimized for Azure Static Web Apps deployment
+
+---
+
+**Built with strategic precision for modern business transformation.**
+
+### Last Updated: 2025-10-27

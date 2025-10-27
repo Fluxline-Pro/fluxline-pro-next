@@ -44,3 +44,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# storybook
+*storybook.log
+storybook-static
+.storybook/build
+
+# scss generated files
+*.module.scss.d.ts
+
+# vitest
+coverage/
+.vitest/
+
+# playwright
+test-results/
+playwright-report/
+playwright/.cache/

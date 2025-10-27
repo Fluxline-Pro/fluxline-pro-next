@@ -1,0 +1,98 @@
+// Theme configuration and variables
+// Import this file in your component SCSS files
+
+// Fluent UI theme variables
+:root {
+  // Primary colors
+  --theme-palette-themePrimary: #0078d4;
+  --theme-palette-themeLighterAlt: #eff6fc;
+  --theme-palette-themeLighter: #deecf9;
+  --theme-palette-themeLight: #c7e0f4;
+  --theme-palette-themeTertiary: #71afe5;
+  --theme-palette-themeSecondary: #2b88d8;
+  --theme-palette-themeDarkAlt: #106ebe;
+  --theme-palette-themeDark: #005a9e;
+  --theme-palette-themeDarker: #004578;
+
+  // Neutral colors
+  --theme-palette-neutralLighterAlt: #faf9f8;
+  --theme-palette-neutralLighter: #f3f2f1;
+  --theme-palette-neutralLight: #edebe9;
+  --theme-palette-neutralQuaternaryAlt: #e1dfdd;
+  --theme-palette-neutralQuaternary: #d0d0d0;
+  --theme-palette-neutralTertiaryAlt: #c8c6c4;
+  --theme-palette-neutralTertiary: #a19f9d;
+  --theme-palette-neutralSecondary: #605e5c;
+  --theme-palette-neutralPrimaryAlt: #3b3a39;
+  --theme-palette-neutralPrimary: #323130;
+  --theme-palette-neutralDark: #201f1e;
+
+  // Semantic colors
+  --theme-palette-red: #d13438;
+  --theme-palette-redDark: #a4262c;
+  --theme-palette-green: #107c10;
+  --theme-palette-greenDark: #004b1c;
+  --theme-palette-yellow: #ffb900;
+  --theme-palette-yellowDark: #d29200;
+  --theme-palette-orange: #ff8c00;
+  --theme-palette-orangeDark: #ca5010;
+
+  // Spacing
+  --theme-spacing-s2: 4px;
+  --theme-spacing-s1: 8px;
+  --theme-spacing-m: 16px;
+  --theme-spacing-l1: 20px;
+  --theme-spacing-l2: 32px;
+
+  // Typography
+  --theme-fonts-small-fontSize: 12px;
+  --theme-fonts-medium-fontSize: 14px;
+  --theme-fonts-mediumPlus-fontSize: 16px;
+  --theme-fonts-large-fontSize: 18px;
+  --theme-fonts-xLarge-fontSize: 20px;
+  --theme-fonts-xxLarge-fontSize: 24px;
+}
+
+// Dark theme variables
+[data-theme='dark'] {
+  --theme-palette-neutralLighterAlt: #0b0b0b;
+  --theme-palette-neutralLighter: #151515;
+  --theme-palette-neutralLight: #252525;
+  --theme-palette-neutralQuaternaryAlt: #2f2f2f;
+  --theme-palette-neutralQuaternary: #373737;
+  --theme-palette-neutralTertiaryAlt: #404040;
+  --theme-palette-neutralTertiary: #c8c8c8;
+  --theme-palette-neutralSecondary: #d0d0d0;
+  --theme-palette-neutralPrimaryAlt: #dadada;
+  --theme-palette-neutralPrimary: #ffffff;
+  --theme-palette-neutralDark: #f4f4f4;
+}
+
+// Mixins for common patterns
+@mixin theme-elevation-1 {
+  box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
+}
+
+@mixin theme-elevation-2 {
+  box-shadow: 0 3.2px 7.2px 0 rgba(0, 0, 0, 0.132), 0 0.6px 1.8px 0 rgba(0, 0, 0, 0.108);
+}
+
+@mixin theme-elevation-3 {
+  box-shadow: 0 6.4px 14.4px 0 rgba(0, 0, 0, 0.132), 0 1.2px 3.6px 0 rgba(0, 0, 0, 0.108);
+}
+
+@mixin theme-focus-border {
+  outline: 2px solid var(--theme-palette-themePrimary);
+  outline-offset: 2px;
+}
+
+@mixin theme-button-hover {
+  background-color: var(--theme-palette-neutralLighter);
+  cursor: pointer;
+}
+
+// Responsive breakpoints
+$theme-breakpoint-mobile: 480px;
+$theme-breakpoint-tablet: 768px;
+$theme-breakpoint-desktop: 1024px;
+$theme-breakpoint-large: 1440px;
