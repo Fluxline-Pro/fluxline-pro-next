@@ -44,10 +44,12 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 
 ### Styling
 
-- **Priority order: Tailwind CSS → CSS Modules → Sass**
+- **Priority order: Tailwind CSS → Fluent UI theme.ts JSX Styling → SCSS component-specific Modules → Sass**
   - Primary styling should be achieved with **Tailwind CSS** utility classes
-  - Use CSS Modules (`*.module.css`) for component-specific styles
-  - Use Sass (`*.module.scss`) for complex styling when needed
+  - Utilize Fluent UI v8's useTheme() in theme.ts for anything theme, dark mode, typography related
+  - Fluent UI v8 is where theme switching occurs; please use JSX-based styling from Fluent UI for these purposes, not Tailwind
+  - Use CSS Modules (`*.module.scss`) for component-specific styles
+  - Use SASS (`*.module.scss`) for complex styling when needed
   - Avoid excessive custom CSS and minimize the use of `!important`
   - Follow responsive-first design principles
   - Auto-generated CSS type definitions are ignored in git
@@ -145,14 +147,22 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 
 ### Styling Approach
 
-- **Use Tailwind CSS utility-first approach**
-  - Example: Use `bg-gray-900 text-white` instead of custom CSS classes
-  - Example: Use `px-4 py-2` for consistent spacing
-  - Create custom components for repeated patterns
-- **CSS Modules for component-specific styles**
-  - Use when Tailwind utilities are insufficient
+- **Use Fluent UI for theme-aware styling**
+  - Handle theme colors, interactive states, and design tokens with Fluent UI theming properties
+  - Ensure accessibility and proper contrast ratios through Fluent UI color system
+  - Example: Use `theme.palette.themePrimary` instead of hardcoded colors
+- **Use Tailwind CSS for layout and utilities**
+  - Example: Use `flex items-center justify-between` for layout instead of custom CSS
+  - Example: Use `px-4 py-2 rounded-lg shadow-md` for consistent spacing and styling
+  - Replace old JSX layout components with Tailwind utility classes where appropriate
+- **SCSS Modules for complex component-specific styles**
+  - Use when Tailwind utilities and Fluent UI theming are insufficient
   - Follow BEM naming conventions
   - Keep styles co-located with components
+- **Global SCSS usage guidelines**
+  - Avoid adding global styles unless absolutely necessary
+  - Document reasoning when global styles are added
+  - Prefer component-based or utility-based solutions
 
 ### Accessibility & Responsiveness
 

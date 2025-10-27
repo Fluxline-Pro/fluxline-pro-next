@@ -92,12 +92,16 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - Use **yarn** exclusively for package management
 - Follow Next.js App Router conventions
 - Maintain TypeScript strict typing
-- Use Tailwind CSS for styling with Fluent UI components
+- **Styling Hierarchy (in order of priority)**:
+  1. **Fluent UI theming properties and objects** - Handle theme-aware colors, design tokens, and component customization
+  2. **Tailwind CSS classes** - Use for layout, spacing, responsive design, and consistent utilities (replace old JSX and Layout components where appropriate)
+  3. **SCSS component-based styling** - Use when Tailwind utilities are insufficient for complex component-specific styles
+  4. **Global SCSS** - Use sparingly and preferably left alone; document reasoning when additions are necessary
+- Ensure that light/dark mode changes and theming are handled by Fluent UI JSX styling, NOT Tailwind, as the two can conflict
 - Follow ESLint configuration
 - Generate components using `yarn generate:component ComponentName`
 - Write tests for all new components
 - Document components with Storybook stories
-- Use SCSS modules for component-specific styling
 
 ## Component Development Workflow
 
