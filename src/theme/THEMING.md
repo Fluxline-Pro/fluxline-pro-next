@@ -112,13 +112,25 @@ export default function RootLayout({ children }) {
 Custom hook for accessing theme in React components:
 ```typescript
 const { 
-  theme,           // Current Fluent UI theme object
+  theme,           // Current Fluent UI theme object (IExtendedTheme)
   themeMode,       // Current theme mode ('light', 'dark', etc.)
   setThemeMode,    // Function to change theme
   toggleTheme,     // Toggle between light/dark
   // ... other theme-related utilities
 } = useAppTheme();
 ```
+
+**Theme Object Structure:**
+The `theme` object returned by `useAppTheme()` includes:
+- `theme.palette` - Fluent UI palette colors (themePrimary, neutralPrimary, etc.)
+- `theme.semanticColors` - Semantic colors (bodyText, bodyBackground, etc.)
+- `theme.spacing` - Spacing values (s, m, l, xl, etc.)
+- `theme.typography` - Typography settings (fonts, sizes, etc.)
+- `theme.animations` - Animation durations and easing functions
+- `theme.shadows` - Shadow definitions (s, m, l)
+- `theme.borderRadius` - Border radius values (s, m, l)
+- `theme.breakpoints` - Responsive breakpoints
+- And more...
 
 ## Using the Theme System
 
@@ -138,7 +150,8 @@ export const MyComponent = () => {
       backgroundColor: theme.palette.themePrimary,
       padding: theme.spacing.m,
       borderRadius: theme.borderRadius.m,
-      transition: theme.animations.transitions.button,
+      // Using standard transition properties
+      transition: `all ${theme.animations.durations.fast} ${theme.animations.easing.primary}`,
     },
     rootHovered: {
       backgroundColor: theme.palette.themeDarkAlt,
@@ -185,9 +198,14 @@ Import the theme and use CSS custom properties:
     @include theme.theme-button-hover;
   }
   
-  // Responsive
-  @media (min-width: theme.$theme-breakpoint-md) {
+  // Responsive - using SCSS variable with interpolation
+  @media (min-width: #{theme.$theme-breakpoint-md}) {
     padding: var(--theme-spacing-l);
+  }
+  
+  // Alternative: use pixel values directly if needed
+  @media (min-width: 768px) {
+    font-size: var(--theme-fonts-large-fontSize);
   }
 }
 ```
