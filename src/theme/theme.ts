@@ -1754,21 +1754,47 @@ export const applyThemeToDocument = (themeMode: ThemeMode) => {
   const root = document.documentElement;
   const theme = themeMap[themeMode];
 
+  // Set the data-theme attribute for CSS selector matching
+  root.setAttribute('data-theme', themeMode);
+
   // Add transition properties to root element
   root.style.setProperty(
     'transition',
     'background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out'
   );
 
-  // Apply CSS variables with transitions
+  // Apply CSS variables with proper naming convention matching _theme.scss
   Object.entries(theme.palette).forEach(([key, value]) => {
-    root.style.setProperty(`--${key}`, value);
+    root.style.setProperty(`--theme-palette-${key}`, value);
   });
 
-  // Apply semantic colors with transitions
+  // Apply semantic colors with proper naming convention
   Object.entries(theme.semanticColors).forEach(([key, value]) => {
-    root.style.setProperty(`--${key}`, value);
+    root.style.setProperty(`--theme-semantic-${key}`, value);
   });
+
+  // Apply spacing variables
+  Object.entries(theme.spacing).forEach(([key, value]) => {
+    if (typeof value === 'string') {
+      root.style.setProperty(`--theme-spacing-${key}`, value);
+    }
+  });
+
+  // Apply animation variables
+  root.style.setProperty('--theme-animation-duration-fast', theme.animations.durations.fast);
+  root.style.setProperty('--theme-animation-duration-normal', theme.animations.durations.normal);
+  root.style.setProperty('--theme-animation-duration-slow', theme.animations.durations.slow);
+  root.style.setProperty('--theme-animation-easing-primary', theme.animations.easing.primary);
+
+  // Apply shadow variables
+  root.style.setProperty('--theme-shadow-s', theme.shadows.s);
+  root.style.setProperty('--theme-shadow-m', theme.shadows.m);
+  root.style.setProperty('--theme-shadow-l', theme.shadows.l);
+
+  // Apply border radius variables
+  root.style.setProperty('--theme-borderRadius-s', theme.borderRadius.s);
+  root.style.setProperty('--theme-borderRadius-m', theme.borderRadius.m);
+  root.style.setProperty('--theme-borderRadius-l', theme.borderRadius.l);
 
   // Store theme preference
   localStorage.setItem(THEME_STORAGE_KEY, themeMode);
