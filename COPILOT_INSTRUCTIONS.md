@@ -393,14 +393,53 @@ yarn build-storybook         # Build for deployment
 ## Notes
 
 - This site is being migrated from a Create React App codebase to Next.js
+- **Theme System Migration (Completed)**: The complete theme system has been successfully migrated from the React app, including:
+  - Core theme configuration with 1888 lines of theme definitions
+  - Zustand-based state management for user preferences
+  - Fluent UI v8 integration with custom Fluxline Pro themes
+  - Theme hooks (useAppTheme, useMediaQuery, useThemeColor, useReducedMotion)
+  - Core components (Button, Card) with full theme integration
+  - Support for dark mode (default), light mode, and high-contrast themes
+  - SSR-compatible ThemeProvider with proper hydration handling
 - API integration will initially use Next.js API routes, with potential Azure Functions for complex operations
 - Environment variables should be properly configured for different deployment environments
 - The project uses Next.js App Router (not Pages Router)
 - All routing uses Next.js file-based routing conventions
 - Build output is optimized for Azure Static Web Apps deployment
 
+## Theme System Architecture
+
+### State Management
+- **Zustand Store**: `src/store/store-specs/userPreferencesStore.ts` - Manages user preferences including theme mode, font scale, layout preferences
+- **Persistence**: User preferences are persisted to localStorage automatically
+- **SSR Compatibility**: Theme state is hydrated properly on client-side
+
+### Theme Provider
+- **Location**: `src/theme/contexts/ThemeProvider.tsx`
+- **Integration**: Wraps the entire app in `app/layout.tsx`
+- **Features**: Applies theme to document, handles theme switching, integrates with Fluent UI
+
+### Theme Configuration
+- **Main File**: `src/theme/theme.ts` (1888 lines)
+- **Exports**: Multiple theme modes (dark, light, high-contrast, grayscale)
+- **Design Tokens**: Colors, typography, spacing, animations, shadows, gradients
+- **Breakpoints**: xs (0px), sm (576px), md (768px), lg (1024px), xl (1366px), xxl (1920px)
+
+### Available Hooks
+- **useAppTheme**: Access theme object and theme switching functions
+- **useMediaQuery**: Responsive breakpoint detection and device type queries
+- **useThemeColor**: Get theme-aware colors based on current mode
+- **useReducedMotion**: Detect and respect motion preferences
+
+### Component Development
+- All components should be generated using `yarn generate:component ComponentName`
+- Use Fluent UI components and theming properties for theme-aware styling
+- Apply Tailwind CSS for layout and utilities (non-theme-dependent)
+- Use SCSS modules only when Fluent UI and Tailwind are insufficient
+- Add 'use client' directive to components that use hooks or interactivity
+
 ---
 
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-10-27
+### Last Updated: 2025-10-27 - Theme System Migration Complete

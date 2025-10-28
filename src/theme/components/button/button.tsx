@@ -52,7 +52,10 @@ export const Button: React.FC<ButtonProps> = ({
     },
   };
 
-  const ButtonComponent = variant === 'default' ? DefaultButton : PrimaryButton;
+  const ButtonComponent = 
+    variant === 'default' ? DefaultButton :
+    variant === 'secondary' ? DefaultButton :
+    PrimaryButton;
 
   return (
     <ButtonComponent

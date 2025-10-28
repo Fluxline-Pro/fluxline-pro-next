@@ -2,6 +2,21 @@
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) for the Fluxline Resonance Group's web platform.
 
+## Recent Updates
+
+### Theme System Migration ✅
+
+The complete theme system has been successfully migrated from the React app to Next.js:
+
+- **Complete theme configuration** (1888 lines) including colors, typography, animations, and design tokens
+- **Zustand state management** for user preferences with SSR compatibility
+- **Fluent UI v8 integration** with custom Fluxline Pro theme
+- **Next.js App Router compatible** ThemeProvider with proper hydration handling
+- **Theme hooks** (useAppTheme, useMediaQuery, useThemeColor, useReducedMotion)
+- **Core components** (Button, Card) with Fluent UI integration
+- **Dark mode support** (default), light mode, and high-contrast themes
+- **Responsive breakpoints** and media query utilities
+
 ## Getting Started
 
 This project uses **yarn** as the package manager. First, install dependencies and run the development server:
@@ -113,6 +128,66 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 6. **Create Stories**: Update the `.stories.tsx` file for documentation
 7. **Run Tests**: `yarn test my-component`
 8. **View in Storybook**: `yarn storybook`
+
+## Theme System
+
+### Overview
+
+The Fluxline Pro theme system provides a comprehensive design system with:
+
+- **Multiple theme modes**: Dark (default), Light, High Contrast, Grayscale
+- **Fluent UI integration**: All components use Fluent UI theming for consistency
+- **Responsive design**: Built-in breakpoint system for mobile, tablet, and desktop
+- **Custom animations**: Smooth transitions with Fluxline Pro motion curve
+- **Accessibility**: WCAG 2.1 AA compliant with proper contrast ratios
+
+### Using the Theme
+
+```tsx
+'use client';
+
+import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { Button } from '@/theme/components/button';
+import { Card } from '@/theme/components/card';
+
+export default function MyComponent() {
+  const { theme, themeMode, toggleTheme } = useAppTheme();
+
+  return (
+    <div style={{ backgroundColor: theme.palette.neutralLighter }}>
+      <h1 style={{ color: theme.palette.themePrimary }}>
+        Current theme: {themeMode}
+      </h1>
+      
+      <Button variant="primary" onClick={toggleTheme}>
+        Toggle Theme
+      </Button>
+      
+      <Card elevation={2} padding="medium">
+        <p>Card content with theme styling</p>
+      </Card>
+    </div>
+  );
+}
+```
+
+### Available Hooks
+
+- **`useAppTheme()`** - Access theme object and theme switching functions
+- **`useMediaQuery()`** - Responsive breakpoint detection
+- **`useThemeColor()`** - Get theme-aware colors
+- **`useReducedMotion()`** - Detect motion preferences
+
+### Theme Configuration
+
+The theme system is configured in `src/theme/theme.ts` and includes:
+
+- Color palettes for all theme modes
+- Typography system with Inter font family
+- Spacing and layout utilities
+- Animation and transition configs
+- Shadow and elevation system
+- Border radius utilities
 
 ## Learn More
 
