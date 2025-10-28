@@ -3,6 +3,9 @@
 
 // Fluent UI theme variables
 :root {
+  // Typography - using Inter font family
+  --theme-fonts-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  
   // Primary colors
   --theme-palette-themePrimary: #0078d4;
   --theme-palette-themeLighterAlt: #eff6fc;
