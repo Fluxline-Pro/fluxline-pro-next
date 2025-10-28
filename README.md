@@ -126,11 +126,16 @@ To learn more about Next.js, take a look at the following resources:
 
 ### Azure Static Web Apps
 
-This project is configured for deployment on Azure Static Web Apps:
+This project is configured for deployment on Azure Static Web Apps with branch-specific environments:
+
+- **Development**: `develop` branch → `az-fluxline-next-dev`
+- **Testing**: `test` branch → `az-fluxline-next-test`
+- **Production**: `master` branch → `az-fluxline-next-prod`
 
 1. Build output is optimized for static hosting
 2. API routes can be handled by Next.js API routes
 3. Follow Azure SWA deployment guidelines
+4. Managed Identity authentication for enhanced security
 
 ### Vercel (Alternative)
 
