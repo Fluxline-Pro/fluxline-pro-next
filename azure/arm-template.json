@@ -1,0 +1,119 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "type": "string",
+      "allowedValues": ["dev", "test", "prod"],
+      "metadata": {
+        "description": "The environment for this deployment"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources"
+      }
+    },
+    "repositoryUrl": {
+      "type": "string",
+      "defaultValue": "https://github.com/Fluxline-Pro/fluxline-pro-next",
+      "metadata": {
+        "description": "GitHub repository URL"
+      }
+    },
+    "branch": {
+      "type": "string",
+      "defaultValue": "[if(equals(parameters('environment'), 'prod'), 'master', if(equals(parameters('environment'), 'test'), 'test', 'develop'))]",
+      "metadata": {
+        "description": "GitHub branch to deploy from"
+      }
+    }
+  },
+  "variables": {
+    "staticWebAppName": "[concat('az-fluxline-next-', parameters('environment'))]",
+    "storageAccountName": "azfluxlinewebstorage",
+    "keyVaultName": "kv-az-fluxline-pro",
+    "staticWebAppSku": "Free"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/staticSites",
+      "apiVersion": "2022-03-01",
+      "name": "[variables('staticWebAppName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Free"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "buildProperties": {
+          "appLocation": "/",
+          "apiLocation": "",
+          "outputLocation": "out"
+        },
+        "stagingEnvironmentPolicy": "[if(equals(parameters('environment'), 'prod'), 'Disabled', 'Enabled')]",
+        "allowConfigFileUpdates": true,
+        "enterpriseGradeCdnStatus": "[if(equals(parameters('environment'), 'prod'), 'Enabled', 'Disabled')]"
+      }
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "apiVersion": "2016-10-01",
+      "name": "[concat(variables('keyVaultName'), '/AZURE-STORAGE-CONNECTION-STRING')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/staticSites', variables('staticWebAppName'))]"
+      ],
+      "properties": {
+        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2023-01-01').keys[0].value, ';EndpointSuffix=core.windows.net')]"
+      }
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "apiVersion": "2016-10-01",
+      "name": "[concat(variables('keyVaultName'), '/AZURE-STORAGE-ACCOUNT-NAME')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/staticSites', variables('staticWebAppName'))]"
+      ],
+      "properties": {
+        "value": "[variables('storageAccountName')]"
+      }
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "apiVersion": "2016-10-01",
+      "name": "[concat(variables('keyVaultName'), '/NEXT-PUBLIC-ENVIRONMENT')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/staticSites', variables('staticWebAppName'))]"
+      ],
+      "properties": {
+        "value": "[parameters('environment')]"
+      }
+    }
+  ],
+  "outputs": {
+    "staticWebAppName": {
+      "type": "string",
+      "value": "[variables('staticWebAppName')]"
+    },
+    "staticWebAppDefaultHostname": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Web/staticSites', variables('staticWebAppName'))).defaultHostname]"
+    },
+    "staticWebAppSku": {
+      "type": "string",
+      "value": "[variables('staticWebAppSku')]"
+    },
+    "existingStorageAccountName": {
+      "type": "string",
+      "value": "[variables('storageAccountName')]"
+    },
+    "existingKeyVaultName": {
+      "type": "string",
+      "value": "[variables('keyVaultName')]"
+    }
+  }
+}

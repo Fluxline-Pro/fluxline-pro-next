@@ -367,7 +367,7 @@ yarn build-storybook         # Build for deployment
 
 ### Branching Strategy
 
-- Create feature branches from `main` or `develop`
+- Create feature branches from `master` or `develop`
 - Use descriptive branch names: `feature/add-blog-system`, `fix/mobile-navigation`
 - Ensure all linting and build checks pass before PR
 - Include tests for new features when applicable
