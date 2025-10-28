@@ -1,0 +1,40 @@
+/**
+ * Storybook Header Styles - Fluent UI Theme Integration
+ * Uses theme variables from _theme.scss for consistent theming
+ */
+
+@use '../theme/theme' as theme;
+
+.storybook-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--theme-palette-neutralQuaternary);
+  padding: var(--theme-spacing-m) var(--theme-spacing-l);
+  font-family: var(--theme-fonts-family);
+  
+  svg {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  h1 {
+    display: inline-block;
+    vertical-align: top;
+    margin: 6px 0 6px var(--theme-spacing-xs);
+    font-weight: 700;
+    font-size: var(--theme-fonts-large-fontSize);
+    line-height: 1;
+    color: var(--theme-semantic-bodyText);
+  }
+  
+  button + button {
+    margin-left: var(--theme-spacing-xs);
+  }
+  
+  .welcome {
+    margin-right: var(--theme-spacing-xs);
+    color: var(--theme-palette-neutralSecondary);
+    font-size: var(--theme-fonts-medium-fontSize);
+  }
+}

@@ -1,87 +1,158 @@
-// Theme configuration and variables
-// Import this file in your component SCSS files
+/**
+ * FLUXLINE PRO THEME SCSS VARIABLES
+ * ==================================
+ * 
+ * This file provides SCSS variables that map to the Fluent UI theme
+ * defined in theme.ts. Import this in your component SCSS files to
+ * access theme values as SCSS variables.
+ * 
+ * These variables are automatically generated from the theme.ts palette
+ * and applied to the DOM via CSS custom properties by the ThemeProvider.
+ */
 
-// Fluent UI theme variables
+// Light Theme (Default Root Variables)
+// These map to the lightTheme palette in theme.ts
 :root {
-  // Typography - using Inter font family
+  // Typography - Inter font family from theme.ts
   --theme-fonts-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --theme-fonts-mono: 'Courier Prime', 'Roboto Mono', 'SF Mono', 'Monaco', 'Cascadia Code', Consolas, 'Courier New', monospace;
   
-  // Primary colors
-  --theme-palette-themePrimary: #0078d4;
-  --theme-palette-themeLighterAlt: #eff6fc;
-  --theme-palette-themeLighter: #deecf9;
-  --theme-palette-themeLight: #c7e0f4;
-  --theme-palette-themeTertiary: #71afe5;
-  --theme-palette-themeSecondary: #2b88d8;
-  --theme-palette-themeDarkAlt: #106ebe;
-  --theme-palette-themeDark: #005a9e;
-  --theme-palette-themeDarker: #004578;
+  // Primary Palette Colors - Fluxline Pro Light Theme
+  --theme-palette-themePrimary: #274770; // Deep slate blue
+  --theme-palette-themeSecondary: #5A7CA0; // Cooler contrast
+  --theme-palette-themeTertiary: #7B9BB8; // UI layering
+  --theme-palette-themeLight: #F8FAFC; // Clean and airy
+  --theme-palette-themeDark: #2E2E3A; // Resonance Core
+  --theme-palette-themeDarker: #1F1F1F; // Deep charcoal
+  --theme-palette-themeLighter: #FFFFFF; // Ritual White
+  --theme-palette-themeLighterAlt: #F5F5F5; // Breath whitespace
+  --theme-palette-themeDarkAlt: #1F1F1F;
 
-  // Neutral colors
-  --theme-palette-neutralLighterAlt: #faf9f8;
-  --theme-palette-neutralLighter: #f3f2f1;
-  --theme-palette-neutralLight: #edebe9;
-  --theme-palette-neutralQuaternaryAlt: #e1dfdd;
-  --theme-palette-neutralQuaternary: #d0d0d0;
-  --theme-palette-neutralTertiaryAlt: #c8c6c4;
-  --theme-palette-neutralTertiary: #a19f9d;
-  --theme-palette-neutralSecondary: #605e5c;
-  --theme-palette-neutralPrimaryAlt: #3b3a39;
-  --theme-palette-neutralPrimary: #323130;
-  --theme-palette-neutralDark: #201f1e;
+  // Neutral Palette - Light Mode
+  --theme-palette-neutralPrimary: #2E2E2E; // Primary text
+  --theme-palette-neutralSecondary: #4A4A4A; // Secondary text
+  --theme-palette-neutralTertiary: #707070; // Tertiary text
+  --theme-palette-neutralTertiaryAlt: #8F8F8F;
+  --theme-palette-neutralQuaternary: #E0E0E0;
+  --theme-palette-neutralQuaternaryAlt: #F0F0F0;
+  --theme-palette-neutralDark: #000000;
+  --theme-palette-neutralLight: #FFFFFF;
+  --theme-palette-neutralLighter: #FFFFFF;
+  --theme-palette-neutralLighterAlt: #F5F5F5;
 
-  // Semantic colors
-  --theme-palette-red: #d13438;
-  --theme-palette-redDark: #a4262c;
-  --theme-palette-green: #107c10;
-  --theme-palette-greenDark: #004b1c;
-  --theme-palette-yellow: #ffb900;
-  --theme-palette-yellowDark: #d29200;
-  --theme-palette-orange: #ff8c00;
-  --theme-palette-orangeDark: #ca5010;
+  // Fluxline Accent
+  --theme-palette-accent: #4A9B96; // Fluxline Teal
+  --theme-palette-black: #000000;
+  --theme-palette-white: #FFFFFF;
 
-  // Spacing
-  --theme-spacing-s2: 4px;
-  --theme-spacing-s1: 8px;
-  --theme-spacing-m: 16px;
-  --theme-spacing-l1: 20px;
-  --theme-spacing-l2: 32px;
+  // Semantic Colors - Light Mode
+  --theme-semantic-bodyText: #2E2E2E;
+  --theme-semantic-bodyBackground: #FFFFFF;
+  --theme-semantic-errorText: #B0303C;
+  --theme-semantic-errorBackground: #FFEBEE;
+  --theme-semantic-successText: #107C10;
+  --theme-semantic-successBackground: #E0F2F1;
+  --theme-semantic-messageText: #F5C85C; // Mythic Gold
+  --theme-semantic-warningText: #C19C00;
+  --theme-semantic-warningBackground: #FFF8E1;
+  --theme-semantic-link: #274770;
+  --theme-semantic-linkHovered: #1F1F1F;
 
-  // Typography
-  --theme-fonts-small-fontSize: 12px;
-  --theme-fonts-medium-fontSize: 14px;
-  --theme-fonts-mediumPlus-fontSize: 16px;
-  --theme-fonts-large-fontSize: 18px;
-  --theme-fonts-xLarge-fontSize: 20px;
-  --theme-fonts-xxLarge-fontSize: 24px;
+  // Spacing (from theme.ts spacing system)
+  --theme-spacing-none: 0;
+  --theme-spacing-xxs: 0.25rem;
+  --theme-spacing-xs: 0.5rem;
+  --theme-spacing-s: 0.75rem;
+  --theme-spacing-m: 1rem;
+  --theme-spacing-l: 1.5rem;
+  --theme-spacing-xl: 2rem;
+  --theme-spacing-xxl: 2.5rem;
+  --theme-spacing-xxxl: 3rem;
+  --theme-spacing-xxxxl: 4rem;
+
+  // Typography Sizes
+  --theme-fonts-tiny-fontSize: clamp(0.25rem, 0.5cqi, 0.25rem);
+  --theme-fonts-xSmall-fontSize: clamp(0.5rem, 1cqi, 0.5rem);
+  --theme-fonts-small-fontSize: clamp(0.75rem, 1.5cqi, 0.75rem);
+  --theme-fonts-medium-fontSize: 1rem;
+  --theme-fonts-mediumPlus-fontSize: clamp(1.25rem, 2.5cqi, 1.25rem);
+  --theme-fonts-large-fontSize: clamp(1.5rem, 3cqi, 1.5rem);
+  --theme-fonts-xLarge-fontSize: clamp(2rem, 4cqi, 2rem);
+  --theme-fonts-xxLarge-fontSize: clamp(3rem, 6cqi, 3rem);
+
+  // Border Radius
+  --theme-borderRadius-s: 0.25rem;
+  --theme-borderRadius-m: 0.5rem;
+  --theme-borderRadius-l: 1rem;
+
+  // Shadows
+  --theme-shadow-s: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --theme-shadow-m: 0 2px 6px rgba(0, 0, 0, 0.15);
+  --theme-shadow-l: 0 4px 12px rgba(0, 0, 0, 0.18);
+
+  // Animations
+  --theme-animation-duration-fast: 200ms;
+  --theme-animation-duration-normal: 300ms;
+  --theme-animation-duration-slow: 400ms;
+  --theme-animation-easing-primary: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-// Dark theme variables
+// Dark Theme Variables - Fluxline Pro Default
+// These map to the darkTheme palette in theme.ts
 [data-theme='dark'] {
-  --theme-palette-neutralLighterAlt: #0b0b0b;
-  --theme-palette-neutralLighter: #151515;
-  --theme-palette-neutralLight: #252525;
-  --theme-palette-neutralQuaternaryAlt: #2f2f2f;
-  --theme-palette-neutralQuaternary: #373737;
-  --theme-palette-neutralTertiaryAlt: #404040;
-  --theme-palette-neutralTertiary: #c8c8c8;
-  --theme-palette-neutralSecondary: #d0d0d0;
-  --theme-palette-neutralPrimaryAlt: #dadada;
-  --theme-palette-neutralPrimary: #ffffff;
-  --theme-palette-neutralDark: #f4f4f4;
+  // Primary Palette - Dark Mode
+  --theme-palette-themePrimary: #AFCAFC; // Slate blue
+  --theme-palette-themeSecondary: #4A9B96; // Fluxline teal
+  --theme-palette-themeTertiary: #5A7CA0;
+  --theme-palette-themeLight: #F8FAFC;
+  --theme-palette-themeDark: #1F1F1F;
+  --theme-palette-themeDarker: #010101; // Deep black base
+  --theme-palette-themeLighter: #2E2E3A;
+  --theme-palette-themeLighterAlt: #3A3A4A;
+  --theme-palette-themeDarkAlt: #005a9e;
+
+  // Neutral Palette - Dark Mode
+  --theme-palette-neutralPrimary: #FFFFFF;
+  --theme-palette-neutralSecondary: #E1E1E1;
+  --theme-palette-neutralTertiary: #B8B8B8;
+  --theme-palette-neutralTertiaryAlt: #8F8F8F;
+  --theme-palette-neutralQuaternary: #404040;
+  --theme-palette-neutralQuaternaryAlt: #2E2E2E;
+  --theme-palette-neutralDark: #1A1A1A;
+  --theme-palette-neutralLight: #262626;
+  --theme-palette-neutralLighter: #2E2E2E;
+  --theme-palette-neutralLighterAlt: #252525;
+
+  // Accent
+  --theme-palette-accent: #F5C85C; // Mythic gold
+  --theme-palette-black: #010101;
+  --theme-palette-white: #FFFFFF;
+
+  // Semantic Colors - Dark Mode
+  --theme-semantic-bodyText: #FFFFFF;
+  --theme-semantic-bodyBackground: #010101;
+  --theme-semantic-errorText: #B0303C;
+  --theme-semantic-errorBackground: #2D1617;
+  --theme-semantic-successText: #4A9B96;
+  --theme-semantic-successBackground: #1A2D2A;
+  --theme-semantic-messageText: #F5C85C;
+  --theme-semantic-warningText: #F5C85C;
+  --theme-semantic-warningBackground: #2D2A17;
+  --theme-semantic-link: #274770;
+  --theme-semantic-linkHovered: #5A7CA0;
 }
 
-// Mixins for common patterns
+// SCSS Mixins for common theme patterns
 @mixin theme-elevation-1 {
-  box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
+  box-shadow: var(--theme-shadow-s);
 }
 
 @mixin theme-elevation-2 {
-  box-shadow: 0 3.2px 7.2px 0 rgba(0, 0, 0, 0.132), 0 0.6px 1.8px 0 rgba(0, 0, 0, 0.108);
+  box-shadow: var(--theme-shadow-m);
 }
 
 @mixin theme-elevation-3 {
-  box-shadow: 0 6.4px 14.4px 0 rgba(0, 0, 0, 0.132), 0 1.2px 3.6px 0 rgba(0, 0, 0, 0.108);
+  box-shadow: var(--theme-shadow-l);
 }
 
 @mixin theme-focus-border {
@@ -90,12 +161,18 @@
 }
 
 @mixin theme-button-hover {
-  background-color: var(--theme-palette-neutralLighter);
+  background-color: var(--theme-palette-neutralQuaternaryAlt);
   cursor: pointer;
 }
 
-// Responsive breakpoints
-$theme-breakpoint-mobile: 480px;
-$theme-breakpoint-tablet: 768px;
-$theme-breakpoint-desktop: 1024px;
-$theme-breakpoint-large: 1440px;
+@mixin theme-transition {
+  transition: all var(--theme-animation-duration-normal) var(--theme-animation-easing-primary);
+}
+
+// Responsive breakpoints (matching theme.ts breakpoints)
+$theme-breakpoint-xs: 0px;
+$theme-breakpoint-sm: 576px;
+$theme-breakpoint-md: 768px;
+$theme-breakpoint-lg: 1024px;
+$theme-breakpoint-xl: 1366px;
+$theme-breakpoint-xxl: 1920px;
