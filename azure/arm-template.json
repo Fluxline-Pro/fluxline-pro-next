@@ -23,10 +23,9 @@
         "description": "GitHub repository URL"
       }
     },
-
     "branch": {
       "type": "string",
-      "defaultValue": "[if(equals(parameters('environment'), 'prod'), 'main', if(equals(parameters('environment'), 'test'), 'test', 'develop'))]",
+      "defaultValue": "[if(equals(parameters('environment'), 'prod'), 'master', if(equals(parameters('environment'), 'test'), 'test', 'develop'))]",
       "metadata": {
         "description": "GitHub branch to deploy from"
       }
@@ -34,76 +33,18 @@
   },
   "variables": {
     "staticWebAppName": "[concat('az-fluxline-next-', parameters('environment'))]",
-    "storageAccountName": "[concat('fluxline', parameters('environment'), 'stg')]",
-    "keyVaultName": "[concat('kv-fluxline-', parameters('environment'))]",
-    "storageSkuName": "[if(equals(parameters('environment'), 'prod'), 'Standard_ZRS', 'Standard_LRS')]",
-    "staticWebAppSku": "[if(equals(parameters('environment'), 'prod'), 'Standard', 'Free')]"
+    "storageAccountName": "azfluxlinewebstorage",
+    "keyVaultName": "kv-az-fluxline-pro",
+    "staticWebAppSku": "Free"
   },
   "resources": [
     {
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2023-01-01",
-      "name": "[variables('storageAccountName')]",
-      "location": "[parameters('location')]",
-      "sku": {
-        "name": "[variables('storageSkuName')]"
-      },
-      "kind": "StorageV2",
-      "properties": {
-        "accessTier": "Hot",
-        "allowBlobPublicAccess": false,
-        "allowCrossTenantReplication": false,
-        "allowSharedKeyAccess": true,
-        "encryption": {
-          "services": {
-            "blob": {
-              "enabled": true
-            },
-            "file": {
-              "enabled": true
-            },
-            "table": {
-              "enabled": true
-            }
-          },
-          "keySource": "Microsoft.Storage"
-        },
-        "minimumTlsVersion": "TLS1_2",
-        "networkAcls": {
-          "defaultAction": "Allow"
-        },
-        "supportsHttpsTrafficOnly": true
-      }
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults",
-      "apiVersion": "2023-02-01",
-      "name": "[variables('keyVaultName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "sku": {
-          "family": "A",
-          "name": "standard"
-        },
-        "tenantId": "[subscription().tenantId]",
-        "accessPolicies": [],
-        "enabledForDeployment": false,
-        "enabledForDiskEncryption": false,
-        "enabledForTemplateDeployment": true,
-        "enableSoftDelete": "[if(equals(parameters('environment'), 'prod'), true, false)]",
-        "softDeleteRetentionInDays": "[if(equals(parameters('environment'), 'prod'), 90, 7)]",
-        "enableRbacAuthorization": true,
-        "publicNetworkAccess": "Enabled"
-      }
-    },
-    {
       "type": "Microsoft.Web/staticSites",
-      "apiVersion": "2023-01-01",
+      "apiVersion": "2022-03-01",
       "name": "[variables('staticWebAppName')]",
       "location": "[parameters('location')]",
       "sku": {
-        "name": "[variables('staticWebAppSku')]",
-        "tier": "[variables('staticWebAppSku')]"
+        "name": "Free"
       },
       "identity": {
         "type": "SystemAssigned"
@@ -121,11 +62,10 @@
     },
     {
       "type": "Microsoft.KeyVault/vaults/secrets",
-      "apiVersion": "2023-02-01",
+      "apiVersion": "2016-10-01",
       "name": "[concat(variables('keyVaultName'), '/AZURE-STORAGE-CONNECTION-STRING')]",
       "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+        "[resourceId('Microsoft.Web/staticSites', variables('staticWebAppName'))]"
       ],
       "properties": {
         "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2023-01-01').keys[0].value, ';EndpointSuffix=core.windows.net')]"
@@ -133,11 +73,10 @@
     },
     {
       "type": "Microsoft.KeyVault/vaults/secrets",
-      "apiVersion": "2023-02-01",
+      "apiVersion": "2016-10-01",
       "name": "[concat(variables('keyVaultName'), '/AZURE-STORAGE-ACCOUNT-NAME')]",
       "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+        "[resourceId('Microsoft.Web/staticSites', variables('staticWebAppName'))]"
       ],
       "properties": {
         "value": "[variables('storageAccountName')]"
@@ -145,10 +84,10 @@
     },
     {
       "type": "Microsoft.KeyVault/vaults/secrets",
-      "apiVersion": "2023-02-01",
+      "apiVersion": "2016-10-01",
       "name": "[concat(variables('keyVaultName'), '/NEXT-PUBLIC-ENVIRONMENT')]",
       "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]"
+        "[resourceId('Microsoft.Web/staticSites', variables('staticWebAppName'))]"
       ],
       "properties": {
         "value": "[parameters('environment')]"
@@ -164,17 +103,17 @@
       "type": "string",
       "value": "[reference(resourceId('Microsoft.Web/staticSites', variables('staticWebAppName'))).defaultHostname]"
     },
-    "storageAccountName": {
+    "staticWebAppSku": {
+      "type": "string",
+      "value": "[variables('staticWebAppSku')]"
+    },
+    "existingStorageAccountName": {
       "type": "string",
       "value": "[variables('storageAccountName')]"
     },
-    "keyVaultName": {
+    "existingKeyVaultName": {
       "type": "string",
       "value": "[variables('keyVaultName')]"
-    },
-    "keyVaultUri": {
-      "type": "string",
-      "value": "[reference(resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))).vaultUri]"
     }
   }
 }

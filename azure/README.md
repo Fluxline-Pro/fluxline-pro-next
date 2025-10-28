@@ -66,7 +66,7 @@ After Azure resources are deployed, you need to manually connect each Static Web
    - Select Branch:
      - **Dev**: `develop`
      - **Test**: `test`
-     - **Prod**: `main`
+     - **Prod**: `master`
 
 4. **Configure Build Settings**:
    ```json
