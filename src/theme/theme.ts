@@ -94,7 +94,7 @@ export const breakpoints = {
   md: 768, // tablet
   lg: 1024, // small desktop / iPad Pro
   xl: 1366, // large desktop
-  xxl: 1920, // high-resolutiondesktop
+  xxl: 1920, // high-resolution desktop
 };
 
 // Media queries
