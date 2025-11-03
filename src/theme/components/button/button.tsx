@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useId } from 'react';
 import {
   PrimaryButton,
   DefaultButton,
@@ -21,7 +21,7 @@ export interface ButtonProps extends Omit<IButtonProps, 'size'> {
 
 /**
  * Button component with Fluent UI integration
- * 
+ *
  * @param props - Component props
  * @returns Button component
  */
@@ -32,9 +32,12 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   text,
   fullWidth = false,
+  id,
   ...props
 }) => {
   const { theme } = useAppTheme();
+  const generatedId = useId();
+  const buttonId = id || generatedId;
 
   const buttonStyles: IButtonStyles = {
     root: {
@@ -52,13 +55,16 @@ export const Button: React.FC<ButtonProps> = ({
     },
   };
 
-  const ButtonComponent = 
-    variant === 'default' ? DefaultButton :
-    variant === 'secondary' ? DefaultButton :
-    PrimaryButton;
+  const ButtonComponent =
+    variant === 'default'
+      ? DefaultButton
+      : variant === 'secondary'
+        ? DefaultButton
+        : PrimaryButton;
 
   return (
     <ButtonComponent
+      id={buttonId}
       className={`${styles.button} ${className || ''}`}
       styles={buttonStyles}
       text={text || (typeof children === 'string' ? children : undefined)}

@@ -28,10 +28,6 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Build application
-        run: yarn build
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -51,12 +47,10 @@ jobs:
           action: 'upload'
           app_location: '/'
           api_location: ''
-          output_location: 'out'
-          skip_app_build: true
+          output_location: '.next'
+          skip_app_build: false
           azure_static_web_apps_api_token: ${{ steps.get-token.outputs.SWA_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          IS_STATIC_EXPORT: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -86,5 +80,5 @@ jobs:
           action: 'close'
           app_location: '/'
           api_location: ''
-          output_location: 'out'
-          skip_app_build: true
+          output_location: '.next'
+          skip_app_build: false

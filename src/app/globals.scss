@@ -4,10 +4,10 @@
  * 
  * Modern SCSS with Tailwind CSS 4+ and Fluent UI theme integration
  * Imports theme variables from _theme.scss for consistent theming
+ * Note: Tailwind CSS is imported separately in layout.tsx to avoid Sass warnings
  */
 
 @use '../theme/theme' as theme;
-@import 'tailwindcss';
 
 // Root CSS Custom Properties - Fluxline Pro Theme Variables
 :root {

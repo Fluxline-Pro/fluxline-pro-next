@@ -1,0 +1,6 @@
+/**
+ * Tailwind CSS 4+ Import
+ * Plain CSS file to avoid Sass deprecation warnings
+ */
+
+@import 'tailwindcss';
