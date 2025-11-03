@@ -38,6 +38,9 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build Application
         run: yarn build
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: 1
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -51,13 +54,18 @@ jobs:
           echo "::add-mask::$token"
           echo "SWA_TOKEN=$token" >> $env:GITHUB_OUTPUT
         shell: pwsh
+      - name: Prepare Deployment
+        run: |
+          # Copy static files to standalone
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: 'upload'
-          app_location: '/'
+          app_location: '.next/standalone'
           api_location: ''
-          output_location: '.next/standalone'
+          output_location: ''
           skip_app_build: true
           azure_static_web_apps_api_token: ${{ steps.get-token.outputs.SWA_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
