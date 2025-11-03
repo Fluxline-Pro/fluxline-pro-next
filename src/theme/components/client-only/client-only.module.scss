@@ -1,0 +1,23 @@
+@import '../../theme';
+
+.clientOnly {
+  // Component styles here
+  display: block;
+  
+  // Use theme variables
+  // color: var(--theme-palette-neutralPrimary);
+  // background-color: var(--theme-palette-neutralLighter);
+  
+  // Add responsive breakpoints
+  @media (max-width: 768px) {
+    // Mobile styles
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    // Tablet styles
+  }
+  
+  @media (min-width: 1025px) {
+    // Desktop styles
+  }
+}

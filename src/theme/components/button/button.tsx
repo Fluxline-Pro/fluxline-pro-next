@@ -8,6 +8,7 @@ import {
   IButtonStyles,
 } from '@fluentui/react';
 import { useAppTheme } from '../../hooks/useAppTheme';
+import { ClientOnly } from '../client-only';
 import styles from './button.module.scss';
 
 export interface ButtonProps extends Omit<IButtonProps, 'size'> {
@@ -59,20 +60,22 @@ export const Button: React.FC<ButtonProps> = ({
       : variant === 'secondary'
         ? DefaultButton
         : PrimaryButton;
-
   return (
-    <ButtonComponent
-      id={id}
-      className={`${styles.button} ${className || ''}`}
-      styles={buttonStyles}
-      text={text || (typeof children === 'string' ? children : undefined)}
-      {...props}
-    >
-      {typeof children !== 'string' && children}
-    </ButtonComponent>
+    <ClientOnly>
+      <ButtonComponent
+        id={id}
+        className={`${styles.button} ${className || ''}`}
+        styles={buttonStyles}
+        text={text || (typeof children === 'string' ? children : undefined)}
+        {...props}
+      >
+        {typeof children !== 'string' && children}
+      </ButtonComponent>
+    </ClientOnly>
   );
 };
 
+Button.displayName = 'Button';
 Button.displayName = 'Button';
 
 export default Button;

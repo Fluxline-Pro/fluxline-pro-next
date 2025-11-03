@@ -2,3 +2,4 @@
 // This file will be automatically updated by the component generator
 export * from './button';
 export * from './card';
+export * from './client-only';
