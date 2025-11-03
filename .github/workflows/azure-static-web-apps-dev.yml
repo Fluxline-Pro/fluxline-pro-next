@@ -18,7 +18,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      ORYX_NODE_VERSION: '20'
+      ORYX_NODE_VERSION: '20' # Force Oryx to use Node.js 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,7 +28,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version: '20'
           cache: 'yarn'
       - name: Azure Login
         uses: azure/login@v2
