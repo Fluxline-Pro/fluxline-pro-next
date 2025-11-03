@@ -30,6 +30,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'yarn'
+      - name: Verify Node Version
+        run: |
+          node --version
+          yarn --version
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build Application
+        run: yarn build
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -50,7 +58,7 @@ jobs:
           app_location: '/'
           api_location: ''
           output_location: '.next/standalone'
-          skip_app_build: false
+          skip_app_build: true
           azure_static_web_apps_api_token: ${{ steps.get-token.outputs.SWA_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
 
