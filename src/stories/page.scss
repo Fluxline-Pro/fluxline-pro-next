@@ -1,0 +1,81 @@
+/**
+ * Storybook Page Styles - Fluent UI Theme Integration
+ * Uses theme variables from _theme.scss for consistent theming
+ */
+
+@use '../theme/theme' as theme;
+
+.storybook-page {
+  margin: 0 auto;
+  padding: var(--theme-spacing-xxxl) var(--theme-spacing-l);
+  max-width: 600px;
+  color: var(--theme-semantic-bodyText);
+  font-size: var(--theme-fonts-medium-fontSize);
+  line-height: 1.6;
+  font-family: var(--theme-fonts-family);
+  
+  h2 {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 0 var(--theme-spacing-xxs);
+    font-weight: 700;
+    font-size: var(--theme-fonts-xxLarge-fontSize);
+    line-height: 1;
+  }
+  
+  p {
+    margin: 1em 0;
+  }
+  
+  a {
+    color: var(--theme-semantic-link);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--theme-semantic-linkHovered);
+      text-decoration: underline;
+    }
+  }
+  
+  ul {
+    margin: 1em 0;
+    padding-left: var(--theme-spacing-xxl);
+  }
+  
+  li {
+    margin-bottom: var(--theme-spacing-xs);
+  }
+  
+  .tip {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: var(--theme-spacing-xs);
+    border-radius: 1em;
+    background: var(--theme-semantic-successBackground);
+    padding: var(--theme-spacing-xxs) var(--theme-spacing-s);
+    color: var(--theme-semantic-successText);
+    font-weight: 700;
+    font-size: var(--theme-fonts-xSmall-fontSize);
+    line-height: 12px;
+  }
+  
+  .tip-wrapper {
+    margin-top: var(--theme-spacing-xxl);
+    margin-bottom: var(--theme-spacing-xxl);
+    font-size: var(--theme-fonts-small-fontSize);
+    line-height: 20px;
+    
+    svg {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 3px;
+      margin-right: var(--theme-spacing-xxs);
+      width: 12px;
+      height: 12px;
+      
+      path {
+        fill: var(--theme-palette-themePrimary);
+      }
+    }
+  }
+}

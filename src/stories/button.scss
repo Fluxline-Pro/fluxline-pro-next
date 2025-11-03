@@ -1,0 +1,70 @@
+/**
+ * Storybook Button Styles - Fluent UI Theme Integration
+ * Uses theme variables from _theme.scss for consistent theming
+ */
+
+@use '../theme/theme' as theme;
+
+.storybook-button {
+  display: inline-block;
+  cursor: pointer;
+  border: 0;
+  border-radius: 3em;
+  font-weight: 600;
+  line-height: 1;
+  font-family: var(--theme-fonts-family);
+  transition: all var(--theme-animation-duration-fast) var(--theme-animation-easing-primary);
+}
+
+.storybook-button--primary {
+  background-color: var(--theme-palette-themePrimary);
+  color: var(--theme-palette-white);
+  
+  &:hover {
+    background-color: var(--theme-palette-themeDarkAlt);
+  }
+  
+  &:active {
+    background-color: var(--theme-palette-themeDark);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--theme-palette-themePrimary);
+    outline-offset: 2px;
+  }
+}
+
+.storybook-button--secondary {
+  box-shadow: 0 0 0 1px var(--theme-palette-neutralTertiary) inset;
+  background-color: transparent;
+  color: var(--theme-semantic-bodyText);
+  
+  &:hover {
+    background-color: var(--theme-palette-neutralQuaternaryAlt);
+    box-shadow: 0 0 0 1px var(--theme-palette-neutralSecondary) inset;
+  }
+  
+  &:active {
+    background-color: var(--theme-palette-neutralQuaternary);
+    box-shadow: 0 0 0 1px var(--theme-palette-neutralPrimary) inset;
+  }
+  
+  &:focus {
+    @include theme.theme-focus-border;
+  }
+}
+
+.storybook-button--small {
+  padding: var(--theme-spacing-xs) var(--theme-spacing-m);
+  font-size: var(--theme-fonts-small-fontSize);
+}
+
+.storybook-button--medium {
+  padding: var(--theme-spacing-xs) var(--theme-spacing-l);
+  font-size: var(--theme-fonts-medium-fontSize);
+}
+
+.storybook-button--large {
+  padding: var(--theme-spacing-s) var(--theme-spacing-xl);
+  font-size: var(--theme-fonts-mediumPlus-fontSize);
+}
