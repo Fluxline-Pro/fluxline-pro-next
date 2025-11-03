@@ -18,52 +18,30 @@ setIconOptions({
  * and handles theme application to the document.
  *
  * Must be a Client Component to use hooks and browser APIs.
- * Uses client-only mounting to avoid hydration mismatches with Fluent UI's dynamic class names.
- * CSS animation provides smooth fade-in without hydration issues.
+ * Waits for hydration to complete before applying persisted theme to avoid mismatches.
  */
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { theme, themeMode } = useAppTheme();
-  const [isMounted, setIsMounted] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Only render Fluent UI on client to avoid hydration mismatches
+  // Wait for hydration to complete
   useEffect(() => {
-    setIsMounted(true);
-    applyThemeToDocument(themeMode);
+    setIsHydrated(true);
   }, []);
 
-  // Apply theme changes after mount
+  // Apply theme changes after hydration
   useEffect(() => {
-    if (isMounted) {
+    if (isHydrated) {
       applyThemeToDocument(themeMode);
     }
-  }, [themeMode, isMounted]);
-
-  // On server and first render, render children without FluentThemeProvider
-  if (!isMounted) {
-    return <>{children}</>;
-  }
+  }, [themeMode, isHydrated]);
 
   return (
-    <div
-      suppressHydrationWarning
-      style={{
-        animation: 'fadeIn 0.2s ease-out',
-      }}
-    >
-      <FluentThemeProvider theme={theme}>{children}</FluentThemeProvider>
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-      `}</style>
-    </div>
+    <FluentThemeProvider theme={theme} suppressHydrationWarning>
+      <div suppressHydrationWarning>{children}</div>
+    </FluentThemeProvider>
   );
 };
 

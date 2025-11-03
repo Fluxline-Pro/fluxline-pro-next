@@ -47,7 +47,7 @@ jobs:
           action: 'upload'
           app_location: '/'
           api_location: ''
-          output_location: '.next'
+          output_location: '.next/standalone'
           skip_app_build: false
           azure_static_web_apps_api_token: ${{ steps.get-token.outputs.SWA_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -80,5 +80,5 @@ jobs:
           action: 'close'
           app_location: '/'
           api_location: ''
-          output_location: '.next'
+          output_location: '.next/standalone'
           skip_app_build: false

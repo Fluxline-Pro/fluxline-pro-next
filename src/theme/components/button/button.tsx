@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useId } from 'react';
+import React from 'react';
 import {
   PrimaryButton,
   DefaultButton,
@@ -36,8 +36,6 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const { theme } = useAppTheme();
-  const generatedId = useId();
-  const buttonId = id || generatedId;
 
   const buttonStyles: IButtonStyles = {
     root: {
@@ -64,7 +62,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <ButtonComponent
-      id={buttonId}
+      id={id}
       className={`${styles.button} ${className || ''}`}
       styles={buttonStyles}
       text={text || (typeof children === 'string' ? children : undefined)}

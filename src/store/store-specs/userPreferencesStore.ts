@@ -24,7 +24,10 @@ export interface UserPreferencesState {
   preferences: UserPreferences;
   setBackgroundImage: (image: string) => void;
   resetPreferences: () => void;
-  setPreference: <K extends keyof UserPreferences>(key: K, value: UserPreferences[K]) => void;
+  setPreference: <K extends keyof UserPreferences>(
+    key: K,
+    value: UserPreferences[K]
+  ) => void;
   toggleTheme: () => void;
   setOnboardingDoneOrSkipped: (doneOrSkipped: boolean) => void;
   setUserFirstName: (firstName: string) => void;
@@ -108,6 +111,7 @@ export const useUserPreferencesStore = create<UserPreferencesState>()(
     }),
     {
       name: 'fluxline-user-preferences',
+      skipHydration: typeof window === 'undefined', // Skip hydration on server
     }
   )
 );
