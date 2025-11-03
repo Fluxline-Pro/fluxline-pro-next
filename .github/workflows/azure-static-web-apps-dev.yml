@@ -58,9 +58,9 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: 'upload'
-          app_location: '/'
+          app_location: 'out'
           api_location: ''
-          output_location: 'out'
+          output_location: ''
           skip_app_build: true
           azure_static_web_apps_api_token: ${{ steps.get-token.outputs.SWA_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
