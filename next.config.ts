@@ -1,8 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // SSR enabled - no static export
-  output: 'standalone', // Required for Azure Static Web Apps with SSR
+  // Static export for Azure Static Web Apps
+  output: 'export', // Static HTML export - no SSR
   trailingSlash: true,
   images: {
     // Azure Static Web Apps supports Next.js image optimization
