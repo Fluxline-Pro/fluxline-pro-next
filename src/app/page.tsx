@@ -44,16 +44,21 @@ export default function Home() {
         </Card>
 
         <div className='flex gap-4 flex-wrap justify-center'>
-          <Button variant='primary' size='medium' onClick={toggleTheme}>
+          <Button
+            variant='primary'
+            size='medium'
+            onClick={toggleTheme}
+            id='toggle-theme-btn'
+          >
             Toggle Theme
           </Button>
-          <Button variant='default' size='medium'>
+          <Button variant='default' size='medium' id='default-btn'>
             Default Button
           </Button>
-          <Button variant='primary' size='small'>
+          <Button variant='primary' size='small' id='small-btn'>
             Small Button
           </Button>
-          <Button variant='primary' size='large'>
+          <Button variant='primary' size='large' id='large-btn'>
             Large Button
           </Button>
         </div>
