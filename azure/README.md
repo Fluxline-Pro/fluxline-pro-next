@@ -1,242 +1,176 @@
-# Azure Deployment Guide (Managed Identity)
+# Azure Infrastructure
 
-## 🔐 **Managed Identity Deployment**
+This directory contains all Azure-related scripts, templates, and documentation for the Fluxline Pro Next.js application.
 
-This configuration uses **Azure Managed Identity** instead of GitHub tokens for enhanced security and simplified management.
+## 📁 Directory Structure
 
-## 🏗️ **Resources Created**
+```
+azure/
+├── scripts/                   # Automation scripts
+│   ├── provisioning/          # Initial setup and provisioning
+│   │   ├── provision-swa-with-managed-identities.ps1
+│   │   ├── grant-service-principal-permissions.ps1
+│   │   └── setup-managed-identity.ps1 (legacy)
+│   ├── deployment/            # Deployment scripts
+│   │   ├── deploy.ps1
+│   │   └── deploy.sh
+│   └── maintenance/           # Maintenance and utilities
+│       ├── verify-identity-assignments.ps1
+│       ├── verify-setup.ps1
+│       └── cleanup-old-resources.ps1
+│
+├── docs/                      # Documentation
+│   ├── SETUP-GUIDE.md         # Complete setup instructions
+│   ├── KEY-VAULT-INTEGRATION.md
+│   ├── QUICK-REFERENCE.md
+│   └── managed-identity-README.md
+│
+├── arm-templates/             # Infrastructure as Code
+│   └── arm-template.json
+│
+└── parameters/                # Environment parameters
+    ├── parameters.dev.json
+    ├── parameters.test.json
+    ├── parameters.prod.json
+    └── parameters.template.json
+```
 
-Each environment creates these resources with your naming convention:
+## 🚀 Quick Start
 
-### **Resource Names**
-- **Static Web App**: `az-fluxline-next-{env}` (with System-Assigned Managed Identity)
-- **Storage Account**: `fluxline{env}stg` 
-- **Key Vault**: `kv-fluxline-{env}`
+### First Time Setup
 
-### **Environment Mapping**
-| Environment | Branch | Static Web App SKU | Storage Redundancy | Managed Identity |
-|-------------|--------|-------------------|-------------------|------------------|
-| **dev** | `develop` | Free | Standard_LRS | ✅ System-Assigned |
-| **test** | `test` | Free | Standard_LRS | ✅ System-Assigned |
-| **prod** | `master` | Standard | Standard_ZRS | ✅ System-Assigned |
+**1. Provision all environments:**
 
-## 🚀 **Deployment Steps**
-
-### **Prerequisites**
-1. **Azure CLI** installed and logged in
-2. **GitHub repository** with appropriate branch structure
-3. **Azure subscription** with appropriate permissions
-4. **Repository Admin** access on GitHub (for connecting Azure)
-
-### **Phase 1: Deploy Azure Resources**
-
-#### **Deploy Development**
 ```powershell
-# Using PowerShell (Windows)
-.\azure\deploy.ps1 -Environment dev
-
-# Using Bash (Linux/Mac/WSL)
-./azure/deploy.sh dev
+.\scripts\provisioning\provision-swa-with-managed-identities.ps1
 ```
 
-#### **Deploy Test**
+**2. Grant Service Principal permissions (Free tier):**
+
 ```powershell
-.\azure\deploy.ps1 -Environment test
+.\scripts\provisioning\grant-service-principal-permissions.ps1
 ```
 
-#### **Deploy Production**
+**3. Verify setup:**
+
 ```powershell
-.\azure\deploy.ps1 -Environment prod
+.\scripts\maintenance\verify-setup.ps1
 ```
 
-### **Phase 2: Connect to GitHub (Manual Step)**
+### Deployment
 
-After Azure resources are deployed, you need to manually connect each Static Web App to GitHub:
+```powershell
+# PowerShell
+.\scripts\deployment\deploy.ps1 -Environment dev
 
-#### **For Each Environment:**
-
-1. **Go to Azure Portal** → Your Static Web App (e.g., `az-fluxline-next-dev`)
-
-2. **Navigate to "Deployment" → "GitHub"**
-
-3. **Click "Connect to GitHub"**
-   - Sign in with your GitHub account
-   - Select Organization: `Fluxline-Pro`
-   - Select Repository: `fluxline-pro-next`
-   - Select Branch:
-     - **Dev**: `develop`
-     - **Test**: `test`
-     - **Prod**: `master`
-
-4. **Configure Build Settings**:
-   ```json
-   App location: /
-   Api location: (leave empty)
-   Output location: out
-   ```
-
-5. **Click "Review + Create"**
-
-#### **Why Manual Connection?**
-- **Enhanced Security**: No GitHub tokens stored in ARM templates
-- **Managed Identity**: Azure handles authentication automatically
-- **Fine-grained Control**: You control exactly which repositories get access
-- **Audit Trail**: Clear visibility of who connected what
-
-## � **GitHub Actions Workflow**
-
-Azure will automatically create `.github/workflows/` files in your repository:
-
-```yaml
-# Example: .github/workflows/azure-static-web-apps-dev.yml
-name: Azure Static Web Apps CI/CD (Dev)
-
-on:
-  push:
-    branches:
-      - develop
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - develop
-
-jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
-    runs-on: ubuntu-latest
-    name: Build and Deploy Job
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - name: Build And Deploy
-        id: builddeploy
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_... }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          app_location: "/"
-          api_location: ""
-          output_location: "out"
+# Bash
+./scripts/deployment/deploy.sh dev
 ```
 
-## 🌐 **Default URLs**
+## 🏗️ Architecture
 
-After deployment and GitHub connection, your apps will be available at:
+### Environments
+
+| Environment | SKU      | Branch  | Static Web App        | Identity Type     |
+| ----------- | -------- | ------- | --------------------- | ----------------- |
+| **Dev**     | Free     | develop | az-fluxline-next-dev  | Service Principal |
+| **Test**    | Free     | test    | az-fluxline-next-test | Service Principal |
+| **Prod**    | Standard | master  | az-fluxline-next-prod | User-Assigned MI  |
+
+> **Note:** Free tier Static Web Apps don't support managed identities, so dev/test use Service Principals instead.
+
+### Service Principals (Free Tier Solution)
+
+- `github-fluxline-pro-next-dev` → Dev environment
+- `github-fluxline-pro-next-test` → Test environment
+- `github-fluxline-pro-next-prod` → Prod environment
+
+### Shared Resources
+
+- **Storage Account**: `azfluxlinewebstorage`
+- **Key Vault**: `kv-az-fluxline-next`
+- **Resource Group**: `az-fluxline-rg`
+
+### Key Vault Secrets
+
+API tokens stored centrally:
+
+- `swa-api-token-dev`
+- `swa-api-token-test`
+- `swa-api-token-prod`
+
+## 📚 Documentation
+
+- **[Setup Guide](docs/SETUP-GUIDE.md)** - Complete setup instructions
+- **[Key Vault Integration](docs/KEY-VAULT-INTEGRATION.md)** - Secret management details
+- **[Quick Reference](docs/QUICK-REFERENCE.md)** - Common commands
+
+## 🔐 Security
+
+### GitHub Secrets Required (Only 5!)
+
+```
+AZURE_TENANT_ID
+AZURE_SUBSCRIPTION_ID
+AZURE_CLIENT_ID_DEV
+AZURE_CLIENT_ID_TEST
+AZURE_CLIENT_ID_PROD
+```
+
+All API tokens are retrieved from Key Vault at runtime!
+
+### Authentication Flow
+
+1. **GitHub Actions** authenticates as Service Principal using federated credentials (OIDC)
+2. **Service Principal** retrieves API token from Key Vault
+3. **Workflow** deploys to Static Web App using the token
+
+No secrets stored in GitHub beyond the 5 Client IDs! 🎉
+
+## 🔧 Maintenance Scripts
+
+### Verify Identity Assignments
+
+```powershell
+.\scripts\maintenance\verify-identity-assignments.ps1
+```
+
+### Verify Complete Setup
+
+```powershell
+.\scripts\maintenance\verify-setup.ps1
+```
+
+### Cleanup Old Resources
+
+```powershell
+.\scripts\maintenance\cleanup-old-resources.ps1
+```
+
+## 🌐 URLs
+
+After deployment:
+
 - **Dev**: `https://az-fluxline-next-dev.azurestaticapps.net`
 - **Test**: `https://az-fluxline-next-test.azurestaticapps.net`
 - **Prod**: `https://az-fluxline-next-prod.azurestaticapps.net`
 
-## 🔐 **Security Benefits of Managed Identity**
+## 🆘 Troubleshooting
 
-### **✅ What You Get**:
-- **No GitHub Tokens**: No need to generate, store, or rotate tokens
-- **Automatic Authentication**: Azure handles auth to GitHub automatically
-- **Least Privilege**: Each environment only has access to its specific repository/branch
-- **Audit Trail**: All connections are logged in Azure Activity Log
-- **No Secret Management**: No tokens in parameter files or Key Vault
+1. Check the [Setup Guide](docs/SETUP-GUIDE.md)
+2. Review [Quick Reference](docs/QUICK-REFERENCE.md)
+3. Verify Azure Portal resource status
+4. Check GitHub Actions workflow logs
 
-### **🛡️ Managed Identity Permissions**:
-Each Static Web App gets:
-- **Repository Access**: Read access to your specific GitHub repository
-- **Deployment Permissions**: Can create and manage GitHub Actions workflows
-- **Branch-Specific**: Each environment only deploys from its designated branch
+## 💡 Key Features
 
-## 🔗 **Custom Domain Setup**
-
-### **1. Add Custom Domain in Azure Portal**
-1. Go to your Static Web App
-2. Navigate to "Custom domains"
-3. Click "Add custom domain"
-4. Enter your subdomain (e.g., `dev.fluxline.com`)
-
-### **2. Configure DNS Records**
-Add these CNAME records in your Azure DNS zone:
-
-```dns
-dev.fluxline.com     CNAME   az-fluxline-next-dev.azurestaticapps.net
-test.fluxline.com    CNAME   az-fluxline-next-test.azurestaticapps.net
-www.fluxline.com     CNAME   az-fluxline-next-prod.azurestaticapps.net
-```
-
-## 📊 **Environment Variables**
-
-Each environment automatically gets these variables:
-
-| Variable | Source | Description |
-|----------|--------|-------------|
-| `AZURE_STORAGE_CONNECTION_STRING` | Key Vault | Storage account connection |
-| `AZURE_STORAGE_ACCOUNT_NAME` | Key Vault | Storage account name |
-| `NEXT_PUBLIC_ENVIRONMENT` | Key Vault | Environment identifier |
-| `NEXT_PUBLIC_API_BASE_URL` | Deployment | App base URL |
-
-## � **Advanced Configuration**
-
-### **Managed Identity Access to Key Vault**
-```bash
-# Grant Static Web App Managed Identity access to Key Vault
-STATIC_WEB_APP_PRINCIPAL_ID=$(az staticwebapp show \
-  --name "az-fluxline-next-dev" \
-  --query "identity.principalId" -o tsv)
-
-az keyvault set-policy \
-  --name "kv-fluxline-dev" \
-  --object-id $STATIC_WEB_APP_PRINCIPAL_ID \
-  --secret-permissions get list
-```
-
-### **Storage Access via Managed Identity**
-```bash
-# Grant Managed Identity access to Storage Account
-az role assignment create \
-  --assignee $STATIC_WEB_APP_PRINCIPAL_ID \
-  --role "Storage Blob Data Contributor" \
-  --scope "/subscriptions/{subscription-id}/resourceGroups/rg-fluxline-dev/providers/Microsoft.Storage/storageAccounts/fluxlinedevstg"
-```
-
-## 🛠️ **Troubleshooting**
-
-### **GitHub Connection Issues**
-```bash
-# Check Managed Identity status
-az staticwebapp show --name "az-fluxline-next-dev" --query "identity"
-
-# Reset API token (if needed)
-az staticwebapp secrets reset-api-key --name "az-fluxline-next-dev"
-```
-
-### **Deployment Status**
-```bash
-# Check deployment history
-az staticwebapp show --name "az-fluxline-next-dev" --query "buildProperties"
-
-# List GitHub workflows
-gh workflow list --repo Fluxline-Pro/fluxline-pro-next
-```
-
-## 🎯 **Migration from Token-Based**
-
-If you previously used GitHub tokens:
-
-1. **Deploy new Managed Identity resources**
-2. **Disconnect old GitHub integration**
-3. **Reconnect using Managed Identity**
-4. **Remove old GitHub tokens from Key Vault**
-5. **Delete old GitHub Action secrets**
-
-## 💰 **Cost Impact**
-
-**Managed Identity has NO additional cost** - it's included with:
-- ✅ Azure Static Web Apps (Free/Standard tier)
-- ✅ Storage Accounts
-- ✅ Key Vault
-
-**Monthly costs remain the same**:
-- **Dev**: ~$2-5 
-- **Test**: ~$2-5 
-- **Prod**: ~$10-20
+✅ **Federated Credentials** - No secrets in GitHub  
+✅ **Key Vault Integration** - Centralized secret management  
+✅ **Service Principal Auth** - Works on Free tier  
+✅ **Automated Provisioning** - One script sets up everything  
+✅ **Environment Separation** - Dev/Test/Prod isolation
 
 ---
 
-**Your Azure environments now use Managed Identity for enhanced security! 🔐✨**
+**Last Updated:** November 3, 2025  
+**Maintained By:** Fluxline Pro Team
