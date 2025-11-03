@@ -17,6 +17,8 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    env:
+      ORYX_NODE_VERSION: '20'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,8 +45,6 @@ jobs:
         shell: pwsh
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
-        env:
-          ORYX_NODE_VERSION: '20'
         with:
           action: 'upload'
           app_location: '/'
