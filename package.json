@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:azure": "next build",
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
@@ -21,8 +22,10 @@
     "type-check": "tsc --noEmit"
   },
   "engines": {
-    "node": ">=22.21.0"
+    "node": ">=20.18.0",
+    "yarn": ">=1.22.18"
   },
+  "packageManager": "yarn@1.22.19",
   "dependencies": {
     "@fluentui/react": "^8.125.0",
     "@fontsource-variable/inter": "^5.2.8",

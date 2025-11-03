@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import "./globals.css";
-import ThemeProvider from "../theme/contexts/ThemeProvider";
+import './tailwind.css'; // ← Tailwind base/utilities first
+import './globals.scss'; // ← Your custom styles override Tailwind
+import ThemeProvider from '../theme/contexts/ThemeProvider';
 
 export const metadata: Metadata = {
-  title: "Fluxline Pro - Business Transformation Platform",
-  description: "Strategic precision for modern business transformation",
+  title: 'Fluxline Pro - Business Transformation Platform',
+  description: 'Strategic precision for modern business transformation',
 };
 
 export default function RootLayout({
@@ -14,11 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+    <html lang='en'>
+      <body className='antialiased' suppressHydrationWarning>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

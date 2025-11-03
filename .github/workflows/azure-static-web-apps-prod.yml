@@ -17,6 +17,8 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    env:
+      ORYX_NODE_VERSION: '20' # Force Oryx to use Node.js 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,11 +28,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version: '20'
           cache: 'yarn'
-      - name: Install dependencies
+      - name: Verify Node Version
+        run: |
+          node --version
+          yarn --version
+      - name: Install Dependencies
         run: yarn install --frozen-lockfile
-      - name: Build application
+      - name: Build Application
         run: yarn build
       - name: Azure Login
         uses: azure/login@v2
@@ -38,18 +44,23 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID_PROD }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Get API Token from Key Vault
+        id: get-token
+        run: |
+          $token = az keyvault secret show --vault-name kv-az-fluxline-next --name swa-api-token-prod --query value -o tsv
+          echo "::add-mask::$token"
+          echo "SWA_TOKEN=$token" >> $env:GITHUB_OUTPUT
+        shell: pwsh
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: 'upload'
           app_location: '/'
           api_location: ''
-          output_location: 'out'
+          output_location: '.next/standalone'
           skip_app_build: true
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROD }}
+          azure_static_web_apps_api_token: ${{ steps.get-token.outputs.SWA_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          IS_STATIC_EXPORT: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -65,12 +76,19 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID_PROD }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Get API Token from Key Vault
+        id: get-token
+        run: |
+          $token = az keyvault secret show --vault-name kv-az-fluxline-next --name swa-api-token-prod --query value -o tsv
+          echo "::add-mask::$token"
+          echo "SWA_TOKEN=$token" >> $env:GITHUB_OUTPUT
+        shell: pwsh
       - name: Close Pull Request
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROD }}
+          azure_static_web_apps_api_token: ${{ steps.get-token.outputs.SWA_TOKEN }}
           action: 'close'
           app_location: '/'
           api_location: ''
-          output_location: 'out'
-          skip_app_build: true
+          output_location: '.next/standalone'
+          skip_app_build: false

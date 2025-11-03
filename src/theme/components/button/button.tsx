@@ -8,6 +8,7 @@ import {
   IButtonStyles,
 } from '@fluentui/react';
 import { useAppTheme } from '../../hooks/useAppTheme';
+import { ClientOnly } from '../client-only';
 import styles from './button.module.scss';
 
 export interface ButtonProps extends Omit<IButtonProps, 'size'> {
@@ -21,7 +22,7 @@ export interface ButtonProps extends Omit<IButtonProps, 'size'> {
 
 /**
  * Button component with Fluent UI integration
- * 
+ *
  * @param props - Component props
  * @returns Button component
  */
@@ -32,6 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   text,
   fullWidth = false,
+  id,
   ...props
 }) => {
   const { theme } = useAppTheme();
@@ -52,23 +54,28 @@ export const Button: React.FC<ButtonProps> = ({
     },
   };
 
-  const ButtonComponent = 
-    variant === 'default' ? DefaultButton :
-    variant === 'secondary' ? DefaultButton :
-    PrimaryButton;
-
+  const ButtonComponent =
+    variant === 'default'
+      ? DefaultButton
+      : variant === 'secondary'
+        ? DefaultButton
+        : PrimaryButton;
   return (
-    <ButtonComponent
-      className={`${styles.button} ${className || ''}`}
-      styles={buttonStyles}
-      text={text || (typeof children === 'string' ? children : undefined)}
-      {...props}
-    >
-      {typeof children !== 'string' && children}
-    </ButtonComponent>
+    <ClientOnly>
+      <ButtonComponent
+        id={id}
+        className={`${styles.button} ${className || ''}`}
+        styles={buttonStyles}
+        text={text || (typeof children === 'string' ? children : undefined)}
+        {...props}
+      >
+        {typeof children !== 'string' && children}
+      </ButtonComponent>
+    </ClientOnly>
   );
 };
 
+Button.displayName = 'Button';
 Button.displayName = 'Button';
 
 export default Button;
