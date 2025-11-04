@@ -27,7 +27,7 @@ export interface ProgressBarProps {
   percentComplete?: number;
   /**
    * Interval delay for auto-increment (ms)
-   * @default 1000
+   * @default 100
    */
   intervalDelay?: number;
   /**
