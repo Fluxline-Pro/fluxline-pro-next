@@ -52,5 +52,5 @@ export function useKeyPress(
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [targetKey, callback, options]);
+  }, [targetKey, callback, options?.ctrl, options?.shift, options?.alt, options?.meta]);
 }
