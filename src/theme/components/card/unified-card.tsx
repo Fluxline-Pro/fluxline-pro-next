@@ -199,7 +199,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             </div>
           )}
 
-          {/* Image */}
+          {/* Image - Using standard img tag instead of next/image for better control over 
+              CSS filters, aspect ratio animations, and dark mode transformations */}
           <div
             style={{
               position: 'relative',

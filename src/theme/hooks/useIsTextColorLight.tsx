@@ -12,15 +12,10 @@ const useIsTextColorLight = (image: string) => {
   const [isLight, setIsColorLight] = React.useState(false);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
+    if (!image) {
       setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  React.useEffect(() => {
-    if (!image) return;
+      return;
+    }
 
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -29,7 +24,10 @@ const useIsTextColorLight = (image: string) => {
     img.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+      if (!ctx) {
+        setIsLoading(false);
+        return;
+      }
 
       canvas.width = img.width;
       canvas.height = img.height;

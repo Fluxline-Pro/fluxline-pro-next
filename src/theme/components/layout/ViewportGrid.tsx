@@ -73,9 +73,11 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
 
   // Auto-scroll to top on navigation if not already at top
   React.useEffect(() => {
+    const SCROLL_TOLERANCE = 5; // px - small tolerance for scroll position precision
+    
     const scrollToTop = () => {
-      // Check if the page is not at the top (with small tolerance for precision)
-      if (window.scrollY > 5) {
+      // Check if the page is not at the top
+      if (window.scrollY > SCROLL_TOLERANCE) {
         window.scrollTo({
           top: 0,
           left: 0,

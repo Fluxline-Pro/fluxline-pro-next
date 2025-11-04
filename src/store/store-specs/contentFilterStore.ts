@@ -5,10 +5,18 @@ import { create } from 'zustand';
 export type ContentViewType = 'grid' | 'small-tile' | 'large-tile';
 export type ViewState = 'list' | 'detail';
 
+// Define Post interface for type safety
+export interface Post {
+  id: string;
+  title: string;
+  imageUrl?: string;
+  [key: string]: unknown; // Allow additional properties
+}
+
 interface ContentFilterState {
   viewType: ContentViewType;
   viewState: ViewState;
-  selectedPost: any | null; // Replace 'any' with actual post type
+  selectedPost: Post | null;
   overrideImage: string | null; // Image URL to override the card-image component
   startDate: Date;
   endDate: Date;
@@ -16,8 +24,8 @@ interface ContentFilterState {
   activeCalendar: 'start' | 'end' | null; // Track which calendar is active
   setViewType: (viewType: ContentViewType) => void;
   setViewState: (viewState: ViewState) => void;
-  setSelectedPost: (post: any | null) => void;
-  selectPost: (post: any, navigate?: (path: string) => void) => void; // Updated to handle navigation
+  setSelectedPost: (post: Post | null) => void;
+  selectPost: (post: Post, navigate?: (path: string) => void) => void; // Updated to handle navigation
   goBackToList: (navigate?: (path: string) => void) => void; // Helper to go back to list view
   setOverrideImage: (imageUrl: string | null) => void;
   setStartDate: (date: Date) => void;
