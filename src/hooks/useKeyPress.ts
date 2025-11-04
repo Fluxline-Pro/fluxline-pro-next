@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Listens for specific keyboard key presses.
@@ -31,6 +31,16 @@ export function useKeyPress(
     meta?: boolean;
   }
 ): void {
+  // Store callback in ref to avoid re-running effect when it changes
+  const callbackRef = useRef(callback);
+  const optionsRef = useRef(options);
+
+  // Keep refs up to date
+  useEffect(() => {
+    callbackRef.current = callback;
+    optionsRef.current = options;
+  }, [callback, options]);
+
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       // Check if the target key matches
@@ -39,12 +49,13 @@ export function useKeyPress(
       }
 
       // Check modifier keys if specified
-      if (options?.ctrl && !event.ctrlKey) return;
-      if (options?.shift && !event.shiftKey) return;
-      if (options?.alt && !event.altKey) return;
-      if (options?.meta && !event.metaKey) return;
+      const opts = optionsRef.current;
+      if (opts?.ctrl && !event.ctrlKey) return;
+      if (opts?.shift && !event.shiftKey) return;
+      if (opts?.alt && !event.altKey) return;
+      if (opts?.meta && !event.metaKey) return;
 
-      callback(event);
+      callbackRef.current(event);
     };
 
     window.addEventListener('keydown', handleKeyPress);
@@ -52,5 +63,5 @@ export function useKeyPress(
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [targetKey, callback, options]);
+  }, [targetKey]); // Only re-run when targetKey changes
 }
