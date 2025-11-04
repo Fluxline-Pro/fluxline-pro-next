@@ -7,7 +7,6 @@ import { Variants } from 'framer-motion';
 import {
   animationDistances,
   animationDurations,
-  animationEasings,
 } from './config';
 
 /**
@@ -19,7 +18,7 @@ export const fadeVariants: Variants = {
     opacity: 1,
     transition: {
       duration: animationDurations.normal / 1000,
-      ease: animationEasings.easeOut,
+      ease: 'easeOut',
     },
   },
   exit: { opacity: 0 },
@@ -38,7 +37,7 @@ export const fadeUpVariants: Variants = {
     y: 0,
     transition: {
       duration: animationDurations.medium / 1000,
-      ease: animationEasings.easeOut,
+      ease: 'easeOut',
     },
   },
   exit: {
@@ -60,7 +59,7 @@ export const fadeDownVariants: Variants = {
     y: 0,
     transition: {
       duration: animationDurations.medium / 1000,
-      ease: animationEasings.easeOut,
+      ease: 'easeOut',
     },
   },
   exit: {
@@ -82,7 +81,7 @@ export const slideLeftVariants: Variants = {
     x: 0,
     transition: {
       duration: animationDurations.medium / 1000,
-      ease: animationEasings.easeOut,
+      ease: 'easeOut',
     },
   },
   exit: {
@@ -104,7 +103,7 @@ export const slideRightVariants: Variants = {
     x: 0,
     transition: {
       duration: animationDurations.medium / 1000,
-      ease: animationEasings.easeOut,
+      ease: 'easeOut',
     },
   },
   exit: {
@@ -126,7 +125,7 @@ export const scaleVariants: Variants = {
     scale: 1,
     transition: {
       duration: animationDurations.normal / 1000,
-      ease: animationEasings.easeOut,
+      ease: 'easeOut',
     },
   },
   exit: {
@@ -171,7 +170,7 @@ export const staggerItemVariants: Variants = {
     y: 0,
     transition: {
       duration: animationDurations.medium / 1000,
-      ease: animationEasings.easeOut,
+      ease: 'easeOut',
     },
   },
   exit: {
@@ -193,7 +192,7 @@ export const modalVariants: Variants = {
     scale: 1,
     transition: {
       duration: animationDurations.fast / 1000,
-      ease: animationEasings.easeOut,
+      ease: 'easeOut',
     },
   },
   exit: {
@@ -201,7 +200,7 @@ export const modalVariants: Variants = {
     scale: 0.95,
     transition: {
       duration: animationDurations.fast / 1000,
-      ease: animationEasings.easeIn,
+      ease: 'easeIn',
     },
   },
 };
@@ -235,14 +234,14 @@ export const drawerVariants = {
       x: 0,
       transition: {
         duration: animationDurations.normal / 1000,
-        ease: animationEasings.easeOut,
+        ease: 'easeOut',
       },
     },
     exit: {
       x: '-100%',
       transition: {
         duration: animationDurations.normal / 1000,
-        ease: animationEasings.easeIn,
+        ease: 'easeIn',
       },
     },
   },
@@ -252,14 +251,14 @@ export const drawerVariants = {
       x: 0,
       transition: {
         duration: animationDurations.normal / 1000,
-        ease: animationEasings.easeOut,
+        ease: 'easeOut',
       },
     },
     exit: {
       x: '100%',
       transition: {
         duration: animationDurations.normal / 1000,
-        ease: animationEasings.easeIn,
+        ease: 'easeIn',
       },
     },
   },
@@ -269,14 +268,14 @@ export const drawerVariants = {
       y: 0,
       transition: {
         duration: animationDurations.normal / 1000,
-        ease: animationEasings.easeOut,
+        ease: 'easeOut',
       },
     },
     exit: {
       y: '-100%',
       transition: {
         duration: animationDurations.normal / 1000,
-        ease: animationEasings.easeIn,
+        ease: 'easeIn',
       },
     },
   },
@@ -286,14 +285,14 @@ export const drawerVariants = {
       y: 0,
       transition: {
         duration: animationDurations.normal / 1000,
-        ease: animationEasings.easeOut,
+        ease: 'easeOut',
       },
     },
     exit: {
       y: '100%',
       transition: {
         duration: animationDurations.normal / 1000,
-        ease: animationEasings.easeIn,
+        ease: 'easeIn',
       },
     },
   },

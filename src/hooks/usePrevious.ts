@@ -26,7 +26,7 @@ import { useEffect, useRef } from 'react';
  */
 export function usePrevious<T>(value: T): T | undefined {
   const currentRef = useRef<T>(value);
-  const previousRef = useRef<T>();
+  const previousRef = useRef<T | undefined>(undefined);
 
   if (currentRef.current !== value) {
     previousRef.current = currentRef.current;

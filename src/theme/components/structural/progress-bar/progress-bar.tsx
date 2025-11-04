@@ -83,13 +83,6 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     itemProgress: {
       borderRadius: 3,
     },
-    itemName: {
-      fontSize: theme.typography.fonts.large.fontSize,
-      fontFamily: theme.typography.fonts.medium.fontFamily,
-      fontWeight: theme.typography.fonts.medium.fontWeight as number,
-      color: theme.palette.themePrimary,
-      padding: theme.spacing.s1,
-    },
   };
 
   const divStyles: React.CSSProperties = {

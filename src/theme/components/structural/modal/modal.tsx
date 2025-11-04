@@ -4,6 +4,7 @@ import React from 'react';
 import {
   Modal as FluentModal,
   IModalProps,
+  IModalStyles,
   IconButton,
   IIconProps,
 } from '@fluentui/react';
@@ -77,14 +78,13 @@ export const Modal: React.FC<ModalProps> = ({
 
   const closeIcon: IIconProps = { iconName: 'Cancel' };
 
-  const modalStyles = {
+  const modalStyles: Partial<IModalStyles> = {
     main: {
       backgroundColor: theme.palette.white,
       borderRadius: '8px',
       padding: 0,
       minWidth: '400px',
       maxWidth: '90vw',
-      ...modalProps?.styles?.main,
     },
   };
 

@@ -27,7 +27,7 @@ export function useThrottle<T extends (...args: unknown[]) => unknown>(
   delay: number = 500
 ): T {
   const lastRan = useRef<number>(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const callbackRef = useRef<T>(callback);
 
   // Keep callback ref up to date
