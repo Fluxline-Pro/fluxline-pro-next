@@ -112,7 +112,6 @@ export function getElementViewportProgress(element: HTMLElement): number {
 
   // Element position relative to viewport
   const elementTop = rect.top;
-  const elementBottom = rect.bottom;
   const elementHeight = rect.height;
 
   // Calculate progress

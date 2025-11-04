@@ -6,6 +6,9 @@ import { useEffect, useRef } from 'react';
  * Returns the previous value of a state or prop.
  * Useful for comparing current and previous values in effects.
  *
+ * Note: This hook uses a pattern that stores the previous value
+ * during render in a way that's safe with React's rules.
+ *
  * @param value - The value to track
  * @returns The previous value
  *
@@ -22,11 +25,13 @@ import { useEffect, useRef } from 'react';
  * ```
  */
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T>();
+  const currentRef = useRef<T>(value);
+  const previousRef = useRef<T>();
 
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
+  if (currentRef.current !== value) {
+    previousRef.current = currentRef.current;
+    currentRef.current = value;
+  }
 
-  return ref.current;
+  return previousRef.current;
 }

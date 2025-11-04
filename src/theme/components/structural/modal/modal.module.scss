@@ -1,0 +1,44 @@
+@use '@/theme/theme' as theme;
+
+.container {
+  // Container styles applied to modal overlay
+}
+
+.fallback {
+  // Fallback while ClientOnly is mounting
+  display: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--neutralLight);
+
+  :global(.dark-mode) & {
+    border-bottom-color: var(--neutralQuaternary);
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--neutralPrimary);
+  flex: 1;
+
+  :global(.dark-mode) & {
+    color: var(--white);
+  }
+}
+
+.closeButton {
+  margin-left: auto;
+}
+
+.body {
+  padding: 1.5rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}

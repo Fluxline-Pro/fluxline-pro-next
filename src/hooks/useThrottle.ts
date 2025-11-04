@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 /**
  * Throttles a callback function, ensuring it's called at most once per specified interval.
@@ -28,6 +28,12 @@ export function useThrottle<T extends (...args: unknown[]) => unknown>(
 ): T {
   const lastRan = useRef<number>(0);
   const timeoutRef = useRef<NodeJS.Timeout>();
+  const callbackRef = useRef<T>(callback);
+
+  // Keep callback ref up to date
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
 
   useEffect(() => {
     return () => {
@@ -37,26 +43,27 @@ export function useThrottle<T extends (...args: unknown[]) => unknown>(
     };
   }, []);
 
-  return useCallback(
-    ((...args: unknown[]) => {
-      const now = Date.now();
+  return useMemo(
+    () =>
+      ((...args: unknown[]) => {
+        const now = Date.now();
 
-      if (now - lastRan.current >= delay) {
-        callback(...args);
-        lastRan.current = now;
-      } else {
-        if (timeoutRef.current) {
-          clearTimeout(timeoutRef.current);
+        if (now - lastRan.current >= delay) {
+          callbackRef.current(...args);
+          lastRan.current = now;
+        } else {
+          if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+          }
+          timeoutRef.current = setTimeout(
+            () => {
+              callbackRef.current(...args);
+              lastRan.current = Date.now();
+            },
+            delay - (now - lastRan.current)
+          );
         }
-        timeoutRef.current = setTimeout(
-          () => {
-            callback(...args);
-            lastRan.current = Date.now();
-          },
-          delay - (now - lastRan.current)
-        );
-      }
-    }) as T,
-    [callback, delay]
+      }) as T,
+    [delay]
   );
 }

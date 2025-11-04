@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Returns the current scroll position of the window.
@@ -31,18 +31,15 @@ export function useScrollPosition(throttleMs: number = 100) {
     scrollY: 0,
   });
 
-  const handleScroll = useCallback(() => {
-    setScrollPosition({
-      scrollX: window.scrollX,
-      scrollY: window.scrollY,
-    });
-  }, []);
-
   useEffect(() => {
-    // Set initial position
-    handleScroll();
-
     let timeoutId: NodeJS.Timeout | null = null;
+
+    const handleScroll = () => {
+      setScrollPosition({
+        scrollX: window.scrollX,
+        scrollY: window.scrollY,
+      });
+    };
 
     const throttledHandleScroll = () => {
       if (timeoutId === null) {
@@ -53,6 +50,9 @@ export function useScrollPosition(throttleMs: number = 100) {
       }
     };
 
+    // Set initial position after mount
+    handleScroll();
+
     window.addEventListener('scroll', throttledHandleScroll, { passive: true });
 
     return () => {
@@ -61,7 +61,7 @@ export function useScrollPosition(throttleMs: number = 100) {
         clearTimeout(timeoutId);
       }
     };
-  }, [handleScroll, throttleMs]);
+  }, [throttleMs]);
 
   return scrollPosition;
 }

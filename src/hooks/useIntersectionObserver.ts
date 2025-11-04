@@ -53,7 +53,11 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
         setIsIntersecting(entry.isIntersecting);
         setEntry(entry);
       },
-      observerOptions
+      {
+        threshold: observerOptions.threshold,
+        root: observerOptions.root,
+        rootMargin: observerOptions.rootMargin,
+      }
     );
 
     observer.observe(element);
