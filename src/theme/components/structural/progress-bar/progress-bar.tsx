@@ -103,7 +103,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     const interval = setInterval(() => {
       setProgress((prev) => {
         const next = prev + intervalIncrement;
-        return next >= 1 ? 0 : next; // Reset to 0 when reaching 100%
+        return next >= 1 ? 1 : next; // Clamp to 1 (100%) when reaching maximum
       });
     }, intervalDelay);
 
