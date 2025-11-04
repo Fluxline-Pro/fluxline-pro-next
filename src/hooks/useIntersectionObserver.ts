@@ -35,7 +35,7 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
 ): [React.RefObject<T>, boolean, IntersectionObserverEntry | undefined] {
   const { freezeOnceVisible = false, ...observerOptions } = options;
 
-  const ref = useRef<T>(null!);
+  const ref = useRef<T>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
 
