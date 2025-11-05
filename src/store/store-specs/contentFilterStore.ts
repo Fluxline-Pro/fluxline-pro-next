@@ -25,8 +25,8 @@ interface ContentFilterState {
   setViewType: (viewType: ContentViewType) => void;
   setViewState: (viewState: ViewState) => void;
   setSelectedPost: (post: Post | null) => void;
-  selectPost: (post: Post, navigate?: (path: string) => void) => void; // Updated to handle navigation
-  goBackToList: (navigate?: (path: string) => void) => void; // Helper to go back to list view
+  selectPost: (post: Post, navigate?: (path: string) => void, currentPath?: string) => void; // Updated to handle navigation
+  goBackToList: (navigate?: (path: string) => void, currentPath?: string) => void; // Helper to go back to list view
   setOverrideImage: (imageUrl: string | null) => void;
   setStartDate: (date: Date) => void;
   setEndDate: (date: Date) => void;
@@ -57,7 +57,7 @@ export const useContentFilterStore = create<ContentFilterState>((set) => ({
 
   setSelectedPost: (selectedPost) => set({ selectedPost }),
 
-  selectPost: (post, navigate) => {
+  selectPost: (post, navigate, currentPath) => {
     set({
       selectedPost: post,
       viewState: 'detail',
@@ -65,8 +65,7 @@ export const useContentFilterStore = create<ContentFilterState>((set) => ({
     });
 
     // If navigate function is provided, update the URL
-    if (navigate && post.id) {
-      const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+    if (navigate && post.id && currentPath) {
       // Get the base path (e.g., '/blog' from '/blog' or '/blog/some-post')
       const pathParts = currentPath.split('/').filter((part) => part);
       const basePath = pathParts.length > 0 ? `/${pathParts[0]}` : '/';
@@ -75,7 +74,7 @@ export const useContentFilterStore = create<ContentFilterState>((set) => ({
     }
   },
 
-  goBackToList: (navigate) => {
+  goBackToList: (navigate, currentPath) => {
     set({
       selectedPost: null,
       viewState: 'list',
@@ -83,8 +82,7 @@ export const useContentFilterStore = create<ContentFilterState>((set) => ({
     });
 
     // If navigate function is provided, update the URL to go back to the main section
-    if (navigate) {
-      const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+    if (navigate && currentPath) {
       // Remove the post ID from the URL to go back to the main section
       const basePath = currentPath.split('/').slice(0, -1).join('/');
       navigate(basePath || '/');

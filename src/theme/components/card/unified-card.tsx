@@ -1,19 +1,15 @@
 'use client';
 
 import React from 'react';
-import { mergeStyles } from '@fluentui/react';
-import Image from 'next/image';
 
 import { useAppTheme } from '../../hooks/useAppTheme';
-import {
-  useIsMobile,
-  useDeviceOrientation,
-} from '../../hooks/useMediaQuery';
+import { useIsMobile, useDeviceOrientation } from '../../hooks/useMediaQuery';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import useIsTextColorLight from '../../hooks/useIsTextColorLight';
 import { FadeIn } from '../../../animations/fade-animations';
 import { Card } from '../card/card';
+import Image from 'next/image';
 
 export type CardViewType = 'grid' | 'small' | 'large' | 'image';
 
@@ -74,13 +70,13 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   skipDarkModeFilter = false,
 }) => {
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
-  const deviceOrientation = useDeviceOrientation();
+  // const isMobile = useIsMobile(); -- commented out for now due to not used yet
+  // const deviceOrientation = useDeviceOrientation(); -- commented out for now due to not used yet
   const { filter } = useColorVisionFilter(skipDarkModeFilter);
   const { shouldReduceMotion } = useReducedMotion();
 
   // Get text color based on image brightness
-  const { isLight } = useIsTextColorLight(imageUrl || '');
+  // const { isLight } = useIsTextColorLight(imageUrl || ''); -- commmented out for now due to not used yet
 
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
@@ -144,7 +140,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
 
   // For image view type
   if (viewType === 'image' && imageUrl) {
-    const elevationLevel = elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2;
+    const elevationLevel =
+      elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2;
 
     // Calculate container dimensions based on landscape state
     const containerWidth = isLandscape && isViewportLeftPanel ? '75%' : '100%';
@@ -171,87 +168,91 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         <div style={containerStyles}>
           <Card
             elevation={elevationLevel}
-            padding="none"
+            padding='none'
             hoverable={!!onClick}
             onClick={onClick}
           >
-          {/* Loading Spinner */}
-          {useSpinner && !imageLoaded && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 10,
-              }}
-            >
+            {/* Loading Spinner */}
+            {useSpinner && !imageLoaded && (
               <div
                 style={{
-                  width: 40,
-                  height: 40,
-                  border: `4px solid ${theme.palette.neutralLight}`,
-                  borderTop: `4px solid ${theme.palette.themePrimary}`,
-                  borderRadius: '50%',
-                  animation: shouldReduceMotion ? 'none' : 'spin 1s linear infinite',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 10,
+                }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    border: `4px solid ${theme.palette.neutralLight}`,
+                    borderTop: `4px solid ${theme.palette.themePrimary}`,
+                    borderRadius: '50%',
+                    animation: shouldReduceMotion
+                      ? 'none'
+                      : 'spin 1s linear infinite',
+                  }}
+                />
+              </div>
+            )}
+
+            {/* Image - Using standard img tag instead of next/image for better control over 
+              CSS filters, aspect ratio animations, and dark mode transformations */}
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Image
+                src={imageUrl}
+                alt={altText || imageAlt || title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  filter: filter,
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: shouldReduceMotion
+                    ? 'none'
+                    : 'opacity 0.3s ease-in-out',
                 }}
               />
             </div>
-          )}
 
-          {/* Image - Using standard img tag instead of next/image for better control over 
-              CSS filters, aspect ratio animations, and dark mode transformations */}
-          <div
-            style={{
-              position: 'relative',
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <img
-              src={imageUrl}
-              alt={altText || imageAlt || title}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                filter: filter,
-                opacity: imageLoaded ? 1 : 0,
-                transition: shouldReduceMotion ? 'none' : 'opacity 0.3s ease-in-out',
-              }}
-            />
-          </div>
-
-          {/* Title Overlay */}
-          {showTitleOnImage && imageText && (
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: theme.spacing.m,
-                background: `linear-gradient(to top, ${theme.palette.black}CC, transparent)`,
-                color: theme.palette.white,
-              }}
-            >
-              <h2
+            {/* Title Overlay */}
+            {showTitleOnImage && imageText && (
+              <div
                 style={{
-                  margin: 0,
-                  fontSize: theme.fonts.xLarge.fontSize,
-                  fontWeight: theme.fonts.xLarge.fontWeight as number,
-                  fontFamily: theme.fonts.xLarge.fontFamily,
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: theme.spacing.m,
+                  background: `linear-gradient(to top, ${theme.palette.black}CC, transparent)`,
+                  color: theme.palette.white,
                 }}
               >
-                {imageText}
-              </h2>
-            </div>
-          )}
-        </Card>
-      </div>
+                <h2
+                  style={{
+                    margin: 0,
+                    fontSize: theme.fonts.xLarge.fontSize,
+                    fontWeight: theme.fonts.xLarge.fontWeight as number,
+                    fontFamily: theme.fonts.xLarge.fontFamily,
+                  }}
+                >
+                  {imageText}
+                </h2>
+              </div>
+            )}
+          </Card>
+        </div>
       </FadeIn>
     );
   }
@@ -265,61 +266,61 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
     <div style={contentWrapperStyle}>
       <Card
         elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
-        padding="medium"
+        padding='medium'
         hoverable={!!onClick}
         onClick={onClick}
       >
-      <div>
-        {title && (
-          <h3
-            style={{
-              margin: `0 0 ${theme.spacing.s} 0`,
-              fontSize: theme.fonts.large.fontSize,
-              fontWeight: theme.fonts.large.fontWeight as number,
-              color: theme.palette.neutralPrimary,
-            }}
-          >
-            {title}
-          </h3>
-        )}
-        {description && (
-          <p
-            style={{
-              margin: 0,
-              fontSize: theme.fonts.medium.fontSize,
-              color: theme.palette.neutralSecondary,
-            }}
-          >
-            {description}
-          </p>
-        )}
-        {imageUrl && (
-          <div
-            style={{
-              marginTop: theme.spacing.m,
-              position: 'relative',
-              width: '100%',
-              paddingBottom: '56.25%', // 16:9 aspect ratio
-              overflow: 'hidden',
-              borderRadius: theme.borderRadius.s,
-            }}
-          >
-            <img
-              src={imageUrl}
-              alt={altText || imageAlt || title}
+        <div>
+          {title && (
+            <h3
               style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
+                margin: `0 0 ${theme.spacing.s} 0`,
+                fontSize: theme.fonts.large.fontSize,
+                fontWeight: theme.fonts.large.fontWeight as number,
+                color: theme.palette.neutralPrimary,
               }}
-            />
-          </div>
-        )}
-      </div>
-    </Card>
+            >
+              {title}
+            </h3>
+          )}
+          {description && (
+            <p
+              style={{
+                margin: 0,
+                fontSize: theme.fonts.medium.fontSize,
+                color: theme.palette.neutralSecondary,
+              }}
+            >
+              {description}
+            </p>
+          )}
+          {imageUrl && (
+            <div
+              style={{
+                marginTop: theme.spacing.m,
+                position: 'relative',
+                width: '100%',
+                paddingBottom: '56.25%', // 16:9 aspect ratio
+                overflow: 'hidden',
+                borderRadius: theme.borderRadius.s,
+              }}
+            >
+              <Image
+                src={imageUrl}
+                alt={altText || imageAlt || title}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
+          )}
+        </div>
+      </Card>
     </div>
   );
 };
