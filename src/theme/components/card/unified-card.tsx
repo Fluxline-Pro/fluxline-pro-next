@@ -3,10 +3,10 @@
 import React from 'react';
 
 import { useAppTheme } from '../../hooks/useAppTheme';
-import { useIsMobile, useDeviceOrientation } from '../../hooks/useMediaQuery';
+// import { useIsMobile, useDeviceOrientation } from '../../hooks/useMediaQuery';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import useIsTextColorLight from '../../hooks/useIsTextColorLight';
+// import useIsTextColorLight from '../../hooks/useIsTextColorLight';
 import { FadeIn } from '../../../animations/fade-animations';
 import { Card } from '../card/card';
 import Image from 'next/image';

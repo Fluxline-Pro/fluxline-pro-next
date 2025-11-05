@@ -1,11 +1,11 @@
 'use client';
 
-import { isDayjs } from 'dayjs';
+import { isDayjs, Dayjs } from 'dayjs';
 
 // converts the date to this format:
 // 01 Jan, 2023
 // or if it's a dayjs object, uses its format method
-export const useDateFormatter = (date: string | Date): string => {
+export const useDateFormatter = (date: string | Date | Dayjs): string => {
   if (isDayjs(date)) {
     return date.format('DD MMM, YYYY');
   } else {

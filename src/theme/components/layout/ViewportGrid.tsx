@@ -49,7 +49,7 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
   isHomePage = false,
   backgroundImage = 'one',
 }) => {
-  const { layoutPreference, readingDirection, theme, themeMode } =
+  const { layoutPreference, readingDirection, theme } =
     useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
   const [isEntering, setIsEntering] = React.useState(false);
