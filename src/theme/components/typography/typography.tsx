@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface TypographyProps {
+export interface TypographyProps {
   children: React.ReactNode;
   variant:
     | 'p'
@@ -59,7 +59,8 @@ export const Typography: React.FC<TypographyProps> = ({
   ];
 
   // Fallback to 'p' if variant is not allowed
-  const tag = allowedTags.includes(variant) ? variant : 'p';
+  // Note: 'quote' variant maps to 'blockquote' HTML element
+  const tag = variant === 'quote' ? 'blockquote' : allowedTags.includes(variant) ? variant : 'p';
 
   return React.createElement(
     tag,

@@ -53,7 +53,6 @@ const HomeContent: React.FC<{
 
     // Name and HR animation
     setTimeout(() => {
-      setAnimateHeader(true);
       setAnimateDivider(true);
     }, 800);
 
@@ -241,7 +240,7 @@ const HomeContent: React.FC<{
               ...(animateSubHeaderLines[3] && animationStyles.slideInDown),
             }}
           >
-            <HighlightText text='mentoring' theme={theme} /> &amp; coaching
+            <HighlightText text='mentoring' theme={theme} /> {'&'} coaching
           </div>
         </Typography>
       </div>
