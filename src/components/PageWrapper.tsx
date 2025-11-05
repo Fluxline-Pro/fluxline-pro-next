@@ -28,14 +28,15 @@ import BooksImage from '../assets/images/EducationTrainingPortrait.jpg';
 import ContentImage from '../assets/images/Content1280x1815.jpg';
 import PortfolioImage from '../assets/images/Portfolio1280x1815.jpg';
 
+// Dark mode themes: dark, high-contrast, grayscale-dark
+const darkModeThemes: ThemeMode[] = [
+  'dark',
+  'high-contrast',
+  'grayscale-dark',
+];
+
 // Helper function to get the appropriate Fluxline logo based on theme mode
 const getFluxlineLogo = (themeMode: ThemeMode): string => {
-  // Dark mode themes: dark, high-contrast, grayscale-dark
-  const darkModeThemes: ThemeMode[] = [
-    'dark',
-    'high-contrast',
-    'grayscale-dark',
-  ];
 
   if (darkModeThemes.includes(themeMode)) {
     return FluxlineLogoDarkMode.src;
