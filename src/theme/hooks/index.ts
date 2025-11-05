@@ -4,6 +4,7 @@
  */
 
 export * from './useAppTheme';
+export * from './useBackgroundImage';
 export * from './useMediaQuery';
 export * from './useReducedMotion';
 export * from './useThemeColor';

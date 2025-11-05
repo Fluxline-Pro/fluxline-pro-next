@@ -1,10 +1,13 @@
 'use client';
 
 import React from 'react';
+import { ViewportGrid } from '@/theme/components/layout/ViewportGrid';
+import { BackgroundLayer } from '@/theme/components/layout/background-layer';
 import { Typography } from '@/theme/components/typography';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { FadeUp } from '@/animations/fade-animations';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useBackgroundImage } from '@/theme/hooks/useBackgroundImage';
 import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { IExtendedTheme } from '@/theme/theme';
 
@@ -265,40 +268,97 @@ const HomeContent: React.FC<{
 /**
  * Home Page
  * Landing page with hero section, animated text, and call-to-action button
+ * Uses ViewportGrid with background image positioning logic
  */
 export default function Home() {
+  const { backgroundImage } = useBackgroundImage();
+  const { theme, themeMode, layoutPreference } = useAppTheme();
   const isMobile = useIsMobile();
+  const orientation = useDeviceOrientation();
   const [backgroundLoaded, setBackgroundLoaded] = React.useState(false);
   const [shouldStartAnimations, setShouldStartAnimations] =
     React.useState(false);
 
-  // Simulate background loading - in production this would preload actual images
+  // Preload the background image based on orientation and background type
   React.useEffect(() => {
-    const timer = setTimeout(() => {
+    const getBackgroundImageSrc = () => {
+      // Use background images from public/images/home/
+      const backgroundImageOneLandscape = '/images/home/HomePageCover4kLandscape.jpg';
+      const backgroundImageOnePortrait = '/images/home/HomePageCover4kPortrait.jpeg';
+
+      // For now, we only use background 'one' as per useBackgroundImage
+      return orientation === 'landscape' || orientation === 'ultrawide'
+        ? backgroundImageOneLandscape
+        : orientation === 'portrait'
+          ? backgroundImageOnePortrait
+          : backgroundImageOneLandscape;
+    };
+
+    const imageUrl = getBackgroundImageSrc();
+    const img = new Image();
+
+    img.onload = () => {
+      setBackgroundLoaded(true);
+      // Start animations after background loads + small delay for smooth transition
+      setTimeout(() => {
+        setShouldStartAnimations(true);
+      }, 200);
+    };
+
+    img.onerror = () => {
+      // If image fails to load, still proceed with animations
       setBackgroundLoaded(true);
       setShouldStartAnimations(true);
-    }, 300);
+    };
 
-    return () => clearTimeout(timer);
-  }, []);
+    img.src = imageUrl;
+
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [backgroundImage, orientation]);
 
   return (
-    <div
-      className='min-h-screen w-full flex items-center justify-center'
-      style={{
-        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
-      }}
-    >
-      <FadeUp
-        key='home-content'
-        delay={backgroundLoaded ? 0.1 : 0}
-        duration={0.5}
-      >
-        <HomeContent
-          isMobile={isMobile}
-          shouldStartAnimations={shouldStartAnimations}
-        />
-      </FadeUp>
-    </div>
+    <>
+      <BackgroundLayer
+        isHomePage={true}
+        backgroundImage={backgroundImage as 'one' | 'two'}
+        orientation={orientation}
+        themeMode={themeMode}
+        theme={theme}
+        layoutPreference={layoutPreference}
+        backgroundLoaded={backgroundLoaded}
+      />
+      <ViewportGrid
+        leftChildren={
+          <FadeUp
+            key={`home-left-${backgroundImage}-${backgroundLoaded}`}
+            delay={backgroundLoaded ? 0.1 : 0}
+            duration={0.5}
+          >
+            <HomeContent
+              isMobile={isMobile}
+              shouldStartAnimations={shouldStartAnimations}
+            />
+          </FadeUp>
+        }
+        rightChildren={
+          <FadeUp
+            key={`home-right-${backgroundImage}-${backgroundLoaded}`}
+            delay={backgroundLoaded ? 0.1 : 0}
+            duration={0.5}
+          >
+            <HomeContent
+              isMobile={isMobile}
+              shouldStartAnimations={shouldStartAnimations}
+            />
+          </FadeUp>
+        }
+        isHomePage={true}
+        respectLayoutPreference={true}
+        backgroundImage={backgroundImage as 'one' | 'two'}
+      />
+    </>
   );
 }
