@@ -1,0 +1,57 @@
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Max Width Variants */
+.maxWidth-narrow {
+  max-width: 768px;
+}
+
+.maxWidth-default {
+  max-width: 1280px;
+}
+
+.maxWidth-wide {
+  max-width: 1536px;
+}
+
+.maxWidth-full {
+  max-width: 100%;
+}
+
+/* Padding Variants */
+.padding-none {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.padding-small {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.padding-default {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  @media (min-width: 768px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.padding-large {
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  @media (min-width: 768px) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
