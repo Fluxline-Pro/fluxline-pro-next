@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider as FluentThemeProvider } from '@fluentui/react';
 import { setIconOptions } from '@fluentui/react/lib/Styling';
 import { useAppTheme } from '../hooks/useAppTheme';
@@ -24,19 +24,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { theme, themeMode } = useAppTheme();
-  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Wait for hydration to complete
+  // Apply theme to document when theme mode changes
   useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
-  // Apply theme changes after hydration
-  useEffect(() => {
-    if (isHydrated) {
-      applyThemeToDocument(themeMode);
-    }
-  }, [themeMode, isHydrated]);
+    applyThemeToDocument(themeMode);
+  }, [themeMode]);
 
   return (
     <FluentThemeProvider theme={theme} suppressHydrationWarning>

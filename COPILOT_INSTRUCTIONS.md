@@ -58,7 +58,8 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 
 - **Favor reusing existing components and Next.js patterns**:
   - Use Next.js built-in components: `Image`, `Link`, `Font`
-  - Create reusable layout components in `/app` directory
+  - Use `PageWrapper` component for consistent page layouts
+  - Create reusable layout components in `src/theme/components/layout/`
   - Implement consistent page layouts using `layout.tsx` files
   - Use Server Components for static content, Client Components for interactivity
 - **Follow Next.js App Router conventions**
@@ -69,6 +70,20 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   3. Develop in `src/theme/components/component-name/`
   4. Test with: `yarn test component-name`
   5. Document with Storybook: `yarn storybook`
+- **Page Layout Usage**:
+  ```tsx
+  // In your page.tsx file
+  import { PageWrapper } from '@/components';
+  
+  export default function AboutPage() {
+    return (
+      <PageWrapper>
+        <h1>About Us</h1>
+        <p>Your content here...</p>
+      </PageWrapper>
+    );
+  }
+  ```
 
 ### State & Data Handling
 
@@ -440,6 +455,60 @@ yarn build-storybook         # Build for deployment
 
 ---
 
+## Page Layout Infrastructure
+
+### PageWrapper Component
+- **Location**: `src/components/PageWrapper.tsx`
+- **Purpose**: Main layout wrapper for all pages (except home page)
+- **Features**:
+  - Responsive 3fr/9fr grid layout (image left, content right)
+  - Dynamic page-specific images based on route
+  - Theme-aware Fluxline logo display
+  - Animated page transitions with Framer Motion
+  - Support for detail views with custom images
+  - Mobile-first responsive design (stacked in portrait mode)
+
+### ViewportGrid Component
+- **Location**: `src/theme/components/layout/ViewportGrid.tsx`
+- **Type**: Client Component ('use client')
+- **Features**:
+  - CSS Grid-based responsive layout
+  - Automatic layout switching based on device orientation
+  - Left-handed mode support (swaps image and content positions)
+  - Auto-scroll to top on route changes
+  - Content scrollability detection
+  - Supports nested layouts
+
+### UnifiedCard Component
+- **Location**: `src/theme/components/card/unified-card.tsx`
+- **Type**: Client Component ('use client')
+- **Purpose**: Flexible card component for displaying images and content
+- **Features**:
+  - Image loading with spinner animation
+  - Aspect ratio preservation for landscape images
+  - Dark mode filtering with color vision accessibility
+  - Title overlay on images
+  - Multiple view types (image, grid, small, large)
+  - Fluent UI typography integration
+
+### Layout Hooks
+All hooks are located in `src/theme/hooks/`:
+- **useLayoutConfig**: Calculates grid layout based on device, orientation, and preferences
+- **useContentScrollable**: Detects if content area is scrollable
+- **useColorVisionFilter**: Applies color vision accessibility filters
+- **useIsTextColorLight**: Determines text color based on image brightness
+- **useDateFormatter**: Formats dates consistently across the app
+
+### Page Configurations
+PageWrapper includes pre-configured routes for:
+- Services pages (consulting, development, design, etc.)
+- Legal pages (terms, privacy, glossary)
+- Content pages (blog, portfolio, my-content)
+- About, contact, and other pages
+- Dynamic 404 handling
+
+---
+
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-10-27 - Theme System Migration Complete
+### Last Updated: 2025-11-04 - Page Layout Infrastructure Migration Complete
