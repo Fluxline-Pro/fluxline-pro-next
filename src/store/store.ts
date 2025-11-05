@@ -4,3 +4,4 @@
  */
 
 export * from './store-specs/userPreferencesStore';
+export * from './store-specs/contentFilterStore';
