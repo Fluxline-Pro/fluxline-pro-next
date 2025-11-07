@@ -319,6 +319,38 @@ export default function Home() {
     };
   }, [backgroundImage, orientation]);
 
+  // Determine which side should show content based on orientation and background image
+  // Portrait: Show content on bottom (rightChildren in portrait stacked layout)
+  // Landscape with backgroundImage 'one': Show content on left (leftChildren) so face shows on right
+  // Landscape with backgroundImage 'two': Show content on right (rightChildren) so face shows on left
+  // Left-handed mode: Flip the above
+  const shouldShowContentOnLeft = React.useMemo(() => {
+    if (orientation === 'portrait') {
+      // In portrait mode, content always goes to rightChildren (which becomes bottom)
+      return false;
+    }
+    
+    // For landscape/ultrawide/square:
+    // backgroundImage 'one' = face on right, text on left
+    // backgroundImage 'two' = face on left, text on right
+    // Left-handed mode flips this
+    const baseLeft = backgroundImage === 'one';
+    return layoutPreference === 'left-handed' ? !baseLeft : baseLeft;
+  }, [orientation, backgroundImage, layoutPreference]);
+
+  const contentNode = (
+    <FadeUp
+      key={`home-content-${backgroundImage}-${backgroundLoaded}`}
+      delay={backgroundLoaded ? 0.1 : 0}
+      duration={0.5}
+    >
+      <HomeContent
+        isMobile={isMobile}
+        shouldStartAnimations={shouldStartAnimations}
+      />
+    </FadeUp>
+  );
+
   return (
     <>
       <BackgroundLayer
@@ -331,30 +363,8 @@ export default function Home() {
         backgroundLoaded={backgroundLoaded}
       />
       <ViewportGrid
-        leftChildren={
-          <FadeUp
-            key={`home-left-${backgroundImage}-${backgroundLoaded}`}
-            delay={backgroundLoaded ? 0.1 : 0}
-            duration={0.5}
-          >
-            <HomeContent
-              isMobile={isMobile}
-              shouldStartAnimations={shouldStartAnimations}
-            />
-          </FadeUp>
-        }
-        rightChildren={
-          <FadeUp
-            key={`home-right-${backgroundImage}-${backgroundLoaded}`}
-            delay={backgroundLoaded ? 0.1 : 0}
-            duration={0.5}
-          >
-            <HomeContent
-              isMobile={isMobile}
-              shouldStartAnimations={shouldStartAnimations}
-            />
-          </FadeUp>
-        }
+        leftChildren={shouldShowContentOnLeft ? contentNode : undefined}
+        rightChildren={!shouldShowContentOnLeft ? contentNode : undefined}
         isHomePage={true}
         respectLayoutPreference={true}
         backgroundImage={backgroundImage as 'one' | 'two'}

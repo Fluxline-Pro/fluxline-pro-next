@@ -90,18 +90,22 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     themeMode: ThemeMode,
     theme: IExtendedTheme
   ) => {
+    // For home page with background image, use vignette (transparent to theme color)
+    // instead of solid background gradient
     switch (themeMode) {
       case 'high-contrast':
-        return theme.gradients.light.background;
+        return theme.gradients.light.vignette;
       case 'dark':
-        return theme.gradients.dark.background;
+        return theme.gradients.dark.vignette;
       case 'protanopia':
       case 'deuteranopia':
       case 'tritanopia':
       case 'grayscale':
-        return theme.gradients.light.background;
+        return theme.gradients.light.vignette;
+      case 'grayscale-dark':
+        return theme.gradients.dark.vignette;
       default:
-        return theme.gradients.light.background;
+        return theme.gradients.light.vignette;
     }
   };
 
