@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     'Fluxline Professional Services - Business consulting, web development, design, and technical services',
   keywords:
-    'Fluxline Resonance Group, Fluxline, Fluxline Pro, consulting, web development, business strategy, design, technical services, professional services, personal training, health and wellness, fitness coaching, nutrition advice, legal services, financial planning, marketing strategy, IT consulting, project management, leadership development, career coaching, life coaching, wellness programs, corporate training, team building, productivity improvement, training, coaching, services, LGBTQ, LGBTQ+, LGBTQIA, LGBTQIA+, queer, inclusivity, diversity, equity, accessibility, professional, expert, experienced, trusted, reliable, innovative, creative, strategic, results-driven, client-focused, personalized, customized, tailored',
+    'Fluxline, consulting, web development, business strategy, design, technical services, professional services, personal training, coaching, LGBTQ+ inclusive, accessibility, diversity, equity',
   openGraph: {
     title: 'Fluxline Professional Services',
     description:
@@ -63,7 +63,7 @@ export default function RootLayout({
         />
         {/* Preconnect to external font sources */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       </head>
       <body className='antialiased' suppressHydrationWarning>
         {/* Structured data for SEO */}

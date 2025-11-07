@@ -40,6 +40,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   backgroundLoaded = true,
 }) => {
   // Skip dark mode brightness filter for background hero images
+  // The skipDarkModeFilter parameter prevents the image from being darkened in dark mode
   const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
   
