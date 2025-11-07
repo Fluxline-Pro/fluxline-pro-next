@@ -39,7 +39,8 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   layoutPreference,
   backgroundLoaded = true,
 }) => {
-  const { filter } = useColorVisionFilter();
+  // Skip dark mode brightness filter for background hero images
+  const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
   
   // Determine if image should be flipped for left-handed mode
@@ -90,22 +91,22 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     themeMode: ThemeMode,
     theme: IExtendedTheme
   ) => {
-    // For home page with background image, use vignette (transparent to theme color)
-    // instead of solid background gradient
+    // For home page with background image, use a very subtle vignette overlay
+    // that allows the image to show through clearly while providing minimal depth
     switch (themeMode) {
       case 'high-contrast':
-        return theme.gradients.light.vignette;
+        return 'radial-gradient(circle at center, transparent 0%, rgba(18, 18, 18, 0.2) 100%)';
       case 'dark':
-        return theme.gradients.dark.vignette;
+        return 'radial-gradient(circle at center, transparent 0%, rgba(1, 1, 1, 0.3) 100%)';
+      case 'grayscale-dark':
+        return 'radial-gradient(circle at center, transparent 0%, rgba(31, 31, 31, 0.25) 100%)';
       case 'protanopia':
       case 'deuteranopia':
       case 'tritanopia':
       case 'grayscale':
-        return theme.gradients.light.vignette;
-      case 'grayscale-dark':
-        return theme.gradients.dark.vignette;
+        return 'radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.1) 100%)';
       default:
-        return theme.gradients.light.vignette;
+        return 'radial-gradient(circle at center, transparent 0%, rgba(245, 245, 245, 0.15) 100%)';
     }
   };
 
