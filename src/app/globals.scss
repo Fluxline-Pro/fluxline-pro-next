@@ -165,3 +165,28 @@ button {
     transform: rotate(360deg);
   }
 }
+
+/* =============================================
+   VIEWPORT GRID STYLES (Home Page)
+   ============================================= */
+
+.viewport-grid {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  
+  &.isHomePage {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Allow scrolling in portrait mode for non-home pages */
+html.allow-scroll,
+body.allow-scroll {
+  overflow-y: auto !important;
+  height: auto !important;
+}

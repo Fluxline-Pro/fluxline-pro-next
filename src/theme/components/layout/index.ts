@@ -3,6 +3,8 @@
  * These components provide consistent spacing, alignment, and structure
  */
 
+export { BackgroundLayer } from './background-layer';
+
 export { Container } from './container';
 export type { ContainerProps } from './container';
 

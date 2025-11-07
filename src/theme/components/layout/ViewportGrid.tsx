@@ -145,8 +145,9 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
     if (fullscreen) baseClasses.push('fullscreen');
     if (nested) baseClasses.push('nested');
     if (shouldSwapChildren) baseClasses.push('swapped');
+    if (isHomePage) baseClasses.push('isHomePage');
     return baseClasses.join(' ');
-  }, [className, reversed, fullscreen, nested, shouldSwapChildren]);
+  }, [className, reversed, fullscreen, nested, shouldSwapChildren, isHomePage]);
 
   // Determine which children to show where
   const leftContent = shouldSwapChildren ? rightChildren : leftChildren;
@@ -155,9 +156,9 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
   return (
     <LayoutGrid
       className={classes}
+      templateColumns={gridTemplateColumns}
       style={{
         ...containerStyle,
-        gridTemplateColumns,
         direction: readingDirection,
       }}
     >
