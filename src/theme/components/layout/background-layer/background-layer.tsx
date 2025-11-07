@@ -36,10 +36,14 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   orientation,
   themeMode,
   theme,
+  layoutPreference,
   backgroundLoaded = true,
 }) => {
   const { filter } = useColorVisionFilter();
   const { shouldReduceMotion } = useReducedMotion();
+  
+  // Determine if image should be flipped for left-handed mode
+  const shouldFlipHorizontally = layoutPreference === 'left-handed';
 
   const getBackgroundImagePath = (
     backgroundImage: 'one' | 'two',
@@ -47,19 +51,16 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   ) => {
     const isLandscape = orientation === 'landscape' || orientation === 'ultrawide';
     const isPortrait = orientation === 'portrait';
+    const isTabletPortrait = orientation === 'tablet-portrait';
     
     if (backgroundImage === 'one') {
-      return isLandscape
-        ? '/images/home/HomePageCover4kLandscape.jpg'
-        : isPortrait
-          ? '/images/home/HomePageCover4kPortrait.jpeg'
-          : '/images/home/HomePageCover4kLandscape.jpg';
+      return isPortrait || isTabletPortrait
+        ? '/images/home/HomePageCover4kPortrait.jpeg'
+        : '/images/home/HomePageCover4kLandscape.jpg';
     } else {
-      return isLandscape
-        ? '/images/home/HomePageCover4kLandscape2.jpg'
-        : isPortrait
-          ? '/images/home/HomePageCover4kPortrait2.jpg'
-          : '/images/home/HomePageCover4kLandscape2.jpg';
+      return isPortrait || isTabletPortrait
+        ? '/images/home/HomePageCover4kPortrait2.jpg'
+        : '/images/home/HomePageCover4kLandscape2.jpg';
     }
   };
 
@@ -150,6 +151,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
           style={{
             objectFit: 'cover',
             objectPosition: backgroundPosition,
+            transform: shouldFlipHorizontally ? 'scaleX(-1)' : undefined,
           }}
         />
       </div>

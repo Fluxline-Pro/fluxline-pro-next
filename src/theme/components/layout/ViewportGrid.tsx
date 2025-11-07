@@ -156,9 +156,9 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
   return (
     <LayoutGrid
       className={classes}
+      templateColumns={gridTemplateColumns}
       style={{
         ...containerStyle,
-        gridTemplateColumns,
         direction: readingDirection,
       }}
     >

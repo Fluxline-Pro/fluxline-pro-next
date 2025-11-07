@@ -1,15 +1,14 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-
-const BACKGROUND_STORAGE_KEY = 'home-background-toggle';
+import { useUserPreferencesStore } from '@/store/store-specs/userPreferencesStore';
 
 /**
  * useBackgroundImage Hook
  * 
- * Manages background image selection for the home page.
- * Always returns 'one' as the background image (darker background with portrait).
+ * Manages background image selection for the home page using Zustand store.
+ * Integrates with userPreferencesStore to persist background selection.
  * 
  * This hook is designed to work with Next.js App Router and maintains
  * compatibility with the original React Router implementation.
@@ -18,9 +17,9 @@ export const useBackgroundImage = () => {
   const pathname = usePathname();
   const prevPathRef = useRef<string | null>(null);
   const hasInitializedRef = useRef(false);
-
-  // Always use 'one' and never toggle to 'two'
-  const [currentBackground] = useState<'one' | 'two'>('one');
+  
+  const { preferences, setBackgroundImage } = useUserPreferencesStore();
+  const backgroundImage = (preferences.backgroundImage || 'one') as 'one' | 'two';
 
   const isHomePage = pathname === '/' || pathname === '/home';
 
@@ -30,10 +29,10 @@ export const useBackgroundImage = () => {
     const currentPath = pathname;
     const prevWasHome = prevPath === '/' || prevPath === '/home';
 
-    // On first mount only, always use 'one'
+    // On first mount only, ensure we have a background set
     if (!hasInitializedRef.current) {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(BACKGROUND_STORAGE_KEY, 'one');
+      if (!preferences.backgroundImage) {
+        setBackgroundImage('one');
       }
       hasInitializedRef.current = true;
       prevPathRef.current = currentPath;
@@ -45,18 +44,19 @@ export const useBackgroundImage = () => {
       return;
     }
 
-    // Returning TO home page (from non-home) - always use background 'one'
+    // Returning TO home page (from non-home) - use stored preference
     if (!prevWasHome && isHomePage) {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(BACKGROUND_STORAGE_KEY, 'one');
+      if (!preferences.backgroundImage) {
+        setBackgroundImage('one');
       }
     }
 
     prevPathRef.current = currentPath;
-  }, [pathname, isHomePage]);
+  }, [pathname, isHomePage, preferences.backgroundImage, setBackgroundImage]);
 
   return {
-    backgroundImage: currentBackground,
+    backgroundImage,
+    setBackgroundImage,
   };
 };
 
