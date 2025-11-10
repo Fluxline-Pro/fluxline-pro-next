@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Button } from '../button';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 
 interface BookingsButtonProps {
@@ -24,7 +23,6 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   style,
   className,
 }) => {
-  const { theme } = useAppTheme();
   const orientation = useDeviceOrientation();
 
   const handleClick = () => {
@@ -36,7 +34,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   // Build responsive font size based on orientation
   const getResponsiveFontSize = () => {
     if (orientation === 'portrait') {
-      return 'clamp(1.2rem, 3.2cqi, 1.8rem)';
+      return 'clamp(1.1rem, 3.2cqi, 1.5rem)';
     }
     if (orientation === 'square') {
       return 'clamp(1.25rem, 3.7cqi, 1.3rem)';
