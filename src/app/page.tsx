@@ -104,9 +104,9 @@ const HomeContent: React.FC<{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        gap: isMobile ? '0.25rem' : '0.5rem',
-        padding: '2rem',
+        justifyContent: isMobile ? 'flex-end' : 'center',
+        gap: isMobile ? '0' : '0.5rem',
+        padding: isMobile ? '3rem' : '2rem',
         textAlign: 'center',
         width: '100%',
         maxWidth: '800px',
@@ -203,7 +203,7 @@ const HomeContent: React.FC<{
             color:
               themeMode === 'grayscale'
                 ? theme.palette.neutralTertiary
-                : theme.palette.themeTertiary,
+                : theme.palette.themeSecondary,
             lineHeight: theme.typography.lineHeights.tight,
             fontWeight: theme.typography.fontWeights.extraLight,
             fontSize: 'clamp(1.2rem, 3vw, 2rem)',
@@ -225,7 +225,7 @@ const HomeContent: React.FC<{
               ...(animateSubHeaderLines[1] && animationStyles.slideInDown),
             }}
           >
-            <HighlightText text='business' theme={theme} /> architecture
+            <HighlightText text='brand' theme={theme} /> establishment
           </div>
           <div
             style={{

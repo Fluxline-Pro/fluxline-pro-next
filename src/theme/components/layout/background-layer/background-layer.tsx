@@ -96,7 +96,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     // that allows the image to show through clearly while providing minimal depth
     switch (themeMode) {
       case 'high-contrast':
-        return 'radial-gradient(circle at center, transparent 0%, rgba(18, 18, 18, 0.2) 100%)';
+        return '#010101';
       case 'dark':
         return 'radial-gradient(circle at center, transparent 0%, rgba(1, 1, 1, 0.3) 100%)';
       case 'grayscale-dark':
