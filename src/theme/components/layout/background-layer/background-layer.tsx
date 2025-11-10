@@ -145,7 +145,6 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
           width: '100%',
           height: '100%',
           filter: filter,
-          zIndex: 1000000,
         }}
       >
         <Image
