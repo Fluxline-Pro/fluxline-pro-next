@@ -14,7 +14,10 @@ import type { IExtendedTheme } from '@/theme/theme';
 /**
  * HighlightText Component - displays highlighted text in white
  */
-const HighlightText: React.FC<{ text: string; theme: IExtendedTheme }> = ({ text, theme }) => (
+const HighlightText: React.FC<{ text: string; theme: IExtendedTheme }> = ({
+  text,
+  theme,
+}) => (
   <span
     style={{
       color: theme.palette.white,
@@ -98,6 +101,8 @@ const HomeContent: React.FC<{
     },
   };
 
+  const isMobileLandscape = orientation === 'mobile-landscape';
+
   return (
     <div
       style={{
@@ -105,13 +110,19 @@ const HomeContent: React.FC<{
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: isMobile ? 'flex-end' : 'center',
-        gap: isMobile ? '0' : '0.5rem',
-        padding: isMobile ? '3rem' : '2rem',
+        gap: isMobile ? (isMobileLandscape ? '0.05rem' : '0.125rem') : '0.5rem',
+        padding: isMobileLandscape ? '1rem' : '2rem',
         textAlign: 'center',
         width: '100%',
         maxWidth: '800px',
-        margin: '0 auto',
-        minHeight: '80vh',
+        margin: isMobile
+          ? isMobileLandscape
+            ? '2rem 0 0' // Less margin for mobile landscape
+            : '6rem 0 0' // pushes the text down on mobile portrait
+          : orientation === 'tablet-portrait'
+            ? '3rem 0 0 3rem' // centers the text on tablet portrait
+            : '0 auto', // remaining layouts center normally
+        minHeight: isMobileLandscape ? '60vh' : '80vh',
       }}
     >
       <style>
@@ -145,10 +156,12 @@ const HomeContent: React.FC<{
             themeMode === 'grayscale'
               ? theme.palette.neutralTertiary
               : theme.palette.themePrimary,
-          marginBottom: '-0.5rem',
+          marginBottom: isMobileLandscape ? '-0.25rem' : '-0.5rem',
           opacity: 0,
           transform: 'translateX(-20px)',
-          fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+          fontSize: isMobileLandscape
+            ? 'clamp(1rem, 3vw, 1.5rem)' // Smaller for mobile landscape
+            : 'clamp(1.5rem, 4vw, 2.5rem)',
           fontWeight: theme.typography.fontWeights.light,
           ...(animateHeader && animationStyles.slideInRight),
         }}
@@ -159,8 +172,10 @@ const HomeContent: React.FC<{
         variant='h1'
         style={{
           color: theme.palette.neutralLighterAlt,
-          marginBottom: theme.spacing.s,
-          fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+          marginBottom: isMobileLandscape ? '0.25rem' : theme.spacing.s,
+          fontSize: isMobileLandscape
+            ? 'clamp(1.8rem, 6vw, 3rem)' // Smaller for mobile landscape
+            : 'clamp(2.5rem, 8vw, 5rem)',
           fontWeight: theme.typography.fontWeights.bold,
           opacity: 0,
           transform: 'translateX(-20px)',
@@ -193,8 +208,12 @@ const HomeContent: React.FC<{
 
       <div
         style={{
-          marginTop: `${orientation === 'mobile-landscape' ? '1rem' : theme.spacing.l}`,
-          marginBottom: `${orientation === 'mobile-landscape' ? '0' : theme.spacing.xl}`,
+          marginTop: isMobileLandscape
+            ? '0.5rem'
+            : `${orientation === 'mobile-landscape' ? '1rem' : theme.spacing.l}`,
+          marginBottom: isMobileLandscape
+            ? '0.5rem'
+            : `${orientation === 'mobile-landscape' ? '0' : theme.spacing.xl}`,
         }}
       >
         <Typography
@@ -206,7 +225,9 @@ const HomeContent: React.FC<{
                 : theme.palette.themeSecondary,
             lineHeight: theme.typography.lineHeights.tight,
             fontWeight: theme.typography.fontWeights.extraLight,
-            fontSize: 'clamp(1.2rem, 3vw, 2rem)',
+            fontSize: isMobileLandscape
+              ? 'clamp(0.9rem, 2.5vw, 1.4rem)' // Smaller for mobile landscape
+              : 'clamp(1.2rem, 3vw, 2rem)',
           }}
         >
           <div
@@ -251,7 +272,7 @@ const HomeContent: React.FC<{
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '1rem',
+          gap: isMobileLandscape ? '0.5rem' : '1rem',
           width: '100%',
           maxWidth: '500px',
         }}
@@ -275,16 +296,28 @@ export default function Home() {
   const { theme, themeMode, layoutPreference } = useAppTheme();
   const isMobile = useIsMobile();
   const orientation = useDeviceOrientation();
+  // For home page layout, treat tablet portrait like mobile (content at bottom)
+  const shouldUseMobileLayout = isMobile || orientation === 'tablet-portrait';
   const [backgroundLoaded, setBackgroundLoaded] = React.useState(false);
   const [shouldStartAnimations, setShouldStartAnimations] =
     React.useState(false);
+
+  // Add home-page class to body for transparent background
+  React.useEffect(() => {
+    document.body.classList.add('home-page');
+    return () => {
+      document.body.classList.remove('home-page');
+    };
+  }, []);
 
   // Preload the background image based on orientation and background type
   React.useEffect(() => {
     const getBackgroundImageSrc = () => {
       // Use background images from public/images/home/
-      const backgroundImageOneLandscape = '/images/home/HomePageCover4kLandscape.jpg';
-      const backgroundImageOnePortrait = '/images/home/HomePageCover4kPortrait.jpeg';
+      const backgroundImageOneLandscape =
+        '/images/home/HomePageCover4kLandscape.jpg';
+      const backgroundImageOnePortrait =
+        '/images/home/HomePageCover4kPortrait.jpeg';
 
       // For now, we only use background 'one' as per useBackgroundImage
       return orientation === 'landscape' || orientation === 'ultrawide'
@@ -329,7 +362,7 @@ export default function Home() {
       // In portrait mode, content always goes to rightChildren (which becomes bottom)
       return false;
     }
-    
+
     // For landscape/ultrawide/square:
     // backgroundImage 'one' = face on right, text on left
     // backgroundImage 'two' = face on left, text on right
@@ -343,9 +376,10 @@ export default function Home() {
       key={`home-content-${backgroundImage}-${backgroundLoaded}`}
       delay={backgroundLoaded ? 0.1 : 0}
       duration={0.5}
+      style={shouldUseMobileLayout ? { width: '100%' } : undefined}
     >
       <HomeContent
-        isMobile={isMobile}
+        isMobile={shouldUseMobileLayout}
         shouldStartAnimations={shouldStartAnimations}
       />
     </FadeUp>

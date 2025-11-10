@@ -51,7 +51,6 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     backgroundImage: 'one' | 'two',
     orientation: string
   ) => {
-    const isLandscape = orientation === 'landscape' || orientation === 'ultrawide';
     const isPortrait = orientation === 'portrait';
     const isTabletPortrait = orientation === 'tablet-portrait';
     
@@ -146,6 +145,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
           width: '100%',
           height: '100%',
           filter: filter,
+          zIndex: 1000000,
         }}
       >
         <Image
