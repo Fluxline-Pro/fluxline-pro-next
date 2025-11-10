@@ -208,12 +208,8 @@ const HomeContent: React.FC<{
 
       <div
         style={{
-          marginTop: isMobileLandscape
-            ? '0.5rem'
-            : `${orientation === 'mobile-landscape' ? '1rem' : theme.spacing.l}`,
-          marginBottom: isMobileLandscape
-            ? '0.5rem'
-            : `${orientation === 'mobile-landscape' ? '0' : theme.spacing.xl}`,
+          marginTop: isMobileLandscape ? '0.5rem' : theme.spacing.l,
+          marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.xl,
         }}
       >
         <Typography
