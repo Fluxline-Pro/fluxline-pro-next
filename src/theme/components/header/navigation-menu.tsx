@@ -38,6 +38,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
         flexDirection: 'column',
         height: '100%',
         minHeight: 0,
+        color: theme.palette.neutralPrimary,
       }}
     >
       {/* Menu Title */}
@@ -48,7 +49,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
         }}
       >
         <Typography
-          variant="h2"
+          variant='h2'
           style={{
             color: theme.palette.themePrimary,
             fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
@@ -95,7 +96,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
         }}
       >
         <Typography
-          variant="p"
+          variant='p'
           style={{
             color: theme.palette.neutralSecondary,
             fontSize: '0.875rem',

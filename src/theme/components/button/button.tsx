@@ -45,6 +45,13 @@ export const Button: React.FC<ButtonProps> = ({
       fontSize: size === 'small' ? '12px' : size === 'large' ? '16px' : '14px',
       fontFamily: theme.typography.fontFamilies.base,
       transition: theme.animations.transitions.button,
+      backgroundColor:
+        variant === 'primary'
+          ? theme.isInverted ? theme.palette.themeSecondary : theme.palette.themePrimary
+          : variant === 'secondary'
+          ? theme.palette.themeSecondary
+            : theme.palette.neutralLighter,
+      border: 'none',
     },
     rootHovered: {
       backgroundColor: theme.palette.themeDarkAlt,

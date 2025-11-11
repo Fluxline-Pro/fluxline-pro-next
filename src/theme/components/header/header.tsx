@@ -17,7 +17,9 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ className }) => {
-  const [activeModal, setActiveModal] = React.useState<'menu' | 'settings' | null>(null);
+  const [activeModal, setActiveModal] = React.useState<
+    'menu' | 'settings' | null
+  >(null);
   const [isViewTransitioning, setIsViewTransitioning] = React.useState(false);
   const { theme, themeMode, setThemeMode, layoutPreference } = useAppTheme();
   const pathname = usePathname();
@@ -116,11 +118,11 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 display: 'flex',
                 alignItems: 'center',
               }}
-              aria-label="Open menu"
+              aria-label='Open menu'
             >
               <FluentIcon
                 iconName={activeModal === 'menu' ? 'Cancel' : 'GlobalNavButton'}
-                size="medium"
+                size='medium'
                 color={theme.palette.neutralPrimary}
               />
             </button>
@@ -134,11 +136,11 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 display: 'flex',
                 alignItems: 'center',
               }}
-              aria-label="Toggle theme"
+              aria-label='Toggle theme'
             >
               <FluentIcon
                 iconName={themeMode === 'dark' ? 'Sunny' : 'ClearNight'}
-                size="medium"
+                size='medium'
                 color={theme.palette.neutralPrimary}
               />
             </button>
@@ -152,11 +154,11 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 display: 'flex',
                 alignItems: 'center',
               }}
-              aria-label="Open settings"
+              aria-label='Open settings'
             >
               <FluentIcon
                 iconName={activeModal === 'settings' ? 'Cancel' : 'Settings'}
-                size="medium"
+                size='medium'
                 color={theme.palette.neutralPrimary}
               />
             </button>
@@ -178,7 +180,12 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
         >
           <div
             style={{
-              backgroundColor: theme.palette.neutralLighter,
+              background:
+                themeMode === 'dark' || themeMode === 'grayscale-dark'
+                  ? theme.gradients?.components?.modal?.dark ||
+                    theme.palette.themeDark
+                  : theme.gradients?.components?.modal?.light ||
+                    theme.palette.white,
               height: '100%',
               width: '100%',
               maxWidth: '400px',
@@ -195,9 +202,16 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 height: '100%',
               }}
             >
-              {activeModal === 'menu' && <NavigationMenu onClose={handleModalClose} />}
+              {activeModal === 'menu' && (
+                <NavigationMenu onClose={handleModalClose} />
+              )}
               {activeModal === 'settings' && (
-                <div style={{ padding: '2rem', color: theme.palette.neutralPrimary }}>
+                <div
+                  style={{
+                    padding: '2rem',
+                    color: theme.palette.neutralPrimary,
+                  }}
+                >
                   <h2>Settings</h2>
                   <p>Settings content will be added here</p>
                 </div>

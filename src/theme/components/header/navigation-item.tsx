@@ -51,22 +51,28 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
         textDecoration: 'none',
         transition: 'all 0.2s ease',
         borderRadius: theme.borderRadius.container.small,
-        backgroundColor: isActive
-          ? theme.palette.neutralQuaternaryAlt
-          : isHovered
+        backgroundColor:
+          isActive || isHovered
             ? theme.palette.neutralQuaternaryAlt
             : 'transparent',
       }}
     >
       <FluentIcon
         iconName={route.iconName}
-        size="large"
-        color={isActive ? theme.palette.themePrimary : theme.palette.neutralSecondary}
+        size='large'
+        color={
+          isActive || isHovered
+            ? theme.palette.themePrimary
+            : theme.palette.neutralSecondary
+        }
       />
       <Typography
-        variant="h3"
+        variant='h3'
         style={{
-          color: isActive ? theme.palette.themePrimary : theme.palette.neutralPrimary,
+          color:
+            isActive || isHovered
+              ? theme.palette.themePrimary
+              : theme.palette.neutralPrimary,
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
           fontWeight: isActive
             ? theme.typography.fontWeights.semiBold
