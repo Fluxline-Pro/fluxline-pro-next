@@ -9,6 +9,8 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
+import { NavigationMenu } from './navigation-menu';
+import { FluentIcon } from '@/theme/components/fluent-icon';
 
 interface HeaderProps {
   className?: string;
@@ -17,10 +19,11 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ className }) => {
   const [activeModal, setActiveModal] = React.useState<'menu' | 'settings' | null>(null);
   const [isViewTransitioning, setIsViewTransitioning] = React.useState(false);
-  const { themeMode, setThemeMode } = useAppTheme();
+  const { theme, themeMode, setThemeMode, layoutPreference } = useAppTheme();
   const pathname = usePathname();
   const orientation = useDeviceOrientation();
   const isMobileLandscape = orientation === 'mobile-landscape';
+  const isLeftHanded = layoutPreference === 'left-handed';
 
   const handleSettingsClick = () => {
     if (activeModal === 'settings') {
@@ -61,50 +64,144 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
 
   return (
     <div className={className}>
-      {/* Navigation Bar - Placeholder for now */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-md">
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="text-white font-bold">Fluxline</div>
-          <div className="flex gap-4">
+      {/* Navigation Bar */}
+      <nav
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          backgroundColor: theme.isInverted
+            ? 'rgba(0, 0, 0, 0.5)'
+            : 'rgba(255, 255, 255, 0.5)',
+          backdropFilter: 'blur(12px)',
+          borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: isLeftHanded ? 'row-reverse' : 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '0.75rem 1rem',
+            maxWidth: '1920px',
+            margin: '0 auto',
+          }}
+        >
+          <div
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: '1.5rem',
+              fontWeight: theme.typography.fontWeights.bold,
+            }}
+          >
+            Fluxline
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: isLeftHanded ? 'row-reverse' : 'row',
+              gap: '1rem',
+            }}
+          >
             <button
               onClick={handleMenuClick}
-              className="text-white hover:text-gray-300"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+              }}
               aria-label="Open menu"
             >
-              Menu
+              <FluentIcon
+                iconName={activeModal === 'menu' ? 'Cancel' : 'GlobalNavButton'}
+                size="medium"
+                color={theme.palette.neutralPrimary}
+              />
             </button>
             <button
               onClick={handleThemeClick}
-              className="text-white hover:text-gray-300"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+              }}
               aria-label="Toggle theme"
             >
-              Theme
+              <FluentIcon
+                iconName={themeMode === 'dark' ? 'Sunny' : 'ClearNight'}
+                size="medium"
+                color={theme.palette.neutralPrimary}
+              />
             </button>
             <button
               onClick={handleSettingsClick}
-              className="text-white hover:text-gray-300"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+              }}
               aria-label="Open settings"
             >
-              Settings
+              <FluentIcon
+                iconName={activeModal === 'settings' ? 'Cancel' : 'Settings'}
+                size="medium"
+                color={theme.palette.neutralPrimary}
+              />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Modal - Placeholder for now */}
+      {/* Modal */}
       {activeModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm">
-          <div className="bg-gray-900 h-full w-full md:w-96 ml-auto p-6">
-            <button
-              onClick={handleModalClose}
-              className="text-white mb-4"
-              aria-label="Close modal"
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 60,
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            backdropFilter: 'blur(8px)',
+          }}
+          onClick={handleModalClose}
+        >
+          <div
+            style={{
+              backgroundColor: theme.palette.neutralLighter,
+              height: '100%',
+              width: '100%',
+              maxWidth: '400px',
+              marginLeft: isLeftHanded ? 0 : 'auto',
+              marginRight: isLeftHanded ? 'auto' : 0,
+              boxShadow: theme.shadows.xl,
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              style={{
+                opacity: isViewTransitioning ? 0 : 1,
+                transition: 'opacity 0.3s ease-in-out',
+                height: '100%',
+              }}
             >
-              Close
-            </button>
-            <div style={{ opacity: isViewTransitioning ? 0 : 1 }}>
-              {activeModal === 'menu' && <div className="text-white">Menu Content</div>}
-              {activeModal === 'settings' && <div className="text-white">Settings Content</div>}
+              {activeModal === 'menu' && <NavigationMenu onClose={handleModalClose} />}
+              {activeModal === 'settings' && (
+                <div style={{ padding: '2rem', color: theme.palette.neutralPrimary }}>
+                  <h2>Settings</h2>
+                  <p>Settings content will be added here</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
