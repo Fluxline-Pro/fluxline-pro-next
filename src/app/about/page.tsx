@@ -36,7 +36,7 @@ export default function AboutPage() {
               fontWeight: theme.typography.fontWeights.semiBold,
             }}
           >
-            We're not done yet—but we're already extraordinary.
+            We&apos;re not done yet—but we&apos;re already extraordinary.
           </Typography>
 
           <Typography
@@ -62,10 +62,10 @@ export default function AboutPage() {
               lineHeight: theme.typography.lineHeights.relaxed,
             }}
           >
-            Whether you're an individual seeking personal growth or a business ready to 
+            Whether you&apos;re an individual seeking personal growth or a business ready to 
             scale with purpose, our <em>coaching</em>, <em>wellness programs</em>, and{' '}
             <em>infrastructure design</em> help you align your <strong>drive</strong> with 
-            your <em>innate identity</em>. We believe transformation isn't just about 
+            your <em>innate identity</em>. We believe transformation isn&apos;t just about 
             metrics—it's about honoring <em>emotional rhythm</em>, <em>creative truth</em>, 
             and <em>legacy resonance</em>.
           </Typography>
