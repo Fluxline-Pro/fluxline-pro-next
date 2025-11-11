@@ -64,6 +64,14 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
     setActiveModal(null);
   };
 
+  // Detect if we're on the home page
+  const isHomePage = pathname === '/';
+
+  // Use white color for buttons on home page for better visibility against dark background
+  const buttonIconColor = isHomePage
+    ? theme.palette.white
+    : theme.palette.black;
+
   return (
     <div className={className}>
       {/* Navigation Bar */}
@@ -123,27 +131,29 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               <FluentIcon
                 iconName={activeModal === 'menu' ? 'Cancel' : 'GlobalNavButton'}
                 size='medium'
-                color={theme.palette.neutralPrimary}
+                color={buttonIconColor}
               />
             </button>
-            <button
-              onClick={handleThemeClick}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '0.5rem',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              aria-label='Toggle theme'
-            >
-              <FluentIcon
-                iconName={themeMode === 'dark' ? 'Sunny' : 'ClearNight'}
-                size='medium'
-                color={theme.palette.neutralPrimary}
-              />
-            </button>
+            {!isHomePage && (
+              <button
+                onClick={handleThemeClick}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                aria-label='Toggle theme'
+              >
+                <FluentIcon
+                  iconName={themeMode === 'dark' ? 'Sunny' : 'ClearNight'}
+                  size='medium'
+                  color={buttonIconColor}
+                />
+              </button>
+            )}
             <button
               onClick={handleSettingsClick}
               style={{
@@ -159,7 +169,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               <FluentIcon
                 iconName={activeModal === 'settings' ? 'Cancel' : 'Settings'}
                 size='medium'
-                color={theme.palette.neutralPrimary}
+                color={buttonIconColor}
               />
             </button>
           </div>

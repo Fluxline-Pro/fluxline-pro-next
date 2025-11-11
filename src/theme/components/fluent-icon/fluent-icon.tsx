@@ -60,22 +60,22 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
       case 'info':
         return theme.palette.blue;
       default:
-        return color;
+        return theme.palette.white;
     }
   };
 
-  const iconStyles: IStyle = Object.assign(
-    {
-      width: sizeMap[size],
-      height: sizeMap[size],
-      fontSize: sizeMap[size],
-      color: getVariantColor(),
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    style
-  );
+  const iconColor = color || getVariantColor();
+
+  const iconStyles: IStyle = {
+    width: sizeMap[size],
+    height: sizeMap[size],
+    fontSize: sizeMap[size],
+    color: iconColor,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    ...(typeof style === 'object' && style ? style : {}),
+  };
 
   // If iconName is a custom SVG component
   if (typeof iconName === 'function') {
@@ -94,6 +94,23 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
     <Icon
       iconName={iconName as string}
       className={mergeStyles(iconStyles, className)}
+      styles={{
+        root: {
+          color: `${iconColor} !important`,
+          '& i': {
+            color: `${iconColor} !important`,
+          },
+          '&::before': {
+            color: `${iconColor} !important`,
+          },
+          '& *': {
+            color: `${iconColor} !important`,
+          },
+        },
+      }}
+      style={{
+        color: iconColor,
+      }}
     />
   );
 };
