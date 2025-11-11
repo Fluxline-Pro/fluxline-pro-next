@@ -241,7 +241,7 @@ const HomeContent: React.FC<{
             {[
               { highlight: 'strategic', text: 'consulting' },
               { highlight: 'brand', text: 'establishment' },
-              { highlight: 'personal training', text: 'solutions' },
+              { highlight: 'personal training', text: '& wellness' },
               { highlight: 'mentoring', text: '& coaching' },
             ].map((line, index) => (
               <div
