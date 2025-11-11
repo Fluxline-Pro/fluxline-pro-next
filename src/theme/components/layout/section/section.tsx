@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import styles from './section.module.scss';
 
 export interface SectionProps {
@@ -47,10 +50,17 @@ export const Section: React.FC<SectionProps> = ({
   className = '',
   id,
 }) => {
+  const { themeMode } = useAppTheme();
+  const isDark = themeMode === 'dark' || themeMode === 'grayscale';
+  
+  const backgroundClass = background !== 'transparent' && isDark 
+    ? `${background}-dark` 
+    : background;
+
   const classNames = [
     styles.section,
     styles[`spacing-${spacing}`],
-    styles[`background-${background}`],
+    styles[`background-${backgroundClass}`],
     className,
   ]
     .filter(Boolean)
