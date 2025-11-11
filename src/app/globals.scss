@@ -61,12 +61,30 @@ body {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter);
+  font-family:
+    'Inter Variable',
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Helvetica Neue',
+    Arial,
+    sans-serif !important;
   font-size: var(--theme-fonts-medium-fontSize);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @include theme.theme-transition;
+
+  /* Make background transparent on home page to show BackgroundLayer */
+  &.home-page {
+    background: transparent;
+
+    /* Override Fluent UI injected background divs */
+    > div[class*='body-'] {
+      background: transparent !important;
+    }
+  }
 }
 
 /* =============================================
@@ -79,10 +97,33 @@ h3,
 h4,
 h5,
 h6 {
+  font-family:
+    'Inter Variable',
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   font-weight: 600;
   line-height: 1.3;
   margin: 0;
   color: var(--foreground);
+}
+
+p,
+span,
+div {
+  font-family:
+    'Inter Variable',
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
 }
 
 /* =============================================
@@ -175,12 +216,10 @@ button {
   width: 100%;
   position: relative;
   overflow: hidden;
-  
+
   &.isHomePage {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    /* Background handled by BackgroundLayer component */
+    background: transparent;
   }
 }
 

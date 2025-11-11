@@ -92,6 +92,7 @@ export interface FadeUpProps {
   duration?: number;
   delay?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 /**
@@ -104,6 +105,7 @@ export const FadeUp: React.FC<FadeUpProps> = ({
   duration = 0.5,
   delay = 0,
   className = '',
+  style
 }) => {
   const { shouldReduceMotion } = useReducedMotion();
 
@@ -133,6 +135,7 @@ export const FadeUp: React.FC<FadeUpProps> = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={getTransition()}
+      style={style}
     >
       {children}
     </motion.div>

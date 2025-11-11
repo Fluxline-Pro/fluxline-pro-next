@@ -198,8 +198,10 @@ export const useLayoutConfig = (
           ? 'center'
           : 'start'
         : 'center',
-    backgroundColor: theme.semanticColors.bodyBackground,
-    backdropFilter: 'blur(8px)',
+    backgroundColor: isHomePage
+      ? 'transparent'
+      : theme.semanticColors.bodyBackground,
+    backdropFilter: isHomePage ? 'none' : 'blur(8px)',
     zIndex: 1,
     isolation: 'isolate',
     boxShadow: nested

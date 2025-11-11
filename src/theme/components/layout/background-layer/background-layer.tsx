@@ -39,7 +39,9 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   layoutPreference,
   backgroundLoaded = true,
 }) => {
-  const { filter } = useColorVisionFilter();
+  // Skip dark mode brightness filter for background hero images
+  // The skipDarkModeFilter parameter prevents the image from being darkened in dark mode
+  const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
   
   // Determine if image should be flipped for left-handed mode
@@ -49,7 +51,6 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     backgroundImage: 'one' | 'two',
     orientation: string
   ) => {
-    const isLandscape = orientation === 'landscape' || orientation === 'ultrawide';
     const isPortrait = orientation === 'portrait';
     const isTabletPortrait = orientation === 'tablet-portrait';
     
@@ -90,18 +91,22 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     themeMode: ThemeMode,
     theme: IExtendedTheme
   ) => {
+    // For home page with background image, use a very subtle vignette overlay
+    // that allows the image to show through clearly while providing minimal depth
     switch (themeMode) {
       case 'high-contrast':
-        return theme.gradients.light.background;
+        return '#010101';
       case 'dark':
-        return theme.gradients.dark.background;
+        return 'radial-gradient(circle at center, transparent 0%, rgba(1, 1, 1, 0.3) 100%)';
+      case 'grayscale-dark':
+        return 'radial-gradient(circle at center, transparent 0%, rgba(31, 31, 31, 0.25) 100%)';
       case 'protanopia':
       case 'deuteranopia':
       case 'tritanopia':
       case 'grayscale':
-        return theme.gradients.light.background;
+        return 'radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.1) 100%)';
       default:
-        return theme.gradients.light.background;
+        return 'radial-gradient(circle at center, transparent 0%, rgba(245, 245, 245, 0.15) 100%)';
     }
   };
 
