@@ -6,9 +6,14 @@
  */
 
 import React from 'react';
-import { Icon } from '@fluentui/react';
+import { Icon, initializeIcons } from '@fluentui/react';
 import { mergeStyles, IStyle } from '@fluentui/merge-styles';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+
+// Initialize Fluent UI icons on component load
+if (typeof window !== 'undefined') {
+  initializeIcons();
+}
 
 export interface FluentIconProps {
   iconName:
@@ -44,6 +49,13 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
   isDarkMode,
 }) => {
   const { theme } = useAppTheme();
+
+  // Ensure icons are initialized on mount
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      initializeIcons();
+    }
+  }, []);
 
   const getVariantColor = () => {
     switch (variant) {

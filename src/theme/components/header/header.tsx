@@ -116,24 +116,6 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               gap: '1rem',
             }}
           >
-            <button
-              onClick={handleMenuClick}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '0.5rem',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              aria-label='Open menu'
-            >
-              <FluentIcon
-                iconName={activeModal === 'menu' ? 'Cancel' : 'GlobalNavButton'}
-                size='medium'
-                color={buttonIconColor}
-              />
-            </button>
             {!isHomePage && (
               <button
                 onClick={handleThemeClick}
@@ -168,6 +150,24 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             >
               <FluentIcon
                 iconName={activeModal === 'settings' ? 'Cancel' : 'Settings'}
+                size='medium'
+                color={buttonIconColor}
+              />
+            </button>
+            <button
+              onClick={handleMenuClick}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+              aria-label='Open menu'
+            >
+              <FluentIcon
+                iconName={activeModal === 'menu' ? 'Cancel' : 'GlobalNavButton'}
                 size='medium'
                 color={buttonIconColor}
               />
