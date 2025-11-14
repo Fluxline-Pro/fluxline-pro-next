@@ -217,7 +217,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             <motion.div
               variants={modalVariants}
               initial='hidden'
-              anmate='visible'
+              animate='visible'
               exit='exit'
               style={{
                 background:

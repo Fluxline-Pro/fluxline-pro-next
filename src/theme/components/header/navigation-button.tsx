@@ -58,17 +58,17 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
         }}
         aria-label={ariaLabel}
       >
-        <FluentIcon iconName={iconName} size='large' color={color} />
+        <FluentIcon iconName={iconName} size='medium' color={color} />
       </button>
 
       {/* Tooltip */}
       <div
         style={{
           position: 'absolute',
-          bottom: '100%',
+          top: '100%',
           left: '50%',
           transform: 'translateX(-50%)',
-          marginBottom: '0.5rem',
+          marginTop: '0.5rem',
           backgroundColor: 'rgba(0, 0, 0, 0.9)',
           color: 'white',
           padding: '0.25rem 0.5rem',
@@ -89,14 +89,14 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
         <div
           style={{
             position: 'absolute',
-            top: '100%',
+            bottom: '100%',
             left: '50%',
             transform: 'translateX(-50%)',
             width: 0,
             height: 0,
             borderLeft: '4px solid transparent',
             borderRight: '4px solid transparent',
-            borderTop: '4px solid rgba(0, 0, 0, 0.9)',
+            borderBottom: '4px solid rgba(0, 0, 0, 0.9)',
           }}
         />
       </div>
