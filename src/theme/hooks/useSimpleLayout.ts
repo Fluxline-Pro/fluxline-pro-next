@@ -38,7 +38,7 @@ export const useSimpleLayout = (
       minHeight: '100vh',
       gap: isMobile ? theme.spacing.s : theme.spacing.m,
       padding: isMobile ? theme.spacing.s : theme.spacing.l,
-      paddingTop: `calc(${headerHeight} + 1rem)`, // Dynamic header height + 1rem breathing room
+      paddingTop: isMobile ? '1rem' : `calc(${headerHeight} + 1rem)`, // Mobile: 1rem only, Desktop: Dynamic header height + 1rem
       backgroundColor: isHomePage
         ? 'transparent'
         : theme.semanticColors.bodyBackground,
