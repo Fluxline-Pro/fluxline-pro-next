@@ -20,16 +20,21 @@ export const useContentScrollable = (
       }
 
       const element = ref.current;
-      // Check if content overflows vertically
-      const hasVerticalScroll = element.scrollHeight > element.clientHeight;
+      // Check if content overflows vertically with a small threshold
+      const hasVerticalScroll = element.scrollHeight > element.clientHeight + 5;
       setIsScrollable(hasVerticalScroll);
     };
 
-    // Check immediately
-    checkScrollable();
+    // Initial check with delays to ensure content is rendered
+    const initialTimer = setTimeout(checkScrollable, 50);
+    const secondaryTimer = setTimeout(checkScrollable, 200);
 
     // Set up ResizeObserver to monitor size changes
-    const resizeObserver = new ResizeObserver(checkScrollable);
+    const resizeObserver = new ResizeObserver(() => {
+      // Small delay to ensure layout is complete after resize
+      setTimeout(checkScrollable, 50);
+    });
+
     if (ref.current) {
       resizeObserver.observe(ref.current);
     }
@@ -38,6 +43,8 @@ export const useContentScrollable = (
     window.addEventListener('resize', checkScrollable);
 
     return () => {
+      clearTimeout(initialTimer);
+      clearTimeout(secondaryTimer);
       resizeObserver.disconnect();
       window.removeEventListener('resize', checkScrollable);
     };
