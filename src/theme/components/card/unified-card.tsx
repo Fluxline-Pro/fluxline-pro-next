@@ -198,8 +198,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               </div>
             )}
 
-            {/* Image - Using standard img tag instead of next/image for better control over 
-              CSS filters, aspect ratio animations, and dark mode transformations */}
+            {/* Image - Using Next.js Image component with fill prop for responsive behavior */}
             <div
               style={{
                 position: 'relative',
@@ -213,9 +212,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               <Image
                 src={imageUrl}
                 alt={altText || imageAlt || title}
+                fill
                 style={{
-                  width: '100%',
-                  height: '100%',
                   objectFit: 'cover',
                   filter: filter,
                   opacity: imageLoaded ? 1 : 0,
@@ -308,12 +306,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               <Image
                 src={imageUrl}
                 alt={altText || imageAlt || title}
+                fill
                 style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
                   objectFit: 'cover',
                 }}
               />

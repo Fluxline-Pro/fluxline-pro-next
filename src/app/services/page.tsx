@@ -6,22 +6,26 @@
  */
 
 import React from 'react';
-import { PageWrapper } from '@/components/PageWrapper';
+import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { ServiceCard } from './components/ServiceCard';
-import { SERVICE_CATEGORIES, SERVICES_SUMMARY, FLUXLINE_SECONDARY_TAGLINE } from './constants';
+import {
+  SERVICE_CATEGORIES,
+  SERVICES_SUMMARY,
+  FLUXLINE_SECONDARY_TAGLINE,
+} from './constants';
 
 export default function ServicesPage() {
   const { theme } = useAppTheme();
 
   return (
-    <PageWrapper>
-      <div className="space-y-12">
+    <SimplePageWrapper>
+      <div className='space-y-12'>
         {/* Page Header */}
-        <div className="space-y-4">
+        <div className='space-y-4'>
           <Typography
-            variant="h1"
+            variant='h1'
             style={{
               color: theme.palette.themePrimary,
               fontSize: 'clamp(2.5rem, 6vw, 4rem)',
@@ -33,7 +37,7 @@ export default function ServicesPage() {
           </Typography>
 
           <Typography
-            variant="h2"
+            variant='h2'
             style={{
               color: theme.palette.themeSecondary,
               fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
@@ -46,7 +50,7 @@ export default function ServicesPage() {
           </Typography>
 
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
               fontSize: '1.125rem',
@@ -70,7 +74,7 @@ export default function ServicesPage() {
         {/* Services Grid */}
         <div>
           <Typography
-            variant="h2"
+            variant='h2'
             style={{
               color: theme.palette.themePrimary,
               fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
@@ -82,9 +86,10 @@ export default function ServicesPage() {
           </Typography>
 
           <div
-            className="grid gap-6"
+            className='grid gap-6'
             style={{
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+              gridTemplateColumns:
+                'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
             }}
           >
             {SERVICE_CATEGORIES.map((service) => (
@@ -104,7 +109,7 @@ export default function ServicesPage() {
           }}
         >
           <Typography
-            variant="h3"
+            variant='h3'
             style={{
               color: theme.palette.themePrimary,
               fontSize: 'clamp(1.5rem, 3vw, 2rem)',
@@ -115,7 +120,7 @@ export default function ServicesPage() {
             Ready to Transform?
           </Typography>
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
               fontSize: '1rem',
@@ -123,11 +128,11 @@ export default function ServicesPage() {
               marginBottom: '1.5rem',
             }}
           >
-            Every service is a curriculum gate. Let&apos;s design the systems, strategies, 
-            and rituals that align your vision with reality.
+            Every service is a curriculum gate. Let&apos;s design the systems,
+            strategies, and rituals that align your vision with reality.
           </Typography>
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.themeTertiary,
               fontSize: '1rem',
@@ -138,6 +143,6 @@ export default function ServicesPage() {
           </Typography>
         </div>
       </div>
-    </PageWrapper>
+    </SimplePageWrapper>
   );
 }

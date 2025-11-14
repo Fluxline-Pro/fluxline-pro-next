@@ -24,7 +24,7 @@ export interface TypographyProps {
 
 /**
  * Typography Component
- * 
+ *
  * Semantic HTML element wrapper with optional styling.
  * Provides type-safe variant-based rendering without default theme styles.
  */
@@ -35,11 +35,24 @@ export const Typography: React.FC<TypographyProps> = ({
   style,
   className,
 }) => {
-  // Merge inline styles with textAlign prop
-  const mergedStyles: React.CSSProperties = {
-    ...style,
-    ...(textAlign ? { textAlign } : {}),
-  };
+  // Merge inline styles with textAlign prop, ensuring no conflicting animation properties
+  const mergedStyles: React.CSSProperties = React.useMemo(() => {
+    const baseStyles = style || {};
+    const alignStyles = textAlign ? { textAlign } : {};
+
+    // Filter out any problematic animation properties that might conflict
+    const cleanedStyles = Object.fromEntries(
+      Object.entries(baseStyles).filter(([key, value]) => {
+        // Remove any undefined, null, or empty string values
+        return value !== undefined && value !== null && value !== '';
+      })
+    );
+
+    return {
+      ...cleanedStyles,
+      ...alignStyles,
+    };
+  }, [style, textAlign]);
 
   // List of allowed tags for safety
   const allowedTags = [
@@ -60,7 +73,12 @@ export const Typography: React.FC<TypographyProps> = ({
 
   // Fallback to 'p' if variant is not allowed
   // Note: 'quote' variant maps to 'blockquote' HTML element
-  const tag = variant === 'quote' ? 'blockquote' : allowedTags.includes(variant) ? variant : 'p';
+  const tag =
+    variant === 'quote'
+      ? 'blockquote'
+      : allowedTags.includes(variant)
+        ? variant
+        : 'p';
 
   return React.createElement(
     tag,

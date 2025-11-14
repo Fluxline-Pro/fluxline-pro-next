@@ -89,14 +89,28 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
     ...(typeof style === 'object' && style ? style : {}),
   };
 
+  // Generate className only on client to avoid hydration mismatch
+  const [isClient, setIsClient] = React.useState(false);
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const mergedClassName = isClient
+    ? mergeStyles(iconStyles, className)
+    : className;
+
   // If iconName is a custom SVG component
   if (typeof iconName === 'function') {
     const CustomIcon = iconName;
     return (
       <CustomIcon
         isDarkMode={isDarkMode}
-        className={mergeStyles(iconStyles, className)}
-        style={{ width: sizeMap[size], height: sizeMap[size] }}
+        className={mergedClassName}
+        style={{
+          width: sizeMap[size],
+          height: sizeMap[size],
+          color: iconColor,
+        }}
       />
     );
   }
@@ -105,23 +119,30 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
   return (
     <Icon
       iconName={iconName as string}
-      className={mergeStyles(iconStyles, className)}
-      styles={{
-        root: {
-          color: `${iconColor} !important`,
-          '& i': {
-            color: `${iconColor} !important`,
-          },
-          '&::before': {
-            color: `${iconColor} !important`,
-          },
-          '& *': {
-            color: `${iconColor} !important`,
-          },
-        },
-      }}
+      className={mergedClassName}
+      styles={
+        isClient
+          ? {
+              root: {
+                color: `${iconColor} !important`,
+                '& i': {
+                  color: `${iconColor} !important`,
+                },
+                '&::before': {
+                  color: `${iconColor} !important`,
+                },
+                '& *': {
+                  color: `${iconColor} !important`,
+                },
+              },
+            }
+          : undefined
+      }
       style={{
         color: iconColor,
+        width: sizeMap[size],
+        height: sizeMap[size],
+        fontSize: sizeMap[size],
       }}
     />
   );
