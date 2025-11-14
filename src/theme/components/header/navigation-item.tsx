@@ -55,17 +55,28 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
           isActive || isHovered
             ? theme.palette.neutralQuaternaryAlt
             : 'transparent',
+        width: '100%',
       }}
     >
-      <FluentIcon
-        iconName={route.iconName}
-        size='large'
-        color={
-          isActive || isHovered
-            ? theme.palette.themePrimary
-            : theme.palette.neutralSecondary
-        }
-      />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: isLeftHanded ? 'flex-start' : 'flex-end',
+          width: isLeftHanded ? 'auto' : '48px', // Fixed width for right-handed mode
+          flexShrink: 0,
+        }}
+      >
+        <FluentIcon
+          iconName={route.iconName}
+          size='large'
+          color={
+            isActive || isHovered
+              ? theme.palette.themePrimary
+              : theme.palette.neutralSecondary
+          }
+        />
+      </div>
       <Typography
         variant='h3'
         style={{
@@ -78,6 +89,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
             ? theme.typography.fontWeights.semiBold
             : theme.typography.fontWeights.regular,
           textAlign: isLeftHanded ? 'left' : 'right',
+          flex: 1,
         }}
       >
         {route.label}

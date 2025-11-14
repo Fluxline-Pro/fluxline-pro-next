@@ -44,7 +44,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
       {/* Menu Title */}
       <div
         style={{
-          padding: isMobile ? '1rem' : '2rem',
+          padding: isMobile ? '1.5rem' : '2rem',
           borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
         }}
       >
@@ -52,7 +52,9 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
           variant='h2'
           style={{
             color: theme.palette.themePrimary,
-            fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+            fontSize: isMobile
+              ? 'clamp(2rem, 6vw, 3rem)'
+              : 'clamp(1.5rem, 4vw, 2.5rem)',
             textAlign: isLeftHanded ? 'left' : 'right',
           }}
         >
@@ -65,7 +67,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
         style={{
           flex: '1 1 auto',
           overflowY: 'auto',
-          padding: isMobile ? '1rem' : '2rem',
+          padding: isMobile ? '1.5rem' : '2rem',
         }}
       >
         <div
@@ -91,7 +93,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
       {/* Social Links Section - Placeholder */}
       <div
         style={{
-          padding: isMobile ? '1rem' : '2rem',
+          padding: isMobile ? '1.5rem' : '2rem',
           borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
         }}
       >
@@ -103,7 +105,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
             textAlign: 'center',
           }}
         >
-          © 2025 Fluxline Professional Services
+          &copy; 2025 Fluxline Professional Services
         </Typography>
       </div>
     </div>

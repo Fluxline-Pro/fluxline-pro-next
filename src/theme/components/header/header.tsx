@@ -7,9 +7,12 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 import { NavigationMenu } from './navigation-menu';
+import { NavigationButton } from './navigation-button';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 
 interface HeaderProps {
@@ -23,9 +26,11 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   const [isViewTransitioning, setIsViewTransitioning] = React.useState(false);
   const { theme, themeMode, setThemeMode, layoutPreference } = useAppTheme();
   const pathname = usePathname();
-  const orientation = useDeviceOrientation();
-  const isMobileLandscape = orientation === 'mobile-landscape';
+  const isMobile = useIsMobile();
   const isLeftHanded = layoutPreference === 'left-handed';
+
+  // Calculate modal width based on device
+  const modalMaxWidth = isMobile ? '350px' : '400px';
 
   const handleSettingsClick = () => {
     if (activeModal === 'settings') {
@@ -70,7 +75,53 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   // Use white color for buttons on home page for better visibility against dark background
   const buttonIconColor = isHomePage
     ? theme.palette.white
-    : theme.palette.black;
+    : theme.palette.neutralPrimary;
+
+  // Motion settings
+  const { shouldReduceMotion } = useReducedMotion();
+
+  // Animation variants for modal slide
+  const modalVariants = {
+    hidden: {
+      x: isLeftHanded ? '-100%' : '100%',
+      opacity: shouldReduceMotion ? 1 : 0,
+    },
+    visible: {
+      x: '0%',
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.3,
+        ease: 'easeOut',
+      },
+    },
+    exit: {
+      x: isLeftHanded ? '-100%' : '100%',
+      opacity: shouldReduceMotion ? 1 : 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.25,
+        ease: 'easeIn',
+      },
+    },
+  };
+
+  // Backdrop variants for fade effect
+  const backdropVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.2,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.2,
+      },
+    },
+  };
 
   return (
     <div className={className}>
@@ -117,119 +168,136 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             }}
           >
             {!isHomePage && (
-              <button
+              <NavigationButton
                 onClick={handleThemeClick}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '0.5rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-                aria-label='Toggle theme'
-              >
-                <FluentIcon
-                  iconName={themeMode === 'dark' ? 'Sunny' : 'ClearNight'}
-                  size='medium'
-                  color={buttonIconColor}
-                />
-              </button>
+                iconName={themeMode === 'dark' ? 'Sunny' : 'ClearNight'}
+                color={buttonIconColor}
+                ariaLabel='Toggle theme'
+                tooltipText='Theme'
+                hoverScale={1.05}
+              />
             )}
-            <button
+            <NavigationButton
               onClick={handleSettingsClick}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '0.5rem',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              aria-label='Open settings'
-            >
-              <FluentIcon
-                iconName={activeModal === 'settings' ? 'Cancel' : 'Settings'}
-                size='medium'
-                color={buttonIconColor}
-              />
-            </button>
-            <button
+              iconName={activeModal === 'settings' ? 'Cancel' : 'Settings'}
+              color={buttonIconColor}
+              ariaLabel='Open settings'
+              tooltipText='Settings'
+              hoverScale={1.05}
+            />
+            <NavigationButton
               onClick={handleMenuClick}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '0.5rem',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              aria-label='Open menu'
-            >
-              <FluentIcon
-                iconName={activeModal === 'menu' ? 'Cancel' : 'GlobalNavButton'}
-                size='medium'
-                color={buttonIconColor}
-              />
-            </button>
+              iconName={activeModal === 'menu' ? 'Cancel' : 'GlobalNavButton'}
+              color={buttonIconColor}
+              ariaLabel='Open menu'
+              tooltipText='Menu'
+              hoverScale={1.15}
+            />
           </div>
         </div>
       </nav>
 
       {/* Modal */}
-      {activeModal && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 60,
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            backdropFilter: 'blur(8px)',
-          }}
-          onClick={handleModalClose}
-        >
-          <div
+      <AnimatePresence mode='wait'>
+        {activeModal && (
+          <motion.div
+            variants={backdropVariants}
+            initial='hidden'
+            animate='visible'
+            exit='exit'
             style={{
-              background:
-                themeMode === 'dark' || themeMode === 'grayscale-dark'
-                  ? theme.gradients?.components?.modal?.dark ||
-                    theme.palette.themeDark
-                  : theme.gradients?.components?.modal?.light ||
-                    theme.palette.white,
-              height: '100%',
-              width: '100%',
-              maxWidth: '400px',
-              marginLeft: isLeftHanded ? 0 : 'auto',
-              marginRight: isLeftHanded ? 'auto' : 0,
-              boxShadow: theme.shadows.xl,
+              position: 'fixed',
+              inset: 0,
+              zIndex: 60,
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              backdropFilter: 'blur(8px)',
             }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={handleModalClose}
           >
-            <div
+            <motion.div
+              variants={modalVariants}
+              initial='hidden'
+              anmate='visible'
+              exit='exit'
               style={{
-                opacity: isViewTransitioning ? 0 : 1,
-                transition: 'opacity 0.3s ease-in-out',
+                background:
+                  themeMode === 'dark' || themeMode === 'grayscale-dark'
+                    ? theme.gradients?.components?.modal?.dark ||
+                      theme.palette.themeDark
+                    : theme.gradients?.components?.modal?.light ||
+                      theme.palette.white,
                 height: '100%',
+                width: '100%',
+                maxWidth: modalMaxWidth,
+                marginLeft: isLeftHanded ? 0 : 'auto',
+                marginRight: isLeftHanded ? 'auto' : 0,
+                boxShadow: theme.shadows.xl,
+                position: 'relative',
               }}
+              onClick={(e) => e.stopPropagation()}
             >
-              {activeModal === 'menu' && (
-                <NavigationMenu onClose={handleModalClose} />
-              )}
-              {activeModal === 'settings' && (
-                <div
-                  style={{
-                    padding: '2rem',
-                    color: theme.palette.neutralPrimary,
-                  }}
-                >
-                  <h2>Settings</h2>
-                  <p>Settings content will be added here</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+              {/* Close Button */}
+              <button
+                onClick={handleModalClose}
+                style={{
+                  position: 'absolute',
+                  top: '1rem',
+                  [isLeftHanded ? 'right' : 'left']: '1rem',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: isMobile ? '0.75rem' : '1.5rem',
+                  zIndex: 10,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                  transition: 'background-color 0.2s ease, transform 0.2s ease',
+                  transform: 'scale(1)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                  e.currentTarget.style.transform = 'scale(1.15)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+                aria-label='Close menu'
+              >
+                <FluentIcon
+                  iconName='Cancel'
+                  size='large'
+                  color={theme.semanticColors.errorIcon}
+                />
+              </button>
+              <div
+                style={{
+                  opacity: isViewTransitioning ? 0 : 1,
+                  transition: 'opacity 0.3s ease-in-out',
+                  height: '100%',
+                }}
+              >
+                {activeModal === 'menu' && (
+                  <NavigationMenu onClose={handleModalClose} />
+                )}
+                {activeModal === 'settings' && (
+                  <div
+                    style={{
+                      padding: '2rem',
+                      color: theme.palette.neutralPrimary,
+                    }}
+                  >
+                    <h2>Settings</h2>
+                    <p>Settings content will be added here</p>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
