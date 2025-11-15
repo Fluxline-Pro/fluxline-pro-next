@@ -89,15 +89,8 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
     ...(typeof style === 'object' && style ? style : {}),
   };
 
-  // Generate className only on client to avoid hydration mismatch
-  const [isClient, setIsClient] = React.useState(false);
-  React.useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const mergedClassName = isClient
-    ? mergeStyles(iconStyles, className)
-    : className;
+  // mergeStyles from Fluent UI should work consistently on both server and client
+  const mergedClassName = mergeStyles(iconStyles, className);
 
   // If iconName is a custom SVG component
   if (typeof iconName === 'function') {
@@ -120,24 +113,20 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
     <Icon
       iconName={iconName as string}
       className={mergedClassName}
-      styles={
-        isClient
-          ? {
-              root: {
-                color: `${iconColor} !important`,
-                '& i': {
-                  color: `${iconColor} !important`,
-                },
-                '&::before': {
-                  color: `${iconColor} !important`,
-                },
-                '& *': {
-                  color: `${iconColor} !important`,
-                },
-              },
-            }
-          : undefined
-      }
+      styles={{
+        root: {
+          color: `${iconColor} !important`,
+          '& i': {
+            color: `${iconColor} !important`,
+          },
+          '&::before': {
+            color: `${iconColor} !important`,
+          },
+          '& *': {
+            color: `${iconColor} !important`,
+          },
+        },
+      }}
       style={{
         color: iconColor,
         width: sizeMap[size],

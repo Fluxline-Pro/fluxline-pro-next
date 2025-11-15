@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Image from 'next/image';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useSimpleLayout } from '@/theme/hooks/useSimpleLayout';
@@ -95,18 +95,20 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
   const imageToDisplay = contentImage || config.image;
 
   // Handle tablet portrait layout options
-  const shouldUseStackedLayout = isTabletPortrait && tabletPortraitLayout === 'stacked';
-  const shouldUseImageSmall = isTabletPortrait && tabletPortraitLayout === 'image-small';
+  const shouldUseStackedLayout =
+    isTabletPortrait && tabletPortraitLayout === 'stacked';
+  const shouldUseImageSmall =
+    isTabletPortrait && tabletPortraitLayout === 'image-small';
 
   // Animation variants
-  const fadeInVariants = {
+  const fadeInVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.5,
-        ease: 'easeOut',
+        ease: [0.4, 0.0, 0.2, 1.0], // Custom cubic-bezier equivalent to easeOut
       },
     },
     exit: {
@@ -119,58 +121,69 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
   };
 
   // Adjust container style for different layouts
-  const adjustedContainerStyle = isMobile || shouldUseStackedLayout
-    ? {
-        ...containerStyle,
-        // Stacked layout for mobile and tablet portrait 'stacked' option
-        gridTemplateColumns: '1fr',
-        gridTemplateRows: shouldUseImageSmall ? 'auto 1fr' : 'minmax(300px, 40vh) 1fr',
-        alignItems: 'start',
-      }
-    : {
-        ...containerStyle,
-        gridTemplateColumns: layoutPreference === 'left-handed' ? '1fr' : '1fr',
-        paddingLeft:
-          layoutPreference === 'left-handed'
-            ? containerStyle.padding
-            : `calc(25vw + ${theme.spacing.l})`,
-        paddingRight:
-          layoutPreference === 'left-handed'
-            ? `calc(25vw + ${theme.spacing.l})`
-            : containerStyle.padding,
-        // Vertically center content when not scrollable, align to top when scrollable
-        alignItems:
-          !isMobile && isContentMounted && !isContentScrollable
-            ? 'center'
-            : 'start',
-      };
+  const adjustedContainerStyle =
+    isMobile || shouldUseStackedLayout
+      ? {
+          ...containerStyle,
+          // Stacked layout for mobile and tablet portrait 'stacked' option
+          gridTemplateColumns: '1fr',
+          gridTemplateRows: shouldUseImageSmall
+            ? 'auto 1fr'
+            : 'minmax(300px, 40vh) 1fr',
+          alignItems: 'start',
+        }
+      : {
+          ...containerStyle,
+          gridTemplateColumns:
+            layoutPreference === 'left-handed' ? '1fr' : '1fr',
+          paddingLeft:
+            layoutPreference === 'left-handed'
+              ? containerStyle.padding
+              : `calc(25vw + ${theme.spacing.l})`,
+          paddingRight:
+            layoutPreference === 'left-handed'
+              ? `calc(25vw + ${theme.spacing.l})`
+              : containerStyle.padding,
+          // Vertically center content when not scrollable, align to top when scrollable
+          alignItems:
+            !isMobile && isContentMounted && !isContentScrollable
+              ? 'center'
+              : 'start',
+        };
 
   // Adjust content style based on scrollability and layout
   const adjustedContentStyle = {
     ...contentStyle,
     // When content is not scrollable on desktop, remove flex grow to allow centering
     flex:
-      !isMobile && !shouldUseStackedLayout && isContentMounted && !isContentScrollable
+      !isMobile &&
+      !shouldUseStackedLayout &&
+      isContentMounted &&
+      !isContentScrollable
         ? 'none'
         : contentStyle.flex,
     justifyContent:
-      !isMobile && !shouldUseStackedLayout && isContentMounted && !isContentScrollable
+      !isMobile &&
+      !shouldUseStackedLayout &&
+      isContentMounted &&
+      !isContentScrollable
         ? 'center'
         : 'flex-start',
   };
 
   // Adjust image style for different tablet layouts
-  const adjustedImageStyle = shouldUseStackedLayout || shouldUseImageSmall
-    ? {
-        // Tablet portrait stacked: image in grid, not fixed
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: shouldUseImageSmall ? 'auto' : '100%',
-        padding: theme.spacing.m,
-      }
-    : imageStyle;
+  const adjustedImageStyle =
+    shouldUseStackedLayout || shouldUseImageSmall
+      ? {
+          // Tablet portrait stacked: image in grid, not fixed
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: shouldUseImageSmall ? 'auto' : '100%',
+          padding: theme.spacing.m,
+        }
+      : imageStyle;
 
   return (
     <>
@@ -192,7 +205,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
                 borderRadius: theme.borderRadius.m,
                 overflow: 'hidden',
                 backgroundColor: theme.palette.neutralLighter,
-                boxShadow: theme.shadows?.depth8 || '0 4px 12px rgba(0,0,0,0.15)',
+                boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
               }}
             >
               <Image
@@ -256,80 +269,80 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
         <>
           {/* Image Panel - Fixed to viewport */}
           <div style={adjustedImageStyle}>
-        <motion.div
-          initial='hidden'
-          animate='visible'
-          variants={fadeInVariants}
-          style={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: '400px',
-            aspectRatio: '3/4',
-            borderRadius: theme.borderRadius.m,
-            overflow: 'hidden',
-            backgroundColor: theme.palette.neutralLighter,
-            boxShadow: theme.shadows?.depth8 || '0 4px 12px rgba(0,0,0,0.15)',
-            pointerEvents: 'auto', // Re-enable pointer events on the actual image
-          }}
-        >
-          <Image
-            src={imageToDisplay}
-            alt={config.imageText}
-            fill
-            style={{
-              objectFit: 'cover',
-            }}
-            priority
-            placeholder='blur'
-            blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
-          />
-          {showImageTitle && config.imageText && (
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: theme.spacing.m,
-                background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent)`,
-                color: theme.palette.white,
-              }}
-            >
-              <h2
-                style={{
-                  margin: 0,
-                  fontSize: theme.fonts.xLarge.fontSize,
-                  fontWeight: theme.fonts.xLarge.fontWeight as number,
-                  fontFamily: theme.fonts.xLarge.fontFamily,
-                }}
-              >
-                {config.imageText}
-              </h2>
-            </div>
-          )}
-        </motion.div>
-      </div>
-
-      {/* Content Container */}
-      <div style={adjustedContainerStyle}>
-        {/* Content Panel */}
-        <div ref={contentRef} style={adjustedContentStyle}>
-          <AnimatePresence mode='wait'>
             <motion.div
-              key={pathname}
               initial='hidden'
               animate='visible'
-              exit='exit'
               variants={fadeInVariants}
               style={{
+                position: 'relative',
                 width: '100%',
+                maxWidth: '400px',
+                aspectRatio: '3/4',
+                borderRadius: theme.borderRadius.m,
+                overflow: 'hidden',
+                backgroundColor: theme.palette.neutralLighter,
+                boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
+                pointerEvents: 'auto', // Re-enable pointer events on the actual image
               }}
             >
-              {children}
+              <Image
+                src={imageToDisplay}
+                alt={config.imageText}
+                fill
+                style={{
+                  objectFit: 'cover',
+                }}
+                priority
+                placeholder='blur'
+                blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
+              />
+              {showImageTitle && config.imageText && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: theme.spacing.m,
+                    background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent)`,
+                    color: theme.palette.white,
+                  }}
+                >
+                  <h2
+                    style={{
+                      margin: 0,
+                      fontSize: theme.fonts.xLarge.fontSize,
+                      fontWeight: theme.fonts.xLarge.fontWeight as number,
+                      fontFamily: theme.fonts.xLarge.fontFamily,
+                    }}
+                  >
+                    {config.imageText}
+                  </h2>
+                </div>
+              )}
             </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
+          </div>
+
+          {/* Content Container */}
+          <div style={adjustedContainerStyle}>
+            {/* Content Panel */}
+            <div ref={contentRef} style={adjustedContentStyle}>
+              <AnimatePresence mode='wait'>
+                <motion.div
+                  key={pathname}
+                  initial='hidden'
+                  animate='visible'
+                  exit='exit'
+                  variants={fadeInVariants}
+                  style={{
+                    width: '100%',
+                  }}
+                >
+                  {children}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </>
       )}
     </>

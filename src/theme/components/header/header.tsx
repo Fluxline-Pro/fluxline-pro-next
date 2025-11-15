@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
@@ -81,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   const { shouldReduceMotion } = useReducedMotion();
 
   // Animation variants for modal slide
-  const modalVariants = {
+  const modalVariants: Variants = {
     hidden: {
       x: isLeftHanded ? '-100%' : '100%',
       opacity: shouldReduceMotion ? 1 : 0,
@@ -91,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
       opacity: 1,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.3,
-        ease: 'easeOut',
+        ease: [0.4, 0.0, 0.2, 1.0], // Custom cubic-bezier equivalent to easeOut
       },
     },
     exit: {
@@ -99,13 +99,13 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
       opacity: shouldReduceMotion ? 1 : 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.25,
-        ease: 'easeIn',
+        ease: [0.4, 0.0, 1.0, 1.0], // Custom cubic-bezier equivalent to easeIn
       },
     },
   };
 
   // Backdrop variants for fade effect
-  const backdropVariants = {
+  const backdropVariants: Variants = {
     hidden: {
       opacity: 0,
     },
