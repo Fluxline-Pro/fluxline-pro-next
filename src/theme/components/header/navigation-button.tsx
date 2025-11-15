@@ -8,6 +8,7 @@
 import React from 'react';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { FluentIcon } from '@/theme/components/fluent-icon';
+import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 interface NavigationButtonProps {
   onClick: () => void;
@@ -30,6 +31,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const [isHovered, setIsHovered] = React.useState(false);
+  const { themeMode, theme } = useAppTheme();
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -37,7 +39,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
         onClick={onClick}
         className={className}
         style={{
-          background: 'none',
+          background: 'transparent',
           border: 'none',
           cursor: 'pointer',
           padding: isMobile ? '0.75rem' : '1rem',
@@ -47,12 +49,10 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
           transition: 'background-color 0.2s ease, transform 0.2s ease',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
           e.currentTarget.style.transform = `scale(${hoverScale})`;
           setIsHovered(true);
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
           e.currentTarget.style.transform = 'scale(1)';
           setIsHovered(false);
         }}
@@ -65,27 +65,30 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
       <div
         style={{
           position: 'absolute',
-          top: '100%',
+          top: '80%',
           left: '50%',
           transform: 'translateX(-50%)',
-          marginTop: '0.5rem',
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
-          color: 'white',
+          backgroundColor: 'transparent',
+          color:
+            themeMode === 'dark'
+              ? theme.palette.neutralLighterAlt
+              : theme.palette.black,
           padding: '0.25rem 0.5rem',
           borderRadius: '4px',
           fontSize: '0.75rem',
           fontFamily: 'Inter, sans-serif',
-          fontWeight: '400',
+          fontWeight: '600',
           whiteSpace: 'nowrap',
           opacity: isHovered ? 1 : 0,
           visibility: isHovered ? 'visible' : 'hidden',
           transition: 'opacity 0.2s ease, visibility 0.2s ease',
           pointerEvents: 'none',
           zIndex: 1000,
+          paddingTop: '0',
         }}
       >
         {tooltipText}
-        {/* Tooltip arrow */}
+        {/* Tooltip arrow
         <div
           style={{
             position: 'absolute',
@@ -94,11 +97,15 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
             transform: 'translateX(-50%)',
             width: 0,
             height: 0,
+            color:
+              themeMode === 'dark'
+                ? theme.palette.neutralLighterAlt
+                : theme.palette.black,
             borderLeft: '4px solid transparent',
             borderRight: '4px solid transparent',
             borderBottom: '4px solid rgba(0, 0, 0, 0.9)',
           }}
-        />
+        /> */}
       </div>
     </div>
   );

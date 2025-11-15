@@ -170,10 +170,10 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             {!isHomePage && (
               <NavigationButton
                 onClick={handleThemeClick}
-                iconName={themeMode === 'dark' ? 'Sunny' : 'ClearNight'}
+                iconName={themeMode === 'dark' ? 'ClearNight' : 'Sunny'}
                 color={buttonIconColor}
                 ariaLabel='Toggle theme'
-                tooltipText='Theme'
+                tooltipText={themeMode === 'dark' ? 'Dark Mode' : 'Light Mode'}
                 hoverScale={1.05}
               />
             )}
