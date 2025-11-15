@@ -51,7 +51,7 @@ export const Section: React.FC<SectionProps> = ({
   id,
 }) => {
   const { themeMode } = useAppTheme();
-  const isDark = themeMode === 'dark' || themeMode === 'grayscale';
+  const isDark = themeMode === 'dark' || themeMode === 'grayscale-dark';
   
   const backgroundClass = background !== 'transparent' && isDark 
     ? `${background}-dark` 
