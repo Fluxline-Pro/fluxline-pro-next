@@ -7,6 +7,7 @@ import '@fontsource-variable/inter';
 import './tailwind.css'; // ← Tailwind base/utilities first
 import './globals.scss'; // ← Your custom styles override Tailwind
 import ThemeProvider from '../theme/contexts/ThemeProvider';
+import { Header } from '../theme/components/header';
 
 export const metadata: Metadata = {
   title: 'Fluxline.pro - Home',
@@ -84,7 +85,10 @@ export default function RootLayout({
             }),
           }}
         />
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

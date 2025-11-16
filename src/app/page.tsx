@@ -81,50 +81,127 @@ const HomeContent: React.FC<{
     }, 2800);
   }, [shouldStartAnimations]);
 
+  const isMobileLandscape = orientation === 'mobile-landscape';
+
+  // Consolidated animation styles
   const animationStyles = {
     fadeIn: {
       animation: 'fadeIn 0.4s ease-in-out forwards',
     },
     slideInRight: {
-      animation: 'slideInRight 0.4s ease-in-out forwards',
+      opacity: 0,
+      transform: 'translateX(-20px)',
+      animation: animateHeader
+        ? 'slideInRight 0.4s ease-in-out forwards'
+        : 'none',
+    },
+    slideInRightDelayed: {
+      opacity: 0,
+      transform: 'translateX(-20px)',
+      animation: animateHeader
+        ? 'slideInRight 0.4s ease-in-out forwards'
+        : 'none',
+      animationDelay: '0.5s',
     },
     slideInDown: {
-      animation: 'slideInDown 0.4s ease-in-out forwards',
-    },
-    slideInUp: {
-      animation: 'slideInUp 0.4s ease-in-out forwards',
+      opacity: 0,
+      transform: 'translateY(-10px)',
     },
     drawLine: {
       transform: 'scaleX(0)',
       transformOrigin: 'left',
-      animation: 'drawLine 0.4s ease-in-out forwards',
+      animation: animateDivider ? 'drawLine 0.4s ease-in-out forwards' : 'none',
     },
   };
 
-  const isMobileLandscape = orientation === 'mobile-landscape';
+  // Base typography styles
+  const textStyles = {
+    welcomeText: {
+      color:
+        themeMode === 'grayscale'
+          ? theme.palette.neutralTertiary
+          : theme.palette.themePrimary,
+      marginBottom: isMobileLandscape ? '-0.25rem' : '-0.5rem',
+      textTransform: 'capitalize' as const,
+      fontSize: isMobileLandscape
+        ? 'clamp(1rem, 3vw, 1.5rem)'
+        : 'clamp(1.5rem, 4vw, 2.5rem)',
+      fontWeight: theme.typography.fontWeights.light,
+      ...animationStyles.slideInRight,
+    },
+    mainTitle: {
+      color: theme.palette.neutralLighterAlt,
+      marginBottom: isMobileLandscape ? '0.25rem' : theme.spacing.s,
+      fontSize: isMobileLandscape
+        ? 'clamp(1.8rem, 6vw, 3rem)'
+        : 'clamp(2.5rem, 8vw, 5rem)',
+      fontWeight: theme.typography.fontWeights.bold,
+      textTransform: 'uppercase' as const,
+      ...animationStyles.slideInRightDelayed,
+    },
+    subHeaderLine: {
+      color:
+        themeMode === 'grayscale'
+          ? theme.palette.neutralTertiary
+          : theme.palette.themeSecondary,
+      lineHeight: theme.typography.lineHeights.tight,
+      fontWeight: theme.typography.fontWeights.extraLight,
+      fontSize: isMobileLandscape
+        ? 'clamp(0.9rem, 2.5vw, 1.4rem)'
+        : 'clamp(1.2rem, 3vw, 2rem)',
+      textTransform: 'capitalize' as const,
+    },
+  };
+
+  // Container styles
+  const containerStyles = {
+    main: {
+      display: 'flex',
+      flexDirection: 'column' as const,
+      alignItems: 'center',
+      justifyContent: isMobile ? 'flex-end' : 'center',
+      gap: isMobile ? (isMobileLandscape ? '0.05rem' : '0.125rem') : '0.5rem',
+      padding: isMobileLandscape ? '1rem' : '2rem',
+      textAlign: 'center' as const,
+      width: '100%',
+      maxWidth: '800px',
+      margin: isMobile
+        ? isMobileLandscape
+          ? '2rem 0 0'
+          : '6rem 0 0'
+        : orientation === 'tablet-portrait'
+          ? '3rem 0 0 3rem'
+          : '0 auto',
+      minHeight: isMobileLandscape ? '60vh' : '80vh',
+    },
+    divider: {
+      width: '95%',
+      height:
+        orientation === 'portrait' || orientation === 'mobile-landscape'
+          ? '1px'
+          : '2px',
+      color: theme.palette.themePrimary,
+      backgroundColor: theme.palette.themePrimary,
+      margin: 0,
+      opacity: 1,
+      boxShadow: `0 0 1px ${theme.palette.neutralPrimary}`,
+      ...animationStyles.drawLine,
+    },
+    subHeaderContainer: {
+      marginTop: isMobileLandscape ? '0.5rem' : theme.spacing.l,
+      marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.xl,
+    },
+    buttonContainer: {
+      display: 'flex',
+      flexDirection: 'column' as const,
+      gap: isMobileLandscape ? '0.5rem' : '1rem',
+      width: '100%',
+      maxWidth: '500px',
+    },
+  };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: isMobile ? 'flex-end' : 'center',
-        gap: isMobile ? (isMobileLandscape ? '0.05rem' : '0.125rem') : '0.5rem',
-        padding: isMobileLandscape ? '1rem' : '2rem',
-        textAlign: 'center',
-        width: '100%',
-        maxWidth: '800px',
-        margin: isMobile
-          ? isMobileLandscape
-            ? '2rem 0 0' // Less margin for mobile landscape
-            : '6rem 0 0' // pushes the text down on mobile portrait
-          : orientation === 'tablet-portrait'
-            ? '3rem 0 0 3rem' // centers the text on tablet portrait
-            : '0 auto', // remaining layouts center normally
-        minHeight: isMobileLandscape ? '60vh' : '80vh',
-      }}
-    >
+    <>
       <style>
         {`
           @keyframes fadeIn {
@@ -149,136 +226,49 @@ const HomeContent: React.FC<{
           }
         `}
       </style>
-      <Typography
-        variant='h2'
-        style={{
-          color:
-            themeMode === 'grayscale'
-              ? theme.palette.neutralTertiary
-              : theme.palette.themePrimary,
-          marginBottom: isMobileLandscape ? '-0.25rem' : '-0.5rem',
-          opacity: 0,
-          transform: 'translateX(-20px)',
-          fontSize: isMobileLandscape
-            ? 'clamp(1rem, 3vw, 1.5rem)' // Smaller for mobile landscape
-            : 'clamp(1.5rem, 4vw, 2.5rem)',
-          fontWeight: theme.typography.fontWeights.light,
-          ...(animateHeader && animationStyles.slideInRight),
-        }}
-      >
-        welcome to
-      </Typography>
-      <Typography
-        variant='h1'
-        style={{
-          color: theme.palette.neutralLighterAlt,
-          marginBottom: isMobileLandscape ? '0.25rem' : theme.spacing.s,
-          fontSize: isMobileLandscape
-            ? 'clamp(1.8rem, 6vw, 3rem)' // Smaller for mobile landscape
-            : 'clamp(2.5rem, 8vw, 5rem)',
-          fontWeight: theme.typography.fontWeights.bold,
-          opacity: 0,
-          transform: 'translateX(-20px)',
-          ...(animateHeader && {
-            ...animationStyles.slideInRight,
-            animationDelay: '0.5s',
-          }),
-        }}
-      >
-        fluxline
-      </Typography>
-
-      <hr
-        style={{
-          width: '95%',
-          height:
-            orientation === 'portrait' || orientation === 'mobile-landscape'
-              ? '1px'
-              : '2px',
-          color: theme.palette.themePrimary,
-          backgroundColor: theme.palette.themePrimary,
-          margin: 0,
-          opacity: 1,
-          boxShadow: `0 0 1px ${theme.palette.neutralPrimary}`,
-          transform: 'scaleX(0)',
-          transformOrigin: 'left',
-          ...(animateDivider && animationStyles.drawLine),
-        }}
-      />
-
-      <div
-        style={{
-          marginTop: isMobileLandscape ? '0.5rem' : theme.spacing.l,
-          marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.xl,
-        }}
-      >
-        <Typography
-          variant='h3'
-          style={{
-            color:
-              themeMode === 'grayscale'
-                ? theme.palette.neutralTertiary
-                : theme.palette.themeSecondary,
-            lineHeight: theme.typography.lineHeights.tight,
-            fontWeight: theme.typography.fontWeights.extraLight,
-            fontSize: isMobileLandscape
-              ? 'clamp(0.9rem, 2.5vw, 1.4rem)' // Smaller for mobile landscape
-              : 'clamp(1.2rem, 3vw, 2rem)',
-          }}
-        >
-          <div
-            style={{
-              opacity: 0,
-              transform: 'translateY(-10px)',
-              ...(animateSubHeaderLines[0] && animationStyles.slideInDown),
-            }}
-          >
-            <HighlightText text='strategic' theme={theme} /> consulting
-          </div>
-          <div
-            style={{
-              opacity: 0,
-              transform: 'translateY(-10px)',
-              ...(animateSubHeaderLines[1] && animationStyles.slideInDown),
-            }}
-          >
-            <HighlightText text='brand' theme={theme} /> establishment
-          </div>
-          <div
-            style={{
-              opacity: 0,
-              transform: 'translateY(-10px)',
-              ...(animateSubHeaderLines[2] && animationStyles.slideInDown),
-            }}
-          >
-            <HighlightText text='personal training' theme={theme} /> solutions
-          </div>
-          <div
-            style={{
-              opacity: 0,
-              transform: 'translateY(-10px)',
-              ...(animateSubHeaderLines[3] && animationStyles.slideInDown),
-            }}
-          >
-            <HighlightText text='mentoring' theme={theme} /> {'&'} coaching
-          </div>
+      <div style={containerStyles.main}>
+        <Typography variant='h2' style={textStyles.welcomeText}>
+          welcome to
         </Typography>
+        <Typography variant='h1' style={textStyles.mainTitle}>
+          fluxline
+        </Typography>
+
+        <hr style={containerStyles.divider} />
+
+        <div style={containerStyles.subHeaderContainer}>
+          <Typography variant='h3' style={textStyles.subHeaderLine}>
+            {[
+              { highlight: 'strategic', text: 'consulting' },
+              { highlight: 'brand', text: 'establishment' },
+              { highlight: 'personal training', text: '& wellness' },
+              { highlight: 'mentoring', text: '& coaching' },
+            ].map((line, index) => (
+              <div
+                key={index}
+                style={{
+                  ...textStyles.subHeaderLine,
+                  opacity: 0,
+                  transform: 'translateY(-10px)',
+                  animation: animateSubHeaderLines[index]
+                    ? 'slideInDown 0.4s ease-in-out forwards'
+                    : 'none',
+                }}
+              >
+                <HighlightText text={line.highlight} theme={theme} />{' '}
+                {line.text}
+              </div>
+            ))}
+          </Typography>
+        </div>
+        <div style={containerStyles.buttonContainer}>
+          <BookingsButton
+            animateSubHeader={animateSubHeader}
+            willAnimate={true}
+          />
+        </div>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: isMobileLandscape ? '0.5rem' : '1rem',
-          width: '100%',
-          maxWidth: '500px',
-        }}
-      >
-        <BookingsButton
-          animateSubHeader={animateSubHeader}
-          willAnimate={true}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

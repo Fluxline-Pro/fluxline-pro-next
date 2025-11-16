@@ -121,6 +121,12 @@ export const useIsMobileLandscape = () => {
   return isMobile && isLandscape;
 };
 
+export const useIsTabletPortrait = () => {
+  const isTablet = useIsTablet();
+  const isPortrait = useIsPortrait();
+  return isTablet && isPortrait;
+};
+
 type DeviceOrientation =
   | 'landscape'
   | 'portrait'
