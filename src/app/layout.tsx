@@ -8,6 +8,7 @@ import './tailwind.css'; // ← Tailwind base/utilities first
 import './globals.scss'; // ← Your custom styles override Tailwind
 import ThemeProvider from '../theme/contexts/ThemeProvider';
 import { Header } from '../theme/components/header';
+import { SkipToContent } from '../theme/components/skip-to-content';
 
 export const metadata: Metadata = {
   title: 'Fluxline.pro - Home',
@@ -86,6 +87,7 @@ export default function RootLayout({
           }}
         />
         <ThemeProvider>
+          <SkipToContent />
           <Header />
           {children}
         </ThemeProvider>

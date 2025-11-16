@@ -11,6 +11,7 @@ import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { Breadcrumb } from '@/theme/components/breadcrumb';
 import { SERVICE_CATEGORIES } from '../constants';
 import type { ServiceCategory } from '../constants';
 import Link from 'next/link';
@@ -376,19 +377,7 @@ export default async function ServiceDetailPage({
     <SimplePageWrapper>
       <div className="space-y-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb">
-          <Link
-            href="/services"
-            style={{
-              color: 'inherit',
-              textDecoration: 'none',
-              fontSize: '0.875rem',
-              opacity: 0.7,
-            }}
-          >
-            ← Back to Services
-          </Link>
-        </nav>
+        <Breadcrumb />
 
         {/* Hero Section */}
         <ServiceDetailHero service={service} />

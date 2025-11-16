@@ -257,7 +257,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
           </div>
 
           {/* Content Panel */}
-          <div ref={contentRef} style={adjustedContentStyle}>
+          <div ref={contentRef} style={adjustedContentStyle} id="main-content">
             <AnimatePresence mode='wait'>
               <motion.div
                 key={pathname}
@@ -337,7 +337,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
           {/* Content Container */}
           <div style={adjustedContainerStyle}>
             {/* Content Panel */}
-            <div ref={contentRef} style={adjustedContentStyle}>
+            <div ref={contentRef} style={adjustedContentStyle} id="main-content">
               <AnimatePresence mode='wait'>
                 <motion.div
                   key={pathname}
