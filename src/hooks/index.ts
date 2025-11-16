@@ -24,3 +24,6 @@ export { useHoverState, useMultiHoverState } from './useHoverState';
 // Animation hooks
 export { useIntersectionObserver } from './useIntersectionObserver';
 export type { UseIntersectionObserverOptions } from './useIntersectionObserver';
+
+// API hooks
+export { usePressReleaseApi } from './usePressReleaseApi';

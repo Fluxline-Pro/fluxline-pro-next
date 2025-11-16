@@ -128,6 +128,10 @@ const PAGE_CONFIGS: Record<string, { image: string | 'FLUXLINE_LOGO'; imageText:
     image: PortfolioImage.src,
     imageText: 'Portfolio',
   },
+  '/press-release': {
+    image: ContentImage.src,
+    imageText: 'Press Release',
+  },
 };
 
 // Special configuration for 404 page
