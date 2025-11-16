@@ -77,9 +77,7 @@ body {
     'Helvetica Neue',
     Arial,
     sans-serif !important;
-  font-size: calc(
-    var(--theme-fonts-medium-fontSize) * var(--theme-font-scale, 1)
-  );
+  font-size: var(--theme-fonts-medium-fontSize);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

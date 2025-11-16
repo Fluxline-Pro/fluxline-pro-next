@@ -1760,18 +1760,12 @@ export const getInitialThemeMode = (): ThemeMode => {
   // return 'dark'; // Fluxline Pro dark mode default
 };
 
-export const applyThemeToDocument = (
-  themeMode: ThemeMode,
-  fontScale: number = 1
-) => {
+export const applyThemeToDocument = (themeMode: ThemeMode) => {
   const root = document.documentElement;
   const theme = themeMap[themeMode];
 
   // Set the data-theme attribute for CSS selector matching
   root.setAttribute('data-theme', themeMode);
-
-  // Apply global font scale as CSS custom property
-  root.style.setProperty('--theme-font-scale', fontScale.toString());
 
   // Add transition properties to root element
   root.style.setProperty(
