@@ -332,6 +332,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
   };
 
   const handleHighContrastChange = (enabled: boolean) => {
+    if (enabled) {
+      setThemeMode('high-contrast');
+    } else {
+      // Switch back to dark mode when high contrast is disabled
+      setThemeMode('dark');
+    }
     setPreference('highContrast', enabled);
   };
 
@@ -348,6 +354,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
   const themeOptions = [
     { value: 'dark', label: 'Dark Mode' },
     { value: 'light', label: 'Light Mode' },
+    { value: 'high-contrast', label: 'High Contrast' },
+    { value: 'grayscale', label: 'Grayscale Light' },
+    { value: 'grayscale-dark', label: 'Grayscale Dark' },
+    { value: 'protanopia', label: 'Protanopia (Red-blind)' },
+    { value: 'deuteranopia', label: 'Deuteranopia (Green-blind)' },
+    { value: 'tritanopia', label: 'Tritanopia (Blue-blind)' },
   ];
 
   const layoutOptions = [
@@ -429,7 +441,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
               label='High Contrast'
               description='Increase contrast for better visibility'
               icon='Contrast'
-              checked={preferences.highContrast}
+              checked={themeMode === 'high-contrast'}
               onChange={handleHighContrastChange}
             />
           </div>
