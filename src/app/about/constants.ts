@@ -50,7 +50,7 @@ export const COMPANY_STATISTICS: Statistic[] = [
     label: 'Product Offerings',
     value: '6+',
     icon: 'ProductVariant',
-    description: 'Emotionally resonant solutions' ,
+    description: 'Emotionally resonant solutions',
   },
   {
     id: 'satisfaction',
