@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import Image from 'next/image';
 import { Typography } from '@/theme/components/typography';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -62,17 +63,18 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
+          position: 'relative',
         }}
       >
         {member.photo ? (
-          <img
+          <Image
             src={member.photo}
             alt={`${member.name} - ${member.role}`}
+            fill
             style={{
-              width: '100%',
-              height: '100%',
               objectFit: 'cover',
             }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
           <FluentIcon
