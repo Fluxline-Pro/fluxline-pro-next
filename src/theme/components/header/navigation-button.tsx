@@ -64,8 +64,8 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
           transform: 'translateX(-50%)',
           backgroundColor: 'transparent',
           color:
-            themeMode === 'dark'
-              ? theme.palette.neutralLighterAlt
+            themeMode === 'dark' || themeMode === 'grayscale-dark'
+              ? theme.palette.white
               : theme.palette.black,
           padding: '0.25rem 0.5rem',
           borderRadius: '4px',

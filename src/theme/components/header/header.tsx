@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
@@ -14,6 +15,13 @@ import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 import { NavigationMenu } from './navigation-menu';
 import { NavigationButton } from './navigation-button';
 import { FluentIcon } from '@/theme/components/fluent-icon';
+import { Typography } from '@/theme/components/typography';
+import { SettingsPanel } from '@/theme/components/settings-panel';
+
+export interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
 
 interface HeaderProps {
   className?: string;
@@ -31,6 +39,33 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
 
   // Calculate modal width based on device
   const modalMaxWidth = isMobile ? '350px' : '400px';
+
+  // Generate breadcrumb items from pathname
+  const breadcrumbItems: BreadcrumbItem[] = React.useMemo(() => {
+    const paths = pathname.split('/').filter(Boolean);
+    const crumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }];
+
+    let currentPath = '';
+    paths.forEach((path) => {
+      currentPath += `/${path}`;
+      // Capitalize and format the path
+      const label = path
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+
+      crumbs.push({
+        label,
+        href: currentPath,
+      });
+    });
+
+    return crumbs;
+  }, [pathname]);
+
+  // Get current page title (last breadcrumb item)
+  const currentPageTitle =
+    breadcrumbItems[breadcrumbItems.length - 1]?.label || 'Home';
 
   const handleSettingsClick = () => {
     if (activeModal === 'settings') {
@@ -76,8 +111,6 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   const buttonIconColor = isHomePage
     ? theme.palette.white
     : theme.palette.neutralPrimary;
-
-  // Motion settings
   const { shouldReduceMotion } = useReducedMotion();
 
   // Modal ref for focus management
@@ -179,15 +212,124 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             margin: '0 auto',
           }}
         >
-          <div
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '1.5rem',
-              fontWeight: theme.typography.fontWeights.bold,
-              fontFamily: theme.typography.fonts.h2.fontFamily,
-            }}
-          >
-            Fluxline
+          <div style={{ flex: 1, minWidth: 0 }}>
+            {/* Mobile: Show page title */}
+            {isMobile ? (
+              <Typography
+                variant='h3'
+                style={{
+                  color: isHomePage
+                    ? theme.palette.white
+                    : theme.palette.themePrimary,
+                  fontSize: '1.5rem',
+                  fontWeight: theme.typography.fontWeights.bold,
+                  fontFamily: theme.typography.fonts.h3.fontFamily,
+                  margin: 0,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {isHomePage ? 'Fluxline' : currentPageTitle}
+              </Typography>
+            ) : (
+              /* Desktop: Show breadcrumb navigation */
+              <nav aria-label='Breadcrumb'>
+                {isHomePage ? (
+                  <Typography
+                    variant='h3'
+                    style={{
+                      color: theme.palette.white,
+                      fontSize: '1.5rem',
+                      fontWeight: theme.typography.fontWeights.bold,
+                      fontFamily: theme.typography.fonts.h2.fontFamily,
+                      margin: 0,
+                    }}
+                  >
+                    Fluxline
+                  </Typography>
+                ) : (
+                  <ol
+                    style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      justifyContent: 'flex-start',
+                      gap: '0.5rem',
+                      flexWrap: 'wrap',
+                      margin: 0,
+                      padding: 0,
+                      listStyle: 'none',
+                    }}
+                  >
+                    {breadcrumbItems.map((item, index) => {
+                      const isLast = index === breadcrumbItems.length - 1;
+                      const isFirst = index === 0;
+
+                      return (
+                        <li
+                          key={item.href}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                          }}
+                        >
+                          {index > 0 && (
+                            <FluentIcon
+                              iconName='ChevronRight'
+                              size='xSmall'
+                              color={theme.palette.neutralTertiary}
+                            />
+                          )}
+
+                          {isLast ? (
+                            <Typography
+                              variant='p'
+                              style={{
+                                color: theme.palette.neutralPrimary,
+                                fontSize: '1.125rem',
+                                fontWeight:
+                                  theme.typography.fontWeights.semiBold,
+                                margin: 0,
+                              }}
+                              aria-current='page'
+                            >
+                              {item.label}
+                            </Typography>
+                          ) : (
+                            <Link
+                              href={item.href}
+                              style={{
+                                color: isFirst
+                                  ? theme.palette.themePrimary
+                                  : theme.palette.neutralSecondary,
+                                fontSize: isFirst ? '1.25rem' : '1.125rem',
+                                fontWeight: isFirst
+                                  ? theme.typography.fontWeights.bold
+                                  : theme.typography.fontWeights.regular,
+                                textDecoration: 'none',
+                                transition: 'color 0.2s ease',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.color =
+                                  theme.palette.themePrimary;
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.color = isFirst
+                                  ? theme.palette.themePrimary
+                                  : theme.palette.neutralSecondary;
+                              }}
+                            >
+                              {item.label}
+                            </Link>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
+              </nav>
+            )}
           </div>
           <div
             style={{
@@ -314,15 +456,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   <NavigationMenu onClose={handleModalClose} />
                 )}
                 {activeModal === 'settings' && (
-                  <div
-                    style={{
-                      padding: '2rem',
-                      color: theme.palette.neutralPrimary,
-                    }}
-                  >
-                    <h2>Settings</h2>
-                    <p>Settings content will be added here</p>
-                  </div>
+                  <SettingsPanel onClose={handleModalClose} />
                 )}
               </div>
             </motion.div>
