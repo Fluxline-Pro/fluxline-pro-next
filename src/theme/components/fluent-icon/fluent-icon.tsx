@@ -107,6 +107,7 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
     <Icon
       iconName={iconName as string}
       className={className}
+      suppressHydrationWarning={true}
       styles={{
         root: {
           color: `${iconColor} !important`,

@@ -240,9 +240,9 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 <h2
                   style={{
                     margin: 0,
-                    fontSize: theme.fonts.xLarge.fontSize,
-                    fontWeight: theme.fonts.xLarge.fontWeight as number,
-                    fontFamily: theme.fonts.xLarge.fontFamily,
+                    fontSize: theme.typography.fonts.xLarge.fontSize,
+                    fontWeight: theme.typography.fonts.xLarge.fontWeight,
+                    fontFamily: theme.typography.fonts.xLarge.fontFamily,
                   }}
                 >
                   {imageText}

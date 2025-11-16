@@ -364,7 +364,7 @@ export const typography = {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.25rem, 0.5cqi, 0.25rem)',
-      fontWeight: '500' as '500', // Inter Medium
+      fontWeight: '500' as const, // Inter Medium
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
       lineHeight: '1.6',
     },
