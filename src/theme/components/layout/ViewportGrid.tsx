@@ -49,8 +49,7 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
   isHomePage = false,
   backgroundImage = 'one',
 }) => {
-  const { layoutPreference, readingDirection, theme } =
-    useAppTheme();
+  const { layoutPreference, readingDirection, theme } = useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
   const [isEntering, setIsEntering] = React.useState(false);
   const orientation = useDeviceOrientation();
@@ -74,7 +73,7 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
   // Auto-scroll to top on navigation if not already at top
   React.useEffect(() => {
     const SCROLL_TOLERANCE = 5; // px - small tolerance for scroll position precision
-    
+
     const scrollToTop = () => {
       // Check if the page is not at the top
       if (window.scrollY > SCROLL_TOLERANCE) {

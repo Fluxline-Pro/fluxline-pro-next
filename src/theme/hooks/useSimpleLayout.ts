@@ -39,9 +39,7 @@ export const useSimpleLayout = (
       gap: isMobile ? theme.spacing.s : theme.spacing.m,
       padding: isMobile ? theme.spacing.s : theme.spacing.l,
       paddingTop: isMobile ? '1rem' : `calc(${headerHeight} + 1rem)`, // Mobile: 1rem only, Desktop: Dynamic header height + 1rem
-      backgroundColor: isHomePage
-        ? 'transparent'
-        : theme.semanticColors.bodyBackground,
+      backgroundColor: 'transparent', // Always transparent to show fixed background
     };
 
     // Content area styles

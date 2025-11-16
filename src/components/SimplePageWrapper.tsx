@@ -197,7 +197,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
   return (
     <>
       {/* Different layout structures based on tablet portrait preference */}
-      {shouldUseStackedLayout || shouldUseImageSmall ? (
+      {(shouldUseStackedLayout || shouldUseImageSmall) ? (
         // Stacked Layout: Image and content in same container
         <div style={adjustedContainerStyle}>
           {/* Image Panel */}

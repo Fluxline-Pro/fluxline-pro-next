@@ -198,9 +198,7 @@ export const useLayoutConfig = (
           ? 'center'
           : 'start'
         : 'center',
-    backgroundColor: isHomePage
-      ? 'transparent'
-      : theme.semanticColors.bodyBackground,
+    backgroundColor: 'transparent', // Always transparent to show fixed background
     backdropFilter: isHomePage ? 'none' : 'blur(8px)',
     zIndex: 1,
     isolation: 'isolate',
