@@ -47,10 +47,10 @@ export const COMPANY_STATISTICS: Statistic[] = [
   },
   {
     id: 'team',
-    label: 'Team Members',
-    value: '5+',
-    icon: 'People',
-    description: 'Expert practitioners',
+    label: 'Product Offerings',
+    value: '6+',
+    icon: 'ProductVariant',
+    description: 'Emotionally resonant solutions' ,
   },
   {
     id: 'satisfaction',
@@ -67,7 +67,7 @@ export const COMPANY_STATISTICS: Statistic[] = [
 export const COMPANY_TIMELINE: TimelineEvent[] = [
   {
     id: 'founded',
-    year: '2015',
+    year: 'June 2025',
     title: 'Fluxline Founded',
     description:
       'Born from a vision to blend emotional intelligence with technical excellence, creating transformative digital experiences.',
@@ -75,7 +75,7 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
   },
   {
     id: 'services-expansion',
-    year: '2017',
+    year: 'July 2025',
     title: 'Services Expansion',
     description:
       'Expanded offerings to include coaching, wellness programs, and strategic consulting alongside web development.',
@@ -83,7 +83,7 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
   },
   {
     id: 'resonance-framework',
-    year: '2020',
+    year: 'August 2025',
     title: 'Resonance Core Framework™',
     description:
       'Launched our signature coaching framework combining archetypal mapping, emotional intelligence, and transformational practices.',
@@ -91,15 +91,15 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
   },
   {
     id: 'digital-evolution',
-    year: '2023',
+    year: 'Septembeer 2025',
     title: 'Digital Architecture Evolution',
     description:
-      'Advanced our technical capabilities with modern frameworks, cloud infrastructure, and scalable design systems.',
+      'Advanced our technical capabilities with modern frameworks, Azure cloud infrastructure, and scalable design systems.',
     icon: 'Code',
   },
   {
     id: 'present',
-    year: '2025',
+    year: '2025 - Present',
     title: 'Modular Innovation',
     description:
       'Continuing to architect transformative systems that blend technology, design, and human-centered philosophy.',

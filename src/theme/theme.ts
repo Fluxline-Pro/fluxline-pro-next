@@ -953,6 +953,8 @@ export const darkTheme: IExtendedTheme = createExtendedTheme(
       neutralTertiaryAlt: '#8F8F8F',
       neutralQuaternary: '#404040',
       neutralQuaternaryAlt: '#2E2E2E',
+      neutralLighter: '#3A3A4A',
+      neutralLighterAlt: '#2E2E3A',
       neutralDark: '#1A1A1A',
       neutralLight: '#262626',
 
@@ -1758,12 +1760,18 @@ export const getInitialThemeMode = (): ThemeMode => {
   // return 'dark'; // Fluxline Pro dark mode default
 };
 
-export const applyThemeToDocument = (themeMode: ThemeMode) => {
+export const applyThemeToDocument = (
+  themeMode: ThemeMode,
+  fontScale: number = 1
+) => {
   const root = document.documentElement;
   const theme = themeMap[themeMode];
 
   // Set the data-theme attribute for CSS selector matching
   root.setAttribute('data-theme', themeMode);
+
+  // Apply global font scale as CSS custom property
+  root.style.setProperty('--theme-font-scale', fontScale.toString());
 
   // Add transition properties to root element
   root.style.setProperty(

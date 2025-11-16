@@ -11,6 +11,7 @@ import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useUserPreferencesStore } from '@/store';
 import type { ThemeMode } from '@/theme/theme';
+import styles from './settings-panel.module.scss';
 
 interface SettingsPanelProps {
   onClose?: () => void;
@@ -27,7 +28,7 @@ const SettingToggle: React.FC<{
   checked: boolean;
   onChange: (checked: boolean) => void;
 }> = ({ label, description, icon, checked, onChange }) => {
-  const { theme } = useAppTheme();
+  const { theme, fontScale } = useAppTheme();
 
   return (
     <div
@@ -43,15 +44,15 @@ const SettingToggle: React.FC<{
     >
       <FluentIcon
         iconName={icon}
-        size="medium"
+        size='medium'
         color={theme.palette.themePrimary}
       />
       <div style={{ flex: 1 }}>
         <Typography
-          variant="p"
+          variant='p'
           style={{
             color: theme.palette.neutralPrimary,
-            fontSize: '1rem',
+            fontSize: `${1 * fontScale}rem`,
             fontWeight: theme.typography.fontWeights.semiBold,
             marginBottom: description ? '0.25rem' : 0,
           }}
@@ -60,10 +61,10 @@ const SettingToggle: React.FC<{
         </Typography>
         {description && (
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
-              fontSize: '0.875rem',
+              fontSize: `${0.875 * fontScale}rem`,
               lineHeight: theme.typography.lineHeights.normal,
             }}
           >
@@ -87,8 +88,8 @@ const SettingToggle: React.FC<{
           flexShrink: 0,
         }}
         aria-label={`Toggle ${label}`}
-        role="switch"
-        aria-checked={checked}
+        role='switch'
+        aria-checked={checked ? 'true' : 'false'}
       >
         <div
           style={{
@@ -120,7 +121,7 @@ const SettingSelect: React.FC<{
   options: { value: string; label: string }[];
   onChange: (value: string) => void;
 }> = ({ label, description, icon, value, options, onChange }) => {
-  const { theme } = useAppTheme();
+  const { theme, fontScale } = useAppTheme();
 
   return (
     <div
@@ -136,15 +137,15 @@ const SettingSelect: React.FC<{
     >
       <FluentIcon
         iconName={icon}
-        size="medium"
+        size='medium'
         color={theme.palette.themePrimary}
       />
       <div style={{ flex: 1 }}>
         <Typography
-          variant="p"
+          variant='p'
           style={{
             color: theme.palette.neutralPrimary,
-            fontSize: '1rem',
+            fontSize: `${1 * fontScale}rem`,
             fontWeight: theme.typography.fontWeights.semiBold,
             marginBottom: description ? '0.25rem' : '0.5rem',
           }}
@@ -153,10 +154,10 @@ const SettingSelect: React.FC<{
         </Typography>
         {description && (
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
-              fontSize: '0.875rem',
+              fontSize: `${0.875 * fontScale}rem`,
               lineHeight: theme.typography.lineHeights.normal,
               marginBottom: '0.5rem',
             }}
@@ -167,14 +168,15 @@ const SettingSelect: React.FC<{
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          aria-label={label}
           style={{
             width: '100%',
             padding: '0.5rem',
             borderRadius: theme.borderRadius.container.small,
-            backgroundColor: theme.palette.white,
+            backgroundColor: theme.palette.neutralLight,
             border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
             color: theme.palette.neutralPrimary,
-            fontSize: '0.875rem',
+            fontSize: `${0.875 * fontScale}rem`,
             cursor: 'pointer',
             fontFamily: theme.typography.fonts.body.fontFamily,
           }}
@@ -215,7 +217,7 @@ const SettingSlider: React.FC<{
   onChange,
   formatValue,
 }) => {
-  const { theme } = useAppTheme();
+  const { theme, fontScale } = useAppTheme();
 
   return (
     <div
@@ -231,7 +233,7 @@ const SettingSlider: React.FC<{
     >
       <FluentIcon
         iconName={icon}
-        size="medium"
+        size='medium'
         color={theme.palette.themePrimary}
       />
       <div style={{ flex: 1 }}>
@@ -244,20 +246,20 @@ const SettingSlider: React.FC<{
           }}
         >
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralPrimary,
-              fontSize: '1rem',
+              fontSize: `${1 * fontScale}rem`,
               fontWeight: theme.typography.fontWeights.semiBold,
             }}
           >
             {label}
           </Typography>
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.themePrimary,
-              fontSize: '0.875rem',
+              fontSize: `${0.875 * fontScale}rem`,
               fontWeight: theme.typography.fontWeights.semiBold,
             }}
           >
@@ -266,10 +268,10 @@ const SettingSlider: React.FC<{
         </div>
         {description && (
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
-              fontSize: '0.875rem',
+              fontSize: `${0.875 * fontScale}rem`,
               lineHeight: theme.typography.lineHeights.normal,
               marginBottom: '0.5rem',
             }}
@@ -278,18 +280,15 @@ const SettingSlider: React.FC<{
           </Typography>
         )}
         <input
-          type="range"
+          type='range'
           min={min}
           max={max}
           step={step}
           value={value}
           onChange={(e) => onChange(parseFloat(e.target.value))}
+          className={styles.rangeSlider}
           style={{
-            width: '100%',
-            height: '4px',
-            borderRadius: '2px',
-            outline: 'none',
-            cursor: 'pointer',
+            background: `linear-gradient(to right, ${theme.palette.themePrimary} 0%, ${theme.palette.themePrimary} ${((value - min) / (max - min)) * 100}%, ${theme.palette.neutralQuaternary} ${((value - min) / (max - min)) * 100}%, ${theme.palette.neutralQuaternary} 100%)`,
           }}
           aria-label={label}
         />
@@ -302,7 +301,14 @@ const SettingSlider: React.FC<{
  * SettingsPanel Component
  */
 export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
-  const { theme, themeMode, setThemeMode, layoutPreference } = useAppTheme();
+  const {
+    theme,
+    themeMode,
+    setThemeMode,
+    layoutPreference,
+    fontScale,
+    setFontScale,
+  } = useAppTheme();
   const { preferences, setPreference, resetPreferences } =
     useUserPreferencesStore();
 
@@ -311,11 +317,14 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
   };
 
   const handleLayoutChange = (newLayout: string) => {
-    setPreference('layoutPreference', newLayout as 'left-handed' | 'right-handed');
+    setPreference(
+      'layoutPreference',
+      newLayout as 'left-handed' | 'right-handed'
+    );
   };
 
   const handleFontScaleChange = (newScale: number) => {
-    setPreference('fontScale', newScale);
+    setFontScale(newScale);
   };
 
   const handleReducedMotionChange = (enabled: boolean) => {
@@ -347,26 +356,19 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
   ];
 
   return (
-    <div
-      style={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        overflowY: 'auto',
-      }}
-    >
+    <div className={styles.settingsPanel}>
       {/* Header */}
       <div
+        className={styles.settingsHeader}
         style={{
-          padding: '5rem 2rem 1.5rem 2rem',
           borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
         }}
       >
         <Typography
-          variant="h2"
+          variant='h2'
           style={{
             color: theme.palette.themePrimary,
-            fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+            fontSize: `clamp(${1.5 * fontScale}rem, 3vw, ${2 * fontScale}rem)`,
             fontWeight: theme.typography.fontWeights.bold,
             marginBottom: '0.5rem',
           }}
@@ -374,10 +376,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
           Settings
         </Typography>
         <Typography
-          variant="p"
+          variant='p'
           style={{
             color: theme.palette.neutralSecondary,
-            fontSize: '0.875rem',
+            fontSize: `${0.875 * fontScale}rem`,
             lineHeight: theme.typography.lineHeights.normal,
           }}
         >
@@ -386,20 +388,15 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
       </div>
 
       {/* Settings Content */}
-      <div
-        style={{
-          padding: '2rem',
-          flex: 1,
-        }}
-      >
-        <div className="space-y-6">
+      <div className={styles.settingsContent}>
+        <div className={styles.spaceY6}>
           {/* Appearance Section */}
-          <div className="space-y-3">
+          <div className={styles.spaceY3}>
             <Typography
-              variant="h3"
+              variant='h3'
               style={{
                 color: theme.palette.neutralPrimary,
-                fontSize: '1.125rem',
+                fontSize: `${1.125 * fontScale}rem`,
                 fontWeight: theme.typography.fontWeights.semiBold,
                 marginBottom: '0.75rem',
               }}
@@ -408,19 +405,19 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
             </Typography>
 
             <SettingSelect
-              label="Theme"
-              description="Choose between dark and light mode"
-              icon="Color"
+              label='Theme'
+              description='Choose between dark and light mode'
+              icon='Color'
               value={themeMode}
               options={themeOptions}
               onChange={handleThemeChange}
             />
 
             <SettingSlider
-              label="Font Size"
-              description="Adjust text size for better readability"
-              icon="FontSize"
-              value={preferences.fontScale}
+              label='Font Size'
+              description='Adjust text size for better readability'
+              icon='FontSize'
+              value={fontScale}
               min={0.8}
               max={1.5}
               step={0.05}
@@ -429,21 +426,21 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
             />
 
             <SettingToggle
-              label="High Contrast"
-              description="Increase contrast for better visibility"
-              icon="Contrast"
+              label='High Contrast'
+              description='Increase contrast for better visibility'
+              icon='Contrast'
               checked={preferences.highContrast}
               onChange={handleHighContrastChange}
             />
           </div>
 
           {/* Layout Section */}
-          <div className="space-y-3">
+          <div className={styles.spaceY3}>
             <Typography
-              variant="h3"
+              variant='h3'
               style={{
                 color: theme.palette.neutralPrimary,
-                fontSize: '1.125rem',
+                fontSize: `${1.125 * fontScale}rem`,
                 fontWeight: theme.typography.fontWeights.semiBold,
                 marginBottom: '0.75rem',
               }}
@@ -452,9 +449,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
             </Typography>
 
             <SettingSelect
-              label="Layout Preference"
-              description="Choose navigation position based on your dominant hand"
-              icon="SidePanel"
+              label='Layout Preference'
+              description='Choose navigation position based on your dominant hand'
+              icon='SidePanel'
               value={layoutPreference}
               options={layoutOptions}
               onChange={handleLayoutChange}
@@ -462,12 +459,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
           </div>
 
           {/* Accessibility Section */}
-          <div className="space-y-3">
+          <div className={styles.spaceY3}>
             <Typography
-              variant="h3"
+              variant='h3'
               style={{
                 color: theme.palette.neutralPrimary,
-                fontSize: '1.125rem',
+                fontSize: `${1.125 * fontScale}rem`,
                 fontWeight: theme.typography.fontWeights.semiBold,
                 marginBottom: '0.75rem',
               }}
@@ -476,9 +473,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
             </Typography>
 
             <SettingToggle
-              label="Reduced Motion"
-              description="Minimize animations and transitions"
-              icon="Motion"
+              label='Reduced Motion'
+              description='Minimize animations and transitions'
+              icon='Motion'
               checked={preferences.reducedMotion}
               onChange={handleReducedMotionChange}
             />
@@ -488,28 +485,19 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
 
       {/* Footer with Reset Button */}
       <div
+        className={styles.settingsFooter}
         style={{
-          padding: '1.5rem 2rem',
           borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
         }}
       >
         <button
           onClick={handleResetSettings}
+          className={styles.resetButton}
           style={{
-            width: '100%',
-            padding: '0.75rem 1.5rem',
             borderRadius: theme.borderRadius.container.small,
-            backgroundColor: 'transparent',
             color: theme.semanticColors.errorIcon,
             border: `1px solid ${theme.semanticColors.errorIcon}`,
-            fontSize: '1rem',
             fontWeight: theme.typography.fontWeights.semiBold,
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.5rem',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor =
@@ -520,8 +508,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
           }}
         >
           <FluentIcon
-            iconName="Reset"
-            size="small"
+            iconName='Reset'
+            size='small'
             color={theme.semanticColors.errorIcon}
           />
           Reset to Defaults

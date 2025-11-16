@@ -13,6 +13,9 @@
 // Light Theme (Default Root Variables)
 // These map to the lightTheme palette in theme.ts
 :root {
+  // Font Scale - Default to 1, overridden by ThemeProvider
+  --theme-font-scale: 1;
+
   // Typography - Inter font family from theme.ts
   --theme-fonts-family:
     'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -79,15 +82,29 @@
   --theme-spacing-xxxl: 3rem;
   --theme-spacing-xxxxl: 4rem;
 
-  // Typography Sizes
-  --theme-fonts-tiny-fontSize: clamp(0.25rem, 0.5cqi, 0.25rem);
-  --theme-fonts-xSmall-fontSize: clamp(0.5rem, 1cqi, 0.5rem);
-  --theme-fonts-small-fontSize: clamp(0.75rem, 1.5cqi, 0.75rem);
-  --theme-fonts-medium-fontSize: 1rem;
-  --theme-fonts-mediumPlus-fontSize: clamp(1.25rem, 2.5cqi, 1.25rem);
-  --theme-fonts-large-fontSize: clamp(1.5rem, 3cqi, 1.5rem);
-  --theme-fonts-xLarge-fontSize: clamp(2rem, 4cqi, 2rem);
-  --theme-fonts-xxLarge-fontSize: clamp(3rem, 6cqi, 3rem);
+  // Typography Sizes (scaled by --theme-font-scale)
+  --theme-fonts-tiny-fontSize: calc(
+    clamp(0.25rem, 0.5cqi, 0.25rem) * var(--theme-font-scale, 1)
+  );
+  --theme-fonts-xSmall-fontSize: calc(
+    clamp(0.5rem, 1cqi, 0.5rem) * var(--theme-font-scale, 1)
+  );
+  --theme-fonts-small-fontSize: calc(
+    clamp(0.75rem, 1.5cqi, 0.75rem) * var(--theme-font-scale, 1)
+  );
+  --theme-fonts-medium-fontSize: calc(1rem * var(--theme-font-scale, 1));
+  --theme-fonts-mediumPlus-fontSize: calc(
+    clamp(1.25rem, 2.5cqi, 1.25rem) * var(--theme-font-scale, 1)
+  );
+  --theme-fonts-large-fontSize: calc(
+    clamp(1.5rem, 3cqi, 1.5rem) * var(--theme-font-scale, 1)
+  );
+  --theme-fonts-xLarge-fontSize: calc(
+    clamp(2rem, 4cqi, 2rem) * var(--theme-font-scale, 1)
+  );
+  --theme-fonts-xxLarge-fontSize: calc(
+    clamp(3rem, 6cqi, 3rem) * var(--theme-font-scale, 1)
+  );
 
   // Border Radius
   --theme-borderRadius-s: 0.25rem;

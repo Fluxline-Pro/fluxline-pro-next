@@ -23,12 +23,12 @@ setIconOptions({
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { theme, themeMode } = useAppTheme();
+  const { theme, themeMode, fontScale } = useAppTheme();
 
-  // Apply theme to document when theme mode changes
+  // Apply theme to document when theme mode or font scale changes
   useEffect(() => {
-    applyThemeToDocument(themeMode);
-  }, [themeMode]);
+    applyThemeToDocument(themeMode, fontScale);
+  }, [themeMode, fontScale]);
 
   return (
     <FluentThemeProvider theme={theme} suppressHydrationWarning>
