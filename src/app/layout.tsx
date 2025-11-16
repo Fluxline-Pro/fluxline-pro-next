@@ -7,7 +7,9 @@ import '@fontsource-variable/inter';
 import './tailwind.css'; // ← Tailwind base/utilities first
 import './globals.scss'; // ← Your custom styles override Tailwind
 import ThemeProvider from '../theme/contexts/ThemeProvider';
+import { FontScaleProvider } from '../theme/providers';
 import { Header } from '../theme/components/header';
+import { SkipToContent } from '../theme/components/skip-to-content';
 
 export const metadata: Metadata = {
   title: 'Fluxline.pro - Home',
@@ -56,21 +58,25 @@ export default function RootLayout({
     <html lang='en'>
       <head>
         {/* Typekit stylesheet for custom typography */}
-        <link rel="stylesheet" href="https://use.typekit.net/qmh5dow.css" />
+        <link rel='stylesheet' href='https://use.typekit.net/qmh5dow.css' />
         {/* Font Awesome icons */}
         <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          rel='stylesheet'
+          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
         />
         {/* Preconnect to external font sources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link
+          rel='preconnect'
+          href='https://fonts.gstatic.com'
+          crossOrigin='anonymous'
+        />
       </head>
       <body className='antialiased' suppressHydrationWarning>
         {/* Structured data for SEO */}
         <Script
-          id="organization-schema"
-          type="application/ld+json"
+          id='organization-schema'
+          type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -85,10 +91,13 @@ export default function RootLayout({
             }),
           }}
         />
-        <ThemeProvider>
-          <Header />
-          {children}
-        </ThemeProvider>
+        <FontScaleProvider>
+          <ThemeProvider>
+            <SkipToContent />
+            <Header />
+            {children}
+          </ThemeProvider>
+        </FontScaleProvider>
       </body>
     </html>
   );

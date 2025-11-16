@@ -58,9 +58,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
   const isContentScrollable = useContentScrollable(contentRef);
 
   // Add state to ensure we don't check scrollability until content is fully mounted
-  const [isContentMounted, setIsContentMounted] = React.useState(false);
-
-  // Wait for content to be fully rendered before applying centering
+  const [isContentMounted, setIsContentMounted] = React.useState(false); // Wait for content to be fully rendered before applying centering
   React.useEffect(() => {
     setIsContentMounted(false);
 
@@ -197,7 +195,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
   return (
     <>
       {/* Different layout structures based on tablet portrait preference */}
-      {(shouldUseStackedLayout || shouldUseImageSmall) ? (
+      {shouldUseStackedLayout || shouldUseImageSmall ? (
         // Stacked Layout: Image and content in same container
         <div style={adjustedContainerStyle}>
           {/* Image Panel */}
@@ -257,7 +255,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
           </div>
 
           {/* Content Panel */}
-          <div ref={contentRef} style={adjustedContentStyle}>
+          <div ref={contentRef} style={adjustedContentStyle} id='main-content'>
             <AnimatePresence mode='wait'>
               <motion.div
                 key={pathname}
@@ -337,7 +335,11 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
           {/* Content Container */}
           <div style={adjustedContainerStyle}>
             {/* Content Panel */}
-            <div ref={contentRef} style={adjustedContentStyle}>
+            <div
+              ref={contentRef}
+              style={adjustedContentStyle}
+              id='main-content'
+            >
               <AnimatePresence mode='wait'>
                 <motion.div
                   key={pathname}

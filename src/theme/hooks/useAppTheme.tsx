@@ -1,6 +1,5 @@
 'use client';
 
-import { ITheme } from '@fluentui/react';
 import { useUserPreferencesStore } from '../../store/store-specs/userPreferencesStore';
 import {
   themeMap,
@@ -14,7 +13,7 @@ export const useAppTheme = () => {
   const { preferences, setPreference, toggleTheme } = useUserPreferencesStore();
   const themeMode = preferences.themeMode;
   const fontScale = preferences.fontScale;
-  const theme = themeMap[themeMode] as IExtendedTheme & ITheme;
+  const theme = themeMap[themeMode] as IExtendedTheme;
   const layoutPreference = preferences.layoutPreference;
   const readingDirection = preferences.readingDirection;
 

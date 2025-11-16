@@ -953,6 +953,8 @@ export const darkTheme: IExtendedTheme = createExtendedTheme(
       neutralTertiaryAlt: '#8F8F8F',
       neutralQuaternary: '#404040',
       neutralQuaternaryAlt: '#2E2E2E',
+      neutralLighter: '#3A3A4A',
+      neutralLighterAlt: '#2E2E3A',
       neutralDark: '#1A1A1A',
       neutralLight: '#262626',
 
