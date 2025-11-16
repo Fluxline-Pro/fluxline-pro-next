@@ -110,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   // Use white color for buttons on home page for better visibility against dark background
   const buttonIconColor = isHomePage
     ? theme.palette.white
-    : theme.palette.neutralPrimary; // Motion settings
+    : theme.palette.neutralPrimary;
   const { shouldReduceMotion } = useReducedMotion();
 
   // Modal ref for focus management
