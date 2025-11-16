@@ -31,10 +31,10 @@ export const pressReleasesMockData: PressRelease[] = [
     subtitle: 'Modern Business Transformation Platform Goes Live',
     description:
       'Fluxline Resonance Group announces the official launch of Fluxline Pro, a next-generation business transformation platform built on Next.js 16 and React 19, featuring advanced theming, accessibility, and responsive design.',
-    imageUrl: '/images/press-release/fluxline-launch.jpg',
+    imageUrl: undefined,
     imageAlt: 'Fluxline Pro Platform Launch',
     imageText: 'Platform Launch 2025',
-    date: new Date('2025-01-15'),
+    date: new Date('2025-01-15T00:00:00Z'),
     category: 'Product Launch',
     glyphTag: '🜂', // Ignition phase
     emotionalCue: 'Ignition',
@@ -67,10 +67,10 @@ precision for modern business transformation," said the Fluxline Resonance Group
     subtitle: 'Commitment to Inclusive Digital Experiences',
     description:
       'The Fluxline Pro platform has been certified as WCAG 2.1 AA compliant, demonstrating our commitment to creating inclusive digital experiences for all users, regardless of ability.',
-    imageUrl: '/images/press-release/accessibility-cert.jpg',
+    imageUrl: undefined,
     imageAlt: 'Accessibility Certification',
     imageText: 'Accessibility Excellence',
-    date: new Date('2024-12-10'),
+    date: new Date('2024-12-10T00:00:00Z'),
     category: 'Achievement',
     glyphTag: '🜄', // Integration phase
     emotionalCue: 'Integration',
@@ -99,10 +99,10 @@ services.
     subtitle: 'Enhanced Cloud Infrastructure for Enterprise Clients',
     description:
       'Fluxline Pro announces strategic partnership with Microsoft Azure, enabling enhanced cloud infrastructure, improved scalability, and enterprise-grade security for our clients.',
-    imageUrl: '/images/press-release/azure-partnership.jpg',
+    imageUrl: undefined,
     imageAlt: 'Azure Partnership',
     imageText: 'Azure Partnership',
-    date: new Date('2024-11-20'),
+    date: new Date('2024-11-20T00:00:00Z'),
     category: 'Partnership',
     glyphTag: '🜄', // Integration phase
     emotionalCue: 'Integration',
@@ -130,10 +130,10 @@ infrastructure allows us to serve our clients better and scale efficiently."
     subtitle: 'Comprehensive Component Library for Modern Web Development',
     description:
       'Fluxline Pro releases version 1.0 of its comprehensive design system, featuring reusable components, theming capabilities, and extensive documentation for developers.',
-    imageUrl: '/images/press-release/design-system.jpg',
+    imageUrl: undefined,
     imageAlt: 'Design System Release',
     imageText: 'Design System v1.0',
-    date: new Date('2024-10-05'),
+    date: new Date('2024-10-05T00:00:00Z'),
     category: 'Product Release',
     glyphTag: '🜂', // Ignition phase
     emotionalCue: 'Breakthrough',
@@ -161,10 +161,10 @@ and beautiful web applications. Full documentation is available on our platform.
     subtitle: 'Now Serving Clients Across North America, Europe, and Asia',
     description:
       'Fluxline Resonance Group announces global expansion of consulting services, now serving enterprise clients across three continents with strategic business transformation expertise.',
-    imageUrl: '/images/press-release/global-expansion.jpg',
+    imageUrl: undefined,
     imageAlt: 'Global Expansion',
     imageText: 'Global Services',
-    date: new Date('2024-09-15'),
+    date: new Date('2024-09-15T00:00:00Z'),
     category: 'Business Expansion',
     glyphTag: '🜄', // Integration phase
     emotionalCue: 'Visibility',
@@ -192,10 +192,10 @@ digital transformation journey with strategic precision and cultural sensitivity
     subtitle: 'Holistic Personal Development for Business Leaders',
     description:
       'Introducing Resonance Core, a comprehensive life coaching program designed for business leaders seeking personal transformation alongside professional growth.',
-    imageUrl: '/images/press-release/resonance-core.jpg',
+    imageUrl: undefined,
     imageAlt: 'Resonance Core Launch',
     imageText: 'Resonance Core',
-    date: new Date('2024-08-01'),
+    date: new Date('2024-08-01T00:00:00Z'),
     category: 'Service Launch',
     glyphTag: '🜂', // Ignition phase
     emotionalCue: 'Integration',

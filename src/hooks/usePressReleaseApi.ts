@@ -132,7 +132,8 @@ export const usePressReleaseApi = () => {
     if (pressReleases.length === 0 && !isLoading && !error) {
       fetchPressReleases();
     }
-  }, [pressReleases.length, isLoading, error]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run on mount
 
   return {
     // State
