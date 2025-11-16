@@ -10,6 +10,9 @@ import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 import { useIsMobile, useIsTabletPortrait } from '@/theme/hooks/useMediaQuery';
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { createPlaceholderSVG } from '@/utils/placeholder';
+import FluxlineLogo from '@/assets/images/FluxlineLogo.png';
+import FluxlineLogoDarkMode from '@/assets/images/FluxlineLogoDarkMode.png';
+import FluxlineLogoLightMode from '@/assets/images/FluxlineLogoLightMode.png';
 
 // Page configurations with placeholder images for now
 const PAGE_CONFIGS = {
@@ -41,7 +44,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
   tabletPortraitLayout = 'stacked',
 }) => {
   const pathname = usePathname();
-  const { theme, layoutPreference } = useAppTheme();
+  const { theme, themeMode, layoutPreference } = useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
   const isMobile = useIsMobile();
   const isTabletPortrait = useIsTabletPortrait();
@@ -84,9 +87,17 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
     return <>{children}</>;
   }
 
+  // Get theme-based logo
+  const getThemeBasedLogo = () => {
+    // Use dark mode logo for dark themes, light mode logo for others
+    const isDarkTheme = themeMode === 'dark' || themeMode === 'grayscale-dark';
+
+    return isDarkTheme ? FluxlineLogoDarkMode : FluxlineLogoLightMode;
+  };
+
   // Get configuration for current page
   const config = PAGE_CONFIGS[pathname as keyof typeof PAGE_CONFIGS] || {
-    image: '/images/home/fluxline-logo.png',
+    image: getThemeBasedLogo(),
     imageText: 'Fluxline',
   };
 

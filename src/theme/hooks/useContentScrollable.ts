@@ -2,6 +2,11 @@
 
 import React from 'react';
 
+// Timing constants for scrollable detection
+const INITIAL_CHECK_DELAY = 50; // Wait for initial DOM paint
+const SECONDARY_CHECK_DELAY = 200; // Wait for layout stabilization
+const RESIZE_DEBOUNCE_DELAY = 50; // Debounce resize events
+
 /**
  * Hook to detect if an element's content is scrollable
  * @param ref - Reference to the element to check
@@ -26,13 +31,13 @@ export const useContentScrollable = (
     };
 
     // Initial check with delays to ensure content is rendered
-    const initialTimer = setTimeout(checkScrollable, 50);
-    const secondaryTimer = setTimeout(checkScrollable, 200);
+    const initialTimer = setTimeout(checkScrollable, INITIAL_CHECK_DELAY);
+    const secondaryTimer = setTimeout(checkScrollable, SECONDARY_CHECK_DELAY);
 
     // Set up ResizeObserver to monitor size changes
     const resizeObserver = new ResizeObserver(() => {
       // Small delay to ensure layout is complete after resize
-      setTimeout(checkScrollable, 50);
+      setTimeout(checkScrollable, RESIZE_DEBOUNCE_DELAY);
     });
 
     if (ref.current) {
