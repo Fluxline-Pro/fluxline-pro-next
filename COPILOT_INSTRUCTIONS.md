@@ -129,6 +129,49 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   - Dynamic content through API routes or external APIs
   - Use Next.js `generateStaticParams` for static generation when applicable
 
+### Scrolls/White Papers Management
+
+- **Location**: `/src/app/services/scrolls/`
+- **Asset Storage**: PDFs stored in `/public/scrolls/pdfs/`
+- **Data Configuration**: Scroll metadata defined in `scrollsData.ts`
+
+**Adding New Scrolls**:
+1. Place PDF file in `/public/scrolls/pdfs/`
+2. Update `scrollsData.ts` with scroll metadata:
+   ```typescript
+   {
+     id: 'unique-scroll-id',
+     title: 'Scroll Title',
+     description: 'Brief description for card display',
+     category: 'business-strategy' | 'development' | 'design' | 'wellness' | 'education' | 'coaching',
+     pdfUrl: '/scrolls/pdfs/filename.pdf',
+     fileSize: 'X.X MB',
+     tags: ['tag1', 'tag2'],
+     publishedDate: new Date('YYYY-MM-DD'),
+     lastUpdated: new Date('YYYY-MM-DD'),
+     seoMetadata: {
+       title: 'SEO Title',
+       description: 'SEO Description',
+       keywords: ['keyword1', 'keyword2']
+     }
+   }
+   ```
+3. Run `yarn build` to regenerate static pages
+4. New scroll will be automatically added to grid and detail route
+
+**Component Patterns**:
+- `ScrollCard`: Individual scroll card with download functionality
+- `ScrollsGrid`: Responsive grid layout for scroll listings
+- All scrolls use Server Components for listings
+- Client Components used only for interactive download buttons
+- Static generation for all scroll detail pages via `generateStaticParams`
+
+**SEO Best Practices**:
+- Each scroll has unique metadata with OpenGraph and Twitter Card support
+- Dynamic metadata generation in detail pages
+- Proper breadcrumbs for navigation context
+- Structured data for enhanced search results
+
 ---
 
 ## Coding Best Practices
