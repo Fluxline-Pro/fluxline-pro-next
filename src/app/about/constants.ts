@@ -91,7 +91,7 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
   },
   {
     id: 'digital-evolution',
-    year: 'Septembeer 2025',
+    year: 'September 2025',
     title: 'Digital Architecture Evolution',
     description:
       'Advanced our technical capabilities with modern frameworks, Azure cloud infrastructure, and scalable design systems.',
