@@ -35,15 +35,15 @@ export const Typography: React.FC<TypographyProps> = ({
   style,
   className,
 }) => {
-  // Merge inline styles with textAlign prop, ensuring no conflicting animation properties
+  // Merge inline styles with textAlign prop, removing undefined, null, and empty string values
   const mergedStyles: React.CSSProperties = React.useMemo(() => {
     const baseStyles = style || {};
     const alignStyles = textAlign ? { textAlign } : {};
 
-    // Filter out any problematic animation properties that might conflict
+    // Remove any undefined, null, or empty string values from the style object
     const cleanedStyles = Object.fromEntries(
       Object.entries(baseStyles).filter(([key, value]) => {
-        // Remove any undefined, null, or empty string values
+        // Remove undefined, null, or empty string values
         return value !== undefined && value !== null && value !== '';
       })
     );

@@ -47,9 +47,9 @@ export const Button: React.FC<ButtonProps> = ({
       transition: theme.animations.transitions.button,
       backgroundColor:
         variant === 'primary'
-          ? theme.isInverted ? theme.palette.themeSecondary : theme.palette.themePrimary
+          ? (theme.isInverted ? theme.palette.themeSecondary : theme.palette.themePrimary)
           : variant === 'secondary'
-          ? theme.palette.themeSecondary
+            ? theme.palette.themeSecondary
             : theme.palette.neutralLighter,
       border: 'none',
     },

@@ -30,8 +30,8 @@ export const RESONANCE_CORE_SUMMARY =
 export interface ServiceCategory {
   id: string;
   title: string;
-  description: string;
-  summary: string;
+  description: string; // Plain text description for service cards
+  summary: string; // HTML content for detail pages (not currently rendered)
   icon: string;
   path: string;
 }

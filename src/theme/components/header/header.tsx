@@ -80,6 +80,34 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   // Motion settings
   const { shouldReduceMotion } = useReducedMotion();
 
+  // Modal ref for focus management
+  const modalRef = React.useRef<HTMLDivElement>(null);
+
+  // Handle Escape key to close modal
+  React.useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && activeModal) {
+        handleModalClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [activeModal]);
+
+  // Focus management for modal
+  React.useEffect(() => {
+    if (activeModal && modalRef.current) {
+      // Save current focus to restore later
+      const previousFocus = document.activeElement as HTMLElement;
+      modalRef.current.focus();
+
+      return () => {
+        previousFocus?.focus();
+      };
+    }
+  }, [activeModal]);
+
   // Animation variants for modal slide
   const modalVariants: Variants = {
     hidden: {
@@ -215,6 +243,8 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             onClick={handleModalClose}
           >
             <motion.div
+              ref={modalRef}
+              tabIndex={-1}
               variants={modalVariants}
               initial='hidden'
               animate='visible'

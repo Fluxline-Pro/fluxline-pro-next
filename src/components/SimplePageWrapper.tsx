@@ -59,23 +59,21 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
 
   // Wait for content to be fully rendered before applying centering
   React.useEffect(() => {
-    // Reset to false first
     setIsContentMounted(false);
 
-    let timerId: NodeJS.Timeout;
+    if (!contentRef.current || typeof ResizeObserver === 'undefined') {
+      // Fallback: immediately set as mounted if ResizeObserver is not available
+      setIsContentMounted(true);
+      return;
+    }
 
-    // Use requestAnimationFrame to wait for paint, then setTimeout for animations
-    const rafId = requestAnimationFrame(() => {
-      timerId = setTimeout(() => {
-        setIsContentMounted(true);
-      }, 600); // Longer delay to account for Framer Motion animations (500ms + buffer)
+    const observer = new ResizeObserver(() => {
+      setIsContentMounted(true);
     });
+    observer.observe(contentRef.current);
 
     return () => {
-      cancelAnimationFrame(rafId);
-      if (timerId) {
-        clearTimeout(timerId);
-      }
+      observer.disconnect();
     };
   }, [pathname]); // Re-run when pathname changes
 

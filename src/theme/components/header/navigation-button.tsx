@@ -45,17 +45,11 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
           padding: isMobile ? '0.75rem' : '1rem',
           display: 'flex',
           alignItems: 'center',
-          transform: 'scale(1)',
+          transform: isHovered ? `scale(${hoverScale})` : 'scale(1)',
           transition: 'background-color 0.2s ease, transform 0.2s ease',
         }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = `scale(${hoverScale})`;
-          setIsHovered(true);
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'scale(1)';
-          setIsHovered(false);
-        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         aria-label={ariaLabel}
       >
         <FluentIcon iconName={iconName} size='medium' color={color} />

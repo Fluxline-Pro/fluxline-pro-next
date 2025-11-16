@@ -50,13 +50,6 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
 }) => {
   const { theme } = useAppTheme();
 
-  // Ensure icons are initialized on mount
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      initializeIcons();
-    }
-  }, []);
-
   const getVariantColor = () => {
     switch (variant) {
       case 'primary':

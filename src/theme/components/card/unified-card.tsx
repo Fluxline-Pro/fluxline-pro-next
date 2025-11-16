@@ -307,6 +307,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 src={imageUrl}
                 alt={altText || imageAlt || title}
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 style={{
                   objectFit: 'cover',
                 }}
