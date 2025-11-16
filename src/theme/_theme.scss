@@ -14,49 +14,58 @@
 // These map to the lightTheme palette in theme.ts
 :root {
   // Typography - Inter font family from theme.ts
-  --theme-fonts-family: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --theme-fonts-mono: 'Courier Prime', 'Roboto Mono', 'SF Mono', 'Monaco', 'Cascadia Code', Consolas, 'Courier New', monospace;
-  
+  --theme-fonts-family:
+    'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --theme-fonts-mono:
+    'Courier Prime', 'Roboto Mono', 'SF Mono', 'Monaco', 'Cascadia Code',
+    Consolas, 'Courier New', monospace;
+
   // Primary Palette Colors - Fluxline Pro Light Theme
   --theme-palette-themePrimary: #274770; // Deep slate blue
-  --theme-palette-themeSecondary: #5A7CA0; // Cooler contrast
-  --theme-palette-themeTertiary: #7B9BB8; // UI layering
-  --theme-palette-themeLight: #F8FAFC; // Clean and airy
-  --theme-palette-themeDark: #2E2E3A; // Resonance Core
-  --theme-palette-themeDarker: #1F1F1F; // Deep charcoal
-  --theme-palette-themeLighter: #FFFFFF; // Ritual White
-  --theme-palette-themeLighterAlt: #F5F5F5; // Breath whitespace
-  --theme-palette-themeDarkAlt: #1F1F1F;
+  --theme-palette-themeSecondary: #5a7ca0; // Cooler contrast
+  --theme-palette-themeTertiary: #7b9bb8; // UI layering
+  --theme-palette-themeLight: #f8fafc; // Clean and airy
+  --theme-palette-themeDark: #2e2e3a; // Resonance Core
+  --theme-palette-themeDarker: #1f1f1f; // Deep charcoal
+  --theme-palette-themeLighter: #ffffff; // Ritual White
+  --theme-palette-themeLighterAlt: #f5f5f5; // Breath whitespace
+  --theme-palette-themeDarkAlt: #1f1f1f;
 
   // Neutral Palette - Light Mode
-  --theme-palette-neutralPrimary: #2E2E2E; // Primary text
-  --theme-palette-neutralSecondary: #4A4A4A; // Secondary text
+  --theme-palette-neutralPrimary: #2e2e2e; // Primary text
+  --theme-palette-neutralSecondary: #4a4a4a; // Secondary text
   --theme-palette-neutralTertiary: #707070; // Tertiary text
-  --theme-palette-neutralTertiaryAlt: #8F8F8F;
-  --theme-palette-neutralQuaternary: #E0E0E0;
-  --theme-palette-neutralQuaternaryAlt: #F0F0F0;
+  --theme-palette-neutralTertiaryAlt: #8f8f8f;
+  --theme-palette-neutralQuaternary: #e0e0e0;
+  --theme-palette-neutralQuaternaryAlt: #f0f0f0;
   --theme-palette-neutralDark: #000000;
-  --theme-palette-neutralLight: #FFFFFF;
-  --theme-palette-neutralLighter: #FFFFFF;
-  --theme-palette-neutralLighterAlt: #F5F5F5;
+  --theme-palette-neutralLight: #ffffff;
+  --theme-palette-neutralLighter: #ffffff;
+  --theme-palette-neutralLighterAlt: #f5f5f5;
 
   // Fluxline Accent
-  --theme-palette-accent: #4A9B96; // Fluxline Teal
+  --theme-palette-accent: #4a9b96; // Fluxline Teal
   --theme-palette-black: #000000;
-  --theme-palette-white: #FFFFFF;
+  --theme-palette-white: #ffffff;
 
   // Semantic Colors - Light Mode
-  --theme-semantic-bodyText: #2E2E2E;
-  --theme-semantic-bodyBackground: #FFFFFF;
-  --theme-semantic-errorText: #B0303C;
-  --theme-semantic-errorBackground: #FFEBEE;
-  --theme-semantic-successText: #107C10;
-  --theme-semantic-successBackground: #E0F2F1;
-  --theme-semantic-messageText: #F5C85C; // Mythic Gold
-  --theme-semantic-warningText: #C19C00;
-  --theme-semantic-warningBackground: #FFF8E1;
+  --theme-semantic-bodyText: #2e2e2e;
+  --theme-semantic-bodyBackground: radial-gradient(
+    ellipse at left,
+    #f8fafc 0%,
+    #f5f5f5 40%,
+    #f0f0f0 100%
+  );
+  --theme-semantic-errorText: #b0303c;
+  --theme-semantic-errorBackground: #ffebee;
+  --theme-semantic-successText: #107c10;
+  --theme-semantic-successBackground: #e0f2f1;
+  --theme-semantic-messageText: #f5c85c; // Mythic Gold
+  --theme-semantic-warningText: #c19c00;
+  --theme-semantic-warningBackground: #fff8e1;
   --theme-semantic-link: #274770;
-  --theme-semantic-linkHovered: #1F1F1F;
+  --theme-semantic-linkHovered: #1f1f1f;
 
   // Spacing (from theme.ts spacing system)
   --theme-spacing-none: 0;
@@ -95,51 +104,72 @@
   --theme-animation-duration-normal: 300ms;
   --theme-animation-duration-slow: 400ms;
   --theme-animation-easing-primary: cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Gradient Backgrounds
+  --theme-gradient-background: radial-gradient(
+    ellipse at left,
+    #f8fafc 0%,
+    #f5f5f5 40%,
+    #f0f0f0 100%
+  );
 }
 
 // Dark Theme Variables - Fluxline Pro Default
 // These map to the darkTheme palette in theme.ts
 [data-theme='dark'] {
   // Primary Palette - Dark Mode
-  --theme-palette-themePrimary: #AFCAFC; // Slate blue
-  --theme-palette-themeSecondary: #4A9B96; // Fluxline teal
-  --theme-palette-themeTertiary: #5A7CA0;
-  --theme-palette-themeLight: #F8FAFC;
-  --theme-palette-themeDark: #1F1F1F;
+  --theme-palette-themePrimary: #afcafc; // Slate blue
+  --theme-palette-themeSecondary: #4a9b96; // Fluxline teal
+  --theme-palette-themeTertiary: #5a7ca0;
+  --theme-palette-themeLight: #f8fafc;
+  --theme-palette-themeDark: #1f1f1f;
   --theme-palette-themeDarker: #010101; // Deep black base
-  --theme-palette-themeLighter: #2E2E3A;
-  --theme-palette-themeLighterAlt: #3A3A4A;
+  --theme-palette-themeLighter: #2e2e3a;
+  --theme-palette-themeLighterAlt: #3a3a4a;
   --theme-palette-themeDarkAlt: #005a9e;
 
   // Neutral Palette - Dark Mode
-  --theme-palette-neutralPrimary: #FFFFFF;
-  --theme-palette-neutralSecondary: #E1E1E1;
-  --theme-palette-neutralTertiary: #B8B8B8;
-  --theme-palette-neutralTertiaryAlt: #8F8F8F;
+  --theme-palette-neutralPrimary: #ffffff;
+  --theme-palette-neutralSecondary: #e1e1e1;
+  --theme-palette-neutralTertiary: #b8b8b8;
+  --theme-palette-neutralTertiaryAlt: #8f8f8f;
   --theme-palette-neutralQuaternary: #404040;
-  --theme-palette-neutralQuaternaryAlt: #2E2E2E;
-  --theme-palette-neutralDark: #1A1A1A;
+  --theme-palette-neutralQuaternaryAlt: #2e2e2e;
+  --theme-palette-neutralDark: #1a1a1a;
   --theme-palette-neutralLight: #262626;
-  --theme-palette-neutralLighter: #2E2E2E;
+  --theme-palette-neutralLighter: #2e2e2e;
   --theme-palette-neutralLighterAlt: #252525;
 
   // Accent
-  --theme-palette-accent: #F5C85C; // Mythic gold
+  --theme-palette-accent: #f5c85c; // Mythic gold
   --theme-palette-black: #010101;
-  --theme-palette-white: #FFFFFF;
+  --theme-palette-white: #ffffff;
 
   // Semantic Colors - Dark Mode
-  --theme-semantic-bodyText: #FFFFFF;
-  --theme-semantic-bodyBackground: #010101;
-  --theme-semantic-errorText: #B0303C;
-  --theme-semantic-errorBackground: #2D1617;
-  --theme-semantic-successText: #4A9B96;
-  --theme-semantic-successBackground: #1A2D2A;
-  --theme-semantic-messageText: #F5C85C;
-  --theme-semantic-warningText: #F5C85C;
-  --theme-semantic-warningBackground: #2D2A17;
+  --theme-semantic-bodyText: #ffffff;
+  --theme-semantic-bodyBackground: radial-gradient(
+    ellipse at left,
+    #2e2e3a 0%,
+    #1a1a1a 40%,
+    #010101 100%
+  );
+  --theme-semantic-errorText: #b0303c;
+  --theme-semantic-errorBackground: #2d1617;
+  --theme-semantic-successText: #4a9b96;
+  --theme-semantic-successBackground: #1a2d2a;
+  --theme-semantic-messageText: #f5c85c;
+  --theme-semantic-warningText: #f5c85c;
+  --theme-semantic-warningBackground: #2d2a17;
   --theme-semantic-link: #274770;
-  --theme-semantic-linkHovered: #5A7CA0;
+  --theme-semantic-linkHovered: #5a7ca0;
+
+  // Gradient Backgrounds - Dark Mode
+  --theme-gradient-background: radial-gradient(
+    ellipse at left,
+    #2e2e3a 0%,
+    #1a1a1a 40%,
+    #010101 100%
+  );
 }
 
 // SCSS Mixins for common theme patterns
@@ -166,7 +196,8 @@
 }
 
 @mixin theme-transition {
-  transition: all var(--theme-animation-duration-normal) var(--theme-animation-easing-primary);
+  transition: all var(--theme-animation-duration-normal)
+    var(--theme-animation-easing-primary);
 }
 
 // Responsive breakpoints (matching theme.ts breakpoints)
