@@ -184,6 +184,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               color: theme.palette.themePrimary,
               fontSize: '1.5rem',
               fontWeight: theme.typography.fontWeights.bold,
+              fontFamily: theme.typography.fonts.h2.fontFamily,
             }}
           >
             Fluxline

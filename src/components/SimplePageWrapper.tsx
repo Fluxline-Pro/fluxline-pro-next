@@ -246,7 +246,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
                       margin: 0,
                       fontSize: theme.fonts.xLarge.fontSize,
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
-                      fontFamily: theme.fonts.xLarge.fontFamily,
+                      fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                     }}
                   >
                     {config.imageText}
@@ -324,7 +324,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
                       margin: 0,
                       fontSize: theme.fonts.xLarge.fontSize,
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
-                      fontFamily: theme.fonts.xLarge.fontFamily,
+                      fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                     }}
                   >
                     {config.imageText}
