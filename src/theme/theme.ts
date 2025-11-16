@@ -364,7 +364,7 @@ export const typography = {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.25rem, 0.5cqi, 0.25rem)',
-      fontWeight: '500' as '500', // Inter Medium
+      fontWeight: '500' as const, // Inter Medium
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
       lineHeight: '1.6',
     },
@@ -896,7 +896,8 @@ export const lightTheme: IExtendedTheme = createExtendedTheme(
     semanticColors: {
       // Body and Background – Clean light aesthetic
       bodyText: '#2E2E2E',
-      bodyBackground: '#FFFFFF',
+      bodyBackground:
+        'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
 
       // State Colors – Emotional clarity
       errorText: '#B0303C', // Refined red
@@ -963,7 +964,8 @@ export const darkTheme: IExtendedTheme = createExtendedTheme(
     semanticColors: {
       // Body and Background – Fluxline Pro dark aesthetic
       bodyText: '#FFFFFF',
-      bodyBackground: '#010101',
+      bodyBackground:
+        'radial-gradient(ellipse at left, #2E2E3A 0%, #1A1A1A 40%, #010101 100%)',
 
       // State Colors – Emotional clarity
       errorText: '#B0303C', // Somatic rose – soft red
@@ -1027,7 +1029,8 @@ export const highContrastTheme: IExtendedTheme = createExtendedTheme(
     },
     semanticColors: {
       bodyText: '#F8F8F8',
-      bodyBackground: '#121212',
+      bodyBackground:
+        'radial-gradient(ellipse at left, #2A2A2A 0%, #1A1A1A 40%, #121212 100%)',
       errorText: '#FF0000',
       errorBackground: '#FF0000',
       successText: '#00FF00',
@@ -1124,7 +1127,8 @@ export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
     },
     semanticColors: {
       bodyText: '#333333',
-      bodyBackground: '#ffffff',
+      bodyBackground:
+        'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
       errorText: '#B34C4C', // Dark teal for error states
       errorBackground: '#FDE7E7', // Light red background
       successText: '#1B5E20', // Dark green for success states
@@ -1223,7 +1227,8 @@ export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
     },
     semanticColors: {
       bodyText: '#333333',
-      bodyBackground: '#ffffff',
+      bodyBackground:
+        'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
       errorText: '#E81123',
       errorBackground: '#FDE7E7',
       successText: '#4894FE',
@@ -1322,7 +1327,8 @@ export const tritanopiaTheme: IExtendedTheme = createExtendedTheme(
     },
     semanticColors: {
       bodyText: '#333333',
-      bodyBackground: '#ffffff',
+      bodyBackground:
+        'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
       errorText: '#FF8C00', // Orange for error states
       errorBackground: '#FFF3E0', // Light orange background
       successText: '#107C10', // Green for success states
@@ -1408,7 +1414,8 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
     },
     semanticColors: {
       bodyText: '#000000',
-      bodyBackground: '#FFFFFF',
+      bodyBackground:
+        'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
       errorText: '#888888', // Dark red in grayscale
       errorBackground: '#999999',
       successText: '#1A1A1A', // Dark gray for success
@@ -1507,7 +1514,8 @@ export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
     },
     semanticColors: {
       bodyText: '#ffffff',
-      bodyBackground: '#1a1a1a',
+      bodyBackground:
+        'radial-gradient(ellipse at left, #2A2A2A 0%, #1A1A1A 40%, #121212 100%)',
       errorText: '#bbbbbb', // Light gray for error
       errorBackground: '#222222',
       successText: '#f0f0f0', // Light gray for success
@@ -1781,10 +1789,22 @@ export const applyThemeToDocument = (themeMode: ThemeMode) => {
   });
 
   // Apply animation variables
-  root.style.setProperty('--theme-animation-duration-fast', theme.animations.durations.fast);
-  root.style.setProperty('--theme-animation-duration-normal', theme.animations.durations.normal);
-  root.style.setProperty('--theme-animation-duration-slow', theme.animations.durations.slow);
-  root.style.setProperty('--theme-animation-easing-primary', theme.animations.easing.primary);
+  root.style.setProperty(
+    '--theme-animation-duration-fast',
+    theme.animations.durations.fast
+  );
+  root.style.setProperty(
+    '--theme-animation-duration-normal',
+    theme.animations.durations.normal
+  );
+  root.style.setProperty(
+    '--theme-animation-duration-slow',
+    theme.animations.durations.slow
+  );
+  root.style.setProperty(
+    '--theme-animation-easing-primary',
+    theme.animations.easing.primary
+  );
 
   // Apply shadow variables
   root.style.setProperty('--theme-shadow-s', theme.shadows.s);

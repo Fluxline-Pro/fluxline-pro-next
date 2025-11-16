@@ -37,6 +37,14 @@ export interface UnifiedCardProps {
   isViewportLeftPanel?: boolean;
   // Flag to skip dark mode filter (useful for dark logos)
   skipDarkModeFilter?: boolean;
+  // Callback for image dimensions (for container adaptation)
+  onImageDimensionsChange?: (
+    dimensions: {
+      width: number;
+      height: number;
+      aspectRatio: number;
+    } | null
+  ) => void;
 }
 
 /**
@@ -68,6 +76,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   contentContainerStyle,
   isViewportLeftPanel = false,
   skipDarkModeFilter = false,
+  onImageDimensionsChange,
 }) => {
   const { theme } = useAppTheme();
   // const isMobile = useIsMobile(); -- commented out for now due to not used yet
@@ -94,6 +103,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       setImageLoaded(false);
       setImageDimensions(null);
       setIsLandscape(false);
+      // Clear dimensions in parent container
+      onImageDimensionsChange?.(null);
 
       const img = new window.Image();
       img.onload = () => {
@@ -103,11 +114,16 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         const aspectRatio = naturalWidth / naturalHeight;
 
         // Store image dimensions for container sizing
-        setImageDimensions({
+        const dimensions = {
           width: naturalWidth,
           height: naturalHeight,
           aspectRatio: aspectRatio,
-        });
+        };
+
+        setImageDimensions(dimensions);
+
+        // Notify parent container of dimensions change
+        onImageDimensionsChange?.(dimensions);
 
         // Mark image as loaded first
         setImageLoaded(true);
@@ -131,6 +147,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         // Still mark as loaded on error to prevent infinite loading state
         setImageLoaded(true);
         setImageDimensions(null);
+        // Notify parent container that dimensions are cleared
+        onImageDimensionsChange?.(null);
       };
 
       // Start loading the image
@@ -198,8 +216,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               </div>
             )}
 
-            {/* Image - Using standard img tag instead of next/image for better control over 
-              CSS filters, aspect ratio animations, and dark mode transformations */}
+            {/* Image - Using Next.js Image component with fill prop for responsive behavior */}
             <div
               style={{
                 position: 'relative',
@@ -213,9 +230,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               <Image
                 src={imageUrl}
                 alt={altText || imageAlt || title}
+                fill
                 style={{
-                  width: '100%',
-                  height: '100%',
                   objectFit: 'cover',
                   filter: filter,
                   opacity: imageLoaded ? 1 : 0,
@@ -242,9 +258,9 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 <h2
                   style={{
                     margin: 0,
-                    fontSize: theme.fonts.xLarge.fontSize,
-                    fontWeight: theme.fonts.xLarge.fontWeight as number,
-                    fontFamily: theme.fonts.xLarge.fontFamily,
+                    fontSize: theme.typography.fonts.xLarge.fontSize,
+                    fontWeight: theme.typography.fonts.xLarge.fontWeight,
+                    fontFamily: `${theme.typography.fonts.xLarge.fontFamily} !important`,
                   }}
                 >
                   {imageText}
@@ -277,6 +293,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 margin: `0 0 ${theme.spacing.s} 0`,
                 fontSize: theme.fonts.large.fontSize,
                 fontWeight: theme.fonts.large.fontWeight as number,
+                fontFamily: `${theme.fonts.large.fontFamily} !important`,
                 color: theme.palette.neutralPrimary,
               }}
             >
@@ -288,6 +305,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               style={{
                 margin: 0,
                 fontSize: theme.fonts.medium.fontSize,
+                fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                 color: theme.palette.neutralSecondary,
               }}
             >
@@ -308,12 +326,9 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               <Image
                 src={imageUrl}
                 alt={altText || imageAlt || title}
+                fill
+                sizes='(max-width: 768px) 100vw, 50vw'
                 style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
                   objectFit: 'cover',
                 }}
               />
