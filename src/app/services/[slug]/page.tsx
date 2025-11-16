@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * Service Detail Page
  * Dynamic route for individual service pages
@@ -32,15 +30,15 @@ const ServiceDetailHero: React.FC<{ service: ServiceCategory }> = ({
   const { theme } = useAppTheme();
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-4">
+    <div className='space-y-6'>
+      <div className='flex items-center gap-4'>
         <FluentIcon
           iconName={service.icon}
-          size="xLarge"
+          size='xLarge'
           color={theme.palette.themePrimary}
         />
         <Typography
-          variant="h1"
+          variant='h1'
           style={{
             color: theme.palette.themePrimary,
             fontSize: 'clamp(2rem, 5vw, 3.5rem)',
@@ -52,7 +50,7 @@ const ServiceDetailHero: React.FC<{ service: ServiceCategory }> = ({
       </div>
 
       <Typography
-        variant="p"
+        variant='p'
         style={{
           color: theme.palette.neutralSecondary,
           fontSize: '1.25rem',
@@ -153,9 +151,9 @@ const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
   if (features.length === 0) return null;
 
   return (
-    <div className="space-y-4">
+    <div className='space-y-4'>
       <Typography
-        variant="h2"
+        variant='h2'
         style={{
           color: theme.palette.themePrimary,
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
@@ -165,7 +163,7 @@ const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
         What We Offer
       </Typography>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className='grid gap-4 md:grid-cols-2'>
         {features.map((feature, index) => (
           <div
             key={index}
@@ -179,12 +177,12 @@ const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
             }}
           >
             <FluentIcon
-              iconName="CheckMark"
-              size="medium"
+              iconName='CheckMark'
+              size='medium'
               color={theme.palette.themeTertiary}
             />
             <Typography
-              variant="p"
+              variant='p'
               style={{
                 color: theme.palette.neutralSecondary,
                 fontSize: '1rem',
@@ -217,9 +215,9 @@ const RelatedServices: React.FC<{ currentServiceId: string }> = ({
   if (relatedServices.length === 0) return null;
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       <Typography
-        variant="h2"
+        variant='h2'
         style={{
           color: theme.palette.themePrimary,
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
@@ -229,7 +227,7 @@ const RelatedServices: React.FC<{ currentServiceId: string }> = ({
         Related Services
       </Typography>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className='grid gap-4 md:grid-cols-3'>
         {relatedServices.map((service) => (
           <Link
             key={service.id}
@@ -255,12 +253,12 @@ const RelatedServices: React.FC<{ currentServiceId: string }> = ({
           >
             <FluentIcon
               iconName={service.icon}
-              size="large"
+              size='large'
               color={theme.palette.themePrimary}
               style={{ marginBottom: '1rem' }}
             />
             <Typography
-              variant="h3"
+              variant='h3'
               style={{
                 color: theme.palette.themePrimary,
                 fontSize: '1.25rem',
@@ -271,7 +269,7 @@ const RelatedServices: React.FC<{ currentServiceId: string }> = ({
               {service.title}
             </Typography>
             <Typography
-              variant="p"
+              variant='p'
               style={{
                 color: theme.palette.neutralSecondary,
                 fontSize: '0.875rem',
@@ -305,7 +303,7 @@ const ServiceCTA: React.FC = () => {
       }}
     >
       <Typography
-        variant="h3"
+        variant='h3'
         style={{
           color: theme.palette.themePrimary,
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
@@ -316,7 +314,7 @@ const ServiceCTA: React.FC = () => {
         Ready to Begin?
       </Typography>
       <Typography
-        variant="p"
+        variant='p'
         style={{
           color: theme.palette.neutralSecondary,
           fontSize: '1.125rem',
@@ -328,7 +326,7 @@ const ServiceCTA: React.FC = () => {
         vision with reality.
       </Typography>
       <Link
-        href="/contact"
+        href='/contact'
         style={{
           display: 'inline-block',
           padding: '0.75rem 2rem',
@@ -360,7 +358,7 @@ export default async function ServiceDetailPage({
   params,
 }: ServiceDetailPageProps) {
   const { slug } = await params;
-  
+
   // Find the service by slug
   const service = SERVICE_CATEGORIES.find((s) => {
     // Extract slug from path (e.g., /services/consulting -> consulting)
@@ -375,7 +373,7 @@ export default async function ServiceDetailPage({
 
   return (
     <SimplePageWrapper>
-      <div className="space-y-12">
+      <div className='space-y-12'>
         {/* Breadcrumb */}
         <Breadcrumb />
 
