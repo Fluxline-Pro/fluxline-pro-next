@@ -14,6 +14,7 @@ import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 import { NavigationMenu } from './navigation-menu';
 import { NavigationButton } from './navigation-button';
 import { FluentIcon } from '@/theme/components/fluent-icon';
+import { SettingsPanel } from '@/theme/components/settings-panel';
 
 interface HeaderProps {
   className?: string;
@@ -314,15 +315,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   <NavigationMenu onClose={handleModalClose} />
                 )}
                 {activeModal === 'settings' && (
-                  <div
-                    style={{
-                      padding: '2rem',
-                      color: theme.palette.neutralPrimary,
-                    }}
-                  >
-                    <h2>Settings</h2>
-                    <p>Settings content will be added here</p>
-                  </div>
+                  <SettingsPanel onClose={handleModalClose} />
                 )}
               </div>
             </motion.div>
