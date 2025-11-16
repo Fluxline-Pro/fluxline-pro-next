@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Icon, initializeIcons } from '@fluentui/react';
-import { mergeStyles, IStyle } from '@fluentui/merge-styles';
+import { IStyle } from '@fluentui/merge-styles';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 // Initialize Fluent UI icons on component load
@@ -78,7 +78,8 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
 
   const iconColor = color || getVariantColor();
 
-  const iconStyles: IStyle = {
+  // Use inline styles to avoid hydration mismatch from mergeStyles
+  const combinedStyle: React.CSSProperties = {
     width: sizeMap[size],
     height: sizeMap[size],
     fontSize: sizeMap[size],
@@ -86,11 +87,10 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    ...(typeof style === 'object' && style ? style : {}),
+    ...(typeof style === 'object' && style
+      ? (style as React.CSSProperties)
+      : {}),
   };
-
-  // mergeStyles from Fluent UI should work consistently on both server and client
-  const mergedClassName = mergeStyles(iconStyles, className);
 
   // If iconName is a custom SVG component
   if (typeof iconName === 'function') {
@@ -98,11 +98,12 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
     return (
       <CustomIcon
         isDarkMode={isDarkMode}
-        className={mergedClassName}
+        className={className}
         style={{
           width: sizeMap[size],
           height: sizeMap[size],
           color: iconColor,
+          ...combinedStyle,
         }}
       />
     );
@@ -112,10 +113,16 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
   return (
     <Icon
       iconName={iconName as string}
-      className={mergedClassName}
+      className={className}
       styles={{
         root: {
           color: `${iconColor} !important`,
+          width: sizeMap[size],
+          height: sizeMap[size],
+          fontSize: sizeMap[size],
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           '& i': {
             color: `${iconColor} !important`,
           },
@@ -127,12 +134,7 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
           },
         },
       }}
-      style={{
-        color: iconColor,
-        width: sizeMap[size],
-        height: sizeMap[size],
-        fontSize: sizeMap[size],
-      }}
+      style={combinedStyle}
     />
   );
 };

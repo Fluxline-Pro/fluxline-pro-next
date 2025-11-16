@@ -212,6 +212,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
                 src={imageToDisplay}
                 alt={config.imageText}
                 fill
+                sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px'
                 style={{
                   objectFit: 'cover',
                 }}
@@ -289,6 +290,7 @@ export const SimplePageWrapper: React.FC<SimplePageWrapperProps> = ({
                 src={imageToDisplay}
                 alt={config.imageText}
                 fill
+                sizes='(max-width: 768px) 100vw, 400px'
                 style={{
                   objectFit: 'cover',
                 }}
