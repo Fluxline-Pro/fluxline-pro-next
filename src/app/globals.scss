@@ -11,7 +11,10 @@
 
 // Root CSS Custom Properties - Fluxline Pro Theme Variables
 :root {
-  --background: var(--theme-semantic-bodyBackground);
+  --background: var(
+    --theme-gradient-background,
+    var(--theme-semantic-bodyBackground)
+  );
   --foreground: var(--theme-semantic-bodyText);
   --font-inter: var(--theme-fonts-family);
   --font-mono: var(--theme-fonts-mono);
@@ -60,6 +63,10 @@ body {
 
 body {
   background: var(--background);
+  background-attachment: fixed;
+  background-size: 100dvw 100dvh;
+  background-repeat: no-repeat;
+  background-position: center;
   color: var(--foreground);
   font-family:
     'Inter Variable',
@@ -76,14 +83,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   @include theme.theme-transition;
 
+  /* Override Fluent UI injected background divs for all pages */
+  > div[class*='body-'] {
+    background: transparent !important;
+  }
+
   /* Make background transparent on home page to show BackgroundLayer */
   &.home-page {
     background: transparent;
-
-    /* Override Fluent UI injected background divs */
-    > div[class*='body-'] {
-      background: transparent !important;
-    }
   }
 }
 

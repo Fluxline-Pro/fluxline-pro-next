@@ -104,6 +104,14 @@
   --theme-animation-duration-normal: 300ms;
   --theme-animation-duration-slow: 400ms;
   --theme-animation-easing-primary: cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Gradient Backgrounds
+  --theme-gradient-background: radial-gradient(
+    ellipse at left,
+    #f8fafc 0%,
+    #f5f5f5 40%,
+    #f0f0f0 100%
+  );
 }
 
 // Dark Theme Variables - Fluxline Pro Default
@@ -139,7 +147,12 @@
 
   // Semantic Colors - Dark Mode
   --theme-semantic-bodyText: #ffffff;
-  --theme-semantic-bodyBackground: radial-gradient(ellipse at left, #2E2E3A 0%, #1A1A1A 40%, #010101 100%);
+  --theme-semantic-bodyBackground: radial-gradient(
+    ellipse at left,
+    #2e2e3a 0%,
+    #1a1a1a 40%,
+    #010101 100%
+  );
   --theme-semantic-errorText: #b0303c;
   --theme-semantic-errorBackground: #2d1617;
   --theme-semantic-successText: #4a9b96;
@@ -149,6 +162,14 @@
   --theme-semantic-warningBackground: #2d2a17;
   --theme-semantic-link: #274770;
   --theme-semantic-linkHovered: #5a7ca0;
+
+  // Gradient Backgrounds - Dark Mode
+  --theme-gradient-background: radial-gradient(
+    ellipse at left,
+    #2e2e3a 0%,
+    #1a1a1a 40%,
+    #010101 100%
+  );
 }
 
 // SCSS Mixins for common theme patterns
