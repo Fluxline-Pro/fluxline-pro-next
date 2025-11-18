@@ -70,7 +70,7 @@ precision for modern business transformation," said the Fluxline Resonance Group
     imageUrl: undefined,
     imageAlt: 'Accessibility Certification',
     imageText: 'Accessibility Excellence',
-    date: new Date('2025-12-10T00:00:00Z'),
+    date: new Date('2025-01-20T00:00:00Z'),
     category: 'Achievement',
     glyphTag: '🜄', // Integration phase
     emotionalCue: 'Integration',
