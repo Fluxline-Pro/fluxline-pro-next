@@ -160,7 +160,10 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
         gridAutoRows: config.gridAutoRows,
         alignItems: config.alignItems,
         gap: config.gap,
-        width: '100%',
+        width: 'auto',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        padding: isMobile ? '0.5rem 0' : '1rem',
         transition: theme.animations.transitions.card,
       }}
     >

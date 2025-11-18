@@ -132,7 +132,8 @@ export default function PressReleasePage() {
     <PageWrapper>
       <div
         style={{
-          padding: theme.spacing.xl,
+          padding:
+            orientation === 'portrait' ? theme.spacing.m : theme.spacing.xl,
           width: '100%',
         }}
       >
@@ -159,7 +160,11 @@ export default function PressReleasePage() {
               Press Release
             </Typography>
             {/* View Selector Dropdown */}
-            <div style={{ minWidth: '200px' }}>
+            <div
+              style={{
+                minWidth: orientation === 'portrait' ? '150px' : '200px',
+              }}
+            >
               <Dropdown
                 placeholder='Select view type'
                 options={viewOptions}
@@ -171,7 +176,7 @@ export default function PressReleasePage() {
                 }}
                 styles={{
                   root: {
-                    minWidth: '200px',
+                    minWidth: orientation === 'portrait' ? '150px' : '200px',
                   },
                   dropdown: {
                     backgroundColor: theme.palette.neutralLighter,

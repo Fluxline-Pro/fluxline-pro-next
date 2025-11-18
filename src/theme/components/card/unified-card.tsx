@@ -390,6 +390,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           padding='medium'
           hoverable={!!onClick}
           onClick={onClick}
+          style={{ width: 'auto', maxWidth: '100%', boxSizing: 'border-box' }}
         >
           <div
             style={{
@@ -397,6 +398,9 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               alignItems: 'center',
               gap: theme.spacing.m,
               minHeight: '80px',
+              width: 'auto',
+              maxWidth: '100%',
+              overflow: 'hidden',
             }}
           >
             {imageUrl && (
@@ -421,7 +425,14 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 />
               </div>
             )}
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <div
+              style={{
+                flex: 1,
+                minWidth: 0,
+                maxWidth: '100%',
+                overflow: 'hidden',
+              }}
+            >
               <h3
                 style={{
                   margin: `0 0 ${theme.spacing.xs} 0`,
@@ -431,7 +442,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   color: theme.palette.neutralPrimary,
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
                 }}
               >
                 {title}
