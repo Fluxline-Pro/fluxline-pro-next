@@ -372,6 +372,9 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         data-card-id={id}
         style={{
           cursor: onClick ? 'pointer' : 'default',
+          width: 'auto',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
         }}
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -390,7 +393,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           padding='medium'
           hoverable={!!onClick}
           onClick={onClick}
-          style={{ width: 'auto', maxWidth: '100%', boxSizing: 'border-box' }}
         >
           <div
             style={{
