@@ -6,13 +6,13 @@
  */
 
 import React from 'react';
+
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FacebookIcon } from '@/assets/svgs/FacebookLogo';
 import { InstagramIcon } from '@/assets/svgs/InstagramLogo';
 import { LinkedInIcon } from '@/assets/svgs/LinkedInLogo';
 import { ThreadsIcon } from '@/assets/svgs/ThreadsLogo';
 import { YouTubeLogo } from '@/assets/svgs/YouTubeLogo';
-import { MicrosoftLogo } from '@/assets/svgs/MicrosoftLogo';
 
 interface SocialLink {
   name: string;
@@ -24,16 +24,17 @@ interface SocialLink {
   ariaLabel: string;
 }
 
+// Social links are correct as of November 2025
 const SOCIAL_LINKS: SocialLink[] = [
   {
     name: 'Facebook',
-    url: 'https://facebook.com/fluxlinepro',
+    url: 'https://facebook.com/fluxline',
     icon: FacebookIcon,
     ariaLabel: 'Visit our Facebook page',
   },
   {
     name: 'Threads',
-    url: 'https://threads.net/@fluxlinepro',
+    url: 'https://threads.net/@fluxlineco',
     icon: ThreadsIcon,
     ariaLabel: 'Follow us on Threads',
   },
@@ -55,16 +56,10 @@ const SOCIAL_LINKS: SocialLink[] = [
     icon: LinkedInIcon,
     ariaLabel: 'Connect with us on LinkedIn',
   },
-  {
-    name: 'Microsoft',
-    url: 'mailto:support@fluxline.pro',
-    icon: MicrosoftLogo,
-    ariaLabel: 'Email us at support@fluxline.pro',
-  },
 ];
 
 export const SocialLinks: React.FC = () => {
-  const { theme, themeMode } = useAppTheme();
+  const { theme } = useAppTheme();
   const [hoveredIcon, setHoveredIcon] = React.useState<string | null>(null);
 
   return (
@@ -134,7 +129,7 @@ export const SocialLinks: React.FC = () => {
                 paddingTop: '0',
               }}
             >
-              {social.name === 'Microsoft' ? 'Email' : social.name}
+              {social.name}
             </div>
           </div>
         );

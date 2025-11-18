@@ -421,6 +421,8 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 style={{
                   position: 'absolute',
                   top: '1rem',
+                  // isLeftHanded mode or the active modal is settings which always has
+                  // its close button on the right side
                   [isLeftHanded || activeModal === 'settings'
                     ? 'right'
                     : 'left']: '1rem',

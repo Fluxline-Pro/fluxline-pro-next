@@ -35,13 +35,15 @@ function validateEmail(email: string): boolean {
 }
 
 function sanitizeInput(input: string): string {
-  // Remove any potentially harmful characters
+  // Remove any potentially harmful characters- temp solution for now
+  // before we implement a proper sanitization library
   return input.replace(/[<>]/g, '');
 }
 
 export async function POST(request: NextRequest) {
   try {
     // Get client IP for rate limiting
+    // Implementing a more robust solution come backend infrastructure
     const ip = request.headers.get('x-forwarded-for') || 'unknown';
 
     // Check rate limit

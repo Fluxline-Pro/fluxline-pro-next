@@ -34,6 +34,8 @@ export const ContactForm: React.FC = () => {
   const [charCount, setCharCount] = useState(0);
 
   const validateEmail = (email: string): boolean => {
+    // Simple email regex for validation
+    // will be more robust after backend infrastructure build
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -343,6 +345,7 @@ export const ContactForm: React.FC = () => {
       {status === 'success' && (
         <div
           role='alert'
+          aria-live='polite'
           style={{
             padding: theme.spacing.m,
             backgroundColor:
@@ -358,10 +361,11 @@ export const ContactForm: React.FC = () => {
         </div>
       )}
 
-      {/* Error Message */}
+    {/* Error Message */}
       {errors.submit && (
         <div
           role='alert'
+          aria-live='polite'
           style={{
             padding: theme.spacing.m,
             backgroundColor: theme.semanticColors.errorBackground || '#FFEBEE',

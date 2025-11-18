@@ -8,7 +8,6 @@
 import React from 'react';
 import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
-import { Button } from '@/theme/components/button';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { ContactForm } from './components/ContactForm';
 
