@@ -1,13 +1,13 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 
 import { useAppTheme } from '../../hooks/useAppTheme';
 // import { useIsMobile, useDeviceOrientation } from '../../hooks/useMediaQuery';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 // import useIsTextColorLight from '../../hooks/useIsTextColorLight';
-import { FadeIn } from '../../../animations/fade-animations';
 import { Card } from '../card/card';
 import Image from 'next/image';
 
@@ -182,7 +182,21 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
     };
 
     return (
-      <FadeIn delay={delay}>
+      <motion.div
+        data-card-id={id}
+        initial={{ y: 0, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        whileHover={{
+          y: -4,
+          transition: { duration: 0.2, ease: 'easeOut' },
+        }}
+        transition={{
+          delay: delay / 1000, // Convert ms to seconds
+          duration: 0.15,
+          ease: 'easeOut',
+        }}
+        style={{ cursor: onClick ? 'pointer' : 'default' }}
+      >
         <div style={containerStyles}>
           <Card
             elevation={elevationLevel}
@@ -269,11 +283,274 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             )}
           </Card>
         </div>
-      </FadeIn>
+      </motion.div>
     );
   }
 
-  // For other view types (grid, small, large), render basic card
+  // For grid view type, render image card with title overlay
+  if (viewType === 'grid' && imageUrl) {
+    return (
+      <motion.div
+        data-card-id={id}
+        initial={{ y: 0 }}
+        whileHover={{
+          y: -4,
+          transition: { duration: 0.2, ease: 'easeOut' },
+        }}
+        style={{ cursor: onClick ? 'pointer' : 'default' }}
+      >
+        <Card
+          elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+          padding='none'
+          hoverable={!!onClick}
+          onClick={onClick}
+        >
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+              paddingBottom: '60%', // 5:3 aspect ratio for grid cards
+              overflow: 'hidden',
+            }}
+          >
+            <Image
+              src={imageUrl}
+              alt={altText || imageAlt || title}
+              fill
+              style={{
+                objectFit: 'cover',
+                filter: filter,
+              }}
+            />
+
+            {/* Title and date overlay */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                padding: theme.spacing.m,
+                background: `linear-gradient(to top, ${theme.palette.black}CC, transparent)`,
+                color: theme.palette.white,
+              }}
+            >
+              <h3
+                style={{
+                  margin: `0 0 ${theme.spacing.xs} 0`,
+                  fontSize: theme.fonts.large.fontSize,
+                  fontWeight: theme.fonts.large.fontWeight as number,
+                  fontFamily: `${theme.fonts.large.fontFamily} !important`,
+                  lineHeight: 1.2,
+                }}
+              >
+                {title}
+              </h3>
+              {imageText && (
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: theme.fonts.small.fontSize,
+                    fontFamily: `${theme.fonts.small.fontFamily} !important`,
+                    opacity: 0.9,
+                  }}
+                >
+                  {imageText}
+                </p>
+              )}
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+    );
+  }
+
+  // For small tile view - compact horizontal layout
+  if (viewType === 'small') {
+    return (
+      <motion.div
+        data-card-id={id}
+        style={{
+          cursor: onClick ? 'pointer' : 'default',
+        }}
+        initial={{ y: 0, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        whileHover={{
+          y: -2,
+          transition: { duration: 0.2, ease: 'easeOut' },
+        }}
+        transition={{
+          delay: delay / 1000, // Convert ms to seconds
+          duration: 0.15,
+          ease: 'easeOut',
+        }}
+      >
+        <Card
+          elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+          padding='medium'
+          hoverable={!!onClick}
+          onClick={onClick}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: theme.spacing.m,
+              minHeight: '80px',
+            }}
+          >
+            {imageUrl && (
+              <div
+                style={{
+                  position: 'relative',
+                  width: '80px',
+                  height: '80px',
+                  flexShrink: 0,
+                  borderRadius: theme.effects.roundedCorner4,
+                  overflow: 'hidden',
+                }}
+              >
+                <Image
+                  src={imageUrl}
+                  alt={altText || imageAlt || title}
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                    filter: filter,
+                  }}
+                />
+              </div>
+            )}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <h3
+                style={{
+                  margin: `0 0 ${theme.spacing.xs} 0`,
+                  fontSize: theme.fonts.large.fontSize,
+                  fontWeight: theme.fonts.large.fontWeight as number,
+                  fontFamily: `${theme.fonts.large.fontFamily} !important`,
+                  color: theme.palette.neutralPrimary,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {title}
+              </h3>
+              {imageText && (
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: theme.fonts.medium.fontSize,
+                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                    color: theme.palette.neutralSecondary,
+                  }}
+                >
+                  {imageText}
+                </p>
+              )}
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+    );
+  }
+
+  // For large tile view - full content layout
+  if (viewType === 'large') {
+    return (
+      <motion.div
+        data-card-id={id}
+        style={{
+          cursor: onClick ? 'pointer' : 'default',
+        }}
+        initial={{ y: 0, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        whileHover={{
+          y: -3,
+          transition: { duration: 0.2, ease: 'easeOut' },
+        }}
+        transition={{
+          delay: delay / 1000, // Convert ms to seconds
+          duration: 0.15,
+          ease: 'easeOut',
+        }}
+      >
+        <Card
+          elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+          padding='large'
+          hoverable={!!onClick}
+          onClick={onClick}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {imageUrl && (
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  paddingBottom: '40%', // 5:2 aspect ratio for large tiles
+                  marginBottom: theme.spacing.m,
+                  borderRadius: theme.effects.roundedCorner4,
+                  overflow: 'hidden',
+                }}
+              >
+                <Image
+                  src={imageUrl}
+                  alt={altText || imageAlt || title}
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                    filter: filter,
+                  }}
+                />
+              </div>
+            )}
+            <div>
+              <h3
+                style={{
+                  margin: `0 0 ${theme.spacing.s} 0`,
+                  fontSize: theme.fonts.xLarge.fontSize,
+                  fontWeight: theme.fonts.xLarge.fontWeight as number,
+                  fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
+                  color: theme.palette.neutralPrimary,
+                  lineHeight: 1.3,
+                }}
+              >
+                {title}
+              </h3>
+              {description && (
+                <p
+                  style={{
+                    margin: `0 0 ${theme.spacing.s} 0`,
+                    fontSize: theme.fonts.medium.fontSize,
+                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                    color: theme.palette.neutralSecondary,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {description}
+                </p>
+              )}
+              {imageText && (
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: theme.fonts.medium.fontSize,
+                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                    color: theme.palette.themePrimary,
+                    fontWeight: 500,
+                  }}
+                >
+                  {imageText}
+                </p>
+              )}
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+    );
+  }
+
+  // Fallback for other view types
   const contentWrapperStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -282,14 +559,38 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   };
 
   return (
-    <div style={contentWrapperStyle}>
+    <motion.div
+      data-card-id={id}
+      style={{
+        ...contentWrapperStyle,
+        cursor: onClick ? 'pointer' : 'default',
+      }}
+      initial={{ y: 0, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      whileHover={{
+        y: -2,
+        transition: { duration: 0.2, ease: 'easeOut' },
+      }}
+      transition={{
+        delay: delay / 1000, // Convert ms to seconds
+        duration: 0.15,
+        ease: 'easeOut',
+      }}
+    >
       <Card
         elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
         padding='medium'
         hoverable={!!onClick}
         onClick={onClick}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            cursor: onClick ? 'pointer' : 'default',
+          }}
+        >
           {title && (
             <h3
               style={{
@@ -323,7 +624,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 width: '100%',
                 paddingBottom: '56.25%', // 16:9 aspect ratio
                 overflow: 'hidden',
-                borderRadius: theme.borderRadius.s,
+                borderRadius: theme.effects.roundedCorner4,
               }}
             >
               <Image
@@ -339,7 +640,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           )}
         </div>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 

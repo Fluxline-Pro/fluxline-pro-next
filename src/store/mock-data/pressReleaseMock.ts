@@ -62,7 +62,7 @@ precision for modern business transformation," said the Fluxline Resonance Group
     `,
   },
   {
-    id: 'accessibility-certification-2024',
+    id: 'accessibility-certification-2025',
     title: 'Fluxline Pro Achieves WCAG 2.1 AA Accessibility Certification',
     subtitle: 'Commitment to Inclusive Digital Experiences',
     description:
@@ -70,7 +70,7 @@ precision for modern business transformation," said the Fluxline Resonance Group
     imageUrl: undefined,
     imageAlt: 'Accessibility Certification',
     imageText: 'Accessibility Excellence',
-    date: new Date('2024-12-10T00:00:00Z'),
+    date: new Date('2025-12-10T00:00:00Z'),
     category: 'Achievement',
     glyphTag: '🜄', // Integration phase
     emotionalCue: 'Integration',
@@ -94,7 +94,7 @@ services.
     `,
   },
   {
-    id: 'azure-partnership-2024',
+    id: 'azure-partnership-2025',
     title: 'Strategic Partnership with Microsoft Azure Announced',
     subtitle: 'Enhanced Cloud Infrastructure for Enterprise Clients',
     description:
@@ -102,7 +102,7 @@ services.
     imageUrl: undefined,
     imageAlt: 'Azure Partnership',
     imageText: 'Azure Partnership',
-    date: new Date('2024-11-20T00:00:00Z'),
+    date: new Date('2025-11-20T00:00:00Z'),
     category: 'Partnership',
     glyphTag: '🜄', // Integration phase
     emotionalCue: 'Integration',
@@ -125,7 +125,7 @@ infrastructure allows us to serve our clients better and scale efficiently."
     `,
   },
   {
-    id: 'design-system-release-2024',
+    id: 'design-system-release-2025',
     title: 'Fluxline Design System 1.0 Released',
     subtitle: 'Comprehensive Component Library for Modern Web Development',
     description:
@@ -133,7 +133,7 @@ infrastructure allows us to serve our clients better and scale efficiently."
     imageUrl: undefined,
     imageAlt: 'Design System Release',
     imageText: 'Design System v1.0',
-    date: new Date('2024-10-05T00:00:00Z'),
+    date: new Date('2025-10-05T00:00:00Z'),
     category: 'Product Release',
     glyphTag: '🜂', // Ignition phase
     emotionalCue: 'Breakthrough',
@@ -156,7 +156,7 @@ and beautiful web applications. Full documentation is available on our platform.
     `,
   },
   {
-    id: 'consulting-expansion-2024',
+    id: 'consulting-expansion-2025',
     title: 'Fluxline Pro Expands Consulting Services Globally',
     subtitle: 'Now Serving Clients Across North America, Europe, and Asia',
     description:
@@ -164,7 +164,7 @@ and beautiful web applications. Full documentation is available on our platform.
     imageUrl: undefined,
     imageAlt: 'Global Expansion',
     imageText: 'Global Services',
-    date: new Date('2024-09-15T00:00:00Z'),
+    date: new Date('2025-09-15T00:00:00Z'),
     category: 'Business Expansion',
     glyphTag: '🜄', // Integration phase
     emotionalCue: 'Visibility',
@@ -187,7 +187,7 @@ digital transformation journey with strategic precision and cultural sensitivity
     `,
   },
   {
-    id: 'resonance-core-launch-2024',
+    id: 'resonance-core-launch-2025',
     title: 'Resonance Core Life Coaching Program Launched',
     subtitle: 'Holistic Personal Development for Business Leaders',
     description:
@@ -195,7 +195,7 @@ digital transformation journey with strategic precision and cultural sensitivity
     imageUrl: undefined,
     imageAlt: 'Resonance Core Launch',
     imageText: 'Resonance Core',
-    date: new Date('2024-08-01T00:00:00Z'),
+    date: new Date('2025-08-01T00:00:00Z'),
     category: 'Service Launch',
     glyphTag: '🜂', // Ignition phase
     emotionalCue: 'Integration',

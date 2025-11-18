@@ -7,14 +7,16 @@ import { Typography } from '@/theme/components/typography';
 import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
-import { usePressReleaseApi } from '@/hooks/usePressReleaseApi';
+import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
+import { Dropdown } from '@fluentui/react';
 import { format } from 'date-fns';
+import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
 
 /**
  * Press Release Page Component
  * Displays press releases in a card grid layout
  * Mirrors the design logic from Blog and Portfolio views
- * 
+ *
  * Features:
  * - Responsive card grid layout
  * - Theme-aware styling with Fluent UI
@@ -25,10 +27,50 @@ import { format } from 'date-fns';
 export default function PressReleasePage() {
   const router = useRouter();
   const { theme } = useAppTheme();
-  const { viewType } = useContentFilterStore();
-  
-  // Use the API hook for data fetching
-  const { pressReleases, isLoading, error } = usePressReleaseApi();
+  const { viewType, setViewType } = useContentFilterStore();
+  const orientation = useDeviceOrientation();
+
+  // Use direct import of mock data (sorted by date, newest first)
+  const pressReleases = React.useMemo(() => {
+    return [...pressReleasesMockData].sort(
+      (a, b) => b.date.getTime() - a.date.getTime()
+    );
+  }, []);
+
+  const isLoading = false;
+  const error = null;
+
+  // View type options for dropdown
+  const viewOptions = [
+    { key: 'grid', text: 'Grid View' },
+    { key: 'small-tile', text: 'Small Tile' },
+    { key: 'large-tile', text: 'Large Tile' },
+  ];
+
+  // Determine grid columns based on orientation and view type
+  const gridColumns = React.useMemo(() => {
+    // For tile views, use single column layout
+    if (viewType === 'small-tile' || viewType === 'large-tile') {
+      return 1;
+    }
+
+    // For grid view, use responsive columns
+    switch (orientation) {
+      case 'portrait': // Mobile portrait
+      case 'tablet-portrait':
+        return 1;
+      case 'mobile-landscape':
+      case 'square':
+        return 2;
+      case 'landscape':
+      case 'large-portrait':
+        return 3;
+      case 'ultrawide':
+        return 4;
+      default:
+        return 3;
+    }
+  }, [orientation, viewType]);
 
   // Map ContentViewType to AdaptiveCardGrid viewType
   const mappedViewType = React.useMemo(() => {
@@ -44,7 +86,7 @@ export default function PressReleasePage() {
 
   // Transform press releases to card format
   const cards = React.useMemo(() => {
-    return pressReleases.map((release) => ({
+    const transformedCards = pressReleases.map((release) => ({
       id: release.id,
       title: release.title,
       description: release.subtitle || release.description,
@@ -52,13 +94,34 @@ export default function PressReleasePage() {
       imageAlt: release.imageAlt || release.title,
       imageText: format(release.date, 'MMMM d, yyyy'),
     }));
-  }, [pressReleases]);
+    console.log('PressReleasePage render - state:', {
+      pressReleasesCount: pressReleases?.length || 0,
+      isLoading,
+      error,
+      orientation,
+      viewType,
+      gridColumns,
+      mappedViewType,
+    });
+    return transformedCards;
+  }, [
+    gridColumns,
+    mappedViewType,
+    isLoading,
+    error,
+    orientation,
+    pressReleases,
+    viewType,
+  ]);
 
   // Handle card click to navigate to detail view
   const handleCardClick = React.useCallback(
     (id: string) => {
+      console.log('handleCardClick called with ID:', id);
       const selectedRelease = pressReleases.find((r) => r.id === id);
+      console.log('Found release:', selectedRelease?.title);
       if (selectedRelease) {
+        console.log('Navigating to:', `/press-release/${id}`);
         router.push(`/press-release/${id}`);
       }
     },
@@ -79,17 +142,56 @@ export default function PressReleasePage() {
             marginBottom: theme.spacing.xl,
           }}
         >
-          <Typography
-            variant="h1"
+          <div
             style={{
-              marginBottom: theme.spacing.s,
-              color: theme.palette.neutralPrimary,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              marginBottom: theme.spacing.m,
             }}
           >
-            Press Release
-          </Typography>
+            <Typography
+              variant='h1'
+              style={{
+                color: theme.palette.neutralPrimary,
+              }}
+            >
+              Press Release
+            </Typography>
+            {/* View Selector Dropdown */}
+            <div style={{ minWidth: '200px' }}>
+              <Dropdown
+                placeholder='Select view type'
+                options={viewOptions}
+                selectedKey={viewType}
+                onChange={(event, option) => {
+                  if (option) {
+                    setViewType(option.key as any);
+                  }
+                }}
+                styles={{
+                  root: {
+                    minWidth: '200px',
+                  },
+                  dropdown: {
+                    backgroundColor: theme.palette.neutralLighter,
+                    border: `1px solid ${theme.palette.neutralLight}`,
+                    borderRadius: theme.effects.roundedCorner4,
+                  },
+                  title: {
+                    backgroundColor: 'transparent',
+                    borderColor: theme.palette.neutralLight,
+                    color: theme.palette.neutralPrimary,
+                  },
+                  caretDown: {
+                    color: theme.palette.themePrimary,
+                  },
+                }}
+              />
+            </div>
+          </div>
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
               maxWidth: '800px',
@@ -111,7 +213,10 @@ export default function PressReleasePage() {
               minHeight: '400px',
             }}
           >
-            <Typography variant="h3" style={{ color: theme.palette.themePrimary }}>
+            <Typography
+              variant='h3'
+              style={{ color: theme.palette.themePrimary }}
+            >
               Loading press releases...
             </Typography>
           </div>
@@ -127,13 +232,10 @@ export default function PressReleasePage() {
               marginBottom: theme.spacing.xl,
             }}
           >
-            <Typography variant="h3" style={{ color: theme.palette.white }}>
+            <Typography variant='h3' style={{ color: theme.palette.white }}>
               Error loading press releases
             </Typography>
-            <Typography
-              variant="p"
-              style={{ color: theme.palette.white }}
-            >
+            <Typography variant='p' style={{ color: theme.palette.white }}>
               {error}
             </Typography>
           </div>
@@ -141,18 +243,23 @@ export default function PressReleasePage() {
 
         {/* Press Release Cards */}
         {!isLoading && !error && cards.length > 0 && (
-          <div onClick={(e) => {
-            const target = e.target as HTMLElement;
-            const card = target.closest('[data-card-id]');
-            if (card) {
-              const cardId = card.getAttribute('data-card-id');
-              if (cardId) {
-                handleCardClick(cardId);
+          <div
+            onClick={(e) => {
+              console.log('Click event triggered:', e.target);
+              const target = e.target as HTMLElement;
+              const card = target.closest('[data-card-id]');
+              console.log('Found card element:', card);
+              if (card) {
+                const cardId = card.getAttribute('data-card-id');
+                console.log('Card ID:', cardId);
+                if (cardId) {
+                  handleCardClick(cardId);
+                }
               }
-            }
-          }}>
+            }}
+          >
             <AdaptiveCardGrid
-              cards={cards.map(card => ({
+              cards={cards.map((card) => ({
                 ...card,
                 // Add data attribute to identify clickable cards
                 id: card.id,
@@ -160,6 +267,8 @@ export default function PressReleasePage() {
               viewType={mappedViewType}
               gap={theme.spacing.m}
               enableImageAdaptation={true}
+              gridColumns={gridColumns}
+              onCardClick={handleCardClick}
             />
           </div>
         )}
@@ -177,13 +286,13 @@ export default function PressReleasePage() {
             }}
           >
             <Typography
-              variant="h3"
+              variant='h3'
               style={{ color: theme.palette.neutralSecondary }}
             >
               No press releases found
             </Typography>
             <Typography
-              variant="p"
+              variant='p'
               style={{ color: theme.palette.neutralTertiary }}
             >
               Check back soon for updates and announcements.

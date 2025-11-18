@@ -12,7 +12,7 @@ import {
 /**
  * Custom hook for Press Release API integration
  * Currently uses mock data, prepared for future backend integration
- * 
+ *
  * Similar pattern to useBlogApi and usePortfolioApi
  */
 export const usePressReleaseApi = () => {
@@ -46,7 +46,6 @@ export const usePressReleaseApi = () => {
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to fetch press releases';
       setError(errorMessage);
-      console.error('Error fetching press releases:', err);
     } finally {
       setLoading(false);
     }

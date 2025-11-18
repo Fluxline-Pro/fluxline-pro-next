@@ -17,6 +17,8 @@ export interface AdaptiveCardGridProps {
   gap?: string;
   enableImageAdaptation?: boolean;
   className?: string;
+  gridColumns?: number;
+  onCardClick?: (id: string) => void;
 }
 
 /**
@@ -34,6 +36,8 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
   gap = '1rem',
   enableImageAdaptation = true,
   className,
+  gridColumns,
+  onCardClick,
 }) => {
   const [imageDimensions, setImageDimensions] = React.useState<{
     width: number;
@@ -63,6 +67,7 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
       imageDimensions={imageDimensions}
       adaptToImageDimensions={enableImageAdaptation}
       className={className}
+      gridColumns={gridColumns}
     >
       {cards.map((card, index) => (
         <UnifiedCard
@@ -74,8 +79,9 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
           imageAlt={card.imageAlt}
           imageText={card.imageText}
           viewType={viewType}
-          delay={index * 100} // Stagger animations
+          delay={index * 25} // Much faster stagger: 25ms per card
           showTitleOnImage={viewType === 'image'}
+          onClick={onCardClick ? () => onCardClick(card.id) : undefined}
           onImageDimensionsChange={
             enableImageAdaptation && index === 0
               ? handleImageDimensionsChange

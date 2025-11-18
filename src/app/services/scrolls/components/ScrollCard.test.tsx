@@ -11,8 +11,21 @@ import { ScrollItem } from '../types';
 
 // Mock Next.js Link component
 jest.mock('next/link', () => {
-  return ({ children, href, className, ...props }: { children: React.ReactNode; href: string; className?: string }) => {
-    return <a href={href} className={className} {...props}>{children}</a>;
+  return ({
+    children,
+    href,
+    className,
+    ...props
+  }: {
+    children: React.ReactNode;
+    href: string;
+    className?: string;
+  }) => {
+    return (
+      <a href={href} className={className} {...props}>
+        {children}
+      </a>
+    );
   };
 });
 
@@ -25,8 +38,8 @@ const mockScroll: ScrollItem = {
   pdfUrl: '/scrolls/pdfs/test.pdf',
   fileSize: '1.2 MB',
   tags: ['testing', 'example', 'mock'],
-  publishedDate: new Date('2024-01-15'),
-  lastUpdated: new Date('2024-01-15'),
+  publishedDate: new Date('2025-01-15'),
+  lastUpdated: new Date('2025-01-15'),
   seoMetadata: {
     title: 'Test Scroll - SEO Title',
     description: 'Test scroll SEO description',
@@ -52,7 +65,9 @@ describe('ScrollCard', () => {
   it('renders scroll description', () => {
     render(<ScrollCard scroll={mockScroll} />);
     expect(
-      screen.getByText('This is a test scroll description for testing purposes.')
+      screen.getByText(
+        'This is a test scroll description for testing purposes.'
+      )
     ).toBeInTheDocument();
   });
 
@@ -68,12 +83,16 @@ describe('ScrollCard', () => {
 
   it('renders download button', () => {
     render(<ScrollCard scroll={mockScroll} />);
-    expect(screen.getByRole('button', { name: /download/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /download/i })
+    ).toBeInTheDocument();
   });
 
   it('renders details button', () => {
     render(<ScrollCard scroll={mockScroll} />);
-    expect(screen.getByRole('button', { name: /details/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /details/i })
+    ).toBeInTheDocument();
   });
 
   it('opens PDF in new window when download button is clicked', async () => {
@@ -91,19 +110,19 @@ describe('ScrollCard', () => {
   });
 
   it('renders tags when variant is detailed', () => {
-    render(<ScrollCard scroll={mockScroll} variant="detailed" />);
+    render(<ScrollCard scroll={mockScroll} variant='detailed' />);
     expect(screen.getByText('testing')).toBeInTheDocument();
     expect(screen.getByText('example')).toBeInTheDocument();
     expect(screen.getByText('mock')).toBeInTheDocument();
   });
 
   it('does not render tags when variant is compact', () => {
-    render(<ScrollCard scroll={mockScroll} variant="compact" />);
+    render(<ScrollCard scroll={mockScroll} variant='compact' />);
     expect(screen.queryByText('testing')).not.toBeInTheDocument();
   });
 
   it('applies custom className', () => {
-    render(<ScrollCard scroll={mockScroll} className="custom-class" />);
+    render(<ScrollCard scroll={mockScroll} className='custom-class' />);
     const link = screen.getByRole('link');
     expect(link).toHaveClass('custom-class');
   });
