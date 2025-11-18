@@ -5,20 +5,31 @@
 
 import { ScrollItem, ScrollCategory } from './types';
 
+// Category labels mapping for consistent display across components
+export const categoryLabels: Record<string, string> = {
+  'business-strategy': 'Business Strategy',
+  development: 'Development',
+  design: 'Design',
+  wellness: 'Wellness',
+  education: 'Education',
+  coaching: 'Coaching',
+};
+
 export const SCROLLS_DATA: ScrollItem[] = [
   {
     id: 'business-it-consulting',
     title: 'Business Strategy & Systems Alignment',
     description:
       'Strategic consulting for founders and small teams. Learn how to design systems that scale, strategies that resonate, and operations that reflect your deepest values.',
-    category: 'business-strategy' as ScrollCategory,
+    category: 'business-strategy',
     pdfUrl: '/scrolls/pdfs/Fluxline-Business-IT-Consulting.pdf',
     fileSize: '4.8 MB',
     tags: ['consulting', 'strategy', 'systems', 'operations'],
     publishedDate: new Date('2024-01-15'),
     lastUpdated: new Date('2024-01-15'),
     seoMetadata: {
-      title: 'Business Strategy & Systems Alignment - Fluxline Strategic Insights',
+      title:
+        'Business Strategy & Systems Alignment - Fluxline Strategic Insights',
       description:
         'Comprehensive guide to business strategy and systems alignment for founders and organizations seeking transformation.',
       keywords: [
@@ -35,14 +46,15 @@ export const SCROLLS_DATA: ScrollItem[] = [
     title: 'Web Development & Digital Architecture',
     description:
       'Deep dive into modern web development practices. Learn how we architect digital solutions with modular clarity and emotional intelligence.',
-    category: 'development' as ScrollCategory,
+    category: 'development',
     pdfUrl: '/scrolls/pdfs/Fluxline-App-and-Web-Development.pdf',
     fileSize: '4.8 MB',
     tags: ['development', 'web', 'architecture', 'digital'],
     publishedDate: new Date('2024-01-15'),
     lastUpdated: new Date('2024-01-15'),
     seoMetadata: {
-      title: 'Web Development & Digital Architecture - Fluxline Strategic Insights',
+      title:
+        'Web Development & Digital Architecture - Fluxline Strategic Insights',
       description:
         'Explore modern web development practices and digital architecture patterns for scalable, maintainable applications.',
       keywords: [
@@ -59,7 +71,7 @@ export const SCROLLS_DATA: ScrollItem[] = [
     title: 'Brand & Experience Design',
     description:
       'Visual identity and design principles. Discover how we create brands that resonate through strategic design and symbolic depth.',
-    category: 'design' as ScrollCategory,
+    category: 'design',
     pdfUrl: '/scrolls/pdfs/Fluxline-Graphic-Design.pdf',
     fileSize: '4.8 MB',
     tags: ['design', 'branding', 'visual identity', 'UX'],
@@ -83,7 +95,7 @@ export const SCROLLS_DATA: ScrollItem[] = [
     title: 'Personal Training & Wellness',
     description:
       'Holistic approach to physical training. Learn modular coaching systems that adapt to your goals, limitations, and breakthroughs.',
-    category: 'wellness' as ScrollCategory,
+    category: 'wellness',
     pdfUrl: '/scrolls/pdfs/Fluxline-Personal-Training.pdf',
     fileSize: '4.8 MB',
     tags: ['wellness', 'training', 'coaching', 'fitness'],
@@ -107,7 +119,7 @@ export const SCROLLS_DATA: ScrollItem[] = [
     title: 'Coaching, Education & Leadership',
     description:
       'Transformative education and coaching. Discover frameworks for experiential learning, emotional intelligence, and strategic embodiment.',
-    category: 'education' as ScrollCategory,
+    category: 'education',
     pdfUrl: '/scrolls/pdfs/Fluxline-Education-Mentoring.pdf',
     fileSize: '4.8 MB',
     tags: ['education', 'coaching', 'leadership', 'mentoring'],
@@ -131,7 +143,7 @@ export const SCROLLS_DATA: ScrollItem[] = [
     title: 'Resonance Core Framework™',
     description:
       'Deep transformation curriculum. Explore archetypal mapping, emotional emergence, and symbolic ritual for personal evolution.',
-    category: 'coaching' as ScrollCategory,
+    category: 'coaching',
     pdfUrl: '/scrolls/pdfs/Fluxline-Life-Coaching-Resonance-Core.pdf',
     fileSize: '4.8 MB',
     tags: ['coaching', 'transformation', 'framework', 'resonance'],
