@@ -6,7 +6,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { SimplePageWrapper } from '@/components/SimplePageWrapper';
-import { Breadcrumb } from '@/theme/components/breadcrumb';
 import { SERVICE_CATEGORIES } from '../constants';
 import { ServiceDetailHero } from './components/service-detail-hero';
 import { ServiceDetailContent } from './components/service-detail-content';
@@ -43,9 +42,6 @@ export default async function ServiceDetailPage({
   return (
     <SimplePageWrapper>
       <div className='space-y-12'>
-        {/* Breadcrumb */}
-        <Breadcrumb />
-
         {/* Hero Section */}
         <ServiceDetailHero service={service} />
 
