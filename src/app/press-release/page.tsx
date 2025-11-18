@@ -8,8 +8,6 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { usePressReleaseApi } from '@/hooks/usePressReleaseApi';
-import { usePressReleaseStore } from '@/store/store';
-import { getPressReleases } from '@/store/mock-data/pressReleaseMock';
 import { format } from 'date-fns';
 
 /**
@@ -29,23 +27,8 @@ export default function PressReleasePage() {
   const { theme } = useAppTheme();
   const { viewType } = useContentFilterStore();
   
-  // For now, use mock data directly to ensure page works
-  const [pressReleases, setPressReleases] = React.useState<ReturnType<typeof getPressReleases>>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  
-  // Load press releases on mount
-  React.useEffect(() => {
-    const loadData = () => {
-      setIsLoading(true);
-      // Simulate API delay
-      setTimeout(() => {
-        const releases = getPressReleases();
-        setPressReleases(releases);
-        setIsLoading(false);
-      }, 300);
-    };
-    loadData();
-  }, []);
+  // Use the API hook for data fetching
+  const { pressReleases, isLoading, error } = usePressReleaseApi();
 
   // Map ContentViewType to AdaptiveCardGrid viewType
   const mappedViewType = React.useMemo(() => {
@@ -134,8 +117,30 @@ export default function PressReleasePage() {
           </div>
         )}
 
+        {/* Error State */}
+        {error && !isLoading && (
+          <div
+            style={{
+              padding: theme.spacing.xl,
+              backgroundColor: theme.palette.redDark,
+              borderRadius: theme.effects.roundedCorner4,
+              marginBottom: theme.spacing.xl,
+            }}
+          >
+            <Typography variant="h3" style={{ color: theme.palette.white }}>
+              Error loading press releases
+            </Typography>
+            <Typography
+              variant="p"
+              style={{ color: theme.palette.white }}
+            >
+              {error}
+            </Typography>
+          </div>
+        )}
+
         {/* Press Release Cards */}
-        {!isLoading && cards.length > 0 && (
+        {!isLoading && !error && cards.length > 0 && (
           <div onClick={(e) => {
             const target = e.target as HTMLElement;
             const card = target.closest('[data-card-id]');
@@ -160,7 +165,7 @@ export default function PressReleasePage() {
         )}
 
         {/* Empty State */}
-        {!isLoading && cards.length === 0 && (
+        {!isLoading && !error && cards.length === 0 && (
           <div
             style={{
               display: 'flex',

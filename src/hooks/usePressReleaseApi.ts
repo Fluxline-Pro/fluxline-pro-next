@@ -129,9 +129,7 @@ export const usePressReleaseApi = () => {
    * Auto-fetch press releases on mount
    */
   useEffect(() => {
-    if (pressReleases.length === 0 && !isLoading && !error) {
-      fetchPressReleases();
-    }
+    fetchPressReleases();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run on mount
 

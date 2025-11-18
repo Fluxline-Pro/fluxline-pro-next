@@ -275,6 +275,9 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
 
   // For other view types (grid, small, large), render basic card
   const contentWrapperStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
     ...contentContainerStyle,
   };
 
@@ -286,7 +289,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         hoverable={!!onClick}
         onClick={onClick}
       >
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
           {title && (
             <h3
               style={{

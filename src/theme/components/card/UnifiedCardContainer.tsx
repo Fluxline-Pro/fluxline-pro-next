@@ -48,28 +48,28 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
-          alignItems: 'start',
+          gridAutoRows: '1fr',
+          alignItems: 'stretch',
         };
       } else if (aspectRatio < 0.75) {
         // Portrait images - can use more columns
-        const columns = isMobile ? 2 : isTablet ? 4 : 5;
+        const columns = isMobile ? 1 : isTablet ? 3 : 4;
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
+          gridAutoRows: '1fr',
           alignItems: 'stretch',
         };
       } else {
         // Square or moderate aspect ratios - standard grid
-        const columns = isMobile ? 2 : isTablet ? 3 : 4;
+        const columns = isMobile ? 1 : isTablet ? 3 : 4;
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
-          alignItems: 'center',
+          gridAutoRows: '1fr',
+          alignItems: 'stretch',
         };
       }
     }
@@ -81,19 +81,21 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   const getStandardGridConfig = () => {
     switch (viewType) {
       case 'grid':
-        const columns = forceColumns || (isMobile ? 2 : isTablet ? 3 : 4);
+        const columns = forceColumns || (isMobile ? 1 : isTablet ? 3 : 4);
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
+          gridAutoRows: '1fr',
+          alignItems: 'stretch',
         };
       case 'small':
         return {
           display: 'grid' as const,
           templateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
           gap,
-          gridAutoRows: 'auto',
+          gridAutoRows: '1fr',
+          alignItems: 'stretch',
         };
       case 'large':
         return {
