@@ -33,11 +33,7 @@ export const YouTubeLogo: React.FC<YouTubeLogoProps> = ({
         d='M23 7.926C23 5.024 20.723 3 18.322 3H5.678C3.277 3 1 5.024 1 7.926v8.148C1 18.976 3.277 21 5.678 21h12.644C20.723 21 23 18.976 23 16.074V7.926z'
         fill={theme.palette.themePrimary}
       />
-      <path
-        d='M16 12l-6 3.464V8.536L16 12z'
-        fill={theme.semanticColors.bodyBackground}
-        fillOpacity='0.85'
-      />
+      <path d='M16 12l-6 3.464V8.536L16 12z' fill='#FFFFFF' />
     </svg>
   );
 };

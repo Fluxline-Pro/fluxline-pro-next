@@ -17,7 +17,10 @@ import { MicrosoftLogo } from '@/assets/svgs/MicrosoftLogo';
 interface SocialLink {
   name: string;
   url: string;
-  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  icon: React.ComponentType<{
+    className?: string;
+    style?: React.CSSProperties;
+  }>;
   ariaLabel: string;
 }
 
@@ -36,19 +39,19 @@ const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     name: 'Instagram',
-    url: 'https://instagram.com/fluxlinepro',
+    url: 'https://instagram.com/fluxlineco',
     icon: InstagramIcon,
     ariaLabel: 'Follow us on Instagram',
   },
   {
     name: 'YouTube',
-    url: 'https://youtube.com/@fluxlinepro',
+    url: 'https://youtube.com/TerenceWaters',
     icon: YouTubeLogo,
     ariaLabel: 'Subscribe to our YouTube channel',
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/company/fluxlinepro',
+    url: 'https://linkedin.com/in/terencewaters',
     icon: LinkedInIcon,
     ariaLabel: 'Connect with us on LinkedIn',
   },
@@ -61,7 +64,8 @@ const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const SocialLinks: React.FC = () => {
-  const { theme } = useAppTheme();
+  const { theme, themeMode } = useAppTheme();
+  const [hoveredIcon, setHoveredIcon] = React.useState<string | null>(null);
 
   return (
     <div
@@ -74,38 +78,65 @@ export const SocialLinks: React.FC = () => {
     >
       {SOCIAL_LINKS.map((social) => {
         const IconComponent = social.icon;
+        const isHovered = hoveredIcon === social.name;
         return (
-          <a
+          <div
             key={social.name}
-            href={social.url}
-            target='_blank'
-            rel='noopener noreferrer'
-            aria-label={social.ariaLabel}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '48px',
-              height: '48px',
-              transition: 'transform 0.2s ease, opacity 0.2s ease',
-              textDecoration: 'none',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.1)';
-              e.currentTarget.style.opacity = '0.8';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.opacity = '1';
-            }}
+            style={{ position: 'relative', display: 'inline-block' }}
           >
-            <IconComponent
+            <a
+              href={social.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              aria-label={social.ariaLabel}
               style={{
-                width: '32px',
-                height: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '48px',
+                height: '48px',
+                transition: 'transform 0.2s ease, opacity 0.2s ease',
+                textDecoration: 'none',
+                transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                opacity: isHovered ? 0.8 : 1,
               }}
-            />
-          </a>
+              onMouseEnter={() => setHoveredIcon(social.name)}
+              onMouseLeave={() => setHoveredIcon(null)}
+            >
+              <IconComponent
+                style={{
+                  width: '32px',
+                  height: '32px',
+                }}
+              />
+            </a>
+
+            {/* Tooltip */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '90%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                backgroundColor: 'transparent',
+                color: theme.palette.themePrimary,
+                padding: '0.25rem 0.5rem',
+                borderRadius: '4px',
+                fontSize: '0.75rem',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: '600',
+                whiteSpace: 'nowrap',
+                opacity: isHovered ? 1 : 0,
+                visibility: isHovered ? 'visible' : 'hidden',
+                transition: 'opacity 0.2s ease, visibility 0.2s ease',
+                pointerEvents: 'none',
+                zIndex: 1000,
+                paddingTop: '0',
+              }}
+            >
+              {social.name === 'Microsoft' ? 'Email' : social.name}
+            </div>
+          </div>
         );
       })}
     </div>
