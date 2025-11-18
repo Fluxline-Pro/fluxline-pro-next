@@ -1,6 +1,7 @@
 import React from 'react';
 import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
 import { PressReleaseDetailClient } from './PressReleaseDetailClient';
+import notFound from '@/app/services/scrolls/[scroll]/not-found';
 
 // Generate static params for all press releases
 export async function generateStaticParams() {
@@ -24,6 +25,10 @@ export default async function PressReleaseDetailPage({
   const pressRelease = pressReleasesMockData.find(
     (release) => release.id === id
   );
+
+  if (!pressRelease) {
+    notFound();
+  };
 
   return <PressReleaseDetailClient pressRelease={pressRelease} />;
 }

@@ -248,21 +248,7 @@ export default function PressReleasePage() {
 
         {/* Press Release Cards */}
         {!isLoading && !error && cards.length > 0 && (
-          <div
-            onClick={(e) => {
-              console.log('Click event triggered:', e.target);
-              const target = e.target as HTMLElement;
-              const card = target.closest('[data-card-id]');
-              console.log('Found card element:', card);
-              if (card) {
-                const cardId = card.getAttribute('data-card-id');
-                console.log('Card ID:', cardId);
-                if (cardId) {
-                  handleCardClick(cardId);
-                }
-              }
-            }}
-          >
+          <div>
             <AdaptiveCardGrid
               cards={cards.map((card) => ({
                 ...card,
