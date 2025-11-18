@@ -32,10 +32,16 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
     'menu' | 'settings' | null
   >(null);
   const [isViewTransitioning, setIsViewTransitioning] = React.useState(false);
+  const [isMounted, setIsMounted] = React.useState(false);
   const { theme, themeMode, setThemeMode, layoutPreference } = useAppTheme();
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const isLeftHanded = layoutPreference === 'left-handed';
+
+  // Ensure component is mounted before rendering dynamic content
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Calculate modal width based on device
   const modalMaxWidth = isMobile ? '350px' : '400px';
@@ -370,7 +376,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
 
       {/* Modal */}
       <AnimatePresence mode='wait'>
-        {activeModal && (
+        {isMounted && activeModal && (
           <motion.div
             variants={backdropVariants}
             initial='hidden'
@@ -415,7 +421,9 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 style={{
                   position: 'absolute',
                   top: '1rem',
-                  [isLeftHanded ? 'right' : 'left']: '1rem',
+                  [isLeftHanded || activeModal === 'settings'
+                    ? 'right'
+                    : 'left']: '1rem',
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',

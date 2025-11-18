@@ -33,19 +33,6 @@ export default function ContactPage() {
               contact
             </Typography>
           </div>
-
-          {/* Hire Me Section */}
-          <div className='flex items-center gap-4'>
-            <Button
-              variant='primary'
-              text='hire me!'
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              style={{
-                fontSize: '0.875rem',
-                padding: `${theme.spacing.s} ${theme.spacing.m}`,
-              }}
-            />
-          </div>
         </div>
 
         {/* Intro Text */}
