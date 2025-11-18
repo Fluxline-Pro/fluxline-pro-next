@@ -5,7 +5,7 @@ import { PressReleaseDetailClient } from './PressReleaseDetailClient';
 // Generate static params for all press releases
 export async function generateStaticParams() {
   return pressReleasesMockData.map((release) => ({
-    id: release.id.toString(),
+    id: release.id,
   }));
 }
 
