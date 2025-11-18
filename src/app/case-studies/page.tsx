@@ -9,7 +9,6 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { Dropdown } from '@fluentui/react';
-import { format } from 'date-fns';
 import { getCaseStudies } from './caseStudiesData';
 
 /**
@@ -140,7 +139,9 @@ export default function CaseStudiesPage() {
                 selectedKey={viewType}
                 onChange={(event, option) => {
                   if (option) {
-                    setViewType(option.key as any);
+                    setViewType(
+                      option.key as 'grid' | 'small-tile' | 'large-tile'
+                    );
                   }
                 }}
                 styles={{
@@ -249,7 +250,7 @@ export default function CaseStudiesPage() {
             }}
           >
             Join the growing list of organizations achieving measurable results
-            with Fluxline's strategic approach to transformation.
+            with Fluxline&apos;s strategic approach to transformation.
           </Typography>
           <div
             style={{

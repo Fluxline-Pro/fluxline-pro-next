@@ -4,7 +4,7 @@
  * Structure ready for future API/state integration
  */
 
-import { CaseStudy } from './types';
+import { CaseStudy, ServiceCategory } from './types';
 
 /**
  * Mock case studies data covering all service lines
@@ -470,7 +470,9 @@ export const getCaseStudiesByService = (
   service: string
 ): CaseStudy[] => {
   return caseStudiesMockData
-    .filter((study) => study.services.includes(service as any))
+    .filter((study) =>
+      study.services.includes(service as ServiceCategory)
+    )
     .sort((a, b) => b.publishedDate.getTime() - a.publishedDate.getTime());
 };
 

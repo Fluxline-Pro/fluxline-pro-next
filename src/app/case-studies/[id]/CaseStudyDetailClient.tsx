@@ -337,7 +337,7 @@ export default function CaseStudyDetailClient({
                 marginBottom: theme.spacing.m,
               }}
             >
-              "{caseStudy.testimonial.quote}"
+              "              &quot;{caseStudy.testimonial.quote}&quot;"
             </Typography>
             <Typography
               variant='p'
@@ -382,7 +382,7 @@ export default function CaseStudyDetailClient({
               marginRight: 'auto',
             }}
           >
-            Let's discuss how we can help you achieve your transformation goals.
+            Let&apos;s discuss how we can help you achieve your transformation goals.
           </Typography>
           <div
             style={{
