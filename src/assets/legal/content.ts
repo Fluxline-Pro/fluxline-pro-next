@@ -171,4 +171,6 @@ Website: https://www.fluxline.pro
 By using Fluxline Professional Services, you acknowledge that you have read and understood these Terms of Use.
 `;
 
-export default { termsOfUse };
+const legalContent = { termsOfUse };
+
+export default legalContent;
