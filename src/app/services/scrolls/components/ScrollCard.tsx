@@ -95,16 +95,6 @@ export function ScrollCard({ scroll, variant = 'compact', className = '' }: Scro
         >
           Download PDF
         </button>
-        <button
-          className="px-4 py-2 rounded-lg font-semibold border transition-colors"
-          style={{
-            borderColor: 'var(--neutralLight)',
-            color: 'var(--themePrimary)',
-          }}
-          aria-label={`View details for ${scroll.title}`}
-        >
-          Details
-        </button>
       </div>
     </Link>
   );
