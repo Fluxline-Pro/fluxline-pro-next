@@ -25,8 +25,8 @@ export const SCROLLS_DATA: ScrollItem[] = [
     pdfUrl: '/scrolls/pdfs/Fluxline-Business-IT-Consulting.pdf',
     fileSize: '4.8 MB',
     tags: ['consulting', 'strategy', 'systems', 'operations'],
-    publishedDate: new Date('2024-01-15'),
-    lastUpdated: new Date('2024-01-15'),
+    publishedDate: new Date('2025-01-15'),
+    lastUpdated: new Date('2025-01-15'),
     seoMetadata: {
       title:
         'Business Strategy & Systems Alignment - Fluxline Strategic Insights',
@@ -50,8 +50,8 @@ export const SCROLLS_DATA: ScrollItem[] = [
     pdfUrl: '/scrolls/pdfs/Fluxline-App-and-Web-Development.pdf',
     fileSize: '4.8 MB',
     tags: ['development', 'web', 'architecture', 'digital'],
-    publishedDate: new Date('2024-01-15'),
-    lastUpdated: new Date('2024-01-15'),
+    publishedDate: new Date('2025-01-15'),
+    lastUpdated: new Date('2025-01-15'),
     seoMetadata: {
       title:
         'Web Development & Digital Architecture - Fluxline Strategic Insights',
@@ -75,8 +75,8 @@ export const SCROLLS_DATA: ScrollItem[] = [
     pdfUrl: '/scrolls/pdfs/Fluxline-Graphic-Design.pdf',
     fileSize: '4.8 MB',
     tags: ['design', 'branding', 'visual identity', 'UX'],
-    publishedDate: new Date('2024-01-15'),
-    lastUpdated: new Date('2024-01-15'),
+    publishedDate: new Date('2025-01-15'),
+    lastUpdated: new Date('2025-01-15'),
     seoMetadata: {
       title: 'Brand & Experience Design - Fluxline Strategic Insights',
       description:
@@ -99,8 +99,8 @@ export const SCROLLS_DATA: ScrollItem[] = [
     pdfUrl: '/scrolls/pdfs/Fluxline-Personal-Training.pdf',
     fileSize: '4.8 MB',
     tags: ['wellness', 'training', 'coaching', 'fitness'],
-    publishedDate: new Date('2024-01-15'),
-    lastUpdated: new Date('2024-01-15'),
+    publishedDate: new Date('2025-01-15'),
+    lastUpdated: new Date('2025-01-15'),
     seoMetadata: {
       title: 'Personal Training & Wellness - Fluxline Strategic Insights',
       description:
@@ -123,8 +123,8 @@ export const SCROLLS_DATA: ScrollItem[] = [
     pdfUrl: '/scrolls/pdfs/Fluxline-Education-Mentoring.pdf',
     fileSize: '4.8 MB',
     tags: ['education', 'coaching', 'leadership', 'mentoring'],
-    publishedDate: new Date('2024-01-15'),
-    lastUpdated: new Date('2024-01-15'),
+    publishedDate: new Date('2025-01-15'),
+    lastUpdated: new Date('2025-01-15'),
     seoMetadata: {
       title: 'Coaching, Education & Leadership - Fluxline Strategic Insights',
       description:
@@ -147,8 +147,8 @@ export const SCROLLS_DATA: ScrollItem[] = [
     pdfUrl: '/scrolls/pdfs/Fluxline-Life-Coaching-Resonance-Core.pdf',
     fileSize: '4.8 MB',
     tags: ['coaching', 'transformation', 'framework', 'resonance'],
-    publishedDate: new Date('2024-01-15'),
-    lastUpdated: new Date('2024-01-15'),
+    publishedDate: new Date('2025-01-15'),
+    lastUpdated: new Date('2025-01-15'),
     seoMetadata: {
       title: 'Resonance Core Framework™ - Fluxline Strategic Insights',
       description:

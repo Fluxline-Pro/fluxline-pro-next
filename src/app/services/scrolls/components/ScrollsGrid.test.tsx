@@ -25,8 +25,8 @@ const mockScrolls: ScrollItem[] = [
     pdfUrl: '/scrolls/pdfs/scroll-1.pdf',
     fileSize: '1.0 MB',
     tags: ['tag1'],
-    publishedDate: new Date('2024-01-15'),
-    lastUpdated: new Date('2024-01-15'),
+    publishedDate: new Date('2025-01-15'),
+    lastUpdated: new Date('2025-01-15'),
     seoMetadata: {
       title: 'First Scroll',
       description: 'Description',
@@ -41,8 +41,8 @@ const mockScrolls: ScrollItem[] = [
     pdfUrl: '/scrolls/pdfs/scroll-2.pdf',
     fileSize: '2.0 MB',
     tags: ['tag2'],
-    publishedDate: new Date('2024-01-16'),
-    lastUpdated: new Date('2024-01-16'),
+    publishedDate: new Date('2025-01-16'),
+    lastUpdated: new Date('2025-01-16'),
     seoMetadata: {
       title: 'Second Scroll',
       description: 'Description',
@@ -69,7 +69,9 @@ describe('ScrollsGrid', () => {
 
   it('renders empty state when no scrolls provided', () => {
     render(<ScrollsGrid scrolls={[]} />);
-    expect(screen.getByText('No scrolls available at this time.')).toBeInTheDocument();
+    expect(
+      screen.getByText('No scrolls available at this time.')
+    ).toBeInTheDocument();
   });
 
   it('applies grid layout by default', () => {
@@ -79,14 +81,16 @@ describe('ScrollsGrid', () => {
   });
 
   it('applies list layout when specified', () => {
-    const { container } = render(<ScrollsGrid scrolls={mockScrolls} layout="list" />);
+    const { container } = render(
+      <ScrollsGrid scrolls={mockScrolls} layout='list' />
+    );
     const listElement = container.querySelector('.flex-col');
     expect(listElement).toBeInTheDocument();
   });
 
   it('applies custom className', () => {
     const { container } = render(
-      <ScrollsGrid scrolls={mockScrolls} className="custom-grid-class" />
+      <ScrollsGrid scrolls={mockScrolls} className='custom-grid-class' />
     );
     expect(container.querySelector('.custom-grid-class')).toBeInTheDocument();
   });

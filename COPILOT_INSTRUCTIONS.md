@@ -71,10 +71,11 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   4. Test with: `yarn test component-name`
   5. Document with Storybook: `yarn storybook`
 - **Page Layout Usage**:
+
   ```tsx
   // In your page.tsx file
   import { PageWrapper } from '@/components';
-  
+
   export default function AboutPage() {
     return (
       <PageWrapper>
@@ -136,6 +137,7 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 - **Data Configuration**: Scroll metadata defined in `scrollsData.ts`
 
 **Adding New Scrolls**:
+
 1. Place PDF file in `/public/scrolls/pdfs/`
 2. Update `scrollsData.ts` with scroll metadata:
    ```typescript
@@ -160,6 +162,7 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 4. New scroll will be automatically added to grid and detail route
 
 **Component Patterns**:
+
 - `ScrollCard`: Individual scroll card with download functionality
 - `ScrollsGrid`: Responsive grid layout for scroll listings
 - All scrolls use Server Components for listings
@@ -167,10 +170,51 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 - Static generation for all scroll detail pages via `generateStaticParams`
 
 **SEO Best Practices**:
+
 - Each scroll has unique metadata with OpenGraph and Twitter Card support
 - Dynamic metadata generation in detail pages
 - Proper breadcrumbs for navigation context
 - Structured data for enhanced search results
+
+### Press Release System
+
+- **Location**: `/src/app/press-release/`
+- **Components**: Complete responsive card system with AdaptiveCardGrid
+- **Data**: Mock data stored in `/src/store/mock-data/pressReleaseMock.ts`
+
+**System Architecture**:
+
+- **Listing Page**: Client component with 3 view modes (Grid, Small Tile, Large Tile)
+- **Detail Pages**: Server components with static generation via `generateStaticParams`
+- **Card System**: AdaptiveCardGrid → UnifiedCardContainer → UnifiedCard
+- **Animations**: Framer Motion with 25ms staggered card appearances
+- **Mobile Optimized**: Overflow protection and responsive breakpoints
+
+**Adding New Press Releases**:
+
+1. Update `pressReleaseMockData` array in mock file with complete schema
+2. Include all required fields: `id`, `title`, `subtitle`, `description`, `date`, `imageUrl`
+3. Add images to `/public/images/` directory
+4. Run `yarn build` to regenerate static detail pages
+5. New press release automatically appears in grid and gets detail route
+
+**Key Features**:
+
+- **Responsive Grid**: 1-4 columns based on device orientation
+- **Fast Animations**: 125ms total stagger time for 6 cards
+- **Hover Effects**: Smooth upward slide transitions with pointer cursor
+- **Click Navigation**: Event delegation to detail pages
+- **Mobile Protection**: No horizontal overflow, proper text wrapping
+- **Accessibility**: WCAG 2.1 AA compliant with keyboard navigation
+
+**Component Details**:
+
+- `AdaptiveCardGrid`: Smart grid with image dimension adaptation
+- `UnifiedCardContainer`: Responsive container with CSS Grid/Flexbox
+- `UnifiedCard`: Multi-view card component (grid, small, large, image modes)
+- All use Fluent UI theming and Next.js Image optimization
+
+For complete technical documentation, see `PRESS_RELEASE_README.md`
 
 ---
 
@@ -468,28 +512,33 @@ yarn build-storybook         # Build for deployment
 ## Theme System Architecture
 
 ### State Management
+
 - **Zustand Store**: `src/store/store-specs/userPreferencesStore.ts` - Manages user preferences including theme mode, font scale, layout preferences
 - **Persistence**: User preferences are persisted to localStorage automatically
 - **SSR Compatibility**: Theme state is hydrated properly on client-side
 
 ### Theme Provider
+
 - **Location**: `src/theme/contexts/ThemeProvider.tsx`
 - **Integration**: Wraps the entire app in `app/layout.tsx`
 - **Features**: Applies theme to document, handles theme switching, integrates with Fluent UI
 
 ### Theme Configuration
+
 - **Main File**: `src/theme/theme.ts` (1888 lines)
 - **Exports**: Multiple theme modes (dark, light, high-contrast, grayscale)
 - **Design Tokens**: Colors, typography, spacing, animations, shadows, gradients
 - **Breakpoints**: xs (0px), sm (576px), md (768px), lg (1024px), xl (1366px), xxl (1920px)
 
 ### Available Hooks
+
 - **useAppTheme**: Access theme object and theme switching functions
 - **useMediaQuery**: Responsive breakpoint detection and device type queries
 - **useThemeColor**: Get theme-aware colors based on current mode
 - **useReducedMotion**: Detect and respect motion preferences
 
 ### Component Development
+
 - All components should be generated using `yarn generate:component ComponentName`
 - Use Fluent UI components and theming properties for theme-aware styling
 - Apply Tailwind CSS for layout and utilities (non-theme-dependent)
@@ -501,6 +550,7 @@ yarn build-storybook         # Build for deployment
 ## Page Layout Infrastructure
 
 ### PageWrapper Component
+
 - **Location**: `src/components/PageWrapper.tsx`
 - **Purpose**: Main layout wrapper for all pages (except home page)
 - **Features**:
@@ -512,6 +562,7 @@ yarn build-storybook         # Build for deployment
   - Mobile-first responsive design (stacked in portrait mode)
 
 ### ViewportGrid Component
+
 - **Location**: `src/theme/components/layout/ViewportGrid.tsx`
 - **Type**: Client Component ('use client')
 - **Features**:
@@ -523,6 +574,7 @@ yarn build-storybook         # Build for deployment
   - Supports nested layouts
 
 ### UnifiedCard Component
+
 - **Location**: `src/theme/components/card/unified-card.tsx`
 - **Type**: Client Component ('use client')
 - **Purpose**: Flexible card component for displaying images and content
@@ -535,7 +587,9 @@ yarn build-storybook         # Build for deployment
   - Fluent UI typography integration
 
 ### Layout Hooks
+
 All hooks are located in `src/theme/hooks/`:
+
 - **useLayoutConfig**: Calculates grid layout based on device, orientation, and preferences
 - **useContentScrollable**: Detects if content area is scrollable
 - **useColorVisionFilter**: Applies color vision accessibility filters
@@ -543,7 +597,9 @@ All hooks are located in `src/theme/hooks/`:
 - **useDateFormatter**: Formats dates consistently across the app
 
 ### Page Configurations
+
 PageWrapper includes pre-configured routes for:
+
 - Services pages (consulting, development, design, etc.)
 - Legal pages (terms, privacy, glossary)
 - Content pages (blog, portfolio, my-content)
@@ -554,4 +610,4 @@ PageWrapper includes pre-configured routes for:
 
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-11-04 - Page Layout Infrastructure Migration Complete
+### Last Updated: 2025-11-17 - Press Release System Implementation Complete

@@ -7,6 +7,7 @@
 
 import { ScrollItem } from '../types';
 import { ScrollCard } from './ScrollCard';
+import { FadeUp } from '@/animations/fade-animations';
 
 interface ScrollsGridProps {
   scrolls: ScrollItem[];
@@ -14,14 +15,20 @@ interface ScrollsGridProps {
   className?: string;
 }
 
-export function ScrollsGrid({ scrolls, layout = 'grid', className = '' }: ScrollsGridProps) {
+export function ScrollsGrid({
+  scrolls,
+  layout = 'grid',
+  className = '',
+}: ScrollsGridProps) {
   if (scrolls.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 px-4">
-        <p className="text-lg" style={{ color: 'var(--neutralSecondary)' }}>
-          No scrolls available at this time.
-        </p>
-      </div>
+      <FadeUp>
+        <div className='flex flex-col items-center justify-center py-16 px-4'>
+          <p className='text-lg' style={{ color: 'var(--neutralSecondary)' }}>
+            No scrolls available at this time.
+          </p>
+        </div>
+      </FadeUp>
     );
   }
 
@@ -31,10 +38,14 @@ export function ScrollsGrid({ scrolls, layout = 'grid', className = '' }: Scroll
       : 'flex flex-col gap-4';
 
   return (
-    <div className={`${gridClasses} ${className}`}>
-      {scrolls.map((scroll) => (
-        <ScrollCard key={scroll.id} scroll={scroll} variant="compact" />
-      ))}
-    </div>
+    <FadeUp>
+      <div className={`${gridClasses} ${className}`}>
+        {scrolls.map((scroll, index) => (
+          <FadeUp key={scroll.id} delay={index * 0.1}>
+            <ScrollCard scroll={scroll} variant='compact' />
+          </FadeUp>
+        ))}
+      </div>
+    </FadeUp>
   );
 }

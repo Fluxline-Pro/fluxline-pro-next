@@ -49,6 +49,13 @@ export const navItems: NavItem[] = [
   //   description: 'Read our blog',
   // },
   {
+    label: 'press release',
+    path: '/press-release',
+    view: 'press-release',
+    iconName: 'News',
+    description: 'Latest announcements',
+  },
+  {
     label: 'events',
     path: '/events',
     view: 'events',

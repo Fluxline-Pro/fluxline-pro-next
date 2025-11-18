@@ -105,7 +105,7 @@ export const FadeUp: React.FC<FadeUpProps> = ({
   duration = 0.5,
   delay = 0,
   className = '',
-  style
+  style,
 }) => {
   const { shouldReduceMotion } = useReducedMotion();
 
@@ -155,7 +155,7 @@ export interface FadeInProps {
  */
 export const FadeIn: React.FC<FadeInProps> = ({
   children,
-  duration = 0.3,
+  duration = 0.15,
   delay = 0,
   className = '',
 }) => {

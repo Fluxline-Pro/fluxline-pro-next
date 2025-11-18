@@ -20,6 +20,8 @@ export interface UnifiedCardContainerProps {
   forceColumns?: number;
   // Responsive behavior
   adaptToImageDimensions?: boolean;
+  // Custom grid columns override
+  gridColumns?: number;
 }
 
 export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
@@ -30,6 +32,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   imageDimensions,
   forceColumns,
   adaptToImageDimensions = false,
+  gridColumns,
 }) => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
@@ -48,28 +51,28 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
-          alignItems: 'start',
+          gridAutoRows: '1fr',
+          alignItems: 'stretch',
         };
       } else if (aspectRatio < 0.75) {
         // Portrait images - can use more columns
-        const columns = isMobile ? 2 : isTablet ? 4 : 5;
+        const columns = isMobile ? 1 : isTablet ? 3 : 4;
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
+          gridAutoRows: '1fr',
           alignItems: 'stretch',
         };
       } else {
         // Square or moderate aspect ratios - standard grid
-        const columns = isMobile ? 2 : isTablet ? 3 : 4;
+        const columns = isMobile ? 1 : isTablet ? 3 : 4;
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
-          alignItems: 'center',
+          gridAutoRows: '1fr',
+          alignItems: 'stretch',
         };
       }
     }
@@ -81,19 +84,24 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   const getStandardGridConfig = () => {
     switch (viewType) {
       case 'grid':
-        const columns = forceColumns || (isMobile ? 2 : isTablet ? 3 : 4);
+        // Use custom gridColumns if provided, otherwise use existing logic
+        const columns =
+          gridColumns || forceColumns || (isMobile ? 1 : isTablet ? 3 : 4);
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
+          gridAutoRows: 'minmax(auto, 1fr)',
+          alignItems: 'stretch',
         };
       case 'small':
+        const smallColumns = gridColumns || (isMobile ? 1 : 2);
         return {
           display: 'grid' as const,
-          templateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+          templateColumns: `repeat(${smallColumns}, 1fr)`,
           gap,
-          gridAutoRows: 'auto',
+          gridAutoRows: '1fr',
+          alignItems: 'stretch',
         };
       case 'large':
         return {
@@ -152,7 +160,10 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
         gridAutoRows: config.gridAutoRows,
         alignItems: config.alignItems,
         gap: config.gap,
-        width: '100%',
+        width: 'auto',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        padding: isMobile ? '0.5rem 0' : '1rem',
         transition: theme.animations.transitions.card,
       }}
     >
