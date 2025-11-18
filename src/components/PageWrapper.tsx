@@ -29,15 +29,10 @@ import ContentImage from '../assets/images/Content1280x1815.jpg';
 import PortfolioImage from '../assets/images/Portfolio1280x1815.jpg';
 
 // Dark mode themes: dark, high-contrast, grayscale-dark
-const darkModeThemes: ThemeMode[] = [
-  'dark',
-  'high-contrast',
-  'grayscale-dark',
-];
+const darkModeThemes: ThemeMode[] = ['dark', 'high-contrast', 'grayscale-dark'];
 
 // Helper function to get the appropriate Fluxline logo based on theme mode
 const getFluxlineLogo = (themeMode: ThemeMode): string => {
-
   if (darkModeThemes.includes(themeMode)) {
     return FluxlineLogoDarkMode.src;
   }
@@ -47,7 +42,10 @@ const getFluxlineLogo = (themeMode: ThemeMode): string => {
 };
 
 // Define page configurations
-const PAGE_CONFIGS: Record<string, { image: string | 'FLUXLINE_LOGO'; imageText: string }> = {
+const PAGE_CONFIGS: Record<
+  string,
+  { image: string | 'FLUXLINE_LOGO'; imageText: string }
+> = {
   '/about': {
     image: 'FLUXLINE_LOGO',
     imageText: '',
@@ -108,9 +106,9 @@ const PAGE_CONFIGS: Record<string, { image: string | 'FLUXLINE_LOGO'; imageText:
     image: BlogImage.src,
     imageText: 'Blog',
   },
-  '/contact-me': {
+  '/contact': {
     image: ContactImage.src,
-    imageText: '',
+    imageText: "Let's Connect",
   },
   '/books': {
     image: BooksImage.src,
@@ -231,11 +229,11 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
       leftChildren={
         <UnifiedCard
           key={pathname + (id || '')} // Add key to reset animations on route change
-          id="imageCard" // Use consistent id for hooks compatibility
+          id='imageCard' // Use consistent id for hooks compatibility
           title={imageTextToDisplay}
-          viewType="image"
+          viewType='image'
           imageUrl={imageToDisplay}
-          elevation="medium"
+          elevation='medium'
           showTitleOnImage={shouldShowTitle}
           imageText={imageTextToDisplay}
           delay={0.1}
@@ -261,12 +259,8 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
             minWidth: 0, // Allow shrinking
           }}
         >
-          <AnimatePresence mode="wait">
-            <FadeUp
-              key={pathname + (id || '')}
-              delay={0.1}
-              duration={0.5}
-            >
+          <AnimatePresence mode='wait'>
+            <FadeUp key={pathname + (id || '')} delay={0.1} duration={0.5}>
               {children}
             </FadeUp>
           </AnimatePresence>

@@ -2,16 +2,13 @@ import React from 'react';
 import { mergeStyles } from '@fluentui/react';
 import { useAppTheme } from '../../theme/hooks/useAppTheme';
 
-interface YouTubeLogoProps {
+interface EmailLogoProps {
   isDarkMode?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
-export const YouTubeLogo: React.FC<YouTubeLogoProps> = ({
-  className,
-  style,
-}) => {
+export const EmailLogo: React.FC<EmailLogoProps> = ({ className, style }) => {
   const { theme } = useAppTheme();
   const rootClass = mergeStyles(
     {
@@ -30,12 +27,21 @@ export const YouTubeLogo: React.FC<YouTubeLogoProps> = ({
       fill='none'
     >
       <path
-        d='M23 7.926C23 5.024 20.723 3 18.322 3H5.678C3.277 3 1 5.024 1 7.926v8.148C1 18.976 3.277 21 5.678 21h12.644C20.723 21 23 18.976 23 16.074V7.926z'
-        fill={theme.palette.themePrimary}
+        d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'
+        stroke={theme.palette.themePrimary}
+        strokeWidth='2'
+        fill='none'
       />
-      <path d='M16 12l-6 3.464V8.536L16 12z' fill='#FFFFFF' />
+      <path
+        d='m22 6-10 7L2 6'
+        stroke={theme.palette.themePrimary}
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        fill='none'
+      />
     </svg>
   );
 };
 
-export default YouTubeLogo;
+export default EmailLogo;
