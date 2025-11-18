@@ -13,12 +13,17 @@ import { createPlaceholderSVG } from '@/utils/placeholder';
 import FluxlineLogo from '@/assets/images/FluxlineLogo.png';
 import FluxlineLogoDarkMode from '@/assets/images/FluxlineLogoDarkMode.png';
 import FluxlineLogoLightMode from '@/assets/images/FluxlineLogoLightMode.png';
+import ContactMeImage from '@/assets/images/ContactMe2400x1600.jpg';
 
 // Page configurations with placeholder images for now
 const PAGE_CONFIGS = {
   '/about': {
     image: createPlaceholderSVG(600, 800, 'About Fluxline', '#2563eb', 'white'),
     imageText: 'About Fluxline',
+  },
+  '/contact': {
+    image: ContactMeImage,
+    imageText: 'contact',
   },
   '/services': {
     image: createPlaceholderSVG(600, 800, 'Our Services', '#059669', 'white'),
