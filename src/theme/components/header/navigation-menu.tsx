@@ -13,6 +13,7 @@ import { Typography } from '@/theme/components/typography';
 import { NavigationItem } from './navigation-item';
 import { navItems } from './navigation.config';
 import type { NavigationProps } from './navigation.types';
+import { SocialLinks } from './social-links';
 
 export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
   const { theme, layoutPreference } = useAppTheme();
@@ -90,13 +91,18 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
         </div>
       </div>
 
-      {/* Social Links Section - Placeholder */}
+      {/* Social Links Footer */}
       <div
         style={{
           padding: isMobile ? '1.5rem' : '2rem',
           borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          alignItems: 'center',
         }}
       >
+        <SocialLinks />
         <Typography
           variant='p'
           style={{

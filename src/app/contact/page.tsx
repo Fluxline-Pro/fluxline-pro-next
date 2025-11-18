@@ -11,19 +11,18 @@ import { Typography } from '@/theme/components/typography';
 import { Button } from '@/theme/components/button';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { ContactForm } from './components/ContactForm';
-import { SocialLinks } from './components/SocialLinks';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
 
   return (
     <SimplePageWrapper>
-      <div className="space-y-8">
-        {/* Header Section with Social Links and Hire Me Button */}
-        <div className="flex justify-between items-start flex-wrap gap-4">
-          <div className="flex-1">
+      <div className='space-y-8'>
+        {/* Header Section with Hire Me Button */}
+        <div className='flex justify-between items-start flex-wrap gap-4'>
+          <div className='flex-1'>
             <Typography
-              variant="h1"
+              variant='h1'
               style={{
                 color: theme.palette.themePrimary,
                 fontSize: 'clamp(2rem, 5vw, 3rem)',
@@ -35,12 +34,11 @@ export default function ContactPage() {
             </Typography>
           </div>
 
-          {/* Social Media and Hire Me Section */}
-          <div className="flex items-center gap-4">
-            <SocialLinks />
+          {/* Hire Me Section */}
+          <div className='flex items-center gap-4'>
             <Button
-              variant="primary"
-              text="hire me!"
+              variant='primary'
+              text='hire me!'
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               style={{
                 fontSize: '0.875rem',
@@ -51,9 +49,9 @@ export default function ContactPage() {
         </div>
 
         {/* Intro Text */}
-        <div className="space-y-4">
+        <div className='space-y-4'>
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
               fontSize: '1.125rem',
@@ -63,7 +61,7 @@ export default function ContactPage() {
             Feel free to contact me via social media or the form below.
           </Typography>
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
               fontSize: '1.125rem',
@@ -85,9 +83,9 @@ export default function ContactPage() {
         </div>
 
         {/* Business Cards / CTA Section */}
-        <div className="space-y-6 mt-12">
+        <div className='space-y-6 mt-12'>
           <Typography
-            variant="h2"
+            variant='h2'
             style={{
               color: theme.palette.themePrimary,
               fontSize: '1.75rem',
@@ -97,7 +95,7 @@ export default function ContactPage() {
             Let&apos;s Build Something Extraordinary
           </Typography>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className='grid gap-6 md:grid-cols-2'>
             {/* Design Services Card */}
             <div
               style={{
@@ -108,7 +106,7 @@ export default function ContactPage() {
               }}
             >
               <Typography
-                variant="h3"
+                variant='h3'
                 style={{
                   color: theme.palette.themePrimary,
                   fontSize: '1.25rem',
@@ -119,7 +117,7 @@ export default function ContactPage() {
                 Design & Branding
               </Typography>
               <Typography
-                variant="p"
+                variant='p'
                 style={{
                   color: theme.palette.neutralSecondary,
                   lineHeight: theme.typography.lineHeights.relaxed,
@@ -141,7 +139,7 @@ export default function ContactPage() {
               }}
             >
               <Typography
-                variant="h3"
+                variant='h3'
                 style={{
                   color: theme.palette.themePrimary,
                   fontSize: '1.25rem',
@@ -152,7 +150,7 @@ export default function ContactPage() {
                 Web Development
               </Typography>
               <Typography
-                variant="p"
+                variant='p'
                 style={{
                   color: theme.palette.neutralSecondary,
                   lineHeight: theme.typography.lineHeights.relaxed,
@@ -174,7 +172,7 @@ export default function ContactPage() {
               }}
             >
               <Typography
-                variant="h3"
+                variant='h3'
                 style={{
                   color: theme.palette.themePrimary,
                   fontSize: '1.25rem',
@@ -185,7 +183,7 @@ export default function ContactPage() {
                 Strategic Consulting
               </Typography>
               <Typography
-                variant="p"
+                variant='p'
                 style={{
                   color: theme.palette.neutralSecondary,
                   lineHeight: theme.typography.lineHeights.relaxed,
@@ -207,7 +205,7 @@ export default function ContactPage() {
               }}
             >
               <Typography
-                variant="h3"
+                variant='h3'
                 style={{
                   color: theme.palette.themePrimary,
                   fontSize: '1.25rem',
@@ -218,7 +216,7 @@ export default function ContactPage() {
                 Training & Mentorship
               </Typography>
               <Typography
-                variant="p"
+                variant='p'
                 style={{
                   color: theme.palette.neutralSecondary,
                   lineHeight: theme.typography.lineHeights.relaxed,

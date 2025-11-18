@@ -149,23 +149,23 @@ export const ContactForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className='space-y-6'>
       {/* Honeypot field - hidden from users */}
-      <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
+      <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden='true'>
         <input
-          type="text"
-          name="honeypot"
+          type='text'
+          name='honeypot'
           value={formData.honeypot}
           onChange={handleChange}
           tabIndex={-1}
-          autoComplete="off"
+          autoComplete='off'
         />
       </div>
 
       {/* Name Field */}
       <div>
         <label
-          htmlFor="name"
+          htmlFor='name'
           style={{
             display: 'block',
             marginBottom: theme.spacing.xs,
@@ -174,18 +174,25 @@ export const ContactForm: React.FC = () => {
             color: theme.palette.neutralSecondary,
           }}
         >
-          Name <span style={{ color: theme.semanticColors.errorText || theme.palette.red }}>*</span>
+          Name{' '}
+          <span
+            style={{
+              color: theme.semanticColors.errorText || theme.palette.red,
+            }}
+          >
+            *
+          </span>
         </label>
         <input
-          id="name"
-          name="name"
-          type="text"
+          id='name'
+          name='name'
+          type='text'
           value={formData.name}
           onChange={handleChange}
-          placeholder="name"
+          placeholder='Your first and last name'
           required
-          aria-required="true"
-          aria-invalid={!!errors.name}
+          aria-required='true'
+          {...(errors.name && { 'aria-invalid': 'true' })}
           aria-describedby={errors.name ? 'name-error' : undefined}
           style={inputStyle}
           onFocus={(e) =>
@@ -196,7 +203,7 @@ export const ContactForm: React.FC = () => {
           }
         />
         {errors.name && (
-          <div id="name-error" role="alert" style={errorStyle}>
+          <div id='name-error' role='alert' style={errorStyle}>
             {errors.name}
           </div>
         )}
@@ -205,7 +212,7 @@ export const ContactForm: React.FC = () => {
       {/* Email Field */}
       <div>
         <label
-          htmlFor="email"
+          htmlFor='email'
           style={{
             display: 'block',
             marginBottom: theme.spacing.xs,
@@ -214,18 +221,25 @@ export const ContactForm: React.FC = () => {
             color: theme.palette.neutralSecondary,
           }}
         >
-          E-mail <span style={{ color: theme.semanticColors.errorText || theme.palette.red }}>*</span>
+          E-mail{' '}
+          <span
+            style={{
+              color: theme.semanticColors.errorText || theme.palette.red,
+            }}
+          >
+            *
+          </span>
         </label>
         <input
-          id="email"
-          name="email"
-          type="email"
+          id='email'
+          name='email'
+          type='email'
           value={formData.email}
           onChange={handleChange}
-          placeholder="e-mail"
+          placeholder='E-mail address'
           required
-          aria-required="true"
-          aria-invalid={!!errors.email}
+          aria-required='true'
+          {...(errors.email && { 'aria-invalid': 'true' })}
           aria-describedby={errors.email ? 'email-error' : undefined}
           style={inputStyle}
           onFocus={(e) =>
@@ -236,7 +250,7 @@ export const ContactForm: React.FC = () => {
           }
         />
         {errors.email && (
-          <div id="email-error" role="alert" style={errorStyle}>
+          <div id='email-error' role='alert' style={errorStyle}>
             {errors.email}
           </div>
         )}
@@ -245,7 +259,7 @@ export const ContactForm: React.FC = () => {
       {/* Message Field */}
       <div>
         <label
-          htmlFor="message"
+          htmlFor='message'
           style={{
             display: 'block',
             marginBottom: theme.spacing.xs,
@@ -254,17 +268,24 @@ export const ContactForm: React.FC = () => {
             color: theme.palette.neutralSecondary,
           }}
         >
-          Message <span style={{ color: theme.semanticColors.errorText || theme.palette.red }}>*</span>
+          Message{' '}
+          <span
+            style={{
+              color: theme.semanticColors.errorText || theme.palette.red,
+            }}
+          >
+            *
+          </span>
         </label>
         <textarea
-          id="message"
-          name="message"
+          id='message'
+          name='message'
           value={formData.message}
           onChange={handleChange}
-          placeholder="message"
+          placeholder='Type your message here...'
           required
-          aria-required="true"
-          aria-invalid={!!errors.message}
+          aria-required='true'
+          {...(errors.message && { 'aria-invalid': 'true' })}
           aria-describedby={
             errors.message ? 'message-error' : 'message-counter'
           }
@@ -291,12 +312,12 @@ export const ContactForm: React.FC = () => {
           }}
         >
           {errors.message && (
-            <div id="message-error" role="alert" style={errorStyle}>
+            <div id='message-error' role='alert' style={errorStyle}>
               {errors.message}
             </div>
           )}
           <div
-            id="message-counter"
+            id='message-counter'
             style={{
               fontSize: '0.75rem',
               color: theme.palette.neutralTertiary,
@@ -310,27 +331,28 @@ export const ContactForm: React.FC = () => {
 
       {/* Submit Button */}
       <Button
-        type="submit"
-        variant="primary"
+        type='submit'
+        variant='primary'
         fullWidth
         disabled={status === 'submitting'}
-        text={status === 'submitting' ? 'Sending...' : 'submit'}
+        text={status === 'submitting' ? 'Sending...' : 'Submit'}
         aria-busy={status === 'submitting'}
       />
 
       {/* Success Message */}
       {status === 'success' && (
         <div
-          role="alert"
+          role='alert'
           style={{
             padding: theme.spacing.m,
-            backgroundColor: theme.semanticColors.successBackground || '#E0F2F1',
+            backgroundColor:
+              theme.semanticColors.successBackground || '#E0F2F1',
             color: theme.semanticColors.successText || theme.palette.green,
             borderRadius: theme.borderRadius.s,
             textAlign: 'center',
           }}
         >
-          <Typography variant="p" style={{ margin: 0 }}>
+          <Typography variant='p' style={{ margin: 0 }}>
             Thank you for your message! We&apos;ll get back to you soon.
           </Typography>
         </div>
@@ -339,7 +361,7 @@ export const ContactForm: React.FC = () => {
       {/* Error Message */}
       {errors.submit && (
         <div
-          role="alert"
+          role='alert'
           style={{
             padding: theme.spacing.m,
             backgroundColor: theme.semanticColors.errorBackground || '#FFEBEE',
@@ -348,7 +370,7 @@ export const ContactForm: React.FC = () => {
             textAlign: 'center',
           }}
         >
-          <Typography variant="p" style={{ margin: 0 }}>
+          <Typography variant='p' style={{ margin: 0 }}>
             {errors.submit}
           </Typography>
         </div>
