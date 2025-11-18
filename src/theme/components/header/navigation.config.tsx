@@ -27,6 +27,13 @@ export const navItems: NavItem[] = [
     iconName: 'ProductList',
     description: 'View our services',
   },
+  {
+    label: 'scrolls',
+    path: '/services/scrolls',
+    view: 'scrolls',
+    iconName: 'DocumentSet',
+    description: 'Explore strategic insights',
+  },
   // {
   //   label: 'portfolio',
   //   path: '/portfolio',
