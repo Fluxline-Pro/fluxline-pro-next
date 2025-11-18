@@ -13,6 +13,7 @@ import { InstagramIcon } from '@/assets/svgs/InstagramLogo';
 import { LinkedInIcon } from '@/assets/svgs/LinkedInLogo';
 import { ThreadsIcon } from '@/assets/svgs/ThreadsLogo';
 import { YouTubeLogo } from '@/assets/svgs/YouTubeLogo';
+import { EmailLogo } from '@/assets/svgs/EmailLogo';
 
 interface SocialLink {
   name: string;
@@ -55,6 +56,12 @@ const SOCIAL_LINKS: SocialLink[] = [
     url: 'https://linkedin.com/in/terencewaters',
     icon: LinkedInIcon,
     ariaLabel: 'Connect with us on LinkedIn',
+  },
+  {
+    name: 'Email',
+    url: 'mailto:support@fluxline.pro',
+    icon: EmailLogo,
+    ariaLabel: 'Email us at support@fluxline.pro',
   },
 ];
 
