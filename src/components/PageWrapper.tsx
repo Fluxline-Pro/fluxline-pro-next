@@ -104,7 +104,7 @@ const PAGE_CONFIGS: Record<
     image: DesignImage.src,
     imageText: 'Brand & Experience Design',
   },
-  '/fluxine-ethos': {
+  '/fluxline-ethos': {
     image: FluxlineEthos.src,
     imageText: 'Fluxline Ethos',
   },
