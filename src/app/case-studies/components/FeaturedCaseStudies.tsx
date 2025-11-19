@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -11,7 +12,7 @@ import { Icon } from '@fluentui/react';
 /**
  * Featured Case Studies Component
  * Displays top featured case studies in a prominent layout
- * 
+ *
  * Features:
  * - Showcases 2-3 featured case studies
  * - Responsive grid layout
@@ -25,7 +26,8 @@ export default function FeaturedCaseStudies() {
   const orientation = useDeviceOrientation();
 
   const featuredStudies = React.useMemo(() => getFeaturedCaseStudies(), []);
-  const isMobile = orientation === 'portrait' || orientation === 'tablet-portrait';
+  const isMobile =
+    orientation === 'portrait' || orientation === 'tablet-portrait';
 
   if (featuredStudies.length === 0) {
     return null;
@@ -63,8 +65,8 @@ export default function FeaturedCaseStudies() {
             marginRight: 'auto',
           }}
         >
-          Discover how we&apos;ve helped organizations achieve transformative results
-          through strategic partnerships and innovative solutions.
+          Discover how we&apos;ve helped organizations achieve transformative
+          results through strategic partnerships and innovative solutions.
         </Typography>
       </div>
 
@@ -72,16 +74,20 @@ export default function FeaturedCaseStudies() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: isMobile
+            ? '1fr'
+            : 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: theme.spacing.l,
           marginBottom: theme.spacing.xl,
         }}
       >
         {featuredStudies.map((study) => (
-          <div
+          <Link
             key={study.id}
-            onClick={() => router.push(`/case-studies/${study.id}`)}
+            href={`/case-studies/${study.id}`}
             style={{
+              display: 'block',
+              textDecoration: 'none',
               backgroundColor: theme.palette.neutralLighterAlt,
               borderRadius: theme.effects.roundedCorner6,
               padding: theme.spacing.l,
@@ -225,7 +231,7 @@ export default function FeaturedCaseStudies() {
               <span>Read Case Study</span>
               <Icon iconName='ChevronRight' />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

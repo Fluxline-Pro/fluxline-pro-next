@@ -232,20 +232,30 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
   return (
     <ViewportGrid
       leftChildren={
-        <UnifiedCard
-          key={pathname + (id || '')} // Add key to reset animations on route change
-          id='imageCard' // Use consistent id for hooks compatibility
-          title={imageTextToDisplay}
-          viewType='image'
-          imageUrl={imageToDisplay}
-          elevation='medium'
-          showTitleOnImage={shouldShowTitle}
-          imageText={imageTextToDisplay}
-          delay={0.1}
-          useSpinner={true}
-          isViewportLeftPanel={true} // Mark this card as being in the ViewportGrid's left panel
-          skipDarkModeFilter={isUsingDarkLogo} // Skip dark mode filter for Fluxline dark logo
-        />
+        <div
+          style={{
+            minHeight: '200px',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <UnifiedCard
+            key={pathname + (id || '')} // Add key to reset animations on route change
+            id='imageCard' // Use consistent id for hooks compatibility
+            title={imageTextToDisplay}
+            viewType='image'
+            imageUrl={imageToDisplay}
+            elevation='medium'
+            showTitleOnImage={shouldShowTitle}
+            imageText={imageTextToDisplay}
+            delay={0.1}
+            useSpinner={true}
+            isViewportLeftPanel={true} // Mark this card as being in the ViewportGrid's left panel
+            skipDarkModeFilter={isUsingDarkLogo} // Skip dark mode filter for Fluxline dark logo
+          />
+        </div>
       }
       rightChildren={
         <div

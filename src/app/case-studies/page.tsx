@@ -14,7 +14,7 @@ import { getCaseStudies } from './caseStudiesData';
 /**
  * Case Studies Page Component
  * Displays client success stories in a card grid layout
- * 
+ *
  * Features:
  * - Responsive card grid layout with view type selector
  * - Theme-aware styling with Fluent UI
@@ -173,9 +173,9 @@ export default function CaseStudiesPage() {
             }}
           >
             Explore our client success stories and discover how strategic
-            transformation drives measurable results. From digital transformation
-            to wellness platforms, see how we partner with organizations to achieve
-            their most ambitious goals.
+            transformation drives measurable results. From digital
+            transformation to wellness platforms, see how we partner with
+            organizations to achieve their most ambitious goals.
           </Typography>
         </div>
 
@@ -274,8 +274,7 @@ export default function CaseStudiesPage() {
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themeDark;
+                e.currentTarget.style.backgroundColor = theme.palette.themeDark;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor =
