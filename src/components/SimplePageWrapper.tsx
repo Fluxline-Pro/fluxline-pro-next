@@ -10,7 +10,6 @@ import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 import { useIsMobile, useIsTabletPortrait } from '@/theme/hooks/useMediaQuery';
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { createPlaceholderSVG } from '@/utils/placeholder';
-import FluxlineLogo from '@/assets/images/FluxlineLogo.png';
 import FluxlineLogoDarkMode from '@/assets/images/FluxlineLogoDarkMode.png';
 import FluxlineLogoLightMode from '@/assets/images/FluxlineLogoLightMode.png';
 import ContactMeImage from '@/assets/images/ContactMe2400x1600.jpg';

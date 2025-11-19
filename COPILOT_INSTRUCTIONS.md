@@ -124,6 +124,7 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   - Dynamic routes with `[param]` directories
   - Route groups with `(group)` directories when needed
   - Nested layouts for consistent page structure
+  - Include image and routing within the PageWrapper.tsx file so images will appear based on route taken
 - **Content management**:
   - Markdown content can be processed with MDX or similar
   - Static content in `/public` directory
@@ -140,6 +141,7 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 
 1. Place PDF file in `/public/scrolls/pdfs/`
 2. Update `scrollsData.ts` with scroll metadata:
+
    ```typescript
    {
      id: 'unique-scroll-id',
@@ -158,6 +160,7 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
      }
    }
    ```
+
 3. Run `yarn build` to regenerate static pages
 4. New scroll will be automatically added to grid and detail route
 
@@ -353,7 +356,7 @@ For complete technical documentation, see `PRESS_RELEASE_README.md`
 
 ### Next.js App Router Structure
 
-```
+```text
 /
 ├── app/                     # App Router directory
 │   ├── globals.css         # Global styles
@@ -419,7 +422,7 @@ yarn lint                # Run ESLint
 yarn lint --fix          # Fix auto-fixable issues
 ```
 
-### Component Development
+### Component Development Commands
 
 ```bash
 # Generate new component with full structure
@@ -537,7 +540,7 @@ yarn build-storybook         # Build for deployment
 - **useThemeColor**: Get theme-aware colors based on current mode
 - **useReducedMotion**: Detect and respect motion preferences
 
-### Component Development
+### Component Development Best Practices
 
 - All components should be generated using `yarn generate:component ComponentName`
 - Use Fluent UI components and theming properties for theme-aware styling
@@ -610,4 +613,4 @@ PageWrapper includes pre-configured routes for:
 
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-11-17 - Press Release System Implementation Complete
+### Last Updated: 2025-11-19 - Author updated content for PageWrapper and Markdown formatting errors -Aplusandminus

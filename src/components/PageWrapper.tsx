@@ -15,6 +15,7 @@ import { FadeUp } from '../animations/fade-animations';
 // Import images directly
 import FluxlineLogoDarkMode from '../assets/images/FluxlineLogoDarkMode.png';
 import FluxlineLogoLightMode from '../assets/images/FluxlineLogoLightMode.png';
+import FluxlineEthos from '../assets/images/FluxlineEthos.png';
 import OurServicesImage from '../assets/images/OurServices1197x1600.jpg';
 import ConsultingImage from '../assets/images/ConsultingPortrait.jpg';
 import GitHubImage from '../assets/images/GitHubPortrait.jpg';
@@ -102,6 +103,10 @@ const PAGE_CONFIGS: Record<
   '/services/design': {
     image: DesignImage.src,
     imageText: 'Brand & Experience Design',
+  },
+  '/fluxline-ethos': {
+    image: FluxlineEthos.src,
+    imageText: 'Fluxline Ethos',
   },
   '/case-studies': {
     image: 'FLUXLINE_LOGO',
