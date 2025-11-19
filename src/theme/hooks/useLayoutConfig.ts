@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-
 import { IExtendedTheme } from '../theme';
 
 interface LayoutConfig {
@@ -28,7 +27,8 @@ export const useLayoutConfig = (
   isXLScreen: boolean,
   nested: boolean,
   theme: IExtendedTheme,
-  layoutPreference: 'left-handed' | 'right-handed'
+  layoutPreference: 'left-handed' | 'right-handed',
+  headerHeight: string
 ): LayoutConfig => {
   const pathname = usePathname();
   const isOnboardingPage =
@@ -118,7 +118,7 @@ export const useLayoutConfig = (
   ]);
 
   const gridTemplateColumns = useMemo(() => {
-    if (orientation === 'portrait') return '1fr';
+    if (orientation === 'portrait') return '1fr'; // Single column for stacked layout
 
     // Special handling for home page in mobile landscape
     if (isHomePage && orientation === 'mobile-landscape') {
@@ -171,14 +171,16 @@ export const useLayoutConfig = (
           orientation === 'mobile-landscape'
         ? theme.spacing.m
         : theme.spacing.l,
+    paddingTop: isHomePage
+      ? undefined
+      : `calc(${headerHeight} + ${theme.spacing.l})`,
     gap:
       orientation === 'portrait' ||
       orientation === 'mobile-landscape' ||
       orientation === 'tablet-portrait'
-        ? '0'
+        ? theme.spacing.m
         : theme.spacing.l,
-    gridTemplateRows:
-      orientation === 'portrait' && !isHomePage ? 'auto auto' : '1fr',
+    gridTemplateRows: orientation === 'portrait' ? 'auto 1fr' : '1fr', // Stacked layout: image auto-sized, content takes remaining space
     overflow: isHomePage
       ? orientation === 'portrait'
         ? 'visible'
