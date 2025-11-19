@@ -171,7 +171,7 @@ export default function PressReleasePage() {
                 selectedKey={viewType}
                 onChange={(event, option) => {
                   if (option) {
-                    setViewType(option.key as any);
+                    setViewType(option.key as 'grid' | 'small-tile' | 'large-tile');
                   }
                 }}
                 styles={{
