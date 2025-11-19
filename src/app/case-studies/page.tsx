@@ -9,36 +9,27 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { Dropdown } from '@fluentui/react';
-import { format } from 'date-fns';
-import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
+import { getCaseStudies } from './caseStudiesData';
 
 /**
- * Press Release Page Component
- * Displays press releases in a card grid layout
- * Mirrors the design logic from Blog and Portfolio views
+ * Case Studies Page Component
+ * Displays client success stories in a card grid layout
  *
  * Features:
- * - Responsive card grid layout
+ * - Responsive card grid layout with view type selector
  * - Theme-aware styling with Fluent UI
- * - Loading and error states
  * - Integration with PageWrapper for consistent layout
- * - Portrait image and title display
+ * - SSG static rendering
+ * - Navigation to detail views
  */
-export default function PressReleasePage() {
+export default function CaseStudiesPage() {
   const router = useRouter();
   const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
   const orientation = useDeviceOrientation();
 
-  // Use direct import of mock data (sorted by date, newest first)
-  const pressReleases = React.useMemo(() => {
-    return [...pressReleasesMockData].sort(
-      (a, b) => b.date.getTime() - a.date.getTime()
-    );
-  }, []);
-
-  const isLoading = false;
-  const error = null;
+  // Load case studies data
+  const caseStudies = React.useMemo(() => getCaseStudies(), []);
 
   // View type options for dropdown
   const viewOptions = [
@@ -84,48 +75,25 @@ export default function PressReleasePage() {
     }
   }, [viewType]);
 
-  // Transform press releases to card format
+  // Transform case studies to card format
   const cards = React.useMemo(() => {
-    const transformedCards = pressReleases.map((release) => ({
-      id: release.id,
-      title: release.title,
-      description: release.subtitle || release.description,
-      imageUrl: release.imageUrl,
-      imageAlt: release.imageAlt || release.title,
-      imageText: format(release.date, 'MMMM d, yyyy'),
+    return caseStudies.map((study) => ({
+      id: study.id,
+      title: study.title,
+      description: study.description,
+      imageUrl: study.imageUrl,
+      imageAlt: study.imageAlt || study.title,
+      imageText: `${study.client} • ${study.industry}`,
     }));
-    console.log('PressReleasePage render - state:', {
-      pressReleasesCount: pressReleases?.length || 0,
-      isLoading,
-      error,
-      orientation,
-      viewType,
-      gridColumns,
-      mappedViewType,
-    });
-    return transformedCards;
-  }, [
-    gridColumns,
-    mappedViewType,
-    isLoading,
-    error,
-    orientation,
-    pressReleases,
-    viewType,
-  ]);
+  }, [caseStudies]);
 
   // Handle card click to navigate to detail view
   const handleCardClick = React.useCallback(
     (id: string) => {
-      console.log('handleCardClick called with ID:', id);
-      const selectedRelease = pressReleases.find((r) => r.id === id);
-      console.log('Found release:', selectedRelease?.title);
-      if (selectedRelease) {
-        console.log('Navigating to:', `/press-release/${id}`);
-        router.push(`/press-release/${id}`);
-      }
+      console.log('Navigating to case study:', id);
+      router.push(`/case-studies/${id}`);
     },
-    [pressReleases, router]
+    [router]
   );
 
   return (
@@ -157,7 +125,7 @@ export default function PressReleasePage() {
                 color: theme.palette.neutralPrimary,
               }}
             >
-              Press Release
+              Case Studies
             </Typography>
             {/* View Selector Dropdown */}
             <div
@@ -171,7 +139,9 @@ export default function PressReleasePage() {
                 selectedKey={viewType}
                 onChange={(event, option) => {
                   if (option) {
-                    setViewType(option.key as 'grid' | 'small-tile' | 'large-tile');
+                    setViewType(
+                      option.key as 'grid' | 'small-tile' | 'large-tile'
+                    );
                   }
                 }}
                 styles={{
@@ -202,59 +172,18 @@ export default function PressReleasePage() {
               maxWidth: '800px',
             }}
           >
-            Public announcements, media features, and milestone broadcasts from
-            Fluxline Resonance Group. Stay informed about our latest
-            developments, partnerships, and achievements.
+            Explore our client success stories and discover how strategic
+            transformation drives measurable results. From digital
+            transformation to wellness platforms, see how we partner with
+            organizations to achieve their most ambitious goals.
           </Typography>
         </div>
 
-        {/* Loading State */}
-        {isLoading && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '400px',
-            }}
-          >
-            <Typography
-              variant='h3'
-              style={{ color: theme.palette.themePrimary }}
-            >
-              Loading press releases...
-            </Typography>
-          </div>
-        )}
-
-        {/* Error State */}
-        {error && !isLoading && (
-          <div
-            style={{
-              padding: theme.spacing.xl,
-              backgroundColor: theme.palette.redDark,
-              borderRadius: theme.effects.roundedCorner4,
-              marginBottom: theme.spacing.xl,
-            }}
-          >
-            <Typography variant='h3' style={{ color: theme.palette.white }}>
-              Error loading press releases
-            </Typography>
-            <Typography variant='p' style={{ color: theme.palette.white }}>
-              {error}
-            </Typography>
-          </div>
-        )}
-
-        {/* Press Release Cards */}
-        {!isLoading && !error && cards.length > 0 && (
+        {/* Case Study Cards */}
+        {cards.length > 0 && (
           <div>
             <AdaptiveCardGrid
-              cards={cards.map((card) => ({
-                ...card,
-                // Add data attribute to identify clickable cards
-                id: card.id,
-              }))}
+              cards={cards}
               viewType={mappedViewType}
               gap={theme.spacing.m}
               enableImageAdaptation={true}
@@ -265,7 +194,7 @@ export default function PressReleasePage() {
         )}
 
         {/* Empty State */}
-        {!isLoading && !error && cards.length === 0 && (
+        {cards.length === 0 && (
           <div
             style={{
               display: 'flex',
@@ -280,16 +209,105 @@ export default function PressReleasePage() {
               variant='h3'
               style={{ color: theme.palette.neutralSecondary }}
             >
-              No press releases found
+              No case studies found
             </Typography>
             <Typography
               variant='p'
               style={{ color: theme.palette.neutralTertiary }}
             >
-              Check back soon for updates and announcements.
+              Check back soon for client success stories.
             </Typography>
           </div>
         )}
+
+        {/* Call to Action Section */}
+        <div
+          style={{
+            marginTop: theme.spacing.xxl,
+            padding: theme.spacing.xl,
+            backgroundColor: theme.palette.neutralLighterAlt,
+            borderRadius: theme.effects.roundedCorner6,
+            textAlign: 'center',
+          }}
+        >
+          <Typography
+            variant='h2'
+            style={{
+              color: theme.palette.themePrimary,
+              marginBottom: theme.spacing.m,
+            }}
+          >
+            Ready to Transform Your Business?
+          </Typography>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              marginBottom: theme.spacing.l,
+              maxWidth: '600px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            Join the growing list of organizations achieving measurable results
+            with Fluxline&apos;s strategic approach to transformation.
+          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              gap: theme.spacing.m,
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            <button
+              onClick={() => router.push('/services')}
+              style={{
+                padding: `${theme.spacing.s1} ${theme.spacing.l}`,
+                backgroundColor: theme.palette.themePrimary,
+                color: theme.palette.white,
+                border: 'none',
+                borderRadius: theme.effects.roundedCorner4,
+                fontSize: theme.fonts.mediumPlus.fontSize,
+                fontWeight: theme.typography.fontWeights.semiBold,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = theme.palette.themeDark;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.themePrimary;
+              }}
+            >
+              View Our Services
+            </button>
+            <button
+              onClick={() => router.push('/contact')}
+              style={{
+                padding: `${theme.spacing.s1} ${theme.spacing.l}`,
+                backgroundColor: 'transparent',
+                color: theme.palette.themePrimary,
+                border: `2px solid ${theme.palette.themePrimary}`,
+                borderRadius: theme.effects.roundedCorner4,
+                fontSize: theme.fonts.mediumPlus.fontSize,
+                fontWeight: theme.typography.fontWeights.semiBold,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.themeLighterAlt;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
+            >
+              Start Your Transformation
+            </button>
+          </div>
+        </div>
       </div>
     </PageWrapper>
   );
