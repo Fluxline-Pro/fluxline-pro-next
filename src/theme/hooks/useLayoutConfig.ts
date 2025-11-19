@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { IExtendedTheme } from '../index';
+import { IExtendedTheme } from '../theme';
 
 interface LayoutConfig {
   gridTemplateColumns: string;

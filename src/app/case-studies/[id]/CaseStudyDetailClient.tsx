@@ -24,7 +24,8 @@ export default function CaseStudyDetailClient({
   const { theme } = useAppTheme();
   const orientation = useDeviceOrientation();
 
-  const isMobile = orientation === 'portrait' || orientation === 'tablet-portrait';
+  const isMobile =
+    orientation === 'portrait' || orientation === 'tablet-portrait';
 
   return (
     <PageWrapper>
@@ -74,7 +75,7 @@ export default function CaseStudyDetailClient({
           >
             {caseStudy.title}
           </Typography>
-          
+
           <div
             style={{
               display: 'flex',
@@ -85,13 +86,19 @@ export default function CaseStudyDetailClient({
               fontSize: theme.fonts.medium.fontSize,
             }}
           >
-            <span><strong>Client:</strong> {caseStudy.client}</span>
+            <span>
+              <strong>Client:</strong> {caseStudy.client}
+            </span>
             <span>•</span>
-            <span><strong>Industry:</strong> {caseStudy.industry}</span>
+            <span>
+              <strong>Industry:</strong> {caseStudy.industry}
+            </span>
             {caseStudy.projectDuration && (
               <>
                 <span>•</span>
-                <span><strong>Duration:</strong> {caseStudy.projectDuration}</span>
+                <span>
+                  <strong>Duration:</strong> {caseStudy.projectDuration}
+                </span>
               </>
             )}
           </div>
@@ -127,7 +134,13 @@ export default function CaseStudyDetailClient({
             >
               Services
             </Typography>
-            <div style={{ display: 'flex', gap: theme.spacing.s2, flexWrap: 'wrap' }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: theme.spacing.s2,
+                flexWrap: 'wrap',
+              }}
+            >
               {caseStudy.services.map((service) => (
                 <span
                   key={service}
@@ -157,7 +170,13 @@ export default function CaseStudyDetailClient({
             >
               Technologies
             </Typography>
-            <div style={{ display: 'flex', gap: theme.spacing.s2, flexWrap: 'wrap' }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: theme.spacing.s2,
+                flexWrap: 'wrap',
+              }}
+            >
               {caseStudy.technologies.map((tech) => (
                 <span
                   key={tech}
@@ -337,7 +356,7 @@ export default function CaseStudyDetailClient({
                 marginBottom: theme.spacing.m,
               }}
             >
-              "              &quot;{caseStudy.testimonial.quote}&quot;"
+              {`"${caseStudy.testimonial.quote}"`}
             </Typography>
             <Typography
               variant='p'
@@ -382,7 +401,8 @@ export default function CaseStudyDetailClient({
               marginRight: 'auto',
             }}
           >
-            Let&apos;s discuss how we can help you achieve your transformation goals.
+            Let&apos;s discuss how we can help you achieve your transformation
+            goals.
           </Typography>
           <div
             style={{
@@ -406,8 +426,7 @@ export default function CaseStudyDetailClient({
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themeDark;
+                e.currentTarget.style.backgroundColor = theme.palette.themeDark;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor =
