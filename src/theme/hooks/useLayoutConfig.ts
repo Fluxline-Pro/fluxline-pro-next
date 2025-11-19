@@ -2,8 +2,7 @@
 
 import { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-
-import { IExtendedTheme } from '../theme';
+import { IExtendedTheme } from '../index';
 
 interface LayoutConfig {
   gridTemplateColumns: string;
@@ -28,7 +27,8 @@ export const useLayoutConfig = (
   isXLScreen: boolean,
   nested: boolean,
   theme: IExtendedTheme,
-  layoutPreference: 'left-handed' | 'right-handed'
+  layoutPreference: 'left-handed' | 'right-handed',
+  headerHeight: string
 ): LayoutConfig => {
   const pathname = usePathname();
   const isOnboardingPage =
@@ -171,6 +171,7 @@ export const useLayoutConfig = (
           orientation === 'mobile-landscape'
         ? theme.spacing.m
         : theme.spacing.l,
+        paddingTop: isHomePage ? undefined : `calc(${headerHeight} + ${theme.spacing.l})`,
     gap:
       orientation === 'portrait' ||
       orientation === 'mobile-landscape' ||

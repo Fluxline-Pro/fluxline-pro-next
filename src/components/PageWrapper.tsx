@@ -103,6 +103,10 @@ const PAGE_CONFIGS: Record<
     image: DesignImage.src,
     imageText: 'Brand & Experience Design',
   },
+  '/case-studies': {
+    image: 'FLUXLINE_LOGO',
+    imageText: 'Case Studies',
+  },
   '/blog': {
     image: BlogImage.src,
     imageText: 'Blog',

@@ -80,6 +80,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
       <Typography
         variant='h3'
         style={{
+          textTransform: 'capitalize',
           color:
             isActive || isHovered
               ? theme.palette.themePrimary
