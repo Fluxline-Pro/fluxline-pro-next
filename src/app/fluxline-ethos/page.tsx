@@ -17,9 +17,6 @@ import {
   ethosCTA,
 } from '@/lib/ethos/ethosContent';
 
-// Force static generation
-export const dynamic = 'force-static';
-
 export default function FluxlineEthosPage() {
   const { theme } = useAppTheme();
 
@@ -146,13 +143,15 @@ export default function FluxlineEthosPage() {
                   transition: 'all 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = theme.palette.themePrimary;
+                  e.currentTarget.style.borderColor =
+                    theme.palette.themePrimary;
                   e.currentTarget.style.transform = 'translateY(-2px)';
                   e.currentTarget.style.boxShadow =
                     theme.shadows?.m || '0 4px 8px rgba(0,0,0,0.1)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = theme.palette.neutralLight;
+                  e.currentTarget.style.borderColor =
+                    theme.palette.neutralLight;
                   e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
@@ -271,7 +270,8 @@ export default function FluxlineEthosPage() {
               e.currentTarget.style.transform = 'scale(1.05)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = theme.palette.themePrimary;
+              e.currentTarget.style.backgroundColor =
+                theme.palette.themePrimary;
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
