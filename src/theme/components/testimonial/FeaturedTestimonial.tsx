@@ -112,7 +112,7 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
             textAlign: 'center',
           }}
         >
-          "{testimonial.quote}"
+          &ldquo;{testimonial.quote}&rdquo;
         </Typography>
       </div>
 
