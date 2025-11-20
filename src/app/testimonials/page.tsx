@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { PageWrapper } from '@/components/PageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -33,7 +34,7 @@ import Image from 'next/image';
 export default function TestimonialsPage() {
   const { theme } = useAppTheme();
   const orientation = useDeviceOrientation();
-  
+
   // Get testimonials data
   const allTestimonials = getAllTestimonials();
   const featuredTestimonials = getFeaturedTestimonials();
@@ -41,9 +42,8 @@ export default function TestimonialsPage() {
 
   // Modal state
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial | null>(
-    null
-  );
+  const [selectedTestimonial, setSelectedTestimonial] =
+    useState<Testimonial | null>(null);
 
   const handleCardClick = (testimonial: Testimonial) => {
     setSelectedTestimonial(testimonial);
@@ -91,18 +91,69 @@ export default function TestimonialsPage() {
           margin: '0 auto',
         }}
       >
+        {/* Back Navigation */}
+        <motion.div
+          initial='hidden'
+          animate='visible'
+          variants={fadeUpVariants}
+          style={{
+            marginBottom: theme.spacing.l,
+          }}
+        >
+          <Link
+            href='/about'
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: theme.spacing.s1,
+              padding: theme.spacing.s1,
+              borderRadius: '8px',
+              color: theme.palette.themePrimary,
+              textDecoration: 'none',
+              fontSize: theme.typography.fontSizes.clamp3,
+              fontWeight: theme.typography.fontWeights.medium,
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor =
+                theme.palette.neutralLighterAlt;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+          >
+            <svg
+              width='20'
+              height='20'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M15 19l-7-7 7-7'
+              />
+            </svg>
+            Back to About
+          </Link>
+        </motion.div>
+
         {/* Page Header */}
         <motion.div
-          initial="hidden"
-          animate="visible"
+          initial='hidden'
+          animate='visible'
           variants={fadeUpVariants}
+          transition={{ delay: 0.1 }}
           style={{
             textAlign: 'center',
             marginBottom: theme.spacing.xxl,
           }}
         >
           <Typography
-            variant="h1"
+            variant='h1'
             style={{
               color: theme.palette.themePrimary,
               marginBottom: theme.spacing.m,
@@ -112,7 +163,7 @@ export default function TestimonialsPage() {
             What Our Clients Say
           </Typography>
           <Typography
-            variant="p"
+            variant='p'
             style={{
               color: theme.palette.neutralSecondary,
               maxWidth: '800px',
@@ -120,22 +171,22 @@ export default function TestimonialsPage() {
               fontSize: theme.typography.fontSizes.clamp4,
             }}
           >
-            Hear from the businesses and individuals we&apos;ve helped transform through
-            strategic consulting, training, and development services.
+            Hear from the businesses and individuals we&apos;ve helped transform
+            through strategic consulting, training, and development services.
           </Typography>
         </motion.div>
 
         {/* Featured Testimonials Carousel */}
         {featuredTestimonials.length > 0 && (
           <motion.div
-            initial="hidden"
-            animate="visible"
+            initial='hidden'
+            animate='visible'
             variants={fadeUpVariants}
             transition={{ delay: 0.2 }}
             style={{ marginBottom: theme.spacing.xxl }}
           >
             <Typography
-              variant="h2"
+              variant='h2'
               style={{
                 color: theme.palette.neutralPrimary,
                 marginBottom: theme.spacing.l,
@@ -145,7 +196,9 @@ export default function TestimonialsPage() {
               Featured Testimonials
             </Typography>
             <TestimonialCarousel
-              onItemClick={(index) => handleCardClick(featuredTestimonials[index])}
+              onItemClick={(index) =>
+                handleCardClick(featuredTestimonials[index])
+              }
             >
               {featuredTestimonials.map((testimonial) => (
                 <FeaturedTestimonial
@@ -160,14 +213,14 @@ export default function TestimonialsPage() {
 
         {/* All Testimonials Grid */}
         <motion.div
-          initial="hidden"
-          animate="visible"
+          initial='hidden'
+          animate='visible'
           variants={fadeUpVariants}
           transition={{ delay: 0.4 }}
           style={{ marginBottom: theme.spacing.xxl }}
         >
           <Typography
-            variant="h2"
+            variant='h2'
             style={{
               color: theme.palette.neutralPrimary,
               marginBottom: theme.spacing.l,
@@ -199,9 +252,9 @@ export default function TestimonialsPage() {
                   description={testimonial.quote}
                   imageUrl={testimonial.imageUrl}
                   imageAlt={testimonial.imageAlt}
-                  viewType="grid"
+                  viewType='grid'
                   onClick={() => handleCardClick(testimonial)}
-                  elevation="medium"
+                  elevation='medium'
                   imageText={testimonial.company}
                   showTitleOnImage={false}
                 />
@@ -212,13 +265,13 @@ export default function TestimonialsPage() {
 
         {/* Browse Testimonials Carousel */}
         <motion.div
-          initial="hidden"
-          animate="visible"
+          initial='hidden'
+          animate='visible'
           variants={fadeUpVariants}
           transition={{ delay: 0.6 }}
         >
           <Typography
-            variant="h2"
+            variant='h2'
             style={{
               color: theme.palette.neutralPrimary,
               marginBottom: theme.spacing.l,
@@ -264,7 +317,7 @@ export default function TestimonialsPage() {
                   />
                   <div>
                     <Typography
-                      variant="h4"
+                      variant='h4'
                       style={{
                         color: theme.palette.neutralPrimary,
                         fontSize: theme.typography.fontSizes.clamp4,
@@ -273,7 +326,7 @@ export default function TestimonialsPage() {
                       {testimonial.name}
                     </Typography>
                     <Typography
-                      variant="p"
+                      variant='p'
                       style={{
                         color: theme.palette.neutralSecondary,
                         fontSize: theme.typography.fontSizes.clamp2,
@@ -284,7 +337,7 @@ export default function TestimonialsPage() {
                   </div>
                 </div>
                 <Typography
-                  variant="p"
+                  variant='p'
                   style={{
                     color: theme.palette.neutralPrimary,
                     fontStyle: 'italic',
@@ -292,7 +345,7 @@ export default function TestimonialsPage() {
                     flex: 1,
                   }}
                 >
-                  "                  &ldquo;{testimonial.quote.substring(0, 120)}...&rdquo;"
+                  " &ldquo;{testimonial.quote.substring(0, 120)}...&rdquo;"
                 </Typography>
               </div>
             ))}
