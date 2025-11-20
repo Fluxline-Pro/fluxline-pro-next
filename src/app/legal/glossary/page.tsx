@@ -1,24 +1,20 @@
+import React from 'react';
 import { Metadata } from 'next';
 import { PageWrapper } from '../../../components/PageWrapper';
-import LegalPageLayout from '../../../components/LegalPageLayout';
-import { content } from '../../../assets/legal/glossary';
+import GlossaryLandingClient from './GlossaryLandingClient';
 
 export const metadata: Metadata = {
   title: 'Glossary of Terms - Fluxline Professional Services',
   description:
-    'Definitions of key terms used in Fluxline Professional Services documentation, contracts, and communications.',
+    'Comprehensive glossary covering both mythic architecture terminology and technical/professional terms used by Fluxline Professional Services.',
   keywords:
-    'glossary, terminology, definitions, business terms, technical terms, Fluxline',
+    'glossary, terminology, definitions, mythic terms, technical terms, business terms, Fluxline',
 };
 
 export default function GlossaryPage() {
   return (
     <PageWrapper>
-      <LegalPageLayout
-        title='Glossary of Terms'
-        subtitle='Key Terminology and Definitions'
-        content={content}
-      />
+      <GlossaryLandingClient />
     </PageWrapper>
   );
 }
