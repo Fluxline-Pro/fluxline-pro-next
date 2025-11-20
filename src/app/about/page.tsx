@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -78,11 +79,12 @@ export default function AboutPage() {
             >
               Whether you&apos;re an individual seeking personal growth or a
               business ready to scale with purpose, our <em>coaching</em>,{' '}
-              <em>wellness programs</em>, and <em>infrastructure design</em> help
-              you align your <strong>drive</strong> with your{' '}
-              <em>innate identity</em>. We believe transformation isn&apos;t just
-              about metrics—it&apos;s about honoring <em>emotional rhythm</em>,{' '}
-              <em>creative truth</em>, and <em>legacy resonance</em>.
+              <em>wellness programs</em>, and <em>infrastructure design</em>{' '}
+              help you align your <strong>drive</strong> with your{' '}
+              <em>innate identity</em>. We believe transformation isn&apos;t
+              just about metrics—it&apos;s about honoring{' '}
+              <em>emotional rhythm</em>, <em>creative truth</em>, and{' '}
+              <em>legacy resonance</em>.
             </Typography>
 
             <Typography
@@ -112,6 +114,65 @@ export default function AboutPage() {
             Our Impact
           </Typography>
           <CompanyStatistics statistics={COMPANY_STATISTICS} />
+        </div>
+
+        {/* Testimonials Callout */}
+        <div className='space-y-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 p-8 rounded-lg border border-gray-200 dark:border-gray-700'>
+          <Typography
+            variant='h3'
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: '1.5rem',
+              fontWeight: theme.typography.fontWeights.semiBold,
+            }}
+          >
+            Hear From Our Clients
+          </Typography>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '1rem',
+              lineHeight: theme.typography.lineHeights.relaxed,
+            }}
+          >
+            Don&apos;t just take our word for it. See how we&apos;ve helped
+            businesses and individuals transform through our strategic
+            consulting, coaching, and development services.
+          </Typography>
+          <div className='pt-2'>
+            <Link
+              href='/testimonials'
+              className='inline-flex items-center px-6 py-3 rounded-md font-medium transition-colors duration-200'
+              style={{
+                backgroundColor: theme.palette.themePrimary,
+                color: theme.palette.white,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = theme.palette.themeDark;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.themePrimary;
+              }}
+            >
+              Read Client Stories
+              <svg
+                className='ml-2 w-4 h-4'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M9 5l7 7-7 7'
+                />
+              </svg>
+            </Link>
+          </div>
         </div>
 
         {/* Mission & Vision */}
@@ -170,7 +231,7 @@ export default function AboutPage() {
           >
             Our Values
           </Typography>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {COMPANY_VALUES.map((value) => (
               <ValueCard key={value.id} value={value} />
             ))}
@@ -204,7 +265,7 @@ export default function AboutPage() {
           >
             Our Team
           </Typography>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {TEAM_MEMBERS.map((member) => (
               <TeamMemberCard key={member.id} member={member} />
             ))}

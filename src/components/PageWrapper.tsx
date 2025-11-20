@@ -16,6 +16,7 @@ import { FadeUp } from '../animations/fade-animations';
 import FluxlineLogoDarkMode from '../assets/images/FluxlineLogoDarkMode.png';
 import FluxlineLogoLightMode from '../assets/images/FluxlineLogoLightMode.png';
 import FluxlineEthos from '../assets/images/FluxlineEthos.png';
+import FluxlineTestimonials from '../assets/images/FluxlineTestimonials.png';
 import OurServicesImage from '../assets/images/OurServices1197x1600.jpg';
 import ConsultingImage from '../assets/images/ConsultingPortrait.jpg';
 import GitHubImage from '../assets/images/GitHubPortrait.jpg';
@@ -139,6 +140,10 @@ const PAGE_CONFIGS: Record<
   '/press-release': {
     image: PressReleaseImage.src,
     imageText: 'Press Release',
+  },
+  '/testimonials': {
+    image: FluxlineTestimonials.src,
+    imageText: 'Testimonials',
   },
 };
 
