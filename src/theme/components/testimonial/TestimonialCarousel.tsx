@@ -82,9 +82,9 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
       {/* Left Arrow */}
       {canScrollLeft && (
         <button
-          type="button"
+          type='button'
           onClick={() => scrollBy('left')}
-          aria-label="Scroll left"
+          aria-label='Scroll left'
           style={{ ...buttonStyles, left: '8px' }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = theme.palette.neutralLighter;
@@ -96,7 +96,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
           }}
         >
           <Icon
-            iconName="ChevronLeft"
+            iconName='ChevronLeft'
             styles={{
               root: {
                 fontSize: '20px',
@@ -121,38 +121,83 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
           padding: '1rem 2rem',
         }}
       >
-        {children.map((child, index) => (
-          <div
-            key={index}
-            onClick={() => onItemClick?.(index)}
-            style={{
-              minWidth: 'clamp(280px, 33.333%, 400px)',
-              scrollSnapAlign: 'start',
-              cursor: onItemClick ? 'pointer' : 'default',
-              transition: 'transform 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              if (onItemClick) {
-                e.currentTarget.style.transform = 'scale(1.02)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (onItemClick) {
-                e.currentTarget.style.transform = 'scale(1)';
-              }
-            }}
-          >
-            {child}
-          </div>
-        ))}
+        {children.map((child, index) => {
+          const commonStyles = {
+            minWidth: 'clamp(280px, 33.333%, 400px)',
+            scrollSnapAlign: 'start' as const,
+            transition: 'transform 0.2s ease',
+          };
+
+          const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+            if (onItemClick) {
+              (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)';
+            }
+          };
+
+          const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+            if (onItemClick) {
+              (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+            }
+          };
+
+          const handleKeyDown = (e: React.KeyboardEvent) => {
+            if (onItemClick && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              onItemClick(index);
+            }
+          };
+
+          if (onItemClick) {
+            return (
+              <button
+                key={index}
+                type='button'
+                onClick={() => onItemClick(index)}
+                onKeyDown={handleKeyDown}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                aria-label={`View testimonial ${index + 1}`}
+                style={{
+                  ...commonStyles,
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: 'transparent',
+                  padding: 0,
+                  outline: 'none',
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.outline = `2px solid ${theme.palette.themePrimary}`;
+                  e.currentTarget.style.outlineOffset = '2px';
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.outline = 'none';
+                }}
+              >
+                {child}
+              </button>
+            );
+          }
+
+          return (
+            <div
+              key={index}
+              style={{
+                ...commonStyles,
+                cursor: 'default',
+              }}
+            >
+              {child}
+            </div>
+          );
+        })}
       </div>
 
       {/* Right Arrow */}
       {canScrollRight && (
         <button
-          type="button"
+          type='button'
           onClick={() => scrollBy('right')}
-          aria-label="Scroll right"
+          aria-label='Scroll right'
           style={{ ...buttonStyles, right: '8px' }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = theme.palette.neutralLighter;
@@ -164,7 +209,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
           }}
         >
           <Icon
-            iconName="ChevronRight"
+            iconName='ChevronRight'
             styles={{
               root: {
                 fontSize: '20px',
