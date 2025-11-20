@@ -93,7 +93,7 @@ const PAGE_CONFIGS: Record<
     image: ConsultingImage.src,
     imageText: 'Articles of Conversion',
   },
-  '/services/education-training': {
+  '/services/education': {
     image: EducationImage.src,
     imageText: 'Education & Training',
   },
