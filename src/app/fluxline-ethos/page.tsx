@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useHoverEffects } from '@/hooks/useHoverEffects';
 import {
   ethosHero,
   ethosAbout,
@@ -19,11 +20,6 @@ import {
 
 export default function FluxlineEthosPage() {
   const { theme } = useAppTheme();
-  const cardHoverEffects = useHoverEffects({
-    type: 'card',
-    hoverBorderColor: theme.palette.themePrimary,
-    defaultBorderColor: theme.palette.neutralLight,
-  });
   const cardHoverEffects = useHoverEffects({
     type: 'card',
     hoverBorderColor: theme.palette.themePrimary,

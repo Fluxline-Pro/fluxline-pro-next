@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
+import { useHoverEffects } from '@/hooks/useHoverEffects';
 import { getFeaturedCaseStudies } from '../caseStudiesData';
 import { Icon } from '@fluentui/react';
 
