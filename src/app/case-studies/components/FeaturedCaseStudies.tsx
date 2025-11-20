@@ -24,6 +24,19 @@ export default function FeaturedCaseStudies() {
   const router = useRouter();
   const { theme } = useAppTheme();
   const orientation = useDeviceOrientation();
+  const cardHoverEffects = useHoverEffects({
+    type: 'card',
+    hoverBorderColor: theme.palette.themePrimary,
+    defaultBorderColor: theme.palette.neutralLight,
+  });
+  const buttonHoverEffects = useHoverEffects({
+    type: 'button',
+    hoverBgColor: theme.palette.themePrimary,
+    defaultBgColor: 'transparent',
+    hoverTextColor: theme.palette.white,
+    defaultTextColor: theme.palette.themePrimary,
+    enableTransform: false,
+  });
 
   const featuredStudies = React.useMemo(() => getFeaturedCaseStudies(), []);
   const isMobile =
@@ -95,16 +108,7 @@ export default function FeaturedCaseStudies() {
               transition: 'all 0.3s ease',
               border: `1px solid ${theme.palette.neutralLight}`,
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = theme.effects.elevation8;
-              e.currentTarget.style.borderColor = theme.palette.themePrimary;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.borderColor = theme.palette.neutralLight;
-            }}
+            {...cardHoverEffects}
           >
             {/* Card Header */}
             <div
@@ -250,14 +254,7 @@ export default function FeaturedCaseStudies() {
             cursor: 'pointer',
             transition: 'all 0.2s ease',
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = theme.palette.themePrimary;
-            e.currentTarget.style.color = theme.palette.white;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-            e.currentTarget.style.color = theme.palette.themePrimary;
-          }}
+          {...buttonHoverEffects}
         >
           View All Case Studies
         </button>

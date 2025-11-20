@@ -6,6 +6,7 @@ import { PageWrapper } from '../../components/PageWrapper';
 import { Typography } from '../../theme/components/typography';
 import { useAppTheme } from '../../theme/hooks/useAppTheme';
 import { spacing } from '../../theme/theme';
+import { useHoverEffects } from '../../hooks/useHoverEffects';
 
 interface LegalDocument {
   title: string;
@@ -16,7 +17,7 @@ interface LegalDocument {
 
 const LEGAL_DOCUMENTS: LegalDocument[] = [
   {
-    title: 'Terms Of Use',
+    title: 'Terms of Use',
     description:
       'Review the terms and conditions governing your use of the Fluxline pro website and services.',
     href: '/legal/terms',
@@ -34,13 +35,13 @@ const LEGAL_DOCUMENTS: LegalDocument[] = [
     href: '/legal/stewardship-contract',
   },
   {
-    title: 'Glossary Of Terms',
+    title: 'Glossary of Terms',
     description:
       'Understand key concepts, methodologies, and terminology used throughout Fluxline.',
     href: '/legal/glossary',
   },
   {
-    title: 'Articles Of Conversion',
+    title: 'Articles of Conversion',
     description:
       'View or download the official Articles of Conversion document (PDF).',
     href: '/legal/articles-of-conversion',
@@ -55,6 +56,11 @@ const LEGAL_DOCUMENTS: LegalDocument[] = [
  */
 export default function LegalPage() {
   const { theme } = useAppTheme();
+  const cardHoverEffects = useHoverEffects({ type: 'card' });
+  const backLinkHoverEffects = useHoverEffects({
+    type: 'link',
+    enableTransform: false,
+  });
 
   return (
     <PageWrapper>
@@ -83,13 +89,7 @@ export default function LegalPage() {
             transition: 'all 0.2s ease',
             marginBottom: spacing.l,
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor =
-              theme.palette.neutralLighterAlt;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }}
+          {...backLinkHoverEffects}
         >
           <svg
             width='20'
@@ -168,20 +168,7 @@ export default function LegalPage() {
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    theme.palette.neutralLighter;
-                  e.currentTarget.style.borderColor =
-                    theme.palette.themePrimary;
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    theme.palette.neutralLighterAlt;
-                  e.currentTarget.style.borderColor =
-                    theme.palette.neutralQuaternary;
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
+                {...cardHoverEffects}
               >
                 <div>
                   <Typography

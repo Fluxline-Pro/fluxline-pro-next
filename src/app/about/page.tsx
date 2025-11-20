@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useHoverEffects } from '@/hooks/useHoverEffects';
 import { TeamMemberCard } from './components/TeamMemberCard';
 import { CompanyStatistics } from './components/CompanyStatistics';
 import { CompanyTimeline } from './components/CompanyTimeline';
@@ -23,6 +24,12 @@ import {
 
 export default function AboutPage() {
   const { theme } = useAppTheme();
+  const buttonHoverEffects = useHoverEffects({
+    type: 'button',
+    hoverBgColor: theme.palette.themeDark,
+    defaultBgColor: theme.palette.themePrimary,
+    enableTransform: false,
+  });
 
   return (
     <SimplePageWrapper>
@@ -148,13 +155,7 @@ export default function AboutPage() {
                 backgroundColor: theme.palette.themePrimary,
                 color: theme.palette.white,
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.themeDark;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themePrimary;
-              }}
+              {...buttonHoverEffects}
             >
               Read Client Stories
               <svg

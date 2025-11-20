@@ -7,6 +7,7 @@ import { Typography } from '../theme/components/typography';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
 import { typography, spacing } from '../theme/theme';
 import { ProtectedEmail } from './ProtectedEmail';
+import { useHoverEffects } from '../hooks/useHoverEffects';
 
 interface LegalPageLayoutProps {
   title: string;
@@ -29,6 +30,10 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
   content,
 }) => {
   const { theme } = useAppTheme();
+  const linkHoverEffects = useHoverEffects({
+    type: 'link',
+    enableTransform: false,
+  });
 
   const currentYear = new Date().getFullYear();
 
@@ -63,13 +68,7 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
             transition: 'all 0.2s ease',
             flexShrink: 0,
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor =
-              theme.palette.neutralLighterAlt;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }}
+          {...linkHoverEffects}
         >
           <svg
             width='24'

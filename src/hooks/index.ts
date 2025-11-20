@@ -1,6 +1,6 @@
 /**
  * Custom React hooks for the Fluxline Pro Next.js application.
- * 
+ *
  * These hooks provide reusable functionality for common patterns like
  * state management, browser APIs, animations, and user interactions.
  */
@@ -20,6 +20,8 @@ export { useSessionStorage } from './useSessionStorage';
 
 // Interaction hooks
 export { useHoverState, useMultiHoverState } from './useHoverState';
+export { useHoverEffects } from './useHoverEffects';
+export type { HoverEffectsConfig } from './useHoverEffects';
 
 // Animation hooks
 export { useIntersectionObserver } from './useIntersectionObserver';
