@@ -1,6 +1,7 @@
 # Stewardship Contract
 
 **Effective Date:** October 12, 2025
+**Last Updated Date:** October 12, 2025
 
 ## Our Commitment to You
 

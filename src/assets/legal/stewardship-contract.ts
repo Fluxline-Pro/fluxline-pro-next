@@ -1,6 +1,7 @@
 export const content = `# Stewardship Contract
 
-**Effective Date:** October 12, 2025
+**Effective Date:** October 12, 2025  
+**Last Updated:** October 12, 2025
 
 ## Our Commitment to You
 

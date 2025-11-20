@@ -26,7 +26,10 @@ export interface UnifiedMarkdownRendererProps {
  */
 const detectContentType = (content: string): ContentType => {
   // Check for MDX imports/exports
-  if (/^import\s+.*from\s+['"].*['"];?/m.test(content) || /^export\s+/m.test(content)) {
+  if (
+    /^import\s+.*from\s+['"].*['"];?/m.test(content) ||
+    /^export\s+/m.test(content)
+  ) {
     return 'mdx';
   }
 
@@ -72,18 +75,16 @@ const convertNotionUrls = (content: string): string => {
 
 /**
  * Unified Markdown Renderer Component
- * 
+ *
  * Automatically detects and renders content types: Markdown, MDX, HTML, or text
  * - Uses ReactMarkdown for Markdown/MDX
  * - Sanitizes and renders HTML securely
  * - Converts Notion URLs to relative site URLs
  * - Applies Fluxline Pro theme typography
  */
-export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = ({
-  content,
-  contentType,
-  className,
-}) => {
+export const UnifiedMarkdownRenderer: React.FC<
+  UnifiedMarkdownRendererProps
+> = ({ content, contentType, className }) => {
   const { theme } = useAppTheme();
 
   // Auto-detect content type if not provided
@@ -98,9 +99,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
   // Define custom components for ReactMarkdown
   const markdownComponents = useMemo(
     () => ({
-      h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode }) => (
+      h1: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLHeadingElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="h1"
+          variant='h1'
           {...props}
           style={{
             ...typography.fonts.h1,
@@ -112,9 +118,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode }) => (
+      h2: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLHeadingElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="h2"
+          variant='h2'
           {...props}
           style={{
             ...typography.fonts.h2,
@@ -126,9 +137,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode }) => (
+      h3: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLHeadingElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="h3"
+          variant='h3'
           {...props}
           style={{
             ...typography.fonts.h3,
@@ -140,9 +156,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      h4: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode }) => (
+      h4: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLHeadingElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="h4"
+          variant='h4'
           {...props}
           style={{
             ...typography.fonts.h4,
@@ -154,9 +175,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      h5: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode }) => (
+      h5: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLHeadingElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="h5"
+          variant='h5'
           {...props}
           style={{
             ...typography.fonts.h5,
@@ -168,9 +194,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      h6: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode }) => (
+      h6: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLHeadingElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="h6"
+          variant='h6'
           {...props}
           style={{
             ...typography.fonts.h6,
@@ -182,9 +213,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      p: ({ children, ...props }: React.HTMLAttributes<HTMLParagraphElement> & { children?: React.ReactNode }) => (
+      p: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLParagraphElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="p"
+          variant='p'
           {...props}
           style={{
             ...typography.fonts.body,
@@ -196,9 +232,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      blockquote: ({ children, ...props }: React.HTMLAttributes<HTMLQuoteElement> & { children?: React.ReactNode }) => (
+      blockquote: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLQuoteElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="blockquote"
+          variant='blockquote'
           {...props}
           style={{
             ...typography.fonts.quote,
@@ -214,9 +255,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      code: ({ children, ...props }: React.HTMLAttributes<HTMLElement> & { children?: React.ReactNode }) => (
+      code: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="code"
+          variant='code'
           {...props}
           style={{
             ...typography.fonts.code,
@@ -230,9 +276,14 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement> & { children?: React.ReactNode }) => (
+      pre: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLPreElement> & {
+        children?: React.ReactNode;
+      }) => (
         <Typography
-          variant="pre"
+          variant='pre'
           {...props}
           style={{
             ...typography.fonts.pre,
@@ -249,7 +300,12 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </Typography>
       ),
-      ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement> & { children?: React.ReactNode }) => (
+      ul: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLUListElement> & {
+        children?: React.ReactNode;
+      }) => (
         <ul
           {...props}
           style={{
@@ -257,12 +313,19 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
             marginLeft: theme.spacing.l,
             marginBottom: theme.spacing.m,
             lineHeight: typography.lineHeights.normal,
+            listStyleType: 'disc',
+            paddingLeft: theme.spacing.m,
           }}
         >
           {children}
         </ul>
       ),
-      ol: ({ children, ...props }: React.HTMLAttributes<HTMLOListElement> & { children?: React.ReactNode }) => (
+      ol: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLOListElement> & {
+        children?: React.ReactNode;
+      }) => (
         <ol
           {...props}
           style={{
@@ -270,12 +333,19 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
             marginLeft: theme.spacing.l,
             marginBottom: theme.spacing.m,
             lineHeight: typography.lineHeights.normal,
+            listStyleType: 'decimal',
+            paddingLeft: theme.spacing.m,
           }}
         >
           {children}
         </ol>
       ),
-      li: ({ children, ...props }: React.LiHTMLAttributes<HTMLLIElement> & { children?: React.ReactNode }) => (
+      li: ({
+        children,
+        ...props
+      }: React.LiHTMLAttributes<HTMLLIElement> & {
+        children?: React.ReactNode;
+      }) => (
         <li
           {...props}
           style={{
@@ -287,7 +357,13 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
           {children}
         </li>
       ),
-      a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }) => (
+      a: ({
+        href,
+        children,
+        ...props
+      }: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+        children?: React.ReactNode;
+      }) => (
         <a
           href={href}
           {...props}
@@ -377,7 +453,7 @@ export const UnifiedMarkdownRenderer: React.FC<UnifiedMarkdownRendererProps> = (
     default:
       return (
         <Typography
-          variant="p"
+          variant='p'
           className={className}
           style={{
             ...typography.fonts.body,
