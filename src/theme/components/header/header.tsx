@@ -17,6 +17,7 @@ import { NavigationButton } from './navigation-button';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { Typography } from '@/theme/components/typography';
 import { SettingsPanel } from '@/theme/components/settings-panel';
+import { Button } from '@/theme/components/button';
 
 export interface BreadcrumbItem {
   label: string;
@@ -108,6 +109,12 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
 
   const handleModalClose = () => {
     setActiveModal(null);
+  };
+
+  const handleConsultationClick = () => {
+    const url =
+      'https://outlook.office.com/owa/calendar/Bookings@terencewaters.com/bookings/';
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   // Detect if we're on the home page
@@ -341,9 +348,40 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             style={{
               display: 'flex',
               flexDirection: isLeftHanded ? 'row-reverse' : 'row',
-              gap: '1rem',
+              alignItems: 'center',
+              gap: isMobile ? '0.5rem' : '1rem',
             }}
           >
+            {/* Consultation Button - Show on non-home pages and non-mobile */}
+            {!isHomePage && !isMobile && (
+              <Button
+                variant='primary'
+                size='small'
+                onClick={handleConsultationClick}
+                style={{
+                  fontSize: '0.875rem',
+                  padding: '6px 12px',
+                  minHeight: '32px',
+                  fontWeight: theme.typography.fontWeights.semiBold,
+                  borderRadius: '6px',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  transition: 'all 0.2s ease',
+                  transform: 'scale(1)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow =
+                    '0 4px 8px rgba(0,0,0,0.15)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                }}
+                aria-label='Book a free consultation'
+              >
+                Book Consultation
+              </Button>
+            )}
             {!isHomePage && (
               <NavigationButton
                 onClick={handleThemeClick}
