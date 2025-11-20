@@ -65,7 +65,7 @@ const PAGE_CONFIGS: Record<
     image: 'FLUXLINE_LOGO',
     imageText: '',
   },
-  '/legal/terms-of-use': {
+  '/legal/terms': {
     image: ConsultingImage.src,
     imageText: 'Terms of Use',
   },
@@ -79,7 +79,11 @@ const PAGE_CONFIGS: Record<
   },
   '/legal/stewardship-contract': {
     image: ResonanceCoreImage.src,
-    imageText: '',
+    imageText: 'Stewardship Contract',
+  },
+  '/legal/articles-of-conversion': {
+    image: ConsultingImage.src,
+    imageText: 'Articles of Conversion',
   },
   '/services/education-training': {
     image: EducationImage.src,

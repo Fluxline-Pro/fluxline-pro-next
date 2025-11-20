@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useHoverEffects } from '@/hooks/useHoverEffects';
 import {
   ethosHero,
   ethosAbout,
@@ -19,6 +20,11 @@ import {
 
 export default function FluxlineEthosPage() {
   const { theme } = useAppTheme();
+  const cardHoverEffects = useHoverEffects({
+    type: 'card',
+    hoverBorderColor: theme.palette.themePrimary,
+    defaultBorderColor: theme.palette.neutralLight,
+  });
 
   return (
     <SimplePageWrapper>
@@ -142,19 +148,7 @@ export default function FluxlineEthosPage() {
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor =
-                    theme.palette.themePrimary;
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow =
-                    theme.shadows?.m || '0 4px 8px rgba(0,0,0,0.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor =
-                    theme.palette.neutralLight;
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
+                {...cardHoverEffects}
               >
                 <Typography
                   variant='h3'
