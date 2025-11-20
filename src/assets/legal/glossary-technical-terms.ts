@@ -298,7 +298,7 @@ A sequence of tasks or processes through which work passes from initiation to co
 If you encounter a technical term not defined in this glossary, please contact us:
 
 **Fluxline Professional Services**  
-Email: support@fluxline.pro  
+Email: support [at] fluxline.pro  
 Website: https://www.fluxline.pro/contact
 
 ---

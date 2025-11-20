@@ -154,7 +154,7 @@ Depending on your location, you may have the following rights:
 
 - Lodge a complaint with a supervisory authority
 
-To exercise these rights, please contact us at privacy@fluxline.pro.
+To exercise these rights, please contact us at privacy [at] fluxline.pro.
 
 ## 8. Cookies and Tracking Technologies
 
@@ -213,7 +213,7 @@ Opt out of the sale of personal information (we do not sell personal information
 
 You will not receive discriminatory treatment for exercising your privacy rights.
 
-To exercise these rights, contact us at privacy@fluxline.pro or call us at the number provided on our website.
+To exercise these rights, contact us at privacy [at] fluxline.pro or call us at the number provided on our website.
 
 ## 13. Changes to This Privacy Policy
 
@@ -231,7 +231,7 @@ If you have questions or concerns about this Privacy Policy or our data practice
 
 **Fluxline Professional Services**  
 Privacy Officer  
-Email: privacy@fluxline.pro  
+Email: privacy [at] fluxline.pro  
 Website: https://www.fluxline.pro/contact
 
 ## 15. Accessibility

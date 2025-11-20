@@ -276,7 +276,7 @@ Your participation is voluntary.
 For questions about this Stewardship Contract:
 
 **Fluxline Professional Services**  
-Email: support@fluxline.pro
+Email: support [at] fluxline.pro
 Website: https://www.fluxline.pro/contact
 
 ### 10.2 Office Hours
