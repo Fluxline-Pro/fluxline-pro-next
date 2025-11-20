@@ -153,7 +153,7 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
             textAlign: 'center',
           }}
         >
-          © {currentYear} Fluxline Professional Services. All rights reserved.
+          © {currentYear} Fluxline Resonance Group, LLC. All rights reserved.
         </Typography>
         <Typography
           variant='p'
