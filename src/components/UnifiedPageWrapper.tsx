@@ -290,6 +290,12 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     return true;
   }, [pathname, showImageTitle, imageConfig?.showTitle]);
 
+  // Initialize hover effects for legal layout (always call hooks unconditionally)
+  const linkHoverEffects = useHoverEffects({
+    type: 'link',
+    enableTransform: false,
+  });
+
   if (!shouldUseWrapper) {
     return <>{children}</>;
   }
@@ -328,11 +334,6 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   // Legal Document Layout
   if (effectiveLayoutType === 'legal-document') {
-    const linkHoverEffects = useHoverEffects({
-      type: 'link',
-      enableTransform: false,
-    });
-
     const currentYear = new Date().getFullYear();
     const backUrl = legalPageConfig?.backNavigationUrl || '/legal';
     const showBackNav = legalPageConfig?.showBackNavigation !== false;

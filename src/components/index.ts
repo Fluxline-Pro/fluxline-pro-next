@@ -3,5 +3,7 @@
  * Central export for all reusable components
  */
 
-export { PageWrapper } from './PageWrapper';
 export { UnifiedPageWrapper } from './UnifiedPageWrapper';
+
+// Deprecated - Use UnifiedPageWrapper instead
+// export { PageWrapper } from './PageWrapper';
