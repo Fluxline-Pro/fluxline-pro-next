@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Icon } from '@fluentui/react/lib/Icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
@@ -25,12 +25,12 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   const { theme } = useAppTheme();
 
   // Check scroll position
-  const checkScroll = () => {
+  const checkScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 5);
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 5);
-  };
+  }, []);
 
   // Scroll by viewport width
   const scrollBy = (direction: 'left' | 'right') => {
@@ -57,7 +57,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
       el.removeEventListener('scroll', checkScroll);
       window.removeEventListener('resize', checkScroll);
     };
-  }, [children.length]);
+  }, [children.length, checkScroll]);
 
   const buttonStyles = {
     position: 'absolute' as const,
