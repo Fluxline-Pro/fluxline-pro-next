@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
 import { Typography } from '@/theme/components/typography';
-import { PageWrapper } from '@/components/PageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import type { PressRelease } from '@/store/mock-data/pressReleaseMock';
@@ -32,7 +32,7 @@ export function PressReleaseDetailClient({
 
   if (!pressRelease) {
     return (
-      <PageWrapper>
+      <UnifiedPageWrapper layoutType='viewport-grid'>
         <div
           style={{
             padding: theme.spacing.xl,
@@ -69,12 +69,12 @@ export function PressReleaseDetailClient({
             ← Back to Press Releases
           </Link>
         </div>
-      </PageWrapper>
+      </UnifiedPageWrapper>
     );
   }
 
   return (
-    <PageWrapper>
+    <UnifiedPageWrapper layoutType='viewport-grid'>
       <div
         style={{
           padding: isMobileLayout ? theme.spacing.m : theme.spacing.xl,
@@ -269,6 +269,6 @@ export function PressReleaseDetailClient({
           </div>
         </div>
       </div>
-    </PageWrapper>
+    </UnifiedPageWrapper>
   );
 }

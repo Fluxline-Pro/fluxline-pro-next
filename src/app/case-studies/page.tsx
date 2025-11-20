@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { PageWrapper } from '@/components/PageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -97,7 +97,7 @@ export default function CaseStudiesPage() {
   );
 
   return (
-    <PageWrapper>
+    <UnifiedPageWrapper layoutType='viewport-grid'>
       <div
         style={{
           padding:
@@ -309,6 +309,6 @@ export default function CaseStudiesPage() {
           </div>
         </div>
       </div>
-    </PageWrapper>
+    </UnifiedPageWrapper>
   );
 }

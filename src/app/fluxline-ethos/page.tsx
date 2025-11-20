@@ -8,7 +8,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useHoverEffects } from '@/hooks/useHoverEffects';
