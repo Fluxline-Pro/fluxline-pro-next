@@ -5,8 +5,8 @@
 
 export const termsOfUse = `# Terms of Use
 
-**Effective Date:** January 1, 2025  
-**Last Updated:** January 1, 2025
+**Effective Date:** October 12, 2025  
+**Last Updated:** October 12, 2025
 
 ## Welcome to Fluxline Professional Services
 
@@ -118,7 +118,7 @@ You agree to indemnify and hold harmless Fluxline Professional Services, its off
 
 ### 10.1 Informal Resolution
 
-Before pursuing formal dispute resolution, you agree to attempt to resolve disputes informally by contacting us at contact@fluxline.pro.
+Before pursuing formal dispute resolution, you agree to attempt to resolve disputes informally by contacting us at support@fluxline.pro.
 
 ### 10.2 Arbitration
 
@@ -161,12 +161,12 @@ These Terms constitute the entire agreement between you and Fluxline Professiona
 For questions about these Terms of Use, please contact us:
 
 **Fluxline Professional Services**  
-Email: contact@fluxline.pro  
+Email: support@fluxline.pro  
 Website: https://www.fluxline.pro
 
 ---
 
-**Last Updated:** January 1, 2025
+**Last Updated:** October 12, 2025
 
 By using Fluxline Professional Services, you acknowledge that you have read and understood these Terms of Use.
 `;

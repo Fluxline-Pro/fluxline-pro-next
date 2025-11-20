@@ -88,9 +88,10 @@ export async function POST(request: NextRequest) {
     const sanitizedMessage = sanitizeInput(message);
 
     // Prepare email content
+    const supportEmail = 'support' + '@' + 'fluxline.pro';
     const emailContent = {
       from: sanitizedEmail,
-      to: 'support@fluxline.pro',
+      to: `mailto:${supportEmail}`,
       subject: `Contact Form Submission from ${sanitizedName}`,
       body: `
 Name: ${sanitizedName}

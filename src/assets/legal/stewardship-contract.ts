@@ -1,6 +1,6 @@
 export const content = `# Stewardship Contract
 
-**Effective Date:** January 1, 2025
+**Effective Date:** October 12, 2025
 
 ## Our Commitment to You
 
@@ -275,7 +275,7 @@ Your participation is voluntary.
 For questions about this Stewardship Contract:
 
 **Fluxline Professional Services**  
-Email: contact@fluxline.pro  
+Email: support@fluxline.pro
 Website: https://www.fluxline.pro/contact
 
 ### 10.2 Office Hours
@@ -293,6 +293,6 @@ By engaging our services, you acknowledge that you have:
 
 ---
 
-**Last Updated:** January 1, 2025
+**Last Updated:** October 12, 2025
 
 This Stewardship Contract reflects our commitment to serving you with integrity, professionalism, and heart. We look forward to our journey together.`;

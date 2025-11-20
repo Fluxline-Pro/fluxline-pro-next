@@ -59,9 +59,9 @@ const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     name: 'Email',
-    url: 'mailto:support@fluxline.pro',
+    url: 'mailto:support' + '@' + 'fluxline.pro',
     icon: EmailLogo,
-    ariaLabel: 'Email us at support@fluxline.pro',
+    ariaLabel: 'Email us at support [at] fluxline.pro',
   },
 ];
 

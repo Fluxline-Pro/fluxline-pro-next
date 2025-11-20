@@ -1,7 +1,7 @@
 # Terms of Use
 
-**Effective Date:** January 1, 2025  
-**Last Updated:** January 1, 2025
+**Effective Date:** October 12, 2025  
+**Last Updated:** October 12, 2025
 
 ## Welcome to Fluxline Professional Services
 
@@ -27,6 +27,7 @@ Fluxline Professional Services provides:
 ### 3.1 Account Security
 
 If you create an account with us, you are responsible for:
+
 - Maintaining the confidentiality of your account credentials
 - All activities that occur under your account
 - Notifying us immediately of any unauthorized use
@@ -34,6 +35,7 @@ If you create an account with us, you are responsible for:
 ### 3.2 Acceptable Use
 
 You agree not to:
+
 - Violate any applicable laws or regulations
 - Infringe upon the rights of others
 - Transmit harmful, offensive, or inappropriate content
@@ -46,6 +48,7 @@ You agree not to:
 ### 4.1 Our Content
 
 All content, materials, and intellectual property on our Services, including but not limited to:
+
 - Text, graphics, logos, images
 - Software, code, and applications
 - Design elements and branding
@@ -60,6 +63,7 @@ By submitting content to our Services, you grant us a non-exclusive, worldwide, 
 ## 5. Service Modifications
 
 We reserve the right to:
+
 - Modify or discontinue any aspect of our Services at any time
 - Update these Terms as necessary
 - Refuse service to anyone for any reason
@@ -113,7 +117,7 @@ You agree to indemnify and hold harmless Fluxline Professional Services, its off
 
 ### 10.1 Informal Resolution
 
-Before pursuing formal dispute resolution, you agree to attempt to resolve disputes informally by contacting us at contact@fluxline.pro.
+Before pursuing formal dispute resolution, you agree to attempt to resolve disputes informally by contacting us at [support@fluxline.pro](mailto:support@fluxline.pro).
 
 ### 10.2 Arbitration
 
@@ -156,11 +160,11 @@ These Terms constitute the entire agreement between you and Fluxline Professiona
 For questions about these Terms of Use, please contact us:
 
 **Fluxline Professional Services**  
-Email: contact@fluxline.pro  
-Website: https://www.fluxline.pro
+Email: [support@fluxline.pro](mailto:support@fluxline.pro)
+Website: [https://www.fluxline.pro](https://www.fluxline.pro)
 
 ---
 
-**Last Updated:** January 1, 2025
+**Last Updated:** October 12, 2025
 
 By using Fluxline Professional Services, you acknowledge that you have read and understood these Terms of Use.

@@ -4,6 +4,7 @@ import React from 'react';
 import { PageWrapper } from '../../../components/PageWrapper';
 import { Typography } from '../../../theme/components/typography';
 import { useAppTheme } from '../../../theme/hooks/useAppTheme';
+import { ProtectedEmail } from '../../../components/ProtectedEmail';
 import { typography, spacing } from '../../../theme/theme';
 
 export default function ArticlesOfConversionPage() {
@@ -27,7 +28,7 @@ export default function ArticlesOfConversionPage() {
       >
         {/* Page Title */}
         <Typography
-          variant="h1"
+          variant='h1'
           style={{
             ...typography.fonts.h1,
             color: theme.semanticColors.bodyText,
@@ -38,7 +39,7 @@ export default function ArticlesOfConversionPage() {
         </Typography>
 
         <Typography
-          variant="h3"
+          variant='h3'
           style={{
             ...typography.fonts.h3,
             color: theme.palette.neutralSecondary,
@@ -50,7 +51,7 @@ export default function ArticlesOfConversionPage() {
 
         {/* Description */}
         <Typography
-          variant="p"
+          variant='p'
           style={{
             ...typography.fonts.body,
             color: theme.semanticColors.bodyText,
@@ -76,7 +77,7 @@ export default function ArticlesOfConversionPage() {
           }}
         >
           <Typography
-            variant="h4"
+            variant='h4'
             style={{
               ...typography.fonts.h4,
               color: theme.semanticColors.bodyText,
@@ -96,8 +97,8 @@ export default function ArticlesOfConversionPage() {
             {/* For browsers that support PDF embedding */}
             <object
               data={pdfUrl}
-              type="application/pdf"
-              width="100%"
+              type='application/pdf'
+              width='100%'
               style={{
                 minHeight: '600px',
                 border: `1px solid ${theme.palette.neutralTertiary}`,
@@ -112,7 +113,7 @@ export default function ArticlesOfConversionPage() {
                 }}
               >
                 <Typography
-                  variant="p"
+                  variant='p'
                   style={{
                     ...typography.fonts.body,
                     color: theme.semanticColors.bodyText,
@@ -123,7 +124,7 @@ export default function ArticlesOfConversionPage() {
                 </Typography>
                 <a
                   href={pdfUrl}
-                  download="Fluxline-Articles-of-Conversion.pdf"
+                  download='Fluxline-Articles-of-Conversion.pdf'
                   style={{
                     display: 'inline-block',
                     padding: `${spacing.s} ${spacing.l}`,
@@ -144,7 +145,7 @@ export default function ArticlesOfConversionPage() {
           {/* Download Button */}
           <a
             href={pdfUrl}
-            download="Fluxline-Articles-of-Conversion.pdf"
+            download='Fluxline-Articles-of-Conversion.pdf'
             style={{
               display: 'inline-block',
               marginTop: spacing.m,
@@ -170,17 +171,18 @@ export default function ArticlesOfConversionPage() {
           }}
         >
           <Typography
-            variant="p"
+            variant='p'
             style={{
               ...typography.fonts.bodySmall,
               color: theme.palette.neutralTertiary,
               textAlign: 'center',
             }}
           >
-            © {currentYear} Fluxline Professional Services. All rights reserved.
+            © {currentYear} Fluxline Professional Services. All rights
+            reserved.
           </Typography>
           <Typography
-            variant="p"
+            variant='p'
             style={{
               ...typography.fonts.bodySmall,
               color: theme.palette.neutralTertiary,
@@ -189,15 +191,16 @@ export default function ArticlesOfConversionPage() {
             }}
           >
             Questions? Contact us at{' '}
-            <a
-              href="mailto:contact@fluxline.pro"
+            <ProtectedEmail
+              username='support'
+              domain='fluxline.pro'
               style={{
                 color: theme.semanticColors.link,
                 textDecoration: 'underline',
               }}
             >
-              contact@fluxline.pro
-            </a>
+              support [at] fluxline.pro
+            </ProtectedEmail>
           </Typography>
         </footer>
       </div>

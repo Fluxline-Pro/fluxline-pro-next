@@ -1,7 +1,7 @@
 export const content = `# Privacy Policy
 
-**Effective Date:** January 1, 2025  
-**Last Updated:** January 1, 2025
+**Effective Date:** October 12, 2025  
+**Last Updated:** October 12, 2025
 
 ## Introduction
 
@@ -240,6 +240,6 @@ We are committed to ensuring this Privacy Policy is accessible to all users. If 
 
 ---
 
-**Last Updated:** January 1, 2025
+**Last Updated:** October 12, 2025
 
 By using Fluxline Professional Services, you acknowledge that you have read and understood this Privacy Policy.`;

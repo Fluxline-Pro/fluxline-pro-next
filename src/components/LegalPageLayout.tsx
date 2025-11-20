@@ -1,10 +1,12 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { UnifiedMarkdownRenderer } from '../utils/markdownRenderer';
 import { Typography } from '../theme/components/typography';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
 import { typography, spacing } from '../theme/theme';
+import { ProtectedEmail } from './ProtectedEmail';
 
 interface LegalPageLayoutProps {
   title: string;
@@ -15,7 +17,7 @@ interface LegalPageLayoutProps {
 
 /**
  * Legal Page Layout Component
- * 
+ *
  * Provides consistent layout and styling for all legal/reference pages
  * - Displays title and optional subtitle
  * - Renders markdown content with theme-aware styling
@@ -42,22 +44,69 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
         color: theme.semanticColors.bodyText,
       }}
     >
-      {/* Page Title */}
-      <Typography
-        variant="h1"
+      {/* Back Navigation and Page Title */}
+      <div
         style={{
-          ...typography.fonts.h1,
-          color: theme.semanticColors.bodyText,
+          display: 'flex',
+          alignItems: 'center',
+          gap: spacing.m,
           marginBottom: subtitle ? spacing.s : spacing.l,
         }}
       >
-        {title}
-      </Typography>
+        <Link
+          href='/legal'
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            padding: spacing.s1,
+            borderRadius: '8px',
+            color: theme.palette.themePrimary,
+            textDecoration: 'none',
+            transition: 'all 0.2s ease',
+            flexShrink: 0,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor =
+              theme.palette.neutralLighterAlt;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
+        >
+          <svg
+            width='24'
+            height='24'
+            fill='none'
+            stroke='currentColor'
+            viewBox='0 0 24 24'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M15 19l-7-7 7-7'
+            />
+          </svg>
+        </Link>
+        <Typography
+          variant='h1'
+          style={{
+            ...typography.fonts.h2,
+            color: theme.semanticColors.bodyText,
+            fontSize: '2rem',
+            fontWeight: 600,
+            margin: 0,
+          }}
+        >
+          {title}
+        </Typography>
+      </div>
 
       {/* Subtitle (if provided) */}
       {subtitle && (
         <Typography
-          variant="h3"
+          variant='h3'
           style={{
             ...typography.fonts.h3,
             color: theme.palette.neutralSecondary,
@@ -71,7 +120,7 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
       {/* Last Updated (if provided) */}
       {lastUpdated && (
         <Typography
-          variant="p"
+          variant='p'
           style={{
             ...typography.fonts.bodySmall,
             color: theme.palette.neutralTertiary,
@@ -85,12 +134,24 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
 
       {/* Main Content */}
       <div
+        className='legal-content'
         style={{
           marginTop: spacing.xl,
           marginBottom: spacing.xxl,
         }}
       >
         <UnifiedMarkdownRenderer content={content} />
+        <style jsx>{`
+          :global(.legal-content h1:first-child) {
+            display: none;
+          }
+          :global(.legal-content h2) {
+            font-size: 2rem !important;
+            font-weight: 600 !important;
+            margin-top: 2rem !important;
+            margin-bottom: 1rem !important;
+          }
+        `}</style>
       </div>
 
       {/* Copyright Footer */}
@@ -102,7 +163,7 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
         }}
       >
         <Typography
-          variant="p"
+          variant='p'
           style={{
             ...typography.fonts.bodySmall,
             color: theme.palette.neutralTertiary,
@@ -112,7 +173,7 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
           © {currentYear} Fluxline Professional Services. All rights reserved.
         </Typography>
         <Typography
-          variant="p"
+          variant='p'
           style={{
             ...typography.fonts.bodySmall,
             color: theme.palette.neutralTertiary,
@@ -121,15 +182,16 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
           }}
         >
           Questions? Contact us at{' '}
-          <a
-            href="mailto:contact@fluxline.pro"
+          <ProtectedEmail
+            username='support'
+            domain='fluxline.pro'
             style={{
               color: theme.semanticColors.link,
               textDecoration: 'underline',
             }}
           >
-            contact@fluxline.pro
-          </a>
+            support [at] fluxline.pro
+          </ProtectedEmail>
         </Typography>
       </footer>
     </div>

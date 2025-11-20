@@ -1,7 +1,7 @@
 # Privacy Policy
 
-**Effective Date:** January 1, 2025  
-**Last Updated:** January 1, 2025
+**Effective Date:** October 12, 2025  
+**Last Updated:** October 12, 2025
 
 ## Introduction
 
@@ -83,6 +83,7 @@ We do not sell your personal information. We may share your information with:
 ### 4.1 Service Providers
 
 Third-party vendors who perform services on our behalf:
+
 - Payment processors
 - Email service providers
 - Cloud hosting providers
@@ -154,7 +155,7 @@ Depending on your location, you may have the following rights:
 
 - Lodge a complaint with a supervisory authority
 
-To exercise these rights, please contact us at privacy@fluxline.pro.
+To exercise these rights, please contact us at [privacy@fluxline.pro](mailto:privacy@fluxline.pro).
 
 ## 8. Cookies and Tracking Technologies
 
@@ -176,6 +177,7 @@ Our Services may contain links to third-party websites or integrate with third-p
 ### 9.1 Analytics Services
 
 We use analytics services such as:
+
 - Google Analytics
 - Microsoft Clarity
 
@@ -213,7 +215,7 @@ Opt out of the sale of personal information (we do not sell personal information
 
 You will not receive discriminatory treatment for exercising your privacy rights.
 
-To exercise these rights, contact us at privacy@fluxline.pro or call us at the number provided on our website.
+To exercise these rights, contact us at [privacy@fluxline.pro](mailto:privacy@fluxline.pro) or call us at the number provided on our website.
 
 ## 13. Changes to This Privacy Policy
 
@@ -231,8 +233,8 @@ If you have questions or concerns about this Privacy Policy or our data practice
 
 **Fluxline Professional Services**  
 Privacy Officer  
-Email: privacy@fluxline.pro  
-Website: https://www.fluxline.pro/contact
+Email: [privacy@fluxline.pro](mailto:privacy@fluxline.pro)  
+Website: [https://www.fluxline.pro/contact](https://www.fluxline.pro/contact)
 
 ## 15. Accessibility
 
@@ -240,6 +242,6 @@ We are committed to ensuring this Privacy Policy is accessible to all users. If 
 
 ---
 
-**Last Updated:** January 1, 2025
+**Last Updated:** October 12, 2025
 
 By using Fluxline Professional Services, you acknowledge that you have read and understood this Privacy Policy.
