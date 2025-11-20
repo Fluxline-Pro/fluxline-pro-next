@@ -7,7 +7,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { SimplePageWrapper } from '@/components/SimplePageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useHoverEffects } from '@/hooks/useHoverEffects';
@@ -32,7 +32,7 @@ export default function AboutPage() {
   });
 
   return (
-    <SimplePageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-16'>
         {/* Hero Section */}
         <div className='space-y-8'>
@@ -273,6 +273,6 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-    </SimplePageWrapper>
+    </UnifiedPageWrapper>
   );
 }

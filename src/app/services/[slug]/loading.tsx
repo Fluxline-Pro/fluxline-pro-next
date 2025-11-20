@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
-import { SimplePageWrapper } from '@/components/SimplePageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 
 export default function ServiceDetailLoading() {
   return (
-    <SimplePageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className="space-y-12 animate-pulse">
         {/* Breadcrumb Skeleton */}
         <div className="h-4 w-32 bg-gray-300 dark:bg-gray-700 rounded" />
@@ -63,6 +63,6 @@ export default function ServiceDetailLoading() {
           </div>
         </div>
       </div>
-    </SimplePageWrapper>
+    </UnifiedPageWrapper>
   );
 }

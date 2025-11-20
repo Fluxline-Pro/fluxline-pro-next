@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { PageWrapper } from '@/components/PageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -129,7 +129,7 @@ export default function PressReleasePage() {
   );
 
   return (
-    <PageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           padding:
@@ -171,7 +171,9 @@ export default function PressReleasePage() {
                 selectedKey={viewType}
                 onChange={(event, option) => {
                   if (option) {
-                    setViewType(option.key as 'grid' | 'small-tile' | 'large-tile');
+                    setViewType(
+                      option.key as 'grid' | 'small-tile' | 'large-tile'
+                    );
                   }
                 }}
                 styles={{
@@ -291,6 +293,6 @@ export default function PressReleasePage() {
           </div>
         )}
       </div>
-    </PageWrapper>
+    </UnifiedPageWrapper>
   );
 }

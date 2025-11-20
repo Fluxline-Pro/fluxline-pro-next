@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { SimplePageWrapper } from '@/components/SimplePageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import Link from 'next/link';
@@ -23,7 +23,7 @@ export default function ServiceDetailError({
   const { theme } = useAppTheme();
 
   return (
-    <SimplePageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         className="flex flex-col items-center justify-center space-y-6"
         style={{ minHeight: '50vh' }}
@@ -128,6 +128,6 @@ export default function ServiceDetailError({
           </Link>
         </div>
       </div>
-    </SimplePageWrapper>
+    </UnifiedPageWrapper>
   );
 }

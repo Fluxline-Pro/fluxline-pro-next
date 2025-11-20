@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import { PageWrapper } from '../../../components/PageWrapper';
-import LegalPageLayout from '../../../components/LegalPageLayout';
+import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
 import { content } from '../../../assets/legal/stewardship-contract';
 
 export const metadata: Metadata = {
@@ -13,12 +12,14 @@ export const metadata: Metadata = {
 
 export default function StewardshipContractPage() {
   return (
-    <PageWrapper>
-      <LegalPageLayout
-        title='Stewardship Contract'
-        subtitle='Our Commitment to Ethical Service and Partnership'
-        content={content}
-      />
-    </PageWrapper>
+    <UnifiedPageWrapper
+      layoutType='legal-document'
+      legalPageConfig={{
+        title: 'Stewardship Contract',
+        subtitle: 'Our Commitment to Ethical Service and Partnership',
+        content,
+        documentType: 'contract',
+      }}
+    />
   );
 }

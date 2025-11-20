@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { PageWrapper } from '@/components/PageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
@@ -83,7 +83,7 @@ export default function TestimonialsPage() {
   };
 
   return (
-    <PageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           padding: theme.spacing.xl,
@@ -361,6 +361,6 @@ export default function TestimonialsPage() {
           testimonial={selectedTestimonial}
         />
       )}
-    </PageWrapper>
+    </UnifiedPageWrapper>
   );
 }

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { PageWrapper } from '@/components/PageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
@@ -28,7 +28,7 @@ export default function CaseStudyDetailClient({
     orientation === 'portrait' || orientation === 'tablet-portrait';
 
   return (
-    <PageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           padding: isMobile ? theme.spacing.m : theme.spacing.xl,
@@ -461,6 +461,6 @@ export default function CaseStudyDetailClient({
           </div>
         </div>
       </div>
-    </PageWrapper>
+    </UnifiedPageWrapper>
   );
 }

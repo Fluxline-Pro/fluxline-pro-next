@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import { PageWrapper } from '../../../components/PageWrapper';
-import LegalPageLayout from '../../../components/LegalPageLayout';
+import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
 import { content } from '../../../assets/legal/terms-of-use';
 
 export const metadata: Metadata = {
@@ -13,12 +12,14 @@ export const metadata: Metadata = {
 
 export default function TermsOfUsePage() {
   return (
-    <PageWrapper>
-      <LegalPageLayout
-        title='Terms of Use'
-        subtitle='Service Terms and User Agreements'
-        content={content}
-      />
-    </PageWrapper>
+    <UnifiedPageWrapper
+      layoutType='legal-document'
+      legalPageConfig={{
+        title: 'Terms of Use',
+        subtitle: 'Service Terms and User Agreements',
+        content,
+        documentType: 'terms',
+      }}
+    />
   );
 }

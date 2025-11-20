@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { SimplePageWrapper } from '@/components/SimplePageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { ServiceCard } from './components/ServiceCard';
@@ -20,7 +20,7 @@ export default function ServicesPage() {
   const { theme } = useAppTheme();
 
   return (
-    <SimplePageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-12'>
         {/* Page Header */}
         <div className='space-y-4'>
@@ -143,6 +143,6 @@ export default function ServicesPage() {
           </Typography>
         </div>
       </div>
-    </SimplePageWrapper>
+    </UnifiedPageWrapper>
   );
 }
