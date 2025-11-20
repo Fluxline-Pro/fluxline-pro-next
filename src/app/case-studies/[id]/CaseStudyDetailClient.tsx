@@ -28,7 +28,7 @@ export default function CaseStudyDetailClient({
     orientation === 'portrait' || orientation === 'tablet-portrait';
 
   return (
-    <UnifiedPageWrapper layoutType='viewport-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           padding: isMobile ? theme.spacing.m : theme.spacing.xl,

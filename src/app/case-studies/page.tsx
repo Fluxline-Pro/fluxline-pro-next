@@ -97,7 +97,7 @@ export default function CaseStudiesPage() {
   );
 
   return (
-    <UnifiedPageWrapper layoutType='viewport-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           padding:

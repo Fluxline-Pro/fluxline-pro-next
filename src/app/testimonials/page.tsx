@@ -83,7 +83,7 @@ export default function TestimonialsPage() {
   };
 
   return (
-    <UnifiedPageWrapper layoutType='viewport-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           padding: theme.spacing.xl,

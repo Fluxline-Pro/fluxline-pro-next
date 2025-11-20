@@ -32,7 +32,7 @@ export function PressReleaseDetailClient({
 
   if (!pressRelease) {
     return (
-      <UnifiedPageWrapper layoutType='viewport-grid'>
+      <UnifiedPageWrapper layoutType='responsive-grid'>
         <div
           style={{
             padding: theme.spacing.xl,
@@ -74,7 +74,7 @@ export function PressReleaseDetailClient({
   }
 
   return (
-    <UnifiedPageWrapper layoutType='viewport-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           padding: isMobileLayout ? theme.spacing.m : theme.spacing.xl,

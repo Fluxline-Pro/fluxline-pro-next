@@ -6,11 +6,10 @@ import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ViewportGrid } from '../theme/components/layout';
 import { Typography } from '../theme/components/typography';
 import { UnifiedMarkdownRenderer } from '../utils/markdownRenderer';
 import { ProtectedEmail } from './ProtectedEmail';
-import { useDeviceOrientation } from '../theme/hooks/useMediaQuery';
+
 import { useContentFilterStore } from '../store/store';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
 import { useSimpleLayout } from '@/theme/hooks/useSimpleLayout';
@@ -19,7 +18,7 @@ import { useIsMobile, useIsTabletPortrait } from '@/theme/hooks/useMediaQuery';
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { useHoverEffects } from '../hooks/useHoverEffects';
 import { ThemeMode } from '../theme/theme';
-import { FadeUp } from '../animations/fade-animations';
+
 import { typography, spacing } from '../theme/theme';
 
 // Import images directly
@@ -169,7 +168,7 @@ const NOT_FOUND_CONFIG = {
 const EXCLUDED_PAGES = ['/'];
 
 // Type definitions
-type LayoutType = 'viewport-grid' | 'responsive-grid' | 'legal-document';
+type LayoutType = 'responsive-grid' | 'legal-document';
 type TabletPortraitLayout = 'side-by-side' | 'stacked' | 'image-small';
 
 interface LegalPageConfig {
@@ -212,13 +211,12 @@ export interface UnifiedPageWrapperProps {
 
 /**
  * UnifiedPageWrapper - Unified layout wrapper consolidating:
- * - PageWrapper (viewport-grid layout)
- * - SimplePageWrapper (responsive-grid layout)
+ * - PageWrapper and SimplePageWrapper (responsive-grid layout)
  * - LegalPageLayout (legal-document layout)
  *
  * Provides:
- * - Consistent page layouts across all page types
- * - Reliable Next.js Image rendering
+ * - Consistent responsive layouts across all page types
+ * - Reliable Next.js Image rendering with sticky positioning
  * - Theme-aware logo and image display
  * - Animated page transitions
  * - Legal page specific features
@@ -228,13 +226,12 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   layoutType = 'responsive-grid',
   showImageTitle = true,
   contentImage,
-  tabletPortraitLayout = 'stacked',
-  respectLayoutPreference = true,
+
   imageConfig,
   legalPageConfig,
 }) => {
   const pathname = usePathname();
-  const orientation = useDeviceOrientation();
+
   const { selectedPost } = useContentFilterStore();
   const params = useParams();
   const { themeMode, theme, layoutPreference } = useAppTheme();
@@ -296,20 +293,24 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     enableTransform: false,
   });
 
-  if (!shouldUseWrapper) {
-    return <>{children}</>;
-  }
-
   // Determine effective layout type
   const effectiveLayoutType = React.useMemo(() => {
     if (layoutType === 'legal-document' || pathname.startsWith('/legal')) {
       return 'legal-document';
     }
-    return layoutType;
+    return 'responsive-grid';
   }, [layoutType, pathname]);
 
+  if (!shouldUseWrapper) {
+    return <>{children}</>;
+  }
+
+  // Normalize pathname by removing trailing slash for consistent lookup
+  const normalizedPathname =
+    pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+
   // Get configuration for current page
-  const currentConfig = PAGE_CONFIGS[pathname];
+  const currentConfig = PAGE_CONFIGS[normalizedPathname];
   const config = currentConfig || NOT_FOUND_CONFIG;
 
   // Handle dynamic Fluxline logo based on theme mode
@@ -491,137 +492,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     );
   }
 
-  // Viewport Grid Layout (from PageWrapper)
-  if (effectiveLayoutType === 'viewport-grid') {
-    // Check if we're using the dark mode logo to skip dark mode filter
-    const isUsingDarkLogo =
-      config.image === 'FLUXLINE_LOGO' &&
-      ['dark', 'high-contrast', 'grayscale-dark'].includes(themeMode);
-
-    return (
-      <ViewportGrid
-        leftChildren={
-          <div
-            style={{
-              minHeight: '200px',
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <motion.div
-              key={pathname + (id || '')}
-              initial={{ y: 0, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              whileHover={{
-                y: -4,
-                transition: { duration: 0.2, ease: 'easeOut' },
-              }}
-              transition={{
-                delay: 0.1,
-                duration: 0.15,
-                ease: 'easeOut',
-              }}
-              style={{
-                position: 'relative',
-                width: '100%',
-                height: '100%',
-                maxHeight: '90vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <div
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: theme.borderRadius.m,
-                  overflow: 'hidden',
-                  backgroundColor: theme.palette.neutralLighter,
-                  boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
-                }}
-              >
-                <Image
-                  src={imageToDisplay}
-                  alt={imageAltText}
-                  fill
-                  sizes='(max-width: 768px) 100vw, 400px'
-                  style={{
-                    objectFit: 'cover',
-                    filter: isUsingDarkLogo ? 'none' : undefined,
-                  }}
-                  priority
-                  placeholder='blur'
-                  blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
-                />
-                {shouldShowTitle && imageTextToDisplay && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      padding: theme.spacing.m,
-                      background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent)`,
-                      color: theme.palette.white,
-                    }}
-                  >
-                    <h2
-                      style={{
-                        margin: 0,
-                        fontSize: theme.fonts.xLarge.fontSize,
-                        fontWeight: theme.fonts.xLarge.fontWeight as number,
-                        fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
-                      }}
-                    >
-                      {imageTextToDisplay}
-                    </h2>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        }
-        rightChildren={
-          <div
-            style={{
-              width: '100%',
-              maxWidth:
-                orientation === 'portrait'
-                  ? '100%'
-                  : orientation === 'ultrawide'
-                    ? '40dvw'
-                    : '62dvw',
-              paddingRight: '0',
-              overflowX: 'hidden',
-              wordWrap: 'break-word',
-              minWidth: 0,
-            }}
-          >
-            <AnimatePresence mode='wait'>
-              <FadeUp key={pathname + (id || '')} delay={0.1} duration={0.5}>
-                {children}
-              </FadeUp>
-            </AnimatePresence>
-          </div>
-        }
-        respectLayoutPreference={respectLayoutPreference}
-      />
-    );
-  }
-
   // Responsive Grid Layout (from SimplePageWrapper) - DEFAULT
-  // Handle tablet portrait layout options
-  const shouldUseStackedLayout =
-    isTabletPortrait && tabletPortraitLayout === 'stacked';
-  const shouldUseImageSmall =
-    isTabletPortrait && tabletPortraitLayout === 'image-small';
+  // Use stacked layout for mobile and tablet-portrait
+  const shouldUseStackedLayout = isMobile || isTabletPortrait;
 
   // Animation variants
   const fadeInVariants: Variants = {
@@ -644,33 +517,30 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   };
 
   // Adjust container style for different layouts
-  const adjustedContainerStyle =
-    isMobile || shouldUseStackedLayout
-      ? {
-          ...containerStyle,
-          gridTemplateColumns: '1fr',
-          gridTemplateRows: shouldUseImageSmall
-            ? 'auto 1fr'
-            : 'minmax(300px, 40vh) 1fr',
-          alignItems: 'start',
-        }
-      : {
-          ...containerStyle,
-          gridTemplateColumns:
-            layoutPreference === 'left-handed' ? '1fr' : '1fr',
-          paddingLeft:
-            layoutPreference === 'left-handed'
-              ? containerStyle.padding
-              : `calc(25vw + ${theme.spacing.l})`,
-          paddingRight:
-            layoutPreference === 'left-handed'
-              ? `calc(25vw + ${theme.spacing.l})`
-              : containerStyle.padding,
-          alignItems:
-            !isMobile && isContentMounted && !isContentScrollable
-              ? 'center'
-              : 'start',
-        };
+  const adjustedContainerStyle = shouldUseStackedLayout
+    ? {
+        ...containerStyle,
+        gridTemplateColumns: '1fr',
+        gridTemplateRows: 'auto 1fr', // Smaller image area, more content space
+        alignItems: 'start',
+        overflow: 'clip',
+      }
+    : {
+        ...containerStyle,
+        gridTemplateColumns: layoutPreference === 'left-handed' ? '1fr' : '1fr',
+        paddingLeft:
+          layoutPreference === 'left-handed'
+            ? containerStyle.padding
+            : `calc(25vw + ${theme.spacing.l})`,
+        paddingRight:
+          layoutPreference === 'left-handed'
+            ? `calc(25vw + ${theme.spacing.l})`
+            : containerStyle.padding,
+        alignItems:
+          !isMobile && isContentMounted && !isContentScrollable
+            ? 'center'
+            : 'start',
+      };
 
   // Adjust content style based on scrollability and layout
   const adjustedContentStyle = {
@@ -691,23 +561,22 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         : 'flex-start',
   };
 
-  // Adjust image style for different tablet layouts
-  const adjustedImageStyle =
-    shouldUseStackedLayout || shouldUseImageSmall
-      ? {
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%',
-          height: shouldUseImageSmall ? 'auto' : '100%',
-          padding: theme.spacing.m,
-        }
-      : imageStyle;
+  // Adjust image style for stacked layout
+  const adjustedImageStyle = shouldUseStackedLayout
+    ? {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: 'auto',
+        padding: theme.spacing.m,
+      }
+    : imageStyle;
 
   return (
     <>
-      {shouldUseStackedLayout || shouldUseImageSmall ? (
-        // Stacked Layout: Image and content in same container
+      {shouldUseStackedLayout ? (
+        // Stacked Layout: Image and content in same container (Mobile & Tablet Portrait)
         <div style={adjustedContainerStyle}>
           {/* Image Panel */}
           <div style={adjustedImageStyle}>
@@ -718,8 +587,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               style={{
                 position: 'relative',
                 width: '100%',
-                maxWidth: shouldUseImageSmall ? '200px' : '400px',
-                aspectRatio: shouldUseImageSmall ? '4/3' : '3/4',
+                maxWidth: '300px', // Smaller max width for mobile/tablet
+                aspectRatio: '4/3', // More landscape ratio for smaller viewport usage
                 borderRadius: theme.borderRadius.m,
                 overflow: 'hidden',
                 backgroundColor: theme.palette.neutralLighter,
@@ -738,32 +607,31 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 placeholder='blur'
                 blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
               />
-              {shouldShowTitle &&
-                imageTextToDisplay &&
-                !shouldUseImageSmall && (
-                  <div
+              {/* No title overlay for stacked layout - keeps it clean */}
+              {false && shouldShowTitle && imageTextToDisplay && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: theme.spacing.m,
+                    background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent)`,
+                    color: theme.palette.white,
+                  }}
+                >
+                  <h2
                     style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      padding: theme.spacing.m,
-                      background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent)`,
-                      color: theme.palette.white,
+                      margin: 0,
+                      fontSize: '1.75rem',
+                      fontWeight: theme.fonts.xLarge.fontWeight as number,
+                      fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                     }}
                   >
-                    <h2
-                      style={{
-                        margin: 0,
-                        fontSize: theme.fonts.xLarge.fontSize,
-                        fontWeight: theme.fonts.xLarge.fontWeight as number,
-                        fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
-                      }}
-                    >
-                      {imageTextToDisplay}
-                    </h2>
-                  </div>
-                )}
+                    {imageTextToDisplay}
+                  </h2>
+                </div>
+              )}
             </motion.div>
           </div>
 
@@ -833,7 +701,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   <h2
                     style={{
                       margin: 0,
-                      fontSize: theme.fonts.xLarge.fontSize,
+                      fontSize: '1.75rem',
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
                       fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                     }}

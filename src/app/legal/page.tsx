@@ -63,7 +63,7 @@ export default function LegalPage() {
   });
 
   return (
-    <UnifiedPageWrapper layoutType='viewport-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           width: '100%',

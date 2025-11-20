@@ -129,7 +129,7 @@ export default function PressReleasePage() {
   );
 
   return (
-    <UnifiedPageWrapper layoutType='viewport-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
           padding:
@@ -171,7 +171,9 @@ export default function PressReleasePage() {
                 selectedKey={viewType}
                 onChange={(event, option) => {
                   if (option) {
-                    setViewType(option.key as 'grid' | 'small-tile' | 'large-tile');
+                    setViewType(
+                      option.key as 'grid' | 'small-tile' | 'large-tile'
+                    );
                   }
                 }}
                 styles={{

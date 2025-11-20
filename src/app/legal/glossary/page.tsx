@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function GlossaryPage() {
   return (
-    <UnifiedPageWrapper layoutType='viewport-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <GlossaryLandingClient />
     </UnifiedPageWrapper>
   );
