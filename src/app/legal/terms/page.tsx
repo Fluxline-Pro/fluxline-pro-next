@@ -18,7 +18,6 @@ export default function TermsOfUsePage() {
         title='Terms of Use'
         subtitle='Service Terms and User Agreements'
         content={content}
-        lastUpdated='October 12, 2025'
       />
     </PageWrapper>
   );

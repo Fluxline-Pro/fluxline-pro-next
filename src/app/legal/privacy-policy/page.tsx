@@ -18,7 +18,6 @@ export default function PrivacyPolicyPage() {
         title='Privacy Policy'
         subtitle='Data Protection and Privacy Practices'
         content={content}
-        lastUpdated='October 12, 2025'
       />
     </PageWrapper>
   );

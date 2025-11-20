@@ -12,7 +12,6 @@ interface LegalPageLayoutProps {
   title: string;
   subtitle?: string;
   content: string;
-  lastUpdated?: string;
 }
 
 /**
@@ -28,7 +27,6 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
   title,
   subtitle,
   content,
-  lastUpdated,
 }) => {
   const { theme } = useAppTheme();
 
@@ -114,21 +112,6 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
           }}
         >
           {subtitle}
-        </Typography>
-      )}
-
-      {/* Last Updated (if provided) */}
-      {lastUpdated && (
-        <Typography
-          variant='p'
-          style={{
-            ...typography.fonts.bodySmall,
-            color: theme.palette.neutralTertiary,
-            marginBottom: spacing.xl,
-            fontStyle: 'italic',
-          }}
-        >
-          Last Updated: {lastUpdated}
         </Typography>
       )}
 

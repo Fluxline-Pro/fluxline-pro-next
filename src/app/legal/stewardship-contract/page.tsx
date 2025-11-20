@@ -18,7 +18,6 @@ export default function StewardshipContractPage() {
         title='Stewardship Contract'
         subtitle='Our Commitment to Ethical Service and Partnership'
         content={content}
-        lastUpdated='October 12, 2025'
       />
     </PageWrapper>
   );

@@ -18,7 +18,6 @@ export default function GlossaryPage() {
         title='Glossary of Terms'
         subtitle='Key Terminology and Definitions'
         content={content}
-        lastUpdated='October 12, 2025'
       />
     </PageWrapper>
   );
