@@ -5,7 +5,7 @@
 
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { SimplePageWrapper } from '@/components/SimplePageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { ScrollsGrid } from './components/ScrollsGrid';
 import { getAllScrolls } from './scrollsData';
 import { FadeUp } from '@/animations/fade-animations';
@@ -32,7 +32,7 @@ export default function ScrollsPage() {
   const scrolls = getAllScrolls();
 
   return (
-    <SimplePageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-8'>
         {/* Header Section */}
         <FadeUp>
@@ -84,6 +84,6 @@ export default function ScrollsPage() {
           </section>
         </FadeUp>
       </div>
-    </SimplePageWrapper>
+    </UnifiedPageWrapper>
   );
 }

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { SimplePageWrapper } from '@/components/SimplePageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { ContactForm } from './components/ContactForm';
@@ -15,7 +15,7 @@ export default function ContactPage() {
   const { theme } = useAppTheme();
 
   return (
-    <SimplePageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-8'>
         {/* Header Section with Hire Me Button */}
         <div className='flex justify-between items-start flex-wrap gap-4'>
@@ -216,6 +216,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-    </SimplePageWrapper>
+    </UnifiedPageWrapper>
   );
 }

@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { SimplePageWrapper } from '@/components/SimplePageWrapper';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { SERVICE_CATEGORIES } from '../constants';
 import { ServiceDetailHero } from './components/service-detail-hero';
 import { ServiceDetailContent } from './components/service-detail-content';
@@ -40,7 +40,7 @@ export default async function ServiceDetailPage({
   }
 
   return (
-    <SimplePageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-12'>
         {/* Hero Section */}
         <ServiceDetailHero service={service} />
@@ -57,6 +57,6 @@ export default async function ServiceDetailPage({
         {/* Related Services */}
         <RelatedServices currentServiceId={service.id} />
       </div>
-    </SimplePageWrapper>
+    </UnifiedPageWrapper>
   );
 }

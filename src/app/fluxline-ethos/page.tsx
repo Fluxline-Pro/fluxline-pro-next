@@ -7,6 +7,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { SimplePageWrapper } from '@/components/SimplePageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -27,7 +28,7 @@ export default function FluxlineEthosPage() {
   });
 
   return (
-    <SimplePageWrapper>
+    <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-16'>
         {/* Hero Section */}
         <section className='space-y-6'>
@@ -351,6 +352,6 @@ export default function FluxlineEthosPage() {
           </div>
         </section>
       </div>
-    </SimplePageWrapper>
+    </UnifiedPageWrapper>
   );
 }
