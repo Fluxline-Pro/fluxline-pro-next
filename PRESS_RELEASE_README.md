@@ -36,7 +36,7 @@ The press release system provides a professional platform for displaying company
 - **Features**:
   - Dynamic content rendering
   - Theme-aware styling
-  - PageWrapper integration
+  - UnifiedPageWrapper integration
   - 404 handling for missing press releases
 
 ### Card System Components
@@ -244,9 +244,9 @@ src/
 
 ## Integration Points
 
-### PageWrapper Integration
+### UnifiedPageWrapper Integration
 
-- Detail pages use PageWrapper for consistent layout
+- Detail pages use UnifiedPageWrapper for consistent layout
 - Automatic breadcrumb generation
 - Theme-aware page transitions
 

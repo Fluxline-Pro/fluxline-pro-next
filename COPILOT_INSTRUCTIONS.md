@@ -58,7 +58,7 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 
 - **Favor reusing existing components and Next.js patterns**:
   - Use Next.js built-in components: `Image`, `Link`, `Font`
-  - Use `PageWrapper` component for consistent page layouts
+  - Use `UnifiedPageWrapper` component for consistent page layouts
   - Create reusable layout components in `src/theme/components/layout/`
   - Implement consistent page layouts using `layout.tsx` files
   - Use Server Components for static content, Client Components for interactivity
@@ -74,14 +74,14 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 
   ```tsx
   // In your page.tsx file
-  import { PageWrapper } from '@/components';
+  import { UnifiedPageWrapper } from '@/components';
 
   export default function AboutPage() {
     return (
-      <PageWrapper>
+      <UnifiedPageWrapper layout='responsive-grid'>
         <h1>About Us</h1>
         <p>Your content here...</p>
-      </PageWrapper>
+      </UnifiedPageWrapper>
     );
   }
   ```
@@ -124,7 +124,7 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   - Dynamic routes with `[param]` directories
   - Route groups with `(group)` directories when needed
   - Nested layouts for consistent page structure
-  - Include image and routing within the PageWrapper.tsx file so images will appear based on route taken
+  - Include image and routing within the UnifiedPageWrapper.tsx file so images will appear based on route taken
 - **Content management**:
   - Markdown content can be processed with MDX or similar
   - Static content in `/public` directory
@@ -552,65 +552,59 @@ yarn build-storybook         # Build for deployment
 
 ## Page Layout Infrastructure
 
-### PageWrapper Component
+### UnifiedPageWrapper Component
 
-- **Location**: `src/components/PageWrapper.tsx`
-- **Purpose**: Main layout wrapper for all pages (except home page)
+- **Location**: `src/components/UnifiedPageWrapper.tsx`
+- **Purpose**: Consolidated layout wrapper for all pages (except home page)
+- **Layout Types**:
+  - `responsive-grid`: Main layout with sticky images and scrollable content (3fr/9fr grid)
+  - `legal-document`: Specialized layout for legal pages with centered content
 - **Features**:
-  - Responsive 3fr/9fr grid layout (image left, content right)
   - Dynamic page-specific images based on route
   - Theme-aware Fluxline logo display
   - Animated page transitions with Framer Motion
-  - Support for detail views with custom images
-  - Mobile-first responsive design (stacked in portrait mode)
+  - Mobile-first responsive design (stacked layout on mobile)
+  - Dynamic header height calculation for proper spacing
+  - Consolidated three previous layout components (PageWrapper, SimplePageWrapper, LegalPageLayout)
 
-### ViewportGrid Component
+### Layout System Architecture
 
-- **Location**: `src/theme/components/layout/ViewportGrid.tsx`
-- **Type**: Client Component ('use client')
-- **Features**:
-  - CSS Grid-based responsive layout
-  - Automatic layout switching based on device orientation
-  - Left-handed mode support (swaps image and content positions)
-  - Auto-scroll to top on route changes
-  - Content scrollability detection
-  - Supports nested layouts
+- **Responsive Grid Layout**: Image left (sticky), content right (scrollable) on desktop
+- **Mobile Layout**: Stacked design with image above content
+- **Legal Document Layout**: Centered content with consistent margins
+- **Dynamic Spacing**: Uses `useHeaderHeight` hook for proper content positioning
 
-### UnifiedCard Component
+### Key Layout Features
 
-- **Location**: `src/theme/components/card/unified-card.tsx`
-- **Type**: Client Component ('use client')
-- **Purpose**: Flexible card component for displaying images and content
-- **Features**:
-  - Image loading with spinner animation
-  - Aspect ratio preservation for landscape images
-  - Dark mode filtering with color vision accessibility
-  - Title overlay on images
-  - Multiple view types (image, grid, small, large)
-  - Fluent UI typography integration
+- **Image Management**: Route-based image selection with fallback system
+- **Header Integration**: Dynamic height detection prevents content overlap
+- **Animation Support**: Framer Motion with accessibility-aware reduced motion
+- **Theme Integration**: Full Fluent UI theme support across all layout types
+- **Responsive Breakpoints**: Mobile-first design with Tailwind CSS utilities
 
-### Layout Hooks
+### Layout Usage Patterns
 
-All hooks are located in `src/theme/hooks/`:
+```tsx
+// Responsive grid layout (default)
+<UnifiedPageWrapper layout="responsive-grid">
+  <YourContent />
+</UnifiedPageWrapper>
 
-- **useLayoutConfig**: Calculates grid layout based on device, orientation, and preferences
-- **useContentScrollable**: Detects if content area is scrollable
-- **useColorVisionFilter**: Applies color vision accessibility filters
-- **useIsTextColorLight**: Determines text color based on image brightness
-- **useDateFormatter**: Formats dates consistently across the app
+// Legal document layout
+<UnifiedPageWrapper layout="legal-document">
+  <LegalContent />
+</UnifiedPageWrapper>
+```
 
-### Page Configurations
+### Mobile Optimization
 
-PageWrapper includes pre-configured routes for:
-
-- Services pages (consulting, development, design, etc.)
-- Legal pages (terms, privacy, glossary)
-- Content pages (blog, portfolio, my-content)
-- About, contact, and other pages
-- Dynamic 404 handling
+- **Stacked Layout**: Images display above content on mobile devices
+- **Header Spacing**: Dynamic top padding prevents header overlap
+- **Touch-Friendly**: Optimized spacing and interaction areas
+- **Performance**: Lazy-loaded images and optimized animations
 
 ---
 
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-11-19 - Author updated content for PageWrapper and Markdown formatting errors -Aplusandminus
+### Last Updated: 2024-12-19 - Updated for UnifiedPageWrapper consolidation and current architecture - GitHub Copilot
