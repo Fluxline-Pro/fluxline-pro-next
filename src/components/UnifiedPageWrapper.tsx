@@ -190,7 +190,7 @@ interface ImageConfig {
 }
 
 export interface UnifiedPageWrapperProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   // Layout type selection
   layoutType?: LayoutType;

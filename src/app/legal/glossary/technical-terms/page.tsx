@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import { PageWrapper } from '../../../../components/PageWrapper';
-import LegalPageLayout from '../../../../components/LegalPageLayout';
+import { UnifiedPageWrapper } from '../../../../components/UnifiedPageWrapper';
 import { content } from '../../../../assets/legal/glossary-technical-terms';
 
 export const metadata: Metadata = {
@@ -13,12 +12,14 @@ export const metadata: Metadata = {
 
 export default function TechnicalTermsPage() {
   return (
-    <PageWrapper>
-      <LegalPageLayout
-        title='Technical & Professional Terms'
-        subtitle='Business, Legal, and Technical Terminology'
-        content={content}
-      />
-    </PageWrapper>
+    <UnifiedPageWrapper
+      layoutType='legal-document'
+      legalPageConfig={{
+        title: 'Technical & Professional Terms',
+        subtitle: 'Business, Legal, and Technical Terminology',
+        content,
+        documentType: 'glossary',
+      }}
+    />
   );
 }

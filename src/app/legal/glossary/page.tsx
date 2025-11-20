@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { PageWrapper } from '../../../components/PageWrapper';
+import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
 import GlossaryLandingClient from './GlossaryLandingClient';
 
 export const metadata: Metadata = {
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 
 export default function GlossaryPage() {
   return (
-    <PageWrapper>
+    <UnifiedPageWrapper layoutType='viewport-grid'>
       <GlossaryLandingClient />
-    </PageWrapper>
+    </UnifiedPageWrapper>
   );
 }
