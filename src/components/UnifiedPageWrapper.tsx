@@ -17,6 +17,7 @@ import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 import { useIsMobile, useIsTabletPortrait } from '@/theme/hooks/useMediaQuery';
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { useHoverEffects } from '../hooks/useHoverEffects';
+import { useHeaderHeight } from '../theme/hooks/useHeaderHeight';
 import { ThemeMode } from '../theme/theme';
 
 import { typography, spacing } from '../theme/theme';
@@ -238,6 +239,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   const { shouldReduceMotion } = useReducedMotion();
   const isMobile = useIsMobile();
   const isTabletPortrait = useIsTabletPortrait();
+  const headerHeight = useHeaderHeight();
   const { containerStyle, contentStyle, imageStyle } = useSimpleLayout(
     theme,
     layoutPreference
@@ -570,6 +572,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         width: '100%',
         height: 'auto',
         padding: theme.spacing.m,
+        paddingTop: `calc(${headerHeight} + ${theme.spacing.m})`, // Dynamic header height + margin
       }
     : imageStyle;
 
