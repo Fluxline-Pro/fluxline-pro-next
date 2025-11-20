@@ -345,7 +345,7 @@ export default function TestimonialsPage() {
                     flex: 1,
                   }}
                 >
-                  " &ldquo;{testimonial.quote.substring(0, 120)}...&rdquo;"
+                  &ldquo;{testimonial.quote.substring(0, 120)}...&rdquo;
                 </Typography>
               </div>
             ))}
