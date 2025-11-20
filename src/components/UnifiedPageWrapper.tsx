@@ -227,7 +227,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   layoutType = 'responsive-grid',
   showImageTitle = true,
   contentImage,
-
+  tabletPortraitLayout,
+  respectLayoutPreference = true,
   imageConfig,
   legalPageConfig,
 }) => {
@@ -529,7 +530,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
       }
     : {
         ...containerStyle,
-        gridTemplateColumns: layoutPreference === 'left-handed' ? '1fr' : '1fr',
+        gridTemplateColumns: '1fr',
         paddingLeft:
           layoutPreference === 'left-handed'
             ? containerStyle.padding
@@ -610,31 +611,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 placeholder='blur'
                 blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
               />
-              {/* No title overlay for stacked layout - keeps it clean */}
-              {false && shouldShowTitle && imageTextToDisplay && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: theme.spacing.m,
-                    background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent)`,
-                    color: theme.palette.white,
-                  }}
-                >
-                  <h2
-                    style={{
-                      margin: 0,
-                      fontSize: '1.75rem',
-                      fontWeight: theme.fonts.xLarge.fontWeight as number,
-                      fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
-                    }}
-                  >
-                    {imageTextToDisplay}
-                  </h2>
-                </div>
-              )}
+              {/* No title overlay on stacked layouts for cleaner mobile/tablet experience */}
             </motion.div>
           </div>
 
