@@ -6,30 +6,22 @@
  */
 
 import React from 'react';
-import Link from 'next/link';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useHoverEffects } from '@/hooks/useHoverEffects';
 import { TeamMemberCard } from './components/TeamMemberCard';
-import { CompanyStatistics } from './components/CompanyStatistics';
 import { CompanyTimeline } from './components/CompanyTimeline';
 import { ValueCard } from './components/ValueCard';
+import { InfoCard } from './components/InfoCard';
 import {
   TEAM_MEMBERS,
-  COMPANY_STATISTICS,
   COMPANY_TIMELINE,
   COMPANY_VALUES,
+  INFO_CARDS,
 } from './constants';
 
 export default function AboutPage() {
   const { theme } = useAppTheme();
-  const buttonHoverEffects = useHoverEffects({
-    type: 'button',
-    hoverBgColor: theme.palette.themeDark,
-    defaultBgColor: theme.palette.themePrimary,
-    enableTransform: false,
-  });
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -40,7 +32,7 @@ export default function AboutPage() {
             variant='h1'
             style={{
               color: theme.palette.themePrimary,
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
               fontWeight: theme.typography.fontWeights.bold,
             }}
           >
@@ -48,17 +40,6 @@ export default function AboutPage() {
           </Typography>
 
           <div className='space-y-4'>
-            <Typography
-              variant='h2'
-              style={{
-                color: theme.palette.themeSecondary,
-                fontSize: '1.75rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              We&apos;re not done yet—but we&apos;re already extraordinary.
-            </Typography>
-
             <Typography
               variant='p'
               style={{
@@ -104,79 +85,53 @@ export default function AboutPage() {
             >
               <strong>Fluxline</strong> builds <em>systems that breathe</em>,{' '}
               <em>brands that feel</em>, and <em>legacies that last</em>.
+              Let&apos;s make your vision real—through <strong>ritual</strong>,{' '}
+              <strong>resonance</strong>, and <strong>iteration</strong>.
             </Typography>
           </div>
         </div>
 
-        {/* Company Statistics */}
-        <div className='space-y-6'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-            }}
-          >
-            Our Impact
-          </Typography>
-          <CompanyStatistics statistics={COMPANY_STATISTICS} />
+        {/* Info Cards Section - What We Do, Deliver, How We Do It */}
+        <div className='grid gap-6 md:grid-cols-3'>
+          {INFO_CARDS.map((card) => (
+            <InfoCard key={card.id} card={card} />
+          ))}
         </div>
 
-        {/* Testimonials Callout */}
-        <div className='space-y-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 p-8 rounded-lg border border-gray-200 dark:border-gray-700'>
+        {/* Quote Section */}
+        <div
+          style={{
+            padding: '2rem',
+            borderLeft: `4px solid ${theme.palette.themeTertiary}`,
+            backgroundColor: 'transparent',
+          }}
+        >
           <Typography
-            variant='h3'
+            variant='p'
             style={{
-              color: theme.palette.themePrimary,
-              fontSize: '1.5rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
+              color: theme.palette.neutralSecondary,
+              fontSize: '1.25rem',
+              fontStyle: 'italic',
+              lineHeight: theme.typography.lineHeights.relaxed,
             }}
           >
-            Hear From Our Clients
+            We&apos;re not done yet— but we&apos;re already extraordinary.
           </Typography>
           <Typography
             variant='p'
             style={{
               color: theme.palette.neutralSecondary,
-              fontSize: '1rem',
+              fontSize: '1.125rem',
+              fontStyle: 'italic',
               lineHeight: theme.typography.lineHeights.relaxed,
+              marginTop: '0.5rem',
             }}
           >
-            Don&apos;t just take our word for it. See how we&apos;ve helped
-            businesses and individuals transform through our strategic
-            consulting, coaching, and development services.
+            Modular by design. Resonant by nature.
           </Typography>
-          <div className='pt-2'>
-            <Link
-              href='/testimonials'
-              className='inline-flex items-center px-6 py-3 rounded-md font-medium transition-colors duration-200'
-              style={{
-                backgroundColor: theme.palette.themePrimary,
-                color: theme.palette.white,
-              }}
-              {...buttonHoverEffects}
-            >
-              Read Client Stories
-              <svg
-                className='ml-2 w-4 h-4'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M9 5l7 7-7 7'
-                />
-              </svg>
-            </Link>
-          </div>
         </div>
 
-        {/* Mission & Vision */}
+        {/* Mission Section */}
         <div className='space-y-6'>
           <Typography
             variant='h2'
@@ -186,7 +141,7 @@ export default function AboutPage() {
               fontWeight: theme.typography.fontWeights.semiBold,
             }}
           >
-            Our Mission & Vision
+            Our Mission
           </Typography>
 
           <Typography
@@ -202,21 +157,6 @@ export default function AboutPage() {
             <em>somatic discipline</em>—empowering individuals and brands to
             live with <strong>modular precision</strong> and{' '}
             <strong>legacy-driven resonance</strong>.
-          </Typography>
-
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            Fluxline envisions a world where individuals and businesses become{' '}
-            <em>self-authored stewards</em> of their inner and outer
-            architecture—where identity is revealed through{' '}
-            <strong>ritual</strong>, <strong>resonance</strong>, and{' '}
-            <strong>iteration</strong>.
           </Typography>
         </div>
 

@@ -10,6 +10,7 @@ import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { ServiceCard } from './components/ServiceCard';
+import { CTACallout } from './components/CTACallout';
 import {
   SERVICE_CATEGORIES,
   SERVICES_SUMMARY,
@@ -48,6 +49,30 @@ export default function ServicesPage() {
           >
             {FLUXLINE_SECONDARY_TAGLINE}
           </Typography>
+        </div>
+
+        {/* CTA Callout */}
+        <CTACallout
+          emoji='👉'
+          title="Your vision is calling. Let's architect it into form."
+          description='Book your free consultation to discuss your project needs and get started today!'
+          buttonHref='/contact'
+          buttonText='Contact Us'
+        />
+
+        {/* Overview Section */}
+        <div className='space-y-4'>
+          <Typography
+            variant='h2'
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+              fontWeight: theme.typography.fontWeights.semiBold,
+              marginBottom: '1rem',
+            }}
+          >
+            Overview
+          </Typography>
 
           <Typography
             variant='p'
@@ -79,10 +104,24 @@ export default function ServicesPage() {
               color: theme.palette.themePrimary,
               fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
               fontWeight: theme.typography.fontWeights.semiBold,
+              marginBottom: '1rem',
+            }}
+          >
+            Services Offered
+          </Typography>
+
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '1rem',
+              fontStyle: 'italic',
+              lineHeight: theme.typography.lineHeights.relaxed,
               marginBottom: '2rem',
             }}
           >
-            Service Offerings
+            Every module a milestone, every feature a ritual—crafted for your
+            sovereign ascent.
           </Typography>
 
           <div
@@ -98,7 +137,7 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Call to Action */}
+        {/* Call to Action - Let's Connect */}
         <div
           style={{
             padding: '2rem',

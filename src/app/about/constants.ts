@@ -7,6 +7,34 @@ import type { TeamMember } from './components/TeamMemberCard';
 import type { Statistic } from './components/CompanyStatistics';
 import type { TimelineEvent } from './components/CompanyTimeline';
 import type { CompanyValue } from './components/ValueCard';
+import type { InfoCardData } from './components/InfoCard';
+
+/**
+ * Info Cards - What We Do, What We Deliver, How We Do It
+ */
+export const INFO_CARDS: InfoCardData[] = [
+  {
+    id: 'what-we-do',
+    title: 'What We Do',
+    heading: 'Creative & Modular Thinker',
+    content:
+      'We architect transformative brands, systems, and digital experiences that scale with your vision—fusing creative storytelling with technical precision to build frameworks that evolve, not restrict.',
+  },
+  {
+    id: 'what-we-deliver',
+    title: 'What We Deliver',
+    heading: 'Results With Resonance',
+    content:
+      'Every project delivers measurable outcomes and emotional impact. We create solutions that drive business growth while building authentic connections between you and your audience.',
+  },
+  {
+    id: 'how-we-do-it',
+    title: 'How We Do It',
+    heading: 'Human-Centered Approach',
+    content:
+      'We prioritize empathy, collaboration, belonging, and intentional communication—designing every interaction around how people actually think, feel, and make decisions.',
+  },
+];
 
 /**
  * Team Members
