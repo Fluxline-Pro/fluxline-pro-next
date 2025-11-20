@@ -15,6 +15,8 @@ import { FadeUp } from '../animations/fade-animations';
 // Import images directly
 import FluxlineLogoDarkMode from '../assets/images/FluxlineLogoDarkMode.png';
 import FluxlineLogoLightMode from '../assets/images/FluxlineLogoLightMode.png';
+import FluxlineEthos from '../assets/images/FluxlineEthos.png';
+import FluxlineTestimonials from '../assets/images/FluxlineTestimonials.png';
 import OurServicesImage from '../assets/images/OurServices1197x1600.jpg';
 import ConsultingImage from '../assets/images/ConsultingPortrait.jpg';
 import GitHubImage from '../assets/images/GitHubPortrait.jpg';
@@ -107,6 +109,14 @@ const PAGE_CONFIGS: Record<
     image: DesignImage.src,
     imageText: 'Brand & Experience Design',
   },
+  '/fluxline-ethos': {
+    image: FluxlineEthos.src,
+    imageText: 'Fluxline Ethos',
+  },
+  '/case-studies': {
+    image: 'FLUXLINE_LOGO',
+    imageText: 'Case Studies',
+  },
   '/blog': {
     image: BlogImage.src,
     imageText: 'Blog',
@@ -134,6 +144,10 @@ const PAGE_CONFIGS: Record<
   '/press-release': {
     image: PressReleaseImage.src,
     imageText: 'Press Release',
+  },
+  '/testimonials': {
+    image: FluxlineTestimonials.src,
+    imageText: 'Testimonials',
   },
 };
 
@@ -232,20 +246,30 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({
   return (
     <ViewportGrid
       leftChildren={
-        <UnifiedCard
-          key={pathname + (id || '')} // Add key to reset animations on route change
-          id='imageCard' // Use consistent id for hooks compatibility
-          title={imageTextToDisplay}
-          viewType='image'
-          imageUrl={imageToDisplay}
-          elevation='medium'
-          showTitleOnImage={shouldShowTitle}
-          imageText={imageTextToDisplay}
-          delay={0.1}
-          useSpinner={true}
-          isViewportLeftPanel={true} // Mark this card as being in the ViewportGrid's left panel
-          skipDarkModeFilter={isUsingDarkLogo} // Skip dark mode filter for Fluxline dark logo
-        />
+        <div
+          style={{
+            minHeight: '200px',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <UnifiedCard
+            key={pathname + (id || '')} // Add key to reset animations on route change
+            id='imageCard' // Use consistent id for hooks compatibility
+            title={imageTextToDisplay}
+            viewType='image'
+            imageUrl={imageToDisplay}
+            elevation='medium'
+            showTitleOnImage={shouldShowTitle}
+            imageText={imageTextToDisplay}
+            delay={0.1}
+            useSpinner={true}
+            isViewportLeftPanel={true} // Mark this card as being in the ViewportGrid's left panel
+            skipDarkModeFilter={isUsingDarkLogo} // Skip dark mode filter for Fluxline dark logo
+          />
+        </div>
       }
       rightChildren={
         <div
