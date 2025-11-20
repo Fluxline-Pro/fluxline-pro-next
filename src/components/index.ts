@@ -4,3 +4,4 @@
  */
 
 export { PageWrapper } from './PageWrapper';
+export { UnifiedPageWrapper } from './UnifiedPageWrapper';
