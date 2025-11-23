@@ -657,7 +657,8 @@ export function getBlogPosts(filters?: {
   let posts = [...blogPostsMockData];
 
   if (filters?.tag) {
-    posts = posts.filter((post) => post.tags.includes(filters.tag!));
+    const tag = filters.tag;
+    posts = posts.filter((post) => post.tags.includes(tag));
   }
 
   if (filters?.category) {

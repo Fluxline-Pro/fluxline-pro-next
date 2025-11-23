@@ -123,7 +123,6 @@ export default function BlogPage() {
   // Handle card click to navigate to detail view
   const handleCardClick = React.useCallback(
     (slug: string) => {
-      console.log('Navigating to blog post:', slug);
       router.push(`/blog/${slug}`);
     },
     [router]
