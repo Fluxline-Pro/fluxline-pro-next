@@ -119,20 +119,23 @@ export function filterPortfolioProjects(
   let projects = getAllPortfolioProjects();
 
   if (filters.categories && filters.categories.length > 0) {
+    const categories = filters.categories;
     projects = projects.filter((project) =>
-      filters.categories!.includes(project.category)
+      categories.includes(project.category)
     );
   }
 
   if (filters.tags && filters.tags.length > 0) {
+    const tags = filters.tags;
     projects = projects.filter((project) =>
-      project.tags.some((tag) => filters.tags!.includes(tag))
+      project.tags.some((tag) => tags.includes(tag))
     );
   }
 
   if (filters.technologies && filters.technologies.length > 0) {
+    const technologies = filters.technologies;
     projects = projects.filter((project) =>
-      project.technologies.some((tech) => filters.technologies!.includes(tech))
+      project.technologies.some((tech) => technologies.includes(tech))
     );
   }
 

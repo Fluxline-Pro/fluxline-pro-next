@@ -8,7 +8,7 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown } from '@fluentui/react';
+import { Dropdown, IDropdownOption } from '@fluentui/react';
 import { PortfolioProject } from './types';
 
 interface PortfolioPageProps {
@@ -134,11 +134,11 @@ export default function PortfolioPageClient({
   const handleTagChange = React.useCallback(
     (
       event: React.FormEvent<HTMLDivElement>,
-      option?: { key: string; selected: boolean }
+      option?: IDropdownOption
     ) => {
       if (option) {
         const tags = option.selected
-          ? [...selectedTags, option.key]
+          ? [...selectedTags, String(option.key)]
           : selectedTags.filter((t) => t !== option.key);
         setSelectedTags(tags);
       }
@@ -150,11 +150,11 @@ export default function PortfolioPageClient({
   const handleTechnologyChange = React.useCallback(
     (
       event: React.FormEvent<HTMLDivElement>,
-      option?: { key: string; selected: boolean }
+      option?: IDropdownOption
     ) => {
       if (option) {
         const techs = option.selected
-          ? [...selectedTechnologies, option.key]
+          ? [...selectedTechnologies, String(option.key)]
           : selectedTechnologies.filter((t) => t !== option.key);
         setSelectedTechnologies(techs);
       }

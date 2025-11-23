@@ -443,7 +443,12 @@ export default function PortfolioDetailClient({
                       marginBottom: theme.spacing.s1,
                     }}
                   >
-                    {/* Placeholder for image - in production, use Next.js Image */}
+                    {/* 
+                      NOTE: Placeholder for gallery images
+                      In production, replace with Next.js Image component:
+                      <Image src={image.url} alt={image.alt} fill style={{objectFit: 'cover'}} />
+                      Images should be added to /public/images/portfolio/ directory
+                    */}
                     <Typography
                       variant='p'
                       style={{ color: theme.palette.neutralTertiary }}
