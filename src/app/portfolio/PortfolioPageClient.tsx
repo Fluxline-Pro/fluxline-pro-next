@@ -154,12 +154,6 @@ export default function PortfolioPageClient({
     [selectedTechnologies]
   );
 
-  // Clear all filters
-  const clearFilters = React.useCallback(() => {
-    setSelectedTags([]);
-    setSelectedTechnologies([]);
-  }, []);
-
   const hasActiveFilters =
     selectedTags.length > 0 || selectedTechnologies.length > 0;
 
