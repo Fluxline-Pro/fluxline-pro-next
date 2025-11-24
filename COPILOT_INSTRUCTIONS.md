@@ -125,11 +125,56 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   - Route groups with `(group)` directories when needed
   - Nested layouts for consistent page structure
   - Include image and routing within the PageWrapper.tsx file so images will appear based on route taken
-- **Content management**:
-  - Markdown content can be processed with MDX or similar
-  - Static content in `/public` directory
-  - Dynamic content through API routes or external APIs
-  - Use Next.js `generateStaticParams` for static generation when applicable
+- **Content management with Server/Client Component pattern**:
+  - **Server Components** for data loading from Markdown files or file system
+  - **Client Components** for user interactions and filtering
+  - Markdown content processed with `react-markdown` and `gray-matter`
+  - Blog posts stored in `/public/blog/posts/[slug]/markdown/post.md`
+  - Images co-located with content in `/public/blog/posts/[slug]/images/`
+  - Use Next.js `generateStaticParams` for static generation (SSG)
+  - Pass data from Server Components to Client Components via props
+  - Never use `'use client'` in components that read from file system
+
+### Blog System Management
+
+- **Location**: `/src/app/blog/`
+- **Content Storage**: Markdown files in `/public/blog/posts/[slug]/markdown/post.md`
+- **Image Storage**: Images in `/public/blog/posts/[slug]/images/`
+- **Architecture**: Server Components for data loading, Client Components for interactivity
+
+**Adding New Blog Posts**:
+
+1. Create folder structure: `public/blog/posts/your-post-slug/markdown/` and `images/`
+2. Create `post.md` with frontmatter (title, excerpt, author, date, category, tags, SEO)
+3. Add images to images folder
+4. Run `yarn build` to generate static pages
+5. New post automatically appears in listing, gets detail page, and is added to tag/category filters
+
+**Blog Architecture Patterns**:
+
+- **Server Components**: Load data from file system using `blogLoader.ts`
+- **Client Components**: Handle filtering, view switching, and navigation
+- All blog content loaded from Markdown files (no mock data)
+- Static generation for all pages via `generateStaticParams`
+- Full SSG support - works in both `yarn dev` and `yarn build`
+
+**Component Structure**:
+
+- `page.tsx`: Server Component that loads posts from file system
+- `BlogListingClient.tsx`: Client Component for user interactions
+- `lib/blogLoader.ts`: Server-only file system loader
+- `[slug]/page.tsx`: Server Component for detail pages
+- `BlogPostDetailClient.tsx`: Client Component for markdown rendering
+
+**SEO Best Practices**:
+
+- Each post has frontmatter with SEO metadata
+- Automatic OpenGraph and Twitter Card generation
+- Dynamic metadata in detail pages
+- Proper heading hierarchy and semantic HTML
+- Image alt text for accessibility
+
+For complete documentation, see `FILE_BASED_BLOG_GUIDE.md`
 
 ### Scrolls/White Papers Management
 

@@ -562,6 +562,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
       !isContentScrollable
         ? 'center'
         : 'flex-start',
+    maxWidth: '1200px',
+    margin: !isMobile && !shouldUseStackedLayout ? '0 auto' : undefined,
   };
 
   // Adjust image style for stacked layout

@@ -104,10 +104,13 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
           alignItems: 'stretch',
         };
       case 'large':
+        const largeColumns = gridColumns || (isMobile ? 1 : isTablet ? 2 : 3);
         return {
-          display: 'flex' as const,
-          flexDirection: 'column' as const,
+          display: 'grid' as const,
+          templateColumns: `repeat(${largeColumns}, 1fr)`,
           gap,
+          gridAutoRows: 'minmax(auto, 1fr)',
+          alignItems: 'stretch',
         };
       case 'image':
         // For image view type, use a flexible container
