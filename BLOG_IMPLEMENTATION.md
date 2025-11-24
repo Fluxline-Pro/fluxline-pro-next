@@ -1,25 +1,20 @@
-# Blog Feature Implementation
+# Blog Feature - Technical Reference
+
+> **📖 For Complete Documentation**: See [`FILE_BASED_BLOG_GUIDE.md`](FILE_BASED_BLOG_GUIDE.md) for the comprehensive guide including setup instructions, frontmatter reference, Markdown examples, SEO best practices, and troubleshooting.
 
 ## Overview
 
-The blog feature has been successfully implemented in the Fluxline Pro Next.js platform, following the same patterns and design principles used in the press-release and case-studies features.
+The blog feature is a production-ready, file-based Markdown blog system built with Next.js 16 App Router, featuring static site generation, Server/Client Component architecture, and comprehensive SEO optimization.
 
 **Status**: ✅ Complete and Production Ready  
-**Implementation Date**: November 23, 2025 (Initial) / January 24, 2025 (File-based system)  
-**Documentation**: See `FILE_BASED_BLOG_GUIDE.md` for complete file-based blog guide
+**Implementation Date**: November 23, 2025 (Initial) / January 24, 2025 (File-based system)
 
-## File-Based Blog System
+## Quick Reference
 
-The blog now supports **file-based Markdown posts** loaded directly from the repository. Simply drop Markdown files and images into organized folders and build.
-
-**Quick Start**: See `FILE_BASED_BLOG_GUIDE.md` for:
-
-- Complete setup instructions
-- Frontmatter reference
-- Markdown examples
-- SEO best practices
-- Troubleshooting guide
-- Workflow examples
+- **Location**: `/src/app/blog/`
+- **Content**: `public/blog/posts/[slug]/markdown/post.md`
+- **Images**: `public/blog/posts/[slug]/images/`
+- **Build Output**: 27+ static pages from 5 Markdown files
 
 ### Adding a Blog Post
 
@@ -27,6 +22,15 @@ The blog now supports **file-based Markdown posts** loaded directly from the rep
 2. Add Markdown: `public/blog/posts/your-post-slug/markdown/post.md`
 3. Add images: `public/blog/posts/your-post-slug/images/`
 4. Build: `yarn build`
+
+## Architecture
+
+### Server/Client Component Pattern
+
+- **Server Components** (`page.tsx`) load data from file system using `blogLoader.ts`
+- **Client Components** (`BlogListingClient.tsx`, detail components) handle interactivity
+- Data passed from Server to Client via props
+- 100% file-based - no mock data dependency
 
 ---
 
