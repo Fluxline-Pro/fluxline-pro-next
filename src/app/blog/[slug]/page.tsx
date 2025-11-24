@@ -1,11 +1,30 @@
 import React from 'react';
-import { blogPostsMockData } from '../blogData';
+import { getBlogPostBySlug } from '../blogData';
 import { BlogPostDetailClient } from './BlogPostDetailClient';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
+// Conditionally import server-only functions
+let getAllBlogPostSlugs: (() => string[]) | undefined;
+if (typeof window === 'undefined') {
+  try {
+    const loader = require('../lib/blogLoader');
+    getAllBlogPostSlugs = loader.getAllBlogPostSlugs;
+  } catch (error) {
+    console.warn('Could not load blog loader for generateStaticParams');
+  }
+}
+
 // Generate static params for all blog posts
 export async function generateStaticParams() {
+  if (getAllBlogPostSlugs) {
+    const slugs = getAllBlogPostSlugs();
+    return slugs.map((slug) => ({
+      slug: slug,
+    }));
+  }
+  // Fallback: use mock data
+  const { blogPostsMockData } = await import('../blogData');
   return blogPostsMockData.map((post) => ({
     slug: post.slug,
   }));
@@ -18,7 +37,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogPostsMockData.find((p) => p.slug === slug);
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     return {
@@ -58,7 +77,7 @@ export default async function BlogPostDetailPage({
   const { slug } = await params;
 
   // Find the blog post data
-  const post = blogPostsMockData.find((p) => p.slug === slug);
+  const post = getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();

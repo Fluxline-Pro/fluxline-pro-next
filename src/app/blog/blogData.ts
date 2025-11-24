@@ -1,15 +1,26 @@
 /**
- * Blog Posts Mock Data
- * Mock data for blog content with markdown support
- * Structure mirrors press-release and case-studies patterns
+ * Blog Data Interface
+ * Provides unified interface for blog posts from file system or mock data
+ * Automatically loads markdown posts from public/blog/posts/[slug]/markdown/post.md
  */
 
 import { BlogPost } from './types';
 
+// Conditional import of file system loader (only on server)
+let fileSystemLoader: typeof import('./lib/blogLoader') | null = null;
+if (typeof window === 'undefined') {
+  try {
+    fileSystemLoader = require('./lib/blogLoader');
+  } catch (error) {
+    console.warn('Could not load file system blog loader:', error);
+  }
+}
+
 /**
- * Mock blog posts data in reverse chronological order (newest first)
+ * Legacy mock blog posts data - kept for backward compatibility
+ * These will be used as fallback if no file-system posts are found
  */
-export const blogPostsMockData: BlogPost[] = [
+const blogPostsMockDataLegacy: BlogPost[] = [
   {
     id: 'embracing-next-js-16-modern-web-development',
     slug: 'embracing-next-js-16-modern-web-development',
@@ -59,7 +70,7 @@ Next.js 16 is not just an incremental update—it's a transformation in how we a
 `,
     author: 'Fluxline Resonance Group',
     publishedDate: new Date('2025-01-25'),
-    imageUrl: undefined,
+    imageUrl: '/public/images/home/HomePageCover4kPortrait.jpeg',
     imageAlt: 'Next.js 16 Modern Web Development',
     tags: ['Next.js', 'Web Development', 'Technology', 'Performance'],
     category: 'Technology',
@@ -648,6 +659,48 @@ TypeScript's type system is powerful and flexible. By following these best pract
 ];
 
 /**
+ * Check if we're in a build/server environment where we can access the file system
+ */
+const canUseFileSystem =
+  typeof window === 'undefined' && fileSystemLoader !== null;
+
+/**
+ * Get all blog posts (from file system or fallback to mock data)
+ * Exported as blogPostsMockData for backward compatibility
+ */
+export const blogPostsMockData: BlogPost[] =
+  canUseFileSystem && fileSystemLoader
+    ? (() => {
+        try {
+          const posts = fileSystemLoader.getAllBlogPosts();
+          return posts.length > 0 ? posts : blogPostsMockDataLegacy;
+        } catch (error) {
+          console.warn(
+            'Error loading blog posts from file system, using mock data:',
+            error
+          );
+          return blogPostsMockDataLegacy;
+        }
+      })()
+    : blogPostsMockDataLegacy;
+
+/**
+ * Get a single blog post by slug
+ */
+export function getBlogPostBySlug(slug: string): BlogPost | undefined {
+  if (canUseFileSystem && fileSystemLoader) {
+    try {
+      const post = fileSystemLoader.getBlogPostBySlug(slug);
+      return post ?? blogPostsMockDataLegacy.find((p) => p.slug === slug);
+    } catch (error) {
+      console.warn(`Error loading blog post ${slug} from file system:`, error);
+      return blogPostsMockDataLegacy.find((p) => p.slug === slug);
+    }
+  }
+  return blogPostsMockDataLegacy.find((p) => p.slug === slug);
+}
+
+/**
  * Get all blog posts
  */
 export function getBlogPosts(filters?: {
@@ -674,6 +727,15 @@ export function getBlogPosts(filters?: {
  * Get unique tags from all posts
  */
 export function getAllTags(): string[] {
+  if (canUseFileSystem && fileSystemLoader) {
+    try {
+      const tags = fileSystemLoader.getAllTags();
+      if (tags.length > 0) return tags;
+    } catch (error) {
+      console.warn('Error getting tags from file system:', error);
+    }
+  }
+
   const tags = new Set<string>();
   blogPostsMockData.forEach((post) => {
     post.tags.forEach((tag) => tags.add(tag));
@@ -685,6 +747,15 @@ export function getAllTags(): string[] {
  * Get unique categories from all posts
  */
 export function getAllCategories(): string[] {
+  if (canUseFileSystem && fileSystemLoader) {
+    try {
+      const categories = fileSystemLoader.getAllCategories();
+      if (categories.length > 0) return categories;
+    } catch (error) {
+      console.warn('Error getting categories from file system:', error);
+    }
+  }
+
   const categories = new Set<string>();
   blogPostsMockData.forEach((post) => {
     categories.add(post.category);
