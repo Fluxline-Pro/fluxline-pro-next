@@ -80,9 +80,41 @@ export function BlogListingClient({
 
   // Determine grid columns based on orientation and view type
   const gridColumns = React.useMemo(() => {
-    // For tile views, use single column layout
-    if (viewType === 'small-tile' || viewType === 'large-tile') {
-      return 1;
+    // Get aspect ratio for more precise detection
+    const aspectRatio =
+      typeof window !== 'undefined'
+        ? window.innerWidth / window.innerHeight
+        : 1.5;
+
+    // For small tile view, use 1-2 columns
+    if (viewType === 'small-tile') {
+      switch (orientation) {
+        case 'portrait':
+        case 'tablet-portrait':
+          return 1;
+        default:
+          return 2;
+      }
+    }
+
+    // For large tile view, use 1-4 columns based on screen size
+    if (viewType === 'large-tile') {
+      switch (orientation) {
+        case 'portrait':
+          return 1;
+        case 'tablet-portrait':
+        case 'square':
+          return 2;
+        case 'landscape':
+          // Treat narrow landscape (aspect < 1.5) as square-like
+          return aspectRatio < 1.5 ? 2 : 3;
+        case 'large-portrait':
+          return 3;
+        case 'ultrawide':
+          return 4;
+        default:
+          return 2;
+      }
     }
 
     // For grid view, use responsive columns
@@ -94,6 +126,8 @@ export function BlogListingClient({
       case 'square':
         return 2;
       case 'landscape':
+        // Treat narrow landscape (aspect < 1.5) as square-like
+        return aspectRatio < 1.5 ? 2 : 3;
       case 'large-portrait':
         return 3;
       case 'ultrawide':
@@ -102,6 +136,19 @@ export function BlogListingClient({
         return 3;
     }
   }, [orientation, viewType]);
+
+  // Debug logging
+  React.useEffect(() => {
+    console.log('🔍 BlogListingClient Debug:', {
+      viewType,
+      orientation,
+      calculatedGridColumns: gridColumns,
+      aspectRatio:
+        typeof window !== 'undefined'
+          ? window.innerWidth / window.innerHeight
+          : 'N/A',
+    });
+  }, [viewType, orientation, gridColumns]);
 
   // Map ContentViewType to AdaptiveCardGrid viewType
   const mappedViewType = React.useMemo(() => {

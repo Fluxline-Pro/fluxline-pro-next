@@ -365,7 +365,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
     );
   }
 
-  // For small tile view - compact horizontal layout
+  // For small tile view - vertical layout with image on top
   if (viewType === 'small') {
     return (
       <motion.div
@@ -390,18 +390,15 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       >
         <Card
           elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
-          padding='medium'
+          padding='none'
           hoverable={!!onClick}
           onClick={onClick}
         >
           <div
             style={{
               display: 'flex',
-              alignItems: 'center',
-              gap: theme.spacing.m,
-              minHeight: '80px',
-              width: 'auto',
-              maxWidth: '100%',
+              flexDirection: 'column',
+              width: '100%',
               overflow: 'hidden',
             }}
           >
@@ -409,10 +406,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               <div
                 style={{
                   position: 'relative',
-                  width: '80px',
-                  height: '80px',
-                  flexShrink: 0,
-                  borderRadius: theme.effects.roundedCorner4,
+                  width: '100%',
+                  paddingBottom: '60%', // 5:3 aspect ratio
                   overflow: 'hidden',
                 }}
               >
@@ -429,21 +424,20 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             )}
             <div
               style={{
-                flex: 1,
-                minWidth: 0,
-                maxWidth: '100%',
-                overflow: 'hidden',
+                padding: theme.spacing.m,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: theme.spacing.xs,
               }}
             >
               <h3
                 style={{
-                  margin: `0 0 ${theme.spacing.xs} 0`,
+                  margin: 0,
                   fontSize: theme.fonts.large.fontSize,
                   fontWeight: theme.fonts.large.fontWeight as number,
                   fontFamily: `${theme.fonts.large.fontFamily} !important`,
                   color: theme.palette.neutralPrimary,
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
+                  lineHeight: 1.3,
                 }}
               >
                 {title}
@@ -467,13 +461,14 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
     );
   }
 
-  // For large tile view - full content layout
+  // For large tile view - vertical layout with image on top
   if (viewType === 'large') {
     return (
       <motion.div
         data-card-id={id}
         style={{
           cursor: onClick ? 'pointer' : 'default',
+          width: '100%',
         }}
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -489,19 +484,19 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       >
         <Card
           elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
-          padding='large'
+          padding='none'
           hoverable={!!onClick}
           onClick={onClick}
         >
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+          >
             {imageUrl && (
               <div
                 style={{
                   position: 'relative',
                   width: '100%',
-                  paddingBottom: '40%', // 5:2 aspect ratio for large tiles
-                  marginBottom: theme.spacing.m,
-                  borderRadius: theme.effects.roundedCorner4,
+                  paddingBottom: '60%', // 5:3 aspect ratio
                   overflow: 'hidden',
                 }}
               >
@@ -516,7 +511,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 />
               </div>
             )}
-            <div>
+            <div style={{ padding: theme.spacing.l }}>
               <h3
                 style={{
                   margin: `0 0 ${theme.spacing.s} 0`,
