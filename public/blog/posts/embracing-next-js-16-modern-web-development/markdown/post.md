@@ -5,7 +5,7 @@ author: 'Fluxline Resonance Group'
 publishedDate: '2025-01-25'
 category: 'Technology'
 tags: ['Next.js', 'Web Development', 'Technology', 'Performance']
-imageUrl: '/public/images/home/HomePageCover4kPortrait.jpeg'
+imageUrl: '/images/home/HomePageCover4kPortrait.jpeg'
 imageAlt: 'Next.js 16 Modern Web Development'
 featured: true
 seoTitle: 'Embracing Next.js 16 for Modern Web Development | Fluxline Pro'
