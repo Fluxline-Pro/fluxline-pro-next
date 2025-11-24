@@ -8,7 +8,7 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown } from '@fluentui/react';
+import { Dropdown, IDropdownOption } from '@fluentui/react';
 import { getCaseStudies } from './caseStudiesData';
 
 /**
@@ -29,7 +29,28 @@ export default function CaseStudiesPage() {
   const orientation = useDeviceOrientation();
 
   // Load case studies data
-  const caseStudies = React.useMemo(() => getCaseStudies(), []);
+  const allCaseStudies = React.useMemo(() => getCaseStudies(), []);
+
+  // Filter state
+  const [selectedIndustries, setSelectedIndustries] = React.useState<string[]>(
+    []
+  );
+
+  // Get all unique industries
+  const allIndustries = React.useMemo(() => {
+    const industries = new Set(allCaseStudies.map((study) => study.industry));
+    return Array.from(industries).sort();
+  }, [allCaseStudies]);
+
+  // Filter case studies based on selected industries
+  const caseStudies = React.useMemo(() => {
+    if (selectedIndustries.length === 0) {
+      return allCaseStudies;
+    }
+    return allCaseStudies.filter((study) =>
+      selectedIndustries.includes(study.industry)
+    );
+  }, [allCaseStudies, selectedIndustries]);
 
   // View type options for dropdown
   const viewOptions = [
@@ -96,6 +117,19 @@ export default function CaseStudiesPage() {
     [router]
   );
 
+  // Handle industry selection
+  const handleIndustryChange = React.useCallback(
+    (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
+      if (option) {
+        const industries = option.selected
+          ? [...selectedIndustries, String(option.key)]
+          : selectedIndustries.filter((i) => i !== option.key);
+        setSelectedIndustries(industries);
+      }
+    },
+    [selectedIndustries]
+  );
+
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
@@ -106,70 +140,24 @@ export default function CaseStudiesPage() {
         }}
       >
         {/* Page Header */}
-        <div
-          style={{
-            marginBottom: theme.spacing.xl,
-          }}
-        >
-          <div
+        <div style={{ marginBottom: theme.spacing.l2 }}>
+          <Typography
+            variant='h1'
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
+              fontWeight: 700,
+              color: theme.palette.themePrimary,
               marginBottom: theme.spacing.m,
+              fontSize: '2.5rem',
             }}
           >
-            <Typography
-              variant='h1'
-              style={{
-                color: theme.palette.neutralPrimary,
-              }}
-            >
-              Case Studies
-            </Typography>
-            {/* View Selector Dropdown */}
-            <div
-              style={{
-                minWidth: orientation === 'portrait' ? '150px' : '200px',
-              }}
-            >
-              <Dropdown
-                placeholder='Select view type'
-                options={viewOptions}
-                selectedKey={viewType}
-                onChange={(event, option) => {
-                  if (option) {
-                    setViewType(
-                      option.key as 'grid' | 'small-tile' | 'large-tile'
-                    );
-                  }
-                }}
-                styles={{
-                  root: {
-                    minWidth: orientation === 'portrait' ? '150px' : '200px',
-                  },
-                  dropdown: {
-                    backgroundColor: theme.palette.neutralLighter,
-                    border: `1px solid ${theme.palette.neutralLight}`,
-                    borderRadius: theme.effects.roundedCorner4,
-                  },
-                  title: {
-                    backgroundColor: 'transparent',
-                    borderColor: theme.palette.neutralLight,
-                    color: theme.palette.neutralPrimary,
-                  },
-                  caretDown: {
-                    color: theme.palette.themePrimary,
-                  },
-                }}
-              />
-            </div>
-          </div>
+            Case Studies
+          </Typography>
           <Typography
             variant='p'
             style={{
               color: theme.palette.neutralSecondary,
-              maxWidth: '800px',
+              marginBottom: theme.spacing.l1,
+              fontSize: '1.1rem',
             }}
           >
             Explore our client success stories and discover how strategic
@@ -178,6 +166,71 @@ export default function CaseStudiesPage() {
             organizations to achieve their most ambitious goals.
           </Typography>
         </div>
+
+        {/* Filters and View Selector */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: theme.spacing.m,
+            marginBottom: theme.spacing.l1,
+            alignItems: 'flex-end',
+          }}
+        >
+          {/* Industry Filter */}
+          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+            <Dropdown
+              label='Industry'
+              placeholder='All Industries'
+              multiSelect
+              options={allIndustries.map((industry) => ({
+                key: industry,
+                text: industry,
+              }))}
+              selectedKeys={selectedIndustries}
+              onChange={handleIndustryChange}
+              styles={{
+                dropdown: { minWidth: 200 },
+                root: { width: '100%' },
+              }}
+            />
+          </div>
+
+          {/* View Type Selector */}
+          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+            <Dropdown
+              label='View Type'
+              options={viewOptions}
+              selectedKey={viewType}
+              onChange={(_, option) => {
+                if (option?.key) {
+                  setViewType(
+                    option.key as 'grid' | 'small-tile' | 'large-tile'
+                  );
+                }
+              }}
+              styles={{
+                dropdown: { minWidth: 200 },
+                root: { width: '100%' },
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Results Count */}
+        <Typography
+          variant='p'
+          style={{
+            color: theme.palette.neutralSecondary,
+            marginBottom: theme.spacing.l1,
+          }}
+        >
+          Showing {caseStudies.length}{' '}
+          {caseStudies.length === 1 ? 'case study' : 'case studies'}
+          {selectedIndustries.length > 0 &&
+            ` in: ${selectedIndustries.join(', ')}`}
+        </Typography>
 
         {/* Case Study Cards */}
         {cards.length > 0 && (

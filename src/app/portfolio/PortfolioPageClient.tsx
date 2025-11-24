@@ -100,9 +100,7 @@ export default function PortfolioPageClient({
 
     if (selectedTechnologies.length > 0) {
       filtered = filtered.filter((project) =>
-        project.technologies.some((tech) =>
-          selectedTechnologies.includes(tech)
-        )
+        project.technologies.some((tech) => selectedTechnologies.includes(tech))
       );
     }
 
@@ -132,10 +130,7 @@ export default function PortfolioPageClient({
 
   // Handle tag selection
   const handleTagChange = React.useCallback(
-    (
-      event: React.FormEvent<HTMLDivElement>,
-      option?: IDropdownOption
-    ) => {
+    (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
       if (option) {
         const tags = option.selected
           ? [...selectedTags, String(option.key)]
@@ -148,10 +143,7 @@ export default function PortfolioPageClient({
 
   // Handle technology selection
   const handleTechnologyChange = React.useCallback(
-    (
-      event: React.FormEvent<HTMLDivElement>,
-      option?: IDropdownOption
-    ) => {
+    (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
       if (option) {
         const techs = option.selected
           ? [...selectedTechnologies, String(option.key)]
@@ -168,7 +160,8 @@ export default function PortfolioPageClient({
     setSelectedTechnologies([]);
   }, []);
 
-  const hasActiveFilters = selectedTags.length > 0 || selectedTechnologies.length > 0;
+  const hasActiveFilters =
+    selectedTags.length > 0 || selectedTechnologies.length > 0;
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -180,175 +173,113 @@ export default function PortfolioPageClient({
         }}
       >
         {/* Page Header */}
-        <div
-          style={{
-            marginBottom: theme.spacing.xl,
-          }}
-        >
-          <div
+        <div style={{ marginBottom: theme.spacing.l2 }}>
+          <Typography
+            variant='h1'
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
+              fontWeight: 700,
+              color: theme.palette.themePrimary,
               marginBottom: theme.spacing.m,
+              fontSize: '2.5rem',
             }}
           >
-            <Typography
-              variant='h1'
-              style={{
-                color: theme.palette.neutralPrimary,
-              }}
-            >
-              Portfolio
-            </Typography>
-            {/* View Selector Dropdown */}
-            <div
-              style={{
-                minWidth: orientation === 'portrait' ? '150px' : '200px',
-              }}
-            >
-              <Dropdown
-                placeholder='Select view type'
-                options={viewOptions}
-                selectedKey={viewType}
-                onChange={(event, option) => {
-                  if (option) {
-                    setViewType(
-                      option.key as 'grid' | 'small-tile' | 'large-tile'
-                    );
-                  }
-                }}
-                styles={{
-                  root: {
-                    minWidth: orientation === 'portrait' ? '150px' : '200px',
-                  },
-                  dropdown: {
-                    backgroundColor: theme.palette.neutralLighter,
-                    border: `1px solid ${theme.palette.neutralLight}`,
-                    borderRadius: theme.effects.roundedCorner4,
-                  },
-                  title: {
-                    backgroundColor: 'transparent',
-                    borderColor: theme.palette.neutralLight,
-                    color: theme.palette.neutralPrimary,
-                  },
-                  caretDown: {
-                    color: theme.palette.themePrimary,
-                  },
-                }}
-              />
-            </div>
-          </div>
+            Portfolio
+          </Typography>
           <Typography
             variant='p'
             style={{
               color: theme.palette.neutralSecondary,
-              maxWidth: '800px',
+              marginBottom: theme.spacing.l1,
+              fontSize: '1.1rem',
             }}
           >
             Explore our portfolio of innovative projects spanning web
             applications, mobile apps, enterprise software, and more. Each
-            project showcases our expertise in delivering high-quality,
-            user-centered solutions.
+            project demonstrates our commitment to excellence and innovation.
           </Typography>
         </div>
 
-        {/* Filter Section */}
+        {/* Filters and View Selector */}
         <div
           style={{
-            marginBottom: theme.spacing.l,
-            padding: theme.spacing.m,
-            backgroundColor: theme.palette.neutralLighterAlt,
-            borderRadius: theme.effects.roundedCorner4,
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: theme.spacing.m,
+            marginBottom: theme.spacing.l1,
+            alignItems: 'flex-end',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: orientation === 'portrait' ? 'column' : 'row',
-              gap: theme.spacing.m,
-              marginBottom: hasActiveFilters ? theme.spacing.m : 0,
-            }}
-          >
-            {/* Tag Filter */}
-            <div style={{ flex: 1 }}>
-              <Dropdown
-                placeholder='Filter by tags'
-                multiSelect
-                options={allTags.map((tag) => ({ key: tag, text: tag }))}
-                selectedKeys={selectedTags}
-                onChange={handleTagChange}
-                styles={{
-                  dropdown: {
-                    backgroundColor: theme.palette.white,
-                    border: `1px solid ${theme.palette.neutralLight}`,
-                    borderRadius: theme.effects.roundedCorner4,
-                  },
-                  title: {
-                    backgroundColor: 'transparent',
-                    borderColor: theme.palette.neutralLight,
-                    color: theme.palette.neutralPrimary,
-                  },
-                }}
-              />
-            </div>
-
-            {/* Technology Filter */}
-            <div style={{ flex: 1 }}>
-              <Dropdown
-                placeholder='Filter by technology'
-                multiSelect
-                options={allTechnologies.map((tech) => ({
-                  key: tech,
-                  text: tech,
-                }))}
-                selectedKeys={selectedTechnologies}
-                onChange={handleTechnologyChange}
-                styles={{
-                  dropdown: {
-                    backgroundColor: theme.palette.white,
-                    border: `1px solid ${theme.palette.neutralLight}`,
-                    borderRadius: theme.effects.roundedCorner4,
-                  },
-                  title: {
-                    backgroundColor: 'transparent',
-                    borderColor: theme.palette.neutralLight,
-                    color: theme.palette.neutralPrimary,
-                  },
-                }}
-              />
-            </div>
+          {/* Tag Filter */}
+          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+            <Dropdown
+              label='Tags'
+              placeholder='All Tags'
+              multiSelect
+              options={allTags.map((tag) => ({ key: tag, text: tag }))}
+              selectedKeys={selectedTags}
+              onChange={handleTagChange}
+              styles={{
+                dropdown: { minWidth: 200 },
+                root: { width: '100%' },
+              }}
+            />
           </div>
 
-          {/* Clear Filters Button */}
-          {hasActiveFilters && (
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <button
-                onClick={clearFilters}
-                style={{
-                  padding: `${theme.spacing.s2} ${theme.spacing.m}`,
-                  backgroundColor: 'transparent',
-                  color: theme.palette.themePrimary,
-                  border: `1px solid ${theme.palette.themePrimary}`,
-                  borderRadius: theme.effects.roundedCorner4,
-                  fontSize: theme.fonts.small.fontSize,
-                  fontWeight: theme.typography.fontWeights.semiBold,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    theme.palette.themeLighterAlt;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                }}
-              >
-                Clear Filters
-              </button>
-            </div>
-          )}
+          {/* Technology Filter */}
+          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+            <Dropdown
+              label='Technologies'
+              placeholder='All Technologies'
+              multiSelect
+              options={allTechnologies.map((tech) => ({
+                key: tech,
+                text: tech,
+              }))}
+              selectedKeys={selectedTechnologies}
+              onChange={handleTechnologyChange}
+              styles={{
+                dropdown: { minWidth: 200 },
+                root: { width: '100%' },
+              }}
+            />
+          </div>
+
+          {/* View Type Selector */}
+          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+            <Dropdown
+              label='View Type'
+              options={viewOptions}
+              selectedKey={viewType}
+              onChange={(_, option) => {
+                if (option?.key) {
+                  setViewType(
+                    option.key as 'grid' | 'small-tile' | 'large-tile'
+                  );
+                }
+              }}
+              styles={{
+                dropdown: { minWidth: 200 },
+                root: { width: '100%' },
+              }}
+            />
+          </div>
         </div>
+
+        {/* Results Count */}
+        <Typography
+          variant='p'
+          style={{
+            color: theme.palette.neutralSecondary,
+            marginBottom: theme.spacing.l1,
+          }}
+        >
+          Showing {filteredProjects.length}{' '}
+          {filteredProjects.length === 1 ? 'project' : 'projects'}
+          {selectedTags.length > 0 && ` with tags: ${selectedTags.join(', ')}`}
+          {selectedTechnologies.length > 0 &&
+            ` using: ${selectedTechnologies.join(', ')}`}
+        </Typography>
 
         {/* Portfolio Cards */}
         {cards.length > 0 && (
