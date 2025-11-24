@@ -36,41 +36,58 @@ The Fluxline Pro Next.js blog system supports **file-based Markdown blog posts**
 ✅ **File-based Markdown blog system** - Loads posts from repository  
 ✅ **Automatic SEO optimization** - Frontmatter metadata for all posts  
 ✅ **Static Site Generation (SSG)** - Pre-rendered at build time  
-✅ **Backward compatibility** - Mock data still works as fallback  
+✅ **Server Components** - Data loading on server for optimal performance  
+✅ **Client Components** - Interactive filtering and view switching  
 ✅ **Image support** - Organized folder structure  
 ✅ **Tag & category filtering** - Auto-generated filter pages  
 ✅ **Full Markdown support** - Code blocks, tables, images, links  
-✅ **Type-safe** - Full TypeScript support throughout
+✅ **Type-safe** - Full TypeScript support throughout  
+✅ **No mock data dependency** - 100% file-based system
 
 ### Build Results
 
 Successfully generates:
 
-- **2 blog post pages**: `/blog/embracing-nextjs-16`, `/blog/building-accessible-web-applications`
-- **2 category pages**: `/blog/category/Technology`, `/blog/category/Development`
-- **7 tag pages**: Next.js, Performance, Technology, Web Development, Accessibility, WCAG, UX Design
-- **1 listing page**: `/blog`
+- **5 blog post pages**: All posts from `/public/blog/posts/`
+- **4 category pages**: Technology, Development, Design, Growth
+- **17 tag pages**: Automatically generated from all unique tags
+- **1 listing page**: `/blog` (Server Component with client-side filtering)
 
-**Total: 12 static pages** from 2 Markdown files
+**Total: 27+ static pages** from 5 Markdown files
 
 ### Key Components
 
 1. **File System Loader** (`src/app/blog/lib/blogLoader.ts`)
+   - Server-side only module using Node.js `fs` and `path`
    - Reads Markdown files from `public/blog/posts/[slug]/markdown/post.md`
    - Parses frontmatter using `gray-matter`
    - Extracts metadata (title, author, date, tags, categories, SEO)
    - Provides utility functions for filtering and querying posts
 
-2. **Updated Blog Data Interface** (`src/app/blog/blogData.ts`)
-   - Maintains backward compatibility with mock data
-   - Uses conditional imports to avoid client-side fs module errors
-   - Automatically falls back to mock data if no file-based posts exist
-   - Exports same API as before for seamless integration
+2. **Blog Listing Page** (`src/app/blog/page.tsx`)
+   - **Server Component** that loads all posts from file system
+   - Passes data to Client Component for interactivity
+   - Direct `require()` of `blogLoader` for server-side access
+   - No fallback to mock data - 100% file-based
 
-3. **Sample Blog Posts**
-   - **Embracing Next.js 16** (Technology category)
-   - **Building Accessible Web Applications** (Development category)
-   - Both demonstrate proper frontmatter, Markdown content, and SEO
+3. **Blog Listing Client** (`src/app/blog/BlogListingClient.tsx`)
+   - **Client Component** handling all user interactions
+   - Receives posts as props from Server Component
+   - Client-side filtering by tag and category
+   - View type switching and responsive grid layout
+   - Navigation to detail pages
+
+4. **Blog Data Interface** (`src/app/blog/blogData.ts`)
+   - Legacy compatibility layer (now mostly unused)
+   - Empty mock data array as fallback
+   - Used only by tag/category filter pages
+
+5. **Sample Blog Posts** (5 total)
+   - Embracing Next.js 16 for Modern Web Development (Technology)
+   - Building Accessible Web Applications (Development)
+   - Digital Transformation Strategies for 2025 (Growth)
+   - Design Systems for Scalable Applications (Design)
+   - TypeScript Best Practices for Enterprise (Technology)
 
 ---
 
@@ -551,24 +568,43 @@ Different colors evoke different emotions...
 ## Technical Architecture
 
 ### Server-Side Only
+
 - File system operations (fs, path) only run on server
-- Conditional imports using `require()` to avoid bundling in client
-- Dynamic imports in Server Components for `generateStaticParams()`
+- Blog listing page is a **Server Component** that uses `require('./lib/blogLoader')`
+- Direct access to file system for loading all posts
+- No conditional imports needed - server-only by default
 
-### Client-Side Safe
-- Blog listing page can safely import blogData.ts
-- Falls back to mock data on client side
-- No fs module errors in browser
+### Client-Side Interactivity
 
-### Static Generation
-- All blog posts pre-rendered at build time
+- **BlogListingClient** component receives posts as props
+- All filtering, view switching, and navigation happens client-side
+- No file system access in browser - all data passed from server
+- Fast, responsive user interactions
+
+### Static Generation (SSG)
+
+- Blog listing page pre-rendered as static HTML at build time
+- All blog post detail pages statically generated
 - Tag and category filter pages auto-generated
 - SEO metadata automatically applied
-- Fast page loads (static HTML)
+- Fast page loads with minimal JavaScript
+
+### Architecture Pattern
+
+```
+Server Component (page.tsx)
+  ↓ Loads data from file system
+  ↓ Passes posts as props
+Client Component (BlogListingClient.tsx)
+  ↓ Handles user interactions
+  ↓ Client-side filtering
+  ↓ View type switching
+```
 
 ### File System Architecture
 
 **File Structure:**
+
 ```
 src/app/blog/
 ├── types.ts                    # TypeScript interfaces
@@ -605,6 +641,7 @@ public/blog/posts/
 ### Integration with Existing Systems
 
 The blog seamlessly integrates with:
+
 - **UnifiedPageWrapper**: For consistent page layout
 - **AdaptiveCardGrid**: For responsive card display
 - **Fluent UI Theme System**: For theme-aware styling
@@ -614,12 +651,14 @@ The blog seamlessly integrates with:
 ### Responsive Design
 
 The blog follows the same responsive layout as other features:
+
 - **Mobile Portrait**: 1 column grid
 - **Mobile Landscape/Square**: 2 column grid
 - **Tablet/Desktop**: 3 column grid
 - **Ultrawide**: 4 column grid
 
 View types can be switched between:
+
 - Grid View (multiple columns)
 - Small Tile (single column, compact)
 - Large Tile (single column, expanded)
@@ -627,6 +666,7 @@ View types can be switched between:
 ### Accessibility
 
 The blog implementation follows WCAG 2.1 AA standards:
+
 - Semantic HTML structure
 - Proper heading hierarchy
 - ARIA labels on interactive elements
@@ -647,24 +687,27 @@ The blog implementation follows WCAG 2.1 AA standards:
 ✅ **Markdown**: Content rendered properly  
 ✅ **Navigation**: Links between pages work correctly  
 ✅ **Theme**: Theme-aware styling applies correctly  
-✅ **Responsive**: Layout adapts to different screen sizes  
+✅ **Responsive**: Layout adapts to different screen sizes
 
 ---
 
 ## File Changes Summary
 
 ### New Files Created
+
 1. `src/app/blog/lib/blogLoader.ts` - File system loader
 2. `public/blog/posts/embracing-nextjs-16/markdown/post.md` - Sample post 1
 3. `public/blog/posts/building-accessible-web-applications/markdown/post.md` - Sample post 2
 4. `FILE_BASED_BLOG_GUIDE.md` - This comprehensive guide
 
 ### Modified Files
+
 1. `src/app/blog/blogData.ts` - Added file system integration with fallback
 2. `src/app/blog/[slug]/page.tsx` - Updated to use new loader
 3. `package.json` / `yarn.lock` - Added `gray-matter` dependency
 
 ### Unchanged (Working as Before)
+
 - `src/app/blog/page.tsx` - Blog listing page
 - `src/app/blog/[slug]/BlogPostDetailClient.tsx` - Detail view client component
 - `src/app/blog/tag/[tag]/*` - Tag filtering pages

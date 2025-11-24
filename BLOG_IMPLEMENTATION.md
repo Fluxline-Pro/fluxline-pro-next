@@ -13,6 +13,7 @@ The blog feature has been successfully implemented in the Fluxline Pro Next.js p
 The blog now supports **file-based Markdown posts** loaded directly from the repository. Simply drop Markdown files and images into organized folders and build.
 
 **Quick Start**: See `FILE_BASED_BLOG_GUIDE.md` for:
+
 - Complete setup instructions
 - Frontmatter reference
 - Markdown examples
@@ -36,8 +37,11 @@ The blog now supports **file-based Markdown posts** loaded directly from the rep
 ```
 src/app/blog/
 ├── types.ts                      # TypeScript type definitions
-├── blogData.ts                   # Mock blog posts data
-├── page.tsx                      # Main blog listing page (client component)
+├── blogData.ts                   # Data interface (legacy compatibility)
+├── lib/
+│   └── blogLoader.ts             # File system loader (server-only)
+├── page.tsx                      # Blog listing Server Component
+├── BlogListingClient.tsx         # Blog listing Client Component
 ├── [slug]/
 │   ├── page.tsx                  # Server component for blog post details
 │   └── BlogPostDetailClient.tsx  # Client component for rendering blog posts
@@ -52,12 +56,14 @@ src/app/blog/
 ### Features Implemented
 
 1. **Blog Listing Page (`/blog`)**
-   - Displays all blog posts in a responsive grid layout
-   - Three view types: Grid View, Small Tile, Large Tile
-   - Filtering by category and tag using dropdowns
-   - Shows count of filtered posts
-   - Theme-aware styling with Fluent UI
-   - Uses AdaptiveCardGrid for consistent card display
+   - **Server Component** loads all posts from file system at build time
+   - **Client Component** handles all interactivity:
+     - Three view types: Grid View, Small Tile, Large Tile
+     - Client-side filtering by category and tag using dropdowns
+     - Shows count of filtered posts
+     - Theme-aware styling with Fluent UI
+     - Uses AdaptiveCardGrid for consistent card display
+   - Fully static generated (SSG) for optimal performance
 
 2. **Individual Blog Post Pages (`/blog/[slug]`)**
    - Full markdown rendering with react-markdown
@@ -82,25 +88,30 @@ src/app/blog/
 
 ### Sample Blog Posts
 
-The implementation includes 5 comprehensive sample blog posts:
+The implementation includes 5 comprehensive sample blog posts loaded from Markdown files:
 
 1. **Embracing Next.js 16 for Modern Web Development**
+   - Location: `public/blog/posts/embracing-next-js-16-modern-web-development/`
    - Category: Technology
    - Tags: Next.js, Web Development, Technology, Performance
 
 2. **Building Accessible Web Applications: A Guide to WCAG 2.1**
+   - Location: `public/blog/posts/building-accessible-web-applications/`
    - Category: Development
    - Tags: Accessibility, WCAG, Web Development, UX Design
 
 3. **Digital Transformation Strategies for 2025**
+   - Location: `public/blog/posts/digital-transformation-strategies-2025/`
    - Category: Growth
    - Tags: Digital Transformation, Business Strategy, Technology, Innovation
 
 4. **Design Systems for Scalable Applications**
+   - Location: `public/blog/posts/design-systems-scalable-applications/`
    - Category: Design
    - Tags: Design Systems, UI/UX, Component Libraries, Development
 
 5. **TypeScript Best Practices for Enterprise Applications**
+   - Location: `public/blog/posts/typescript-best-practices-enterprise/`
    - Category: Technology
    - Tags: TypeScript, Programming, Best Practices, Development
 
@@ -114,7 +125,7 @@ interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
-  content: string;           // Markdown content
+  content: string; // Markdown content
   author: string;
   publishedDate: Date;
   lastUpdated?: Date;
@@ -131,15 +142,23 @@ interface BlogPost {
 }
 ```
 
-#### Static Site Generation
+#### Static Site Generation (SSG)
 
-All blog pages are statically generated at build time:
-- 5 blog post detail pages (`/blog/[slug]`)
-- 17 tag filter pages (`/blog/tag/[tag]`)
-- 4 category filter pages (`/blog/category/[category]`)
-- 1 main blog listing page (`/blog`)
+All blog pages are statically generated at build time using Next.js App Router:
 
-Total: **27 static blog pages**
+- **5 blog post detail pages** (`/blog/[slug]`) - Server Components
+- **17 tag filter pages** (`/blog/tag/[tag]`) - Server Components
+- **4 category filter pages** (`/blog/category/[category]`) - Server Components
+- **1 main blog listing page** (`/blog`) - Server Component with Client Component for interactivity
+
+Total: **27 static blog pages** with zero mock data dependency
+
+**Architecture**:
+
+- Server Components load data from file system using `blogLoader.ts`
+- Client Components handle user interactions (filtering, view switching, navigation)
+- All data passed from Server to Client via props
+- No `'use client'` imports in data loading logic
 
 #### Markdown Rendering
 
@@ -165,6 +184,7 @@ The blog follows the same responsive layout as other features:
 - **Ultrawide**: 4 column grid
 
 View types can be switched between:
+
 - Grid View (multiple columns)
 - Small Tile (single column, compact)
 - Large Tile (single column, expanded)
@@ -265,6 +285,7 @@ This will regenerate all static pages, including new blog posts, tags, and categ
 For comprehensive documentation, see:
 
 **FILE_BASED_BLOG_GUIDE.md** - Complete guide including:
+
 - Quick start guide
 - Frontmatter reference
 - Markdown content examples
@@ -295,31 +316,36 @@ Potential future improvements:
 
 ## Notes
 
-- ✅ **File-based system** now implemented - blog posts loaded from `public/blog/posts/`
-- ✅ **Backward compatible** - mock data still works as fallback
+- ✅ **File-based system** - blog posts loaded from `public/blog/posts/`
+- ✅ **Server Components** - listing page uses Server Component for data loading
+- ✅ **Client Components** - interactivity handled by separate Client Component
+- ✅ **No mock data dependency** - 100% file-based Markdown system
 - ✅ **SEO optimized** - automatic meta tags, OpenGraph, Twitter Cards
 - The blog is fully compatible with Next.js static export (`output: 'export'`)
 - All blog pages are statically generated at build time for optimal performance
 - Markdown rendering supports code syntax highlighting via inline styles
 - Image optimization is disabled (`unoptimized: true`) for static export compatibility
+- Works in both `yarn dev` (development) and `yarn build` (production)
 
 ## Testing
 
 The blog has been tested and verified:
 
-✅ Build succeeds with all static pages generated  
-✅ Main blog listing page loads and displays posts  
+✅ Build succeeds with all static pages generated (27+ pages)  
+✅ Main blog listing page loads and displays posts (Server Component)  
+✅ Client-side filtering works in development and production  
 ✅ Individual blog post pages render markdown correctly  
 ✅ Tag filtering pages work as expected  
 ✅ Category filtering pages work as expected  
-✅ View type switching functions properly  
+✅ View type switching functions properly (client-side)  
 ✅ Navigation between pages works correctly  
 ✅ Theme-aware styling applies correctly  
 ✅ Responsive layout adapts to different screen sizes  
-✅ **File-based loading** works for Markdown posts  
+✅ **File-based loading** works for Markdown posts (server-side)  
 ✅ **SEO metadata** automatically applied from frontmatter  
-✅ **Multiple posts** handled correctly  
-✅ **Backward compatibility** maintained with mock data  
+✅ **5 blog posts** all load correctly from file system  
+✅ **No mock data dependency** - 100% file-based  
+✅ **Works in yarn dev and yarn build** - Server/Client Component split
 
 ---
 
