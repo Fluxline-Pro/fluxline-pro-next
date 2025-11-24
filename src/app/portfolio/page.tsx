@@ -2,14 +2,15 @@ import {
   getAllPortfolioProjects,
   getAllPortfolioTags,
   getAllPortfolioTechnologies,
-} from './portfolioData';
+} from './lib/portfolioLoader';
 import PortfolioPageClient from './PortfolioPageClient';
 
 /**
  * Portfolio Page - Server Component
- * 
- * This server component loads portfolio data at build time
+ *
+ * Loads portfolio data from file system at build time
  * and passes it to the client component for rendering
+ * Mirrors the blog page pattern for consistency
  */
 export default function PortfolioPage() {
   const projects = getAllPortfolioProjects();

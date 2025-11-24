@@ -1,106 +1,135 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import {
-  PortfolioProject,
-  PortfolioFrontmatter,
-  PortfolioFilters,
-} from './types';
+/**
+ * Portfolio Data Interface
+ * Provides unified interface for portfolio projects from file system
+ * Automatically loads markdown projects from public/portfolio/posts/[slug]/markdown/post.md
+ * Mirrors the blog data pattern for consistency
+ */
 
-const PORTFOLIO_DIRECTORY = path.join(
-  process.cwd(),
-  'content',
-  'portfolio'
-);
+import { PortfolioProject, PortfolioFilters } from './types';
+
+// Conditional import of file system loader (only on server)
+let fileSystemLoader: typeof import('./lib/portfolioLoader') | null = null;
+if (typeof window === 'undefined') {
+  try {
+    fileSystemLoader = require('./lib/portfolioLoader');
+  } catch (error) {
+    console.warn('Could not load file system portfolio loader:', error);
+  }
+}
 
 /**
- * Get all portfolio project slugs
+ * Empty array - all portfolio projects now loaded from file system
+ * This maintains backward compatibility but no longer contains any mock data
  */
-export function getAllPortfolioSlugs(): string[] {
-  if (!fs.existsSync(PORTFOLIO_DIRECTORY)) {
-    return [];
-  }
+const portfolioProjectsLegacy: PortfolioProject[] = [];
 
-  const files = fs.readdirSync(PORTFOLIO_DIRECTORY);
-  return files
-    .filter((file) => file.endsWith('.mdx') || file.endsWith('.md'))
-    .map((file) => file.replace(/\.mdx?$/, ''));
+/**
+ * Check if we're in a build/server environment where we can access the file system
+ */
+const canUseFileSystem =
+  typeof window === 'undefined' && fileSystemLoader !== null;
+
+/**
+ * Get all portfolio projects (from file system)
+ */
+export function getAllPortfolioProjects(): PortfolioProject[] {
+  if (canUseFileSystem && fileSystemLoader) {
+    try {
+      const projects = fileSystemLoader.getAllPortfolioProjects();
+      return projects.length > 0 ? projects : portfolioProjectsLegacy;
+    } catch (error) {
+      console.warn('Error loading portfolio projects from file system:', error);
+      return portfolioProjectsLegacy;
+    }
+  }
+  return portfolioProjectsLegacy;
 }
 
 /**
  * Get a single portfolio project by slug
  */
 export function getPortfolioBySlug(slug: string): PortfolioProject | null {
-  try {
-    const fullPath = path.join(PORTFOLIO_DIRECTORY, `${slug}.mdx`);
-    
-    // Try .mdx first, then .md
-    let fileContents: string;
-    if (fs.existsSync(fullPath)) {
-      fileContents = fs.readFileSync(fullPath, 'utf8');
-    } else {
-      const mdPath = path.join(PORTFOLIO_DIRECTORY, `${slug}.md`);
-      if (fs.existsSync(mdPath)) {
-        fileContents = fs.readFileSync(mdPath, 'utf8');
-      } else {
-        return null;
-      }
+  if (canUseFileSystem && fileSystemLoader) {
+    try {
+      const project = fileSystemLoader.getPortfolioBySlug(slug);
+      return (
+        project ?? portfolioProjectsLegacy.find((p) => p.slug === slug) ?? null
+      );
+    } catch (error) {
+      console.warn(
+        `Error loading portfolio project ${slug} from file system:`,
+        error
+      );
+      return portfolioProjectsLegacy.find((p) => p.slug === slug) ?? null;
     }
-
-    const { data, content } = matter(fileContents);
-    const frontmatter = data as PortfolioFrontmatter;
-
-    return {
-      slug,
-      title: frontmatter.title,
-      shortDescription: frontmatter.shortDescription,
-      longDescription: frontmatter.longDescription,
-      role: frontmatter.role,
-      client: frontmatter.client,
-      category: frontmatter.category,
-      tags: frontmatter.tags || [],
-      technologies: frontmatter.technologies || [],
-      featuredImage: {
-        url: frontmatter.featuredImage.url,
-        alt: frontmatter.featuredImage.alt,
-      },
-      gallery: frontmatter.gallery?.map((img) => ({
-        url: img.url,
-        alt: img.alt,
-        caption: img.caption,
-      })),
-      publishedDate: new Date(frontmatter.publishedDate),
-      projectDate: frontmatter.projectDate,
-      featured: frontmatter.featured || false,
-      githubUrl: frontmatter.githubUrl,
-      liveUrl: frontmatter.liveUrl,
-      content,
-      seoMetadata: {
-        title: frontmatter.seoTitle || frontmatter.title,
-        description:
-          frontmatter.seoDescription || frontmatter.shortDescription,
-        keywords: frontmatter.seoKeywords || frontmatter.tags || [],
-      },
-    };
-  } catch (error) {
-    console.error(`Error loading portfolio project ${slug}:`, error);
-    return null;
   }
+  return portfolioProjectsLegacy.find((p) => p.slug === slug) ?? null;
 }
 
 /**
- * Get all portfolio projects
+ * Get all unique tags from all projects
  */
-export function getAllPortfolioProjects(): PortfolioProject[] {
-  const slugs = getAllPortfolioSlugs();
-  const projects = slugs
-    .map((slug) => getPortfolioBySlug(slug))
-    .filter((project): project is PortfolioProject => project !== null);
+export function getAllPortfolioTags(): string[] {
+  if (canUseFileSystem && fileSystemLoader) {
+    try {
+      const tags = fileSystemLoader.getAllPortfolioTags();
+      if (tags.length > 0) return tags;
+    } catch (error) {
+      console.warn('Error getting portfolio tags from file system:', error);
+    }
+  }
 
-  // Sort by published date, newest first
-  return projects.sort(
-    (a, b) => b.publishedDate.getTime() - a.publishedDate.getTime()
-  );
+  const tags = new Set<string>();
+  portfolioProjectsLegacy.forEach((project) => {
+    project.tags.forEach((tag) => tags.add(tag));
+  });
+  return Array.from(tags).sort();
+}
+
+/**
+ * Get all unique technologies from all projects
+ */
+export function getAllPortfolioTechnologies(): string[] {
+  if (canUseFileSystem && fileSystemLoader) {
+    try {
+      const technologies = fileSystemLoader.getAllPortfolioTechnologies();
+      if (technologies.length > 0) return technologies;
+    } catch (error) {
+      console.warn(
+        'Error getting portfolio technologies from file system:',
+        error
+      );
+    }
+  }
+
+  const techSet = new Set<string>();
+  portfolioProjectsLegacy.forEach((project) => {
+    project.technologies.forEach((tech) => techSet.add(tech));
+  });
+  return Array.from(techSet).sort();
+}
+
+/**
+ * Get all unique categories from all projects
+ */
+export function getAllPortfolioCategories(): string[] {
+  if (canUseFileSystem && fileSystemLoader) {
+    try {
+      const categories = fileSystemLoader.getAllPortfolioCategories();
+      if (categories.length > 0) return categories;
+    } catch (error) {
+      console.warn(
+        'Error getting portfolio categories from file system:',
+        error
+      );
+    }
+  }
+
+  const categoriesSet = new Set<string>();
+  portfolioProjectsLegacy.forEach((project) => {
+    categoriesSet.add(project.category);
+  });
+  return Array.from(categoriesSet).sort();
 }
 
 /**
@@ -159,29 +188,8 @@ export function filterPortfolioProjects(
 }
 
 /**
- * Get all unique tags from all projects
+ * Legacy function names for backward compatibility
  */
-export function getAllPortfolioTags(): string[] {
-  const projects = getAllPortfolioProjects();
-  const tagsSet = new Set<string>();
-  
-  projects.forEach((project) => {
-    project.tags.forEach((tag) => tagsSet.add(tag));
-  });
-  
-  return Array.from(tagsSet).sort();
-}
-
-/**
- * Get all unique technologies from all projects
- */
-export function getAllPortfolioTechnologies(): string[] {
-  const projects = getAllPortfolioProjects();
-  const techSet = new Set<string>();
-  
-  projects.forEach((project) => {
-    project.technologies.forEach((tech) => techSet.add(tech));
-  });
-  
-  return Array.from(techSet).sort();
+export function getAllPortfolioSlugs(): string[] {
+  return getAllPortfolioProjects().map((p) => p.slug);
 }
