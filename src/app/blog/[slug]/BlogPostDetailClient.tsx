@@ -342,7 +342,7 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
                   alt={alt || ''}
                   style={{
                     maxWidth: '100%',
-                    maxHeight: '600px',
+                    maxHeight: '400px',
                     width: 'auto',
                     height: 'auto',
                     marginBottom: theme.spacing.m,
@@ -370,7 +370,7 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
           onClick={handleBack}
           style={{
             padding: `${theme.spacing.m} ${theme.spacing.l1}`,
-            backgroundColor: theme.palette.themePrimary,
+            backgroundColor: theme.palette.themeSecondary,
             color: theme.palette.white,
             border: 'none',
             borderRadius: theme.effects.roundedCorner2,
@@ -379,7 +379,7 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
             fontWeight: 600,
           }}
         >
-          ← Back to Blog
+          ← Back to Blog Entries
         </button>
       </div>
     </UnifiedPageWrapper>

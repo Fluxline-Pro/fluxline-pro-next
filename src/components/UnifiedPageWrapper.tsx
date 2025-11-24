@@ -40,7 +40,6 @@ import ContactImage from '../assets/images/ContactMe2400x1600.jpg';
 import BooksImage from '../assets/images/EducationTrainingPortrait.jpg';
 import ContentImage from '../assets/images/Content1280x1815.jpg';
 import PortfolioImage from '../assets/images/Portfolio1280x1815.jpg';
-import { should } from 'vitest';
 
 // Dark mode themes: dark, high-contrast, grayscale-dark
 const darkModeThemes: ThemeMode[] = ['dark', 'high-contrast', 'grayscale-dark'];
