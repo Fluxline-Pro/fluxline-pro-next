@@ -38,17 +38,6 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   const isTablet = useIsTablet();
   const { theme } = useAppTheme();
 
-  // Debug logging
-  React.useEffect(() => {
-    console.log('🎯 UnifiedCardContainer Debug:', {
-      viewType,
-      gridColumns,
-      isMobile,
-      isTablet,
-      forceColumns,
-    });
-  }, [viewType, gridColumns, isMobile, isTablet, forceColumns]);
-
   const getAdaptiveGridConfig = () => {
     // If we have image dimensions and adaptation is enabled
     if (adaptToImageDimensions && imageDimensions) {
@@ -116,12 +105,6 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
         };
       case 'large':
         const largeColumns = gridColumns || (isMobile ? 1 : isTablet ? 2 : 3);
-        console.log('📐 Large columns calculation:', {
-          gridColumns,
-          isMobile,
-          isTablet,
-          result: largeColumns,
-        });
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${largeColumns}, 1fr)`,

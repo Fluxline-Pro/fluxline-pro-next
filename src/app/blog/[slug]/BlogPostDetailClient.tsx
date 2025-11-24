@@ -45,41 +45,69 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
   }, [router, post.category]);
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper
+      layoutType='responsive-grid'
+      imageConfig={{
+        source: post.imageUrl || '',
+        alt: post.imageAlt || post.title,
+        title: post.title,
+        showTitle: false,
+      }}
+    >
       {/* Back Button */}
-      <div style={{ marginBottom: theme.spacing.l1 }}>
-        <IconButton
-          iconProps={{ iconName: 'Back' }}
-          title='Back to Blog'
-          ariaLabel='Back to Blog'
-          onClick={handleBack}
-          styles={{
-            root: {
-              color: theme.palette.themePrimary,
-            },
-            rootHovered: {
-              color: theme.palette.themeDark,
-              backgroundColor: theme.palette.neutralLighter,
-            },
-          }}
-        />
-      </div>
+      <div style={{ marginBottom: theme.spacing.l1 }}></div>
 
       {/* Article Header */}
       <article>
         <header style={{ marginBottom: theme.spacing.l2 }}>
-          <Typography
-            variant='h1'
+          <div
             style={{
-              fontWeight: 700,
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '2.5rem',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'baseline',
+              justifyContent: 'left',
+              marginBottom: theme.spacing.l2,
             }}
           >
-            {post.title}
-          </Typography>
-
+            <div
+              style={{
+                paddingLeft: theme.spacing.s1,
+                marginRight: theme.spacing.l,
+              }}
+            >
+              <IconButton
+                iconProps={{ iconName: 'Back' }}
+                title='Back to Blog'
+                ariaLabel='Back to Blog'
+                onClick={handleBack}
+                styles={{
+                  root: {
+                    color: theme.palette.themePrimary,
+                  },
+                  rootHovered: {
+                    color: theme.palette.themeDark,
+                    transform: 'translateX(-4px)',
+                    transition: 'transform 0.2s ease-in-out',
+                  },
+                  icon: {
+                    fontSize: '2rem',
+                    fontWeight: 'bold',
+                  },
+                }}
+              />
+            </div>
+            <Typography
+              variant='h1'
+              style={{
+                fontWeight: 700,
+                color: theme.palette.themePrimary,
+                marginBottom: theme.spacing.m,
+                fontSize: '2.5rem',
+              }}
+            >
+              {post.title}
+            </Typography>
+          </div>
           <div
             style={{
               display: 'flex',
@@ -146,27 +174,6 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
             ))}
           </div>
         </header>
-
-        {/* Featured Image */}
-        {post.imageUrl && (
-          <div
-            style={{
-              marginBottom: theme.spacing.l2,
-              borderRadius: theme.effects.roundedCorner4,
-              overflow: 'hidden',
-            }}
-          >
-            <img
-              src={post.imageUrl}
-              alt={post.imageAlt || post.title}
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-            />
-          </div>
-        )}
 
         {/* Excerpt */}
         <Typography
@@ -286,7 +293,9 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
                         ? `2px ${theme.spacing.s1}`
                         : theme.spacing.m,
                       borderRadius: theme.effects.roundedCorner2,
-                      fontSize: isInline ? '0.9em' : theme.fonts.medium.fontSize,
+                      fontSize: isInline
+                        ? '0.9em'
+                        : theme.fonts.medium.fontSize,
                       display: isInline ? 'inline' : 'block',
                       overflowX: isInline ? 'visible' : 'auto',
                       fontFamily: 'monospace',
@@ -333,9 +342,12 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
                   alt={alt || ''}
                   style={{
                     maxWidth: '100%',
+                    maxHeight: '600px',
+                    width: 'auto',
                     height: 'auto',
                     marginBottom: theme.spacing.m,
                     borderRadius: theme.effects.roundedCorner4,
+                    objectFit: 'contain',
                   }}
                 />
               ),

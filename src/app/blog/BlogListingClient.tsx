@@ -137,19 +137,6 @@ export function BlogListingClient({
     }
   }, [orientation, viewType]);
 
-  // Debug logging
-  React.useEffect(() => {
-    console.log('🔍 BlogListingClient Debug:', {
-      viewType,
-      orientation,
-      calculatedGridColumns: gridColumns,
-      aspectRatio:
-        typeof window !== 'undefined'
-          ? window.innerWidth / window.innerHeight
-          : 'N/A',
-    });
-  }, [viewType, orientation, gridColumns]);
-
   // Map ContentViewType to AdaptiveCardGrid viewType
   const mappedViewType = React.useMemo(() => {
     switch (viewType) {
