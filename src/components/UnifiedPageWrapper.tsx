@@ -69,6 +69,10 @@ const PAGE_CONFIGS: Record<
     image: 'FLUXLINE_LOGO',
     imageText: '',
   },
+  '/content': {
+    image: ContentImage.src,
+    imageText: 'Fluxline Content',
+  },
   '/legal': {
     image: 'FLUXLINE_LOGO',
     imageText: '',

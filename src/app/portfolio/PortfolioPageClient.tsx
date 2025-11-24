@@ -9,48 +9,40 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { Dropdown, IDropdownOption } from '@fluentui/react';
-import { getCaseStudies } from './caseStudiesData';
+import { PortfolioProject } from './types';
+
+interface PortfolioPageProps {
+  projects: PortfolioProject[];
+  allTags: string[];
+  allTechnologies: string[];
+}
 
 /**
- * Case Studies Page Component
- * Displays client success stories in a card grid layout
+ * Portfolio Page Component
+ * Displays portfolio projects in a card grid layout with filtering capabilities
  *
  * Features:
  * - Responsive card grid layout with view type selector
+ * - Tag and technology filtering
  * - Theme-aware styling with Fluent UI
  * - Integration with PageWrapper for consistent layout
- * - SSG static rendering
- * - Navigation to detail views
+ * - SSG static rendering with client-side interactivity
  */
-export default function CaseStudiesPage() {
+export default function PortfolioPageClient({
+  projects,
+  allTags,
+  allTechnologies,
+}: PortfolioPageProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
   const orientation = useDeviceOrientation();
 
-  // Load case studies data
-  const allCaseStudies = React.useMemo(() => getCaseStudies(), []);
-
   // Filter state
-  const [selectedIndustries, setSelectedIndustries] = React.useState<string[]>(
-    []
-  );
-
-  // Get all unique industries
-  const allIndustries = React.useMemo(() => {
-    const industries = new Set(allCaseStudies.map((study) => study.industry));
-    return Array.from(industries).sort();
-  }, [allCaseStudies]);
-
-  // Filter case studies based on selected industries
-  const caseStudies = React.useMemo(() => {
-    if (selectedIndustries.length === 0) {
-      return allCaseStudies;
-    }
-    return allCaseStudies.filter((study) =>
-      selectedIndustries.includes(study.industry)
-    );
-  }, [allCaseStudies, selectedIndustries]);
+  const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
+  const [selectedTechnologies, setSelectedTechnologies] = React.useState<
+    string[]
+  >([]);
 
   // View type options for dropdown
   const viewOptions = [
@@ -96,39 +88,74 @@ export default function CaseStudiesPage() {
     }
   }, [viewType]);
 
-  // Transform case studies to card format
+  // Filter projects based on selected filters
+  const filteredProjects = React.useMemo(() => {
+    let filtered = projects;
+
+    if (selectedTags.length > 0) {
+      filtered = filtered.filter((project) =>
+        project.tags.some((tag) => selectedTags.includes(tag))
+      );
+    }
+
+    if (selectedTechnologies.length > 0) {
+      filtered = filtered.filter((project) =>
+        project.technologies.some((tech) => selectedTechnologies.includes(tech))
+      );
+    }
+
+    return filtered;
+  }, [projects, selectedTags, selectedTechnologies]);
+
+  // Transform portfolio projects to card format
   const cards = React.useMemo(() => {
-    return caseStudies.map((study) => ({
-      id: study.id,
-      title: study.title,
-      description: study.description,
-      imageUrl: study.imageUrl,
-      imageAlt: study.imageAlt || study.title,
-      imageText: `${study.client} • ${study.industry}`,
+    return filteredProjects.map((project) => ({
+      id: project.slug,
+      title: project.title,
+      description: project.shortDescription,
+      imageUrl: project.featuredImage.url,
+      imageAlt: project.featuredImage.alt,
+      imageText: `${project.role}${project.client ? ` • ${project.client}` : ''}`,
     }));
-  }, [caseStudies]);
+  }, [filteredProjects]);
 
   // Handle card click to navigate to detail view
   const handleCardClick = React.useCallback(
-    (id: string) => {
-      console.log('Navigating to case study:', id);
-      router.push(`/case-studies/${id}`);
+    (slug: string) => {
+      console.log('Navigating to portfolio project:', slug);
+      router.push(`/portfolio/${slug}`);
     },
     [router]
   );
 
-  // Handle industry selection
-  const handleIndustryChange = React.useCallback(
+  // Handle tag selection
+  const handleTagChange = React.useCallback(
     (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
       if (option) {
-        const industries = option.selected
-          ? [...selectedIndustries, String(option.key)]
-          : selectedIndustries.filter((i) => i !== option.key);
-        setSelectedIndustries(industries);
+        const tags = option.selected
+          ? [...selectedTags, String(option.key)]
+          : selectedTags.filter((t) => t !== option.key);
+        setSelectedTags(tags);
       }
     },
-    [selectedIndustries]
+    [selectedTags]
   );
+
+  // Handle technology selection
+  const handleTechnologyChange = React.useCallback(
+    (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
+      if (option) {
+        const techs = option.selected
+          ? [...selectedTechnologies, String(option.key)]
+          : selectedTechnologies.filter((t) => t !== option.key);
+        setSelectedTechnologies(techs);
+      }
+    },
+    [selectedTechnologies]
+  );
+
+  const hasActiveFilters =
+    selectedTags.length > 0 || selectedTechnologies.length > 0;
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -150,7 +177,7 @@ export default function CaseStudiesPage() {
               fontSize: '2.5rem',
             }}
           >
-            Case Studies
+            Portfolio
           </Typography>
           <Typography
             variant='p'
@@ -160,10 +187,9 @@ export default function CaseStudiesPage() {
               fontSize: '1.1rem',
             }}
           >
-            Explore our client success stories and discover how strategic
-            transformation drives measurable results. From digital
-            transformation to wellness platforms, see how we partner with
-            organizations to achieve their most ambitious goals.
+            Explore our portfolio of innovative projects spanning web
+            applications, mobile apps, enterprise software, and more. Each
+            project demonstrates our commitment to excellence and innovation.
           </Typography>
         </div>
 
@@ -178,18 +204,34 @@ export default function CaseStudiesPage() {
             alignItems: 'flex-end',
           }}
         >
-          {/* Industry Filter */}
+          {/* Tag Filter */}
           <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
             <Dropdown
-              label='Industry'
-              placeholder='All Industries'
+              label='Tags'
+              placeholder='All Tags'
               multiSelect
-              options={allIndustries.map((industry) => ({
-                key: industry,
-                text: industry,
+              options={allTags.map((tag) => ({ key: tag, text: tag }))}
+              selectedKeys={selectedTags}
+              onChange={handleTagChange}
+              styles={{
+                dropdown: { minWidth: 200 },
+                root: { width: '100%' },
+              }}
+            />
+          </div>
+
+          {/* Technology Filter */}
+          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+            <Dropdown
+              label='Technologies'
+              placeholder='All Technologies'
+              multiSelect
+              options={allTechnologies.map((tech) => ({
+                key: tech,
+                text: tech,
               }))}
-              selectedKeys={selectedIndustries}
-              onChange={handleIndustryChange}
+              selectedKeys={selectedTechnologies}
+              onChange={handleTechnologyChange}
               styles={{
                 dropdown: { minWidth: 200 },
                 root: { width: '100%' },
@@ -226,13 +268,14 @@ export default function CaseStudiesPage() {
             marginBottom: theme.spacing.l1,
           }}
         >
-          Showing {caseStudies.length}{' '}
-          {caseStudies.length === 1 ? 'case study' : 'case studies'}
-          {selectedIndustries.length > 0 &&
-            ` in: ${selectedIndustries.join(', ')}`}
+          Showing {filteredProjects.length}{' '}
+          {filteredProjects.length === 1 ? 'project' : 'projects'}
+          {selectedTags.length > 0 && ` with tags: ${selectedTags.join(', ')}`}
+          {selectedTechnologies.length > 0 &&
+            ` using: ${selectedTechnologies.join(', ')}`}
         </Typography>
 
-        {/* Case Study Cards */}
+        {/* Portfolio Cards */}
         {cards.length > 0 && (
           <div>
             <AdaptiveCardGrid
@@ -262,13 +305,15 @@ export default function CaseStudiesPage() {
               variant='h3'
               style={{ color: theme.palette.neutralSecondary }}
             >
-              No case studies found
+              No projects found
             </Typography>
             <Typography
               variant='p'
               style={{ color: theme.palette.neutralTertiary }}
             >
-              Check back soon for client success stories.
+              {hasActiveFilters
+                ? 'Try adjusting your filters to see more projects.'
+                : 'Check back soon for new projects.'}
             </Typography>
           </div>
         )}
@@ -290,7 +335,7 @@ export default function CaseStudiesPage() {
               marginBottom: theme.spacing.m,
             }}
           >
-            Ready to Transform Your Business?
+            Let&apos;s Build Something Amazing Together
           </Typography>
           <Typography
             variant='p'
@@ -302,8 +347,8 @@ export default function CaseStudiesPage() {
               marginRight: 'auto',
             }}
           >
-            Join the growing list of organizations achieving measurable results
-            with Fluxline&apos;s strategic approach to transformation.
+            Have a project in mind? We&apos;d love to hear about it and explore
+            how we can bring your vision to life.
           </Typography>
           <div
             style={{
@@ -314,7 +359,7 @@ export default function CaseStudiesPage() {
             }}
           >
             <button
-              onClick={() => router.push('/services')}
+              onClick={() => router.push('/contact')}
               style={{
                 padding: `${theme.spacing.s1} ${theme.spacing.l}`,
                 backgroundColor: theme.palette.themePrimary,
@@ -334,10 +379,10 @@ export default function CaseStudiesPage() {
                   theme.palette.themePrimary;
               }}
             >
-              View Our Services
+              Get in Touch
             </button>
             <button
-              onClick={() => router.push('/contact')}
+              onClick={() => router.push('/services')}
               style={{
                 padding: `${theme.spacing.s1} ${theme.spacing.l}`,
                 backgroundColor: 'transparent',
@@ -357,7 +402,7 @@ export default function CaseStudiesPage() {
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              Start Your Transformation
+              View Our Services
             </button>
           </div>
         </div>

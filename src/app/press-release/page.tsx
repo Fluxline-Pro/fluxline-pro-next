@@ -31,11 +31,32 @@ export default function PressReleasePage() {
   const orientation = useDeviceOrientation();
 
   // Use direct import of mock data (sorted by date, newest first)
-  const pressReleases = React.useMemo(() => {
+  const allPressReleases = React.useMemo(() => {
     return [...pressReleasesMockData].sort(
       (a, b) => b.date.getTime() - a.date.getTime()
     );
   }, []);
+
+  // Filter state
+  const [selectedYear, setSelectedYear] = React.useState<string | undefined>();
+
+  // Get all unique years
+  const allYears = React.useMemo(() => {
+    const years = new Set(
+      allPressReleases.map((release) => release.date.getFullYear().toString())
+    );
+    return Array.from(years).sort((a, b) => Number(b) - Number(a));
+  }, [allPressReleases]);
+
+  // Filter press releases based on selected year
+  const pressReleases = React.useMemo(() => {
+    if (!selectedYear) {
+      return allPressReleases;
+    }
+    return allPressReleases.filter(
+      (release) => release.date.getFullYear().toString() === selectedYear
+    );
+  }, [allPressReleases, selectedYear]);
 
   const isLoading = false;
   const error = null;
@@ -138,70 +159,24 @@ export default function PressReleasePage() {
         }}
       >
         {/* Page Header */}
-        <div
-          style={{
-            marginBottom: theme.spacing.xl,
-          }}
-        >
-          <div
+        <div style={{ marginBottom: theme.spacing.l2 }}>
+          <Typography
+            variant='h1'
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
+              fontWeight: 700,
+              color: theme.palette.themePrimary,
               marginBottom: theme.spacing.m,
+              fontSize: '2.5rem',
             }}
           >
-            <Typography
-              variant='h1'
-              style={{
-                color: theme.palette.neutralPrimary,
-              }}
-            >
-              Press Release
-            </Typography>
-            {/* View Selector Dropdown */}
-            <div
-              style={{
-                minWidth: orientation === 'portrait' ? '150px' : '200px',
-              }}
-            >
-              <Dropdown
-                placeholder='Select view type'
-                options={viewOptions}
-                selectedKey={viewType}
-                onChange={(event, option) => {
-                  if (option) {
-                    setViewType(
-                      option.key as 'grid' | 'small-tile' | 'large-tile'
-                    );
-                  }
-                }}
-                styles={{
-                  root: {
-                    minWidth: orientation === 'portrait' ? '150px' : '200px',
-                  },
-                  dropdown: {
-                    backgroundColor: theme.palette.neutralLighter,
-                    border: `1px solid ${theme.palette.neutralLight}`,
-                    borderRadius: theme.effects.roundedCorner4,
-                  },
-                  title: {
-                    backgroundColor: 'transparent',
-                    borderColor: theme.palette.neutralLight,
-                    color: theme.palette.neutralPrimary,
-                  },
-                  caretDown: {
-                    color: theme.palette.themePrimary,
-                  },
-                }}
-              />
-            </div>
-          </div>
+            Press Release
+          </Typography>
           <Typography
             variant='p'
             style={{
               color: theme.palette.neutralSecondary,
-              maxWidth: '800px',
+              marginBottom: theme.spacing.l1,
+              fontSize: '1.1rem',
             }}
           >
             Public announcements, media features, and milestone broadcasts from
@@ -209,6 +184,70 @@ export default function PressReleasePage() {
             developments, partnerships, and achievements.
           </Typography>
         </div>
+
+        {/* Filters and View Selector */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: theme.spacing.m,
+            marginBottom: theme.spacing.l1,
+            alignItems: 'flex-end',
+          }}
+        >
+          {/* Year Filter */}
+          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+            <Dropdown
+              label='Year'
+              options={[
+                { key: '', text: 'All Years' },
+                ...allYears.map((year) => ({ key: year, text: year })),
+              ]}
+              selectedKey={selectedYear || ''}
+              onChange={(_, option) => {
+                setSelectedYear(option?.key ? String(option.key) : undefined);
+              }}
+              styles={{
+                dropdown: { minWidth: 200 },
+                root: { width: '100%' },
+              }}
+            />
+          </div>
+
+          {/* View Type Selector */}
+          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+            <Dropdown
+              label='View Type'
+              options={viewOptions}
+              selectedKey={viewType}
+              onChange={(_, option) => {
+                if (option?.key) {
+                  setViewType(
+                    option.key as 'grid' | 'small-tile' | 'large-tile'
+                  );
+                }
+              }}
+              styles={{
+                dropdown: { minWidth: 200 },
+                root: { width: '100%' },
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Results Count */}
+        <Typography
+          variant='p'
+          style={{
+            color: theme.palette.neutralSecondary,
+            marginBottom: theme.spacing.l1,
+          }}
+        >
+          Showing {pressReleases.length}{' '}
+          {pressReleases.length === 1 ? 'press release' : 'press releases'}
+          {selectedYear && ` from ${selectedYear}`}
+        </Typography>
 
         {/* Loading State */}
         {isLoading && (

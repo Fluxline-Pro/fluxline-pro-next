@@ -91,6 +91,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "js-yaml": "^4.1.0"
   }
 }
