@@ -76,13 +76,13 @@ export const FormButton: React.FC<FormButtonProps> = ({
           ...baseStyles,
           backgroundColor:
             isHovered && !disabled
-              ? theme.palette.themeSecondary
+              ? theme.palette.themeLight
               : theme.palette.themePrimary,
           color:
-            theme.themeMode === 'dark'
-              ? isHovered
-                ? theme.palette.white
-                : theme.palette.black
+            theme.themeMode === 'dark' ||
+            theme.themeMode === 'high-contrast' ||
+            theme.themeMode === 'grayscale-dark'
+              ? theme.palette.black
               : theme.palette.white,
         };
 
@@ -149,11 +149,15 @@ export const FormButton: React.FC<FormButtonProps> = ({
   const iconColor =
     variant === 'danger'
       ? theme.semanticColors.errorIcon
-      : variant === 'primary' && theme.themeMode === 'dark'
-        ? isHovered
-          ? theme.palette.white
-          : theme.palette.black
-        : theme.palette.white;
+      : variant === 'primary'
+        ? theme.themeMode === 'dark' ||
+          theme.themeMode === 'high-contrast' ||
+          theme.themeMode === 'grayscale-dark'
+          ? theme.palette.black
+          : theme.palette.white
+        : variant === 'secondary'
+          ? theme.palette.themePrimary
+          : theme.palette.neutralPrimary;
 
   const content = text || children;
 

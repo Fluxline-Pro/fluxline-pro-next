@@ -5,11 +5,11 @@
  * Information about Fluxline and the company mission
  */
 
-import React from 'react';
 import Link from 'next/link';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useHoverEffects } from '@/hooks/useHoverEffects';
@@ -28,14 +28,19 @@ export default function AboutPage() {
   const { theme } = useAppTheme();
   const buttonHoverEffects = useHoverEffects({
     type: 'button',
-    hoverBgColor: theme.palette.themeDark,
+    hoverBgColor: theme.palette.themeLight,
     defaultBgColor: theme.palette.themePrimary,
+    hoverTextColor:
+      theme.themeMode === 'dark' ? theme.palette.black : theme.palette.white,
+    defaultTextColor:
+      theme.themeMode === 'dark' ? theme.palette.black : theme.palette.white,
     enableTransform: false,
   });
+  const isMobile = useIsMobile();
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-8'>
+      <div className='space-y-16'>
         {/* Hero Section */}
         <Hero title='About Fluxline'>
           <Typography
@@ -94,18 +99,160 @@ export default function AboutPage() {
         </Hero>
 
         {/* Company Statistics */}
-        <div className='space-y-6'>
+        <section className='space-y-8'>
           <Typography
             variant='h2'
             style={{
               color: theme.palette.themePrimary,
               fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
+              fontWeight: theme.typography.fontWeights.bold,
             }}
           >
             Our Impact
           </Typography>
           <CompanyStatistics statistics={COMPANY_STATISTICS} />
+        </section>
+
+        {/* Divider */}
+        <hr
+          style={{
+            border: 'none',
+            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+            margin: `${theme.spacing.xxl} 0`,
+          }}
+        />
+
+        {/* Mission & Vision */}
+        <section className='space-y-8'>
+          <Typography
+            variant='h2'
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: '2rem',
+              fontWeight: theme.typography.fontWeights.bold,
+            }}
+          >
+            Our Mission & Vision
+          </Typography>
+
+          <div className='space-y-6'>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1.125rem',
+                lineHeight: theme.typography.lineHeights.relaxed,
+              }}
+            >
+              We seek to architect multidimensional systems that fuse{' '}
+              <em>emotional intelligence</em>, <em>financial clarity</em>, and{' '}
+              <em>somatic discipline</em>—empowering individuals and brands to
+              live with <strong>modular precision</strong> and{' '}
+              <strong>legacy-driven resonance</strong>.
+            </Typography>
+
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1.125rem',
+                lineHeight: theme.typography.lineHeights.relaxed,
+              }}
+            >
+              Fluxline envisions a world where individuals and businesses become{' '}
+              <em>self-authored stewards</em> of their inner and outer
+              architecture—where identity is revealed through{' '}
+              <strong>ritual</strong>, <strong>resonance</strong>, and{' '}
+              <strong>iteration</strong>.
+            </Typography>
+          </div>
+        </section>
+
+        {/* Company Values */}
+        <section className='space-y-8'>
+          <Typography
+            variant='h2'
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: '2rem',
+              fontWeight: theme.typography.fontWeights.bold,
+            }}
+          >
+            Our Values
+          </Typography>
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+            {COMPANY_VALUES.map((value) => (
+              <ValueCard key={value.id} value={value} />
+            ))}
+          </div>
+        </section>
+
+        {/* Divider */}
+        <hr
+          style={{
+            border: 'none',
+            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+            margin: `${theme.spacing.xxl} 0`,
+          }}
+        />
+
+        {/* Journey & Team - Flex Layout */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            justifyContent: 'space-between',
+            gap: theme.spacing.xxl,
+          }}
+          className='lg:flex-row'
+        >
+          {/* Company Timeline */}
+          <section className='space-y-8 flex-1'>
+            <Typography
+              variant='h2'
+              style={{
+                color: theme.palette.themePrimary,
+                fontSize: '2rem',
+                fontWeight: theme.typography.fontWeights.bold,
+              }}
+            >
+              Our Journey
+            </Typography>
+            <CompanyTimeline events={COMPANY_TIMELINE} />
+          </section>
+
+          {/* Team Section */}
+          <section className='space-y-8 flex-1'>
+            <Typography
+              variant='h2'
+              style={{
+                color: theme.palette.themePrimary,
+                fontSize: '2rem',
+                fontWeight: theme.typography.fontWeights.bold,
+              }}
+            >
+              Our Team
+            </Typography>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                maxWidth: '400px',
+              }}
+            >
+              {TEAM_MEMBERS.map((member) => (
+                <div
+                  key={member.id}
+                  style={{
+                    maxWidth: '400px',
+                    width: '100%',
+                  }}
+                >
+                  <TeamMemberCard member={member} />
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
 
         {/* Testimonials Callout */}
@@ -154,103 +301,6 @@ export default function AboutPage() {
             consulting, coaching, and development services.
           </Typography>
         </Callout>
-
-        {/* Mission & Vision */}
-        <div className='space-y-6'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-            }}
-          >
-            Our Mission & Vision
-          </Typography>
-
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            We seek to architect multidimensional systems that fuse{' '}
-            <em>emotional intelligence</em>, <em>financial clarity</em>, and{' '}
-            <em>somatic discipline</em>—empowering individuals and brands to
-            live with <strong>modular precision</strong> and{' '}
-            <strong>legacy-driven resonance</strong>.
-          </Typography>
-
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            Fluxline envisions a world where individuals and businesses become{' '}
-            <em>self-authored stewards</em> of their inner and outer
-            architecture—where identity is revealed through{' '}
-            <strong>ritual</strong>, <strong>resonance</strong>, and{' '}
-            <strong>iteration</strong>.
-          </Typography>
-        </div>
-
-        {/* Company Values */}
-        <div className='space-y-6'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-            }}
-          >
-            Our Values
-          </Typography>
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {COMPANY_VALUES.map((value) => (
-              <ValueCard key={value.id} value={value} />
-            ))}
-          </div>
-        </div>
-
-        {/* Company Timeline */}
-        <div className='space-y-6'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-            }}
-          >
-            Our Journey
-          </Typography>
-          <CompanyTimeline events={COMPANY_TIMELINE} />
-        </div>
-
-        {/* Team Section */}
-        <div className='space-y-6'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-            }}
-          >
-            Our Team
-          </Typography>
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {TEAM_MEMBERS.map((member) => (
-              <TeamMemberCard key={member.id} member={member} />
-            ))}
-          </div>
-        </div>
       </div>
     </UnifiedPageWrapper>
   );

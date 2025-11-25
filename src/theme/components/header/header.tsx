@@ -348,10 +348,10 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               gap: '1rem',
             }}
           >
-            {!isMobile && (
+            {!isMobile && !isHomePage && (
               <FormButton
                 variant='primary'
-                size='small'
+                size='medium'
                 onClick={() => router.push('/contact')}
                 icon='Calendar'
                 style={{

@@ -26,7 +26,7 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
   const { theme } = useAppTheme();
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6' style={{ maxWidth: '600px' }}>
       {events.map((event, index) => (
         <div
           key={event.id}
@@ -45,7 +45,7 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
                 top: '48px',
                 bottom: '-24px',
                 width: '2px',
-                backgroundColor: theme.palette.neutralQuaternary,
+                backgroundColor: theme.palette.themeTertiary,
               }}
             />
           )}
@@ -67,12 +67,16 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
             {event.icon ? (
               <FluentIcon
                 iconName={event.icon}
-                size="small"
-                color={theme.palette.white}
+                size='small'
+                color={
+                  theme.themeMode === 'dark'
+                    ? theme.palette.black
+                    : theme.palette.white
+                }
               />
             ) : (
               <Typography
-                variant="p"
+                variant='p'
                 style={{
                   color: theme.palette.white,
                   fontSize: '0.875rem',
@@ -92,10 +96,10 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
             }}
           >
             <Typography
-              variant="p"
+              variant='p'
               style={{
-                color: theme.palette.themeTertiary,
-                fontSize: '0.875rem',
+                color: theme.palette.themeSecondary,
+                fontSize: '1rem',
                 fontWeight: theme.typography.fontWeights.semiBold,
                 marginBottom: '0.25rem',
               }}
@@ -104,7 +108,7 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
             </Typography>
 
             <Typography
-              variant="h3"
+              variant='h3'
               style={{
                 color: theme.palette.themePrimary,
                 fontSize: '1.25rem',
@@ -116,7 +120,7 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
             </Typography>
 
             <Typography
-              variant="p"
+              variant='p'
               style={{
                 color: theme.palette.neutralSecondary,
                 fontSize: '1rem',

@@ -41,21 +41,23 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        padding: '1.5rem',
+        padding: '1.25rem',
         borderRadius: theme.borderRadius.container.medium,
         border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
         backgroundColor: 'transparent',
         transition: 'all 0.3s ease',
         transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
         boxShadow: isHovered ? theme.shadows.m : 'none',
-        height: '100%',
+        maxHeight: '600px',
       }}
     >
       {/* Photo Placeholder */}
       <div
         style={{
           width: '100%',
+          maxWidth: '350px',
           aspectRatio: '1',
+          margin: '0 auto',
           borderRadius: theme.borderRadius.container.small,
           backgroundColor: theme.palette.neutralLighter,
           marginBottom: '1rem',
@@ -73,22 +75,24 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
             fill
             style={{
               objectFit: 'cover',
+              transform: 'scale(2)',
+              translate: '0 30%',
             }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
           />
         ) : (
           <FluentIcon
-            iconName="ContactCard"
-            size="xLarge"
+            iconName='ContactCard'
+            size='xLarge'
             color={theme.palette.neutralTertiary}
           />
         )}
       </div>
 
       {/* Name and Role */}
-      <div className="space-y-2 flex-1">
+      <div className='space-y-2 flex-1'>
         <Typography
-          variant="h3"
+          variant='h3'
           style={{
             color: theme.palette.themePrimary,
             fontSize: '1.25rem',
@@ -99,7 +103,7 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         </Typography>
 
         <Typography
-          variant="p"
+          variant='p'
           style={{
             color: theme.palette.themeSecondary,
             fontSize: '0.875rem',
@@ -111,7 +115,7 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         </Typography>
 
         <Typography
-          variant="p"
+          variant='p'
           style={{
             color: theme.palette.neutralSecondary,
             fontSize: '0.875rem',
@@ -136,8 +140,8 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           {member.socialLinks.linkedin && (
             <Link
               href={member.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -149,16 +153,18 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.themeLighter;
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.themeLighter;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.neutralLighter;
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.neutralLighter;
               }}
               aria-label={`${member.name} on LinkedIn`}
             >
               <FluentIcon
-                iconName="LinkedInLogo"
-                size="small"
+                iconName='LinkedInLogo'
+                size='small'
                 color={theme.palette.themePrimary}
               />
             </Link>
@@ -167,8 +173,8 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           {member.socialLinks.twitter && (
             <Link
               href={member.socialLinks.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -180,16 +186,18 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.themeLighter;
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.themeLighter;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.neutralLighter;
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.neutralLighter;
               }}
               aria-label={`${member.name} on Twitter`}
             >
               <FluentIcon
-                iconName="TwitterLogo"
-                size="small"
+                iconName='TwitterLogo'
+                size='small'
                 color={theme.palette.themePrimary}
               />
             </Link>
@@ -198,8 +206,8 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           {member.socialLinks.github && (
             <Link
               href={member.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -211,16 +219,18 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.themeLighter;
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.themeLighter;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.neutralLighter;
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.neutralLighter;
               }}
               aria-label={`${member.name} on GitHub`}
             >
               <FluentIcon
-                iconName="GitGraph"
-                size="small"
+                iconName='GitGraph'
+                size='small'
                 color={theme.palette.themePrimary}
               />
             </Link>
@@ -240,16 +250,18 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.themeLighter;
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.themeLighter;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.neutralLighter;
+                e.currentTarget.style.backgroundColor =
+                  theme.palette.neutralLighter;
               }}
               aria-label={`Email ${member.name}`}
             >
               <FluentIcon
-                iconName="Mail"
-                size="small"
+                iconName='Mail'
+                size='small'
                 color={theme.palette.themePrimary}
               />
             </Link>

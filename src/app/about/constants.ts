@@ -13,15 +13,16 @@ import type { CompanyValue } from './components/ValueCard';
  */
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: 'andrew-smith',
-    name: 'Andrew Smith',
-    role: 'Founder & Chief Architect',
+    id: 'terence-waters',
+    name: 'Terence Waters',
+    role: 'CEO, Founder & Chief Architect',
     bio: 'Visionary technologist and systems thinker, architecting transformative digital experiences and coaching frameworks.',
+    photo: '/images/home/HomePageCover4kPortrait.jpeg',
     socialLinks: {
-      linkedin: 'https://linkedin.com',
-      twitter: 'https://twitter.com',
-      github: 'https://github.com',
-      email: 'andrew@fluxline.pro',
+      linkedin: 'https://linkedin.com/in/terencewaters',
+      twitter: 'https://twitter.com/aplusinflux',
+      github: 'https://github.com/aplusandminus',
+      email: 'mailto:terence@fluxline.pro',
     },
   },
   // Add more team members as needed
