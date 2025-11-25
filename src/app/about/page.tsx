@@ -6,7 +6,7 @@
  */
 
 import Link from 'next/link';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
+import { UnifiedPageWrapper, InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
@@ -16,7 +16,6 @@ import { useHoverEffects } from '@/hooks/useHoverEffects';
 import { TeamMemberCard } from './components/TeamMemberCard';
 import { CompanyStatistics } from './components/CompanyStatistics';
 import { CompanyTimeline } from './components/CompanyTimeline';
-import { ValueCard } from './components/ValueCard';
 import {
   TEAM_MEMBERS,
   COMPANY_STATISTICS,
@@ -182,7 +181,14 @@ export default function AboutPage() {
           </Typography>
           <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {COMPANY_VALUES.map((value) => (
-              <ValueCard key={value.id} value={value} />
+              <InteractiveCard
+                key={value.id}
+                id={value.id}
+                title={value.title}
+                description={value.description}
+                icon={value.icon}
+                iconPosition='center'
+              />
             ))}
           </div>
         </section>

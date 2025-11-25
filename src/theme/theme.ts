@@ -505,11 +505,11 @@ export const typography = {
     h6: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(1rem, 1.5cqi, 1.25rem)', // Mobile-first: 16px -> 20px
+      fontSize: 'clamp(0.875rem, 1.5cqi, 1.1rem)', // Mobile-first: 16px -> 20px
       fontWeight: '700' as const,
-      fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.05em', // Wider for uppercase
-      textShadow: 'var(--text-shadow-h6)',
+      fontVariationSettings: '"wght" 700, "wdth" 400, "slnt" 0',
+      letterSpacing: '0.2px', // Wider for uppercase
+      textShadow: 'none',
       textTransform: 'uppercase' as const,
       lineHeight: '1.5',
     },
@@ -906,7 +906,7 @@ export const lightTheme: IExtendedTheme = createExtendedTheme(
     palette: {
       // Fluxline Pro Light Primary Palette – Mythic clarity
       themePrimary: '#274770', // Deep slate blue – anchors brand
-      themeSecondary: '#5A7CA0', // Cooler contrast
+      themeSecondary: '#2E7A75', // Darker Fluxline teal – flow and clarity (darker shade for light mode)
       themeTertiary: '#7B9BB8', // UI layering
       themeLight: '#F8FAFC', // Clean and airy
       themeDark: '#2E2E3A', // Resonance Core – grounding
@@ -976,7 +976,7 @@ export const darkTheme: IExtendedTheme = createExtendedTheme(
     palette: {
       // Fluxline Pro Dark Primary Palette – Resonance Core
       themePrimary: '#AFCAFC', // Slate blue – sovereign structure
-      themeSecondary: '#4A9B96', // Fluxline teal – intuitive clarity (accessible)
+      themeSecondary: '#5FC4BE', // Brighter Fluxline teal – intuitive clarity (more vibrant)
       themeTertiary: '#5A7CA0', // UI layering
       themeLight: '#F8FAFC', // Light overlay for contrast
       themeDark: '#1F1F1F', // Resonance Core

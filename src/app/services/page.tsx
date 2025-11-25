@@ -7,9 +7,9 @@
 
 import React from 'react';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
+import { InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { ServiceCard } from './components/ServiceCard';
 import {
   SERVICE_CATEGORIES,
   SERVICES_SUMMARY,
@@ -93,7 +93,16 @@ export default function ServicesPage() {
             }}
           >
             {SERVICE_CATEGORIES.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+              <InteractiveCard
+                key={service.id}
+                id={service.id}
+                title={service.title}
+                description={service.description}
+                icon={service.icon}
+                href={service.path}
+                iconPosition='left'
+                showLearnMore={true}
+              />
             ))}
           </div>
         </div>

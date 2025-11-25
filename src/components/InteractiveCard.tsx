@@ -25,6 +25,8 @@ export interface InteractiveCardProps {
   href?: string;
   /** Whether to show icon at top center (default) or left aligned with text */
   iconPosition?: 'center' | 'left';
+  /** Show "Learn more" link with chevron at bottom of card */
+  showLearnMore?: boolean;
   /** Custom onClick handler (ignored if href is provided) */
   onClick?: () => void;
 }
@@ -35,100 +37,173 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
   icon,
   href,
   iconPosition = 'center',
+  showLearnMore = false,
   onClick,
 }) => {
   const { theme } = useAppTheme();
   const [isHovered, setIsHovered] = React.useState(false);
 
+  const isDark =
+    theme.themeMode === 'dark' ||
+    theme.themeMode === 'high-contrast' ||
+    theme.themeMode === 'grayscale-dark';
+
+  const isInteractive = Boolean(href || onClick);
+  const isCentered = iconPosition === 'center';
+
   const cardStyles: React.CSSProperties = {
     display: 'flex',
-    flexDirection: iconPosition === 'center' ? 'column' : 'row',
-    alignItems: iconPosition === 'center' ? 'center' : 'flex-start',
-    textAlign: iconPosition === 'center' ? 'center' : 'left',
-    gap: iconPosition === 'left' ? '1rem' : '0',
-    padding: '2rem 1.5rem',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: isCentered ? 'center' : 'stretch',
+    padding: isCentered ? '2rem 1.5rem' : '1.5rem',
     borderRadius: theme.borderRadius.container.medium,
     border: `1px solid ${
       isHovered ? theme.palette.themePrimary : theme.palette.neutralTertiaryAlt
     }`,
     backgroundColor: isHovered
-      ? theme.themeMode === 'dark' ||
-        theme.themeMode === 'high-contrast' ||
-        theme.themeMode === 'grayscale-dark'
-        ? theme.palette.themeDarker
-        : theme.palette.neutralLighter
+      ? isDark
+        ? theme.palette.neutralLighter
+        : theme.palette.neutralLighterAlt
       : 'transparent',
     transition: 'all 0.3s ease',
     transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
     boxShadow: isHovered ? theme.shadows.m : 'none',
-    cursor: href || onClick ? 'pointer' : 'default',
+    opacity: isHovered ? 1 : 0.9,
+    cursor: isInteractive ? 'pointer' : 'default',
     textDecoration: 'none',
   };
 
-  const content = (
+  const renderContent = () => (
     <>
-      {icon && (
-        <FluentIcon
-          iconName={icon}
-          size='xLarge'
-          color={theme.palette.themePrimary}
-          style={{
-            marginBottom: iconPosition === 'center' ? '1rem' : '0',
-            flexShrink: 0,
-          }}
-        />
+      {isCentered ? (
+        // Center layout: icon on top, title and description centered
+        <>
+          {icon && (
+            <FluentIcon
+              iconName={icon}
+              size='xLarge'
+              color={theme.palette.themePrimary}
+              style={{ marginBottom: '0.5rem' }}
+            />
+          )}
+          <Typography
+            variant='h3'
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: '1.25rem',
+              fontWeight: theme.typography.fontWeights.semiBold,
+              marginBottom: '0.5rem',
+              textAlign: 'center',
+            }}
+          >
+            {title}
+          </Typography>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '0.875rem',
+              lineHeight: theme.typography.lineHeights.relaxed,
+              textAlign: 'center',
+            }}
+          >
+            {description}
+          </Typography>
+        </>
+      ) : (
+        // Left layout: icon and title in row, description below
+        <>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              marginBottom: '1rem',
+            }}
+          >
+            {icon && (
+              <FluentIcon
+                iconName={icon}
+                size='large'
+                color={theme.palette.themePrimary}
+              />
+            )}
+            <Typography
+              variant='h3'
+              style={{
+                color: theme.palette.themePrimary,
+                fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
+                fontWeight: theme.typography.fontWeights.semiBold,
+              }}
+            >
+              {title}
+            </Typography>
+          </div>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '1rem',
+              lineHeight: theme.typography.lineHeights.relaxed,
+            }}
+          >
+            {description}
+          </Typography>
+        </>
       )}
 
-      <div style={{ flex: 1 }}>
-        <Typography
-          variant='h3'
+      {showLearnMore && (
+        <div
           style={{
-            color: theme.palette.themePrimary,
-            fontSize: '1.25rem',
-            fontWeight: theme.typography.fontWeights.semiBold,
-            marginBottom: '0.75rem',
+            marginTop: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
           }}
         >
-          {title}
-        </Typography>
-
-        <Typography
-          variant='p'
-          style={{
-            color: theme.palette.neutralSecondary,
-            fontSize: '0.875rem',
-            lineHeight: theme.typography.lineHeights.relaxed,
-          }}
-        >
-          {description}
-        </Typography>
-      </div>
+          <Typography
+            variant='h6'
+            style={{
+              color: theme.palette.themeSecondary,
+              opacity: isHovered ? 1 : 0.7,
+              transition: 'opacity 0.2s ease',
+            }}
+          >
+            Learn more
+          </Typography>
+          <FluentIcon
+            iconName='ChevronRight'
+            size='small'
+            color={theme.palette.themeSecondary}
+            style={{
+              opacity: isHovered ? 1 : 0.7,
+              transition: 'all 0.2s ease',
+              transform: isHovered ? 'translateX(4px)' : 'translateX(0)',
+            }}
+          />
+        </div>
+      )}
     </>
   );
 
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
+  const commonProps = {
+    style: cardStyles,
+    onMouseEnter: () => setIsHovered(true),
+    onMouseLeave: () => setIsHovered(false),
+  };
 
-  // If href is provided, render as Link
   if (href) {
     return (
-      <Link
-        href={href}
-        style={cardStyles}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        {content}
+      <Link href={href} {...commonProps}>
+        {renderContent()}
       </Link>
     );
   }
 
-  // Otherwise render as div with optional onClick
   return (
     <div
-      style={cardStyles}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      {...commonProps}
       onClick={onClick}
       {...(onClick && {
         role: 'button',
@@ -141,7 +216,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
         },
       })}
     >
-      {content}
+      {renderContent()}
     </div>
   );
 };

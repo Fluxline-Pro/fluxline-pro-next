@@ -126,8 +126,10 @@ export default function FluxlineEthosPage() {
                 id={service.id}
                 title={service.title}
                 description={service.description}
+                icon={service.icon}
                 href={service.link}
-                iconPosition='center'
+                iconPosition='left'
+                showLearnMore={true}
               />
             ))}
           </div>
@@ -177,8 +179,8 @@ export default function FluxlineEthosPage() {
             {ethosCTA.description}
           </Typography>
         </Callout>
-
         {/* Additional Links Section */}
+        {/* No longer needed per design review: TODO: Remove upon confirmation
         <section
           style={{
             marginTop: '2rem',
@@ -254,7 +256,7 @@ export default function FluxlineEthosPage() {
               → Explore the Scrolls
             </Link>
           </div>
-        </section>
+        </section> */}
       </div>
     </UnifiedPageWrapper>
   );

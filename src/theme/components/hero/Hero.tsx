@@ -3,6 +3,7 @@
 import React from 'react';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '@/theme/components/typography';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 export interface HeroProps {
   /**
@@ -29,7 +30,7 @@ export interface HeroProps {
    * Show border around hero section
    * @default true
    */
-  showBorder?: boolean;
+showBorder?: boolean;
   /**
    * Show shadow on hero section
    * @default false
@@ -59,6 +60,7 @@ export const Hero: React.FC<HeroProps> = ({
   showShadow = false,
 }) => {
   const { theme } = useAppTheme();
+  const isMobile = useIsMobile();
 
   return (
     <div
@@ -68,7 +70,7 @@ export const Hero: React.FC<HeroProps> = ({
           ? `1px solid ${theme.palette.neutralTertiary}`
           : 'none',
         backgroundColor: theme.palette.neutralLight,
-        padding: `${theme.spacing.xxl} ${theme.spacing.xxxl}`,
+        padding: isMobile ? `${theme.spacing.l}` : `${theme.spacing.xxl} ${theme.spacing.xxxl}`,
         borderRadius: 'clamp(0.75rem, 1.5cqi, 0.75rem)',
         boxShadow: showShadow ? theme.shadows.hero : 'none',
         ...style,
