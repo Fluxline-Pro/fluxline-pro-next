@@ -1,5 +1,5 @@
 import React from 'react';
-import { getBlogPosts, getAllTags } from '../../blogData';
+import { getAllBlogPosts, getAllTags } from '../../lib/blogLoader';
 import { BlogTagClient } from './BlogTagClient';
 import { notFound } from 'next/navigation';
 
@@ -23,8 +23,9 @@ export default async function BlogTagPage({ params }: BlogTagPageProps) {
   const { tag } = await params;
   const decodedTag = decodeURIComponent(tag);
 
-  // Get posts filtered by tag
-  const posts = getBlogPosts({ tag: decodedTag });
+  // Get all posts and filter by tag
+  const allPosts = getAllBlogPosts();
+  const posts = allPosts.filter((post) => post.tags.includes(decodedTag));
 
   if (posts.length === 0) {
     notFound();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getBlogPosts, getAllCategories } from '../../blogData';
+import { getAllBlogPosts, getAllCategories } from '../../lib/blogLoader';
 import { BlogCategoryClient } from './BlogCategoryClient';
 import { notFound } from 'next/navigation';
 
@@ -25,8 +25,9 @@ export default async function BlogCategoryPage({
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
 
-  // Get posts filtered by category
-  const posts = getBlogPosts({ category: decodedCategory });
+  // Get all posts and filter by category
+  const allPosts = getAllBlogPosts();
+  const posts = allPosts.filter((post) => post.category === decodedCategory);
 
   if (posts.length === 0) {
     notFound();

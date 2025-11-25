@@ -1,6 +1,9 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllPortfolioSlugs, getPortfolioBySlug } from '../portfolioData';
+import {
+  getAllPortfolioSlugs,
+  getPortfolioBySlug,
+} from '../lib/portfolioLoader';
 import PortfolioDetailClient from './PortfolioDetailClient';
 
 interface PortfolioDetailPageProps {
@@ -11,7 +14,7 @@ interface PortfolioDetailPageProps {
 
 /**
  * Portfolio Detail Page - Server Component
- * 
+ *
  * Generates static pages for each portfolio project at build time
  */
 export default async function PortfolioDetailPage({

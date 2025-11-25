@@ -1,5 +1,5 @@
 import React from 'react';
-import { getBlogPostBySlug } from '../blogData';
+import { getBlogPostBySlug } from '../lib/blogLoader';
 import { BlogPostDetailClient } from './BlogPostDetailClient';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -23,11 +23,8 @@ export async function generateStaticParams() {
       slug: slug,
     }));
   }
-  // Fallback: use mock data
-  const { blogPostsMockData } = await import('../blogData');
-  return blogPostsMockData.map((post) => ({
-    slug: post.slug,
-  }));
+  // Fallback: return empty array if loader not available
+  return [];
 }
 
 // Generate metadata for SEO
