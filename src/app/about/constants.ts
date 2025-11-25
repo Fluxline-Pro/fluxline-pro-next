@@ -20,7 +20,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     photo: '/images/home/HomePageCover4kPortrait.jpeg',
     socialLinks: {
       linkedin: 'https://linkedin.com/in/terencewaters',
-      twitter: 'https://twitter.com/aplusinflux',
+      instagram: 'https://instagram.com/aplusinflux',
       github: 'https://github.com/aplusandminus',
       email: 'mailto:terence@fluxline.pro',
     },

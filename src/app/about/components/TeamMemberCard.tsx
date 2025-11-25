@@ -11,6 +11,7 @@ import { Typography } from '@/theme/components/typography';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import Link from 'next/link';
+import { InstagramIcon } from '@/assets/svgs/InstagramLogo';
 
 export interface TeamMember {
   id: string;
@@ -20,7 +21,7 @@ export interface TeamMember {
   photo?: string;
   socialLinks?: {
     linkedin?: string;
-    twitter?: string;
+    instagram?: string;
     github?: string;
     email?: string;
   };
@@ -170,9 +171,9 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
             </Link>
           )}
 
-          {member.socialLinks.twitter && (
+          {member.socialLinks.instagram && (
             <Link
-              href={member.socialLinks.twitter}
+              href={member.socialLinks.instagram}
               target='_blank'
               rel='noopener noreferrer'
               style={{
@@ -193,12 +194,13 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
                 e.currentTarget.style.backgroundColor =
                   theme.palette.neutralLighter;
               }}
-              aria-label={`${member.name} on Twitter`}
+              aria-label={`${member.name} on Instagram`}
             >
-              <FluentIcon
-                iconName='TwitterLogo'
-                size='small'
-                color={theme.palette.themePrimary}
+              <InstagramIcon
+                style={{
+                  width: '16px',
+                  height: '16px',
+                }}
               />
             </Link>
           )}
