@@ -59,35 +59,40 @@ export default function AboutPage() {
             <em>strategic innovation</em> that evolves with you.
           </Typography>
 
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            Whether you&apos;re an individual seeking personal growth or a
-            business ready to scale with purpose, our <em>coaching</em>,{' '}
-            <em>wellness programs</em>, and <em>infrastructure design</em> help
-            you align your <strong>drive</strong> with your{' '}
-            <em>innate identity</em>. We believe transformation isn&apos;t just
-            about metrics—it&apos;s about honoring <em>emotional rhythm</em>,{' '}
-            <em>creative truth</em>, and <em>legacy resonance</em>.
-          </Typography>
+          {!isMobile && ( // shortens the hero text on mobile per design review
+            <>
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '1.125rem',
+                  lineHeight: theme.typography.lineHeights.relaxed,
+                }}
+              >
+                Whether you&apos;re an individual seeking personal growth or a
+                business ready to scale with purpose, our <em>coaching</em>,{' '}
+                <em>wellness programs</em>, and <em>infrastructure design</em>{' '}
+                help you align your <strong>drive</strong> with your{' '}
+                <em>innate identity</em>. We believe transformation isn&apos;t
+                just about metrics—it&apos;s about honoring{' '}
+                <em>emotional rhythm</em>, <em>creative truth</em>, and{' '}
+                <em>legacy resonance</em>.
+              </Typography>
 
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-              paddingBottom: theme.spacing.m,
-            }}
-          >
-            <strong>Fluxline</strong> builds <em>systems that breathe</em>,{' '}
-            <em>brands that feel</em>, and <em>legacies that last</em>.
-          </Typography>
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '1.125rem',
+                  lineHeight: theme.typography.lineHeights.relaxed,
+                  paddingBottom: theme.spacing.m,
+                }}
+              >
+                <strong>Fluxline</strong> builds <em>systems that breathe</em>,{' '}
+                <em>brands that feel</em>, and <em>legacies that last</em>.
+              </Typography>
+            </>
+          )}
 
           {/* Quote Callout */}
           <Callout
