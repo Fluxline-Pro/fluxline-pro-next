@@ -3,16 +3,16 @@
 import React from 'react';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { isDark } from '@fluentui/react';
 
 export interface FormButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'default';
   icon?: string;
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean;
   size?: 'small' | 'medium' | 'large';
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  text?: string;
 }
 
 /**
@@ -33,6 +33,7 @@ export const FormButton: React.FC<FormButtonProps> = ({
   fullWidth = false,
   size = 'medium',
   children,
+  text,
   disabled = false,
   className,
   style,
@@ -118,6 +119,17 @@ export const FormButton: React.FC<FormButtonProps> = ({
           border: `1px solid ${theme.semanticColors.errorIcon}`,
         };
 
+      case 'default':
+        return {
+          ...baseStyles,
+          backgroundColor:
+            isHovered && !disabled
+              ? theme.palette.neutralQuaternaryAlt
+              : theme.palette.neutralLighter,
+          color: theme.palette.neutralPrimary,
+          border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+        };
+
       default:
         return baseStyles;
     }
@@ -143,6 +155,8 @@ export const FormButton: React.FC<FormButtonProps> = ({
           : theme.palette.black
         : theme.palette.white;
 
+  const content = text || children;
+
   return (
     <button
       {...rest}
@@ -155,10 +169,14 @@ export const FormButton: React.FC<FormButtonProps> = ({
       {icon && iconPosition === 'left' && (
         <FluentIcon iconName={icon} size='small' color={iconColor} />
       )}
-      {children}
+      {content}
       {icon && iconPosition === 'right' && (
         <FluentIcon iconName={icon} size='small' color={iconColor} />
       )}
     </button>
   );
 };
+
+// Backward compatibility alias
+export const Button = FormButton;
+export type ButtonProps = FormButtonProps;

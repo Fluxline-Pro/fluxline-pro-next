@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Button } from '@/theme/components/button';
+import { FormButton } from '@/theme/components/form';
 import { Typography } from '@/theme/components/typography';
 
 interface FormData {
@@ -332,7 +332,7 @@ export const ContactForm: React.FC = () => {
       </div>
 
       {/* Submit Button */}
-      <Button
+      <FormButton
         type='submit'
         variant='primary'
         fullWidth
@@ -361,7 +361,7 @@ export const ContactForm: React.FC = () => {
         </div>
       )}
 
-    {/* Error Message */}
+      {/* Error Message */}
       {errors.submit && (
         <div
           role='alert'

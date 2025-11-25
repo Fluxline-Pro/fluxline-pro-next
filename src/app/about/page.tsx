@@ -35,7 +35,7 @@ export default function AboutPage() {
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-16'>
+      <div className='space-y-8'>
         {/* Hero Section */}
         <Hero title='About Fluxline'>
           <Typography

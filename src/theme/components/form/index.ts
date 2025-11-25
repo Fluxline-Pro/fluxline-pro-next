@@ -9,8 +9,8 @@
 export { FormSelect } from './FormSelect';
 export type { FormSelectProps, FormSelectOption } from './FormSelect';
 
-export { FormButton } from './FormButton';
-export type { FormButtonProps } from './FormButton';
+export { FormButton, Button } from './FormButton';
+export type { FormButtonProps, ButtonProps } from './FormButton';
 
 export { FormToggle } from './FormToggle';
 export type { FormToggleProps } from './FormToggle';
