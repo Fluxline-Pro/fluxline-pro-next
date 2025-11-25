@@ -104,7 +104,7 @@ export const ethosServices: EthosServicesContent = {
 export const ethosCTA: EthosCTAContent = {
   title: 'Your Vision is Calling',
   description:
-    "Let's architect it into form. Every service is a curriculum gate—crafted to align your identity, systems, and mission with intentionality and resonance.",
+    'Each service is a curriculum gate, aligning identity, systems, and mission with intentional resonance. \n\nAre you ready to architect your legacy? Let’s begin the journey together.',
   buttonText: 'Start the Conversation',
   buttonLink: '/contact',
 };

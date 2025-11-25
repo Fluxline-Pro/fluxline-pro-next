@@ -6,7 +6,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface FormButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'default';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'default' | 'outline';
   icon?: string;
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean;
@@ -20,7 +20,7 @@ export interface FormButtonProps
  * Consistent button component following Fluxline DSM
  *
  * Features:
- * - Multiple variants (primary, secondary, tertiary, danger)
+ * - Multiple variants (primary, secondary, tertiary, danger, outline)
  * - Optional icons with positioning
  * - Hover states with theme colors
  * - Responsive sizing
@@ -112,6 +112,23 @@ export const FormButton: React.FC<FormButtonProps> = ({
           border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
         };
 
+      case 'outline':
+        return {
+          ...baseStyles,
+          backgroundColor:
+            isHovered && !disabled
+              ? theme.palette.themePrimary
+              : 'transparent',
+          color: isHovered && !disabled
+            ? theme.themeMode === 'dark' ||
+              theme.themeMode === 'high-contrast' ||
+              theme.themeMode === 'grayscale-dark'
+              ? theme.palette.black
+              : theme.palette.white
+            : theme.palette.themePrimary,
+          border: `2px solid ${theme.palette.themePrimary}`,
+        };
+
       case 'danger':
         return {
           ...baseStyles,
@@ -159,8 +176,14 @@ export const FormButton: React.FC<FormButtonProps> = ({
           theme.themeMode === 'grayscale-dark'
           ? theme.palette.black
           : theme.palette.white
-        : variant === 'secondary'
-          ? theme.palette.themePrimary
+        : variant === 'secondary' || variant === 'outline'
+          ? isHovered && !disabled
+            ? theme.themeMode === 'dark' ||
+              theme.themeMode === 'high-contrast' ||
+              theme.themeMode === 'grayscale-dark'
+              ? theme.palette.black
+              : theme.palette.white
+            : theme.palette.themePrimary
           : theme.palette.neutralPrimary;
 
   const content = text || children;

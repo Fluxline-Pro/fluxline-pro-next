@@ -10,6 +10,10 @@ export interface HeroProps {
    */
   title: string;
   /**
+   * Subtitle to render within the hero section
+   */
+  subTitle?: string;
+  /**
    * Hero content - can be text, JSX, or array of content blocks
    */
   children?: React.ReactNode;

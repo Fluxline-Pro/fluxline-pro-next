@@ -5,12 +5,14 @@
  * Presents the Fluxline philosophy, mission, and service framework
  */
 
-import React from 'react';
 import Link from 'next/link';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
+import { UnifiedPageWrapper, InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
+import { Callout } from '@/theme/components/callout';
+import { IExtendedTheme } from '@/theme/theme';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useHoverEffects } from '@/hooks/useHoverEffects';
+import { FormButton } from '@/theme/components/form';
+import { Hero } from '@/theme/components/hero/Hero';
 import {
   ethosHero,
   ethosAbout,
@@ -18,55 +20,44 @@ import {
   ethosCTA,
 } from '@/lib/ethos/ethosContent';
 
+const heroContent = ({ theme }: { theme: IExtendedTheme }) => {
+  return (
+    <section className='space-y-6'>
+      <Typography
+        variant='h2'
+        style={{
+          color: theme.palette.themeSecondary,
+          fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
+          fontWeight: theme.typography.fontWeights.light,
+          fontStyle: 'italic',
+          marginBottom: '1.5rem',
+        }}
+      >
+        {ethosHero.subtitle}
+      </Typography>
+
+      <Typography
+        variant='p'
+        style={{
+          color: theme.palette.neutralSecondary,
+          fontSize: '1.125rem',
+          lineHeight: theme.typography.lineHeights.relaxed,
+        }}
+      >
+        {ethosHero.description}
+      </Typography>
+    </section>
+  );
+};
+
 export default function FluxlineEthosPage() {
   const { theme } = useAppTheme();
-  const cardHoverEffects = useHoverEffects({
-    type: 'card',
-    hoverBorderColor: theme.palette.themePrimary,
-    defaultBorderColor: theme.palette.neutralLight,
-  });
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-16'>
         {/* Hero Section */}
-        <section className='space-y-6'>
-          <Typography
-            variant='h1'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-              fontWeight: theme.typography.fontWeights.bold,
-              lineHeight: theme.typography.lineHeights.tight,
-            }}
-          >
-            {ethosHero.title}
-          </Typography>
-
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themeSecondary,
-              fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
-              fontWeight: theme.typography.fontWeights.light,
-              fontStyle: 'italic',
-              marginBottom: '1.5rem',
-            }}
-          >
-            {ethosHero.subtitle}
-          </Typography>
-
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            {ethosHero.description}
-          </Typography>
-        </section>
+        <Hero title={ethosHero.title}>{heroContent({ theme })}</Hero>
 
         {/* Divider */}
         <hr
@@ -128,79 +119,26 @@ export default function FluxlineEthosPage() {
             {ethosServices.sectionTitle}
           </Typography>
 
-          <div
-            className='grid gap-6'
-            style={{
-              gridTemplateColumns:
-                'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
-            }}
-          >
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {ethosServices.services.map((service) => (
-              <Link
+              <InteractiveCard
                 key={service.id}
+                id={service.id}
+                title={service.title}
+                description={service.description}
                 href={service.link}
-                style={{
-                  display: 'block',
-                  padding: '1.5rem',
-                  borderRadius: theme.borderRadius.container.medium,
-                  border: `1px solid ${theme.palette.neutralLight}`,
-                  backgroundColor: theme.palette.white,
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease',
-                }}
-                {...cardHoverEffects}
-              >
-                <Typography
-                  variant='h3'
-                  style={{
-                    color: theme.palette.themePrimary,
-                    fontSize: '1.25rem',
-                    fontWeight: theme.typography.fontWeights.semiBold,
-                    marginBottom: '0.75rem',
-                  }}
-                >
-                  {service.title}
-                </Typography>
-                <Typography
-                  variant='p'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '1rem',
-                    lineHeight: theme.typography.lineHeights.relaxed,
-                  }}
-                >
-                  {service.description}
-                </Typography>
-              </Link>
+                iconPosition='center'
+              />
             ))}
           </div>
 
-          <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-            <Link
-              href='/services'
-              style={{
-                display: 'inline-block',
-                padding: '0.75rem 2rem',
-                borderRadius: theme.borderRadius.container.small,
-                border: `2px solid ${theme.palette.themePrimary}`,
-                color: theme.palette.themePrimary,
-                textDecoration: 'none',
-                fontSize: '1rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themePrimary;
-                e.currentTarget.style.color = theme.palette.white;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.color = theme.palette.themePrimary;
-              }}
-            >
-              View All Services
-            </Link>
+          <div className='flex justify-center mt-4'>
+            <FormButton
+              text='View All Services'
+              variant='outline'
+              size='medium'
+              onClick={() => (window.location.href = '/services')}
+            />
           </div>
         </section>
 
@@ -214,64 +152,31 @@ export default function FluxlineEthosPage() {
         />
 
         {/* CTA Section */}
-        <section
-          style={{
-            padding: '2.5rem',
-            borderRadius: theme.borderRadius.container.medium,
-            border: `2px solid ${theme.palette.themeTertiary}`,
-            backgroundColor: 'transparent',
-            textAlign: 'center',
-          }}
+        <Callout
+          variant='accent'
+          title={ethosCTA.title}
+          action={
+            <div style={{ textAlign: 'center' }}>
+              <FormButton
+                text={ethosCTA.buttonText}
+                variant='primary'
+                size='large'
+                onClick={() => (window.location.href = ethosCTA.buttonLink)}
+              />
+            </div>
+          }
         >
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
-              fontWeight: theme.typography.fontWeights.semiBold,
-              marginBottom: '1rem',
-            }}
-          >
-            {ethosCTA.title}
-          </Typography>
           <Typography
             variant='p'
             style={{
               color: theme.palette.neutralSecondary,
               fontSize: '1.125rem',
               lineHeight: theme.typography.lineHeights.relaxed,
-              marginBottom: '2rem',
             }}
           >
             {ethosCTA.description}
           </Typography>
-          <Link
-            href={ethosCTA.buttonLink}
-            style={{
-              display: 'inline-block',
-              padding: '1rem 2.5rem',
-              borderRadius: theme.borderRadius.container.small,
-              backgroundColor: theme.palette.themePrimary,
-              color: theme.palette.white,
-              textDecoration: 'none',
-              fontSize: '1.125rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-              transition: 'all 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                theme.palette.themeSecondary;
-              e.currentTarget.style.transform = 'scale(1.05)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor =
-                theme.palette.themePrimary;
-              e.currentTarget.style.transform = 'scale(1)';
-            }}
-          >
-            {ethosCTA.buttonText}
-          </Link>
-        </section>
+        </Callout>
 
         {/* Additional Links Section */}
         <section

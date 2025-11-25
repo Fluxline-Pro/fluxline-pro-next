@@ -6,3 +6,5 @@
 export { UnifiedPageWrapper } from './UnifiedPageWrapper';
 export { UnifiedContentDetail } from './UnifiedContentDetail';
 export type { UnifiedContentDetailConfig } from './UnifiedContentDetail';
+export { InteractiveCard } from './InteractiveCard';
+export type { InteractiveCardProps } from './InteractiveCard';
