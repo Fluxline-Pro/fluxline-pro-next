@@ -371,64 +371,78 @@ export const typography = {
     xSmall: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(0.5rem, 1cqi, 0.5rem)',
+      fontSize: 'clamp(0.75rem, 1cqi, 0.875rem)', // Mobile-first: 12px -> 14px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.5',
     },
     small: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(0.75rem, 1.5cqi, 0.75rem)',
+      fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
       lineHeight: '1.6',
     },
     medium: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: '1rem',
+      fontSize: '1rem', // Standard base: 16px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
       lineHeight: '1.6',
     },
     mediumPlus: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(1.25rem, 2.5cqi, 1.25rem)',
+      fontSize: 'clamp(1.125rem, 2cqi, 1.375rem)', // Mobile-first: 18px -> 22px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
       lineHeight: '1.6',
     },
     large: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(1.5rem, 3cqi, 1.5rem)',
+      fontSize: 'clamp(1.25rem, 2.5cqi, 1.75rem)', // Mobile-first: 20px -> 28px
       fontWeight: '700' as const, // Inter Bold
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.5',
     },
     xLarge: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(2rem, 4cqi, 2rem)',
+      fontSize: 'clamp(1.5rem, 3.5cqi, 2.25rem)', // Mobile-first: 24px -> 36px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.4',
     },
     xxLarge: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(3rem, 6cqi, 3rem)',
+      fontSize: 'clamp(2rem, 5cqi, 3.5rem)', // Mobile-first: 32px -> 56px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
       lineHeight: '1.3',
     },
 
@@ -436,32 +450,32 @@ export const typography = {
     h1: {
       fontFamily:
         'Inter Variable, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(8cqi, min(10cqi, 10cqh), min(14cqi, 14cqh))',
+      fontSize: 'clamp(2.5rem, 8cqi, 6rem)', // Mobile-first: 40px -> container query -> 96px max
       fontWeight: '800' as const,
       fontVariationSettings: '"wght" 800, "wdth" 200, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.02em', // Slightly tighter for large text
       textShadow: 'var(--text-shadow-textBig)',
       textTransform: 'uppercase' as const,
-      lineHeight: '1.6',
+      lineHeight: '1.1', // Tighter for display headings
     },
     h2: {
       fontFamily:
         'Inter Variable, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(2cqi, min(5cqi, 5cqh), min(7cqi, 7cqh))',
+      fontSize: 'clamp(2rem, 5cqi, 3.5rem)', // Mobile-first: 32px -> 56px
       fontWeight: '800' as const,
       fontVariationSettings: '"wght" 800, "wdth" 200, "slnt" 0',
-      letterSpacing: '0.1px',
-      textShadow: 'none !important',
-      textTransform: 'uppercase' as const,
-      lineHeight: '1.3',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'capitalize' as const,
+      lineHeight: '1.2',
     },
     h3: {
       fontFamily:
         'Inter Variable, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(1.6rem, 2.5cqi, 1.85rem)',
+      fontSize: 'clamp(1.5rem, 3.5cqi, 2.25rem)', // Mobile-first: 24px -> 36px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
       textShadow: 'none',
       textTransform: 'capitalize' as const,
       lineHeight: '1.3',
@@ -469,133 +483,155 @@ export const typography = {
     h4: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(1rem, 1.75cqi, 1.125rem)',
+      fontSize: 'clamp(1.25rem, 2.5cqi, 1.75rem)', // Mobile-first: 20px -> 28px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
       textShadow: 'var(--text-shadow-h4)',
       textTransform: 'capitalize' as const,
-      lineHeight: '1.3',
+      lineHeight: '1.4',
     },
     h5: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(1.125rem, 1.5cqi, 1.375rem)',
+      fontSize: 'clamp(1.125rem, 2cqi, 1.5rem)', // Mobile-first: 18px -> 24px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
       textShadow: 'var(--text-shadow-h5)',
       textTransform: 'capitalize' as const,
-      lineHeight: '1.3',
+      lineHeight: '1.4',
     },
     h6: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(1rem, 1.25cqi, 1.25rem)',
+      fontSize: 'clamp(1rem, 1.5cqi, 1.25rem)', // Mobile-first: 16px -> 20px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.05em', // Wider for uppercase
       textShadow: 'var(--text-shadow-h6)',
       textTransform: 'uppercase' as const,
-      lineHeight: '1.6',
+      lineHeight: '1.5',
     },
 
     // Body and utility text
     body: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: '1.1rem', // rising just a tad
+      fontSize: 'clamp(1rem, 1.5cqi, 1.125rem)', // Mobile-first: 16px -> 18px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
       lineHeight: '1.6',
     },
     bodySmall: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(0.875rem, 1.75cqi, 0.875rem)',
+      fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
       lineHeight: '1.6',
     },
     homeH3: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(3cqi, min(6cqi, 6cqh), min(8cqi, 8cqh))',
+      fontSize: 'clamp(1.75rem, 4.5cqi, 3rem)', // Mobile-first: 28px -> 48px
       fontWeight: '500' as const, // Inter Medium
       fontVariationSettings: '"wght" 500, "wdth" 125, "slnt" 0',
-      lineHeight: '1.6',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.4',
     },
     paragraph: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: '1rem',
+      fontSize: 'clamp(1rem, 1.5cqi, 1.125rem)', // Match body sizing
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
       lineHeight: '1.6',
     },
 
     label: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(0.875rem, 1.75cqi, 0.875rem)',
+      fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.5',
     },
     quote: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(1.25rem, 2.5cqi, 1.25rem)',
+      fontSize: 'clamp(1.125rem, 2cqi, 1.5rem)', // Mobile-first: 18px -> 24px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.7', // More generous for quotes
     },
     pre: {
       fontFamily: 'Courier Prime, "Courier New", Courier, monospace',
-      fontSize: 'clamp(0.875rem, 1.75cqi, 0.875rem)',
+      fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: 'normal' as const,
       fontVariationSettings: '"wght" 400, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.7', // More generous for code readability
     },
     code: {
       fontFamily: 'Courier Prime, "Courier New", Courier, monospace',
-      fontSize: 'clamp(0.875rem, 1.75cqi, 0.875rem)',
+      fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: 'normal' as const,
       fontVariationSettings: '"wght" 400, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.7',
     },
     caption: {
       fontFamily:
         'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(0.75rem, 1.5cqi, 0.75rem)',
+      fontSize: 'clamp(0.75rem, 1cqi, 0.875rem)', // Mobile-first: 12px -> 14px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0.01em',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.5',
     },
     mono: {
       fontFamily: 'Courier Prime, "Courier New", Courier, monospace',
-      fontSize: 'clamp(0.875rem, 1.75cqi, 0.875rem)',
+      fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: 'normal' as const,
       fontVariationSettings: '"wght" 400, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0',
+      textShadow: 'none',
+      textTransform: 'none' as const,
+      lineHeight: '1.7',
     },
     ritual: {
       fontFamily: 'Courier Prime, "Courier New", Courier, monospace',
-      fontSize: 'clamp(0.875rem, 2.5cqi, 1.125rem)',
+      fontSize: 'clamp(1rem, 2cqi, 1.25rem)', // Mobile-first: 16px -> 20px
       fontWeight: 'normal' as const,
       fontVariationSettings: '"wght" 400, "wdth" 100, "slnt" 0',
-      letterSpacing: '0.1px',
-      lineHeight: '1.6',
+      letterSpacing: '0.02em',
+      textShadow: 'none',
       textTransform: 'none' as const,
+      lineHeight: '1.7',
     },
     glyphTag: {
       fontFamily:

@@ -86,17 +86,16 @@ export default function ContentPageClient() {
         }}
       >
         {/* Page Header */}
-        <div style={{ marginBottom: theme.spacing.l2, textAlign: 'center' }}>
+        <div style={{ marginBottom: theme.spacing.l2 }}>
           <Typography
             variant='h1'
             style={{
               fontWeight: 700,
               color: theme.palette.themePrimary,
               marginBottom: theme.spacing.m,
-              fontSize: isMobile ? '2rem' : '2.5rem',
             }}
           >
-            My Content
+            Business Content
           </Typography>
           <Typography
             variant='p'
@@ -105,7 +104,6 @@ export default function ContentPageClient() {
               marginBottom: theme.spacing.l1,
               fontSize: '1.1rem',
               maxWidth: '800px',
-              margin: '0 auto',
             }}
           >
             Explore our collection of articles, projects, and insights. Discover
@@ -147,7 +145,9 @@ export default function ContentPageClient() {
                   padding: theme.spacing.l1,
                   backgroundColor: isHovered
                     ? theme.palette.neutralLighter
-                    : theme.palette.white,
+                    : theme.themeMode === 'dark'
+                      ? theme.palette.themeDark
+                      : theme.palette.white,
                   border: `2px solid ${isHovered ? category.color : theme.palette.neutralLight}`,
                   borderRadius: theme.effects.roundedCorner6,
                   cursor: isDisabled ? 'not-allowed' : 'pointer',
@@ -295,10 +295,7 @@ export default function ContentPageClient() {
             Subscribe to our newsletter to get the latest updates on new blog
             posts, projects, and insights delivered to your inbox.
           </Typography>
-          <FormButton
-            onClick={() => router.push('/contact')}
-            
-          >
+          <FormButton onClick={() => router.push('/contact')}>
             Get in Touch
           </FormButton>
         </div>
