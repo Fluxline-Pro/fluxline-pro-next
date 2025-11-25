@@ -8,7 +8,8 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown, IDropdownOption } from '@fluentui/react';
+import { FormSelect } from '@/theme/components/form';
+import { FormButton } from '@/theme/components/form';
 import { getCaseStudies } from './caseStudiesData';
 
 /**
@@ -118,17 +119,9 @@ export default function CaseStudiesPage() {
   );
 
   // Handle industry selection
-  const handleIndustryChange = React.useCallback(
-    (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
-      if (option) {
-        const industries = option.selected
-          ? [...selectedIndustries, String(option.key)]
-          : selectedIndustries.filter((i) => i !== option.key);
-        setSelectedIndustries(industries);
-      }
-    },
-    [selectedIndustries]
-  );
+  const handleIndustryChange = React.useCallback((selectedKeys: string[]) => {
+    setSelectedIndustries(selectedKeys);
+  }, []);
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -180,7 +173,7 @@ export default function CaseStudiesPage() {
         >
           {/* Industry Filter */}
           <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
+            <FormSelect
               label='Industry'
               placeholder='All Industries'
               multiSelect
@@ -189,30 +182,18 @@ export default function CaseStudiesPage() {
                 text: industry,
               }))}
               selectedKeys={selectedIndustries}
-              onChange={handleIndustryChange}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
-              }}
+              onMultiChange={handleIndustryChange}
             />
           </div>
 
           {/* View Type Selector */}
           <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
+            <FormSelect
               label='View Type'
               options={viewOptions}
-              selectedKey={viewType}
-              onChange={(_, option) => {
-                if (option?.key) {
-                  setViewType(
-                    option.key as 'grid' | 'small-tile' | 'large-tile'
-                  );
-                }
-              }}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
+              value={viewType}
+              onChange={(value) => {
+                setViewType(value as 'grid' | 'small-tile' | 'large-tile');
               }}
             />
           </div>
@@ -313,52 +294,20 @@ export default function CaseStudiesPage() {
               flexWrap: 'wrap',
             }}
           >
-            <button
+            <FormButton
+              variant='primary'
               onClick={() => router.push('/services')}
-              style={{
-                padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                backgroundColor: theme.palette.themePrimary,
-                color: theme.palette.white,
-                border: 'none',
-                borderRadius: theme.effects.roundedCorner4,
-                fontSize: theme.fonts.mediumPlus.fontSize,
-                fontWeight: theme.typography.fontWeights.semiBold,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.themeDark;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themePrimary;
-              }}
+              size='large'
             >
               View Our Services
-            </button>
-            <button
+            </FormButton>
+            <FormButton
+              variant='secondary'
               onClick={() => router.push('/contact')}
-              style={{
-                padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                backgroundColor: 'transparent',
-                color: theme.palette.themePrimary,
-                border: `2px solid ${theme.palette.themePrimary}`,
-                borderRadius: theme.effects.roundedCorner4,
-                fontSize: theme.fonts.mediumPlus.fontSize,
-                fontWeight: theme.typography.fontWeights.semiBold,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themeLighterAlt;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
+              size='large'
             >
               Start Your Transformation
-            </button>
+            </FormButton>
           </div>
         </div>
       </div>

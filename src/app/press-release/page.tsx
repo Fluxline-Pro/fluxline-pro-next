@@ -8,7 +8,7 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown } from '@fluentui/react';
+import { FormSelect } from '@/theme/components/form';
 import { format } from 'date-fns';
 import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
 
@@ -198,39 +198,27 @@ export default function PressReleasePage() {
         >
           {/* Year Filter */}
           <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
+            <FormSelect
               label='Year'
               options={[
                 { key: '', text: 'All Years' },
                 ...allYears.map((year) => ({ key: year, text: year })),
               ]}
-              selectedKey={selectedYear || ''}
-              onChange={(_, option) => {
-                setSelectedYear(option?.key ? String(option.key) : undefined);
-              }}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
+              value={selectedYear || ''}
+              onChange={(value) => {
+                setSelectedYear(value || undefined);
               }}
             />
           </div>
 
           {/* View Type Selector */}
           <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
+            <FormSelect
               label='View Type'
               options={viewOptions}
-              selectedKey={viewType}
-              onChange={(_, option) => {
-                if (option?.key) {
-                  setViewType(
-                    option.key as 'grid' | 'small-tile' | 'large-tile'
-                  );
-                }
-              }}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
+              value={viewType}
+              onChange={(value) => {
+                setViewType(value as 'grid' | 'small-tile' | 'large-tile');
               }}
             />
           </div>

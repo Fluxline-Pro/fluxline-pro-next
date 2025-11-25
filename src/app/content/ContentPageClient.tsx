@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
+import { FormButton } from '@/theme/components/form';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { FluentIcon } from '@/theme/components/fluent-icon';
@@ -294,29 +295,12 @@ export default function ContentPageClient() {
             Subscribe to our newsletter to get the latest updates on new blog
             posts, projects, and insights delivered to your inbox.
           </Typography>
-          <button
+          <FormButton
             onClick={() => router.push('/contact')}
-            style={{
-              padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-              backgroundColor: theme.palette.themePrimary,
-              color: theme.palette.white,
-              border: 'none',
-              borderRadius: theme.effects.roundedCorner4,
-              fontSize: theme.fonts.mediumPlus.fontSize,
-              fontWeight: theme.typography.fontWeights.semiBold,
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = theme.palette.themeDark;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor =
-                theme.palette.themePrimary;
-            }}
+            
           >
             Get in Touch
-          </button>
+          </FormButton>
         </div>
       </div>
     </UnifiedPageWrapper>

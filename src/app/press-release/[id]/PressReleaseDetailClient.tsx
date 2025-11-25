@@ -6,6 +6,7 @@ import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
+import { FormButton } from '@/theme/components/form';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { format } from 'date-fns';
 import type { PressRelease } from '@/store/mock-data/pressReleaseMock';
@@ -48,19 +49,12 @@ export function PressReleaseDetailClient({
           >
             The requested press release could not be found.
           </Typography>
-          <button
+          <FormButton
+            variant='primary'
             onClick={() => router.push('/press-release')}
-            style={{
-              padding: `${theme.spacing.s} ${theme.spacing.m}`,
-              backgroundColor: theme.palette.themePrimary,
-              color: theme.palette.white,
-              border: 'none',
-              borderRadius: theme.effects.roundedCorner4,
-              cursor: 'pointer',
-            }}
           >
             ← Back to Press Releases
-          </button>
+          </FormButton>
         </div>
       </UnifiedPageWrapper>
     );

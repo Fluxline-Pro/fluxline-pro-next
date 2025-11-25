@@ -47,18 +47,41 @@ export default function AboutPage() {
             About Fluxline
           </Typography>
 
-          <div className='space-y-4'>
+          {/* Quote Callout */}
+          <div
+            style={{
+              borderLeft: `4px solid ${theme.semanticColors.messageText}`,
+              backgroundColor: theme.palette.neutralLighterAlt,
+              padding: theme.spacing.l,
+              borderRadius: theme.borderRadius.container.small,
+              marginBottom: theme.spacing.l1,
+            }}
+          >
             <Typography
               variant='h2'
               style={{
-                color: theme.palette.themeSecondary,
-                fontSize: '1.75rem',
+                color: theme.semanticColors.messageText,
+                fontSize: '1.5rem',
                 fontWeight: theme.typography.fontWeights.semiBold,
+                fontStyle: 'italic',
+                marginBottom: theme.spacing.s1,
               }}
             >
               We&apos;re not done yet—but we&apos;re already extraordinary.
             </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1rem',
+                fontStyle: 'italic',
+              }}
+            >
+              Modular by design. Resonant by nature.
+            </Typography>
+          </div>
 
+          <div className='space-y-4'>
             <Typography
               variant='p'
               style={{
@@ -153,7 +176,10 @@ export default function AboutPage() {
               className='inline-flex items-center px-6 py-3 rounded-md font-medium transition-colors duration-200'
               style={{
                 backgroundColor: theme.palette.themePrimary,
-                color: theme.palette.white,
+                color:
+                  theme.themeMode === 'dark'
+                    ? theme.palette.black
+                    : theme.palette.white,
               }}
               {...buttonHoverEffects}
             >

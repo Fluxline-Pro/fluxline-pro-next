@@ -6,6 +6,7 @@ import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
+import { FormButton } from '@/theme/components/form';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { PortfolioProject } from '../types';
 
@@ -47,22 +48,13 @@ export default function PortfolioDetailClient({
           >
             The portfolio project you&apos;re looking for doesn&apos;t exist.
           </Typography>
-          <button
+          <FormButton
+            variant='primary'
             onClick={() => router.push('/portfolio')}
-            style={{
-              marginTop: theme.spacing.l,
-              padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-              backgroundColor: theme.palette.themePrimary,
-              color: theme.palette.white,
-              border: 'none',
-              borderRadius: theme.effects.roundedCorner4,
-              fontSize: theme.fonts.medium.fontSize,
-              fontWeight: theme.typography.fontWeights.semiBold,
-              cursor: 'pointer',
-            }}
+            style={{ marginTop: theme.spacing.l }}
           >
             Back to Portfolio
-          </button>
+          </FormButton>
         </div>
       </UnifiedPageWrapper>
     );

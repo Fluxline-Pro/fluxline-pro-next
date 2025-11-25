@@ -8,7 +8,7 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown } from '@fluentui/react';
+import { FormSelect } from '@/theme/components/form';
 import { format } from 'date-fns';
 import { BlogPost } from './types';
 
@@ -210,50 +210,36 @@ export function BlogListingClient({
       >
         {/* Category Filter */}
         <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <Dropdown
+          <FormSelect
             label='Category'
             options={categoryOptions}
-            selectedKey={selectedCategory || ''}
-            onChange={(_, option) => {
-              setSelectedCategory(option?.key ? String(option.key) : undefined);
-            }}
-            styles={{
-              dropdown: { minWidth: 200 },
-              root: { width: '100%' },
+            value={selectedCategory || ''}
+            onChange={(value) => {
+              setSelectedCategory(value || undefined);
             }}
           />
         </div>
 
         {/* Tag Filter */}
         <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <Dropdown
+          <FormSelect
             label='Tag'
             options={tagOptions}
-            selectedKey={selectedTag || ''}
-            onChange={(_, option) => {
-              setSelectedTag(option?.key ? String(option.key) : undefined);
-            }}
-            styles={{
-              dropdown: { minWidth: 200 },
-              root: { width: '100%' },
+            value={selectedTag || ''}
+            onChange={(value) => {
+              setSelectedTag(value || undefined);
             }}
           />
         </div>
 
         {/* View Type Selector */}
         <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <Dropdown
+          <FormSelect
             label='View Type'
             options={viewOptions}
-            selectedKey={viewType}
-            onChange={(_, option) => {
-              if (option?.key) {
-                setViewType(option.key as 'grid' | 'small-tile' | 'large-tile');
-              }
-            }}
-            styles={{
-              dropdown: { minWidth: 200 },
-              root: { width: '100%' },
+            value={viewType}
+            onChange={(value) => {
+              setViewType(value as 'grid' | 'small-tile' | 'large-tile');
             }}
           />
         </div>
