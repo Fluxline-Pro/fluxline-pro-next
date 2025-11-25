@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Button } from '../button';
+import { FormButton } from '@/theme/components/form';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 
 interface BookingsButtonProps {
@@ -82,7 +82,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   };
 
   return (
-    <Button
+    <FormButton
       variant='primary'
       size='medium'
       onClick={handleClick}
@@ -91,7 +91,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
       id='bookings-button'
     >
       Book a free consultation
-    </Button>
+    </FormButton>
   );
 };
 
