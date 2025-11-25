@@ -76,7 +76,11 @@ export const FormButton: React.FC<FormButtonProps> = ({
           ...baseStyles,
           backgroundColor:
             isHovered && !disabled
-              ? theme.palette.themeLight
+              ? theme.themeMode === 'dark' ||
+                theme.themeMode === 'high-contrast' ||
+                theme.themeMode === 'grayscale-dark'
+                ? theme.palette.themeLight
+                : theme.palette.themeDark
               : theme.palette.themePrimary,
           color:
             theme.themeMode === 'dark' ||

@@ -42,7 +42,7 @@ export const COMPANY_STATISTICS: Statistic[] = [
   {
     id: 'years',
     label: 'Years Experience',
-    value: '10+',
+    value: '20+',
     icon: 'DateTime',
     description: 'In digital innovation',
   },

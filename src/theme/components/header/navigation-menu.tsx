@@ -45,7 +45,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
       {/* Menu Title */}
       <div
         style={{
-          padding: isMobile ? '1.5rem' : '2rem',
+          padding: isMobile ? '1.5rem' : '1rem 2rem',
           borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
         }}
       >

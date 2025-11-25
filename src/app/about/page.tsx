@@ -51,11 +51,11 @@ export default function AboutPage() {
               lineHeight: theme.typography.lineHeights.relaxed,
             }}
           >
-            <strong>Fluxline</strong> architects transformative systems, brand
-            experiences, and human-centered technology—blending{' '}
-            <em>emotional intelligence</em>, <em>financial clarity</em>, and{' '}
-            <em>somatic discipline</em>. We specialize in{' '}
-            <em>modular web development</em>,{' '}
+            <strong>Fluxline</strong>, also known as Fluxline Resonance Group,
+            architects transformative systems, brand experiences, and
+            human-centered technology—blending <em>emotional intelligence</em>,{' '}
+            <em>financial clarity</em>, and <em>somatic discipline</em>. We
+            specialize in <em>modular web development</em>,{' '}
             <em>scalable design ecosystems</em>, and{' '}
             <em>strategic innovation</em> that evolves with you.
           </Typography>
