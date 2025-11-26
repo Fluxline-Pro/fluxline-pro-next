@@ -607,7 +607,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 position: 'relative',
                 width: '100%',
                 maxWidth: '300px', // Smaller max width for mobile/tablet
-                aspectRatio: '4/3', // More landscape ratio for smaller viewport usage
+                height: 'auto',
                 borderRadius: theme.borderRadius.m,
                 overflow: 'hidden',
                 backgroundColor: theme.palette.neutralLighter,
@@ -617,9 +617,12 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               <Image
                 src={imageToDisplay}
                 alt={imageAltText}
-                fill
-                sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px'
+                width={300}
+                height={0}
+                sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 300px'
                 style={{
+                  width: '100%',
+                  height: 'auto',
                   objectFit: 'contain',
                 }}
                 priority
