@@ -8,7 +8,6 @@
 import { UnifiedPageWrapper, InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
-import { IExtendedTheme } from '@/theme/theme';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FormButton } from '@/theme/components/form';
 import { Hero } from '@/theme/components/hero/Hero';

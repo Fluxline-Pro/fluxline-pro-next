@@ -71,7 +71,7 @@ export default function ServiceDetailPage() {
         'Adaptive training systems for all bodies',
         'Movement patterns and chronic pain management',
         'Emotional intelligence in physical transformation',
-        'Mindset supupport and behavioral change strategies',
+        'Mindset support and behavioral change strategies',
         'Flexible scheduling and remote coaching options',
       ],
       'resonance-core': [
