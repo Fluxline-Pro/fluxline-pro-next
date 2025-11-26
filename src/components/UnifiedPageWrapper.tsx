@@ -360,6 +360,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
           maxWidth: '900px',
           margin: '0 auto',
           padding: spacing.xl,
+          paddingTop: `calc(${headerHeight} + ${spacing.xl})`,
           color: theme.semanticColors.bodyText,
         }}
       >
