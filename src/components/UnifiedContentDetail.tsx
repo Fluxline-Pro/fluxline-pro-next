@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { UnifiedPageWrapper } from './UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
+import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { IconButton } from '@fluentui/react';
 
@@ -505,54 +506,35 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
 
       {/* Call to Action */}
       {config.cta && (
-        <div
-          style={{
-            marginTop: theme.spacing.xxl,
-            padding: theme.spacing.xl,
-            backgroundColor: theme.palette.neutralLighterAlt,
-            borderRadius: theme.effects.roundedCorner6,
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant='h3'
-            style={{
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '1.5rem',
-            }}
-          >
-            {config.cta.title}
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l,
-              fontSize: '1.125rem',
-            }}
-          >
-            {config.cta.description}
-          </Typography>
-          <div
-            style={{
-              display: 'flex',
-              gap: theme.spacing.m,
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            {config.cta.buttons.map((button, index) => (
-              <FormButton
-                key={index}
-                variant={button.variant === 'primary' ? 'primary' : 'secondary'}
-                onClick={button.onClick}
-                size='large'
+        <div style={{ marginTop: theme.spacing.xxl }}>
+          <Callout
+            variant='subtle'
+            title={config.cta.title}
+            subtitle={config.cta.description}
+            action={
+              <div
+                style={{
+                  display: 'flex',
+                  gap: theme.spacing.m,
+                  justifyContent: 'flex-start',
+                  flexWrap: 'wrap',
+                }}
               >
-                {button.label}
-              </FormButton>
-            ))}
-          </div>
+                {config.cta.buttons.map((button, index) => (
+                  <FormButton
+                    key={index}
+                    variant={
+                      button.variant === 'primary' ? 'primary' : 'secondary'
+                    }
+                    onClick={button.onClick}
+                    size='large'
+                  >
+                    {button.label}
+                  </FormButton>
+                ))}
+              </div>
+            }
+          />
         </div>
       )}
 

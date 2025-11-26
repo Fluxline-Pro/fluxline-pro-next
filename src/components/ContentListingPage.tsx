@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
+import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
-import { FormSelect } from '@/theme/components/form';
+import { FormButton, FormSelect } from '@/theme/components/form';
 import { Hero } from '@/theme/components/hero/Hero';
 
 /**
@@ -337,76 +338,54 @@ export function ContentListingPage({
 
         {/* Optional Call to Action Section */}
         {ctaSection && (
-          <div
-            style={{
-              marginTop: theme.spacing.xxl,
-              padding: theme.spacing.xl,
-              backgroundColor: theme.palette.neutralLighterAlt,
-              borderRadius: theme.effects.roundedCorner6,
-              textAlign: 'center',
-            }}
-          >
-            <Typography
-              variant='h2'
-              style={{
-                color: theme.palette.themePrimary,
-                marginBottom: theme.spacing.m,
-              }}
-            >
-              {ctaSection.title}
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                marginBottom: theme.spacing.l,
-                maxWidth: '600px',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-              }}
-            >
-              {ctaSection.description}
-            </Typography>
-            <div
-              style={{
-                display: 'flex',
-                gap: theme.spacing.m,
-                justifyContent: 'center',
-                flexWrap: 'wrap',
-              }}
-            >
-              {ctaSection.buttons.map((button, index) => (
-                <button
-                  key={index}
-                  onClick={() => router.push(button.path)}
+          <div style={{ marginTop: theme.spacing.xxl }}>
+            <Callout
+              variant='subtle'
+              title={ctaSection.title}
+              subtitle={ctaSection.description}
+              action={
+                <div
                   style={{
-                    padding: `${theme.spacing.s2} ${theme.spacing.l}`,
-                    backgroundColor:
-                      button.variant === 'primary'
-                        ? theme.palette.themePrimary
-                        : theme.palette.neutralLight,
-                    color:
-                      button.variant === 'primary'
-                        ? theme.palette.white
-                        : theme.palette.themePrimary,
-                    border: `1px solid ${theme.palette.themePrimary}`,
-                    borderRadius: theme.effects.roundedCorner4,
-                    fontSize: theme.typography.fonts.large.fontSize,
-                    fontWeight: theme.typography.fontWeights.semiBold,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.02)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
+                    display: 'flex',
+                    gap: theme.spacing.m,
+                    justifyContent: 'flex-start',
+                    flexWrap: 'wrap',
                   }}
                 >
-                  {button.label}
-                </button>
-              ))}
-            </div>
+                  {ctaSection.buttons.map((button, index) => (
+                    <FormButton
+                      key={index}
+                      variant={
+                        button.variant === 'primary' ? 'primary' : 'secondary'
+                      }
+                      onClick={() => router.push(button.path)}
+                      style={{
+                        backgroundColor:
+                          button.variant === 'primary'
+                            ? theme.palette.themePrimary
+                            : theme.palette.neutralLight,
+                        color:
+                          button.variant === 'primary'
+                            ? theme.palette.white
+                            : theme.palette.themePrimary,
+                        border: `1px solid ${theme.palette.themePrimary}`,
+                        borderRadius: theme.effects.roundedCorner4,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.02)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    >
+                      {button.label}
+                    </FormButton>
+                  ))}
+                </div>
+              }
+            />
           </div>
         )}
       </div>
