@@ -110,7 +110,7 @@ export const CompanyStatistics: React.FC<CompanyStatisticsProps> = ({
   statistics,
 }) => {
   return (
-    <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
+    <div className='grid gap-6 grid-cols-2 lg:grid-cols-4'>
       {statistics.map((stat) => (
         <StatCard key={stat.id} stat={stat} />
       ))}

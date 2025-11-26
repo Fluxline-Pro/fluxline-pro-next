@@ -5,7 +5,6 @@
  * Presents the Fluxline philosophy, mission, and service framework
  */
 
-import Link from 'next/link';
 import { UnifiedPageWrapper, InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
@@ -19,6 +18,7 @@ import {
   ethosServices,
   ethosCTA,
 } from '@/lib/ethos/ethosContent';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 const heroContent = ({ theme }: { theme: IExtendedTheme }) => {
   return (
@@ -31,6 +31,7 @@ const heroContent = ({ theme }: { theme: IExtendedTheme }) => {
           fontWeight: theme.typography.fontWeights.light,
           fontStyle: 'italic',
           marginBottom: '1.5rem',
+          lineHeight: '1.5',
         }}
       >
         {ethosHero.subtitle}
@@ -52,10 +53,11 @@ const heroContent = ({ theme }: { theme: IExtendedTheme }) => {
 
 export default function FluxlineEthosPage() {
   const { theme } = useAppTheme();
+  const isMobile = useIsMobile();
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-16'>
+      <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
         {/* Hero Section */}
         <Hero title={ethosHero.title}>{heroContent({ theme })}</Hero>
 
@@ -95,6 +97,32 @@ export default function FluxlineEthosPage() {
               {paragraph}
             </Typography>
           ))}
+          <Callout
+            variant='neutral'
+            title='Want to Know More?'
+            action={
+              <div style={{ textAlign: 'center' }}>
+                <FormButton
+                  text='Learn More About Fluxline'
+                  variant='primary'
+                  size='large'
+                  onClick={() => (window.location.href = '/about')}
+                />
+              </div>
+            }
+          >
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1.125rem',
+                lineHeight: theme.typography.lineHeights.relaxed,
+              }}
+            >
+              Discover how Fluxline can partner with you to drive innovation and
+              transform your business.
+            </Typography>
+          </Callout>
         </section>
 
         {/* Divider */}
@@ -119,7 +147,13 @@ export default function FluxlineEthosPage() {
             {ethosServices.sectionTitle}
           </Typography>
 
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+          <div
+            className={
+              isMobile
+                ? 'grid gap-6 grid-cols-1'
+                : 'grid gap-6 md:grid-cols-2 lg:grid-cols-3'
+            }
+          >
             {ethosServices.services.map((service) => (
               <InteractiveCard
                 key={service.id}

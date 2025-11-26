@@ -68,7 +68,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
       : 'transparent',
     transition: 'all 0.3s ease',
     transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-    boxShadow: isHovered ? theme.shadows.m : 'none',
+    boxShadow: isHovered ? theme.shadows.l : theme.shadows.card,
     opacity: isHovered ? 1 : 0.9,
     cursor: isInteractive ? 'pointer' : 'default',
     textDecoration: 'none',
