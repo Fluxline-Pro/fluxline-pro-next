@@ -69,9 +69,9 @@ const PAGE_CONFIGS: Record<
     image: OurServicesImage.src,
     imageText: 'Services',
   },
-  '/white-pages': {
+  '/services/scrolls': {
     image: 'FLUXLINE_LOGO',
-    imageText: '',
+    imageText: 'Strategic Insights',
   },
   '/content': {
     image: ContentImage.src,

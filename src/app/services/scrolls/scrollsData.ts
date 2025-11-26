@@ -17,31 +17,6 @@ export const categoryLabels: Record<string, string> = {
 
 export const SCROLLS_DATA: ScrollItem[] = [
   {
-    id: 'business-it-consulting',
-    title: 'Business Strategy & Systems Alignment',
-    description:
-      'Strategic consulting for founders and small teams. Learn how to design systems that scale, strategies that resonate, and operations that reflect your deepest values.',
-    category: 'business-strategy',
-    pdfUrl: '/scrolls/pdfs/Fluxline-Business-IT-Consulting.pdf',
-    fileSize: '4.8 MB',
-    tags: ['consulting', 'strategy', 'systems', 'operations'],
-    publishedDate: new Date('2025-01-15'),
-    lastUpdated: new Date('2025-01-15'),
-    seoMetadata: {
-      title:
-        'Business Strategy & Systems Alignment - Fluxline Strategic Insights',
-      description:
-        'Comprehensive guide to business strategy and systems alignment for founders and organizations seeking transformation.',
-      keywords: [
-        'business strategy',
-        'systems alignment',
-        'consulting',
-        'operations',
-        'strategic planning',
-      ],
-    },
-  },
-  {
     id: 'app-web-development',
     title: 'Web Development & Digital Architecture',
     description:
@@ -115,6 +90,30 @@ export const SCROLLS_DATA: ScrollItem[] = [
     },
   },
   {
+    id: 'resonance-core',
+    title: 'Resonance Core Framework™',
+    description:
+    'Deep transformation curriculum. Explore archetypal mapping, emotional emergence, and symbolic ritual for personal evolution.',
+    category: 'coaching',
+    pdfUrl: '/scrolls/pdfs/Fluxline-Life-Coaching-Resonance-Core.pdf',
+    fileSize: '4.8 MB',
+    tags: ['coaching', 'transformation', 'framework', 'resonance'],
+    publishedDate: new Date('2025-01-15'),
+    lastUpdated: new Date('2025-01-15'),
+    seoMetadata: {
+      title: 'Resonance Core Framework™ - Fluxline Strategic Insights',
+      description:
+      'Deep dive into the Resonance Core Framework for personal transformation through archetypal mapping and emotional emergence.',
+      keywords: [
+        'life coaching',
+        'resonance core',
+        'transformation',
+        'personal development',
+        'archetypal mapping',
+      ],
+    },
+  },
+  {
     id: 'education-mentoring',
     title: 'Coaching, Education & Leadership',
     description:
@@ -139,26 +138,27 @@ export const SCROLLS_DATA: ScrollItem[] = [
     },
   },
   {
-    id: 'resonance-core',
-    title: 'Resonance Core Framework™',
+    id: 'business-it-consulting',
+    title: 'Business Strategy & Systems Alignment',
     description:
-      'Deep transformation curriculum. Explore archetypal mapping, emotional emergence, and symbolic ritual for personal evolution.',
-    category: 'coaching',
-    pdfUrl: '/scrolls/pdfs/Fluxline-Life-Coaching-Resonance-Core.pdf',
+      'Strategic consulting for founders and small teams. Learn how to design systems that scale, strategies that resonate, and operations that reflect your deepest values.',
+    category: 'business-strategy',
+    pdfUrl: '/scrolls/pdfs/Fluxline-Business-IT-Consulting.pdf',
     fileSize: '4.8 MB',
-    tags: ['coaching', 'transformation', 'framework', 'resonance'],
+    tags: ['consulting', 'strategy', 'systems', 'operations'],
     publishedDate: new Date('2025-01-15'),
     lastUpdated: new Date('2025-01-15'),
     seoMetadata: {
-      title: 'Resonance Core Framework™ - Fluxline Strategic Insights',
+      title:
+        'Business Strategy & Systems Alignment - Fluxline Strategic Insights',
       description:
-        'Deep dive into the Resonance Core Framework for personal transformation through archetypal mapping and emotional emergence.',
+        'Comprehensive guide to business strategy and systems alignment for founders and organizations seeking transformation.',
       keywords: [
-        'life coaching',
-        'resonance core',
-        'transformation',
-        'personal development',
-        'archetypal mapping',
+        'business strategy',
+        'systems alignment',
+        'consulting',
+        'operations',
+        'strategic planning',
       ],
     },
   },
