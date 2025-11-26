@@ -79,7 +79,7 @@ const PAGE_CONFIGS: Record<
   },
   '/legal': {
     image: 'FLUXLINE_LOGO',
-    imageText: '',
+    imageText: 'Legal & Reference',
   },
   '/legal/terms': {
     image: ConsultingImage.src,
@@ -305,21 +305,22 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     enableTransform: false,
   });
 
+  // Normalize pathname by removing trailing slash for consistent lookupconst
+  const normalizedPathname =
+    pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+
   // Determine effective layout type
   const effectiveLayoutType = React.useMemo(() => {
-    if (layoutType === 'legal-document' || pathname.startsWith('/legal')) {
+    // Only use legal-document layout for legal detail pages, not the landing page
+    if (
+      layoutType === 'legal-document' ||
+      (normalizedPathname.startsWith('/legal') &&
+        normalizedPathname !== '/legal')
+    ) {
       return 'legal-document';
     }
     return 'responsive-grid';
-  }, [layoutType, pathname]);
-
-  if (!shouldUseWrapper) {
-    return <>{children}</>;
-  }
-
-  // Normalize pathname by removing trailing slash for consistent lookup
-  const normalizedPathname =
-    pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+  }, [layoutType, normalizedPathname]);
 
   // Get configuration for current page
   const currentConfig = PAGE_CONFIGS[normalizedPathname];
@@ -618,7 +619,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 fill
                 sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px'
                 style={{
-                  objectFit: 'cover',
+                  objectFit: 'contain',
                 }}
                 priority
                 placeholder='blur'

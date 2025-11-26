@@ -61,154 +61,99 @@ export default function LegalPage() {
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: spacing.xl,
-          color: theme.semanticColors.bodyText,
-        }}
-      >
+      <div className='space-y-16'>
         {/* Hero Section */}
         <Hero
           title='Legal & Reference'
-          iconName='LegalDocument'
-          description='Access important legal documents and reference materials for the Fluxline Resonance Group. These documents outline our policies, terms, and core definitions.'
+          iconName='shield'
+          description='Access important legal documents and reference materials for the Fluxline Resonance Group. These documents outline our policies, terms, and core definitions.  '
         />
 
         {/* Document Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: spacing.l,
-            marginTop: spacing.xl,
-            marginBottom: spacing.xxl,
-          }}
-        >
-          {LEGAL_DOCUMENTS.map((doc) => (
-            <Link
-              key={doc.title}
-              href={doc.href}
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: theme.palette.neutralLighterAlt,
-                  border: `1px solid ${theme.palette.neutralQuaternary}`,
-                  borderRadius: '8px',
-                  padding: spacing.l,
-                  height: '180px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  transition: 'all 0.2s ease',
-                  cursor: 'pointer',
-                }}
-                {...cardHoverEffects}
-              >
-                <div>
-                  <Typography
-                    variant='h3'
-                    style={{
-                      fontSize: '1.25rem',
-                      fontWeight: 600,
-                      color: theme.semanticColors.bodyText,
-                      marginBottom: spacing.s2,
-                    }}
-                  >
-                    {doc.title}
-                  </Typography>
-                  <Typography
-                    variant='p'
-                    style={{
-                      fontSize: '0.875rem',
-                      color: theme.palette.neutralSecondary,
-                      lineHeight: '1.5',
-                    }}
-                  >
-                    {doc.description}
-                  </Typography>
-                </div>
-
-                {/* Special indicator for PDF document */}
-                {doc.title === 'Articles Of Conversion' && (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: spacing.s1,
-                      color: theme.palette.themePrimary,
-                      fontSize: '0.875rem',
-                      fontWeight: 500,
-                    }}
-                  >
-                    <svg
-                      width='16'
-                      height='16'
-                      fill='currentColor'
-                      viewBox='0 0 24 24'
-                    >
-                      <path d='M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z' />
-                    </svg>
-                    VIEW PDF
-                  </div>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Fluxline Logo Section */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: spacing.xxxl,
-            marginBottom: spacing.xl,
-          }}
-        >
+        <section className='space-y-8'>
           <div
             style={{
-              backgroundColor: theme.palette.black,
-              padding: spacing.xl,
-              borderRadius: '12px',
-              textAlign: 'center',
-              maxWidth: '400px',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: spacing.l,
             }}
           >
-            {/* This would be where the Fluxline logo goes - you can replace with actual logo component */}
-            <Typography
-              variant='h2'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '3rem',
-                fontWeight: 700,
-                marginBottom: spacing.s1,
-                fontFamily: 'Inter, sans-serif',
-              }}
-            >
-              FLUXLINE
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: '#FFD700', // Gold color for tagline
-                fontSize: '1rem',
-                fontWeight: 500,
-                letterSpacing: '2px',
-                textTransform: 'uppercase',
-              }}
-            >
-              STRUCTURE THE SHIFT
-            </Typography>
+            {LEGAL_DOCUMENTS.map((doc) => (
+              <Link
+                key={doc.title}
+                href={doc.href}
+                style={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: theme.palette.neutralLighterAlt,
+                    border: `1px solid ${theme.palette.neutralQuaternary}`,
+                    borderRadius: '8px',
+                    padding: spacing.l,
+                    height: '180px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    transition: 'all 0.2s ease',
+                    cursor: 'pointer',
+                  }}
+                  {...cardHoverEffects}
+                >
+                  <div>
+                    <Typography
+                      variant='h3'
+                      style={{
+                        fontSize: '1.25rem',
+                        fontWeight: 600,
+                        color: theme.semanticColors.bodyText,
+                        marginBottom: spacing.s2,
+                      }}
+                    >
+                      {doc.title}
+                    </Typography>
+                    <Typography
+                      variant='p'
+                      style={{
+                        fontSize: '0.875rem',
+                        color: theme.palette.neutralSecondary,
+                        lineHeight: '1.5',
+                      }}
+                    >
+                      {doc.description}
+                    </Typography>
+                  </div>
+
+                  {/* Special indicator for PDF document */}
+                  {doc.title === 'Articles Of Conversion' && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: spacing.s1,
+                        color: theme.palette.themePrimary,
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                      }}
+                    >
+                      <svg
+                        width='16'
+                        height='16'
+                        fill='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path d='M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z' />
+                      </svg>
+                      VIEW PDF
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ))}
           </div>
-        </div>
+        </section>
       </div>
     </UnifiedPageWrapper>
   );
