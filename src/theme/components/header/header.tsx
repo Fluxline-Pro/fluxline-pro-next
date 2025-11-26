@@ -262,7 +262,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                     style={{
                       display: 'flex',
                       alignItems: 'baseline',
-                      justifyContent: 'flex-start',
+                      justifyContent: isLeftHanded ? 'flex-end' : 'flex-start',
                       gap: '0.5rem',
                       flexWrap: 'wrap',
                       margin: 0,
