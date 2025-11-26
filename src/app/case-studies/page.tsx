@@ -7,7 +7,7 @@ import { Typography } from '@/theme/components/typography';
 import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
-import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
+import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { FormSelect } from '@/theme/components/form';
 import { FormButton } from '@/theme/components/form';
 import { getCaseStudies } from './caseStudiesData';
@@ -30,6 +30,7 @@ export default function CaseStudiesPage() {
   const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
   const orientation = useDeviceOrientation();
+  const isMobile = useIsMobile();
 
   // Load case studies data
   const allCaseStudies = React.useMemo(() => getCaseStudies(), []);
@@ -177,6 +178,7 @@ export default function CaseStudiesPage() {
           style={{
             color: theme.palette.neutralSecondary,
             marginBottom: theme.spacing.l1,
+            marginTop: isMobile ? theme.spacing.m : theme.spacing.xl,
           }}
         >
           Showing {caseStudies.length}{' '}

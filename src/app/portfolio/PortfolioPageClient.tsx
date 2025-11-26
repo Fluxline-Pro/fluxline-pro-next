@@ -7,12 +7,11 @@ import { Typography } from '@/theme/components/typography';
 import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
-import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
+import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { FormSelect } from '@/theme/components/form';
 import { FormButton } from '@/theme/components/form';
 import { PortfolioProject } from './types';
 import { Hero } from '@/theme/components/hero/Hero';
-import { getIconForPath } from '@/utils/navigation-icons';
 
 interface PortfolioPageProps {
   projects: PortfolioProject[];
@@ -45,7 +44,8 @@ export default function PortfolioPageClient({
   const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
   const [selectedTechnologies, setSelectedTechnologies] = React.useState<
     string[]
-  >([]);
+    >([]);
+  const isMobile = useIsMobile();
 
   // View type options for dropdown
   const viewOptions = [
@@ -208,6 +208,7 @@ export default function PortfolioPageClient({
           style={{
             color: theme.palette.neutralSecondary,
             marginBottom: theme.spacing.l1,
+            marginTop: isMobile ? theme.spacing.m : theme.spacing.xl,
           }}
         >
           Showing {filteredProjects.length}{' '}

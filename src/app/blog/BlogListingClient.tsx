@@ -12,7 +12,7 @@ import { FormSelect } from '@/theme/components/form';
 import { format } from 'date-fns';
 import { BlogPost } from './types';
 import { Hero } from '@/theme/components/hero/Hero';
-import { getIconForPath } from '@/utils/navigation-icons';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 interface BlogListingClientProps {
   initialPosts: BlogPost[];
@@ -38,7 +38,8 @@ export function BlogListingClient({
   const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
   const [selectedCategory, setSelectedCategory] = React.useState<
     string | undefined
-  >();
+    >();
+  const isMobile = useIsMobile();
 
   // Filter blog posts based on selected filters
   const blogPosts = React.useMemo(() => {
@@ -225,6 +226,7 @@ export function BlogListingClient({
         style={{
           color: theme.palette.neutralSecondary,
           marginBottom: theme.spacing.l1,
+          marginTop: isMobile ? theme.spacing.m : theme.spacing.xl,
         }}
       >
         Showing {blogPosts.length} {blogPosts.length === 1 ? 'post' : 'posts'}
