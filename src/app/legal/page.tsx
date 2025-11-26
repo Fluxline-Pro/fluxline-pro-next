@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { UnifiedPageWrapper } from '../../components/UnifiedPageWrapper';
 import { Typography } from '../../theme/components/typography';
+import { Hero } from '@/theme/components/hero/Hero';
 import { useAppTheme } from '../../theme/hooks/useAppTheme';
 import { spacing } from '../../theme/theme';
 import { useHoverEffects } from '../../hooks/useHoverEffects';
@@ -57,10 +58,6 @@ const LEGAL_DOCUMENTS: LegalDocument[] = [
 export default function LegalPage() {
   const { theme } = useAppTheme();
   const cardHoverEffects = useHoverEffects({ type: 'card' });
-  const backLinkHoverEffects = useHoverEffects({
-    type: 'link',
-    enableTransform: false,
-  });
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -73,69 +70,12 @@ export default function LegalPage() {
           color: theme.semanticColors.bodyText,
         }}
       >
-        {/* Back Arrow */}
-        <Link
-          href='/'
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: spacing.s1,
-            padding: spacing.s1,
-            borderRadius: '8px',
-            color: theme.palette.themePrimary,
-            textDecoration: 'none',
-            fontSize: '1rem',
-            fontWeight: 500,
-            transition: 'all 0.2s ease',
-            marginBottom: spacing.l,
-          }}
-          {...backLinkHoverEffects}
-        >
-          <svg
-            width='20'
-            height='20'
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M15 19l-7-7 7-7'
-            />
-          </svg>
-          Back
-        </Link>
-
-        {/* Page Header */}
-        <div style={{ marginBottom: spacing.xxl }}>
-          <Typography
-            variant='h1'
-            style={{
-              fontSize: '2.5rem',
-              fontWeight: 600,
-              color: theme.semanticColors.bodyText,
-              marginBottom: spacing.m,
-            }}
-          >
-            LEGAL & REFERENCE
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              fontSize: '1.125rem',
-              color: theme.palette.neutralSecondary,
-              lineHeight: '1.6',
-              maxWidth: '800px',
-            }}
-          >
-            Access important legal documents and reference materials for the
-            Fluxline Resonance Group. These documents outline our policies,
-            terms, and core definitions.
-          </Typography>
-        </div>
+        {/* Hero Section */}
+        <Hero
+          title='Legal & Reference'
+          iconName='LegalDocument'
+          description='Access important legal documents and reference materials for the Fluxline Resonance Group. These documents outline our policies, terms, and core definitions.'
+        />
 
         {/* Document Grid */}
         <div
@@ -143,6 +83,7 @@ export default function LegalPage() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: spacing.l,
+            marginTop: spacing.xl,
             marginBottom: spacing.xxl,
           }}
         >

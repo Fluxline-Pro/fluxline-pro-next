@@ -1,6 +1,6 @@
+import React from 'react';
 import { Metadata } from 'next';
-import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
-import { content } from '../../../assets/legal/stewardship-contract';
+import StewardshipContractClientPage from './StewardshipContractClientPage';
 
 export const metadata: Metadata = {
   title: 'Stewardship Contract - Fluxline Professional Services',
@@ -11,15 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function StewardshipContractPage() {
-  return (
-    <UnifiedPageWrapper
-      layoutType='legal-document'
-      legalPageConfig={{
-        title: 'Stewardship Contract',
-        subtitle: 'Our Commitment to Ethical Service and Partnership',
-        content,
-        documentType: 'contract',
-      }}
-    />
-  );
+  return <StewardshipContractClientPage />;
 }
