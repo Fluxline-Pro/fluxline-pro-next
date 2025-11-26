@@ -195,7 +195,7 @@ export function ScrollDetailModal({
                 style={{
                   fontSize: '0.875rem',
                   padding: `${theme.spacing.s} ${theme.spacing.m} ${theme.spacing.s} 0`,
-                  borderRadius: theme.borderRadius.small,
+                  borderRadius: theme.borderRadius.s,
                   backgroundColor: theme.palette.themeLighterAlt,
                   color: theme.palette.neutralPrimary,
                 }}
@@ -220,7 +220,7 @@ export function ScrollDetailModal({
         <div
           style={{
             padding: theme.spacing.l,
-            borderRadius: theme.borderRadius.medium,
+            borderRadius: theme.borderRadius.m,
             border: `1px solid ${theme.palette.neutralLight}`,
             backgroundColor: isDark
               ? theme.palette.neutralLight
