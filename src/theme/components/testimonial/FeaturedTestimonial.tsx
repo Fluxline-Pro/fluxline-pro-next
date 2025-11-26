@@ -3,6 +3,7 @@
 import React from 'react';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { Testimonial } from '@/lib/testimonials/types';
 import Image from 'next/image';
 import { Icon } from '@fluentui/react/lib/Icon';
@@ -23,6 +24,10 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
   onViewFull,
 }) => {
   const { theme } = useAppTheme();
+  const orientation = useDeviceOrientation();
+
+  const isMobile =
+    orientation === 'portrait' || orientation === 'mobile-landscape';
 
   return (
     <div
@@ -30,14 +35,16 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: theme.spacing.m,
-        padding: theme.spacing.xl,
+        gap: isMobile ? theme.spacing.s2 : theme.spacing.m,
+        padding: isMobile ? theme.spacing.m : theme.spacing.xl,
         backgroundColor: theme.palette.neutralLighterAlt,
         borderRadius: '8px',
         border: `2px solid ${theme.palette.themePrimary}`,
         boxShadow: theme.effects.elevation8,
         position: 'relative',
-        minHeight: '400px',
+        minHeight: isMobile ? '350px' : '400px',
+        width: '100%',
+        height: '100%',
       }}
     >
       {/* Decorative accent */}
@@ -59,8 +66,8 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
         <Image
           src={testimonial.imageUrl}
           alt={testimonial.imageAlt}
-          width={120}
-          height={120}
+          width={isMobile ? 80 : 120}
+          height={isMobile ? 80 : 120}
           style={{
             borderRadius: '50%',
             objectFit: 'cover',
@@ -76,16 +83,16 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
             backgroundColor: theme.palette.themeSecondary,
             color: theme.palette.white,
             borderRadius: '50%',
-            width: '40px',
-            height: '40px',
+            width: isMobile ? '32px' : '40px',
+            height: isMobile ? '32px' : '40px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '20px',
+            fontSize: isMobile ? '16px' : '20px',
             fontWeight: 'bold',
             boxShadow: theme.effects.elevation4,
           }}
-          aria-label="Featured"
+          aria-label='Featured'
         >
           ★
         </div>
@@ -94,20 +101,25 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
       {/* Quote */}
       <div
         style={{
-          padding: theme.spacing.m,
+          padding: isMobile ? theme.spacing.s2 : theme.spacing.m,
           backgroundColor: theme.palette.white,
           borderLeft: `4px solid ${theme.palette.themePrimary}`,
           borderRadius: '4px',
           boxShadow: theme.effects.elevation4,
           width: '100%',
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         <Typography
-          variant="p"
+          variant='p'
           style={{
             fontStyle: 'italic',
             color: theme.palette.neutralPrimary,
-            fontSize: theme.typography.fontSizes.clamp4,
+            fontSize: isMobile
+              ? theme.typography.fontSizes.clamp3
+              : theme.typography.fontSizes.clamp4,
             lineHeight: 1.6,
             textAlign: 'center',
           }}
@@ -127,28 +139,36 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
         }}
       >
         <Typography
-          variant="h3"
+          variant='h3'
           style={{
             color: theme.palette.neutralPrimary,
             fontWeight: 700,
-            fontSize: theme.typography.fontSizes.clamp5,
+            fontSize: isMobile
+              ? theme.typography.fontSizes.clamp4
+              : theme.typography.fontSizes.clamp5,
           }}
         >
           {testimonial.name}
         </Typography>
         <Typography
-          variant="p"
+          variant='p'
           style={{
             color: theme.palette.neutralSecondary,
             fontWeight: 600,
+            fontSize: isMobile
+              ? theme.typography.fontSizes.clamp2
+              : theme.typography.fontSizes.clamp3,
           }}
         >
           {testimonial.jobTitle}
         </Typography>
         <Typography
-          variant="p"
+          variant='p'
           style={{
             color: theme.palette.neutralTertiary,
+            fontSize: isMobile
+              ? theme.typography.fontSizes.clamp2
+              : theme.typography.fontSizes.clamp3,
           }}
         >
           {testimonial.company}
@@ -166,10 +186,10 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
           {Array.from({ length: 5 }).map((_, index) => (
             <Icon
               key={index}
-              iconName="FavoriteStarFill"
+              iconName='FavoriteStarFill'
               styles={{
                 root: {
-                  fontSize: '20px',
+                  fontSize: isMobile ? '16px' : '20px',
                   color:
                     index < testimonial.rating
                       ? theme.palette.themePrimary
@@ -184,13 +204,16 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
       {/* CTA Button */}
       {onViewFull && (
         <PrimaryButton
-          text="View Full Testimonial"
+          text={isMobile ? 'View Full' : 'View Full Testimonial'}
           onClick={onViewFull}
           iconProps={{ iconName: 'ChevronRight' }}
           styles={{
             root: {
               marginTop: theme.spacing.s2,
               borderRadius: '4px',
+              fontSize: isMobile
+                ? theme.typography.fontSizes.clamp2
+                : theme.typography.fontSizes.clamp3,
             },
           }}
         />

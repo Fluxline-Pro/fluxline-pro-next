@@ -97,12 +97,12 @@ export const Hero: React.FC<HeroProps> = ({
           color: theme.palette.themePrimary,
           fontSize: 'clamp(2rem, 5vw, 3rem)',
           fontWeight: theme.typography.fontWeights.bold,
-          marginBottom: theme.spacing.m,
+          marginBottom: subtitle ? undefined : theme.spacing.m,
         }}
       >
         {title}
       </Typography>
-
+      
       {subtitle && (
         <Typography
           variant='h2'

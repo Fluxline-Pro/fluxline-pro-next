@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Icon } from '@fluentui/react/lib/Icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 
 interface TestimonialCarouselProps {
   children: React.ReactNode[];
@@ -23,6 +24,27 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const { theme } = useAppTheme();
+  const orientation = useDeviceOrientation();
+
+  // Determine card width based on orientation
+  const cardMinWidth = React.useMemo(() => {
+    switch (orientation) {
+      case 'portrait':
+      case 'mobile-landscape':
+        return '85%'; // Almost full width on mobile
+      case 'tablet-portrait':
+        return '45%'; // 2 cards on tablet portrait
+      case 'square':
+        return '40%'; // 2-3 cards on square
+      case 'landscape':
+      case 'large-portrait':
+        return '30%'; // 3 cards on landscape
+      case 'ultrawide':
+        return '25%'; // 4 cards on ultrawide
+      default:
+        return '30%';
+    }
+  }, [orientation]);
 
   // Check scroll position
   const checkScroll = useCallback(() => {
@@ -118,12 +140,21 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
           WebkitOverflowScrolling: 'touch',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
-          padding: '1rem 2rem',
+          padding:
+            orientation === 'portrait' || orientation === 'mobile-landscape'
+              ? '1rem 0.5rem'
+              : '1rem 2rem',
+          width: '100%',
         }}
       >
         {children.map((child, index) => {
           const commonStyles = {
-            minWidth: 'clamp(280px, 33.333%, 400px)',
+            minWidth: cardMinWidth,
+            maxWidth:
+              orientation === 'portrait' || orientation === 'mobile-landscape'
+                ? '100%'
+                : '450px',
+            flexShrink: 0,
             scrollSnapAlign: 'start' as const,
             transition: 'transform 0.2s ease',
           };

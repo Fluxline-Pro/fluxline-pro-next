@@ -37,7 +37,8 @@ export const Modal: React.FC<ModalProps> = ({
   showCloseButton = true,
 }) => {
   const { theme } = useAppTheme();
-  const isDark = theme.themeMode === 'dark' ||
+  const isDark =
+    theme.themeMode === 'dark' ||
     theme.themeMode === 'high-contrast' ||
     theme.themeMode === 'grayscale-dark';
 
@@ -89,9 +90,12 @@ export const Modal: React.FC<ModalProps> = ({
           maxWidth,
           maxHeight,
           width: '100%',
-          backgroundColor: isDark ? theme.palette.neutralLighter : theme.palette.neutralLighterAlt,
+          backgroundColor: isDark
+            ? theme.palette.themeDark
+            : theme.palette.neutralQuaternary,
+          border: `1px solid ${theme.palette.neutralTertiary}`,
           borderRadius: theme.borderRadius.container.medium,
-          boxShadow: theme.effects.elevation16,
+          boxShadow: theme.shadows.hero || theme.effects.elevation16,
           overflow: 'auto',
         }}
         onClick={(e) => e.stopPropagation()}

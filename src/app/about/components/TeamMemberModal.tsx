@@ -132,7 +132,6 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
             : theme.palette.neutralQuaternaryAlt,
           borderLeft: `4px solid ${theme.palette.themePrimary}`,
           borderRadius: theme.borderRadius.container.small,
-          marginBottom: theme.spacing.l,
         }}
       >
         <Typography

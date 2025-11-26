@@ -36,7 +36,7 @@ export interface UserPreferencesState {
 // Default preferences - Fluxline Pro defaults to dark mode
 const defaultPreferences: UserPreferences = {
   backgroundImage: 'one',
-  fontScale: 0.95,
+  fontScale: 0.9,
   minFontScale: 0.8,
   maxFontScale: 1.5,
   fontScaleManuallySet: false,

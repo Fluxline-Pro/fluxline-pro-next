@@ -86,9 +86,11 @@ export default function TestimonialsPage() {
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
-          padding: theme.spacing.xl,
-          maxWidth: '1400px',
-          margin: '0 auto',
+          padding:
+            orientation === 'portrait' || orientation === 'mobile-landscape'
+              ? theme.spacing.m
+              : theme.spacing.l,
+          width: '100%',
         }}
       >
         {/* Back Navigation */}
@@ -233,7 +235,10 @@ export default function TestimonialsPage() {
             style={{
               display: 'grid',
               gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-              gap: theme.spacing.l,
+              gap:
+                orientation === 'portrait' || orientation === 'mobile-landscape'
+                  ? theme.spacing.m
+                  : theme.spacing.l,
             }}
           >
             {regularTestimonials.map((testimonial, index) => (
