@@ -1,16 +1,14 @@
 import React from 'react';
-import { BlogListingClient } from './BlogListingClient';
-
+import { BlogListingClientWrapper } from './BlogListingClientWrapper';
 import { getAllBlogPosts, getAllTags, getAllCategories } from './lib/blogLoader';
 
-// Import from blogLoader directly (server-side only)
 /**
  * Blog Page - Server Component
- * Loads blog posts from file system and passes to client component
+ * Loads blog posts from file system and passes to client wrapper
  */
 export default function BlogPage() {
   return (
-    <BlogListingClient
+    <BlogListingClientWrapper
       initialPosts={getAllBlogPosts()}
       allTags={getAllTags()}
       allCategories={getAllCategories()}
