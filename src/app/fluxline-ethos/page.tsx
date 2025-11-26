@@ -20,37 +20,6 @@ import {
 } from '@/lib/ethos/ethosContent';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
-const heroContent = ({ theme }: { theme: IExtendedTheme }) => {
-  return (
-    <section className='space-y-6'>
-      <Typography
-        variant='h2'
-        style={{
-          color: theme.palette.themeSecondary,
-          fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
-          fontWeight: theme.typography.fontWeights.light,
-          fontStyle: 'italic',
-          marginBottom: '1.5rem',
-          lineHeight: '1.5',
-        }}
-      >
-        {ethosHero.subtitle}
-      </Typography>
-
-      <Typography
-        variant='p'
-        style={{
-          color: theme.palette.neutralSecondary,
-          fontSize: '1.125rem',
-          lineHeight: theme.typography.lineHeights.relaxed,
-        }}
-      >
-        {ethosHero.description}
-      </Typography>
-    </section>
-  );
-};
-
 export default function FluxlineEthosPage() {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
@@ -59,7 +28,11 @@ export default function FluxlineEthosPage() {
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
         {/* Hero Section */}
-        <Hero title={ethosHero.title}>{heroContent({ theme })}</Hero>
+        <Hero
+          title={ethosHero.title}
+          subtitle={ethosHero.subtitle}
+          description={ethosHero.description}
+        />
 
         {/* About Fluxline Section */}
         <section className='space-y-6'>

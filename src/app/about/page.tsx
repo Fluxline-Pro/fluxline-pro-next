@@ -9,7 +9,7 @@ import { UnifiedPageWrapper, InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
 import { FormButton } from '@/theme/components/form/FormButton';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { TeamMemberCard } from './components/TeamMemberCard';
@@ -25,30 +25,17 @@ import {
 export default function AboutPage() {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-16'>
         {/* Hero Section */}
-        <Hero title='About Fluxline'>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            <strong>Fluxline</strong>, also known as Fluxline Resonance Group,
-            architects transformative systems, brand experiences, and
-            human-centered technology—blending <em>emotional intelligence</em>,{' '}
-            <em>financial clarity</em>, and <em>somatic discipline</em>. We
-            specialize in <em>modular web development</em>,{' '}
-            <em>scalable design ecosystems</em>, and{' '}
-            <em>strategic innovation</em> that evolves with you.
-          </Typography>
-
-          {!isMobile && ( // shortens the hero text on mobile per design review
+        <Hero
+          title='About Fluxline'
+          description='Fluxline, also known as Fluxline Resonance Group, architects transformative systems, brand experiences, and human-centered technology—blending emotional intelligence, financial clarity, and somatic discipline. We specialize in modular web development, scalable design ecosystems, and strategic innovation that evolves with you.'
+        >
+          {!isMobile && !isTablet && ( // shortens the hero text on mobile per design review
             <>
               <Typography
                 variant='p'

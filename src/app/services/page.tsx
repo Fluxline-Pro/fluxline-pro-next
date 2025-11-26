@@ -10,6 +10,7 @@ import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { Hero } from '@/theme/components/hero/Hero';
 import {
   SERVICE_CATEGORIES,
   SERVICES_SUMMARY,
@@ -23,43 +24,11 @@ export default function ServicesPage() {
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-12'>
         {/* Page Header */}
-        <div className='space-y-4'>
-          <Typography
-            variant='h1'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              fontWeight: theme.typography.fontWeights.bold,
-              marginBottom: '0.5rem',
-            }}
-          >
-            Our Services
-          </Typography>
-
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themeSecondary,
-              fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
-              fontWeight: theme.typography.fontWeights.light,
-              fontStyle: 'italic',
-              marginBottom: '1.5rem',
-            }}
-          >
-            {FLUXLINE_SECONDARY_TAGLINE}
-          </Typography>
-
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            {SERVICES_SUMMARY}
-          </Typography>
-        </div>
+        <Hero
+          title='Our Services'
+          subtitle={FLUXLINE_SECONDARY_TAGLINE}
+          description={SERVICES_SUMMARY}
+        />
 
         {/* Divider */}
         <hr

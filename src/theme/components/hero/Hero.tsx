@@ -11,11 +11,16 @@ export interface HeroProps {
    */
   title: string;
   /**
-   * Subtitle to render within the hero section
+   * Subtitle text (styled as italic secondary color)
    */
-  subTitle?: string;
+  subtitle?: string;
+  /**
+   * Description text (styled as body text with relaxed line height)
+   */
+  description?: string;
   /**
    * Hero content - can be text, JSX, or array of content blocks
+   * Use this for custom content beyond subtitle/description
    */
   children?: React.ReactNode;
   /**
@@ -46,13 +51,17 @@ export interface HeroProps {
  *
  * @example
  * ```tsx
- * <Hero title="About Fluxline">
- *   <Typography variant="p">Your content here...</Typography>
- * </Hero>
+ * <Hero
+ *   title="About Fluxline"
+ *   subtitle="Your tagline here"
+ *   description="Your description text here"
+ * />
  * ```
  */
 export const Hero: React.FC<HeroProps> = ({
   title,
+  subtitle,
+  description,
   children,
   className = '',
   style,
@@ -93,6 +102,34 @@ export const Hero: React.FC<HeroProps> = ({
       >
         {title}
       </Typography>
+
+      {subtitle && (
+        <Typography
+          variant='h2'
+          style={{
+            color: theme.palette.themeSecondary,
+            fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
+            fontWeight: theme.typography.fontWeights.light,
+            fontStyle: 'italic',
+            marginBottom: '1.5rem',
+          }}
+        >
+          {subtitle}
+        </Typography>
+      )}
+
+      {description && (
+        <Typography
+          variant='p'
+          style={{
+            color: theme.palette.neutralSecondary,
+            fontSize: '1.125rem',
+            lineHeight: theme.typography.lineHeights.relaxed,
+          }}
+        >
+          {description}
+        </Typography>
+      )}
 
       {children && <div className='space-y-4'>{children}</div>}
     </div>
