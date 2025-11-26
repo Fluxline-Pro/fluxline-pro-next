@@ -58,12 +58,17 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 
 - **Favor reusing existing components and Next.js patterns**:
   - Use Next.js built-in components: `Image`, `Link`, `Font`
+  - Use `ContentListingPage` for all content listing views (Blog, Portfolio, Press Release, Case Studies)
   - Use `PageWrapper` component for consistent page layouts
   - Create reusable layout components in `src/theme/components/layout/`
   - Implement consistent page layouts using `layout.tsx` files
   - Use Server Components for static content, Client Components for interactivity
 - **Follow Next.js App Router conventions**
 - Use component generators when available: `yarn generate:component ComponentName`
+- **Content Listing Pattern**:
+  - Server Component loads data from file system or data source
+  - Client Wrapper manages filters and transforms data to `ContentCard[]`
+  - `ContentListingPage` renders unified UI with responsive grids and filtering
 - **Component Development Workflow**:
   1. Generate: `yarn generate:component ComponentName`
   2. Generate SCSS types: `yarn scss-types` or `yarn scss-types:watch`
@@ -135,12 +140,59 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   - Pass data from Server Components to Client Components via props
   - Never use `'use client'` in components that read from file system
 
-### Blog System Management
+### Content Listing System (Unified)
+
+**Location**: `src/components/ContentListingPage.tsx`
+
+The application uses a unified content listing system that consolidates all listing pages (Blog, Portfolio, Press Release, Case Studies) into a single, reusable component. This reduces code duplication by ~85% while maintaining flexibility for each content type.
+
+**Core Architecture**:
+
+- **ContentListingPage Component**: Unified listing component with responsive grids, filtering, and view types
+- **Wrapper Pattern**: Each content type has a thin wrapper that manages state and transforms data
+- **Server/Client Split**: Server Components load data (SSG), Client Components handle interactivity
+- **Filter System**: Flexible configuration supporting single-select and multi-select filters
+- **Hero Integration**: Filter controls embedded in Hero component for better visual hierarchy
+
+**Key Features**:
+
+- Three view types: Grid View, Small Tile, Large Tile
+- Responsive column layouts (1-4 columns based on device orientation)
+- Integrated filtering system with single and multi-select support
+- Optional CTA sections per page
+- Theme-aware styling with Fluent UI
+- Orientation-aware column calculations
+- Empty states and results messaging
+
+**Component Interface**:
+
+```typescript
+interface ContentCard {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  imageAlt: string;
+  imageText: string;
+}
+
+interface FilterConfig {
+  type: 'single' | 'multi';
+  label: string;
+  placeholder?: string;
+  options: Array<{ key: string; text: string }>;
+  value?: string | undefined;
+  selectedKeys?: string[];
+  onChange: (value: any) => void;
+}
+```
+
+### Blog System
 
 - **Location**: `/src/app/blog/`
 - **Content Storage**: Markdown files in `/public/blog/posts/[slug]/markdown/post.md`
 - **Image Storage**: Images in `/public/blog/posts/[slug]/images/`
-- **Architecture**: Server Components for data loading, Client Components for interactivity
+- **Architecture**: Server Components for data loading, Client Wrapper for interactivity
 
 **Adding New Blog Posts**:
 
@@ -150,29 +202,15 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
 4. Run `yarn build` to generate static pages
 5. New post automatically appears in listing, gets detail page, and is added to tag/category filters
 
-**Blog Architecture Patterns**:
-
-- **Server Components**: Load data from file system using `blogLoader.ts`
-- **Client Components**: Handle filtering, view switching, and navigation
-- All blog content loaded from Markdown files (no mock data)
-- Static generation for all pages via `generateStaticParams`
-- Full SSG support - works in both `yarn dev` and `yarn build`
-
 **Component Structure**:
 
 - `page.tsx`: Server Component that loads posts from file system
-- `BlogListingClient.tsx`: Client Component for user interactions
+- `BlogListingClientWrapper.tsx`: Client Wrapper that transforms data and manages filters
+- Uses unified `ContentListingPage` component for rendering
 - `lib/blogLoader.ts`: Server-only file system loader
 - `[slug]/page.tsx`: Server Component for detail pages
-- `BlogPostDetailClient.tsx`: Client Component for markdown rendering
 
-**SEO Best Practices**:
-
-- Each post has frontmatter with SEO metadata
-- Automatic OpenGraph and Twitter Card generation
-- Dynamic metadata in detail pages
-- Proper heading hierarchy and semantic HTML
-- Image alt text for accessibility
+**Filters**: Category (single-select), Tag (single-select)
 
 For complete documentation, see `FILE_BASED_BLOG_GUIDE.md`
 
@@ -185,27 +223,7 @@ For complete documentation, see `FILE_BASED_BLOG_GUIDE.md`
 **Adding New Scrolls**:
 
 1. Place PDF file in `/public/scrolls/pdfs/`
-2. Update `scrollsData.ts` with scroll metadata:
-
-   ```typescript
-   {
-     id: 'unique-scroll-id',
-     title: 'Scroll Title',
-     description: 'Brief description for card display',
-     category: 'business-strategy' | 'development' | 'design' | 'wellness' | 'education' | 'coaching',
-     pdfUrl: '/scrolls/pdfs/filename.pdf',
-     fileSize: 'X.X MB',
-     tags: ['tag1', 'tag2'],
-     publishedDate: new Date('YYYY-MM-DD'),
-     lastUpdated: new Date('YYYY-MM-DD'),
-     seoMetadata: {
-       title: 'SEO Title',
-       description: 'SEO Description',
-       keywords: ['keyword1', 'keyword2']
-     }
-   }
-   ```
-
+2. Update `scrollsData.ts` with scroll metadata
 3. Run `yarn build` to regenerate static pages
 4. New scroll will be automatically added to grid and detail route
 
@@ -217,18 +235,7 @@ For complete documentation, see `FILE_BASED_BLOG_GUIDE.md`
 - Client Components used only for interactive download buttons
 - Static generation for all scroll detail pages via `generateStaticParams`
 
-**SEO Best Practices**:
-
-- Each scroll has unique metadata with OpenGraph and Twitter Card support
-- Dynamic metadata generation in detail pages
-- Proper breadcrumbs for navigation context
-- Structured data for enhanced search results
-
-### Press Release System
-
-- **Location**: `/src/app/press-release/`
-- **Components**: Complete responsive card system with AdaptiveCardGrid
-- **Data**: Mock data stored in `/src/store/mock-data/pressReleaseMock.ts`
+For complete content listing documentation, see `CONTENT_LISTING_CONSOLIDATION.md`
 
 **System Architecture**:
 
@@ -261,8 +268,9 @@ For complete documentation, see `FILE_BASED_BLOG_GUIDE.md`
 - `UnifiedCardContainer`: Responsive container with CSS Grid/Flexbox
 - `UnifiedCard`: Multi-view card component (grid, small, large, image modes)
 - All use Fluent UI theming and Next.js Image optimization
+- **Note**: Press Release now uses unified `ContentListingPage` component system
 
-For complete technical documentation, see `PRESS_RELEASE_README.md`
+For legacy documentation, see `PRESS_RELEASE_README.md`. For current implementation, see `CONTENT_LISTING_CONSOLIDATION.md`
 
 ---
 
@@ -294,6 +302,9 @@ For complete technical documentation, see `PRESS_RELEASE_README.md`
 - Prefer composition over inheritance
 - Keep components focused and single-responsibility
 - Use Server Components for static content, Client Components for interactivity
+- **Reuse unified components**: Leverage `ContentListingPage` for all listing views
+- **Wrapper pattern**: Create thin client wrappers for page-specific logic and state management
+- **Data transformation**: Transform domain data to common interfaces (`ContentCard`, `FilterConfig`)
 
 ### Styling Approach
 
@@ -658,4 +669,4 @@ PageWrapper includes pre-configured routes for:
 
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-11-19 - Author updated content for PageWrapper and Markdown formatting errors -Aplusandminus
+### Last Updated: 2025-11-26 - Unified content listing system implementation completed. All listing pages (Blog, Portfolio, Press Release, Case Studies) now use ContentListingPage component with Hero-integrated filters. -Aplusandminus

@@ -2,7 +2,10 @@
 
 import React from 'react';
 import { format } from 'date-fns';
-import { ContentListingPage, FilterConfig } from '@/components/ContentListingPage';
+import {
+  ContentListingPage,
+  FilterConfig,
+} from '@/components/ContentListingPage';
 import { getIconForPath } from '@/utils/navigation-icons';
 import { BlogPost } from './types';
 

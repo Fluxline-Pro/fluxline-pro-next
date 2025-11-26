@@ -1,7 +1,10 @@
 'use client';
 
 import React from 'react';
-import { ContentListingPage, FilterConfig } from '@/components/ContentListingPage';
+import {
+  ContentListingPage,
+  FilterConfig,
+} from '@/components/ContentListingPage';
 import { getIconForPath } from '@/utils/navigation-icons';
 import { PortfolioProject } from './types';
 

@@ -1,14 +1,17 @@
 'use client';
 
 import React from 'react';
-import { ContentListingPage, FilterConfig } from '@/components/ContentListingPage';
+import {
+  ContentListingPage,
+  FilterConfig,
+} from '@/components/ContentListingPage';
 import { getIconForPath } from '@/utils/navigation-icons';
 import { getCaseStudies } from './caseStudiesData';
 
 /**
  * Case Studies Page Component
  * Uses the unified ContentListingPage component
- * 
+ *
  * Note: Currently uses in-file data. This will be migrated to use
  * file-based content loading (MDX) similar to Blog and Portfolio
  */

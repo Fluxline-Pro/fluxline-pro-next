@@ -2,14 +2,17 @@
 
 import React from 'react';
 import { format } from 'date-fns';
-import { ContentListingPage, FilterConfig } from '@/components/ContentListingPage';
+import {
+  ContentListingPage,
+  FilterConfig,
+} from '@/components/ContentListingPage';
 import { getIconForPath } from '@/utils/navigation-icons';
 import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
 
 /**
  * Press Release Page Component
  * Uses the unified ContentListingPage component
- * 
+ *
  * Note: Currently uses mock data. This will be migrated to use
  * file-based content loading (MDX) similar to Blog and Portfolio
  */

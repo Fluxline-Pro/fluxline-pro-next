@@ -1,6 +1,10 @@
 import React from 'react';
 import { BlogListingClientWrapper } from './BlogListingClientWrapper';
-import { getAllBlogPosts, getAllTags, getAllCategories } from './lib/blogLoader';
+import {
+  getAllBlogPosts,
+  getAllTags,
+  getAllCategories,
+} from './lib/blogLoader';
 
 /**
  * Blog Page - Server Component
