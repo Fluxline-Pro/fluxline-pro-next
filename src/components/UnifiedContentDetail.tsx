@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import { UnifiedPageWrapper } from './UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
+import { FormButton } from '@/theme/components/form';
+import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { IconButton } from '@fluentui/react';
 
@@ -364,37 +366,15 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
               }}
             >
               {config.badges.map((badge, index) => (
-                <button
+                <FormButton
                   key={index}
+                  variant={badge.variant === 'primary' ? 'primary' : 'tertiary'}
                   onClick={badge.onClick}
                   disabled={!badge.onClick}
-                  style={{
-                    padding: `${theme.spacing.s1} ${theme.spacing.m}`,
-                    backgroundColor:
-                      badge.variant === 'primary'
-                        ? theme.palette.themeLighter
-                        : badge.variant === 'secondary'
-                          ? theme.palette.neutralLighter
-                          : theme.palette.neutralLight,
-                    color:
-                      badge.variant === 'primary'
-                        ? theme.palette.themePrimary
-                        : theme.palette.neutralPrimary,
-                    border:
-                      badge.variant === 'primary'
-                        ? `1px solid ${theme.palette.themePrimary}`
-                        : 'none',
-                    borderRadius: theme.effects.roundedCorner2,
-                    cursor: badge.onClick ? 'pointer' : 'default',
-                    fontSize:
-                      badge.variant === 'primary'
-                        ? theme.fonts.medium.fontSize
-                        : theme.fonts.small.fontSize,
-                    fontWeight: badge.variant === 'primary' ? 600 : 400,
-                  }}
+                  size='small'
                 >
                   {badge.label}
-                </button>
+                </FormButton>
               ))}
             </div>
           )}
@@ -526,89 +506,35 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
 
       {/* Call to Action */}
       {config.cta && (
-        <div
-          style={{
-            marginTop: theme.spacing.xxl,
-            padding: theme.spacing.xl,
-            backgroundColor: theme.palette.neutralLighterAlt,
-            borderRadius: theme.effects.roundedCorner6,
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant='h3'
-            style={{
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '1.5rem',
-            }}
-          >
-            {config.cta.title}
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l,
-              fontSize: '1.125rem',
-            }}
-          >
-            {config.cta.description}
-          </Typography>
-          <div
-            style={{
-              display: 'flex',
-              gap: theme.spacing.m,
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            {config.cta.buttons.map((button, index) => (
-              <button
-                key={index}
-                onClick={button.onClick}
+        <div style={{ marginTop: theme.spacing.xxl }}>
+          <Callout
+            variant='subtle'
+            title={config.cta.title}
+            subtitle={config.cta.description}
+            action={
+              <div
                 style={{
-                  padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                  backgroundColor:
-                    button.variant === 'primary'
-                      ? theme.palette.themePrimary
-                      : 'transparent',
-                  color:
-                    button.variant === 'primary'
-                      ? theme.palette.white
-                      : theme.palette.themePrimary,
-                  border:
-                    button.variant === 'primary'
-                      ? 'none'
-                      : `2px solid ${theme.palette.themePrimary}`,
-                  borderRadius: theme.effects.roundedCorner4,
-                  fontSize: theme.fonts.mediumPlus.fontSize,
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  if (button.variant === 'primary') {
-                    e.currentTarget.style.backgroundColor =
-                      theme.palette.themeDark;
-                  } else {
-                    e.currentTarget.style.backgroundColor =
-                      theme.palette.themeLighterAlt;
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (button.variant === 'primary') {
-                    e.currentTarget.style.backgroundColor =
-                      theme.palette.themePrimary;
-                  } else {
-                    e.currentTarget.style.backgroundColor = 'transparent';
-                  }
+                  display: 'flex',
+                  gap: theme.spacing.m,
+                  justifyContent: 'flex-start',
+                  flexWrap: 'wrap',
                 }}
               >
-                {button.label}
-              </button>
-            ))}
-          </div>
+                {config.cta.buttons.map((button, index) => (
+                  <FormButton
+                    key={index}
+                    variant={
+                      button.variant === 'primary' ? 'primary' : 'secondary'
+                    }
+                    onClick={button.onClick}
+                    size='large'
+                  >
+                    {button.label}
+                  </FormButton>
+                ))}
+              </div>
+            }
+          />
         </div>
       )}
 
@@ -620,21 +546,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           borderTop: `1px solid ${theme.palette.neutralLight}`,
         }}
       >
-        <button
-          onClick={handleBack}
-          style={{
-            padding: `${theme.spacing.m} ${theme.spacing.l1}`,
-            backgroundColor: theme.palette.themeSecondary,
-            color: theme.palette.white,
-            border: 'none',
-            borderRadius: theme.effects.roundedCorner2,
-            cursor: 'pointer',
-            fontSize: theme.fonts.medium.fontSize,
-            fontWeight: 600,
-          }}
-        >
+        <FormButton variant='secondary' onClick={handleBack} size='large'>
           ← {config.backLink.label}
-        </button>
+        </FormButton>
       </div>
     </UnifiedPageWrapper>
   );

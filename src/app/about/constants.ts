@@ -6,22 +6,23 @@
 import type { TeamMember } from './components/TeamMemberCard';
 import type { Statistic } from './components/CompanyStatistics';
 import type { TimelineEvent } from './components/CompanyTimeline';
-import type { CompanyValue } from './components/ValueCard';
+import type { CompanyValue } from './components/CompanyValues';
 
 /**
  * Team Members
  */
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: 'andrew-smith',
-    name: 'Andrew Smith',
-    role: 'Founder & Chief Architect',
+    id: 'terence-waters',
+    name: 'Terence Waters',
+    role: 'CEO, Founder & Chief Architect',
     bio: 'Visionary technologist and systems thinker, architecting transformative digital experiences and coaching frameworks.',
+    photo: '/images/home/HomePageCover4kPortrait.jpeg',
     socialLinks: {
-      linkedin: 'https://linkedin.com',
-      twitter: 'https://twitter.com',
-      github: 'https://github.com',
-      email: 'andrew@fluxline.pro',
+      linkedin: 'https://linkedin.com/in/terencewaters',
+      instagram: 'https://instagram.com/aplusinflux',
+      github: 'https://github.com/aplusandminus',
+      email: 'mailto:terence@fluxline.pro',
     },
   },
   // Add more team members as needed
@@ -41,7 +42,7 @@ export const COMPANY_STATISTICS: Statistic[] = [
   {
     id: 'years',
     label: 'Years Experience',
-    value: '10+',
+    value: '20+',
     icon: 'DateTime',
     description: 'In digital innovation',
   },

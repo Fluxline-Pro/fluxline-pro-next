@@ -7,9 +7,11 @@ import { Typography } from '@/theme/components/typography';
 import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
-import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown, IDropdownOption } from '@fluentui/react';
+import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { FormSelect } from '@/theme/components/form';
+import { FormButton } from '@/theme/components/form';
 import { PortfolioProject } from './types';
+import { Hero } from '@/theme/components/hero/Hero';
 
 interface PortfolioPageProps {
   projects: PortfolioProject[];
@@ -42,7 +44,8 @@ export default function PortfolioPageClient({
   const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
   const [selectedTechnologies, setSelectedTechnologies] = React.useState<
     string[]
-  >([]);
+    >([]);
+  const isMobile = useIsMobile();
 
   // View type options for dropdown
   const viewOptions = [
@@ -129,30 +132,14 @@ export default function PortfolioPageClient({
   );
 
   // Handle tag selection
-  const handleTagChange = React.useCallback(
-    (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
-      if (option) {
-        const tags = option.selected
-          ? [...selectedTags, String(option.key)]
-          : selectedTags.filter((t) => t !== option.key);
-        setSelectedTags(tags);
-      }
-    },
-    [selectedTags]
-  );
+  const handleTagChange = React.useCallback((selectedKeys: string[]) => {
+    setSelectedTags(selectedKeys);
+  }, []);
 
   // Handle technology selection
-  const handleTechnologyChange = React.useCallback(
-    (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
-      if (option) {
-        const techs = option.selected
-          ? [...selectedTechnologies, String(option.key)]
-          : selectedTechnologies.filter((t) => t !== option.key);
-        setSelectedTechnologies(techs);
-      }
-    },
-    [selectedTechnologies]
-  );
+  const handleTechnologyChange = React.useCallback((selectedKeys: string[]) => {
+    setSelectedTechnologies(selectedKeys);
+  }, []);
 
   const hasActiveFilters =
     selectedTags.length > 0 || selectedTechnologies.length > 0;
@@ -167,98 +154,53 @@ export default function PortfolioPageClient({
         }}
       >
         {/* Page Header */}
-        <div style={{ marginBottom: theme.spacing.l2 }}>
-          <Typography
-            variant='h1'
-            style={{
-              fontWeight: 700,
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '2.5rem',
-            }}
-          >
-            Portfolio
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l1,
-              fontSize: '1.1rem',
-            }}
-          >
-            Explore our portfolio of innovative projects spanning web
-            applications, mobile apps, enterprise software, and more. Each
-            project demonstrates our commitment to excellence and innovation.
-          </Typography>
-        </div>
+        <Hero
+          title='Portfolio'
+          iconName='FolderQuery'
+          description='Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more. Each project demonstrates our commitment to excellence and innovation.'
+          filters={
+            <>
+              {/* Tag Filter */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='Tags'
+                  placeholder='All Tags'
+                  multiSelect
+                  options={allTags.map((tag) => ({ key: tag, text: tag }))}
+                  selectedKeys={selectedTags}
+                  onMultiChange={handleTagChange}
+                />
+              </div>
 
-        {/* Filters and View Selector */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: theme.spacing.m,
-            marginBottom: theme.spacing.l1,
-            alignItems: 'flex-end',
-          }}
-        >
-          {/* Tag Filter */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
-              label='Tags'
-              placeholder='All Tags'
-              multiSelect
-              options={allTags.map((tag) => ({ key: tag, text: tag }))}
-              selectedKeys={selectedTags}
-              onChange={handleTagChange}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
-              }}
-            />
-          </div>
+              {/* Technology Filter */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='Technologies'
+                  placeholder='All Technologies'
+                  multiSelect
+                  options={allTechnologies.map((tech) => ({
+                    key: tech,
+                    text: tech,
+                  }))}
+                  selectedKeys={selectedTechnologies}
+                  onMultiChange={handleTechnologyChange}
+                />
+              </div>
 
-          {/* Technology Filter */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
-              label='Technologies'
-              placeholder='All Technologies'
-              multiSelect
-              options={allTechnologies.map((tech) => ({
-                key: tech,
-                text: tech,
-              }))}
-              selectedKeys={selectedTechnologies}
-              onChange={handleTechnologyChange}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
-              }}
-            />
-          </div>
-
-          {/* View Type Selector */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
-              label='View Type'
-              options={viewOptions}
-              selectedKey={viewType}
-              onChange={(_, option) => {
-                if (option?.key) {
-                  setViewType(
-                    option.key as 'grid' | 'small-tile' | 'large-tile'
-                  );
-                }
-              }}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
-              }}
-            />
-          </div>
-        </div>
+              {/* View Type Selector */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='View Type'
+                  options={viewOptions}
+                  value={viewType}
+                  onChange={(value) => {
+                    setViewType(value as 'grid' | 'small-tile' | 'large-tile');
+                  }}
+                />
+              </div>
+            </>
+          }
+        />
 
         {/* Results Count */}
         <Typography
@@ -266,6 +208,7 @@ export default function PortfolioPageClient({
           style={{
             color: theme.palette.neutralSecondary,
             marginBottom: theme.spacing.l1,
+            marginTop: isMobile ? theme.spacing.m : theme.spacing.xl,
           }}
         >
           Showing {filteredProjects.length}{' '}
@@ -358,52 +301,20 @@ export default function PortfolioPageClient({
               flexWrap: 'wrap',
             }}
           >
-            <button
+            <FormButton
+              variant='primary'
               onClick={() => router.push('/contact')}
-              style={{
-                padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                backgroundColor: theme.palette.themePrimary,
-                color: theme.palette.white,
-                border: 'none',
-                borderRadius: theme.effects.roundedCorner4,
-                fontSize: theme.fonts.mediumPlus.fontSize,
-                fontWeight: theme.typography.fontWeights.semiBold,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.themeDark;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themePrimary;
-              }}
+              size='large'
             >
               Get in Touch
-            </button>
-            <button
+            </FormButton>
+            <FormButton
+              variant='secondary'
               onClick={() => router.push('/services')}
-              style={{
-                padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                backgroundColor: 'transparent',
-                color: theme.palette.themePrimary,
-                border: `2px solid ${theme.palette.themePrimary}`,
-                borderRadius: theme.effects.roundedCorner4,
-                fontSize: theme.fonts.mediumPlus.fontSize,
-                fontWeight: theme.typography.fontWeights.semiBold,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themeLighterAlt;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
+              size='large'
             >
               View Our Services
-            </button>
+            </FormButton>
           </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ export interface EthosServiceItem {
   id: string;
   title: string;
   description: string;
+  icon: string;
   link: string;
 }
 
@@ -35,7 +36,8 @@ export interface EthosCTAContent {
 
 // Hero Section Content
 export const ethosHero: EthosHeroContent = {
-  title: 'Fluxline Ethos: Architecting Legacy Through Ritual, Resonance & Iteration',
+  title:
+    'Fluxline Ethos: Architecting Legacy Through Ritual, Resonance & Iteration',
   subtitle: 'A Multidimensional Transformation Framework',
   description:
     'At Fluxline, we architect systems that breathe, brands that feel, and legacies that last. Through curriculum gates of identity, mission, and resonance, we guide individuals and organizations in building sovereign, self-authored pathways to transformation.',
@@ -60,6 +62,7 @@ export const ethosServices: EthosServicesContent = {
       title: 'Resonance Core Coaching',
       description:
         'Deep transformation through archetypal mapping, emotional emergence, and symbolic ritual. A curriculum of becoming for those ready to reclaim their light.',
+      icon: 'HeartFill',
       link: '/services/resonance-core',
     },
     {
@@ -67,6 +70,7 @@ export const ethosServices: EthosServicesContent = {
       title: 'Personal Training & Wellness',
       description:
         'Physical training with emotional intelligence. Movement as sovereignty, designed for all bodies, all thresholds, all breakthroughs.',
+      icon: 'Health',
       link: '/services/personal-training',
     },
     {
@@ -74,6 +78,7 @@ export const ethosServices: EthosServicesContent = {
       title: 'Brand Identity & Experience Design',
       description:
         'Visual identities and digital experiences crafted with emotional intelligence, modular precision, and mythic depth. Where strategy meets symbolism.',
+      icon: 'Design',
       link: '/services/design',
     },
     {
@@ -81,6 +86,7 @@ export const ethosServices: EthosServicesContent = {
       title: 'Web & Application Development',
       description:
         'We architect digital temples—every line of code designed to serve your mission with modular clarity and emotional intelligence. Living systems, built to evolve.',
+      icon: 'Code',
       link: '/services/development',
     },
     {
@@ -88,6 +94,7 @@ export const ethosServices: EthosServicesContent = {
       title: 'Education, Leadership & Consulting',
       description:
         'Experiential learning, emotional intelligence, and strategic embodiment. Coaching for those ready to lead with clarity, courage, and creative truth.',
+      icon: 'Education',
       link: '/services/education',
     },
     {
@@ -95,6 +102,7 @@ export const ethosServices: EthosServicesContent = {
       title: 'Business Strategy & Systems Alignment',
       description:
         'Where clarity meets infrastructure. Strategic consulting that guides you through designing systems that scale, strategies that resonate, and operations that reflect your deepest values.',
+      icon: 'Lightbulb',
       link: '/services/consulting',
     },
   ],
@@ -104,7 +112,7 @@ export const ethosServices: EthosServicesContent = {
 export const ethosCTA: EthosCTAContent = {
   title: 'Your Vision is Calling',
   description:
-    "Let's architect it into form. Every service is a curriculum gate—crafted to align your identity, systems, and mission with intentionality and resonance.",
+    'Each service is a curriculum gate, aligning identity, systems, and mission with intentional resonance. \n\nAre you ready to architect your legacy? Let’s begin the journey together.',
   buttonText: 'Start the Conversation',
   buttonLink: '/contact',
 };

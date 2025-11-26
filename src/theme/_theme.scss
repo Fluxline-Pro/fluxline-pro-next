@@ -83,14 +83,56 @@
   --theme-spacing-xxxxl: 4rem;
 
   // Typography Sizes (automatically scaled by FontScaleProvider via rem units)
-  --theme-fonts-tiny-fontSize: clamp(0.25rem, 0.5cqi, 0.25rem);
-  --theme-fonts-xSmall-fontSize: clamp(0.5rem, 1cqi, 0.5rem);
-  --theme-fonts-small-fontSize: clamp(0.75rem, 1.5cqi, 0.75rem);
-  --theme-fonts-medium-fontSize: 1rem;
-  --theme-fonts-mediumPlus-fontSize: clamp(1.25rem, 2.5cqi, 1.25rem);
-  --theme-fonts-large-fontSize: clamp(1.5rem, 3cqi, 1.5rem);
-  --theme-fonts-xLarge-fontSize: clamp(2rem, 4cqi, 2rem);
-  --theme-fonts-xxLarge-fontSize: clamp(3rem, 6cqi, 3rem);
+  // Mobile-first responsive sizing using container query units (cqi)
+  --theme-fonts-tiny-fontSize: clamp(
+    0.625rem,
+    0.75cqi,
+    0.75rem
+  ); // 10px -> 12px
+  --theme-fonts-xSmall-fontSize: clamp(0.75rem, 1cqi, 0.875rem); // 12px -> 14px
+  --theme-fonts-small-fontSize: clamp(0.875rem, 1.25cqi, 1rem); // 14px -> 16px
+  --theme-fonts-medium-fontSize: 1rem; // 16px base
+  --theme-fonts-mediumPlus-fontSize: clamp(
+    1.125rem,
+    2cqi,
+    1.375rem
+  ); // 18px -> 22px
+  --theme-fonts-large-fontSize: clamp(1.25rem, 2.5cqi, 1.75rem); // 20px -> 28px
+  --theme-fonts-xLarge-fontSize: clamp(1.5rem, 3.5cqi, 2.25rem); // 24px -> 36px
+  --theme-fonts-xxLarge-fontSize: clamp(2rem, 5cqi, 3.5rem); // 32px -> 56px
+
+  // Heading Sizes
+  --theme-fonts-h1-fontSize: clamp(2.5rem, 8cqi, 6rem); // 40px -> 96px
+  --theme-fonts-h2-fontSize: clamp(2rem, 5cqi, 3.5rem); // 32px -> 56px
+  --theme-fonts-h3-fontSize: clamp(1.5rem, 3.5cqi, 2.25rem); // 24px -> 36px
+  --theme-fonts-h4-fontSize: clamp(1.25rem, 2.5cqi, 1.75rem); // 20px -> 28px
+  --theme-fonts-h5-fontSize: clamp(1.125rem, 2cqi, 1.5rem); // 18px -> 24px
+  --theme-fonts-h6-fontSize: clamp(1rem, 1.5cqi, 1.25rem); // 16px -> 20px
+
+  // Body Text Sizes
+  --theme-fonts-body-fontSize: clamp(1rem, 1.5cqi, 1.125rem); // 16px -> 18px
+  --theme-fonts-bodySmall-fontSize: clamp(
+    0.875rem,
+    1.25cqi,
+    1rem
+  ); // 14px -> 16px
+  --theme-fonts-caption-fontSize: clamp(
+    0.75rem,
+    1cqi,
+    0.875rem
+  ); // 12px -> 14px
+
+  // Letter Spacing
+  --theme-fonts-letterSpacing-tight: 0.01em;
+  --theme-fonts-letterSpacing-normal: 0.02em;
+  --theme-fonts-letterSpacing-wide: 0.05em;
+
+  // Line Heights
+  --theme-fonts-lineHeight-tight: 1.1;
+  --theme-fonts-lineHeight-snug: 1.2;
+  --theme-fonts-lineHeight-normal: 1.4;
+  --theme-fonts-lineHeight-relaxed: 1.6;
+  --theme-fonts-lineHeight-loose: 1.7;
 
   // Border Radius
   --theme-borderRadius-s: 0.25rem;

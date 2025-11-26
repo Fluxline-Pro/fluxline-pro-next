@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
-import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
-import { content } from '../../../assets/legal/terms-of-use';
+import TermsClientPage from './TermsClientPage';
 
 export const metadata: Metadata = {
   title: 'Terms of Use - Fluxline Professional Services',
@@ -11,15 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function TermsOfUsePage() {
-  return (
-    <UnifiedPageWrapper
-      layoutType='legal-document'
-      legalPageConfig={{
-        title: 'Terms of Use',
-        subtitle: 'Service Terms and User Agreements',
-        content,
-        documentType: 'terms',
-      }}
-    />
-  );
+  return <TermsClientPage />;
 }

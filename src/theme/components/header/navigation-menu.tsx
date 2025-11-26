@@ -8,7 +8,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile, useIsMobileLandscape } from '@/theme/hooks/useMediaQuery';
 import { Typography } from '@/theme/components/typography';
 import { NavigationItem } from './navigation-item';
 import { navItems } from './navigation.config';
@@ -19,6 +19,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
   const { theme, layoutPreference } = useAppTheme();
   const isLeftHanded = layoutPreference === 'left-handed';
   const isMobile = useIsMobile();
+  const isMobileLandscape = useIsMobileLandscape();
   const router = useRouter();
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
 
@@ -45,7 +46,11 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
       {/* Menu Title */}
       <div
         style={{
-          padding: isMobile ? '1.5rem' : '2rem',
+          padding: isMobileLandscape
+            ? '0.75rem 1rem'
+            : isMobile
+              ? '1.5rem'
+              : '1rem 2rem',
           borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
         }}
       >
@@ -53,9 +58,11 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
           variant='h2'
           style={{
             color: theme.palette.themePrimary,
-            fontSize: isMobile
-              ? 'clamp(2rem, 6vw, 3rem)'
-              : 'clamp(1.5rem, 4vw, 2.5rem)',
+            fontSize: isMobileLandscape
+              ? '1.5rem'
+              : isMobile
+                ? 'clamp(2rem, 6vw, 3rem)'
+                : 'clamp(1.5rem, 4vw, 2.5rem)',
             textAlign: isLeftHanded ? 'left' : 'right',
           }}
         >
@@ -68,7 +75,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
         style={{
           flex: '1 1 auto',
           overflowY: 'auto',
-          padding: isMobile ? '1.5rem' : '2rem',
+          padding: isMobileLandscape ? '1rem' : isMobile ? '1.5rem' : '2rem',
         }}
       >
         <div
@@ -94,7 +101,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
       {/* Social Links Footer */}
       <div
         style={{
-          padding: isMobile ? '1.5rem' : '2rem',
+          padding: isMobileLandscape ? '1rem' : isMobile ? '1.5rem' : '2rem',
           borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
           display: 'flex',
           flexDirection: 'column',

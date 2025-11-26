@@ -1,33 +1,21 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useContentFilterStore } from '@/store/store';
-import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown, IDropdownOption } from '@fluentui/react';
+import {
+  ContentListingPage,
+  FilterConfig,
+} from '@/components/ContentListingPage';
+import { getIconForPath } from '@/utils/navigation-icons';
 import { getCaseStudies } from './caseStudiesData';
 
 /**
  * Case Studies Page Component
- * Displays client success stories in a card grid layout
+ * Uses the unified ContentListingPage component
  *
- * Features:
- * - Responsive card grid layout with view type selector
- * - Theme-aware styling with Fluent UI
- * - Integration with PageWrapper for consistent layout
- * - SSG static rendering
- * - Navigation to detail views
+ * Note: Currently uses in-file data. This will be migrated to use
+ * file-based content loading (MDX) similar to Blog and Portfolio
  */
 export default function CaseStudiesPage() {
-  const router = useRouter();
-  const { theme } = useAppTheme();
-  const { viewType, setViewType } = useContentFilterStore();
-  const orientation = useDeviceOrientation();
-
   // Load case studies data
   const allCaseStudies = React.useMemo(() => getCaseStudies(), []);
 
@@ -52,50 +40,6 @@ export default function CaseStudiesPage() {
     );
   }, [allCaseStudies, selectedIndustries]);
 
-  // View type options for dropdown
-  const viewOptions = [
-    { key: 'grid', text: 'Grid View' },
-    { key: 'small-tile', text: 'Small Tile' },
-    { key: 'large-tile', text: 'Large Tile' },
-  ];
-
-  // Determine grid columns based on orientation and view type
-  const gridColumns = React.useMemo(() => {
-    // For tile views, use single column layout
-    if (viewType === 'small-tile' || viewType === 'large-tile') {
-      return 1;
-    }
-
-    // For grid view, use responsive columns
-    switch (orientation) {
-      case 'portrait': // Mobile portrait
-      case 'tablet-portrait':
-        return 1;
-      case 'mobile-landscape':
-      case 'square':
-        return 2;
-      case 'landscape':
-      case 'large-portrait':
-        return 3;
-      case 'ultrawide':
-        return 4;
-      default:
-        return 3;
-    }
-  }, [orientation, viewType]);
-
-  // Map ContentViewType to AdaptiveCardGrid viewType
-  const mappedViewType = React.useMemo(() => {
-    switch (viewType) {
-      case 'small-tile':
-        return 'small';
-      case 'large-tile':
-        return 'large';
-      default:
-        return viewType; // 'grid' maps directly
-    }
-  }, [viewType]);
-
   // Transform case studies to card format
   const cards = React.useMemo(() => {
     return caseStudies.map((study) => ({
@@ -108,260 +52,52 @@ export default function CaseStudiesPage() {
     }));
   }, [caseStudies]);
 
-  // Handle card click to navigate to detail view
-  const handleCardClick = React.useCallback(
-    (id: string) => {
-      console.log('Navigating to case study:', id);
-      router.push(`/case-studies/${id}`);
+  // Configure filters
+  const filters: FilterConfig[] = [
+    {
+      type: 'multi',
+      label: 'Industry',
+      placeholder: 'All Industries',
+      options: allIndustries.map((industry) => ({
+        key: industry,
+        text: industry,
+      })),
+      selectedKeys: selectedIndustries,
+      onChange: setSelectedIndustries,
     },
-    [router]
-  );
+  ];
 
-  // Handle industry selection
-  const handleIndustryChange = React.useCallback(
-    (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption) => {
-      if (option) {
-        const industries = option.selected
-          ? [...selectedIndustries, String(option.key)]
-          : selectedIndustries.filter((i) => i !== option.key);
-        setSelectedIndustries(industries);
-      }
-    },
-    [selectedIndustries]
-  );
+  // Build results message
+  const resultsMessage = `Showing ${caseStudies.length} ${caseStudies.length === 1 ? 'case study' : 'case studies'}${selectedIndustries.length > 0 ? ` in: ${selectedIndustries.join(', ')}` : ''}`;
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div
-        style={{
-          padding:
-            orientation === 'portrait' ? theme.spacing.m : theme.spacing.xl,
-          width: '100%',
-        }}
-      >
-        {/* Page Header */}
-        <div style={{ marginBottom: theme.spacing.l2 }}>
-          <Typography
-            variant='h1'
-            style={{
-              fontWeight: 700,
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '2.5rem',
-            }}
-          >
-            Case Studies
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l1,
-              fontSize: '1.1rem',
-            }}
-          >
-            Explore our client success stories and discover how strategic
-            transformation drives measurable results. From digital
-            transformation to wellness platforms, see how we partner with
-            organizations to achieve their most ambitious goals.
-          </Typography>
-        </div>
-
-        {/* Filters and View Selector */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: theme.spacing.m,
-            marginBottom: theme.spacing.l1,
-            alignItems: 'flex-end',
-          }}
-        >
-          {/* Industry Filter */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
-              label='Industry'
-              placeholder='All Industries'
-              multiSelect
-              options={allIndustries.map((industry) => ({
-                key: industry,
-                text: industry,
-              }))}
-              selectedKeys={selectedIndustries}
-              onChange={handleIndustryChange}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
-              }}
-            />
-          </div>
-
-          {/* View Type Selector */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
-              label='View Type'
-              options={viewOptions}
-              selectedKey={viewType}
-              onChange={(_, option) => {
-                if (option?.key) {
-                  setViewType(
-                    option.key as 'grid' | 'small-tile' | 'large-tile'
-                  );
-                }
-              }}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Results Count */}
-        <Typography
-          variant='p'
-          style={{
-            color: theme.palette.neutralSecondary,
-            marginBottom: theme.spacing.l1,
-          }}
-        >
-          Showing {caseStudies.length}{' '}
-          {caseStudies.length === 1 ? 'case study' : 'case studies'}
-          {selectedIndustries.length > 0 &&
-            ` in: ${selectedIndustries.join(', ')}`}
-        </Typography>
-
-        {/* Case Study Cards */}
-        {cards.length > 0 && (
-          <div>
-            <AdaptiveCardGrid
-              cards={cards}
-              viewType={mappedViewType}
-              gap={theme.spacing.m}
-              enableImageAdaptation={true}
-              gridColumns={gridColumns}
-              onCardClick={handleCardClick}
-            />
-          </div>
-        )}
-
-        {/* Empty State */}
-        {cards.length === 0 && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '400px',
-              flexDirection: 'column',
-              gap: theme.spacing.m,
-            }}
-          >
-            <Typography
-              variant='h3'
-              style={{ color: theme.palette.neutralSecondary }}
-            >
-              No case studies found
-            </Typography>
-            <Typography
-              variant='p'
-              style={{ color: theme.palette.neutralTertiary }}
-            >
-              Check back soon for client success stories.
-            </Typography>
-          </div>
-        )}
-
-        {/* Call to Action Section */}
-        <div
-          style={{
-            marginTop: theme.spacing.xxl,
-            padding: theme.spacing.xl,
-            backgroundColor: theme.palette.neutralLighterAlt,
-            borderRadius: theme.effects.roundedCorner6,
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-            }}
-          >
-            Ready to Transform Your Business?
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l,
-              maxWidth: '600px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            Join the growing list of organizations achieving measurable results
-            with Fluxline&apos;s strategic approach to transformation.
-          </Typography>
-          <div
-            style={{
-              display: 'flex',
-              gap: theme.spacing.m,
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            <button
-              onClick={() => router.push('/services')}
-              style={{
-                padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                backgroundColor: theme.palette.themePrimary,
-                color: theme.palette.white,
-                border: 'none',
-                borderRadius: theme.effects.roundedCorner4,
-                fontSize: theme.fonts.mediumPlus.fontSize,
-                fontWeight: theme.typography.fontWeights.semiBold,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = theme.palette.themeDark;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themePrimary;
-              }}
-            >
-              View Our Services
-            </button>
-            <button
-              onClick={() => router.push('/contact')}
-              style={{
-                padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                backgroundColor: 'transparent',
-                color: theme.palette.themePrimary,
-                border: `2px solid ${theme.palette.themePrimary}`,
-                borderRadius: theme.effects.roundedCorner4,
-                fontSize: theme.fonts.mediumPlus.fontSize,
-                fontWeight: theme.typography.fontWeights.semiBold,
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor =
-                  theme.palette.themeLighterAlt;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              Start Your Transformation
-            </button>
-          </div>
-        </div>
-      </div>
-    </UnifiedPageWrapper>
+    <ContentListingPage
+      title='Case Studies'
+      iconName={getIconForPath('/case-studies') || 'ReadingMode'}
+      description='Explore our client success stories and discover how strategic transformation drives measurable results. From digital transformation to wellness platforms, see how we partner with organizations to achieve their most ambitious goals.'
+      basePath='/case-studies'
+      cards={cards}
+      filters={filters}
+      resultsMessage={resultsMessage}
+      emptyStateTitle='No case studies found'
+      emptyStateMessage='Check back soon for client success stories.'
+      ctaSection={{
+        title: 'Ready to Transform Your Business?',
+        description:
+          "Join the growing list of organizations achieving measurable results with Fluxline's strategic approach to transformation.",
+        buttons: [
+          {
+            label: 'View Our Services',
+            variant: 'primary',
+            path: '/services',
+          },
+          {
+            label: 'Start Your Transformation',
+            variant: 'secondary',
+            path: '/contact',
+          },
+        ],
+      }}
+    />
   );
 }

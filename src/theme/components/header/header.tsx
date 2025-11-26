@@ -17,6 +17,8 @@ import { NavigationButton } from './navigation-button';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { Typography } from '@/theme/components/typography';
 import { SettingsPanel } from '@/theme/components/settings-panel';
+import { FormButton } from '@/theme/components/form';
+import { useRouter } from 'next/navigation';
 
 export interface BreadcrumbItem {
   label: string;
@@ -35,6 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   const [isMounted, setIsMounted] = React.useState(false);
   const { theme, themeMode, setThemeMode, layoutPreference } = useAppTheme();
   const pathname = usePathname();
+  const router = useRouter();
   const isMobile = useIsMobile();
   const isLeftHanded = layoutPreference === 'left-handed';
 
@@ -234,6 +237,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
+                  textAlign: isLeftHanded ? 'right' : 'left',
                 }}
               >
                 {isHomePage ? 'Fluxline' : currentPageTitle}
@@ -252,14 +256,14 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                       margin: 0,
                     }}
                   >
-                    Fluxline
+                    Fluxline Resonance Group, LLC
                   </Typography>
                 ) : (
                   <ol
                     style={{
                       display: 'flex',
                       alignItems: 'baseline',
-                      justifyContent: 'flex-start',
+                      justifyContent: isLeftHanded ? 'flex-end' : 'flex-start',
                       gap: '0.5rem',
                       flexWrap: 'wrap',
                       margin: 0,
@@ -341,9 +345,23 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             style={{
               display: 'flex',
               flexDirection: isLeftHanded ? 'row-reverse' : 'row',
+              alignItems: 'center',
               gap: '1rem',
             }}
           >
+            {!isMobile && !isHomePage && (
+              <FormButton
+                variant='primary'
+                size='medium'
+                onClick={() => router.push('/contact')}
+                icon='Calendar'
+                style={{
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Book a Consultation
+              </FormButton>
+            )}
             {!isHomePage && (
               <NavigationButton
                 onClick={handleThemeClick}

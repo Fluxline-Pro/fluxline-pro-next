@@ -67,6 +67,22 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
         onClick: () => handleTagClick(tag),
       })),
     ],
+    cta: {
+      title: 'Stay Connected',
+      description: "Get insights on the latest trends, best practices, and industry news.",
+      buttons: [
+        {
+          label: 'Explore More Articles',
+          onClick: () => router.push('/blog'),
+          variant: 'primary',
+        },
+        {
+          label: 'Get in Touch',
+          onClick: () => router.push('/contact'),
+          variant: 'secondary',
+        },
+      ],
+    },
   };
 
   return <UnifiedContentDetail config={config} />;

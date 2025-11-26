@@ -71,14 +71,22 @@ export const useMediaQuery = (
 };
 
 export const useWindowSize = () => {
-  const [windowHeight, setWindowHeight] = React.useState(0);
-  const [windowWidth, setWindowWidth] = React.useState(0);
+  const [windowHeight, setWindowHeight] = React.useState(
+    typeof window !== 'undefined' ? window.innerHeight : 0
+  );
+  const [windowWidth, setWindowWidth] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth : 0
+  );
 
   React.useEffect(() => {
     const handleResize = () => {
       setWindowHeight(window.innerHeight);
       setWindowWidth(window.innerWidth);
     };
+
+    // Set initial values
+    handleResize();
+
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
@@ -116,9 +124,15 @@ export const useIsPortrait = () => {
 };
 
 export const useIsMobileLandscape = () => {
-  const isMobile = useIsMobile();
-  const isLandscape = useIsLandscape();
-  return isMobile && isLandscape;
+  const { windowWidth, windowHeight } = useWindowSize();
+  const aspectRatio = windowWidth / windowHeight;
+  const LANDSCAPE_THRESHOLD = 1.25;
+
+  return (
+    aspectRatio >= LANDSCAPE_THRESHOLD &&
+    windowWidth <= breakpoints.lg &&
+    windowHeight < windowWidth
+  );
 };
 
 export const useIsTabletPortrait = () => {

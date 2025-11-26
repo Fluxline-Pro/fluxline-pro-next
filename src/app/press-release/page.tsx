@@ -1,35 +1,22 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useContentFilterStore } from '@/store/store';
-import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown } from '@fluentui/react';
 import { format } from 'date-fns';
+import {
+  ContentListingPage,
+  FilterConfig,
+} from '@/components/ContentListingPage';
+import { getIconForPath } from '@/utils/navigation-icons';
 import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
 
 /**
  * Press Release Page Component
- * Displays press releases in a card grid layout
- * Mirrors the design logic from Blog and Portfolio views
+ * Uses the unified ContentListingPage component
  *
- * Features:
- * - Responsive card grid layout
- * - Theme-aware styling with Fluent UI
- * - Loading and error states
- * - Integration with PageWrapper for consistent layout
- * - Portrait image and title display
+ * Note: Currently uses mock data. This will be migrated to use
+ * file-based content loading (MDX) similar to Blog and Portfolio
  */
 export default function PressReleasePage() {
-  const router = useRouter();
-  const { theme } = useAppTheme();
-  const { viewType, setViewType } = useContentFilterStore();
-  const orientation = useDeviceOrientation();
-
   // Use direct import of mock data (sorted by date, newest first)
   const allPressReleases = React.useMemo(() => {
     return [...pressReleasesMockData].sort(
@@ -58,56 +45,9 @@ export default function PressReleasePage() {
     );
   }, [allPressReleases, selectedYear]);
 
-  const isLoading = false;
-  const error = null;
-
-  // View type options for dropdown
-  const viewOptions = [
-    { key: 'grid', text: 'Grid View' },
-    { key: 'small-tile', text: 'Small Tile' },
-    { key: 'large-tile', text: 'Large Tile' },
-  ];
-
-  // Determine grid columns based on orientation and view type
-  const gridColumns = React.useMemo(() => {
-    // For tile views, use single column layout
-    if (viewType === 'small-tile' || viewType === 'large-tile') {
-      return 1;
-    }
-
-    // For grid view, use responsive columns
-    switch (orientation) {
-      case 'portrait': // Mobile portrait
-      case 'tablet-portrait':
-        return 1;
-      case 'mobile-landscape':
-      case 'square':
-        return 2;
-      case 'landscape':
-      case 'large-portrait':
-        return 3;
-      case 'ultrawide':
-        return 4;
-      default:
-        return 3;
-    }
-  }, [orientation, viewType]);
-
-  // Map ContentViewType to AdaptiveCardGrid viewType
-  const mappedViewType = React.useMemo(() => {
-    switch (viewType) {
-      case 'small-tile':
-        return 'small';
-      case 'large-tile':
-        return 'large';
-      default:
-        return viewType; // 'grid' maps directly
-    }
-  }, [viewType]);
-
   // Transform press releases to card format
   const cards = React.useMemo(() => {
-    const transformedCards = pressReleases.map((release) => ({
+    return pressReleases.map((release) => ({
       id: release.id,
       title: release.title,
       description: release.subtitle || release.description,
@@ -115,223 +55,36 @@ export default function PressReleasePage() {
       imageAlt: release.imageAlt || release.title,
       imageText: format(release.date, 'MMMM d, yyyy'),
     }));
-    console.log('PressReleasePage render - state:', {
-      pressReleasesCount: pressReleases?.length || 0,
-      isLoading,
-      error,
-      orientation,
-      viewType,
-      gridColumns,
-      mappedViewType,
-    });
-    return transformedCards;
-  }, [
-    gridColumns,
-    mappedViewType,
-    isLoading,
-    error,
-    orientation,
-    pressReleases,
-    viewType,
-  ]);
+  }, [pressReleases]);
 
-  // Handle card click to navigate to detail view
-  const handleCardClick = React.useCallback(
-    (id: string) => {
-      console.log('handleCardClick called with ID:', id);
-      const selectedRelease = pressReleases.find((r) => r.id === id);
-      console.log('Found release:', selectedRelease?.title);
-      if (selectedRelease) {
-        console.log('Navigating to:', `/press-release/${id}`);
-        router.push(`/press-release/${id}`);
-      }
+  // Configure filters
+  const filters: FilterConfig[] = [
+    {
+      type: 'single',
+      label: 'Year',
+      options: [
+        { key: '', text: 'All Years' },
+        ...allYears.map((year) => ({ key: year, text: year })),
+      ],
+      value: selectedYear,
+      onChange: setSelectedYear,
     },
-    [pressReleases, router]
-  );
+  ];
+
+  // Build results message
+  const resultsMessage = `Showing ${pressReleases.length} ${pressReleases.length === 1 ? 'press release' : 'press releases'}${selectedYear ? ` from ${selectedYear}` : ''}`;
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div
-        style={{
-          padding:
-            orientation === 'portrait' ? theme.spacing.m : theme.spacing.xl,
-          width: '100%',
-        }}
-      >
-        {/* Page Header */}
-        <div style={{ marginBottom: theme.spacing.l2 }}>
-          <Typography
-            variant='h1'
-            style={{
-              fontWeight: 700,
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '2.5rem',
-            }}
-          >
-            Press Release
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l1,
-              fontSize: '1.1rem',
-            }}
-          >
-            Public announcements, media features, and milestone broadcasts from
-            Fluxline Resonance Group. Stay informed about our latest
-            developments, partnerships, and achievements.
-          </Typography>
-        </div>
-
-        {/* Filters and View Selector */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: theme.spacing.m,
-            marginBottom: theme.spacing.l1,
-            alignItems: 'flex-end',
-          }}
-        >
-          {/* Year Filter */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
-              label='Year'
-              options={[
-                { key: '', text: 'All Years' },
-                ...allYears.map((year) => ({ key: year, text: year })),
-              ]}
-              selectedKey={selectedYear || ''}
-              onChange={(_, option) => {
-                setSelectedYear(option?.key ? String(option.key) : undefined);
-              }}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
-              }}
-            />
-          </div>
-
-          {/* View Type Selector */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <Dropdown
-              label='View Type'
-              options={viewOptions}
-              selectedKey={viewType}
-              onChange={(_, option) => {
-                if (option?.key) {
-                  setViewType(
-                    option.key as 'grid' | 'small-tile' | 'large-tile'
-                  );
-                }
-              }}
-              styles={{
-                dropdown: { minWidth: 200 },
-                root: { width: '100%' },
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Results Count */}
-        <Typography
-          variant='p'
-          style={{
-            color: theme.palette.neutralSecondary,
-            marginBottom: theme.spacing.l1,
-          }}
-        >
-          Showing {pressReleases.length}{' '}
-          {pressReleases.length === 1 ? 'press release' : 'press releases'}
-          {selectedYear && ` from ${selectedYear}`}
-        </Typography>
-
-        {/* Loading State */}
-        {isLoading && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '400px',
-            }}
-          >
-            <Typography
-              variant='h3'
-              style={{ color: theme.palette.themePrimary }}
-            >
-              Loading press releases...
-            </Typography>
-          </div>
-        )}
-
-        {/* Error State */}
-        {error && !isLoading && (
-          <div
-            style={{
-              padding: theme.spacing.xl,
-              backgroundColor: theme.palette.redDark,
-              borderRadius: theme.effects.roundedCorner4,
-              marginBottom: theme.spacing.xl,
-            }}
-          >
-            <Typography variant='h3' style={{ color: theme.palette.white }}>
-              Error loading press releases
-            </Typography>
-            <Typography variant='p' style={{ color: theme.palette.white }}>
-              {error}
-            </Typography>
-          </div>
-        )}
-
-        {/* Press Release Cards */}
-        {!isLoading && !error && cards.length > 0 && (
-          <div>
-            <AdaptiveCardGrid
-              cards={cards.map((card) => ({
-                ...card,
-                // Add data attribute to identify clickable cards
-                id: card.id,
-              }))}
-              viewType={mappedViewType}
-              gap={theme.spacing.m}
-              enableImageAdaptation={true}
-              gridColumns={gridColumns}
-              onCardClick={handleCardClick}
-            />
-          </div>
-        )}
-
-        {/* Empty State */}
-        {!isLoading && !error && cards.length === 0 && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '400px',
-              flexDirection: 'column',
-              gap: theme.spacing.m,
-            }}
-          >
-            <Typography
-              variant='h3'
-              style={{ color: theme.palette.neutralSecondary }}
-            >
-              No press releases found
-            </Typography>
-            <Typography
-              variant='p'
-              style={{ color: theme.palette.neutralTertiary }}
-            >
-              Check back soon for updates and announcements.
-            </Typography>
-          </div>
-        )}
-      </div>
-    </UnifiedPageWrapper>
+    <ContentListingPage
+      title='Press Release'
+      iconName={getIconForPath('/press-release') || 'News'}
+      description='Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group. Stay informed about our latest developments, partnerships, and achievements.'
+      basePath='/press-release'
+      cards={cards}
+      filters={filters}
+      resultsMessage={resultsMessage}
+      emptyStateTitle='No press releases found'
+      emptyStateMessage='Check back soon for updates and announcements.'
+    />
   );
 }

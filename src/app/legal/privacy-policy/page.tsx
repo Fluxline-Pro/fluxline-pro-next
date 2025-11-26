@@ -1,6 +1,6 @@
+import React from 'react';
 import { Metadata } from 'next';
-import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
-import { content } from '../../../assets/legal/privacy-policy';
+import PrivacyPolicyClientPage from './PrivacyPolicyClientPage';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy - Fluxline Professional Services',
@@ -11,15 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPolicyPage() {
-  return (
-    <UnifiedPageWrapper
-      layoutType='legal-document'
-      legalPageConfig={{
-        title: 'Privacy Policy',
-        subtitle: 'Data Protection and Privacy Practices',
-        content,
-        documentType: 'policy',
-      }}
-    />
-  );
+  return <PrivacyPolicyClientPage />;
 }

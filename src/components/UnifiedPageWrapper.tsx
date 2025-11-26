@@ -14,7 +14,11 @@ import { useContentFilterStore } from '../store/store';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
 import { useSimpleLayout } from '@/theme/hooks/useSimpleLayout';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
-import { useIsMobile, useIsTabletPortrait } from '@/theme/hooks/useMediaQuery';
+import {
+  useIsMobile,
+  useIsTabletPortrait,
+  useIsMobileLandscape,
+} from '@/theme/hooks/useMediaQuery';
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { useHoverEffects } from '../hooks/useHoverEffects';
 import { useHeaderHeight } from '../theme/hooks/useHeaderHeight';
@@ -65,17 +69,17 @@ const PAGE_CONFIGS: Record<
     image: OurServicesImage.src,
     imageText: 'Services',
   },
-  '/white-pages': {
+  '/services/scrolls': {
     image: 'FLUXLINE_LOGO',
-    imageText: '',
+    imageText: 'Strategic Insights',
   },
   '/content': {
-    image: ContentImage.src,
-    imageText: 'Fluxline Content',
+    image: PortfolioImage.src,
+    imageText: 'Content Hub',
   },
   '/legal': {
     image: 'FLUXLINE_LOGO',
-    imageText: '',
+    imageText: 'Legal & Reference',
   },
   '/legal/terms': {
     image: ConsultingImage.src,
@@ -244,6 +248,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   const { shouldReduceMotion } = useReducedMotion();
   const isMobile = useIsMobile();
   const isTabletPortrait = useIsTabletPortrait();
+  const isMobileLandscape = useIsMobileLandscape();
   const headerHeight = useHeaderHeight();
   const { containerStyle, contentStyle, imageStyle } = useSimpleLayout(
     theme,
@@ -300,21 +305,22 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     enableTransform: false,
   });
 
+  // Normalize pathname by removing trailing slash for consistent lookupconst
+  const normalizedPathname =
+    pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+
   // Determine effective layout type
   const effectiveLayoutType = React.useMemo(() => {
-    if (layoutType === 'legal-document' || pathname.startsWith('/legal')) {
+    // Only use legal-document layout for legal detail pages, not the landing page
+    if (
+      layoutType === 'legal-document' ||
+      (normalizedPathname.startsWith('/legal') &&
+        normalizedPathname !== '/legal')
+    ) {
       return 'legal-document';
     }
     return 'responsive-grid';
-  }, [layoutType, pathname]);
-
-  if (!shouldUseWrapper) {
-    return <>{children}</>;
-  }
-
-  // Normalize pathname by removing trailing slash for consistent lookup
-  const normalizedPathname =
-    pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+  }, [layoutType, normalizedPathname]);
 
   // Get configuration for current page
   const currentConfig = PAGE_CONFIGS[normalizedPathname];
@@ -354,6 +360,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
           maxWidth: '900px',
           margin: '0 auto',
           padding: spacing.xl,
+          paddingTop: `calc(${headerHeight} + ${spacing.xl})`,
           color: theme.semanticColors.bodyText,
         }}
       >
@@ -500,8 +507,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   }
 
   // Responsive Grid Layout (from SimplePageWrapper) - DEFAULT
-  // Use stacked layout for mobile and tablet-portrait
-  const shouldUseStackedLayout = isMobile || isTabletPortrait;
+  // Use stacked layout for mobile portrait and tablet-portrait
+  // Mobile landscape uses the 3fr/9fr grid like tablet landscape
+  const shouldUseStackedLayout =
+    (isMobile && !isMobileLandscape) || isTabletPortrait;
 
   // Animation variants
   const fadeInVariants: Variants = {
@@ -598,7 +607,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 position: 'relative',
                 width: '100%',
                 maxWidth: '300px', // Smaller max width for mobile/tablet
-                aspectRatio: '4/3', // More landscape ratio for smaller viewport usage
+                height: 'auto',
                 borderRadius: theme.borderRadius.m,
                 overflow: 'hidden',
                 backgroundColor: theme.palette.neutralLighter,
@@ -608,10 +617,13 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               <Image
                 src={imageToDisplay}
                 alt={imageAltText}
-                fill
-                sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px'
+                width={300}
+                height={0}
+                sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 300px'
                 style={{
-                  objectFit: 'cover',
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'contain',
                 }}
                 priority
                 placeholder='blur'
@@ -652,7 +664,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 position: 'relative',
                 width: '100%',
                 maxWidth: '400px',
-                aspectRatio: '3/4',
+                height: 'auto',
                 borderRadius: theme.borderRadius.m,
                 overflow: 'hidden',
                 backgroundColor: theme.palette.neutralLighter,
@@ -663,10 +675,13 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               <Image
                 src={imageToDisplay}
                 alt={imageAltText}
-                fill
+                width={400}
+                height={0}
                 sizes='(max-width: 768px) 100vw, 400px'
                 style={{
-                  objectFit: 'cover',
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'contain',
                 }}
                 priority
                 placeholder='blur'

@@ -41,6 +41,8 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
         'Adaptive training systems for all bodies',
         'Movement patterns and chronic pain management',
         'Emotional intelligence in physical transformation',
+        'Mindset support and behavioral change strategies',
+        'Flexible scheduling and remote coaching options',
       ],
       'education-training': [
         'Experiential learning and leadership workshops',

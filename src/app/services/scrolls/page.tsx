@@ -1,88 +1,91 @@
+'use client';
+
 /**
  * Scrolls Overview Page
  * Main listing page for all strategic insights and white papers
  */
 
-import { Metadata } from 'next';
-import Link from 'next/link';
+import React from 'react';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
+import { Hero } from '@/theme/components/hero/Hero';
+import { Callout } from '@/theme/components/callout/Callout';
+import { FormButton } from '@/theme/components/form/FormButton';
+import { Typography } from '@/theme/components/typography';
 import { ScrollsGrid } from './components/ScrollsGrid';
 import { getAllScrolls } from './scrollsData';
-import { FadeUp } from '@/animations/fade-animations';
-
-export const metadata: Metadata = {
-  title: 'Explore the Scrolls | Fluxline Strategic Insights',
-  description:
-    'Access our comprehensive collection of strategic insights, white papers, and frameworks covering business strategy, development, design, wellness, education, and transformation.',
-  openGraph: {
-    title: 'Explore the Scrolls | Fluxline Strategic Insights',
-    description:
-      'Access our comprehensive collection of strategic insights and white papers.',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Explore the Scrolls | Fluxline Strategic Insights',
-    description:
-      'Access our comprehensive collection of strategic insights and white papers.',
-  },
-};
+import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { getIconForPath } from '@/utils/navigation-icons';
 
 export default function ScrollsPage() {
   const scrolls = getAllScrolls();
+  const { theme } = useAppTheme();
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-8'>
-        {/* Header Section */}
-        <FadeUp>
-          <header className='space-y-4'>
-            <h1 className='text-4xl font-bold md:text-5xl'>
-              Explore the Scrolls
-            </h1>
-            <p className='text-lg md:text-xl max-w-3xl'>
-              Access our comprehensive collection of strategic insights and
-              frameworks. Each scroll offers deep-dive guidance on transforming
-              your business, craft, or personal practice with intentionality and
-              resonance.
-            </p>
-          </header>
-        </FadeUp>
+      <div className='space-y-16'>
+        {/* Hero Section */}
+        <Hero
+          title='Explore the Scrolls'
+          iconName={getIconForPath('/services/scrolls')}
+          description='Access our comprehensive collection of strategic insights and frameworks. Each scroll offers deep-dive guidance on transforming your business, craft, or personal practice with intentionality and resonance.'
+        >
+          <Callout
+            variant='accent'
+            title='Gates to Transformation'
+            subtitle='Curricula for your evolution—frameworks designed for sustainable growth.'
+          />
+        </Hero>
 
-        {/* Scrolls Grid */}
-        <FadeUp delay={0.2}>
+        {/* Scrolls Grid Section */}
+        <section className='space-y-8'>
+          <Typography
+            variant='h2'
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: '2rem',
+              fontWeight: theme.typography.fontWeights.bold,
+            }}
+          >
+            Strategic Insights Library
+          </Typography>
           <ScrollsGrid scrolls={scrolls} />
-        </FadeUp>
+        </section>
 
         {/* Call to Action */}
-        <FadeUp delay={0.4}>
-          <section className='mt-8 p-6 md:p-8 rounded-lg border'>
-            <h2 className='text-2xl font-bold mb-4'>Ready to Transform?</h2>
-            <p className='mb-6 max-w-2xl'>
-              These scrolls are gates—curricula for your evolution. Explore the
-              insights that resonate with your current phase and discover
-              frameworks designed for sustainable transformation.
-            </p>
-            <div className='flex flex-wrap gap-4'>
-              <Link
-                href='/services'
-                className='inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-colors'
-                style={{
-                  backgroundColor: 'var(--themePrimary)',
-                  color: 'var(--white)',
-                }}
-              >
-                Explore Our Services
-              </Link>
-              <Link
-                href='/contact'
-                className='inline-flex items-center px-6 py-3 rounded-lg font-semibold border transition-colors'
-              >
-                Get In Touch
-              </Link>
+        <Callout
+          variant='subtle'
+          title='Ready to Transform?'
+          action={
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <FormButton
+                text='Explore Our Services'
+                variant='primary'
+                size='large'
+                icon='ChevronRight'
+                iconPosition='right'
+                onClick={() => (window.location.href = '/services')}
+              />
+              <FormButton
+                text='Get In Touch'
+                variant='outline'
+                size='large'
+                onClick={() => (window.location.href = '/contact')}
+              />
             </div>
-          </section>
-        </FadeUp>
+          }
+        >
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '1.125rem',
+              lineHeight: theme.typography.lineHeights.relaxed,
+            }}
+          >
+            Explore the insights that resonate with your current phase and
+            discover how our services can support your transformational journey.
+          </Typography>
+        </Callout>
       </div>
     </UnifiedPageWrapper>
   );

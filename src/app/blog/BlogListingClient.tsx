@@ -8,9 +8,11 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { Dropdown } from '@fluentui/react';
+import { FormSelect } from '@/theme/components/form';
 import { format } from 'date-fns';
 import { BlogPost } from './types';
+import { Hero } from '@/theme/components/hero/Hero';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 interface BlogListingClientProps {
   initialPosts: BlogPost[];
@@ -36,7 +38,8 @@ export function BlogListingClient({
   const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
   const [selectedCategory, setSelectedCategory] = React.useState<
     string | undefined
-  >();
+    >();
+  const isMobile = useIsMobile();
 
   // Filter blog posts based on selected filters
   const blogPosts = React.useMemo(() => {
@@ -172,92 +175,50 @@ export function BlogListingClient({
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       {/* Header Section */}
-      <div style={{ marginBottom: theme.spacing.l2 }}>
-        <Typography
-          variant='h1'
-          style={{
-            fontWeight: 700,
-            color: theme.palette.themePrimary,
-            marginBottom: theme.spacing.m,
-            fontSize: '2.5rem',
-          }}
-        >
-          Blog
-        </Typography>
-        <Typography
-          variant='p'
-          style={{
-            color: theme.palette.neutralSecondary,
-            marginBottom: theme.spacing.l1,
-            fontSize: '1.1rem',
-          }}
-        >
-          Insights, best practices, and thoughts on technology, design, and
-          business transformation.
-        </Typography>
-      </div>
+      <Hero
+        title='Blog'
+        iconName='TextDocumentShared'
+        description='Insights, best practices, and thoughts on technology, design, and business transformation. Explore articles on software development, leadership, wellness, and strategic innovation.'
+        filters={
+          <>
+            {/* Category Filter */}
+            <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+              <FormSelect
+                label='Category'
+                options={categoryOptions}
+                value={selectedCategory || ''}
+                onChange={(value) => {
+                  setSelectedCategory(value || undefined);
+                }}
+              />
+            </div>
 
-      {/* Filters and View Selector */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          gap: theme.spacing.m,
-          marginBottom: theme.spacing.l1,
-          alignItems: 'flex-end',
-        }}
-      >
-        {/* Category Filter */}
-        <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <Dropdown
-            label='Category'
-            options={categoryOptions}
-            selectedKey={selectedCategory || ''}
-            onChange={(_, option) => {
-              setSelectedCategory(option?.key ? String(option.key) : undefined);
-            }}
-            styles={{
-              dropdown: { minWidth: 200 },
-              root: { width: '100%' },
-            }}
-          />
-        </div>
+            {/* Tag Filter */}
+            <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+              <FormSelect
+                label='Tag'
+                options={tagOptions}
+                value={selectedTag || ''}
+                onChange={(value) => {
+                  setSelectedTag(value || undefined);
+                }}
+              />
+            </div>
 
-        {/* Tag Filter */}
-        <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <Dropdown
-            label='Tag'
-            options={tagOptions}
-            selectedKey={selectedTag || ''}
-            onChange={(_, option) => {
-              setSelectedTag(option?.key ? String(option.key) : undefined);
-            }}
-            styles={{
-              dropdown: { minWidth: 200 },
-              root: { width: '100%' },
-            }}
-          />
-        </div>
-
-        {/* View Type Selector */}
-        <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <Dropdown
-            label='View Type'
-            options={viewOptions}
-            selectedKey={viewType}
-            onChange={(_, option) => {
-              if (option?.key) {
-                setViewType(option.key as 'grid' | 'small-tile' | 'large-tile');
-              }
-            }}
-            styles={{
-              dropdown: { minWidth: 200 },
-              root: { width: '100%' },
-            }}
-          />
-        </div>
-      </div>
+            {/* View Type Selector */}
+            <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+              <FormSelect
+                label='View Type'
+                options={viewOptions}
+                value={viewType}
+                onChange={(value) => {
+                  setViewType(value as 'grid' | 'small-tile' | 'large-tile');
+                }}
+              />
+            </div>
+          </>
+        }
+      />
 
       {/* Results Count */}
       <Typography
@@ -265,6 +226,7 @@ export function BlogListingClient({
         style={{
           color: theme.palette.neutralSecondary,
           marginBottom: theme.spacing.l1,
+          marginTop: isMobile ? theme.spacing.m : theme.spacing.xl,
         }}
       >
         Showing {blogPosts.length} {blogPosts.length === 1 ? 'post' : 'posts'}

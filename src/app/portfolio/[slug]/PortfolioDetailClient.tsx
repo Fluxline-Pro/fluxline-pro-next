@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
+import { ContentNotFound } from '@/components/ContentNotFound';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { PortfolioProject } from '../types';
@@ -25,46 +25,14 @@ export default function PortfolioDetailClient({
 
   if (!project) {
     return (
-      <UnifiedPageWrapper layoutType='responsive-grid'>
-        <div
-          style={{
-            padding: theme.spacing.xl,
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant='h1'
-            style={{ color: theme.palette.themePrimary }}
-          >
-            Project Not Found
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginTop: theme.spacing.m,
-            }}
-          >
-            The portfolio project you&apos;re looking for doesn&apos;t exist.
-          </Typography>
-          <button
-            onClick={() => router.push('/portfolio')}
-            style={{
-              marginTop: theme.spacing.l,
-              padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-              backgroundColor: theme.palette.themePrimary,
-              color: theme.palette.white,
-              border: 'none',
-              borderRadius: theme.effects.roundedCorner4,
-              fontSize: theme.fonts.medium.fontSize,
-              fontWeight: theme.typography.fontWeights.semiBold,
-              cursor: 'pointer',
-            }}
-          >
-            Back to Portfolio
-          </button>
-        </div>
-      </UnifiedPageWrapper>
+      <ContentNotFound
+        title='Project Not Found'
+        message="The portfolio project you're looking for doesn't exist."
+        backButton={{
+          label: 'Back to Portfolio',
+          url: '/portfolio',
+        }}
+      />
     );
   }
 

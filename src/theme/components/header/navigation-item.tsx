@@ -47,7 +47,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
         alignItems: 'center',
         justifyContent: isLeftHanded ? 'flex-start' : 'flex-end',
         gap: '1rem',
-        padding: '0.75rem 1rem',
+        padding: '0.75rem 0.5rem',
         textDecoration: 'none',
         transition: 'all 0.2s ease',
         borderRadius: theme.borderRadius.container.small,
@@ -62,7 +62,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: isLeftHanded ? 'flex-start' : 'flex-end',
+          justifyContent: 'center',
           width: isLeftHanded ? 'auto' : '48px', // Fixed width for right-handed mode
           flexShrink: 0,
         }}

@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Typography } from '@/theme/components/typography';
+import { FormButton } from '@/theme/components/form';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { useHoverEffects } from '@/hooks/useHoverEffects';
@@ -242,23 +243,13 @@ export default function FeaturedCaseStudies() {
 
       {/* View All CTA */}
       <div style={{ textAlign: 'center' }}>
-        <button
+        <FormButton
+          variant='secondary'
           onClick={() => router.push('/case-studies')}
-          style={{
-            padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-            backgroundColor: 'transparent',
-            color: theme.palette.themePrimary,
-            border: `2px solid ${theme.palette.themePrimary}`,
-            borderRadius: theme.effects.roundedCorner4,
-            fontSize: theme.fonts.mediumPlus.fontSize,
-            fontWeight: theme.typography.fontWeights.semiBold,
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-          }}
-          {...buttonHoverEffects}
+          size='large'
         >
           View All Case Studies
-        </button>
+        </FormButton>
       </div>
     </div>
   );

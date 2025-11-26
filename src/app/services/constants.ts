@@ -38,12 +38,12 @@ export interface ServiceCategory {
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
-    id: 'consulting',
-    title: 'Business Strategy & Systems Alignment',
-    description: 'Strategic consulting and operational design.',
-    summary: CONSULTING_SUMMARY,
-    icon: 'Lightbulb',
-    path: '/services/consulting',
+    id: 'personal-training',
+    title: 'Personal Training & Wellness',
+    description: 'Physical training with emotional intelligence.',
+    summary: PERSONAL_TRAINING_SUMMARY,
+    icon: 'Health',
+    path: '/services/personal-training',
   },
   {
     id: 'development',
@@ -62,12 +62,12 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     path: '/services/design',
   },
   {
-    id: 'personal-training',
-    title: 'Personal Training & Wellness',
-    description: 'Physical training with emotional intelligence.',
-    summary: PERSONAL_TRAINING_SUMMARY,
-    icon: 'Health',
-    path: '/services/personal-training',
+    id: 'resonance-core',
+    title: 'Resonance Core Framework™',
+    description: 'Deep transformation through archetypal mapping.',
+    summary: RESONANCE_CORE_SUMMARY,
+    icon: 'HeartFill',
+    path: '/services/resonance-core',
   },
   {
     id: 'education-training',
@@ -78,11 +78,11 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     path: '/services/education',
   },
   {
-    id: 'resonance-core',
-    title: 'Resonance Core Framework™',
-    description: 'Deep transformation through archetypal mapping.',
-    summary: RESONANCE_CORE_SUMMARY,
-    icon: 'HeartFill',
-    path: '/services/resonance-core',
+    id: 'consulting',
+    title: 'Business Strategy & Systems Alignment',
+    description: 'Strategic consulting and operational design.',
+    summary: CONSULTING_SUMMARY,
+    icon: 'Lightbulb',
+    path: '/services/consulting',
   },
 ];
