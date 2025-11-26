@@ -28,7 +28,8 @@ export default function PrivacyPolicyClientPage() {
         {/* Hero Section */}
         <Hero
           title='Privacy Policy'
-          iconName='SecurityGroup'
+          backArrow={true}
+          backArrowPath='/legal'
           description='Data Protection and Privacy Practices'
         />
 

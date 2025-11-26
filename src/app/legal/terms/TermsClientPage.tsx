@@ -28,8 +28,9 @@ export default function TermsClientPage() {
         {/* Hero Section */}
         <Hero
           title='Terms of Use'
-          iconName='LegalDocument'
           description='Service Terms and User Agreements'
+          backArrow={true}
+          backArrowPath='/legal'
         />
 
         {/* Main Content */}

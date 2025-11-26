@@ -53,6 +53,10 @@ export interface HeroProps {
    * @default false
    */
   backArrow?: boolean;
+  /** Path for back arrow link
+   * @default '/services'
+   */
+  backArrowPath?: string;
   /**
    * Filter controls to display below description
    * Renders above children if both are provided
@@ -86,6 +90,7 @@ export const Hero: React.FC<HeroProps> = ({
   showBorder = true,
   showShadow = false,
   backArrow = false,
+  backArrowPath = '/services',
   filters,
 }) => {
   const { theme } = useAppTheme();
@@ -123,7 +128,7 @@ export const Hero: React.FC<HeroProps> = ({
         }}
       >
         {backArrow && (
-          <Link href='/services' style={{ textDecoration: 'none' }}>
+          <Link href={backArrowPath}   style={{ textDecoration: 'none' }}>
             <div
               style={{
                 display: 'inline-block',

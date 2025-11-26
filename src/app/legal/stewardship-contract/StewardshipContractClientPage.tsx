@@ -28,7 +28,8 @@ export default function StewardshipContractClientPage() {
         {/* Hero Section */}
         <Hero
           title='Stewardship Contract'
-          iconName='Handshake'
+          backArrow={true}
+          backArrowPath='/legal'
           description='Our Commitment to Ethical Service and Partnership'
         />
 
