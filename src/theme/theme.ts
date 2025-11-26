@@ -268,7 +268,7 @@ export const baseGradients = {
  */
 
 export const fontFamily = {
-  text: '"Inter Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+  text: '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
   mono: '"Courier Prime", "Roboto Mono", "SF Mono", "Monaco", "Cascadia Code", Consolas, "Courier New", monospace',
 };
 
@@ -362,7 +362,7 @@ export const typography = {
   fonts: {
     tiny: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.25rem, 0.5cqi, 0.25rem)',
       fontWeight: '500' as const, // Inter Medium
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -370,7 +370,7 @@ export const typography = {
     },
     xSmall: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.75rem, 1cqi, 0.875rem)', // Mobile-first: 12px -> 14px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -381,7 +381,7 @@ export const typography = {
     },
     small: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -392,7 +392,7 @@ export const typography = {
     },
     medium: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: '1rem', // Standard base: 16px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -403,7 +403,7 @@ export const typography = {
     },
     mediumPlus: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1.125rem, 2cqi, 1.375rem)', // Mobile-first: 18px -> 22px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -414,7 +414,7 @@ export const typography = {
     },
     large: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1.25rem, 2.5cqi, 1.75rem)', // Mobile-first: 20px -> 28px
       fontWeight: '700' as const, // Inter Bold
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
@@ -425,7 +425,7 @@ export const typography = {
     },
     xLarge: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1.5rem, 3.5cqi, 2.25rem)', // Mobile-first: 24px -> 36px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
@@ -436,7 +436,7 @@ export const typography = {
     },
     xxLarge: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(2rem, 5cqi, 3.5rem)', // Mobile-first: 32px -> 56px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
@@ -449,7 +449,7 @@ export const typography = {
     // Headings
     h1: {
       fontFamily:
-        'Inter Variable, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(2.5rem, 8cqi, 6rem)', // Mobile-first: 40px -> container query -> 96px max
       fontWeight: '800' as const,
       fontVariationSettings: '"wght" 800, "wdth" 200, "slnt" 0',
@@ -460,7 +460,7 @@ export const typography = {
     },
     h2: {
       fontFamily:
-        'Inter Variable, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(2rem, 5cqi, 3.5rem)', // Mobile-first: 32px -> 56px
       fontWeight: '800' as const,
       fontVariationSettings: '"wght" 800, "wdth" 200, "slnt" 0',
@@ -471,7 +471,7 @@ export const typography = {
     },
     h3: {
       fontFamily:
-        'Inter Variable, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1.5rem, 3.5cqi, 2.25rem)', // Mobile-first: 24px -> 36px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
@@ -482,7 +482,7 @@ export const typography = {
     },
     h4: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1.25rem, 2.5cqi, 1.75rem)', // Mobile-first: 20px -> 28px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
@@ -493,7 +493,7 @@ export const typography = {
     },
     h5: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1.125rem, 2cqi, 1.5rem)', // Mobile-first: 18px -> 24px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
@@ -504,7 +504,7 @@ export const typography = {
     },
     h6: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.875rem, 1.5cqi, 1.1rem)', // Mobile-first: 16px -> 20px
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 400, "slnt" 0',
@@ -517,7 +517,7 @@ export const typography = {
     // Body and utility text
     body: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1rem, 1.5cqi, 1.125rem)', // Mobile-first: 16px -> 18px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -528,7 +528,7 @@ export const typography = {
     },
     bodySmall: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -539,7 +539,7 @@ export const typography = {
     },
     homeH3: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1.75rem, 4.5cqi, 3rem)', // Mobile-first: 28px -> 48px
       fontWeight: '500' as const, // Inter Medium
       fontVariationSettings: '"wght" 500, "wdth" 125, "slnt" 0',
@@ -550,7 +550,7 @@ export const typography = {
     },
     paragraph: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1rem, 1.5cqi, 1.125rem)', // Match body sizing
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -562,7 +562,7 @@ export const typography = {
 
     label: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.875rem, 1.25cqi, 1rem)', // Mobile-first: 14px -> 16px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -573,7 +573,7 @@ export const typography = {
     },
     quote: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(1.125rem, 2cqi, 1.5rem)', // Mobile-first: 18px -> 24px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -604,7 +604,7 @@ export const typography = {
     },
     caption: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.75rem, 1cqi, 0.875rem)', // Mobile-first: 12px -> 14px
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
@@ -635,7 +635,7 @@ export const typography = {
     },
     glyphTag: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.75rem, 1.5cqi, 0.875rem)',
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
@@ -645,7 +645,7 @@ export const typography = {
     },
     emotionalCue: {
       fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
+        '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
       fontSize: 'clamp(0.875rem, 2cqi, 1rem)',
       fontWeight: '500' as const,
       fontVariationSettings: '"wght" 500, "wdth" 100, "slnt" 0',
