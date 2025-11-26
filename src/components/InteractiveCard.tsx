@@ -55,7 +55,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
   const cardStyles: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: isCentered ? 'center' : 'stretch',
     padding: isCentered ? '2rem 1.5rem' : '1rem',
     borderRadius: theme.borderRadius.container.medium,
@@ -85,7 +85,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
               iconName={icon}
               size='xLarge'
               color={theme.palette.themePrimary}
-              style={{ marginBottom: '0.5rem' }}
+              style={{ marginBottom: '1rem', fontSize: '3rem' }}
             />
           )}
           {hasTitle && (
@@ -120,7 +120,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
           <div
             style={{
               display: 'flex',
-              alignItems: hasTitle ? 'center' : 'flex-start',
+              alignItems: 'center',
               gap: '1rem',
             }}
           >

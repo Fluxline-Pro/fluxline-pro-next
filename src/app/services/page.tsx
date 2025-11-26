@@ -70,7 +70,7 @@ export default function ServicesPage() {
                 description={service.description}
                 icon={service.icon}
                 href={service.path}
-                iconPosition='left'
+                iconPosition='center'
                 showLearnMore={true}
               />
             ))}

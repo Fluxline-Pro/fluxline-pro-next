@@ -5,6 +5,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '@/theme/components/typography';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { FluentIcon } from '@/theme/components/fluent-icon';
+import Link from 'next/link';
 
 export interface HeroProps {
   /**
@@ -47,6 +48,11 @@ export interface HeroProps {
    * @default false
    */
   showShadow?: boolean;
+  /**
+   * Show back arrow icon next to title
+   * @default false
+   */
+  backArrow?: boolean;
 }
 
 /**
@@ -74,6 +80,7 @@ export const Hero: React.FC<HeroProps> = ({
   style,
   showBorder = true,
   showShadow = false,
+  backArrow = false,
 }) => {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
@@ -109,6 +116,35 @@ export const Hero: React.FC<HeroProps> = ({
           flexWrap: isMobile ? 'nowrap' : 'wrap',
         }}
       >
+        {backArrow && (
+          <Link href='/services' style={{ textDecoration: 'none' }}>
+            <div
+              style={{
+                display: 'inline-block',
+                transition: 'transform 0.2s ease',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform =
+                  'translateX(-4px) scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateX(0) scale(1)';
+              }}
+            >
+              <FluentIcon
+                iconName='Back'
+                size='large'
+                color={theme.palette.themePrimary}
+                style={{
+                  flexShrink: 0,
+                  marginTop: isMobile ? '0.25rem' : 0,
+                  marginRight: '0.5rem',
+                }}
+              />
+            </div>
+          </Link>
+        )}
         {iconName && (
           <FluentIcon
             iconName={iconName}

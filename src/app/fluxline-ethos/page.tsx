@@ -100,7 +100,7 @@ export default function FluxlineEthosPage() {
                 description={service.description}
                 icon={service.icon}
                 href={service.link}
-                iconPosition='left'
+                iconPosition='center'
                 showLearnMore={true}
               />
             ))}

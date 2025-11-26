@@ -815,7 +815,7 @@ export const responsiveValue = (
     xxl?: keyof typeof spacing;
   }
 ) => {
-  const styles: any = {};
+  const styles: Record<string, string> = {};
 
   if (values.xs) styles.xs = theme.spacing[values.xs];
   if (values.sm) styles.sm = theme.spacing[values.sm];

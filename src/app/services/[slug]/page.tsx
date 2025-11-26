@@ -5,7 +5,7 @@
  * Dynamic route for individual service pages
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
@@ -14,7 +14,6 @@ import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
 import { InteractiveCard } from '@/components/InteractiveCard';
 import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import {
   ProgramTiersTable,
@@ -51,23 +50,21 @@ export default function ServiceDetailPage() {
   // Define features based on service type
   const getFeatures = (serviceId: string): string[] => {
     const featuresMap: Record<string, string[]> = {
-      consulting: [
-        'Strategic systems design and operational optimization',
-        'Modular frameworks for scalable growth',
-        'Tech integration and infrastructure planning',
-        'Business soul alignment and values-driven strategy',
-      ],
-      development: [
+      'development': [
         'Custom web applications and digital platforms',
         'Intuitive UX and resilient infrastructure',
         'CI/CD pipelines and cloud architecture',
         'Full-stack development with long-term maintainability',
+        'API design and third-party integrations',
+        'Performance optimization and scalability solutions',
       ],
-      design: [
+      'design': [
         'Visual identity and brand architecture',
         'Digital experience design',
         'Modular design systems',
         'Symbolic and emotionally resonant design',
+        'User-centered design methodologies and thinking',
+        'Cross-platform consistency and responsiveness',
       ],
       'personal-training': [
         'Personalized fitness and wellness coaching',
@@ -77,17 +74,29 @@ export default function ServiceDetailPage() {
         'Mindset supupport and behavioral change strategies',
         'Flexible scheduling and remote coaching options',
       ],
-      'education-training': [
-        'Experiential learning and leadership workshops',
-        'Emotional intelligence development',
-        'Strategic embodiment coaching',
-        'Team leadership and influence cultivation',
-      ],
       'resonance-core': [
         'Archetypal mapping and identity exploration',
         'Emotional emergence and breakthrough documentation',
         'Symbolic rituals and transformational practices',
         'Legacy building and mission alignment',
+        'Community resonance and network cultivation',
+        'Ongoing mentorship and evolutionary support',
+      ],
+      'education-training': [
+        'Experiential learning and leadership workshops',
+        'Emotional intelligence development',
+        'Strategic embodiment coaching',
+        'Team leadership and influence cultivation',
+        'Custom curriculum design and delivery',
+        'Ongoing support and community building',
+      ],
+      'consulting': [
+        'Strategic systems design and operational optimization',
+        'Modular frameworks for scalable growth',
+        'Tech integration and infrastructure planning',
+        'Business soul alignment and values-driven strategy',
+        'Change management and transformation facilitation',
+        'Leadership coaching and team dynamics',
       ],
     };
     return featuresMap[serviceId] || [];
@@ -109,6 +118,7 @@ export default function ServiceDetailPage() {
           title={service.title}
           iconName={service.icon}
           subtitle={service.description}
+          backArrow={true}
         >
           <div
             style={{
