@@ -4,9 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form';
+import { ContentNotFound } from '@/components/ContentNotFound';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { format } from 'date-fns';
 import type { PressRelease } from '@/store/mock-data/pressReleaseMock';
@@ -27,36 +25,14 @@ export function PressReleaseDetailClient({
 
   if (!pressRelease) {
     return (
-      <UnifiedPageWrapper layoutType='responsive-grid'>
-        <div
-          style={{
-            padding: theme.spacing.xl,
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant='h2'
-            style={{ color: theme.palette.red, marginBottom: theme.spacing.m }}
-          >
-            Press Release Not Found
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l,
-            }}
-          >
-            The requested press release could not be found.
-          </Typography>
-          <FormButton
-            variant='primary'
-            onClick={() => router.push('/press-release')}
-          >
-            ← Back to Press Releases
-          </FormButton>
-        </div>
-      </UnifiedPageWrapper>
+      <ContentNotFound
+        title='Press Release Not Found'
+        message='The requested press release could not be found.'
+        backButton={{
+          label: '← Back to Press Releases',
+          url: '/press-release',
+        }}
+      />
     );
   }
 
