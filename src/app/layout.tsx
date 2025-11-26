@@ -7,6 +7,7 @@ import '@fontsource-variable/inter';
 import './tailwind.css'; // ← Tailwind base/utilities first
 import './globals.scss'; // ← Your custom styles override Tailwind
 import ThemeProvider from '../theme/contexts/ThemeProvider';
+import { ThemeOverrideProvider } from '../theme/contexts/ThemeOverrideContext';
 import { FontScaleProvider } from '../theme/providers';
 import { Header } from '../theme/components/header';
 import { SkipToContent } from '../theme/components/skip-to-content';
@@ -92,11 +93,13 @@ export default function RootLayout({
           }}
         />
         <FontScaleProvider>
-          <ThemeProvider>
-            <SkipToContent />
-            <Header />
-            {children}
-          </ThemeProvider>
+          <ThemeOverrideProvider>
+            <ThemeProvider>
+              <SkipToContent />
+              <Header />
+              {children}
+            </ThemeProvider>
+          </ThemeOverrideProvider>
         </FontScaleProvider>
       </body>
     </html>

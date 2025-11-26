@@ -7,6 +7,7 @@ import { Typography } from '@/theme/components/typography';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { FadeUp } from '@/animations/fade-animations';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useThemeOverride } from '@/theme/contexts/ThemeOverrideContext';
 import { useBackgroundImage } from '@/theme/hooks/useBackgroundImage';
 import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { IExtendedTheme } from '@/theme/theme';
@@ -130,7 +131,7 @@ const HomeContent: React.FC<{
       ...animationStyles.slideInRight,
     },
     mainTitle: {
-      color: theme.palette.neutralLighterAlt,
+      color: theme.palette.white,
       marginBottom: isMobileLandscape ? '0.25rem' : theme.spacing.s,
       fontSize: isMobileLandscape
         ? 'clamp(1.8rem, 6vw, 3rem)'
@@ -276,10 +277,12 @@ const HomeContent: React.FC<{
  * Home Page
  * Landing page with hero section, animated text, and call-to-action button
  * Uses ViewportGrid with background image positioning logic
+ * Forces dark mode for this page only without affecting user's saved preference
  */
 export default function Home() {
   const { backgroundImage } = useBackgroundImage();
   const { theme, themeMode, layoutPreference } = useAppTheme();
+  const { setOverrideThemeMode } = useThemeOverride();
   const isMobile = useIsMobile();
   const orientation = useDeviceOrientation();
   // For home page layout, treat tablet portrait like mobile (content at bottom)
@@ -287,6 +290,16 @@ export default function Home() {
   const [backgroundLoaded, setBackgroundLoaded] = React.useState(false);
   const [shouldStartAnimations, setShouldStartAnimations] =
     React.useState(false);
+
+  // Force dark mode for home page only - doesn't affect user's saved preference
+  React.useEffect(() => {
+    setOverrideThemeMode('dark');
+
+    return () => {
+      // Clear override when leaving the page
+      setOverrideThemeMode(null);
+    };
+  }, [setOverrideThemeMode]);
 
   // Add home-page class to body for transparent background
   React.useEffect(() => {

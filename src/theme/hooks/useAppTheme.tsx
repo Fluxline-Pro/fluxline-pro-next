@@ -8,10 +8,14 @@ import {
   LayoutPreference,
   IExtendedTheme,
 } from '../theme';
+import { useThemeOverride } from '../contexts/ThemeOverrideContext';
 
 export const useAppTheme = () => {
   const { preferences, setPreference, toggleTheme } = useUserPreferencesStore();
-  const themeMode = preferences.themeMode;
+  const { overrideThemeMode } = useThemeOverride();
+
+  // Use override theme if set, otherwise use user's preference
+  const themeMode = overrideThemeMode ?? preferences.themeMode;
   const fontScale = preferences.fontScale;
   const theme = themeMap[themeMode] as IExtendedTheme;
   const layoutPreference = preferences.layoutPreference;
