@@ -11,6 +11,8 @@ import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { FormSelect } from '@/theme/components/form';
 import { format } from 'date-fns';
 import { BlogPost } from './types';
+import { Hero } from '@/theme/components/hero/Hero';
+import { getIconForPath } from '@/utils/navigation-icons';
 
 interface BlogListingClientProps {
   initialPosts: BlogPost[];
@@ -172,78 +174,50 @@ export function BlogListingClient({
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       {/* Header Section */}
-      <div style={{ marginBottom: theme.spacing.l2 }}>
-        <Typography
-          variant='h1'
-          style={{
-            fontWeight: 700,
-            color: theme.palette.themePrimary,
-            marginBottom: theme.spacing.m,
-            fontSize: '2.5rem',
-          }}
-        >
-          Blog
-        </Typography>
-        <Typography
-          variant='p'
-          style={{
-            color: theme.palette.neutralSecondary,
-            marginBottom: theme.spacing.l1,
-            fontSize: '1.1rem',
-          }}
-        >
-          Insights, best practices, and thoughts on technology, design, and
-          business transformation.
-        </Typography>
-      </div>
+      <Hero
+        title='Blog'
+        iconName='TextDocumentShared'
+        description='Insights, best practices, and thoughts on technology, design, and business transformation. Explore articles on software development, leadership, wellness, and strategic innovation.'
+        filters={
+          <>
+            {/* Category Filter */}
+            <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+              <FormSelect
+                label='Category'
+                options={categoryOptions}
+                value={selectedCategory || ''}
+                onChange={(value) => {
+                  setSelectedCategory(value || undefined);
+                }}
+              />
+            </div>
 
-      {/* Filters and View Selector */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          gap: theme.spacing.m,
-          marginBottom: theme.spacing.l1,
-          alignItems: 'flex-end',
-        }}
-      >
-        {/* Category Filter */}
-        <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <FormSelect
-            label='Category'
-            options={categoryOptions}
-            value={selectedCategory || ''}
-            onChange={(value) => {
-              setSelectedCategory(value || undefined);
-            }}
-          />
-        </div>
+            {/* Tag Filter */}
+            <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+              <FormSelect
+                label='Tag'
+                options={tagOptions}
+                value={selectedTag || ''}
+                onChange={(value) => {
+                  setSelectedTag(value || undefined);
+                }}
+              />
+            </div>
 
-        {/* Tag Filter */}
-        <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <FormSelect
-            label='Tag'
-            options={tagOptions}
-            value={selectedTag || ''}
-            onChange={(value) => {
-              setSelectedTag(value || undefined);
-            }}
-          />
-        </div>
-
-        {/* View Type Selector */}
-        <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-          <FormSelect
-            label='View Type'
-            options={viewOptions}
-            value={viewType}
-            onChange={(value) => {
-              setViewType(value as 'grid' | 'small-tile' | 'large-tile');
-            }}
-          />
-        </div>
-      </div>
+            {/* View Type Selector */}
+            <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+              <FormSelect
+                label='View Type'
+                options={viewOptions}
+                value={viewType}
+                onChange={(value) => {
+                  setViewType(value as 'grid' | 'small-tile' | 'large-tile');
+                }}
+              />
+            </div>
+          </>
+        }
+      />
 
       {/* Results Count */}
       <Typography

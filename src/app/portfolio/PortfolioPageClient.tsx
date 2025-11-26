@@ -11,6 +11,8 @@ import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { FormSelect } from '@/theme/components/form';
 import { FormButton } from '@/theme/components/form';
 import { PortfolioProject } from './types';
+import { Hero } from '@/theme/components/hero/Hero';
+import { getIconForPath } from '@/utils/navigation-icons';
 
 interface PortfolioPageProps {
   projects: PortfolioProject[];
@@ -152,82 +154,53 @@ export default function PortfolioPageClient({
         }}
       >
         {/* Page Header */}
-        <div style={{ marginBottom: theme.spacing.l2 }}>
-          <Typography
-            variant='h1'
-            style={{
-              fontWeight: 700,
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '2.5rem',
-            }}
-          >
-            Portfolio
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l1,
-              fontSize: '1.1rem',
-            }}
-          >
-            Explore our portfolio of innovative projects spanning web
-            applications, mobile apps, enterprise software, and more. Each
-            project demonstrates our commitment to excellence and innovation.
-          </Typography>
-        </div>
+        <Hero
+          title='Portfolio'
+          iconName='FolderQuery'
+          description='Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more. Each project demonstrates our commitment to excellence and innovation.'
+          filters={
+            <>
+              {/* Tag Filter */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='Tags'
+                  placeholder='All Tags'
+                  multiSelect
+                  options={allTags.map((tag) => ({ key: tag, text: tag }))}
+                  selectedKeys={selectedTags}
+                  onMultiChange={handleTagChange}
+                />
+              </div>
 
-        {/* Filters and View Selector */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: theme.spacing.m,
-            marginBottom: theme.spacing.l1,
-            alignItems: 'flex-end',
-          }}
-        >
-          {/* Tag Filter */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <FormSelect
-              label='Tags'
-              placeholder='All Tags'
-              multiSelect
-              options={allTags.map((tag) => ({ key: tag, text: tag }))}
-              selectedKeys={selectedTags}
-              onMultiChange={handleTagChange}
-            />
-          </div>
+              {/* Technology Filter */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='Technologies'
+                  placeholder='All Technologies'
+                  multiSelect
+                  options={allTechnologies.map((tech) => ({
+                    key: tech,
+                    text: tech,
+                  }))}
+                  selectedKeys={selectedTechnologies}
+                  onMultiChange={handleTechnologyChange}
+                />
+              </div>
 
-          {/* Technology Filter */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <FormSelect
-              label='Technologies'
-              placeholder='All Technologies'
-              multiSelect
-              options={allTechnologies.map((tech) => ({
-                key: tech,
-                text: tech,
-              }))}
-              selectedKeys={selectedTechnologies}
-              onMultiChange={handleTechnologyChange}
-            />
-          </div>
-
-          {/* View Type Selector */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <FormSelect
-              label='View Type'
-              options={viewOptions}
-              value={viewType}
-              onChange={(value) => {
-                setViewType(value as 'grid' | 'small-tile' | 'large-tile');
-              }}
-            />
-          </div>
-        </div>
+              {/* View Type Selector */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='View Type'
+                  options={viewOptions}
+                  value={viewType}
+                  onChange={(value) => {
+                    setViewType(value as 'grid' | 'small-tile' | 'large-tile');
+                  }}
+                />
+              </div>
+            </>
+          }
+        />
 
         {/* Results Count */}
         <Typography

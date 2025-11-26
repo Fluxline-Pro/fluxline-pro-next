@@ -12,6 +12,7 @@ import { IExtendedTheme } from '@/theme/theme';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FormButton } from '@/theme/components/form';
 import { Hero } from '@/theme/components/hero/Hero';
+import { getIconForPath } from '@/utils/navigation-icons';
 import {
   ethosHero,
   ethosAbout,
@@ -30,6 +31,7 @@ export default function FluxlineEthosPage() {
         {/* Hero Section */}
         <Hero
           title={ethosHero.title}
+          iconName={getIconForPath('/about')}
           subtitle={ethosHero.subtitle}
           description={ethosHero.description}
         />

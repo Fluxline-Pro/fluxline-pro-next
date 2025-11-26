@@ -14,6 +14,7 @@ import { Typography } from '@/theme/components/typography';
 import { ScrollsGrid } from './components/ScrollsGrid';
 import { getAllScrolls } from './scrollsData';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { getIconForPath } from '@/utils/navigation-icons';
 
 export default function ScrollsPage() {
   const scrolls = getAllScrolls();
@@ -25,7 +26,7 @@ export default function ScrollsPage() {
         {/* Hero Section */}
         <Hero
           title='Explore the Scrolls'
-          iconName='Documentation'
+          iconName={getIconForPath('/services/scrolls')}
           description='Access our comprehensive collection of strategic insights and frameworks. Each scroll offers deep-dive guidance on transforming your business, craft, or personal practice with intentionality and resonance.'
         >
           <Callout

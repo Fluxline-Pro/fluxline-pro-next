@@ -15,6 +15,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { TeamMemberCard } from './components/TeamMemberCard';
 import { CompanyStatistics } from './components/CompanyStatistics';
 import { CompanyTimeline } from './components/CompanyTimeline';
+import { getIconForPath } from '@/utils/navigation-icons';
 import {
   TEAM_MEMBERS,
   COMPANY_STATISTICS,
@@ -33,42 +34,44 @@ export default function AboutPage() {
         {/* Hero Section */}
         <Hero
           title='About Fluxline'
+          iconName={getIconForPath('/about')}
           description='Fluxline, also known as Fluxline Resonance Group, architects transformative systems, brand experiences, and human-centered technology—blending emotional intelligence, financial clarity, and somatic discipline. We specialize in modular web development, scalable design ecosystems, and strategic innovation that evolves with you.'
         >
-          {!isMobile && !isTablet && ( // shortens the hero text on mobile per design review
-            <>
-              <Typography
-                variant='p'
-                style={{
-                  color: theme.palette.neutralSecondary,
-                  fontSize: '1.125rem',
-                  lineHeight: theme.typography.lineHeights.relaxed,
-                }}
-              >
-                Whether you&apos;re an individual seeking personal growth or a
-                business ready to scale with purpose, our <em>coaching</em>,{' '}
-                <em>wellness programs</em>, and <em>infrastructure design</em>{' '}
-                help you align your <strong>drive</strong> with your{' '}
-                <em>innate identity</em>. We believe transformation isn&apos;t
-                just about metrics—it&apos;s about honoring{' '}
-                <em>emotional rhythm</em>, <em>creative truth</em>, and{' '}
-                <em>legacy resonance</em>.
-              </Typography>
+          {!isMobile &&
+            !isTablet && ( // shortens the hero text on mobile per design review
+              <>
+                <Typography
+                  variant='p'
+                  style={{
+                    color: theme.palette.neutralSecondary,
+                    fontSize: '1.125rem',
+                    lineHeight: theme.typography.lineHeights.relaxed,
+                  }}
+                >
+                  Whether you&apos;re an individual seeking personal growth or a
+                  business ready to scale with purpose, our <em>coaching</em>,{' '}
+                  <em>wellness programs</em>, and <em>infrastructure design</em>{' '}
+                  help you align your <strong>drive</strong> with your{' '}
+                  <em>innate identity</em>. We believe transformation isn&apos;t
+                  just about metrics—it&apos;s about honoring{' '}
+                  <em>emotional rhythm</em>, <em>creative truth</em>, and{' '}
+                  <em>legacy resonance</em>.
+                </Typography>
 
-              <Typography
-                variant='p'
-                style={{
-                  color: theme.palette.neutralSecondary,
-                  fontSize: '1.125rem',
-                  lineHeight: theme.typography.lineHeights.relaxed,
-                  paddingBottom: theme.spacing.m,
-                }}
-              >
-                <strong>Fluxline</strong> builds <em>systems that breathe</em>,{' '}
-                <em>brands that feel</em>, and <em>legacies that last</em>.
-              </Typography>
-            </>
-          )}
+                <Typography
+                  variant='p'
+                  style={{
+                    color: theme.palette.neutralSecondary,
+                    fontSize: '1.125rem',
+                    lineHeight: theme.typography.lineHeights.relaxed,
+                    paddingBottom: theme.spacing.m,
+                  }}
+                >
+                  <strong>Fluxline</strong> builds <em>systems that breathe</em>
+                  , <em>brands that feel</em>, and <em>legacies that last</em>.
+                </Typography>
+              </>
+            )}
 
           {/* Quote Callout */}
           <Callout

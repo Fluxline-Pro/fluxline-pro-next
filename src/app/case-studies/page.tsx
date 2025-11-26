@@ -11,6 +11,8 @@ import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { FormSelect } from '@/theme/components/form';
 import { FormButton } from '@/theme/components/form';
 import { getCaseStudies } from './caseStudiesData';
+import { Hero } from '@/theme/components/hero/Hero';
+import { getIconForPath } from '@/utils/navigation-icons';
 
 /**
  * Case Studies Page Component
@@ -133,71 +135,41 @@ export default function CaseStudiesPage() {
         }}
       >
         {/* Page Header */}
-        <div style={{ marginBottom: theme.spacing.l2 }}>
-          <Typography
-            variant='h1'
-            style={{
-              fontWeight: 700,
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '2.5rem',
-            }}
-          >
-            Case Studies
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l1,
-              fontSize: '1.1rem',
-            }}
-          >
-            Explore our client success stories and discover how strategic
-            transformation drives measurable results. From digital
-            transformation to wellness platforms, see how we partner with
-            organizations to achieve their most ambitious goals.
-          </Typography>
-        </div>
+        <Hero
+          title='Case Studies'
+          iconName={getIconForPath('/case-studies')}
+          description='Explore our client success stories and discover how strategic transformation drives measurable results. From digital transformation to wellness platforms, see how we partner with organizations to achieve their most ambitious goals.'
+          filters={
+            <>
+              {/* Industry Filter */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='Industry'
+                  placeholder='All Industries'
+                  multiSelect
+                  options={allIndustries.map((industry) => ({
+                    key: industry,
+                    text: industry,
+                  }))}
+                  selectedKeys={selectedIndustries}
+                  onMultiChange={handleIndustryChange}
+                />
+              </div>
 
-        {/* Filters and View Selector */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: theme.spacing.m,
-            marginBottom: theme.spacing.l1,
-            alignItems: 'flex-end',
-          }}
-        >
-          {/* Industry Filter */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <FormSelect
-              label='Industry'
-              placeholder='All Industries'
-              multiSelect
-              options={allIndustries.map((industry) => ({
-                key: industry,
-                text: industry,
-              }))}
-              selectedKeys={selectedIndustries}
-              onMultiChange={handleIndustryChange}
-            />
-          </div>
-
-          {/* View Type Selector */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <FormSelect
-              label='View Type'
-              options={viewOptions}
-              value={viewType}
-              onChange={(value) => {
-                setViewType(value as 'grid' | 'small-tile' | 'large-tile');
-              }}
-            />
-          </div>
-        </div>
+              {/* View Type Selector */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='View Type'
+                  options={viewOptions}
+                  value={viewType}
+                  onChange={(value) => {
+                    setViewType(value as 'grid' | 'small-tile' | 'large-tile');
+                  }}
+                />
+              </div>
+            </>
+          }
+        />
 
         {/* Results Count */}
         <Typography

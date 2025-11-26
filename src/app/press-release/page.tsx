@@ -11,6 +11,8 @@ import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { FormSelect } from '@/theme/components/form';
 import { format } from 'date-fns';
 import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
+import { getIconForPath } from '@/utils/navigation-icons';
+import { Hero } from '@/theme/components/hero/Hero';
 
 /**
  * Press Release Page Component
@@ -159,70 +161,41 @@ export default function PressReleasePage() {
         }}
       >
         {/* Page Header */}
-        <div style={{ marginBottom: theme.spacing.l2 }}>
-          <Typography
-            variant='h1'
-            style={{
-              fontWeight: 700,
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '2.5rem',
-            }}
-          >
-            Press Release
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l1,
-              fontSize: '1.1rem',
-            }}
-          >
-            Public announcements, media features, and milestone broadcasts from
-            Fluxline Resonance Group. Stay informed about our latest
-            developments, partnerships, and achievements.
-          </Typography>
-        </div>
+        <Hero
+          title='Press Release'
+          iconName={getIconForPath('/press-release')}
+          description='Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group. Stay informed about our latest developments, partnerships, and achievements.'
+          filters={
+            <>
+              {/* Year Filter */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='Year'
+                  options={[
+                    { key: '', text: 'All Years' },
+                    ...allYears.map((year) => ({ key: year, text: year })),
+                  ]}
+                  value={selectedYear || ''}
+                  onChange={(value) => {
+                    setSelectedYear(value || undefined);
+                  }}
+                />
+              </div>
 
-        {/* Filters and View Selector */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: theme.spacing.m,
-            marginBottom: theme.spacing.l1,
-            alignItems: 'flex-end',
-          }}
-        >
-          {/* Year Filter */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <FormSelect
-              label='Year'
-              options={[
-                { key: '', text: 'All Years' },
-                ...allYears.map((year) => ({ key: year, text: year })),
-              ]}
-              value={selectedYear || ''}
-              onChange={(value) => {
-                setSelectedYear(value || undefined);
-              }}
-            />
-          </div>
-
-          {/* View Type Selector */}
-          <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
-            <FormSelect
-              label='View Type'
-              options={viewOptions}
-              value={viewType}
-              onChange={(value) => {
-                setViewType(value as 'grid' | 'small-tile' | 'large-tile');
-              }}
-            />
-          </div>
-        </div>
+              {/* View Type Selector */}
+              <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+                <FormSelect
+                  label='View Type'
+                  options={viewOptions}
+                  value={viewType}
+                  onChange={(value) => {
+                    setViewType(value as 'grid' | 'small-tile' | 'large-tile');
+                  }}
+                />
+              </div>
+            </>
+          }
+        />
 
         {/* Results Count */}
         <Typography

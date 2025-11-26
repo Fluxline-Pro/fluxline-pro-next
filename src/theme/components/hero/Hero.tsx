@@ -53,6 +53,11 @@ export interface HeroProps {
    * @default false
    */
   backArrow?: boolean;
+  /**
+   * Filter controls to display below description
+   * Renders above children if both are provided
+   */
+  filters?: React.ReactNode;
 }
 
 /**
@@ -81,6 +86,7 @@ export const Hero: React.FC<HeroProps> = ({
   showBorder = true,
   showShadow = false,
   backArrow = false,
+  filters,
 }) => {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
@@ -104,7 +110,7 @@ export const Hero: React.FC<HeroProps> = ({
         marginTop: !isMobile && !isTablet ? theme.spacing.xl : undefined,
         display: 'flex',
         flexDirection: 'column',
-        gap: isMobile ? theme.spacing.m : theme.spacing.l,
+        gap: isMobile ? theme.spacing.m : theme.spacing.xs,
         ...style,
       }}
     >
@@ -112,7 +118,7 @@ export const Hero: React.FC<HeroProps> = ({
         style={{
           display: 'flex',
           alignItems: isMobile ? 'flex-start' : 'center',
-          gap: isMobile ? '0.75rem' : 0,
+          gap: isMobile ? '0.75rem' : theme.spacing.xs,
           flexWrap: isMobile ? 'nowrap' : 'wrap',
         }}
       >
@@ -150,7 +156,11 @@ export const Hero: React.FC<HeroProps> = ({
             iconName={iconName}
             size={isMobile ? 'large' : 'xLarge'}
             color={theme.palette.themePrimary}
-            style={{ flexShrink: 0, marginTop: isMobile ? '0.25rem' : 0 }}
+            style={{
+              flexShrink: 0,
+              marginTop: isMobile ? '0.25rem' : 0,
+              marginRight: '1rem',
+            }}
           />
         )}
         <Typography
@@ -196,6 +206,20 @@ export const Hero: React.FC<HeroProps> = ({
         >
           {description}
         </Typography>
+      )}
+      {filters && (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: isMobile ? theme.spacing.s1 : theme.spacing.m,
+            marginTop: isMobile ? theme.spacing.m : theme.spacing.l,
+            alignItems: 'flex-end',
+          }}
+        >
+          {filters}
+        </div>
       )}
 
       {children && (

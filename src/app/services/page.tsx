@@ -11,6 +11,7 @@ import { InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Hero } from '@/theme/components/hero/Hero';
+import { getIconForPath } from '@/utils/navigation-icons';
 import {
   SERVICE_CATEGORIES,
   SERVICES_SUMMARY,
@@ -28,6 +29,7 @@ export default function ServicesPage() {
         {/* Page Header */}
         <Hero
           title='Our Services'
+          iconName={getIconForPath('/services')}
           subtitle={FLUXLINE_SECONDARY_TAGLINE}
           description={SERVICES_SUMMARY}
         />

@@ -10,6 +10,7 @@ import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { Hero } from '@/theme/components/hero/Hero';
 import { Callout } from '@/theme/components/callout';
+import { getIconForPath } from '@/utils/navigation-icons';
 
 interface ContentCategory {
   title: string;
@@ -90,6 +91,7 @@ export default function ContentPageClient() {
         {/* Page Header */}
         <Hero
           title='Content Hub'
+          iconName={getIconForPath('/content')}
           subtitle='Where Ideas Meet Execution'
           description="Explore our collection of articles, projects, and insights. Discover
             the work we've done and the ideas we're sharing with the

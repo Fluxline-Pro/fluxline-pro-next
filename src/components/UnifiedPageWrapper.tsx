@@ -74,8 +74,8 @@ const PAGE_CONFIGS: Record<
     imageText: 'Strategic Insights',
   },
   '/content': {
-    image: ContentImage.src,
-    imageText: 'Fluxline Content',
+    image: PortfolioImage.src,
+    imageText: 'Content Hub',
   },
   '/legal': {
     image: 'FLUXLINE_LOGO',
