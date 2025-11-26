@@ -5,14 +5,13 @@
  * Information about Fluxline and the company mission
  */
 
-import Link from 'next/link';
 import { UnifiedPageWrapper, InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
+import { FormButton } from '@/theme/components/form/FormButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useHoverEffects } from '@/hooks/useHoverEffects';
 import { TeamMemberCard } from './components/TeamMemberCard';
 import { CompanyStatistics } from './components/CompanyStatistics';
 import { CompanyTimeline } from './components/CompanyTimeline';
@@ -25,16 +24,6 @@ import {
 
 export default function AboutPage() {
   const { theme } = useAppTheme();
-  const buttonHoverEffects = useHoverEffects({
-    type: 'button',
-    hoverBgColor: theme.palette.themeLight,
-    defaultBgColor: theme.palette.themePrimary,
-    hoverTextColor:
-      theme.themeMode === 'dark' ? theme.palette.black : theme.palette.white,
-    defaultTextColor:
-      theme.themeMode === 'dark' ? theme.palette.black : theme.palette.white,
-    enableTransform: false,
-  });
   const isMobile = useIsMobile();
 
   return (
@@ -271,34 +260,14 @@ export default function AboutPage() {
           variant='subtle'
           title='Hear From Our Clients'
           action={
-            <Link
-              href='/testimonials'
-              className='inline-flex items-center px-6 py-3 rounded-md font-medium transition-colors duration-200'
-              style={{
-                backgroundColor: theme.palette.themePrimary,
-                color:
-                  theme.themeMode === 'dark'
-                    ? theme.palette.black
-                    : theme.palette.white,
-              }}
-              {...buttonHoverEffects}
-            >
-              Read Client Stories
-              <svg
-                className='ml-2 w-4 h-4'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M9 5l7 7-7 7'
-                />
-              </svg>
-            </Link>
+            <FormButton
+              text='Read Client Stories'
+              variant='primary'
+              size='large'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => (window.location.href = '/testimonials')}
+            />
           }
         >
           <Typography

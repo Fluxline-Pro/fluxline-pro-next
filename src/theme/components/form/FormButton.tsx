@@ -178,12 +178,8 @@ export const FormButton: React.FC<FormButtonProps> = ({
           : theme.palette.white
         : variant === 'secondary' || variant === 'outline'
           ? isHovered && !disabled
-            ? theme.themeMode === 'dark' ||
-              theme.themeMode === 'high-contrast' ||
-              theme.themeMode === 'grayscale-dark'
-              ? theme.palette.black
-              : theme.palette.white
-            : theme.palette.themePrimary
+            ? theme.palette.themePrimary
+            : theme.palette.neutralPrimary
           : theme.palette.neutralPrimary;
 
   const content = text || children;

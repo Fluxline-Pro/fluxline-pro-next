@@ -61,15 +61,6 @@ export default function FluxlineEthosPage() {
         {/* Hero Section */}
         <Hero title={ethosHero.title}>{heroContent({ theme })}</Hero>
 
-        {/* Divider */}
-        <hr
-          style={{
-            border: 'none',
-            height: '1px',
-            backgroundColor: theme.palette.neutralQuaternary,
-          }}
-        />
-
         {/* About Fluxline Section */}
         <section className='space-y-6'>
           <Typography
@@ -97,32 +88,6 @@ export default function FluxlineEthosPage() {
               {paragraph}
             </Typography>
           ))}
-          <Callout
-            variant='neutral'
-            title='Want to Know More?'
-            action={
-              <div style={{ textAlign: 'center' }}>
-                <FormButton
-                  text='Learn More About Fluxline'
-                  variant='primary'
-                  size='large'
-                  onClick={() => (window.location.href = '/about')}
-                />
-              </div>
-            }
-          >
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1.125rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
-              }}
-            >
-              Discover how Fluxline can partner with you to drive innovation and
-              transform your business.
-            </Typography>
-          </Callout>
         </section>
 
         {/* Divider */}
@@ -168,11 +133,11 @@ export default function FluxlineEthosPage() {
             ))}
           </div>
 
-          <div className='flex justify-center mt-4'>
+          <div className='flex justify-center mt-8'>
             <FormButton
               text='View All Services'
               variant='outline'
-              size='medium'
+              size='large'
               onClick={() => (window.location.href = '/services')}
             />
           </div>
@@ -187,19 +152,47 @@ export default function FluxlineEthosPage() {
           }}
         />
 
+        {/* Learn More Callout */}
+        <Callout
+          variant='subtle'
+          title='Want to Know More?'
+          action={
+            <FormButton
+              text='Learn More About Fluxline'
+              variant='secondary'
+              size='large'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => (window.location.href = '/about')}
+            />
+          }
+        >
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '1.125rem',
+              lineHeight: theme.typography.lineHeights.relaxed,
+            }}
+          >
+            Discover how Fluxline can partner with you to drive innovation and
+            transform your business.
+          </Typography>
+        </Callout>
+
         {/* CTA Section */}
         <Callout
           variant='accent'
           title={ethosCTA.title}
           action={
-            <div style={{ textAlign: 'center' }}>
-              <FormButton
-                text={ethosCTA.buttonText}
-                variant='primary'
-                size='large'
-                onClick={() => (window.location.href = ethosCTA.buttonLink)}
-              />
-            </div>
+            <FormButton
+              text={ethosCTA.buttonText}
+              variant='primary'
+              size='large'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => (window.location.href = ethosCTA.buttonLink)}
+            />
           }
         >
           <Typography
@@ -213,84 +206,6 @@ export default function FluxlineEthosPage() {
             {ethosCTA.description}
           </Typography>
         </Callout>
-        {/* Additional Links Section */}
-        {/* No longer needed per design review: TODO: Remove upon confirmation
-        <section
-          style={{
-            marginTop: '2rem',
-            padding: '1.5rem',
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1rem',
-              marginBottom: '1rem',
-            }}
-          >
-            Explore more about Fluxline
-          </Typography>
-          <div className='flex flex-wrap justify-center gap-4'>
-            <Link
-              href='/about'
-              style={{
-                color: theme.palette.themeTertiary,
-                textDecoration: 'none',
-                fontSize: '1rem',
-                fontWeight: theme.typography.fontWeights.medium,
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = theme.palette.themePrimary;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = theme.palette.themeTertiary;
-              }}
-            >
-              → About Us
-            </Link>
-            <span style={{ color: theme.palette.neutralTertiary }}>|</span>
-            <Link
-              href='/services'
-              style={{
-                color: theme.palette.themeTertiary,
-                textDecoration: 'none',
-                fontSize: '1rem',
-                fontWeight: theme.typography.fontWeights.medium,
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = theme.palette.themePrimary;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = theme.palette.themeTertiary;
-              }}
-            >
-              → Services
-            </Link>
-            <span style={{ color: theme.palette.neutralTertiary }}>|</span>
-            <Link
-              href='/services/scrolls'
-              style={{
-                color: theme.palette.themeTertiary,
-                textDecoration: 'none',
-                fontSize: '1rem',
-                fontWeight: theme.typography.fontWeights.medium,
-                transition: 'color 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = theme.palette.themePrimary;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = theme.palette.themeTertiary;
-              }}
-            >
-              → Explore the Scrolls
-            </Link>
-          </div>
-        </section> */}
       </div>
     </UnifiedPageWrapper>
   );
