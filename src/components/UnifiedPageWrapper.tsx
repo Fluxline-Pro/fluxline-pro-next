@@ -14,7 +14,11 @@ import { useContentFilterStore } from '../store/store';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
 import { useSimpleLayout } from '@/theme/hooks/useSimpleLayout';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
-import { useIsMobile, useIsTabletPortrait } from '@/theme/hooks/useMediaQuery';
+import {
+  useIsMobile,
+  useIsTabletPortrait,
+  useIsMobileLandscape,
+} from '@/theme/hooks/useMediaQuery';
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { useHoverEffects } from '../hooks/useHoverEffects';
 import { useHeaderHeight } from '../theme/hooks/useHeaderHeight';
@@ -244,6 +248,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   const { shouldReduceMotion } = useReducedMotion();
   const isMobile = useIsMobile();
   const isTabletPortrait = useIsTabletPortrait();
+  const isMobileLandscape = useIsMobileLandscape();
   const headerHeight = useHeaderHeight();
   const { containerStyle, contentStyle, imageStyle } = useSimpleLayout(
     theme,
@@ -500,8 +505,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   }
 
   // Responsive Grid Layout (from SimplePageWrapper) - DEFAULT
-  // Use stacked layout for mobile and tablet-portrait
-  const shouldUseStackedLayout = isMobile || isTabletPortrait;
+  // Use stacked layout for mobile portrait and tablet-portrait
+  // Mobile landscape uses the 3fr/9fr grid like tablet landscape
+  const shouldUseStackedLayout =
+    (isMobile && !isMobileLandscape) || isTabletPortrait;
 
   // Animation variants
   const fadeInVariants: Variants = {

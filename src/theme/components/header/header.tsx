@@ -237,6 +237,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
+                  textAlign: isLeftHanded ? 'right' : 'left',
                 }}
               >
                 {isHomePage ? 'Fluxline' : currentPageTitle}

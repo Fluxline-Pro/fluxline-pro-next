@@ -116,9 +116,15 @@ export const useIsPortrait = () => {
 };
 
 export const useIsMobileLandscape = () => {
-  const isMobile = useIsMobile();
-  const isLandscape = useIsLandscape();
-  return isMobile && isLandscape;
+  const { windowWidth, windowHeight } = useWindowSize();
+  const aspectRatio = windowWidth / windowHeight;
+  const LANDSCAPE_THRESHOLD = 1.25;
+
+  return (
+    aspectRatio >= LANDSCAPE_THRESHOLD &&
+    windowWidth <= breakpoints.lg &&
+    windowHeight < windowWidth
+  );
 };
 
 export const useIsTabletPortrait = () => {
