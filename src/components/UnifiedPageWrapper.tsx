@@ -652,7 +652,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 position: 'relative',
                 width: '100%',
                 maxWidth: '400px',
-                aspectRatio: '3/4',
+                height: 'auto',
                 borderRadius: theme.borderRadius.m,
                 overflow: 'hidden',
                 backgroundColor: theme.palette.neutralLighter,
@@ -663,10 +663,13 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               <Image
                 src={imageToDisplay}
                 alt={imageAltText}
-                fill
+                width={400}
+                height={0}
                 sizes='(max-width: 768px) 100vw, 400px'
                 style={{
-                  objectFit: 'cover',
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'contain',
                 }}
                 priority
                 placeholder='blur'
