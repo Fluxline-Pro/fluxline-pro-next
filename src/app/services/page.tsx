@@ -16,6 +16,8 @@ import {
   SERVICES_SUMMARY,
   FLUXLINE_SECONDARY_TAGLINE,
 } from './constants';
+import { Callout } from '@/theme/components/callout/Callout';
+import { FormButton } from '@/theme/components/form/FormButton';
 
 export default function ServicesPage() {
   const { theme } = useAppTheme();
@@ -46,9 +48,8 @@ export default function ServicesPage() {
             variant='h2'
             style={{
               color: theme.palette.themePrimary,
-              fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
-              fontWeight: theme.typography.fontWeights.semiBold,
-              marginBottom: '2rem',
+              fontSize: '2rem',
+              fontWeight: theme.typography.fontWeights.bold,
             }}
           >
             Service Offerings
@@ -76,50 +77,22 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div
-          style={{
-            padding: '2rem',
-            borderRadius: theme.borderRadius.container.medium,
-            border: `1px solid ${theme.palette.themeTertiary}`,
-            backgroundColor: 'transparent',
-            marginTop: '3rem',
-          }}
-        >
-          <Typography
-            variant='h3'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-              fontWeight: theme.typography.fontWeights.semiBold,
-              marginBottom: '1rem',
-            }}
-          >
-            Ready to Transform?
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-              marginBottom: '1.5rem',
-            }}
-          >
-            Every service is a curriculum gate. Let&apos;s design the systems,
-            strategies, and rituals that align your vision with reality.
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.themeTertiary,
-              fontSize: '1rem',
-              fontWeight: theme.typography.fontWeights.medium,
-            }}
-          >
-            → Contact us to get started
-          </Typography>
-        </div>
+        <Callout
+          variant='accent'
+          title='Ready to Transform?'
+          subtitle="Every service is a curriculum gate. Let's design the systems,
+            strategies, and rituals that align your vision with reality."
+          action={
+            <FormButton
+              text='Book a Consultation'
+              variant='primary'
+              size='large'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => (window.location.href = '/testimonials')}
+            />
+          }
+        />
       </div>
     </UnifiedPageWrapper>
   );

@@ -50,13 +50,14 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
 
   const isInteractive = Boolean(href || onClick);
   const isCentered = iconPosition === 'center';
+  const hasTitle = Boolean(title);
 
   const cardStyles: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: isCentered ? 'center' : 'stretch',
-    padding: isCentered ? '2rem 1.5rem' : '1.5rem',
+    padding: isCentered ? '2rem 1.5rem' : '1rem',
     borderRadius: theme.borderRadius.container.medium,
     border: `1px solid ${
       isHovered ? theme.palette.themePrimary : theme.palette.neutralTertiaryAlt
@@ -87,18 +88,20 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
               style={{ marginBottom: '0.5rem' }}
             />
           )}
-          <Typography
-            variant='h3'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '1.25rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-              marginBottom: '0.5rem',
-              textAlign: 'center',
-            }}
-          >
-            {title}
-          </Typography>
+          {hasTitle && (
+            <Typography
+              variant='h3'
+              style={{
+                color: theme.palette.themePrimary,
+                fontSize: '1.25rem',
+                fontWeight: theme.typography.fontWeights.semiBold,
+                marginBottom: '0.5rem',
+                textAlign: 'center',
+              }}
+            >
+              {title}
+            </Typography>
+          )}
           <Typography
             variant='p'
             style={{
@@ -112,44 +115,61 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
           </Typography>
         </>
       ) : (
-        // Left layout: icon and title in row, description below
+        // Left layout: icon and text in a row (for features/offers)
         <>
           <div
             style={{
               display: 'flex',
-              alignItems: 'center',
+              alignItems: hasTitle ? 'center' : 'flex-start',
               gap: '1rem',
-              marginBottom: '1rem',
             }}
           >
             {icon && (
               <FluentIcon
                 iconName={icon}
-                size='large'
-                color={theme.palette.themePrimary}
+                size='medium'
+                color={theme.palette.themeTertiary}
+                style={{ flexShrink: 0, marginTop: hasTitle ? 0 : '0.125rem' }}
               />
             )}
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              {title}
-            </Typography>
+            {hasTitle ? (
+              <div style={{ flex: 1 }}>
+                <Typography
+                  variant='h3'
+                  style={{
+                    color: theme.palette.themePrimary,
+                    fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
+                    fontWeight: theme.typography.fontWeights.semiBold,
+                    marginBottom: '0.5rem',
+                  }}
+                >
+                  {title}
+                </Typography>
+                <Typography
+                  variant='p'
+                  style={{
+                    color: theme.palette.neutralSecondary,
+                    fontSize: '1rem',
+                    lineHeight: theme.typography.lineHeights.relaxed,
+                  }}
+                >
+                  {description}
+                </Typography>
+              </div>
+            ) : (
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '1rem',
+                  lineHeight: theme.typography.lineHeights.relaxed,
+                  flex: 1,
+                }}
+              >
+                {description}
+              </Typography>
+            )}
           </div>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            {description}
-          </Typography>
         </>
       )}
 
