@@ -6,7 +6,7 @@
 import type { TeamMember } from './components/TeamMemberCard';
 import type { Statistic } from './components/CompanyStatistics';
 import type { TimelineEvent } from './components/CompanyTimeline';
-import type { CompanyValue } from './components/ValueCard';
+import type { CompanyValue } from './components/CompanyValues';
 
 /**
  * Team Members
