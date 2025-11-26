@@ -48,13 +48,12 @@ export function ScrollDetailModal({
       isOpen={isOpen}
       onDismiss={onClose}
       showCloseButton={false}
-      isBlocking={false}
-      containerStyle={{
+      style={{
         maxWidth: '900px',
         width: '90vw',
         maxHeight: '90vh',
         overflow: 'auto',
-      }}
+      }}  
     >
       <div
         style={{

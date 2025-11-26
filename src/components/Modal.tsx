@@ -25,6 +25,8 @@ export interface ModalProps {
   maxHeight?: string;
   /** Show close button (default: true) */
   showCloseButton?: boolean;
+  /** Additional styles for modal content */
+  style?: React.CSSProperties;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -35,6 +37,7 @@ export const Modal: React.FC<ModalProps> = ({
   maxWidth = '800px',
   maxHeight = '90vh',
   showCloseButton = true,
+  style,
 }) => {
   const { theme } = useAppTheme();
   const isDark =
@@ -97,6 +100,7 @@ export const Modal: React.FC<ModalProps> = ({
           borderRadius: theme.borderRadius.container.medium,
           boxShadow: theme.shadows.hero || theme.effects.elevation16,
           overflow: 'auto',
+          ...style,
         }}
         onClick={(e) => e.stopPropagation()}
       >
