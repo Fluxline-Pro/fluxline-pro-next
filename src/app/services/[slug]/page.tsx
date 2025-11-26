@@ -5,7 +5,7 @@
  * Dynamic route for individual service pages
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
@@ -16,8 +16,16 @@ import { InteractiveCard } from '@/components/InteractiveCard';
 import { Typography } from '@/theme/components/typography';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import {
+  ProgramTiersTable,
+  ProgramComparisonModal,
+} from '@/theme/components/pricing';
 import { SERVICE_CATEGORIES } from '../constants';
+import { SERVICE_PRICING } from '../pricing-data';
+import { SERVICE_SCROLL_MAPPING } from '../scroll-mapping';
+import { getScrollById } from '../scrolls/scrollsData';
 import { RelatedServices } from './components/related-services';
+import { ServiceScrollSection } from './components/service-scroll-section';
 
 /**
  * Service Detail Page Component
@@ -26,6 +34,7 @@ export default function ServiceDetailPage() {
   const params = useParams();
   const { theme } = useAppTheme();
   const slug = params.slug as string;
+  const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
 
   // Find the service by slug
   const service = SERVICE_CATEGORIES.find((s) => {
@@ -65,6 +74,8 @@ export default function ServiceDetailPage() {
         'Adaptive training systems for all bodies',
         'Movement patterns and chronic pain management',
         'Emotional intelligence in physical transformation',
+        'Mindset supupport and behavioral change strategies',
+        'Flexible scheduling and remote coaching options',
       ],
       'education-training': [
         'Experiential learning and leadership workshops',
@@ -83,6 +94,12 @@ export default function ServiceDetailPage() {
   };
 
   const features = getFeatures(service.id);
+  // Check if this service has pricing data
+  const pricingData = SERVICE_PRICING[service.id];
+
+  // Get related scroll/white paper
+  const scrollId = SERVICE_SCROLL_MAPPING[service.id];
+  const relatedScroll = scrollId ? getScrollById(scrollId) : undefined;
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -103,33 +120,78 @@ export default function ServiceDetailPage() {
           />
         </Hero>
 
+        {/* Related Scroll/White Paper Section */}
+        {relatedScroll && (
+          <>
+            <ServiceScrollSection scroll={relatedScroll} />
+            {/* Divider */}
+            <hr
+              style={{
+                border: 'none',
+                height: '1px',
+                backgroundColor: theme.palette.neutralQuaternary,
+              }}
+            />
+          </>
+        )}
+
         {/* Features Section */}
         {features.length > 0 && (
-          <section className='space-y-6'>
-            <Typography
-              variant='h2'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '2rem',
-                fontWeight: theme.typography.fontWeights.bold,
-              }}
-            >
-              What We Offer
-            </Typography>
+          <>
+            <section className='space-y-6'>
+              <Typography
+                variant='h2'
+                style={{
+                  color: theme.palette.themePrimary,
+                  fontSize: '2rem',
+                  fontWeight: theme.typography.fontWeights.bold,
+                }}
+              >
+                What We Offer
+              </Typography>
 
-            <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-              {features.map((feature, index) => (
-                <InteractiveCard
-                  key={index}
-                  id={`feature-${service.id}-${index}`}
-                  title=''
-                  description={feature}
-                  icon='CheckMark'
-                  iconPosition='left'
-                />
-              ))}
-            </div>
-          </section>
+              <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+                {features.map((feature, index) => (
+                  <InteractiveCard
+                    key={index}
+                    id={`feature-${service.id}-${index}`}
+                    title=''
+                    description={feature}
+                    icon='CheckMark'
+                    iconPosition='left'
+                  />
+                ))}
+              </div>
+            </section>
+            <hr
+              style={{
+                border: 'none',
+                height: '1px',
+                backgroundColor: theme.palette.neutralQuaternary,
+              }}
+            />
+          </>
+        )}
+
+        {/* Pricing Table (if available) */}
+        {pricingData && (
+          <>
+            <section>
+              <ProgramTiersTable
+                tiers={pricingData.tiers}
+                onViewComparison={() => setIsComparisonModalOpen(true)}
+                showComparisonButton={true}
+              />
+            </section>
+
+            <hr
+              style={{
+                border: 'none',
+                height: '1px',
+                backgroundColor: theme.palette.neutralQuaternary,
+              }}
+            />
+          </>
         )}
 
         {/* CTA Section */}
@@ -148,10 +210,18 @@ export default function ServiceDetailPage() {
             />
           }
         />
-
         {/* Related Services */}
         <RelatedServices currentServiceId={service.id} />
       </div>
+
+      {/* Program Comparison Modal */}
+      {pricingData && (
+        <ProgramComparisonModal
+          isOpen={isComparisonModalOpen}
+          onClose={() => setIsComparisonModalOpen(false)}
+          pricingData={pricingData}
+        />
+      )}
     </UnifiedPageWrapper>
   );
 }
