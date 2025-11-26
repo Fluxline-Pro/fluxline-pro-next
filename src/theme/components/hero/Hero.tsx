@@ -112,7 +112,7 @@ export const Hero: React.FC<HeroProps> = ({
         style={{
           display: 'flex',
           alignItems: isMobile ? 'flex-start' : 'center',
-          gap: isMobile ? '0.75rem' : theme.spacing.m,
+          gap: isMobile ? '0.75rem' : 0,
           flexWrap: isMobile ? 'nowrap' : 'wrap',
         }}
       >
@@ -191,7 +191,7 @@ export const Hero: React.FC<HeroProps> = ({
             color: theme.palette.neutralSecondary,
             fontSize: isMobile ? '1rem' : '1.125rem',
             lineHeight: isMobile ? '1.6' : theme.typography.lineHeights.relaxed,
-            margin: 0,
+            marginTop: '1rem',
           }}
         >
           {description}

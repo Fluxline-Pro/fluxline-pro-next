@@ -8,6 +8,8 @@ import { FormButton } from '@/theme/components/form';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { FluentIcon } from '@/theme/components/fluent-icon';
+import { Hero } from '@/theme/components/hero/Hero';
+import { Callout } from '@/theme/components/callout';
 
 interface ContentCategory {
   title: string;
@@ -44,7 +46,7 @@ export default function ContentPageClient() {
         'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
       path: '/portfolio',
       iconName: 'FolderQuery',
-      color: theme.palette.teal,
+      color: theme.palette.tealLight,
     },
     {
       title: 'Media',
@@ -52,7 +54,7 @@ export default function ContentPageClient() {
         'Videos, podcasts, and multimedia content showcasing our expertise and insights.',
       path: '/media',
       iconName: 'Video',
-      color: theme.palette.magenta,
+      color: theme.palette.magentaLight,
       comingSoon: true,
     },
     {
@@ -61,7 +63,7 @@ export default function ContentPageClient() {
         'Open source projects, code samples, and technical resources from our development team.',
       path: '/github',
       iconName: 'BranchMerge',
-      color: theme.palette.purple,
+      color: theme.palette.purpleLight,
       comingSoon: true,
     },
   ];
@@ -86,31 +88,14 @@ export default function ContentPageClient() {
         }}
       >
         {/* Page Header */}
-        <div style={{ marginBottom: theme.spacing.l2 }}>
-          <Typography
-            variant='h1'
-            style={{
-              fontWeight: 700,
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-            }}
-          >
-            Business Content
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l1,
-              fontSize: '1.1rem',
-              maxWidth: '800px',
-            }}
-          >
-            Explore our collection of articles, projects, and insights. Discover
-            the work we&apos;ve done and the ideas we&apos;re sharing with the
-            community.
-          </Typography>
-        </div>
+        <Hero
+          title='Content Hub'
+          subtitle='Where Ideas Meet Execution'
+          description="Explore our collection of articles, projects, and insights. Discover
+            the work we've done and the ideas we're sharing with the
+            community."
+          backArrow={false}
+        />
 
         {/* Content Categories Grid */}
         <div
@@ -120,12 +105,10 @@ export default function ContentPageClient() {
               ? '1fr'
               : orientation === 'ultrawide'
                 ? 'repeat(4, 1fr)'
-                : orientation === 'landscape' ||
-                    orientation === 'large-portrait'
-                  ? 'repeat(2, 1fr)'
-                  : '1fr',
+                : 'repeat(2, 1fr)',
             gap: theme.spacing.l1,
             marginBottom: theme.spacing.xxl,
+            marginTop: theme.spacing.xxl,
           }}
         >
           {contentCategories.map((category) => {
@@ -264,41 +247,22 @@ export default function ContentPageClient() {
         </div>
 
         {/* Call to Action Section */}
-        <div
-          style={{
-            marginTop: theme.spacing.xxl,
-            padding: theme.spacing.xl,
-            backgroundColor: theme.palette.neutralLighterAlt,
-            borderRadius: theme.effects.roundedCorner6,
-            textAlign: 'center',
-          }}
-        >
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-            }}
-          >
-            Stay Updated
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l,
-              maxWidth: '600px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            Subscribe to our newsletter to get the latest updates on new blog
-            posts, projects, and insights delivered to your inbox.
-          </Typography>
-          <FormButton onClick={() => router.push('/contact')}>
-            Get in Touch
-          </FormButton>
-        </div>
+        <Callout
+          variant='neutral'
+          title='Stay Updated'
+          subtitle='Subscribe to our newsletter to get the latest updates on new blog posts, projects, and insights delivered to your inbox.'
+          action={
+            <FormButton
+              variant='primary'
+              size='medium'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => router.push('/contact')}
+            >
+              Get in Touch
+            </FormButton>
+          }
+        />
       </div>
     </UnifiedPageWrapper>
   );
