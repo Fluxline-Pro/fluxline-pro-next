@@ -61,3 +61,7 @@ coverage/
 test-results/
 playwright-report/
 playwright/.cache/
+
+# Azure Functions
+api/local.settings.json
+api/node_modules/
