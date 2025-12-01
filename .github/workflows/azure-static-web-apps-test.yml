@@ -41,6 +41,8 @@ jobs:
         env:
           NODE_ENV: production
           NEXT_TELEMETRY_DISABLED: 1
+      - name: Install API Dependencies
+        run: cd api && npm install
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -59,7 +61,7 @@ jobs:
         with:
           action: 'upload'
           app_location: 'out'
-          api_location: ''
+          api_location: 'api'
           output_location: ''
           skip_app_build: true
           azure_static_web_apps_api_token: ${{ steps.get-token.outputs.SWA_TOKEN }}
