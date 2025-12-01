@@ -4,6 +4,10 @@
   "private": true,
   "description": "Azure Functions API for Fluxline Pro",
   "main": "contact/index.js",
+  "scripts": {
+    "start": "func start",
+    "test": "node test-contact.js"
+  },
   "dependencies": {
     "nodemailer": "^7.0.11"
   }
