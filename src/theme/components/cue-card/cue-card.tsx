@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { mergeStyleSets } from '@fluentui/react';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { Card } from '../card/card';
 import Link from 'next/link';
+import { Modal } from '@/components/Modal';
 
 /**
  * Data interface for CueCard content
@@ -70,12 +71,26 @@ export const CueCard: React.FC<CueCardProps> = ({
 }) => {
   const { theme } = useAppTheme();
   const { icon, title, mantra, action, overlay, link, linkText, tags } = data;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      setIsModalOpen(true);
+    }
+  };
 
   const classNames = mergeStyleSets({
     root: [
       {
         width: '100%',
-        maxWidth: variant === 'compact' ? '320px' : variant === 'inline' ? '280px' : '400px',
+        maxWidth:
+          variant === 'compact'
+            ? '320px'
+            : variant === 'inline'
+              ? '280px'
+              : '400px',
       },
       className,
     ],
@@ -89,12 +104,7 @@ export const CueCard: React.FC<CueCardProps> = ({
       marginBottom: theme.spacing.xs,
     },
     title: {
-      fontSize:
-        variant === 'compact'
-          ? theme.fonts.large.fontSize
-          : theme.fonts.xLarge.fontSize,
-      fontWeight: theme.fonts.xLarge.fontWeight as number,
-      fontFamily: theme.fonts.xLarge.fontFamily,
+      ...theme.typography.fonts.xxLarge,
       color: theme.palette.themePrimary,
       margin: 0,
       lineHeight: 1.2,
@@ -103,52 +113,43 @@ export const CueCard: React.FC<CueCardProps> = ({
       width: '100%',
       height: '1px',
       backgroundColor: theme.palette.neutralLight,
-      margin: `${theme.spacing.s} 0`,
+      margin: `${theme.spacing.xs} 0`,
     },
     label: {
-      fontSize: theme.fonts.small.fontSize,
-      fontWeight: 600,
+      ...theme.typography.fonts.glyphTag,
       color: theme.palette.neutralSecondary,
-      textTransform: 'uppercase' as const,
-      letterSpacing: '0.05em',
       marginBottom: theme.spacing.xs,
     },
     mantra: {
-      fontSize: theme.fonts.medium.fontSize,
-      fontFamily: theme.fonts.medium.fontFamily,
+      ...theme.typography.fonts.quote,
       fontStyle: 'italic',
       color: theme.palette.neutralPrimary,
       margin: 0,
-      lineHeight: 1.5,
     },
     action: {
-      fontSize: theme.fonts.medium.fontSize,
-      fontFamily: theme.fonts.medium.fontFamily,
-      fontWeight: 600,
+      ...theme.typography.fonts.mediumPlus,
+      fontWeight: theme.typography.fontWeights.semiBold,
       color: theme.palette.neutralPrimary,
       margin: 0,
-      lineHeight: 1.5,
     },
     overlay: {
-      fontSize: theme.fonts.medium.fontSize,
-      fontFamily: theme.fonts.medium.fontFamily,
+      ...theme.typography.fonts.emotionalCue,
       color: theme.palette.neutralSecondary,
       margin: 0,
-      lineHeight: 1.6,
     },
     footer: {
       marginTop: theme.spacing.s,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      flexWrap: 'wrap',
+      flexWrap: 'wrap' as const,
       gap: theme.spacing.s,
     },
     link: {
+      ...theme.typography.fonts.medium,
+      marginTop: theme.spacing.s,
       color: theme.palette.themePrimary,
       textDecoration: 'underline',
-      fontSize: theme.fonts.medium.fontSize,
-      fontFamily: theme.fonts.medium.fontFamily,
       cursor: 'pointer',
       transition: 'color 0.2s ease',
       ':hover': {
@@ -157,12 +158,11 @@ export const CueCard: React.FC<CueCardProps> = ({
     },
     tags: {
       display: 'flex',
-      flexWrap: 'wrap',
+      flexWrap: 'wrap' as const,
       gap: theme.spacing.xs,
     },
     tag: {
-      fontSize: theme.fonts.small.fontSize,
-      fontFamily: theme.fonts.small.fontFamily,
+      ...theme.typography.fonts.caption,
       backgroundColor: theme.palette.neutralLight,
       color: theme.palette.neutralSecondary,
       padding: `2px ${theme.spacing.xs}`,
@@ -173,70 +173,252 @@ export const CueCard: React.FC<CueCardProps> = ({
   const cardPadding = variant === 'compact' ? 'small' : 'medium';
 
   return (
-    <div className={classNames.root}>
-      <Card
-        elevation={2}
-        padding={cardPadding}
-        hoverable={!!onClick || !!link}
-        onClick={onClick}
-      >
-        <div className={classNames.cardContent}>
-          {/* Icon / Symbol */}
-          {icon && (
-            <div className={classNames.iconContainer} aria-hidden='true'>
-              {icon}
-            </div>
-          )}
-
-          {/* Title / Archetype */}
-          <h2 className={classNames.title}>{title}</h2>
-
-          <div className={classNames.divider} />
-
-          {/* Mantra / Invocation */}
-          <div>
-            <p className={classNames.label}>Mantra</p>
-            <p className={classNames.mantra}>&ldquo;{mantra}&rdquo;</p>
-          </div>
-
-          <div className={classNames.divider} />
-
-          {/* Action Prompt */}
-          <div>
-            <p className={classNames.label}>Action</p>
-            <p className={classNames.action}>{action}</p>
-          </div>
-
-          <div className={classNames.divider} />
-
-          {/* Emotional Overlay / Description */}
-          <div>
-            <p className={classNames.label}>Overlay</p>
-            <p className={classNames.overlay}>&ldquo;{overlay}&rdquo;</p>
-          </div>
-
-          {/* Optional Footer */}
-          {(link || (tags && tags.length > 0)) && (
-            <div className={classNames.footer}>
-              {tags && tags.length > 0 && (
-                <div className={classNames.tags}>
-                  {tags.map((tag) => (
-                    <span key={tag} className={classNames.tag}>
-                      {tag}
-                    </span>
-                  ))}
+    <>
+      <div className={classNames.root}>
+        <Card
+          elevation={2}
+          padding={cardPadding}
+          hoverable
+          onClick={handleCardClick}
+        >
+          <div className={classNames.cardContent}>
+            <div className='flex items-center'>
+              {/* Icon / Symbol */}
+              {icon && (
+                <div className={classNames.iconContainer} aria-hidden='true'>
+                  {icon}
                 </div>
               )}
-              {link && (
-                <Link href={link} className={classNames.link}>
-                  {linkText || 'Learn More'}
-                </Link>
-              )}
+
+              {/* Title / Archetype */}
+              <h2 className={classNames.title}>{title}</h2>
             </div>
-          )}
+            <div className={classNames.divider} />
+
+            {/* Mantra / Invocation */}
+            <div>
+              <p className={classNames.label}>Mantra</p>
+              <p className={classNames.mantra}>&ldquo;{mantra}&rdquo;</p>
+            </div>
+
+            <div className={classNames.divider} />
+
+            {/* Action Prompt */}
+            <div>
+              <p className={classNames.label}>Action</p>
+              <p className={classNames.action}>{action}</p>
+            </div>
+
+            <div className={classNames.divider} />
+
+            {/* Emotional Overlay / Description */}
+            <div>
+              <p className={classNames.label}>Overlay</p>
+              <p className={classNames.overlay}>&ldquo;{overlay}&rdquo;</p>
+            </div>
+
+            {/* Optional Footer */}
+            {(link || (tags && tags.length > 0)) && (
+              <div className={classNames.footer}>
+                {tags && tags.length > 0 && (
+                  <div className={classNames.tags}>
+                    {tags.map((tag) => (
+                      <span key={tag} className={classNames.tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {link && (
+              <Link href={link} className={classNames.link}>
+                {linkText || 'Learn More'}
+              </Link>
+            )}
+          </div>
+        </Card>
+      </div>
+
+      {/* Full-screen Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onDismiss={() => setIsModalOpen(false)}
+        ariaLabel={`${title} details`}
+        maxWidth='900px'
+      >
+        <div className='p-xl'>
+          {/* Modal Header */}
+          <div className='text-center mb-xxl'>
+            {icon && (
+              <div
+                style={{
+                  fontSize: '4rem',
+                  marginBottom: theme.spacing.l,
+                }}
+                aria-hidden='true'
+              >
+                {icon}
+              </div>
+            )}
+            <h1
+              style={{
+                ...theme.typography.fonts.xxLarge,
+                color: theme.palette.themePrimary,
+                margin: 0,
+                marginBottom: theme.spacing.m,
+              }}
+            >
+              {title}
+            </h1>
+          </div>
+
+          {/* Modal Content */}
+          <div className='flex flex-col gap-xxl'>
+            {/* Mantra Section */}
+            <section>
+              <h2
+                style={{
+                  ...theme.typography.fonts.glyphTag,
+                  color: theme.palette.themePrimary,
+                  marginBottom: theme.spacing.m,
+                }}
+              >
+                Mantra
+              </h2>
+              <blockquote
+                style={{
+                  ...theme.typography.fonts.xLarge,
+                  fontStyle: 'italic',
+                  color: theme.palette.neutralPrimary,
+                  margin: 0,
+                  padding: `${theme.spacing.m} ${theme.spacing.l}`,
+                  borderLeft: `4px solid ${theme.palette.themePrimary}`,
+                }}
+              >
+                &ldquo;{mantra}&rdquo;
+              </blockquote>
+            </section>
+
+            <hr
+              style={{
+                border: 'none',
+                borderTop: `2px solid ${theme.palette.neutralLight}`,
+                margin: 0,
+              }}
+            />
+
+            {/* Action Section */}
+            <section>
+              <h2
+                style={{
+                  ...theme.typography.fonts.glyphTag,
+                  color: theme.palette.themePrimary,
+                  marginBottom: theme.spacing.m,
+                }}
+              >
+                Action
+              </h2>
+              <p
+                style={{
+                  ...theme.typography.fonts.large,
+                  fontWeight: theme.typography.fontWeights.semiBold,
+                  color: theme.palette.neutralPrimary,
+                  margin: 0,
+                }}
+              >
+                {action}
+              </p>
+            </section>
+
+            <hr
+              style={{
+                border: 'none',
+                borderTop: `2px solid ${theme.palette.neutralLight}`,
+                margin: 0,
+              }}
+            />
+
+            {/* Overlay Section */}
+            <section>
+              <h2
+                style={{
+                  ...theme.typography.fonts.glyphTag,
+                  color: theme.palette.themePrimary,
+                  marginBottom: theme.spacing.m,
+                }}
+              >
+                Overlay
+              </h2>
+              <p
+                style={{
+                  ...theme.typography.fonts.emotionalCue,
+                  color: theme.palette.neutralSecondary,
+                  margin: 0,
+                  lineHeight: 1.6,
+                }}
+              >
+                &ldquo;{overlay}&rdquo;
+              </p>
+            </section>
+
+            {/* Tags and Link */}
+            {(tags || link) && (
+              <>
+                <hr
+                  style={{
+                    border: 'none',
+                    borderTop: `2px solid ${theme.palette.neutralLight}`,
+                    margin: 0,
+                  }}
+                />
+                <div className='flex items-center justify-between flex-wrap gap-4'>
+                  {tags && tags.length > 0 && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: theme.spacing.s,
+                      }}
+                    >
+                      {tags.map((tag) => (
+                        <span
+                          key={tag}
+                          style={{
+                            ...theme.typography.fonts.medium,
+                            backgroundColor: theme.palette.neutralLight,
+                            color: theme.palette.neutralSecondary,
+                            padding: `${theme.spacing.xs} ${theme.spacing.s}`,
+                            borderRadius: theme.borderRadius.m,
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {link && (
+                    <Link
+                      href={link}
+                      style={{
+                        ...theme.typography.fonts.large,
+                        color: theme.palette.themePrimary,
+                        textDecoration: 'underline',
+                        fontWeight: theme.typography.fontWeights.semiBold,
+                      }}
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      {linkText || 'Learn More'} →
+                    </Link>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      </Card>
-    </div>
+      </Modal>
+    </>
   );
 };
 

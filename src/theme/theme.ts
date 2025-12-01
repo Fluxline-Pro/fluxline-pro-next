@@ -636,12 +636,12 @@ export const typography = {
     glyphTag: {
       fontFamily:
         '"inter-variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif',
-      fontSize: 'clamp(0.75rem, 1.5cqi, 0.875rem)',
+      fontSize: 'clamp(0.875rem, 1.5cqi, 1rem)',
       fontWeight: '700' as const,
       fontVariationSettings: '"wght" 700, "wdth" 100, "slnt" 0',
       letterSpacing: '0.5px',
       textTransform: 'uppercase' as const,
-      lineHeight: '1.3',
+      lineHeight: '1.1',
     },
     emotionalCue: {
       fontFamily:
