@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 
 // Simple rate limiting store (in-memory)
+// Note: In-memory rate limiting has limitations in serverless environments due to cold starts
+// and multiple instances. For production, consider using Azure Redis Cache or Table Storage.
 const rateLimit = new Map();
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
 const MAX_REQUESTS = 5; // 5 requests per hour
@@ -28,8 +30,10 @@ function validateEmail(email) {
 }
 
 function sanitizeInput(input) {
-  // Remove any potentially harmful characters
-  return input.replace(/[<>]/g, '');
+  // Basic sanitization for email content - removes HTML angle brackets
+  // Since we send emails as plain text (not HTML), full XSS sanitization isn't required
+  // The angle brackets are removed to prevent potential email client HTML interpretation
+  return input.replace(/[<>]/g, '').trim();
 }
 
 module.exports = async function (context, req) {
