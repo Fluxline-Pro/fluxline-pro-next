@@ -166,7 +166,7 @@ export const CueCard: React.FC<CueCardProps> = ({
       backgroundColor: theme.palette.neutralLight,
       color: theme.palette.neutralSecondary,
       padding: `2px ${theme.spacing.xs}`,
-      borderRadius: theme.borderRadius?.s || '4px',
+      borderRadius: theme.borderRadius.s,
     },
   });
 
