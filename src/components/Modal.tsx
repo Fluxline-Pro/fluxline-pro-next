@@ -8,7 +8,7 @@
 
 import React, { useEffect } from 'react';
 import { IconButton } from '@fluentui/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 
@@ -69,26 +69,26 @@ export const Modal: React.FC<ModalProps> = ({
   }, [isOpen, onDismiss]);
 
   // Backdrop animation variants
-  const backdropVariants = {
+  const backdropVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.2,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
     exit: {
       opacity: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.15,
-        ease: 'easeIn',
+        ease: 'easeIn' as const,
       },
     },
   };
 
   // Modal content animation variants
-  const modalVariants = {
+  const modalVariants: Variants = {
     hidden: {
       opacity: 0,
       scale: shouldReduceMotion ? 1 : 0.95,
@@ -100,7 +100,7 @@ export const Modal: React.FC<ModalProps> = ({
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.3,
-        ease: [0.4, 0.0, 0.2, 1.0],
+        ease: [0.4, 0.0, 0.2, 1.0] as const,
       },
     },
     exit: {
@@ -109,7 +109,7 @@ export const Modal: React.FC<ModalProps> = ({
       y: shouldReduceMotion ? 0 : 20,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.2,
-        ease: [0.4, 0.0, 1.0, 1.0],
+        ease: [0.4, 0.0, 1.0, 1.0] as const,
       },
     },
   };
