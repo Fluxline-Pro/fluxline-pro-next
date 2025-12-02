@@ -12,6 +12,8 @@ import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { getIconForPath } from '@/utils/navigation-icons';
 import { ContactForm } from './components/ContactForm';
+import { Callout } from '@/theme/components/callout/Callout';
+import { FormButton } from '@/theme/components/form/FormButton';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
@@ -21,10 +23,27 @@ export default function ContactPage() {
       <div className='space-y-16'>
         {/* Hero Section */}
         <Hero
-          title='Contact'
+          title='Invitation for Fluxline Connection'
           iconName={getIconForPath('/contact')}
-          description='Feel free to contact me via social media or the form below. I can also offer estimates for your design projects and tutoring sessions. Simply enquire below!'
-        />
+          description="Reach out in the way that feels most natural—whether through social media, a direct conversation, or the form below. You're also welcome to schedule a free, no-obligation consultation using the booking button, so we can explore your needs together."
+        >
+          <Callout
+            variant='accent'
+            title='Ready to Transform?'
+            subtitle="Every service is a curriculum gate. Let's design the systems,
+                      strategies, and rituals that align your vision with reality."
+            action={
+              <FormButton
+                text='Book a Consultation'
+                variant='primary'
+                size='large'
+                icon='ChevronRight'
+                iconPosition='right'
+                onClick={() => (window.location.href = '/testimonials')}
+              />
+            }
+          />
+        </Hero>
 
         {/* Contact Form */}
         <section className='space-y-8'>

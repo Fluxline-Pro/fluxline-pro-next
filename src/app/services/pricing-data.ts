@@ -111,7 +111,7 @@ export const SERVICE_PRICING: ServicePricing = {
         'online-hypertrophy': true,
         'hybrid-hypertrophy': true,
       },
-      'cancel-anytime': {
+      'cancel-anytime-first-2-sessions': {
         'single-session': false,
         'online-pt-only': true,
         'hybrid-pt': true,

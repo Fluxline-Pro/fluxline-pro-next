@@ -38,13 +38,12 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   const { theme, themeMode, setThemeMode, layoutPreference } = useAppTheme();
   const pathname = usePathname();
   const router = useRouter();
-  const isMobile = useIsMobile();
+  // Defer isMobile evaluation until after mount to prevent hydration mismatch
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
   const isLeftHanded = layoutPreference === 'left-handed';
-
-  // Ensure component is mounted before rendering dynamic content
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const { shouldReduceMotion } = useReducedMotion();
+  const modalRef = React.useRef<HTMLDivElement>(null);
 
   // Calculate modal width based on device
   const modalMaxWidth = isMobile ? '350px' : '400px';
@@ -75,6 +74,14 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   // Get current page title (last breadcrumb item)
   const currentPageTitle =
     breadcrumbItems[breadcrumbItems.length - 1]?.label || 'Home';
+
+  // Detect if we're on the home page
+  const isHomePage = pathname === '/';
+
+  // Use white color for buttons on home page for better visibility against dark background
+  const buttonIconColor = isHomePage
+    ? theme.palette.white
+    : theme.palette.neutralPrimary;
 
   const handleSettingsClick = () => {
     if (activeModal === 'settings') {
@@ -113,17 +120,11 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
     setActiveModal(null);
   };
 
-  // Detect if we're on the home page
-  const isHomePage = pathname === '/';
-
-  // Use white color for buttons on home page for better visibility against dark background
-  const buttonIconColor = isHomePage
-    ? theme.palette.white
-    : theme.palette.neutralPrimary;
-  const { shouldReduceMotion } = useReducedMotion();
-
-  // Modal ref for focus management
-  const modalRef = React.useRef<HTMLDivElement>(null);
+  // Ensure component is mounted before rendering dynamic content
+  // This prevents hydration mismatches by only rendering client-specific content after mount
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Handle Escape key to close modal
   React.useEffect(() => {
@@ -194,9 +195,10 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   };
 
   return (
-    <div className={className}>
+    <div className={className} suppressHydrationWarning>
       {/* Navigation Bar */}
       <nav
+        suppressHydrationWarning
         style={{
           position: 'fixed',
           top: 0,
@@ -220,8 +222,9 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             maxWidth: '1920px',
             margin: '0 auto',
           }}
+          suppressHydrationWarning
         >
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ flex: 1, minWidth: 0 }} suppressHydrationWarning>
             {/* Mobile: Show page title */}
             {isMobile ? (
               <Typography
@@ -244,7 +247,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               </Typography>
             ) : (
               /* Desktop: Show breadcrumb navigation */
-              <nav aria-label='Breadcrumb'>
+              <nav aria-label='Breadcrumb' suppressHydrationWarning>
                 {isHomePage ? (
                   <Typography
                     variant='h3'
@@ -260,6 +263,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   </Typography>
                 ) : (
                   <ol
+                    suppressHydrationWarning
                     style={{
                       display: 'flex',
                       alignItems: 'baseline',
@@ -278,6 +282,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                       return (
                         <li
                           key={item.href}
+                          suppressHydrationWarning
                           style={{
                             display: 'flex',
                             alignItems: 'center',
@@ -348,6 +353,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               alignItems: 'center',
               gap: '1rem',
             }}
+            suppressHydrationWarning
           >
             {!isMobile && !isHomePage && (
               <FormButton
@@ -431,11 +437,12 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 boxShadow: theme.shadows.xl,
                 position: 'relative',
               }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={handleModalClose}
+                suppressHydrationWarning
                 style={{
                   position: 'absolute',
                   top: '1rem',

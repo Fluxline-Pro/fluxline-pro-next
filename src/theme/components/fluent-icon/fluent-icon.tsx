@@ -104,32 +104,33 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
 
   // If iconName is a string (Fluent UI icon name)
   return (
-    <Icon
-      iconName={iconName as string}
-      className={className}
-      suppressHydrationWarning
-      styles={{
-        root: {
-          color: `${iconColor} !important`,
-          width: sizeMap[size],
-          height: sizeMap[size],
-          fontSize: sizeMap[size],
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          '& i': {
+    <span suppressHydrationWarning style={{ display: 'contents' }}>
+      <Icon
+        iconName={iconName as string}
+        className={className}
+        styles={{
+          root: {
             color: `${iconColor} !important`,
+            width: sizeMap[size],
+            height: sizeMap[size],
+            fontSize: sizeMap[size],
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            '& i': {
+              color: `${iconColor} !important`,
+            },
+            '&::before': {
+              color: `${iconColor} !important`,
+            },
+            '& *': {
+              color: `${iconColor} !important`,
+            },
           },
-          '&::before': {
-            color: `${iconColor} !important`,
-          },
-          '& *': {
-            color: `${iconColor} !important`,
-          },
-        },
-      }}
-      style={combinedStyle}
-    />
+        }}
+        style={combinedStyle}
+      />
+    </span>
   );
 };
 

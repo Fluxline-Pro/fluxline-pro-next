@@ -1,19 +1,23 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
-// Import Inter font from fontsource (already in dependencies)
-import '@fontsource-variable/inter';
-
-import './tailwind.css'; // ← Tailwind base/utilities first
-import './globals.scss'; // ← Your custom styles override Tailwind
+// Theme and layout components
 import ThemeProvider from '../theme/contexts/ThemeProvider';
 import { ThemeOverrideProvider } from '../theme/contexts/ThemeOverrideContext';
 import { FontScaleProvider } from '../theme/providers';
 import { Header } from '../theme/components/header';
 import { SkipToContent } from '../theme/components/skip-to-content';
 
+// Global styles
+import './tailwind.css'; // ← Tailwind base/utilities first
+import './globals.scss'; // ← Your custom styles override Tailwind
+
 export const metadata: Metadata = {
-  title: 'Fluxline.pro - Home',
+  metadataBase: new URL('https://www.fluxline.pro'),
+  title: {
+    default: 'Fluxline Professional Services',
+    template: '%s | Fluxline.pro',
+  },
   description:
     'Fluxline Professional Services - Business consulting, web development, design, and technical services',
   keywords:
@@ -26,7 +30,7 @@ export const metadata: Metadata = {
     siteName: 'Fluxline Professional Services',
     images: [
       {
-        url: 'https://www.fluxline.pro/images/FluxlineLogo.png',
+        url: '/images/FluxlineLogo.png',
         width: 1200,
         height: 630,
         alt: 'Fluxline Professional Services Logo',
@@ -40,10 +44,10 @@ export const metadata: Metadata = {
     title: 'Fluxline Professional Services',
     description:
       'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
-    images: ['https://www.fluxline.pro/images/FluxlineLogo.png'],
+    images: ['/images/FluxlineLogo.png'],
   },
   alternates: {
-    canonical: 'https://www.fluxline.pro/',
+    canonical: '/',
   },
   other: {
     'theme-color': '#010101',

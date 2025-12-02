@@ -3,12 +3,14 @@
 /**
  * Modal Component
  * Reusable full-screen modal with overlay
- * Supports custom content and styling
+ * Supports custom content and styling with smooth animations
  */
 
 import React, { useEffect } from 'react';
 import { IconButton } from '@fluentui/react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 
 export interface ModalProps {
   /** Whether the modal is open */
@@ -40,6 +42,7 @@ export const Modal: React.FC<ModalProps> = ({
   style,
 }) => {
   const { theme } = useAppTheme();
+  const { shouldReduceMotion } = useReducedMotion();
   const isDark =
     theme.themeMode === 'dark' ||
     theme.themeMode === 'high-contrast' ||
@@ -65,75 +68,131 @@ export const Modal: React.FC<ModalProps> = ({
     };
   }, [isOpen, onDismiss]);
 
-  if (!isOpen) return null;
+  // Backdrop animation variants
+  const backdropVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.2,
+        ease: 'easeOut' as const,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.15,
+        ease: 'easeIn' as const,
+      },
+    },
+  };
+
+  // Modal content animation variants
+  const modalVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      scale: shouldReduceMotion ? 1 : 0.95,
+      y: shouldReduceMotion ? 0 : 20,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.3,
+        ease: [0.4, 0.0, 0.2, 1.0] as const,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: shouldReduceMotion ? 1 : 0.95,
+      y: shouldReduceMotion ? 0 : 20,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.2,
+        ease: [0.4, 0.0, 1.0, 1.0] as const,
+      },
+    },
+  };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-        padding: '2rem',
-      }}
-      onClick={onDismiss}
-      role='dialog'
-      aria-modal='true'
-      aria-label={ariaLabel}
-    >
-      <div
-        style={{
-          position: 'relative',
-          maxWidth,
-          maxHeight,
-          width: '100%',
-          backgroundColor: isDark
-            ? theme.palette.themeDark
-            : theme.palette.neutralQuaternary,
-          border: `1px solid ${theme.palette.neutralTertiary}`,
-          borderRadius: theme.borderRadius.container.medium,
-          boxShadow: theme.shadows.hero || theme.effects.elevation16,
-          overflow: 'auto',
-          ...style,
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close button */}
-        {showCloseButton && (
-          <div
+    <AnimatePresence mode='wait'>
+      {isOpen && (
+        <motion.div
+          variants={backdropVariants}
+          initial='hidden'
+          animate='visible'
+          exit='exit'
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            padding: '2rem',
+          }}
+          onClick={onDismiss}
+          role='dialog'
+          aria-modal='true'
+          aria-label={ariaLabel}
+        >
+          <motion.div
+            variants={modalVariants}
+            initial='hidden'
+            animate='visible'
+            exit='exit'
             style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              zIndex: 1,
+              position: 'relative',
+              maxWidth,
+              maxHeight,
+              width: '100%',
+              backgroundColor: isDark
+                ? theme.palette.themeDark
+                : theme.palette.neutralQuaternary,
+              border: `1px solid ${theme.palette.neutralTertiary}`,
+              borderRadius: theme.borderRadius.container.medium,
+              boxShadow: theme.shadows.hero || theme.effects.elevation16,
+              overflow: 'auto',
+              ...style,
             }}
+            onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
-            <IconButton
-              iconProps={{ iconName: 'Cancel' }}
-              onClick={onDismiss}
-              ariaLabel='Close modal'
-              styles={{
-                root: {
-                  color: theme.palette.neutralPrimary,
-                },
-                rootHovered: {
-                  color: theme.palette.themePrimary,
-                },
-              }}
-            />
-          </div>
-        )}
+            {/* Close button */}
+            {showCloseButton && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '1rem',
+                  zIndex: 1,
+                }}
+              >
+                <IconButton
+                  iconProps={{ iconName: 'Cancel' }}
+                  onClick={onDismiss}
+                  ariaLabel='Close modal'
+                  styles={{
+                    root: {
+                      color: theme.palette.neutralPrimary,
+                    },
+                    rootHovered: {
+                      color: theme.palette.themePrimary,
+                    },
+                  }}
+                />
+              </div>
+            )}
 
-        {/* Content */}
-        <div style={{ padding: theme.spacing.xl }}>{children}</div>
-      </div>
-    </div>
+            {/* Content */}
+            <div style={{ padding: theme.spacing.xl }}>{children}</div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

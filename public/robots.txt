@@ -1,0 +1,9 @@
+# Robots.txt for Fluxline.pro
+# Allows all public routes, disallows API endpoints
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.fluxline.pro/sitemap.xml

@@ -718,6 +718,43 @@ PageWrapper includes pre-configured routes for:
 
 ---
 
+## SEO Guidelines
+
+### Metadata Management
+
+- **Use Next.js `metadata` exports** for SEO on page/layout files
+- Root layout (`app/layout.tsx`) provides default metadata with title template `%s | Fluxline.pro`
+- Page/route-level `layout.tsx` files should export `metadata` with:
+  - A simple page `title` (template will append `| Fluxline.pro`)
+  - A `description` that matches page content
+  - `openGraph` configuration for social sharing
+  - `alternates.canonical` for canonical URL
+
+### Content SEO Policy
+
+- **Do not add SEO metadata** for blog posts, markdown content, or portfolio entries inside this project
+- Page-level SEO is handled at the route level only (in layout.tsx or page.tsx)
+- Blog and portfolio dynamic routes inherit from their parent layout
+- Static SEO files (`robots.txt`, `sitemap.xml`) are in the `public/` directory
+
+### SEO Files
+
+- `public/robots.txt` - Controls search engine crawling (allows public routes, disallows /api)
+- `public/sitemap.xml` - Static sitemap for public marketing routes
+
+---
+
+## Content Policy
+
+### Existing Content
+
+- **Do not modify existing copy or text content** without explicit instructions
+- Limit changes to structure, types, and implementation details
+- When refactoring, ensure UI and copy remain identical
+- Do not change functional behavior or user flows when refactoring
+
+---
+
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-11-26 - Unified content listing and detail systems completed. Listing pages consolidated into ContentListingPage component (85% code reduction). Detail pages use UnifiedContentDetail with content-specific wrappers. ContentNotFound component extracts shared not-found handling. -Aplusandminus
+### Last Updated: 2025-12-02 - Added SEO foundation with root metadata, route-level metadata, robots.txt and sitemap.xml. Updated COPILOT_INSTRUCTIONS with SEO and content policies.
