@@ -207,6 +207,7 @@ export const Hero: React.FC<HeroProps> = ({
             fontSize: isMobile ? '1rem' : '1.125rem',
             lineHeight: isMobile ? '1.6' : theme.typography.lineHeights.relaxed,
             marginTop: '1rem',
+            marginBottom: '1rem',
           }}
         >
           {description}

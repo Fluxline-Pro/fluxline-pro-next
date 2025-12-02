@@ -165,6 +165,10 @@ const PAGE_CONFIGS: Record<
     image: FluxlineTestimonials.src,
     imageText: 'Testimonials',
   },
+  '/cue-cards': {
+    image: 'FLUXLINE_LOGO',
+    imageText: 'The Archetypes',
+  },
 };
 
 // Special configuration for 404 page
