@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
-// Import Inter font from fontsource (already in dependencies)
-import '@fontsource-variable/inter';
-
-import './tailwind.css'; // ← Tailwind base/utilities first
-import './globals.scss'; // ← Your custom styles override Tailwind
+// Theme and layout components
 import ThemeProvider from '../theme/contexts/ThemeProvider';
 import { ThemeOverrideProvider } from '../theme/contexts/ThemeOverrideContext';
 import { FontScaleProvider } from '../theme/providers';
 import { Header } from '../theme/components/header';
 import { SkipToContent } from '../theme/components/skip-to-content';
+
+// Global styles
+import './tailwind.css'; // ← Tailwind base/utilities first
+import './globals.scss'; // ← Your custom styles override Tailwind
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fluxline.pro'),
