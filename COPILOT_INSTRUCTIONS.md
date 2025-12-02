@@ -739,7 +739,7 @@ PageWrapper includes pre-configured routes for:
 
 ### SEO Files
 
-- `public/robots.txt` - Controls search engine crawling (allows public routes, disallows /api/ and /content/)
+- `public/robots.txt` - Controls search engine crawling (allows public routes, disallows /api)
 - `public/sitemap.xml` - Static sitemap for public marketing routes
 
 ---
