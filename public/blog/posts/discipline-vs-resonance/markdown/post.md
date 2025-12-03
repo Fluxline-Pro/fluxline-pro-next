@@ -5,11 +5,12 @@ author: 'Terence Waters'
 publishedDate: '2025-08-19'
 category: 'Personal Growth'
 tags: ['Fluxline', 'Resonance', 'Personal Growth', 'Discipline', 'Emotional Architecture', 'Intentionality']
-imageAlt: 'Discipline vs. Resonance'
+imageUrl: '/blog/posts/discipline-vs-resonance/images/discipline-resonance.png'
+imageAlt: 'Image showing a scale that shows discipline and resonance as a balance'
 featured: true
 seoTitle: 'Discipline vs. Resonance: How to Sustain Your Drive | Fluxline Pro'
 seoDescription: 'Discover how discipline bridges the gap between inspiration and transformation. Learn to cultivate lasting resonance through the Law of Opposites and sustainable clarity.'
-seoKeywords: ['discipline', 'resonance', 'personal growth', 'transformation', 'emotional architecture', 'sustainable change', 'Marcus Aurelius']
+seoKeywords: ['discipline', 'resonance', 'personal growth', 'transformation', 'emotional architecture', 'sustainable change', 'Marcus Aurelius', 'stoicism', 'law of opposites']
 ---
 
 ## 💪 Resonance, Part 2: Discipline vs. Resonance

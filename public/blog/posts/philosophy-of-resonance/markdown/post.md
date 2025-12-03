@@ -1,5 +1,5 @@
 ---
-title: 'The Philosophy of Resonance'
+title: 'Resonance, Pt. 1: The Philosophy of Resonance'
 excerpt: "What do Ryan Reynolds, Pikachu, and your deepest drive have in common? They're rooted in the jellies of resonance."
 author: 'Terence Waters'
 publishedDate: '2025-08-04'
