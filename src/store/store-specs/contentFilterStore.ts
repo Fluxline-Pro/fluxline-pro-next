@@ -42,7 +42,7 @@ defaultStartDate.setMonth(defaultStartDate.getMonth() - 12); // 1 year ago
 const defaultEndDate = new Date(); // Today
 
 export const useContentFilterStore = create<ContentFilterState>((set) => ({
-  viewType: 'grid',
+  viewType: 'small-tile',
   viewState: 'list',
   selectedPost: null,
   overrideImage: null,
