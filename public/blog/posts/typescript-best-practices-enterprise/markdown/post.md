@@ -19,7 +19,7 @@ seoKeywords:
   ]
 ---
 
-# TypeScript Best Practices for Enterprise Applications
+## TypeScript Best Practices for Enterprise Applications
 
 TypeScript has become the standard for building large-scale JavaScript applications. This guide covers best practices and advanced patterns for enterprise-grade TypeScript development.
 
