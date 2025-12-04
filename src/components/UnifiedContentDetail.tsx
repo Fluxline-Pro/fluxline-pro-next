@@ -10,6 +10,7 @@ import { FormButton } from '@/theme/components/form';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { IconButton } from '@fluentui/react';
+import { SocialLinks, type SocialLinksData } from '@/app/about/components/SocialLinks';
 
 /**
  * Unified configuration interface for content detail pages
@@ -27,6 +28,14 @@ export interface UnifiedContentDetailConfig {
     label: string;
     value: string | React.ReactNode;
   }>;
+
+  // Author info (for blog posts, press releases, etc.)
+  authorInfo?: {
+    name: string;
+    publishDate?: string;
+    lastUpdated?: string;
+    socialLinks?: SocialLinksData;
+  };
 
   // Navigation
   backLink: {
@@ -399,8 +408,67 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             </Typography>
           </div>
 
-          {/* Metadata */}
-          {config.metadata && config.metadata.length > 0 && (
+          {/* Author Info */}
+          {config.authorInfo && (
+            <div
+              style={{
+                marginBottom: theme.spacing.l1,
+                paddingBottom: theme.spacing.m,
+              }}
+            >
+              <Typography
+                variant='p'
+                style={{
+                  fontSize: '1.125rem',
+                  fontWeight: 600,
+                  color: theme.palette.neutralPrimary,
+                  marginBottom: theme.spacing.s1,
+                }}
+              >
+                {config.authorInfo.name}
+              </Typography>
+              
+              {config.authorInfo.name === 'Terence Waters' && config.authorInfo.socialLinks && (
+                <>
+                  <hr
+                    style={{
+                      border: 'none',
+                      borderTop: `2px solid ${theme.palette.themePrimary}`,
+                      margin: `${theme.spacing.s1} 0`,
+                      width: '60px',
+                    }}
+                  />
+                  <div style={{ marginTop: theme.spacing.s2, marginBottom: theme.spacing.s2 }}>
+                    <SocialLinks
+                      socialLinks={config.authorInfo.socialLinks}
+                      name={config.authorInfo.name}
+                      size='small'
+                    />
+                  </div>
+                </>
+              )}
+              
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '0.95rem',
+                  marginTop: theme.spacing.s1,
+                }}
+              >
+                {config.authorInfo.publishDate}
+                {config.authorInfo.lastUpdated && (
+                  <>
+                    {' • '}
+                    Updated: {config.authorInfo.lastUpdated}
+                  </>
+                )}
+              </Typography>
+            </div>
+          )}
+
+          {/* Metadata (for other content types) */}
+          {!config.authorInfo && config.metadata && config.metadata.length > 0 && (
             <div
               style={{
                 display: 'flex',

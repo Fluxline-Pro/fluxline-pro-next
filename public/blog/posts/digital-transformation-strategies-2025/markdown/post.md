@@ -129,4 +129,4 @@ When done right, it doesn’t just modernize your business—it redefines it.
 **Let’s build what’s next.**
 
 → [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
-→ [Explore more about the Fluxline philosophy](#)
+→ [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)

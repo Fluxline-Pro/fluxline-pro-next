@@ -2,10 +2,10 @@
 title: 'TypeScript Best Practices for Enterprise Applications'
 excerpt: 'Learn advanced TypeScript patterns and practices that ensure type safety, maintainability, and scalability in large applications.'
 author: 'Fluxline Resonance Group'
-publishedDate: '2025-01-05'
+publishedDate: '2025-12-01'
 category: 'Technology'
 tags: ['TypeScript', 'Programming', 'Best Practices', 'Development']
-imageUrl: '/blog/typescript-best-practices-enterprise/images/typescript-best-practices.png'
+imageUrl: '/blog/posts/typescript-best-practices-enterprise/images/typescript-best-practices.png'
 imageAlt: 'TypeScript Best Practices infographic'
 featured: false
 seoTitle: 'TypeScript Best Practices for Enterprise Applications | Fluxline Pro'
@@ -229,4 +229,4 @@ TypeScript's type system is powerful and flexible. By following these best pract
 Let us help you by auditing your current type usage and configuration. Small changes today can unlock massive clarity tomorrow.
 
 → [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
-→ [Explore more about the Fluxline philosophy](#)
+→ [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)

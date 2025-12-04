@@ -8,10 +8,19 @@ import { ContentNotFound } from '@/components/ContentNotFound';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { format } from 'date-fns';
 import type { PressRelease } from '@/store/mock-data/pressReleaseMock';
+import type { SocialLinksData } from '@/app/about/components/SocialLinks';
 
 interface PressReleaseDetailClientProps {
   pressRelease: PressRelease | undefined;
 }
+
+// Terence Waters' social links
+const TERENCE_SOCIAL_LINKS: SocialLinksData = {
+  linkedin: 'https://linkedin.com/in/terencewaters',
+  instagram: 'https://instagram.com/aplusinflux',
+  github: 'https://github.com/aplusandminus',
+  email: 'terence@fluxline.pro',
+};
 
 /**
  * Press Release Detail Client Component
@@ -61,15 +70,24 @@ export function PressReleaseDetailClient({
           showTitle: false,
         }
       : undefined,
-    metadata: [
-      {
-        label: '',
-        value: format(pressRelease.date, 'MMMM d, yyyy'),
-      },
-      ...(pressRelease.author
-        ? [{ label: '', value: pressRelease.author }]
-        : []),
-    ],
+    authorInfo: pressRelease.author
+      ? {
+          name: pressRelease.author,
+          publishDate: format(pressRelease.date, 'MMMM d, yyyy'),
+          socialLinks:
+            pressRelease.author === 'Terence Waters'
+              ? TERENCE_SOCIAL_LINKS
+              : undefined,
+        }
+      : undefined,
+    metadata: !pressRelease.author
+      ? [
+          {
+            label: '',
+            value: format(pressRelease.date, 'MMMM d, yyyy'),
+          },
+        ]
+      : undefined,
     badges: [
       ...(pressRelease.category
         ? [{ label: pressRelease.category, variant: 'primary' as const }]

@@ -6,10 +6,19 @@ import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { format } from 'date-fns';
 import type { BlogPost } from '../types';
+import type { SocialLinksData } from '@/app/about/components/SocialLinks';
 
 interface BlogPostDetailClientProps {
   post: BlogPost;
 }
+
+// Terence Waters' social links
+const TERENCE_SOCIAL_LINKS: SocialLinksData = {
+  linkedin: 'https://linkedin.com/in/terencewaters',
+  instagram: 'https://instagram.com/aplusinflux',
+  github: 'https://github.com/aplusandminus',
+  email: 'terence@fluxline.pro',
+};
 
 /**
  * Blog Post Detail Client Component
@@ -41,20 +50,15 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
       title: post.title,
       showTitle: false,
     },
-    metadata: [
-      {
-        label: 'By',
-        value: `${post.author} • ${format(post.publishedDate, 'MMMM d, yyyy')}`,
-      },
-      ...(post.lastUpdated
-        ? [
-            {
-              label: '',
-              value: `Updated: ${format(post.lastUpdated, 'MMMM d, yyyy')}`,
-            },
-          ]
-        : []),
-    ],
+    authorInfo: {
+      name: post.author,
+      publishDate: format(post.publishedDate, 'MMMM d, yyyy'),
+      lastUpdated: post.lastUpdated
+        ? format(post.lastUpdated, 'MMMM d, yyyy')
+        : undefined,
+      socialLinks:
+        post.author === 'Terence Waters' ? TERENCE_SOCIAL_LINKS : undefined,
+    },
     badges: [
       {
         label: post.category,

@@ -8,10 +8,19 @@ import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { CaseStudy } from '../types';
+import type { SocialLinksData } from '@/app/about/components/SocialLinks';
 
 interface CaseStudyDetailClientProps {
   caseStudy: CaseStudy;
 }
+
+// Terence Waters' social links
+const TERENCE_SOCIAL_LINKS: SocialLinksData = {
+  linkedin: 'https://linkedin.com/in/terencewaters',
+  instagram: 'https://instagram.com/aplusinflux',
+  github: 'https://github.com/aplusandminus',
+  email: 'terence@fluxline.pro',
+};
 
 /**
  * Client component for Case Study Detail Page
@@ -143,6 +152,14 @@ export default function CaseStudyDetailClient({
           showTitle: false,
         }
       : undefined,
+    authorInfo: {
+      name: caseStudy.author,
+      publishDate: caseStudy.date,
+      socialLinks:
+        caseStudy.author === 'Terence Waters'
+          ? TERENCE_SOCIAL_LINKS
+          : undefined,
+    },
     metadata: [
       { label: 'Client', value: caseStudy.client },
       { label: 'Industry', value: caseStudy.industry },

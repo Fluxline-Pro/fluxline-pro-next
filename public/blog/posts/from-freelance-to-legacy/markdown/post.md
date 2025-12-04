@@ -125,4 +125,4 @@ Fluxline is my way of augmenting my sphere of influence, of creating systems tha
 This is Fluxline. This is legacy. And it's my vision for the future. Let's make some amazing things together.
 
 → [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
-→ [Explore more about the Fluxline philosophy](#)
+→ [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)

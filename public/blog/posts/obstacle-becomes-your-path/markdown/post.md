@@ -34,7 +34,7 @@ seoKeywords:
 
 ## 🪨 Resonance, Part 3: The Obstacle Becomes Your Path
 
-[In Part 2: Discipline vs. Resonance](#), we talked about how discipline is
+[In Part 2: Discipline vs. Resonance](/blog/discipline-vs-resonance), we talked about how discipline is
 required to keep you moving in the direction toward those things that move and
 drive you. Your goals don't show themselves overnight, nor can you just be
 magically granted them. Discipline to push forward becomes that piece.
@@ -100,4 +100,4 @@ Because when you walk through what you once avoided, you don’t just move forwa
 Let's name the real barriers—personal or professional—and shift them into catalysts. Enough "someday." Let's build something that delivers.
 
 → [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
-→ [Explore more about the Fluxline philosophy](#)
+→ [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)
