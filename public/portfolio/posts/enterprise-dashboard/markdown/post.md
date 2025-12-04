@@ -37,8 +37,6 @@ seoKeywords:
   ]
 ---
 
-# Enterprise Analytics Dashboard
-
 ## Project Overview
 
 Built a comprehensive analytics dashboard for a Fortune 500 financial services company to replace their legacy reporting system. The platform processes millions of transactions daily and provides real-time insights to business analysts and executives.
