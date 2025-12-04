@@ -5,6 +5,7 @@ author: 'Terence Waters'
 publishedDate: '2025-08-04'
 category: 'Personal Growth'
 tags: ['Fluxline', 'Resonance', 'Personal Growth', 'Emotional Architecture', 'Intentionality', 'Ryan Reynolds']
+imageUrl: '/blog/posts/philosophy-of-resonance/images/resonance-philosophy.png'
 imageAlt: 'The Philosophy of Resonance'
 featured: true
 seoTitle: 'The Philosophy of Resonance: Understanding Your Drive | Fluxline Pro'
