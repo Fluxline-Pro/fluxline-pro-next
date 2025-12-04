@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { UnifiedPageWrapper } from './UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
@@ -127,7 +128,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           fontWeight: 600,
           marginTop: theme.spacing.l1,
           marginBottom: theme.spacing.m,
-          color: theme.palette.neutralPrimary,
+          color: theme.palette.themePrimary,
           fontSize: '1.25rem',
         }}
       >
@@ -150,6 +151,8 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         style={{
           marginBottom: theme.spacing.m,
           paddingLeft: theme.spacing.l1,
+          listStyleType: 'disc',
+          listStylePosition: 'outside',
         }}
       >
         {children}
@@ -160,6 +163,8 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         style={{
           marginBottom: theme.spacing.m,
           paddingLeft: theme.spacing.l1,
+          listStyleType: 'decimal',
+          listStylePosition: 'outside',
         }}
       >
         {children}
@@ -169,6 +174,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       <li
         style={{
           marginBottom: theme.spacing.s1,
+          display: 'list-item',
         }}
       >
         <Typography variant='p'>{children}</Typography>
@@ -268,6 +274,68 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           objectFit: 'contain',
         }}
       />
+    ),
+    table: ({ children }: { children?: React.ReactNode }) => (
+      <div
+        style={{
+          overflowX: 'auto',
+          marginBottom: theme.spacing.m,
+        }}
+      >
+        <table
+          style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            border: `1px solid ${theme.palette.neutralLight}`,
+          }}
+        >
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }: { children?: React.ReactNode }) => (
+      <thead
+        style={{
+          backgroundColor: theme.palette.neutralLighter,
+        }}
+      >
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }: { children?: React.ReactNode }) => (
+      <tbody>{children}</tbody>
+    ),
+    tr: ({ children }: { children?: React.ReactNode }) => (
+      <tr
+        style={{
+          borderBottom: `1px solid ${theme.palette.neutralLight}`,
+        }}
+      >
+        {children}
+      </tr>
+    ),
+    th: ({ children }: { children?: React.ReactNode }) => (
+      <th
+        style={{
+          padding: theme.spacing.s2,
+          textAlign: 'left',
+          fontWeight: 600,
+          color: theme.palette.themePrimary,
+          borderRight: `1px solid ${theme.palette.neutralLight}`,
+        }}
+      >
+        {children}
+      </th>
+    ),
+    td: ({ children }: { children?: React.ReactNode }) => (
+      <td
+        style={{
+          padding: theme.spacing.s2,
+          borderRight: `1px solid ${theme.palette.neutralLight}`,
+        }}
+      >
+        {children}
+      </td>
     ),
   };
 
@@ -463,7 +531,10 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           className='unified-content-detail'
         >
           {config.contentType === 'markdown' ? (
-            <ReactMarkdown components={markdownComponents}>
+            <ReactMarkdown
+              components={markdownComponents}
+              remarkPlugins={[remarkGfm]}
+            >
               {config.content}
             </ReactMarkdown>
           ) : (
