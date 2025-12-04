@@ -8,6 +8,7 @@ import {
 } from '@/components/ContentListingPage';
 import { getIconForPath } from '@/utils/navigation-icons';
 import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
+import FluxlineLogoDarkMode from '@/assets/images/FluxlineLogoDarkMode.png';
 
 /**
  * Press Release Page Component
@@ -51,7 +52,7 @@ export default function PressReleasePage() {
       id: release.id,
       title: release.title,
       description: release.subtitle || release.description,
-      imageUrl: release.imageUrl,
+      imageUrl: release.imageUrl || FluxlineLogoDarkMode.src,
       imageAlt: release.imageAlt || release.title,
       imageText: format(release.date, 'MMMM d, yyyy'),
     }));

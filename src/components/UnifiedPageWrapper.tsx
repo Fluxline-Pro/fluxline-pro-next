@@ -698,17 +698,18 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    padding: theme.spacing.m,
-                    background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent)`,
+                    padding: theme.spacing.l,
+                    background: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent)`,
                     color: theme.palette.white,
                   }}
                 >
                   <h2
                     style={{
                       margin: 0,
-                      fontSize: '1.75rem',
+                      fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
                       fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
+                      lineHeight: 1.2,
                     }}
                   >
                     {imageTextToDisplay}

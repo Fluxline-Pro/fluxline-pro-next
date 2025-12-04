@@ -7,6 +7,7 @@ import {
 } from '@/components/ContentListingPage';
 import { getIconForPath } from '@/utils/navigation-icons';
 import { getCaseStudies } from './caseStudiesData';
+import FluxlineLogoDarkMode from '@/assets/images/FluxlineLogoDarkMode.png';
 
 /**
  * Case Studies Page Component
@@ -46,7 +47,7 @@ export default function CaseStudiesPage() {
       id: study.id,
       title: study.title,
       description: study.description,
-      imageUrl: study.imageUrl,
+      imageUrl: study.imageUrl || FluxlineLogoDarkMode.src,
       imageAlt: study.imageAlt || study.title,
       imageText: `${study.client} • ${study.industry}`,
     }));
