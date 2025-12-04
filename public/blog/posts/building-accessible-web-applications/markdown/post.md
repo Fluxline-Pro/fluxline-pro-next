@@ -1,12 +1,12 @@
 ---
 title: 'Building Accessible Web Applications: A Guide to WCAG 2.1'
 excerpt: 'Learn essential principles and practical techniques for creating web applications that are accessible to all users, following WCAG 2.1 AA standards.'
-author: 'Alex Rodriguez'
-publishedDate: '2025-01-20'
+author: 'Fluxline Resonance Group'
+publishedDate: '2025-12-02'
 category: 'Development'
 tags: ['Accessibility', 'WCAG', 'Web Development', 'UX Design']
 featured: false
-imageUrl: '/blog/posts/building-accessible-web-applications/images/FluxlineLogo.png'
+imageUrl: '/blog/posts/building-accessible-web-applications/images/accessibility-icons.png'
 imageAlt: 'Accessibility icons showing various assistive technologies'
 seoTitle: 'Web Accessibility Guide - WCAG 2.1 Best Practices'
 seoDescription: 'Complete guide to building accessible web applications following WCAG 2.1 AA standards with practical examples.'
@@ -20,7 +20,7 @@ seoKeywords:
   ]
 ---
 
-# Building Accessible Web Applications: A Guide to WCAG 2.1
+## Building Accessible Web Applications: A Guide to WCAG 2.1
 
 Web accessibility isn't just a legal requirement—it's a moral imperative and a smart business decision. According to the WHO, over 1 billion people live with some form of disability. By making your web applications accessible, you're opening your digital doors to everyone.
 

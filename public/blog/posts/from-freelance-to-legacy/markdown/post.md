@@ -2,14 +2,35 @@
 title: 'Fluxline: From Freelance to Legacy'
 excerpt: 'Fluxline was never meant to be just another portfolio site. It is both a technical platform and a mythic threshold, where freelance identity evolves into legacy.'
 author: 'Terence Waters'
-publishedDate: '2025-01-05'
+publishedDate: '2025-09-30'
 category: 'Business Philosophy'
-tags: ['Fluxline', 'Business Model', 'Legacy', 'Solopreneurship', 'Resonance', 'Transformation']
+tags:
+  [
+    'Fluxline',
+    'Business Model',
+    'Legacy',
+    'Solopreneurship',
+    'Resonance',
+    'Transformation',
+  ]
+imageUrl: '/images/home/HomePageCover4kPortrait.jpeg'
 imageAlt: 'Fluxline: From Freelance to Legacy'
 featured: true
 seoTitle: 'Fluxline: From Freelance to Legacy - Building Systems That Endure | Fluxline Pro'
 seoDescription: 'Discover how Fluxline transforms freelance work into legacy-building. Learn the business model, principles, and philosophy behind creating ecosystems that endure beyond the gig economy.'
-seoKeywords: ['Fluxline', 'freelance to legacy', 'business model', 'solopreneur', 'legacy building', 'resonance', 'legacy brand', 'solopreneurship', 'modular architecture', 'transformation']
+seoKeywords:
+  [
+    'Fluxline',
+    'freelance to legacy',
+    'business model',
+    'solopreneur',
+    'legacy building',
+    'resonance',
+    'legacy brand',
+    'solopreneurship',
+    'modular architecture',
+    'transformation',
+  ]
 ---
 
 ## Fluxline: From Freelance to Legacy
@@ -22,7 +43,7 @@ You see... we see the world, its leaders, its corporations, its corruption... be
 
 That's who we're also trained to dislike. To consider the enemy. To consider being that person... who is the source of our problems.
 
-But do you know what we all fail to actually acknowledge? That although the horrific acts, changes, words, thoughts, whatever... that come from these sources. 
+But do you know what we all fail to actually acknowledge? That although the horrific acts, changes, words, thoughts, whatever... that come from these sources.
 
 - Why are **THEY** the problem?
 - Why are **THEY** the obstacle we must remove to resolve the problem?
@@ -32,7 +53,7 @@ When in reality... what about **US**? What about **OURSELVES**?
 
 Instead of focusing on THEIR problems that appear or sometimes may be OUR problems... what can WE do to make ourselves the best version of ourselves? And take control of how we solve our own problems?
 
-This is a big thing right? What does this have to do with starting a business? 
+This is a big thing right? What does this have to do with starting a business?
 
 Well... I'm about to tell you. Read on!
 
@@ -40,7 +61,7 @@ Well... I'm about to tell you. Read on!
 
 You see, we have this thing called "The Sphere of Influence": A small, insignificant circle that we all have to make effort to change and augment reality. Meaning... we can't change the world at the rate we would like to because our sphere only amounts to so much. And that's all of us.
 
-Yes, some have a larger sphere. More resources. More people. More connections. More influence. And they can influence more... no one denies that. 
+Yes, some have a larger sphere. More resources. More people. More connections. More influence. And they can influence more... no one denies that.
 
 But what if we could _augment_ our sphere to make more of a difference where we can? And have the resources to make that happen?
 

@@ -15,7 +15,8 @@ tags:
     'Intentionality',
     'Philosophy',
   ]
-imageAlt: 'The Fluxline Philosophy - Structuring the Shift'
+imageUrl: '/blog/posts/the-fluxline-philosophy/images/FluxlineLogoDarkMode.png'
+imageAlt: 'The Fluxline Philosophy - Structuring the Shift, company logo'
 featured: true
 seoTitle: 'The Fluxline Philosophy: Structuring Transformation & Shift | Fluxline Pro'
 seoDescription: 'Discover the Fluxline philosophy—where emotional resonance meets strategic flexibility. Learn how we architect transformative systems across technology, design, and personal growth.'
