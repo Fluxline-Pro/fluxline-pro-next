@@ -8,19 +8,11 @@ import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { CaseStudy } from '../types';
-import type { SocialLinksData } from '@/app/about/components/SocialLinks';
+import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
 
 interface CaseStudyDetailClientProps {
   caseStudy: CaseStudy;
 }
-
-// Terence Waters' social links
-const TERENCE_SOCIAL_LINKS: SocialLinksData = {
-  linkedin: 'https://linkedin.com/in/terencewaters',
-  instagram: 'https://instagram.com/aplusinflux',
-  github: 'https://github.com/aplusandminus',
-  email: 'terence@fluxline.pro',
-};
 
 /**
  * Client component for Case Study Detail Page

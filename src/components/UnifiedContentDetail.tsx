@@ -10,7 +10,10 @@ import { FormButton } from '@/theme/components/form';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { IconButton } from '@fluentui/react';
-import { SocialLinks, type SocialLinksData } from '@/app/about/components/SocialLinks';
+import {
+  SocialLinks,
+  type SocialLinksData,
+} from '@/app/about/components/SocialLinks';
 
 /**
  * Unified configuration interface for content detail pages
@@ -235,7 +238,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           marginLeft: 0,
           marginBottom: theme.spacing.m,
           fontStyle: 'italic',
+          fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
           color: theme.palette.neutralSecondary,
+          maxWidth: '600px',
         }}
       >
         {children}
@@ -419,35 +424,31 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
               <Typography
                 variant='p'
                 style={{
-                  fontSize: '1.125rem',
+                  fontSize: '1.25rem',
                   fontWeight: 600,
                   color: theme.palette.neutralPrimary,
-                  marginBottom: theme.spacing.s1,
+                  marginBottom: theme.spacing.s,
                 }}
               >
                 {config.authorInfo.name}
               </Typography>
-              
-              {config.authorInfo.name === 'Terence Waters' && config.authorInfo.socialLinks && (
-                <>
-                  <hr
+
+              {config.authorInfo.name === 'Terence Waters' &&
+                config.authorInfo.socialLinks && (
+                  <div
                     style={{
-                      border: 'none',
-                      borderTop: `2px solid ${theme.palette.themePrimary}`,
-                      margin: `${theme.spacing.s1} 0`,
-                      width: '60px',
+                      marginTop: theme.spacing.s2,
+                      marginBottom: theme.spacing.s2,
                     }}
-                  />
-                  <div style={{ marginTop: theme.spacing.s2, marginBottom: theme.spacing.s2 }}>
+                  >
                     <SocialLinks
                       socialLinks={config.authorInfo.socialLinks}
                       name={config.authorInfo.name}
                       size='small'
                     />
                   </div>
-                </>
-              )}
-              
+                )}
+
               <Typography
                 variant='p'
                 style={{
@@ -456,11 +457,11 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
                   marginTop: theme.spacing.s1,
                 }}
               >
-                {config.authorInfo.publishDate}
+                Published: {config.authorInfo.publishDate}
                 {config.authorInfo.lastUpdated && (
                   <>
                     {' • '}
-                    Updated: {config.authorInfo.lastUpdated}
+                    Last Updated: {config.authorInfo.lastUpdated}
                   </>
                 )}
               </Typography>
@@ -468,28 +469,30 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           )}
 
           {/* Metadata (for other content types) */}
-          {!config.authorInfo && config.metadata && config.metadata.length > 0 && (
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: theme.spacing.m,
-                alignItems: 'center',
-                marginBottom: theme.spacing.l1,
-                color: theme.palette.neutralSecondary,
-              }}
-            >
-              {config.metadata.map((meta, index) => (
-                <React.Fragment key={index}>
-                  {index > 0 && <span>•</span>}
-                  <Typography variant='p'>
-                    {meta.label ? `${meta.label}: ` : ''}
-                    {meta.value}
-                  </Typography>
-                </React.Fragment>
-              ))}
-            </div>
-          )}
+          {!config.authorInfo &&
+            config.metadata &&
+            config.metadata.length > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: theme.spacing.m,
+                  alignItems: 'center',
+                  marginBottom: theme.spacing.l1,
+                  color: theme.palette.neutralSecondary,
+                }}
+              >
+                {config.metadata.map((meta, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && <span>•</span>}
+                    <Typography variant='p'>
+                      {meta.label ? `${meta.label}: ` : ''}
+                      {meta.value}
+                    </Typography>
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
 
           {/* Badges */}
           {config.badges && config.badges.length > 0 && (

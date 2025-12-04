@@ -1,26 +1,16 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { ContentNotFound } from '@/components/ContentNotFound';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { format } from 'date-fns';
 import type { PressRelease } from '@/store/mock-data/pressReleaseMock';
-import type { SocialLinksData } from '@/app/about/components/SocialLinks';
+import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
 
 interface PressReleaseDetailClientProps {
   pressRelease: PressRelease | undefined;
 }
-
-// Terence Waters' social links
-const TERENCE_SOCIAL_LINKS: SocialLinksData = {
-  linkedin: 'https://linkedin.com/in/terencewaters',
-  instagram: 'https://instagram.com/aplusinflux',
-  github: 'https://github.com/aplusandminus',
-  email: 'terence@fluxline.pro',
-};
 
 /**
  * Press Release Detail Client Component
@@ -29,9 +19,6 @@ const TERENCE_SOCIAL_LINKS: SocialLinksData = {
 export function PressReleaseDetailClient({
   pressRelease,
 }: PressReleaseDetailClientProps) {
-  const router = useRouter();
-  const { theme } = useAppTheme();
-
   if (!pressRelease) {
     return (
       <ContentNotFound
