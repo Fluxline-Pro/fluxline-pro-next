@@ -218,6 +218,12 @@ export interface UnifiedPageWrapperProps {
   // Unified options
   imageConfig?: ImageConfig;
 
+  // Force specific image configuration (for 404, error pages, etc.)
+  forceImageConfig?: {
+    image: 'NOT_FOUND' | string;
+    imageText: string;
+  };
+
   // Legal/Document-specific
   legalPageConfig?: LegalPageConfig;
 }
@@ -242,6 +248,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   tabletPortraitLayout,
   respectLayoutPreference = true,
   imageConfig,
+  forceImageConfig,
   legalPageConfig,
 }) => {
   const pathname = usePathname();
@@ -332,7 +339,15 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   // Handle dynamic Fluxline logo based on theme mode
   let configImage = imageConfig?.source || config.image;
-  if (configImage === 'FLUXLINE_LOGO') {
+
+  // Apply forceImageConfig if provided (for 404, error pages)
+  if (forceImageConfig) {
+    if (forceImageConfig.image === 'NOT_FOUND') {
+      configImage = NOT_FOUND_CONFIG.image;
+    } else {
+      configImage = forceImageConfig.image;
+    }
+  } else if (configImage === 'FLUXLINE_LOGO') {
     configImage = getFluxlineLogo(themeMode);
   }
 
@@ -344,9 +359,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   // Use the selected post's title if available and we're in detail view
   const imageTextToDisplay =
-    id && selectedPost && selectedPost.title
+    forceImageConfig?.imageText ||
+    (id && selectedPost && selectedPost.title
       ? selectedPost.title
-      : imageConfig?.title || config.imageText || '';
+      : imageConfig?.title || config.imageText || '');
 
   const imageAltText = imageConfig?.alt || imageTextToDisplay;
 
