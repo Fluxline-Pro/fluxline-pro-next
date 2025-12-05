@@ -490,7 +490,14 @@ See [Scrolls README](src/app/services/scrolls/README.md) for details.
 
 ### Adding Press Releases
 
-Update `src/store/mock-data/pressReleaseMock.ts` and rebuild.
+Press releases use a markdown-based file system:
+
+1. Create folder: `public/press-release/posts/[release-id]/markdown/`
+2. Create `release.md` with frontmatter
+3. Add images (optional): `public/press-release/posts/[release-id]/images/`
+4. Build: `yarn build`
+
+See [Press Release Guide](public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md) for details.
 
 ## 🤝 Contributing
 
