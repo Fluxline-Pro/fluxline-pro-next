@@ -3,7 +3,7 @@ title: 'Fluxline Design System 1.0 Released'
 subtitle: 'Comprehensive Component Library for Modern Web Development'
 description: 'Fluxline Pro releases version 1.0 of its comprehensive design system, featuring reusable components, theming capabilities, and extensive documentation for developers.'
 author: 'Fluxline Resonance Group'
-publishedDate: '2025-10-05'
+publishedDate: '2025-12-05'
 category: 'Product Release'
 tags: ['design-system', 'components', 'open-source']
 imageAlt: 'Design System Release'
@@ -22,7 +22,7 @@ seoKeywords:
   ]
 ---
 
-Fluxline Resonance Group proudly releases **version 1.0 of the Fluxline Design System**, a comprehensive component library built for modern web development.
+Fluxline Resonance Group proudly releases **version 2.0 of the Fluxline Design System**, a comprehensive component library built for modern web development. This coincides with our Fluxline 2.0 web and product launches that are occurring in mid-December 2025.
 
 ## What's Included
 

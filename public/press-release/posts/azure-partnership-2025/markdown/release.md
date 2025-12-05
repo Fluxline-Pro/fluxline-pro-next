@@ -21,7 +21,7 @@ seoKeywords:
   ]
 ---
 
-Fluxline Resonance Group is excited to announce a **strategic partnership with Microsoft Azure**, bringing enterprise-grade cloud infrastructure to our clients.
+Fluxline Resonance Group is excited to announce a **strategic partnership with Microsoft**, bringing its enterprise-grade Azure cloud infrastructure to our clients.
 
 ## Enhanced Capabilities
 
@@ -35,7 +35,7 @@ This partnership enables:
 
 ## Strategic Alignment
 
-"This partnership aligns perfectly with our mission to deliver cutting-edge business transformation solutions," said the Fluxline team. "Azure's robust infrastructure allows us to serve our clients better and scale efficiently."
+"This partnership aligns perfectly with our mission to deliver cutting-edge business transformation solutions," said Terence Waters from Fluxline. "Azure's strong and reliable infrastructure allows us to serve our clients better and scale efficiently."
 
 By leveraging Microsoft Azure's global infrastructure, we can provide enterprise clients with the reliability, security, and performance they need to succeed in today's digital landscape.
 

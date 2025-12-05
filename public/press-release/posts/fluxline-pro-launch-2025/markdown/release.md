@@ -3,7 +3,7 @@ title: 'Fluxline 2.0 Platform Launches with Next.js 16'
 subtitle: 'Modern Business Transformation Platform Goes Live'
 description: 'Fluxline Resonance Group announces the official launch of Fluxline 2.0, a next-generation business transformation platform built on Next.js 16 and React 19, featuring advanced theming, accessibility, and responsive design.'
 author: 'Fluxline Resonance Group'
-publishedDate: '2025-12-10'
+publishedDate: '2025-12-15'
 category: 'New Website and Platform Launch'
 tags: ['launch', 'platform', 'technology']
 imageAlt: 'Fluxline 2.0 Platform Launch'
