@@ -297,7 +297,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           y: -4,
           transition: { duration: 0.2, ease: 'easeOut' },
         }}
-        style={{ cursor: onClick ? 'pointer' : 'default', minHeight: '200px' }}
+        style={{
+          cursor: onClick ? 'pointer' : 'default',
+          height: '100%',
+        }}
       >
         <Card
           elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
@@ -377,6 +380,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           width: 'auto',
           maxWidth: '100%',
           boxSizing: 'border-box',
+          height: '100%',
+          display: 'flex',
         }}
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -401,6 +406,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               display: 'flex',
               flexDirection: 'column',
               width: '100%',
+              height: '100%',
+              minHeight: '300px',
             }}
           >
             {imageUrl && (
@@ -429,7 +436,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 padding: theme.spacing.m,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: theme.spacing.xs,
+                flex: 1,
+                minHeight: 0,
               }}
             >
               <h3
@@ -440,6 +448,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   fontFamily: `${theme.fonts.large.fontFamily} !important`,
                   color: theme.palette.neutralPrimary,
                   lineHeight: 1.3,
+                  flex: '0 0 auto',
                 }}
               >
                 {title}
@@ -447,10 +456,11 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               {imageText && (
                 <p
                   style={{
-                    margin: 0,
+                    margin: `${theme.spacing.xs} 0 0 0`,
                     fontSize: theme.fonts.medium.fontSize,
                     fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                     color: theme.palette.neutralSecondary,
+                    marginTop: 'auto',
                   }}
                 >
                   {imageText}
@@ -471,6 +481,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         style={{
           cursor: onClick ? 'pointer' : 'default',
           width: '100%',
+          height: '100%',
+          display: 'flex',
         }}
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -491,7 +503,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           onClick={onClick}
         >
           <div
-            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              height: '100%',
+            }}
           >
             {imageUrl && (
               <div
@@ -514,40 +531,51 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 />
               </div>
             )}
-            <div style={{ padding: theme.spacing.l }}>
-              <h3
-                style={{
-                  margin: `0 0 ${theme.spacing.s} 0`,
-                  fontSize: theme.fonts.xLarge.fontSize,
-                  fontWeight: theme.fonts.xLarge.fontWeight as number,
-                  fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
-                  color: theme.palette.neutralPrimary,
-                  lineHeight: 1.3,
-                }}
-              >
-                {title}
-              </h3>
-              {description && (
-                <p
+            <div
+              style={{
+                padding: theme.spacing.l,
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 1,
+                minHeight: 0,
+              }}
+            >
+              <div style={{ flex: '0 0 auto' }}>
+                <h3
                   style={{
                     margin: `0 0 ${theme.spacing.s} 0`,
-                    fontSize: theme.fonts.medium.fontSize,
-                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
-                    color: theme.palette.neutralSecondary,
-                    lineHeight: 1.5,
+                    fontSize: theme.fonts.xLarge.fontSize,
+                    fontWeight: theme.fonts.xLarge.fontWeight as number,
+                    fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
+                    color: theme.palette.neutralPrimary,
+                    lineHeight: 1.3,
                   }}
                 >
-                  {description}
-                </p>
-              )}
+                  {title}
+                </h3>
+                {description && (
+                  <p
+                    style={{
+                      margin: `${theme.spacing.xs} 0 0 0`,
+                      fontSize: theme.fonts.medium.fontSize,
+                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                      color: theme.palette.neutralSecondary,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {description}
+                  </p>
+                )}
+              </div>
               {imageText && (
                 <p
                   style={{
-                    margin: 0,
+                    margin: `${theme.spacing.s} 0 0 0`,
                     fontSize: theme.fonts.medium.fontSize,
                     fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                     color: theme.palette.themePrimary,
                     fontWeight: 500,
+                    marginTop: 'auto',
                   }}
                 >
                   {imageText}
