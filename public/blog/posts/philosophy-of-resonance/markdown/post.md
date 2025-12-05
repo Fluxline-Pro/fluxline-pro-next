@@ -25,7 +25,7 @@ the eyes and exudes stellar charisma—but think on this for a minute:
 Truly... that can't be the case, right? He’s evolved—through practice,
 intention, and emotional grit. From hustling as a waiter in _Monty_, to dealing
 with Margaret’s immigration antics in _The Proposal_, to voicing a literal
-Voicing Pikachu in _Detective Pikachu_... what can this guy **NOT** do?
+Pikachu in _Detective Pikachu_... what can this guy **NOT** do?
 
 ## 🎬 The Fun of It: _The Drive_
 
@@ -57,7 +57,7 @@ it: _The Drive_.
 
 ## 💡 Resonance in Real Life
 
-Think back in your life and reflect-—when did you last accomplish something that
+Think back in your life and reflect—when did you last accomplish something that
 actually mattered to you?
 
 - What pushed you there?
