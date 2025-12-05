@@ -107,12 +107,49 @@ The section between `---` marks is called "frontmatter" - it's metadata about yo
 
 #### Optional Fields
 
-| Field         | Example                                   | Description            |
-| ------------- | ----------------------------------------- | ---------------------- |
-| `imageUrl`    | `"/blog/posts/your-post/images/hero.jpg"` | Hero image path        |
-| `imageAlt`    | `"React hooks diagram"`                   | Hero image description |
-| `featured`    | `true`                                    | Mark as featured post  |
-| `lastUpdated` | `"2025-11-25"`                            | When you last updated  |
+| Field         | Example                                   | Description                  |
+| ------------- | ----------------------------------------- | ---------------------------- |
+| `imageUrl`    | `"/blog/posts/your-post/images/hero.jpg"` | Hero image path              |
+| `imageAlt`    | `"React hooks diagram"`                   | Hero image description       |
+| `gallery`     | See gallery section below                 | Array of images for carousel |
+| `featured`    | `true`                                    | Mark as featured post        |
+| `lastUpdated` | `"2025-11-25"`                            | When you last updated        |
+
+#### Image Gallery & Carousel (Optional)
+
+You can add multiple images to your blog post that users can view in a fullscreen carousel modal. When you add a `gallery` array to your frontmatter, users can click the hero image to open the carousel and navigate through all images with left/right arrows and keyboard controls.
+
+**Gallery Format:**
+
+```yaml
+gallery:
+  - url: '/blog/posts/your-post/images/screenshot-1.jpg'
+    alt: 'First screenshot showing the dashboard'
+    caption: 'The main dashboard with real-time data'
+  - url: '/blog/posts/your-post/images/screenshot-2.jpg'
+    alt: 'Second screenshot of the analytics view'
+    caption: 'Analytics panel with detailed metrics'
+  - url: '/blog/posts/your-post/images/screenshot-3.jpg'
+    alt: 'Third screenshot'
+    # Caption is optional
+```
+
+**Gallery Features:**
+
+- **Automatic Carousel**: Gallery images automatically enable a fullscreen carousel modal
+- **Navigation**: Users can navigate with left/right arrow buttons or keyboard (ArrowLeft/ArrowRight)
+- **Image Captions**: Optional captions display below each image in the carousel
+- **Image Counter**: Shows "1 / 3" etc. to indicate current position
+- **Hover Effect**: The hero image shows a hover effect (slides up) when carousel is enabled
+- **Click to Open**: Clicking the hero image opens the carousel modal
+
+**Best Practices:**
+
+1. Include 2-6 images in a gallery (too few = not worth carousel, too many = overwhelming)
+2. Use high-quality images (at least 1200px wide)
+3. Keep captions concise (1-2 sentences)
+4. Provide descriptive `alt` text for accessibility
+5. Use consistent aspect ratios for a professional look
 
 ### Step 5: Writing Your Content
 

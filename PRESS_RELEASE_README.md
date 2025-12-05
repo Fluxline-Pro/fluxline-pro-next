@@ -1,5 +1,27 @@
 # Press Release System
 
+> **⚠️ DEPRECATED DOCUMENTATION**
+>
+> This document describes the legacy mock data-based press release system.
+> **The system has been migrated to a markdown-based file system architecture.**
+>
+> **For current documentation, see:**
+>
+> - [Press Release Creation Guide](public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md)
+> - [Content Listing Consolidation](CONTENT_LISTING_CONSOLIDATION.md)
+> - [COPILOT_INSTRUCTIONS.md](COPILOT_INSTRUCTIONS.md) - Press Release System section
+>
+> **Current Architecture:**
+>
+> - Markdown files: `public/press-release/posts/[id]/markdown/release.md`
+> - Server Components for data loading
+> - File system loader: `src/app/press-release/lib/pressReleaseLoader.ts`
+> - Types: `src/app/press-release/types.ts`
+
+---
+
+## Legacy Documentation (Mock Data System)
+
 A complete press release management system built with Next.js 16, featuring responsive card layouts, dynamic routing, and smooth animations.
 
 ## Overview

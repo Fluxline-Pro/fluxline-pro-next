@@ -1,7 +1,7 @@
 'use client';
 
 import { create } from 'zustand';
-import { PressRelease } from '../mock-data/pressReleaseMock';
+import { PressRelease } from '@/app/press-release/types';
 
 /**
  * Press Release Store State Interface
@@ -76,12 +76,16 @@ export const usePressReleaseStore = create<PressReleaseState>((set, get) => ({
     // Filter by year if selected
     if (selectedYear) {
       filtered = filtered.filter(
-        (pr) => pr.date.getFullYear() === selectedYear
+        (pr) => new Date(pr.publishedDate).getFullYear() === selectedYear
       );
     }
 
     // Always sort by date (newest first)
-    return filtered.sort((a, b) => b.date.getTime() - a.date.getTime());
+    return filtered.sort(
+      (a, b) =>
+        new Date(b.publishedDate).getTime() -
+        new Date(a.publishedDate).getTime()
+    );
   },
 
   getCategories: () => {
@@ -94,7 +98,9 @@ export const usePressReleaseStore = create<PressReleaseState>((set, get) => ({
 
   getYears: () => {
     const { pressReleases } = get();
-    const years = pressReleases.map((pr) => pr.date.getFullYear());
+    const years = pressReleases.map((pr) =>
+      new Date(pr.publishedDate).getFullYear()
+    );
     return Array.from(new Set(years)).sort((a, b) => b - a); // Newest first
   },
 }));

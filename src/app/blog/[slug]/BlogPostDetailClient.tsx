@@ -41,6 +41,8 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
       alt: post.imageAlt || post.title,
       title: post.title,
       showTitle: false,
+      gallery: post.gallery, // Pass gallery array
+      enableCarousel: Boolean(post.gallery && post.gallery.length > 0), // Enable carousel if gallery exists
     },
     authorInfo: {
       name: post.author,

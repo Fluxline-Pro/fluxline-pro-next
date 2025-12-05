@@ -199,6 +199,9 @@ interface ImageConfig {
   alt: string;
   title?: string;
   showTitle?: boolean;
+  // Gallery carousel support
+  onClick?: () => void;
+  enableHoverEffect?: boolean;
 }
 
 export interface UnifiedPageWrapperProps {
@@ -272,6 +275,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   // Create ref for content to detect scrollability
   const contentRef = React.useRef<HTMLDivElement>(null);
   const isContentScrollable = useContentScrollable(contentRef);
+
+  // Hover state for image gallery
+  const [isImageHovered, setIsImageHovered] = React.useState(false);
 
   // Add state to ensure we don't check scrollability until content is fully mounted
   const [isContentMounted, setIsContentMounted] = React.useState(false);
@@ -623,6 +629,13 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               initial='hidden'
               animate='visible'
               variants={fadeInVariants}
+              onClick={imageConfig?.onClick}
+              onMouseEnter={() =>
+                imageConfig?.enableHoverEffect && setIsImageHovered(true)
+              }
+              onMouseLeave={() =>
+                imageConfig?.enableHoverEffect && setIsImageHovered(false)
+              }
               style={{
                 position: 'relative',
                 width: '100%',
@@ -632,6 +645,11 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 overflow: 'hidden',
                 backgroundColor: theme.palette.neutralLighter,
                 boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
+                cursor: imageConfig?.onClick ? 'pointer' : 'default',
+                transform: isImageHovered
+                  ? 'translateY(-4px)'
+                  : 'translateY(0)',
+                transition: 'transform 0.2s ease-in-out',
               }}
             >
               <Image
@@ -680,6 +698,13 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               initial='hidden'
               animate='visible'
               variants={fadeInVariants}
+              onClick={imageConfig?.onClick}
+              onMouseEnter={() =>
+                imageConfig?.enableHoverEffect && setIsImageHovered(true)
+              }
+              onMouseLeave={() =>
+                imageConfig?.enableHoverEffect && setIsImageHovered(false)
+              }
               style={{
                 position: 'relative',
                 width: '100%',
@@ -690,6 +715,11 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 backgroundColor: theme.palette.neutralLighter,
                 boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
                 pointerEvents: 'auto',
+                cursor: imageConfig?.onClick ? 'pointer' : 'default',
+                transform: isImageHovered
+                  ? 'translateY(-4px)'
+                  : 'translateY(0)',
+                transition: 'transform 0.2s ease-in-out',
               }}
             >
               <Image

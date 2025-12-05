@@ -16,6 +16,12 @@ export interface CaseStudyMetric {
   description?: string;
 }
 
+export interface CaseStudyImage {
+  url: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface CaseStudy {
   id: string;
   title: string;
@@ -25,8 +31,10 @@ export interface CaseStudy {
   challenge: string;
   solution: string;
   results: string;
+  content?: string; // Full markdown content (when loaded from file)
   imageUrl?: string;
   imageAlt?: string;
+  gallery?: CaseStudyImage[];
   services: ServiceCategory[];
   technologies: string[];
   metrics: CaseStudyMetric[];

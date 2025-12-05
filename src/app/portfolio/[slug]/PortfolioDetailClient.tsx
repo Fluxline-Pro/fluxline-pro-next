@@ -51,6 +51,10 @@ export default function PortfolioDetailClient({
           alt: project.featuredImage.alt,
           title: project.title,
           showTitle: false,
+          gallery: project.gallery, // Pass gallery array
+          enableCarousel: Boolean(
+            project.gallery && project.gallery.length > 0
+          ), // Enable carousel if gallery exists
         }
       : undefined,
     metadata: [

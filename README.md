@@ -48,10 +48,11 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app.
 
 ### Content Management
 
-- 📝 **Blog System** - File-based Markdown blog with frontmatter, tags, and categories
+- 📝 **Blog System** - File-based Markdown blog with frontmatter, tags, categories, and image galleries
+- 📰 **Press Releases** - Markdown-based press releases with year filtering and carousel support
+- 📊 **Case Studies** - File-based case studies with industry/service filtering and metrics visualization
+- 🎨 **Portfolio** - Markdown project showcases with galleries, tags, and external links
 - 📄 **Scrolls/White Papers** - Downloadable strategic insights with metadata
-- 📰 **Press Releases** - Dynamic press release system with multiple view modes
-- 📊 **Case Studies** - Client success stories with metrics and testimonials
 - 🏢 **Services** - Dynamic service pages with detailed information
 
 ### Development Tools
@@ -140,6 +141,24 @@ fluxline-pro-next/
 │   │       └── [slug]/
 │   │           ├── markdown/
 │   │           │   └── post.md
+│   │           └── images/
+│   ├── press-release/            # Press release Markdown files & images
+│   │   └── posts/
+│   │       └── [id]/
+│   │           ├── markdown/
+│   │           │   └── release.md
+│   │           └── images/
+│   ├── case-studies/             # Case study Markdown files & images
+│   │   └── posts/
+│   │       └── [id]/
+│   │           ├── markdown/
+│   │           │   └── case-study.md
+│   │           └── images/
+│   ├── portfolio/                # Portfolio project Markdown files & images
+│   │   └── posts/
+│   │       └── [slug]/
+│   │           ├── markdown/
+│   │           │   └── project.md
 │   │           └── images/
 │   ├── scrolls/                  # White paper PDFs
 │   │   └── pdfs/
@@ -297,9 +316,11 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 
 - **[BLOG_IMPLEMENTATION.md](BLOG_IMPLEMENTATION.md)** - Blog system overview
 - **[FILE_BASED_BLOG_GUIDE.md](FILE_BASED_BLOG_GUIDE.md)** - Complete blog guide
-- **[CASE_STUDIES_IMPLEMENTATION.md](CASE_STUDIES_IMPLEMENTATION.md)** - Case studies feature
-- **[PRESS_RELEASE_README.md](PRESS_RELEASE_README.md)** - Press release system
-- **[src/app/services/scrolls/README.md](src/app/services/scrolls/README.md)** - Scrolls/white papers
+- **[PORTFOLIO_REFACTORING_SUMMARY.md](PORTFOLIO_REFACTORING_SUMMARY.md)** - Portfolio markdown migration
+- **[CASE_STUDIES_IMPLEMENTATION.md](CASE_STUDIES_IMPLEMENTATION.md)** - Case studies markdown system
+- **[CONTENT_LISTING_CONSOLIDATION.md](CONTENT_LISTING_CONSOLIDATION.md)** - Unified listing system
+- **[UNIFIED_CONTENT_DETAIL_SUMMARY.md](UNIFIED_CONTENT_DETAIL_SUMMARY.md)** - Unified detail pages
+- **[SCROLLS_IMPLEMENTATION_SUMMARY.md](SCROLLS_IMPLEMENTATION_SUMMARY.md)** - Scrolls/white papers system
 
 ### Phase Documentation
 
@@ -314,7 +335,10 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 
 ### Content Creation
 
-- **[public/blog/posts/HOW_TO_CREATE_A_BLOG_POST.md](public/blog/posts/HOW_TO_CREATE_A_BLOG_POST.md)** - Blog post tutorial
+- **[public/blog/posts/HOW_TO_CREATE_A_BLOG_POST.md](public/blog/posts/HOW_TO_CREATE_A_BLOG_POST.md)** - Blog post creation guide
+- **[public/portfolio/posts/HOW_TO_CREATE_A_PORTFOLIO_PROJECT.md](public/portfolio/posts/HOW_TO_CREATE_A_PORTFOLIO_PROJECT.md)** - Portfolio project guide
+- **[public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md](public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md)** - Press release creation guide
+- **[public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md](public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md)** - Case study creation guide
 
 ## 🚢 Deployment
 
@@ -466,7 +490,14 @@ See [Scrolls README](src/app/services/scrolls/README.md) for details.
 
 ### Adding Press Releases
 
-Update `src/store/mock-data/pressReleaseMock.ts` and rebuild.
+Press releases use a markdown-based file system:
+
+1. Create folder: `public/press-release/posts/[release-id]/markdown/`
+2. Create `release.md` with frontmatter
+3. Add images (optional): `public/press-release/posts/[release-id]/images/`
+4. Build: `yarn build`
+
+See [Press Release Guide](public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md) for details.
 
 ## 🤝 Contributing
 

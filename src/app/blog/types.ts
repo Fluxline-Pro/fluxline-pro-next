@@ -2,6 +2,12 @@
  * TypeScript type definitions for the Blog system
  */
 
+export interface BlogImage {
+  url: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -13,6 +19,7 @@ export interface BlogPost {
   lastUpdated?: Date;
   imageUrl?: string;
   imageAlt?: string;
+  gallery?: BlogImage[];
   tags: string[];
   category: string;
   featured?: boolean;

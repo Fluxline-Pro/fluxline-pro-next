@@ -1,10 +1,10 @@
 /**
  * Case Study Detail Page Component
  * Displays comprehensive information about a single case study
- * 
+ *
  * Features:
  * - Static generation with generateStaticParams
- * - Detailed challenge/solution/results narrative
+ * - Markdown content rendering
  * - Metrics display with visual emphasis
  * - Service and technology badges
  * - Client testimonial
@@ -15,14 +15,14 @@
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getCaseStudies, getCaseStudyById } from '../caseStudiesData';
+import { getAllCaseStudySlugs, getCaseStudyById } from '../lib/caseStudyLoader';
 import CaseStudyDetailClient from './CaseStudyDetailClient';
 
 // Generate static params for all case studies
 export async function generateStaticParams() {
-  const caseStudies = getCaseStudies();
-  return caseStudies.map((study) => ({
-    id: study.id,
+  const slugs = getAllCaseStudySlugs();
+  return slugs.map((id) => ({
+    id,
   }));
 }
 

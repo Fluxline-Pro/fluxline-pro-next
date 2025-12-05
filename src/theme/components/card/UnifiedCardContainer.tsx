@@ -38,99 +38,66 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   const isTablet = useIsTablet();
   const { theme } = useAppTheme();
 
-  const getAdaptiveGridConfig = () => {
-    // If we have image dimensions and adaptation is enabled
+  const getGridConfig = () => {
+    // Special case: Image view type uses flexbox, not grid
+    if (viewType === 'image') {
+      return {
+        display: 'flex' as const,
+        flexDirection: 'column' as const,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap,
+        width: '100%',
+        height: '100%',
+      };
+    }
+
+    // Determine column count based on view type and device
+    let columns: number;
+
+    // If we have image dimensions and adaptation is enabled, use aspect ratio for column decisions
     if (adaptToImageDimensions && imageDimensions) {
       const { aspectRatio } = imageDimensions;
 
-      // Determine layout based on aspect ratio
       if (aspectRatio > 1.5) {
         // Wide landscape images - use fewer columns to preserve aspect ratio
-        const columns = isMobile ? 1 : isTablet ? 2 : 3;
-        return {
-          display: 'grid' as const,
-          templateColumns: `repeat(${columns}, 1fr)`,
-          gap,
-          gridAutoRows: '1fr',
-          alignItems: 'stretch',
-        };
+        columns = isMobile ? 1 : isTablet ? 2 : 3;
       } else if (aspectRatio < 0.75) {
         // Portrait images - can use more columns
-        const columns = isMobile ? 1 : isTablet ? 3 : 4;
-        return {
-          display: 'grid' as const,
-          templateColumns: `repeat(${columns}, 1fr)`,
-          gap,
-          gridAutoRows: '1fr',
-          alignItems: 'stretch',
-        };
+        columns = isMobile ? 1 : isTablet ? 2 : 3;
       } else {
         // Square or moderate aspect ratios - standard grid
-        const columns = isMobile ? 1 : isTablet ? 3 : 4;
-        return {
-          display: 'grid' as const,
-          templateColumns: `repeat(${columns}, 1fr)`,
-          gap,
-          gridAutoRows: '1fr',
-          alignItems: 'stretch',
-        };
+        columns = isMobile ? 1 : isTablet ? 2 : 3;
+      }
+    } else {
+      // Standard column calculation based on view type
+      switch (viewType) {
+        case 'grid':
+          columns =
+            gridColumns || forceColumns || (isMobile ? 1 : isTablet ? 3 : 4);
+          break;
+        case 'small':
+          columns = gridColumns || (isMobile ? 1 : 2);
+          break;
+        case 'large':
+          columns = gridColumns || (isMobile ? 1 : isTablet ? 2 : 3);
+          break;
+        default:
+          columns = isMobile ? 1 : isTablet ? 3 : 4;
       }
     }
 
-    // Fallback to standard grid configuration
-    return getStandardGridConfig();
+    // All grid layouts use the same structure now (minHeight in cards handles sizing)
+    return {
+      display: 'grid' as const,
+      templateColumns: `repeat(${columns}, 1fr)`,
+      gap,
+      gridAutoRows: '1fr',
+      alignItems: 'stretch',
+    };
   };
 
-  const getStandardGridConfig = () => {
-    switch (viewType) {
-      case 'grid':
-        // Use custom gridColumns if provided, otherwise use existing logic
-        const columns =
-          gridColumns || forceColumns || (isMobile ? 1 : isTablet ? 3 : 4);
-        return {
-          display: 'grid' as const,
-          templateColumns: `repeat(${columns}, 1fr)`,
-          gap,
-          gridAutoRows: 'minmax(auto, 1fr)',
-          alignItems: 'stretch',
-        };
-      case 'small':
-        const smallColumns = gridColumns || (isMobile ? 1 : 2);
-        return {
-          display: 'grid' as const,
-          templateColumns: `repeat(${smallColumns}, 1fr)`,
-          gap,
-          gridAutoRows: '1fr',
-          alignItems: 'stretch',
-        };
-      case 'large':
-        const largeColumns = gridColumns || (isMobile ? 1 : isTablet ? 2 : 3);
-        return {
-          display: 'grid' as const,
-          templateColumns: `repeat(${largeColumns}, 1fr)`,
-          gap,
-          gridAutoRows: 'minmax(auto, 1fr)',
-          alignItems: 'stretch',
-        };
-      case 'image':
-        // For image view type, use a flexible container
-        return {
-          display: 'flex' as const,
-          flexDirection: 'column' as const,
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap,
-          width: '100%',
-          height: '100%',
-        };
-      default:
-        return getStandardGridConfig();
-    }
-  };
-
-  const config = adaptToImageDimensions
-    ? getAdaptiveGridConfig()
-    : getStandardGridConfig();
+  const config = getGridConfig();
 
   // For flex layouts (large and image view types)
   if (config.display === 'flex') {

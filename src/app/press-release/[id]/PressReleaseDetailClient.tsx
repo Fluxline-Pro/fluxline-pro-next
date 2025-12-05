@@ -5,11 +5,11 @@ import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { ContentNotFound } from '@/components/ContentNotFound';
 import { format } from 'date-fns';
-import type { PressRelease } from '@/store/mock-data/pressReleaseMock';
+import type { PressRelease } from '../types';
 import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
 
 interface PressReleaseDetailClientProps {
-  pressRelease: PressRelease | undefined;
+  pressRelease: PressRelease | null;
 }
 
 /**
@@ -34,16 +34,8 @@ export function PressReleaseDetailClient({
 
   const config: UnifiedContentDetailConfig = {
     title: pressRelease.title,
-    content:
-      pressRelease.content ||
-      `
-      <p>This is the full content of the press release.</p>
-      <p>Press release content would typically include detailed information about announcements, 
-      partnerships, product launches, company news, or other significant developments.</p>
-      <p>The content can contain HTML formatting, images, and other media references to provide 
-      a comprehensive view of the news being shared.</p>
-    `,
-    contentType: 'html',
+    content: pressRelease.content,
+    contentType: 'markdown',
     excerpt: pressRelease.subtitle || pressRelease.description,
     backLink: {
       url: '/press-release',
@@ -55,12 +47,22 @@ export function PressReleaseDetailClient({
           alt: pressRelease.imageAlt || pressRelease.title,
           title: pressRelease.title,
           showTitle: false,
+          gallery: pressRelease.gallery,
+          enableCarousel: Boolean(
+            pressRelease.gallery && pressRelease.gallery.length > 0
+          ),
         }
-      : undefined,
+      : {
+          source: '/images/home/FluxlineLogo.png',
+          alt: 'Default Press Release Image',
+          title: pressRelease.title,
+          showTitle: false,
+          enableCarousel: false,
+        },
     authorInfo: pressRelease.author
       ? {
           name: pressRelease.author,
-          publishDate: format(pressRelease.date, 'MMMM d, yyyy'),
+          publishDate: format(pressRelease.publishedDate, 'MMMM d, yyyy'),
           socialLinks:
             pressRelease.author === 'Terence Waters'
               ? TERENCE_SOCIAL_LINKS
@@ -71,7 +73,7 @@ export function PressReleaseDetailClient({
       ? [
           {
             label: '',
-            value: format(pressRelease.date, 'MMMM d, yyyy'),
+            value: format(pressRelease.publishedDate, 'MMMM d, yyyy'),
           },
         ]
       : undefined,
