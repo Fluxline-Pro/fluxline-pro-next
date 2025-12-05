@@ -192,6 +192,26 @@ version: '1.0.0'
        caption: 'Optional caption'
    ```
 
+### Image Carousel Feature
+
+When you add a `gallery` array to your frontmatter, users can click the featured image to open a fullscreen carousel modal and navigate through all project images.
+
+**Carousel Features:**
+
+- **Automatic Activation**: Gallery images automatically enable the carousel
+- **Navigation**: Left/right arrow buttons and keyboard controls (ArrowLeft/ArrowRight)
+- **Image Captions**: Optional captions display below each image
+- **Image Counter**: Shows current position (e.g., "2 / 5")
+- **Hover Effect**: Featured image slides up on hover when carousel is enabled
+
+**Gallery Best Practices:**
+
+1. Include 3-8 images for optimal carousel experience
+2. Use high-quality images (at least 1200px wide)
+3. Keep captions concise and descriptive
+4. Provide accessible alt text for each image
+5. Use consistent aspect ratios across images
+
 ## Best Practices
 
 ### Frontmatter

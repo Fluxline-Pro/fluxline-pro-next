@@ -29,6 +29,11 @@ interface BlogFrontmatter {
   featured?: boolean;
   imageUrl?: string;
   imageAlt?: string;
+  gallery?: Array<{
+    url: string;
+    alt: string;
+    caption?: string;
+  }>;
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
@@ -91,6 +96,11 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
         : undefined,
       imageUrl: frontmatter.imageUrl,
       imageAlt: frontmatter.imageAlt,
+      gallery: frontmatter.gallery?.map((img) => ({
+        url: img.url,
+        alt: img.alt,
+        caption: img.caption,
+      })),
       tags: frontmatter.tags,
       category: frontmatter.category,
       featured: frontmatter.featured ?? false,

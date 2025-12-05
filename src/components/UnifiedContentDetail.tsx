@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -14,6 +14,7 @@ import {
   SocialLinks,
   type SocialLinksData,
 } from '@/app/about/components/SocialLinks';
+import { ImageCarouselModal, type CarouselImage } from './ImageCarouselModal';
 
 /**
  * Unified configuration interface for content detail pages
@@ -53,12 +54,16 @@ export interface UnifiedContentDetailConfig {
     onClick?: () => void;
   }>;
 
-  // Optional image for left pane (blog posts)
+  // Optional image for left pane (blog posts, portfolio)
   imageConfig?: {
     source: string;
     alt: string;
     title?: string;
     showTitle?: boolean;
+    // Gallery support - array of images for carousel
+    gallery?: CarouselImage[];
+    // Whether to enable carousel on image click
+    enableCarousel?: boolean;
   };
 
   // Additional sections (for case studies, portfolio projects)
@@ -98,6 +103,19 @@ interface UnifiedContentDetailProps {
 export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
+  const [isCarouselOpen, setIsCarouselOpen] = useState(false);
+  const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
+
+  const handleImageClick = React.useCallback(() => {
+    if (config.imageConfig?.enableCarousel && config.imageConfig?.gallery) {
+      setCarouselInitialIndex(0);
+      setIsCarouselOpen(true);
+    }
+  }, [config.imageConfig]);
+
+  const handleCarouselClose = React.useCallback(() => {
+    setIsCarouselOpen(false);
+  }, []);
 
   const handleBack = React.useCallback(() => {
     router.push(config.backLink.url);
@@ -353,345 +371,370 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
     ),
   };
 
+  // Prepare image config with carousel functionality
+  const imageConfigWithCarousel = config.imageConfig
+    ? {
+        ...config.imageConfig,
+        onClick: config.imageConfig.enableCarousel
+          ? handleImageClick
+          : undefined,
+        enableHoverEffect: config.imageConfig.enableCarousel || false,
+      }
+    : undefined;
+
   return (
-    <UnifiedPageWrapper
-      layoutType='responsive-grid'
-      imageConfig={config.imageConfig}
-    >
-      {/* Back Button */}
-      <div style={{ marginBottom: theme.spacing.l1 }}></div>
+    <>
+      <UnifiedPageWrapper
+        layoutType='responsive-grid'
+        imageConfig={imageConfigWithCarousel}
+      >
+        {/* Back Button */}
+        <div style={{ marginBottom: theme.spacing.l1 }}></div>
 
-      {/* Article Header */}
-      <article>
-        <header style={{ marginBottom: theme.spacing.l2 }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'baseline',
-              justifyContent: 'left',
-              marginBottom: theme.spacing.l2,
-            }}
-          >
-            <div
-              style={{
-                paddingLeft: theme.spacing.s1,
-                marginRight: theme.spacing.l,
-              }}
-            >
-              <IconButton
-                iconProps={{ iconName: 'Back' }}
-                title={config.backLink.label}
-                ariaLabel={config.backLink.label}
-                onClick={handleBack}
-                styles={{
-                  root: {
-                    color: theme.palette.themePrimary,
-                  },
-                  rootHovered: {
-                    color: theme.palette.themeDark,
-                    transform: 'translateX(-4px)',
-                    transition: 'transform 0.2s ease-in-out',
-                  },
-                  icon: {
-                    fontSize: '2rem',
-                    fontWeight: 'bold',
-                  },
-                }}
-              />
-            </div>
-            <Typography
-              variant='h1'
-              style={{
-                fontWeight: 700,
-                color: theme.palette.themePrimary,
-                marginBottom: theme.spacing.m,
-                fontSize: '2.5rem',
-              }}
-            >
-              {config.title}
-            </Typography>
-          </div>
-
-          {/* Author Info */}
-          {config.authorInfo && (
-            <div
-              style={{
-                marginBottom: theme.spacing.l1,
-                paddingBottom: theme.spacing.m,
-              }}
-            >
-              <Typography
-                variant='p'
-                style={{
-                  fontSize: '1.25rem',
-                  fontWeight: 600,
-                  color: theme.palette.neutralPrimary,
-                  marginBottom: theme.spacing.s,
-                }}
-              >
-                {config.authorInfo.name}
-              </Typography>
-
-              {config.authorInfo.name === 'Terence Waters' &&
-                config.authorInfo.socialLinks && (
-                  <div
-                    style={{
-                      marginTop: theme.spacing.s2,
-                      marginBottom: theme.spacing.s2,
-                    }}
-                  >
-                    <SocialLinks
-                      socialLinks={config.authorInfo.socialLinks}
-                      name={config.authorInfo.name}
-                      size='small'
-                    />
-                  </div>
-                )}
-
-              <Typography
-                variant='p'
-                style={{
-                  color: theme.palette.neutralSecondary,
-                  fontSize: '0.95rem',
-                  marginTop: theme.spacing.s1,
-                }}
-              >
-                Published: {config.authorInfo.publishDate}
-                {config.authorInfo.lastUpdated && (
-                  <>
-                    {' • '}
-                    Last Updated: {config.authorInfo.lastUpdated}
-                  </>
-                )}
-              </Typography>
-            </div>
-          )}
-
-          {/* Metadata (for other content types) */}
-          {!config.authorInfo &&
-            config.metadata &&
-            config.metadata.length > 0 && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: theme.spacing.m,
-                  alignItems: 'center',
-                  marginBottom: theme.spacing.l1,
-                  color: theme.palette.neutralSecondary,
-                }}
-              >
-                {config.metadata.map((meta, index) => (
-                  <React.Fragment key={index}>
-                    {index > 0 && <span>•</span>}
-                    <Typography variant='p'>
-                      {meta.label ? `${meta.label}: ` : ''}
-                      {meta.value}
-                    </Typography>
-                  </React.Fragment>
-                ))}
-              </div>
-            )}
-
-          {/* Badges */}
-          {config.badges && config.badges.length > 0 && (
+        {/* Article Header */}
+        <article>
+          <header style={{ marginBottom: theme.spacing.l2 }}>
             <div
               style={{
                 display: 'flex',
-                flexWrap: 'wrap',
-                gap: theme.spacing.s1,
-                marginBottom: theme.spacing.m,
+                flexDirection: 'row',
+                alignItems: 'baseline',
+                justifyContent: 'left',
+                marginBottom: theme.spacing.l2,
               }}
             >
-              {config.badges.map((badge, index) => (
-                <FormButton
-                  key={index}
-                  variant={badge.variant === 'primary' ? 'primary' : 'tertiary'}
-                  onClick={badge.onClick}
-                  disabled={!badge.onClick}
-                  size='small'
-                >
-                  {badge.label}
-                </FormButton>
-              ))}
-            </div>
-          )}
-        </header>
-
-        {/* Excerpt */}
-        {config.excerpt && (
-          <Typography
-            variant='p'
-            style={{
-              fontStyle: 'italic',
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l2,
-              paddingLeft: theme.spacing.l1,
-              borderLeft: `4px solid ${theme.palette.themePrimary}`,
-              fontSize: '1.125rem',
-            }}
-          >
-            {config.excerpt}
-          </Typography>
-        )}
-
-        {/* External Links (for portfolio projects) */}
-        {config.externalLinks && config.externalLinks.length > 0 && (
-          <div
-            style={{
-              display: 'flex',
-              gap: theme.spacing.m,
-              marginBottom: theme.spacing.l2,
-              flexWrap: 'wrap',
-            }}
-          >
-            {config.externalLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target='_blank'
-                rel='noopener noreferrer'
+              <div
                 style={{
-                  padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                  backgroundColor:
-                    link.variant === 'live'
-                      ? theme.palette.themePrimary
-                      : theme.palette.neutralLighter,
-                  color:
-                    link.variant === 'live'
-                      ? theme.palette.white
-                      : theme.palette.neutralPrimary,
-                  textDecoration: 'none',
-                  borderRadius: theme.effects.roundedCorner4,
-                  fontSize: theme.fonts.medium.fontSize,
-                  fontWeight: 600,
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  if (link.variant === 'live') {
-                    e.currentTarget.style.backgroundColor =
-                      theme.palette.themeDark;
-                  } else {
-                    e.currentTarget.style.backgroundColor =
-                      theme.palette.neutralLight;
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (link.variant === 'live') {
-                    e.currentTarget.style.backgroundColor =
-                      theme.palette.themePrimary;
-                  } else {
-                    e.currentTarget.style.backgroundColor =
-                      theme.palette.neutralLighter;
-                  }
+                  paddingLeft: theme.spacing.s1,
+                  marginRight: theme.spacing.l,
                 }}
               >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        )}
-
-        {/* Main Content */}
-        <div
-          style={{
-            color: theme.palette.neutralPrimary,
-            lineHeight: 1.7,
-          }}
-          className='unified-content-detail'
-        >
-          {config.contentType === 'markdown' ? (
-            <ReactMarkdown
-              components={markdownComponents}
-              remarkPlugins={[remarkGfm]}
-            >
-              {config.content}
-            </ReactMarkdown>
-          ) : (
-            <div dangerouslySetInnerHTML={{ __html: config.content }} />
-          )}
-        </div>
-
-        {/* Additional Sections */}
-        {config.sections &&
-          config.sections.map((section, index) => (
-            <div key={index} style={{ marginTop: theme.spacing.xl }}>
+                <IconButton
+                  iconProps={{ iconName: 'Back' }}
+                  title={config.backLink.label}
+                  ariaLabel={config.backLink.label}
+                  onClick={handleBack}
+                  styles={{
+                    root: {
+                      color: theme.palette.themePrimary,
+                    },
+                    rootHovered: {
+                      color: theme.palette.themeDark,
+                      transform: 'translateX(-4px)',
+                      transition: 'transform 0.2s ease-in-out',
+                    },
+                    icon: {
+                      fontSize: '2rem',
+                      fontWeight: 'bold',
+                    },
+                  }}
+                />
+              </div>
               <Typography
-                variant='h2'
+                variant='h1'
                 style={{
-                  fontWeight: 600,
-                  marginBottom: theme.spacing.m,
+                  fontWeight: 700,
                   color: theme.palette.themePrimary,
-                  fontSize: '1.5rem',
+                  marginBottom: theme.spacing.m,
+                  fontSize: '2.5rem',
                 }}
               >
-                {section.title}
+                {config.title}
               </Typography>
-              {typeof section.content === 'string' ? (
+            </div>
+
+            {/* Author Info */}
+            {config.authorInfo && (
+              <div
+                style={{
+                  marginBottom: theme.spacing.l1,
+                  paddingBottom: theme.spacing.m,
+                }}
+              >
+                <Typography
+                  variant='p'
+                  style={{
+                    fontSize: '1.25rem',
+                    fontWeight: 600,
+                    color: theme.palette.neutralPrimary,
+                    marginBottom: theme.spacing.s,
+                  }}
+                >
+                  {config.authorInfo.name}
+                </Typography>
+
+                {config.authorInfo.name === 'Terence Waters' &&
+                  config.authorInfo.socialLinks && (
+                    <div
+                      style={{
+                        marginTop: theme.spacing.s2,
+                        marginBottom: theme.spacing.s2,
+                      }}
+                    >
+                      <SocialLinks
+                        socialLinks={config.authorInfo.socialLinks}
+                        name={config.authorInfo.name}
+                        size='small'
+                      />
+                    </div>
+                  )}
+
                 <Typography
                   variant='p'
                   style={{
                     color: theme.palette.neutralSecondary,
-                    fontSize: '1.125rem',
-                    lineHeight: 1.7,
+                    fontSize: '0.95rem',
+                    marginTop: theme.spacing.s1,
                   }}
                 >
-                  {section.content}
+                  Published: {config.authorInfo.publishDate}
+                  {config.authorInfo.lastUpdated && (
+                    <>
+                      {' • '}
+                      Last Updated: {config.authorInfo.lastUpdated}
+                    </>
+                  )}
                 </Typography>
-              ) : (
-                section.content
-              )}
-            </div>
-          ))}
-      </article>
+              </div>
+            )}
 
-      {/* Call to Action */}
-      {config.cta && (
-        <div style={{ marginTop: theme.spacing.xxl }}>
-          <Callout
-            variant='subtle'
-            title={config.cta.title}
-            subtitle={config.cta.description}
-            action={
+            {/* Metadata (for other content types) */}
+            {!config.authorInfo &&
+              config.metadata &&
+              config.metadata.length > 0 && (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: theme.spacing.m,
+                    alignItems: 'center',
+                    marginBottom: theme.spacing.l1,
+                    color: theme.palette.neutralSecondary,
+                  }}
+                >
+                  {config.metadata.map((meta, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && <span>•</span>}
+                      <Typography variant='p'>
+                        {meta.label ? `${meta.label}: ` : ''}
+                        {meta.value}
+                      </Typography>
+                    </React.Fragment>
+                  ))}
+                </div>
+              )}
+
+            {/* Badges */}
+            {config.badges && config.badges.length > 0 && (
               <div
                 style={{
                   display: 'flex',
-                  gap: theme.spacing.m,
-                  justifyContent: 'flex-start',
                   flexWrap: 'wrap',
+                  gap: theme.spacing.s1,
+                  marginBottom: theme.spacing.m,
                 }}
               >
-                {config.cta.buttons.map((button, index) => (
+                {config.badges.map((badge, index) => (
                   <FormButton
                     key={index}
                     variant={
-                      button.variant === 'primary' ? 'primary' : 'secondary'
+                      badge.variant === 'primary' ? 'primary' : 'tertiary'
                     }
-                    onClick={button.onClick}
-                    size='large'
+                    onClick={badge.onClick}
+                    disabled={!badge.onClick}
+                    size='small'
                   >
-                    {button.label}
+                    {badge.label}
                   </FormButton>
                 ))}
               </div>
-            }
-          />
-        </div>
-      )}
+            )}
+          </header>
 
-      {/* Footer Navigation */}
-      <div
-        style={{
-          marginTop: theme.spacing.l2,
-          paddingTop: theme.spacing.l1,
-          borderTop: `1px solid ${theme.palette.neutralLight}`,
-        }}
-      >
-        <FormButton variant='secondary' onClick={handleBack} size='large'>
-          ← {config.backLink.label}
-        </FormButton>
-      </div>
-    </UnifiedPageWrapper>
+          {/* Excerpt */}
+          {config.excerpt && (
+            <Typography
+              variant='p'
+              style={{
+                fontStyle: 'italic',
+                color: theme.palette.neutralSecondary,
+                marginBottom: theme.spacing.l2,
+                paddingLeft: theme.spacing.l1,
+                borderLeft: `4px solid ${theme.palette.themePrimary}`,
+                fontSize: '1.125rem',
+              }}
+            >
+              {config.excerpt}
+            </Typography>
+          )}
+
+          {/* External Links (for portfolio projects) */}
+          {config.externalLinks && config.externalLinks.length > 0 && (
+            <div
+              style={{
+                display: 'flex',
+                gap: theme.spacing.m,
+                marginBottom: theme.spacing.l2,
+                flexWrap: 'wrap',
+              }}
+            >
+              {config.externalLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={{
+                    padding: `${theme.spacing.s1} ${theme.spacing.l}`,
+                    backgroundColor:
+                      link.variant === 'live'
+                        ? theme.palette.themePrimary
+                        : theme.palette.neutralLighter,
+                    color:
+                      link.variant === 'live'
+                        ? theme.palette.white
+                        : theme.palette.neutralPrimary,
+                    textDecoration: 'none',
+                    borderRadius: theme.effects.roundedCorner4,
+                    fontSize: theme.fonts.medium.fontSize,
+                    fontWeight: 600,
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (link.variant === 'live') {
+                      e.currentTarget.style.backgroundColor =
+                        theme.palette.themeDark;
+                    } else {
+                      e.currentTarget.style.backgroundColor =
+                        theme.palette.neutralLight;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (link.variant === 'live') {
+                      e.currentTarget.style.backgroundColor =
+                        theme.palette.themePrimary;
+                    } else {
+                      e.currentTarget.style.backgroundColor =
+                        theme.palette.neutralLighter;
+                    }
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+
+          {/* Main Content */}
+          <div
+            style={{
+              color: theme.palette.neutralPrimary,
+              lineHeight: 1.7,
+            }}
+            className='unified-content-detail'
+          >
+            {config.contentType === 'markdown' ? (
+              <ReactMarkdown
+                components={markdownComponents}
+                remarkPlugins={[remarkGfm]}
+              >
+                {config.content}
+              </ReactMarkdown>
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: config.content }} />
+            )}
+          </div>
+
+          {/* Additional Sections */}
+          {config.sections &&
+            config.sections.map((section, index) => (
+              <div key={index} style={{ marginTop: theme.spacing.xl }}>
+                <Typography
+                  variant='h2'
+                  style={{
+                    fontWeight: 600,
+                    marginBottom: theme.spacing.m,
+                    color: theme.palette.themePrimary,
+                    fontSize: '1.5rem',
+                  }}
+                >
+                  {section.title}
+                </Typography>
+                {typeof section.content === 'string' ? (
+                  <Typography
+                    variant='p'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '1.125rem',
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {section.content}
+                  </Typography>
+                ) : (
+                  section.content
+                )}
+              </div>
+            ))}
+        </article>
+
+        {/* Call to Action */}
+        {config.cta && (
+          <div style={{ marginTop: theme.spacing.xxl }}>
+            <Callout
+              variant='subtle'
+              title={config.cta.title}
+              subtitle={config.cta.description}
+              action={
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: theme.spacing.m,
+                    justifyContent: 'flex-start',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {config.cta.buttons.map((button, index) => (
+                    <FormButton
+                      key={index}
+                      variant={
+                        button.variant === 'primary' ? 'primary' : 'secondary'
+                      }
+                      onClick={button.onClick}
+                      size='large'
+                    >
+                      {button.label}
+                    </FormButton>
+                  ))}
+                </div>
+              }
+            />
+          </div>
+        )}
+
+        {/* Footer Navigation */}
+        <div
+          style={{
+            marginTop: theme.spacing.l2,
+            paddingTop: theme.spacing.l1,
+            borderTop: `1px solid ${theme.palette.neutralLight}`,
+          }}
+        >
+          <FormButton variant='secondary' onClick={handleBack} size='large'>
+            ← {config.backLink.label}
+          </FormButton>
+        </div>
+      </UnifiedPageWrapper>
+
+      {/* Image Carousel Modal */}
+      {config.imageConfig?.gallery && config.imageConfig?.enableCarousel && (
+        <ImageCarouselModal
+          isOpen={isCarouselOpen}
+          onDismiss={handleCarouselClose}
+          images={config.imageConfig.gallery}
+          initialIndex={carouselInitialIndex}
+        />
+      )}
+    </>
   );
 }

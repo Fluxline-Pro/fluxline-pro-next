@@ -30,6 +30,11 @@ export interface CaseStudyFrontmatter {
   featured: boolean;
   imageUrl?: string;
   imageAlt?: string;
+  gallery?: Array<{
+    url: string;
+    alt: string;
+    caption?: string;
+  }>;
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
@@ -101,6 +106,11 @@ export function getCaseStudyById(id: string): CaseStudy | null {
       results: '', // Will be extracted from content
       imageUrl: frontmatter.imageUrl,
       imageAlt: frontmatter.imageAlt,
+      gallery: frontmatter.gallery?.map((img) => ({
+        url: img.url,
+        alt: img.alt,
+        caption: img.caption,
+      })),
       services: frontmatter.services,
       technologies: frontmatter.technologies,
       metrics: frontmatter.metrics || [],

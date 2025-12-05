@@ -84,13 +84,46 @@ Choose one or more services that apply to your case study:
 
 ## Optional Frontmatter Fields
 
-| Field             | Type   | Description                   |
-| ----------------- | ------ | ----------------------------- |
-| `projectDuration` | string | How long the project took     |
-| `imageUrl`        | string | Path to featured image        |
-| `imageAlt`        | string | Alt text for featured image   |
-| `metrics`         | array  | Project metrics/results       |
-| `testimonial`     | object | Client testimonial (optional) |
+| Field             | Type   | Description                    |
+| ----------------- | ------ | ------------------------------ |
+| `projectDuration` | string | How long the project took      |
+| `imageUrl`        | string | Path to featured image         |
+| `imageAlt`        | string | Alt text for featured image    |
+| `gallery`         | array  | Additional images for carousel |
+| `metrics`         | array  | Project metrics/results        |
+| `testimonial`     | object | Client testimonial (optional)  |
+
+### Gallery Format (Optional)
+
+Add multiple images that users can view in a fullscreen carousel:
+
+```yaml
+gallery:
+  - url: '/case-studies/posts/your-case-study/images/screenshot-1.jpg'
+    alt: 'System architecture diagram'
+    caption: 'The new cloud architecture deployed on Azure'
+  - url: '/case-studies/posts/your-case-study/images/screenshot-2.jpg'
+    alt: 'Performance metrics dashboard'
+    caption: 'Real-time performance monitoring dashboard'
+  - url: '/case-studies/posts/your-case-study/images/screenshot-3.jpg'
+    alt: 'User interface redesign'
+    # Caption is optional
+```
+
+**Carousel Features:**
+
+- Users click the featured image to open fullscreen carousel
+- Navigate with arrow buttons or keyboard (ArrowLeft/ArrowRight)
+- Image captions and counter display (e.g., "1 / 3")
+- Hover effect on featured image when gallery is present
+
+**Gallery Best Practices:**
+
+1. Include 3-6 images showing key aspects of the project
+2. Use high-quality screenshots and diagrams (1200px+ wide)
+3. Add descriptive captions explaining what each image shows
+4. Provide accessible alt text for all images
+5. Show before/after comparisons, architecture diagrams, or UI screenshots
 
 ### Metrics Format
 

@@ -43,7 +43,8 @@ export const pressReleasesMockData: PressRelease[] = [
     content: `
 Fluxline Resonance Group is proud to announce the official launch of Fluxline 2.0, 
 a cutting-edge business transformation platform designed to empower businesses in 
-their digital transformation journey.
+their digital transformation journey. This is the upgrade to our existing Fluxline.pro
+website, fully utilized and enhanced for user experience, accessibility, and performance.
 
 Built on the latest technology stack including Next.js 16 and React 19, Fluxline 2.0 
 delivers exceptional performance, accessibility, and user experience. The platform 
@@ -58,7 +59,7 @@ Key features include:
 - Modern component-based architecture
 
 "This launch represents a significant milestone in our mission to deliver strategic 
-precision for modern business transformation," said the Fluxline Resonance Group team.
+precision for modern business transformation," said Terence Waters, CEO and Founder of Fluxline Resonance Group.
     `,
   },
   {
