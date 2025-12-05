@@ -287,8 +287,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
     );
   }
 
-  // For grid view type, render image card with title overlay
-  if (viewType === 'grid' && imageUrl) {
+  // For grid view type
+  if (viewType === 'grid') {
     return (
       <motion.div
         data-card-id={id}
@@ -308,63 +308,116 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           hoverable={!!onClick}
           onClick={onClick}
         >
-          <div
-            style={{
-              position: 'relative',
-              width: '100%',
-              paddingBottom: '60%', // 5:3 aspect ratio for grid cards
-              overflow: 'hidden',
-              borderRadius: '6px',
-              minHeight: '200px',
-            }}
-          >
-            <Image
-              src={imageUrl}
-              alt={altText || imageAlt || title}
-              fill
-              style={{
-                objectFit: 'cover',
-                filter: filter,
-              }}
-            />
-
-            {/* Title and date overlay */}
+          {imageUrl ? (
             <div
               style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: theme.spacing.m,
-                background: `linear-gradient(to top, ${theme.palette.black}CC, transparent)`,
-                color: theme.palette.white,
+                position: 'relative',
+                width: '100%',
+                paddingBottom: '60%', // 5:3 aspect ratio for grid cards
+                overflow: 'hidden',
+                borderRadius: '6px',
+                minHeight: '200px',
               }}
             >
-              <h3
+              <Image
+                src={imageUrl}
+                alt={altText || imageAlt || title}
+                fill
                 style={{
-                  margin: `0 0 ${theme.spacing.xs} 0`,
-                  fontSize: theme.fonts.large.fontSize,
-                  fontWeight: theme.fonts.large.fontWeight as number,
-                  fontFamily: `${theme.fonts.large.fontFamily} !important`,
-                  lineHeight: 1.2,
+                  objectFit: 'cover',
+                  filter: filter,
+                }}
+              />
+
+              {/* Title and date overlay */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: theme.spacing.m,
+                  background: `linear-gradient(to top, ${theme.palette.black}CC, transparent)`,
+                  color: theme.palette.white,
                 }}
               >
-                {title}
-              </h3>
+                <h3
+                  style={{
+                    margin: `0 0 ${theme.spacing.xs} 0`,
+                    fontSize: theme.fonts.large.fontSize,
+                    fontWeight: theme.fonts.large.fontWeight as number,
+                    fontFamily: `${theme.fonts.large.fontFamily} !important`,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {title}
+                </h3>
+                {imageText && (
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: theme.fonts.small.fontSize,
+                      fontFamily: `${theme.fonts.small.fontFamily} !important`,
+                      opacity: 0.9,
+                    }}
+                  >
+                    {imageText}
+                  </p>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                padding: theme.spacing.m,
+                minHeight: '200px',
+                height: '100%',
+              }}
+            >
+              <div>
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: theme.fonts.large.fontSize,
+                    fontWeight: theme.fonts.large.fontWeight as number,
+                    fontFamily: `${theme.fonts.large.fontFamily} !important`,
+                    color: theme.palette.neutralPrimary,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {title}
+                </h3>
+                {description && (
+                  <p
+                    style={{
+                      margin: `${theme.spacing.s} 0 0 0`,
+                      fontSize: theme.fonts.medium.fontSize,
+                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                      color: theme.palette.neutralSecondary,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {description}
+                  </p>
+                )}
+              </div>
               {imageText && (
                 <p
                   style={{
                     margin: 0,
-                    fontSize: theme.fonts.small.fontSize,
-                    fontFamily: `${theme.fonts.small.fontFamily} !important`,
-                    opacity: 0.9,
+                    fontSize: theme.fonts.medium.fontSize,
+                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                    color: theme.palette.neutralSecondary,
                   }}
                 >
                   {imageText}
                 </p>
               )}
             </div>
-          </div>
+          )}
         </Card>
       </motion.div>
     );
@@ -395,21 +448,22 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           ease: 'easeOut',
         }}
       >
-        <Card
-          elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
-          padding='none'
-          hoverable={!!onClick}
-          onClick={onClick}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              height: '100%',
-              minHeight: '300px',
-            }}
+        <div style={{ width: '100%', height: '100%' }}>
+          <Card
+            elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+            padding='none'
+            hoverable={!!onClick}
+            onClick={onClick}
           >
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                height: '100%',
+                minHeight: imageUrl ? '335px' : '125px',
+              }}
+            >
             {imageUrl && (
               <div
                 style={{
@@ -438,21 +492,36 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 flexDirection: 'column',
                 flex: 1,
                 minHeight: 0,
+                justifyContent: imageUrl ? 'flex-start' : 'space-between',
               }}
             >
-              <h3
-                style={{
-                  margin: 0,
-                  fontSize: theme.fonts.large.fontSize,
-                  fontWeight: theme.fonts.large.fontWeight as number,
-                  fontFamily: `${theme.fonts.large.fontFamily} !important`,
-                  color: theme.palette.neutralPrimary,
-                  lineHeight: 1.3,
-                  flex: '0 0 auto',
-                }}
-              >
-                {title}
-              </h3>
+              <div style={{ flex: imageUrl ? '0 0 auto' : '1 1 auto' }}>
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: theme.fonts.large.fontSize,
+                    fontWeight: theme.fonts.large.fontWeight as number,
+                    fontFamily: `${theme.fonts.large.fontFamily} !important`,
+                    color: theme.palette.neutralPrimary,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {title}
+                </h3>
+                {!imageUrl && description && (
+                  <p
+                    style={{
+                      margin: `${theme.spacing.s} 0 0 0`,
+                      fontSize: theme.fonts.medium.fontSize,
+                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                      color: theme.palette.neutralSecondary,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {description}
+                  </p>
+                )}
+              </div>
               {imageText && (
                 <p
                   style={{
@@ -460,7 +529,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     fontSize: theme.fonts.medium.fontSize,
                     fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                     color: theme.palette.neutralSecondary,
-                    marginTop: 'auto',
+                    marginTop: imageUrl ? 'auto' : '0',
                   }}
                 >
                   {imageText}
@@ -469,6 +538,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             </div>
           </div>
         </Card>
+        </div>
       </motion.div>
     );
   }
@@ -496,94 +566,97 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           ease: 'easeOut',
         }}
       >
-        <Card
-          elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
-          padding='none'
-          hoverable={!!onClick}
-          onClick={onClick}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              height: '100%',
-            }}
+        <div style={{ width: '100%', height: '100%' }}>
+          <Card
+            elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+            padding='none'
+            hoverable={!!onClick}
+            onClick={onClick}
           >
-            {imageUrl && (
-              <div
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  paddingBottom: '60%', // 5:3 aspect ratio
-                  overflow: 'hidden',
-                  borderRadius: '6px 6px 0 0',
-                }}
-              >
-                <Image
-                  src={imageUrl}
-                  alt={altText || imageAlt || title}
-                  fill
-                  style={{
-                    objectFit: 'cover',
-                    filter: filter,
-                  }}
-                />
-              </div>
-            )}
             <div
               style={{
-                padding: theme.spacing.l,
                 display: 'flex',
                 flexDirection: 'column',
-                flex: 1,
-                minHeight: 0,
+                width: '100%',
+                height: '100%',
+                minHeight: imageUrl ? '460px' : '175px',
               }}
             >
-              <div style={{ flex: '0 0 auto' }}>
-                <h3
+              {imageUrl && (
+                <div
                   style={{
-                    margin: `0 0 ${theme.spacing.s} 0`,
-                    fontSize: theme.fonts.xLarge.fontSize,
-                    fontWeight: theme.fonts.xLarge.fontWeight as number,
-                    fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
-                    color: theme.palette.neutralPrimary,
-                    lineHeight: 1.3,
+                    position: 'relative',
+                    width: '100%',
+                    paddingBottom: '60%', // 5:3 aspect ratio
+                    overflow: 'hidden',
+                    borderRadius: '6px 6px 0 0',
                   }}
                 >
-                  {title}
-                </h3>
-                {description && (
-                  <p
+                  <Image
+                    src={imageUrl}
+                    alt={altText || imageAlt || title}
+                    fill
                     style={{
-                      margin: `${theme.spacing.xs} 0 0 0`,
-                      fontSize: theme.fonts.medium.fontSize,
-                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
-                      color: theme.palette.neutralSecondary,
-                      lineHeight: 1.5,
+                      objectFit: 'cover',
+                      filter: filter,
+                    }}
+                  />
+                </div>
+              )}
+              <div
+                style={{
+                  padding: theme.spacing.l,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flex: 1,
+                  minHeight: 0,
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div>
+                  <h3
+                    style={{
+                      margin: `0 0 ${theme.spacing.s} 0`,
+                      fontSize: theme.fonts.xLarge.fontSize,
+                      fontWeight: theme.fonts.xLarge.fontWeight as number,
+                      fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
+                      color: theme.palette.neutralPrimary,
+                      lineHeight: 1.3,
                     }}
                   >
-                    {description}
+                    {title}
+                  </h3>
+                  {description && (
+                    <p
+                      style={{
+                        margin: `${theme.spacing.xs} 0 0 0`,
+                        fontSize: theme.fonts.medium.fontSize,
+                        fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                        color: theme.palette.neutralSecondary,
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {description}
+                    </p>
+                  )}
+                </div>
+                {imageText && (
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: theme.fonts.medium.fontSize,
+                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                      color: theme.palette.themePrimary,
+                      fontWeight: 500,
+                    }}
+                  >
+                    {imageText}
                   </p>
                 )}
               </div>
-              {imageText && (
-                <p
-                  style={{
-                    margin: `${theme.spacing.s} 0 0 0`,
-                    fontSize: theme.fonts.medium.fontSize,
-                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
-                    color: theme.palette.themePrimary,
-                    fontWeight: 500,
-                    marginTop: 'auto',
-                  }}
-                >
-                  {imageText}
-                </p>
-              )}
             </div>
-          </div>
-        </Card>
+          </Card>
+        </div>
       </motion.div>
     );
   }

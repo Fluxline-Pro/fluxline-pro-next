@@ -56,7 +56,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
         };
       } else if (aspectRatio < 0.75) {
         // Portrait images - can use more columns
-        const columns = isMobile ? 1 : isTablet ? 3 : 4;
+        const columns = isMobile ? 1 : isTablet ? 2 : 3;
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
@@ -66,7 +66,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
         };
       } else {
         // Square or moderate aspect ratios - standard grid
-        const columns = isMobile ? 1 : isTablet ? 3 : 4;
+        const columns = isMobile ? 1 : isTablet ? 2 : 3;
         return {
           display: 'grid' as const,
           templateColumns: `repeat(${columns}, 1fr)`,
@@ -100,7 +100,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
           display: 'grid' as const,
           templateColumns: `repeat(${smallColumns}, 1fr)`,
           gap,
-          gridAutoRows: 'minmax(300px, auto)',
+          gridAutoRows: 'minmax(auto, auto)',
           alignItems: 'stretch',
         };
       case 'large':
