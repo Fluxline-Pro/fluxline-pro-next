@@ -417,11 +417,16 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
                   styles={{
                     root: {
                       color: theme.palette.themePrimary,
+                      backgroundColor: 'transparent',
                     },
                     rootHovered: {
                       color: theme.palette.themeDark,
+                      backgroundColor: 'transparent',
                       transform: 'translateX(-4px)',
                       transition: 'transform 0.2s ease-in-out',
+                    },
+                    rootPressed: {
+                      backgroundColor: 'transparent',
                     },
                     icon: {
                       fontSize: '2rem',

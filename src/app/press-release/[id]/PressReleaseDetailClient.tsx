@@ -52,7 +52,13 @@ export function PressReleaseDetailClient({
             pressRelease.gallery && pressRelease.gallery.length > 0
           ),
         }
-      : undefined,
+      : {
+          source: '/images/home/FluxlineLogo.png',
+          alt: 'Default Press Release Image',
+          title: pressRelease.title,
+          showTitle: false,
+          enableCarousel: false,
+        },
     authorInfo: pressRelease.author
       ? {
           name: pressRelease.author,

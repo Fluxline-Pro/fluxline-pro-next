@@ -128,19 +128,22 @@ export const Hero: React.FC<HeroProps> = ({
         }}
       >
         {backArrow && (
-          <Link href={backArrowPath}   style={{ textDecoration: 'none' }}>
+          <Link href={backArrowPath} style={{ textDecoration: 'none' }}>
             <div
               style={{
                 display: 'inline-block',
                 transition: 'transform 0.2s ease',
                 cursor: 'pointer',
+                background: 'transparent',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform =
                   'translateX(-4px) scale(1.05)';
+                e.currentTarget.style.background = 'transparent';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateX(0) scale(1)';
+                e.currentTarget.style.background = 'transparent';
               }}
             >
               <FluentIcon
@@ -151,6 +154,7 @@ export const Hero: React.FC<HeroProps> = ({
                   flexShrink: 0,
                   marginTop: isMobile ? '0.25rem' : 0,
                   marginRight: '0.5rem',
+                  background: 'transparent',
                 }}
               />
             </div>
