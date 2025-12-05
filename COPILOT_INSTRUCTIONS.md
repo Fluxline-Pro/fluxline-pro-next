@@ -265,6 +265,60 @@ For complete documentation, see `UNIFIED_CONTENT_DETAIL_SUMMARY.md`
 
 For complete documentation, see `FILE_BASED_BLOG_GUIDE.md`
 
+### Press Release System
+
+- **Location**: `/src/app/press-release/`
+- **Content Storage**: Markdown files in `/public/press-release/posts/[id]/markdown/release.md`
+- **Image Storage**: Images in `/public/press-release/posts/[id]/images/`
+- **Architecture**: Server Components for data loading, Client Wrapper for interactivity
+
+**Adding New Press Releases**:
+
+1. Create folder structure: `public/press-release/posts/your-release-id/markdown/` and `images/`
+2. Create `release.md` with frontmatter (title, subtitle, description, author, date, category, tags, SEO)
+3. Add images to images folder
+4. Run `yarn build` to generate static pages
+5. New release automatically appears in listing, gets detail page, and is filterable by year
+
+**Component Structure**:
+
+- `page.tsx`: Server Component that loads releases from file system
+- `PressReleaseListingClient.tsx`: Client Wrapper that transforms data and manages filters
+- Uses unified `ContentListingPage` component for rendering
+- `lib/pressReleaseLoader.ts`: Server-only file system loader
+- `[id]/page.tsx`: Server Component for detail pages
+
+**Filters**: Year (single-select)
+
+For complete documentation, see `/public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md`
+
+### Case Studies System
+
+- **Location**: `/src/app/case-studies/`
+- **Content Storage**: Markdown files in `/public/case-studies/posts/[id]/markdown/case-study.md`
+- **Image Storage**: Images in `/public/case-studies/posts/[id]/images/`
+- **Architecture**: Server Components for data loading, Client Wrapper for interactivity
+
+**Adding New Case Studies**:
+
+1. Create folder structure: `public/case-studies/posts/your-case-study-id/markdown/` and `images/`
+2. Create `case-study.md` with frontmatter (title, client, industry, description, challenge, solution, results, metrics, testimonial, SEO)
+3. Add images to images folder
+4. Run `yarn build` to generate static pages
+5. New case study automatically appears in listing, gets detail page, and is filterable by industry and service
+
+**Component Structure**:
+
+- `page.tsx`: Server Component that loads case studies from file system
+- `CaseStudiesListingClient.tsx`: Client Wrapper that transforms data and manages filters
+- Uses unified `ContentListingPage` component for rendering
+- `lib/caseStudyLoader.ts`: Server-only file system loader
+- `[id]/page.tsx`: Server Component for detail pages
+
+**Filters**: Industry (multi-select), Service (multi-select)
+
+For complete documentation, see `/public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md`
+
 ### Scrolls/White Papers Management
 
 - **Location**: `/src/app/services/scrolls/`
@@ -286,42 +340,7 @@ For complete documentation, see `FILE_BASED_BLOG_GUIDE.md`
 - Client Components used only for interactive download buttons
 - Static generation for all scroll detail pages via `generateStaticParams`
 
-For complete content listing documentation, see `CONTENT_LISTING_CONSOLIDATION.md`
-
-**System Architecture**:
-
-- **Listing Page**: Client component with 3 view modes (Grid, Small Tile, Large Tile)
-- **Detail Pages**: Server components with static generation via `generateStaticParams`
-- **Card System**: AdaptiveCardGrid → UnifiedCardContainer → UnifiedCard
-- **Animations**: Framer Motion with 25ms staggered card appearances
-- **Mobile Optimized**: Overflow protection and responsive breakpoints
-
-**Adding New Press Releases**:
-
-1. Update `pressReleaseMockData` array in mock file with complete schema
-2. Include all required fields: `id`, `title`, `subtitle`, `description`, `date`, `imageUrl`
-3. Add images to `/public/images/` directory
-4. Run `yarn build` to regenerate static detail pages
-5. New press release automatically appears in grid and gets detail route
-
-**Key Features**:
-
-- **Responsive Grid**: 1-4 columns based on device orientation
-- **Fast Animations**: 125ms total stagger time for 6 cards
-- **Hover Effects**: Smooth upward slide transitions with pointer cursor
-- **Click Navigation**: Event delegation to detail pages
-- **Mobile Protection**: No horizontal overflow, proper text wrapping
-- **Accessibility**: WCAG 2.1 AA compliant with keyboard navigation
-
-**Component Details**:
-
-- `AdaptiveCardGrid`: Smart grid with image dimension adaptation
-- `UnifiedCardContainer`: Responsive container with CSS Grid/Flexbox
-- `UnifiedCard`: Multi-view card component (grid, small, large, image modes)
-- All use Fluent UI theming and Next.js Image optimization
-- **Note**: Press Release now uses unified `ContentListingPage` component system
-
-For legacy documentation, see `PRESS_RELEASE_README.md`. For current implementation, see `CONTENT_LISTING_CONSOLIDATION.md`
+For complete scrolls documentation, see `SCROLLS_IMPLEMENTATION_SUMMARY.md`
 
 ---
 
@@ -757,4 +776,4 @@ PageWrapper includes pre-configured routes for:
 
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-12-02 - Added SEO foundation with root metadata, route-level metadata, robots.txt and sitemap.xml. Updated COPILOT_INSTRUCTIONS with SEO and content policies.
+### Last Updated: 2025-12-04 - Migrated press releases and case studies to markdown-based file system. Updated all documentation to reflect markdown architecture for blog, portfolio, press releases, and case studies.

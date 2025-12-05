@@ -20,7 +20,7 @@ This file provides instructions for GitHub Copilot when working with this reposi
 
 ### SEO
 - Use Next.js `metadata` exports for SEO on page/layout files
-- Do not add SEO metadata for markdown content itself (blog posts and portfolio items are wrapped in page/layout files)
+- Do not add SEO metadata for markdown content itself (blog posts, portfolio, press releases, and case studies are wrapped in page/layout files)
 - Page-level SEO is handled at the route level only
 
 ### Content Policy

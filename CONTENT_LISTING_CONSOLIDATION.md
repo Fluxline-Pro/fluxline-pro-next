@@ -55,37 +55,38 @@ Each content type now uses a thin wrapper component that:
 
 ### Press Release
 
-- **Client Component:** `src/app/press-release/page.tsx`
-  - Currently uses mock data (will migrate to MDX)
-  - Manages year filter
-  - Transforms press releases to `ContentCard[]`
+- **Server Component:** `src/app/press-release/page.tsx`
+  - Loads data from file system (SSG)
+  - Calls `getAllPressReleases()`, `getAllYears()`
+  - Passes to wrapper
+- **Client Wrapper:** `src/app/press-release/PressReleaseListingClient.tsx`
+  - Manages year filter (single-select)
+  - Transforms `PressRelease[]` to `ContentCard[]`
+  - Filters by year based on imageText field
   - Configures single-select year filter
 
 ### Case Studies
 
-- **Client Component:** `src/app/case-studies/page.tsx`
-  - Currently uses in-file data (will migrate to MDX)
-  - Manages multi-select industry filter
-  - Transforms case studies to `ContentCard[]`
+- **Server Component:** `src/app/case-studies/page.tsx`
+  - Loads data from file system (SSG)
+  - Calls `getAllCaseStudies()`, `getAllIndustries()`, `getAllServices()`
+  - Passes to wrapper
+- **Client Wrapper:** `src/app/case-studies/CaseStudiesListingClient.tsx`
+  - Manages multi-select filters for industry and service
+  - Transforms `CaseStudy[]` to `ContentCard[]`
   - Includes CTA section
 
 ## Data Flow
 
-```
-Server Component (Blog/Portfolio)
-  ↓ SSG data loading
+```text
+Server Component (Blog/Portfolio/PressRelease/CaseStudies)
+  ↓ SSG data loading from markdown files
 Client Wrapper
-  ↓ State management + transformation
+  ↓ State management + filtering + transformation
 ContentListingPage
-  ↓ Rendering + interactions
+  ↓ Rendering + user interactions
 User Interface
 ```
-
-For Press Release and Case Studies (currently client-only):
-
-```
-Client Component
-  ↓ Data loading + state management + transformation
 ContentListingPage
   ↓ Rendering + interactions
 User Interface

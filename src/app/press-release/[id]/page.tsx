@@ -1,12 +1,16 @@
 import React from 'react';
-import { pressReleasesMockData } from '@/store/mock-data/pressReleaseMock';
+import {
+  getAllPressReleaseIds,
+  getPressReleaseById,
+} from '../lib/pressReleaseLoader';
 import { PressReleaseDetailClient } from './PressReleaseDetailClient';
 import notFound from '@/app/services/scrolls/[scroll]/not-found';
 
 // Generate static params for all press releases
 export async function generateStaticParams() {
-  return pressReleasesMockData.map((release) => ({
-    id: release.id,
+  const ids = getAllPressReleaseIds();
+  return ids.map((id) => ({
+    id: id,
   }));
 }
 
@@ -21,14 +25,12 @@ export default async function PressReleaseDetailPage({
 }) {
   const { id } = await params;
 
-  // Find the press release data
-  const pressRelease = pressReleasesMockData.find(
-    (release) => release.id === id
-  );
+  // Load the press release from file system
+  const pressRelease = getPressReleaseById(id);
 
   if (!pressRelease) {
     notFound();
-  };
+  }
 
   return <PressReleaseDetailClient pressRelease={pressRelease} />;
 }
