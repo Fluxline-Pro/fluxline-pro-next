@@ -144,14 +144,7 @@ export default function CaseStudyDetailClient({
           showTitle: false,
         }
       : undefined,
-    authorInfo: {
-      name: caseStudy.author,
-      publishDate: caseStudy.date,
-      socialLinks:
-        caseStudy.author === 'Terence Waters'
-          ? TERENCE_SOCIAL_LINKS
-          : undefined,
-    },
+    authorInfo: undefined, // Case studies don't have authors in the type definition
     metadata: [
       { label: 'Client', value: caseStudy.client },
       { label: 'Industry', value: caseStudy.industry },
