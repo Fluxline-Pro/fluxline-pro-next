@@ -6,7 +6,6 @@ author: 'Fluxline Resonance Group'
 publishedDate: '2025-11-20'
 category: 'Partnership'
 tags: ['partnership', 'azure', 'cloud', 'enterprise']
-imageUrl: '/images/press-release/azure-partnership.jpg'
 imageAlt: 'Azure Partnership'
 glyphTag: '🜄'
 emotionalCue: 'Integration'

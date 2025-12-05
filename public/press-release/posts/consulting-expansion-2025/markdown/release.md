@@ -6,7 +6,6 @@ author: 'Fluxline Resonance Group'
 publishedDate: '2025-09-15'
 category: 'Business Expansion'
 tags: ['consulting', 'expansion', 'global']
-imageUrl: '/images/press-release/global-expansion.jpg'
 imageAlt: 'Global Expansion'
 glyphTag: '🜄'
 emotionalCue: 'Visibility'

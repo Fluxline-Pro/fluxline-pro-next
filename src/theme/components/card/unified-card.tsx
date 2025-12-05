@@ -377,7 +377,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           width: 'auto',
           maxWidth: '100%',
           boxSizing: 'border-box',
-          minHeight: '200px',
         }}
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -402,7 +401,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               display: 'flex',
               flexDirection: 'column',
               width: '100%',
-              overflow: 'hidden',
             }}
           >
             {imageUrl && (
@@ -473,7 +471,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         style={{
           cursor: onClick ? 'pointer' : 'default',
           width: '100%',
-          minHeight: '200px',
         }}
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

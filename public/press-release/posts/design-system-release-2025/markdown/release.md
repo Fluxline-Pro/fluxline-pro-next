@@ -6,7 +6,6 @@ author: 'Fluxline Resonance Group'
 publishedDate: '2025-10-05'
 category: 'Product Release'
 tags: ['design-system', 'components', 'open-source']
-imageUrl: '/images/press-release/design-system.jpg'
 imageAlt: 'Design System Release'
 glyphTag: '🜂'
 emotionalCue: 'Breakthrough'

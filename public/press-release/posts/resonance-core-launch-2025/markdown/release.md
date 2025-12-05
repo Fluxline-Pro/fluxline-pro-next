@@ -6,7 +6,6 @@ author: 'Fluxline Resonance Group'
 publishedDate: '2025-08-01'
 category: 'Service Launch'
 tags: ['coaching', 'wellness', 'leadership']
-imageUrl: '/images/press-release/resonance-core.jpg'
 imageAlt: 'Resonance Core Launch'
 glyphTag: '🜂'
 emotionalCue: 'Integration'

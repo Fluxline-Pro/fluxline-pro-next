@@ -6,7 +6,6 @@ author: 'Fluxline Resonance Group'
 publishedDate: '2025-12-10'
 category: 'New Website and Platform Launch'
 tags: ['launch', 'platform', 'technology']
-imageUrl: '/images/press-release/fluxline-launch.jpg'
 imageAlt: 'Fluxline 2.0 Platform Launch'
 glyphTag: '🜂'
 emotionalCue: 'Ignition'
