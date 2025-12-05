@@ -86,11 +86,13 @@ Client Wrapper
 ContentListingPage
   ↓ Rendering + user interactions
 User Interface
-```
+```text
+
 ContentListingPage
-  ↓ Rendering + interactions
+↓ Rendering + interactions
 User Interface
-```
+
+````
 
 ## Key Interfaces
 
@@ -105,7 +107,7 @@ interface ContentCard {
   imageAlt: string;
   imageText: string;
 }
-```
+````
 
 ### FilterConfig (Union Type)
 
