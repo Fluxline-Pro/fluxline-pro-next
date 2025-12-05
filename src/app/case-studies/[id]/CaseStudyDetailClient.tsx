@@ -129,7 +129,7 @@ export default function CaseStudyDetailClient({
 
   const config: UnifiedContentDetailConfig = {
     title: caseStudy.title,
-    content: '', // Case studies don't have markdown content - using sections instead
+    content: caseStudy.content || '', // Use markdown content from file
     contentType: 'markdown',
     excerpt: caseStudy.description,
     backLink: {
@@ -144,7 +144,7 @@ export default function CaseStudyDetailClient({
           showTitle: false,
         }
       : undefined,
-    authorInfo: undefined, // Case studies don't have authors in the type definition
+    authorInfo: undefined, // Case studies don't have authors
     metadata: [
       { label: 'Client', value: caseStudy.client },
       { label: 'Industry', value: caseStudy.industry },
@@ -166,18 +166,6 @@ export default function CaseStudyDetailClient({
       {
         title: 'Key Results',
         content: metricsSection,
-      },
-      {
-        title: 'The Challenge',
-        content: caseStudy.challenge,
-      },
-      {
-        title: 'Our Solution',
-        content: caseStudy.solution,
-      },
-      {
-        title: 'The Results',
-        content: caseStudy.results,
       },
       ...(testimonialSection
         ? [

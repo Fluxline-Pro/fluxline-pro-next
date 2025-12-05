@@ -25,6 +25,7 @@ export interface CaseStudy {
   challenge: string;
   solution: string;
   results: string;
+  content?: string; // Full markdown content (when loaded from file)
   imageUrl?: string;
   imageAlt?: string;
   services: ServiceCategory[];

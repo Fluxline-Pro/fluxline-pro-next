@@ -27,25 +27,25 @@ export interface PressRelease {
 export const pressReleasesMockData: PressRelease[] = [
   {
     id: 'fluxline-pro-launch-2025',
-    title: 'Fluxline Pro Platform Launches with Next.js 16',
+    title: 'Fluxline 2.0 Platform Launches with Next.js 16',
     subtitle: 'Modern Business Transformation Platform Goes Live',
     description:
-      'Fluxline Resonance Group announces the official launch of Fluxline Pro, a next-generation business transformation platform built on Next.js 16 and React 19, featuring advanced theming, accessibility, and responsive design.',
+      'Fluxline Resonance Group announces the official launch of Fluxline 2.0, a next-generation business transformation platform built on Next.js 16 and React 19, featuring advanced theming, accessibility, and responsive design.',
     imageUrl: undefined,
-    imageAlt: 'Fluxline Pro Platform Launch',
+    imageAlt: 'Fluxline 2.0 Platform Launch',
     imageText: 'Platform Launch 2025',
-    date: new Date('2025-01-15T00:00:00Z'),
-    category: 'Product Launch',
+    date: new Date('2025-12-10T00:01:00Z'),
+    category: 'New Website and Platform Launch',
     glyphTag: '🜂', // Ignition phase
     emotionalCue: 'Ignition',
     tags: ['launch', 'platform', 'technology'],
     author: 'Fluxline Resonance Group',
     content: `
-Fluxline Resonance Group is proud to announce the official launch of Fluxline Pro, 
+Fluxline Resonance Group is proud to announce the official launch of Fluxline 2.0, 
 a cutting-edge business transformation platform designed to empower businesses in 
 their digital transformation journey.
 
-Built on the latest technology stack including Next.js 16 and React 19, Fluxline Pro 
+Built on the latest technology stack including Next.js 16 and React 19, Fluxline 2.0 
 delivers exceptional performance, accessibility, and user experience. The platform 
 features advanced theming capabilities with support for dark mode, light mode, and 
 high-contrast themes, ensuring accessibility for all users.
@@ -63,10 +63,10 @@ precision for modern business transformation," said the Fluxline Resonance Group
   },
   {
     id: 'accessibility-certification-2025',
-    title: 'Fluxline Pro Achieves WCAG 2.1 AA Accessibility Certification',
+    title: 'Fluxline 2.0 Achieves WCAG 2.1 AA Accessibility Certification',
     subtitle: 'Commitment to Inclusive Digital Experiences',
     description:
-      'The Fluxline Pro platform has been certified as WCAG 2.1 AA compliant, demonstrating our commitment to creating inclusive digital experiences for all users, regardless of ability.',
+      'The Fluxline 2.0 platform has been certified as WCAG 2.1 AA compliant, demonstrating our commitment to creating inclusive digital experiences for all users, regardless of ability.',
     imageUrl: undefined,
     imageAlt: 'Accessibility Certification',
     imageText: 'Accessibility Excellence',
@@ -77,7 +77,7 @@ precision for modern business transformation," said the Fluxline Resonance Group
     tags: ['accessibility', 'certification', 'wcag'],
     author: 'Fluxline Resonance Group',
     content: `
-Fluxline Resonance Group announces that the Fluxline Pro platform has achieved 
+Fluxline Resonance Group announces that the Fluxline 2.0 platform has achieved 
 WCAG 2.1 AA accessibility certification, reinforcing our commitment to creating 
 inclusive digital experiences.
 
@@ -98,7 +98,7 @@ services.
     title: 'Strategic Partnership with Microsoft Azure Announced',
     subtitle: 'Enhanced Cloud Infrastructure for Enterprise Clients',
     description:
-      'Fluxline Pro announces strategic partnership with Microsoft Azure, enabling enhanced cloud infrastructure, improved scalability, and enterprise-grade security for our clients.',
+      'Fluxline 2.0 announces strategic partnership with Microsoft Azure, enabling enhanced cloud infrastructure, improved scalability, and enterprise-grade security for our clients.',
     imageUrl: undefined,
     imageAlt: 'Azure Partnership',
     imageText: 'Azure Partnership',
@@ -109,8 +109,7 @@ services.
     tags: ['partnership', 'azure', 'cloud', 'enterprise'],
     author: 'Fluxline Resonance Group',
     content: `
-Fluxline Resonance Group is excited to announce a strategic partnership with 
-Microsoft Azure, bringing enterprise-grade cloud infrastructure to our clients.
+Fluxline Resonance Group is excited to announce a strategic partnership with Microsoft Azure, bringing enterprise-grade cloud infrastructure to our clients.
 
 This partnership enables:
 - Scalable hosting with Azure Static Web Apps
