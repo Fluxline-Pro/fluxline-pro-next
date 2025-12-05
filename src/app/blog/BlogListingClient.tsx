@@ -13,6 +13,7 @@ import { format } from 'date-fns';
 import { BlogPost } from './types';
 import { Hero } from '@/theme/components/hero/Hero';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import FluxlineLogoDarkMode from '@/assets/images/FluxlineLogoDarkMode.png';
 
 interface BlogListingClientProps {
   initialPosts: BlogPost[];
@@ -38,7 +39,7 @@ export function BlogListingClient({
   const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
   const [selectedCategory, setSelectedCategory] = React.useState<
     string | undefined
-    >();
+  >();
   const isMobile = useIsMobile();
 
   // Filter blog posts based on selected filters
@@ -158,7 +159,7 @@ export function BlogListingClient({
       id: post.slug,
       title: post.title,
       description: post.excerpt,
-      imageUrl: post.imageUrl,
+      imageUrl: post.imageUrl || FluxlineLogoDarkMode.src,
       imageAlt: post.imageAlt || post.title,
       imageText: format(post.publishedDate, 'MMMM d, yyyy'),
     }));

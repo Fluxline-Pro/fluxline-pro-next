@@ -297,7 +297,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           y: -4,
           transition: { duration: 0.2, ease: 'easeOut' },
         }}
-        style={{ cursor: onClick ? 'pointer' : 'default' }}
+        style={{ cursor: onClick ? 'pointer' : 'default', minHeight: '200px' }}
       >
         <Card
           elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
@@ -311,6 +311,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               width: '100%',
               paddingBottom: '60%', // 5:3 aspect ratio for grid cards
               overflow: 'hidden',
+              borderRadius: '6px',
+              minHeight: '200px',
             }}
           >
             <Image
@@ -375,6 +377,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           width: 'auto',
           maxWidth: '100%',
           boxSizing: 'border-box',
+          minHeight: '200px',
         }}
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -409,6 +412,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   width: '100%',
                   paddingBottom: '60%', // 5:3 aspect ratio
                   overflow: 'hidden',
+                  borderRadius: '6px 6px 0 0',
                 }}
               >
                 <Image
@@ -469,6 +473,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         style={{
           cursor: onClick ? 'pointer' : 'default',
           width: '100%',
+          minHeight: '200px',
         }}
         initial={{ y: 0, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -498,6 +503,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   width: '100%',
                   paddingBottom: '60%', // 5:3 aspect ratio
                   overflow: 'hidden',
+                  borderRadius: '6px 6px 0 0',
                 }}
               >
                 <Image

@@ -3,12 +3,17 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { UnifiedPageWrapper } from './UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { IconButton } from '@fluentui/react';
+import {
+  SocialLinks,
+  type SocialLinksData,
+} from '@/app/about/components/SocialLinks';
 
 /**
  * Unified configuration interface for content detail pages
@@ -26,6 +31,14 @@ export interface UnifiedContentDetailConfig {
     label: string;
     value: string | React.ReactNode;
   }>;
+
+  // Author info (for blog posts, press releases, etc.)
+  authorInfo?: {
+    name: string;
+    publishDate?: string;
+    lastUpdated?: string;
+    socialLinks?: SocialLinksData;
+  };
 
   // Navigation
   backLink: {
@@ -127,7 +140,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           fontWeight: 600,
           marginTop: theme.spacing.l1,
           marginBottom: theme.spacing.m,
-          color: theme.palette.neutralPrimary,
+          color: theme.palette.themePrimary,
           fontSize: '1.25rem',
         }}
       >
@@ -150,6 +163,8 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         style={{
           marginBottom: theme.spacing.m,
           paddingLeft: theme.spacing.l1,
+          listStyleType: 'disc',
+          listStylePosition: 'outside',
         }}
       >
         {children}
@@ -160,6 +175,8 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         style={{
           marginBottom: theme.spacing.m,
           paddingLeft: theme.spacing.l1,
+          listStyleType: 'decimal',
+          listStylePosition: 'outside',
         }}
       >
         {children}
@@ -169,6 +186,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       <li
         style={{
           marginBottom: theme.spacing.s1,
+          display: 'list-item',
         }}
       >
         <Typography variant='p'>{children}</Typography>
@@ -220,7 +238,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           marginLeft: 0,
           marginBottom: theme.spacing.m,
           fontStyle: 'italic',
+          fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
           color: theme.palette.neutralSecondary,
+          maxWidth: '600px',
         }}
       >
         {children}
@@ -268,6 +288,68 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           objectFit: 'contain',
         }}
       />
+    ),
+    table: ({ children }: { children?: React.ReactNode }) => (
+      <div
+        style={{
+          overflowX: 'auto',
+          marginBottom: theme.spacing.m,
+        }}
+      >
+        <table
+          style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            border: `1px solid ${theme.palette.neutralLight}`,
+          }}
+        >
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }: { children?: React.ReactNode }) => (
+      <thead
+        style={{
+          backgroundColor: theme.palette.neutralLighter,
+        }}
+      >
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }: { children?: React.ReactNode }) => (
+      <tbody>{children}</tbody>
+    ),
+    tr: ({ children }: { children?: React.ReactNode }) => (
+      <tr
+        style={{
+          borderBottom: `1px solid ${theme.palette.neutralLight}`,
+        }}
+      >
+        {children}
+      </tr>
+    ),
+    th: ({ children }: { children?: React.ReactNode }) => (
+      <th
+        style={{
+          padding: theme.spacing.s2,
+          textAlign: 'left',
+          fontWeight: 600,
+          color: theme.palette.themePrimary,
+          borderRight: `1px solid ${theme.palette.neutralLight}`,
+        }}
+      >
+        {children}
+      </th>
+    ),
+    td: ({ children }: { children?: React.ReactNode }) => (
+      <td
+        style={{
+          padding: theme.spacing.s2,
+          borderRight: `1px solid ${theme.palette.neutralLight}`,
+        }}
+      >
+        {children}
+      </td>
     ),
   };
 
@@ -331,29 +413,86 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             </Typography>
           </div>
 
-          {/* Metadata */}
-          {config.metadata && config.metadata.length > 0 && (
+          {/* Author Info */}
+          {config.authorInfo && (
             <div
               style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: theme.spacing.m,
-                alignItems: 'center',
                 marginBottom: theme.spacing.l1,
-                color: theme.palette.neutralSecondary,
+                paddingBottom: theme.spacing.m,
               }}
             >
-              {config.metadata.map((meta, index) => (
-                <React.Fragment key={index}>
-                  {index > 0 && <span>•</span>}
-                  <Typography variant='p'>
-                    {meta.label ? `${meta.label}: ` : ''}
-                    {meta.value}
-                  </Typography>
-                </React.Fragment>
-              ))}
+              <Typography
+                variant='p'
+                style={{
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                  color: theme.palette.neutralPrimary,
+                  marginBottom: theme.spacing.s,
+                }}
+              >
+                {config.authorInfo.name}
+              </Typography>
+
+              {config.authorInfo.name === 'Terence Waters' &&
+                config.authorInfo.socialLinks && (
+                  <div
+                    style={{
+                      marginTop: theme.spacing.s2,
+                      marginBottom: theme.spacing.s2,
+                    }}
+                  >
+                    <SocialLinks
+                      socialLinks={config.authorInfo.socialLinks}
+                      name={config.authorInfo.name}
+                      size='small'
+                    />
+                  </div>
+                )}
+
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '0.95rem',
+                  marginTop: theme.spacing.s1,
+                }}
+              >
+                Published: {config.authorInfo.publishDate}
+                {config.authorInfo.lastUpdated && (
+                  <>
+                    {' • '}
+                    Last Updated: {config.authorInfo.lastUpdated}
+                  </>
+                )}
+              </Typography>
             </div>
           )}
+
+          {/* Metadata (for other content types) */}
+          {!config.authorInfo &&
+            config.metadata &&
+            config.metadata.length > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: theme.spacing.m,
+                  alignItems: 'center',
+                  marginBottom: theme.spacing.l1,
+                  color: theme.palette.neutralSecondary,
+                }}
+              >
+                {config.metadata.map((meta, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && <span>•</span>}
+                    <Typography variant='p'>
+                      {meta.label ? `${meta.label}: ` : ''}
+                      {meta.value}
+                    </Typography>
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
 
           {/* Badges */}
           {config.badges && config.badges.length > 0 && (
@@ -463,7 +602,10 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           className='unified-content-detail'
         >
           {config.contentType === 'markdown' ? (
-            <ReactMarkdown components={markdownComponents}>
+            <ReactMarkdown
+              components={markdownComponents}
+              remarkPlugins={[remarkGfm]}
+            >
               {config.content}
             </ReactMarkdown>
           ) : (

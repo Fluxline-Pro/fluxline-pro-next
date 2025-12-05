@@ -1,13 +1,12 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { ContentNotFound } from '@/components/ContentNotFound';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { format } from 'date-fns';
 import type { PressRelease } from '@/store/mock-data/pressReleaseMock';
+import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
 
 interface PressReleaseDetailClientProps {
   pressRelease: PressRelease | undefined;
@@ -20,9 +19,6 @@ interface PressReleaseDetailClientProps {
 export function PressReleaseDetailClient({
   pressRelease,
 }: PressReleaseDetailClientProps) {
-  const router = useRouter();
-  const { theme } = useAppTheme();
-
   if (!pressRelease) {
     return (
       <ContentNotFound
@@ -61,15 +57,24 @@ export function PressReleaseDetailClient({
           showTitle: false,
         }
       : undefined,
-    metadata: [
-      {
-        label: '',
-        value: format(pressRelease.date, 'MMMM d, yyyy'),
-      },
-      ...(pressRelease.author
-        ? [{ label: '', value: pressRelease.author }]
-        : []),
-    ],
+    authorInfo: pressRelease.author
+      ? {
+          name: pressRelease.author,
+          publishDate: format(pressRelease.date, 'MMMM d, yyyy'),
+          socialLinks:
+            pressRelease.author === 'Terence Waters'
+              ? TERENCE_SOCIAL_LINKS
+              : undefined,
+        }
+      : undefined,
+    metadata: !pressRelease.author
+      ? [
+          {
+            label: '',
+            value: format(pressRelease.date, 'MMMM d, yyyy'),
+          },
+        ]
+      : undefined,
     badges: [
       ...(pressRelease.category
         ? [{ label: pressRelease.category, variant: 'primary' as const }]

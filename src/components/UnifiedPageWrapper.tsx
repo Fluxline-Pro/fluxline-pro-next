@@ -218,6 +218,12 @@ export interface UnifiedPageWrapperProps {
   // Unified options
   imageConfig?: ImageConfig;
 
+  // Force specific image configuration (for 404, error pages, etc.)
+  forceImageConfig?: {
+    image: 'NOT_FOUND' | string;
+    imageText: string;
+  };
+
   // Legal/Document-specific
   legalPageConfig?: LegalPageConfig;
 }
@@ -242,6 +248,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   tabletPortraitLayout,
   respectLayoutPreference = true,
   imageConfig,
+  forceImageConfig,
   legalPageConfig,
 }) => {
   const pathname = usePathname();
@@ -332,7 +339,15 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   // Handle dynamic Fluxline logo based on theme mode
   let configImage = imageConfig?.source || config.image;
-  if (configImage === 'FLUXLINE_LOGO') {
+
+  // Apply forceImageConfig if provided (for 404, error pages)
+  if (forceImageConfig) {
+    if (forceImageConfig.image === 'NOT_FOUND') {
+      configImage = NOT_FOUND_CONFIG.image;
+    } else {
+      configImage = forceImageConfig.image;
+    }
+  } else if (configImage === 'FLUXLINE_LOGO') {
     configImage = getFluxlineLogo(themeMode);
   }
 
@@ -344,9 +359,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   // Use the selected post's title if available and we're in detail view
   const imageTextToDisplay =
-    id && selectedPost && selectedPost.title
+    forceImageConfig?.imageText ||
+    (id && selectedPost && selectedPost.title
       ? selectedPost.title
-      : imageConfig?.title || config.imageText || '';
+      : imageConfig?.title || config.imageText || '');
 
   const imageAltText = imageConfig?.alt || imageTextToDisplay;
 
@@ -698,17 +714,18 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    padding: theme.spacing.m,
-                    background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent)`,
+                    padding: theme.spacing.l,
+                    background: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent)`,
                     color: theme.palette.white,
                   }}
                 >
                   <h2
                     style={{
                       margin: 0,
-                      fontSize: '1.75rem',
+                      fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
                       fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
+                      lineHeight: 1.2,
                     }}
                   >
                     {imageTextToDisplay}

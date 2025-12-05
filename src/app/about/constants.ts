@@ -7,6 +7,18 @@ import type { TeamMember } from './components/TeamMemberCard';
 import type { Statistic } from './components/CompanyStatistics';
 import type { TimelineEvent } from './components/CompanyTimeline';
 import type { CompanyValue } from './components/CompanyValues';
+import type { SocialLinksData } from './components/SocialLinks';
+
+/**
+ * Terence Waters' Social Links
+ * Used across all content detail pages (Blog, Press Release, Case Studies)
+ */
+export const TERENCE_SOCIAL_LINKS: SocialLinksData = {
+  linkedin: 'https://linkedin.com/in/terencewaters',
+  instagram: 'https://instagram.com/aplusinflux',
+  github: 'https://github.com/aplusandminus',
+  email: 'terence@fluxline.pro',
+};
 
 /**
  * Team Members

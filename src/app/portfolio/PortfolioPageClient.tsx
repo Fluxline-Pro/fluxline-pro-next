@@ -12,6 +12,7 @@ import { FormSelect } from '@/theme/components/form';
 import { FormButton } from '@/theme/components/form';
 import { PortfolioProject } from './types';
 import { Hero } from '@/theme/components/hero/Hero';
+import FluxlineLogoDarkMode from '@/assets/images/FluxlineLogoDarkMode.png';
 
 interface PortfolioPageProps {
   projects: PortfolioProject[];
@@ -44,7 +45,7 @@ export default function PortfolioPageClient({
   const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
   const [selectedTechnologies, setSelectedTechnologies] = React.useState<
     string[]
-    >([]);
+  >([]);
   const isMobile = useIsMobile();
 
   // View type options for dropdown
@@ -116,7 +117,7 @@ export default function PortfolioPageClient({
       id: project.slug,
       title: project.title,
       description: project.shortDescription,
-      imageUrl: project.featuredImage.url,
+      imageUrl: project.featuredImage.url || FluxlineLogoDarkMode.src,
       imageAlt: project.featuredImage.alt,
       imageText: `${project.role}${project.client ? ` • ${project.client}` : ''}`,
     }));

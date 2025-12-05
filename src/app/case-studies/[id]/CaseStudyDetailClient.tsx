@@ -8,6 +8,7 @@ import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { CaseStudy } from '../types';
+import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
 
 interface CaseStudyDetailClientProps {
   caseStudy: CaseStudy;
@@ -143,6 +144,14 @@ export default function CaseStudyDetailClient({
           showTitle: false,
         }
       : undefined,
+    authorInfo: {
+      name: caseStudy.author,
+      publishDate: caseStudy.date,
+      socialLinks:
+        caseStudy.author === 'Terence Waters'
+          ? TERENCE_SOCIAL_LINKS
+          : undefined,
+    },
     metadata: [
       { label: 'Client', value: caseStudy.client },
       { label: 'Industry', value: caseStudy.industry },
