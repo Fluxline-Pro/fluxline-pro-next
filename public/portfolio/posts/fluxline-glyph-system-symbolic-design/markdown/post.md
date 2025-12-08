@@ -22,21 +22,18 @@ technologies:
   - Brand Architecture
   - Typography
 featuredImage:
-  url: '/portfolio/posts/fluxline-glyph-system-symbolic-design/images/hero.jpg'
-  alt: 'Fluxline glyph system showing curriculum and emotional threshold symbols'
+  url: '/case-studies/posts/symbolic-design-glyph-language/images/glyphs-fluxline-initiation.jpg'
+  alt: 'Fluxline Pro 2.0 Symbolic Glyph Development and Initiation throughout the design system'
 gallery:
-  - url: '/portfolio/posts/fluxline-glyph-system-symbolic-design/images/glyph-library.jpg'
-    alt: 'Complete glyph library showing all symbols'
-    caption: '12+ glyphs organized by category: Curriculum, Emotional, Practice'
-  - url: '/portfolio/posts/fluxline-glyph-system-symbolic-design/images/case-study-application.jpg'
-    alt: 'Glyphs applied to case study layout'
-    caption: 'Curriculum glyphs frame transformation narratives'
-  - url: '/portfolio/posts/fluxline-glyph-system-symbolic-design/images/gradient-overlays.jpg'
-    alt: 'Glyphs with gradient overlays'
-    caption: 'Symbolic depth through glyph + gradient compositions'
-  - url: '/portfolio/posts/fluxline-glyph-system-symbolic-design/images/client-materials.jpg'
-    alt: 'Client tracking materials with glyphs'
-    caption: 'Glyphs as teaching tools in Resonance Core coaching'
+  - url: '/case-studies/posts/symbolic-design-glyph-language/images/glyphs-fluxline-initiation.jpg'
+    alt: 'Fluxline Pro 2.0 Symbolic Glyph Development and Initiation throughout the design system'
+    caption: 'Fluxline Pro 2.0 Symbolic Glyph Development and Initiation throughout the design system'
+  - url: '/case-studies/posts/symbolic-design-glyph-language/images/glyph-icon-library-sample.jpg'
+    alt: 'A glyph library showing a sampling of symbols'
+    caption: 'A glyph library showing a sampling of symbols; highlight given to the current phase'
+  - url: '/case-studies/posts/symbolic-design-glyph-language/images/the-resonance-core-glyph.jpg'
+    alt: 'Glyphs as teaching tools in The Resonance Core Framework™ coaching'
+    caption: 'Glyphs as teaching tools in The Resonance Core Framework™ coaching'
 publishedDate: '2025-12-08'
 projectDate: '2024-2025'
 featured: true
@@ -110,12 +107,12 @@ Explored archetypal symbols during evenings and weekends:
 
 Assigned symbols to curriculum framework:
 
-```
+```text
 Curriculum Gates:
-├── Initiation (🔥)    - Threshold spark, challenge
-├── Descent (🌑)       - Shadow work, deep practice
-├── Integration (☀️)   - Breakthrough, clarity
-└── Expansion (🕊️)     - Sovereignty, flight
+├── Initiation (🔥)    - Threshold spark, challenge, beginning
+├── Descent (🌑)       - Shadow work, deep practice, discovery
+├── Integration (☀️)   - Breakthrough, clarity, continuation
+└── Expansion (🕊️)     - Sovereignty, flight, empowerment
 ```
 
 ### Phase 2: Formalization (2025)

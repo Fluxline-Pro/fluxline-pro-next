@@ -19,6 +19,18 @@ technologies:
   ]
 publishedDate: '2025-12-08'
 projectDuration: '18 months (2024-2025)'
+imageUrl: '/case-studies/posts/symbolic-design-glyph-language/images/glyphs-fluxline-initiation.jpg'
+imageAlt: 'Fluxline Pro 2.0 Symbolic Glyph Development and Initiation throughout the design system'
+gallery:
+  - url: '/case-studies/posts/symbolic-design-glyph-language/images/glyphs-fluxline-initiation.jpg'
+    alt: 'Fluxline Pro 2.0 Symbolic Glyph Development and Initiation throughout the design system'
+    caption: 'Fluxline Pro 2.0 Symbolic Glyph Development and Initiation throughout the design system'
+  - url: '/case-studies/posts/symbolic-design-glyph-language/images/glyph-icon-library-sample.jpg'
+    alt: 'A glyph library showing a sampling of symbols'
+    caption: 'A glyph library showing a sampling of symbols; highlight given to the current phase'
+  - url: '/case-studies/posts/symbolic-design-glyph-language/images/the-resonance-core-glyph.jpg'
+    alt: 'Glyphs as teaching tools in The Resonance Core Framework™ coaching'
+    caption: 'Glyphs as teaching tools in The Resonance Core Framework™ coaching'
 featured: true
 seoTitle: 'Symbolic Design & Glyph Language Case Study - Fluxline Brand Identity'
 seoDescription: 'How Fluxline developed a proprietary glyph system to visualize transformation thresholds, creating brand differentiation and teaching utility.'
@@ -79,7 +91,7 @@ Traditional consulting brands use generic iconography—arrows, lightbulbs, gear
 
 **Initial Concepts:**
 
-While working full-time at Intermountain Health, I began exploring visual motifs during evenings and weekends:
+While creating this program, I began exploring visual motifs to define this newly formulated structure:
 
 - **Compass Rose**: Navigation and direction-finding
 - **Torch/Flame**: Illumination and transformation
@@ -110,7 +122,7 @@ Created a systematic glyph library organized by function:
 
 **1. Curriculum Phase Glyphs**
 
-```
+```text
 Initiation (🔥)     - Challenge, threshold, ignition
 Descent (🌑)        - Shadow work, deep practice, chamber
 Integration (☀️)    - Breakthrough, clarity, seal
@@ -119,7 +131,7 @@ Expansion (🕊️)      - Sovereignty, embodiment, flight
 
 **2. Emotional Threshold Glyphs**
 
-```
+```text
 Portal              - Entry point, gateway, beginning
 Spiral              - Cyclical growth, iteration, depth
 Flamebearer         - Visionary, light-carrier, guide
@@ -130,7 +142,7 @@ Anchor              - Grounding, stability, foundation
 
 **3. Practice Glyphs**
 
-```
+```text
 Breathwork          - Somatic regulation, presence
 Movement            - Embodiment, physical practice
 Reflection          - Journaling, documentation, insight
@@ -183,7 +195,7 @@ Glyphs became pedagogical tools in Resonance Core coaching:
 
 **Visual Hierarchy:**
 
-```
+```text
 Case Study Structure:
 ├── Title + Curriculum Glyph (Initiation 🔥)
 ├── Challenge Section
@@ -243,7 +255,7 @@ Portfolio Piece Structure:
 
 **Design Consistency:**
 
-```
+```text
 Touchpoint Coverage:
 ├── Website (100%)
 ├── Case Studies (100%)
@@ -396,7 +408,7 @@ This case study embodies Fluxline's integrated capabilities:
 
 **Design Templates:**
 
-All Fluxline materials now feature glyph integration, creating consistent brand experience and teaching opportunities throughout client journey.
+All Fluxline materials now feature glyph integration, creating consistent brand experience and teaching opportunities throughout each client's journey.
 
 ---
 

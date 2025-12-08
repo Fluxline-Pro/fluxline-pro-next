@@ -16,6 +16,8 @@ technologies:
     'Framer Motion',
     'Design Systems',
   ]
+imageUrl: '/case-studies/posts/fluxline-2-platform/development/images/fluxline-20-dsm.jpg'
+imageAlt: 'Fluxline Pro 2.0 Design System Theming'
 publishedDate: '2025-12-15'
 projectDuration: '3 months'
 featured: true
@@ -160,7 +162,7 @@ Implemented file-based CMS using markdown:
 
 ### Development Process
 
-**Phase 1: Foundation (Months 1-3)**
+**Phase 1: Foundation (Month 1)**
 
 - Architecture planning and technology selection
 - Design system development and documentation
@@ -168,7 +170,7 @@ Implemented file-based CMS using markdown:
 - Theme system implementation and testing
 - Azure infrastructure provisioning
 
-**Phase 2: Core Platform (Months 4-8)**
+**Phase 2: Core Platform (Month 2)**
 
 - Homepage and service pages development
 - Blog and portfolio systems implementation
@@ -176,7 +178,7 @@ Implemented file-based CMS using markdown:
 - SEO optimization and meta tag implementation
 - Accessibility testing and compliance
 
-**Phase 3: Content & Launch (Months 9-12)**
+**Phase 3: Content & Launch (Month 3)**
 
 - Content creation (blog posts, case studies, portfolio)
 - Brand identity finalization (logos, glyphs, gradients)
@@ -355,9 +357,10 @@ This case study demonstrates Fluxline's integrated capabilities:
 
 ## Technical Resources
 
-**Open Source Contributions:**
+**MIT and Code Contributions:**
 
-- GitHub repository: [github.com/Fluxline-Pro/fluxline-pro-next](https://github.com/Fluxline-Pro/fluxline-pro-next)
+- GitHub repository (access granted by sending an email to [support@fluxline.pro](mailto:support@fluxline.pro)): [github.com/Fluxline-Pro/fluxline-pro-next](https://github.com/Fluxline-Pro/fluxline-pro-next)
+- Fluxline 2.0 Portfolio piece: [Fluxline 2.0 Portfolio Piece](/portfolio/fluxline-pro-website/)
 - Component documentation available in Storybook
 - Design system patterns documented in README
 
