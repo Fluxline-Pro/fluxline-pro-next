@@ -3,7 +3,10 @@ title: 'Personal Training Program Growth — From Recovery to Resonance'
 client: 'Self / Fluxline Resonance Group'
 industry: 'Health & Wellness'
 description: 'A personal journey of transformation integrating NASM-certified training, the Resonance Core Framework™, and OTP Model into a holistic wellness methodology.'
-services: ['wellness', 'resonance-core', 'personal-training']
+services:
+  - wellness
+  - training
+  - education
 technologies:
   [
     'NASM Certification',
@@ -46,7 +49,7 @@ metrics:
     value: 'NASM CPT'
     description: 'December 2025'
 testimonial:
-  quote: 'This journey immortalizes my personal training transformation as a living curriculum gate. It demonstrates Fluxline's ability to blend technical mastery with mythic resonance—helping others cross their own thresholds of strength and sovereignty.'
+  quote: "This journey immortalizes my personal training transformation as a living curriculum gate. It demonstrates Fluxline's ability to blend technical mastery with mythic resonance—helping others cross their own thresholds of strength and sovereignty."
   author: 'Terence Waters'
   role: 'Founder, Fluxline Resonance Group'
 ---

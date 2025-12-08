@@ -2,8 +2,10 @@
 title: 'Symbolic Design & Glyph Language — Emergence of Resonant Visuals'
 client: 'Fluxline Resonance Group (Internal)'
 industry: 'Design & Brand Identity'
-description: 'Development of a proprietary glyph and symbolic design system that transforms mythic thresholds into professional visual language, creating brand differentiation and teaching utility for Fluxline's transformation methodology.'
-services: ['design', 'consulting', 'resonance-core']
+description: "Development of a proprietary glyph and symbolic design system that transforms mythic thresholds into professional visual language, creating brand differentiation and teaching utility for Fluxline's transformation methodology."
+services:
+  - design
+  - consulting
 technologies:
   [
     'Design Systems',
@@ -45,12 +47,12 @@ metrics:
     value: '100%'
     description: 'Across all brand touchpoints'
 testimonial:
-  quote: 'The glyph system transformed how we communicate transformation. What was once abstract became visible, tangible, and teachable. Clients now track their own curriculum gates using our symbolic language—it's become part of their journey.'
+  quote: 'The glyph system transformed how we communicate transformation. What was once abstract became visible, tangible, and teachable. Clients now track their own curriculum gates using our symbolic language—it has become part of their journey.'
   author: 'Terence Waters'
   role: 'CEO & Founder, Fluxline Resonance Group'
 ---
 
-# Symbolic Design & Glyph Language — Emergence of Resonant Visuals
+## Symbolic Design & Glyph Language — Emergence of Resonant Visuals
 
 ## Challenge (Initiation Gate 🔥)
 
