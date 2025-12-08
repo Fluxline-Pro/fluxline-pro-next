@@ -5,8 +5,22 @@ longDescription: 'Development of a comprehensive glyph and symbolic design syste
 role: 'Brand Designer & Symbolic Language Developer'
 client: 'Fluxline Resonance Group'
 category: 'other'
-tags: ['Brand Identity', 'Design System', 'Symbolic Language', 'Glyph Development', 'Visual Design', 'Archetypal Mapping']
-technologies: ['Design Systems', 'SVG Design', 'Fluent UI', 'Sacred Geometry', 'Archetypal Mapping', 'Visual Identity', 'Brand Architecture', 'Typography']
+tags:
+  - Brand Identity
+  - Design System
+  - Symbolic Language
+  - Glyph Development
+  - Visual Design
+  - Archetypal Mapping
+technologies:
+  - Design Systems
+  - SVG Design
+  - Fluent UI
+  - Sacred Geometry
+  - Archetypal Mapping
+  - Visual Identity
+  - Brand Architecture
+  - Typography
 featuredImage:
   url: '/portfolio/posts/fluxline-glyph-system-symbolic-design/images/hero.jpg'
   alt: 'Fluxline glyph system showing curriculum and emotional threshold symbols'
@@ -27,8 +41,15 @@ publishedDate: '2025-12-08'
 projectDate: '2024-2025'
 featured: true
 seoTitle: 'Fluxline Glyph System - Symbolic Design & Brand Identity Portfolio'
-seoDescription: 'Portfolio showcase of Fluxline's proprietary glyph system: 12+ symbols translating transformation methodology into memorable brand identity.'
-seoKeywords: ['glyph design', 'symbolic language', 'brand identity design', 'design system', 'visual identity', 'archetypal branding', 'transformation symbols']
+seoDescription: "Portfolio showcase of Fluxline's proprietary glyph system: 12+ symbols translating transformation methodology into memorable brand identity."
+seoKeywords:
+  - glyph design
+  - symbolic language
+  - brand identity design
+  - design system
+  - visual identity
+  - archetypal branding
+  - transformation symbols
 ---
 
 ## Fluxline Glyph System: Symbolic Design Language

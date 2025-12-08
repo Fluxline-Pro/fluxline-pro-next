@@ -10,16 +10,8 @@ export interface UnifiedCardContainerProps {
   className?: string;
   gap?: string;
   viewType: 'grid' | 'small' | 'large' | 'image';
-  // Image dimension-based props
-  imageDimensions?: {
-    width: number;
-    height: number;
-    aspectRatio: number;
-  } | null;
   // Optional override for grid behavior
   forceColumns?: number;
-  // Responsive behavior
-  adaptToImageDimensions?: boolean;
   // Custom grid columns override
   gridColumns?: number;
 }
@@ -29,9 +21,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   className = '',
   gap = '1rem',
   viewType,
-  imageDimensions,
   forceColumns,
-  adaptToImageDimensions = false,
   gridColumns,
 }) => {
   const isMobile = useIsMobile();
@@ -55,36 +45,20 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
     // Determine column count based on view type and device
     let columns: number;
 
-    // If we have image dimensions and adaptation is enabled, use aspect ratio for column decisions
-    if (adaptToImageDimensions && imageDimensions) {
-      const { aspectRatio } = imageDimensions;
-
-      if (aspectRatio > 1.5) {
-        // Wide landscape images - use fewer columns to preserve aspect ratio
-        columns = isMobile ? 1 : isTablet ? 2 : 3;
-      } else if (aspectRatio < 0.75) {
-        // Portrait images - can use more columns
-        columns = isMobile ? 1 : isTablet ? 2 : 3;
-      } else {
-        // Square or moderate aspect ratios - standard grid
-        columns = isMobile ? 1 : isTablet ? 2 : 3;
-      }
-    } else {
-      // Standard column calculation based on view type
-      switch (viewType) {
-        case 'grid':
-          columns =
-            gridColumns || forceColumns || (isMobile ? 1 : isTablet ? 3 : 4);
-          break;
-        case 'small':
-          columns = gridColumns || (isMobile ? 1 : 2);
-          break;
-        case 'large':
-          columns = gridColumns || (isMobile ? 1 : isTablet ? 2 : 3);
-          break;
-        default:
-          columns = isMobile ? 1 : isTablet ? 3 : 4;
-      }
+    // Standard column calculation based on view type
+    switch (viewType) {
+      case 'grid':
+        columns =
+          gridColumns || forceColumns || (isMobile ? 1 : isTablet ? 3 : 4);
+        break;
+      case 'small':
+        columns = gridColumns || (isMobile ? 1 : 3);
+        break;
+      case 'large':
+        columns = gridColumns || (isMobile ? 1 : isTablet ? 2 : 3);
+        break;
+      default:
+        columns = isMobile ? 1 : isTablet ? 3 : 4;
     }
 
     // All grid layouts use the same structure now (minHeight in cards handles sizing)

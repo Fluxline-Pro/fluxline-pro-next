@@ -6,24 +6,20 @@ role: 'Founder, Business Developer & Lead Coach'
 client: 'Fluxline Resonance Group'
 category: 'other'
 tags:
-  [
-    'Coaching Business',
-    'Wellness',
-    'Business Model',
-    'Resonance Core',
-    'NASM',
-    'Client Retention',
-  ]
+  - Coaching Business
+  - Wellness
+  - Business Model
+  - Resonance Core
+  - NASM
+  - Client Retention
 technologies:
-  [
-    'NASM Certification',
-    'Resonance Core Framework',
-    'Business Systems',
-    'Client Management',
-    'Digital Marketing',
-    'Hybrid Service Delivery',
-    'Revenue Operations',
-  ]
+  - NASM Certification
+  - Resonance Core Framework
+  - Business Systems
+  - Client Management
+  - Digital Marketing
+  - Hybrid Service Delivery
+  - Revenue Operations
 featuredImage:
   url: '/portfolio/posts/resonance-core-coaching-business/images/hero.jpg'
   alt: 'Resonance Core coaching business dashboard showing client metrics and growth'

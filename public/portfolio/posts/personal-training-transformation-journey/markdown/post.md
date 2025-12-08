@@ -6,24 +6,20 @@ role: 'Personal Trainer & Resonance Core Practitioner'
 client: 'Self-Directed Personal Development'
 category: 'other'
 tags:
-  [
-    'Personal Training',
-    'NASM Certification',
-    'Transformation',
-    'Resonance Core',
-    'Wellness',
-    'Strength Training',
-  ]
+  - Personal Training
+  - NASM Certification
+  - Transformation
+  - Resonance Core
+  - Wellness
+  - Strength Training
 technologies:
-  [
-    'NASM Certification',
-    'OTP Model',
-    'Resonance Core Framework',
-    'Tonal System',
-    'Breathwork',
-    'Somatic Practices',
-    'Archetypal Mapping',
-  ]
+  - NASM Certification
+  - OTP Model
+  - Resonance Core Framework
+  - Tonal System
+  - Breathwork
+  - Somatic Practices
+  - Archetypal Mapping
 featuredImage:
   url: '/portfolio/posts/personal-training-transformation-journey/images/hero.jpg'
   alt: 'Transformation journey showing strength training progress from 120 lbs to 185 lbs'

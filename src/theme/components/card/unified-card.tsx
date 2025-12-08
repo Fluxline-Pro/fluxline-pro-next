@@ -154,7 +154,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       // Start loading the image
       img.src = imageUrl;
     }
-  }, [imageUrl, isViewportLeftPanel]);
+  }, [imageUrl, onImageDimensionsChange, isViewportLeftPanel]);
 
   // For image view type
   if (viewType === 'image' && imageUrl) {
@@ -461,83 +461,86 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 flexDirection: 'column',
                 width: '100%',
                 height: '100%',
-                minHeight: imageUrl ? '335px' : '125px',
+                minHeight: imageUrl ? '225px' : '125px',
+                maxHeight: imageUrl ? '300px' : 'none',
               }}
             >
-            {imageUrl && (
-              <div
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  paddingBottom: '60%', // 5:3 aspect ratio
-                  overflow: 'hidden',
-                  borderRadius: '6px 6px 0 0',
-                }}
-              >
-                <Image
-                  src={imageUrl}
-                  alt={altText || imageAlt || title}
-                  fill
+              {imageUrl && (
+                <div
                   style={{
-                    objectFit: 'cover',
-                    filter: filter,
-                  }}
-                />
-              </div>
-            )}
-            <div
-              style={{
-                padding: theme.spacing.m,
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-                minHeight: 0,
-                justifyContent: imageUrl ? 'flex-start' : 'space-between',
-              }}
-            >
-              <div style={{ flex: imageUrl ? '0 0 auto' : '1 1 auto' }}>
-                <h3
-                  style={{
-                    margin: 0,
-                    fontSize: theme.fonts.large.fontSize,
-                    fontWeight: theme.fonts.large.fontWeight as number,
-                    fontFamily: `${theme.fonts.large.fontFamily} !important`,
-                    color: theme.palette.neutralPrimary,
-                    lineHeight: 1.3,
+                    position: 'relative',
+                    width: '100%',
+                    paddingBottom: '35%', // Reduced from 60% for more compact image
+                    overflow: 'hidden',
+                    borderRadius: '6px 6px 0 0',
+                    flexShrink: 0,
                   }}
                 >
-                  {title}
-                </h3>
-                {!imageUrl && description && (
+                  <Image
+                    src={imageUrl}
+                    alt={altText || imageAlt || title}
+                    fill
+                    style={{
+                      objectFit: 'cover',
+                      filter: filter,
+                    }}
+                  />
+                </div>
+              )}
+              <div
+                style={{
+                  padding: theme.spacing.m,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flex: 1,
+                  minHeight: 0,
+                  justifyContent: imageUrl ? 'flex-start' : 'space-between',
+                  overflow: 'hidden',
+                }}
+              >
+                <div style={{ flex: imageUrl ? '0 0 auto' : '1 1 auto' }}>
+                  <h3
+                    style={{
+                      margin: 0,
+                      fontSize: theme.fonts.large.fontSize,
+                      fontWeight: theme.fonts.large.fontWeight as number,
+                      fontFamily: `${theme.fonts.large.fontFamily} !important`,
+                      color: theme.palette.neutralPrimary,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {title}
+                  </h3>
+                  {!imageUrl && description && (
+                    <p
+                      style={{
+                        margin: `${theme.spacing.s} 0 0 0`,
+                        fontSize: theme.fonts.medium.fontSize,
+                        fontFamily: `${theme.fonts.medium.fontFamily} !important`,
+                        color: theme.palette.neutralSecondary,
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {description}
+                    </p>
+                  )}
+                </div>
+                {imageText && (
                   <p
                     style={{
-                      margin: `${theme.spacing.s} 0 0 0`,
+                      margin: `${theme.spacing.xs} 0 0 0`,
                       fontSize: theme.fonts.medium.fontSize,
                       fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                       color: theme.palette.neutralSecondary,
-                      lineHeight: 1.5,
+                      marginTop: imageUrl ? 'auto' : '0',
                     }}
                   >
-                    {description}
+                    {imageText}
                   </p>
                 )}
               </div>
-              {imageText && (
-                <p
-                  style={{
-                    margin: `${theme.spacing.xs} 0 0 0`,
-                    fontSize: theme.fonts.medium.fontSize,
-                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
-                    color: theme.palette.neutralSecondary,
-                    marginTop: imageUrl ? 'auto' : '0',
-                  }}
-                >
-                  {imageText}
-                </p>
-              )}
             </div>
-          </div>
-        </Card>
+          </Card>
         </div>
       </motion.div>
     );
