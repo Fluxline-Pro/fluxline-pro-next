@@ -38,7 +38,7 @@ seoKeywords:
   ]
 ---
 
-# Fluxline Pro - Modern Business Platform
+## Fluxline Pro - Modern Business Platform
 
 ## Project Overview
 
