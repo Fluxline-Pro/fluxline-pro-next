@@ -1,7 +1,7 @@
 ---
 title: 'How We Built Fluxline 2.0: A Technical and Strategic Breakdown'
 excerpt: 'Inside the 12-month journey to build a next-generation business platform using Next.js 16, achieving 94/100 Lighthouse scores and transforming lead generation through strategic design and technical excellence.'
-author: 'Teren Collings'
+author: 'Terence Waters'
 publishedDate: '2025-12-15'
 category: 'Technology'
 tags:

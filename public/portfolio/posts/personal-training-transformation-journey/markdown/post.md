@@ -57,7 +57,7 @@ seoKeywords:
   ]
 ---
 
-# Personal Training Transformation Journey
+## Personal Training Transformation Journey
 
 An 8-year transformation journey from 120 lbs. and fragility to 185 lbs. and sovereignty, integrating **NASM-certified strength training** with the **Resonance Core Framework™**—a methodology that blends physical training with emotional intelligence, somatic practices, and archetypal mapping.
 

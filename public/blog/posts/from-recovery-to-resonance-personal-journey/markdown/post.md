@@ -1,7 +1,7 @@
 ---
 title: 'From Recovery to Resonance: My Personal Training Transformation'
 excerpt: 'My 8-year journey from 120 lbs. and fragility to 185 lbs. and sovereignty—how I integrated NASM certification with the Resonance Core Framework™ to transform my body and life.'
-author: 'Teren Collings'
+author: 'Terence Waters'
 publishedDate: '2025-12-08'
 category: 'Growth'
 tags:

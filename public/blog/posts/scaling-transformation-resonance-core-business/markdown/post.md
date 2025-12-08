@@ -1,7 +1,7 @@
 ---
 title: 'Scaling Personal Transformation: The Business Case for Resonance Core'
 excerpt: 'How integrating NASM-certified training with emotional intelligence creates a scalable, differentiated coaching business that transforms lives and generates sustainable revenue.'
-author: 'Teren Collings'
+author: 'Terence Waters'
 publishedDate: '2025-12-08'
 category: 'Growth'
 tags:
