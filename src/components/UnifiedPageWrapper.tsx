@@ -161,10 +161,11 @@ const PAGE_CONFIGS: Record<
     image: PressReleaseImage.src,
     imageText: 'Press Release',
   },
-  '/testimonials': {
-    image: FluxlineTestimonials.src,
-    imageText: 'Testimonials',
-  },
+  // Testimonials page hidden until client testimonials are available
+  // '/testimonials': {
+  //   image: FluxlineTestimonials.src,
+  //   imageText: 'Testimonials',
+  // },
   '/cue-cards': {
     image: 'FLUXLINE_LOGO',
     imageText: 'The Archetypes',

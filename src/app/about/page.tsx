@@ -251,12 +251,12 @@ export default function AboutPage() {
           title='Hear From Our Clients'
           action={
             <FormButton
-              text='Read Client Stories'
+              text='Contact Us'
               variant='primary'
               size='large'
               icon='ChevronRight'
               iconPosition='right'
-              onClick={() => (window.location.href = '/testimonials')}
+              onClick={() => (window.location.href = '/contact')}
             />
           }
         >

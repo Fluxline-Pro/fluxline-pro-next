@@ -34,12 +34,12 @@ export default function ContactPage() {
                       strategies, and rituals that align your vision with reality."
             action={
               <FormButton
-                text='Book a Consultation'
+                text='View Our Services'
                 variant='primary'
                 size='large'
                 icon='ChevronRight'
                 iconPosition='right'
-                onClick={() => (window.location.href = '/testimonials')}
+                onClick={() => (window.location.href = '/services')}
               />
             }
           />

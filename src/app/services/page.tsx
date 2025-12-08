@@ -91,7 +91,7 @@ export default function ServicesPage() {
               size='large'
               icon='ChevronRight'
               iconPosition='right'
-              onClick={() => (window.location.href = '/testimonials')}
+              onClick={() => (window.location.href = '/contact')}
             />
           }
         />
