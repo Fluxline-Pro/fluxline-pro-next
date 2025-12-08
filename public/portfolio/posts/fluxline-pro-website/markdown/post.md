@@ -18,13 +18,22 @@ technologies:
     'Azure',
   ]
 featuredImage:
-  url: '/images/home/HomePageCover4kPortrait.jpeg'
-  alt: 'Fluxline Pro Website Homepage'
-publishedDate: '2025-01-20'
+  url: '/case-studies/posts/fluxline-2-platform-development/images/fluxline-20-dsm.jpg'
+  alt: 'Fluxline Pro 2.0 Design System Theming'
+gallery:
+  - url: '/case-studies/posts/fluxline-2-platform-development/images/fluxline-20-dsm.jpg'
+    alt: 'Fluxline Pro 2.0 Design System Theming'
+    caption: 'Fluxline Pro 2.0 Design System Theming'
+  - url: '/case-studies/posts/fluxline-2-platform-development/images/fluxline-about.png'
+    alt: 'Fluxline 2.0 About page redesign'
+    caption: 'Fluxline 2.0 About page redesign'
+  - url: '/case-studies/posts/fluxline-2-platform-development/images/fluxline-theming.png'
+    alt: 'Fluxline 2.0 Theming code in Fluent UI'
+    caption: 'Fluxline 2.0 Theming code in Fluent UI'
+publishedDate: '2025-12-15'
 projectDate: '2024-2025'
 featured: true
 liveUrl: 'https://fluxline.pro'
-githubUrl: 'https://github.com/Fluxline-Pro/fluxline-pro-next'
 seoTitle: 'Fluxline Pro - Modern Next.js Business Platform'
 seoDescription: 'Enterprise-grade web platform built with Next.js 16, featuring advanced theming, content management, and responsive design'
 seoKeywords:
@@ -42,7 +51,7 @@ seoKeywords:
 
 ## Project Overview
 
-Fluxline Pro is a comprehensive business platform built from the ground up using the latest web technologies. The platform serves as both a showcase of modern web development practices and a functional business website with advanced features.
+Fluxline Pro 2.0 is a comprehensive business platform built from the ground up using the latest web technologies. The platform serves as both a showcase of modern web development practices and a functional business website with advanced features.
 
 ## Technical Stack
 
@@ -58,7 +67,16 @@ Fluxline Pro is a comprehensive business platform built from the ground up using
 - **SCSS Modules** with automatic type generation
 - **Tailwind CSS 4+** for utility-first styling
 - **Framer Motion** for smooth animations
-- **Custom Theme System** with 8+ theme variants including dark mode
+- **Custom Theme System** with 8+ theme variants including dark mode, high contrast, and colorblindness
+- **Accessibility** standards with font-sizing, reduced motion, and left/right-handed viewability modes
+
+### Backend Architecture
+
+- **Azure Static Web App** setup with serverless backend
+- **Azure Functions** for content serve-up in dynamic data
+- **Azure CDN and Front Door** to serve up media in robust, reliable settings
+- **Azure Managed Identity** workflows through Microsoft Entra
+- **GitHub Actions** setup with Azure and AI integration
 
 ### Content Management
 
@@ -66,6 +84,7 @@ Fluxline Pro is a comprehensive business platform built from the ground up using
 - **File-Based Portfolio** - Organized project showcase
 - **Dynamic White Papers** - PDF management system
 - **Press Release System** - Multiple view modes and filtering
+- **Case Studies System** - Constant data viewability and pairing with portfolio and blog content
 
 ## Key Features
 
