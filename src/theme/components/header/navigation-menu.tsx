@@ -7,8 +7,10 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile, useIsMobileLandscape } from '@/theme/hooks/useMediaQuery';
+import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 import { Typography } from '@/theme/components/typography';
 import { NavigationItem } from './navigation-item';
 import { navItems } from './navigation.config';
@@ -20,6 +22,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
   const isLeftHanded = layoutPreference === 'left-handed';
   const isMobile = useIsMobile();
   const isMobileLandscape = useIsMobileLandscape();
+  const { shouldReduceMotion } = useReducedMotion();
   const router = useRouter();
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(
@@ -111,28 +114,53 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
                 isExpanded={expandedItems.has(item.path)}
                 onToggleExpand={() => handleToggleExpand(item.path)}
               />
-              {item.children && expandedItems.has(item.path) && (
-                <div
-                  style={{
-                    width: '100%',
-                    paddingLeft: isLeftHanded ? '0' : '0',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.25rem',
-                  }}
-                >
-                  {item.children.map((child) => (
-                    <NavigationItem
-                      key={child.path}
-                      route={child}
-                      isHovered={hoveredItem === child.path}
-                      getHoverProps={getHoverProps}
-                      onClick={() => handleNavigation(child.path)}
-                      isChild
-                    />
-                  ))}
-                </div>
-              )}
+              <AnimatePresence>
+                {item.children && expandedItems.has(item.path) && (
+                  <motion.div
+                    initial={
+                      shouldReduceMotion
+                        ? { opacity: 1, height: 'auto' }
+                        : { opacity: 0, height: 0 }
+                    }
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={
+                      shouldReduceMotion
+                        ? { opacity: 1, height: 'auto' }
+                        : { opacity: 0, height: 0 }
+                    }
+                    transition={{
+                      duration: shouldReduceMotion ? 0 : 0.3,
+                      ease: 'easeInOut',
+                    }}
+                    style={{
+                      overflow: 'hidden',
+                      width: '100%',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '100%',
+                        paddingLeft: isLeftHanded ? '0' : '0',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.25rem',
+                        paddingTop: '0.25rem',
+                      }}
+                    >
+                      {item.children.map((child) => (
+                        <NavigationItem
+                          key={child.path}
+                          route={child}
+                          isHovered={hoveredItem === child.path}
+                          getHoverProps={getHoverProps}
+                          onClick={() => handleNavigation(child.path)}
+                          isChild
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </React.Fragment>
           ))}
         </div>
