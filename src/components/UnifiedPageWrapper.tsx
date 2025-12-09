@@ -630,10 +630,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               variants={fadeInVariants}
               onClick={imageConfig?.onClick}
               onMouseEnter={() =>
-                imageConfig?.enableHoverEffect && setIsImageHovered(true)
+                imageConfig?.onClick && setIsImageHovered(true)
               }
               onMouseLeave={() =>
-                imageConfig?.enableHoverEffect && setIsImageHovered(false)
+                imageConfig?.onClick && setIsImageHovered(false)
               }
               style={{
                 position: 'relative',
@@ -646,10 +646,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 backgroundColor: theme.palette.neutralLighter,
                 boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
                 cursor: imageConfig?.onClick ? 'pointer' : 'default',
-                transform: isImageHovered
-                  ? 'translateY(-4px)'
-                  : 'translateY(0)',
-                transition: 'transform 0.2s ease-in-out',
+                transform: isImageHovered ? 'scale(1.25)' : 'scale(1)',
+                transition: 'transform 0.3s ease-in-out',
               }}
             >
               <Image
@@ -667,7 +665,42 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 placeholder='blur'
                 blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
               />
-              {/* No title overlay on stacked layouts for cleaner mobile/tablet experience */}
+              {/* Arrow icon indicator for clickable images */}
+              {imageConfig?.onClick && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: theme.spacing.m,
+                    right: theme.spacing.m,
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: isImageHovered ? 1 : 0.8,
+                    transition: 'opacity 0.2s ease-in-out',
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <svg
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path
+                      d='M7 17L17 7M17 7H7M17 7V17'
+                      stroke='white'
+                      strokeWidth='2.5'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                  </svg>
+                </div>
+              )}
             </motion.div>
           </div>
 
@@ -700,10 +733,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               variants={fadeInVariants}
               onClick={imageConfig?.onClick}
               onMouseEnter={() =>
-                imageConfig?.enableHoverEffect && setIsImageHovered(true)
+                imageConfig?.onClick && setIsImageHovered(true)
               }
               onMouseLeave={() =>
-                imageConfig?.enableHoverEffect && setIsImageHovered(false)
+                imageConfig?.onClick && setIsImageHovered(false)
               }
               style={{
                 position: 'relative',
@@ -716,10 +749,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
                 pointerEvents: 'auto',
                 cursor: imageConfig?.onClick ? 'pointer' : 'default',
-                transform: isImageHovered
-                  ? 'translateY(-4px)'
-                  : 'translateY(0)',
-                transition: 'transform 0.2s ease-in-out',
+                transform: isImageHovered ? 'scale(1.15)' : 'scale(1)',
+                transition: 'transform 0.3s ease-in-out',
               }}
             >
               <Image
@@ -737,6 +768,42 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 placeholder='blur'
                 blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
               />
+              {/* Arrow icon indicator for clickable images */}
+              {imageConfig?.onClick && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: theme.spacing.l,
+                    right: theme.spacing.l,
+                    width: '56px',
+                    height: '56px',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: isImageHovered ? 1 : 0.8,
+                    transition: 'opacity 0.2s ease-in-out',
+                    pointerEvents: 'none',
+                  }}
+                >
+                  <svg
+                    width='28'
+                    height='28'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path
+                      d='M7 17L17 7M17 7H7M17 7V17'
+                      stroke='white'
+                      strokeWidth='2.5'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                  </svg>
+                </div>
+              )}
               {shouldShowTitle && imageTextToDisplay && (
                 <div
                   style={{
