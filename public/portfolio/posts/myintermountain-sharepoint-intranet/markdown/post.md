@@ -23,9 +23,9 @@ technologies:
   - Microsoft Search
   - OneDrive Integration
   - PING SSO
-featuredImage: 
-  url: '/blog/posts/design-systems-scalable-applications/images/Portfolio1280x1815.jpg'
-  alt: 'Portfolio default image'
+featuredImage:
+  url: '/images/home/FluxlineLogo.png'
+  alt: 'Fluxline Resonance Group Logo default image'
 gallery:
   - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/architecture.jpg'
     alt: 'Azure and SharePoint architecture diagram'

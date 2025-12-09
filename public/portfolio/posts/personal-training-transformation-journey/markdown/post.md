@@ -20,9 +20,9 @@ technologies:
   - Breathwork
   - Somatic Practices
   - Archetypal Mapping
-featuredImage: 
-  url: '/blog/posts/design-systems-scalable-applications/images/Portfolio1280x1815.jpg'
-  alt: 'Portfolio default image'
+featuredImage:
+  url: '/blog/posts/from-recovery-to-resonance-personal-journey/images/personalTrainingPortrait.jpg'
+  alt: 'Personal Training & Resonance Core Framework practitioner'
 gallery:
   - url: '/portfolio/posts/personal-training-transformation-journey/images/before-after.jpg'
     alt: 'Before and after physical transformation'

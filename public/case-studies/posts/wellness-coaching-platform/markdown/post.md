@@ -21,8 +21,8 @@ technologies:
 publishedDate: '2025-12-08'
 projectDuration: '8 years (2017-2025)'
 featured: true
-imageUrl: '/blog/posts/design-systems-scalable-applications/images/Portfolio1280x1815.jpg'
-imageAlt: 'Portfolio default image'
+imageUrl: '/images/home/FluxlineLogo.png'
+imageAlt: 'Personal Training Program Growth default image'
 gallery:
   - url: '/portfolio/posts/personal-training-transformation-journey/images/before-after.jpg'
     alt: 'Before and after physical transformation'

@@ -20,9 +20,9 @@ technologies:
   - Digital Marketing
   - Hybrid Service Delivery
   - Revenue Operations
-featuredImage: 
-  url: '/blog/posts/design-systems-scalable-applications/images/Portfolio1280x1815.jpg'
-  alt: 'Portfolio default image'
+featuredImage:
+  url: '/portfolio/posts/resonance-core-coaching-business/images/LifeCoachingResonanceCore.jpg'
+  alt: 'Life Coaching and The Resonance Core Framework'
 gallery:
   - url: '/portfolio/posts/resonance-core-coaching-business/images/business-model.jpg'
     alt: 'Business model diagram showing revenue streams'

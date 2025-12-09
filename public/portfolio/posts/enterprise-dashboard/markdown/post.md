@@ -19,7 +19,7 @@ technologies:
     'PostgreSQL',
   ]
 featuredImage:
-  url: '/images/home/HomePageCover4kPortrait.jpeg'
+  url: '/images/home/FluxlineLogo.png'
   alt: 'Enterprise Analytics Dashboard Screenshot'
 publishedDate: '2024-11-15'
 projectDate: '2024'
