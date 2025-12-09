@@ -2,14 +2,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-
+import Image from 'next/image';
+import { Card } from '../card/card';
 import { useAppTheme } from '../../hooks/useAppTheme';
-// import { useIsMobile, useDeviceOrientation } from '../../hooks/useMediaQuery';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-// import useIsTextColorLight from '../../hooks/useIsTextColorLight';
-import { Card } from '../card/card';
-import Image from 'next/image';
 
 export type CardViewType = 'grid' | 'small' | 'large' | 'image';
 
@@ -79,13 +76,14 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   onImageDimensionsChange,
 }) => {
   const { theme } = useAppTheme();
-  // const isMobile = useIsMobile(); -- commented out for now due to not used yet
-  // const deviceOrientation = useDeviceOrientation(); -- commented out for now due to not used yet
   const { filter } = useColorVisionFilter(skipDarkModeFilter);
   const { shouldReduceMotion } = useReducedMotion();
 
-  // Get text color based on image brightness
-  // const { isLight } = useIsTextColorLight(imageUrl || ''); -- commmented out for now due to not used yet
+  // Calculate elevation level once
+  const elevationLevel = elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2;
+
+  // Common overlay gradient for image text
+  const overlayGradient = `linear-gradient(to top, ${theme.palette.black}CC, transparent)`;
 
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
@@ -158,13 +156,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
 
   // For image view type
   if (viewType === 'image' && imageUrl) {
-    const elevationLevel =
-      elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2;
-
     // Calculate container dimensions based on landscape state
-    const containerWidth = isLandscape && isViewportLeftPanel ? '75%' : '100%';
-    const containerHeight =
-      isLandscape && isViewportLeftPanel ? 'auto' : '100%';
+    const isLandscapePanel = isLandscape && isViewportLeftPanel;
+    const containerWidth = isLandscapePanel ? '75%' : '100%';
+    const containerHeight = isLandscapePanel ? 'auto' : '100%';
 
     const containerStyles: React.CSSProperties = {
       position: 'relative',
@@ -265,7 +260,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   left: 0,
                   right: 0,
                   padding: theme.spacing.m,
-                  background: `linear-gradient(to top, ${theme.palette.black}CC, transparent)`,
+                  background: overlayGradient,
                   color: theme.palette.white,
                 }}
               >
@@ -303,7 +298,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         }}
       >
         <Card
-          elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+          elevation={elevationLevel}
           padding='none'
           hoverable={!!onClick}
           onClick={onClick}
@@ -337,7 +332,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   left: 0,
                   right: 0,
                   padding: theme.spacing.m,
-                  background: `linear-gradient(to top, ${theme.palette.black}CC, transparent)`,
+                  background: overlayGradient,
                   color: theme.palette.white,
                 }}
               >
@@ -450,7 +445,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       >
         <div style={{ width: '100%', height: '100%' }}>
           <Card
-            elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+            elevation={elevationLevel}
             padding='none'
             hoverable={!!onClick}
             onClick={onClick}
@@ -571,7 +566,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       >
         <div style={{ width: '100%', height: '100%' }}>
           <Card
-            elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+            elevation={elevationLevel}
             padding='none'
             hoverable={!!onClick}
             onClick={onClick}
@@ -692,7 +687,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       }}
     >
       <Card
-        elevation={elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2}
+        elevation={elevationLevel}
         padding='medium'
         hoverable={!!onClick}
         onClick={onClick}
