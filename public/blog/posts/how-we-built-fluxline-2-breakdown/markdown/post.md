@@ -13,7 +13,7 @@ tags:
     'Case Study',
     'Technical Excellence',
   ]
-imageUrl: '/blog/posts/how-we-built-fluxline-2-breakdown/images/hero.jpg'
+imageUrl: '/blog/posts/how-we-built-fluxline-2-breakdown/images/fluxline-theming.png'
 imageAlt: 'Fluxline 2.0 platform architecture and design system'
 seoTitle: 'How We Built Fluxline 2.0 - Next.js 16 Platform Development Breakdown'
 seoDescription: 'A technical and strategic breakdown of building Fluxline 2.0: Next.js 16, 94/100 Lighthouse score, 300% traffic increase, and enterprise-grade design systems.'

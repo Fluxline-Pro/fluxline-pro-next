@@ -5,7 +5,7 @@ author: 'Fluxline Resonance Group'
 publishedDate: '2025-12-04'
 category: 'Design'
 tags: ['Design Systems', 'UI/UX', 'Component Libraries', 'Development']
-imageUrl: '/blog/posts/design-systems-scalable-applications/images/Portfolio1280x1815.jpg'
+imageUrl: '/blog/posts/design-systems-scalable-applications/images/fluxline-20-dsm.jpg'
 imageAlt: 'Design Systems for Scalable Applications'
 featured: false
 seoTitle: 'Design Systems for Scalable Applications | Fluxline Pro'

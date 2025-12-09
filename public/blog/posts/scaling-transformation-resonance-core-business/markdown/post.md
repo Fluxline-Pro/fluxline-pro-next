@@ -13,7 +13,7 @@ tags:
     'Wellness Industry',
     'Differentiation',
   ]
-imageUrl: '/blog/posts/scaling-transformation-resonance-core-business/images/hero.jpg'
+imageUrl: '/blog/posts/scaling-transformation-resonance-core-business/images/the-resonance-core-glyph.jpg'
 imageAlt: 'Business dashboard showing coaching program growth and client retention metrics'
 seoTitle: 'Scaling Personal Transformation: Resonance Core Framework Business Model'
 seoDescription: 'Learn how combining NASM certification with emotional intelligence creates a differentiated coaching business that scales personal transformation.'
