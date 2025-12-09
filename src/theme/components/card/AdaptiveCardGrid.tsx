@@ -99,7 +99,6 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
           imageDimensions={imageDimensions}
           adaptToImageDimensions={enableImageAdaptation}
           className={className}
-          gridColumns={gridColumns}
         >
           {cards.map((card, index) => (
             <UnifiedCard

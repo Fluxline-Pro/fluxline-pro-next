@@ -55,31 +55,6 @@ export default function PortfolioPageClient({
     { key: 'large-tile', text: 'Large Tile' },
   ];
 
-  // Determine grid columns based on orientation and view type
-  const gridColumns = React.useMemo(() => {
-    // For tile views, use single column layout
-    if (viewType === 'small-tile' || viewType === 'large-tile') {
-      return 1;
-    }
-
-    // For grid view, use responsive columns
-    switch (orientation) {
-      case 'portrait': // Mobile portrait
-      case 'tablet-portrait':
-        return 1;
-      case 'mobile-landscape':
-      case 'square':
-        return 2;
-      case 'landscape':
-      case 'large-portrait':
-        return 3;
-      case 'ultrawide':
-        return 4;
-      default:
-        return 3;
-    }
-  }, [orientation, viewType]);
-
   // Map ContentViewType to AdaptiveCardGrid viewType
   const mappedViewType = React.useMemo(() => {
     switch (viewType) {
@@ -226,8 +201,6 @@ export default function PortfolioPageClient({
               cards={cards}
               viewType={mappedViewType}
               gap={theme.spacing.m}
-              enableImageAdaptation={true}
-              gridColumns={gridColumns}
               onCardClick={handleCardClick}
             />
           </div>

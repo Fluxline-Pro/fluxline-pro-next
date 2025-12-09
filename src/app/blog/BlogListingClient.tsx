@@ -7,7 +7,6 @@ import { Typography } from '@/theme/components/typography';
 import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
-import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { FormSelect } from '@/theme/components/form';
 import { format } from 'date-fns';
 import { BlogPost } from './types';
@@ -33,7 +32,6 @@ export function BlogListingClient({
   const router = useRouter();
   const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
-  const orientation = useDeviceOrientation();
 
   // State for filters
   const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
@@ -81,65 +79,6 @@ export function BlogListingClient({
       ...allCategories.map((cat) => ({ key: cat, text: cat })),
     ];
   }, [allCategories]);
-
-  // Determine grid columns based on orientation and view type
-  const gridColumns = React.useMemo(() => {
-    // Get aspect ratio for more precise detection
-    const aspectRatio =
-      typeof window !== 'undefined'
-        ? window.innerWidth / window.innerHeight
-        : 1.5;
-
-    // For small tile view, use 1-2 columns
-    if (viewType === 'small-tile') {
-      switch (orientation) {
-        case 'portrait':
-        case 'tablet-portrait':
-          return 1;
-        default:
-          return 2;
-      }
-    }
-
-    // For large tile view, use 1-4 columns based on screen size
-    if (viewType === 'large-tile') {
-      switch (orientation) {
-        case 'portrait':
-          return 1;
-        case 'tablet-portrait':
-        case 'square':
-          return 2;
-        case 'landscape':
-          // Treat narrow landscape (aspect < 1.5) as square-like
-          return aspectRatio < 1.5 ? 2 : 3;
-        case 'large-portrait':
-          return 3;
-        case 'ultrawide':
-          return 4;
-        default:
-          return 2;
-      }
-    }
-
-    // For grid view, use responsive columns
-    switch (orientation) {
-      case 'portrait': // Mobile portrait
-      case 'tablet-portrait':
-        return 1;
-      case 'mobile-landscape':
-      case 'square':
-        return 2;
-      case 'landscape':
-        // Treat narrow landscape (aspect < 1.5) as square-like
-        return aspectRatio < 1.5 ? 2 : 3;
-      case 'large-portrait':
-        return 3;
-      case 'ultrawide':
-        return 4;
-      default:
-        return 3;
-    }
-  }, [orientation, viewType]);
 
   // Map ContentViewType to AdaptiveCardGrid viewType
   const mappedViewType = React.useMemo(() => {
@@ -239,7 +178,6 @@ export function BlogListingClient({
       {blogPosts.length > 0 ? (
         <AdaptiveCardGrid
           cards={cards}
-          gridColumns={gridColumns}
           onCardClick={handleCardClick}
           viewType={mappedViewType}
         />

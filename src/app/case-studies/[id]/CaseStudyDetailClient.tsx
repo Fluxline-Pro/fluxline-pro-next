@@ -143,9 +143,6 @@ export default function CaseStudyDetailClient({
           title: caseStudy.title,
           showTitle: false,
           gallery: caseStudy.gallery, // Pass gallery array
-          enableCarousel: Boolean(
-            caseStudy.gallery && caseStudy.gallery.length > 0
-          ), // Enable carousel if gallery exists
         }
       : undefined,
     authorInfo: undefined, // Case studies don't have authors

@@ -48,16 +48,12 @@ export function PressReleaseDetailClient({
           title: pressRelease.title,
           showTitle: false,
           gallery: pressRelease.gallery,
-          enableCarousel: Boolean(
-            pressRelease.gallery && pressRelease.gallery.length > 0
-          ),
         }
       : {
           source: '/images/home/FluxlineLogo.png',
           alt: 'Default Press Release Image',
           title: pressRelease.title,
           showTitle: false,
-          enableCarousel: false,
         },
     authorInfo: pressRelease.author
       ? {
