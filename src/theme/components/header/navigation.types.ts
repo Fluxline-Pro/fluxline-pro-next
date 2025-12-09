@@ -9,6 +9,7 @@ export interface NavItem {
   view: string;
   iconName: string;
   description?: string;
+  children?: NavItem[];
 }
 
 export interface NavigationProps {

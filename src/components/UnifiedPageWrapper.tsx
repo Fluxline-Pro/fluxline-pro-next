@@ -30,7 +30,7 @@ import { typography, spacing } from '../theme/theme';
 import FluxlineLogoDarkMode from '../assets/images/FluxlineLogoDarkMode.png';
 import FluxlineLogoLightMode from '../assets/images/FluxlineLogoLightMode.png';
 import FluxlineEthos from '../assets/images/FluxlineEthos.png';
-import FluxlineTestimonials from '../assets/images/FluxlineTestimonials.png';
+// import FluxlineTestimonials from '../assets/images/FluxlineTestimonials.png';
 import OurServicesImage from '../assets/images/OurServices1197x1600.jpg';
 import ConsultingImage from '../assets/images/ConsultingPortrait.jpg';
 import GitHubImage from '../assets/images/GitHubPortrait.jpg';
@@ -39,7 +39,7 @@ import PersonalTrainingImage from '../assets/images/PersonalTrainingPortrait.jpg
 import PressReleaseImage from '../assets/images/FluxlinePressReleases.png';
 import ResonanceCoreImage from '../assets/images/LifeCoachingResonanceCore.jpg';
 import DesignImage from '../assets/images/Portfolio1280x1815.jpg';
-import BlogImage from '../assets/images/Blog1280x1815.jpg';
+import BlogImage from '../assets/images/Blog1280x1815.png';
 import ContactImage from '../assets/images/ContactMe2400x1600.jpg';
 import BooksImage from '../assets/images/EducationTrainingPortrait.jpg';
 import ContentImage from '../assets/images/Content1280x1815.jpg';

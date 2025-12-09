@@ -245,7 +245,24 @@ export default function AboutPage() {
           </section>
         </div>
 
-        {/* Testimonials Callout */}
+        {/* Content Navigation Callout-- move back under "Our Values" once testimonials is added back -TW */}
+        <Callout
+          variant='subtle'
+          title="See what we've been working on!"
+          subtitle='Review case studies, client work, and upcoming announcements.'
+          action={
+            <FormButton
+              text='Explore Our Content'
+              variant='primary'
+              size='large'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => (window.location.href = '/content')}
+            />
+          }
+        />
+
+        {/* Testimonials Callout -- commented out for now since no testimonials have been given -TW*
         <Callout
           variant='subtle'
           title='Hear From Our Clients'
@@ -270,7 +287,7 @@ export default function AboutPage() {
             businesses and individuals transform through our strategic
             consulting, coaching, and development services.
           </Typography>
-        </Callout>
+        </Callout> */}
       </div>
     </UnifiedPageWrapper>
   );

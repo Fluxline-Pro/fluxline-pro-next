@@ -22,10 +22,25 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
   const isMobileLandscape = useIsMobileLandscape();
   const router = useRouter();
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
+  const [expandedItems, setExpandedItems] = React.useState<Set<string>>(
+    new Set()
+  );
 
   const handleNavigation = (path: string) => {
     router.push(path);
     onClose();
+  };
+
+  const handleToggleExpand = (path: string) => {
+    setExpandedItems((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(path)) {
+        newSet.delete(path);
+      } else {
+        newSet.add(path);
+      }
+      return newSet;
+    });
   };
 
   const getHoverProps = (key: string) => ({
@@ -87,13 +102,38 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
           }}
         >
           {navItems.map((item) => (
-            <NavigationItem
-              key={item.path}
-              route={item}
-              isHovered={hoveredItem === item.path}
-              getHoverProps={getHoverProps}
-              onClick={() => handleNavigation(item.path)}
-            />
+            <React.Fragment key={item.path}>
+              <NavigationItem
+                route={item}
+                isHovered={hoveredItem === item.path}
+                getHoverProps={getHoverProps}
+                onClick={() => handleNavigation(item.path)}
+                isExpanded={expandedItems.has(item.path)}
+                onToggleExpand={() => handleToggleExpand(item.path)}
+              />
+              {item.children && expandedItems.has(item.path) && (
+                <div
+                  style={{
+                    width: '100%',
+                    paddingLeft: isLeftHanded ? '0' : '0',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.25rem',
+                  }}
+                >
+                  {item.children.map((child) => (
+                    <NavigationItem
+                      key={child.path}
+                      route={child}
+                      isHovered={hoveredItem === child.path}
+                      getHoverProps={getHoverProps}
+                      onClick={() => handleNavigation(child.path)}
+                      isChild
+                    />
+                  ))}
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>

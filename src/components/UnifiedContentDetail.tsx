@@ -61,9 +61,8 @@ export interface UnifiedContentDetailConfig {
     title?: string;
     showTitle?: boolean;
     // Gallery support - array of images for carousel
+    // If not provided, single image will be clickable for fullscreen view
     gallery?: CarouselImage[];
-    // Whether to enable carousel on image click
-    enableCarousel?: boolean;
   };
 
   // Additional sections (for case studies, portfolio projects)
@@ -107,7 +106,8 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
 
   const handleImageClick = React.useCallback(() => {
-    if (config.imageConfig?.enableCarousel && config.imageConfig?.gallery) {
+    if (config.imageConfig) {
+      // Support both gallery and single image click-to-enlarge
       setCarouselInitialIndex(0);
       setIsCarouselOpen(true);
     }
@@ -372,13 +372,30 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   };
 
   // Prepare image config with carousel functionality
+  // Create gallery array from single image if no gallery exists
+  const imageGallery = React.useMemo(() => {
+    if (!config.imageConfig) return undefined;
+
+    // Use existing gallery or create single-item gallery
+    if (config.imageConfig.gallery) {
+      return config.imageConfig.gallery;
+    }
+
+    // Create single-item gallery from main image
+    return [
+      {
+        url: config.imageConfig.source,
+        alt: config.imageConfig.alt,
+        caption: config.imageConfig.title,
+      },
+    ];
+  }, [config.imageConfig]);
+
   const imageConfigWithCarousel = config.imageConfig
     ? {
         ...config.imageConfig,
-        onClick: config.imageConfig.enableCarousel
-          ? handleImageClick
-          : undefined,
-        enableHoverEffect: config.imageConfig.enableCarousel || false,
+        onClick: handleImageClick,
+        enableHoverEffect: true,
       }
     : undefined;
 
@@ -732,11 +749,11 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       </UnifiedPageWrapper>
 
       {/* Image Carousel Modal */}
-      {config.imageConfig?.gallery && config.imageConfig?.enableCarousel && (
+      {imageGallery && (
         <ImageCarouselModal
           isOpen={isCarouselOpen}
           onDismiss={handleCarouselClose}
-          images={config.imageConfig.gallery}
+          images={imageGallery}
           initialIndex={carouselInitialIndex}
         />
       )}
