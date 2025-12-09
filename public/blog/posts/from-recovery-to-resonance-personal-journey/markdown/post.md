@@ -14,7 +14,7 @@ tags:
     'Strength Training',
     'NASM',
   ]
-imageUrl: '/blog/posts/from-recovery-to-resonance-personal-journey/images/personalTrainingPortrait.jpg'
+imageUrl: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
 imageAlt: 'Before and after transformation showing strength training journey'
 seoTitle: 'From Recovery to Resonance: 8-Year Personal Training Transformation'
 seoDescription: 'A personal story of transformation from 120 lbs. to 185 lbs., integrating NASM-certified training with emotional intelligence and the Resonance Core Framework™.'

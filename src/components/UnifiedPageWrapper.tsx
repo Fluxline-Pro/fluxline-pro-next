@@ -278,26 +278,6 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   // Hover state for image gallery
   const [isImageHovered, setIsImageHovered] = React.useState(false);
 
-  // Add state to ensure we don't check scrollability until content is fully mounted
-  const [isContentMounted, setIsContentMounted] = React.useState(false);
-  React.useEffect(() => {
-    setIsContentMounted(false);
-
-    if (!contentRef.current || typeof ResizeObserver === 'undefined') {
-      setIsContentMounted(true);
-      return;
-    }
-
-    const observer = new ResizeObserver(() => {
-      setIsContentMounted(true);
-    });
-    observer.observe(contentRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [pathname]);
-
   // Check if current path should use the wrapper
   // const shouldUseWrapper = !EXCLUDED_PAGES.includes(pathname);
 
@@ -577,27 +557,18 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
           layoutPreference === 'left-handed'
             ? `calc(25vw + ${theme.spacing.l})`
             : containerStyle.padding,
-        alignItems:
-          !isMobile && isContentMounted && !isContentScrollable
-            ? 'center'
-            : 'start',
+        alignItems: !isMobile && isContentScrollable ? 'start' : 'center',
       };
 
   // Adjust content style based on scrollability and layout
   const adjustedContentStyle = {
     ...contentStyle,
     flex:
-      !isMobile &&
-      !shouldUseStackedLayout &&
-      isContentMounted &&
-      !isContentScrollable
+      !isMobile && !shouldUseStackedLayout && !isContentScrollable
         ? 'none'
         : contentStyle.flex,
     justifyContent:
-      !isMobile &&
-      !shouldUseStackedLayout &&
-      isContentMounted &&
-      !isContentScrollable
+      !isMobile && !shouldUseStackedLayout && !isContentScrollable
         ? 'center'
         : 'flex-start',
     maxWidth: '1200px',
