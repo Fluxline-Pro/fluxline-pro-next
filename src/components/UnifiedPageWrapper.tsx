@@ -179,7 +179,7 @@ const NOT_FOUND_CONFIG = {
 };
 
 // Pages that should NOT use the wrapper (like home page)
-const EXCLUDED_PAGES = ['/'];
+// const EXCLUDED_PAGES = ['/'];
 
 // Type definitions
 type LayoutType = 'responsive-grid' | 'legal-document';
@@ -249,8 +249,6 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   layoutType = 'responsive-grid',
   showImageTitle = true,
   contentImage,
-  tabletPortraitLayout,
-  respectLayoutPreference = true,
   imageConfig,
   forceImageConfig,
   legalPageConfig,
@@ -301,7 +299,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   }, [pathname]);
 
   // Check if current path should use the wrapper
-  const shouldUseWrapper = !EXCLUDED_PAGES.includes(pathname);
+  // const shouldUseWrapper = !EXCLUDED_PAGES.includes(pathname);
 
   // Hide title for services views except about view to prevent duplicate titles
   const shouldShowTitle = React.useMemo(() => {
@@ -641,6 +639,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 position: 'relative',
                 width: '100%',
                 maxWidth: '300px', // Smaller max width for mobile/tablet
+                maxHeight: isMobile ? '275px' : 'none', // Limit height on mobile to keep content visible
                 height: 'auto',
                 borderRadius: theme.borderRadius.m,
                 overflow: 'hidden',
@@ -661,8 +660,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 300px'
                 style={{
                   width: '100%',
-                  height: 'auto',
-                  objectFit: 'contain',
+                  height: '100%',
+                  objectFit: 'cover',
                 }}
                 priority
                 placeholder='blur'

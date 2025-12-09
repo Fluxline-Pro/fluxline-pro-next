@@ -14,13 +14,15 @@ import { getIconForPath } from '@/utils/navigation-icons';
 import { ContactForm } from './components/ContactForm';
 import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
+  const isMobile = useIsMobile();
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-16'>
+      <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
         {/* Hero Section */}
         <Hero
           title='Invitation for Fluxline Connection'
@@ -83,6 +85,8 @@ export default function ContactPage() {
               color: theme.palette.themePrimary,
               fontSize: '2rem',
               fontWeight: theme.typography.fontWeights.bold,
+              lineHeight: isMobile ? '1.6' : '2',
+              marginBottom: isMobile ? '1rem' : undefined
             }}
           >
             Let&apos;s Build Something Extraordinary

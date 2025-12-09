@@ -97,6 +97,18 @@ export const Hero: React.FC<HeroProps> = ({
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
 
+  /**
+   * Truncates text to first sentence (up to and including first period)
+   * Returns full text if no period is found
+   */
+  const getFirstSentence = (text: string): string => {
+    const periodIndex = text.indexOf('.');
+    if (periodIndex === -1) {
+      return text; // No period found, return full text
+    }
+    return text.substring(0, periodIndex + 1); // Include the period
+  };
+
   return (
     <div
       className={`${className}`}
@@ -214,7 +226,7 @@ export const Hero: React.FC<HeroProps> = ({
             marginBottom: '1rem',
           }}
         >
-          {description}
+          {isMobile ? getFirstSentence(description) : description}
         </Typography>
       )}
       {filters && (

@@ -19,13 +19,15 @@ import {
 } from './constants';
 import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 export default function ServicesPage() {
   const { theme } = useAppTheme();
+  const isMobile = useIsMobile();   
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-12'>
+      <div className={isMobile ? 'space-y-8' : 'space-y-12'}>
         {/* Page Header */}
         <Hero
           title='Our Services'
