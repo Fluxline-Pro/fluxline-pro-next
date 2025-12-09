@@ -75,7 +75,6 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
           viewType={viewType}
           gap={gap}
           className={className}
-          gridColumns={gridColumns}
         >
           {cards.map((card, index) => (
             <UnifiedCard

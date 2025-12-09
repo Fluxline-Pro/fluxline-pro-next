@@ -25,7 +25,7 @@ export default function ServicesPage() {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();   
 
-  return (
+  return (ww
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className={isMobile ? 'space-y-8' : 'space-y-12'}>
         {/* Page Header */}

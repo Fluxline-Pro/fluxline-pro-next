@@ -155,9 +155,7 @@ export function BlogTagClient({ tag, posts }: BlogTagClientProps) {
             selectedKey={viewType}
             onChange={(_, option) => {
               if (option?.key) {
-                setViewType(
-                  option.key as 'grid' | 'small-tile' | 'large-tile'
-                );
+                setViewType(option.key as 'grid' | 'small-tile' | 'large-tile');
               }
             }}
             styles={{
@@ -171,7 +169,6 @@ export function BlogTagClient({ tag, posts }: BlogTagClientProps) {
       {posts.length > 0 ? (
         <AdaptiveCardGrid
           cards={cards}
-          gridColumns={gridColumns}
           onCardClick={handleCardClick}
           viewType={mappedViewType}
         />

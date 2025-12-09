@@ -139,8 +139,8 @@ export function BlogCategoryClient({
             fontSize: '1.1rem',
           }}
         >
-          Showing {posts.length} {posts.length === 1 ? 'post' : 'posts'} in
-          this category.
+          Showing {posts.length} {posts.length === 1 ? 'post' : 'posts'} in this
+          category.
         </Typography>
       </div>
 
@@ -158,9 +158,7 @@ export function BlogCategoryClient({
             selectedKey={viewType}
             onChange={(_, option) => {
               if (option?.key) {
-                setViewType(
-                  option.key as 'grid' | 'small-tile' | 'large-tile'
-                );
+                setViewType(option.key as 'grid' | 'small-tile' | 'large-tile');
               }
             }}
             styles={{
@@ -174,7 +172,6 @@ export function BlogCategoryClient({
       {posts.length > 0 ? (
         <AdaptiveCardGrid
           cards={cards}
-          gridColumns={gridColumns}
           onCardClick={handleCardClick}
           viewType={mappedViewType}
         />
