@@ -304,7 +304,6 @@ export function ContentListingPage({
               cards={cards}
               viewType={mappedViewType}
               gap={theme.spacing.m}
-              enableImageAdaptation={true}
               gridColumns={gridColumns}
               onCardClick={handleCardClick}
             />

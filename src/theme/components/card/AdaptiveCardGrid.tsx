@@ -17,19 +17,18 @@ export interface AdaptiveCardGridProps {
   }>;
   viewType?: 'grid' | 'small' | 'large' | 'image';
   gap?: string;
-  enableImageAdaptation?: boolean;
   className?: string;
   gridColumns?: number;
   onCardClick?: (id: string) => void;
 }
 
 /**
- * AdaptiveCardGrid - A smart card grid that adapts its layout based on image dimensions
+ * AdaptiveCardGrid - A smart card grid that adapts its layout based on view type
  *
  * Features:
- * - Automatically adjusts column count based on image aspect ratios
- * - Handles landscape, portrait, and square images intelligently
- * - Falls back to standard grid behavior when image adaptation is disabled
+ * - Responsive column counts based on device breakpoints
+ * - Handles grid, small, large, and image view types
+ * - Falls back to standard grid behavior across all view types
  * - Responsive across mobile, tablet, and desktop breakpoints
  * - Smooth fade transitions when switching view types
  */
@@ -37,32 +36,11 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
   cards,
   viewType = 'grid',
   gap = '1rem',
-  enableImageAdaptation = true,
   className,
   gridColumns,
   onCardClick,
 }) => {
   const { shouldReduceMotion } = useReducedMotion();
-  const [imageDimensions, setImageDimensions] = React.useState<{
-    width: number;
-    height: number;
-    aspectRatio: number;
-  } | null>(null);
-
-  // Track the first image's dimensions to determine container layout
-  const handleImageDimensionsChange = React.useCallback(
-    (
-      dimensions: { width: number; height: number; aspectRatio: number } | null
-    ) => {
-      // Use the first image's dimensions to set the container layout
-      if (dimensions && !imageDimensions) {
-        setImageDimensions(dimensions);
-      } else if (!dimensions) {
-        setImageDimensions(null);
-      }
-    },
-    [imageDimensions]
-  );
 
   // Animation variants for view type transitions
   const fadeInVariants: Variants = {
@@ -96,8 +74,6 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
         <UnifiedCardContainer
           viewType={viewType}
           gap={gap}
-          imageDimensions={imageDimensions}
-          adaptToImageDimensions={enableImageAdaptation}
           className={className}
           gridColumns={gridColumns}
         >
@@ -114,11 +90,6 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
               delay={index * 25} // Much faster stagger: 25ms per card
               showTitleOnImage={viewType === 'image'}
               onClick={onCardClick ? () => onCardClick(card.id) : undefined}
-              onImageDimensionsChange={
-                enableImageAdaptation && index === 0
-                  ? handleImageDimensionsChange
-                  : undefined
-              }
             />
           ))}
         </UnifiedCardContainer>
