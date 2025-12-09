@@ -8,7 +8,7 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
-import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { FormButton, FormSelect } from '@/theme/components/form';
 import { Hero } from '@/theme/components/hero/Hero';
 
@@ -132,7 +132,6 @@ export function ContentListingPage({
   const router = useRouter();
   const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
-  const orientation = useDeviceOrientation();
   const isMobile = useIsMobile();
 
   // View type options for dropdown
@@ -142,85 +141,21 @@ export function ContentListingPage({
     { key: 'large-tile', text: 'Large Tile' },
   ];
 
-  // Determine grid columns based on orientation and view type
-  const gridColumns = React.useMemo(() => {
-    // Get aspect ratio for more precise detection
-    const aspectRatio =
-      typeof window !== 'undefined'
-        ? window.innerWidth / window.innerHeight
-        : 1.5;
-
-    // For tile views, use single column layout
-    if (viewType === 'small-tile') {
-      switch (orientation) {
-        case 'portrait':
-        case 'tablet-portrait':
-          return 1;
-        default:
-          return 2;
-      }
-    }
-
-    if (viewType === 'large-tile') {
-      switch (orientation) {
-        case 'portrait':
-          return 1;
-        case 'tablet-portrait':
-        case 'square':
-          return 2;
-        case 'landscape':
-          return aspectRatio < 1.5 ? 2 : 3;
-        case 'large-portrait':
-          return 3;
-        case 'ultrawide':
-          return 4;
-        default:
-          return 2;
-      }
-    }
-
-    // For grid view, use responsive columns
-    switch (orientation) {
-      case 'portrait':
-      case 'tablet-portrait':
-        return 1;
-      case 'mobile-landscape':
-      case 'square':
-        return 2;
-      case 'landscape':
-        return aspectRatio < 1.5 ? 2 : 3;
-      case 'large-portrait':
-        return 3;
-      case 'ultrawide':
-        return 4;
-      default:
-        return 3;
-    }
-  }, [orientation, viewType]);
-
-  // Map ContentViewType to AdaptiveCardGrid viewType
-  const mappedViewType = React.useMemo(() => {
-    switch (viewType) {
-      case 'small-tile':
-        return 'small';
-      case 'large-tile':
-        return 'large';
-      default:
-        return viewType; // 'grid' maps directly
-    }
-  }, [viewType]);
+  // Map view type for grid component
+  const getViewType = () => {
+    if (viewType === 'small-tile') return 'small';
+    if (viewType === 'large-tile') return 'large';
+    return 'grid';
+  };
 
   // Handle card click
-  const handleCardClick = React.useCallback(
-    (id: string) => {
-      if (onCardClick) {
-        onCardClick(id);
-      } else {
-        router.push(`${basePath}/${id}`);
-      }
-    },
-    [basePath, onCardClick, router]
-  );
+  const handleCardClick = (id: string) => {
+    if (onCardClick) {
+      onCardClick(id);
+    } else {
+      router.push(`${basePath}/${id}`);
+    }
+  };
 
   // Render filter controls
   const renderFilters = () => {
@@ -270,8 +205,7 @@ export function ContentListingPage({
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
-          padding:
-            orientation === 'portrait' ? theme.spacing.m : theme.spacing.xl,
+          padding: isMobile ? theme.spacing.m : theme.spacing.xl,
           width: '100%',
         }}
       >
@@ -302,9 +236,8 @@ export function ContentListingPage({
           <div>
             <AdaptiveCardGrid
               cards={cards}
-              viewType={mappedViewType}
+              viewType={getViewType()}
               gap={theme.spacing.m}
-              gridColumns={gridColumns}
               onCardClick={handleCardClick}
             />
           </div>

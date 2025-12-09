@@ -10,10 +10,6 @@ export interface UnifiedCardContainerProps {
   className?: string;
   gap?: string;
   viewType: 'grid' | 'small' | 'large' | 'image';
-  // Optional override for grid behavior
-  forceColumns?: number;
-  // Custom grid columns override
-  gridColumns?: number;
 }
 
 export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
@@ -21,8 +17,6 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   className = '',
   gap = '1rem',
   viewType,
-  forceColumns,
-  gridColumns,
 }) => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
@@ -42,26 +36,18 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
       };
     }
 
-    // Determine column count based on view type and device
+    // Determine columns based on view type and device
     let columns: number;
 
-    // Standard column calculation based on view type
-    switch (viewType) {
-      case 'grid':
-        columns =
-          gridColumns || forceColumns || (isMobile ? 1 : isTablet ? 3 : 4);
-        break;
-      case 'small':
-        columns = gridColumns || (isMobile ? 1 : 3);
-        break;
-      case 'large':
-        columns = gridColumns || (isMobile ? 1 : isTablet ? 2 : 3);
-        break;
-      default:
-        columns = isMobile ? 1 : isTablet ? 3 : 4;
+    if (isMobile) {
+      columns = 1;
+    } else if (isTablet) {
+      columns = viewType === 'grid' ? 3 : 2;
+    } else {
+      // Desktop
+      columns = viewType === 'grid' ? 4 : 3;
     }
 
-    // All grid layouts use the same structure now (minHeight in cards handles sizing)
     return {
       display: 'grid' as const,
       templateColumns: `repeat(${columns}, 1fr)`,
