@@ -1,5 +1,5 @@
 ---
-title: 'Fluxline 2.0 Platform Development — Brand Identity Rebirth'
+title: 'Fluxline 2.0 Platform Development — Brand Identity & Website Launchpad Rebirth'
 client: 'Fluxline Resonance Group (Internal)'
 industry: 'Technology & Business Transformation'
 description: 'Complete platform rebuild and brand identity evolution transforming TerenceWaters.com into Fluxline 2.0—a next-generation business transformation platform built on Next.js 16, featuring mythic design systems and strategic brand architecture.'
@@ -16,7 +16,7 @@ technologies:
     'Framer Motion',
     'Design Systems',
   ]
-imageUrl: '/case-studies/posts/fluxline-2-platform/development/images/fluxline-20-dsm.jpg'
+imageUrl: '/case-studies/posts/fluxline-2-platform-development/images/fluxline-20-dsm.jpg'
 imageAlt: 'Fluxline Pro 2.0 Design System Theming'
 publishedDate: '2025-12-15'
 projectDuration: '3 months'

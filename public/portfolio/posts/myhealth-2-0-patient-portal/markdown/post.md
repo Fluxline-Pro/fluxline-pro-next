@@ -20,9 +20,9 @@ technologies:
   - Agile/Scrum
   - Cross-Platform Development
   - Healthcare IT
-featuredImage:
-  url: '/portfolio/posts/modern-web-app-showcase/images/hero.jpg'
-  alt: 'Healthcare patient portal interface concept'
+featuredImage: 
+  url: '/blog/posts/design-systems-scalable-applications/images/Portfolio1280x1815.jpg'
+  alt: 'Portfolio default image'
 gallery:
   - url: '/portfolio/posts/modern-web-app-showcase/images/dashboard.jpg'
     alt: 'Patient portal dashboard concept'
@@ -50,7 +50,7 @@ seoKeywords:
 
 # MyHealth 2.0 - Healthcare Patient Portal
 
-**INTELLECTUAL PROPERTY DISCLAIMER**: This project is the proprietary intellectual property of Intermountain Health. This portfolio entry demonstrates Fluxline's capability to deliver enterprise-scale healthcare applications. All work was performed as a front-end developer and designer while Terence Waters, the owner, was an employee with Intermountain Health. No proprietary code, screenshots, or confidential information is disclosed, nor does Fluxline claim this project nor its property to be its own.
+**INTELLECTUAL PROPERTY DISCLAIMER**: This project is the proprietary intellectual property of Intermountain Health. This portfolio entry demonstrates Fluxline's capability to deliver enterprise-scale healthcare applications. All work was performed as a front-end developer and designer while Terence Waters, the owner of Fluxline, was an employee with Intermountain Health. No proprietary code, screenshots, or confidential information are disclosed in this post, nor does Fluxline claim this project or its property as its own.
 
 ---
 

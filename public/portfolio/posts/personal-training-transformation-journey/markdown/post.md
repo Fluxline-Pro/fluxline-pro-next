@@ -20,9 +20,9 @@ technologies:
   - Breathwork
   - Somatic Practices
   - Archetypal Mapping
-featuredImage:
-  url: '/portfolio/posts/personal-training-transformation-journey/images/hero.jpg'
-  alt: 'Transformation journey showing strength training progress from 120 lbs to 185 lbs'
+featuredImage: 
+  url: '/blog/posts/design-systems-scalable-applications/images/Portfolio1280x1815.jpg'
+  alt: 'Portfolio default image'
 gallery:
   - url: '/portfolio/posts/personal-training-transformation-journey/images/before-after.jpg'
     alt: 'Before and after physical transformation'
