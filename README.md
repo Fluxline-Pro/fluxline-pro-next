@@ -321,6 +321,9 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 - **[CONTENT_LISTING_CONSOLIDATION.md](CONTENT_LISTING_CONSOLIDATION.md)** - Unified listing system
 - **[UNIFIED_CONTENT_DETAIL_SUMMARY.md](UNIFIED_CONTENT_DETAIL_SUMMARY.md)** - Unified detail pages
 - **[SCROLLS_IMPLEMENTATION_SUMMARY.md](SCROLLS_IMPLEMENTATION_SUMMARY.md)** - Scrolls/white papers system
+- **[RECAPTCHA_IMPLEMENTATION.md](RECAPTCHA_IMPLEMENTATION.md)** - reCAPTCHA integration guide
+- **[RECAPTCHA_AZURE_DEPLOYMENT.md](RECAPTCHA_AZURE_DEPLOYMENT.md)** - Azure deployment guide for reCAPTCHA
+- **[RECAPTCHA_QUICKSTART.md](RECAPTCHA_QUICKSTART.md)** - 5-minute reCAPTCHA setup
 
 ### Phase Documentation
 

@@ -8,6 +8,8 @@
     "SMTP_USER": "<your-smtp2go-username>",
     "SMTP_PASS": "<your-smtp2go-password>",
     "SMTP_FROM": "no-reply@fluxline.pro",
-    "CONTACT_EMAIL": "support@fluxline.pro"
+    "CONTACT_EMAIL": "support@fluxline.pro",
+    "RECAPTCHA_SECRET_KEY": "<your-recaptcha-secret-key>",
+    "RECAPTCHA_SCORE_THRESHOLD": "0.5"
   }
 }
