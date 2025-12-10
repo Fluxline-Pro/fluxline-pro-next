@@ -50,7 +50,7 @@ export default function ServiceDetailPage() {
   // Define features based on service type
   const getFeatures = (serviceId: string): string[] => {
     const featuresMap: Record<string, string[]> = {
-      'development': [
+      development: [
         'Custom web applications and digital platforms',
         'Intuitive UX and resilient infrastructure',
         'CI/CD pipelines and cloud architecture',
@@ -58,7 +58,7 @@ export default function ServiceDetailPage() {
         'API design and third-party integrations',
         'Performance optimization and scalability solutions',
       ],
-      'design': [
+      design: [
         'Visual identity and brand architecture',
         'Digital experience design',
         'Modular design systems',
@@ -90,7 +90,7 @@ export default function ServiceDetailPage() {
         'Custom curriculum design and delivery',
         'Ongoing support and community building',
       ],
-      'consulting': [
+      consulting: [
         'Strategic systems design and operational optimization',
         'Modular frameworks for scalable growth',
         'Tech integration and infrastructure planning',
@@ -105,6 +105,30 @@ export default function ServiceDetailPage() {
   const features = getFeatures(service.id);
   // Check if this service has pricing data
   const pricingData = SERVICE_PRICING[service.id];
+
+  // Define service-specific subtitles for pricing tables
+  const pricingSubtitles: Record<string, string> = {
+    'personal-training':
+      'Choose your path based on your archetype assessment and personal goals.',
+    design:
+      "Choose the tier that aligns with your brand's current phase, archetype, and unfolding vision.",
+    development:
+      'Select the program that matches your project scope and technical requirements.',
+  };
+
+  const pricingSubtitle =
+    pricingSubtitles[service.id] ||
+    'Choose the program that best fits your needs and objectives.';
+
+  // Define service-specific disclaimers for pricing tables
+  const pricingDisclaimers: Record<string, string> = {
+    design:
+      'Additional services can be added for an extra fee. Rush delivery fees apply for expedited timelines.',
+    development:
+      'Additional services can be added for an extra fee. Rush delivery fees apply for expedited timelines.',
+  };
+
+  const pricingDisclaimer = pricingDisclaimers[service.id];
 
   // Get related scroll/white paper
   const scrollId = SERVICE_SCROLL_MAPPING[service.id];
@@ -191,7 +215,41 @@ export default function ServiceDetailPage() {
                 tiers={pricingData.tiers}
                 onViewComparison={() => setIsComparisonModalOpen(true)}
                 showComparisonButton={true}
+                subtitle={pricingSubtitle}
               />
+
+              {/* Pricing Disclaimer */}
+              {pricingDisclaimer && (
+                <div
+                  style={{
+                    marginTop: theme.spacing.l,
+                    padding: theme.spacing.m,
+                    backgroundColor: theme.palette.neutralLighterAlt,
+                    borderLeft: `4px solid ${theme.palette.themePrimary}`,
+                    borderRadius: theme.borderRadius.container.small,
+                  }}
+                >
+                  <Typography
+                    variant='p'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '0.9375rem',
+                      fontStyle: 'italic',
+                      lineHeight: theme.typography.lineHeights.relaxed,
+                    }}
+                  >
+                    <strong
+                      style={{
+                        color: theme.palette.themePrimary,
+                        fontWeight: theme.typography.fontWeights.semiBold,
+                      }}
+                    >
+                      Note:
+                    </strong>{' '}
+                    {pricingDisclaimer}
+                  </Typography>
+                </div>
+              )}
             </section>
 
             <hr

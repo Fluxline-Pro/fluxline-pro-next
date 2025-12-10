@@ -563,7 +563,6 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
                       badge.variant === 'primary' ? 'primary' : 'tertiary'
                     }
                     onClick={badge.onClick}
-                    disabled={!badge.onClick}
                     size='small'
                   >
                     {badge.label}

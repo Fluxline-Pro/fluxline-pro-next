@@ -36,6 +36,14 @@ export default function PortfolioDetailClient({
     );
   }
 
+  const handleTagClick = (tag: string) => {
+    router.push(`/portfolio/tag/${encodeURIComponent(tag)}`);
+  };
+
+  const handleTechnologyClick = (technology: string) => {
+    router.push(`/portfolio/technology/${encodeURIComponent(technology)}`);
+  };
+
   const config: UnifiedContentDetailConfig = {
     title: project.title,
     content: project.content,
@@ -69,10 +77,12 @@ export default function PortfolioDetailClient({
       ...project.tags.map((tag) => ({
         label: tag,
         variant: 'secondary' as const,
+        onClick: () => handleTagClick(tag),
       })),
       ...project.technologies.map((tech) => ({
         label: tech,
         variant: 'tertiary' as const,
+        onClick: () => handleTechnologyClick(tech),
       })),
     ],
     externalLinks: [

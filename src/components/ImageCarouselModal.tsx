@@ -13,6 +13,7 @@ import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
+import { LoadingSpinner } from '@/theme/components/structural';
 import Image from 'next/image';
 
 export interface CarouselImage {
@@ -40,6 +41,7 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [lastOpenState, setLastOpenState] = useState(isOpen);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const { theme } = useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
 
@@ -48,16 +50,19 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
     setLastOpenState(isOpen);
     if (isOpen) {
       setCurrentIndex(initialIndex);
+      setIsImageLoading(true);
     }
   }
 
   // Navigate to next image
   const handleNext = useCallback(() => {
+    setIsImageLoading(true);
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
   // Navigate to previous image
   const handlePrevious = useCallback(() => {
+    setIsImageLoading(true);
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   }, [images.length]);
 
@@ -208,6 +213,21 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
               justifyContent: 'center',
             }}
           >
+            {/* Loading spinner */}
+            {isImageLoading && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 5,
+                }}
+              >
+                <LoadingSpinner showLabel={false} />
+              </div>
+            )}
+
             <AnimatePresence initial={false} custom={direction} mode='wait'>
               <motion.div
                 key={currentIndex}
@@ -241,7 +261,10 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
                     height: 'auto',
                     objectFit: 'contain',
                     borderRadius: theme.effects.roundedCorner4,
+                    opacity: isImageLoading ? 0 : 1,
+                    transition: 'opacity 0.2s ease-in-out',
                   }}
+                  onLoadingComplete={() => setIsImageLoading(false)}
                   priority
                 />
               </motion.div>

@@ -6,6 +6,13 @@ import { notFound } from 'next/navigation';
 // Generate static params for all tags
 export async function generateStaticParams() {
   const tags = getAllTags();
+
+  // Ensure we return an array even if empty
+  if (!tags || tags.length === 0) {
+    console.warn('No blog tags found for static generation');
+    return [];
+  }
+
   return tags.map((tag) => ({
     tag: tag,
   }));

@@ -16,8 +16,20 @@ import type { SocialLinksData } from './components/SocialLinks';
 export const TERENCE_SOCIAL_LINKS: SocialLinksData = {
   linkedin: 'https://linkedin.com/in/terencewaters',
   instagram: 'https://instagram.com/aplusinflux',
+  facebook: 'https://www.facebook.com/fluxline',
+  threads: 'https://www.threads.net/@aplusinflux',
   github: 'https://github.com/aplusandminus',
-  email: 'terence@fluxline.pro',
+  twitter: 'https://twitter.com/aplusinflux',
+  tiktok: 'https://www.tiktok.com/@aplusinflux',
+  email: 'mailto:terence@fluxline.pro',
+};
+
+export const FLUXLINE_SOCIAL_LINKS: SocialLinksData = {
+  facebook: 'https://www.facebook.com/fluxline',
+  instagram: 'https://instagram.com/fluxlineco',
+  threads: 'https://www.threads.net/@fluxlineco',
+  github: 'https://github.com/fluxline-pro',
+  email: 'mailto:support@fluxline.pro',
 };
 
 /**
@@ -33,8 +45,11 @@ export const TEAM_MEMBERS: TeamMember[] = [
     socialLinks: {
       linkedin: 'https://linkedin.com/in/terencewaters',
       instagram: 'https://instagram.com/aplusinflux',
+      facebook: 'https://www.facebook.com/fluxline',
       github: 'https://github.com/aplusandminus',
       email: 'mailto:terence@fluxline.pro',
+      twitter: 'https://twitter.com/aplusinflux',
+      tiktok: 'https://www.tiktok.com/@aplusinflux',
     },
   },
   // Add more team members as needed
@@ -56,7 +71,7 @@ export const COMPANY_STATISTICS: Statistic[] = [
     label: 'Years Experience',
     value: '20+',
     icon: 'DateTime',
-    description: 'In digital innovation',
+    description: 'In digital innovation and creativity',
   },
   {
     id: 'team',
@@ -66,11 +81,11 @@ export const COMPANY_STATISTICS: Statistic[] = [
     description: 'Emotionally resonant solutions',
   },
   {
-    id: 'satisfaction',
-    label: 'Client Satisfaction',
-    value: '98%',
-    icon: 'FavoriteStarFill',
-    description: 'Consistently excellent',
+    id: 'industries',
+    label: 'Industries Served',
+    value: '10+',
+    icon: 'BranchFork2',
+    description: 'Across diverse sectors',
   },
 ];
 
@@ -83,39 +98,63 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
     year: 'June 2025',
     title: 'Fluxline Founded',
     description:
-      'Born from a vision to blend emotional intelligence with technical excellence, creating transformative digital experiences.',
+      'Established Fluxline Professional Services to channel two decades of technical expertise into transformative client solutions.',
     icon: 'Lightbulb',
   },
   {
-    id: 'services-expansion',
+    id: 'brand-identity',
     year: 'July 2025',
-    title: 'Services Expansion',
+    title: 'Brand Identity & Service Definition',
     description:
-      'Expanded offerings to include coaching, wellness programs, and strategic consulting alongside web development.',
-    icon: 'BranchMerge',
+      'Developed comprehensive brand identity and defined core service offerings: consulting, development, design, coaching, and wellness integration.',
+    icon: 'Design',
   },
   {
-    id: 'resonance-framework',
+    id: 'platform-launch',
     year: 'August 2025',
+    title: 'Initial Digital Platform Launch',
+    description:
+      'Launched Fluxline.pro with Azure backend and React.js frontend architecture, showcasing portfolio and establishing online presence for client engagement.',
+    icon: 'Globe',
+  },
+  {
+    id: 'framework-development',
+    year: 'September 2025',
     title: 'Resonance Core Framework™',
     description:
-      'Launched our signature coaching framework combining archetypal mapping, emotional intelligence, and transformational practices.',
+      'Formalized signature coaching methodology combining archetypal mapping, emotional intelligence, and somatic practices.',
     icon: 'HeartFill',
   },
   {
-    id: 'digital-evolution',
-    year: 'September 2025',
-    title: 'Digital Architecture Evolution',
+    id: 'content-strategy',
+    year: 'October 2025',
+    title: 'Content & Thought Leadership',
     description:
-      'Advanced our technical capabilities with modern frameworks, Azure cloud infrastructure, and scalable design systems.',
+      'Initiated blog, case studies, and white papers to share insights on digital transformation and human-centered design.',
+    icon: 'DocumentManagement',
+  },
+  {
+    id: 'infrastructure',
+    year: 'November 2025',
+    title: 'Technical Infrastructure',
+    description:
+      'Implemented Azure cloud infrastructure, CI/CD pipelines, and scalable architecture supporting enterprise-level solutions.',
     icon: 'Code',
   },
   {
-    id: 'present',
-    year: '2025 - Present',
-    title: 'Modular Innovation',
+    id: 'platform-launch',
+    year: 'December 2025',
+    title: 'Fluxline 2.0 Platform Launch',
     description:
-      'Continuing to architect transformative systems that blend technology, design, and human-centered philosophy.',
+      'Launched Fluxline.pro with modern Next.js architecture, showcasing portfolio and establishing online presence for client engagement.',
+    icon: 'Globe',
+  },
+  {
+    id: 'present',
+    year: 'December 2025 - Present',
+    title: 'Client Acquisition & Growth',
+    description:
+      'Actively building client relationships and delivering modular solutions that blend technology, design, and transformational philosophy.',
     icon: 'Rocket',
   },
 ];

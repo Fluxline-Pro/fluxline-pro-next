@@ -23,6 +23,7 @@ import { useRouter } from 'next/navigation';
 export interface BreadcrumbItem {
   label: string;
   href: string;
+  isClickable?: boolean; // Optional: if false, render as text instead of link
 }
 
 interface HeaderProps {
@@ -52,19 +53,34 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   const breadcrumbItems: BreadcrumbItem[] = React.useMemo(() => {
     const paths = pathname.split('/').filter(Boolean);
     const crumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }];
+    // Define non-clickable intermediate paths
+    const nonClickablePaths = [
+      '/blog/tag',
+      '/blog/category',
+      '/portfolio/tag',
+      '/portfolio/technology',
+      '/case-studies/industry',
+      '/case-studies/service',
+      '/press-release/year',
+    ];
 
     let currentPath = '';
     paths.forEach((path) => {
       currentPath += `/${path}`;
-      // Capitalize and format the path
-      const label = path
+      // Decode URI component and capitalize and format the path
+      const decodedPath = decodeURIComponent(path);
+      const label = decodedPath
         .split('-')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
 
+      // Check if this path should be non-clickable
+      const isClickable = !nonClickablePaths.includes(currentPath);
+
       crumbs.push({
         label,
         href: currentPath,
+        isClickable,
       });
     });
 
@@ -302,12 +318,26 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                               variant='p'
                               style={{
                                 color: theme.palette.neutralPrimary,
-                                fontSize: '1.125rem',
+                                fontSize: '1.25rem',
                                 fontWeight:
                                   theme.typography.fontWeights.semiBold,
                                 margin: 0,
                               }}
                               aria-current='page'
+                            >
+                              {item.label}
+                            </Typography>
+                          ) : item.isClickable === false ? (
+                            <Typography
+                              variant='p'
+                              style={{
+                                color: theme.palette.neutralTertiary,
+                                fontSize: '1.25rem',
+                                fontWeight:
+                                  theme.typography.fontWeights.regular,
+                                margin: 0,
+                                cursor: 'default',
+                              }}
                             >
                               {item.label}
                             </Typography>

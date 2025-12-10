@@ -456,7 +456,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 flexDirection: 'column',
                 width: '100%',
                 height: '100%',
-                minHeight: imageUrl ? '225px' : '150px',
+                minHeight: imageUrl ? '250px' : '150px',
                 maxHeight: imageUrl ? '300px' : 'none',
               }}
             >

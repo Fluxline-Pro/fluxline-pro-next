@@ -10,11 +10,20 @@ import Link from 'next/link';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { InstagramIcon } from '@/assets/svgs/InstagramLogo';
+import { FacebookIcon } from '@/assets/svgs/FacebookLogo';
+import { GitHubLogo } from '@/assets/svgs/GitHubLogo';
+import { TwitterLogo } from '@/assets/svgs/TwitterLogo';
+import { TiktokLogo } from '@/assets/svgs/TiktokLogo';
 
 export interface SocialLinksData {
   linkedin?: string;
   instagram?: string;
+  facebook?: string;
   github?: string;
+  threads?: string;
+  twitter?: string;
+  youtube?: string;
+  tiktok?: string;
   email?: string;
 }
 
@@ -75,24 +84,24 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
         gap: '0.75rem',
       }}
     >
-      {socialLinks.linkedin && (
+      {socialLinks.facebook && (
         <Link
-          href={socialLinks.linkedin}
+          href={socialLinks.facebook}
           target='_blank'
           rel='noopener noreferrer'
           style={buttonStyle}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          aria-label={`${name} on LinkedIn`}
+          aria-label={`${name} on Facebook`}
         >
-          <FluentIcon
-            iconName='LinkedInLogo'
-            size={iconSize}
-            color={theme.palette.themePrimary}
+          <FacebookIcon
+            style={{
+              width: instagramIconSize,
+              height: instagramIconSize,
+            }}
           />
         </Link>
       )}
-
       {socialLinks.instagram && (
         <Link
           href={socialLinks.instagram}
@@ -111,6 +120,43 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           />
         </Link>
       )}
+      {socialLinks.twitter && (
+        <Link
+          href={socialLinks.twitter}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={buttonStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label={`${name} on Twitter`}
+        >
+          <TwitterLogo
+            style={{
+              width: instagramIconSize,
+              height: instagramIconSize,
+            }}
+          />
+        </Link>
+      )}
+
+      {socialLinks.tiktok && (
+        <Link
+          href={socialLinks.tiktok}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={buttonStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label={`${name} on TikTok`}
+        >
+          <TiktokLogo
+            style={{
+              width: instagramIconSize,
+              height: instagramIconSize,
+            }}
+          />
+        </Link>
+      )}
 
       {socialLinks.github && (
         <Link
@@ -122,8 +168,27 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           onMouseLeave={handleMouseLeave}
           aria-label={`${name} on GitHub`}
         >
+          <GitHubLogo
+            style={{
+              width: instagramIconSize,
+              height: instagramIconSize,
+            }}
+          />
+        </Link>
+      )}
+
+      {socialLinks.linkedin && (
+        <Link
+          href={socialLinks.linkedin}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={buttonStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label={`${name} on LinkedIn`}
+        >
           <FluentIcon
-            iconName='GitGraph'
+            iconName='LinkedInLogo'
             size={iconSize}
             color={theme.palette.themePrimary}
           />

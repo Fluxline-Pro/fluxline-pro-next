@@ -172,10 +172,11 @@ const PAGE_CONFIGS: Record<
   },
 };
 
-// Special configuration for 404 page
+// Special configuration for 404 page - uses FLUXLINE_LOGO placeholder
+// which will be replaced with theme-appropriate logo at runtime
 const NOT_FOUND_CONFIG = {
-  image: ConsultingImage.src,
-  imageText: '404 - Not Found',
+  image: 'FLUXLINE_LOGO',
+  imageText: '',
 };
 
 // Pages that should NOT use the wrapper (like home page)
@@ -790,7 +791,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   <h2
                     style={{
                       margin: 0,
-                      fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
+                      fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
                       fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                       lineHeight: 1.2,
