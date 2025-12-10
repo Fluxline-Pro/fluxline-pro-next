@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const https = require('https');
 
 // Simple rate limiting store (in-memory)
 // Note: In-memory rate limiting has limitations in serverless environments due to cold starts
@@ -34,6 +35,78 @@ function sanitizeInput(input) {
   // Since we send emails as plain text (not HTML), full XSS sanitization isn't required
   // The angle brackets are removed to prevent potential email client HTML interpretation
   return input.replace(/[<>]/g, '').trim();
+}
+
+/**
+ * Verify reCAPTCHA token with Google's API
+ * @param {string} token - The reCAPTCHA token from the frontend
+ * @returns {Promise<{success: boolean, score?: number, error?: string}>}
+ */
+async function verifyRecaptcha(token) {
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+
+  // If no secret key is configured, allow submission with warning
+  if (!secretKey) {
+    console.warn('RECAPTCHA_SECRET_KEY not configured. Skipping reCAPTCHA verification.');
+    return { success: true };
+  }
+
+  if (!token) {
+    return { success: false, error: 'reCAPTCHA token is missing' };
+  }
+
+  return new Promise((resolve) => {
+    const postData = `secret=${secretKey}&response=${token}`;
+    
+    const options = {
+      hostname: 'www.google.com',
+      port: 443,
+      path: '/recaptcha/api/siteverify',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      
+      res.on('end', () => {
+        try {
+          const result = JSON.parse(data);
+          
+          // Check if verification was successful and score is above threshold
+          // Score ranges from 0.0 (bot) to 1.0 (human)
+          // 0.5 is a reasonable threshold for contact forms
+          if (result.success && result.score >= 0.5) {
+            resolve({ success: true, score: result.score });
+          } else {
+            resolve({ 
+              success: false, 
+              score: result.score,
+              error: `reCAPTCHA verification failed. Score: ${result.score || 'N/A'}`
+            });
+          }
+        } catch (error) {
+          console.error('Error parsing reCAPTCHA response:', error);
+          resolve({ success: false, error: 'Invalid reCAPTCHA response' });
+        }
+      });
+    });
+
+    req.on('error', (error) => {
+      console.error('reCAPTCHA verification request error:', error);
+      resolve({ success: false, error: 'reCAPTCHA verification failed' });
+    });
+
+    req.write(postData);
+    req.end();
+  });
 }
 
 module.exports = async function (context, req) {
@@ -88,7 +161,29 @@ module.exports = async function (context, req) {
       return;
     }
 
-    const { name, email, message } = body;
+    const { name, email, message, recaptchaToken } = body;
+
+    // Verify reCAPTCHA token
+    if (recaptchaToken) {
+      context.log('Verifying reCAPTCHA token...');
+      const recaptchaResult = await verifyRecaptcha(recaptchaToken);
+      
+      if (!recaptchaResult.success) {
+        context.log.error('reCAPTCHA verification failed:', recaptchaResult.error);
+        context.res = {
+          status: 403,
+          headers,
+          body: JSON.stringify({
+            message: 'reCAPTCHA verification failed. Please refresh and try again.',
+          }),
+        };
+        return;
+      }
+      
+      context.log('reCAPTCHA verification successful. Score:', recaptchaResult.score);
+    } else {
+      context.log.warn('No reCAPTCHA token provided in request');
+    }
 
     // Validate required fields
     if (!name || !email || !message) {

@@ -15,10 +15,13 @@ Google reCAPTCHA v3 has been integrated into the contact form to prevent spam su
 ### Modified Files
 1. **`src/app/layout.tsx`** - Added ReCaptchaProvider wrapper
 2. **`src/app/contact/components/ContactForm.tsx`** - Added reCAPTCHA token generation
-3. **`src/app/api/contact/route.ts`** - Added reCAPTCHA verification
-4. **`src/components/index.ts`** - Exported ReCaptchaProvider
-5. **`src/app/contact/page.tsx`** - Added privacy notice
-6. **`package.json`** - Added react-google-recaptcha-v3 dependency
+3. **`src/app/api/contact/route.ts`** - Added reCAPTCHA verification (Next.js API route)
+4. **`api/contact/index.js`** - Added reCAPTCHA verification (Azure Function)
+5. **`src/components/index.ts`** - Exported ReCaptchaProvider
+6. **`src/app/contact/page.tsx`** - Added privacy notice
+7. **`package.json`** - Added react-google-recaptcha-v3 dependency
+8. **`api/local.settings.sample.json`** - Added RECAPTCHA_SECRET_KEY configuration
+9. **`api/README.md`** - Documented reCAPTCHA setup for Azure Functions
 
 ## Setup Required
 
@@ -34,17 +37,47 @@ Visit: https://www.google.com/recaptcha/admin/create
 
 ### 2. Configure Environment Variables (Required)
 
+#### For Next.js Development (Local)
+
 Create `.env.local` in the project root:
 
 ```bash
 # Public key (used in frontend)
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_site_key_here
 
-# Secret key (used in backend API)
+# Secret key (used in backend API - Next.js API routes)
 RECAPTCHA_SECRET_KEY=your_secret_key_here
 ```
 
-**Important**: Never commit `.env.local` - it's already in `.gitignore`
+#### For Azure Functions (Production)
+
+Azure Functions require the secret key to be configured in the Azure Static Web App settings:
+
+1. **Local Development**: Copy `api/local.settings.sample.json` to `api/local.settings.json` and add:
+   ```json
+   {
+     "Values": {
+       "RECAPTCHA_SECRET_KEY": "your_secret_key_here"
+     }
+   }
+   ```
+
+2. **Azure Portal Configuration**: 
+   - Go to your Azure Static Web App
+   - Navigate to **Configuration** > **Application settings**
+   - Add: `RECAPTCHA_SECRET_KEY` with your secret key value
+
+3. **Azure CLI**:
+   ```bash
+   az staticwebapp appsettings set \
+     --name <your-swa-name> \
+     --setting-names RECAPTCHA_SECRET_KEY=<your-secret-key>
+   ```
+
+**Important**: 
+- Never commit `.env.local` or `api/local.settings.json` - they're in `.gitignore`
+- Use the same secret key for both Next.js API routes and Azure Functions
+- The site key (`NEXT_PUBLIC_*`) is used in the browser, the secret key is used server-side
 
 ### 3. Test the Implementation
 
@@ -70,10 +103,12 @@ open http://localhost:3000/contact
 
 ### Backend Flow
 1. API receives form data + reCAPTCHA token
-2. Server calls Google to verify the token
+2. Server calls Google to verify the token (via HTTPS POST to `https://www.google.com/recaptcha/api/siteverify`)
 3. Google returns a score (0.0 = bot, 1.0 = human)
 4. If score ≥ 0.5, form is processed
 5. If score < 0.5, submission is rejected
+
+**Note**: Both the Next.js API route (`/src/app/api/contact/route.ts`) and the Azure Function (`/api/contact/index.js`) implement reCAPTCHA verification independently. In production on Azure Static Web Apps, the Azure Function will handle contact form submissions.
 
 ### Security Layers
 1. **reCAPTCHA v3** - Invisible bot detection (score-based)
@@ -120,23 +155,41 @@ yarn dev
 - Ensure reCAPTCHA v3 was selected (not v2)
 
 ### Form Submission Fails
-- Check `RECAPTCHA_SECRET_KEY` is set in server environment
+- Check `RECAPTCHA_SECRET_KEY` is set in:
+  - `.env.local` for Next.js API route
+  - `api/local.settings.json` for local Azure Function testing
+  - Azure Static Web App configuration for production
 - Verify domain is added in reCAPTCHA admin
 - Check browser console for errors
-- Review API route logs
+- Review API route logs (Next.js) or Azure Function logs
 
 ### Localhost Issues
 - Add `localhost` to domains in reCAPTCHA admin console
 - Some browsers block reCAPTCHA - test in multiple browsers
 
+### Azure Function Specific Issues
+- **CORS errors**: Check `staticwebapp.config.json` allows `/api/*` routes
+- **Authentication errors**: Ensure Azure Function has `authLevel: "anonymous"` in `function.json`
+- **Missing environment variables**: Verify all settings are configured in Azure Portal
+- **Cold start delays**: First request after idle time may take longer
+
 ## Next Steps
 
 1. **Get reCAPTCHA keys** from Google
-2. **Configure environment variables** in `.env.local`
+2. **Configure environment variables**:
+   - `.env.local` for local Next.js development
+   - `api/local.settings.json` for local Azure Functions testing
+   - Azure Static Web App settings for production
 3. **Test locally** at http://localhost:3000/contact
-4. **Deploy** and configure production environment
-5. **Monitor** for spam in contact submissions
-6. **Adjust threshold** in API route if needed (currently 0.5)
+4. **Test Azure Function locally** (optional):
+   ```bash
+   cd api
+   npm install
+   func start
+   ```
+5. **Deploy** and configure production environment in Azure Portal
+6. **Monitor** for spam in contact submissions
+7. **Adjust threshold** in API routes if needed (currently 0.5 in both implementations)
 
 ## Additional Resources
 
