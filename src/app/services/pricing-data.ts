@@ -155,4 +155,212 @@ export const SERVICE_PRICING: ServicePricing = {
       },
     },
   },
+  design: {
+    tiers: [
+      {
+        id: 'starter',
+        name: 'Starter',
+        idealFor:
+          'A starting company getting started, initial branding package and logo',
+        monthlyRate: '$800',
+      },
+      {
+        id: 'signature',
+        name: 'Signature',
+        idealFor:
+          'Redesign, needed styling and style guide, setup with custom artwork',
+        monthlyRate: '$1,250',
+      },
+      {
+        id: 'premium',
+        name: 'Premium',
+        idealFor: 'Full redesign, app, and website development',
+        monthlyRate: '$2,700',
+      },
+    ],
+    features: [
+      { name: 'Logo Design' },
+      { name: 'Pitch Deck' },
+      { name: 'Milestone Check-ins' },
+      { name: 'File Delivery' },
+      { name: 'Brand Discovery Worksheet' },
+      { name: 'Brand Style Guide' },
+      { name: 'Custom Artwork' },
+      { name: 'Website UI' },
+      { name: 'App UI' },
+    ],
+    comparison: {
+      'logo-design': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'pitch-deck': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'milestone-check-ins': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'file-delivery': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'brand-discovery-worksheet': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'brand-style-guide': {
+        starter: false,
+        signature: true,
+        premium: true,
+      },
+      'custom-artwork': {
+        starter: false,
+        signature: true,
+        premium: true,
+      },
+      'website-ui': {
+        starter: false,
+        signature: false,
+        premium: true,
+      },
+      'app-ui': {
+        starter: false,
+        signature: false,
+        premium: true,
+      },
+    },
+  },
+  development: {
+    tiers: [
+      {
+        id: 'starter',
+        name: 'Starter (Lean Launches)',
+        idealFor:
+          'Landing page or 3-page brochure site entrepreneurs, small businesses',
+        monthlyRate: '$1,750+',
+        rateNote: 'Next.js or static HTML implementation',
+      },
+      {
+        id: 'signature',
+        name: 'Signature (Growth Phase)',
+        idealFor: 'Full website (5-8 pages) or MVP web app for growing businesses',
+        monthlyRate: '$3,500+',
+        rateNote: 'Includes CMS integration and basic backend',
+      },
+      {
+        id: 'premium',
+        name: 'Premium (Legacy Builders)',
+        idealFor: 'Full-stack web app or mobile app for established organizations',
+        monthlyRate: '$6,500+',
+        rateNote: 'Complete architecture with retainer support available',
+      },
+    ],
+    features: [
+      { name: 'Custom UI Design' },
+      { name: 'Responsive Layout' },
+      { name: 'SEO Optimization' },
+      { name: 'Performance Optimization' },
+      { name: 'Accessibility Best Practices' },
+      { name: 'Hosting Setup' },
+      { name: 'Email Integration' },
+      { name: 'CMS Integration' },
+      { name: 'Backend Development' },
+      { name: 'Mobile Optimization' },
+      { name: 'CI/CD Pipeline' },
+      { name: 'Cloud Infrastructure' },
+      { name: 'Docker & Containerization' },
+      { name: 'Admin Dashboard / Portal' },
+      { name: 'Revision Rounds' },
+      { name: 'Retainer Support' },
+    ],
+    comparison: {
+      'custom-ui-design': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'responsive-layout': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'seo-optimization': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'performance-optimization': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'accessibility-best-practices': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'hosting-setup': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'email-integration': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'cms-integration': {
+        starter: false,
+        signature: true,
+        premium: true,
+      },
+      'backend-development': {
+        starter: false,
+        signature: true,
+        premium: true,
+      },
+      'mobile-optimization': {
+        starter: false,
+        signature: true,
+        premium: true,
+      },
+      'ci-cd-pipeline': {
+        starter: false,
+        signature: true,
+        premium: true,
+      },
+      'cloud-infrastructure': {
+        starter: false,
+        signature: false,
+        premium: true,
+      },
+      'docker-containerization': {
+        starter: false,
+        signature: false,
+        premium: true,
+      },
+      'admin-dashboard-portal': {
+        starter: false,
+        signature: false,
+        premium: true,
+      },
+      'revision-rounds': {
+        starter: true,
+        signature: true,
+        premium: true,
+      },
+      'retainer-support': {
+        starter: false,
+        signature: false,
+        premium: true,
+      },
+    },
+  },
 };
