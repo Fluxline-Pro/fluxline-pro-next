@@ -59,6 +59,34 @@ export default function ContactPage() {
           >
             Get In Touch
           </Typography>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '0.875rem',
+              marginBottom: theme.spacing.s,
+            }}
+          >
+            This form is protected by reCAPTCHA to prevent spam. Google&apos;s{' '}
+            <a
+              href='https://policies.google.com/privacy'
+              target='_blank'
+              rel='noopener noreferrer'
+              style={{ color: theme.palette.themePrimary }}
+            >
+              Privacy Policy
+            </a>{' '}
+            and{' '}
+            <a
+              href='https://policies.google.com/terms'
+              target='_blank'
+              rel='noopener noreferrer'
+              style={{ color: theme.palette.themePrimary }}
+            >
+              Terms of Service
+            </a>{' '}
+            apply.
+          </Typography>
           <div
             style={{
               maxWidth: '600px',

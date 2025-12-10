@@ -4,6 +4,7 @@ interface ContactFormData {
   name: string;
   email: string;
   message: string;
+  recaptchaToken?: string;
 }
 
 // Simple rate limiting store (in-memory)
@@ -40,6 +41,38 @@ function sanitizeInput(input: string): string {
   return input.replace(/[<>]/g, '');
 }
 
+async function verifyRecaptcha(token: string): Promise<boolean> {
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+
+  if (!secretKey) {
+    console.warn('RECAPTCHA_SECRET_KEY not configured. Skipping verification.');
+    return true; // Allow submission if reCAPTCHA is not configured
+  }
+
+  try {
+    const response = await fetch(
+      'https://www.google.com/recaptcha/api/siteverify',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `secret=${secretKey}&response=${token}`,
+      }
+    );
+
+    const data = await response.json();
+
+    // Check if verification was successful and score is above threshold
+    // Score ranges from 0.0 (bot) to 1.0 (human)
+    // 0.5 is a reasonable threshold for contact forms
+    return data.success && data.score >= 0.5;
+  } catch (error) {
+    console.error('reCAPTCHA verification error:', error);
+    return false;
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     // Get client IP for rate limiting
@@ -56,7 +89,21 @@ export async function POST(request: NextRequest) {
 
     // Parse request body
     const body: ContactFormData = await request.json();
-    const { name, email, message } = body;
+    const { name, email, message, recaptchaToken } = body;
+
+    // Verify reCAPTCHA token
+    if (recaptchaToken) {
+      const isHuman = await verifyRecaptcha(recaptchaToken);
+      if (!isHuman) {
+        return NextResponse.json(
+          {
+            message:
+              'reCAPTCHA verification failed. Please refresh and try again.',
+          },
+          { status: 403 }
+        );
+      }
+    }
 
     // Validate required fields
     if (!name || !email || !message) {

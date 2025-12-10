@@ -7,6 +7,7 @@ import { ThemeOverrideProvider } from '../theme/contexts/ThemeOverrideContext';
 import { FontScaleProvider } from '../theme/providers';
 import { Header } from '../theme/components/header';
 import { SkipToContent } from '../theme/components/skip-to-content';
+import { ReCaptchaProvider } from '../components/ReCaptchaProvider';
 
 // Global styles
 import './tailwind.css'; // ← Tailwind base/utilities first
@@ -99,9 +100,11 @@ export default function RootLayout({
         <FontScaleProvider>
           <ThemeOverrideProvider>
             <ThemeProvider>
-              <SkipToContent />
-              <Header />
-              {children}
+              <ReCaptchaProvider>
+                <SkipToContent />
+                <Header />
+                {children}
+              </ReCaptchaProvider>
             </ThemeProvider>
           </ThemeOverrideProvider>
         </FontScaleProvider>

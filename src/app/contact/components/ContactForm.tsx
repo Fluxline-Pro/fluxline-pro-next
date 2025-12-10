@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FormButton } from '@/theme/components/form';
 import { Typography } from '@/theme/components/typography';
@@ -23,6 +24,7 @@ type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export const ContactForm: React.FC = () => {
   const { theme } = useAppTheme();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -96,6 +98,22 @@ export const ContactForm: React.FC = () => {
     setErrors({});
 
     try {
+      // Get reCAPTCHA token
+      let recaptchaToken = '';
+      if (executeRecaptcha) {
+        try {
+          recaptchaToken = await executeRecaptcha('contact_form');
+        } catch (error) {
+          console.error('reCAPTCHA error:', error);
+          setErrors({
+            submit:
+              'Unable to verify you are human. Please refresh and try again.',
+          });
+          setStatus('error');
+          return;
+        }
+      }
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -105,6 +123,7 @@ export const ContactForm: React.FC = () => {
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          recaptchaToken,
         }),
       });
 
