@@ -791,7 +791,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   <h2
                     style={{
                       margin: 0,
-                      fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
+                      fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
                       fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                       lineHeight: 1.2,

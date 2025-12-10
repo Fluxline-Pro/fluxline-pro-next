@@ -63,7 +63,6 @@ const StatCard: React.FC<StatCardProps> = ({ stat }) => {
         iconName={stat.icon}
         size='xLarge'
         color={theme.palette.themePrimary}
-        style={{ marginBottom: '1rem' }}
       />
 
       <Typography
@@ -72,7 +71,6 @@ const StatCard: React.FC<StatCardProps> = ({ stat }) => {
           color: theme.palette.themePrimary,
           fontSize: 'clamp(2rem, 4vw, 3rem)',
           fontWeight: theme.typography.fontWeights.bold,
-          marginBottom: '0.5rem',
         }}
       >
         {stat.value}
