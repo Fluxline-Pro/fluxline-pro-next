@@ -243,120 +243,120 @@ export const SERVICE_PRICING: ServicePricing = {
         id: 'starter',
         name: 'Starter (Lean Launches)',
         idealFor:
-          'Landing page or 3-page brochure site entrepreneurs, small businesses',
+          'Simple websites or landing pages for entrepreneurs and small businesses',
         monthlyRate: '$1,750+',
-        rateNote: 'Next.js or static HTML implementation',
+        rateNote: 'Basic website setup with up to 3 pages',
       },
       {
         id: 'signature',
         name: 'Signature (Growth Phase)',
-        idealFor: 'Full website (5-8 pages) or MVP web app for growing businesses',
+        idealFor: 'Full website (5-8 pages) or basic web app for growing businesses',
         monthlyRate: '$3,500+',
-        rateNote: 'Includes CMS integration and basic backend',
+        rateNote: 'Includes content management and basic backend features',
       },
       {
         id: 'premium',
         name: 'Premium (Legacy Builders)',
-        idealFor: 'Full-stack web app or mobile app for established organizations',
+        idealFor: 'Custom web application or mobile app for established organizations',
         monthlyRate: '$6,500+',
-        rateNote: 'Complete architecture with retainer support available',
+        rateNote: 'Complete custom solution with ongoing support available',
       },
     ],
     features: [
-      { name: 'Custom UI Design' },
-      { name: 'Responsive Layout' },
-      { name: 'SEO Optimization' },
-      { name: 'Performance Optimization' },
-      { name: 'Accessibility Best Practices' },
-      { name: 'Hosting Setup' },
-      { name: 'Email Integration' },
-      { name: 'CMS Integration' },
-      { name: 'Backend Development' },
-      { name: 'Mobile Optimization' },
-      { name: 'CI/CD Pipeline' },
-      { name: 'Cloud Infrastructure' },
-      { name: 'Docker & Containerization' },
-      { name: 'Admin Dashboard / Portal' },
-      { name: 'Revision Rounds' },
-      { name: 'Retainer Support' },
+      { name: 'Custom Website Design' },
+      { name: 'Mobile-Friendly Layout' },
+      { name: 'Search Engine Optimization' },
+      { name: 'Fast Page Loading' },
+      { name: 'Accessible Design' },
+      { name: 'Hosting Setup & Support' },
+      { name: 'Email Setup & Integration' },
+      { name: 'Content Management System' },
+      { name: 'Database & Server Setup' },
+      { name: 'Mobile App Design' },
+      { name: 'Automated Deployment' },
+      { name: 'Cloud Hosting Setup' },
+      { name: 'Deployment Tools' },
+      { name: 'Admin Dashboard' },
+      { name: 'Design Revision Rounds' },
+      { name: 'Ongoing Support Available' },
     ],
     comparison: {
-      'custom-ui-design': {
+      'custom-website-design': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'responsive-layout': {
+      'mobile-friendly-layout': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'seo-optimization': {
+      'search-engine-optimization': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'performance-optimization': {
+      'fast-page-loading': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'accessibility-best-practices': {
+      'accessible-design': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'hosting-setup': {
+      'hosting-setup-support': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'email-integration': {
+      'email-setup-integration': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'cms-integration': {
+      'content-management-system': {
         starter: false,
         signature: true,
         premium: true,
       },
-      'backend-development': {
+      'database-server-setup': {
         starter: false,
         signature: true,
         premium: true,
       },
-      'mobile-optimization': {
+      'mobile-app-design': {
         starter: false,
         signature: true,
         premium: true,
       },
-      'ci-cd-pipeline': {
+      'automated-deployment': {
         starter: false,
         signature: true,
         premium: true,
       },
-      'cloud-infrastructure': {
-        starter: false,
-        signature: false,
-        premium: true,
-      },
-      'docker-containerization': {
+      'cloud-hosting-setup': {
         starter: false,
         signature: false,
         premium: true,
       },
-      'admin-dashboard-portal': {
+      'deployment-tools': {
         starter: false,
         signature: false,
         premium: true,
       },
-      'revision-rounds': {
+      'admin-dashboard': {
+        starter: false,
+        signature: false,
+        premium: true,
+      },
+      'design-revision-rounds': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'retainer-support': {
+      'ongoing-support-available': {
         starter: false,
         signature: false,
         premium: true,

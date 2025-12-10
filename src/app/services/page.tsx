@@ -47,45 +47,168 @@ export default function ServicesPage() {
         />
 
         {/* Services Grid */}
-        <div>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
-            }}
-          >
-            Service Offerings
-          </Typography>
-
-          <div
-            className='grid gap-6'
-            style={{
-              gridTemplateColumns:
-                'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
-            }}
-          >
-            {SERVICE_CATEGORIES.map((service) => (
-              <InteractiveCard
-                key={service.id}
-                id={service.id}
-                title={service.title}
-                description={service.description}
-                icon={service.icon}
-                href={service.path}
-                iconPosition='center'
-                showLearnMore={true}
-              />
-            ))}
+        <div className='space-y-8'>
+          <div>
+            <Typography
+              variant='h2'
+              style={{
+                color: theme.palette.themePrimary,
+                fontSize: '2rem',
+                fontWeight: theme.typography.fontWeights.bold,
+                marginBottom: theme.spacing.s,
+              }}
+            >
+              Choose the kind of support you need right now
+            </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1.125rem',
+                lineHeight: theme.typography.lineHeights.relaxed,
+              }}
+            >
+              Every service is a doorway: from idea to embodiment, from intention to infrastructure.
+            </Typography>
           </div>
+
+          {/* Body & Practice */}
+          <section className='space-y-4'>
+            <Typography
+              variant='h3'
+              style={{
+                color: theme.palette.themePrimary,
+                fontSize: '1.5rem',
+                fontWeight: theme.typography.fontWeights.semiBold,
+              }}
+            >
+              Body & Practice
+            </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1rem',
+                marginBottom: theme.spacing.m,
+              }}
+            >
+              Physical training and wellness support for sustainable transformation.
+            </Typography>
+            <div
+              className='grid gap-6'
+              style={{
+                gridTemplateColumns:
+                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+              }}
+            >
+              {SERVICE_CATEGORIES.filter((s) => s.id === 'personal-training').map((service) => (
+                <InteractiveCard
+                  key={service.id}
+                  id={service.id}
+                  title={service.title}
+                  description={service.description}
+                  icon={service.icon}
+                  href={service.path}
+                  iconPosition='center'
+                  showLearnMore={true}
+                />
+              ))}
+            </div>
+          </section>
+
+          {/* Brand & Digital Presence */}
+          <section className='space-y-4'>
+            <Typography
+              variant='h3'
+              style={{
+                color: theme.palette.themePrimary,
+                fontSize: '1.5rem',
+                fontWeight: theme.typography.fontWeights.semiBold,
+              }}
+            >
+              Brand & Digital Presence
+            </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1rem',
+                marginBottom: theme.spacing.m,
+              }}
+            >
+              Web development and brand design to build your digital foundation.
+            </Typography>
+            <div
+              className='grid gap-6'
+              style={{
+                gridTemplateColumns:
+                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+              }}
+            >
+              {SERVICE_CATEGORIES.filter((s) => s.id === 'development' || s.id === 'design').map((service) => (
+                <InteractiveCard
+                  key={service.id}
+                  id={service.id}
+                  title={service.title}
+                  description={service.description}
+                  icon={service.icon}
+                  href={service.path}
+                  iconPosition='center'
+                  showLearnMore={true}
+                />
+              ))}
+            </div>
+          </section>
+
+          {/* Depth Work & Strategy */}
+          <section className='space-y-4'>
+            <Typography
+              variant='h3'
+              style={{
+                color: theme.palette.themePrimary,
+                fontSize: '1.5rem',
+                fontWeight: theme.typography.fontWeights.semiBold,
+              }}
+            >
+              Depth Work & Strategy
+            </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1rem',
+                marginBottom: theme.spacing.m,
+              }}
+            >
+              Coaching, strategic consulting, and transformational frameworks for clarity and growth.
+            </Typography>
+            <div
+              className='grid gap-6'
+              style={{
+                gridTemplateColumns:
+                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+              }}
+            >
+              {SERVICE_CATEGORIES.filter((s) => s.id === 'resonance-core' || s.id === 'education-training' || s.id === 'consulting').map((service) => (
+                <InteractiveCard
+                  key={service.id}
+                  id={service.id}
+                  title={service.title}
+                  description={service.description}
+                  icon={service.icon}
+                  href={service.path}
+                  iconPosition='center'
+                  showLearnMore={true}
+                />
+              ))}
+            </div>
+          </section>
         </div>
 
         <Callout
           variant='accent'
-          title='Ready to Transform?'
-          subtitle="Every service is a curriculum gate. Let's design the systems,
-            strategies, and rituals that align your vision with reality."
+          title='Not sure where to start?'
+          subtitle="Share a bit about your situation and we'll map the right first step together."
           action={
             <FormButton
               text='Book a Consultation'
