@@ -16,7 +16,7 @@ import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { SocialLinks } from '@/app/about/components/SocialLinks';
-import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
+import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
@@ -39,7 +39,7 @@ export default function ContactPage() {
             }}
           >
             <SocialLinks
-              socialLinks={TERENCE_SOCIAL_LINKS}
+              socialLinks={FLUXLINE_SOCIAL_LINKS}
               name='Terence Waters'
               size='medium'
             />
