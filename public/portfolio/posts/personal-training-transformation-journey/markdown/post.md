@@ -216,7 +216,7 @@ Now applying this integrated approach with clients:
 
 **Service Offerings:**
 
-- Single sessions ($110)
+- Single sessions ($100)
 - Online PT ($225+/month)
 - Hybrid PT ($350+/month)
 - Online Hypertrophy ($275+/month)

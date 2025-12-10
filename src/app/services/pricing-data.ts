@@ -3,7 +3,6 @@
  * Pricing information for services that offer tiered programs
  */
 
-import { on } from 'stream';
 import { ServicePricing } from './types';
 
 export const SERVICE_PRICING: ServicePricing = {
