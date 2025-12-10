@@ -13,7 +13,7 @@ export const SERVICE_PRICING: ServicePricing = {
         name: 'Single Session',
         idealFor:
           'Clients needing simplified instruction, unsure about performing exercises, not wanting to commit to a monthly cadence',
-        monthlyRate: '$110/session',
+        monthlyRate: '$100/session',
       },
       {
         id: 'online-pt-only',
@@ -31,7 +31,7 @@ export const SERVICE_PRICING: ServicePricing = {
       },
       {
         id: 'online-hypertrophy',
-        name: 'Online Hypertrophy',
+        name: 'Online PT-Hypertrophy',
         idealFor:
           'Remote clients focused on physique, nutrition, and metabolic coaching',
         monthlyRate: 'Starting at $275/month',
@@ -39,7 +39,7 @@ export const SERVICE_PRICING: ServicePricing = {
       },
       {
         id: 'hybrid-hypertrophy',
-        name: 'Hybrid Hypertrophy',
+        name: 'Hybrid PT-Hypertrophy',
         idealFor:
           'Full-spectrum transformation: movement, nutrition, emotional integration',
         monthlyRate: 'Starting at $450/month',
@@ -250,14 +250,16 @@ export const SERVICE_PRICING: ServicePricing = {
       {
         id: 'signature',
         name: 'Signature (Growth Phase)',
-        idealFor: 'Full website (5-8 pages) or MVP web app for growing businesses',
+        idealFor:
+          'Full website (5-8 pages) or MVP web app for growing businesses',
         monthlyRate: '$3,500+',
         rateNote: 'Includes CMS integration and basic backend',
       },
       {
         id: 'premium',
         name: 'Premium (Legacy Builders)',
-        idealFor: 'Full-stack web app or mobile app for established organizations',
+        idealFor:
+          'Full-stack web app or mobile app for established organizations',
         monthlyRate: '$6,500+',
         rateNote: 'Complete architecture with retainer support available',
       },

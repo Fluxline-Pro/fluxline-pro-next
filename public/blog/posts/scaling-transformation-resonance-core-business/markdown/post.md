@@ -103,7 +103,7 @@ The **Resonance Core Framework™** is a proprietary methodology that integrates
 
 | Tier               | Target Audience     | Pricing      | Features                                     |
 | ------------------ | ------------------- | ------------ | -------------------------------------------- |
-| Single Session     | Trial clients       | $110/session | Simplified instruction, no commitment        |
+| Single Session     | Trial clients       | $100/session | Simplified instruction, no commitment        |
 | Online PT          | Remote clients      | $225+/month  | Flexible support, digital programming        |
 | Hybrid PT          | Local clients       | $350+/month  | In-person + remote structure                 |
 | Online Hypertrophy | Physique-focused    | $275+/month  | Nutrition + metabolic coaching               |
