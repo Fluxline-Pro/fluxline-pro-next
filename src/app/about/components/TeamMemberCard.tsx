@@ -22,6 +22,9 @@ export interface TeamMember {
   socialLinks?: {
     linkedin?: string;
     instagram?: string;
+    facebook?: string;
+    twitter?: string;
+    tiktok?: string;
     github?: string;
     email?: string;
   };

@@ -16,8 +16,11 @@ import type { SocialLinksData } from './components/SocialLinks';
 export const TERENCE_SOCIAL_LINKS: SocialLinksData = {
   linkedin: 'https://linkedin.com/in/terencewaters',
   instagram: 'https://instagram.com/aplusinflux',
+  facebook: 'https://www.facebook.com/fluxline',
   github: 'https://github.com/aplusandminus',
-  email: 'terence@fluxline.pro',
+  twitter: 'https://twitter.com/aplusinflux',
+  tiktok: 'https://www.tiktok.com/@aplusinflux',
+  email: 'mailto:support@fluxline.pro',
 };
 
 /**
@@ -33,8 +36,11 @@ export const TEAM_MEMBERS: TeamMember[] = [
     socialLinks: {
       linkedin: 'https://linkedin.com/in/terencewaters',
       instagram: 'https://instagram.com/aplusinflux',
+      facebook: 'https://www.facebook.com/fluxline',
       github: 'https://github.com/aplusandminus',
-      email: 'mailto:terence@fluxline.pro',
+      email: 'mailto:support@fluxline.pro',
+      twitter: 'https://twitter.com/aplusinflux',
+      tiktok: 'https://www.tiktok.com/@aplusinflux',
     },
   },
   // Add more team members as needed

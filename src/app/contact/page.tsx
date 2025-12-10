@@ -15,6 +15,8 @@ import { ContactForm } from './components/ContactForm';
 import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { SocialLinks } from '@/app/about/components/SocialLinks';
+import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
@@ -27,8 +29,22 @@ export default function ContactPage() {
         <Hero
           title='Invitation for Fluxline Connection'
           iconName={getIconForPath('/contact')}
-          description="Reach out in the way that feels most natural—whether through social media, a direct conversation, or the form below. You're also welcome to schedule a free, no-obligation consultation using the booking button, so we can explore your needs together."
+          description="Reach out in the way that feels most natural to you—whether through social media, a direct conversation, or the form below, we'd be delighted to connect with you! You're also welcome to schedule a free, no-obligation consultation using the booking button so we can explore your needs together."
         >
+          {/* Social Links */}
+          <div
+            style={{
+              marginTop: theme.spacing.m,
+              marginBottom: theme.spacing.l,
+            }}
+          >
+            <SocialLinks
+              socialLinks={TERENCE_SOCIAL_LINKS}
+              name='Terence Waters'
+              size='medium'
+            />
+          </div>
+
           <Callout
             variant='accent'
             title='Ready to Transform?'
@@ -86,7 +102,7 @@ export default function ContactPage() {
               fontSize: '2rem',
               fontWeight: theme.typography.fontWeights.bold,
               lineHeight: isMobile ? '1.6' : '2',
-              marginBottom: isMobile ? '1rem' : undefined
+              marginBottom: isMobile ? '1rem' : undefined,
             }}
           >
             Let&apos;s Build Something Extraordinary
