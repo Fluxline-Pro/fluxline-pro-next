@@ -40,14 +40,18 @@ function sanitizeInput(input) {
 /**
  * Verify reCAPTCHA token with Google's API
  * @param {string} token - The reCAPTCHA token from the frontend
+ * @param {object} context - Azure Functions context for logging
  * @returns {Promise<{success: boolean, score?: number, error?: string}>}
  */
-async function verifyRecaptcha(token) {
+async function verifyRecaptcha(token, context) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const scoreThreshold = parseFloat(process.env.RECAPTCHA_SCORE_THRESHOLD || '0.5');
 
   // If no secret key is configured, allow submission with warning
   if (!secretKey) {
-    console.warn('RECAPTCHA_SECRET_KEY not configured. Skipping reCAPTCHA verification.');
+    if (context) {
+      context.log.warn('RECAPTCHA_SECRET_KEY not configured. Skipping reCAPTCHA verification.');
+    }
     return { success: true };
   }
 
@@ -55,7 +59,7 @@ async function verifyRecaptcha(token) {
     return { success: false, error: 'reCAPTCHA token is missing' };
   }
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const postData = `secret=${secretKey}&response=${token}`;
     
     const options = {
@@ -82,26 +86,30 @@ async function verifyRecaptcha(token) {
           
           // Check if verification was successful and score is above threshold
           // Score ranges from 0.0 (bot) to 1.0 (human)
-          // 0.5 is a reasonable threshold for contact forms
-          if (result.success && result.score >= 0.5) {
+          // Default threshold is 0.5, configurable via RECAPTCHA_SCORE_THRESHOLD
+          if (result.success && result.score >= scoreThreshold) {
             resolve({ success: true, score: result.score });
           } else {
             resolve({ 
               success: false, 
               score: result.score,
-              error: `reCAPTCHA verification failed. Score: ${result.score || 'N/A'}`
+              error: `reCAPTCHA verification failed. Score: ${result.score || 'N/A'} (threshold: ${scoreThreshold})`
             });
           }
         } catch (error) {
-          console.error('Error parsing reCAPTCHA response:', error);
-          resolve({ success: false, error: 'Invalid reCAPTCHA response' });
+          if (context) {
+            context.log.error('Error parsing reCAPTCHA response:', error);
+          }
+          reject(new Error('Invalid reCAPTCHA response'));
         }
       });
     });
 
     req.on('error', (error) => {
-      console.error('reCAPTCHA verification request error:', error);
-      resolve({ success: false, error: 'reCAPTCHA verification failed' });
+      if (context) {
+        context.log.error('reCAPTCHA verification request error:', error);
+      }
+      reject(error);
     });
 
     req.write(postData);
@@ -166,21 +174,34 @@ module.exports = async function (context, req) {
     // Verify reCAPTCHA token
     if (recaptchaToken) {
       context.log('Verifying reCAPTCHA token...');
-      const recaptchaResult = await verifyRecaptcha(recaptchaToken);
       
-      if (!recaptchaResult.success) {
-        context.log.error('reCAPTCHA verification failed:', recaptchaResult.error);
+      try {
+        const recaptchaResult = await verifyRecaptcha(recaptchaToken, context);
+        
+        if (!recaptchaResult.success) {
+          context.log.error('reCAPTCHA verification failed:', recaptchaResult.error);
+          context.res = {
+            status: 403,
+            headers,
+            body: JSON.stringify({
+              message: 'reCAPTCHA verification failed. Please refresh and try again.',
+            }),
+          };
+          return;
+        }
+        
+        context.log('reCAPTCHA verification successful. Score:', recaptchaResult.score);
+      } catch (error) {
+        context.log.error('reCAPTCHA verification error:', error);
         context.res = {
-          status: 403,
+          status: 500,
           headers,
           body: JSON.stringify({
-            message: 'reCAPTCHA verification failed. Please refresh and try again.',
+            message: 'Failed to verify reCAPTCHA. Please try again later.',
           }),
         };
         return;
       }
-      
-      context.log('reCAPTCHA verification successful. Score:', recaptchaResult.score);
     } else {
       context.log.warn('No reCAPTCHA token provided in request');
     }

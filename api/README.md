@@ -15,15 +15,16 @@ This directory contains the Azure Functions API for the contact form functionali
 
 For production deployment, you need to configure the following application settings in your Azure Static Web App:
 
-| Setting               | Description                           | Default Value           | Required |
-| --------------------- | ------------------------------------- | ----------------------- | -------- |
-| `SMTP_HOST`           | SMTP server hostname                  | mail.smtp2go.com        | No       |
-| `SMTP_PORT`           | SMTP server port                      | 2525                    | No       |
-| `SMTP_USER`           | SMTP2Go username                      | (Required)              | Yes      |
-| `SMTP_PASS`           | SMTP2Go password                      | (Required)              | Yes      |
-| `SMTP_FROM`           | Email address to send from            | no-reply@fluxline.pro   | No       |
-| `CONTACT_EMAIL`       | Email address to receive contact form | support@fluxline.pro    | No       |
-| `RECAPTCHA_SECRET_KEY`| Google reCAPTCHA v3 secret key        | (Required)              | Yes      |
+| Setting                     | Description                           | Default Value           | Required |
+| --------------------------- | ------------------------------------- | ----------------------- | -------- |
+| `SMTP_HOST`                 | SMTP server hostname                  | mail.smtp2go.com        | No       |
+| `SMTP_PORT`                 | SMTP server port                      | 2525                    | No       |
+| `SMTP_USER`                 | SMTP2Go username                      | (Required)              | Yes      |
+| `SMTP_PASS`                 | SMTP2Go password                      | (Required)              | Yes      |
+| `SMTP_FROM`                 | Email address to send from            | no-reply@fluxline.pro   | No       |
+| `CONTACT_EMAIL`             | Email address to receive contact form | support@fluxline.pro    | No       |
+| `RECAPTCHA_SECRET_KEY`      | Google reCAPTCHA v3 secret key        | (Required)              | Yes      |
+| `RECAPTCHA_SCORE_THRESHOLD` | Minimum score to accept (0.0-1.0)     | 0.5                     | No       |
 
 ### Setting Environment Variables in Azure
 
@@ -63,9 +64,24 @@ The API expects a `recaptchaToken` field in the request body:
 }
 ```
 
-The backend verifies the token with Google's API and rejects submissions with a score below 0.5.
+The backend verifies the token with Google's API and rejects submissions with a score below the configured threshold (default: 0.5).
 
 **Note**: If `RECAPTCHA_SECRET_KEY` is not configured, the API will log a warning and allow submissions without reCAPTCHA verification. However, other security measures (rate limiting, input validation) will still be active.
+
+### Configurable Score Threshold
+
+The reCAPTCHA score threshold can be adjusted via the `RECAPTCHA_SCORE_THRESHOLD` environment variable:
+- **Range**: 0.0 to 1.0
+- **Default**: 0.5
+- **Higher values**: More strict (may reject legitimate users)
+- **Lower values**: More lenient (may allow more bots)
+
+```bash
+# Example: Set a stricter threshold
+az staticwebapp appsettings set \
+  --name <your-swa-name> \
+  --setting-names RECAPTCHA_SCORE_THRESHOLD=0.7
+```
 
 ## API Endpoints
 
