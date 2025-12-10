@@ -172,10 +172,11 @@ const PAGE_CONFIGS: Record<
   },
 };
 
-// Special configuration for 404 page
+// Special configuration for 404 page - uses FLUXLINE_LOGO placeholder
+// which will be replaced with theme-appropriate logo at runtime
 const NOT_FOUND_CONFIG = {
-  image: ConsultingImage.src,
-  imageText: '404 - Not Found',
+  image: 'FLUXLINE_LOGO',
+  imageText: '',
 };
 
 // Pages that should NOT use the wrapper (like home page)

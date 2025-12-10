@@ -9,6 +9,13 @@ import { notFound } from 'next/navigation';
 // Generate static params for all technologies
 export async function generateStaticParams() {
   const technologies = getAllPortfolioTechnologies();
+
+  // Ensure we return an array even if empty
+  if (!technologies || technologies.length === 0) {
+    console.warn('No portfolio technologies found for static generation');
+    return [];
+  }
+
   return technologies.map((technology) => ({
     technology: technology,
   }));

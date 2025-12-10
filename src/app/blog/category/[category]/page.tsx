@@ -6,6 +6,13 @@ import { notFound } from 'next/navigation';
 // Generate static params for all categories
 export async function generateStaticParams() {
   const categories = getAllCategories();
+
+  // Ensure we return an array even if empty
+  if (!categories || categories.length === 0) {
+    console.warn('No blog categories found for static generation');
+    return [];
+  }
+
   return categories.map((category) => ({
     category: category,
   }));
