@@ -45,12 +45,26 @@ function sanitizeInput(input) {
  */
 async function verifyRecaptcha(token, context) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-  const scoreThreshold = parseFloat(process.env.RECAPTCHA_SCORE_THRESHOLD || '0.5');
+  let scoreThreshold = parseFloat(
+    process.env.RECAPTCHA_SCORE_THRESHOLD || '0.5'
+  );
+
+  // Validate score threshold
+  if (isNaN(scoreThreshold) || scoreThreshold < 0 || scoreThreshold > 1) {
+    if (context) {
+      context.log.warn(
+        `Invalid RECAPTCHA_SCORE_THRESHOLD: ${process.env.RECAPTCHA_SCORE_THRESHOLD}. Using default: 0.5`
+      );
+    }
+    scoreThreshold = 0.5;
+  }
 
   // If no secret key is configured, allow submission with warning
   if (!secretKey) {
     if (context) {
-      context.log.warn('RECAPTCHA_SECRET_KEY not configured. Skipping reCAPTCHA verification.');
+      context.log.warn(
+        'RECAPTCHA_SECRET_KEY not configured. Skipping reCAPTCHA verification.'
+      );
     }
     return { success: true };
   }
@@ -60,8 +74,8 @@ async function verifyRecaptcha(token, context) {
   }
 
   return new Promise((resolve, reject) => {
-    const postData = `secret=${secretKey}&response=${token}`;
-    
+    const postData = `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(token)}`;
+
     const options = {
       hostname: 'www.google.com',
       port: 443,
@@ -69,31 +83,54 @@ async function verifyRecaptcha(token, context) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': Buffer.byteLength(postData)
-      }
+        'Content-Length': Buffer.byteLength(postData),
+      },
     };
 
     const req = https.request(options, (res) => {
       let data = '';
-      
+
       res.on('data', (chunk) => {
         data += chunk;
       });
-      
+
       res.on('end', () => {
+        // Check HTTP status code
+        if (res.statusCode !== 200) {
+          if (context) {
+            context.log.error(
+              `reCAPTCHA API returned status ${res.statusCode}: ${data}`
+            );
+          }
+          reject(new Error(`reCAPTCHA API error: HTTP ${res.statusCode}`));
+          return;
+        }
+
         try {
           const result = JSON.parse(data);
-          
+
           // Check if verification was successful and score is above threshold
           // Score ranges from 0.0 (bot) to 1.0 (human)
           // Default threshold is 0.5, configurable via RECAPTCHA_SCORE_THRESHOLD
-          if (result.success && result.score >= scoreThreshold) {
+          if (
+            result.success &&
+            typeof result.score === 'number' &&
+            result.score >= scoreThreshold
+          ) {
             resolve({ success: true, score: result.score });
+          } else if (result.success && typeof result.score !== 'number') {
+            // Handle missing score - log warning and reject based on security policy
+            if (context) {
+              context.log.warn(
+                'reCAPTCHA verification succeeded but score is missing'
+              );
+            }
+            resolve({ success: false, error: 'reCAPTCHA score unavailable' });
           } else {
-            resolve({ 
-              success: false, 
+            resolve({
+              success: false,
               score: result.score,
-              error: `reCAPTCHA verification failed. Score: ${result.score || 'N/A'} (threshold: ${scoreThreshold})`
+              error: `reCAPTCHA verification failed. Score: ${result.score || 'N/A'} (threshold: ${scoreThreshold})`,
             });
           }
         } catch (error) {
@@ -174,23 +211,30 @@ module.exports = async function (context, req) {
     // Verify reCAPTCHA token
     if (recaptchaToken) {
       context.log('Verifying reCAPTCHA token...');
-      
+
       try {
         const recaptchaResult = await verifyRecaptcha(recaptchaToken, context);
-        
+
         if (!recaptchaResult.success) {
-          context.log.error('reCAPTCHA verification failed:', recaptchaResult.error);
+          context.log.error(
+            'reCAPTCHA verification failed:',
+            recaptchaResult.error
+          );
           context.res = {
             status: 403,
             headers,
             body: JSON.stringify({
-              message: 'reCAPTCHA verification failed. Please refresh and try again.',
+              message:
+                'reCAPTCHA verification failed. Please refresh and try again.',
             }),
           };
           return;
         }
-        
-        context.log('reCAPTCHA verification successful. Score:', recaptchaResult.score);
+
+        context.log(
+          'reCAPTCHA verification successful. Score:',
+          recaptchaResult.score
+        );
       } catch (error) {
         context.log.error('reCAPTCHA verification error:', error);
         context.res = {
@@ -307,7 +351,8 @@ IP Address: ${ip}
   } catch (error) {
     context.log.error('Error processing contact form:', error);
 
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
     context.log.error('Error details:', errorMessage);
 
     context.res = {

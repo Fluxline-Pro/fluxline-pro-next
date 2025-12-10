@@ -15,16 +15,16 @@ This directory contains the Azure Functions API for the contact form functionali
 
 For production deployment, you need to configure the following application settings in your Azure Static Web App:
 
-| Setting                     | Description                           | Default Value           | Required |
-| --------------------------- | ------------------------------------- | ----------------------- | -------- |
-| `SMTP_HOST`                 | SMTP server hostname                  | mail.smtp2go.com        | No       |
-| `SMTP_PORT`                 | SMTP server port                      | 2525                    | No       |
-| `SMTP_USER`                 | SMTP2Go username                      | (Required)              | Yes      |
-| `SMTP_PASS`                 | SMTP2Go password                      | (Required)              | Yes      |
-| `SMTP_FROM`                 | Email address to send from            | no-reply@fluxline.pro   | No       |
-| `CONTACT_EMAIL`             | Email address to receive contact form | support@fluxline.pro    | No       |
-| `RECAPTCHA_SECRET_KEY`      | Google reCAPTCHA v3 secret key        | (Required)              | Yes      |
-| `RECAPTCHA_SCORE_THRESHOLD` | Minimum score to accept (0.0-1.0)     | 0.5                     | No       |
+| Setting                     | Description                           | Default Value         | Required |
+| --------------------------- | ------------------------------------- | --------------------- | -------- |
+| `SMTP_HOST`                 | SMTP server hostname                  | mail.smtp2go.com      | No       |
+| `SMTP_PORT`                 | SMTP server port                      | 2525                  | No       |
+| `SMTP_USER`                 | SMTP2Go username                      | -                     | Yes      |
+| `SMTP_PASS`                 | SMTP2Go password                      | -                     | Yes      |
+| `SMTP_FROM`                 | Email address to send from            | no-reply@fluxline.pro | No       |
+| `CONTACT_EMAIL`             | Email address to receive contact form | support@fluxline.pro  | No       |
+| `RECAPTCHA_SECRET_KEY`      | Google reCAPTCHA v3 secret key        | -                     | Yes      |
+| `RECAPTCHA_SCORE_THRESHOLD` | Minimum score to accept (0.0-1.0)     | 0.5                   | No       |
 
 ### Setting Environment Variables in Azure
 
@@ -71,6 +71,7 @@ The backend verifies the token with Google's API and rejects submissions with a 
 ### Configurable Score Threshold
 
 The reCAPTCHA score threshold can be adjusted via the `RECAPTCHA_SCORE_THRESHOLD` environment variable:
+
 - **Range**: 0.0 to 1.0
 - **Default**: 0.5
 - **Higher values**: More strict (may reject legitimate users)
@@ -90,6 +91,7 @@ az staticwebapp appsettings set \
 Submit a contact form message.
 
 **Request Body:**
+
 ```json
 {
   "name": "John Doe",
@@ -102,6 +104,7 @@ Submit a contact form message.
 **Note**: The `recaptchaToken` field is optional but highly recommended for spam protection.
 
 **Response (Success):**
+
 ```json
 {
   "message": "Message sent successfully"
@@ -109,6 +112,7 @@ Submit a contact form message.
 ```
 
 **Response (Error):**
+
 ```json
 {
   "message": "Error description"
@@ -116,6 +120,7 @@ Submit a contact form message.
 ```
 
 **Rate Limiting:**
+
 - 5 requests per IP per hour
 - Returns 429 status code when exceeded
 
@@ -133,18 +138,21 @@ Submit a contact form message.
 ### Local Testing
 
 1. Install dependencies:
+
    ```bash
    cd api
    npm install
    ```
 
 2. Configure local settings:
+
    ```bash
    cp local.settings.sample.json local.settings.json
    # Edit local.settings.json with your SMTP and reCAPTCHA credentials
    ```
 
 3. Start the Azure Functions runtime:
+
    ```bash
    npm start
    ```
@@ -155,6 +163,7 @@ Submit a contact form message.
    ```
 
 The test script will run several test cases including:
+
 - Valid submission
 - Missing required fields
 - Invalid email format
