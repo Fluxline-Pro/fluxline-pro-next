@@ -11,6 +11,7 @@ interface ProgramTiersTableProps {
   tiers: ProgramTier[];
   onViewComparison?: () => void;
   showComparisonButton?: boolean;
+  subtitle?: string;
 }
 
 /**
@@ -21,6 +22,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
   tiers,
   onViewComparison,
   showComparisonButton = true,
+  subtitle = 'Choose your path based on your archetype assessment and personal goals.',
 }) => {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
@@ -54,7 +56,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
           marginBottom: theme.spacing.l,
         }}
       >
-        Choose your path based on your archetype assessment and personal goals.
+        {subtitle}
       </Typography>
 
       {/* Pricing Table */}
