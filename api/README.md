@@ -105,8 +105,53 @@ Submit a contact form message.
 
 ## Files
 
-- `contact/index.js` - Main Azure Function handler
+- `contact/index.js` - Main Azure Function handler with reCAPTCHA verification
 - `contact/function.json` - Function binding configuration
 - `host.json` - Azure Functions host configuration
 - `package.json` - Dependencies (nodemailer)
 - `local.settings.sample.json` - Template for local development settings
+- `test-contact.js` - Test script for the contact API endpoint
+
+## Testing
+
+### Local Testing
+
+1. Install dependencies:
+   ```bash
+   cd api
+   npm install
+   ```
+
+2. Configure local settings:
+   ```bash
+   cp local.settings.sample.json local.settings.json
+   # Edit local.settings.json with your SMTP and reCAPTCHA credentials
+   ```
+
+3. Start the Azure Functions runtime:
+   ```bash
+   npm start
+   ```
+
+4. In another terminal, run the test script:
+   ```bash
+   npm test
+   ```
+
+The test script will run several test cases including:
+- Valid submission
+- Missing required fields
+- Invalid email format
+- Message length validation
+- Submission with reCAPTCHA token
+
+### Testing reCAPTCHA Integration
+
+To test the complete reCAPTCHA flow:
+
+1. Ensure `RECAPTCHA_SECRET_KEY` is configured in `local.settings.json`
+2. The test script includes a test case with a mock token
+3. For real token testing, use the frontend form at http://localhost:3000/contact
+4. Monitor function logs for reCAPTCHA verification messages
+
+**Note**: If `RECAPTCHA_SECRET_KEY` is not configured, the function will log a warning and allow submissions without verification (other security measures remain active).
