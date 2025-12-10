@@ -35,7 +35,7 @@ export default function AboutPage() {
         <Hero
           title='About Fluxline'
           iconName={getIconForPath('/about')}
-          description='Fluxline, also known as Fluxline Resonance Group, architects transformative systems, brand experiences, and human-centered technology—blending emotional intelligence, financial clarity, and somatic discipline. We specialize in modular web development, scalable design ecosystems, and strategic innovation that evolves with you.'
+          description='Fluxline helps individuals and businesses build with clarity and purpose. We specialize in web development, brand design, personal training, coaching, and strategic consulting. Our work blends technical expertise with emotional intelligence to create systems, brands, and practices that actually work for you.'
         >
           {!isMobile &&
             !isTablet && ( // shortens the hero text on mobile per design review
@@ -49,13 +49,11 @@ export default function AboutPage() {
                   }}
                 >
                   Whether you&apos;re an individual seeking personal growth or a
-                  business ready to scale with purpose, our <em>coaching</em>,{' '}
-                  <em>wellness programs</em>, and <em>infrastructure design</em>{' '}
-                  help you align your <strong>drive</strong> with your{' '}
-                  <em>innate identity</em>. We believe transformation isn&apos;t
-                  just about metrics—it&apos;s about honoring{' '}
-                  <em>emotional rhythm</em>, <em>creative truth</em>, and{' '}
-                  <em>legacy resonance</em>.
+                  business ready to scale with purpose, our coaching, wellness
+                  programs, and infrastructure design help you align your
+                  ambitions with your authentic identity. We believe
+                  transformation isn&apos;t just about metrics—it&apos;s about
+                  honoring your values, creative truth, and long-term vision.
                 </Typography>
 
                 <Typography
@@ -67,8 +65,8 @@ export default function AboutPage() {
                     paddingBottom: theme.spacing.m,
                   }}
                 >
-                  <strong>Fluxline</strong> builds <em>systems that breathe</em>
-                  , <em>brands that feel</em>, and <em>legacies that last</em>.
+                  <strong>Fluxline</strong> builds systems that work, brands
+                  that connect, and practices that last.
                 </Typography>
               </>
             )}
@@ -127,11 +125,9 @@ export default function AboutPage() {
                 lineHeight: theme.typography.lineHeights.relaxed,
               }}
             >
-              We seek to architect multidimensional systems that fuse{' '}
-              <em>emotional intelligence</em>, <em>financial clarity</em>, and{' '}
-              <em>somatic discipline</em>—empowering individuals and brands to
-              live with <strong>modular precision</strong> and{' '}
-              <strong>legacy-driven resonance</strong>.
+              We build systems that integrate emotional intelligence, financial
+              clarity, and physical discipline—empowering individuals and brands
+              to work with purpose and precision.
             </Typography>
 
             <Typography
@@ -142,11 +138,9 @@ export default function AboutPage() {
                 lineHeight: theme.typography.lineHeights.relaxed,
               }}
             >
-              Fluxline envisions a world where individuals and businesses become{' '}
-              <em>self-authored stewards</em> of their inner and outer
-              architecture—where identity is revealed through{' '}
-              <strong>ritual</strong>, <strong>resonance</strong>, and{' '}
-              <strong>iteration</strong>.
+              Fluxline envisions a world where individuals and businesses become
+              intentional stewards of their growth—where identity is clarified
+              through practice, reflection, and continuous improvement.
             </Typography>
           </div>
         </section>
