@@ -19,6 +19,14 @@ const testData = {
   message: 'This is a test message from the test script.',
 };
 
+// Test data with mock reCAPTCHA token
+const testDataWithRecaptcha = {
+  name: 'Test User',
+  email: 'test@example.com',
+  message: 'This is a test message with reCAPTCHA token.',
+  recaptchaToken: 'test-token-12345', // Mock token for testing
+};
+
 /**
  * Make HTTP POST request to the contact API
  */
@@ -122,8 +130,24 @@ async function runTests() {
     console.error(`❌ Error: ${error.message}\n`);
   }
 
+  // Test 5: With reCAPTCHA token (will be verified if RECAPTCHA_SECRET_KEY is set)
+  console.log('Test 5: With reCAPTCHA token');
+  try {
+    const response = await sendContactForm(testDataWithRecaptcha);
+    console.log(`✅ Status: ${response.status}`);
+    console.log(`📨 Response: ${response.body}`);
+    console.log(
+      '💡 Note: If RECAPTCHA_SECRET_KEY is not configured, token verification is skipped.\n'
+    );
+  } catch (error) {
+    console.error(`❌ Error: ${error.message}\n`);
+  }
+
   console.log('✅ All tests completed!');
   console.log('\n💡 Check your email inbox for test messages.');
+  console.log(
+    '💡 To test reCAPTCHA verification, configure RECAPTCHA_SECRET_KEY in local.settings.json'
+  );
 }
 
 // Run tests
