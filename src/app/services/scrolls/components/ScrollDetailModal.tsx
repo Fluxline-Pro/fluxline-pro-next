@@ -53,7 +53,7 @@ export function ScrollDetailModal({
         width: '90vw',
         maxHeight: '90vh',
         overflow: 'auto',
-      }}  
+      }}
     >
       <div
         style={{
@@ -138,26 +138,29 @@ export function ScrollDetailModal({
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              padding: theme.spacing.s,
+              padding: '1.5rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '50%',
-              transition: 'background-color 0.2s ease',
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              transition: 'background-color 0.2s ease, transform 0.2s ease',
+              transform: 'scale(1)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                theme.palette.neutralLighter;
+              e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+              e.currentTarget.style.transform = 'scale(1.15)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+              e.currentTarget.style.transform = 'scale(1)';
             }}
             aria-label='Close modal'
           >
             <FluentIcon
               iconName='Cancel'
               size='large'
-              color={theme.palette.neutralPrimary}
+              color={theme.semanticColors.errorIcon}
             />
           </button>
         </div>

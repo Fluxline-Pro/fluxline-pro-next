@@ -3,6 +3,8 @@
 import React from 'react';
 import { ViewportGrid } from '@/theme/components/layout/ViewportGrid';
 import { BackgroundLayer } from '@/theme/components/layout/background-layer';
+import { HomeFooter } from '@/theme/components/layout/home-footer';
+import { HomeCtaBanner } from '@/theme/components/layout/home-cta-banner';
 import { Typography } from '@/theme/components/typography';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { FadeUp } from '@/animations/fade-animations';
@@ -10,7 +12,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useThemeOverride } from '@/theme/contexts/ThemeOverrideContext';
 import { useBackgroundImage } from '@/theme/hooks/useBackgroundImage';
 import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
-import type { IExtendedTheme } from '@/theme/theme';
+import type { IExtendedTheme, ThemeMode } from '@/theme/theme';
 
 /**
  * HighlightText Component - displays highlighted text in white
@@ -161,7 +163,7 @@ const HomeContent: React.FC<{
       flexDirection: 'column' as const,
       alignItems: 'center',
       justifyContent: isMobile ? 'flex-end' : 'center',
-      gap: isMobile ? (isMobileLandscape ? '0.05rem' : '0.125rem') : '0.5rem',
+      gap: isMobile ? (isMobileLandscape ? '0.05rem' : '0.125rem') : '0.25rem',
       padding: isMobileLandscape ? '1rem' : '2rem',
       textAlign: 'center' as const,
       width: '100%',
@@ -189,15 +191,16 @@ const HomeContent: React.FC<{
       ...animationStyles.drawLine,
     },
     subHeaderContainer: {
-      marginTop: isMobileLandscape ? '0.5rem' : theme.spacing.l,
-      marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.xl,
+      marginTop: isMobileLandscape ? '0.5rem' : theme.spacing.m,
+      marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.l,
     },
     buttonContainer: {
       display: 'flex',
       flexDirection: 'column' as const,
-      gap: isMobileLandscape ? '0.5rem' : '1rem',
+      gap: '0.5rem',
       width: '100%',
       maxWidth: '500px',
+      paddingBottom: !isMobile ? '125px' : undefined, // Extra space for footer on desktop
     },
   };
 
@@ -291,15 +294,30 @@ export default function Home() {
   const [shouldStartAnimations, setShouldStartAnimations] =
     React.useState(false);
 
-  // Force dark mode for home page only - doesn't affect user's saved preference
+  // Force dark mode for home page unless user has accessibility preference
+  // Respect high-contrast and colorblindness modes for accessibility
   React.useEffect(() => {
-    setOverrideThemeMode('dark');
+    const accessibilityModes: ThemeMode[] = [
+      'high-contrast',
+      'protanopia',
+      'deuteranopia',
+      'tritanopia',
+    ];
+
+    // If user has an accessibility mode, keep it; otherwise force dark mode
+    const shouldOverride = !accessibilityModes.includes(themeMode);
+
+    if (shouldOverride) {
+      setOverrideThemeMode('dark');
+    }
 
     return () => {
       // Clear override when leaving the page
-      setOverrideThemeMode(null);
+      if (shouldOverride) {
+        setOverrideThemeMode(null);
+      }
     };
-  }, [setOverrideThemeMode]);
+  }, [setOverrideThemeMode, themeMode]);
 
   // Add home-page class to body for transparent background
   React.useEffect(() => {
@@ -395,13 +413,33 @@ export default function Home() {
         layoutPreference={layoutPreference}
         backgroundLoaded={backgroundLoaded}
       />
-      <ViewportGrid
-        leftChildren={shouldShowContentOnLeft ? contentNode : undefined}
-        rightChildren={!shouldShowContentOnLeft ? contentNode : undefined}
-        isHomePage={true}
-        respectLayoutPreference={true}
-        backgroundImage={backgroundImage as 'one' | 'two'}
-      />
+      <div
+        style={{
+          position: 'relative',
+          minHeight: '100vh',
+          backgroundColor: '#010101', // Ensure dark background while theme loads
+        }}
+      >
+        <ViewportGrid
+          leftChildren={shouldShowContentOnLeft ? contentNode : undefined}
+          rightChildren={!shouldShowContentOnLeft ? contentNode : undefined}
+          isHomePage={true}
+          respectLayoutPreference={true}
+          backgroundImage={backgroundImage as 'one' | 'two'}
+        />
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 100,
+          }}
+        >
+          <HomeCtaBanner />
+          <HomeFooter />
+        </div>
+      </div>
     </>
   );
 }

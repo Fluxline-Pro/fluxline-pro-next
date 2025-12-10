@@ -21,7 +21,7 @@ export const TERENCE_SOCIAL_LINKS: SocialLinksData = {
   github: 'https://github.com/aplusandminus',
   twitter: 'https://twitter.com/aplusinflux',
   tiktok: 'https://www.tiktok.com/@aplusinflux',
-  email: 'mailto:terence@fluxline.pro',
+  email: 'terence@fluxline.pro',
 };
 
 export const FLUXLINE_SOCIAL_LINKS: SocialLinksData = {
@@ -29,7 +29,7 @@ export const FLUXLINE_SOCIAL_LINKS: SocialLinksData = {
   instagram: 'https://instagram.com/fluxlineco',
   threads: 'https://www.threads.net/@fluxlineco',
   github: 'https://github.com/fluxline-pro',
-  email: 'mailto:support@fluxline.pro',
+  email: 'support@fluxline.pro',
 };
 
 /**
@@ -46,8 +46,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
       linkedin: 'https://linkedin.com/in/terencewaters',
       instagram: 'https://instagram.com/aplusinflux',
       facebook: 'https://www.facebook.com/fluxline',
+      threads: 'https://www.threads.net/@aplusinflux',
       github: 'https://github.com/aplusandminus',
-      email: 'mailto:terence@fluxline.pro',
+      email: 'terence@fluxline.pro', // only needs the email handle, no mailto:
       twitter: 'https://twitter.com/aplusinflux',
       tiktok: 'https://www.tiktok.com/@aplusinflux',
     },

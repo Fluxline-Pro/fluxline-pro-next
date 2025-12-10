@@ -6,6 +6,7 @@ import DOMPurify from 'dompurify';
 import { Typography } from '../theme/components/typography';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
 import { typography } from '../theme/theme';
+import { useColorVisionFilter } from '@/theme';
 
 /**
  * Content types supported by the markdown renderer
@@ -86,6 +87,7 @@ export const UnifiedMarkdownRenderer: React.FC<
   UnifiedMarkdownRendererProps
 > = ({ content, contentType, className }) => {
   const { theme } = useAppTheme();
+  const { filter } = useColorVisionFilter();
 
   // Auto-detect content type if not provided
   const detectedType = useMemo(
@@ -400,149 +402,31 @@ export const UnifiedMarkdownRenderer: React.FC<
           }}
         />
       ),
-      table: ({
-        children,
-        ...props
-      }: React.TableHTMLAttributes<HTMLTableElement> & {
-        children?: React.ReactNode;
-      }) => (
-        <div
-          style={{
-            overflowX: 'auto',
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.m,
-          }}
-        >
-          <table
-            {...props}
-            style={{
-              width: '100%',
-              borderCollapse: 'collapse',
-              color: theme.semanticColors.bodyText,
-              fontSize: typography.fonts.body.fontSize,
-            }}
-          >
-            {children}
-          </table>
-        </div>
-      ),
-      thead: ({
-        children,
-        ...props
-      }: React.HTMLAttributes<HTMLTableSectionElement> & {
-        children?: React.ReactNode;
-      }) => (
-        <thead
-          {...props}
-          style={{
-            backgroundColor: theme.themeMode === 'high-contrast'
-        ? theme.semanticColors.bodyBackground : theme.palette.themePrimary,
-            color: theme.palette.white,
-            borderBottom: `2px solid ${theme.palette.themeDark}`,
-          }}
-        >
-          {children}
-        </thead>
-      ),
-      tbody: ({
-        children,
-        ...props
-      }: React.HTMLAttributes<HTMLTableSectionElement> & {
-        children?: React.ReactNode;
-      }) => (
-        <tbody
-          {...props}
-          style={{
-            color: theme.semanticColors.bodyText,
-          }}
-        >
-          {children}
-        </tbody>
-      ),
-      tr: ({
-        children,
-        ...props
-      }: React.HTMLAttributes<HTMLTableRowElement> & {
-        children?: React.ReactNode;
-      }) => {
-        // Check if this row contains header cells
-        const hasHeaderCells = React.Children.toArray(children).some(
-          (child) =>
-            React.isValidElement(child) &&
-            (child.type === 'th' || (child as any).props?.originalType === 'th')
-        );
-
-        return (
-          <tr
-            {...props}
-            style={{
-              backgroundColor: hasHeaderCells
-                ? theme.palette.themePrimary
-                : undefined,
-              borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
-            }}
-          >
-            {children}
-          </tr>
-        );
-      },
-      th: ({
-        children,
-        ...props
-      }: React.ThHTMLAttributes<HTMLTableCellElement> & {
-        children?: React.ReactNode;
-      }) => (
-        <th
-          {...props}
-          style={{
-            padding: theme.spacing.m,
-            textAlign: 'left',
-            fontWeight: typography.fontWeights.bold,
-            color: theme.palette.white,
-          }}
-        >
-          {children}
-        </th>
-      ),
-      td: ({
-        children,
-        ...props
-      }: React.TdHTMLAttributes<HTMLTableCellElement> & {
-        children?: React.ReactNode;
-      }) => (
-        <td
-          {...props}
-          style={{
-            padding: theme.spacing.m,
-            color: theme.semanticColors.bodyText,
-          }}
-        >
-          {children}
-        </td>
-      ),
+      /* ![Alt Text](image-url.jpg "Optional Title") */
       img: ({
         src,
         alt,
+        title,
         ...props
-      }: React.ImgHTMLAttributes<HTMLImageElement> & {
-        src?: string;
-        alt?: string;
-      }) => (
+      }: React.ImgHTMLAttributes<HTMLImageElement>) => (
         <img
           src={src}
-          alt={alt}
+          alt={alt || ''}
+          title={title}
           {...props}
           style={{
             maxWidth: '100%',
             height: 'auto',
-            borderRadius: theme.borderRadius.m,
+            display: 'block',
             marginTop: theme.spacing.m,
             marginBottom: theme.spacing.m,
+            borderRadius: theme.borderRadius.m,
+            filter: filter,
           }}
         />
       ),
     }),
-    [theme]
+    [theme, filter]
   );
 
   // Render based on detected content type
