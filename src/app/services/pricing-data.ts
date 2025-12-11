@@ -234,7 +234,7 @@ export const SERVICE_PRICING: ServicePricing = {
         name: 'Signature',
         idealFor:
           'Redesign, needed styling and style guide, setup with custom artwork',
-        monthlyRate: '$1,250',
+        monthlyRate: '$1,450',
       },
       {
         id: 'premium',
