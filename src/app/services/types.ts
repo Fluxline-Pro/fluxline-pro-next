@@ -17,7 +17,7 @@ export interface ProgramFeature {
 }
 
 export interface ProgramComparison {
-  [tierKey: string]: boolean;
+  [tierKey: string]: boolean | string;
 }
 
 export interface ServicePricingData {

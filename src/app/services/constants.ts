@@ -3,11 +3,13 @@
  * Data and configuration for the Services page
  */
 
-export const FLUXLINE_TAGLINE = "We're not done yet—\nbut we're already extraordinary.";
-export const FLUXLINE_SECONDARY_TAGLINE = 'Modular by design. Resonant by nature.';
+export const FLUXLINE_TAGLINE =
+  "We're not done yet—\nbut we're already extraordinary.";
+export const FLUXLINE_SECONDARY_TAGLINE =
+  'Modular by design. Resonant by nature.';
 
 export const SERVICES_SUMMARY =
-  'Fluxline helps founders, creatives, and small teams build stronger bodies, clearer brands, and resilient systems. Work together on personal training, web development, brand design, coaching, and strategic consulting—so your inner work and outer work actually match.';
+  'Fluxline helps founders, creatives, and small teams build stronger bodies, clearer brands, and resilient systems. Work with us on personal training, web development, brand design, coaching, and strategic consulting—so your inner work and outer work actually match.';
 
 export const CONSULTING_SUMMARY =
   "<strong>Strategic consulting and operational design to align your offers, systems, and day-to-day operations.</strong> Fluxline's Business Strategy & Systems Alignment offering guides founders and small teams through designing systems that scale, strategies that work, and operations that reflect their core values.<br /><br />Whether you're launching a new venture, optimizing your operations, or preparing to scale, we offer practical frameworks, tech integration support, and strategic planning that turns friction into flow. Every engagement is tailored to your growth phase and operational needs.";
@@ -27,6 +29,11 @@ export const EDUCATION_TRAINING_SUMMARY =
 export const RESONANCE_CORE_SUMMARY =
   "<strong>A guided, structured process to clarify your core story, archetypes, and message for your life or business.</strong> The Resonance Core Framework™ uses archetypal mapping and guided reflection to help you understand your patterns, clarify your story, and align your inner world with your outer work. Whether you're navigating a major life transition, reframing your narrative, or building your legacy, this framework offers structured modules and personalized guidance.<br /><br />Every session is documented. Every insight builds on the last. This is coaching for those ready to do deep work.";
 
+export type ServiceCategoryType =
+  | 'body-practice'
+  | 'brand-digital'
+  | 'depth-strategy';
+
 export interface ServiceCategory {
   id: string;
   title: string;
@@ -34,6 +41,7 @@ export interface ServiceCategory {
   summary: string; // HTML content for detail pages (not currently rendered)
   icon: string;
   path: string;
+  category: ServiceCategoryType;
 }
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -44,6 +52,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: PERSONAL_TRAINING_SUMMARY,
     icon: 'Health',
     path: '/services/personal-training',
+    category: 'body-practice',
   },
   {
     id: 'development',
@@ -52,6 +61,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: DEVELOPMENT_SUMMARY,
     icon: 'Code',
     path: '/services/development',
+    category: 'brand-digital',
   },
   {
     id: 'design',
@@ -60,6 +70,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: DESIGN_SUMMARY,
     icon: 'Design',
     path: '/services/design',
+    category: 'brand-digital',
   },
   {
     id: 'resonance-core',
@@ -68,6 +79,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: RESONANCE_CORE_SUMMARY,
     icon: 'HeartFill',
     path: '/services/resonance-core',
+    category: 'depth-strategy',
   },
   {
     id: 'education-training',
@@ -76,6 +88,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: EDUCATION_TRAINING_SUMMARY,
     icon: 'Education',
     path: '/services/education',
+    category: 'depth-strategy',
   },
   {
     id: 'consulting',
@@ -84,5 +97,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: CONSULTING_SUMMARY,
     icon: 'Lightbulb',
     path: '/services/consulting',
+    category: 'depth-strategy',
   },
 ];

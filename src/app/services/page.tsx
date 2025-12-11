@@ -23,7 +23,7 @@ import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 export default function ServicesPage() {
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();   
+  const isMobile = useIsMobile();
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -68,7 +68,8 @@ export default function ServicesPage() {
                 lineHeight: theme.typography.lineHeights.relaxed,
               }}
             >
-              Every service is a doorway: from idea to embodiment, from intention to infrastructure.
+              Every service is your doorway to transformation, from idea to
+              embodiment, from intention to infrastructure.
             </Typography>
           </div>
 
@@ -92,7 +93,8 @@ export default function ServicesPage() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Physical training and wellness support for sustainable transformation.
+              Physical training and wellness support for sustainable
+              transformation.
             </Typography>
             <div
               className='grid gap-6'
@@ -101,7 +103,9 @@ export default function ServicesPage() {
                   'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
               }}
             >
-              {SERVICE_CATEGORIES.filter((s) => s.id === 'personal-training').map((service) => (
+              {SERVICE_CATEGORIES.filter(
+                (s) => s.category === 'body-practice'
+              ).map((service) => (
                 <InteractiveCard
                   key={service.id}
                   id={service.id}
@@ -145,7 +149,9 @@ export default function ServicesPage() {
                   'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
               }}
             >
-              {SERVICE_CATEGORIES.filter((s) => s.id === 'development' || s.id === 'design').map((service) => (
+              {SERVICE_CATEGORIES.filter(
+                (s) => s.category === 'brand-digital'
+              ).map((service) => (
                 <InteractiveCard
                   key={service.id}
                   id={service.id}
@@ -180,7 +186,8 @@ export default function ServicesPage() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Coaching, strategic consulting, and transformational frameworks for clarity and growth.
+              Coaching, strategic consulting, and transformational frameworks
+              for clarity and growth.
             </Typography>
             <div
               className='grid gap-6'
@@ -189,7 +196,9 @@ export default function ServicesPage() {
                   'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
               }}
             >
-              {SERVICE_CATEGORIES.filter((s) => s.id === 'resonance-core' || s.id === 'education-training' || s.id === 'consulting').map((service) => (
+              {SERVICE_CATEGORIES.filter(
+                (s) => s.category === 'depth-strategy'
+              ).map((service) => (
                 <InteractiveCard
                   key={service.id}
                   id={service.id}
