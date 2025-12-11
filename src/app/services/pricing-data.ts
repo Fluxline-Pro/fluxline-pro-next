@@ -226,7 +226,7 @@ export const SERVICE_PRICING: ServicePricing = {
         id: 'starter',
         name: 'Starter',
         idealFor:
-          'A starting company getting started, initial branding package and logo',
+          'A starting company needing initial branding and logo design',
         monthlyRate: '$800',
       },
       {
@@ -239,7 +239,7 @@ export const SERVICE_PRICING: ServicePricing = {
       {
         id: 'premium',
         name: 'Premium',
-        idealFor: 'Full redesign, app, and website development',
+        idealFor: 'Full brand redesign, app, and website design package',
         monthlyRate: '$2,700',
       },
     ],
