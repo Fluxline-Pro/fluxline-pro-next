@@ -266,10 +266,10 @@ export default function ServiceDetailPage() {
         <Callout
           variant='accent'
           title='Ready to Begin?'
-          subtitle="Let's design the systems, strategies, and rituals that align your vision with reality."
+          subtitle="Book a 20–30 minute consultation to see if this is a fit."
           action={
             <FormButton
-              text='Get in Touch'
+              text='Book a Consultation'
               variant='primary'
               size='large'
               icon='ChevronRight'

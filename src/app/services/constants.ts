@@ -3,29 +3,36 @@
  * Data and configuration for the Services page
  */
 
-export const FLUXLINE_TAGLINE = "We're not done yet—\nbut we're already extraordinary.";
-export const FLUXLINE_SECONDARY_TAGLINE = 'Modular by design. Resonant by nature.';
+export const FLUXLINE_TAGLINE =
+  "We're not done yet—\nbut we're already extraordinary.";
+export const FLUXLINE_SECONDARY_TAGLINE =
+  'Modular by design. Resonant by nature.';
 
 export const SERVICES_SUMMARY =
-  'Fluxline offers strategic, emotionally intelligent, and design-forward solutions for founders, creatives, and organizations seeking transformation. Every service is a curriculum gate—crafted to align your identity, systems, and mission with intentionality and resonance.';
+  'Fluxline helps founders, creatives, and small teams build stronger bodies, clearer brands, and resilient systems. Work with us on personal training, web development, brand design, coaching, and strategic consulting—so your inner work and outer work actually match.';
 
 export const CONSULTING_SUMMARY =
-  "<strong>This is where clarity meets infrastructure.</strong> Fluxline's Business Strategy & Systems Alignment offering guides founders and small teams through the sacred work of designing systems that scale, strategies that resonate, and operations that reflect their deepest values.<br /><br />Every engagement is tailored to your archetype, growth phase, and operational rhythm—ensuring your systems serve not just your mission, but your legacy.<br /><br />Whether you're launching a new venture, optimizing your backend, or preparing to scale, we offer modular frameworks, tech integration, and strategic alignment rituals that turn friction into flow. This isn't just consulting—<strong>it's curriculum for your business soul.</strong>";
+  "<strong>Strategic consulting and operational design to align your offers, systems, and day-to-day operations.</strong> Fluxline's Business Strategy & Systems Alignment offering guides founders and small teams through designing systems that scale, strategies that work, and operations that reflect their core values.<br /><br />Whether you're launching a new venture, optimizing your operations, or preparing to scale, we offer practical frameworks, tech integration support, and strategic planning that turns friction into flow. Every engagement is tailored to your growth phase and operational needs.";
 
 export const DEVELOPMENT_SUMMARY =
-  "<strong>At Fluxline, we don't just build websites—we architect digital temples.</strong> Every line of code, every interface, every deployment pipeline is designed to serve your mission with modular clarity and emotional intelligence. Whether you're launching a lean MVP, scaling a full-stack platform, or immortalizing your brand through a custom app, our development rituals blend intuitive UX, resilient infrastructure, and long-term maintainability. <br /><br />From frontend flow to backend logic, cloud architecture to CI/CD pipelines, we guide founders and creatives through a build process that feels intentional, empowering, and aligned. Your product isn't just functional—<strong>it's a living system, built to evolve</strong>.";
+  "<strong>Design and build your website or web app, from simple sites to full platforms.</strong> Fluxline creates custom web applications with intuitive interfaces and reliable infrastructure. Whether you're launching an MVP, scaling a full-stack platform, or building a custom app, our development process combines clear user experience with long-term maintainability.<br /><br />From frontend design to backend logic and cloud deployment, we guide founders and creatives through a build process that's transparent, empowering, and aligned with your goals. Your product is built to work well and evolve with you.";
 
 export const DESIGN_SUMMARY =
-  "Fluxline Design is where strategy meets symbolism. We architect visual identities and digital experiences that don't just look good—<strong>they feel aligned</strong>. Every logo, layout, and interface is a ritual of clarity, crafted to reflect your evolution and resonate with your audience. Whether you're launching, scaling, or immortalizing your legacy, we design with emotional intelligence, modular precision, and mythic depth.";
+  "<strong>Visual identity and user experience design so your brand feels cohesive and clear.</strong> Fluxline Design creates brand identities and digital experiences that look good and feel aligned with who you are. Every logo, layout, and interface is designed to reflect your story and connect with your audience. Whether you're launching, scaling, or building your legacy, we design with care, precision, and strategic thinking.";
 
 export const PERSONAL_TRAINING_SUMMARY =
-  "<strong>Training is not just physical—it's emotional, symbolic, and sovereign.</strong> At Fluxline, we specialize in modular coaching systems that adapt to your goals, limitations, and breakthroughs. Whether you're returning to movement, navigating chronic pain, or refining your edge, we design your path with precision and care.<br /><br />Every offering is tailored to your body, schedule, and emotional readiness. We work with all bodies, all backgrounds, and all thresholds. This is not just fitness—<strong><em>it's felt transformation</em></strong>.";
+  "<strong>Physical training with emotional intelligence—build strength, reduce pain, and create a sustainable practice.</strong> At Fluxline, we specialize in personalized fitness coaching that adapts to your goals, body, and life. Whether you're returning to movement, working through chronic pain, or pushing your physical limits, we design your training path with care and precision.<br /><br />Every program is tailored to your schedule, body type, and readiness. We work with all bodies, all backgrounds, and all starting points.";
 
 export const EDUCATION_TRAINING_SUMMARY =
-  "This isn't just training—<strong>it's transmission</strong>. Fluxline's Coaching, Education & Leadership offerings guide founders, creatives, and organizations through experiential learning, emotional intelligence, and strategic embodiment. Whether you're leading a team, launching a curriculum, or refining your influence, we offer modular frameworks, live workshops, and personalized coaching to help you build with purpose.<br/><br />Every session is designed to activate your leadership archetype, align your mission with emotional cadence, and cultivate sovereign presence in every interaction. This is education for those ready to lead with clarity, courage, and creative truth.";
+  "<strong>Workshops and coaching to help you lead, teach, and communicate with more clarity and embodiment.</strong> Fluxline's Coaching, Education & Leadership offerings guide founders, creatives, and organizations through experiential learning and leadership development. Whether you're leading a team, launching a program, or developing your voice, we offer practical frameworks, live workshops, and personalized coaching to help you build with purpose.<br /><br />Every session is designed to strengthen your leadership presence, clarify your message, and help you show up with confidence in every interaction.";
 
 export const RESONANCE_CORE_SUMMARY =
-  "<strong>The Resonance Core Framework™ is not just coaching—it's a curriculum of becoming.</strong> Through archetypal mapping, emotional emergence, and symbolic ritual, we guide individuals through deep transformation. Whether you're navigating a threshold, reframing your story, or anchoring your legacy, this framework offers structured modules, personalized rituals, and breakthrough documentation to align your inner world with your outer mission. Every session is a scroll. Every insight, a gate. This is coaching for those ready to reclaim their light.";
+  "<strong>A guided, structured process to clarify your core story, archetypes, and message for your life or business.</strong> The Resonance Core Framework™ uses archetypal mapping and guided reflection to help you understand your patterns, clarify your story, and align your inner world with your outer work. Whether you're navigating a major life transition, reframing your narrative, or building your legacy, this framework offers structured modules and personalized guidance.<br /><br />Every session is documented. Every insight builds on the last. This is coaching for those ready to do deep work.";
+
+export type ServiceCategoryType =
+  | 'body-practice'
+  | 'brand-digital'
+  | 'depth-strategy';
 
 export interface ServiceCategory {
   id: string;
@@ -34,6 +41,7 @@ export interface ServiceCategory {
   summary: string; // HTML content for detail pages (not currently rendered)
   icon: string;
   path: string;
+  category: ServiceCategoryType;
 }
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -44,6 +52,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: PERSONAL_TRAINING_SUMMARY,
     icon: 'Health',
     path: '/services/personal-training',
+    category: 'body-practice',
   },
   {
     id: 'development',
@@ -52,6 +61,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: DEVELOPMENT_SUMMARY,
     icon: 'Code',
     path: '/services/development',
+    category: 'brand-digital',
   },
   {
     id: 'design',
@@ -60,6 +70,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: DESIGN_SUMMARY,
     icon: 'Design',
     path: '/services/design',
+    category: 'brand-digital',
   },
   {
     id: 'resonance-core',
@@ -68,6 +79,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: RESONANCE_CORE_SUMMARY,
     icon: 'HeartFill',
     path: '/services/resonance-core',
+    category: 'depth-strategy',
   },
   {
     id: 'education-training',
@@ -76,6 +88,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: EDUCATION_TRAINING_SUMMARY,
     icon: 'Education',
     path: '/services/education',
+    category: 'depth-strategy',
   },
   {
     id: 'consulting',
@@ -84,5 +97,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: CONSULTING_SUMMARY,
     icon: 'Lightbulb',
     path: '/services/consulting',
+    category: 'depth-strategy',
   },
 ];
