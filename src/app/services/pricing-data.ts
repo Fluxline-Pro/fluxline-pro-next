@@ -308,7 +308,7 @@ export const SERVICE_PRICING: ServicePricing = {
         id: 'starter',
         name: 'Starter (Lean Launches)',
         idealFor:
-          'Simple websites or landing pages for entrepreneurs and small businesses',
+          'Simple websites or landing pages for individuals, entrepreneurs and small businesses',
         monthlyRate: '$1,750+',
         rateNote: 'Basic website setup with up to 3 pages',
       },

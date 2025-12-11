@@ -55,10 +55,9 @@ export default function ServicesPage() {
                 color: theme.palette.themePrimary,
                 fontSize: '2rem',
                 fontWeight: theme.typography.fontWeights.bold,
-                marginBottom: theme.spacing.s,
               }}
             >
-              Choose the kind of support you need right now
+              Choose what kind of support you need
             </Typography>
             <Typography
               variant='p'
@@ -68,8 +67,8 @@ export default function ServicesPage() {
                 lineHeight: theme.typography.lineHeights.relaxed,
               }}
             >
-              Every service is your doorway to transformation, from idea to
-              embodiment, from intention to infrastructure.
+              Every service is your doorway to transformation. From idea to
+              embodiment. From intention to infrastructure.
             </Typography>
           </div>
 
@@ -217,7 +216,7 @@ export default function ServicesPage() {
         <Callout
           variant='accent'
           title='Not sure where to start?'
-          subtitle="Share a bit about your situation and we'll map the right first step together."
+          subtitle="Share with us your needs in a free, no obligation consultation. We'll map the right first step together."
           action={
             <FormButton
               text='Book a Consultation'
