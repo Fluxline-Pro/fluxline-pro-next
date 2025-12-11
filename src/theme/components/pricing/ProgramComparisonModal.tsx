@@ -118,7 +118,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                       padding: isMobile ? '0.75rem' : '1rem',
                       color: theme.palette.white,
                       textAlign: 'center',
-                      fontSize: isMobile ? '0.75rem' : '0.875rem',
+                      fontSize: isMobile ? '0.875rem' : '1rem',
                       fontWeight: theme.typography.fontWeights.semiBold,
                       minWidth: isMobile ? '100px' : '140px',
                     }}
@@ -161,7 +161,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                         variant='p'
                         style={{
                           color: theme.palette.neutralPrimary,
-                          fontSize: isMobile ? '0.8125rem' : '0.9375rem',
+                          fontSize: isMobile ? '0.875rem' : '1rem',
                           fontWeight: theme.typography.fontWeights.regular,
                           textAlign: 'center',
                           display: 'block',
@@ -176,8 +176,12 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                         : false;
 
                       const isPartial = typeof featureValue === 'string';
+                      const isAddOn =
+                        typeof featureValue === 'string' &&
+                        (featureValue as string)
+                          .toLowerCase()
+                          .includes('available as add-on');
                       const hasFeature = featureValue === true;
-                      const noFeature = featureValue === false;
 
                       return (
                         <td
@@ -201,15 +205,19 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                               }}
                             >
                               <FluentIcon
-                                iconName='WarningSolid'
+                                iconName={isAddOn ? 'Cancel' : 'WarningSolid'}
                                 size='medium'
-                                color={theme.palette.yellow}
+                                color={
+                                  isAddOn
+                                    ? theme.palette.red
+                                    : theme.palette.yellow
+                                }
                               />
                               {!isMobile && (
                                 <Typography
                                   variant='p'
                                   style={{
-                                    fontSize: '0.8125rem',
+                                    fontSize: '0.875rem',
                                     color: theme.palette.neutralSecondary,
                                     textAlign: 'center',
                                     lineHeight: 1.2,

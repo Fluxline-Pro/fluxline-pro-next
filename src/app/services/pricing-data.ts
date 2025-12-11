@@ -3,6 +3,7 @@
  * Pricing information for services that offer tiered programs
  */
 
+import { on } from 'stream';
 import { ServicePricing } from './types';
 
 export const SERVICE_PRICING: ServicePricing = {
@@ -156,8 +157,8 @@ export const SERVICE_PRICING: ServicePricing = {
       },
       'nutrition-coaching': {
         'single-session': false,
-        'online-pt-only': 'Basic only; advanced coaching available as add-on',
-        'hybrid-pt': 'Basic only; advanced coaching available as add-on',
+        'online-pt-only': 'Basic only; advanced coaching available',
+        'hybrid-pt': 'Basic only; advanced coaching available',
         'online-hypertrophy': true,
         'hybrid-hypertrophy': true,
       },
@@ -280,23 +281,23 @@ export const SERVICE_PRICING: ServicePricing = {
         premium: true,
       },
       'brand-style-guide': {
-        starter: false,
+        starter: 'available as add-on',
         signature: true,
         premium: true,
       },
       'custom-artwork': {
-        starter: false,
+        starter: 'available as add-on',
         signature: true,
         premium: true,
       },
       'website-ui': {
-        starter: false,
-        signature: false,
+        starter: 'available as add-on',
+        signature: 'available as add-on',
         premium: true,
       },
       'app-ui': {
-        starter: false,
-        signature: false,
+        starter: 'available as add-on',
+        signature: 'available as add-on',
         premium: true,
       },
     },
@@ -334,17 +335,17 @@ export const SERVICE_PRICING: ServicePricing = {
       { name: 'Search Engine Optimization' },
       { name: 'Fast Page Loading' },
       { name: 'Accessible Design' },
-      { name: 'Hosting Setup & Support' },
-      { name: 'Email Setup & Integration' },
-      { name: 'Content Management System' },
-      { name: 'Database & Server Setup' },
-      { name: 'Mobile App Design' },
-      { name: 'Automated Deployment' },
-      { name: 'Cloud Hosting Setup' },
-      { name: 'Deployment Tools' },
-      { name: 'Admin Dashboard' },
-      { name: 'Design Revision Rounds' },
-      { name: 'Ongoing Support Available' },
+      { name: 'Hosting Setup' },
+      { name: 'Email Integration' },
+      { name: 'CMS Integration' },
+      { name: 'Backend Development' },
+      { name: 'Mobile Optimization' },
+      { name: 'CI/CD Pipeline' },
+      { name: 'Cloud Infrastructure' },
+      { name: 'Docker & Containerization' },
+      { name: 'Admin Dashboard / Portal' },
+      { name: 'Revision Rounds' },
+      { name: 'Retainer Support' },
     ],
     comparison: {
       'custom-website-design': {
@@ -372,57 +373,57 @@ export const SERVICE_PRICING: ServicePricing = {
         signature: true,
         premium: true,
       },
-      'hosting-setup-support': {
+      'hosting-setup': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'email-setup-integration': {
+      'email-integration': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'content-management-system': {
+      'cms-integration': {
         starter: false,
         signature: true,
         premium: true,
       },
-      'database-server-setup': {
+      'backend-development': {
         starter: false,
         signature: true,
         premium: true,
       },
-      'mobile-app-design': {
+      'mobile-optimization': {
+        starter: 'available as add-on',
+        signature: true,
+        premium: true,
+      },
+      'ci-cd-pipeline': {
         starter: false,
         signature: true,
         premium: true,
       },
-      'automated-deployment': {
-        starter: false,
-        signature: true,
-        premium: true,
-      },
-      'cloud-hosting-setup': {
+      'cloud-infrastructure': {
         starter: false,
         signature: false,
         premium: true,
       },
-      'deployment-tools': {
+      'docker-containerization': {
         starter: false,
         signature: false,
         premium: true,
       },
-      'admin-dashboard': {
+      'admin-dashboard-portal': {
         starter: false,
         signature: false,
         premium: true,
       },
-      'design-revision-rounds': {
-        starter: true,
-        signature: true,
-        premium: true,
+      'revision-rounds': {
+        starter: '1',
+        signature: '2',
+        premium: '3+',
       },
-      'ongoing-support-available': {
+      'retainer-support': {
         starter: false,
         signature: false,
         premium: true,
