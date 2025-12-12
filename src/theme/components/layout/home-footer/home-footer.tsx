@@ -89,7 +89,7 @@ export const HomeFooter: React.FC = () => {
         </p>
       </div>
 
-      {/* Navigation Columns */}
+      {/* Navigation Columns - Placeholder links to be updated with actual content */}
       <div
         style={{
           display: 'grid',

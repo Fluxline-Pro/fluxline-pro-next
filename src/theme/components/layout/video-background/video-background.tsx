@@ -100,7 +100,9 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
   const handleReplay = () => {
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
-      videoRef.current.play();
+      videoRef.current.play().catch((error) => {
+        console.error('Error playing video:', error);
+      });
       setHasEnded(false);
     }
   };
