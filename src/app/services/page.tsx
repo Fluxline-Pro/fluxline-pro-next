@@ -34,7 +34,23 @@ export default function ServicesPage() {
           iconName={getIconForPath('/services')}
           subtitle={FLUXLINE_SECONDARY_TAGLINE}
           description={SERVICES_SUMMARY}
-        />
+        >
+          <Callout
+            variant='accent'
+            title='Not sure where to start?'
+            subtitle="Let's discuss your needs in a free, no obligation consultation. We'll map the right first step together."
+            action={
+              <FormButton
+                text='Book a Consultation'
+                variant='primary'
+                size='large'
+                icon='ChevronRight'
+                iconPosition='right'
+                onClick={() => (window.location.href = '/contact')}
+              />
+            }
+          />
+        </Hero>
 
         {/* Divider */}
         <hr
@@ -92,8 +108,7 @@ export default function ServicesPage() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Physical training and wellness support for sustainable
-              transformation.
+              Personalized training programs to build strength and resilience.
             </Typography>
             <div
               className='grid gap-6'
@@ -139,7 +154,7 @@ export default function ServicesPage() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Web development and brand design to build your digital foundation.
+              Websites and brand identities that scale with your vision.
             </Typography>
             <div
               className='grid gap-6'
@@ -175,7 +190,7 @@ export default function ServicesPage() {
                 fontWeight: theme.typography.fontWeights.semiBold,
               }}
             >
-              Depth Work & Strategy
+              Guided Improvement & Strategy
             </Typography>
             <Typography
               variant='p'
@@ -185,8 +200,8 @@ export default function ServicesPage() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Coaching, strategic consulting, and transformational frameworks
-              for clarity and growth.
+              Coaching and consulting to align your business and personal
+              growth.
             </Typography>
             <div
               className='grid gap-6'
@@ -212,11 +227,10 @@ export default function ServicesPage() {
             </div>
           </section>
         </div>
-
         <Callout
           variant='accent'
-          title='Not sure where to start?'
-          subtitle="Share with us your needs in a free, no obligation consultation. We'll map the right first step together."
+          title="Let's begin your transformation"
+          subtitle="Book a free, no obligation consultation with us to help you map the right first step together."
           action={
             <FormButton
               text='Book a Consultation'
