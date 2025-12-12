@@ -96,7 +96,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                 <th
                   style={{
                     padding: isMobile ? '0.75rem' : '1rem',
-                    textAlign: 'left',
+                    textAlign: 'center',
                     color: theme.palette.white,
                     fontSize: isMobile ? '0.875rem' : '1rem',
                     fontWeight: theme.typography.fontWeights.semiBold,
@@ -117,8 +117,8 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                     style={{
                       padding: isMobile ? '0.75rem' : '1rem',
                       color: theme.palette.white,
-                      textAlign: 'left',
-                      fontSize: isMobile ? '0.75rem' : '0.875rem',
+                      textAlign: 'center',
+                      fontSize: isMobile ? '0.875rem' : '1rem',
                       fontWeight: theme.typography.fontWeights.semiBold,
                       minWidth: isMobile ? '100px' : '140px',
                     }}
@@ -161,17 +161,27 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                         variant='p'
                         style={{
                           color: theme.palette.neutralPrimary,
-                          fontSize: isMobile ? '0.8125rem' : '0.9375rem',
+                          fontSize: isMobile ? '0.875rem' : '1rem',
                           fontWeight: theme.typography.fontWeights.regular,
+                          textAlign: 'center',
+                          display: 'block',
                         }}
                       >
                         {feature.name}
                       </Typography>
                     </td>
                     {tiers.map((tier) => {
-                      const hasFeature = featureComparison
+                      const featureValue = featureComparison
                         ? featureComparison[tier.id]
                         : false;
+
+                      const isPartial = typeof featureValue === 'string';
+                      const isAddOn =
+                        typeof featureValue === 'string' &&
+                        (featureValue as string)
+                          .toLowerCase()
+                          .includes('available as add-on');
+                      const hasFeature = featureValue === true;
 
                       return (
                         <td
@@ -180,16 +190,62 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                             padding: isMobile ? '0.75rem' : '1rem',
                             textAlign: 'center',
                           }}
+                          title={
+                            isPartial ? (featureValue as string) : undefined
+                          }
                         >
-                          <FluentIcon
-                            iconName={hasFeature ? 'CheckMark' : 'Cancel'}
-                            size='medium'
-                            color={
-                              hasFeature
-                                ? theme.palette.green
-                                : theme.palette.red
-                            }
-                          />
+                          {isPartial ? (
+                            <div
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.25rem',
+                              }}
+                            >
+                              <FluentIcon
+                                iconName={isAddOn ? 'Cancel' : 'WarningSolid'}
+                                size='medium'
+                                color={
+                                  isAddOn
+                                    ? theme.palette.red
+                                    : theme.palette.yellow
+                                }
+                              />
+                              {!isMobile && (
+                                <Typography
+                                  variant='p'
+                                  style={{
+                                    fontSize: '0.875rem',
+                                    color: theme.palette.neutralSecondary,
+                                    textAlign: 'center',
+                                    lineHeight: 1.2,
+                                  }}
+                                >
+                                  {featureValue}
+                                </Typography>
+                              )}
+                            </div>
+                          ) : (
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <FluentIcon
+                                iconName={hasFeature ? 'CheckMark' : 'Cancel'}
+                                size='medium'
+                                color={
+                                  hasFeature
+                                    ? theme.palette.green
+                                    : theme.palette.red
+                                }
+                              />
+                            </div>
+                          )}
                         </td>
                       );
                     })}

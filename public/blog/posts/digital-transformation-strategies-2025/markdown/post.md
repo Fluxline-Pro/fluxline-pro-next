@@ -21,7 +21,7 @@ seoKeywords:
   ]
 ---
 
-## Digital Transformation Strategies for 2025
+# Digital Transformation Strategies for 2025
 
 Digital transformation isn’t just a buzzword anymore—it’s the heartbeat of modern business. If you're looking to stay relevant, resilient, and ready for what’s next, transformation is no longer optional. _It’s the strategy._
 
@@ -125,6 +125,15 @@ interface DigitalTransformationStack {
 Digital transformation isn’t a one-time project—it’s a mindset shift. It’s about aligning your technology, people, and processes to create something more resilient, more responsive, and more human.
 
 When done right, it doesn’t just modernize your business—it redefines it.
+
+## Related Resources
+
+- [Enterprise Digital Transformation Case Study](/case-studies/enterprise-digital-transformation) — see how we transformed Fluxline using resonance-based marketing
+- [MyIntermountain Enterprise Intranet Case Study](/case-studies/myintermountain-intranet) — enterprise SharePoint architecture serving 65K+ users exemplifies transformation at scale
+- [How We Built Fluxline 2.0](/blog/how-we-built-fluxline-2-breakdown) — transformation strategies in action, from concept to launch
+- [Fluxline 2.0 Platform Development Case Study](/case-studies/fluxline-2-platform-development) — complete business context and transformation methodology
+
+## Let's Connect
 
 **Let’s build what’s next.**
 

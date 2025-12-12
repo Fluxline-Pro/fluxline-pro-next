@@ -226,6 +226,14 @@ This project demonstrates **Fluxline's capability** to deliver:
 
 ---
 
+## Related Resources
+
+- [MyIntermountain Enterprise Intranet Case Study](/case-studies/myintermountain-intranet) — full strategic context with Azure infrastructure and Agile transformation details
+- [Agile Transformation & Infrastructure Case Study](/case-studies/agile-transformation-consulting) — learn how we transformed the siloed team into a high-performing Agile unit
+- [Digital Transformation Strategies](/blog/digital-transformation-strategies-2025) — this project exemplifies enterprise transformation at scale
+
+---
+
 _This portfolio entry demonstrates professional experience and technical capabilities. No proprietary intellectual property, screenshots, or confidential information belonging to Intermountain Health is disclosed._
 
 **Project Type**: Enterprise Infrastructure & Intranet  

@@ -410,6 +410,14 @@ Create a differentiated coaching business that:
 4. Client results drive word-of-mouth growth
 5. Long-term vision enables asset building
 
+**Key Metrics:**
+
+- 85% client retention rate
+- $6,000-$9,000 MRR
+- 60% referral rate
+- 70-80% net margins
+- 12+ month average client duration
+
 ## Future Roadmap
 
 ### Near-Term (2026-2027)
@@ -470,16 +478,13 @@ This business integrates with:
 - **[Personal Training Services](https://fluxline.pro/services/personal-training/)**: Client-facing service offerings
 - **[Resonance Core Framework™](https://fluxline.pro/services/resonance-core/)**: Methodology and coaching approach
 
+## Related Resources
+
+- [Scaling Personal Transformation Case Study](/case-studies/scaling-personal-transformation-resonance-core) — complete business analysis with 6-phase implementation playbook
+- [From Recovery to Resonance Blog](/blog/from-recovery-to-resonance-personal-journey) — the founder's 8-year transformation story that created this methodology
+- [What Makes Transformation Coaching Different?](/blog/scaling-transformation-resonance-core-business) — why this approach works in a crowded wellness market
+- [Resonance Core Launch Press Release](/press-release/resonance-core-launch-2025) — official program announcement
+
 ---
 
 _This project demonstrates how to build a differentiated, scalable wellness coaching business by integrating technical credentials with proprietary methodology, personal brand, and client-centric service delivery._
-
-**Key Metrics:**
-
-- 85% client retention rate
-- $6,000-$9,000 MRR
-- 60% referral rate
-- 70-80% net margins
-- 12+ month average client duration
-
-**View Services:** [Personal Training](https://fluxline.pro/services/personal-training/) • [Resonance Core](https://fluxline.pro/services/resonance-core/) • [Contact](https://fluxline.pro/contact/)

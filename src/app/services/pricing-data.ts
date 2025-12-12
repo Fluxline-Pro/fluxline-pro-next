@@ -3,6 +3,7 @@
  * Pricing information for services that offer tiered programs
  */
 
+import { on } from 'stream';
 import { ServicePricing } from './types';
 
 export const SERVICE_PRICING: ServicePricing = {
@@ -54,12 +55,20 @@ export const SERVICE_PRICING: ServicePricing = {
       { name: 'Emotional Integration Coaching' },
       { name: 'PTDistinction Portal Access' },
       { name: 'First 2 Sessions Free' },
-      { name: 'Cancel Anytime (First 2 Sessions)' },
       { name: 'In-Person Training Sessions' },
       { name: 'Hands-On Form Correction' },
       { name: 'On-Site Meditation & Breathwork' },
       { name: 'Real-Time Cueing & Adjustments' },
-      { name: 'Local Access' },
+      { name: 'Local Access in Wasatch Front Utah' },
+      { name: 'Nutrition Coaching' },
+      { name: 'Recipes & Meal Plans' },
+      { name: 'Physique Optimization Strategy' },
+      { name: 'Cycle Tracking / Fasting Protocols' },
+      { name: 'Metabolic Phase Mapping' },
+      { name: 'Muscle-building Specific Programming' },
+      { name: 'Progressive Overload Tracking' },
+      { name: 'Supplemental Recovery Rituals' },
+      { name: 'Hormonal Phase Integration' },
     ],
     comparison: {
       'custom-training-plan': {
@@ -111,13 +120,6 @@ export const SERVICE_PRICING: ServicePricing = {
         'online-hypertrophy': true,
         'hybrid-hypertrophy': true,
       },
-      'cancel-anytime-first-2-sessions': {
-        'single-session': false,
-        'online-pt-only': true,
-        'hybrid-pt': true,
-        'online-hypertrophy': true,
-        'hybrid-hypertrophy': true,
-      },
       'in-person-training-sessions': {
         'single-session': true,
         'online-pt-only': false,
@@ -146,11 +148,74 @@ export const SERVICE_PRICING: ServicePricing = {
         'online-hypertrophy': false,
         'hybrid-hypertrophy': true,
       },
-      'local-access': {
+      'local-access-in-wasatch-front-utah': {
         'single-session': true,
         'online-pt-only': false,
         'hybrid-pt': true,
         'online-hypertrophy': false,
+        'hybrid-hypertrophy': true,
+      },
+      'nutrition-coaching': {
+        'single-session': false,
+        'online-pt-only': 'Basic only; advanced coaching available',
+        'hybrid-pt': 'Basic only; advanced coaching available',
+        'online-hypertrophy': true,
+        'hybrid-hypertrophy': true,
+      },
+      'recipes-meal-plans': {
+        'single-session': false,
+        'online-pt-only': 'Basic through Discord Server',
+        'hybrid-pt': 'Basic through Discord Server',
+        'online-hypertrophy': true,
+        'hybrid-hypertrophy': true,
+      },
+      'physique-optimization-strategy': {
+        'single-session': false,
+        'online-pt-only': 'Basic movement fixes for body sculpting offered',
+        'hybrid-pt': 'Basic movement fixes for body sculpting offered',
+        'online-hypertrophy': true,
+        'hybrid-hypertrophy': true,
+      },
+      'cycle-tracking-fasting-protocols': {
+        'single-session': false,
+        'online-pt-only': false,
+        'hybrid-pt': true,
+        'online-hypertrophy': true,
+        'hybrid-hypertrophy': true,
+      },
+      'metabolic-phase-mapping': {
+        'single-session': false,
+        'online-pt-only': false,
+        'hybrid-pt': true,
+        'online-hypertrophy': true,
+        'hybrid-hypertrophy': true,
+      },
+      'muscle-building-specific-programming': {
+        'single-session': false,
+        'online-pt-only': false,
+        'hybrid-pt': true,
+        'online-hypertrophy': true,
+        'hybrid-hypertrophy': true,
+      },
+      'progressive-overload-tracking': {
+        'single-session': false,
+        'online-pt-only': false,
+        'hybrid-pt': true,
+        'online-hypertrophy': true,
+        'hybrid-hypertrophy': true,
+      },
+      'supplemental-recovery-rituals': {
+        'single-session': false,
+        'online-pt-only': false,
+        'hybrid-pt': true,
+        'online-hypertrophy': true,
+        'hybrid-hypertrophy': true,
+      },
+      'hormonal-phase-integration': {
+        'single-session': false,
+        'online-pt-only': false,
+        'hybrid-pt': true,
+        'online-hypertrophy': true,
         'hybrid-hypertrophy': true,
       },
     },
@@ -161,7 +226,7 @@ export const SERVICE_PRICING: ServicePricing = {
         id: 'starter',
         name: 'Starter',
         idealFor:
-          'A starting company getting started, initial branding package and logo',
+          'A starting company needing initial branding and logo design',
         monthlyRate: '$800',
       },
       {
@@ -169,12 +234,12 @@ export const SERVICE_PRICING: ServicePricing = {
         name: 'Signature',
         idealFor:
           'Redesign, needed styling and style guide, setup with custom artwork',
-        monthlyRate: '$1,250',
+        monthlyRate: '$1,450',
       },
       {
         id: 'premium',
         name: 'Premium',
-        idealFor: 'Full redesign, app, and website development',
+        idealFor: 'Full brand redesign, app, and website design package',
         monthlyRate: '$2,700',
       },
     ],
@@ -216,23 +281,23 @@ export const SERVICE_PRICING: ServicePricing = {
         premium: true,
       },
       'brand-style-guide': {
-        starter: false,
+        starter: 'available as add-on',
         signature: true,
         premium: true,
       },
       'custom-artwork': {
-        starter: false,
+        starter: 'available as add-on',
         signature: true,
         premium: true,
       },
       'website-ui': {
-        starter: false,
-        signature: false,
+        starter: 'available as add-on',
+        signature: 'available as add-on',
         premium: true,
       },
       'app-ui': {
-        starter: false,
-        signature: false,
+        starter: 'available as add-on',
+        signature: 'available as add-on',
         premium: true,
       },
     },
@@ -243,31 +308,33 @@ export const SERVICE_PRICING: ServicePricing = {
         id: 'starter',
         name: 'Starter (Lean Launches)',
         idealFor:
-          'Landing page or 3-page brochure site entrepreneurs, small businesses',
+          'Simple websites or landing pages for individuals, entrepreneurs and small businesses',
         monthlyRate: '$1,750+',
-        rateNote: 'Next.js or static HTML implementation',
+        rateNote: 'Basic website setup with up to 3 pages',
       },
       {
         id: 'signature',
         name: 'Signature (Growth Phase)',
-        idealFor: 'Full website (5-8 pages) or MVP web app for growing businesses',
+        idealFor:
+          'Full website (5-8 pages) or basic web app for growing businesses',
         monthlyRate: '$3,500+',
-        rateNote: 'Includes CMS integration and basic backend',
+        rateNote: 'Includes content management and basic backend features',
       },
       {
         id: 'premium',
         name: 'Premium (Legacy Builders)',
-        idealFor: 'Full-stack web app or mobile app for established organizations',
+        idealFor:
+          'Custom web application or mobile app for established organizations',
         monthlyRate: '$6,500+',
-        rateNote: 'Complete architecture with retainer support available',
+        rateNote: 'Complete custom solution with ongoing support available',
       },
     ],
     features: [
-      { name: 'Custom UI Design' },
-      { name: 'Responsive Layout' },
-      { name: 'SEO Optimization' },
-      { name: 'Performance Optimization' },
-      { name: 'Accessibility Best Practices' },
+      { name: 'Custom Website Design' },
+      { name: 'Mobile-Friendly Layout' },
+      { name: 'Search Engine Optimization' },
+      { name: 'Fast Page Loading' },
+      { name: 'Accessible Design' },
       { name: 'Hosting Setup' },
       { name: 'Email Integration' },
       { name: 'CMS Integration' },
@@ -281,27 +348,27 @@ export const SERVICE_PRICING: ServicePricing = {
       { name: 'Retainer Support' },
     ],
     comparison: {
-      'custom-ui-design': {
+      'custom-website-design': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'responsive-layout': {
+      'mobile-friendly-layout': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'seo-optimization': {
+      'search-engine-optimization': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'performance-optimization': {
+      'fast-page-loading': {
         starter: true,
         signature: true,
         premium: true,
       },
-      'accessibility-best-practices': {
+      'accessible-design': {
         starter: true,
         signature: true,
         premium: true,
@@ -327,7 +394,7 @@ export const SERVICE_PRICING: ServicePricing = {
         premium: true,
       },
       'mobile-optimization': {
-        starter: false,
+        starter: 'available as add-on',
         signature: true,
         premium: true,
       },
@@ -352,9 +419,9 @@ export const SERVICE_PRICING: ServicePricing = {
         premium: true,
       },
       'revision-rounds': {
-        starter: true,
-        signature: true,
-        premium: true,
+        starter: '1',
+        signature: '2',
+        premium: '3+',
       },
       'retainer-support': {
         starter: false,

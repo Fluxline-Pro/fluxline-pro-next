@@ -252,3 +252,10 @@ $theme-breakpoint-md: 768px;
 $theme-breakpoint-lg: 1024px;
 $theme-breakpoint-xl: 1366px;
 $theme-breakpoint-xxl: 1920px;
+
+// Global style fix for markdown content h1 headers
+.unified-content-detail {
+  h1 {
+    display: none !important;
+  }
+}

@@ -40,3 +40,9 @@ Built on the latest technology stack including **Next.js 16** and **React 19**, 
 "This launch represents a significant milestone in our mission to deliver strategic precision for modern business transformation," said Terence Waters, CEO and Founder of Fluxline Resonance Group.
 
 The platform is now live and available for businesses seeking to transform their digital presence with cutting-edge technology and strategic expertise.
+
+## Related Resources
+
+- [Fluxline 2.0 Platform Development Case Study](/case-studies/fluxline-2-platform-development/) — complete strategic context and business impact
+- [How We Built Fluxline 2.0: Technical Breakdown](/blog/how-we-built-fluxline-2-breakdown/) — inside the 12-month development journey
+- [Fluxline Pro Website Portfolio](/portfolio/fluxline-pro-website) — technical showcase and visual presentation

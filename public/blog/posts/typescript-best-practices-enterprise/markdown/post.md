@@ -20,7 +20,7 @@ seoKeywords:
   ]
 ---
 
-## TypeScript Best Practices for Enterprise Applications
+# TypeScript Best Practices for Enterprise Applications
 
 TypeScript isn’t just a developer preference—it’s a strategic choice for enterprise-grade applications. Whether you're scaling a product or refining your architecture, these best practices will help you build with confidence
 
@@ -223,6 +223,12 @@ describe('User Service', () => {
 ## Conclusion
 
 TypeScript's type system is powerful and flexible. By following these best practices and patterns, you can build robust, maintainable, and scalable enterprise applications with confidence.
+
+## Related Resources
+
+- [Fluxline Pro Website Portfolio](/portfolio/fluxline-pro-website) — see these practices applied in production with strict TypeScript throughout
+- [How We Built Fluxline 2.0](/blog/how-we-built-fluxline-2-breakdown) — these patterns enabled type-safe architecture at scale
+- [Fluxline 2.0 Platform Case Study](/case-studies/fluxline-2-platform-development) — these TypeScript best practices enabled rapid development in just 3 months
 
 **Ready to level up your TypeScript architecture?**
 
