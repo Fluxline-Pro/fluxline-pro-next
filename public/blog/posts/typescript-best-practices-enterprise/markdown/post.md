@@ -224,6 +224,12 @@ describe('User Service', () => {
 
 TypeScript's type system is powerful and flexible. By following these best practices and patterns, you can build robust, maintainable, and scalable enterprise applications with confidence.
 
+## Related Resources
+
+- [Fluxline Pro Website Portfolio](/portfolio/fluxline-pro-website) — see these practices applied in production with strict TypeScript throughout
+- [How We Built Fluxline 2.0](/blog/how-we-built-fluxline-2-breakdown) — these patterns enabled type-safe architecture at scale
+- [Fluxline 2.0 Platform Case Study](/case-studies/fluxline-2-platform-development) — these TypeScript best practices enabled rapid development in just 3 months
+
 **Ready to level up your TypeScript architecture?**
 
 Let us help you by auditing your current type usage and configuration. Small changes today can unlock massive clarity tomorrow.

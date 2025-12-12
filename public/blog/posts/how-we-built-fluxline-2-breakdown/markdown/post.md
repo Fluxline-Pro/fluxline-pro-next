@@ -274,6 +274,8 @@ Custom glyphs for curriculum phases and emotional states:
 
 Strategic gradients for visual hierarchy:
 
+> **Explore the complete portfolio piece**: See these design systems in production in the [Fluxline Pro Website](/portfolio/fluxline-pro-website) portfolio piece with additional technical details and screenshots.
+
 ```scss
 // Fluxline Ascension: Depth → Illumination
 .ascension-gradient {
@@ -569,6 +571,8 @@ _Fluxline 2.0 is live at [fluxline.pro](https://fluxline.pro). Check out the pla
 **Related Reading:**
 
 - [Fluxline 2.0 Launch Press Release](/press-release/fluxline-pro-launch-2025/)
+- [Fluxline 2.0 Platform Development Case Study](/case-studies/fluxline-2-platform-development/) — strategic business context and transformation methodology
+- [Fluxline Pro Website Portfolio](/portfolio/fluxline-pro-website) — additional technical details and visual showcase
 - [Next.js 16 Best Practices](/blog/embracing-next-js-16-modern-web-development/)
 - [Design Systems for Enterprise](/blog/design-systems-scalable-applications/)
 - [Building High-Performance Platforms](/blog/typescript-best-practices-enterprise/)

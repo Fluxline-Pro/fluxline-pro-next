@@ -1,6 +1,6 @@
 ---
-title: 'Fluxline Pro Expands Consulting Services Globally'
-subtitle: 'Now Serving Clients Across North America, Europe, and Asia'
+title: 'Fluxline Pro Expands Consulting Services Nationally'
+subtitle: 'Now Serving Clients Across America'
 description: 'Fluxline Resonance Group announces global expansion of consulting services, now serving enterprise clients across three continents with strategic business transformation expertise.'
 author: 'Fluxline Resonance Group'
 publishedDate: '2025-09-15'
@@ -9,8 +9,8 @@ tags: ['consulting', 'expansion', 'global']
 imageAlt: 'Global Expansion'
 glyphTag: '🜄'
 emotionalCue: 'Visibility'
-seoTitle: 'Fluxline Global Consulting Expansion - North America, Europe, Asia'
-seoDescription: 'Fluxline expands consulting services globally with digital transformation, technology modernization, agile coaching, and accessibility audits across three continents.'
+seoTitle: 'Fluxline Consulting Expansion Throughout America'
+seoDescription: 'Fluxline expands consulting services nationally with digital transformation, technology modernization, agile coaching, and accessibility audits across three continents.'
 seoKeywords:
   [
     'global expansion',

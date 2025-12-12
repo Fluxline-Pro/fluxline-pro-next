@@ -237,6 +237,15 @@ This is coaching for those ready to reclaim their light.
 
 ---
 
+## Related Resources
+
+- [Personal Training Transformation Journey Portfolio](/portfolio/personal-training-transformation-journey) — complete technical details with training protocols and business impact
+- [Resonance Core Coaching Business](/portfolio/resonance-core-coaching-business) — how this methodology evolved into a scalable business with 85% client retention
+- [Scaling Personal Transformation Case Study](/case-studies/scaling-personal-transformation-resonance-core) — business model behind transformation coaching
+- [What Makes Transformation Coaching Different?](/blog/scaling-transformation-resonance-core-business) — why traditional fitness programs don't work long-term
+
+---
+
 _Every session is a scroll. Every insight, a gate. This is not just fitness—it's felt transformation._
 
 **Connect with me:** Let's design your path from fragility to sovereignty.

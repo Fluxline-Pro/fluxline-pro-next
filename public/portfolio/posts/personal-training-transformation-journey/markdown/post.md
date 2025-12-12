@@ -374,6 +374,14 @@ Phase 5: Power
 4. **Retention Over Acquisition**: Long-term relationships compound value
 5. **Impact and Income Align**: Transforming lives generates sustainable business
 
+**Key Stats:**
+
+- 8 years development
+- 120 lbs. → 185 lbs. transformation
+- NASM Certified Personal Trainer
+- 85% client retention rate
+- Proprietary Resonance Core Framework™
+
 ## Future Development
 
 ### Near-Term (1-2 Years)
@@ -438,16 +446,15 @@ This transformation journey embodies:
 - **[Personal Training & Wellness](https://fluxline.pro/services/personal-training/)**: Physical training with emotional intelligence
 - **[Resonance Core Framework™](https://fluxline.pro/services/resonance-core/)**: Deep transformation through archetypal mapping
 
+## Related Resources
+
+- [From Recovery to Resonance Blog](/blog/from-recovery-to-resonance-personal-journey) — the personal narrative behind this transformation
+- [Wellness Coaching Platform Case Study](/case-studies/wellness-coaching-platform) — how this journey became client methodology
+- [Resonance Core Coaching Business](/portfolio/resonance-core-coaching-business) — how this transformed into a scalable business
+- [What Makes Transformation Coaching Different?](/blog/scaling-transformation-resonance-core-business) — the business model and approach
+
 ---
 
 _This project demonstrates how personal transformation becomes professional methodology, creating a scalable, differentiated coaching business that integrates technical mastery with mythic resonance._
-
-**Key Stats:**
-
-- 8 years development
-- 120 lbs. → 185 lbs. transformation
-- NASM Certified Personal Trainer
-- 85% client retention rate
-- Proprietary Resonance Core Framework™
 
 **Connect:** [Personal Training](https://fluxline.pro/services/personal-training/) • [Resonance Core](https://fluxline.pro/services/resonance-core/) • [Contact](https://fluxline.pro/contact/)

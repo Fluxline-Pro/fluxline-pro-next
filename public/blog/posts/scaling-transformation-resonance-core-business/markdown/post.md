@@ -190,4 +190,13 @@ Founder, Fluxline Resonance Group
 
 ---
 
+## Related Resources
+
+- [Resonance Core Coaching Business Portfolio](/portfolio/resonance-core-coaching-business) — complete business model with revenue metrics and unit economics
+- [Scaling Personal Transformation Case Study](/case-studies/scaling-personal-transformation-resonance-core) — 6-phase playbook and business results
+- [From Recovery to Resonance](/blog/from-recovery-to-resonance-personal-journey) — the founder's 8-year transformation story
+- [Personal Training Transformation Journey](/portfolio/personal-training-transformation-journey) — the transformation that validates the methodology
+
+---
+
 **P.S.** If this post resonated with you, please share it with someone who might need to hear it. Transformation happens in community, not isolation.

@@ -428,6 +428,14 @@ This project embodies Fluxline's constellation of capabilities: technical master
 
 ---
 
+## Related Resources
+
+- [MyIntermountain SharePoint Intranet Portfolio](/portfolio/myintermountain-sharepoint-intranet) — additional technical details and implementation showcase
+- [Agile Transformation & Infrastructure Case Study](/case-studies/agile-transformation-consulting) — how we transformed the development team from siloed chaos to predictable delivery
+- [Digital Transformation Strategies Blog](/blog/digital-transformation-strategies-2025) — framework and best practices for enterprise transformation
+
+---
+
 _This case study demonstrates professional experience and technical capabilities. No proprietary intellectual property, screenshots, or confidential information belonging to Intermountain Health is disclosed._
 
 **Industry:** Healthcare IT  

@@ -357,7 +357,11 @@ This case study demonstrates Fluxline's integrated capabilities:
 
 ## Technical Resources
 
-**MIT and Code Contributions:**
+**Technical Deep Dive:**
+
+- [How We Built Fluxline 2.0: Technical and Strategic Breakdown](/blog/how-we-built-fluxline-2-breakdown/) — complete implementation details from concept to launch
+
+**MIT and Code Contributions:\*\***
 
 - GitHub repository (access granted by sending an email to [support@fluxline.pro](mailto:support@fluxline.pro)): [github.com/Fluxline-Pro/fluxline-pro-next](https://github.com/Fluxline-Pro/fluxline-pro-next)
 - Fluxline 2.0 Portfolio piece: [Fluxline 2.0 Portfolio Piece](/portfolio/fluxline-pro-website/)

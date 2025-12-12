@@ -42,3 +42,9 @@ The Resonance Core Framework™ offers:
 The program combines evidence-based coaching methodologies with mindfulness practices and strategic planning. Each engagement is customized to the individual leader's goals, challenges, and vision for their future.
 
 Through The Resonance Core Framework™, leaders discover how to lead with authenticity, build sustainable high-performance habits, and create lasting impact in their organizations and communities.
+
+## Related Resources
+
+- [What Makes Transformation Coaching Different?](/blog/scaling-transformation-resonance-core-business) — founder's perspective on the coaching methodology
+- [Resonance Core Coaching Business Portfolio](/portfolio/resonance-core-coaching-business) — business model and metrics
+- [Scaling Personal Transformation Case Study](/case-studies/scaling-personal-transformation-resonance-core) — complete strategic analysis
