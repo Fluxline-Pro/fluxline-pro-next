@@ -403,7 +403,7 @@ Content Pillars:
 
 ```
 Monthly Costs:
-├── Azure Hosting: $75
+├── Azure Hosting: $100
 ├── Domain & DNS: $15
 ├── Email Service: $10
 ├── Analytics: $0 (Azure included)

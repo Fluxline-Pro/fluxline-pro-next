@@ -117,7 +117,7 @@ Create a differentiated coaching business that:
 
 | Tier                   | Target Audience     | Price Point  | Key Features                                   |
 | ---------------------- | ------------------- | ------------ | ---------------------------------------------- |
-| **Single Session**     | Trial clients       | $110/session | Simplified instruction, no commitment          |
+| **Single Session**     | Trial clients       | $100/session | Simplified instruction, no commitment          |
 | **Online PT**          | Remote/creatives    | $225+/month  | Flexible support, digital programming          |
 | **Hybrid PT**          | Local clients       | $350+/month  | In-person + remote structure                   |
 | **Online Hypertrophy** | Physique-focused    | $275+/month  | Nutrition + metabolic coaching                 |
@@ -173,7 +173,7 @@ Create a differentiated coaching business that:
 **Time & Capacity:**
 
 - **Hours per Client**: 6-8 hours/month (Hybrid Hypertrophy)
-- **Effective Hourly Rate**: $56-$75/hour
+- **Effective Hourly Rate**: $56-$100/hour
 - **Current Capacity**: 15-20 clients (solo practitioner)
 - **Utilization Rate**: 70-80%
 - **Time to Value**: Clients see results within 4-6 weeks
