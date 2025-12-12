@@ -174,6 +174,14 @@ Whether you're scaling a business, redefining your brand, or architecting person
 → [Explore our services](/services)  
 → [Read more about our journey](/about)
 
+## Related Resources
+
+- [The Philosophy of Resonance (Part 1)](/blog/philosophy-of-resonance) — Core principles of the resonance framework
+- [Discipline vs. Resonance (Part 2)](/blog/discipline-vs-resonance) — How discipline sustains transformation
+- [The Obstacle Becomes Your Path (Part 3)](/blog/obstacle-becomes-your-path) — Turning barriers into growth catalysts
+- [Scaling Business Transformation](/blog/scaling-transformation-resonance-core-business) — Applying Fluxline philosophy to business growth
+- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — Technical embodiment of our philosophy
+
 ---
 
 _Modular by design. Resonant by nature._

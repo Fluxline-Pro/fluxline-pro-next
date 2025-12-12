@@ -40,3 +40,10 @@ This partnership enables:
 By leveraging Microsoft Azure's global infrastructure, we can provide enterprise clients with the reliability, security, and performance they need to succeed in today's digital landscape.
 
 Our clients benefit from Azure's 99.95% SLA, global edge network, and comprehensive security certifications including ISO 27001, SOC 2, and GDPR compliance.
+
+## Related Resources
+
+- [Digital Transformation Strategies 2025](/blog/digital-transformation-strategies-2025) — Azure’s role in transformation strategies
+- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — Azure Static Web Apps implementation
+- [MyIntermountain Intranet](/case-studies/myintermountain-intranet) — Enterprise Azure deployment case study
+- [Agile Transformation Consulting](/case-studies/agile-transformation-consulting) — Azure DevOps infrastructure setup

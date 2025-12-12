@@ -176,3 +176,10 @@ It’s how I help others find and elevate their own.
 
 → [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
 → [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)
+
+## Related Resources
+
+- [The Fluxline Philosophy](/blog/the-fluxline-philosophy) — Core principles and framework guiding the business
+- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — Technical embodiment of the legacy vision
+- [Scaling Business Transformation](/blog/scaling-transformation-resonance-core-business) — From coaching to business ecosystem
+- [Digital Transformation Strategies 2025](/blog/digital-transformation-strategies-2025) — Strategic approach to lasting transformation

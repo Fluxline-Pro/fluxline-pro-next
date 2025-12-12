@@ -403,4 +403,14 @@ By following WCAG 2.1 guidelines and testing thoroughly, you'll create applicati
 - Consider accessibility from day one, not as an afterthought
 - Remember: accessible design is good design
 
-_Have questions about accessibility? Drop them in the comments below!_
+## Let's Connect
+
+→ [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
+→ [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)
+
+## Related Resources
+
+- [Fluxline 2.0 Achieves WCAG 2.1 AA Certification](/press-release/accessibility-certification-2025) — How we achieved accessibility compliance
+- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — Building accessibility into the platform
+- [Design Systems for Scalable Applications](/blog/design-systems-scalable-applications) — Accessible component architecture
+- [Fluxline Pro Website Portfolio](/portfolio/fluxline-2-platform-development) — Live example of WCAG 2.1 AA implementation
