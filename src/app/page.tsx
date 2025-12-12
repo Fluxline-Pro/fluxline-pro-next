@@ -3,6 +3,8 @@
 import React from 'react';
 import { ViewportGrid } from '@/theme/components/layout/ViewportGrid';
 import { BackgroundLayer } from '@/theme/components/layout/background-layer';
+import { HomeFooter } from '@/theme/components/layout/home-footer';
+import { HomeCtaBanner } from '@/theme/components/layout/home-cta-banner';
 import { Typography } from '@/theme/components/typography';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { FadeUp } from '@/animations/fade-animations';
@@ -395,13 +397,17 @@ export default function Home() {
         layoutPreference={layoutPreference}
         backgroundLoaded={backgroundLoaded}
       />
-      <ViewportGrid
-        leftChildren={shouldShowContentOnLeft ? contentNode : undefined}
-        rightChildren={!shouldShowContentOnLeft ? contentNode : undefined}
-        isHomePage={true}
-        respectLayoutPreference={true}
-        backgroundImage={backgroundImage as 'one' | 'two'}
-      />
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <ViewportGrid
+          leftChildren={shouldShowContentOnLeft ? contentNode : undefined}
+          rightChildren={!shouldShowContentOnLeft ? contentNode : undefined}
+          isHomePage={true}
+          respectLayoutPreference={true}
+          backgroundImage={backgroundImage as 'one' | 'two'}
+        />
+        <HomeCtaBanner />
+        <HomeFooter />
+      </div>
     </>
   );
 }

@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { useColorVisionFilter } from '../../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../../hooks/useReducedMotion';
+import { VideoBackground } from '../video-background';
 import type { IExtendedTheme, ThemeMode } from '../../../theme';
 
 interface BackgroundLayerProps {
@@ -118,6 +119,15 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   const backgroundPosition = getBackgroundPosition(orientation, backgroundImage);
   const gradient = getBackgroundGradient(themeMode, theme);
 
+  // Determine if we should use video (only for backgroundImage === 'one')
+  const useVideo = backgroundImage === 'one';
+  
+  // Video paths - placeholder for now, will be updated when video is uploaded
+  const videoPath = orientation === 'portrait' || orientation === 'tablet-portrait'
+    ? '/videos/home/testimonial-portrait.mp4'
+    : '/videos/home/testimonial-landscape.mp4';
+  const captionsPath = '/videos/home/testimonial-captions.vtt';
+
   return (
     <div
       style={{
@@ -134,47 +144,65 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         transition: shouldReduceMotion ? 'none' : 'opacity 0.5s ease-in-out',
       }}
     >
-      {/* Background Image */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          width: '100%',
-          height: '100%',
-          filter: filter,
-        }}
-      >
-        <Image
-          src={imagePath}
-          alt="Fluxline Pro background"
-          fill
-          priority
-          quality={90}
-          style={{
-            objectFit: 'cover',
-            objectPosition: backgroundPosition,
-            transform: shouldFlipHorizontally ? 'scaleX(-1)' : undefined,
-          }}
+      {useVideo ? (
+        /* Video Background for backgroundImage === 'one' */
+        <VideoBackground
+          videoSrc={videoPath}
+          posterSrc={imagePath}
+          fallbackImageSrc={imagePath}
+          captionsSrc={captionsPath}
+          orientation={orientation}
+          backgroundPosition={backgroundPosition}
+          gradient={gradient}
+          shouldFlipHorizontally={shouldFlipHorizontally}
+          themeMode={themeMode}
+          theme={theme}
         />
-      </div>
+      ) : (
+        /* Static Image Background for backgroundImage === 'two' */
+        <>
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100%',
+              height: '100%',
+              filter: filter,
+            }}
+          >
+            <Image
+              src={imagePath}
+              alt="Fluxline Pro background"
+              fill
+              priority
+              quality={90}
+              style={{
+                objectFit: 'cover',
+                objectPosition: backgroundPosition,
+                transform: shouldFlipHorizontally ? 'scaleX(-1)' : undefined,
+              }}
+            />
+          </div>
 
-      {/* Gradient Overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          width: '100%',
-          height: '100%',
-          background: gradient,
-          pointerEvents: 'none',
-        }}
-      />
+          {/* Gradient Overlay */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100%',
+              height: '100%',
+              background: gradient,
+              pointerEvents: 'none',
+            }}
+          />
+        </>
+      )}
     </div>
   );
 };
