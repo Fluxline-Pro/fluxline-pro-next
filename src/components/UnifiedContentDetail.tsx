@@ -654,6 +654,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             }}
             className='unified-content-detail'
           >
+            {/* H1 headings are removed in _theme.scss to avoid duplication with title */}
             {config.contentType === 'markdown' ? (
               <ReactMarkdown
                 components={markdownComponents}
