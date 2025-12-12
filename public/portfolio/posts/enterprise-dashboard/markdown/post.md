@@ -26,7 +26,7 @@ technologies:
     'Decision Scoring',
   ]
 featuredImage:
-  url: '/images/home/FluxlineLogo.png'
+  url: '/portfolio/posts/enterprise-dashboard/images/dii-dashboard.png'
   alt: 'Decision Integrity Index Dashboard'
 gallery:
   - url: '/portfolio/posts/enterprise-dashboard/images/dii-dashboard.png'
