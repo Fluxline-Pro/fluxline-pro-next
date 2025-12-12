@@ -62,11 +62,14 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
     border: `1px solid ${
       isHovered ? theme.palette.themePrimary : theme.palette.neutralTertiaryAlt
     }`,
-    backgroundColor: isHovered
-      ? isDark
-        ? theme.palette.neutralLighter
-        : theme.palette.neutralLighterAlt
-      : 'transparent',
+    backgroundColor:
+      theme.themeMode === 'high-contrast'
+        ? theme.semanticColors.bodyBackground
+        : isHovered
+          ? isDark
+            ? theme.palette.neutralLighter
+            : theme.palette.neutralLighterAlt
+          : theme.palette.neutralLighterAlt,
     transition: 'all 0.3s ease',
     transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
     boxShadow: isHovered ? theme.shadows.l : theme.shadows.card,

@@ -22,6 +22,7 @@ import {
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { useHoverEffects } from '../hooks/useHoverEffects';
 import { useHeaderHeight } from '../theme/hooks/useHeaderHeight';
+import { useColorVisionFilter } from '../theme/hooks/useColorVisionFilter';
 import { ThemeMode } from '../theme/theme';
 
 import { typography, spacing } from '../theme/theme';
@@ -278,6 +279,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   // Hover state for image gallery
   const [isImageHovered, setIsImageHovered] = React.useState(false);
+
+  // Color vision filter for accessibility
+  const { filter: colorVisionFilter } = useColorVisionFilter();
 
   // Check if current path should use the wrapper
   // const shouldUseWrapper = !EXCLUDED_PAGES.includes(pathname);
@@ -632,6 +636,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
+                  filter: colorVisionFilter,
                 }}
                 priority
                 placeholder='blur'
@@ -735,6 +740,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   width: '100%',
                   height: 'auto',
                   objectFit: 'contain',
+                  filter: colorVisionFilter,
                 }}
                 priority
                 placeholder='blur'
@@ -785,7 +791,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                     right: 0,
                     padding: theme.spacing.l,
                     background: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent)`,
-                    color: theme.palette.white,
+                    color: '#FFFFFF',
                   }}
                 >
                   <h2
@@ -795,6 +801,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
                       fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                       lineHeight: 1.2,
+                      color: '#FFFFFF',
                     }}
                   >
                     {imageTextToDisplay}

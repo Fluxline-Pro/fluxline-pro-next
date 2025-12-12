@@ -116,7 +116,10 @@ export const Hero: React.FC<HeroProps> = ({
         border: showBorder
           ? `1px solid ${theme.palette.neutralTertiary}`
           : 'none',
-        backgroundColor: theme.palette.neutralLight,
+        backgroundColor:
+          theme.themeMode === 'high-contrast'
+            ? theme.semanticColors.bodyBackground
+            : theme.palette.neutralLight,
         padding: isMobile
           ? `${theme.spacing.l}`
           : isTablet

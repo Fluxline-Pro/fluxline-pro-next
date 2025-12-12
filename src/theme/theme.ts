@@ -226,12 +226,12 @@ export const baseGradients = {
   light: {
     solid: '#FFFFFF',
     background:
-      'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-    menu: 'linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%)',
+      'radial-gradient(ellipse at left, #E8EAF0 0%, #E5E5E5 40%, #DADADA 100%)',
+    menu: 'linear-gradient(135deg, #E8EAF0 0%, #F0F0F0 100%)',
     radial:
-      'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-    vignette: 'radial-gradient(circle at center, transparent 0%, #F5F5F5 100%)',
-    linear: 'linear-gradient(90deg, #F8FAFC 0%, #FFFFFF 100%)',
+      'radial-gradient(ellipse at left, #E8EAF0 0%, #E5E5E5 40%, #DADADA 100%)',
+    vignette: 'radial-gradient(circle at center, transparent 0%, #E5E5E5 100%)',
+    linear: 'linear-gradient(90deg, #E8EAF0 0%, #F0F0F0 100%)',
   },
   components: {
     card: {
@@ -1047,41 +1047,40 @@ export const highContrastTheme: IExtendedTheme = createExtendedTheme(
   createTheme({
     palette: {
       themePrimary: '#3399FF',
-      themeSecondary: '#F8F8F8',
-      themeTertiary: '#CCCCCC',
-      themeLight: '#F8F8F8',
+      themeSecondary: '#00FFFF',
+      themeTertiary: '#00FFFF',
+      themeLight: '#1A1A1A',
       themeDark: '#000000',
       themeDarker: '#000000',
-      themeLighter: '#F8F8F8',
-      themeLighterAlt: '#F8F8F8',
+      themeLighter: '#2A2A2A',
+      themeLighterAlt: '#1A1A1A',
       neutralPrimary: '#FFFFFF',
-      neutralSecondary: '#F8F8F8',
-      neutralTertiary: '#CCCCCC',
-      neutralTertiaryAlt: '#F8F8F8',
-      neutralQuaternary: '#F8F8F8',
-      neutralQuaternaryAlt: '#F8F8F8',
+      neutralSecondary: '#CCCCCC',
+      neutralTertiary: '#999999',
+      neutralTertiaryAlt: '#666666',
+      neutralQuaternary: '#444444',
+      neutralQuaternaryAlt: '#2A2A2A',
       neutralDark: '#000000',
-      neutralLight: '#F8F8F8',
-      neutralLighter: '#F8F8F8',
-      neutralLighterAlt: '#F8F8F8',
+      neutralLight: '#1A1A1A',
+      neutralLighter: '#2A2A2A',
+      neutralLighterAlt: '#1A1A1A',
       accent: '#3399FF',
-      black: '#121212',
-      white: '#F8F8F8',
+      black: '#000000',
+      white: '#FFFFFF',
     },
     semanticColors: {
-      bodyText: '#F8F8F8',
-      bodyBackground:
-        'radial-gradient(ellipse at left, #2A2A2A 0%, #1A1A1A 40%, #121212 100%)',
+      bodyText: '#FFFFFF',
+      bodyBackground: '#000000',
       errorText: '#FF0000',
-      errorBackground: '#FF0000',
+      errorBackground: '#1A1A1A',
       successText: '#00FF00',
       successBackground: '#121212',
       successIcon: '#00FF00',
       messageText: '#FFFF00',
       warningText: '#FFFF00',
       warningBackground: '#121212',
-      link: '#0000FF',
-      linkHovered: '#CCCCCC',
+      link: '#3399FF',
+      linkHovered: '#00FFFF',
     },
     isInverted: true,
   }),
@@ -1557,7 +1556,7 @@ export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
       neutralQuaternaryAlt: '#1a1a1a', // Very dark backgrounds
       neutralLighter: '#333333', // Lighter dark backgrounds
       neutralLighterAlt: '#000000', // Lightest dark backgrounds
-      neutralDark: '#f0f0f0', // Light text
+      neutralDark: '#010101', // Dark text
       neutralLight: '#000000', // Black
       accent: '#666666', // Accent elements (light gray)
       black: '#000000', // White

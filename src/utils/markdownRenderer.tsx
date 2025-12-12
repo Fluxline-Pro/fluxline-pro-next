@@ -397,6 +397,147 @@ export const UnifiedMarkdownRenderer: React.FC<
           }}
         />
       ),
+      table: ({
+        children,
+        ...props
+      }: React.TableHTMLAttributes<HTMLTableElement> & {
+        children?: React.ReactNode;
+      }) => (
+        <div
+          style={{
+            overflowX: 'auto',
+            marginTop: theme.spacing.m,
+            marginBottom: theme.spacing.m,
+          }}
+        >
+          <table
+            {...props}
+            style={{
+              width: '100%',
+              borderCollapse: 'collapse',
+              color: theme.semanticColors.bodyText,
+              fontSize: typography.fonts.body.fontSize,
+            }}
+          >
+            {children}
+          </table>
+        </div>
+      ),
+      thead: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLTableSectionElement> & {
+        children?: React.ReactNode;
+      }) => (
+        <thead
+          {...props}
+          style={{
+            backgroundColor: theme.themeMode === 'high-contrast'
+        ? theme.semanticColors.bodyBackground : theme.palette.themePrimary,
+            color: theme.palette.white,
+            borderBottom: `2px solid ${theme.palette.themeDark}`,
+          }}
+        >
+          {children}
+        </thead>
+      ),
+      tbody: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLTableSectionElement> & {
+        children?: React.ReactNode;
+      }) => (
+        <tbody
+          {...props}
+          style={{
+            color: theme.semanticColors.bodyText,
+          }}
+        >
+          {children}
+        </tbody>
+      ),
+      tr: ({
+        children,
+        ...props
+      }: React.HTMLAttributes<HTMLTableRowElement> & {
+        children?: React.ReactNode;
+      }) => {
+        // Check if this row contains header cells
+        const hasHeaderCells = React.Children.toArray(children).some(
+          (child) =>
+            React.isValidElement(child) &&
+            (child.type === 'th' || (child as any).props?.originalType === 'th')
+        );
+
+        return (
+          <tr
+            {...props}
+            style={{
+              backgroundColor: hasHeaderCells
+                ? theme.palette.themePrimary
+                : undefined,
+              borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
+            }}
+          >
+            {children}
+          </tr>
+        );
+      },
+      th: ({
+        children,
+        ...props
+      }: React.ThHTMLAttributes<HTMLTableCellElement> & {
+        children?: React.ReactNode;
+      }) => (
+        <th
+          {...props}
+          style={{
+            padding: theme.spacing.m,
+            textAlign: 'left',
+            fontWeight: typography.fontWeights.bold,
+            color: theme.palette.white,
+          }}
+        >
+          {children}
+        </th>
+      ),
+      td: ({
+        children,
+        ...props
+      }: React.TdHTMLAttributes<HTMLTableCellElement> & {
+        children?: React.ReactNode;
+      }) => (
+        <td
+          {...props}
+          style={{
+            padding: theme.spacing.m,
+            color: theme.semanticColors.bodyText,
+          }}
+        >
+          {children}
+        </td>
+      ),
+      img: ({
+        src,
+        alt,
+        ...props
+      }: React.ImgHTMLAttributes<HTMLImageElement> & {
+        src?: string;
+        alt?: string;
+      }) => (
+        <img
+          src={src}
+          alt={alt}
+          {...props}
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            borderRadius: theme.borderRadius.m,
+            marginTop: theme.spacing.m,
+            marginBottom: theme.spacing.m,
+          }}
+        />
+      ),
     }),
     [theme]
   );
