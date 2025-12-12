@@ -38,10 +38,3 @@ The certification validates our implementation of:
 This achievement reflects our core belief that technology should be accessible to everyone. We will continue to prioritize accessibility in all our products and services, ensuring that digital experiences are available to users of all abilities.
 
 Accessibility is not just a compliance requirement—it's a fundamental principle that guides our design and development processes. Every user deserves equal access to information and services, regardless of their physical or cognitive abilities.
-
-## Related Resources
-
-- [Building Accessible Web Applications](/blog/building-accessible-web-applications) — Complete guide to WCAG 2.1 implementation
-- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — How accessibility is built into the platform
-- [Design Systems for Scalable Applications](/blog/design-systems-scalable-applications) — Accessible design system principles
-- [Fluxline Pro Website Portfolio](/portfolio/fluxline-2-platform-development) — Technical showcase of accessibility features

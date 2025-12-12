@@ -522,7 +522,7 @@ Reach out. Let's explore what resonance looks like for you.
 
 ---
 
-Fluxline's transformation wasn't about tactics—it was about **building a business that honors resonance over reach, depth over breadth, legacy over virality**.
+At its core, Fluxline's journey has been about prioritizing meaningful connections, lasting impact, and authentic resonance—choosing substance over scale, and legacy over fleeting trends.
 
 If that resonates with you, **let's build together**.
 

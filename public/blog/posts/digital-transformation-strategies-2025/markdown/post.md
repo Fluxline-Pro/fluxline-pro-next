@@ -132,7 +132,10 @@ When done right, it doesn’t just modernize your business—it redefines it.
 - [MyIntermountain Enterprise Intranet Case Study](/case-studies/myintermountain-intranet) — enterprise SharePoint architecture serving 65K+ users exemplifies transformation at scale
 - [How We Built Fluxline 2.0](/blog/how-we-built-fluxline-2-breakdown) — transformation strategies in action, from concept to launch
 - [Fluxline 2.0 Platform Development Case Study](/case-studies/fluxline-2-platform-development) — complete business context and transformation methodology
-  **Let’s build what’s next.**
+
+## Let's Connect
+
+**Let’s build what’s next.**
 
 → [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
 → [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)

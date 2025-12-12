@@ -184,7 +184,9 @@ If that resonates with you, I'd love to support your journey.
 
 I'd love to hear your story. Reply to this email (if you're reading from the newsletter) or [reach out directly](/contact).
 
-**Every transformation starts with a single step. Let's take it together.**With clarity and resonance,\*\*  
+**Every transformation starts with a single step. Let's take it together.**
+
+With clarity and resonance,
 Terence Waters  
 Founder, Fluxline Resonance Group
 
@@ -198,5 +200,3 @@ Founder, Fluxline Resonance Group
 - [Personal Training Transformation Journey](/portfolio/personal-training-transformation-journey) — the transformation that validates the methodology
 
 ---
-
-**P.S.** If this post resonated with you, please share it with someone who might need to hear it. Transformation happens in community, not isolation.
