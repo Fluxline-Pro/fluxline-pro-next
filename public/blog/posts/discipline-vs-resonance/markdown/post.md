@@ -32,7 +32,7 @@ seoKeywords:
   ]
 ---
 
-## 💪 Resonance, Part 2: Discipline vs. Resonance
+# 💪 Resonance, Part 2: Discipline vs. Resonance
 
 [In Part 1: The Philosophy of Resonance](/blog/philosophy-of-resonance), we explored how resonance becomes
 an inner glow—an emotional alignment that drives action. Whether you're learning
@@ -128,5 +128,12 @@ emotional architecture that keep you grounded—and growing.
 
 →
 [Book a session with me](https://outlook.office.com/book/Bookings@terencewaters.com/)
+
+## Related Resources
+
+- [The Philosophy of Resonance (Part 1)](/blog/philosophy-of-resonance) — Understanding the drive behind transformation
+- [The Obstacle Becomes Your Path (Part 3)](/blog/obstacle-becomes-your-path) — How friction fuels growth
+- [From Recovery to Resonance](/blog/from-recovery-to-resonance-personal-journey) — Personal transformation story demonstrating discipline and resonance
+- [Scaling Personal Transformation Case Study](/case-studies/scaling-personal-transformation-resonance-core) — Business model behind resonance methodology
 
 ---

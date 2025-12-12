@@ -42,3 +42,10 @@ The design system is now available for developers to build consistent, accessibl
 Each component is thoroughly tested, documented, and follows accessibility best practices. The system supports dark mode, light mode, and high-contrast themes out of the box.
 
 Developers can quickly scaffold new projects using our component generators and leverage pre-built patterns for common UI challenges.
+
+## Related Resources
+
+- [Design Systems for Scalable Applications](/blog/design-systems-scalable-applications) — Technical deep dive into design system principles
+- [Fluxline Glyph System Portfolio](/portfolio/fluxline-glyph-system-symbolic-design) — Symbolic design language within the system
+- [Symbolic Design & Glyph Language Case Study](/case-studies/symbolic-design-glyph-language) — Brand differentiation through visual identity
+- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — Complete platform showcasing the design system

@@ -20,7 +20,7 @@ seoKeywords:
   ]
 ---
 
-## Design Systems for Scalable Applications
+# Design Systems for Scalable Applications
 
 A well-designed design system is the foundation of scalable, maintainable, and consistent applications. This article explores the principles and practices for creating effective design systems.
 
@@ -147,3 +147,15 @@ export function ThemedButton() {
 ## Conclusion
 
 A well-implemented design system is an investment that pays dividends in consistency, efficiency, and scalability. By following best practices and continuously iterating, you can create a design system that empowers your teams and delights your users.
+
+## Let's Connect
+
+→ [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
+→ [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)
+
+## Related Resources
+
+- [Fluxline Glyph System Portfolio](/portfolio/fluxline-glyph-system-symbolic-design) — Symbolic design language as part of design system
+- [Symbolic Design & Glyph Language Case Study](/case-studies/symbolic-design-glyph-language) — How visual language creates brand differentiation
+- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — Real-world design system implementation
+- [Fluxline Design System 1.0 Released](/press-release/design-system-release-2025) — Official component library announcement

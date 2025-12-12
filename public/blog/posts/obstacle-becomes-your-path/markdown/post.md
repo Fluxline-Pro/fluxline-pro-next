@@ -32,7 +32,7 @@ seoKeywords:
   ]
 ---
 
-## 🪨 Resonance, Part 3: The Obstacle Becomes Your Path
+# 🪨 Resonance, Part 3: The Obstacle Becomes Your Path
 
 [In Part 2: Discipline vs. Resonance](/blog/discipline-vs-resonance), we talked about how discipline is
 required to keep you moving in the direction toward those things that move and
@@ -101,3 +101,10 @@ Let's name the real barriers—personal or professional—and shift them into ca
 
 → [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)  
 → [Explore more about the Fluxline philosophy](/blog/the-fluxline-philosophy)
+
+## Related Resources
+
+- [The Philosophy of Resonance (Part 1)](/blog/philosophy-of-resonance) — Understanding what drives you forward
+- [Discipline vs. Resonance (Part 2)](/blog/discipline-vs-resonance) — The bridge between inspiration and transformation
+- [Agile Transformation Case Study](/case-studies/agile-transformation-consulting) — Real-world example of turning obstacles into infrastructure
+- [MyIntermountain Intranet Case Study](/case-studies/myintermountain-intranet) — Overcoming barriers in complex healthcare projects

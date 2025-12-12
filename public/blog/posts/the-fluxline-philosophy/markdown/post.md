@@ -32,7 +32,7 @@ seoKeywords:
   ]
 ---
 
-## ✨ The Fluxline Philosophy
+# ✨ The Fluxline Philosophy
 
 Fluxline Resonance Group isn't just an offering—it's a framework for transformation and shift. Built around the belief that architecture should reflect emotion and purpose, Fluxline bridges modular technology, intentional design, and coaching that meets people where they are. Whether you're scaling a business or redefining your identity, Fluxline provides not just tools—but structured pathways to clarity, alignment, and impact.
 
@@ -173,6 +173,14 @@ Whether you're scaling a business, redefining your brand, or architecting person
 → [Book a consultation](https://outlook.office.com/book/Bookings@terencewaters.com/)  
 → [Explore our services](/services)  
 → [Read more about our journey](/about)
+
+## Related Resources
+
+- [The Philosophy of Resonance (Part 1)](/blog/philosophy-of-resonance) — Core principles of the resonance framework
+- [Discipline vs. Resonance (Part 2)](/blog/discipline-vs-resonance) — How discipline sustains transformation
+- [The Obstacle Becomes Your Path (Part 3)](/blog/obstacle-becomes-your-path) — Turning barriers into growth catalysts
+- [Scaling Business Transformation](/blog/scaling-transformation-resonance-core-business) — Applying Fluxline philosophy to business growth
+- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — Technical embodiment of our philosophy
 
 ---
 

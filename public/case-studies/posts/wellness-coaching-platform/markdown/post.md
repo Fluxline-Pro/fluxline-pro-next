@@ -69,7 +69,7 @@ testimonial:
   role: 'Founder, Fluxline Resonance Group'
 ---
 
-## Personal Training Program Growth — From Recovery to Resonance
+# Personal Training Program Growth — From Recovery to Resonance
 
 ## Challenge (Initiation Gate 🔥)
 

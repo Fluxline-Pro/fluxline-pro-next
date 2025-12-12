@@ -64,7 +64,7 @@ testimonial:
   role: 'CEO & Founder, Fluxline Resonance Group'
 ---
 
-## Symbolic Design & Glyph Language — Emergence of Resonant Visuals
+# Symbolic Design & Glyph Language — Emergence of Resonant Visuals
 
 ## Challenge (Initiation Gate 🔥)
 
@@ -395,6 +395,13 @@ This case study embodies Fluxline's integrated capabilities:
 - **[Resonance Core Framework™](https://fluxline.pro/services/resonance-core/)**: Transformation methodology using glyph language
 - **[Business Transformation Consulting](https://fluxline.pro/services/consulting/)**: Strategic differentiation through brand identity
 
+## Related Resources
+
+- [Fluxline Glyph System Portfolio](/portfolio/fluxline-glyph-system-symbolic-design) — Technical specifications and design details
+- [Design Systems for Scalable Applications](/blog/design-systems-scalable-applications) — How design systems enable consistency
+- [Fluxline Design System 1.0 Released](/press-release/design-system-release-2025) — Official component library announcement
+- [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — End-to-end implementation
+
 ## Visual Examples
 
 **Glyph Applications:**
@@ -414,4 +421,4 @@ All Fluxline materials now feature glyph integration, creating consistent brand 
 
 _Glyphs are not decoration—they are living symbols of sovereignty, discipline, and resonance. This is how transformation becomes visible._
 
-**Interested in developing your own symbolic brand language?** [Get in touch](https://fluxline.pro/contact/) to discuss brand identity and design system development.
+**Interested in developing your own symbolic brand language?** [Get in touch with us](https://fluxline.pro/contact/) to discuss your business's unique brand identity and design system development.

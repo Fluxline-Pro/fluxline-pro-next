@@ -13,7 +13,7 @@ seoDescription: 'Discover the philosophy of resonance and how it drives personal
 seoKeywords: ['resonance', 'personal growth', 'emotional architecture', 'intentionality', 'transformation', 'drive', 'Ryan Reynolds']
 ---
 
-## 🧠 Resonance, Part 1: The Philosophy of Resonance
+# 🧠 Resonance, Part 1: The Philosophy of Resonance
 
 I've always admired Ryan Reynolds' versatility and persona. Sure, he's easy on
 the eyes and exudes stellar charisma—but think on this for a minute:
@@ -93,5 +93,12 @@ emotional architecture that drive your clarity and impact.
 
 →
 [Book a session with us](https://outlook.office.com/book/Bookings@terencewaters.com/)
+
+## Related Resources
+
+- [Discipline vs. Resonance (Part 2)](/blog/discipline-vs-resonance) — How discipline bridges inspiration and transformation
+- [The Obstacle Becomes Your Path (Part 3)](/blog/obstacle-becomes-your-path) — Turning barriers into pathways for growth
+- [The Fluxline Philosophy](/blog/the-fluxline-philosophy) — Complete framework for transformation
+- [Scaling Personal Transformation Case Study](/case-studies/scaling-personal-transformation-resonance-core) — Resonance methodology in practice
 
 ---
