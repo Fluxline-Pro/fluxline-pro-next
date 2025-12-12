@@ -282,8 +282,7 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLPreElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='pre'
+        <pre
           {...props}
           style={{
             ...typography.fonts.pre,
@@ -292,13 +291,18 @@ export const UnifiedMarkdownRenderer: React.FC<
             padding: theme.spacing.m,
             borderRadius: theme.borderRadius.m,
             overflow: 'auto',
+            overflowX: 'auto',
             marginTop: theme.spacing.m,
             marginBottom: theme.spacing.m,
             fontFamily: typography.fontFamilies.mono,
+            maxWidth: '100%',
+            width: '100%',
+            minWidth: 0,
+            boxSizing: 'border-box',
           }}
         >
           {children}
-        </Typography>
+        </pre>
       ),
       ul: ({
         children,
