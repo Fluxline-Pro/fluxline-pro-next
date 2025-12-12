@@ -57,7 +57,7 @@ testimonial:
 
 # MyIntermountain Enterprise Intranet - Azure & SharePoint Infrastructure
 
-**INTELLECTUAL PROPERTY DISCLAIMER**: This project is the proprietary intellectual property of Intermountain Health. This case study demonstrates Fluxline's capability to deliver enterprise-scale infrastructure and integrated Microsoft 365 solutions. All work was performed as a lead infrastructure developer and Scrum lead under employment with Intermountain Health. No proprietary code, screenshots, or confidential information is disclosed.
+**INTELLECTUAL PROPERTY DISCLAIMER**: This project is the proprietary intellectual property of Intermountain Health. This case study demonstrates Fluxline's capability to deliver enterprise-scale infrastructure and integrated Microsoft 365 solutions. All work was performed as a lead infrastructure developer and Scrum lead under employment with Intermountain Health. No proprietary code, screenshots, or confidential information is disclosed, and Fluxline was not involved in the actual development of this application.
 
 ---
 
