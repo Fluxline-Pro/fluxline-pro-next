@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { ContentNotFound } from '@/components/ContentNotFound';
-import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { PortfolioProject } from '../types';
 
@@ -105,59 +104,8 @@ export default function PortfolioDetailClient({
           ]
         : []),
     ],
-    sections:
-      project.gallery && project.gallery.length > 0
-        ? [
-            {
-              title: 'Project Gallery',
-              content: (
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: theme.spacing.l,
-                  }}
-                >
-                  {project.gallery.map((image, index) => (
-                    <div key={index}>
-                      <div
-                        style={{
-                          width: '100%',
-                          height: '200px',
-                          backgroundColor: theme.palette.neutralLight,
-                          borderRadius: theme.effects.roundedCorner4,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          marginBottom: theme.spacing.s1,
-                        }}
-                      >
-                        <Typography
-                          variant='p'
-                          style={{ color: theme.palette.neutralTertiary }}
-                        >
-                          {image.alt}
-                        </Typography>
-                      </div>
-                      {image.caption && (
-                        <Typography
-                          variant='p'
-                          style={{
-                            color: theme.palette.neutralSecondary,
-                            fontSize: theme.fonts.small.fontSize,
-                            fontStyle: 'italic',
-                          }}
-                        >
-                          {image.caption}
-                        </Typography>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ),
-            },
-          ]
-        : undefined,
+    showGallerySection: project.gallery && project.gallery.length > 0,
+    sectionsPosition: 'before', // Show gallery at top of page
     cta: {
       title: 'Interested in Working Together?',
       description: "Let's discuss how we can help bring your project to life.",
