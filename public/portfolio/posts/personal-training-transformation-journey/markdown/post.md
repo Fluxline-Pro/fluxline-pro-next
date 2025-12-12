@@ -21,7 +21,7 @@ technologies:
   - Somatic Practices
   - Archetypal Mapping
 featuredImage:
-  url: '/blog/posts/from-recovery-to-resonance-personal-journey/images/personalTrainingPortrait.jpg'
+  url: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
   alt: 'Personal Training & Resonance Core Framework practitioner'
 gallery:
   - url: '/portfolio/posts/personal-training-transformation-journey/images/before-after.jpg'
