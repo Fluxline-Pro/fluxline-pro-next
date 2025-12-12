@@ -32,7 +32,7 @@ seoKeywords:
   ]
 ---
 
-## 💪 Resonance, Part 2: Discipline vs. Resonance
+# 💪 Resonance, Part 2: Discipline vs. Resonance
 
 [In Part 1: The Philosophy of Resonance](/blog/philosophy-of-resonance), we explored how resonance becomes
 an inner glow—an emotional alignment that drives action. Whether you're learning

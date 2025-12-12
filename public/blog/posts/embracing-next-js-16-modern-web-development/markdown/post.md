@@ -21,7 +21,7 @@ seoKeywords:
   ]
 ---
 
-## Embracing Next.js 16 for Modern Web Development
+# Embracing Next.js 16 for Modern Web Development
 
 Next.js 16 represents a significant leap forward in web development, bringing enhanced performance, improved developer experience, and powerful new features that make building modern web applications more efficient than ever.
 

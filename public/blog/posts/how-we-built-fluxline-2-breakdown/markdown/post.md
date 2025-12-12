@@ -30,7 +30,7 @@ seoKeywords:
 featured: true
 ---
 
-## How We Built Fluxline 2.0: A Technical and Strategic Breakdown
+# How We Built Fluxline 2.0: A Technical and Strategic Breakdown
 
 Today marks the official launch of **Fluxline 2.0**—a complete platform rebuild that transforms our digital presence from personal portfolio to enterprise business platform. This isn't just a new website; it's a strategic business asset that generates leads, demonstrates capabilities, and embodies our transformation methodology.
 

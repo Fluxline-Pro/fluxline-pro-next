@@ -32,7 +32,7 @@ seoKeywords:
   ]
 ---
 
-## ✨ The Fluxline Philosophy
+# ✨ The Fluxline Philosophy
 
 Fluxline Resonance Group isn't just an offering—it's a framework for transformation and shift. Built around the belief that architecture should reflect emotion and purpose, Fluxline bridges modular technology, intentional design, and coaching that meets people where they are. Whether you're scaling a business or redefining your identity, Fluxline provides not just tools—but structured pathways to clarity, alignment, and impact.
 

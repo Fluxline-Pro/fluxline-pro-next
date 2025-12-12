@@ -52,7 +52,7 @@ testimonial:
   role: 'CEO & Founder, Fluxline Resonance Group'
 ---
 
-## Fluxline 2.0 Platform Development — Brand Identity Rebirth
+# Fluxline 2.0 Platform Development — Brand Identity Rebirth
 
 ## Challenge (Initiation Gate 🔥)
 

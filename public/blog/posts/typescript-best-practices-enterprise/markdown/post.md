@@ -20,7 +20,7 @@ seoKeywords:
   ]
 ---
 
-## TypeScript Best Practices for Enterprise Applications
+# TypeScript Best Practices for Enterprise Applications
 
 TypeScript isn’t just a developer preference—it’s a strategic choice for enterprise-grade applications. Whether you're scaling a product or refining your architecture, these best practices will help you build with confidence
 

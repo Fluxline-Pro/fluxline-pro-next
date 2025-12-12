@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import React from 'react';
 import { getBlogPostBySlug } from '../lib/blogLoader';
 import { BlogPostDetailClient } from './BlogPostDetailClient';
@@ -11,7 +12,7 @@ if (typeof window === 'undefined') {
     const loader = require('../lib/blogLoader');
     getAllBlogPostSlugs = loader.getAllBlogPostSlugs;
   } catch (error) {
-    console.warn('Could not load blog loader for generateStaticParams');
+    console.warn('Could not load blog loader for generateStaticParams', error);
   }
 }
 

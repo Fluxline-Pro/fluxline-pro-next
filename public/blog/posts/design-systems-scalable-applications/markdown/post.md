@@ -20,7 +20,7 @@ seoKeywords:
   ]
 ---
 
-## Design Systems for Scalable Applications
+# Design Systems for Scalable Applications
 
 A well-designed design system is the foundation of scalable, maintainable, and consistent applications. This article explores the principles and practices for creating effective design systems.
 

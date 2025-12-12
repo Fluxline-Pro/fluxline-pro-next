@@ -64,7 +64,7 @@ testimonial:
   role: 'CEO & Founder, Fluxline Resonance Group'
 ---
 
-## Symbolic Design & Glyph Language — Emergence of Resonant Visuals
+# Symbolic Design & Glyph Language — Emergence of Resonant Visuals
 
 ## Challenge (Initiation Gate 🔥)
 

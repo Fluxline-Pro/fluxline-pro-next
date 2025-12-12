@@ -21,7 +21,7 @@ seoKeywords:
   ]
 ---
 
-## Digital Transformation Strategies for 2025
+# Digital Transformation Strategies for 2025
 
 Digital transformation isn’t just a buzzword anymore—it’s the heartbeat of modern business. If you're looking to stay relevant, resilient, and ready for what’s next, transformation is no longer optional. _It’s the strategy._
 

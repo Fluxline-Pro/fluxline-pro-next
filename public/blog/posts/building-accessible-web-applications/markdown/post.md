@@ -20,7 +20,7 @@ seoKeywords:
   ]
 ---
 
-## Building Accessible Web Applications: A Guide to WCAG 2.1
+# Building Accessible Web Applications: A Guide to WCAG 2.1
 
 Web accessibility isn't just a legal requirement—it's a moral imperative and a smart business decision. According to the WHO, over 1 billion people live with some form of disability. By making your web applications accessible, you're opening your digital doors to everyone.
 

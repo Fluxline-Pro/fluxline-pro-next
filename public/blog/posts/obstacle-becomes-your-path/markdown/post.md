@@ -32,7 +32,7 @@ seoKeywords:
   ]
 ---
 
-## 🪨 Resonance, Part 3: The Obstacle Becomes Your Path
+# 🪨 Resonance, Part 3: The Obstacle Becomes Your Path
 
 [In Part 2: Discipline vs. Resonance](/blog/discipline-vs-resonance), we talked about how discipline is
 required to keep you moving in the direction toward those things that move and

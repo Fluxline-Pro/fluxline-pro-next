@@ -49,7 +49,7 @@ seoKeywords:
   - transformation symbols
 ---
 
-## Fluxline Glyph System: Symbolic Design Language
+# Fluxline Glyph System: Symbolic Design Language
 
 A comprehensive symbolic design language system that transforms abstract transformation concepts into tangible, teachable, and memorable brand elements.
 

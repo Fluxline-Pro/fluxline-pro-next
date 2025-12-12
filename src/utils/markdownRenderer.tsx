@@ -406,6 +406,11 @@ export const UnifiedMarkdownRenderer: React.FC<
           <ReactMarkdown components={markdownComponents}>
             {processedContent}
           </ReactMarkdown>
+          <style jsx>{`
+            div :global(h1) {
+              display: none;
+            }
+          `}</style>
         </div>
       );
 
