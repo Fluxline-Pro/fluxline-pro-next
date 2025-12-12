@@ -45,12 +45,17 @@ metrics:
     value: '4x'
     description: 'Weekly livestreams and posts'
 testimonial:
-  quote: 'Traditional advertising never worked for me. It felt performative and disconnected from my values. By building emotional resonance through livestreaming and direct human connection, I created a business that actually reflects who I am—and attracts clients who resonate with that authenticity. This transformation wasn't just about marketing; it was about honoring my truth and building legacy resonance.'
+  quote: >
+    Traditional advertising never worked for me. It felt performative and disconnected from my values. By building emotional resonance through livestreaming and direct human connection, I created a business that actually reflects who I am—and attracts clients who resonate with that authenticity. This transformation wasn't just about marketing; it was about honoring my truth and building legacy resonance.
   author: 'Terence Waters'
   role: 'CEO & Founder, Fluxline Resonance Group'
 ---
 
 # Fluxline Digital Transformation: From Traditional Business to Human-Centered Resonance
+
+## Summary
+
+Fluxline Resonance Group transformed a one-person consultancy from invisible to influential—without traditional advertising, paid campaigns, or marketing agencies. By replacing performative outreach with **authentic livestreaming, direct engagement, and community-driven content**, we achieved a 280% increase in engagement, 95% reduction in marketing costs, and a 70% discovery-to-contract conversion rate. This case study documents the 6-phase playbook that proved **human connection beats algorithmic optimization**—and built a sustainable, values-aligned business in just six months. If you're a founder, creative, or solopreneur tired of marketing methods that drain your energy and contradict your values, this is your roadmap.
 
 ## Challenge
 
