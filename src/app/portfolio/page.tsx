@@ -32,11 +32,11 @@ export const metadata = {
   keywords:
     'portfolio, web development, mobile apps, enterprise software, case studies, project showcase, technology solutions',
   openGraph: {
-    title: 'Portfolio - Fluxline Professional Services',
+    title: 'Portfolio - Fluxline',
     description:
       'Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more.',
     url: 'https://www.fluxline.pro/portfolio',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
     images: [
       {
@@ -49,7 +49,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portfolio - Fluxline Professional Services',
+    title: 'Portfolio - Fluxline',
     description:
       'Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more.',
     images: ['/images/FluxlineLogo.png'],

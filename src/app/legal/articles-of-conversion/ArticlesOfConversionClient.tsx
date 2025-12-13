@@ -46,9 +46,8 @@ export default function ArticlesOfConversionClient() {
             }}
           >
             The Articles of Conversion document the legal transformation of
-            Fluxline Professional Services business entity structure. This
-            official filing records the conversion process and regulatory
-            compliance.
+            Fluxline Resonance Group business entity structure. This official
+            filing records the conversion process and regulatory compliance.
           </Typography>
 
           {/* PDF Viewer Container */}

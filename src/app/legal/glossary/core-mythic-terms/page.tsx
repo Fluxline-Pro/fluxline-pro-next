@@ -8,16 +8,16 @@ export const metadata: Metadata = {
   keywords:
     'mythic terms, archetype, threshold, emotional ROI, resonance, Fluxline mythology, ritual language',
   openGraph: {
-    title: 'Core Mythic Terms - Fluxline Professional Services',
+    title: 'Core Mythic Terms - Fluxline',
     description:
       "Comprehensive glossary of Fluxline's mythic architecture terminology and archetypal concepts.",
     url: 'https://www.fluxline.pro/legal/glossary/core-mythic-terms',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'Core Mythic Terms - Fluxline Professional Services',
+    title: 'Core Mythic Terms - Fluxline Resonance Group',
     description:
       "Comprehensive glossary of Fluxline's mythic architecture terminology and archetypal concepts.",
   },

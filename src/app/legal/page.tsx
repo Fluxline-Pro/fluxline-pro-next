@@ -8,16 +8,16 @@ export const metadata: Metadata = {
   keywords:
     'legal documents, terms of use, privacy policy, stewardship contract, glossary, legal compliance, Fluxline',
   openGraph: {
-    title: 'Legal & Reference - Fluxline Professional Services',
+    title: 'Legal & Reference - Fluxline Resonance Group',
     description:
       'Access legal documents and reference materials for Fluxline Resonance Group.',
     url: 'https://www.fluxline.pro/legal',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'Legal & Reference - Fluxline Professional Services',
+    title: 'Legal & Reference - Fluxline Resonance Group',
     description:
       'Access legal documents and reference materials for Fluxline Resonance Group.',
   },

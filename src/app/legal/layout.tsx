@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   description:
     'Access legal documents and reference materials for Fluxline Resonance Group, including terms of use, privacy policy, and glossary.',
   openGraph: {
-    title: 'Legal & Reference - Fluxline Professional Services',
+    title: 'Legal & Reference - Fluxline',
     description:
       'Access legal documents and reference materials for Fluxline Resonance Group.',
     url: 'https://www.fluxline.pro/legal',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   alternates: {

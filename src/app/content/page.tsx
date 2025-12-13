@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       'Explore our collection of blog posts, portfolio projects, and insights on technology, design, and business transformation.',
     url: 'https://www.fluxline.pro/content',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   alternates: {

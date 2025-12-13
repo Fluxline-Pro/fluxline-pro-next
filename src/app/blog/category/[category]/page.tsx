@@ -36,7 +36,7 @@ export async function generateMetadata({
       title: `Category: ${decodedCategory} - Fluxline Blog`,
       description: `Explore blog posts in the "${decodedCategory}" category.`,
       url: `https://www.fluxline.pro/blog/category/${encodeURIComponent(category)}`,
-      siteName: 'Fluxline Professional Services',
+      siteName: 'Fluxline',
       type: 'website',
     },
     twitter: {

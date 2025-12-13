@@ -98,7 +98,7 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
     year: 'June 2025',
     title: 'Fluxline Founded',
     description:
-      'Established Fluxline Professional Services to channel two decades of technical expertise into transformative client solutions.',
+      'Established Fluxline to channel two decades of technical expertise into transformative client solutions.',
     icon: 'Lightbulb',
   },
   {

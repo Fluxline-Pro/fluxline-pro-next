@@ -1,5 +1,5 @@
 /**
- * Legal content files for Fluxline Professional Services
+ * Legal content files for Fluxline
  * Contains markdown content for legal and reference pages
  */
 
@@ -8,17 +8,17 @@ export const termsOfUse = `# Terms of Use
 **Effective Date:** October 12, 2025  
 **Last Updated:** October 12, 2025
 
-## Welcome to Fluxline Professional Services
+## Welcome to Fluxline
 
-These Terms of Use ("Terms") govern your access to and use of the Fluxline Professional Services website, applications, and services (collectively, the "Services"). By accessing or using our Services, you agree to be bound by these Terms.
+These Terms of Use ("Terms") govern your access to and use of the Fluxline website, applications, and services (collectively, the "Services"). By accessing or using our Services, you agree to be bound by these Terms.
 
 ## 1. Acceptance of Terms
 
-By accessing and using Fluxline Professional Services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and our [Privacy Policy](/legal/privacy-policy). If you do not agree to these Terms, please do not use our Services.
+By accessing and using Fluxline, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and our [Privacy Policy](/legal/privacy-policy). If you do not agree to these Terms, please do not use our Services.
 
 ## 2. Description of Services
 
-Fluxline Professional Services provides:
+Fluxline provides:
 
 - **Business Consulting:** Strategic business planning, process optimization, and growth consulting
 - **Web & App Development:** Custom web applications, mobile apps, and software solutions
@@ -56,7 +56,7 @@ All content, materials, and intellectual property on our Services, including but
 - Design elements and branding
 - Documentation and training materials
 
-are owned by Fluxline Professional Services or our licensors and are protected by copyright, trademark, and other intellectual property laws.
+are owned by Fluxline or our licensors and are protected by copyright, trademark, and other intellectual property laws.
 
 ### 4.2 User Content
 
@@ -97,7 +97,7 @@ Refund policies are specified in your service agreement. Generally, services alr
 
 ## 8. Limitation of Liability
 
-TO THE MAXIMUM EXTENT PERMITTED BY LAW, FLUXLINE PROFESSIONAL SERVICES SHALL NOT BE LIABLE FOR:
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, FLUXLINE SHALL NOT BE LIABLE FOR:
 
 - ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES
 - LOSS OF PROFITS, DATA, USE, OR GOODWILL
@@ -108,7 +108,7 @@ OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID FOR THE SPECIFIC SERVIC
 
 ## 9. Indemnification
 
-You agree to indemnify and hold harmless Fluxline Professional Services, its officers, employees, and agents from any claims, damages, losses, or expenses arising from:
+You agree to indemnify and hold harmless Fluxline, its officers, employees, and agents from any claims, damages, losses, or expenses arising from:
 
 - Your use of our Services
 - Your violation of these Terms
@@ -126,7 +126,7 @@ Any disputes that cannot be resolved informally shall be resolved through bindin
 
 ### 10.3 Governing Law
 
-These Terms shall be governed by the laws of the State where Fluxline Professional Services is registered, without regard to conflict of law principles.
+These Terms shall be governed by the laws of the State where Fluxline is registered, without regard to conflict of law principles.
 
 ## 11. Privacy and Data Protection
 
@@ -138,7 +138,7 @@ Our Services may contain links to third-party websites or services. We are not r
 
 ## 13. Accessibility Commitment
 
-Fluxline Professional Services is committed to ensuring digital accessibility for people with disabilities. We continually work to improve the accessibility of our Services.
+Fluxline is committed to ensuring digital accessibility for people with disabilities. We continually work to improve the accessibility of our Services.
 
 ## 14. Diversity and Inclusion
 
@@ -154,13 +154,13 @@ If any provision of these Terms is found to be unenforceable, the remaining prov
 
 ## 17. Entire Agreement
 
-These Terms constitute the entire agreement between you and Fluxline Professional Services regarding your use of our Services and supersede any prior agreements.
+These Terms constitute the entire agreement between you and Fluxline regarding your use of our Services and supersede any prior agreements.
 
 ## 18. Contact Information
 
 For questions about these Terms of Use, please contact us:
 
-**Fluxline Professional Services**  
+**Fluxline Resonance Group, LLC**  
 Email: support [at] fluxline.pro  
 Website: https://www.fluxline.pro
 
@@ -168,7 +168,7 @@ Website: https://www.fluxline.pro
 
 **Last Updated:** October 12, 2025
 
-By using Fluxline Professional Services, you acknowledge that you have read and understood these Terms of Use.
+By using Fluxline and its services, you acknowledge that you have read and understood these Terms of Use.
 `;
 
 const legalContent = { termsOfUse };

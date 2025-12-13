@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   keywords:
     'blog, technology, web development, design, business transformation, consulting, professional development, strategy, innovation',
   openGraph: {
-    title: 'Blog - Fluxline Professional Services',
+    title: 'Blog - Fluxline',
     description:
       'Insights on technology, design, business transformation, and strategic thinking.',
     url: 'https://www.fluxline.pro/blog',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
     images: [
       {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog - Fluxline Professional Services',
+    title: 'Blog - Fluxline',
     description:
       'Insights on technology, design, business transformation, and strategic thinking.',
     images: ['/images/FluxlineLogo.png'],

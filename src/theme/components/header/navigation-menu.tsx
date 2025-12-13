@@ -186,7 +186,7 @@ export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
             textAlign: 'center',
           }}
         >
-          &copy; 2025 Fluxline Professional Services
+          &copy; 2025 Fluxline Resonance Group, LLC
         </Typography>
       </div>
     </div>

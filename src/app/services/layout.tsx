@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   description:
     'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks. Modular by design, resonant by nature.',
   openGraph: {
-    title: 'Services - Fluxline Professional Services',
+    title: 'Services - Fluxline',
     description:
       'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks.',
     url: 'https://www.fluxline.pro/services',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   alternates: {
