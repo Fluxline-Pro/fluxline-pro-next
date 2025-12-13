@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from '../../../../components/UnifiedPageWrapper';
 import { Hero } from '@/theme/components/hero/Hero';
 import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
@@ -10,7 +9,6 @@ import { content } from '../../../../assets/legal/glossary-technical-terms';
 import { FadeUp } from '@/animations/fade-animations';
 
 export default function TechnicalTermsClient() {
-  const router = useRouter();
   const { theme } = useAppTheme();
   const currentYear = new Date().getFullYear();
 

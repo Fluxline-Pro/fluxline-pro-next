@@ -7,14 +7,12 @@ import { Typography } from '../../../theme/components/typography';
 import { InteractiveCard } from '../../../components/InteractiveCard';
 import { useAppTheme } from '../../../theme/hooks/useAppTheme';
 import { FadeUp } from '@/animations/fade-animations';
-import Link from 'next/link';
 import Callout from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
 import { useRouter } from 'next/navigation';
 
 export default function GlossaryLandingClient() {
   const { theme } = useAppTheme();
-  const currentYear = new Date().getFullYear();
   const router = useRouter();
 
   const glossarySections = [

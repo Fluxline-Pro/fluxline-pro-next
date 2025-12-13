@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     title: 'Legal & Reference - Fluxline Resonance Group',
     description:
       'Access legal documents and reference materials for Fluxline Resonance Group.',
+    creator: '@fluxlinepro',
   },
   alternates: {
     canonical: '/legal',
