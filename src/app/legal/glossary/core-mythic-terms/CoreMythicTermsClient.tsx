@@ -2,16 +2,14 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
+import { UnifiedPageWrapper } from '../../../../components/UnifiedPageWrapper';
 import { Hero } from '@/theme/components/hero/Hero';
-import { Callout } from '@/theme/components/callout';
-import { FormButton } from '@/theme/components/form';
 import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { content } from '../../../assets/legal/privacy-policy';
+import { content } from '../../../../assets/legal/glossary-mythic-terms';
 import { FadeUp } from '@/animations/fade-animations';
 
-export default function PrivacyPolicyClientPage() {
+export default function CoreMythicTermsClient() {
   const router = useRouter();
   const { theme } = useAppTheme();
   const currentYear = new Date().getFullYear();
@@ -29,10 +27,10 @@ export default function PrivacyPolicyClientPage() {
         >
           {/* Hero Section */}
           <Hero
-            title='Privacy Policy'
+            title='Core Mythic Terms'
+            description='Archetypal Terminology and Mythic Architecture'
             backArrow={true}
-            backArrowPath='/legal'
-            description='Data Protection and Privacy Practices'
+            backArrowPath='/legal/glossary'
           />
 
           {/* Main Content */}
@@ -44,21 +42,6 @@ export default function PrivacyPolicyClientPage() {
           >
             <UnifiedMarkdownRenderer content={content} />
           </div>
-
-          {/* Contact CTA */}
-          <Callout
-            variant='subtle'
-            title='Privacy Concerns?'
-            subtitle='We take your privacy seriously. Contact us with any questions or concerns.'
-            action={
-              <FormButton
-                text='Contact Us'
-                variant='primary'
-                size='large'
-                onClick={() => router.push('/contact')}
-              />
-            }
-          />
 
           {/* Copyright Footer */}
           <div
