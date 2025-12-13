@@ -13,16 +13,16 @@ export const metadata: Metadata = {
   keywords:
     'strategic insights, white papers, business frameworks, transformation guides, strategic planning, Fluxline scrolls',
   openGraph: {
-    title: 'Strategic Scrolls & White Papers - Fluxline Professional Services',
+    title: 'Strategic Scrolls & White Papers - Fluxline',
     description:
       'Comprehensive collection of strategic insights and frameworks for sustainable business transformation.',
     url: 'https://www.fluxline.pro/services/scrolls',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Strategic Scrolls & White Papers - Fluxline Professional Services',
+    title: 'Strategic Scrolls & White Papers - Fluxline',
     description:
       'Comprehensive collection of strategic insights and frameworks for sustainable business transformation.',
   },
@@ -32,5 +32,5 @@ export const metadata: Metadata = {
 };
 
 export default function ScrollsLayout({ children }: { children: ReactNode }) {
-  return <div className="scrolls-layout">{children}</div>;
+  return <div className='scrolls-layout'>{children}</div>;
 }

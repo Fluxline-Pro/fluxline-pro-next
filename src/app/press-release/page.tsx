@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   keywords:
     'press release, news, announcements, media, milestones, Fluxline news, company updates',
   openGraph: {
-    title: 'Press Release - Fluxline Professional Services',
+    title: 'Press Release - Fluxline Resonance Group',
     description:
       'Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group.',
     url: 'https://www.fluxline.pro/press-release',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline Resonance Group',
     type: 'website',
     images: [
       {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Press Release - Fluxline Professional Services',
+    title: 'Press Release - Fluxline Resonance Group',
     description:
       'Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group.',
     images: ['/images/FluxlineLogo.png'],

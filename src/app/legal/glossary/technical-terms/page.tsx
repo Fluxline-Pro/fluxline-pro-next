@@ -8,16 +8,16 @@ export const metadata: Metadata = {
   keywords:
     'technical terms, business glossary, professional services, development, consulting, legal terminology',
   openGraph: {
-    title: 'Technical & Professional Terms - Fluxline Professional Services',
+    title: 'Technical & Professional Terms - Fluxline',
     description:
       "Comprehensive glossary of technical, business, and professional terminology used in Fluxline's services.",
     url: 'https://www.fluxline.pro/legal/glossary/technical-terms',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'Technical & Professional Terms - Fluxline Professional Services',
+    title: 'Technical & Professional Terms - Fluxline Resonance Group',
     description:
       "Comprehensive glossary of technical, business, and professional terminology used in Fluxline's services.",
   },

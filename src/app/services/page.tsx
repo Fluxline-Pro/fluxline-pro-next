@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   keywords:
     'services, consulting, web development, design, personal training, coaching, strategic planning, business transformation, digital services',
   openGraph: {
-    title: 'Services - Fluxline Professional Services',
+    title: 'Services - Fluxline',
     description:
       'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks.',
     url: 'https://www.fluxline.pro/services',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
     images: [
       {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Services - Fluxline Professional Services',
+    title: 'Services - Fluxline',
     description:
       'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks.',
     images: ['/images/FluxlineLogo.png'],

@@ -39,7 +39,7 @@ export async function generateMetadata({
       title: `Technology: ${decodedTechnology} - Fluxline Portfolio`,
       description: `Browse portfolio projects built with ${decodedTechnology}.`,
       url: `https://www.fluxline.pro/portfolio/technology/${encodeURIComponent(technology)}`,
-      siteName: 'Fluxline Professional Services',
+      siteName: 'Fluxline Resonance Group',
       type: 'website',
     },
     twitter: {

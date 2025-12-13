@@ -2,7 +2,7 @@ export const content = `# Privacy Policy
 
 ## Introduction
 
-Fluxline Professional Services ("we," "us," or "our") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+Fluxline Resonance Group, LLC ("Fluxline", "FLUXLINE", "Fluxline Resonance Group", "we," "us," or "our") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
 
 ## 1. Information We Collect
 
@@ -226,7 +226,7 @@ Your continued use of our Services after changes constitutes acceptance of the u
 
 If you have questions or concerns about this Privacy Policy or our data practices, please contact us:
 
-**Fluxline Professional Services**  
+**Fluxline Resonance Group, LLC**  
 Privacy Officer  
 Email: privacy [at] fluxline.pro  
 Website: https://www.fluxline.pro/contact
@@ -239,4 +239,4 @@ We are committed to ensuring this Privacy Policy is accessible to all users. If 
 
 **Last Updated:** October 12, 2025
 
-By using Fluxline Professional Services, you acknowledge that you have read and understood this Privacy Policy.`;
+By using Fluxline, you acknowledge that you have read and understood this Privacy Policy.`;

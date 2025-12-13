@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       'At Fluxline, we architect systems that breathe, brands that feel, and legacies that last. Explore our multidimensional transformation framework.',
     url: 'https://www.fluxline.pro/fluxline-ethos',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   twitter: {

@@ -15,16 +15,16 @@ import './globals.scss'; // ← Your custom styles override Tailwind
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fluxline.pro'),
   title: {
-    default: 'Fluxline Professional Services',
+    default: 'Fluxline Resonance Group',
     template: '%s | Fluxline.pro',
   },
   description:
-    'Fluxline Professional Services - Business consulting, web development, design, and technical services. Modular by design, resonant by nature.',
+    'Fluxline Resonance Group - Business consulting, web development, design, and technical services. Modular by design, resonant by nature.',
   keywords:
     'Fluxline, consulting, web development, business strategy, design, technical services, professional services, personal training, coaching, LGBTQ+ inclusive, accessibility, diversity, equity, AI-driven solutions, digital transformation',
-  authors: [{ name: 'Fluxline Professional Services' }],
-  creator: 'Fluxline Professional Services',
-  publisher: 'Fluxline Professional Services',
+  authors: [{ name: 'Fluxline Resonance Group' }],
+  creator: 'Fluxline Resonance Group',
+  publisher: 'Fluxline Resonance Group',
   robots: {
     index: true,
     follow: true,
@@ -37,17 +37,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Fluxline Professional Services',
+    title: 'Fluxline Resonance Group',
     description:
       'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
     url: 'https://www.fluxline.pro/',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline Resonance Group',
     images: [
       {
         url: '/images/FluxlineLogo.png',
         width: 1200,
         height: 630,
-        alt: 'Fluxline Professional Services Logo',
+        alt: 'Fluxline Resonance Group Logo',
       },
     ],
     type: 'website',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fluxline Professional Services',
+    title: 'Fluxline Resonance Group',
     description:
       'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
     images: ['/images/FluxlineLogo.png'],
@@ -106,7 +106,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              name: 'Fluxline Professional Services',
+              name: 'Fluxline Resonance Group',
               alternateName: 'Fluxline Resonance Group',
               url: 'https://www.fluxline.pro',
               logo: 'https://www.fluxline.pro/images/FluxlineLogo.png',
@@ -146,7 +146,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
-              name: 'Fluxline Professional Services',
+              name: 'Fluxline Resonance Group',
               url: 'https://www.fluxline.pro',
               description:
                 'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
@@ -170,7 +170,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'ProfessionalService',
-              name: 'Fluxline Professional Services',
+              name: 'Fluxline Resonance Group',
               image: 'https://www.fluxline.pro/images/FluxlineLogo.png',
               '@id': 'https://www.fluxline.pro',
               url: 'https://www.fluxline.pro',
