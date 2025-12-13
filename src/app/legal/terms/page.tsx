@@ -2,11 +2,32 @@ import { Metadata } from 'next';
 import TermsClientPage from './TermsClientPage';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use - Fluxline Professional Services',
+  title: 'Terms of Use',
   description:
     'Terms of Use for Fluxline Professional Services. Learn about our service terms, user responsibilities, and legal agreements.',
   keywords:
     'terms of use, terms and conditions, legal, service agreement, Fluxline',
+  openGraph: {
+    title: 'Terms of Use - Fluxline Professional Services',
+    description:
+      'Terms of Use for Fluxline Professional Services. Learn about our service terms and legal agreements.',
+    url: 'https://www.fluxline.pro/legal/terms',
+    siteName: 'Fluxline Professional Services',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Terms of Use - Fluxline Professional Services',
+    description:
+      'Terms of Use for Fluxline Professional Services. Learn about our service terms and legal agreements.',
+  },
+  alternates: {
+    canonical: '/legal/terms',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function TermsOfUsePage() {

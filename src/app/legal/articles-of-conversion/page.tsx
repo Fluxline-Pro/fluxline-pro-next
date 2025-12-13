@@ -1,138 +1,35 @@
-'use client';
+import { Metadata } from 'next';
+import ArticlesOfConversionClient from './ArticlesOfConversionClient';
 
-import React from 'react';
-import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
-import { Typography } from '../../../theme/components/typography';
-import { useAppTheme } from '../../../theme/hooks/useAppTheme';
-import { typography, spacing } from '../../../theme/theme';
+export const metadata: Metadata = {
+  title: 'Articles of Conversion',
+  description:
+    'Legal documentation of Fluxline Professional Services business entity conversion process and regulatory compliance.',
+  keywords:
+    'articles of conversion, legal entity, business conversion, regulatory compliance, corporate documents, Fluxline',
+  openGraph: {
+    title: 'Articles of Conversion - Fluxline Professional Services',
+    description:
+      'Legal documentation of Fluxline Professional Services business entity conversion process.',
+    url: 'https://www.fluxline.pro/legal/articles-of-conversion',
+    siteName: 'Fluxline Professional Services',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Articles of Conversion - Fluxline Professional Services',
+    description:
+      'Legal documentation of Fluxline Professional Services business entity conversion process.',
+  },
+  alternates: {
+    canonical: '/legal/articles-of-conversion',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function ArticlesOfConversionPage() {
-  const { theme } = useAppTheme();
-
-  // In a real implementation, you would have the actual PDF file
-  // For now, we'll provide a placeholder and download link
-  const pdfUrl = '/assets/legal/articles-of-conversion.pdf';
-
-  return (
-    <UnifiedPageWrapper
-      layoutType='legal-document'
-      legalPageConfig={{
-        title: 'Articles of Conversion',
-        subtitle: 'Legal Entity Conversion Documentation',
-        documentType: 'contract',
-      }}
-    >
-      {/* Description */}
-      <Typography
-        variant='p'
-        style={{
-          ...typography.fonts.body,
-          color: theme.semanticColors.bodyText,
-          marginBottom: spacing.l,
-        }}
-      >
-        The Articles of Conversion document the legal transformation of
-        Fluxline Professional Services business entity structure. This official
-        filing records the conversion process and regulatory compliance.
-      </Typography>
-
-      {/* PDF Viewer Container */}
-      <div
-        style={{
-          marginTop: spacing.xl,
-          marginBottom: spacing.xl,
-          border: `1px solid ${theme.palette.neutralQuaternary}`,
-          borderRadius: theme.borderRadius.m,
-          padding: spacing.l,
-          backgroundColor: theme.palette.neutralQuaternaryAlt,
-          textAlign: 'center',
-        }}
-      >
-        <Typography
-          variant='h4'
-          style={{
-            ...typography.fonts.h4,
-            color: theme.semanticColors.bodyText,
-            marginBottom: spacing.m,
-          }}
-        >
-          PDF Document
-        </Typography>
-
-        {/* PDF Embed or Download Link */}
-        <div
-          style={{
-            marginTop: spacing.m,
-            marginBottom: spacing.m,
-          }}
-        >
-          {/* For browsers that support PDF embedding */}
-          <object
-            data={pdfUrl}
-            type='application/pdf'
-            width='100%'
-            style={{
-              minHeight: '600px',
-              border: `1px solid ${theme.palette.neutralTertiary}`,
-              borderRadius: theme.borderRadius.s,
-            }}
-          >
-            {/* Fallback for browsers that don't support PDF embedding */}
-            <div
-              style={{
-                padding: spacing.xl,
-                textAlign: 'center',
-              }}
-            >
-              <Typography
-                variant='p'
-                style={{
-                  ...typography.fonts.body,
-                  color: theme.semanticColors.bodyText,
-                  marginBottom: spacing.m,
-                }}
-              >
-                Your browser does not support embedded PDF viewing.
-              </Typography>
-              <a
-                href={pdfUrl}
-                download='Fluxline-Articles-of-Conversion.pdf'
-                style={{
-                  display: 'inline-block',
-                  padding: `${spacing.s} ${spacing.l}`,
-                  backgroundColor: theme.palette.themePrimary,
-                  color: theme.palette.white,
-                  borderRadius: theme.borderRadius.m,
-                  textDecoration: 'none',
-                  fontWeight: typography.fontWeights.semiBold,
-                  transition: theme.animations.transitions.button,
-                }}
-              >
-                Download PDF
-              </a>
-            </div>
-          </object>
-        </div>
-
-        {/* Download Button */}
-        <a
-          href={pdfUrl}
-          download='Fluxline-Articles-of-Conversion.pdf'
-          style={{
-            display: 'inline-block',
-            marginTop: spacing.m,
-            padding: `${spacing.s} ${spacing.l}`,
-            backgroundColor: theme.palette.themePrimary,
-            color: theme.palette.white,
-            borderRadius: theme.borderRadius.m,
-            textDecoration: 'none',
-            fontWeight: typography.fontWeights.semiBold,
-            transition: theme.animations.transitions.button,
-          }}
-        >
-          Download PDF
-        </a>
-      </div>
-    </UnifiedPageWrapper>
-  );
+  return <ArticlesOfConversionClient />;
 }
