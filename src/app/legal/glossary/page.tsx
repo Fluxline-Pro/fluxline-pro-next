@@ -1,6 +1,4 @@
-import React from 'react';
 import { Metadata } from 'next';
-import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
 import GlossaryLandingClient from './GlossaryLandingClient';
 
 export const metadata: Metadata = {
