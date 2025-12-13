@@ -46,6 +46,7 @@ export async function generateMetadata({
       card: 'summary',
       title: `Technology: ${decodedTechnology} - Fluxline Portfolio`,
       description: `Browse portfolio projects built with ${decodedTechnology}.`,
+      creator: '@aplusinflux',
     },
     alternates: {
       canonical: `/portfolio/technology/${encodeURIComponent(technology)}`,

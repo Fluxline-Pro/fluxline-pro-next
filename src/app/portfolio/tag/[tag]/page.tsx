@@ -46,6 +46,7 @@ export async function generateMetadata({
       card: 'summary',
       title: `Tag: ${decodedTag} - Fluxline Portfolio`,
       description: `Explore portfolio projects tagged with "${decodedTag}".`,
+      creator: '@aplusinflux',
     },
     alternates: {
       canonical: `/portfolio/tag/${encodeURIComponent(tag)}`,

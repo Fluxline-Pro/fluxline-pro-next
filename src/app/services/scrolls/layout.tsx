@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     title: 'Strategic Scrolls & White Papers - Fluxline',
     description:
       'Comprehensive collection of strategic insights and frameworks for sustainable business transformation.',
+    creator: '@fluxlinepro',
   },
   alternates: {
     canonical: '/services/scrolls',

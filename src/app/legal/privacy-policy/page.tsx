@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     title: 'Privacy Policy - Fluxline',
     description:
       'Learn how Fluxline collects, uses, and protects your personal information.',
+    creator: '@fluxlinepro',
   },
   alternates: {
     canonical: '/legal/privacy-policy',

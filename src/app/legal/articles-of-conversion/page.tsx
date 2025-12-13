@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     title: 'Articles of Conversion - Fluxline Resonance Group',
     description:
       'Legal documentation of Fluxline Resonance Group business entity conversion process.',
+    creator: '@fluxlinepro',
   },
   alternates: {
     canonical: '/legal/articles-of-conversion',
