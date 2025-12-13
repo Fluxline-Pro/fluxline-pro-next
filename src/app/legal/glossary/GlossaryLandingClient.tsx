@@ -7,10 +7,15 @@ import { Typography } from '../../../theme/components/typography';
 import { InteractiveCard } from '../../../components/InteractiveCard';
 import { useAppTheme } from '../../../theme/hooks/useAppTheme';
 import { FadeUp } from '@/animations/fade-animations';
+import Link from 'next/link';
+import Callout from '@/theme/components/callout/Callout';
+import { FormButton } from '@/theme/components/form/FormButton';
+import { useRouter } from 'next/navigation';
 
 export default function GlossaryLandingClient() {
   const { theme } = useAppTheme();
   const currentYear = new Date().getFullYear();
+  const router = useRouter();
 
   const glossarySections = [
     {
@@ -83,53 +88,18 @@ export default function GlossaryLandingClient() {
           </div>
 
           {/* Usage Note */}
-          <div
-            style={{
-              padding: theme.spacing.l,
-              backgroundColor: theme.palette.neutralLighterAlt,
-              borderRadius: theme.borderRadius.m,
-              marginBottom: theme.spacing.xxl,
-            }}
+          <Callout
+            title='Need More Information?'
+            variant='subtle'
+            subtitle='If you encounter a term not defined in either glossary, please contact us for clarification.'
           >
-            <Typography
-              variant='h4'
-              style={{
-                color: theme.semanticColors.bodyText,
-                fontSize: '1.125rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-                marginBottom: theme.spacing.s,
-              }}
-            >
-              Need More Information?
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.semanticColors.bodyText,
-                lineHeight: theme.typography.lineHeights.relaxed,
-              }}
-            >
-              If you encounter a term not defined in either glossary, please
-              contact us for clarification.
-            </Typography>
-          </div>
-
-          {/* Copyright Footer */}
-          <div
-            style={{
-              marginTop: theme.spacing.xxxl,
-              paddingTop: theme.spacing.l,
-              borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-              textAlign: 'center',
-              color: theme.palette.neutralTertiary,
-              fontSize: theme.fonts.small.fontSize,
-            }}
-          >
-            <p>
-              © {currentYear} Fluxline Resonance Group, LLC. All rights
-              reserved.
-            </p>
-          </div>
+            <FormButton
+              text='Contact Us'
+              variant='primary'
+              size='large'
+              onClick={() => router.push('/contact')}
+            />
+          </Callout>
         </div>
       </FadeUp>
     </UnifiedPageWrapper>
