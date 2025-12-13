@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   description:
     'Get in touch with Fluxline for design, development, consulting, and training inquiries.',
   openGraph: {
-    title: 'Contact - Fluxline Professional Services',
+    title: 'Contact - Fluxline',
     description:
       'Get in touch with Fluxline for design, development, consulting, and training inquiries.',
     url: 'https://www.fluxline.pro/contact',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   alternates: {

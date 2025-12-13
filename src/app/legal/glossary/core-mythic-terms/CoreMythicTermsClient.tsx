@@ -2,16 +2,14 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
+import { UnifiedPageWrapper } from '../../../../components/UnifiedPageWrapper';
 import { Hero } from '@/theme/components/hero/Hero';
-import { Callout } from '@/theme/components/callout';
-import { FormButton } from '@/theme/components/form';
 import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { content } from '../../../assets/legal/terms-of-use';
+import { content } from '../../../../assets/legal/glossary-mythic-terms';
 import { FadeUp } from '@/animations/fade-animations';
 
-export default function TermsClientPage() {
+export default function CoreMythicTermsClient() {
   const router = useRouter();
   const { theme } = useAppTheme();
   const currentYear = new Date().getFullYear();
@@ -29,12 +27,10 @@ export default function TermsClientPage() {
         >
           {/* Hero Section */}
           <Hero
-            title='Terms of Use'
-            description='Service Terms and User Agreements'
-            effectiveDate='October 12, 2025'
-            lastUpdated='October 12, 2025'
+            title='Core Mythic Terms'
+            description='Archetypal Terminology and Mythic Architecture'
             backArrow={true}
-            backArrowPath='/legal'
+            backArrowPath='/legal/glossary'
           />
 
           {/* Main Content */}
@@ -46,21 +42,6 @@ export default function TermsClientPage() {
           >
             <UnifiedMarkdownRenderer content={content} />
           </div>
-
-          {/* Contact CTA */}
-          <Callout
-            variant='subtle'
-            title='Questions About Our Terms?'
-            subtitle="We're here to help clarify any questions you may have."
-            action={
-              <FormButton
-                text='Contact Us'
-                variant='primary'
-                size='large'
-                onClick={() => router.push('/contact')}
-              />
-            }
-          />
 
           {/* Copyright Footer */}
           <div

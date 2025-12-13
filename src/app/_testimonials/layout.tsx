@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   description:
     'Read client testimonials and success stories from businesses and individuals transformed through Fluxline consulting, training, and development services.',
   openGraph: {
-    title: 'Testimonials - Fluxline Professional Services',
+    title: 'Testimonials - Fluxline Resonance Group',
     description:
       'Hear from clients transformed through strategic consulting, training, and development services.',
     url: 'https://www.fluxline.pro/testimonials',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline Resonance Group',
     type: 'website',
   },
   alternates: {

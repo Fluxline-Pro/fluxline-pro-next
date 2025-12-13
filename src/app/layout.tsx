@@ -15,25 +15,39 @@ import './globals.scss'; // ← Your custom styles override Tailwind
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fluxline.pro'),
   title: {
-    default: 'Fluxline Professional Services',
+    default: 'Fluxline Resonance Group',
     template: '%s | Fluxline.pro',
   },
   description:
-    'Fluxline Professional Services - Business consulting, web development, design, and technical services',
+    'Fluxline Resonance Group - Business consulting, web development, design, and technical services. Modular by design, resonant by nature.',
   keywords:
-    'Fluxline, consulting, web development, business strategy, design, technical services, professional services, personal training, coaching, LGBTQ+ inclusive, accessibility, diversity, equity',
+    'Fluxline, consulting, web development, business strategy, design, technical services, professional services, personal training, coaching, LGBTQ+ inclusive, accessibility, diversity, equity, AI-driven solutions, digital transformation',
+  authors: [{ name: 'Fluxline Resonance Group' }],
+  creator: 'Fluxline Resonance Group',
+  publisher: 'Fluxline Resonance Group',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: 'Fluxline Professional Services',
+    title: 'Fluxline Resonance Group',
     description:
       'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
     url: 'https://www.fluxline.pro/',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline Resonance Group',
     images: [
       {
         url: '/images/FluxlineLogo.png',
         width: 1200,
         height: 630,
-        alt: 'Fluxline Professional Services Logo',
+        alt: 'Fluxline Resonance Group Logo',
       },
     ],
     type: 'website',
@@ -41,13 +55,19 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fluxline Professional Services',
+    title: 'Fluxline Resonance Group',
     description:
       'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
     images: ['/images/FluxlineLogo.png'],
+    creator: '@fluxlineco',
   },
   alternates: {
     canonical: '/',
+  },
+  verification: {
+    // Add verification meta tags here when available
+    // google: 'verification_token',
+    // bing: 'verification_token',
   },
   other: {
     'theme-color': '#010101',
@@ -78,7 +98,7 @@ export default function RootLayout({
         />
       </head>
       <body className='antialiased' suppressHydrationWarning>
-        {/* Structured data for SEO */}
+        {/* Organization structured data for SEO */}
         <Script
           id='organization-schema'
           type='application/ld+json'
@@ -86,9 +106,95 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              name: 'Fluxline Professional Services',
+              name: 'Fluxline Resonance Group',
+              alternateName: 'Fluxline Resonance Group',
               url: 'https://www.fluxline.pro',
               logo: 'https://www.fluxline.pro/images/FluxlineLogo.png',
+              description:
+                'Professional services firm specializing in business consulting, web development, design, personal training, and coaching.',
+              foundingDate: '2020',
+              sameAs: [
+                'https://www.instagram.com/fluxlineco',
+                'https://www.linkedin.com/in/terencewaters',
+              ],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                contactType: 'Customer Service',
+                url: 'https://www.fluxline.pro/contact',
+              },
+              areaServed: {
+                '@type': 'Place',
+                name: 'Worldwide',
+              },
+              knowsAbout: [
+                'Business Consulting',
+                'Web Development',
+                'Brand Design',
+                'Personal Training',
+                'Coaching',
+                'Digital Transformation',
+                'Strategic Planning',
+              ],
+            }),
+          }}
+        />
+        {/* Website structured data */}
+        <Script
+          id='website-schema'
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Fluxline Resonance Group',
+              url: 'https://www.fluxline.pro',
+              description:
+                'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: {
+                  '@type': 'EntryPoint',
+                  urlTemplate:
+                    'https://www.fluxline.pro/search?q={search_term_string}',
+                },
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
+        {/* Professional Service structured data */}
+        <Script
+          id='professional-service-schema'
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ProfessionalService',
+              name: 'Fluxline Resonance Group',
+              image: 'https://www.fluxline.pro/images/FluxlineLogo.png',
+              '@id': 'https://www.fluxline.pro',
+              url: 'https://www.fluxline.pro',
+              telephone: '',
+              priceRange: '$$',
+              address: {
+                '@type': 'PostalAddress',
+                addressCountry: 'US',
+              },
+              geo: {
+                '@type': 'GeoCoordinates',
+              },
+              openingHoursSpecification: {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: [
+                  'Monday',
+                  'Tuesday',
+                  'Wednesday',
+                  'Thursday',
+                  'Friday',
+                ],
+                opens: '09:00',
+                closes: '17:00',
+              },
               sameAs: [
                 'https://www.instagram.com/fluxlineco',
                 'https://www.linkedin.com/in/terencewaters',

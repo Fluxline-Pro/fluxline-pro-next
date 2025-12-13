@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   description:
     'Reference cards and quick guides for Fluxline methodologies and frameworks.',
   openGraph: {
-    title: 'Cue Cards - Fluxline Professional Services',
+    title: 'Cue Cards - Fluxline',
     description:
       'Reference cards and quick guides for Fluxline methodologies and frameworks.',
     url: 'https://www.fluxline.pro/cue-cards',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   alternates: {

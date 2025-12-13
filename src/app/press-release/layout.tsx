@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   description:
     'Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group.',
   openGraph: {
-    title: 'Press Release - Fluxline Professional Services',
+    title: 'Press Release - Fluxline Resonance Group',
     description:
       'Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group.',
     url: 'https://www.fluxline.pro/press-release',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline Resonance Group',
     type: 'website',
   },
   alternates: {

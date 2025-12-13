@@ -5,7 +5,7 @@ export const content = `# Stewardship Contract
 
 ## Our Commitment to You
 
-At Fluxline Professional Services, we believe in the power of genuine partnership and mutual respect. This Stewardship Contract outlines our commitments to you as our client and the values that guide our work together.
+At Fluxline, we believe in the power of genuine partnership and mutual respect. This Stewardship Contract outlines our commitments to you as our client and the values that guide our work together.
 
 ## 1. Philosophy of Stewardship
 
@@ -275,7 +275,7 @@ Your participation is voluntary.
 
 For questions about this Stewardship Contract:
 
-**Fluxline Professional Services**  
+**Fluxline Resonance Group, LLC**  
 Email: support [at] fluxline.pro
 Website: https://www.fluxline.pro/contact
 

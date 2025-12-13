@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { getAllBlogPosts, getAllTags } from '../../lib/blogLoader';
 import { BlogTagClient } from './BlogTagClient';
 import { notFound } from 'next/navigation';
@@ -16,6 +17,41 @@ export async function generateStaticParams() {
   return tags.map((tag) => ({
     tag: tag,
   }));
+}
+
+// Generate metadata for tag pages
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ tag: string }>;
+}): Promise<Metadata> {
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
+
+  return {
+    title: `Tag: ${decodedTag}`,
+    description: `Browse blog posts tagged with "${decodedTag}". Explore articles about ${decodedTag} and related topics.`,
+    keywords: `${decodedTag}, blog, articles, technology, development, design`,
+    openGraph: {
+      title: `Tag: ${decodedTag} - Fluxline Blog`,
+      description: `Browse blog posts tagged with "${decodedTag}".`,
+      url: `https://www.fluxline.pro/blog/tag/${encodeURIComponent(tag)}`,
+      siteName: 'Fluxline',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: `Tag: ${decodedTag} - Fluxline Blog`,
+      description: `Browse blog posts tagged with "${decodedTag}".`,
+    },
+    alternates: {
+      canonical: `/blog/tag/${encodeURIComponent(tag)}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 interface BlogTagPageProps {
