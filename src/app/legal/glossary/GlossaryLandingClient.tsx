@@ -32,16 +32,9 @@ export default function GlossaryLandingClient() {
   ];
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid' showImageTitle={false}>
       <FadeUp duration={0.5} delay={0}>
-        <div
-          style={{
-            padding: theme.spacing.xl,
-            maxWidth: '900px',
-            margin: '0 auto',
-            width: '100%',
-          }}
-        >
+        <div>
           {/* Hero Section */}
           <Hero
             title='Glossary of Terms'

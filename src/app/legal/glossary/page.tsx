@@ -33,9 +33,5 @@ export const metadata: Metadata = {
 };
 
 export default function GlossaryPage() {
-  return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <GlossaryLandingClient />
-    </UnifiedPageWrapper>
-  );
+  return <GlossaryLandingClient />;
 }

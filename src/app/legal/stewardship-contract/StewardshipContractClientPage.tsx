@@ -17,7 +17,7 @@ export default function StewardshipContractClientPage() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid' showImageTitle={false}>
       <FadeUp duration={0.5} delay={0}>
         <div
           style={{

@@ -17,7 +17,7 @@ export default function TermsClientPage() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid' showImageTitle={false}>
       <FadeUp duration={0.5} delay={0}>
         <div
           style={{
@@ -31,6 +31,8 @@ export default function TermsClientPage() {
           <Hero
             title='Terms of Use'
             description='Service Terms and User Agreements'
+            effectiveDate='October 12, 2025'
+            lastUpdated='October 12, 2025'
             backArrow={true}
             backArrowPath='/legal'
           />

@@ -61,7 +61,7 @@ export default function LegalPageClient() {
   const cardHoverEffects = useHoverEffects({ type: 'card' });
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid' showImageTitle={false}>
       <FadeUp duration={0.5} delay={0}>
         <div className='space-y-16'>
           {/* Hero Section */}

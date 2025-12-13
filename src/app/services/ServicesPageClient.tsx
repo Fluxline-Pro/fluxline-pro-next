@@ -228,6 +228,22 @@ export default function ServicesPageClient() {
             />
           }
         />
+
+        <Callout
+          variant='neutral'
+          title='Legal & Governance'
+          subtitle='Review our terms, policies, and stewardship commitments that govern our professional relationship.'
+          action={
+            <FormButton
+              text='View Legal Documents'
+              variant='secondary'
+              size='medium'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => (window.location.href = '/legal')}
+            />
+          }
+        />
       </div>
     </UnifiedPageWrapper>
   );
