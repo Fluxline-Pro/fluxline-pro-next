@@ -1,8 +1,5 @@
 export const content = `# Privacy Policy
 
-**Effective Date:** October 12, 2025  
-**Last Updated:** October 12, 2025
-
 ## Introduction
 
 Fluxline Professional Services ("we," "us," or "our") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.

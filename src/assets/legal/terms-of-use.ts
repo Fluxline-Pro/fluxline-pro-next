@@ -1,8 +1,5 @@
 export const content = `# Terms of Use
 
-**Effective Date:** October 12, 2025  
-**Last Updated:** October 12, 2025
-
 ## Welcome to Fluxline Professional Services
 
 These Terms of Use ("Terms") govern your access to and use of the Fluxline Professional Services website, applications, and services (collectively, the "Services"). By accessing or using our Services, you agree to be bound by these Terms.

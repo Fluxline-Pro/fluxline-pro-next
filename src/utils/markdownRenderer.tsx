@@ -108,8 +108,10 @@ export const UnifiedMarkdownRenderer: React.FC<
         <Typography
           variant='h1'
           {...props}
+          className='markdown-h1'
           style={{
-            ...typography.fonts.h1,
+            fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+            fontWeight: typography.fontWeights.semiBold,
             color: theme.semanticColors.bodyText,
             marginTop: theme.spacing.xl,
             marginBottom: theme.spacing.m,
@@ -128,7 +130,8 @@ export const UnifiedMarkdownRenderer: React.FC<
           variant='h2'
           {...props}
           style={{
-            ...typography.fonts.h2,
+            fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
+            fontWeight: typography.fontWeights.semiBold,
             color: theme.semanticColors.bodyText,
             marginTop: theme.spacing.l,
             marginBottom: theme.spacing.m,
@@ -547,10 +550,15 @@ export const UnifiedMarkdownRenderer: React.FC<
     case 'markdown':
     case 'mdx':
       return (
-        <div className={className}>
+        <div className={`markdown-content ${className || ''}`}>
           <ReactMarkdown components={markdownComponents}>
             {processedContent}
           </ReactMarkdown>
+          <style jsx>{`
+            :global(.markdown-content .markdown-h1:first-child) {
+              display: none;
+            }
+          `}</style>
         </div>
       );
 

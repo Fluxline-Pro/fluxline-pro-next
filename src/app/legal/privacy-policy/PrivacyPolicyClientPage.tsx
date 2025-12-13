@@ -17,7 +17,7 @@ export default function PrivacyPolicyClientPage() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid' showImageTitle={false}>
       <FadeUp duration={0.5} delay={0}>
         <div
           style={{
@@ -30,9 +30,11 @@ export default function PrivacyPolicyClientPage() {
           {/* Hero Section */}
           <Hero
             title='Privacy Policy'
+            description='Data Protection and Privacy Practices'
+            effectiveDate='October 12, 2025'
+            lastUpdated='October 12, 2025'
             backArrow={true}
             backArrowPath='/legal'
-            description='Data Protection and Privacy Practices'
           />
 
           {/* Main Content */}
