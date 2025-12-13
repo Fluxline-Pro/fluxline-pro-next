@@ -1,248 +1,48 @@
-'use client';
+import type { Metadata } from 'next';
+import ServicesPageClient from './ServicesPageClient';
+
+export const metadata: Metadata = {
+  title: 'Services',
+  description:
+    'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks. Modular by design, resonant by nature.',
+  keywords:
+    'services, consulting, web development, design, personal training, coaching, strategic planning, business transformation, digital services',
+  openGraph: {
+    title: 'Services - Fluxline Professional Services',
+    description:
+      'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks.',
+    url: 'https://www.fluxline.pro/services',
+    siteName: 'Fluxline Professional Services',
+    type: 'website',
+    images: [
+      {
+        url: '/images/FluxlineLogo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Fluxline Services',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Services - Fluxline Professional Services',
+    description:
+      'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks.',
+    images: ['/images/FluxlineLogo.png'],
+  },
+  alternates: {
+    canonical: '/services',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 /**
  * Services Page
  * Displays Fluxline services and offerings
  */
-
-import React from 'react';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { InteractiveCard } from '@/components';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Hero } from '@/theme/components/hero/Hero';
-import { getIconForPath } from '@/utils/navigation-icons';
-import {
-  SERVICE_CATEGORIES,
-  SERVICES_SUMMARY,
-  FLUXLINE_SECONDARY_TAGLINE,
-} from './constants';
-import { Callout } from '@/theme/components/callout/Callout';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
-
 export default function ServicesPage() {
-  const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
-
-  return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className={isMobile ? 'space-y-8' : 'space-y-12'}>
-        {/* Page Header */}
-        <Hero
-          title='Our Services'
-          iconName={getIconForPath('/services')}
-          subtitle={FLUXLINE_SECONDARY_TAGLINE}
-          description={SERVICES_SUMMARY}
-        >
-          <Callout
-            variant='accent'
-            title='Not sure where to start?'
-            subtitle="Let's discuss your needs in a free, no obligation consultation. We'll map the right first step together."
-            action={
-              <FormButton
-                text='Book a Consultation'
-                variant='primary'
-                size='large'
-                icon='ChevronRight'
-                iconPosition='right'
-                onClick={() => (window.location.href = '/contact')}
-              />
-            }
-          />
-        </Hero>
-
-        {/* Divider */}
-        <hr
-          style={{
-            border: 'none',
-            height: '1px',
-            backgroundColor: theme.palette.neutralQuaternary,
-            margin: '2rem 0',
-          }}
-        />
-
-        {/* Services Grid */}
-        <div className='space-y-8'>
-          <div>
-            <Typography
-              variant='h2'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '2rem',
-                fontWeight: theme.typography.fontWeights.bold,
-              }}
-            >
-              Choose what kind of support you need
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1.125rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
-              }}
-            >
-              Every service is your doorway to transformation. From idea to
-              embodiment. From intention to infrastructure.
-            </Typography>
-          </div>
-
-          {/* Body & Practice */}
-          <section className='space-y-4'>
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '1.5rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              Body & Practice
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1rem',
-                marginBottom: theme.spacing.m,
-              }}
-            >
-              Personalized training programs to build strength and resilience.
-            </Typography>
-            <div
-              className='grid gap-6'
-              style={{
-                gridTemplateColumns:
-                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
-              }}
-            >
-              {SERVICE_CATEGORIES.filter(
-                (s) => s.category === 'body-practice'
-              ).map((service) => (
-                <InteractiveCard
-                  key={service.id}
-                  id={service.id}
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  href={service.path}
-                  iconPosition='center'
-                  showLearnMore={true}
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* Brand & Digital Presence */}
-          <section className='space-y-4'>
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '1.5rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              Brand & Digital Presence
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1rem',
-                marginBottom: theme.spacing.m,
-              }}
-            >
-              Websites and brand identities that scale with your vision.
-            </Typography>
-            <div
-              className='grid gap-6'
-              style={{
-                gridTemplateColumns:
-                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
-              }}
-            >
-              {SERVICE_CATEGORIES.filter(
-                (s) => s.category === 'brand-digital'
-              ).map((service) => (
-                <InteractiveCard
-                  key={service.id}
-                  id={service.id}
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  href={service.path}
-                  iconPosition='center'
-                  showLearnMore={true}
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* Depth Work & Strategy */}
-          <section className='space-y-4'>
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '1.5rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              Guided Improvement & Strategy
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1rem',
-                marginBottom: theme.spacing.m,
-              }}
-            >
-              Coaching and consulting to align your business and personal
-              growth.
-            </Typography>
-            <div
-              className='grid gap-6'
-              style={{
-                gridTemplateColumns:
-                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
-              }}
-            >
-              {SERVICE_CATEGORIES.filter(
-                (s) => s.category === 'depth-strategy'
-              ).map((service) => (
-                <InteractiveCard
-                  key={service.id}
-                  id={service.id}
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  href={service.path}
-                  iconPosition='center'
-                  showLearnMore={true}
-                />
-              ))}
-            </div>
-          </section>
-        </div>
-        <Callout
-          variant='accent'
-          title="Let's begin your transformation"
-          subtitle="Book a free, no obligation consultation with us to help you map the right first step together."
-          action={
-            <FormButton
-              text='Book a Consultation'
-              variant='primary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => (window.location.href = '/contact')}
-            />
-          }
-        />
-      </div>
-    </UnifiedPageWrapper>
-  );
+  return <ServicesPageClient />;
 }
