@@ -9,10 +9,50 @@ import { Typography } from '../../typography';
 
 /**
  * HomeFooter Component
- * 
+ *
  * Footer specifically for the home page, displayed only on desktop and widescreen tablet.
  * Features company logo, navigation links, and contact information.
  */
+
+export const StyledLink: React.FC<{
+  href: string;
+  children: React.ReactNode;
+  openInNewTab?: boolean;
+}> = ({ href, children, openInNewTab }) => {  
+  const { theme } = useAppTheme();
+
+  const linkStyle: React.CSSProperties = {
+    color: theme.palette.neutralSecondary,
+    fontSize: '0.875rem',
+    textDecoration: 'none',
+    transition: 'color 0.2s ease',
+    cursor: 'pointer',
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = theme.palette.themePrimary;
+    e.currentTarget.style.textDecoration = 'underline';
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = theme.palette.neutralSecondary;
+    e.currentTarget.style.textDecoration = 'none';
+  };
+
+  return (
+    <Link
+      href={href}
+      style={linkStyle}
+      target={openInNewTab ? '_blank' : '_self'}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </Link>
+  );
+};
+
 export const HomeFooter: React.FC = () => {
   const { theme } = useAppTheme();
   const orientation = useDeviceOrientation();
@@ -55,14 +95,6 @@ export const HomeFooter: React.FC = () => {
     textTransform: 'capitalize',
   };
 
-  const linkStyle: React.CSSProperties = {
-    color: theme.palette.neutralSecondary,
-    fontSize: '0.875rem',
-    textDecoration: 'none',
-    transition: 'color 0.2s ease',
-    cursor: 'pointer',
-  };
-
   const contactInfoStyle: React.CSSProperties = {
     color: theme.palette.neutralSecondary,
     fontSize: '0.875rem',
@@ -79,18 +111,15 @@ export const HomeFooter: React.FC = () => {
       {/* Logo Section */}
       <div style={columnStyle}>
         <Image
-          src="/images/home/FluxlineLogo.png"
-          alt="Fluxline Logo"
+          src='/images/home/FluxlineLogoHomePage.png'
+          alt='Fluxline Logo'
           width={200}
           height={60}
           style={{ objectFit: 'contain' }}
         />
-        <p style={{ ...contactInfoStyle, marginTop: '1rem', fontSize: '0.8rem' }}>
-          Structure the shift
-        </p>
       </div>
 
-      {/* Navigation Columns - Placeholder links to be updated with actual content */}
+      {/* Navigation Columns */}
       <div
         style={{
           display: 'grid',
@@ -100,60 +129,51 @@ export const HomeFooter: React.FC = () => {
       >
         {/* About Column */}
         <div style={columnStyle}>
-          <Typography variant='h3' style={headingStyle}>About</Typography>
-          <Link href="/about" style={linkStyle}>
-            About 1
-          </Link>
-          <Link href="/about" style={linkStyle}>
-            About 2
-          </Link>
-          <Link href="/about" style={linkStyle}>
-            About 3
-          </Link>
-          <Link href="/about" style={linkStyle}>
-            About 4
-          </Link>
+          <Typography variant='h3' style={headingStyle}>
+            About
+          </Typography>
+          <StyledLink href='/about'>About Us</StyledLink>
+          <StyledLink href='/fluxline-ethos'>Fluxline Ethos</StyledLink>
+          <StyledLink href='/case-studies'>Case Studies</StyledLink>
+          <StyledLink href='/press-release'>Press Releases</StyledLink>
+          {/* <StyledLink href='/cue-cards'>Cue Cards</StyledLink> */}
         </div>
 
-        {/* Company Column */}
+        {/* Services Column */}
         <div style={columnStyle}>
-          <Typography variant='h3' style={headingStyle}>Company</Typography>
-          <Link href="/services" style={linkStyle}>
-            Company 1
-          </Link>
-          <Link href="/services" style={linkStyle}>
-            Company 2
-          </Link>
-          <Link href="/services" style={linkStyle}>
-            Company 3
-          </Link>
-          <Link href="/services" style={linkStyle}>
-            Company 4
-          </Link>
+          <Typography variant='h3' style={headingStyle}>
+            Services
+          </Typography>
+          <StyledLink href='/services'>All Services</StyledLink>
+          <StyledLink href='/services/design'>Design</StyledLink>
+          <StyledLink href='/services/web-development'>Development</StyledLink>
+          <StyledLink href='/services/personal-training'>
+            Personal Training
+          </StyledLink>
+          <StyledLink href='/services/life-coaching'>Life Coaching</StyledLink>
+          <StyledLink href='/services/consulting'>Consulting</StyledLink>
         </div>
 
-        {/* Contact Me Column */}
+        {/* Resources Column */}
         <div style={columnStyle}>
-          <Typography variant='h3' style={headingStyle}>Contact Me</Typography>
-          <Link href="/contact" style={linkStyle}>
-            Contact Me 1
-          </Link>
-          <Link href="/contact" style={linkStyle}>
-            Contact Me 2
-          </Link>
-          <Link href="/contact" style={linkStyle}>
-            Contact Me 3
-          </Link>
-          <Link href="/contact" style={linkStyle}>
-            Contact Me 4
-          </Link>
+          <Typography variant='h3' style={headingStyle}>
+            Resources
+          </Typography>
+          <StyledLink href='/blog'>Blog</StyledLink>
+          <StyledLink href='/portfolio'>Portfolio</StyledLink>
+          <StyledLink href='/services/scrolls'>Scrolls</StyledLink>
+          <StyledLink href='/legal'>Legal</StyledLink>
+          <StyledLink href='/contact'>Contact Us</StyledLink>
         </div>
       </div>
 
       {/* Contact Information */}
       <div style={columnStyle}>
         <div style={contactInfoStyle}>
-          <Typography variant="h3" style={{ ...headingStyle, marginBottom: '1rem' }}>
+          <Typography
+            variant='h3'
+            style={{ ...headingStyle, marginBottom: '1rem' }}
+          >
             Get in Touch
           </Typography>
           <div style={{ marginBottom: '0.5rem' }}>
@@ -162,25 +182,15 @@ export const HomeFooter: React.FC = () => {
           </div>
           <div style={{ marginBottom: '0.5rem' }}>
             <span style={iconStyle}>🔗</span>
-            <a
-              href="https://www.fluxline.pro"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ ...linkStyle, color: theme.palette.neutralSecondary }}
-            >
+            <StyledLink href='https://www.fluxline.pro'>
               www.fluxline.pro
-            </a>
+            </StyledLink>
           </div>
           <div>
             <span style={iconStyle}>✉️</span>
-            <a
-              href="https://outlook.office.com/book/Bookings@terencewaters.com/?ismsaljsauthenabled=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ ...linkStyle, color: theme.palette.neutralSecondary }}
-            >
+            <StyledLink href='https://outlook.office.com/book/Bookings@terencewaters.com/?ismsaljsauthenabled' openInNewTab={true}>
               Book an appointment
-            </a>
+            </StyledLink>
           </div>
         </div>
       </div>

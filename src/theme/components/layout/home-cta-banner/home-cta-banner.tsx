@@ -7,7 +7,7 @@ import { useDeviceOrientation } from '../../../hooks/useMediaQuery';
 
 /**
  * HomeCtaBanner Component
- * 
+ *
  * Call-to-action banner for the home page, displayed above the footer.
  * Only visible on desktop and widescreen tablet.
  */
@@ -62,25 +62,31 @@ export const HomeCtaBanner: React.FC = () => {
 
   return (
     <div style={bannerStyle}>
-      <span style={textStyle}>→ CTA: Explore the Fluxline architecture</span>
+      <span style={textStyle}>Explore the Fluxline architecture → </span>
       <Link
-        href="/services"
+        href='/services'
         style={ctaStyle}
         onMouseEnter={(e) => {
-          const arrow = e.currentTarget.querySelector('[data-arrow]') as HTMLElement;
+          const arrow = e.currentTarget.querySelector(
+            '[data-arrow]'
+          ) as HTMLElement;
           if (arrow) {
             arrow.style.transform = 'translateX(5px)';
           }
         }}
         onMouseLeave={(e) => {
-          const arrow = e.currentTarget.querySelector('[data-arrow]') as HTMLElement;
+          const arrow = e.currentTarget.querySelector(
+            '[data-arrow]'
+          ) as HTMLElement;
           if (arrow) {
             arrow.style.transform = 'translateX(0)';
           }
         }}
       >
         <span>Learn More</span>
-        <span data-arrow style={arrowStyle}>→</span>
+        <span data-arrow style={arrowStyle}>
+          →
+        </span>
       </Link>
     </div>
   );
