@@ -30,11 +30,11 @@ export const HomeCtaBanner: React.FC = () => {
     width: '100%',
     backgroundColor: 'rgba(35, 50, 70, 0.8)',
     backdropFilter: 'blur(10px)',
-    padding: '2.5rem 4rem',
+    padding: '1rem 2rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderTop: `2px solid ${theme.palette.themePrimary}`,
+    borderTop: `3px solid ${theme.palette.themePrimary}`,
     zIndex: 5,
   };
 

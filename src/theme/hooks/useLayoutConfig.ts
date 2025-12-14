@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo } from 'react';
-import { usePathname } from 'next/navigation';
 import { IExtendedTheme } from '../theme';
 
 interface LayoutConfig {
@@ -30,9 +29,6 @@ export const useLayoutConfig = (
   layoutPreference: 'left-handed' | 'right-handed',
   headerHeight: string
 ): LayoutConfig => {
-  const pathname = usePathname();
-  const isOnboardingPage =
-    pathname.startsWith('/onboarding') || pathname.includes('/onboarding/');
   const isLeftHanded = layoutPreference === 'left-handed';
 
   const defaultColumns = useMemo(() => {
@@ -174,6 +170,12 @@ export const useLayoutConfig = (
     paddingTop: isHomePage
       ? undefined
       : `calc(${headerHeight} + ${theme.spacing.l})`,
+    paddingBottom: isHomePage && 
+      orientation !== 'portrait' && 
+      orientation !== 'tablet-portrait' && 
+      orientation !== 'mobile-landscape'
+        ? '200px' // Account for fixed footer height on desktop
+      : undefined,
     gap:
       orientation === 'portrait' ||
       orientation === 'mobile-landscape' ||
@@ -186,7 +188,7 @@ export const useLayoutConfig = (
         ? 'visible'
         : orientation === 'mobile-landscape'
           ? 'visible'
-          : 'clip'
+          : 'hidden'
       : orientation === 'mobile-landscape'
         ? 'hidden'
         : 'clip',
@@ -194,12 +196,7 @@ export const useLayoutConfig = (
     placeItems:
       isHomePage && orientation === 'portrait' ? 'end center' : 'center',
     placeSelf: 'center',
-    placeContent:
-      orientation === 'portrait'
-        ? isOnboardingPage
-          ? 'center'
-          : 'start'
-        : 'center',
+    placeContent: orientation === 'portrait' ? 'start' : 'center',
     backgroundColor: 'transparent', // Always transparent to show fixed background
     backdropFilter: isHomePage ? 'none' : 'blur(8px)',
     zIndex: 1,

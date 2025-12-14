@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import { useDeviceOrientation } from '../../../hooks/useMediaQuery';
+import { Typography } from '../../typography';
 
 /**
  * HomeFooter Component
@@ -99,7 +100,7 @@ export const HomeFooter: React.FC = () => {
       >
         {/* About Column */}
         <div style={columnStyle}>
-          <h3 style={headingStyle}>About</h3>
+          <Typography variant='h3' style={headingStyle}>About</Typography>
           <Link href="/about" style={linkStyle}>
             About 1
           </Link>
@@ -116,7 +117,7 @@ export const HomeFooter: React.FC = () => {
 
         {/* Company Column */}
         <div style={columnStyle}>
-          <h3 style={headingStyle}>Company</h3>
+          <Typography variant='h3' style={headingStyle}>Company</Typography>
           <Link href="/services" style={linkStyle}>
             Company 1
           </Link>
@@ -133,7 +134,7 @@ export const HomeFooter: React.FC = () => {
 
         {/* Contact Me Column */}
         <div style={columnStyle}>
-          <h3 style={headingStyle}>Contact Me</h3>
+          <Typography variant='h3' style={headingStyle}>Contact Me</Typography>
           <Link href="/contact" style={linkStyle}>
             Contact Me 1
           </Link>
@@ -152,29 +153,14 @@ export const HomeFooter: React.FC = () => {
       {/* Contact Information */}
       <div style={columnStyle}>
         <div style={contactInfoStyle}>
+          <Typography variant="h3" style={{ ...headingStyle, marginBottom: '1rem' }}>
+            Get in Touch
+          </Typography>
           <div style={{ marginBottom: '0.5rem' }}>
             <span style={iconStyle}>📍</span>
-            576 e briarsprings cir, midvale, ut
+            Salt Lake City, Utah
           </div>
           <div style={{ marginBottom: '0.5rem' }}>
-            <span style={iconStyle}>✉️</span>
-            <a
-              href="mailto:terence@fluxline.pro"
-              style={{ ...linkStyle, color: theme.palette.neutralSecondary }}
-            >
-              terence@fluxline.pro
-            </a>
-          </div>
-          <div style={{ marginBottom: '0.5rem' }}>
-            <span style={iconStyle}>📞</span>
-            <a
-              href="tel:385.306.8113"
-              style={{ ...linkStyle, color: theme.palette.neutralSecondary }}
-            >
-              385.306.8113
-            </a>
-          </div>
-          <div>
             <span style={iconStyle}>🔗</span>
             <a
               href="https://www.fluxline.pro"
@@ -183,6 +169,17 @@ export const HomeFooter: React.FC = () => {
               style={{ ...linkStyle, color: theme.palette.neutralSecondary }}
             >
               www.fluxline.pro
+            </a>
+          </div>
+          <div>
+            <span style={iconStyle}>✉️</span>
+            <a
+              href="https://outlook.office.com/book/Bookings@terencewaters.com/?ismsaljsauthenabled=true"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ ...linkStyle, color: theme.palette.neutralSecondary }}
+            >
+              Book an appointment
             </a>
           </div>
         </div>

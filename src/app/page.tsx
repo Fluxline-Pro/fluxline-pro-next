@@ -163,7 +163,7 @@ const HomeContent: React.FC<{
       flexDirection: 'column' as const,
       alignItems: 'center',
       justifyContent: isMobile ? 'flex-end' : 'center',
-      gap: isMobile ? (isMobileLandscape ? '0.05rem' : '0.125rem') : '0.5rem',
+      gap: isMobile ? (isMobileLandscape ? '0.05rem' : '0.125rem') : '0.25rem',
       padding: isMobileLandscape ? '1rem' : '2rem',
       textAlign: 'center' as const,
       width: '100%',
@@ -191,15 +191,16 @@ const HomeContent: React.FC<{
       ...animationStyles.drawLine,
     },
     subHeaderContainer: {
-      marginTop: isMobileLandscape ? '0.5rem' : theme.spacing.l,
-      marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.xl,
+      marginTop: isMobileLandscape ? '0.5rem' : theme.spacing.m,
+      marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.l,
     },
     buttonContainer: {
       display: 'flex',
       flexDirection: 'column' as const,
-      gap: isMobileLandscape ? '0.5rem' : '1rem',
+      gap: '0.5rem',
       width: '100%',
       maxWidth: '500px',
+      paddingBottom: !isMobile ? '125px' : undefined, // Extra space for footer on desktop
     },
   };
 
@@ -397,7 +398,10 @@ export default function Home() {
         layoutPreference={layoutPreference}
         backgroundLoaded={backgroundLoaded}
       />
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ 
+        position: 'relative',
+        minHeight: '100vh',
+      }}>
         <ViewportGrid
           leftChildren={shouldShowContentOnLeft ? contentNode : undefined}
           rightChildren={!shouldShowContentOnLeft ? contentNode : undefined}
@@ -405,8 +409,16 @@ export default function Home() {
           respectLayoutPreference={true}
           backgroundImage={backgroundImage as 'one' | 'two'}
         />
-        <HomeCtaBanner />
-        <HomeFooter />
+        <div style={{ 
+          position: 'fixed', 
+          bottom: 0, 
+          left: 0, 
+          right: 0,
+          zIndex: 100 
+        }}>
+          <HomeCtaBanner />
+          <HomeFooter />
+        </div>
       </div>
     </>
   );
