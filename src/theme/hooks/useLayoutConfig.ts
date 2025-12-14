@@ -27,7 +27,8 @@ export const useLayoutConfig = (
   nested: boolean,
   theme: IExtendedTheme,
   layoutPreference: 'left-handed' | 'right-handed',
-  headerHeight: string
+  headerHeight: string,
+  footerHeight?: string
 ): LayoutConfig => {
   const isLeftHanded = layoutPreference === 'left-handed';
 
@@ -170,12 +171,13 @@ export const useLayoutConfig = (
     paddingTop: isHomePage
       ? undefined
       : `calc(${headerHeight} + ${theme.spacing.l})`,
-    paddingBottom: isHomePage && 
-      orientation !== 'portrait' && 
-      orientation !== 'tablet-portrait' && 
+    paddingBottom:
+      isHomePage &&
+      orientation !== 'portrait' &&
+      orientation !== 'tablet-portrait' &&
       orientation !== 'mobile-landscape'
-        ? '200px' // Account for fixed footer height on desktop
-      : undefined,
+        ? footerHeight || '200px' // Use dynamic footer height, fallback to 200px if not provided
+        : undefined,
     gap:
       orientation === 'portrait' ||
       orientation === 'mobile-landscape' ||

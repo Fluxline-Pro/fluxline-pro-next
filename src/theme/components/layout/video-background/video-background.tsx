@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
 import { useReducedMotion } from '../../../hooks/useReducedMotion';
 import { useColorVisionFilter } from '../../../hooks/useColorVisionFilter';
 import type { IExtendedTheme, ThemeMode } from '../../../theme';
@@ -29,7 +30,7 @@ interface VideoBackgroundProps {
 
 /**
  * VideoBackground Component
- * 
+ *
  * Renders a background video with controls for muting/unmuting and replaying.
  * Falls back to a static image if video fails to load.
  * Supports closed captions and accessibility features.
@@ -124,7 +125,7 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
       >
         <Image
           src={fallbackImageSrc}
-          alt="Fluxline Pro background"
+          alt='Fluxline Pro background'
           fill
           priority
           quality={90}
@@ -200,17 +201,17 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
           autoPlay
           muted
           playsInline
-          preload="auto"
+          preload='auto'
           poster={posterSrc}
-          crossOrigin="anonymous"
+          crossOrigin='anonymous'
         >
-          <source src={videoSrc} type="video/mp4" />
+          <source src={videoSrc} type='video/mp4' />
           {captionsSrc && (
             <track
-              kind="captions"
+              kind='captions'
               src={captionsSrc}
-              srcLang="en"
-              label="English"
+              srcLang='en'
+              label='English'
               default
             />
           )}
@@ -253,13 +254,31 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
                 if (!shouldReduceMotion) {
                   (e.currentTarget as HTMLElement).style.backgroundColor =
                     'rgba(0, 0, 0, 0.6)';
-                  (e.currentTarget as HTMLElement).style.transform =
-                    'scale(1)';
+                  (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
                 }
               }}
-              aria-label="Replay video"
+              aria-label='Replay video'
             >
-              ↻
+              <FluentIcon
+                iconName='Play'
+                size='small'
+                color={theme.palette.white}
+              />
+              <span
+                style={{
+                  position: 'absolute',
+                  width: 1,
+                  height: 1,
+                  padding: 0,
+                  margin: -1,
+                  overflow: 'hidden',
+                  clip: 'rect(0 0 0 0)',
+                  whiteSpace: 'nowrap',
+                  border: 0,
+                }}
+              >
+                Replay video
+              </span>
             </button>
           )}
 
@@ -283,7 +302,26 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
             }}
             aria-label={isMuted ? 'Unmute video' : 'Mute video'}
           >
-            {isMuted ? '🔇' : '🔊'}
+            <FluentIcon
+              iconName={isMuted ? 'VolumeDisabled' : 'Volume2'}
+              size='small'
+              color={theme.palette.white}
+            />
+            <span
+              style={{
+                position: 'absolute',
+                width: 1,
+                height: 1,
+                padding: 0,
+                margin: -1,
+                overflow: 'hidden',
+                clip: 'rect(0 0 0 0)',
+                whiteSpace: 'nowrap',
+                border: 0,
+              }}
+            >
+              {isMuted ? 'Unmute video' : 'Mute video'}
+            </span>
           </button>
         </div>
       </div>

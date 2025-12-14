@@ -133,7 +133,7 @@ Next caption text
 - **Hidden on**: Mobile portrait, mobile landscape, tablet portrait
 - **Footer sections**:
   - Left: Logo and tagline
-  - Middle: Three navigation columns (About, Company, Contact Me)
+  - Middle: Three navigation columns (About, Services, Resources)
   - Right: Contact information with icons
 - **CTA Banner**: Positioned above footer with call-to-action message
 

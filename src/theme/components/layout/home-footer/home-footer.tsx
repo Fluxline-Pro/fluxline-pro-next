@@ -98,7 +98,7 @@ export const HomeFooter: React.FC = () => {
   const { theme, themeMode } = useAppTheme();
   const orientation = useDeviceOrientation();
 
-  const getBackgroundColor = (): string => {
+  const getBackground = (): string => {
     switch (themeMode) {
       case 'high-contrast':
         return '#000000';
@@ -132,7 +132,7 @@ export const HomeFooter: React.FC = () => {
   const footerStyle: React.CSSProperties = {
     position: 'relative',
     width: '100%',
-    backgroundColor: getBackgroundColor(),
+    background: getBackground(),
     backdropFilter: 'blur(10px)',
     padding: '2rem 4rem',
     display: 'grid',
