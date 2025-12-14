@@ -59,7 +59,7 @@ export const GlobalFooter: React.FC = () => {
     transform: 'translateX(-50%)',
     padding: '0.5rem 2rem',
     backgroundColor: theme.palette.themePrimary,
-    color: theme.palette.white,
+    color: theme.isInverted ? theme.palette.black : theme.palette.white,
     fontSize: '0.875rem',
     fontWeight: theme.typography.fontWeights.semiBold,
     borderTopLeftRadius: '8px',
@@ -88,10 +88,17 @@ export const GlobalFooter: React.FC = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: 'spring' as const,
-        stiffness: 300,
-        damping: 30,
-        duration: shouldReduceMotion ? 0 : 0.3,
+        y: {
+          type: 'spring' as const,
+          stiffness: 300,
+          damping: 30,
+          duration: shouldReduceMotion ? 0 : 0.3,
+        },
+        opacity: {
+          duration: shouldReduceMotion ? 0 : 0.07,
+          delay: shouldReduceMotion ? 0 : 0.05,
+          ease: 'easeOut' as const,
+        },
       },
     },
     exit: {
@@ -99,6 +106,7 @@ export const GlobalFooter: React.FC = () => {
       opacity: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.2,
+        ease: 'easeInOut' as const,
       },
     },
   };

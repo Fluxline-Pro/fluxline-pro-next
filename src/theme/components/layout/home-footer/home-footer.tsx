@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import { useDeviceOrientation } from '../../../hooks/useMediaQuery';
 import { Typography } from '../../typography';
-import { get } from 'http';
+import { themeMap } from '@/theme/theme';
 
 /**
  * HomeFooter Component
@@ -22,15 +22,33 @@ const getFooterTextColor = (themeMode: string): string => {
     case 'high-contrast':
     case 'grayscale-dark':
     case 'dark':
-    case 'grayscale':
-      return '#FFFFFF';
     case 'tritanopia':
     case 'deuteranopia':
     case 'protanopia':
+      return '#FFFFFF';
     case 'light':
+    case 'grayscale':
       return '#000000';
     default:
       return '#000000';
+  }
+};
+
+const getHoverLinkAndHeaderColor = (themeMode: string): string => {
+  switch (themeMode) {
+    case 'grayscale':
+      return '#010101';
+    case 'light':
+    case 'dark':
+    case 'grayscale-dark':
+    case 'high-contrast':
+      return themeMap[themeMode].palette.themePrimary;
+    case 'tritanopia':
+    case 'protanopia':
+    case 'deuteranopia':
+      return '#FFFFFF';
+    default:
+      return '#DFCDFC';
   }
 };
 
@@ -41,23 +59,25 @@ export const StyledLink: React.FC<{
 }> = ({ href, children, openInNewTab }) => {
   const { themeMode } = useAppTheme();
 
-
   const linkStyle: React.CSSProperties = {
     color: getFooterTextColor(themeMode), // don't change the text color on any mode changes
     fontSize: '0.875rem',
     textDecoration: 'none',
-    transition: 'color 0.2s ease',
+    transition:
+      'color 0.2s ease-in-out, font-variation-settings 0.2s ease-in-out',
     cursor: 'pointer',
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.currentTarget.style.color = '#888888';
+    e.currentTarget.style.color = getHoverLinkAndHeaderColor(themeMode); // light blue on hover by default on dark modes
     e.currentTarget.style.textDecoration = 'underline';
+    e.currentTarget.style.fontVariationSettings = '"wght" 600';
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.currentTarget.style.color = getFooterTextColor(themeMode); // revert to original color
     e.currentTarget.style.textDecoration = 'none';
+    e.currentTarget.style.fontVariationSettings = '"wght" 400';
   };
 
   return (
@@ -83,16 +103,19 @@ export const HomeFooter: React.FC = () => {
       case 'high-contrast':
         return '#000000';
       case 'grayscale-dark':
+        return 'rgba(26, 26, 26, 0.9)';
       case 'grayscale':
-        return '#1A1A1A';
-      case 'tritanopia':
-      case 'deuteranopia':
-      case 'protanopia':
-        return 'rgba(0, 0, 0, 0.95)';
+        return 'linear-gradient(135deg, rgba(220, 220, 220, 0.95) 0%, rgba(245, 245, 245, 0.95) 50%, rgba(235, 235, 235, 0.95) 100%)';
       case 'light':
+        return 'linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(245, 200, 92, 0.12) 30%, rgba(39, 71, 112, 0.12) 70%, rgba(248, 250, 252, 0.95) 100%)';
+      case 'tritanopia':
+        return 'rgba(140, 30, 35, 0.9)';
+      case 'protanopia':
+      case 'deuteranopia':
+        return 'rgba(0, 70, 120, 0.9)';
       case 'dark':
       default:
-        return 'rgba(25, 40, 60, 0.95)';
+        return 'rgba(25, 40, 60, 0.9)';
     }
   };
 
@@ -116,7 +139,7 @@ export const HomeFooter: React.FC = () => {
     gridTemplateColumns: '1fr 2fr 1fr',
     gap: '3rem',
     alignItems: 'start',
-    borderTop: `1px solid ${theme.palette.themePrimary}`,
+    borderTop: `2px solid ${theme.palette.themePrimary}`,
     zIndex: 5,
   };
 
@@ -127,7 +150,7 @@ export const HomeFooter: React.FC = () => {
   };
 
   const headingStyle: React.CSSProperties = {
-    color: getFooterTextColor(themeMode), // don't change the text color on any mode changes
+    color: getHoverLinkAndHeaderColor(themeMode), // don't change the text color on any mode changes
     fontSize: '1rem',
     fontWeight: theme.typography.fontWeights.semiBold,
     marginBottom: '0.5rem',
@@ -154,7 +177,13 @@ export const HomeFooter: React.FC = () => {
           alt='Fluxline Logo'
           width={200}
           height={60}
-          style={{ objectFit: 'contain' }}
+          style={{
+            objectFit: 'contain',
+            filter:
+              themeMode === 'light' || themeMode === 'grayscale'
+                ? 'invert(1)'
+                : 'none',
+          }}
         />
       </div>
 
@@ -217,7 +246,9 @@ export const HomeFooter: React.FC = () => {
           </Typography>
           <div style={{ marginBottom: '0.5rem' }}>
             <span style={iconStyle}>📍</span>
-            <span style={{ color: getFooterTextColor(themeMode) }}>Salt Lake City, Utah</span>
+            <span style={{ color: getFooterTextColor(themeMode) }}>
+              Salt Lake City, Utah
+            </span>
           </div>
           <div style={{ marginBottom: '0.5rem' }}>
             <span style={iconStyle}>🔗</span>

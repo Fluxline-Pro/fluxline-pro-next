@@ -457,8 +457,13 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   themeMode === 'dark' || themeMode === 'grayscale-dark'
                     ? theme.gradients?.components?.modal?.dark ||
                       theme.palette.themeDark
-                    : theme.gradients?.components?.modal?.light ||
-                      theme.palette.white,
+                    : themeMode === 'light'
+                      ? theme.gradients?.light?.menu ||
+                        'linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%)'
+                      : themeMode === 'grayscale'
+                        ? 'linear-gradient(135deg, #F0F0F0 0%, #FAFAFA 50%, #F5F5F5 100%)'
+                        : theme.gradients?.components?.modal?.light ||
+                          theme.palette.white,
                 height: '100%',
                 width: '100%',
                 maxWidth: modalMaxWidth,
