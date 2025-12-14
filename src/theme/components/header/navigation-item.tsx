@@ -35,7 +35,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
   onToggleExpand,
   isChild = false,
 }) => {
-  const { theme, layoutPreference } = useAppTheme();
+  const { theme, layoutPreference, themeMode } = useAppTheme();
   const pathname = usePathname();
   const isActive = pathname === route.path;
   const isLeftHanded = layoutPreference === 'left-handed';
@@ -94,7 +94,9 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
           size={iconSize}
           color={
             isActive || isHovered
-              ? theme.palette.themePrimary
+              ? themeMode === 'tritanopia'
+                ? theme.palette.white
+                : theme.palette.themePrimary
               : theme.palette.neutralSecondary
           }
         />
@@ -105,7 +107,9 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
           textTransform: 'capitalize',
           color:
             isActive || isHovered
-              ? theme.palette.themePrimary
+              ? themeMode === 'tritanopia'
+                ? theme.palette.white
+                : theme.palette.themePrimary
               : theme.palette.neutralPrimary,
           fontSize,
           fontWeight: isActive
@@ -121,7 +125,11 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
         <FluentIcon
           iconName={isExpanded ? 'ChevronUp' : 'ChevronDown'}
           size='small'
-          color={theme.palette.neutralSecondary}
+          color={isActive || isHovered
+            ? themeMode === 'tritanopia'
+              ? theme.palette.white
+              : theme.palette.themePrimary
+            : theme.palette.neutralSecondary}
         />
       )}
     </div>

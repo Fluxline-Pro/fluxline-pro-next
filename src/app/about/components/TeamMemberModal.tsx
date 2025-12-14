@@ -13,7 +13,7 @@ import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { TeamMember } from './TeamMemberCard';
 import { SocialLinks } from './SocialLinks';
-
+import { useColorVisionFilter } from '@/theme';
 interface TeamMemberModalProps {
   isOpen: boolean;
   onDismiss: () => void;
@@ -30,6 +30,7 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
     theme.themeMode === 'dark' ||
     theme.themeMode === 'high-contrast' ||
     theme.themeMode === 'grayscale-dark';
+  const { filter } = useColorVisionFilter();
 
   return (
     <Modal
@@ -73,6 +74,7 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
                 objectFit: 'cover',
                 transform: 'scale(2)',
                 translate: '0 30%',
+                filter: filter,
               }}
               sizes='200px'
             />

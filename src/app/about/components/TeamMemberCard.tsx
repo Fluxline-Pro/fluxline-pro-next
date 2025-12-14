@@ -12,6 +12,7 @@ import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { TeamMemberModal } from './TeamMemberModal';
 import { SocialLinks } from './SocialLinks';
+import { useColorVisionFilter } from '@/theme';
 
 export interface TeamMember {
   id: string;
@@ -38,6 +39,7 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
   const { theme } = useAppTheme();
   const [isHovered, setIsHovered] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const { filter } = useColorVisionFilter();
 
   return (
     <>
@@ -95,6 +97,7 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
                 objectFit: 'cover',
                 transform: 'scale(2)',
                 translate: '0 30%',
+                filter: filter,
               }}
               sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
             />
