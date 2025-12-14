@@ -11,11 +11,8 @@
 
 // Root CSS Custom Properties - Fluxline Pro Theme Variables
 :root {
-  --background: var(
-    --theme-gradient-background,
-    var(--theme-semantic-bodyBackground)
-  );
-  --foreground: var(--theme-semantic-bodyText);
+  --background: var(--theme-semantic-bodyBackground, #010101);
+  --foreground: var(--theme-semantic-bodyText, #ffffff);
   --font-inter: var(--theme-fonts-family);
   --font-mono: var(--theme-fonts-mono);
 }

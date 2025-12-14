@@ -70,7 +70,7 @@ export const HomeFooter: React.FC = () => {
   const footerStyle: React.CSSProperties = {
     position: 'relative',
     width: '100%',
-    backgroundColor: 'rgba(25, 40, 60, 0.95)',
+    backgroundColor: 'rgba(25, 40, 60, 0.95)', // hard-coded dark semi-transparent to avoid light and dark mode changes
     backdropFilter: 'blur(10px)',
     padding: '2rem 4rem',
     display: 'grid',

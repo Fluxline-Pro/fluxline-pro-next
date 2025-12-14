@@ -89,14 +89,13 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   };
 
   const getBackgroundGradient = (
-    themeMode: ThemeMode,
-    theme: IExtendedTheme
+    themeMode: ThemeMode
   ) => {
     // For home page with background image, use a very subtle vignette overlay
     // that allows the image to show through clearly while providing minimal depth
     switch (themeMode) {
       case 'high-contrast':
-        return '#010101';
+        return '#000000';
       case 'dark':
         return 'radial-gradient(circle at center, transparent 0%, rgba(1, 1, 1, 0.3) 100%)';
       case 'grayscale-dark':
@@ -117,7 +116,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
 
   const imagePath = getBackgroundImagePath(backgroundImage, orientation);
   const backgroundPosition = getBackgroundPosition(orientation, backgroundImage);
-  const gradient = getBackgroundGradient(themeMode, theme);
+  const gradient = getBackgroundGradient(themeMode);
 
   // Determine if we should use video (only for backgroundImage === 'one')
   const useVideo = backgroundImage === 'one';

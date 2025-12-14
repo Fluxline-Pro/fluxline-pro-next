@@ -398,10 +398,12 @@ export default function Home() {
         layoutPreference={layoutPreference}
         backgroundLoaded={backgroundLoaded}
       />
-      <div style={{ 
-        position: 'relative',
-        minHeight: '100vh',
-      }}>
+      <div
+        style={{
+          position: 'relative',
+          minHeight: '100vh',
+        }}
+      >
         <ViewportGrid
           leftChildren={shouldShowContentOnLeft ? contentNode : undefined}
           rightChildren={!shouldShowContentOnLeft ? contentNode : undefined}
@@ -409,13 +411,15 @@ export default function Home() {
           respectLayoutPreference={true}
           backgroundImage={backgroundImage as 'one' | 'two'}
         />
-        <div style={{ 
-          position: 'fixed', 
-          bottom: 0, 
-          left: 0, 
-          right: 0,
-          zIndex: 100 
-        }}>
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 100,
+          }}
+        >
           <HomeCtaBanner />
           <HomeFooter />
         </div>

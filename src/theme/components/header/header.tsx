@@ -439,7 +439,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             style={{
               position: 'fixed',
               inset: 0,
-              zIndex: 60,
+              zIndex: 120,
               backgroundColor: 'rgba(0, 0, 0, 0.8)',
               backdropFilter: 'blur(8px)',
             }}
@@ -485,7 +485,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   border: 'none',
                   cursor: 'pointer',
                   padding: isMobile ? '0.75rem' : '1.5rem',
-                  zIndex: 10,
+                  zIndex: 60,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',

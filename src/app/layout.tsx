@@ -7,6 +7,7 @@ import { ThemeOverrideProvider } from '../theme/contexts/ThemeOverrideContext';
 import { FontScaleProvider } from '../theme/providers';
 import { Header } from '../theme/components/header';
 import { SkipToContent } from '../theme/components/skip-to-content';
+import { GlobalFooter } from '../theme/components/layout/global-footer';
 
 // Global styles
 import './tailwind.css'; // ← Tailwind base/utilities first
@@ -208,6 +209,7 @@ export default function RootLayout({
               <SkipToContent />
               <Header />
               {children}
+              <GlobalFooter />
             </ThemeProvider>
           </ThemeOverrideProvider>
         </FontScaleProvider>
