@@ -8,10 +8,6 @@ import { Hero } from '@/theme/components/hero/Hero';
 import { useAppTheme } from '../../theme/hooks/useAppTheme';
 import { spacing } from '../../theme/theme';
 import { useHoverEffects } from '../../hooks/useHoverEffects';
-<<<<<<< HEAD
-import { FadeUp } from '@/animations/fade-animations';
-=======
->>>>>>> 2c095a7 (Add SEO metadata to legal pages, portfolio, scrolls, and enhance root layout)
 
 interface LegalDocument {
   title: string;
@@ -64,105 +60,6 @@ export default function LegalPageClient() {
   const cardHoverEffects = useHoverEffects({ type: 'card' });
 
   return (
-<<<<<<< HEAD
-    <UnifiedPageWrapper layoutType='responsive-grid' showImageTitle={false}>
-      <FadeUp duration={0.5} delay={0}>
-        <div className='space-y-16'>
-          {/* Hero Section */}
-          <Hero
-            title='Legal & Reference'
-            iconName='shield'
-            description='Access important legal documents and reference materials for the Fluxline Resonance Group. These documents outline our policies, terms, and core definitions.  '
-          />
-
-          {/* Document Grid */}
-          <section className='space-y-8'>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                gap: spacing.l,
-              }}
-            >
-              {LEGAL_DOCUMENTS.map((doc) => (
-                <Link
-                  key={doc.title}
-                  href={doc.href}
-                  style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                  }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: theme.palette.neutralLighterAlt,
-                      border: `1px solid ${theme.palette.neutralQuaternary}`,
-                      borderRadius: '8px',
-                      padding: spacing.l,
-                      height: '180px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      transition: 'all 0.2s ease',
-                      cursor: 'pointer',
-                    }}
-                    {...cardHoverEffects}
-                  >
-                    <div>
-                      <Typography
-                        variant='h3'
-                        style={{
-                          fontSize: '1.25rem',
-                          fontWeight: 600,
-                          color: theme.semanticColors.bodyText,
-                          marginBottom: spacing.s2,
-                        }}
-                      >
-                        {doc.title}
-                      </Typography>
-                      <Typography
-                        variant='p'
-                        style={{
-                          fontSize: '0.875rem',
-                          color: theme.palette.neutralSecondary,
-                          lineHeight: '1.5',
-                        }}
-                      >
-                        {doc.description}
-                      </Typography>
-                    </div>
-
-                    {/* Special indicator for PDF document */}
-                    {doc.title === 'Articles Of Conversion' && (
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: spacing.s1,
-                          color: theme.palette.themePrimary,
-                          fontSize: '0.875rem',
-                          fontWeight: 500,
-                        }}
-                      >
-                        <svg
-                          width='16'
-                          height='16'
-                          fill='currentColor'
-                          viewBox='0 0 24 24'
-                        >
-                          <path d='M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z' />
-                        </svg>
-                        VIEW PDF
-                      </div>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </div>
-      </FadeUp>
-=======
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div className='space-y-16'>
         {/* Hero Section */}
@@ -258,7 +155,6 @@ export default function LegalPageClient() {
           </div>
         </section>
       </div>
->>>>>>> 2c095a7 (Add SEO metadata to legal pages, portfolio, scrolls, and enhance root layout)
     </UnifiedPageWrapper>
   );
 }

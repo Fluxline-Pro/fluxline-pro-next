@@ -10,6 +10,7 @@ import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import ConsultingImage from '@/assets/images/ConsultingPortrait.jpg';
 
 export default function NotFound() {
   const { theme } = useAppTheme();
@@ -28,7 +29,7 @@ export default function NotFound() {
     <UnifiedPageWrapper
       layoutType='responsive-grid'
       forceImageConfig={{
-        image: 'NOT_FOUND',
+        image: ConsultingImage.src,
         imageText: '404 - Page Not Found',
       }}
     >

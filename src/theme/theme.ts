@@ -1467,6 +1467,7 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
         'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
       errorText: '#888888', // Dark red in grayscale
       errorBackground: '#999999',
+      errorIcon: '#888888',
       successText: '#1A1A1A', // Dark gray for success
       successBackground: '#E6E6E6',
       messageText: '#4D4D4D', // Mid gray for messages
@@ -1569,6 +1570,7 @@ export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
       bodyBackground: '#1F1F1F',
       errorText: '#bbbbbb', // Light gray for error
       errorBackground: '#222222',
+      errorIcon: '#bbbbbb',
       successText: '#f0f0f0', // Light gray for success
       successBackground: '#262626',
       messageText: '#bfbfbf', // Light gray for messages
