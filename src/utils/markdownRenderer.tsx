@@ -404,11 +404,7 @@ export const UnifiedMarkdownRenderer: React.FC<
         alt,
         title,
         ...props
-      }: React.ImgHTMLAttributes<HTMLImageElement> & {
-        src?: string;
-        alt?: string;
-        title?: string;
-      }) => (
+      }: React.ImgHTMLAttributes<HTMLImageElement>) => (
         <img
           src={src}
           alt={alt || ''}

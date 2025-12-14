@@ -5,11 +5,10 @@ import {
   Modal as FluentModal,
   IModalProps,
   IModalStyles,
-  IconButton,
-  IIconProps,
 } from '@fluentui/react';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { ClientOnly } from '@/theme/components/client-only';
+import { FluentIcon } from '@/theme/components/fluent-icon';
 import styles from './modal.module.scss';
 
 export interface ModalProps {
@@ -76,8 +75,6 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   const { theme } = useAppTheme();
 
-  const closeIcon: IIconProps = { iconName: 'Cancel' };
-
   const modalStyles: Partial<IModalStyles> = {
     main: {
       backgroundColor: theme.palette.white,
@@ -107,12 +104,38 @@ export const Modal: React.FC<ModalProps> = ({
         <div className={styles.header}>
           {title && <h2 className={styles.title}>{title}</h2>}
           {showCloseButton && (
-            <IconButton
-              className={styles.closeButton}
-              iconProps={closeIcon}
-              ariaLabel="Close modal"
+            <button
               onClick={onDismiss}
-            />
+              className={styles.closeButton}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                transition: 'background-color 0.2s ease, transform 0.2s ease',
+                transform: 'scale(1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                e.currentTarget.style.transform = 'scale(1.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              aria-label='Close modal'
+            >
+              <FluentIcon
+                iconName='Cancel'
+                size='large'
+                color={theme.semanticColors.errorIcon}
+              />
+            </button>
           )}
         </div>
         <div className={styles.body}>{children}</div>

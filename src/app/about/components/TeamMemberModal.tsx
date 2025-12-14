@@ -38,6 +38,7 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
       onDismiss={onDismiss}
       ariaLabel={`${member.name} - Team Member Details`}
       maxWidth='900px'
+      showCloseButton={true}
     >
       {/* Header with photo and info */}
       <div

@@ -47,7 +47,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
       instagram: 'https://instagram.com/aplusinflux',
       facebook: 'https://www.facebook.com/fluxline',
       github: 'https://github.com/aplusandminus',
-      email: 'mailto:terence@fluxline.pro',
+      email: 'terence@fluxline.pro', // only needs the email handle, no mailto:
       twitter: 'https://twitter.com/aplusinflux',
       tiktok: 'https://www.tiktok.com/@aplusinflux',
     },
