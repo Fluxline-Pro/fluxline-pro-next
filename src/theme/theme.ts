@@ -1171,12 +1171,13 @@ export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
       bodyText: '#333333',
       bodyBackground:
         'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-      errorText: '#B34C4C', // Dark teal for error states
-      errorBackground: '#FDE7E7', // Light red background
+      errorText: '#0C8ECB', // Dark teal for error states
+      errorBackground: '#C0D5DF', // Light teal background
+      errorIcon: '#0C8ECB', // Dark teal for error states
       successText: '#1B5E20', // Dark green for success states
       successBackground: '#E8F5E9', // Light green background
-      messageText: '#FFB900',
-      warningText: '#FFB900',
+      messageText: '#C05621', // Soft orange for warnings
+      warningText: '#C05621', // Soft orange for warnings
       warningBackground: '#FFF4CE',
       link: '#0078D4',
       linkHovered: '#004578',
@@ -1273,13 +1274,13 @@ export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
       bodyText: '#333333',
       bodyBackground:
         'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-      errorText: '#E81123',
-      errorBackground: '#FDE7E7',
-      successText: '#4894FE',
+      errorText: '#B21623', // darker error text for visibility
+      errorBackground: '#CEA9A9', // darker error background
+      successText: '#3874C7', // soft, darker blue for success
       successBackground: '#EFF6FC',
-      messageText: '#E6B800', // Muted yellow
-      warningText: '#E6B800', // Muted yellow
-      warningBackground: '#FFF4CE',
+      messageText: '#C05621', // Darker orange for warnings
+      warningText: '#C05621', // Darker orange for warnings
+      warningBackground: '#F3B89A',
       link: '#0063B1',
       linkHovered: '#004578',
     },

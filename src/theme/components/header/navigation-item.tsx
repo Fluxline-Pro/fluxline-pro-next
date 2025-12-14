@@ -94,7 +94,9 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
           size={iconSize}
           color={
             isActive || isHovered
-              ? themeMode === 'tritanopia'
+              ? themeMode === 'tritanopia' ||
+                themeMode === 'deuteranopia' ||
+                themeMode === 'protanopia'
                 ? theme.palette.white
                 : theme.palette.themePrimary
               : theme.palette.neutralSecondary
@@ -107,7 +109,9 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
           textTransform: 'capitalize',
           color:
             isActive || isHovered
-              ? themeMode === 'tritanopia'
+              ? themeMode === 'tritanopia' ||
+                themeMode === 'deuteranopia' ||
+                themeMode === 'protanopia'
                 ? theme.palette.white
                 : theme.palette.themePrimary
               : theme.palette.neutralPrimary,
@@ -125,11 +129,15 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
         <FluentIcon
           iconName={isExpanded ? 'ChevronUp' : 'ChevronDown'}
           size='small'
-          color={isActive || isHovered
-            ? themeMode === 'tritanopia'
-              ? theme.palette.white
-              : theme.palette.themePrimary
-            : theme.palette.neutralSecondary}
+          color={
+            isActive || isHovered
+              ? themeMode === 'tritanopia' ||
+                themeMode === 'deuteranopia' ||
+                themeMode === 'protanopia'
+                ? theme.palette.white
+                : theme.palette.themePrimary
+              : theme.palette.neutralSecondary
+          }
         />
       )}
     </div>

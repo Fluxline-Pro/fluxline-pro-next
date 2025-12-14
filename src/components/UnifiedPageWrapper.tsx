@@ -20,6 +20,7 @@ import {
   useIsMobileLandscape,
 } from '@/theme/hooks/useMediaQuery';
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
+import { useColorVisionFilter } from '@/theme/hooks/useColorVisionFilter';
 import { useHoverEffects } from '../hooks/useHoverEffects';
 import { useHeaderHeight } from '../theme/hooks/useHeaderHeight';
 import { ThemeMode } from '../theme/theme';
@@ -277,6 +278,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     theme,
     layoutPreference
   );
+  const { filter } = useColorVisionFilter();
 
   // Extract id from params if it exists
   const id = params?.id as string | undefined;
@@ -637,6 +639,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
+                  filter: filter,
                 }}
                 priority
                 placeholder='blur'
@@ -740,6 +743,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   width: '100%',
                   height: 'auto',
                   objectFit: 'contain',
+                  filter: filter,
                 }}
                 priority
                 placeholder='blur'
@@ -790,7 +794,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                     right: 0,
                     padding: theme.spacing.l,
                     background: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent)`,
-                    color: theme.palette.white,
+                    color: '#FFFFFF',
                   }}
                 >
                   <h2
@@ -800,6 +804,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
                       fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                       lineHeight: 1.2,
+                      color: '#FFFFFF', // hard-coded so the text is always white despite themeMode changes
                     }}
                   >
                     {imageTextToDisplay}

@@ -12,7 +12,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useThemeOverride } from '@/theme/contexts/ThemeOverrideContext';
 import { useBackgroundImage } from '@/theme/hooks/useBackgroundImage';
 import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
-import type { IExtendedTheme } from '@/theme/theme';
+import type { IExtendedTheme, ThemeMode } from '@/theme/theme';
 
 /**
  * HighlightText Component - displays highlighted text in white
@@ -294,15 +294,30 @@ export default function Home() {
   const [shouldStartAnimations, setShouldStartAnimations] =
     React.useState(false);
 
-  // Force dark mode for home page only - doesn't affect user's saved preference
+  // Force dark mode for home page unless user has accessibility preference
+  // Respect high-contrast and colorblindness modes for accessibility
   React.useEffect(() => {
-    setOverrideThemeMode('dark');
+    const accessibilityModes: ThemeMode[] = [
+      'high-contrast',
+      'protanopia',
+      'deuteranopia',
+      'tritanopia',
+    ];
+
+    // If user has an accessibility mode, keep it; otherwise force dark mode
+    const shouldOverride = !accessibilityModes.includes(themeMode);
+
+    if (shouldOverride) {
+      setOverrideThemeMode('dark');
+    }
 
     return () => {
       // Clear override when leaving the page
-      setOverrideThemeMode(null);
+      if (shouldOverride) {
+        setOverrideThemeMode(null);
+      }
     };
-  }, [setOverrideThemeMode]);
+  }, [setOverrideThemeMode, themeMode]);
 
   // Add home-page class to body for transparent background
   React.useEffect(() => {
@@ -402,6 +417,7 @@ export default function Home() {
         style={{
           position: 'relative',
           minHeight: '100vh',
+          backgroundColor: '#010101', // Ensure dark background while theme loads
         }}
       >
         <ViewportGrid
