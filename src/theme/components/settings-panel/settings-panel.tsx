@@ -229,7 +229,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
       >
         <FormButton
           variant='danger'
-          icon='Reset'
+          icon='RevToggleKey'
           fullWidth
           onClick={handleResetSettings}
         >

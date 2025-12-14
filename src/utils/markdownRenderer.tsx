@@ -6,6 +6,7 @@ import DOMPurify from 'dompurify';
 import { Typography } from '../theme/components/typography';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
 import { typography } from '../theme/theme';
+import { useColorVisionFilter } from '@/theme';
 
 /**
  * Content types supported by the markdown renderer
@@ -86,6 +87,7 @@ export const UnifiedMarkdownRenderer: React.FC<
   UnifiedMarkdownRendererProps
 > = ({ content, contentType, className }) => {
   const { theme } = useAppTheme();
+  const { filter } = useColorVisionFilter();
 
   // Auto-detect content type if not provided
   const detectedType = useMemo(
@@ -396,8 +398,31 @@ export const UnifiedMarkdownRenderer: React.FC<
           }}
         />
       ),
+      /* ![Alt Text](image-url.jpg "Optional Title") */
+      img: ({
+        src,
+        alt,
+        title,
+        ...props
+      }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+        <img
+          src={src}
+          alt={alt || ''}
+          title={title}
+          {...props}
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            display: 'block',
+            marginTop: theme.spacing.m,
+            marginBottom: theme.spacing.m,
+            borderRadius: theme.borderRadius.m,
+            filter: filter,
+          }}
+        />
+      ),
     }),
-    [theme]
+    [theme, filter]
   );
 
   // Render based on detected content type
