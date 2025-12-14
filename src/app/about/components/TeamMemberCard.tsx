@@ -25,6 +25,7 @@ export interface TeamMember {
     instagram?: string;
     facebook?: string;
     twitter?: string;
+    threads?: string;
     tiktok?: string;
     github?: string;
     email?: string;

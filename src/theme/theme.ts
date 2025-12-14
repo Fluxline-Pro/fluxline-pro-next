@@ -1532,7 +1532,8 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
  *
  * Color Roles:
  * - Primary: Deep blue for structure and trust
- * - Secondary: Teal and green for success and balance
+ * - Secondary: 
+ Teal and green for success and balance
  * - Accent: Soft blue for interaction and emphasis
  * - Neutral: Calibrated grays for hierarchy and legibility
  */

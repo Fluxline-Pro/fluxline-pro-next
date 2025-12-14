@@ -6,23 +6,44 @@ import Link from 'next/link';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import { useDeviceOrientation } from '../../../hooks/useMediaQuery';
 import { Typography } from '../../typography';
+import { get } from 'http';
 
 /**
  * HomeFooter Component
  *
  * Footer specifically for the home page, displayed only on desktop and widescreen tablet.
  * Features company logo, navigation links, and contact information.
+ *** Important:*** Does not include collapsible behavior; for that, use GlobalFooter.
+ *** Important:*** This does not use the theme palettes to change color modes during various themeMode changes; colors are hardcoded for consistency.
  */
+
+const getFooterTextColor = (themeMode: string): string => {
+  switch (themeMode) {
+    case 'high-contrast':
+    case 'grayscale-dark':
+    case 'dark':
+    case 'grayscale':
+      return '#FFFFFF';
+    case 'tritanopia':
+    case 'deuteranopia':
+    case 'protanopia':
+    case 'light':
+      return '#000000';
+    default:
+      return '#000000';
+  }
+};
 
 export const StyledLink: React.FC<{
   href: string;
   children: React.ReactNode;
   openInNewTab?: boolean;
-}> = ({ href, children, openInNewTab }) => {  
-  const { theme } = useAppTheme();
+}> = ({ href, children, openInNewTab }) => {
+  const { themeMode } = useAppTheme();
+
 
   const linkStyle: React.CSSProperties = {
-    color: theme.palette.neutralSecondary,
+    color: getFooterTextColor(themeMode), // don't change the text color on any mode changes
     fontSize: '0.875rem',
     textDecoration: 'none',
     transition: 'color 0.2s ease',
@@ -30,12 +51,12 @@ export const StyledLink: React.FC<{
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.currentTarget.style.color = theme.palette.themePrimary;
+    e.currentTarget.style.color = '#888888';
     e.currentTarget.style.textDecoration = 'underline';
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.currentTarget.style.color = theme.palette.neutralSecondary;
+    e.currentTarget.style.color = getFooterTextColor(themeMode); // revert to original color
     e.currentTarget.style.textDecoration = 'none';
   };
 
@@ -54,8 +75,26 @@ export const StyledLink: React.FC<{
 };
 
 export const HomeFooter: React.FC = () => {
-  const { theme } = useAppTheme();
+  const { theme, themeMode } = useAppTheme();
   const orientation = useDeviceOrientation();
+
+  const getBackgroundColor = (): string => {
+    switch (themeMode) {
+      case 'high-contrast':
+        return '#000000';
+      case 'grayscale-dark':
+      case 'grayscale':
+        return '#1A1A1A';
+      case 'tritanopia':
+      case 'deuteranopia':
+      case 'protanopia':
+        return 'rgba(0, 0, 0, 0.95)';
+      case 'light':
+      case 'dark':
+      default:
+        return 'rgba(25, 40, 60, 0.95)';
+    }
+  };
 
   // Only show on desktop and widescreen tablet (landscape orientations)
   const shouldShowFooter =
@@ -70,7 +109,7 @@ export const HomeFooter: React.FC = () => {
   const footerStyle: React.CSSProperties = {
     position: 'relative',
     width: '100%',
-    backgroundColor: 'rgba(25, 40, 60, 0.95)', // hard-coded dark semi-transparent to avoid light and dark mode changes
+    backgroundColor: getBackgroundColor(),
     backdropFilter: 'blur(10px)',
     padding: '2rem 4rem',
     display: 'grid',
@@ -88,7 +127,7 @@ export const HomeFooter: React.FC = () => {
   };
 
   const headingStyle: React.CSSProperties = {
-    color: theme.palette.white,
+    color: getFooterTextColor(themeMode), // don't change the text color on any mode changes
     fontSize: '1rem',
     fontWeight: theme.typography.fontWeights.semiBold,
     marginBottom: '0.5rem',
@@ -178,7 +217,7 @@ export const HomeFooter: React.FC = () => {
           </Typography>
           <div style={{ marginBottom: '0.5rem' }}>
             <span style={iconStyle}>📍</span>
-            Salt Lake City, Utah
+            <span style={{ color: getFooterTextColor(themeMode) }}>Salt Lake City, Utah</span>
           </div>
           <div style={{ marginBottom: '0.5rem' }}>
             <span style={iconStyle}>🔗</span>
@@ -188,7 +227,10 @@ export const HomeFooter: React.FC = () => {
           </div>
           <div>
             <span style={iconStyle}>✉️</span>
-            <StyledLink href='https://outlook.office.com/book/Bookings@terencewaters.com/?ismsaljsauthenabled' openInNewTab={true}>
+            <StyledLink
+              href='https://outlook.office.com/book/Bookings@terencewaters.com/?ismsaljsauthenabled'
+              openInNewTab={true}
+            >
               Book an appointment
             </StyledLink>
           </div>
