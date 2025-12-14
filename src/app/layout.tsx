@@ -20,12 +20,21 @@ export const metadata: Metadata = {
     template: '%s | Fluxline.pro',
   },
   description:
+<<<<<<< HEAD
     'Fluxline Resonance Group - Business consulting, web development, design, and technical services. Modular by design, resonant by nature.',
   keywords:
     'Fluxline, consulting, web development, business strategy, design, technical services, professional services, personal training, coaching, LGBTQ+ inclusive, accessibility, diversity, equity, AI-driven solutions, digital transformation',
   authors: [{ name: 'Fluxline Resonance Group' }],
   creator: 'Fluxline Resonance Group',
   publisher: 'Fluxline Resonance Group',
+=======
+    'Fluxline Professional Services - Business consulting, web development, design, and technical services. Modular by design, resonant by nature.',
+  keywords:
+    'Fluxline, consulting, web development, business strategy, design, technical services, professional services, personal training, coaching, LGBTQ+ inclusive, accessibility, diversity, equity, AI-driven solutions, digital transformation',
+  authors: [{ name: 'Fluxline Professional Services' }],
+  creator: 'Fluxline Professional Services',
+  publisher: 'Fluxline Professional Services',
+>>>>>>> 2c095a7 (Add SEO metadata to legal pages, portfolio, scrolls, and enhance root layout)
   robots: {
     index: true,
     follow: true,
@@ -107,7 +116,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
+<<<<<<< HEAD
               name: 'Fluxline Resonance Group',
+=======
+              name: 'Fluxline Professional Services',
+>>>>>>> 2c095a7 (Add SEO metadata to legal pages, portfolio, scrolls, and enhance root layout)
               alternateName: 'Fluxline Resonance Group',
               url: 'https://www.fluxline.pro',
               logo: 'https://www.fluxline.pro/images/FluxlineLogo.png',
@@ -147,7 +160,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
+<<<<<<< HEAD
               name: 'Fluxline Resonance Group',
+=======
+              name: 'Fluxline Professional Services',
+>>>>>>> 2c095a7 (Add SEO metadata to legal pages, portfolio, scrolls, and enhance root layout)
               url: 'https://www.fluxline.pro',
               description:
                 'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
@@ -171,7 +188,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'ProfessionalService',
+<<<<<<< HEAD
               name: 'Fluxline Resonance Group',
+=======
+              name: 'Fluxline Professional Services',
+>>>>>>> 2c095a7 (Add SEO metadata to legal pages, portfolio, scrolls, and enhance root layout)
               image: 'https://www.fluxline.pro/images/FluxlineLogo.png',
               '@id': 'https://www.fluxline.pro',
               url: 'https://www.fluxline.pro',

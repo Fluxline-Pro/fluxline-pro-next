@@ -9,16 +9,28 @@ export const metadata: Metadata = {
   keywords:
     'stewardship, ethics, professional conduct, client rights, service commitment, Fluxline',
   openGraph: {
+<<<<<<< HEAD
     title: 'Stewardship Contract - Fluxline',
     description:
       'Our commitment to ethical service and mutual respect. Learn about our stewardship philosophy.',
     url: 'https://www.fluxline.pro/legal/stewardship-contract',
     siteName: 'Fluxline',
+=======
+    title: 'Stewardship Contract - Fluxline Professional Services',
+    description:
+      'Our commitment to ethical service and mutual respect. Learn about our stewardship philosophy.',
+    url: 'https://www.fluxline.pro/legal/stewardship-contract',
+    siteName: 'Fluxline Professional Services',
+>>>>>>> 2c095a7 (Add SEO metadata to legal pages, portfolio, scrolls, and enhance root layout)
     type: 'website',
   },
   twitter: {
     card: 'summary',
+<<<<<<< HEAD
     title: 'Stewardship Contract - Fluxline',
+=======
+    title: 'Stewardship Contract - Fluxline Professional Services',
+>>>>>>> 2c095a7 (Add SEO metadata to legal pages, portfolio, scrolls, and enhance root layout)
     description:
       'Our commitment to ethical service and mutual respect. Learn about our stewardship philosophy.',
   },
