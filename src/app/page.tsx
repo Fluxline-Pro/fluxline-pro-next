@@ -126,6 +126,7 @@ const HomeContent: React.FC<{
           : theme.palette.themePrimary,
       marginBottom: isMobileLandscape ? '-0.25rem' : '-0.5rem',
       textTransform: 'capitalize' as const,
+      textShadow: `0 0 5px ${theme.palette.neutralDark}`,
       fontSize: isMobileLandscape
         ? 'clamp(1rem, 3vw, 1.5rem)'
         : 'clamp(1.5rem, 4vw, 2.5rem)',
@@ -140,19 +141,21 @@ const HomeContent: React.FC<{
         : 'clamp(2.5rem, 8vw, 5rem)',
       fontWeight: theme.typography.fontWeights.bold,
       textTransform: 'uppercase' as const,
+      textShadow: `0 0 5px ${theme.palette.neutralDark}`,
       ...animationStyles.slideInRightDelayed,
     },
     subHeaderLine: {
       color:
         themeMode === 'grayscale'
           ? theme.palette.neutralTertiary
-          : theme.palette.themeSecondary,
+          : theme.palette.themePrimary,
       lineHeight: theme.typography.lineHeights.tight,
       fontWeight: theme.typography.fontWeights.extraLight,
       fontSize: isMobileLandscape
         ? 'clamp(0.9rem, 2.5vw, 1.4rem)'
         : 'clamp(1.2rem, 3vw, 2rem)',
       textTransform: 'capitalize' as const,
+      textShadow: `1px 2px 5px ${theme.palette.black}`,
     },
   };
 
