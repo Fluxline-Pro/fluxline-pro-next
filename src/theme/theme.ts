@@ -1938,7 +1938,9 @@ export const getResponsiveTypography = ({
   xl,
   xxl,
 }: ResponsiveTypographyProps) => {
-  const styles: Record<string, { fontSize: string }> = {};
+  // requires various CSS properties, so needs any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   const styles: { [key: string]: any } = {};
 
   if (xs) {
     styles['@media (min-width: 0)'] = {

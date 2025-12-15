@@ -739,13 +739,6 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
                 >
                   {section.title}
                 </Typography>
-                <Typography
-                  variant='p'
-                  style={{ marginBottom: theme.spacing.m }}
-                >
-                  A selection of images showcasing various aspects of the
-                  project.
-                </Typography>
                 {typeof section.content === 'string' ? (
                   <Typography
                     variant='p'
