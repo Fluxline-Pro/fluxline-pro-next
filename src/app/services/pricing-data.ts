@@ -3,7 +3,6 @@
  * Pricing information for services that offer tiered programs
  */
 
-import { on } from 'stream';
 import { ServicePricing } from './types';
 
 export const SERVICE_PRICING: ServicePricing = {
@@ -14,7 +13,7 @@ export const SERVICE_PRICING: ServicePricing = {
         name: 'Single Session',
         idealFor:
           'Clients needing simplified instruction, unsure about performing exercises, not wanting to commit to a monthly cadence',
-        monthlyRate: '$110/session',
+        monthlyRate: '$100/session',
       },
       {
         id: 'online-pt-only',
@@ -32,7 +31,7 @@ export const SERVICE_PRICING: ServicePricing = {
       },
       {
         id: 'online-hypertrophy',
-        name: 'Online Hypertrophy',
+        name: 'Online PT-Hypertrophy',
         idealFor:
           'Remote clients focused on physique, nutrition, and metabolic coaching',
         monthlyRate: 'Starting at $275/month',
@@ -40,7 +39,7 @@ export const SERVICE_PRICING: ServicePricing = {
       },
       {
         id: 'hybrid-hypertrophy',
-        name: 'Hybrid Hypertrophy',
+        name: 'Hybrid PT-Hypertrophy',
         idealFor:
           'Full-spectrum transformation: movement, nutrition, emotional integration',
         monthlyRate: 'Starting at $450/month',

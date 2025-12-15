@@ -318,7 +318,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                               variant='p'
                               style={{
                                 color: theme.palette.neutralPrimary,
-                                fontSize: '1.25rem',
+                                fontSize: '1.125rem',
                                 fontWeight:
                                   theme.typography.fontWeights.semiBold,
                                 margin: 0,
@@ -332,7 +332,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                               variant='p'
                               style={{
                                 color: theme.palette.neutralTertiary,
-                                fontSize: '1.25rem',
+                                fontSize: '1.125rem',
                                 fontWeight:
                                   theme.typography.fontWeights.regular,
                                 margin: 0,
@@ -350,7 +350,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                                   : theme.palette.neutralSecondary,
                                 fontSize: isFirst ? '1.25rem' : '1.125rem',
                                 fontWeight: isFirst
-                                  ? theme.typography.fontWeights.bold
+                                  ? theme.typography.fontWeights.medium
                                   : theme.typography.fontWeights.regular,
                                 textDecoration: 'none',
                                 transition: 'color 0.2s ease',
@@ -439,7 +439,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             style={{
               position: 'fixed',
               inset: 0,
-              zIndex: 60,
+              zIndex: 120,
               backgroundColor: 'rgba(0, 0, 0, 0.8)',
               backdropFilter: 'blur(8px)',
             }}
@@ -457,8 +457,13 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   themeMode === 'dark' || themeMode === 'grayscale-dark'
                     ? theme.gradients?.components?.modal?.dark ||
                       theme.palette.themeDark
-                    : theme.gradients?.components?.modal?.light ||
-                      theme.palette.white,
+                    : themeMode === 'light'
+                      ? theme.gradients?.light?.menu ||
+                        'linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%)'
+                      : themeMode === 'grayscale'
+                        ? 'linear-gradient(135deg, #F0F0F0 0%, #FAFAFA 50%, #F5F5F5 100%)'
+                        : theme.gradients?.components?.modal?.light ||
+                          theme.palette.white,
                 height: '100%',
                 width: '100%',
                 maxWidth: modalMaxWidth,
@@ -485,7 +490,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                   border: 'none',
                   cursor: 'pointer',
                   padding: isMobile ? '0.75rem' : '1.5rem',
-                  zIndex: 10,
+                  zIndex: 60,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',

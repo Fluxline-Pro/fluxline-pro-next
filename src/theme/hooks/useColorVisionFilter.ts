@@ -30,21 +30,21 @@ export const useColorVisionFilter = (
         // Enhanced grayscale with better contrast and brightness
         return `grayscale(100%) ${darkModeContrast} ${darkModeBrightness}`;
       case 'protanopia':
-        // Simulate red-colorblindness by:
-        // - Lower saturation to reduce overall color intensity
-        // - Shifting hue further towards blue spectrum
-        // - Reduced sepia to minimize red/brown tints
-        // - Adjusted contrast for clarity
-        return `saturate(65%) ${darkModeContrast} hue-rotate(-45deg) sepia(10%) ${darkModeBrightness}`;
+        // Red-colorblindness simulation:
+        // Reds appear darker and shift towards brown/yellow tones
+        // Reds and greens become more similar (yellowy-brown range)
+        return `saturate(70%) contrast(90%) hue-rotate(-15deg) sepia(20%) ${darkModeBrightness}`;
       case 'deuteranopia':
-        // Simulate green-colorblindness by:
-        // - Heavy desaturation to remove green perception
-        // - Strong shift towards yellow/blue spectrum
-        // - Increased sepia to push greens towards browns
-        return `saturate(50%) ${darkModeContrast} hue-rotate(165deg) sepia(10%) ${darkModeBrightness}`;
-
+        // Green-colorblindness simulation (most common):
+        // Greens shift towards yellows and browns
+        // Reds and greens become indistinguishable (both appear yellowish)
+        // More aggressive desaturation to remove green perception
+        return `saturate(40%) contrast(95%) hue-rotate(180deg) sepia(15%) ${darkModeBrightness}`;
       case 'tritanopia':
-        return `saturate(105%) ${darkModeContrast} hue-rotate(90deg) ${darkModeBrightness}`;
+        // Blue-yellow colorblindness simulation:
+        // Blues appear greenish, yellows appear pinkish
+        // Blue-yellow axis is confused
+        return `saturate(90%) contrast(100%) hue-rotate(90deg) sepia(5%) ${darkModeBrightness}`;
       default:
         // Skip dark mode filter if explicitly requested (e.g., for Fluxline dark logo)
         if (skipDarkModeFilter && theme.isInverted) {

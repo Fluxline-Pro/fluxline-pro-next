@@ -38,7 +38,7 @@ function processData(data: any) {
   return data.value;
 }
 
-// ✅ Always include TypeScript interfaces that describes the data coming through and their expected input/output
+// ✅ Include TypeScript interfaces that describes each data type
 interface DataItem {
   id: string;
   value: number;
@@ -156,7 +156,7 @@ Your `tsconfig.json` is the foundation of type safety in your project—it tells
 Implement type-safe error handling:
 
 ```typescript
-// Create custom error classes to provide clear, predictable error types throughout your application
+// Create custom error classes to provide clear, predictable error types
 class ApplicationError extends Error {
   constructor(
     message: string,
@@ -192,7 +192,7 @@ async function fetchUser(id: string): Promise<Result<User>> {
 ## Testing with TypeScript
 
 ```typescript
-// Frameworks like Jest allow you to perform valid unit testing on data sets and TypeScript logic
+// Frameworks like Jest.js allow you to perform and write unit tests
 import { describe, it, expect } from 'jest';
 
 describe('User Service', () => {

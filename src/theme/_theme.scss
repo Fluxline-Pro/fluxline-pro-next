@@ -56,9 +56,9 @@
   --theme-semantic-bodyText: #2e2e2e;
   --theme-semantic-bodyBackground: radial-gradient(
     ellipse at left,
-    #f8fafc 0%,
-    #f5f5f5 40%,
-    #f0f0f0 100%
+    #e8eaf0 0%,
+    #e5e5e5 40%,
+    #dadada 100%
   );
   --theme-semantic-errorText: #b0303c;
   --theme-semantic-errorBackground: #ffebee;
@@ -153,15 +153,16 @@
   // Gradient Backgrounds
   --theme-gradient-background: radial-gradient(
     ellipse at left,
-    #f8fafc 0%,
-    #f5f5f5 40%,
-    #f0f0f0 100%
+    #e8eaf0 0%,
+    #e5e5e5 40%,
+    #dadada 100%
   );
 }
 
 // Dark Theme Variables - Fluxline Pro Default
 // These map to the darkTheme palette in theme.ts
-[data-theme='dark'] {
+[data-theme='dark'],
+[data-theme='grayscale-dark'] {
   // Primary Palette - Dark Mode
   --theme-palette-themePrimary: #afcafc; // Slate blue
   --theme-palette-themeSecondary: #4a9b96; // Fluxline teal
@@ -215,6 +216,52 @@
     #1a1a1a 40%,
     #010101 100%
   );
+}
+
+// High Contrast Theme - Pure black background for maximum contrast
+[data-theme='high-contrast'] {
+  // Primary Palette - High Contrast Mode
+  --theme-palette-themePrimary: #3399ff;
+  --theme-palette-themeSecondary: #00ffff;
+  --theme-palette-themeTertiary: #00ffff;
+  --theme-palette-themeLight: #1a1a1a;
+  --theme-palette-themeDark: #000000;
+  --theme-palette-themeDarker: #000000;
+  --theme-palette-themeLighter: #2a2a2a;
+  --theme-palette-themeLighterAlt: #1a1a1a;
+
+  // Neutral Palette - High Contrast Mode
+  --theme-palette-neutralPrimary: #ffffff;
+  --theme-palette-neutralSecondary: #cccccc;
+  --theme-palette-neutralTertiary: #999999;
+  --theme-palette-neutralTertiaryAlt: #666666;
+  --theme-palette-neutralQuaternary: #444444;
+  --theme-palette-neutralQuaternaryAlt: #2a2a2a;
+  --theme-palette-neutralDark: #000000;
+  --theme-palette-neutralLight: #1a1a1a;
+  --theme-palette-neutralLighter: #2a2a2a;
+  --theme-palette-neutralLighterAlt: #1a1a1a;
+
+  // Accent
+  --theme-palette-accent: #3399ff;
+  --theme-palette-black: #000000;
+  --theme-palette-white: #ffffff;
+
+  // Semantic Colors - High Contrast Mode
+  --theme-semantic-bodyText: #ffffff;
+  --theme-semantic-bodyBackground: #000000; // Pure black for high contrast
+  --theme-semantic-errorText: #ff0000;
+  --theme-semantic-errorBackground: #1a1a1a;
+  --theme-semantic-successText: #00ff00;
+  --theme-semantic-successBackground: #121212;
+  --theme-semantic-messageText: #ffff00;
+  --theme-semantic-warningText: #ffff00;
+  --theme-semantic-warningBackground: #121212;
+  --theme-semantic-link: #3399ff;
+  --theme-semantic-linkHovered: #00ffff;
+
+  // Gradient Backgrounds - High Contrast (solid black)
+  --theme-gradient-background: #000000;
 }
 
 // SCSS Mixins for common theme patterns

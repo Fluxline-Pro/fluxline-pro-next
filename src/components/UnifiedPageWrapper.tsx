@@ -20,9 +20,11 @@ import {
   useIsMobileLandscape,
 } from '@/theme/hooks/useMediaQuery';
 import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
+import { useColorVisionFilter } from '@/theme/hooks/useColorVisionFilter';
 import { useHoverEffects } from '../hooks/useHoverEffects';
 import { useHeaderHeight } from '../theme/hooks/useHeaderHeight';
 import { ThemeMode } from '../theme/theme';
+import { FadeUp } from '@/animations/fade-animations';
 
 import { typography, spacing } from '../theme/theme';
 
@@ -82,23 +84,31 @@ const PAGE_CONFIGS: Record<
     imageText: 'Legal & Reference',
   },
   '/legal/terms': {
-    image: ConsultingImage.src,
+    image: 'FLUXLINE_LOGO',
     imageText: 'Terms of Use',
   },
   '/legal/privacy-policy': {
-    image: GitHubImage.src,
+    image: 'FLUXLINE_LOGO',
     imageText: 'Privacy Policy',
   },
   '/legal/glossary': {
-    image: EducationImage.src,
+    image: 'FLUXLINE_LOGO',
     imageText: 'Glossary of Terms',
   },
+  '/legal/glossary/core-mythic-terms': {
+    image: 'FLUXLINE_LOGO',
+    imageText: 'Core Mythic Terms',
+  },
+  '/legal/glossary/technical-terms': {
+    image: 'FLUXLINE_LOGO',
+    imageText: 'Technical Terms',
+  },
   '/legal/stewardship-contract': {
-    image: ResonanceCoreImage.src,
+    image: 'FLUXLINE_LOGO',
     imageText: 'Stewardship Contract',
   },
   '/legal/articles-of-conversion': {
-    image: ConsultingImage.src,
+    image: 'FLUXLINE_LOGO',
     imageText: 'Articles of Conversion',
   },
   '/services/education': {
@@ -268,6 +278,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     theme,
     layoutPreference
   );
+  const { filter } = useColorVisionFilter();
 
   // Extract id from params if it exists
   const id = params?.id as string | undefined;
@@ -308,16 +319,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   // Determine effective layout type
   const effectiveLayoutType = React.useMemo(() => {
-    // Only use legal-document layout for legal detail pages, not the landing page
-    if (
-      layoutType === 'legal-document' ||
-      (normalizedPathname.startsWith('/legal') &&
-        normalizedPathname !== '/legal')
-    ) {
-      return 'legal-document';
-    }
-    return 'responsive-grid';
-  }, [layoutType, normalizedPathname]);
+    // Use the explicitly provided layoutType
+    // All legal pages now use responsive-grid layout
+    return layoutType;
+  }, [layoutType]);
 
   // Get configuration for current page
   const currentConfig = PAGE_CONFIGS[normalizedPathname];
@@ -360,155 +365,157 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     const showCopyright = legalPageConfig?.showCopyright !== false;
 
     return (
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '900px',
-          margin: '0 auto',
-          padding: spacing.xl,
-          paddingTop: `calc(${headerHeight} + ${spacing.xl})`,
-          color: theme.semanticColors.bodyText,
-        }}
-      >
-        {/* Back Navigation and Page Title */}
-        {showBackNav && legalPageConfig?.title && (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: spacing.m,
-              marginBottom: legalPageConfig.subtitle ? spacing.s : spacing.l,
-            }}
-          >
-            <Link
-              href={backUrl}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                padding: spacing.s1,
-                borderRadius: '8px',
-                color: theme.palette.themePrimary,
-                textDecoration: 'none',
-                transition: 'all 0.2s ease',
-                flexShrink: 0,
-              }}
-              {...linkHoverEffects}
-            >
-              <svg
-                width='24'
-                height='24'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M15 19l-7-7 7-7'
-                />
-              </svg>
-            </Link>
-            <Typography
-              variant='h1'
-              style={{
-                ...typography.fonts.h2,
-                color: theme.semanticColors.bodyText,
-                fontSize: '2rem',
-                fontWeight: 600,
-                margin: 0,
-              }}
-            >
-              {legalPageConfig.title}
-            </Typography>
-          </div>
-        )}
-
-        {/* Subtitle (if provided) */}
-        {legalPageConfig?.subtitle && (
-          <Typography
-            variant='h3'
-            style={{
-              ...typography.fonts.h3,
-              color: theme.palette.neutralSecondary,
-              marginBottom: spacing.l,
-            }}
-          >
-            {legalPageConfig.subtitle}
-          </Typography>
-        )}
-
-        {/* Main Content */}
+      <FadeUp duration={0.5} delay={0}>
         <div
-          className='legal-content'
           style={{
-            marginTop: spacing.xl,
-            marginBottom: spacing.xxl,
+            width: '100%',
+            maxWidth: '900px',
+            margin: '0 auto',
+            padding: spacing.xl,
+            paddingTop: `calc(${headerHeight} + ${spacing.xl})`,
+            color: theme.semanticColors.bodyText,
           }}
         >
-          {legalPageConfig?.content ? (
-            <UnifiedMarkdownRenderer content={legalPageConfig.content} />
-          ) : (
-            children
-          )}
-          <style jsx>{`
-            :global(.legal-content h1:first-child) {
-              display: none;
-            }
-            :global(.legal-content h2) {
-              font-size: 2rem !important;
-              font-weight: 600 !important;
-              margin-top: 2rem !important;
-              margin-bottom: 1rem !important;
-            }
-          `}</style>
-        </div>
-
-        {/* Copyright Footer */}
-        {showCopyright && (
-          <footer
-            style={{
-              marginTop: spacing.xxxl,
-              paddingTop: spacing.l,
-              borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            }}
-          >
-            <Typography
-              variant='p'
+          {/* Back Navigation and Page Title */}
+          {showBackNav && legalPageConfig?.title && (
+            <div
               style={{
-                ...typography.fonts.bodySmall,
-                color: theme.palette.neutralTertiary,
-                textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                gap: spacing.m,
+                marginBottom: legalPageConfig.subtitle ? spacing.s : spacing.l,
               }}
             >
-              © {currentYear} Fluxline Resonance Group, LLC. All rights
-              reserved.
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                ...typography.fonts.bodySmall,
-                color: theme.palette.neutralTertiary,
-                textAlign: 'center',
-                marginTop: spacing.s,
-              }}
-            >
-              Questions? Contact us at{' '}
-              <ProtectedEmail
-                username='support'
-                domain='fluxline.pro'
+              <Link
+                href={backUrl}
                 style={{
-                  color: theme.semanticColors.link,
-                  textDecoration: 'underline',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  padding: spacing.s1,
+                  borderRadius: '8px',
+                  color: theme.palette.themePrimary,
+                  textDecoration: 'none',
+                  transition: 'all 0.2s ease',
+                  flexShrink: 0,
+                }}
+                {...linkHoverEffects}
+              >
+                <svg
+                  width='24'
+                  height='24'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M15 19l-7-7 7-7'
+                  />
+                </svg>
+              </Link>
+              <Typography
+                variant='h1'
+                style={{
+                  ...typography.fonts.h2,
+                  color: theme.semanticColors.bodyText,
+                  fontSize: '2rem',
+                  fontWeight: 600,
+                  margin: 0,
                 }}
               >
-                support [at] fluxline.pro
-              </ProtectedEmail>
+                {legalPageConfig.title}
+              </Typography>
+            </div>
+          )}
+
+          {/* Subtitle (if provided) */}
+          {legalPageConfig?.subtitle && (
+            <Typography
+              variant='h3'
+              style={{
+                ...typography.fonts.h3,
+                color: theme.palette.neutralSecondary,
+                marginBottom: spacing.l,
+              }}
+            >
+              {legalPageConfig.subtitle}
             </Typography>
-          </footer>
-        )}
-      </div>
+          )}
+
+          {/* Main Content */}
+          <div
+            className='legal-content'
+            style={{
+              marginTop: spacing.xl,
+              marginBottom: spacing.xxl,
+            }}
+          >
+            {legalPageConfig?.content ? (
+              <UnifiedMarkdownRenderer content={legalPageConfig.content} />
+            ) : (
+              children
+            )}
+            <style jsx>{`
+              :global(.legal-content h1:first-child) {
+                display: none;
+              }
+              :global(.legal-content h2) {
+                font-size: 2rem !important;
+                font-weight: 600 !important;
+                margin-top: 2rem !important;
+                margin-bottom: 1rem !important;
+              }
+            `}</style>
+          </div>
+
+          {/* Copyright Footer */}
+          {showCopyright && (
+            <footer
+              style={{
+                marginTop: spacing.xxxl,
+                paddingTop: spacing.l,
+                borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+              }}
+            >
+              <Typography
+                variant='p'
+                style={{
+                  ...typography.fonts.bodySmall,
+                  color: theme.palette.neutralTertiary,
+                  textAlign: 'center',
+                }}
+              >
+                © {currentYear} Fluxline Resonance Group, LLC. All rights
+                reserved.
+              </Typography>
+              <Typography
+                variant='p'
+                style={{
+                  ...typography.fonts.bodySmall,
+                  color: theme.palette.neutralTertiary,
+                  textAlign: 'center',
+                  marginTop: spacing.s,
+                }}
+              >
+                Questions? Contact us at{' '}
+                <ProtectedEmail
+                  username='support'
+                  domain='fluxline.pro'
+                  style={{
+                    color: theme.semanticColors.link,
+                    textDecoration: 'underline',
+                  }}
+                >
+                  support [at] fluxline.pro
+                </ProtectedEmail>
+              </Typography>
+            </footer>
+          )}
+        </div>
+      </FadeUp>
     );
   }
 
@@ -632,6 +639,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
+                  filter: filter,
                 }}
                 priority
                 placeholder='blur'
@@ -735,6 +743,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   width: '100%',
                   height: 'auto',
                   objectFit: 'contain',
+                  filter: filter,
                 }}
                 priority
                 placeholder='blur'
@@ -785,7 +794,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                     right: 0,
                     padding: theme.spacing.l,
                     background: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent)`,
-                    color: theme.palette.white,
+                    color: '#FFFFFF',
                   }}
                 >
                   <h2
@@ -795,6 +804,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                       fontWeight: theme.fonts.xLarge.fontWeight as number,
                       fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                       lineHeight: 1.2,
+                      color: '#FFFFFF', // hard-coded so the text is always white despite themeMode changes
                     }}
                   >
                     {imageTextToDisplay}

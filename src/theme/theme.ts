@@ -226,12 +226,12 @@ export const baseGradients = {
   light: {
     solid: '#FFFFFF',
     background:
-      'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-    menu: 'linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%)',
+      'radial-gradient(ellipse at left, #E8EAF0 0%, #E5E5E5 40%, #DADADA 100%)',
+    menu: 'linear-gradient(135deg, #E8EAF0 0%, #F0F0F0 100%)',
     radial:
-      'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-    vignette: 'radial-gradient(circle at center, transparent 0%, #F5F5F5 100%)',
-    linear: 'linear-gradient(90deg, #F8FAFC 0%, #FFFFFF 100%)',
+      'radial-gradient(ellipse at left, #E8EAF0 0%, #E5E5E5 40%, #DADADA 100%)',
+    vignette: 'radial-gradient(circle at center, transparent 0%, #E5E5E5 100%)',
+    linear: 'linear-gradient(90deg, #E8EAF0 0%, #F0F0F0 100%)',
   },
   components: {
     card: {
@@ -1047,41 +1047,40 @@ export const highContrastTheme: IExtendedTheme = createExtendedTheme(
   createTheme({
     palette: {
       themePrimary: '#3399FF',
-      themeSecondary: '#F8F8F8',
-      themeTertiary: '#CCCCCC',
-      themeLight: '#F8F8F8',
+      themeSecondary: '#FFFFFF',
+      themeTertiary: '#999999',
+      themeLight: '#FFFFFF',
       themeDark: '#000000',
       themeDarker: '#000000',
-      themeLighter: '#F8F8F8',
-      themeLighterAlt: '#F8F8F8',
+      themeLighter: '#FFFFFF',
+      themeLighterAlt: '#FFFFFF',
       neutralPrimary: '#FFFFFF',
-      neutralSecondary: '#F8F8F8',
-      neutralTertiary: '#CCCCCC',
-      neutralTertiaryAlt: '#F8F8F8',
-      neutralQuaternary: '#F8F8F8',
-      neutralQuaternaryAlt: '#F8F8F8',
+      neutralSecondary: '#CCCCCC',
+      neutralTertiary: '#999999',
+      neutralTertiaryAlt: '#666666',
+      neutralQuaternary: '#444444',
+      neutralQuaternaryAlt: '#333333',
       neutralDark: '#000000',
-      neutralLight: '#F8F8F8',
-      neutralLighter: '#F8F8F8',
-      neutralLighterAlt: '#F8F8F8',
+      neutralLight: '#222222',
+      neutralLighter: '#1A1A1A',
+      neutralLighterAlt: '#121212',
       accent: '#3399FF',
-      black: '#121212',
-      white: '#F8F8F8',
+      black: '#000000',
+      white: '#FFFFFF',
     },
     semanticColors: {
-      bodyText: '#F8F8F8',
-      bodyBackground:
-        'radial-gradient(ellipse at left, #2A2A2A 0%, #1A1A1A 40%, #121212 100%)',
+      bodyText: '#FFFFFF',
+      bodyBackground: '#000000',
       errorText: '#FF0000',
-      errorBackground: '#FF0000',
+      errorBackground: '#330000',
       successText: '#00FF00',
-      successBackground: '#121212',
+      successBackground: '#003300',
       successIcon: '#00FF00',
       messageText: '#FFFF00',
       warningText: '#FFFF00',
-      warningBackground: '#121212',
-      link: '#0000FF',
-      linkHovered: '#CCCCCC',
+      warningBackground: '#333300',
+      link: '#3399FF',
+      linkHovered: '#66B3FF',
     },
     isInverted: true,
   }),
@@ -1089,40 +1088,40 @@ export const highContrastTheme: IExtendedTheme = createExtendedTheme(
     ...baseExtendedProps,
     themeMode: 'high-contrast' as ThemeMode,
     gradients: {
-      // neutralize gradients on high contrast & colorblind modes
+      // Pure black backgrounds for maximum contrast
       dark: {
-        solid: '#121212',
-        background: '#121212',
-        menu: '#121212',
-        radial: '#121212',
-        vignette: '#121212',
-        linear: '#121212',
+        solid: '#000000',
+        background: '#000000',
+        menu: '#000000',
+        radial: '#000000',
+        vignette: '#000000',
+        linear: '#000000',
       },
       light: {
-        solid: '#121212',
-        background: '#121212',
-        menu: '#121212',
-        radial: '#121212',
-        vignette: '#121212',
-        linear: '#121212',
+        solid: '#000000',
+        background: '#000000',
+        menu: '#000000',
+        radial: '#000000',
+        vignette: '#000000',
+        linear: '#000000',
       },
       symbolic: {
-        fluxlineAscension: '#121212',
-        glyphGateFade: '#121212',
-        mythicHorizon: '#121212',
+        fluxlineAscension: '#000000',
+        glyphGateFade: '#000000',
+        mythicHorizon: '#000000',
       },
       components: {
         card: {
-          dark: '#121212',
-          light: '#121212',
+          dark: '#000000',
+          light: '#000000',
         },
         button: {
-          dark: '#121212',
-          light: '#121212',
+          dark: '#000000',
+          light: '#000000',
         },
         modal: {
-          dark: '#121212',
-          light: '#121212',
+          dark: '#000000',
+          light: '#000000',
         },
       },
     },
@@ -1172,12 +1171,13 @@ export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
       bodyText: '#333333',
       bodyBackground:
         'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-      errorText: '#B34C4C', // Dark teal for error states
-      errorBackground: '#FDE7E7', // Light red background
+      errorText: '#0C8ECB', // Dark teal for error states
+      errorBackground: '#C0D5DF', // Light teal background
+      errorIcon: '#0C8ECB', // Dark teal for error states
       successText: '#1B5E20', // Dark green for success states
       successBackground: '#E8F5E9', // Light green background
-      messageText: '#FFB900',
-      warningText: '#FFB900',
+      messageText: '#C05621', // Soft orange for warnings
+      warningText: '#C05621', // Soft orange for warnings
       warningBackground: '#FFF4CE',
       link: '#0078D4',
       linkHovered: '#004578',
@@ -1274,13 +1274,13 @@ export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
       bodyText: '#333333',
       bodyBackground:
         'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-      errorText: '#E81123',
-      errorBackground: '#FDE7E7',
-      successText: '#4894FE',
+      errorText: '#B21623', // darker error text for visibility
+      errorBackground: '#CEA9A9', // darker error background
+      successText: '#3874C7', // soft, darker blue for success
       successBackground: '#EFF6FC',
-      messageText: '#E6B800', // Muted yellow
-      warningText: '#E6B800', // Muted yellow
-      warningBackground: '#FFF4CE',
+      messageText: '#C05621', // Darker orange for warnings
+      warningText: '#C05621', // Darker orange for warnings
+      warningBackground: '#F3B89A',
       link: '#0063B1',
       linkHovered: '#004578',
     },
@@ -1467,6 +1467,7 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
         'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
       errorText: '#888888', // Dark red in grayscale
       errorBackground: '#999999',
+      errorIcon: '#888888',
       successText: '#1A1A1A', // Dark gray for success
       successBackground: '#E6E6E6',
       messageText: '#4D4D4D', // Mid gray for messages
@@ -1533,7 +1534,8 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
  *
  * Color Roles:
  * - Primary: Deep blue for structure and trust
- * - Secondary: Teal and green for success and balance
+ * - Secondary: 
+ Teal and green for success and balance
  * - Accent: Soft blue for interaction and emphasis
  * - Neutral: Calibrated grays for hierarchy and legibility
  */
@@ -1557,7 +1559,7 @@ export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
       neutralQuaternaryAlt: '#1a1a1a', // Very dark backgrounds
       neutralLighter: '#333333', // Lighter dark backgrounds
       neutralLighterAlt: '#000000', // Lightest dark backgrounds
-      neutralDark: '#f0f0f0', // Light text
+      neutralDark: '#010101', // Dark text
       neutralLight: '#000000', // Black
       accent: '#666666', // Accent elements (light gray)
       black: '#000000', // White
@@ -1565,10 +1567,10 @@ export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
     },
     semanticColors: {
       bodyText: '#ffffff',
-      bodyBackground:
-        'radial-gradient(ellipse at left, #2A2A2A 0%, #1A1A1A 40%, #121212 100%)',
+      bodyBackground: '#1F1F1F',
       errorText: '#bbbbbb', // Light gray for error
       errorBackground: '#222222',
+      errorIcon: '#bbbbbb',
       successText: '#f0f0f0', // Light gray for success
       successBackground: '#262626',
       messageText: '#bfbfbf', // Light gray for messages
@@ -1936,7 +1938,9 @@ export const getResponsiveTypography = ({
   xl,
   xxl,
 }: ResponsiveTypographyProps) => {
-  const styles: { [key: string]: any } = {};
+  // requires various CSS properties, so needs any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   const styles: { [key: string]: any } = {};
 
   if (xs) {
     styles['@media (min-width: 0)'] = {

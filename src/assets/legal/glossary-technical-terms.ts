@@ -49,7 +49,7 @@ The process, tools, and techniques used to manage the people side of organizatio
 Development practices that automate the building, testing, and deployment of software, enabling frequent and reliable releases.
 
 ### **Client**
-An individual or organization that engages Fluxline Professional Services for consulting, development, design, coaching, or training services.
+An individual or organization that engages Fluxline for consulting, development, design, coaching, or training services.
 
 ### **Cloud Computing**
 The delivery of computing services (servers, storage, databases, networking, software) over the internet ("the cloud").
@@ -87,7 +87,7 @@ The integration of digital technology into all areas of a business, fundamentall
 The ability to recognize, understand, and manage one's own emotions and the emotions of others.
 
 ### **Engagement**
-A formal agreement or contract for services between Fluxline Professional Services and a client.
+A formal agreement or contract for services between Fluxline and a client.
 
 ### **Ethics**
 Moral principles that govern professional conduct and decision-making.
@@ -297,7 +297,7 @@ A sequence of tasks or processes through which work passes from initiation to co
 
 If you encounter a technical term not defined in this glossary, please contact us:
 
-**Fluxline Professional Services**  
+**Fluxline Resonance Group, LLC**  
 Email: support [at] fluxline.pro  
 Website: https://www.fluxline.pro/contact
 

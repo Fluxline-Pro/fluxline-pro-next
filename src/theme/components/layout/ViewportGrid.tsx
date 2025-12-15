@@ -12,6 +12,7 @@ import {
 import { useLayoutConfig } from '../../hooks/useLayoutConfig';
 import { useContentScrollable } from '../../hooks/useContentScrollable';
 import { useHeaderHeight } from '../../hooks/useHeaderHeight';
+import { useFooterHeight } from '../../hooks/useFooterHeight';
 import { LayoutGrid } from './LayoutGrid';
 
 interface ViewportGridProps {
@@ -57,6 +58,7 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
   const isXLScreen = useIsLargeDesktop();
   const pathname = usePathname();
   const headerHeight = useHeaderHeight();
+  const footerHeight = useFooterHeight();
 
   // Create ref for right content area to detect scrollability
   const rightContentRef = React.useRef<HTMLDivElement>(null);
@@ -116,7 +118,8 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
     nested,
     theme,
     layoutPreference,
-    headerHeight
+    headerHeight,
+    footerHeight
   );
 
   // Determine if we should swap left and right children based on layout preference

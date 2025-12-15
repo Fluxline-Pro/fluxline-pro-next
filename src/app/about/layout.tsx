@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   description:
     'Learn about Fluxline: architects of transformative systems, brand experiences, and human-centered technology. Modular by design, resonant by nature.',
   openGraph: {
-    title: 'About - Fluxline Professional Services',
+    title: 'About - Fluxline',
     description:
       'Architects of transformative systems, brand experiences, and human-centered technology.',
     url: 'https://www.fluxline.pro/about',
-    siteName: 'Fluxline Professional Services',
+    siteName: 'Fluxline',
     type: 'website',
   },
   alternates: {

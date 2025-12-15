@@ -251,7 +251,7 @@ Development practices that automate the building, testing, and deployment of sof
 
 ### **Client**
 
-An individual or organization that engages Fluxline Professional Services for consulting, development, design, coaching, or training services.
+An individual or organization that engages Fluxline for consulting, development, design, coaching, or training services.
 
 ### **Cloud Computing**
 
@@ -299,7 +299,7 @@ The ability to recognize, understand, and manage one's own emotions and the emot
 
 ### **Engagement**
 
-A formal agreement or contract for services between Fluxline Professional Services and a client.
+A formal agreement or contract for services between Fluxline and a client.
 
 ### **Ethics**
 
@@ -555,7 +555,7 @@ A sequence of tasks or processes through which work passes from initiation to co
 
 If you encounter a term not defined in this glossary, please contact us:
 
-**Fluxline Professional Services**  
+**Fluxline Resonance Group, LLC**  
 Email: [support@fluxline.pro](mailto:support@fluxline.pro)  
 Website: [https://www.fluxline.pro/contact](https://www.fluxline.pro/contact)
 

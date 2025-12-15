@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import {
   getAllPortfolioProjects,
   getAllPortfolioTechnologies,
@@ -19,6 +20,42 @@ export async function generateStaticParams() {
   return technologies.map((technology) => ({
     technology: technology,
   }));
+}
+
+// Generate metadata for portfolio technology pages
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ technology: string }>;
+}): Promise<Metadata> {
+  const { technology } = await params;
+  const decodedTechnology = decodeURIComponent(technology);
+
+  return {
+    title: `Technology: ${decodedTechnology}`,
+    description: `Browse portfolio projects built with ${decodedTechnology}. See our expertise in ${decodedTechnology} development and implementation.`,
+    keywords: `${decodedTechnology}, portfolio, projects, technology, web development, software engineering`,
+    openGraph: {
+      title: `Technology: ${decodedTechnology} - Fluxline Portfolio`,
+      description: `Browse portfolio projects built with ${decodedTechnology}.`,
+      url: `https://www.fluxline.pro/portfolio/technology/${encodeURIComponent(technology)}`,
+      siteName: 'Fluxline Resonance Group',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: `Technology: ${decodedTechnology} - Fluxline Portfolio`,
+      description: `Browse portfolio projects built with ${decodedTechnology}.`,
+      creator: '@aplusinflux',
+    },
+    alternates: {
+      canonical: `/portfolio/technology/${encodeURIComponent(technology)}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 interface PortfolioTechnologyPageProps {

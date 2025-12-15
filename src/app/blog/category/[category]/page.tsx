@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { getAllBlogPosts, getAllCategories } from '../../lib/blogLoader';
 import { BlogCategoryClient } from './BlogCategoryClient';
 import { notFound } from 'next/navigation';
@@ -16,6 +17,41 @@ export async function generateStaticParams() {
   return categories.map((category) => ({
     category: category,
   }));
+}
+
+// Generate metadata for category pages
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}): Promise<Metadata> {
+  const { category } = await params;
+  const decodedCategory = decodeURIComponent(category);
+
+  return {
+    title: `Category: ${decodedCategory}`,
+    description: `Explore blog posts in the "${decodedCategory}" category. Insights and articles about ${decodedCategory}.`,
+    keywords: `${decodedCategory}, blog, articles, category, technology, development, design`,
+    openGraph: {
+      title: `Category: ${decodedCategory} - Fluxline Blog`,
+      description: `Explore blog posts in the "${decodedCategory}" category.`,
+      url: `https://www.fluxline.pro/blog/category/${encodeURIComponent(category)}`,
+      siteName: 'Fluxline',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: `Category: ${decodedCategory} - Fluxline Blog`,
+      description: `Explore blog posts in the "${decodedCategory}" category.`,
+    },
+    alternates: {
+      canonical: `/blog/category/${encodeURIComponent(category)}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 interface BlogCategoryPageProps {

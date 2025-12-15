@@ -11,6 +11,7 @@ import { Modal } from './Modal';
 import { Icon } from '@fluentui/react';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useColorVisionFilter } from '@/theme/hooks/useColorVisionFilter';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
 import { LoadingSpinner } from '@/theme/components/structural';
@@ -44,6 +45,7 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
   const [isImageLoading, setIsImageLoading] = useState(true);
   const { theme } = useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
+  const { filter: colorVisionFilter } = useColorVisionFilter();
 
   // Reset index when modal opens (derived state pattern)
   if (isOpen !== lastOpenState) {
@@ -117,7 +119,9 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
   };
 
   const navigationButtonStyles = {
-    background: theme.palette.white,
+    background: theme.isInverted
+      ? theme.palette.neutralLighter
+      : theme.palette.white,
     border: `2px solid ${theme.palette.neutralLight}`,
     borderRadius: '50%',
     width: '56px',
@@ -140,7 +144,9 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
       maxHeight='95vh'
       showCloseButton={true}
       style={{
-        backgroundColor: theme.palette.neutralDark,
+        backgroundColor: theme.isInverted
+          ? theme.palette.neutralDark
+          : theme.palette.white,
         padding: 0,
         display: 'flex',
         flexDirection: 'column',
@@ -263,6 +269,7 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
                     borderRadius: theme.effects.roundedCorner4,
                     opacity: isImageLoading ? 0 : 1,
                     transition: 'opacity 0.2s ease-in-out',
+                    filter: colorVisionFilter,
                   }}
                   onLoadingComplete={() => setIsImageLoading(false)}
                   priority

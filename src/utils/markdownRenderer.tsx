@@ -6,6 +6,7 @@ import DOMPurify from 'dompurify';
 import { Typography } from '../theme/components/typography';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
 import { typography } from '../theme/theme';
+import { useColorVisionFilter } from '@/theme';
 
 /**
  * Content types supported by the markdown renderer
@@ -86,6 +87,7 @@ export const UnifiedMarkdownRenderer: React.FC<
   UnifiedMarkdownRendererProps
 > = ({ content, contentType, className }) => {
   const { theme } = useAppTheme();
+  const { filter } = useColorVisionFilter();
 
   // Auto-detect content type if not provided
   const detectedType = useMemo(
@@ -108,8 +110,10 @@ export const UnifiedMarkdownRenderer: React.FC<
         <Typography
           variant='h1'
           {...props}
+          className='markdown-h1'
           style={{
-            ...typography.fonts.h1,
+            fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+            fontWeight: typography.fontWeights.semiBold,
             color: theme.semanticColors.bodyText,
             marginTop: theme.spacing.xl,
             marginBottom: theme.spacing.m,
@@ -128,7 +132,8 @@ export const UnifiedMarkdownRenderer: React.FC<
           variant='h2'
           {...props}
           style={{
-            ...typography.fonts.h2,
+            fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
+            fontWeight: typography.fontWeights.semiBold,
             color: theme.semanticColors.bodyText,
             marginTop: theme.spacing.l,
             marginBottom: theme.spacing.m,
@@ -282,8 +287,7 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLPreElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='pre'
+        <pre
           {...props}
           style={{
             ...typography.fonts.pre,
@@ -292,13 +296,18 @@ export const UnifiedMarkdownRenderer: React.FC<
             padding: theme.spacing.m,
             borderRadius: theme.borderRadius.m,
             overflow: 'auto',
+            overflowX: 'auto',
             marginTop: theme.spacing.m,
             marginBottom: theme.spacing.m,
             fontFamily: typography.fontFamilies.mono,
+            maxWidth: '100%',
+            width: '100%',
+            minWidth: 0,
+            boxSizing: 'border-box',
           }}
         >
           {children}
-        </Typography>
+        </pre>
       ),
       ul: ({
         children,
@@ -393,8 +402,31 @@ export const UnifiedMarkdownRenderer: React.FC<
           }}
         />
       ),
+      /* ![Alt Text](image-url.jpg "Optional Title") */
+      img: ({
+        src,
+        alt,
+        title,
+        ...props
+      }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+        <img
+          src={src}
+          alt={alt || ''}
+          title={title}
+          {...props}
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            display: 'block',
+            marginTop: theme.spacing.m,
+            marginBottom: theme.spacing.m,
+            borderRadius: theme.borderRadius.m,
+            filter: filter,
+          }}
+        />
+      ),
     }),
-    [theme]
+    [theme, filter]
   );
 
   // Render based on detected content type
@@ -402,10 +434,15 @@ export const UnifiedMarkdownRenderer: React.FC<
     case 'markdown':
     case 'mdx':
       return (
-        <div className={className}>
+        <div className={`markdown-content ${className || ''}`}>
           <ReactMarkdown components={markdownComponents}>
             {processedContent}
           </ReactMarkdown>
+          <style jsx>{`
+            :global(.markdown-content .markdown-h1:first-child) {
+              display: none;
+            }
+          `}</style>
         </div>
       );
 

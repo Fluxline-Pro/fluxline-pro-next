@@ -21,14 +21,14 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fluxline.pro/fluxline-ethos/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.fluxline.pro/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.fluxline.pro/testimonials/</loc>
+    <loc>https://www.fluxline.pro/portfolio/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.fluxline.pro/case-studies/</loc>
@@ -39,6 +39,31 @@
     <loc>https://www.fluxline.pro/press-release/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fluxline.pro/fluxline-ethos/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fluxline.pro/testimonials/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.fluxline.pro/content/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fluxline.pro/cue-cards/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.fluxline.pro/services/scrolls/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.fluxline.pro/legal/</loc>
@@ -66,18 +91,18 @@
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://www.fluxline.pro/cue-cards/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://www.fluxline.pro/legal/glossary/core-mythic-terms/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://www.fluxline.pro/content/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://www.fluxline.pro/legal/glossary/technical-terms/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://www.fluxline.pro/services/scrolls/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://www.fluxline.pro/legal/articles-of-conversion/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 </urlset>

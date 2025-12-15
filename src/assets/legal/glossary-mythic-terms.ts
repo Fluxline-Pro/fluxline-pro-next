@@ -203,7 +203,7 @@ The cyclical journey through distortion, discomfort, and clarity—each loop dee
 
 If you encounter a mythic term not defined in this glossary, please contact us:
 
-**Fluxline Professional Services**  
+**Fluxline Resonance Group, LLC**  
 Email: support [at] fluxline.pro  
 Website: https://www.fluxline.pro/contact
 

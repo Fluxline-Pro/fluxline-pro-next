@@ -24,16 +24,16 @@ technologies:
   - OneDrive Integration
   - PING SSO
 featuredImage:
-  url: '/images/home/FluxlineLogo.png'
-  alt: 'Fluxline Resonance Group Logo default image'
+  url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/myintermountain-intranet-architecture-infographic.jpg'
+  alt: 'Azure and SharePoint architecture diagram'
 gallery:
-  - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/architecture.jpg'
-    alt: 'Azure and SharePoint architecture diagram'
-    caption: 'Scalable Azure backend with SharePoint Online integration'
-  - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/provisioning.jpg'
+  - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/myintermountain-intranet-architecture-infographic.jpg'
+    alt: 'Azure and SharePoint architecture diagram: Showcases the workflow for MyIntermountain based on Microsoft 365 and Azure'
+    caption: 'Microsoft 365 and Azure backend with SharePoint Online integration to showcase MyIntermountain intranet'
+  - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/power-automate-azure-webjob-site-provisioning.jpg'
     alt: 'Automated provisioning workflow'
-    caption: 'Power Automate and Spark provisioning tools'
-  - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/integration.jpg'
+    caption: 'Power Automate and Spark provisioning tools workflow: How to safely create SharePoint sites without user-driven admin privileges'
+  - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/employee-productivity-m365-infographic.jpg'
     alt: 'Microsoft 365 integration architecture'
     caption: 'Unified employee experience with M365 services'
 publishedDate: '2025-12-08'
@@ -75,6 +75,8 @@ Architected and delivered **MyIntermountain**, a scalable enterprise intranet pl
 
 ### Azure Backend Architecture
 
+The backend infrastructure leverages Azure's cloud services to provide scalable, secure automation and authentication capabilities. This architecture ensures seamless integration across Microsoft 365 services while maintaining enterprise-grade security.
+
 **Infrastructure Services:**
 
 - Azure Functions for serverless backend logic
@@ -85,12 +87,16 @@ Architected and delivered **MyIntermountain**, a scalable enterprise intranet pl
 
 **Authentication & Identity:**
 
+A hybrid authentication system integrates Azure Entra ID with existing enterprise SSO infrastructure to provide secure, seamless access across all platforms.
+
 - Azure Entra ID single sign-on (SSO) integration
 - PING SSO for enterprise authentication
 - Role-based access control (RBAC) and permissions management
 - Seamless OneDrive and SharePoint Online authentication
 
 ### SharePoint Online & Microsoft 365 Integration
+
+The employee-facing intranet provides a unified experience by integrating SharePoint Online with the full Microsoft 365 ecosystem. This approach reduces tool fragmentation and improves productivity through seamless service integration.
 
 **Frontend Experience:**
 
@@ -102,6 +108,8 @@ Architected and delivered **MyIntermountain**, a scalable enterprise intranet pl
 
 **Content Management:**
 
+Automated content workflows and Microsoft Graph API integration enable efficient document management and permissions control across the enterprise.
+
 - OneDrive integration for personal file storage
 - SharePoint Online document libraries and lists
 - Permissions management via Graph API
@@ -109,7 +117,9 @@ Architected and delivered **MyIntermountain**, a scalable enterprise intranet pl
 
 ### Provisioning & Automation
 
-**Spark Provisioning Tool:**
+**Spark Provisioning Tool** (RightPoint proprietary runtime engine used for this project):
+
+This custom-built C# provisioning engine automates the creation and configuration of SharePoint sites, reducing manual effort and ensuring consistent deployments across the enterprise.
 
 - Custom provisioning application built with C#
 - Automated site creation and configuration
@@ -117,6 +127,8 @@ Architected and delivered **MyIntermountain**, a scalable enterprise intranet pl
 - Integration with Power Automate for approval processes
 
 **Power Automate Workflows:**
+
+Power Automate orchestrates complex approval processes and governance workflows, connecting business users with backend automation services without requiring technical expertise.
 
 - Automated provisioning request handling
 - Content approval and governance workflows
@@ -127,6 +139,8 @@ Architected and delivered **MyIntermountain**, a scalable enterprise intranet pl
 
 **Scrum Lead Responsibilities:**
 
+As Scrum lead, I coordinated cross-functional teams and maintained agile delivery momentum throughout the 9-month project timeline.
+
 - Facilitated daily standups, sprint planning, and retrospectives
 - Managed cross-functional team coordination (development, QA, stakeholders)
 - Maintained product backlog and sprint velocity tracking
@@ -134,12 +148,16 @@ Architected and delivered **MyIntermountain**, a scalable enterprise intranet pl
 
 **Quality Assurance:**
 
+Comprehensive testing standards and automated QA processes ensured enterprise-grade reliability and security compliance throughout development and deployment.
+
 - Established testing standards and QA processes
 - Coordinated UAT (User Acceptance Testing) with stakeholders
 - Implemented automated testing for provisioning workflows
 - Ensured security and compliance standards
 
 **CI/CD Pipeline:**
+
+Automated build and deployment pipelines enabled rapid iteration and consistent releases across multiple environments.
 
 - Azure DevOps pipeline configuration
 - Automated build and deployment processes
@@ -150,12 +168,16 @@ Architected and delivered **MyIntermountain**, a scalable enterprise intranet pl
 
 **Employee Experience:**
 
+The design prioritizes user productivity and accessibility, creating a seamless digital workplace that reduces friction and improves information discovery.
+
 - Intuitive intranet navigation and information architecture
 - Unified Microsoft 365 integration reducing tool fragmentation
 - Mobile-responsive design for remote workforce
 - Search-first approach with Microsoft Search integration
 
 **Security & Governance:**
+
+Robust security controls and governance frameworks ensure compliance with healthcare industry standards while maintaining enterprise-grade data protection.
 
 - Enterprise-grade authentication with Azure Entra ID
 - Granular permissions management

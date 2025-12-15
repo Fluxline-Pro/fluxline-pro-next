@@ -9,6 +9,7 @@ import { FormButton } from '@/theme/components/form';
 import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { content } from '../../../assets/legal/terms-of-use';
+import { FadeUp } from '@/animations/fade-animations';
 
 export default function TermsClientPage() {
   const router = useRouter();
@@ -16,64 +17,69 @@ export default function TermsClientPage() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div
-        style={{
-          padding: theme.spacing.xl,
-          maxWidth: '900px',
-          margin: '0 auto',
-          width: '100%',
-        }}
-      >
-        {/* Hero Section */}
-        <Hero
-          title='Terms of Use'
-          description='Service Terms and User Agreements'
-          backArrow={true}
-          backArrowPath='/legal'
-        />
-
-        {/* Main Content */}
+    <UnifiedPageWrapper layoutType='responsive-grid' showImageTitle={false}>
+      <FadeUp duration={0.5} delay={0}>
         <div
           style={{
-            marginTop: theme.spacing.xl,
-            marginBottom: theme.spacing.xxl,
+            padding: theme.spacing.xl,
+            maxWidth: '900px',
+            margin: '0 auto',
+            width: '100%',
           }}
         >
-          <UnifiedMarkdownRenderer content={content} />
-        </div>
+          {/* Hero Section */}
+          <Hero
+            title='Terms of Use'
+            description='Service Terms and User Agreements'
+            effectiveDate='October 12, 2025'
+            lastUpdated='October 12, 2025'
+            backArrow={true}
+            backArrowPath='/legal'
+          />
 
-        {/* Contact CTA */}
-        <Callout
-          variant='subtle'
-          title='Questions About Our Terms?'
-          subtitle="We're here to help clarify any questions you may have."
-          action={
-            <FormButton
-              text='Contact Us'
-              variant='primary'
-              size='large'
-              onClick={() => router.push('/contact')}
-            />
-          }
-        />
+          {/* Main Content */}
+          <div
+            style={{
+              marginTop: theme.spacing.xl,
+              marginBottom: theme.spacing.xxl,
+            }}
+          >
+            <UnifiedMarkdownRenderer content={content} />
+          </div>
 
-        {/* Copyright Footer */}
-        <div
-          style={{
-            marginTop: theme.spacing.xxxl,
-            paddingTop: theme.spacing.l,
-            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            textAlign: 'center',
-            color: theme.palette.neutralTertiary,
-            fontSize: theme.fonts.small.fontSize,
-          }}
-        >
-          <p>
-            © {currentYear} Fluxline Resonance Group, LLC. All rights reserved.
-          </p>
+          {/* Contact CTA */}
+          <Callout
+            variant='subtle'
+            title='Questions About Our Terms?'
+            subtitle="We're here to help clarify any questions you may have."
+            action={
+              <FormButton
+                text='Contact Us'
+                variant='primary'
+                size='large'
+                onClick={() => router.push('/contact')}
+              />
+            }
+          />
+
+          {/* Copyright Footer */}
+          <div
+            style={{
+              marginTop: theme.spacing.xxxl,
+              paddingTop: theme.spacing.l,
+              borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+              textAlign: 'center',
+              color: theme.palette.neutralTertiary,
+              fontSize: theme.fonts.small.fontSize,
+            }}
+          >
+            <p>
+              © {currentYear} Fluxline Resonance Group, LLC. All rights
+              reserved.
+            </p>
+          </div>
         </div>
-      </div>
+      </FadeUp>
     </UnifiedPageWrapper>
   );
 }

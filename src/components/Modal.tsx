@@ -7,10 +7,10 @@
  */
 
 import React, { useEffect } from 'react';
-import { IconButton } from '@fluentui/react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
+import { FluentIcon } from '@/theme/components/fluent-icon';
 
 export interface ModalProps {
   /** Whether the modal is open */
@@ -163,28 +163,38 @@ export const Modal: React.FC<ModalProps> = ({
           >
             {/* Close button */}
             {showCloseButton && (
-              <div
+              <button
+                onClick={onDismiss}
                 style={{
                   position: 'absolute',
                   top: '1rem',
                   right: '1rem',
-                  zIndex: 1,
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '1.5rem',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                  transition: 'background-color 0.2s ease, transform 0.2s ease',
+                  transform: 'scale(1)',
+                  zIndex: 10,
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                  e.currentTarget.style.transform = 'scale(1.15)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+                aria-label='Close modal'
               >
-                <IconButton
-                  iconProps={{ iconName: 'Cancel' }}
-                  onClick={onDismiss}
-                  ariaLabel='Close modal'
-                  styles={{
-                    root: {
-                      color: theme.palette.neutralPrimary,
-                    },
-                    rootHovered: {
-                      color: theme.palette.themePrimary,
-                    },
-                  }}
+                <FluentIcon
+                  iconName='Cancel'
+                  size='large'
+                  color={theme.semanticColors.errorIcon}
                 />
-              </div>
+              </button>
             )}
 
             {/* Content */}

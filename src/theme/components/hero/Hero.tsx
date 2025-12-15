@@ -21,6 +21,14 @@ export interface HeroProps {
    */
   description?: string;
   /**
+   * Effective date for legal documents
+   */
+  effectiveDate?: string;
+  /**
+   * Last updated date for legal documents
+   */
+  lastUpdated?: string;
+  /**
    * Hero content - can be text, JSX, or array of content blocks
    * Use this for custom content beyond subtitle/description
    */
@@ -82,6 +90,8 @@ export interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({
   title,
   subtitle,
+  effectiveDate,
+  lastUpdated,
   iconName,
   description,
   children,
@@ -116,7 +126,10 @@ export const Hero: React.FC<HeroProps> = ({
         border: showBorder
           ? `1px solid ${theme.palette.neutralTertiary}`
           : 'none',
-        backgroundColor: theme.palette.neutralLight,
+        backgroundColor:
+          theme.themeMode === 'high-contrast'
+            ? theme.semanticColors.bodyBackground
+            : theme.palette.neutralLight,
         padding: isMobile
           ? `${theme.spacing.l}`
           : isTablet
@@ -213,6 +226,44 @@ export const Hero: React.FC<HeroProps> = ({
         >
           {subtitle}
         </Typography>
+      )}
+
+      {(effectiveDate || lastUpdated) && (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: isMobile ? '0.25rem' : '1rem',
+            marginTop: '0.5rem',
+          }}
+        >
+          {effectiveDate && (
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '0.875rem',
+                fontWeight: theme.typography.fontWeights.semiBold,
+                margin: 0,
+              }}
+            >
+              Effective Date: {effectiveDate}
+            </Typography>
+          )}
+          {lastUpdated && (
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '0.875rem',
+                fontWeight: theme.typography.fontWeights.semiBold,
+                margin: 0,
+              }}
+            >
+              Last Updated: {lastUpdated}
+            </Typography>
+          )}
+        </div>
       )}
 
       {description && (
