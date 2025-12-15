@@ -35,7 +35,7 @@ gallery:
   - url: '/portfolio/posts/enterprise-dashboard/images/decision-table.png'
     alt: 'Notion decision logging table with emotional resonance scoring'
     caption: 'Decision Logging System - Comprehensive Notion table mapping decisions to emotional archetypes, strategic indexes, and threshold frameworks'
-  - url: '/portfolio/posts/enterprise-dashboard/images/decisions-ledger.png'
+  - url: '/portfolio/posts/enterprise-dashboard/images/decision-ledger.png'
     alt: 'Fluxline Decisions Ledger organized by threshold categories'
     caption: 'Fluxline Decisions Ledger - Strategic decisions organized by Meta-System, Creative, Professional, Financial, Statistical/KPI, Somatic, and Emotional/Relational thresholds'
   - url: '/portfolio/posts/enterprise-dashboard/images/microsoft-planner-swimlanes.png'

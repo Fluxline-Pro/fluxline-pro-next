@@ -48,9 +48,12 @@ export function ScrollCard({
         className={`flex flex-col gap-4 p-6 rounded-lg border transition-all hover:shadow-lg cursor-pointer ${className}`}
         style={{
           borderColor: theme.palette.neutralLight,
-          backgroundColor: isDark
-            ? theme.palette.neutralLighter
-            : theme.palette.white,
+          backgroundColor:
+            theme.themeMode === 'high-contrast'
+              ? theme.semanticColors.bodyBackground
+              : isDark
+                ? theme.palette.neutralLighter
+                : theme.palette.white,
         }}
       >
         {/* Category Badge */}

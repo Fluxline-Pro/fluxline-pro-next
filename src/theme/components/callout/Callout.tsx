@@ -74,7 +74,10 @@ export const Callout: React.FC<CalloutProps> = ({
         return {
           ...baseStyles,
           border: `1px solid ${theme.palette.neutralQuaternary}`,
-          backgroundColor: theme.palette.neutralLighterAlt,
+          backgroundColor:
+            theme.themeMode === 'high-contrast'
+              ? theme.semanticColors.bodyBackground
+              : theme.palette.neutralLighterAlt,
           borderTop: `4px solid ${theme.semanticColors.messageText}`,
           boxShadow: `0 0 0 1px ${theme.palette.neutralQuaternary}`,
         };
@@ -84,7 +87,10 @@ export const Callout: React.FC<CalloutProps> = ({
         return {
           ...baseStyles,
           border: `1px solid ${theme.palette.neutralQuaternary}`,
-          backgroundColor: theme.palette.neutralLighterAlt,
+          backgroundColor:
+            theme.themeMode === 'high-contrast'
+              ? theme.semanticColors.bodyBackground
+              : theme.palette.neutralLighterAlt,
           borderTop: `3px solid ${theme.palette.themePrimary}`,
           boxShadow: theme.shadows.card,
         };
@@ -94,7 +100,10 @@ export const Callout: React.FC<CalloutProps> = ({
         return {
           ...baseStyles,
           border: `1px solid ${theme.palette.neutralQuaternary}`,
-          backgroundColor: theme.palette.neutralLighterAlt,
+          backgroundColor:
+            theme.themeMode === 'high-contrast'
+              ? theme.semanticColors.bodyBackground
+              : theme.palette.neutralLighterAlt,
           borderTop: `2px solid ${theme.palette.neutralTertiary}`,
           boxShadow: theme.shadows.card,
         };
@@ -110,9 +119,7 @@ export const Callout: React.FC<CalloutProps> = ({
         // Mythic gold - adjusted for readability based on theme mode
         // Light modes: Use darker gold for better contrast and readability
         // Dark mode: Use bright gold (messageText) for impact
-        return theme.themeMode === 'dark'
-          ? theme.semanticColors.messageText // Bright gold #F5C85C
-          : '#B8860B'; // Dark goldenrod - better contrast on light backgrounds
+        return theme.semanticColors.messageText; // Bright gold #F5C85C
       case 'subtle':
         return theme.palette.themePrimary; // Primary blue
       case 'neutral':

@@ -363,8 +363,8 @@ This case study demonstrates Fluxline's integrated capabilities:
 
 **MIT and Code Contributions:**
 
-- GitHub repository (access granted by sending an email to [support@fluxline.pro](mailto:support@fluxline.pro)): [github.com/Fluxline-Pro/fluxline-pro-next](https://github.com/Fluxline-Pro/fluxline-pro-next)
-- Fluxline 2.0 Portfolio piece: [Fluxline 2.0 Portfolio Piece](/portfolio/fluxline-pro-website/)
+- GitHub repository (access granted by sending an email to [support@fluxline.pro](mailto:support@fluxline.pro)): [Fluxline-Pro GitHub Repos](https://github.com/Fluxline-Pro/fluxline-pro-next)
+- [Fluxline 2.0 Portfolio Piece](/portfolio/fluxline-pro-website/)
 - Component documentation available in Storybook
 - Design system patterns documented in README
 

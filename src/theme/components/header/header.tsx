@@ -318,7 +318,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                               variant='p'
                               style={{
                                 color: theme.palette.neutralPrimary,
-                                fontSize: '1.25rem',
+                                fontSize: '1.125rem',
                                 fontWeight:
                                   theme.typography.fontWeights.semiBold,
                                 margin: 0,
@@ -332,7 +332,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                               variant='p'
                               style={{
                                 color: theme.palette.neutralTertiary,
-                                fontSize: '1.25rem',
+                                fontSize: '1.125rem',
                                 fontWeight:
                                   theme.typography.fontWeights.regular,
                                 margin: 0,
@@ -350,7 +350,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                                   : theme.palette.neutralSecondary,
                                 fontSize: isFirst ? '1.25rem' : '1.125rem',
                                 fontWeight: isFirst
-                                  ? theme.typography.fontWeights.bold
+                                  ? theme.typography.fontWeights.medium
                                   : theme.typography.fontWeights.regular,
                                 textDecoration: 'none',
                                 transition: 'color 0.2s ease',

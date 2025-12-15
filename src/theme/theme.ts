@@ -226,12 +226,12 @@ export const baseGradients = {
   light: {
     solid: '#FFFFFF',
     background:
-      'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-    menu: 'linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%)',
+      'radial-gradient(ellipse at left, #E8EAF0 0%, #E5E5E5 40%, #DADADA 100%)',
+    menu: 'linear-gradient(135deg, #E8EAF0 0%, #F0F0F0 100%)',
     radial:
-      'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
-    vignette: 'radial-gradient(circle at center, transparent 0%, #F5F5F5 100%)',
-    linear: 'linear-gradient(90deg, #F8FAFC 0%, #FFFFFF 100%)',
+      'radial-gradient(ellipse at left, #E8EAF0 0%, #E5E5E5 40%, #DADADA 100%)',
+    vignette: 'radial-gradient(circle at center, transparent 0%, #E5E5E5 100%)',
+    linear: 'linear-gradient(90deg, #E8EAF0 0%, #F0F0F0 100%)',
   },
   components: {
     card: {
@@ -1467,6 +1467,7 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
         'radial-gradient(ellipse at left, #F8FAFC 0%, #F5F5F5 40%, #F0F0F0 100%)',
       errorText: '#888888', // Dark red in grayscale
       errorBackground: '#999999',
+      errorIcon: '#888888',
       successText: '#1A1A1A', // Dark gray for success
       successBackground: '#E6E6E6',
       messageText: '#4D4D4D', // Mid gray for messages
@@ -1558,7 +1559,7 @@ export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
       neutralQuaternaryAlt: '#1a1a1a', // Very dark backgrounds
       neutralLighter: '#333333', // Lighter dark backgrounds
       neutralLighterAlt: '#000000', // Lightest dark backgrounds
-      neutralDark: '#f0f0f0', // Light text
+      neutralDark: '#010101', // Dark text
       neutralLight: '#000000', // Black
       accent: '#666666', // Accent elements (light gray)
       black: '#000000', // White
@@ -1569,6 +1570,7 @@ export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
       bodyBackground: '#1F1F1F',
       errorText: '#bbbbbb', // Light gray for error
       errorBackground: '#222222',
+      errorIcon: '#bbbbbb',
       successText: '#f0f0f0', // Light gray for success
       successBackground: '#262626',
       messageText: '#bfbfbf', // Light gray for messages
@@ -1936,7 +1938,9 @@ export const getResponsiveTypography = ({
   xl,
   xxl,
 }: ResponsiveTypographyProps) => {
-  const styles: { [key: string]: any } = {};
+  // requires various CSS properties, so needs any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   const styles: { [key: string]: any } = {};
 
   if (xs) {
     styles['@media (min-width: 0)'] = {

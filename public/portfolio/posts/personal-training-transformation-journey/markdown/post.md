@@ -24,18 +24,15 @@ featuredImage:
   url: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
   alt: 'Personal Training & Resonance Core Framework practitioner'
 gallery:
-  - url: '/portfolio/posts/personal-training-transformation-journey/images/before-after.jpg'
+  - url: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
+    alt: 'Personal Training & Resonance Core Framework practitioner'
+    caption: 'Personal Training & Resonance Core Framework practitioner - September 2025'
+  - url: '/portfolio/posts/personal-training-transformation-journey/images/before-after-transformation.jpg'
     alt: 'Before and after physical transformation'
     caption: '8 years: 120 lbs. → 185 lbs. at 10% body fat'
-  - url: '/portfolio/posts/personal-training-transformation-journey/images/nasm-certification.jpg'
-    alt: 'NASM Certification achievement'
-    caption: 'NASM Certified Personal Trainer - December 2025'
-  - url: '/portfolio/posts/personal-training-transformation-journey/images/framework.jpg'
+  - url: '/case-studies/posts/scaling-personal-transformation-resonance-core/images/resonance-core-framework.png'
     alt: 'Resonance Core Framework diagram'
     caption: 'Integrating physical training with emotional intelligence'
-  - url: '/portfolio/posts/personal-training-transformation-journey/images/client-work.jpg'
-    alt: 'Working with clients using Resonance Core methodology'
-    caption: 'Guiding others through holistic transformation'
 publishedDate: '2025-12-08'
 projectDate: '2017-2025'
 featured: true
@@ -216,7 +213,7 @@ Now applying this integrated approach with clients:
 
 **Service Offerings:**
 
-- Single sessions ($110)
+- Single sessions ($100)
 - Online PT ($225+/month)
 - Hybrid PT ($350+/month)
 - Online Hypertrophy ($275+/month)

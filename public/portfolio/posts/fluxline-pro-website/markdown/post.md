@@ -2,7 +2,7 @@
 title: 'Fluxline Pro - Modern Business Platform'
 shortDescription: 'A comprehensive business platform built with Next.js 16, featuring dynamic content management and advanced theming'
 longDescription: 'Fluxline Pro is an enterprise-grade web platform showcasing modern web development practices with Next.js 16, TypeScript, and Fluent UI. The platform features a sophisticated theme system, file-based content management for blogs and portfolios, and a fully responsive design optimized for all devices.'
-role: 'Full-Stack Developer & UI/UX Designer'
+role: 'Full-Stack Developer, UI/UX Designer, Project Manager & Main Architect'
 client: 'Fluxline Resonance Group'
 category: 'web-application'
 tags: ['React', 'Next.js', 'TypeScript', 'Enterprise', 'Web Platform']
@@ -190,4 +190,4 @@ Visit [fluxline.pro](https://fluxline.pro) to see the platform in action.
 
 ## Source Code
 
-The project is open source and available on [GitHub](https://github.com/Fluxline-Pro/fluxline-pro-next).
+Due to intellectual property and business secret concerns, we have chosen not to make the repo public. We will be posting a base-code specific build of the application showcasing a simple About page at a future date.

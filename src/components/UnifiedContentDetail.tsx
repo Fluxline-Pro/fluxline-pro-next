@@ -71,6 +71,12 @@ export interface UnifiedContentDetailConfig {
     content: string | React.ReactNode;
   }>;
 
+  // Show gallery as a dedicated section (uses imageConfig.gallery)
+  showGallerySection?: boolean;
+
+  // Control where sections are rendered (default: 'after')
+  sectionsPosition?: 'before' | 'after';
+
   // Call to action
   cta?: {
     title: string;
@@ -646,6 +652,110 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             </div>
           )}
 
+          {/* Gallery Section - Before Content */}
+          {config.showGallerySection &&
+            config.sectionsPosition === 'before' &&
+            config.imageConfig?.gallery && (
+              <div style={{ marginBottom: theme.spacing.xl }}>
+                <Typography
+                  variant='h2'
+                  style={{
+                    fontWeight: 600,
+                    marginBottom: theme.spacing.m,
+                    color: theme.palette.themePrimary,
+                    fontSize: '1.5rem',
+                  }}
+                >
+                  Project Gallery
+                </Typography>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                    gap: theme.spacing.l,
+                    maxWidth: '1100px',
+                  }}
+                >
+                  {config.imageConfig.gallery.map((image, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        cursor: 'pointer',
+                        transition: 'transform 0.2s ease',
+                      }}
+                      onClick={() => {
+                        setCarouselInitialIndex(index);
+                        setIsCarouselOpen(true);
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.02)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    >
+                      <img
+                        src={image.url}
+                        alt={image.alt}
+                        style={{
+                          width: '100%',
+                          height: '250px',
+                          objectFit: 'cover',
+                          borderRadius: theme.effects.roundedCorner4,
+                          marginBottom: image.caption ? theme.spacing.s1 : 0,
+                        }}
+                      />
+                      {image.caption && (
+                        <Typography
+                          variant='p'
+                          style={{
+                            color: theme.palette.neutralSecondary,
+                            fontSize: theme.fonts.small.fontSize,
+                            fontStyle: 'italic',
+                          }}
+                        >
+                          {image.caption}
+                        </Typography>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+          {/* Additional Sections - Before Content */}
+          {config.sections &&
+            config.sectionsPosition === 'before' &&
+            config.sections.map((section, index) => (
+              <div key={index} style={{ marginBottom: theme.spacing.xl }}>
+                <Typography
+                  variant='h2'
+                  style={{
+                    fontWeight: 600,
+                    marginBottom: theme.spacing.m,
+                    color: theme.palette.themePrimary,
+                    fontSize: '1.5rem',
+                  }}
+                >
+                  {section.title}
+                </Typography>
+                {typeof section.content === 'string' ? (
+                  <Typography
+                    variant='p'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '1.125rem',
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {section.content}
+                  </Typography>
+                ) : (
+                  section.content
+                )}
+              </div>
+            ))}
+
           {/* Main Content */}
           <div
             style={{
@@ -669,6 +779,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
 
           {/* Additional Sections */}
           {config.sections &&
+            (!config.sectionsPosition || config.sectionsPosition === 'after') &&
             config.sections.map((section, index) => (
               <div key={index} style={{ marginTop: theme.spacing.xl }}>
                 <Typography
