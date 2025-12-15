@@ -21,8 +21,8 @@ technologies:
   - Agile/Scrum
 publishedDate: '2025-12-08'
 projectDuration: '9 months (2023-2024)'
-imageUrl: '/images/home/FluxlineLogo.png'
-imageAlt: 'Personal Training Program Growth default image'
+imageUrl: '/case-studies/posts/myintermountain-intranet/images/myintermountain-intranet-architecture-infographic.jpg'
+imageAlt: 'Azure and SharePoint architecture diagram: Showcases the workflow for MyIntermountain based on Microsoft 365 and Azure'
 featured: true
 seoTitle: 'MyIntermountain Intranet Case Study - Azure & SharePoint Infrastructure'
 seoDescription: 'Enterprise SharePoint Online intranet infrastructure case study for Intermountain Health with Azure backend, Power Automate, and automated provisioning delivered in 9 months.'

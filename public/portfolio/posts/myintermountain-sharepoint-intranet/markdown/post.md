@@ -28,7 +28,7 @@ featuredImage:
   alt: 'Azure and SharePoint architecture diagram'
 gallery:
   - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/myintermountain-intranet-architecture-infographic.jpg'
-    alt: 'Azure and SharePoint architecture diagram'
+    alt: 'Azure and SharePoint architecture diagram: Showcases the workflow for MyIntermountain based on Microsoft 365 and Azure'
     caption: 'Microsoft 365 and Azure backend with SharePoint Online integration to showcase MyIntermountain intranet'
   - url: '/portfolio/posts/myintermountain-sharepoint-intranet/images/power-automate-azure-webjob-site-provisioning.jpg'
     alt: 'Automated provisioning workflow'
