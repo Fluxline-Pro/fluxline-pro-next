@@ -21,8 +21,8 @@ technologies:
   - Somatic Practices
   - Archetypal Mapping
 featuredImage:
-  url: '/portfolio/posts/personal-training-transformation-journey/images/before-after-transformation.jpg'
-  alt: 'Before and after physical transformation- Terence Waters, 2013 to 2025'
+  url: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
+  alt: 'Personal Training & Resonance Core Framework practitioner'
 gallery:
   - url: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
     alt: 'Personal Training & Resonance Core Framework practitioner'
