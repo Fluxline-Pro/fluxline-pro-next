@@ -21,7 +21,7 @@ technologies:
   - Print Design
   - Digital Design
 featuredImage:
-  url: '/portfolio/posts/graphic-design-portfolio/images/behance-portfolio-featured.png'
+  url: '/portfolio/posts/graphic-design-portfolio/images/behance-portfolio-featured.jpg'
   alt: 'Graphic design portfolio showcase- Behance.net'
 publishedDate: '2025-07-15'
 projectDate: '2010-2020'
