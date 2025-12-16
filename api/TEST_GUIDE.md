@@ -4,7 +4,44 @@
 
 1. **Azure Functions Core Tools** (already installed via winget)
 2. **Node.js** (already installed)
-3. **SMTP credentials configured** in `local.settings.json`
+3. **Azure Key Vault access configured** OR temporary local SMTP credentials
+
+## Configuration
+
+### Option 1: Using Azure Key Vault (Recommended)
+
+The contact API now retrieves SMTP credentials from Azure Key Vault at `https://kv-az-fluxline-next.vault.azure.net/`
+
+1. **Set up Azure authentication** in `local.settings.json`:
+   ```json
+   {
+     "Values": {
+       "FUNCTIONS_WORKER_RUNTIME": "node",
+       "AZURE_CLIENT_ID": "your-client-id",
+       "AZURE_TENANT_ID": "your-tenant-id",
+       "AZURE_SUBSCRIPTION_ID": "your-subscription-id"
+     }
+   }
+   ```
+
+2. **Ensure your Azure identity has access** to the Key Vault:
+   - Role: `Key Vault Secrets User`
+   - Key Vault: `kv-az-fluxline-next`
+
+### Option 2: Temporary Local Testing (Not Recommended)
+
+For quick testing without Azure access, you can temporarily add environment variables:
+```json
+{
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "SMTP_USER": "your-smtp2go-username",
+    "SMTP_PASS": "your-smtp2go-password"
+  }
+}
+```
+
+**Note:** The function code will check Key Vault first, then fall back to environment variables for local testing only.
 
 ## Quick Start
 
@@ -109,26 +146,30 @@ Local Development:
 
 ### Environment Variables
 
+**Production (Azure Key Vault):**
+
+All SMTP credentials are stored in Azure Key Vault at `https://kv-az-fluxline-next.vault.azure.net/`:
+- `SMTPHOST` - SMTP server hostname
+- `SMTPPORT` - SMTP server port
+- `SMTPUSER` - SMTP2Go username (Required)
+- `SMTPPASS` - SMTP2Go password (Required)
+- `SMTPFROM` - Email address to send from
+- `CONTACTEMAIL` - Email address to receive submissions
+
+The Azure Function uses Managed Identity to retrieve these secrets automatically.
+
 **Local (in `local.settings.json`):**
 
+Configure Azure credentials to access Key Vault:
 ```json
 {
   "Values": {
-    "SMTP_HOST": "mail.smtp2go.com",
-    "SMTP_PORT": "2525",
-    "SMTP_USER": "your-username",
-    "SMTP_PASS": "your-password",
-    "SMTP_FROM": "no-reply@fluxline.pro",
-    "CONTACT_EMAIL": "support@fluxline.pro"
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AZURE_CLIENT_ID": "your-client-id",
+    "AZURE_TENANT_ID": "your-tenant-id"
   }
 }
 ```
-
-**Production (in Azure Portal):**
-
-- Go to Azure Portal → Your Static Web App
-- Settings → Configuration → Application Settings
-- Add the same environment variables
 
 ## Common Issues
 
@@ -151,7 +192,9 @@ Get-Process -Id (Get-NetTCPConnection -LocalPort 7071).OwningProcess | Stop-Proc
 
 ### Issue: "SMTP credentials not configured"
 
-**Solution:** Check your `local.settings.json` has `SMTP_USER` and `SMTP_PASS` filled in.
+**Solution:** 
+- For Azure deployments: Ensure the Managed Identity has "Key Vault Secrets User" role on `kv-az-fluxline-next`
+- For local development: Configure Azure credentials in `local.settings.json` or add temporary SMTP credentials
 
 ### Issue: Frontend can't reach the API
 

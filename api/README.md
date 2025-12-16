@@ -4,40 +4,64 @@ This directory contains the Azure Functions API for the contact form functionali
 
 ## Setup
 
+### Azure Key Vault Configuration
+
+**All SMTP credentials are now stored in Azure Key Vault** at `https://kv-az-fluxline-next.vault.azure.net/`
+
+The following secrets are stored in Key Vault (without underscores):
+- `SMTPHOST` - SMTP server hostname (default: mail.smtp2go.com)
+- `SMTPPORT` - SMTP server port (default: 2525)
+- `SMTPUSER` - SMTP2Go username (Required)
+- `SMTPPASS` - SMTP2Go password (Required)
+- `SMTPFROM` - Email address to send from (default: no-reply@fluxline.pro)
+- `CONTACTEMAIL` - Email address to receive contact form submissions (default: support@fluxline.pro)
+
 ### Local Development
 
+For local development, you have two options:
+
+#### Option 1: Use Azure Key Vault (Recommended)
+
 1. Copy `local.settings.sample.json` to `local.settings.json`
-2. Fill in your SMTP credentials from SMTP2Go:
-   - `SMTP_USER`: Your SMTP2Go username
-   - `SMTP_PASS`: Your SMTP2Go password
+2. Configure Azure credentials in `local.settings.json`:
+   ```json
+   {
+     "Values": {
+       "AZURE_CLIENT_ID": "your-client-id",
+       "AZURE_TENANT_ID": "your-tenant-id",
+       "AZURE_SUBSCRIPTION_ID": "your-subscription-id"
+     }
+   }
+   ```
+3. Ensure your Azure identity has "Key Vault Secrets User" role on the Key Vault
+4. Run `npm start` - the function will automatically retrieve secrets from Key Vault
+
+#### Option 2: Temporary Local Secrets (Not Recommended)
+
+For quick local testing without Azure access, you can temporarily add environment variables:
+1. Copy `local.settings.sample.json` to `local.settings.json`
+2. Add the SMTP secrets directly (these will be ignored in production):
+   ```json
+   {
+     "Values": {
+       "SMTP_USER": "your-username",
+       "SMTP_PASS": "your-password"
+     }
+   }
+   ```
+
+**Note:** Production deployments always use Key Vault, regardless of local.settings.json
 
 ### Azure Deployment
 
-For production deployment, you need to configure the following application settings in your Azure Static Web App:
+For production deployment, the Azure Function uses **Managed Identity** to access Key Vault. No application settings are required in the Azure Portal - all credentials are retrieved from Key Vault automatically.
 
-| Setting        | Description                           | Default Value           |
-| -------------- | ------------------------------------- | ----------------------- |
-| `SMTP_HOST`    | SMTP server hostname                  | mail.smtp2go.com        |
-| `SMTP_PORT`    | SMTP server port                      | 2525                    |
-| `SMTP_USER`    | SMTP2Go username                      | (Required)              |
-| `SMTP_PASS`    | SMTP2Go password                      | (Required)              |
-| `SMTP_FROM`    | Email address to send from            | no-reply@fluxline.pro   |
-| `CONTACT_EMAIL`| Email address to receive contact form | support@fluxline.pro    |
+### Key Vault Access Requirements
 
-### Setting Environment Variables in Azure
-
-1. Go to your Azure Static Web App in the Azure Portal
-2. Navigate to **Configuration** > **Application settings**
-3. Add each of the above settings
-4. Click **Save**
-
-Alternatively, store sensitive values in Azure Key Vault and reference them:
-
-```bash
-az staticwebapp appsettings set \
-  --name <your-swa-name> \
-  --setting-names SMTP_USER=<username> SMTP_PASS=<password>
-```
+The Static Web App's Managed Identity requires:
+- Resource: `kv-az-fluxline-next` (Key Vault)
+- Role: `Key Vault Secrets User`
+- Permissions: `Get` and `List` secrets
 
 ## API Endpoints
 

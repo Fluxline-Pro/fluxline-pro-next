@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+const { SecretClient } = require('@azure/keyvault-secrets');
+const { DefaultAzureCredential } = require('@azure/identity');
 
 // Simple rate limiting store (in-memory)
 // Note: In-memory rate limiting has limitations in serverless environments due to cold starts
@@ -6,6 +8,42 @@ const nodemailer = require('nodemailer');
 const rateLimit = new Map();
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
 const MAX_REQUESTS = 5; // 5 requests per hour
+
+// Key Vault configuration
+const KEY_VAULT_URI = 'https://kv-az-fluxline-next.vault.azure.net/';
+let secretClient = null;
+const secretsCache = new Map();
+const CACHE_TTL = 300000; // 5 minutes in milliseconds
+
+// Initialize Key Vault client
+function getSecretClient() {
+  if (!secretClient) {
+    const credential = new DefaultAzureCredential();
+    secretClient = new SecretClient(KEY_VAULT_URI, credential);
+  }
+  return secretClient;
+}
+
+// Get secret from Key Vault with caching
+async function getSecret(secretName) {
+  const now = Date.now();
+  const cached = secretsCache.get(secretName);
+  
+  if (cached && now - cached.timestamp < CACHE_TTL) {
+    return cached.value;
+  }
+  
+  try {
+    const client = getSecretClient();
+    const secret = await client.getSecret(secretName);
+    const value = secret.value;
+    
+    secretsCache.set(secretName, { value, timestamp: now });
+    return value;
+  } catch (error) {
+    throw new Error(`Failed to retrieve secret '${secretName}' from Key Vault: ${error.message}`);
+  }
+}
 
 function checkRateLimit(ip) {
   const now = Date.now();
@@ -127,17 +165,32 @@ module.exports = async function (context, req) {
     const sanitizedEmail = sanitizeInput(email);
     const sanitizedMessage = sanitizeInput(message);
 
-    // Get SMTP configuration from environment variables
-    const smtpHost = process.env.SMTP_HOST || 'mail.smtp2go.com';
-    const smtpPort = parseInt(process.env.SMTP_PORT || '2525', 10);
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
-    const smtpFrom = process.env.SMTP_FROM || 'no-reply@fluxline.pro';
-    const contactEmail = process.env.CONTACT_EMAIL || 'support@fluxline.pro';
+    // Get SMTP configuration from Azure Key Vault
+    let smtpHost, smtpPort, smtpUser, smtpPass, smtpFrom, contactEmail;
+    
+    try {
+      // Retrieve secrets from Key Vault (without underscores)
+      smtpHost = await getSecret('SMTPHOST') || 'mail.smtp2go.com';
+      smtpPort = parseInt(await getSecret('SMTPPORT') || '2525', 10);
+      smtpUser = await getSecret('SMTPUSER');
+      smtpPass = await getSecret('SMTPPASS');
+      smtpFrom = await getSecret('SMTPFROM') || 'no-reply@fluxline.pro';
+      contactEmail = await getSecret('CONTACTEMAIL') || 'support@fluxline.pro';
+    } catch (error) {
+      context.log.error('Failed to retrieve configuration from Key Vault:', error.message);
+      context.res = {
+        status: 500,
+        headers,
+        body: JSON.stringify({
+          message: 'Email service is not configured. Please try again later.',
+        }),
+      };
+      return;
+    }
 
     // Validate SMTP configuration
     if (!smtpUser || !smtpPass) {
-      context.log.error('SMTP credentials not configured');
+      context.log.error('SMTP credentials not configured in Key Vault');
       context.res = {
         status: 500,
         headers,

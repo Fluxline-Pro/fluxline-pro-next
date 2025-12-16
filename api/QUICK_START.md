@@ -57,8 +57,9 @@ User → Next.js (localhost:3000) → http://localhost:7071/api/contact → Azur
 
 ### Your API credentials:
 
-- ✅ Stored in `api/local.settings.json` (local)
-- ✅ Stored in Azure Portal App Settings (production)
+- ✅ Stored in Azure Key Vault: `https://kv-az-fluxline-next.vault.azure.net/` (production)
+- ✅ Secret names in Key Vault: `SMTPHOST`, `SMTPPORT`, `SMTPUSER`, `SMTPPASS`, `SMTPFROM`, `CONTACTEMAIL`
+- ⚠️ For local development: Configure Azure credentials in `api/local.settings.json` to access Key Vault
 - ✅ Using SMTP2Go server: `mail.smtp2go.com:2525`
 - ✅ Sending to: `support@fluxline.pro`
 
@@ -89,7 +90,13 @@ Test-NetConnection -ComputerName localhost -Port 7071
 
 ### Update SMTP credentials
 
-Edit `api/local.settings.json` → Restart Functions
+**Production:** Update secrets in Azure Key Vault:
+```powershell
+az keyvault secret set --vault-name kv-az-fluxline-next --name SMTPUSER --value "your-username"
+az keyvault secret set --vault-name kv-az-fluxline-next --name SMTPPASS --value "your-password"
+```
+
+**Local:** Edit `api/local.settings.json` with Azure credentials → Restart Functions
 
 ### Test from frontend locally
 
@@ -105,8 +112,9 @@ const response = await fetch('http://localhost:7071/api/contact', {
 2. **Azure Functions Core Tools** (`func.exe`) runs them locally
 3. Your API is in the `/api` folder and auto-deploys with your Static Web App
 4. Environment variables go in:
-   - `local.settings.json` (local)
-   - Azure Portal → Configuration (production)
+   - Azure Key Vault: `kv-az-fluxline-next` (production - recommended)
+   - `local.settings.json` (local - Azure credentials for Key Vault access)
+   - Azure Portal → Configuration (legacy/fallback)
 5. The route `/api/contact` is defined in `function.json`
 
 ## Next Steps

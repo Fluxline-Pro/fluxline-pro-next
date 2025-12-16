@@ -112,15 +112,23 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   - Follow RESTful conventions and proper HTTP status codes
   - Implement proper error handling and validation
   - Use TypeScript for request/response types
-- **Future Azure integration**:
-  - API routes can interface with Azure services
-  - Consider Azure Functions for complex backend logic
-  - Use Azure Storage for file uploads and media
+- **Azure Functions integration**:
+  - Azure Functions are in `/api` directory (separate from Next.js `/app/api`)
+  - Azure Functions use Node.js runtime specified in `staticwebapp.config.json`
+  - **Use Azure Key Vault for secrets management** - All sensitive credentials should be stored in Azure Key Vault (`https://kv-az-fluxline-next.vault.azure.net/`)
+  - Azure Functions access Key Vault via Managed Identity (no credentials needed in production)
+  - For local development, configure Azure credentials in `api/local.settings.json`
+  - Use `@azure/keyvault-secrets` and `@azure/identity` packages for Key Vault access
+  - Implement secret caching to reduce Key Vault calls and improve performance
+- **Secret naming convention**:
+  - Use camelCase or UPPERCASE without underscores for Key Vault secret names (e.g., `SMTPUSER`, not `SMTP_USER`)
+  - This aligns with Azure Key Vault naming best practices
 - **Environment variables for API configuration**:
   - `NEXT_PUBLIC_API_BASE_URL` (for client-side API calls)
   - `API_BASE_URL` (for server-side API calls)
-  - `AZURE_STORAGE_CONNECTION_STRING`
+  - `AZURE_STORAGE_CONNECTION_STRING` (if needed, should be in Key Vault)
   - `AZURE_CDN_BASE_URL`
+  - Azure credentials for local development: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`
 
 ### Content & Routing
 

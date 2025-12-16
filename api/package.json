@@ -9,6 +9,8 @@
     "test": "node test-contact.js"
   },
   "dependencies": {
+    "@azure/identity": "^4.13.0",
+    "@azure/keyvault-secrets": "^4.10.0",
     "nodemailer": "^7.0.11"
   }
 }

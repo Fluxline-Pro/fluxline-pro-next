@@ -3,11 +3,9 @@
   "Values": {
     "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "SMTP_HOST": "mail.smtp2go.com",
-    "SMTP_PORT": "2525",
-    "SMTP_USER": "<your-smtp2go-username>",
-    "SMTP_PASS": "<your-smtp2go-password>",
-    "SMTP_FROM": "no-reply@fluxline.pro",
-    "CONTACT_EMAIL": "support@fluxline.pro"
-  }
+    "AZURE_CLIENT_ID": "<optional-for-local-dev>",
+    "AZURE_TENANT_ID": "<optional-for-local-dev>",
+    "AZURE_SUBSCRIPTION_ID": "<optional-for-local-dev>"
+  },
+  "Comment": "SMTP credentials are now stored in Azure Key Vault (https://kv-az-fluxline-next.vault.azure.net/). Secret names: SMTPHOST, SMTPPORT, SMTPUSER, SMTPPASS, SMTPFROM, CONTACTEMAIL. For local development, you can either configure Azure credentials above or temporarily add secrets here for testing (not recommended for production)."
 }
