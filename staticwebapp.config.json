@@ -15,16 +15,16 @@
   },
   "routes": [
     {
-      "route": "/*",
-      "allowedRoles": ["anonymous"]
-    },
-    {
       "route": "/api/*",
       "allowedRoles": ["anonymous"]
     },
     {
       "route": "/admin/*",
       "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/*",
+      "allowedRoles": ["anonymous"]
     }
   ],
   "responseOverrides": {
