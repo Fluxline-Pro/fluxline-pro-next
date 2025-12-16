@@ -50,7 +50,7 @@ We assume people like Reynolds had it all figured out from day one. But then
 reality sets in—and the truth is far from linear. Do we inherently know what
 works for us?
 
-Paradoxically... yes and no.
+Oddly enough... yes and no.
 
 It comes down to what _moves_ you. What _resonates_ with you. And why.  
 Pikachu (**spoiler alert**: who ends up being Ryan Reynolds himself as well as
