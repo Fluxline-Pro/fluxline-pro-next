@@ -176,7 +176,7 @@ export const useLayoutConfig = (
       orientation !== 'portrait' &&
       orientation !== 'tablet-portrait' &&
       orientation !== 'mobile-landscape'
-        ? footerHeight || '200px' // Use dynamic footer height, fallback to 200px if not provided
+        ? isHomePage ? '200px' : footerHeight || '200px' // Use dynamic footer height, fallback to 200px if not provided or on home page
         : undefined,
     gap:
       orientation === 'portrait' ||

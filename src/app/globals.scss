@@ -86,7 +86,7 @@ body {
 
   /* Make background transparent on home page to show BackgroundLayer */
   &.home-page {
-    background: transparent;
+    background: none !important; // Ensure no background interferes with BackgroundLayer
   }
 }
 

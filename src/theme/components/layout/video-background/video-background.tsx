@@ -49,26 +49,59 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
   theme,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
+
+  // Check if video source is valid
+  const hasValidVideoSrc = videoSrc && videoSrc.trim() !== '';
+
+  // Initialize state based on video source validity
+  const [isVideoLoaded, setIsVideoLoaded] = useState(() => !hasValidVideoSrc);
+  const [videoError, setVideoError] = useState(() => !hasValidVideoSrc);
   const [isMuted, setIsMuted] = useState(true);
   const [hasEnded, setHasEnded] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const { shouldReduceMotion } = useReducedMotion();
   const { filter } = useColorVisionFilter(true);
 
+  // Call onVideoLoaded callback when no valid video source
   useEffect(() => {
+    if (!hasValidVideoSrc && onVideoLoaded) {
+      onVideoLoaded();
+    }
+  }, [hasValidVideoSrc, onVideoLoaded]);
+
+  useEffect(() => {
+    // Only set up video loading logic if we have a valid video source
+    if (!hasValidVideoSrc) {
+      return;
+    }
+
     const video = videoRef.current;
     if (!video) return;
 
+    // Set a timeout to fall back to image if video takes too long to load
+    const loadTimeout = setTimeout(() => {
+      if (!isVideoLoaded) {
+        console.warn('Video load timeout - falling back to image');
+        setVideoError(true);
+        setIsVideoLoaded(true);
+        if (onVideoLoaded) {
+          onVideoLoaded();
+        }
+      }
+    }, 10000); // 10 second timeout
+
     const handleLoadedData = () => {
+      clearTimeout(loadTimeout);
       setIsVideoLoaded(true);
+      setVideoError(false);
       if (onVideoLoaded) {
         onVideoLoaded();
       }
     };
 
     const handleError = () => {
+      clearTimeout(loadTimeout);
+      console.error('Video failed to load - using fallback image');
       setVideoError(true);
       setIsVideoLoaded(true);
       if (onVideoLoaded) {
@@ -85,11 +118,12 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
     video.addEventListener('ended', handleEnded);
 
     return () => {
+      clearTimeout(loadTimeout);
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('error', handleError);
       video.removeEventListener('ended', handleEnded);
     };
-  }, [onVideoLoaded]);
+  }, [onVideoLoaded, hasValidVideoSrc, isVideoLoaded]);
 
   const handleMuteToggle = () => {
     if (videoRef.current) {
@@ -108,34 +142,50 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
     }
   };
 
-  // Show fallback image if video failed to load
-  if (videoError) {
+  // Show fallback image if video failed to load or no valid video source
+  if (videoError || !hasValidVideoSrc) {
     return (
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          width: '100%',
-          height: '100%',
-          filter: filter,
-        }}
-      >
-        <Image
-          src={fallbackImageSrc}
-          alt='Fluxline Pro background'
-          fill
-          priority
-          quality={90}
+      <>
+        <div
           style={{
-            objectFit: 'cover',
-            objectPosition: backgroundPosition,
-            transform: shouldFlipHorizontally ? 'scaleX(-1)' : undefined,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100%',
+            height: '100%',
+            filter: filter,
+          }}
+        >
+          <Image
+            src={fallbackImageSrc}
+            alt='Fluxline Pro background'
+            fill
+            priority
+            quality={90}
+            style={{
+              objectFit: 'cover',
+              objectPosition: backgroundPosition,
+              transform: shouldFlipHorizontally ? 'scaleX(-1)' : undefined,
+            }}
+          />
+        </div>
+        {/* Gradient Overlay for fallback image */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100%',
+            height: '100%',
+            background: gradient,
+            pointerEvents: 'none',
           }}
         />
-      </div>
+      </>
     );
   }
 
@@ -173,6 +223,7 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
 
   return (
     <>
+      {/* Fallback Image Layer - Always rendered, hidden when video loads */}
       <div
         style={{
           position: 'absolute',
@@ -183,8 +234,39 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
           width: '100%',
           height: '100%',
           filter: filter,
-          opacity: isVideoLoaded ? 1 : 0,
+          opacity: isVideoLoaded && !videoError ? 0 : 1,
           transition: shouldReduceMotion ? 'none' : 'opacity 0.5s ease-in-out',
+          zIndex: 1,
+        }}
+      >
+        <Image
+          src={fallbackImageSrc}
+          alt='Fluxline Pro background'
+          fill
+          priority
+          quality={90}
+          style={{
+            objectFit: 'cover',
+            objectPosition: backgroundPosition,
+            transform: shouldFlipHorizontally ? 'scaleX(-1)' : undefined,
+          }}
+        />
+      </div>
+
+      {/* Video Layer - Fades in when loaded */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          width: '100%',
+          height: '100%',
+          filter: filter,
+          opacity: isVideoLoaded && !videoError ? 1 : 0,
+          transition: shouldReduceMotion ? 'none' : 'opacity 0.5s ease-in-out',
+          zIndex: 2,
         }}
         onMouseEnter={() => setShowControls(true)}
         onMouseLeave={() => setShowControls(false)}
@@ -338,8 +420,7 @@ export const VideoBackground: React.FC<VideoBackgroundProps> = ({
           height: '100%',
           background: gradient,
           pointerEvents: 'none',
-          opacity: isVideoLoaded ? 1 : 0,
-          transition: shouldReduceMotion ? 'none' : 'opacity 0.5s ease-in-out',
+          zIndex: 3,
         }}
       />
     </>
