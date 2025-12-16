@@ -13,7 +13,7 @@ tags:
     'Emotional Architecture',
     'Intentionality',
   ]
-imageUrl: '/blog/posts/discipline-vs-resonance/images/discipline-resonance.png'
+imageUrl: '/blog/posts/discipline-vs-resonance/images/discipline-resonance.jpg'
 imageAlt: 'Image showing a scale that shows discipline and resonance as a balance'
 featured: true
 seoTitle: 'Discipline vs. Resonance: How to Sustain Your Drive | Fluxline Pro'

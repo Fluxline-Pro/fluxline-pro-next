@@ -13,7 +13,7 @@ tags:
     'Intentionality',
     'Ryan Reynolds',
   ]
-imageUrl: '/blog/posts/philosophy-of-resonance/images/resonance-philosophy.png'
+imageUrl: '/blog/posts/philosophy-of-resonance/images/resonance-philosophy.jpg'
 imageAlt: 'The Philosophy of Resonance'
 featured: true
 seoTitle: 'The Philosophy of Resonance: Understanding Your Drive | Fluxline Pro'

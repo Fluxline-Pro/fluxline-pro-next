@@ -53,6 +53,10 @@ jobs:
         id: get-token
         run: |
           $token = az keyvault secret show --vault-name kv-az-fluxline-next --name swa-api-token-prod --query value -o tsv
+          Write-Host "Token retrieved from Key Vault"
+          Write-Host "Token length: $($token.Length)"
+          Write-Host "First 20 chars: $($token.Substring(0,20))..."
+          Write-Host "Last 10 chars: ...$($token.Substring($token.Length - 10))"
           echo "::add-mask::$token"
           echo "SWA_TOKEN=$token" >> $env:GITHUB_OUTPUT
         shell: pwsh
@@ -85,6 +89,10 @@ jobs:
         id: get-token
         run: |
           $token = az keyvault secret show --vault-name kv-az-fluxline-next --name swa-api-token-prod --query value -o tsv
+          Write-Host "Token retrieved from Key Vault"
+          Write-Host "Token length: $($token.Length)"
+          Write-Host "First 20 chars: $($token.Substring(0,20))..."
+          Write-Host "Last 10 chars: ...$($token.Substring($token.Length - 10))"
           echo "::add-mask::$token"
           echo "SWA_TOKEN=$token" >> $env:GITHUB_OUTPUT
         shell: pwsh
