@@ -11,12 +11,12 @@
       "/favicon.ico",
       "/images/*",
       "/assets/*",
-      "/blog/**",
-      "/portfolio/**",
-      "/case-studies/**",
-      "/press-release/**",
+      "/blog/*",
+      "/portfolio/*",
+      "/case-studies/*",
+      "/press-release/*",
       "/videos/*",
-      "/scrolls/**",
+      "/scrolls/*",
       "/*.{css,js,png,jpg,jpeg,gif,ico,svg,woff,woff2,ttf,eot,webp,mp4,webm}"
     ]
   },
