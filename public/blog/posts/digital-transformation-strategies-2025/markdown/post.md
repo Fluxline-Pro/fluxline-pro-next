@@ -6,7 +6,7 @@ publishedDate: '2025-11-15'
 category: 'Growth'
 tags:
   ['Digital Transformation', 'Business Strategy', 'Technology', 'Innovation']
-imageUrl: '/blog/posts/digital-transformation-strategies-2025/images/digital-transformation.png'
+imageUrl: '/blog/posts/digital-transformation-strategies-2025/images/digital-transformation.jpg'
 imageAlt: 'Digital Transformation Strategies'
 featured: false
 seoTitle: 'Digital Transformation Strategies for 2025 infographic | Fluxline Resonance Group'
