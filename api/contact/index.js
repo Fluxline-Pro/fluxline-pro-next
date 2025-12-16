@@ -25,7 +25,8 @@ function getSecretClient() {
 }
 
 // Get secret from Key Vault with caching
-async function getSecret(secretName) {
+// Returns null if secret doesn't exist, allowing fallback values
+async function getSecret(secretName, fallbackValue = null) {
   const now = Date.now();
   const cached = secretsCache.get(secretName);
   
@@ -41,6 +42,10 @@ async function getSecret(secretName) {
     secretsCache.set(secretName, { value, timestamp: now });
     return value;
   } catch (error) {
+    // If secret doesn't exist and a fallback is provided, return fallback
+    if (fallbackValue !== null) {
+      return fallbackValue;
+    }
     throw new Error(`Failed to retrieve secret '${secretName}' from Key Vault: ${error.message}`);
   }
 }
@@ -170,12 +175,13 @@ module.exports = async function (context, req) {
     
     try {
       // Retrieve secrets from Key Vault (without underscores)
-      smtpHost = await getSecret('SMTPHOST') || 'mail.smtp2go.com';
-      smtpPort = parseInt(await getSecret('SMTPPORT') || '2525', 10);
-      smtpUser = await getSecret('SMTPUSER');
-      smtpPass = await getSecret('SMTPPASS');
-      smtpFrom = await getSecret('SMTPFROM') || 'no-reply@fluxline.pro';
-      contactEmail = await getSecret('CONTACTEMAIL') || 'support@fluxline.pro';
+      // Fallback values are provided as second parameter
+      smtpHost = await getSecret('SMTPHOST', 'mail.smtp2go.com');
+      smtpPort = parseInt(await getSecret('SMTPPORT', '2525'), 10);
+      smtpUser = await getSecret('SMTPUSER'); // No fallback - required secret
+      smtpPass = await getSecret('SMTPPASS'); // No fallback - required secret
+      smtpFrom = await getSecret('SMTPFROM', 'no-reply@fluxline.pro');
+      contactEmail = await getSecret('CONTACTEMAIL', 'support@fluxline.pro');
     } catch (error) {
       context.log.error('Failed to retrieve configuration from Key Vault:', error.message);
       context.res = {
