@@ -30,7 +30,7 @@
 {
   "responseOverrides": {
     "404": {
-      "rewrite": "/404.html",
+      "rewrite": "/404/index.html",
       "statusCode": 404
     }
   }

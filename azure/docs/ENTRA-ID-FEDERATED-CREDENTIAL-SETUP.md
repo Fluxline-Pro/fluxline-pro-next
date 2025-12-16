@@ -6,9 +6,9 @@ This guide walks through setting up federated credentials in Microsoft Entra ID 
 
 ## Prerequisites
 
-- App Registration: `github-fluxline-pro-next-dev`
-- Client ID: `bcea6cc6-3949-4065-8f69-e5879edfe7bf`
-- Tenant ID: `9ebc2060-7a03-47c4-8df4-54d40955cc06`
+- App Registration: `github-fluxline-pro-next-prod`
+- Client ID: `[ENTER-CLIENT-ID]`
+- Tenant ID: `[ENTER-TENANT-ID]`
 - GitHub Repository: `Fluxline-Pro/fluxline-pro-next`
 
 ## Why Federated Credentials?
@@ -69,7 +69,7 @@ This guide walks through setting up federated credentials in Microsoft Entra ID 
 
    ```
    Entity type: Pull request
-   Name: github-fluxline-pro-prod-v2-pr
+   Name: github-fluxline-next-prod
    Description: GitHub Actions for pull requests
    ```
 
@@ -92,14 +92,14 @@ This guide walks through setting up federated credentials in Microsoft Entra ID 
 
 ```powershell
 # Set variables
-$appId = "bcea6cc6-3949-4065-8f69-e5879edfe7bf"
-$federatedCredentialName = "github-fluxline-pro-prod-v2"
+$appId = "[ENTER-CLIENT-ID]"
+$federatedCredentialName = "github-fluxline-pro-next-prod"
 
 # Add federated credential for master branch
 az ad app federated-credential create `
   --id $appId `
   --parameters '{
-    "name": "github-fluxline-pro-prod-v2",
+    "name": "github-fluxline-pro-nextp-prod",
     "issuer": "https://token.actions.githubusercontent.com",
     "subject": "repo:Fluxline-Pro/fluxline-pro-next:ref:refs/heads/master",
     "description": "GitHub Actions deployment for production",
@@ -123,7 +123,7 @@ $app = Get-AzureADApplication -Filter "appId eq 'bcea6cc6-3949-4065-8f69-e5879ed
 
 # Create federated credential parameters
 $federatedCredential = @{
-    Name = "github-fluxline-pro-prod-v2"
+    Name = "github-fluxline-pro-next-prod"
     Issuer = "https://token.actions.githubusercontent.com"
     Subject = "repo:Fluxline-Pro/fluxline-pro-next:ref:refs/heads/master"
     Description = "GitHub Actions deployment for production"

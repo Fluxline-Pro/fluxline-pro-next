@@ -51,7 +51,7 @@
 
 1. Request comes to non-existent page
 2. Azure triggers 404 handling
-3. Attempts rewrite to `/404.html`
+3. Attempts rewrite to `/404/index.html`
 4. **Strict host validation kicks in**
 5. Checks if requesting domain is properly bound
 6. Checks if SSL certificate is active and validated
