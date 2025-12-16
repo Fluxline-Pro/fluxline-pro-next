@@ -229,7 +229,7 @@ When moving from Free to Standard tier:
 $status = "Pending"
 while ($status -ne "Ready") {
     $status = az staticwebapp hostname show `
-        --name swa-fluxline-pro-prod-v2 `
+        --name swa-fluxline-pro-next-prod `
         --resource-group az-fluxline-rg `
         --hostname "fluxline.pro" `
         --query "status" -o tsv
