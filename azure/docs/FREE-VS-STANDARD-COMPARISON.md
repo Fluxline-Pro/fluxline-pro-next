@@ -145,7 +145,7 @@ az staticwebapp hostname set --hostname "fluxline.pro"
 ```json
 {
   "navigationFallback": {
-    "rewrite": "/index.html",
+    "rewrite": "/404/index.html",
     "exclude": [
       "/images/*",
       "/api/*",
