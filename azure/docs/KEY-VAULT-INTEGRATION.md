@@ -46,6 +46,18 @@ The following secrets are automatically stored in `kv-az-fluxline-next`:
 - `github-client-id-prod` - App Registration Client ID
 - `environment-prod` - Environment identifier
 
+### Application Secrets (Shared across all environments)
+
+**SMTP Email Configuration** (used by `/api/contact` Azure Function):
+- `SMTPHOST` - SMTP server hostname (e.g., mail.smtp2go.com)
+- `SMTPPORT` - SMTP server port (e.g., 2525)
+- `SMTPUSER` - SMTP2Go username (Required)
+- `SMTPPASS` - SMTP2Go password (Required)
+- `SMTPFROM` - Email address to send from (e.g., no-reply@fluxline.pro)
+- `CONTACTEMAIL` - Email address to receive contact form submissions (e.g., support@fluxline.pro)
+
+**Note:** SMTP secrets are shared across all environments. The Azure Functions access these secrets via Managed Identity using the `@azure/keyvault-secrets` and `@azure/identity` packages.
+
 ## 🚀 Setup Process
 
 ### Step 1: Clean Up Old Resources
@@ -166,6 +178,50 @@ Each Managed Identity has access **only** to its environment's secrets:
 - ✅ Automatic token refresh per workflow run
 
 ## 🛠️ Maintenance
+
+### Add SMTP Secrets to Key Vault
+
+To add or update SMTP configuration in Key Vault:
+
+```powershell
+# Set SMTP Host
+az keyvault secret set `
+    --vault-name kv-az-fluxline-next `
+    --name SMTPHOST `
+    --value "mail.smtp2go.com"
+
+# Set SMTP Port
+az keyvault secret set `
+    --vault-name kv-az-fluxline-next `
+    --name SMTPPORT `
+    --value "2525"
+
+# Set SMTP User (Required)
+az keyvault secret set `
+    --vault-name kv-az-fluxline-next `
+    --name SMTPUSER `
+    --value "your-smtp2go-username"
+
+# Set SMTP Password (Required)
+az keyvault secret set `
+    --vault-name kv-az-fluxline-next `
+    --name SMTPPASS `
+    --value "your-smtp2go-password"
+
+# Set From Email Address
+az keyvault secret set `
+    --vault-name kv-az-fluxline-next `
+    --name SMTPFROM `
+    --value "no-reply@fluxline.pro"
+
+# Set Contact Email Address
+az keyvault secret set `
+    --vault-name kv-az-fluxline-next `
+    --name CONTACTEMAIL `
+    --value "support@fluxline.pro"
+```
+
+**Note:** These secrets are shared across all environments and are accessed by Azure Functions via Managed Identity.
 
 ### Rotate API Token
 
