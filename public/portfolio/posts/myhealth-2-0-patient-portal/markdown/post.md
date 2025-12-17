@@ -21,23 +21,26 @@ technologies:
   - Cross-Platform Development
   - Healthcare IT
 featuredImage:
-  url: '/images/home/FluxlineLogo.png'
-  alt: 'Fluxline Resonance Group Logo default image'
+  url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myhealthPlus-infographic-architecture.jpg'
+  alt: 'MyHealth 2.0 Enterprise integration architecture infographic'
 gallery:
-  - url: '/portfolio/posts/modern-web-app-showcase/images/dashboard.jpg'
-    alt: 'Patient portal dashboard concept'
-    caption: 'Enterprise healthcare dashboard design'
-  - url: '/portfolio/posts/modern-web-app-showcase/images/responsive.jpg'
-    alt: 'Cross-platform responsive design'
-    caption: 'Unified experience across web and mobile'
-  - url: '/portfolio/posts/modern-web-app-showcase/images/architecture.jpg'
-    alt: 'System architecture diagram'
-    caption: 'Enterprise integration architecture'
+  - url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myhealthPlus-infographic-architecture.jpg'
+    alt: 'MyHealth 2.0 Enterprise integration architecture infographic'
+    caption: 'MyHealth 2.0 Enterprise integration architecture infographic'
+  - url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myHealthWebsite.png'
+    alt: 'MyHealth 2.0 responsive website homepage'
+    caption: 'MyHealth 2.0 responsive website - Homepage'
+  - url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myHealthMobileView.png'
+    alt: 'MyHealth 2.0 responsive app - Test Results Page'
+    caption: 'MyHealth 2.0 responsive app - Test Results Page'
+  - url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myHealthLogo.png'
+    alt: 'MyHealth 2.0 Patient Portal logo'
+    caption: 'MyHealth 2.0 Patient Portal logo'
 publishedDate: '2025-12-08'
 projectDate: '2019-2020'
 featured: true
-seoTitle: 'MyHealth 2.0 Healthcare Portal - React.js Enterprise Project'
-seoDescription: 'Led enterprise healthcare portal rebuild from Angular to React.js/React Native in 4 months for Intermountain Health, integrating HL7 systems and delivering cross-platform patient experience.'
+seoTitle: 'MyHealth 2.0 Healthcare Portal - PWA Unified Enterprise Project'
+seoDescription: 'Led enterprise healthcare portal rebuild from Angular to React.js/React Native in 24 months for Intermountain Health, integrating HL7 systems and delivering cross-platform patient experience.'
 seoKeywords:
   - healthcare application
   - React Native
