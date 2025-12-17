@@ -1,7 +1,7 @@
 ---
 title: 'MyHealth 2.0 - Healthcare Patient Portal'
 shortDescription: 'Enterprise-scale healthcare patient portal rebuilt with React.js and React Native'
-longDescription: "Led the complete rebuild of Intermountain Health's MyHealth 2.0 patient portal from Angular 8 to React.js/React Native in 4 months, delivering a unified cross-platform experience integrating HL7 interfaces, laboratory systems, and financial services for a major healthcare provider."
+longDescription: "Led the complete rebuild of Intermountain Health's MyHealth 2.0 patient portal from Angular 8 to React.js/React Native in 24 months, delivering a unified cross-platform experience integrating HL7 interfaces, laboratory systems, and financial services for a major healthcare provider."
 role: 'Lead Front-End Developer & Designer'
 client: 'Intermountain Health'
 category: 'web'
@@ -66,7 +66,7 @@ Led the complete technical rebuild of **MyHealth 2.0**, Intermountain Health's e
 - **Complete rewrite**: Angular 8 → React.js + React Native
 - **Cross-platform delivery**: Unified codebase for web and mobile
 - **Enterprise integrations**: HL7 interfaces, laboratory systems, financial services
-- **Timeline**: 4 months for rebuild, 1 year total project delivery
+- **Timeline**: 24 months for rebuild, 1 year total project delivery
 - **Team structure**: Full development team, stakeholders, project managers, and executive leadership
 
 ## Technical Implementation
@@ -137,7 +137,7 @@ Interfaced with multiple healthcare IT systems:
 
 ## Challenges & Solutions
 
-### Challenge: Compressed Timeline (4 Months)
+### Challenge: Compressed Timeline (24 months)
 
 **Solution**: Prioritized direct code ports between React Native and React.js, leveraging shared component architecture and aggressive sprint planning to meet critical deadlines.
 
