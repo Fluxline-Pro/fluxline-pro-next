@@ -16,7 +16,7 @@ tags:
     'Philosophy',
   ]
 imageUrl: '/blog/posts/the-fluxline-philosophy/images/fluxline-philosophy-core-values-infographic.png'
-imageAlt: 'The Fluxline Philosophy and Core Values intertwined to form The Resonance Core Framework'
+imageAlt: 'The Fluxline Philosophy and Core Values intertwined to form The Resonance Core Framework™'
 featured: true
 seoTitle: 'The Fluxline Philosophy: Structuring Transformation & Shift | Fluxline Pro'
 seoDescription: 'Discover the Fluxline philosophy—where emotional resonance meets strategic flexibility. Learn how we architect transformative systems across technology, design, and personal growth.'
@@ -51,7 +51,7 @@ Fluxline envisions a world where individuals and businesses become self-authored
 
 ---
 
-## 💡 Our Core Values: The Resonance Core Framework
+## 💡 Our Core Values: The Resonance Core Framework™
 
 At Fluxline, we're guided by six foundational principles organized into a deliberate architecture known as **The Resonance Core Framework™**. These values don't exist in isolation—they form an interconnected system designed around the **DII Process: Discover, Integrate, Impact**.
 
@@ -67,7 +67,7 @@ The first three principles represent the **internal foundation**—the work you 
 
 **3. Adaptability & Resilience (Legacy Resonance)** — Build for lasting impact, not just today's needs. Your work should echo beyond immediate deliverables, creating ripples that align with your deepest intentions. Transformation requires embracing change and bouncing back with strength. This resilience allows your intentions to survive reality and evolve into legacy.
 
-### Part II: Outward Resonance & Interoperability (Collective Impact)
+### Part II: Outward Resonance & Human Connection (Collective Impact)
 
 Once internal alignment is established, the next three principles govern how you engage with the world. These represent **external expression**—the ways your inner work manifests in relationship, collaboration, and systems that outlive individual transactions. These principles embody the Impact phase.
 
@@ -83,7 +83,7 @@ These six principles flow through a three-phase methodology that structures tran
 
 **Discover** — Build internal alignment through principles 1-3. Explore self-awareness, clarify intentionality, and develop resilience. This foundational work is often skipped in the rush toward tactics.
 
-**Integrate** — Bridge internal alignment with external expression. Apply empathy, test collaboration, and prototype systems. This is where theory meets practice and inner work manifests in the world.
+**Integrate** — Bridge internal alignment (principles 1-3) with external expression (principles 4-6). Apply empathy, test collaboration, and prototype systems. This is where theory meets practice and inner work manifests in the world.
 
 **Impact** — Activate principles 4-6 to create collective value and sustainable legacy. Your personal transformation expands into organizational systems, community influence, and structures that persist beyond your direct involvement.
 
