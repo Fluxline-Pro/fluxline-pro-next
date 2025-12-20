@@ -8,6 +8,7 @@ import { FontScaleProvider } from '../theme/providers';
 import { Header } from '../theme/components/header';
 import { SkipToContent } from '../theme/components/skip-to-content';
 import { GlobalFooter } from '../theme/components/layout/global-footer';
+import { IosDetector } from '../components/IosDetector';
 
 // Global styles
 import './tailwind.css'; // ← Tailwind base/utilities first
@@ -203,6 +204,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <IosDetector />
         <FontScaleProvider>
           <ThemeOverrideProvider>
             <ThemeProvider>

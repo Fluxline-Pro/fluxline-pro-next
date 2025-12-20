@@ -14,4 +14,5 @@ export * from './useColorVisionFilter';
 export * from './useDateFormatter';
 export * from './useFooterHeight';
 export * from './useHeaderHeight';
+export * from './useIosDetection';
 export { default as useIsTextColorLight } from './useIsTextColorLight';
