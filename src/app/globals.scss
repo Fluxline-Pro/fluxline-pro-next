@@ -55,13 +55,14 @@ body {
 }
 
 // Ln 57-65: Apply background to html element for full viewport coverage
-// and so the background stays viewport-fixed during scrolling
+// Note: background-attachment: fixed is not used due to iOS Safari compatibility issues
 html {
-  -webkit-background-color: var(--theme-semantic-bodyBackground); // iOS fallback
+  -webkit-background-color: var(
+    --theme-semantic-bodyBackground
+  ); // iOS fallback
   background-color: var(--theme-semantic-bodyBackground); // Standard fallback
   background: var(--background); // Radial gradient (if set in theme)
-  background-attachment: fixed;
-  background-size: 100dvw 100dvh;
+  background-size: cover; // Changed from 100dvw 100dvh for iOS compatibility
   background-repeat: no-repeat;
   background-position: center;
 }
