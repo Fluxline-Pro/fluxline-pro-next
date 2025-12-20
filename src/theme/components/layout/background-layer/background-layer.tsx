@@ -143,7 +143,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         htmlElement.style.removeProperty('background-position');
       }
     };
-  }, [isMobileSafari, isHomePage, themeMode]);
+  }, [isMobileSafari, getBackgroundGradient, isHomePage, themeMode]);
 
   // Determine if image should be flipped for left-handed mode
   const shouldFlipHorizontally = layoutPreference === 'left-handed';
