@@ -43,7 +43,14 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   // The skipDarkModeFilter parameter prevents the image from being darkened in dark mode
   const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
-  const [isMobileSafari, setIsMobileSafari] = React.useState(false);
+  
+  // Detect mobile Safari synchronously to avoid double render
+  const isMobileSafari = React.useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const isMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return isSafari && isMobile;
+  }, []);
 
   const getBackgroundImagePath = (
     backgroundImage: 'one' | 'two',
@@ -104,15 +111,9 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     }
   };
 
-  // Detect mobile Safari and apply gradient directly to HTML element
+  // Apply gradient directly to HTML element for mobile Safari
   React.useEffect(() => {
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    const isMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const isMobileSafariBrowser = isSafari && isMobile;
-
-    setIsMobileSafari(isMobileSafariBrowser);
-
-    if (isMobileSafariBrowser && isHomePage) {
+    if (isMobileSafari && isHomePage) {
       const gradient = getBackgroundGradient(themeMode);
       const htmlElement = document.documentElement;
 
@@ -132,7 +133,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
 
     return () => {
       // Cleanup: remove the inline styles when component unmounts
-      if (isMobileSafariBrowser && isHomePage) {
+      if (isMobileSafari && isHomePage) {
         const htmlElement = document.documentElement;
         htmlElement.style.removeProperty('background');
         htmlElement.style.removeProperty('background-color');
@@ -142,7 +143,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         htmlElement.style.removeProperty('background-position');
       }
     };
-  }, [isHomePage, themeMode]);
+  }, [isMobileSafari, isHomePage, themeMode]);
 
   // Determine if image should be flipped for left-handed mode
   const shouldFlipHorizontally = layoutPreference === 'left-handed';
