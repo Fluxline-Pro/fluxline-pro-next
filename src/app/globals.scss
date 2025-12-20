@@ -54,17 +54,27 @@ body {
   --font-mono: var(--font-mono);
 }
 
-// Ln 57-65: Apply background to html element for full viewport coverage
-// Note: background-attachment: fixed is not used due to iOS Safari compatibility issues
+// Ln 57-68: Apply background to html element for full viewport coverage
+// iOS Safari has issues with background-attachment: fixed, so we conditionally apply it
 html {
   -webkit-background-color: var(
     --theme-semantic-bodyBackground
   ); // iOS fallback
   background-color: var(--theme-semantic-bodyBackground); // Standard fallback
   background: var(--background); // Radial gradient (if set in theme)
-  background-size: cover; // Changed from 100dvw 100dvh for iOS compatibility
   background-repeat: no-repeat;
   background-position: center;
+
+  // Default for iOS: Use cover without fixed attachment
+  &.is-ios {
+    background-size: cover;
+  }
+
+  // For non-iOS devices: Use fixed attachment to prevent scrolling
+  &.not-ios {
+    background-attachment: fixed;
+    background-size: 100dvw 100dvh;
+  }
 }
 
 /* =============================================
