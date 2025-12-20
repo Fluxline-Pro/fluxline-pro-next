@@ -97,12 +97,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   @include theme.theme-transition;
 
-  /* iOS Safe Area Insets - Prevent white bars on notched devices */
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-
   /* Override Fluent UI injected background divs for all pages */
   > div[class*='body-'] {
     background: transparent !important;

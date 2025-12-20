@@ -143,6 +143,9 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         overflow: 'hidden',
         opacity: backgroundLoaded ? 1 : 0, // Fade in when background image is loaded
         transition: shouldReduceMotion ? 'none' : 'opacity 0.5s ease-in-out',
+        // iOS safe area support - extend background to device edges
+        // Note: Background should extend under safe areas, so we don't add padding
+        // This ensures the background covers the entire viewport including notch areas
       }}
     >
       {useVideo ? (
