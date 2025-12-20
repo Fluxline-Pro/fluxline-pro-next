@@ -44,7 +44,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   // The skipDarkModeFilter parameter prevents the image from being darkened in dark mode
   const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
-  
+
   // Detect iOS devices (all iOS browsers use Safari's WebKit engine and may have rendering issues)
   const isIOS = useIsIOS();
 
@@ -114,19 +114,11 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
       const htmlElement = document.documentElement;
 
       // Apply gradient directly to HTML element with !important
-      htmlElement.style.setProperty('background', gradient, 'important');
+      htmlElement.style.setProperty('background', gradient);
       // Remove conflicting background properties that might interfere with gradient
-      htmlElement.style.setProperty(
-        'background-attachment',
-        'scroll',
-        'important'
-      );
-      htmlElement.style.setProperty('background-size', 'auto', 'important');
-      htmlElement.style.setProperty(
-        'background-position',
-        'initial',
-        'important'
-      );
+      htmlElement.style.setProperty('background-attachment', 'scroll');
+      htmlElement.style.setProperty('background-size', 'auto');
+      htmlElement.style.setProperty('background-position', 'initial');
     }
 
     return () => {
@@ -139,7 +131,8 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         htmlElement.style.removeProperty('background-position');
       }
     };
-  }, [isIOS, getBackgroundGradient, isHomePage, themeMode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isIOS, isHomePage, themeMode]);
 
   // Determine if image should be flipped for left-handed mode
   const shouldFlipHorizontally = layoutPreference === 'left-handed';
@@ -181,7 +174,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         height: '100dvh',
         zIndex: 1,
         overflow: 'hidden',
-        opacity: backgroundLoaded ? 1 : 0,
+        opacity: backgroundLoaded && !isIOS ? 1 : 0,
         transition: shouldReduceMotion ? 'none' : 'opacity 0.5s ease-in-out',
       }}
     >
