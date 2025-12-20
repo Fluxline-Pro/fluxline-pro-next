@@ -239,6 +239,44 @@ export default function AboutPage() {
           </section>
         </div>
 
+        {/* Divider */}
+        <hr
+          style={{
+            border: 'none',
+            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+            margin: `${theme.spacing.xxl} 0`,
+          }}
+        />
+
+        {/* Fluxline Ethos CTA */}
+        <Callout
+          variant='accent'
+          title='Discover the Fluxline Ethos'
+          subtitle='Modular by design. Resonant by nature.'
+          action={
+            <FormButton
+              text='Explore Our Philosophy'
+              variant='primary'
+              size='large'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => (window.location.href = '/fluxline-ethos')}
+            />
+          }
+        >
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '1.125rem',
+              lineHeight: theme.typography.lineHeights.relaxed,
+            }}
+          >
+            Learn more about our philosophy, mission, and the service framework
+            that guides everything we do at Fluxline.
+          </Typography>
+        </Callout>
+
         {/* Content Navigation Callout-- move back under "Our Values" once testimonials is added back -TW */}
         <Callout
           variant='subtle'
