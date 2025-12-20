@@ -4,6 +4,7 @@ import React from 'react';
 
 import { useColorVisionFilter } from '../../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../../hooks/useReducedMotion';
+import { useIsIOS } from '../../../hooks/useIsIOS';
 import { VideoBackground } from '../video-background';
 import type { IExtendedTheme, ThemeMode } from '../../../theme';
 
@@ -43,12 +44,9 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   // The skipDarkModeFilter parameter prevents the image from being darkened in dark mode
   const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
-
+  
   // Detect iOS devices (all iOS browsers use Safari's WebKit engine and may have rendering issues)
-  const isIOS = React.useMemo(() => {
-    if (typeof navigator === 'undefined') return false;
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  }, []);
+  const isIOS = useIsIOS();
 
   const getBackgroundImagePath = (
     backgroundImage: 'one' | 'two',
