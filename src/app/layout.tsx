@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 
 // Theme and layout components
@@ -76,6 +76,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  viewportFit: 'cover',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -84,11 +90,6 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
-        {/* Viewport meta tag with viewport-fit=cover for iOS safe area support */}
-        <meta
-          name='viewport'
-          content='width=device-width, initial-scale=1.0, viewport-fit=cover'
-        />
         {/* Typekit stylesheet for custom typography */}
         <link rel='stylesheet' href='https://use.typekit.net/qmh5dow.css' />
         {/* Font Awesome icons */}
