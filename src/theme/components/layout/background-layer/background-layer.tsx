@@ -43,9 +43,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   // The skipDarkModeFilter parameter prevents the image from being darkened in dark mode
   const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
-
-  // Determine if image should be flipped for left-handed mode
-  const shouldFlipHorizontally = layoutPreference === 'left-handed';
+  const [isMobileSafari, setIsMobileSafari] = React.useState(false);
 
   const getBackgroundImagePath = (
     backgroundImage: 'one' | 'two',
@@ -106,7 +104,45 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     }
   };
 
-  if (!isHomePage) {
+  // Detect mobile Safari and apply gradient directly to HTML element
+  React.useEffect(() => {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const isMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isMobileSafariBrowser = isSafari && isMobile;
+
+    setIsMobileSafari(isMobileSafariBrowser);
+
+    if (isMobileSafariBrowser && isHomePage) {
+      const gradient = getBackgroundGradient(themeMode);
+      const htmlElement = document.documentElement;
+
+      // Apply gradient directly to HTML element with !important
+      htmlElement.style.setProperty('background', gradient, 'important');
+      htmlElement.style.setProperty('background-color', gradient, 'important');
+      htmlElement.style.setProperty(
+        '-webkit-background-color',
+        gradient,
+        'important'
+      );
+    }
+
+    return () => {
+      // Cleanup: remove the inline styles when component unmounts
+      if (isMobileSafariBrowser) {
+        const htmlElement = document.documentElement;
+        htmlElement.style.removeProperty('background');
+        htmlElement.style.removeProperty('background-color');
+        htmlElement.style.removeProperty('-webkit-background-color');
+      }
+    };
+  }, [isHomePage, themeMode]);
+
+  // Determine if image should be flipped for left-handed mode
+  const shouldFlipHorizontally = layoutPreference === 'left-handed';
+
+  // If mobile Safari, don't render the background layer div
+  // Background is applied directly to HTML element via useEffect
+  if (!isHomePage || isMobileSafari) {
     return null;
   }
 
@@ -198,6 +234,6 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
       )}
     </div>
   );
-};
+};;
 
 export default BackgroundLayer;
