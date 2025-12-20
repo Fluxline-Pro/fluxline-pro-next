@@ -124,6 +124,10 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         gradient,
         'important'
       );
+      // Remove conflicting background properties that might interfere with gradient
+      htmlElement.style.setProperty('background-attachment', 'scroll', 'important');
+      htmlElement.style.setProperty('background-size', 'auto', 'important');
+      htmlElement.style.setProperty('background-position', 'initial', 'important');
     }
 
     return () => {
@@ -133,6 +137,9 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         htmlElement.style.removeProperty('background');
         htmlElement.style.removeProperty('background-color');
         htmlElement.style.removeProperty('-webkit-background-color');
+        htmlElement.style.removeProperty('background-attachment');
+        htmlElement.style.removeProperty('background-size');
+        htmlElement.style.removeProperty('background-position');
       }
     };
   }, [isHomePage, themeMode]);
