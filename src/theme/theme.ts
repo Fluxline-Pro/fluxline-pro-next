@@ -1940,7 +1940,7 @@ export const getResponsiveTypography = ({
 }: ResponsiveTypographyProps) => {
   // requires various CSS properties, so needs any type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-   const styles: { [key: string]: any } = {};
+  const styles: { [key: string]: any } = {};
 
   if (xs) {
     styles['@media (min-width: 0)'] = {
