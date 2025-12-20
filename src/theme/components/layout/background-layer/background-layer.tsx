@@ -4,7 +4,6 @@ import React from 'react';
 
 import { useColorVisionFilter } from '../../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../../hooks/useReducedMotion';
-import { useIsIOS } from '../../../hooks/useIsIOS';
 import { VideoBackground } from '../video-background';
 import type { IExtendedTheme, ThemeMode } from '../../../theme';
 
@@ -45,8 +44,8 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
 
-  // Detect iOS devices (all iOS browsers use Safari's WebKit engine and may have rendering issues)
-  const isIOS = useIsIOS();
+  // Determine if image should be flipped for left-handed mode
+  const shouldFlipHorizontally = layoutPreference === 'left-handed';
 
   const getBackgroundImagePath = (
     backgroundImage: 'one' | 'two',
@@ -88,7 +87,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     return 'center';
   };
 
-  const getBackgroundGradient = React.useCallback((themeMode: ThemeMode) => {
+  const getBackgroundGradient = (themeMode: ThemeMode) => {
     // Darker overlay to improve text contrast and readability
     switch (themeMode) {
       case 'high-contrast':
@@ -105,41 +104,9 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
       default:
         return 'linear-gradient(to bottom, rgba(240, 240, 240, 0.3) 0%, rgba(240, 240, 240, 0.4) 100%)';
     }
-  }, []);
+  };
 
-  // Apply gradient directly to HTML element for iOS devices (all browsers use WebKit)
-  React.useEffect(() => {
-    if (isIOS && isHomePage) {
-      const gradient = getBackgroundGradient(themeMode);
-      const htmlElement = document.documentElement;
-
-      // Apply gradient directly to HTML element with !important
-      htmlElement.style.setProperty('background', gradient);
-      // Remove conflicting background properties that might interfere with gradient
-      htmlElement.style.setProperty('background-attachment', 'scroll');
-      htmlElement.style.setProperty('background-size', 'auto');
-      htmlElement.style.setProperty('background-position', 'initial');
-    }
-
-    return () => {
-      // Cleanup: remove the inline styles when component unmounts
-      if (isIOS && isHomePage) {
-        const htmlElement = document.documentElement;
-        htmlElement.style.removeProperty('background');
-        htmlElement.style.removeProperty('background-attachment');
-        htmlElement.style.removeProperty('background-size');
-        htmlElement.style.removeProperty('background-position');
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isIOS, isHomePage, themeMode]);
-
-  // Determine if image should be flipped for left-handed mode
-  const shouldFlipHorizontally = layoutPreference === 'left-handed';
-
-  // If iOS device, don't render the background layer div
-  // Background is applied directly to HTML element via useEffect
-  if (!isHomePage || isIOS) {
+  if (!isHomePage) {
     return null;
   }
 
@@ -174,7 +141,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         height: '100dvh',
         zIndex: 1,
         overflow: 'hidden',
-        opacity: backgroundLoaded && !isIOS ? 1 : 0,
+        opacity: 1, // Always visible - backgroundLoaded animation handled by parent
         transition: shouldReduceMotion ? 'none' : 'opacity 0.5s ease-in-out',
       }}
     >
