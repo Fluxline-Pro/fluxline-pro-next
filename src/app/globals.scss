@@ -65,12 +65,10 @@ html {
   background-repeat: no-repeat;
   background-position: center;
 
-  // Default for iOS: Use cover without fixed attachment
-  &.is-ios {
-    background-size: cover;
-  }
+  // Default (SSR/before detection): Use safe iOS-compatible styles
+  background-size: cover;
 
-  // For non-iOS devices: Use fixed attachment to prevent scrolling
+  // Non-iOS override: Use fixed attachment, overriding the default
   &.not-ios {
     background-attachment: fixed;
     background-size: 100dvw 100dvh;

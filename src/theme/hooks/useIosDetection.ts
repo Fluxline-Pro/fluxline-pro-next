@@ -1,8 +1,10 @@
+'use client';
+
 import { useEffect } from 'react';
 
 /**
  * Hook to detect iOS devices and add appropriate class to HTML element
- * Adds 'is-ios' or 'not-ios' class for conditional CSS styling
+ * Adds 'not-ios' class for non-iOS devices; iOS devices use default styles
  */
 export function useIosDetection() {
   useEffect(() => {
@@ -14,11 +16,9 @@ export function useIosDetection() {
     const htmlElement = document.documentElement;
 
     if (isIOS) {
-      htmlElement.classList.add('is-ios');
       htmlElement.classList.remove('not-ios');
     } else {
       htmlElement.classList.add('not-ios');
-      htmlElement.classList.remove('is-ios');
     }
   }, []);
 }
