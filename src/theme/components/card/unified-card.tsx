@@ -239,6 +239,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     ? 'none'
                     : 'opacity 0.3s ease-in-out',
                 }}
+                onLoad={() => setImageLoaded(true)}
               />
             </div>
 
