@@ -19,13 +19,11 @@ export interface UnifiedCardProps {
   imageUrl?: string;
   imageAlt?: string;
   onClick?: () => void;
-  isLoading?: boolean;
   elevation?: 'low' | 'medium' | 'high';
   viewType: CardViewType;
   // Image card specific props
   imageText?: string;
   delay?: number;
-  useSpinner?: boolean;
   altText?: string;
   // Optional flag to show title on image
   showTitleOnImage?: boolean;
@@ -47,14 +45,16 @@ export interface UnifiedCardProps {
 }
 
 /**
- * UnifiedCard - Flexible card component for image display
- * Simplified version focused on page-wrapper image card use case
- * Handles:
- * - Image loading with spinner
+ * UnifiedCard - Flexible card component for content display
+ *
+ * Features:
+ * - Automatic loading spinners for all images
  * - Aspect ratio preservation for landscape images
- * - Dark mode filtering
+ * - Dark mode filtering with accessibility support
  * - Title overlay on images
  * - Responsive sizing
+ * - Dimension detection for viewport optimization
+ * - Multiple view types: grid, small, large, image
  */
 export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   id,
@@ -63,12 +63,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   imageUrl,
   imageAlt,
   onClick,
-  isLoading = false,
   elevation = 'medium',
   viewType,
   imageText,
   delay = 0,
-  useSpinner = false,
   altText,
   showTitleOnImage = false,
   imageContainerStyle,
@@ -90,18 +88,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [isLandscape, setIsLandscape] = React.useState(false);
-  const [imageDimensions, setImageDimensions] = React.useState<{
-    width: number;
-    height: number;
-    aspectRatio: number;
-  } | null>(null);
 
-  // Check if image is landscape and handle image loading
+  // Check if image is landscape and handle dimension detection (separate from visual loading)
   React.useEffect(() => {
     if (imageUrl) {
-      // Reset loading state when imageUrl changes
+      // Reset all states when imageUrl changes
       setImageLoaded(false);
-      setImageDimensions(null);
       setIsLandscape(false);
       // Clear dimensions in parent container
       onImageDimensionsChange?.(null);
@@ -120,13 +112,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           aspectRatio: aspectRatio,
         };
 
-        setImageDimensions(dimensions);
-
         // Notify parent container of dimensions change
         onImageDimensionsChange?.(dimensions);
-
-        // Mark image as loaded first
-        setImageLoaded(true);
 
         // Only apply landscape detection when this card is in the ViewportGrid left panel
         if (isViewportLeftPanel) {
@@ -146,7 +133,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       img.onerror = () => {
         // Still mark as loaded on error to prevent infinite loading state
         setImageLoaded(true);
-        setImageDimensions(null);
         // Notify parent container that dimensions are cleared
         onImageDimensionsChange?.(null);
       };
@@ -202,7 +188,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             onClick={onClick}
           >
             {/* Loading Spinner */}
-            {useSpinner && !imageLoaded && (
+            {!imageLoaded && (
               <div
                 style={{
                   position: 'absolute',
@@ -262,7 +248,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     fontSize: theme.typography.fonts.xLarge.fontSize,
                     fontWeight: theme.typography.fonts.xLarge.fontWeight,
                     fontFamily: `${theme.typography.fonts.xLarge.fontFamily} !important`,
-                    color: '#FFF', 
+                    color: '#FFF',
                   }}
                 >
                   {imageText}
