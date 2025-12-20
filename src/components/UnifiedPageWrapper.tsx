@@ -5,10 +5,12 @@ import { usePathname, useParams } from 'next/navigation';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { SpinnerSize } from '@fluentui/react/lib/Spinner';
 
 import { Typography } from '../theme/components/typography';
 import { UnifiedMarkdownRenderer } from '../utils/markdownRenderer';
 import { ProtectedEmail } from './ProtectedEmail';
+import { LoadingSpinner } from '../theme/components/structural/loading-spinner';
 
 import { useContentFilterStore } from '../store/store';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
@@ -290,6 +292,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   // Hover state for image gallery
   const [isImageHovered, setIsImageHovered] = React.useState(false);
 
+  // Image loading state
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
   // Check if current path should use the wrapper
   // const shouldUseWrapper = !EXCLUDED_PAGES.includes(pathname);
 
@@ -347,6 +352,11 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     id && selectedPost && selectedPost.imageUrl
       ? selectedPost.imageUrl
       : contentImage || configImage;
+
+  // Reset image loaded state when image changes
+  React.useEffect(() => {
+    setImageLoaded(false);
+  }, [imageToDisplay]);
 
   // Use the selected post's title if available and we're in detail view
   const imageTextToDisplay =
@@ -629,6 +639,21 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 transition: 'transform 0.3s ease-in-out',
               }}
             >
+              {/* Loading Spinner */}
+              {!imageLoaded && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 10,
+                  }}
+                >
+                  <LoadingSpinner size={SpinnerSize.large} />
+                </div>
+              )}
+
               <Image
                 src={imageToDisplay}
                 alt={imageAltText}
@@ -640,10 +665,15 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   height: '100%',
                   objectFit: 'cover',
                   filter: filter,
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: shouldReduceMotion
+                    ? 'none'
+                    : 'opacity 0.3s ease-in-out',
                 }}
                 priority
                 placeholder='blur'
                 blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
+                onLoad={() => setImageLoaded(true)}
               />
               {/* Arrow icon indicator for clickable images */}
               {imageConfig?.onClick && (
@@ -733,6 +763,21 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 transition: 'transform 0.3s ease-in-out',
               }}
             >
+              {/* Loading Spinner */}
+              {!imageLoaded && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 10,
+                  }}
+                >
+                  <LoadingSpinner size={SpinnerSize.large} />
+                </div>
+              )}
+
               <Image
                 src={imageToDisplay}
                 alt={imageAltText}
@@ -744,10 +789,15 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   height: 'auto',
                   objectFit: 'contain',
                   filter: filter,
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: shouldReduceMotion
+                    ? 'none'
+                    : 'opacity 0.3s ease-in-out',
                 }}
                 priority
                 placeholder='blur'
                 blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
+                onLoad={() => setImageLoaded(true)}
               />
               {/* Arrow icon indicator for clickable images */}
               {imageConfig?.onClick && (
