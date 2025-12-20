@@ -194,7 +194,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                 overflowY: 'auto',
                 border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
                 borderRadius: theme.borderRadius.container.small,
-                backgroundColor: theme.palette.white,
+                backgroundColor: theme.palette.neutralLight,
                 boxShadow: theme.effects.elevation8,
                 zIndex: 1000,
               }}
