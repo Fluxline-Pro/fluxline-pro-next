@@ -467,7 +467,7 @@ export const typography = {
       letterSpacing: '0.01em',
       textShadow: 'none',
       textTransform: 'capitalize' as const,
-      lineHeight: '2',
+      lineHeight: '1.4',
     },
     h3: {
       fontFamily:

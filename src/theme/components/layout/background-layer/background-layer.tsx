@@ -132,7 +132,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
 
     return () => {
       // Cleanup: remove the inline styles when component unmounts
-      if (isMobileSafariBrowser) {
+      if (isMobileSafariBrowser && isHomePage) {
         const htmlElement = document.documentElement;
         htmlElement.style.removeProperty('background');
         htmlElement.style.removeProperty('background-color');
@@ -241,6 +241,6 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
       )}
     </div>
   );
-};;
+};
 
 export default BackgroundLayer;
