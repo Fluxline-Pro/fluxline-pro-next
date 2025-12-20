@@ -1,7 +1,7 @@
 ---
 title: 'MyHealth 2.0 - Healthcare Patient Portal'
 shortDescription: 'Enterprise-scale healthcare patient portal rebuilt with React.js and React Native'
-longDescription: "Led the complete rebuild of Intermountain Health's MyHealth 2.0 patient portal from Angular 8 to React.js/React Native in 4 months, delivering a unified cross-platform experience integrating HL7 interfaces, laboratory systems, and financial services for a major healthcare provider."
+longDescription: "Led the complete rebuild of Intermountain Health's MyHealth 2.0 patient portal from Angular 8 to React.js/React Native in 24 months, delivering a unified cross-platform experience integrating HL7 interfaces, laboratory systems, and financial services for a major healthcare provider."
 role: 'Lead Front-End Developer & Designer'
 client: 'Intermountain Health'
 category: 'web'
@@ -21,23 +21,26 @@ technologies:
   - Cross-Platform Development
   - Healthcare IT
 featuredImage:
-  url: '/images/home/FluxlineLogo.png'
-  alt: 'Fluxline Resonance Group Logo default image'
+  url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myhealthPlus-infographic-architecture.jpg'
+  alt: 'MyHealth 2.0 Enterprise integration architecture infographic'
 gallery:
-  - url: '/portfolio/posts/modern-web-app-showcase/images/dashboard.jpg'
-    alt: 'Patient portal dashboard concept'
-    caption: 'Enterprise healthcare dashboard design'
-  - url: '/portfolio/posts/modern-web-app-showcase/images/responsive.jpg'
-    alt: 'Cross-platform responsive design'
-    caption: 'Unified experience across web and mobile'
-  - url: '/portfolio/posts/modern-web-app-showcase/images/architecture.jpg'
-    alt: 'System architecture diagram'
-    caption: 'Enterprise integration architecture'
+  - url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myhealthPlus-infographic-architecture.jpg'
+    alt: 'MyHealth 2.0 Enterprise integration architecture infographic'
+    caption: 'MyHealth 2.0 Enterprise integration architecture infographic'
+  - url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myHealthWebsite.png'
+    alt: 'MyHealth 2.0 responsive website homepage'
+    caption: 'MyHealth 2.0 responsive website - Homepage'
+  - url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myHealthMobileView.png'
+    alt: 'MyHealth 2.0 responsive app - Test Results Page'
+    caption: 'MyHealth 2.0 responsive app - Test Results Page'
+  - url: '/portfolio/posts/myhealth-2-0-patient-portal/images/myHealthLogo.png'
+    alt: 'MyHealth 2.0 Patient Portal logo'
+    caption: 'MyHealth 2.0 Patient Portal logo'
 publishedDate: '2025-12-08'
 projectDate: '2019-2020'
 featured: true
-seoTitle: 'MyHealth 2.0 Healthcare Portal - React.js Enterprise Project'
-seoDescription: 'Led enterprise healthcare portal rebuild from Angular to React.js/React Native in 4 months for Intermountain Health, integrating HL7 systems and delivering cross-platform patient experience.'
+seoTitle: 'MyHealth 2.0 Healthcare Portal - React.js/React Native Unified Enterprise Project'
+seoDescription: 'Led enterprise healthcare portal rebuild from Angular to React.js/React Native in 24 months for Intermountain Health, integrating HL7 systems and delivering cross-platform patient experience.'
 seoKeywords:
   - healthcare application
   - React Native
@@ -63,7 +66,7 @@ Led the complete technical rebuild of **MyHealth 2.0**, Intermountain Health's e
 - **Complete rewrite**: Angular 8 → React.js + React Native
 - **Cross-platform delivery**: Unified codebase for web and mobile
 - **Enterprise integrations**: HL7 interfaces, laboratory systems, financial services
-- **Timeline**: 4 months for rebuild, 1 year total project delivery
+- **Timeline**: 24 months for rebuild, 1 year total project delivery
 - **Team structure**: Full development team, stakeholders, project managers, and executive leadership
 
 ## Technical Implementation
@@ -134,7 +137,7 @@ Interfaced with multiple healthcare IT systems:
 
 ## Challenges & Solutions
 
-### Challenge: Compressed Timeline (4 Months)
+### Challenge: Compressed Timeline (24 months)
 
 **Solution**: Prioritized direct code ports between React Native and React.js, leveraging shared component architecture and aggressive sprint planning to meet critical deadlines.
 

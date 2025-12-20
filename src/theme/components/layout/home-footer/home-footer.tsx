@@ -214,11 +214,11 @@ export const HomeFooter: React.FC = () => {
           </Typography>
           <StyledLink href='/services'>All Services</StyledLink>
           <StyledLink href='/services/design'>Design</StyledLink>
-          <StyledLink href='/services/web-development'>Development</StyledLink>
+          <StyledLink href='/services/development'>Development</StyledLink>
           <StyledLink href='/services/personal-training'>
             Personal Training
           </StyledLink>
-          <StyledLink href='/services/life-coaching'>Life Coaching</StyledLink>
+          <StyledLink href='/services/resonance-core'>Life Coaching</StyledLink>
           <StyledLink href='/services/consulting'>Consulting</StyledLink>
         </div>
 
