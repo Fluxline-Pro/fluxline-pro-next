@@ -202,7 +202,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             onClick={onClick}
           >
             {/* Loading Spinner */}
-            {!imageLoaded && (
+            {useSpinner && !imageLoaded && (
               <div
                 style={{
                   position: 'absolute',
@@ -333,6 +333,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     ? 'none'
                     : 'opacity 0.3s ease-in-out',
                 }}
+                onLoad={() => setImageLoaded(true)}
               />
 
               {/* Title and date overlay */}
@@ -509,6 +510,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                         ? 'none'
                         : 'opacity 0.3s ease-in-out',
                     }}
+                    onLoad={() => setImageLoaded(true)}
                   />
                 </div>
               )}
@@ -647,6 +649,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                         ? 'none'
                         : 'opacity 0.3s ease-in-out',
                     }}
+                    onLoad={() => setImageLoaded(true)}
                   />
                 </div>
               )}
