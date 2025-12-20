@@ -12,6 +12,7 @@ import { FormButton } from '@/theme/components/form/FormButton';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useRouter } from 'next/navigation';
 import { TeamMemberCard } from './components/TeamMemberCard';
 import { CompanyStatistics } from './components/CompanyStatistics';
 import { CompanyTimeline } from './components/CompanyTimeline';
@@ -27,6 +28,7 @@ export default function AboutPage() {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const router = useRouter();
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -260,7 +262,7 @@ export default function AboutPage() {
               size='large'
               icon='ChevronRight'
               iconPosition='right'
-              onClick={() => (window.location.href = '/fluxline-ethos')}
+              onClick={() => router.push('/fluxline-ethos')}
             />
           }
         >
@@ -289,7 +291,7 @@ export default function AboutPage() {
               size='large'
               icon='ChevronRight'
               iconPosition='right'
-              onClick={() => (window.location.href = '/content')}
+              onClick={() => router.push('/content')}
             />
           }
         />
