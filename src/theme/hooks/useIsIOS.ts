@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * useIsIOS Hook
@@ -7,12 +7,17 @@ import { useMemo } from 'react';
  * All iOS browsers use Safari's WebKit engine and may have rendering issues
  * with certain CSS properties like background gradients.
  *
+ * Uses useState + useEffect to avoid SSR/CSR hydration mismatches.
+ * Initial state is false (matches SSR), then updates on client mount.
+ *
  * @returns {boolean} True if the device is running iOS (iPhone, iPad, iPod)
  */
 export const useIsIOS = (): boolean => {
-  return useMemo(() => {
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
     if (typeof navigator === 'undefined' || typeof document === 'undefined') {
-      return false;
+      return;
     }
 
     const ua = navigator.userAgent || '';
@@ -25,6 +30,8 @@ export const useIsIOS = (): boolean => {
     const isIPadOS =
       /Macintosh/.test(ua) && 'ontouchend' in document.documentElement;
 
-    return isClassicIOS || isIPadOS;
+    setIsIOS(isClassicIOS || isIPadOS);
   }, []);
+
+  return isIOS;
 };
