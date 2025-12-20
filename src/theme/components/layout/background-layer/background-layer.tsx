@@ -137,8 +137,8 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        width: '100vw',
-        height: '100vh',
+        width: '100dvw',
+        height: '100dvh',
         zIndex: 1,
         overflow: 'hidden',
         opacity: 1, // Always visible - backgroundLoaded animation handled by parent
