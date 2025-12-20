@@ -43,13 +43,11 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   // The skipDarkModeFilter parameter prevents the image from being darkened in dark mode
   const { filter } = useColorVisionFilter(true);
   const { shouldReduceMotion } = useReducedMotion();
-  
-  // Detect mobile Safari synchronously to avoid double render
-  const isMobileSafari = React.useMemo(() => {
-    if (typeof window === 'undefined') return false;
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    const isMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    return isSafari && isMobile;
+
+  // Detect iOS devices (all iOS browsers use Safari's WebKit engine and may have rendering issues)
+  const isIOS = React.useMemo(() => {
+    if (typeof navigator === 'undefined') return false;
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
   }, []);
 
   const getBackgroundImagePath = (
@@ -92,7 +90,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     return 'center';
   };
 
-  const getBackgroundGradient = (themeMode: ThemeMode) => {
+  const getBackgroundGradient = React.useCallback((themeMode: ThemeMode) => {
     // Darker overlay to improve text contrast and readability
     switch (themeMode) {
       case 'high-contrast':
@@ -109,48 +107,48 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
       default:
         return 'linear-gradient(to bottom, rgba(240, 240, 240, 0.3) 0%, rgba(240, 240, 240, 0.4) 100%)';
     }
-  };
+  }, []);
 
-  // Apply gradient directly to HTML element for mobile Safari
+  // Apply gradient directly to HTML element for iOS devices (all browsers use WebKit)
   React.useEffect(() => {
-    if (isMobileSafari && isHomePage) {
+    if (isIOS && isHomePage) {
       const gradient = getBackgroundGradient(themeMode);
       const htmlElement = document.documentElement;
 
       // Apply gradient directly to HTML element with !important
       htmlElement.style.setProperty('background', gradient, 'important');
-      htmlElement.style.setProperty('background-color', gradient, 'important');
+      // Remove conflicting background properties that might interfere with gradient
       htmlElement.style.setProperty(
-        '-webkit-background-color',
-        gradient,
+        'background-attachment',
+        'scroll',
         'important'
       );
-      // Remove conflicting background properties that might interfere with gradient
-      htmlElement.style.setProperty('background-attachment', 'scroll', 'important');
       htmlElement.style.setProperty('background-size', 'auto', 'important');
-      htmlElement.style.setProperty('background-position', 'initial', 'important');
+      htmlElement.style.setProperty(
+        'background-position',
+        'initial',
+        'important'
+      );
     }
 
     return () => {
       // Cleanup: remove the inline styles when component unmounts
-      if (isMobileSafari && isHomePage) {
+      if (isIOS && isHomePage) {
         const htmlElement = document.documentElement;
         htmlElement.style.removeProperty('background');
-        htmlElement.style.removeProperty('background-color');
-        htmlElement.style.removeProperty('-webkit-background-color');
         htmlElement.style.removeProperty('background-attachment');
         htmlElement.style.removeProperty('background-size');
         htmlElement.style.removeProperty('background-position');
       }
     };
-  }, [isMobileSafari, getBackgroundGradient, isHomePage, themeMode]);
+  }, [isIOS, getBackgroundGradient, isHomePage, themeMode]);
 
   // Determine if image should be flipped for left-handed mode
   const shouldFlipHorizontally = layoutPreference === 'left-handed';
 
-  // If mobile Safari, don't render the background layer div
+  // If iOS device, don't render the background layer div
   // Background is applied directly to HTML element via useEffect
-  if (!isHomePage || isMobileSafari) {
+  if (!isHomePage || isIOS) {
     return null;
   }
 
