@@ -101,7 +101,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
         alt: img.alt,
         caption: img.caption,
       })),
-      tags: frontmatter.tags,
+      tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
       category: frontmatter.category,
       featured: frontmatter.featured ?? false,
       seoMetadata: {
