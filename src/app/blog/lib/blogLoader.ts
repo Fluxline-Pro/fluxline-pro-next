@@ -139,9 +139,7 @@ export function getAllTags(): string[] {
   const tagsSet = new Set<string>();
 
   posts.forEach((post) => {
-    if (post.tags && Array.isArray(post.tags)) {
-      post.tags.forEach((tag) => tagsSet.add(tag));
-    }
+    post.tags.forEach((tag) => tagsSet.add(tag));
   });
 
   return Array.from(tagsSet).sort();

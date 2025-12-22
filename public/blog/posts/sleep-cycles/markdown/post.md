@@ -97,7 +97,7 @@ When your circadian rhythm is aligned, your sleep cycles flow naturally.
 When it's misaligned, your sleep becomes fragmented, shallow, or delayed.
 
 This is why consistent wake times matter so much, even on weekends and holidays.
-They anchor the entire system in predictable patterns (rhythms) that help the body know exactly how to handle your sleep schedule and bodily autonomy.
+They anchor the entire system in predictable patterns (rhythms) that help the body know exactly how to handle your sleep schedule and automatic regulation.
 
 ---
 
