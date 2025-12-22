@@ -1,6 +1,6 @@
 ---
 title: 'Why Sleep (and Sleep Cycles) Matter More Than You Think'
-excerpt: 'Your body doesn't just rest at night—it recalibrates. Discover why sleep cycles are your nightly maintenance crew and how rhythmic sleep becomes the foundation for training, focus, and sustainable transformation.'
+excerpt: "Your body doesn't just rest at night. It recalibrates. Discover why sleep cycles are your nightly maintenance crew and how rhythmic sleep becomes the foundation for training, focus, and sustainable transformation."
 author: 'Terence Waters'
 publishedDate: '2025-12-22'
 category: 'Health & Wellness'
@@ -25,7 +25,7 @@ imageUrl: '/blog/posts/sleep-cycles/images/sleep-cycles-infographic.jpg'
 imageAlt: 'Visual representation of sleep cycles showing light sleep, deep sleep, and REM stages throughout the night'
 featured: true
 seoTitle: 'Why Sleep Cycles Matter More Than You Think | Recovery & Performance Guide'
-seoDescription: 'Sleep isn't just rest—it's regulation. Learn how sleep cycles, circadian rhythm, and rhythmic sleep patterns impact training, recovery, focus, and sustainable transformation.'
+seoDescription: "Sleep isn't just rest—it's regulation. Learn how sleep cycles, circadian rhythm, and rhythmic sleep patterns impact training, recovery, focus, and sustainable transformation."
 seoKeywords:
   [
     'sleep cycles',
@@ -59,7 +59,7 @@ Every night, your body moves through a series of cycles — light sleep, deep sl
 When they don't, everything feels harder than it should.
 
 Sleep isn't just rest.  
-It's regulation.
+_It's regulation._
 
 ---
 
@@ -67,9 +67,10 @@ It's regulation.
 
 Each stage of sleep has a purpose:
 
-- **Light sleep** calms your nervous system and transitions your brain into recovery mode.
-- **Deep sleep** repairs tissue, supports muscle growth, and restores physical energy.
-- **REM sleep** processes emotions, consolidates memory, and enhances learning.
+- **Light sleep (N1)** — The transition between wake and sleep. Your muscles relax, heartbeat slows, and you're easily awakened.
+- **Deeper sleep (N2)** — Your heart rate and breathing slow down further. Body temperature drops. Eye movements stop. This stage makes up the largest portion of your sleep cycle.
+- **Deep sleep (N3)** — The restorative stage. Your body repairs tissue, supports muscle growth, and restores physical energy. Brain waves slow significantly, making it hard to wake.
+- **REM sleep** — Brain activity increases, vivid dreaming occurs. This stage processes emotions, consolidates memory, and enhances learning. Your body becomes temporarily paralyzed to prevent acting out dreams.
 
 You don't need to memorize these stages — you just need to understand that your body cycles through them in waves. When those waves are disrupted, you feel it the next day.
 

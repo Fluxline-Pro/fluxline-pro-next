@@ -101,7 +101,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
         alt: img.alt,
         caption: img.caption,
       })),
-      tags: frontmatter.tags,
+      tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
       category: frontmatter.category,
       featured: frontmatter.featured ?? false,
       seoMetadata: {
@@ -139,7 +139,9 @@ export function getAllTags(): string[] {
   const tagsSet = new Set<string>();
 
   posts.forEach((post) => {
-    post.tags.forEach((tag) => tagsSet.add(tag));
+    if (post.tags && Array.isArray(post.tags)) {
+      post.tags.forEach((tag) => tagsSet.add(tag));
+    }
   });
 
   return Array.from(tagsSet).sort();
