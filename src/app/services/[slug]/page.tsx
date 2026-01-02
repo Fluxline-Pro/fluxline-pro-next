@@ -266,7 +266,7 @@ export default function ServiceDetailPage() {
         <Callout
           variant='accent'
           title='Ready to Begin?'
-          subtitle="Book a 20–30 minute consultation to explore whether this work is aligned with your current season."
+          subtitle="Book a 20–30 minute consultation to explore your personal identity and aligning your decisions with it."
           action={
             <FormButton
               text='Book a Consultation'
