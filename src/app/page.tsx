@@ -246,10 +246,10 @@ const HomeContent: React.FC<{
         <div style={containerStyles.subHeaderContainer}>
           <Typography variant='h3' style={textStyles.subHeaderLine}>
             {[
-              { highlight: 'strategic', text: 'consulting' },
-              { highlight: 'brand', text: 'establishment' },
+              { highlight: 'the resonance core', text: 'framework™' },
               { highlight: 'personal training', text: '& wellness' },
-              { highlight: 'mentoring', text: '& coaching' },
+              { highlight: 'brand', text: 'establishment' },
+              { highlight: 'strategic', text: 'consulting' },
             ].map((line, index) => (
               <div
                 key={index}
