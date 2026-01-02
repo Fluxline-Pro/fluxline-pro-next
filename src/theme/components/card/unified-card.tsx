@@ -3,10 +3,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { SpinnerSize } from '@fluentui/react/lib/Spinner';
 import { Card } from '../card/card';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { LoadingSpinner } from '../structural/loading-spinner';
 
 export type CardViewType = 'grid' | 'small' | 'large' | 'image';
 
@@ -17,13 +19,11 @@ export interface UnifiedCardProps {
   imageUrl?: string;
   imageAlt?: string;
   onClick?: () => void;
-  isLoading?: boolean;
   elevation?: 'low' | 'medium' | 'high';
   viewType: CardViewType;
   // Image card specific props
   imageText?: string;
   delay?: number;
-  useSpinner?: boolean;
   altText?: string;
   // Optional flag to show title on image
   showTitleOnImage?: boolean;
@@ -45,14 +45,16 @@ export interface UnifiedCardProps {
 }
 
 /**
- * UnifiedCard - Flexible card component for image display
- * Simplified version focused on page-wrapper image card use case
- * Handles:
- * - Image loading with spinner
+ * UnifiedCard - Flexible card component for content display
+ *
+ * Features:
+ * - Automatic loading spinners for all images
  * - Aspect ratio preservation for landscape images
- * - Dark mode filtering
+ * - Dark mode filtering with accessibility support
  * - Title overlay on images
  * - Responsive sizing
+ * - Dimension detection for viewport optimization
+ * - Multiple view types: grid, small, large, image
  */
 export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   id,
@@ -61,12 +63,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   imageUrl,
   imageAlt,
   onClick,
-  isLoading = false,
   elevation = 'medium',
   viewType,
   imageText,
   delay = 0,
-  useSpinner = false,
   altText,
   showTitleOnImage = false,
   imageContainerStyle,
@@ -88,18 +88,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [isLandscape, setIsLandscape] = React.useState(false);
-  const [imageDimensions, setImageDimensions] = React.useState<{
-    width: number;
-    height: number;
-    aspectRatio: number;
-  } | null>(null);
 
-  // Check if image is landscape and handle image loading
+  // Check if image is landscape and handle dimension detection (separate from visual loading)
   React.useEffect(() => {
     if (imageUrl) {
-      // Reset loading state when imageUrl changes
+      // Reset all states when imageUrl changes
       setImageLoaded(false);
-      setImageDimensions(null);
       setIsLandscape(false);
       // Clear dimensions in parent container
       onImageDimensionsChange?.(null);
@@ -118,13 +112,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           aspectRatio: aspectRatio,
         };
 
-        setImageDimensions(dimensions);
-
         // Notify parent container of dimensions change
         onImageDimensionsChange?.(dimensions);
-
-        // Mark image as loaded first
-        setImageLoaded(true);
 
         // Only apply landscape detection when this card is in the ViewportGrid left panel
         if (isViewportLeftPanel) {
@@ -144,7 +133,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       img.onerror = () => {
         // Still mark as loaded on error to prevent infinite loading state
         setImageLoaded(true);
-        setImageDimensions(null);
         // Notify parent container that dimensions are cleared
         onImageDimensionsChange?.(null);
       };
@@ -200,7 +188,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             onClick={onClick}
           >
             {/* Loading Spinner */}
-            {useSpinner && !imageLoaded && (
+            {!imageLoaded && (
               <div
                 style={{
                   position: 'absolute',
@@ -210,18 +198,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   zIndex: 10,
                 }}
               >
-                <div
-                  style={{
-                    width: 40,
-                    height: 40,
-                    border: `4px solid ${theme.palette.neutralLight}`,
-                    borderTop: `4px solid ${theme.palette.themePrimary}`,
-                    borderRadius: '50%',
-                    animation: shouldReduceMotion
-                      ? 'none'
-                      : 'spin 1s linear infinite',
-                  }}
-                />
+                <LoadingSpinner size={SpinnerSize.large} />
               </div>
             )}
 
@@ -248,6 +225,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     ? 'none'
                     : 'opacity 0.3s ease-in-out',
                 }}
+                onLoad={() => setImageLoaded(true)}
               />
             </div>
 
@@ -270,7 +248,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     fontSize: theme.typography.fonts.xLarge.fontSize,
                     fontWeight: theme.typography.fonts.xLarge.fontWeight,
                     fontFamily: `${theme.typography.fonts.xLarge.fontFamily} !important`,
-                    color: '#FFF', 
+                    color: '#FFF',
                   }}
                 >
                   {imageText}
@@ -315,6 +293,21 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 minHeight: '200px',
               }}
             >
+              {/* Loading Spinner */}
+              {!imageLoaded && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 10,
+                  }}
+                >
+                  <LoadingSpinner size={SpinnerSize.medium} />
+                </div>
+              )}
+
               <Image
                 src={imageUrl}
                 alt={altText || imageAlt || title}
@@ -322,7 +315,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 style={{
                   objectFit: 'cover',
                   filter: filter,
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: shouldReduceMotion
+                    ? 'none'
+                    : 'opacity 0.3s ease-in-out',
                 }}
+                onLoad={() => setImageLoaded(true)}
               />
 
               {/* Title and date overlay */}
@@ -472,6 +470,21 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     flexShrink: 0,
                   }}
                 >
+                  {/* Loading Spinner */}
+                  {!imageLoaded && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: 10,
+                      }}
+                    >
+                      <LoadingSpinner size={SpinnerSize.medium} />
+                    </div>
+                  )}
+
                   <Image
                     src={imageUrl}
                     alt={altText || imageAlt || title}
@@ -479,7 +492,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     style={{
                       objectFit: 'cover',
                       filter: filter,
+                      opacity: imageLoaded ? 1 : 0,
+                      transition: shouldReduceMotion
+                        ? 'none'
+                        : 'opacity 0.3s ease-in-out',
                     }}
+                    onLoad={() => setImageLoaded(true)}
                   />
                 </div>
               )}
@@ -591,6 +609,21 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     borderRadius: '6px 6px 0 0',
                   }}
                 >
+                  {/* Loading Spinner */}
+                  {!imageLoaded && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: 10,
+                      }}
+                    >
+                      <LoadingSpinner size={SpinnerSize.large} />
+                    </div>
+                  )}
+
                   <Image
                     src={imageUrl}
                     alt={altText || imageAlt || title}
@@ -598,7 +631,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     style={{
                       objectFit: 'cover',
                       filter: filter,
+                      opacity: imageLoaded ? 1 : 0,
+                      transition: shouldReduceMotion
+                        ? 'none'
+                        : 'opacity 0.3s ease-in-out',
                     }}
+                    onLoad={() => setImageLoaded(true)}
                   />
                 </div>
               )}
