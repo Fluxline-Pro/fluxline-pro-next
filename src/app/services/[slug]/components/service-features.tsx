@@ -52,10 +52,10 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
       ],
       'resonance-core': [
         'Understand the signals your body and emotions send',
-        'Reveal the stories you've been living inside',
+        "Reveal the stories you've been living inside",
         'Name the outdated identities shaping your choices',
         'Update your internal predictions and interpretations',
-        'Choose the identity that supports who you're becoming',
+        "Choose the identity that supports who you're becoming",
         'Take aligned action from your chosen identity',
       ],
     };
