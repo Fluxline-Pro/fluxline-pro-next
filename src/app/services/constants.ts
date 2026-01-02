@@ -21,13 +21,13 @@ export const DESIGN_SUMMARY =
   "<strong>Visual identity and user experience design so your brand feels cohesive and clear.</strong> Fluxline Design creates brand identities and digital experiences that look good and feel aligned with who you are. Every logo, layout, and interface is designed to reflect your story and connect with your audience. Whether you're launching, scaling, or building your legacy, we design with care, precision, and strategic thinking.";
 
 export const PERSONAL_TRAINING_SUMMARY =
-  "<strong>Physical training with emotional intelligence—build strength, reduce pain, and create a sustainable practice.</strong> At Fluxline, we specialize in personalized fitness coaching that adapts to your goals, body, and life. Whether you're returning to movement, working through chronic pain, or pushing your physical limits, we design your training path with care and precision.<br /><br />Every program is tailored to your schedule, body type, and readiness. We work with all bodies, all backgrounds, and all starting points.";
+  "<strong>Physical training with emotional intelligence—build strength, reduce pain, and create a sustainable practice.</strong> At Fluxline, we specialize in personalized fitness coaching that adapts to your goals, body, and life. Whether you're returning to movement, working through chronic pain, or pushing your physical limits, we design your training path with care and precision. This is embodied identity work—training that aligns your physical practice with who you're becoming.<br /><br />Every program is tailored to your schedule, body type, and readiness. We work with all bodies, all backgrounds, and all starting points.";
 
 export const EDUCATION_TRAINING_SUMMARY =
   "<strong>Workshops and coaching to help you lead, teach, and communicate with more clarity and embodiment.</strong> Fluxline's Coaching, Education & Leadership offerings guide founders, creatives, and organizations through experiential learning and leadership development. Whether you're leading a team, launching a program, or developing your voice, we offer practical frameworks, live workshops, and personalized coaching to help you build with purpose.<br /><br />Every session is designed to strengthen your leadership presence, clarify your message, and help you show up with confidence in every interaction.";
 
 export const RESONANCE_CORE_SUMMARY =
-  "<strong>A guided, structured process to clarify your core story, archetypes, and message for your life or business.</strong> The Resonance Core Framework™ uses archetypal mapping and guided reflection to help you understand your patterns, clarify your story, and align your inner world with your outer work. Whether you're navigating a major life transition, reframing your narrative, or building your legacy, this framework offers structured modules and personalized guidance.<br /><br />Every session is documented. Every insight builds on the last. This is coaching for those ready to do deep work.";
+  "<strong>A transformational system for decoding your cues, reframing your narratives, and authoring the identity you choose to live from.</strong> The Resonance Core Framework™ is a guided, structured process that helps you understand the patterns shaping your life — somatic, emotional, narrative, and identity based. Through archetypal mapping, reflective inquiry, and identity recalibration, you learn to align your inner world with the life, work, and relationships you're trying to build.<br /><br />This isn't generic coaching. This is <strong>identity work</strong>, <strong>narrative work</strong>, and <strong>embodiment work</strong> — woven into a single, coherent system.";
 
 export type ServiceCategoryType =
   | 'body-practice'
@@ -48,7 +48,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: 'personal-training',
     title: 'Personal Training & Wellness',
-    description: 'Physical training with emotional intelligence.',
+    description: 'Embodied identity work through physical transformation.',
     summary: PERSONAL_TRAINING_SUMMARY,
     icon: 'Health',
     path: '/services/personal-training',
@@ -75,11 +75,11 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: 'resonance-core',
     title: 'Resonance Core Framework™',
-    description: 'Deep transformation through archetypal mapping.',
+    description: 'Identity work, narrative work, and embodiment work.',
     summary: RESONANCE_CORE_SUMMARY,
     icon: 'HeartFill',
     path: '/services/resonance-core',
-    category: 'depth-strategy',
+    category: 'body-practice',
   },
   {
     id: 'education-training',
