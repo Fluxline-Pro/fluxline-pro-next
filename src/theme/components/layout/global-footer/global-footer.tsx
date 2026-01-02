@@ -44,6 +44,10 @@ export const GlobalFooter: React.FC = () => {
           left: 0,
           right: 0,
           zIndex: 1,
+          // iOS safe area support - prevent overlap with home indicator
+          paddingBottom: 'env(safe-area-inset-bottom)',
+          paddingLeft: 'env(safe-area-inset-left)',
+          paddingRight: 'env(safe-area-inset-right)',
         }}
       >
         <HomeFooter />
@@ -69,6 +73,8 @@ export const GlobalFooter: React.FC = () => {
     boxShadow: theme.shadows.l,
     transition: 'all 0.2s ease',
     userSelect: 'none',
+    // iOS safe area support - prevent overlap with home indicator
+    paddingBottom: 'env(safe-area-inset-bottom)',
   };
 
   const footerContainerStyle: React.CSSProperties = {
@@ -77,6 +83,10 @@ export const GlobalFooter: React.FC = () => {
     left: 0,
     right: 0,
     zIndex: 40,
+    // iOS safe area support - prevent overlap with home indicator
+    paddingBottom: 'env(safe-area-inset-bottom)',
+    paddingLeft: 'env(safe-area-inset-left)',
+    paddingRight: 'env(safe-area-inset-right)',
   };
 
   const slideVariants = {
