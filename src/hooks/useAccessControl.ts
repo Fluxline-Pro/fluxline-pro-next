@@ -2,13 +2,17 @@
 
 /**
  * Access Control Hook
- * 
+ *
  * Manages token-based access control for DEV and TEST environments.
  * Uses browser localStorage to persist the access token.
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { getEnvironment, requiresAuthentication, getApiBaseUrl } from '@/lib/environment';
+import {
+  getEnvironment,
+  requiresAuthentication,
+  getApiBaseUrl,
+} from '@/lib/environment';
 
 const STORAGE_KEY = 'fluxline_access_token';
 
@@ -91,7 +95,9 @@ export function useAccessControl() {
     };
 
     initializeAuth();
-  }, [authRequired, validateToken]);
+    // validateToken is stable (empty deps in useCallback), safe to omit from dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authRequired]);
 
   /**
    * Submits a token for validation
