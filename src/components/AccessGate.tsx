@@ -2,7 +2,7 @@
 
 /**
  * AccessGate Component
- * 
+ *
  * Provides token-based access control for DEV and TEST environments.
  * Shows a full-screen gate that requires a valid access token before
  * allowing access to the site content.
@@ -19,7 +19,14 @@ interface AccessGateProps {
 
 export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
   const { theme } = useAppTheme();
-  const { isAuthenticated, isLoading, error, environment, authRequired, submitToken } = useAccessControl();
+  const {
+    isAuthenticated,
+    isLoading,
+    error,
+    environment,
+    authRequired,
+    submitToken,
+  } = useAccessControl();
   const [tokenInput, setTokenInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -62,8 +69,13 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
     if (!tokenInput.trim()) return;
 
     setIsSubmitting(true);
-    await submitToken(tokenInput.trim());
+    const success = await submitToken(tokenInput.trim());
     setIsSubmitting(false);
+
+    // Clear input on failed submission to prompt re-entry
+    if (!success) {
+      setTokenInput('');
+    }
   };
 
   return (
@@ -77,7 +89,9 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: isDark ? theme.palette.black : theme.palette.neutralLighter,
+        backgroundColor: isDark
+          ? theme.palette.black
+          : theme.palette.neutralLighter,
         fontFamily: theme.fonts.medium.fontFamily,
       }}
     >
@@ -86,7 +100,9 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
           maxWidth: '500px',
           width: '100%',
           padding: '40px',
-          backgroundColor: isDark ? theme.palette.neutralDark : theme.palette.white,
+          backgroundColor: isDark
+            ? theme.palette.neutralDark
+            : theme.palette.white,
           borderRadius: '8px',
           boxShadow: theme.effects.elevation16,
         }}
@@ -108,7 +124,9 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
               fontFamily: theme.fonts.large.fontFamily,
               fontSize: theme.fonts.large.fontSize,
               fontWeight: 400,
-              color: isDark ? theme.palette.neutralLight : theme.palette.neutralPrimary,
+              color: isDark
+                ? theme.palette.neutralLight
+                : theme.palette.neutralPrimary,
               margin: 0,
             }}
           >
@@ -121,36 +139,41 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
             style={{
               fontFamily: theme.fonts.medium.fontFamily,
               fontSize: theme.fonts.medium.fontSize,
-              color: isDark ? theme.palette.neutralSecondary : theme.palette.neutralPrimary,
+              color: isDark
+                ? theme.palette.neutralSecondary
+                : theme.palette.neutralPrimary,
               textAlign: 'center',
               margin: '0 0 24px 0',
             }}
           >
-            This is a protected environment. Please enter your access token to continue.
+            This is a protected environment. Please enter your access token to
+            continue.
           </p>
 
           <form onSubmit={handleSubmit}>
             <TextField
-              placeholder="Enter access token"
+              placeholder='Enter access token'
               value={tokenInput}
               onChange={(_, newValue) => setTokenInput(newValue || '')}
-              type="password"
+              type='password'
               disabled={isSubmitting}
               errorMessage={error}
               styles={{
                 root: { marginBottom: '16px' },
                 field: {
-                  backgroundColor: isDark ? theme.palette.neutralQuaternaryAlt : theme.palette.white,
+                  backgroundColor: isDark
+                    ? theme.palette.neutralQuaternaryAlt
+                    : theme.palette.white,
                   color: isDark ? theme.palette.white : theme.palette.black,
                 },
               }}
-              autoComplete="current-password"
+              autoComplete='current-password'
               autoFocus
             />
 
             <PrimaryButton
               text={isSubmitting ? 'Validating...' : 'Access Site'}
-              type="submit"
+              type='submit'
               disabled={!tokenInput.trim() || isSubmitting}
               styles={{
                 root: {
@@ -180,7 +203,9 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
             style={{
               fontFamily: theme.fonts.small.fontFamily,
               fontSize: theme.fonts.small.fontSize,
-              color: isDark ? theme.palette.neutralTertiary : theme.palette.neutralSecondary,
+              color: isDark
+                ? theme.palette.neutralTertiary
+                : theme.palette.neutralSecondary,
               textAlign: 'center',
               margin: 0,
             }}
