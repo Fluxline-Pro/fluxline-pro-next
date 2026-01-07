@@ -44,6 +44,8 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
   if (isLoading) {
     return (
       <div
+        role='status'
+        aria-live='polite'
         style={{
           position: 'fixed',
           top: 0,
@@ -66,7 +68,9 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!tokenInput.trim()) return;
+
+    // Prevent multiple rapid submissions
+    if (isSubmitting || !tokenInput.trim()) return;
 
     setIsSubmitting(true);
     const success = await submitToken(tokenInput.trim());
