@@ -7,7 +7,7 @@
  * Uses browser localStorage to persist the access token.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getEnvironment, requiresAuthentication, getApiBaseUrl } from '@/lib/environment';
 
 const STORAGE_KEY = 'fluxline_access_token';
@@ -26,26 +26,10 @@ export function useAccessControl() {
   const environment = getEnvironment();
   const authRequired = requiresAuthentication();
 
-  // Check for stored token on mount
-  useEffect(() => {
-    if (!authRequired) {
-      setIsAuthenticated(true);
-      setIsLoading(false);
-      return;
-    }
-
-    const storedToken = localStorage.getItem(STORAGE_KEY);
-    if (storedToken) {
-      validateToken(storedToken);
-    } else {
-      setIsLoading(false);
-    }
-  }, [authRequired]);
-
   /**
    * Validates a token against the server
    */
-  const validateToken = async (token: string): Promise<boolean> => {
+  const validateToken = useCallback(async (token: string): Promise<boolean> => {
     setIsLoading(true);
     setError('');
 
@@ -79,7 +63,27 @@ export function useAccessControl() {
       setIsLoading(false);
       return false;
     }
-  };
+  }, []);
+
+  // Check for stored token on mount
+  useEffect(() => {
+    const initializeAuth = async () => {
+      if (!authRequired) {
+        setIsAuthenticated(true);
+        setIsLoading(false);
+        return;
+      }
+
+      const storedToken = localStorage.getItem(STORAGE_KEY);
+      if (storedToken) {
+        await validateToken(storedToken);
+      } else {
+        setIsLoading(false);
+      }
+    };
+
+    initializeAuth();
+  }, [authRequired, validateToken]);
 
   /**
    * Submits a token for validation
