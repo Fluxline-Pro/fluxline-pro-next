@@ -144,7 +144,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
                   color: isDark ? theme.palette.white : theme.palette.black,
                 },
               }}
-              autoComplete="off"
+              autoComplete="current-password"
               autoFocus
             />
 

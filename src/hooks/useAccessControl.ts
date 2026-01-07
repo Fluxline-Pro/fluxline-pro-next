@@ -46,7 +46,9 @@ export function useAccessControl() {
       const data: ValidationResponse = await response.json();
 
       if (data.valid) {
-        localStorage.setItem(STORAGE_KEY, token);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(STORAGE_KEY, token);
+        }
         setIsAuthenticated(true);
         setIsLoading(false);
         return true;
@@ -74,6 +76,12 @@ export function useAccessControl() {
         return;
       }
 
+      // Check if we're in a browser environment
+      if (typeof window === 'undefined') {
+        setIsLoading(false);
+        return;
+      }
+
       const storedToken = localStorage.getItem(STORAGE_KEY);
       if (storedToken) {
         await validateToken(storedToken);
@@ -96,7 +104,9 @@ export function useAccessControl() {
    * Clears the stored token and logs out
    */
   const logout = () => {
-    localStorage.removeItem(STORAGE_KEY);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(STORAGE_KEY);
+    }
     setIsAuthenticated(false);
     setError('');
   };
