@@ -47,7 +47,34 @@ export function useAccessControl() {
         body: JSON.stringify({ token }),
       });
 
-      const data: ValidationResponse = await response.json();
+      // Check if the response is OK before parsing JSON
+      if (!response.ok) {
+        // Handle different HTTP error codes
+        if (response.status === 401 || response.status === 403) {
+          setError('Invalid or expired token');
+        } else if (response.status === 404) {
+          setError('Authentication service not found');
+        } else if (response.status >= 500) {
+          setError('Server error. Please try again later.');
+        } else {
+          setError(`Request failed with status ${response.status}`);
+        }
+        setIsAuthenticated(false);
+        setIsLoading(false);
+        return false;
+      }
+
+      // Attempt to parse JSON response
+      let data: ValidationResponse;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error('Failed to parse JSON response:', parseError);
+        setError('Invalid response from server');
+        setIsAuthenticated(false);
+        setIsLoading(false);
+        return false;
+      }
 
       if (data.valid) {
         if (typeof window !== 'undefined') {
