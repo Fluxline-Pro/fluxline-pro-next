@@ -163,11 +163,8 @@ export default function CaseStudyDetailClient({
         variant: 'secondary' as const,
       })),
     ],
+    sectionsPosition: 'before', // Show testimonial and metrics before body content
     sections: [
-      {
-        title: 'Key Results',
-        content: metricsSection,
-      },
       ...(testimonialSection
         ? [
             {
@@ -176,6 +173,10 @@ export default function CaseStudyDetailClient({
             },
           ]
         : []),
+      {
+        title: 'Key Results',
+        content: metricsSection,
+      },
     ],
     cta: {
       title: 'Ready for Similar Results?',
