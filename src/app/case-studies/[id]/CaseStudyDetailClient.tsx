@@ -44,6 +44,7 @@ export default function CaseStudyDetailClient({
             ? '1fr'
             : 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: theme.spacing.l,
+          alignItems: 'center',
         }}
       >
         {caseStudy.metrics.map((metric) => (
