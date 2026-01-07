@@ -18,13 +18,13 @@ technologies:
 publishedDate: '2026-01-07'
 projectDuration: 'Single micro-activation cycle'
 featured: true
-imageUrl: '/case-studies/posts/drive-model-assessment/images/drive-model-assessment.jpg'
+imageUrl: '/case-studies/posts/drive-model-assessment/images/drive-model-infographic.jpg'
 imageAlt: 'DRIVE Model nervous system rewiring visualization'
 gallery:
-  - url: '/case-studies/posts/drive-model-assessment/images/drive-model-assessment.jpg'
+  - url: '/case-studies/posts/drive-model-assessment/images/drive-model-infographic.jpg'
     alt: 'DRIVE Model nervous system rewiring visualization'
     caption: 'The DRIVE Model in action - tracking nervous system signals'
-  - url: '/case-studies/posts/drive-model-assessment/images/drive-model-infographic.jpg'
+  - url: '/case-studies/posts/drive-model-assessment/images/drive-model-assessment.jpg'
     alt: 'The Fueling the DRIVE Model - How Identity Generates Momentum'
     caption: 'Complete DRIVE Model flow: From Spark to Identity Evolution'
 seoTitle: 'DRIVE Model Case Study - Nervous System Rewiring Real Time Data'
