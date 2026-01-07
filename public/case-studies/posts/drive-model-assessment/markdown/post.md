@@ -85,7 +85,7 @@ This is where value/virtue pairs create the initial spark. The client identifies
 
 The MVD (Minimally Viable DRIVE) is tested against the body's wisdom. Coherence ensures the action aligns with values, not survival patterns.
 
-**3. ACTIVATION → MICRO-ACTION** (The Smallest Step)  
+**3. ACTIVATION → MICRO-ACTION** (The Biggest Step)  
 **Inputs**: Single DRIVE, 1% Action, Ritual/Cue  
 **Output**: Shift to Embodiment, Resistance Decreases
 
@@ -199,7 +199,7 @@ In the language of The Resonance Core, these were **Guardians at the Gate** — 
 
 ## Approach: Stage 3 (Activation → Micro-Action)
 
-This is **Stage 3: Activation → Micro-Action** — "The Smallest Step." This is where the DRIVE Model predicts a critical shift: if the action is aligned, resistance decreases and the nervous system recalibrates.
+This is **Stage 3: Activation → Micro-Action** — "The Biggest Step." This is where the DRIVE Model predicts a critical shift: if the action is aligned, resistance decreases and the nervous system recalibrates.
 
 Once we crossed the threshold and began the outreach, the entire internal landscape shifted.
 
@@ -309,7 +309,7 @@ Values meet virtues. "This matters" emerges. The window of choice widens.
 **Stage 2: ALIGNMENT → COHERENCE** (The Stabilizing Layer)  
 The triad (somatic, emotional, narrative) validates the action. No contradictions remain.
 
-**Stage 3: ACTIVATION → MICRO-ACTION** (The Smallest Step)  
+**Stage 3: ACTIVATION → MICRO-ACTION** (The Biggest Step)  
 The action is taken. Resistance decreases. Embodiment begins.
 
 **Stage 4: MOMENTUM → COMPOUNDING IDENTITY** (Action Becomes Self-Reinforcing)  
