@@ -3,6 +3,7 @@
 This is a condensed setup guide for configuring token-based access control after the code has been merged and deployed.
 
 ## Prerequisites
+
 - Code merged and deployed to DEV, TEST, and PROD environments
 - Access to Azure Portal or Azure CLI
 - Secure tokens generated (see below)
@@ -15,11 +16,12 @@ Generate two different secure tokens (one for DEV, one for TEST):
 # Using Node.js
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
-# Using OpenSSL  
+# Using OpenSSL
 openssl rand -hex 32
 ```
 
 **Important:**
+
 - Use different tokens for DEV and TEST
 - Store tokens securely (consider Azure Key Vault)
 - Never commit tokens to source control
@@ -33,14 +35,17 @@ openssl rand -hex 32
 3. Add environment variables:
 
 **For DEV (flx-develop):**
+
 - Name: `ACCESS_TOKEN`, Value: `<your-dev-token>`
 - Name: `ENVIRONMENT`, Value: `dev`
 
 **For TEST (flx-test):**
+
 - Name: `ACCESS_TOKEN`, Value: `<your-test-token>`
 - Name: `ENVIRONMENT`, Value: `test`
 
 **For PROD (fluxline.pro):**
+
 - Name: `ENVIRONMENT`, Value: `prod`
 - (No ACCESS_TOKEN needed)
 
@@ -71,20 +76,23 @@ az staticwebapp appsettings set \
 ## Step 3: Verify Configuration
 
 ### Test DEV Environment
-1. Visit https://flx-develop.fluxline.pro
+
+1. Visit https://flx-next-dev.fluxline.pro
 2. You should see the token gate
 3. Enter the DEV token
 4. Site should load successfully
 5. Refresh the page - should load without re-entering token
 
 ### Test TEST Environment
-1. Visit https://flx-test.fluxline.pro
+
+1. Visit https://flx-next-test.fluxline.pro
 2. You should see the token gate
 3. Enter the TEST token
 4. Site should load successfully
 5. Refresh the page - should load without re-entering token
 
 ### Test PROD Environment
+
 1. Visit https://fluxline.pro
 2. Site should load immediately without any token gate
 
@@ -93,16 +101,19 @@ az staticwebapp appsettings set \
 Securely share the tokens with authorized users:
 
 **DEV Token:**
+
 - Development team members
 - QA team for feature testing
 - Stakeholders who need early access
 
 **TEST Token:**
+
 - QA team for release testing
 - Stakeholders for UAT
 - Client representatives (if applicable)
 
 **Distribution Methods:**
+
 - Secure password manager (recommended)
 - Encrypted communication
 - Azure Key Vault (for programmatic access)
@@ -110,19 +121,23 @@ Securely share the tokens with authorized users:
 ## Troubleshooting
 
 ### Token gate doesn't appear on DEV/TEST
+
 - Check build logs - ensure `NEXT_PUBLIC_ENVIRONMENT` is set correctly
 - Rebuild and redeploy if needed
 
 ### "Server configuration error"
+
 - Verify `ACCESS_TOKEN` is set in Azure Static Web Apps configuration
 - Check Azure Function logs for errors
 
 ### Token validation fails
+
 - Ensure correct token is being used
 - Check for typos or extra spaces
 - Verify token in Azure matches what you're entering
 
 ### Token gate appears on PROD
+
 - Check PROD build workflow has `NEXT_PUBLIC_ENVIRONMENT=prod`
 - Rebuild PROD environment
 
@@ -138,6 +153,7 @@ To rotate tokens (recommended every 90 days):
 ## Removing Access
 
 To revoke a user's access:
+
 - They can clear their browser data
 - You can rotate the token (all users will need new token)
 - For individual revocation, consider implementing user-based auth
@@ -147,6 +163,7 @@ To revoke a user's access:
 For detailed documentation, see `TOKEN_ACCESS_README.md` in the repository root.
 
 For issues:
+
 1. Check Azure Function logs in Azure Portal
 2. Review browser console for errors
 3. Verify environment variables are correct
