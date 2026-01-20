@@ -21,7 +21,7 @@ export async function generateStaticParams() {
   // Return unencoded tags - filesystem will have real spaces,
   // browser and Azure will handle URL encoding automatically
   return tags.map((tag) => ({
-    tag: encodeURIComponent(tag),
+    tag: tag,
   }));
 }
 
