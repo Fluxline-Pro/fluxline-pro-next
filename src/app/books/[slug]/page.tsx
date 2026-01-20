@@ -35,8 +35,9 @@ export async function generateMetadata({
       title: book.seoMetadata.title,
       description: book.seoMetadata.description,
       type: 'book',
-      publishedTime: book.publishedDate.toISOString(),
       authors: [book.author],
+      isbn: book.isbn,
+      releaseDate: book.publishedDate.toISOString(),
       tags: book.tags,
       images: book.coverImageUrl
         ? [
