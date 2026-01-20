@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useTheme } from '@fluentui/react';
 import ReactMarkdown from 'react-markdown';
-import { Book, BookFormat } from '../types';
+import { Book } from '../types';
 import { InteractiveCard } from '@/components/InteractiveCard';
 import Image from 'next/image';
 
@@ -11,8 +11,12 @@ interface BookDetailClientProps {
   book: Book;
 }
 
-type PurchaseStage = 'format' | 'details';
 type SelectedFormat = 'hardcopy' | 'softcopy' | 'digital';
+
+// Placeholder function for Shop integration
+const handleShopIntegrationPlaceholder = () => {
+  alert('Shop integration coming soon');
+};
 
 /**
  * Book Detail Client Component
@@ -23,25 +27,15 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
   const [selectedFormat, setSelectedFormat] = useState<SelectedFormat | null>(
     null
   );
-  const [selectedDigitalOption, setSelectedDigitalOption] = useState<
-    string | null
-  >(null);
 
   // Handle format selection
   const handleFormatSelect = (format: SelectedFormat) => {
     setSelectedFormat(format);
-    setSelectedDigitalOption(null);
-  };
-
-  // Handle digital option selection
-  const handleDigitalOptionSelect = (option: string) => {
-    setSelectedDigitalOption(option);
   };
 
   // Reset selection
   const handleReset = () => {
     setSelectedFormat(null);
-    setSelectedDigitalOption(null);
   };
 
   return (
@@ -254,52 +248,53 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
                   <div className="grid md:grid-cols-2 gap-6">
                     {book.retailers
                       .filter((r) => r.formats.includes('hardcover'))
-                      .map((retailer) => (
-                        <a
-                          key={retailer.name}
-                          href={retailer.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ textDecoration: 'none' }}
-                        >
-                          <div
-                            className="p-6 rounded-lg transition-all"
-                            style={{
-                              backgroundColor: theme.palette.neutralLighter,
-                              border: `2px solid ${theme.palette.neutralTertiary}`,
-                              cursor: 'pointer',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.borderColor = theme.palette.themePrimary;
-                              e.currentTarget.style.transform = 'translateY(-4px)';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.borderColor = theme.palette.neutralTertiary;
-                              e.currentTarget.style.transform = 'translateY(0)';
-                            }}
+                      .map((retailer) => {
+                        const price = book.prices.find(
+                          (p) => p.format === 'hardcover' && p.retailer === retailer.name
+                        );
+                        return (
+                          <a
+                            key={retailer.name}
+                            href={retailer.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: 'none' }}
                           >
-                            <h4
-                              className="text-xl font-bold mb-2"
-                              style={{ color: theme.palette.themePrimary }}
+                            <div
+                              className="p-6 rounded-lg transition-all"
+                              style={{
+                                backgroundColor: theme.palette.neutralLighter,
+                                border: `2px solid ${theme.palette.neutralTertiary}`,
+                                cursor: 'pointer',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.borderColor = theme.palette.themePrimary;
+                                e.currentTarget.style.transform = 'translateY(-4px)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.borderColor = theme.palette.neutralTertiary;
+                                e.currentTarget.style.transform = 'translateY(0)';
+                              }}
                             >
-                              {retailer.name} - Hardcover
-                            </h4>
-                            <p
-                              className="mb-4"
-                              style={{ color: theme.palette.neutralPrimary }}
-                            >
-                              {book.prices.find(
-                                (p) => p.format === 'hardcover' && p.retailer === retailer.name
-                              )?.price
-                                ? `$${book.prices.find((p) => p.format === 'hardcover' && p.retailer === retailer.name)?.price}`
-                                : 'View Price'}
-                            </p>
-                            <span style={{ color: theme.palette.themePrimary }}>
-                              Purchase on {retailer.name} →
-                            </span>
-                          </div>
-                        </a>
-                      ))}
+                              <h4
+                                className="text-xl font-bold mb-2"
+                                style={{ color: theme.palette.themePrimary }}
+                              >
+                                {retailer.name} - Hardcover
+                              </h4>
+                              <p
+                                className="mb-4"
+                                style={{ color: theme.palette.neutralPrimary }}
+                              >
+                                {price ? `$${price.price}` : 'View Price'}
+                              </p>
+                              <span style={{ color: theme.palette.themePrimary }}>
+                                Purchase on {retailer.name} →
+                              </span>
+                            </div>
+                          </a>
+                        );
+                      })}
                   </div>
                 </div>
               )}
@@ -319,52 +314,53 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
                   <div className="grid md:grid-cols-2 gap-6">
                     {book.retailers
                       .filter((r) => r.formats.includes('softcover'))
-                      .map((retailer) => (
-                        <a
-                          key={retailer.name}
-                          href={retailer.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ textDecoration: 'none' }}
-                        >
-                          <div
-                            className="p-6 rounded-lg transition-all"
-                            style={{
-                              backgroundColor: theme.palette.neutralLighter,
-                              border: `2px solid ${theme.palette.neutralTertiary}`,
-                              cursor: 'pointer',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.borderColor = theme.palette.themePrimary;
-                              e.currentTarget.style.transform = 'translateY(-4px)';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.borderColor = theme.palette.neutralTertiary;
-                              e.currentTarget.style.transform = 'translateY(0)';
-                            }}
+                      .map((retailer) => {
+                        const price = book.prices.find(
+                          (p) => p.format === 'softcover' && p.retailer === retailer.name
+                        );
+                        return (
+                          <a
+                            key={retailer.name}
+                            href={retailer.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: 'none' }}
                           >
-                            <h4
-                              className="text-xl font-bold mb-2"
-                              style={{ color: theme.palette.themePrimary }}
+                            <div
+                              className="p-6 rounded-lg transition-all"
+                              style={{
+                                backgroundColor: theme.palette.neutralLighter,
+                                border: `2px solid ${theme.palette.neutralTertiary}`,
+                                cursor: 'pointer',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.borderColor = theme.palette.themePrimary;
+                                e.currentTarget.style.transform = 'translateY(-4px)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.borderColor = theme.palette.neutralTertiary;
+                                e.currentTarget.style.transform = 'translateY(0)';
+                              }}
                             >
-                              {retailer.name} - Softcover
-                            </h4>
-                            <p
-                              className="mb-4"
-                              style={{ color: theme.palette.neutralPrimary }}
-                            >
-                              {book.prices.find(
-                                (p) => p.format === 'softcover' && p.retailer === retailer.name
-                              )?.price
-                                ? `$${book.prices.find((p) => p.format === 'softcover' && p.retailer === retailer.name)?.price}`
-                                : 'View Price'}
-                            </p>
-                            <span style={{ color: theme.palette.themePrimary }}>
-                              Purchase on {retailer.name} →
-                            </span>
-                          </div>
-                        </a>
-                      ))}
+                              <h4
+                                className="text-xl font-bold mb-2"
+                                style={{ color: theme.palette.themePrimary }}
+                              >
+                                {retailer.name} - Softcover
+                              </h4>
+                              <p
+                                className="mb-4"
+                                style={{ color: theme.palette.neutralPrimary }}
+                              >
+                                {price ? `$${price.price}` : 'View Price'}
+                              </p>
+                              <span style={{ color: theme.palette.themePrimary }}>
+                                Purchase on {retailer.name} →
+                              </span>
+                            </div>
+                          </a>
+                        );
+                      })}
                   </div>
                 </div>
               )}
@@ -415,7 +411,7 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
                               border: 'none',
                               cursor: 'pointer',
                             }}
-                            onClick={() => alert('Shop integration coming soon')}
+                            onClick={() => handleShopIntegrationPlaceholder()}
                           >
                             Add to Cart
                           </button>
@@ -450,8 +446,15 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
                               ${book.bundlePrice}
                             </p>
                             <p className="text-sm mb-4" style={{ color: theme.palette.neutralSecondary }}>
-                              <s>${(book.directPurchasePrice || 0) + (book.workbookPrice || 0)}</s> Save $
-                              {((book.directPurchasePrice || 0) + (book.workbookPrice || 0) - (book.bundlePrice || 0)).toFixed(2)}
+                              {(() => {
+                                const originalPrice = (book.directPurchasePrice || 0) + (book.workbookPrice || 0);
+                                const savings = originalPrice - (book.bundlePrice || 0);
+                                return (
+                                  <>
+                                    <s>${originalPrice.toFixed(2)}</s> Save ${savings.toFixed(2)}
+                                  </>
+                                );
+                              })()}
                             </p>
                             <p className="text-sm mb-4" style={{ color: theme.palette.neutralSecondary }}>
                               Both PDFs with instant download. Watermarked with your information.
@@ -464,7 +467,7 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
                                 border: 'none',
                                 cursor: 'pointer',
                               }}
-                              onClick={() => alert('Shop integration coming soon')}
+                              onClick={() => handleShopIntegrationPlaceholder()}
                             >
                               Add to Cart
                             </button>
@@ -498,7 +501,7 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
                                 border: 'none',
                                 cursor: 'pointer',
                               }}
-                              onClick={() => alert('Shop integration coming soon')}
+                              onClick={() => handleShopIntegrationPlaceholder()}
                             >
                               Add to Cart
                             </button>

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { Book } from './types';
 import { useTheme } from '@fluentui/react';
 import { InteractiveCard } from '@/components/InteractiveCard';
@@ -19,7 +18,6 @@ export default function BooksListingClient({
   books,
 }: BooksListingClientProps) {
   const theme = useTheme();
-  const router = useRouter();
 
   // If only one book, could redirect directly, but showing simple grid is better UX
   return (
