@@ -62,6 +62,13 @@ export const navItems: NavItem[] = [
         iconName: 'ReadingMode',
         description: 'In-depth project analyses',
       },
+      {
+        label: 'books',
+        path: '/books',
+        view: 'books',
+        iconName: 'BookAnswers',
+        description: 'Browse our published books',
+      },
     ],
   },
   {
