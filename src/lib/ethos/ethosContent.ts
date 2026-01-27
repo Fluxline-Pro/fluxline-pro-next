@@ -48,7 +48,7 @@ export const ethosAbout: EthosAboutContent = {
   sectionTitle: 'About Fluxline',
   paragraphs: [
     "Fluxline Resonance Group, LLC is a consultancy built around the belief that transformation isn't just about metrics—it's about honoring your values, creative truth, and long-term vision. We specialize in helping individuals and businesses integrate emotional intelligence with practical systems based on their core identity.",
-    "Our approach focuses on clarity, resonance, and sustainable growth to help us custom tailor solutions built around you. Whether you're building a brand, developing a website, training your body, improving yourself, or designing business systems, we help you align your inner work with your outer work.",
+    "Our approach focuses on clarity, resonance, and sustainable growth to custom tailor solutions built around you. Whether you're building a brand, developing a website, training your body, improving yourself, or designing business systems, we help you align your inner work with your outer work.",
     "We work with founders, creatives, and small teams to build stronger bodies, clearer brands, and resilient systems—so that your identity, offerings, and operations fully match who you are and where you're going.",
   ],
 };
