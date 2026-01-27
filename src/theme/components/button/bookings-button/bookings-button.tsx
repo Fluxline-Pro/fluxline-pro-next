@@ -66,7 +66,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
       opacity: 0,
       transform: 'translateY(20px)',
       animation: 'slideInUp 0.4s ease-in-out forwards',
-      animationDelay: '2.1s',
+      animationDelay: '0.8s',
     }),
     ...(animateSubHeader === false &&
       !willAnimate && {
@@ -90,7 +90,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
       className={className}
       id='bookings-button'
     >
-      Book a free consultation
+      Start a Conversation
     </FormButton>
   );
 };

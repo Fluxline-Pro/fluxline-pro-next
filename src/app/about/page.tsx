@@ -37,7 +37,7 @@ export default function AboutPage() {
         <Hero
           title='About Fluxline'
           iconName={getIconForPath('/about')}
-          description='Fluxline helps individuals and businesses build with clarity and purpose. We specialize in web development, brand design, personal training, coaching, and strategic consulting. Our work blends technical expertise with emotional intelligence to create systems, brands, and practices that actually work for you.'
+          description='We help individuals and businesses build with clarity and purpose. We specialize in web development, brand design, personal training, coaching, and strategic consulting. Our work blends technical expertise with emotional intelligence to create systems, brands, and practices that work for you.'
         >
           {!isMobile &&
             !isTablet && ( // shortens the hero text on mobile per design review
