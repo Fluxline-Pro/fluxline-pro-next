@@ -9,7 +9,7 @@ export const FLUXLINE_SECONDARY_TAGLINE =
   'Modular by design. Resonant by nature.';
 
 export const SERVICES_SUMMARY =
-  'Fluxline helps founders, creatives, and small teams build stronger bodies, clearer brands, and resilient systems. Work with us on personal training, web development, brand design, coaching, and strategic consulting—so your inner work and outer work actually match.';
+  'We help individuals and businesses build stronger bodies, clearer brands, and resilient systems. From web development and brand design to personal training, coaching, and strategic consulting—we bring technical expertise and emotional intelligence together so your inner work and outer work actually match.';
 
 export const CONSULTING_SUMMARY =
   "<strong>Strategic consulting and operational design to align your offers, systems, and day-to-day operations.</strong> Fluxline's Business Strategy & Systems Alignment offering guides founders and small teams through designing systems that scale, strategies that work, and operations that reflect their core values.<br /><br />Whether you're launching a new venture, optimizing your operations, or preparing to scale, we offer practical frameworks, tech integration support, and strategic planning that turns friction into flow. Every engagement is tailored to your growth phase and operational needs.";

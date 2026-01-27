@@ -37,19 +37,19 @@ export interface EthosCTAContent {
 // Hero Section Content
 export const ethosHero: EthosHeroContent = {
   title:
-    'Fluxline Ethos: Architecting Legacy Through Ritual, Resonance & Iteration',
-  subtitle: 'A Multidimensional Transformation Framework',
+    'Fluxline Ethos: Building Systems That Work, Brands That Connect, Practices That Last',
+  subtitle: 'A Framework for Transformation',
   description:
-    'At Fluxline, we architect systems that breathe, brands that feel, and legacies that last. Through curriculum gates of identity, mission, and resonance, we guide individuals and organizations in building sovereign, self-authored pathways to transformation.',
+    'At Fluxline, we help you build systems that integrate emotional intelligence, technical precision, and strategic clarity. Through coaching, brand design, web development, and consulting, we guide individuals and organizations to create pathways that honor authenticity, purpose, and long-term vision.',
 };
 
 // About Fluxline Section Content
 export const ethosAbout: EthosAboutContent = {
   sectionTitle: 'About Fluxline',
   paragraphs: [
-    "Fluxline is more than a consultancy—it's a framework for becoming. We specialize in emotional rhythm, self-authored stewardship, and systems that honor the full arc of human transformation.",
-    "Our approach is rooted in dashboards that track moments of truth, emotional shifts, and creative emergence. We believe transformation isn't just about metrics—it's about honoring emotional rhythm, creative truth, and legacy resonance.",
-    'Every service is a curriculum gate. Every engagement is designed to align your identity, systems, and mission with intentionality and resonance. We architect multidimensional systems that fuse emotional intelligence, financial clarity, and somatic discipline.',
+    "Fluxline is a consultancy built around the belief that transformation isn't just about metrics—it's about honoring your values, creative truth, and long-term vision. We specialize in helping individuals and businesses integrate emotional intelligence with practical systems.",
+    "Our approach focuses on clarity, resonance, and sustainable growth. Whether you're building a brand, developing a website, training your body, or designing business systems, we help you align your inner work with your outer work.",
+    'We work with founders, creatives, and small teams to build stronger bodies, clearer brands, and resilient systems—so that your identity, offerings, and operations actually match who you are and where you're going.',
   ],
 };
 
@@ -61,7 +61,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'resonance-core',
       title: 'Resonance Core Coaching',
       description:
-        'Deep transformation through archetypal mapping, emotional emergence, and symbolic ritual. A curriculum of becoming for those ready to reclaim their light.',
+        'Deep transformation through identity work, emotional intelligence, and reflective practice. A structured process for those ready to align their inner world with the life they're building.',
       icon: 'HeartFill',
       link: '/services/resonance-core',
     },
@@ -69,7 +69,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'personal-training',
       title: 'Personal Training & Wellness',
       description:
-        'Physical training with emotional intelligence. Movement as sovereignty, designed for all bodies, all thresholds, all breakthroughs.',
+        'Physical training designed with care and emotional intelligence. Movement practices for all bodies, all backgrounds, and all goals—built to honor where you are and where you're going.',
       icon: 'Health',
       link: '/services/personal-training',
     },
@@ -77,7 +77,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'design',
       title: 'Brand Identity & Experience Design',
       description:
-        'Visual identities and digital experiences crafted with emotional intelligence, modular precision, and mythic depth. Where strategy meets symbolism.',
+        'Visual identities and digital experiences that look good and feel aligned. Design that reflects your story, connects with your audience, and supports your long-term vision.',
       icon: 'Design',
       link: '/services/design',
     },
@@ -85,7 +85,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'development',
       title: 'Web & Application Development',
       description:
-        'We architect digital temples—every line of code designed to serve your mission with modular clarity and emotional intelligence. Living systems, built to evolve.',
+        'Custom websites and applications built with clarity and care. From simple sites to full platforms, we create digital systems designed to work well and evolve with you.',
       icon: 'Code',
       link: '/services/development',
     },
@@ -93,7 +93,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'education-training',
       title: 'Education, Leadership & Consulting',
       description:
-        'Experiential learning, emotional intelligence, and strategic embodiment. Coaching for those ready to lead with clarity, courage, and creative truth.',
+        'Coaching and workshops to help you lead, teach, and communicate with clarity and confidence. Practical frameworks for founders, creatives, and teams ready to show up with purpose.',
       icon: 'Education',
       link: '/services/education',
     },
@@ -101,7 +101,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'consulting',
       title: 'Business Strategy & Systems Alignment',
       description:
-        'Where clarity meets infrastructure. Strategic consulting that guides you through designing systems that scale, strategies that resonate, and operations that reflect your deepest values.',
+        'Strategic consulting to help you design systems that scale, strategies that work, and operations that reflect your values. Clarity meets infrastructure.',
       icon: 'Lightbulb',
       link: '/services/consulting',
     },
@@ -111,8 +111,8 @@ export const ethosServices: EthosServicesContent = {
 // CTA Section Content
 export const ethosCTA: EthosCTAContent = {
   title: 'Your Vision is Calling',
-  description:
-    'Each service is a curriculum gate, aligning identity, systems, and mission with intentional resonance. \n\nAre you ready to architect your legacy? Let’s begin the journey together.',
+  description: "Each service is designed to align your identity, systems, and mission with clarity and purpose. \n\nReady to start building? Let's begin the conversation.",
+  description: "Each service is designed to align your identity, systems, and mission with clarity and purpose. \n\nReady to start building? Let's begin the conversation.",
   buttonText: 'Start the Conversation',
   buttonLink: '/contact',
 };

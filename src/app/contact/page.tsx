@@ -27,9 +27,9 @@ export default function ContactPage() {
       <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
         {/* Hero Section */}
         <Hero
-          title='Invitation for Fluxline Connection'
+          title='Let's Connect'
           iconName={getIconForPath('/contact')}
-          description="Reach out in the way that feels most natural to you—whether through social media, a direct conversation, or the form below, we'd be delighted to connect with you! You're also welcome to schedule a free, no-obligation consultation using the booking button so we can explore your needs together."
+          description="Reach out in the way that feels most natural—social media, a direct conversation, or the form below. We'd love to connect with you! You're also welcome to schedule a free consultation using the booking button to explore your needs together."
         >
           {/* Social Links */}
           <div
@@ -47,9 +47,8 @@ export default function ContactPage() {
 
           <Callout
             variant='accent'
-            title='Ready to Transform?'
-            subtitle="Every service is a curriculum gate. Let's design the systems,
-                      strategies, and rituals that align your vision with reality."
+            title='Ready to Build?'
+            subtitle="Each service is designed to align your vision with reality. Let's design the systems, strategies, and practices that work for you."
             action={
               <FormButton
                 text='View Our Services'
