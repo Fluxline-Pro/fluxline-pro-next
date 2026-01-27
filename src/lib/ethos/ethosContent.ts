@@ -47,9 +47,9 @@ export const ethosHero: EthosHeroContent = {
 export const ethosAbout: EthosAboutContent = {
   sectionTitle: 'About Fluxline',
   paragraphs: [
-    "Fluxline is a consultancy built around the belief that transformation isn't just about metrics—it's about honoring your values, creative truth, and long-term vision. We specialize in helping individuals and businesses integrate emotional intelligence with practical systems.",
-    "Our approach focuses on clarity, resonance, and sustainable growth. Whether you're building a brand, developing a website, training your body, or designing business systems, we help you align your inner work with your outer work.",
-    "We work with founders, creatives, and small teams to build stronger bodies, clearer brands, and resilient systems—so that your identity, offerings, and operations actually match who you are and where you're going.",
+    "Fluxline Resonance Group, LLC is a consultancy built around the belief that transformation isn't just about metrics—it's about honoring your values, creative truth, and long-term vision. We specialize in helping individuals and businesses integrate emotional intelligence with practical systems based on their core identity.",
+    "Our approach focuses on clarity, resonance, and sustainable growth to help us custom tailor solutions built around you. Whether you're building a brand, developing a website, training your body, improving yourself, or designing business systems, we help you align your inner work with your outer work.",
+    "We work with founders, creatives, and small teams to build stronger bodies, clearer brands, and resilient systems—so that your identity, offerings, and operations fully match who you are and where you're going.",
   ],
 };
 
@@ -59,7 +59,7 @@ export const ethosServices: EthosServicesContent = {
   services: [
     {
       id: 'resonance-core',
-      title: 'Resonance Core Coaching',
+      title: 'Resonance Core Framework™ Coaching',
       description:
         "Deep transformation through identity work, emotional intelligence, and reflective practice. A structured process for those ready to align their inner world with the life they're building.",
       icon: 'HeartFill',
@@ -85,7 +85,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'development',
       title: 'Web & Application Development',
       description:
-        "Custom websites and applications built with clarity and care. From simple sites to full platforms, we create digital systems designed to work well and evolve with you.",
+        'Custom websites and applications built with clarity and care. From simple sites to full platforms, we create digital systems designed to work well and evolve with you.',
       icon: 'Code',
       link: '/services/development',
     },

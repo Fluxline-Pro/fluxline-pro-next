@@ -214,7 +214,7 @@ const HomeContent: React.FC<{
           <Typography variant='p' style={textStyles.blurbText}>
             We help individuals and businesses build stronger bodies, clearer brands, and resilient systems. 
             Whether you need web development, brand design, personal training, coaching, or strategic consulting—we bring 
-            technical expertise and emotional intelligence together so your inner work and outer work actually match.
+            technical expertise and emotional intelligence together so your inner and outer work fully match.
           </Typography>
         </div>
         <div style={containerStyles.buttonContainer}>
