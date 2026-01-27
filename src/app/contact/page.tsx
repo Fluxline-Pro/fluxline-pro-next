@@ -27,7 +27,7 @@ export default function ContactPage() {
       <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
         {/* Hero Section */}
         <Hero
-          title='Let's Connect'
+          title="Let's Connect"
           iconName={getIconForPath('/contact')}
           description="Reach out in the way that feels most natural—social media, a direct conversation, or the form below. We'd love to connect with you! You're also welcome to schedule a free consultation using the booking button to explore your needs together."
         >

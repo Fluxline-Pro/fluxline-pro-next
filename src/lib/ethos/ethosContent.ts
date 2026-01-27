@@ -49,7 +49,7 @@ export const ethosAbout: EthosAboutContent = {
   paragraphs: [
     "Fluxline is a consultancy built around the belief that transformation isn't just about metrics—it's about honoring your values, creative truth, and long-term vision. We specialize in helping individuals and businesses integrate emotional intelligence with practical systems.",
     "Our approach focuses on clarity, resonance, and sustainable growth. Whether you're building a brand, developing a website, training your body, or designing business systems, we help you align your inner work with your outer work.",
-    'We work with founders, creatives, and small teams to build stronger bodies, clearer brands, and resilient systems—so that your identity, offerings, and operations actually match who you are and where you're going.',
+    "We work with founders, creatives, and small teams to build stronger bodies, clearer brands, and resilient systems—so that your identity, offerings, and operations actually match who you are and where you're going.",
   ],
 };
 
@@ -61,7 +61,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'resonance-core',
       title: 'Resonance Core Coaching',
       description:
-        'Deep transformation through identity work, emotional intelligence, and reflective practice. A structured process for those ready to align their inner world with the life they're building.',
+        "Deep transformation through identity work, emotional intelligence, and reflective practice. A structured process for those ready to align their inner world with the life they're building.",
       icon: 'HeartFill',
       link: '/services/resonance-core',
     },
@@ -69,7 +69,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'personal-training',
       title: 'Personal Training & Wellness',
       description:
-        'Physical training designed with care and emotional intelligence. Movement practices for all bodies, all backgrounds, and all goals—built to honor where you are and where you're going.',
+        "Physical training designed with care and emotional intelligence. Movement practices for all bodies, all backgrounds, and all goals—built to honor where you are and where you're going.",
       icon: 'Health',
       link: '/services/personal-training',
     },
@@ -85,7 +85,7 @@ export const ethosServices: EthosServicesContent = {
       id: 'development',
       title: 'Web & Application Development',
       description:
-        'Custom websites and applications built with clarity and care. From simple sites to full platforms, we create digital systems designed to work well and evolve with you.',
+        "Custom websites and applications built with clarity and care. From simple sites to full platforms, we create digital systems designed to work well and evolve with you.",
       icon: 'Code',
       link: '/services/development',
     },
@@ -111,7 +111,6 @@ export const ethosServices: EthosServicesContent = {
 // CTA Section Content
 export const ethosCTA: EthosCTAContent = {
   title: 'Your Vision is Calling',
-  description: "Each service is designed to align your identity, systems, and mission with clarity and purpose. \n\nReady to start building? Let's begin the conversation.",
   description: "Each service is designed to align your identity, systems, and mission with clarity and purpose. \n\nReady to start building? Let's begin the conversation.",
   buttonText: 'Start the Conversation',
   buttonLink: '/contact',
