@@ -9,7 +9,7 @@ import { UnifiedPageWrapper, InteractiveCard } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
 import { FormButton } from '@/theme/components/form/FormButton';
-import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useRouter } from 'next/navigation';
@@ -27,7 +27,6 @@ import {
 export default function AboutPage() {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
   const router = useRouter();
 
   return (
@@ -37,42 +36,14 @@ export default function AboutPage() {
         <Hero
           title='About Fluxline'
           iconName={getIconForPath('/about')}
-          description='Fluxline helps individuals and businesses build with clarity and purpose. We specialize in web development, brand design, personal training, coaching, and strategic consulting. Our work blends technical expertise with emotional intelligence to create systems, brands, and practices that actually work for you.'
+          subtitle='Fluxline builds systems that work, brands that connect, and 
+          practices that last'
+          description='We help individuals and businesses build with clarity and
+                  purpose. Our work spans development, design, coaching, and
+                  strategy — blending technical precision with emotional
+                  intelligence to create systems, brands, and practices that
+                  truly work.'
         >
-          {!isMobile &&
-            !isTablet && ( // shortens the hero text on mobile per design review
-              <>
-                <Typography
-                  variant='p'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '1.125rem',
-                    lineHeight: theme.typography.lineHeights.relaxed,
-                  }}
-                >
-                  Whether you&apos;re an individual seeking personal growth or a
-                  business ready to scale with purpose, our coaching, wellness
-                  programs, and infrastructure design help you align your
-                  ambitions with your authentic identity. We believe
-                  transformation isn&apos;t just about metrics—it&apos;s about
-                  honoring your values, creative truth, and long-term vision.
-                </Typography>
-
-                <Typography
-                  variant='p'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '1.125rem',
-                    lineHeight: theme.typography.lineHeights.relaxed,
-                    paddingBottom: theme.spacing.m,
-                  }}
-                >
-                  <strong>Fluxline</strong> builds systems that work, brands
-                  that connect, and practices that last.
-                </Typography>
-              </>
-            )}
-
           {/* Quote Callout */}
           <Callout
             variant='accent'
@@ -123,13 +94,24 @@ export default function AboutPage() {
               variant='p'
               style={{
                 color: theme.palette.neutralSecondary,
+                fontSize: '1.5rem',
+                fontWeight: 'bolder' as const,
+                lineHeight: theme.typography.lineHeights.tight,
+              }}
+            >
+              Fluxline is built on the belief that congruence creates momentum.
+            </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
                 fontSize: '1.125rem',
                 lineHeight: theme.typography.lineHeights.relaxed,
               }}
             >
               We build systems that integrate emotional intelligence, financial
-              clarity, and physical discipline—empowering individuals and brands
-              to work with purpose and precision.
+              clarity, and physical discipline — empowering individuals and
+              brands to work with purpose and precision.
             </Typography>
 
             <Typography

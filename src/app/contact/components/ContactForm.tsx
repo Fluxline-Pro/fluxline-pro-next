@@ -195,7 +195,7 @@ export const ContactForm: React.FC = () => {
           style={{
             display: 'block',
             marginBottom: theme.spacing.xs,
-            fontSize: '0.875rem',
+            fontSize: '1rem',
             fontWeight: theme.typography.fontWeights.semiBold,
             color: theme.palette.neutralSecondary,
           }}
@@ -242,7 +242,7 @@ export const ContactForm: React.FC = () => {
           style={{
             display: 'block',
             marginBottom: theme.spacing.xs,
-            fontSize: '0.875rem',
+            fontSize: '1rem',
             fontWeight: theme.typography.fontWeights.semiBold,
             color: theme.palette.neutralSecondary,
           }}
@@ -289,7 +289,7 @@ export const ContactForm: React.FC = () => {
           style={{
             display: 'block',
             marginBottom: theme.spacing.xs,
-            fontSize: '0.875rem',
+            fontSize: '1rem',
             fontWeight: theme.typography.fontWeights.semiBold,
             color: theme.palette.neutralSecondary,
           }}
