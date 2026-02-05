@@ -36,9 +36,9 @@ export interface EthosCTAContent {
 
 // Hero Section Content
 export const ethosHero: EthosHeroContent = {
-  title:
-    'Fluxline Ethos: Building Systems That Work, Brands That Connect, Practices That Last',
-  subtitle: 'A Framework for Transformation',
+  title: 'The Fluxline Ethos',
+  subtitle:
+    'A Framework for Transformation: Building systems that work, brands that connect, practices that last',
   description:
     'At Fluxline, we help you build systems that integrate emotional intelligence, technical precision, and strategic clarity. Through coaching, brand design, web development, and consulting, we guide individuals and organizations to create pathways that honor authenticity, purpose, and long-term vision.',
 };
@@ -47,9 +47,9 @@ export const ethosHero: EthosHeroContent = {
 export const ethosAbout: EthosAboutContent = {
   sectionTitle: 'About Fluxline',
   paragraphs: [
-    "Fluxline Resonance Group, LLC is a consultancy built around the belief that transformation isn't just about metrics—it's about honoring your values, creative truth, and long-term vision. We specialize in helping individuals and businesses integrate emotional intelligence with practical systems based on their core identity.",
-    "Our approach focuses on clarity, resonance, and sustainable growth to custom tailor solutions built around you. Whether you're building a brand, developing a website, training your body, improving yourself, or designing business systems, we help you align your inner work with your outer work.",
-    "We work with founders, creatives, and small teams to build stronger bodies, clearer brands, and resilient systems—so that your identity, offerings, and operations fully match who you are and where you're going.",
+    'Fluxline is built on the belief that congruence creates momentum.',
+    'We build systems that integrate emotional intelligence, technical precision, and strategic clarity—empowering individuals and businesses to work with purpose and vision.',
+    'Our work spans development, design, coaching, and strategy. We help you build systems that work, brands that connect, and practices that last.',
   ],
 };
 
@@ -111,7 +111,8 @@ export const ethosServices: EthosServicesContent = {
 // CTA Section Content
 export const ethosCTA: EthosCTAContent = {
   title: 'Your Vision is Calling',
-  description: "Each service is designed to align your identity, systems, and mission with clarity and purpose. \n\nReady to start building? Let's begin the conversation.",
+  description:
+    "Each service is designed to align your identity, systems, and mission with clarity and purpose. \n\nReady to start building? Let's begin the conversation.",
   buttonText: 'Start the Conversation',
   buttonLink: '/contact',
 };

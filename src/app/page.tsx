@@ -95,7 +95,7 @@ const HomeContent: React.FC<{
       textShadow: `0 0 5px ${theme.palette.neutralDark}`,
       fontSize: isMobileLandscape
         ? 'clamp(1rem, 3vw, 1.5rem)'
-        : 'clamp(1.5rem, 4vw, 2.5rem)',
+        : 'clamp(2rem, 4vw, 2.5rem)',
       fontWeight: theme.typography.fontWeights.light,
       ...animationStyles.slideInRight,
     },
@@ -118,7 +118,7 @@ const HomeContent: React.FC<{
         ? 'clamp(1rem, 2.5vw, 1.3rem)'
         : 'clamp(1.1rem, 2.5vw, 1.5rem)',
       textShadow: `1px 2px 5px ${theme.palette.black}`,
-      textAlign: 'center' as const,
+      textAlign: 'left' as const,
       maxWidth: '700px',
       opacity: 0,
       animation: animateBlurb ? 'fadeIn 0.8s ease-in-out forwards' : 'none',
@@ -167,6 +167,7 @@ const HomeContent: React.FC<{
     buttonContainer: {
       display: 'flex',
       flexDirection: 'column' as const,
+      justifyContent: 'flex-start',
       gap: '0.5rem',
       width: '100%',
       maxWidth: '500px',
@@ -202,7 +203,7 @@ const HomeContent: React.FC<{
       </style>
       <div style={containerStyles.main}>
         <Typography variant='h2' style={textStyles.welcomeText}>
-          welcome to
+          step into
         </Typography>
         <Typography variant='h1' style={textStyles.mainTitle}>
           fluxline
@@ -212,9 +213,11 @@ const HomeContent: React.FC<{
 
         <div style={containerStyles.subHeaderContainer}>
           <Typography variant='p' style={textStyles.blurbText}>
-            We help individuals and businesses build stronger bodies, clearer brands, and resilient systems.
-            Whether you need web development, brand design, personal training, coaching, or strategic consulting—we bring
-            technical expertise and emotional intelligence together so your inner and outer work fully match.
+            We build <em>congruence.</em><br />
+            <em>Strong</em> bodies. <em>Clear</em> brands. <em>Resilient</em> systems.<br />
+            Whether you need <em>development</em>, <em>design</em>, <em>coaching</em>, or
+            <em>strategy</em>, we integrate technical precision with emotional
+            intelligence so your inner and outer work finally match.
           </Typography>
         </div>
         <div style={containerStyles.buttonContainer}>

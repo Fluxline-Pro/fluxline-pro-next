@@ -218,9 +218,9 @@ export const Hero: React.FC<HeroProps> = ({
           style={{
             color: theme.palette.themeSecondary,
             fontSize: isMobile ? '1.125rem' : 'clamp(1.25rem, 3vw, 1.75rem)',
-            fontWeight: theme.typography.fontWeights.light,
-            fontStyle: 'italic',
+            fontWeight: theme.typography.fontWeights.semiBold,
             lineHeight: isMobile ? '1.4' : '1.5',
+            textTransform: 'none',
             margin: 0,
           }}
         >
