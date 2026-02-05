@@ -1,55 +1,47 @@
 ---
 title: 'Introducing The Resonance Core Framework™: A New Approach to Human Alignment and Change'
-excerpt: 'After months of research, testing, and lived application, I'm sharing the first public preview of The Resonance Core Framework™—a system designed to help people create meaningful, aligned, and sustainable change in their lives.'
+excerpt: "After months of research, testing, and lived application, I'm sharing the first public preview of The Resonance Core Framework™—a system designed to help people create meaningful, aligned, and sustainable change in their lives."
 author: 'Terence Waters'
 publishedDate: '2026-02-04'
 category: 'Framework Announcement'
 tags:
-  [
-    'Resonance Core Framework',
-    'Book Announcement',
-    'Personal Growth',
-    'Alignment',
-    'Self-Help',
-    'Transformation',
-    'Decision Making',
-    'Life Framework',
-  ]
+  - 'Resonance Core Framework'
+  - 'Book Announcement'
+  - 'Personal Growth'
+  - 'Alignment'
+  - 'Self-Help'
+  - 'Transformation'
+  - 'Decision Making'
+  - 'Life Framework'
 imageUrl: '/blog/posts/announcement-resonance-core-book/images/RCF_logo.jpeg'
 imageAlt: 'The Resonance Core Framework™ logo representing alignment and human transformation'
 featured: true
 seoTitle: 'Introducing The Resonance Core Framework™ | A New Approach to Aligned Change'
 seoDescription: 'Discover The Resonance Core Framework™—a practical, trackable system for creating meaningful change through alignment. Built on universal truths, psychological research, and lived experience.'
 seoKeywords:
-  [
-    'Resonance Core Framework',
-    'personal transformation',
-    'alignment framework',
-    'self-help',
-    'decision making',
-    'personal growth',
-    'life change',
-    'sustainable change',
-    'human alignment',
-    'life framework',
-  ]
+  - 'Resonance Core Framework'
+  - 'personal transformation'
+  - 'alignment framework'
+  - 'self-help'
+  - 'decision making'
+  - 'personal growth'
+  - 'life change'
+  - 'sustainable change'
+  - 'human alignment'
+  - 'life framework'
 featuredImage: 'RCF_logo.jpeg'
 gallery:
-  [
-    'RCF_logo.jpeg',
-    'RCF_book_concept.jpg',
-    'drive_model_framework.jpeg',
-    'drive_alignment_loop.jpeg',
-    'spark_step.jpeg',
-    'coherence_step.jpeg',
-    'activation_step.jpeg',
-    'momentum_step.jpeg',
-    'endurance_step.jpeg',
-    'expansion_step.jpeg',
-  ]
+  - 'RCF_logo.jpeg'
+  - 'RCF_book_concept.jpg'
+  - 'drive_model_framework.jpeg'
+  - 'drive_alignment_loop.jpeg'
+  - 'spark_step.jpeg'
+  - 'coherence_step.jpeg'
+  - 'activation_step.jpeg'
+  - 'momentum_step.jpeg'
+  - 'endurance_step.jpeg'
+  - 'expansion_step.jpeg'
 ---
-
-# Introducing The Resonance Core Framework™: A New Approach to Human Alignment and Change
 
 Today marks an important milestone for Fluxline Resonance Group — and for me personally. After months of research, testing, refinement, and lived application, I'm excited to share the first public preview of **The Resonance Core Framework™**, a system designed to help people create meaningful, aligned, and sustainable change in their lives.
 
@@ -175,7 +167,7 @@ I hope it resonates with you.
 I hope it sparks something.  
 And I hope it gives you a glimpse of what's possible when you build your life from alignment instead of fear.
 
-Welcome to the beginning of The Resonance Core Framework™. 
+Welcome to the beginning of The Resonance Core Framework™.
 
 The book will be available later in early spring 2026.
 Please follow us below for updates!
