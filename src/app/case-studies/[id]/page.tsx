@@ -22,7 +22,7 @@ import CaseStudyDetailClient from './CaseStudyDetailClient';
 export async function generateStaticParams() {
   const slugs = getAllCaseStudySlugs();
   return slugs.map((id) => ({
-    id: encodeURIComponent(id),
+    id: id,
   }));
 }
 

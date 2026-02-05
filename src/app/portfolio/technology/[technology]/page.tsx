@@ -6,6 +6,7 @@ import {
 } from '../../lib/portfolioLoader';
 import { PortfolioTechnologyClient } from './PortfolioTechnologyClient';
 import { notFound } from 'next/navigation';
+import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
 
 // Generate static params for all technologies
 export async function generateStaticParams() {
@@ -18,7 +19,7 @@ export async function generateStaticParams() {
   }
 
   return technologies.map((technology) => ({
-    technology: encodeURIComponent(technology),
+    technology: technology,
   }));
 }
 
@@ -65,6 +66,7 @@ interface PortfolioTechnologyPageProps {
 /**
  * Portfolio Technology Filter Page - Server Component
  * Handles static generation and passes data to client component
+ * Uses fuzzy matching to handle spaces and case variations
  */
 export default async function PortfolioTechnologyPage({
   params,
@@ -72,10 +74,20 @@ export default async function PortfolioTechnologyPage({
   const { technology } = await params;
   const decodedTechnology = decodeURIComponent(technology);
 
-  // Get all projects and filter by technology
+  // Get all projects and filter by technology (with fuzzy matching)
   const allProjects = getAllPortfolioProjects();
+  const allTechnologies = getAllPortfolioTechnologies();
+
+  // Find the canonical technology that matches
+  const matchedTechnology = findMatchingTag(decodedTechnology, allTechnologies);
+
+  if (!matchedTechnology) {
+    notFound();
+  }
+
+  // Filter projects using fuzzy technology matching
   const projects = allProjects.filter((project) =>
-    project.technologies.includes(decodedTechnology)
+    project.technologies.some((tech) => tagsMatch(tech, decodedTechnology))
   );
 
   if (projects.length === 0) {
@@ -84,7 +96,7 @@ export default async function PortfolioTechnologyPage({
 
   return (
     <PortfolioTechnologyClient
-      technology={decodedTechnology}
+      technology={matchedTechnology}
       projects={projects}
     />
   );

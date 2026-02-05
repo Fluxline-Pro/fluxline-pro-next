@@ -36,7 +36,7 @@ export default async function PortfolioDetailPage({
 export async function generateStaticParams() {
   const slugs = getAllPortfolioSlugs();
   return slugs.map((slug) => ({
-    slug: encodeURIComponent(slug),
+    slug: slug,
   }));
 }
 
