@@ -5,6 +5,9 @@ import { BlogTagClient } from './BlogTagClient';
 import { notFound } from 'next/navigation';
 import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
 
+// Disable dynamic params - we only serve pre-generated static pages
+export const dynamicParams = false;
+
 // Generate static params for all tags
 export async function generateStaticParams() {
   const tags = getAllTags();
@@ -15,9 +18,10 @@ export async function generateStaticParams() {
     return [];
   }
 
-  // Return encoded tags to match incoming route params
+  // Return unencoded tags - filesystem will have real spaces,
+  // browser and Azure will handle URL encoding automatically
   return tags.map((tag) => ({
-    tag: encodeURIComponent(tag),
+    tag: tag,
   }));
 }
 

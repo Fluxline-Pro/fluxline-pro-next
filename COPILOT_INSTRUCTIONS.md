@@ -140,6 +140,80 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   - Pass data from Server Components to Client Components via props
   - Never use `'use client'` in components that read from file system
 
+### Tag/Category/Technology Navigation (Critical Configuration)
+
+**⚠️ DO NOT MODIFY**: The following configuration is required for tags with spaces to work on Azure deployment.
+
+**Tag/Category/Technology Page Configuration:**
+
+All dynamic route pages for tags, categories, and technologies **must** include:
+
+```typescript
+// Required: Disable dynamic params for static export
+export const dynamicParams = false;
+
+// Required: Return unencoded strings (real spaces, not %20)
+export async function generateStaticParams() {
+  const tags = getAllTags();
+  return tags.map((tag) => ({
+    tag: tag, // Unencoded! Creates directories with real spaces
+  }));
+}
+
+// Required: Decode incoming params
+export default async function TagPage({ params }: Props) {
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
+  // ... rest of component
+}
+```
+
+**Client Component Navigation:**
+
+All navigation to tag/category/technology pages **must** use encoding:
+
+```typescript
+// Required: Encode URLs in navigation
+const handleTagClick = (tag: string) => {
+  router.push(`/blog/tag/${encodeURIComponent(tag)}`);
+};
+```
+
+**Why This Configuration:**
+
+1. **Production Build**: Creates directories with real spaces (e.g., `Resonance Core Framework/`)
+2. **Browser Navigation**: Encodes URLs automatically (e.g., `Resonance%20Core%20Framework`)
+3. **Azure SWA**: Decodes incoming URLs and matches directories with real spaces
+4. **Development Mode**: Will show validation errors - this is **expected** and **safe to ignore**
+
+**Testing Tag Navigation:**
+
+```bash
+# ❌ WRONG: Don't test with dev mode
+yarn dev  # Will show errors for tags with spaces
+
+# ✅ CORRECT: Test with production build
+yarn build
+npx serve@latest out -p 3000
+# Now test tag navigation - should work perfectly
+```
+
+**Files Using This Pattern:**
+
+- `src/app/blog/tag/[tag]/page.tsx`
+- `src/app/blog/category/[category]/page.tsx`
+- `src/app/portfolio/tag/[tag]/page.tsx`
+- `src/app/portfolio/technology/[technology]/page.tsx`
+
+**Common Mistakes to Avoid:**
+
+- ❌ Removing `dynamicParams = false` (breaks static export validation)
+- ❌ Adding `encodeURIComponent()` to `generateStaticParams()` returns (creates literal `%20` in directory names)
+- ❌ Removing `encodeURIComponent()` from navigation calls (creates unencoded URLs)
+- ❌ Testing only in dev mode and thinking it's broken (dev mode has validation limitations)
+
+**This is a Next.js static export limitation, not a bug.** The configuration is correct for production deployment.
+
 ### Content Listing System (Unified)
 
 **Location**: `src/components/ContentListingPage.tsx`

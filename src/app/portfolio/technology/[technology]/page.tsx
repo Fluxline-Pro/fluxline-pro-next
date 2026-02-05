@@ -8,6 +8,9 @@ import { PortfolioTechnologyClient } from './PortfolioTechnologyClient';
 import { notFound } from 'next/navigation';
 import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
 
+// Disable dynamic params - we only serve pre-generated static pages
+export const dynamicParams = false;
+
 // Generate static params for all technologies
 export async function generateStaticParams() {
   const technologies = getAllPortfolioTechnologies();
@@ -18,9 +21,10 @@ export async function generateStaticParams() {
     return [];
   }
 
-  // Return encoded technologies to match incoming route params
+  // Return unencoded technologies - filesystem will have real spaces,
+  // browser and Azure will handle URL encoding automatically
   return technologies.map((technology) => ({
-    technology: encodeURIComponent(technology),
+    technology: technology,
   }));
 }
 
