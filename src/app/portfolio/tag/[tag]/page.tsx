@@ -6,6 +6,7 @@ import {
 } from '../../lib/portfolioLoader';
 import { PortfolioTagClient } from './PortfolioTagClient';
 import { notFound } from 'next/navigation';
+import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
 
 // Generate static params for all tags
 export async function generateStaticParams() {
@@ -18,7 +19,7 @@ export async function generateStaticParams() {
   }
 
   return tags.map((tag) => ({
-    tag: encodeURIComponent(tag),
+    tag: tag,
   }));
 }
 
@@ -65,6 +66,7 @@ interface PortfolioTagPageProps {
 /**
  * Portfolio Tag Filter Page - Server Component
  * Handles static generation and passes data to client component
+ * Uses fuzzy tag matching to handle spaces and case variations
  */
 export default async function PortfolioTagPage({
   params,
@@ -72,15 +74,25 @@ export default async function PortfolioTagPage({
   const { tag } = await params;
   const decodedTag = decodeURIComponent(tag);
 
-  // Get all projects and filter by tag
+  // Get all projects and filter by tag (with fuzzy matching)
   const allProjects = getAllPortfolioProjects();
+  const allTags = getAllPortfolioTags();
+
+  // Find the canonical tag that matches
+  const matchedTag = findMatchingTag(decodedTag, allTags);
+
+  if (!matchedTag) {
+    notFound();
+  }
+
+  // Filter projects using fuzzy tag matching
   const projects = allProjects.filter((project) =>
-    project.tags.includes(decodedTag)
+    project.tags.some((projectTag) => tagsMatch(projectTag, decodedTag))
   );
 
   if (projects.length === 0) {
     notFound();
   }
 
-  return <PortfolioTagClient tag={decodedTag} projects={projects} />;
+  return <PortfolioTagClient tag={matchedTag} projects={projects} />;
 }

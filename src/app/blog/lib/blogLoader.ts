@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { BlogPost } from '../types';
+import { validateTags } from '@/utils/tag-utils';
 
 /**
  * Blog Loader Utilities
@@ -181,6 +182,7 @@ export function getAllBlogPosts(): BlogPost[] {
 
 /**
  * Get all unique tags from all blog posts
+ * Validates for potential duplicate tags (e.g., "Personal Growth" vs "PersonalGrowth")
  */
 export function getAllTags(): string[] {
   const posts = getAllBlogPosts();
@@ -196,7 +198,28 @@ export function getAllTags(): string[] {
     }
   });
 
-  return Array.from(tagsSet).sort();
+  const allTags = Array.from(tagsSet).sort();
+
+  // Validate tags for potential duplicates (development warning only)
+  if (process.env.NODE_ENV !== 'production') {
+    const validation = validateTags(allTags);
+    if (!validation.isValid) {
+      console.warn(
+        '⚠️  Potential duplicate tags detected (different formatting):',
+        validation.duplicates
+          .map(
+            (d) =>
+              `"${d.tag}" matches: [${d.matches.map((m) => `"${m}"`).join(', ')}]`
+          )
+          .join('\n  ')
+      );
+      console.warn(
+        '💡 Tip: Use consistent tag formatting. Recommended: Title Case with spaces (e.g., "Personal Growth")'
+      );
+    }
+  }
+
+  return allTags;
 }
 
 /**
