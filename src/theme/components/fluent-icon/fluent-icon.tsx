@@ -5,7 +5,7 @@
  * Wrapper for Fluent UI icons with theme integration
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon, initializeIcons } from '@fluentui/react';
 import { IStyle } from '@fluentui/merge-styles';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -49,6 +49,11 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
   isDarkMode,
 }) => {
   const { theme } = useAppTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const getVariantColor = () => {
     switch (variant) {
@@ -85,6 +90,15 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
       : {}),
   };
 
+  // Prevent hydration mismatch by only rendering after mount
+  if (!isMounted) {
+    return (
+      <span style={{ display: 'contents' }}>
+        <span style={combinedStyle} className={className} />
+      </span>
+    );
+  }
+
   // If iconName is a custom SVG component
   if (typeof iconName === 'function') {
     const CustomIcon = iconName;
@@ -104,7 +118,7 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
 
   // If iconName is a string (Fluent UI icon name)
   return (
-    <span suppressHydrationWarning style={{ display: 'contents' }}>
+    <span style={{ display: 'contents' }}>
       <Icon
         iconName={iconName as string}
         className={className}
