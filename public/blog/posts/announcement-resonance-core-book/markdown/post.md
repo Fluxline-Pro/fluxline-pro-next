@@ -122,7 +122,7 @@ The framework didn't just help me — **it changed me.**
 
 The full book and workbook are still in development, but the foundation is ready.
 
-And I believe in sharing work when it's alive — not just when it's polished.
+And I believe in sharing work when it's _alive_ — not just when it's polished.
 
 Today, I'm releasing the **Introduction Preview of The Resonance Core Framework™** as a downloadable PDF. It outlines:
 
@@ -167,15 +167,24 @@ This is just the beginning.
 
 You can read the full Introduction Preview here:
 
-**[Download the PDF](#)**
+**[Download the Introduction Preview PDF](/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf)**
 
 I hope it resonates with you.  
 I hope it sparks something.  
 And I hope it gives you a glimpse of what's possible when you build your life from alignment instead of fear.
 
-Welcome to the beginning of The Resonance Core Framework™.
+Welcome to the beginning of The Resonance Core Framework™. 
+
+The book will be available later in early spring 2026.
+Please follow us below for updates!
 
 ---
 
 **Terence Waters**  
-Founder, Fluxline Resonance Group
+Founder, Fluxline Resonance Group, LLC
+
+## Related Resources
+
+- [Resonance Core Framework](/services/resonance-core) — RCF Services and information
+- [Instagram- Fluxline](https://instagram.com/fluxlineco) - Follow us on Instagram
+- [LinkedIn Page- Fluxline Resonance Group, LLC](https://www.linkedin.com/company/fluxlineresonance/) - Follow us on LinkedIn
