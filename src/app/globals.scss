@@ -57,6 +57,7 @@ body {
 // Ln 57-68: Apply background to html element for full viewport coverage
 // iOS Safari has issues with background-attachment: fixed, so we conditionally apply it
 html {
+  height: 100%;
   -webkit-background-color: var(
     --theme-semantic-bodyBackground
   ); // iOS fallback
