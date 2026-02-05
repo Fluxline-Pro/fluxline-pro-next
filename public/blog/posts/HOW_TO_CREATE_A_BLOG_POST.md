@@ -93,17 +93,17 @@ The section between `---` marks is called "frontmatter" - it's metadata about yo
 
 #### Required Fields
 
-| Field            | Example                             | Description                                          |
-| ---------------- | ----------------------------------- | ---------------------------------------------------- |
-| `title`          | `"Mastering React Hooks"`           | Your post title                                      |
-| `excerpt`        | `"Learn how to use React hooks..."` | Brief description (1-2 sentences)                    |
-| `author`         | `"Sarah Chen"`                      | Your name                                            |
-| `publishedDate`  | `"2025-11-24"`                      | Date in YYYY-MM-DD format                            |
-| `category`       | `"Technology"`                      | Choose from: Technology, Development, Design, Growth |
-| `tags`           | `["React", "JavaScript"]`           | 3-6 tags as an array                                 |
-| `seoTitle`       | `"React Hooks Guide..."`            | Title for Google (50-60 chars)                       |
-| `seoDescription` | `"Complete guide to..."`            | Description for Google (150-160 chars)               |
-| `seoKeywords`    | `["React", "hooks"]`                | 5-10 keywords                                        |
+| Field            | Example                             | Description                                                                                                                                                                                      |
+| ---------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `title`          | `"Mastering React Hooks"`           | Your post title                                                                                                                                                                                  |
+| `excerpt`        | `"Learn how to use React hooks..."` | Brief description (1-2 sentences)                                                                                                                                                                |
+| `author`         | `"Sarah Chen"`                      | Your name                                                                                                                                                                                        |
+| `publishedDate`  | `"2025-11-24"`                      | Date in YYYY-MM-DD format                                                                                                                                                                        |
+| `category`       | `"Technology"`                      | Common categories: Technology, Development, Design, Personal Growth, Growth, Business Philosophy, Health & Wellness, Personal Development, About Us, Framework Announcement (or create your own) |
+| `tags`           | `["React", "JavaScript"]`           | 3-6 tags as an array                                                                                                                                                                             |
+| `seoTitle`       | `"React Hooks Guide..."`            | Title for Google (50-60 chars)                                                                                                                                                                   |
+| `seoDescription` | `"Complete guide to..."`            | Description for Google (150-160 chars)                                                                                                                                                           |
+| `seoKeywords`    | `["React", "hooks"]`                | 5-10 keywords                                                                                                                                                                                    |
 
 #### Optional Fields
 
