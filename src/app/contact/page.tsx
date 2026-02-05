@@ -28,8 +28,8 @@ export default function ContactPage() {
         {/* Hero Section */}
         <Hero
           title="Let's Connect"
-          iconName={getIconForPath('/contact')}
-          description="Reach out in the way that feels most natural—social media, a direct conversation, or the form below. We'd love to connect with you! You're also welcome to schedule a free consultation using the booking button to explore your needs together."
+          iconName={getIconForPath('/contact-us')}
+          description="Reach out in the way that feels most natural to you — social media, a direct conversation, or the form below. We'd love to connect with you! You're also welcome to schedule a free consultation using the booking button to explore your needs together."
         >
           {/* Social Links */}
           <div
@@ -72,7 +72,7 @@ export default function ContactPage() {
               fontWeight: theme.typography.fontWeights.bold,
             }}
           >
-            Get In Touch
+            Get in Touch
           </Typography>
           <div
             style={{
