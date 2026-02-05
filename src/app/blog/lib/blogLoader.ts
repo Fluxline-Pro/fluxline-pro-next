@@ -29,11 +29,14 @@ interface BlogFrontmatter {
   featured?: boolean;
   imageUrl?: string;
   imageAlt?: string;
-  gallery?: Array<{
-    url: string;
-    alt: string;
-    caption?: string;
-  }>;
+  featuredImage?: string; // Simple image filename for featured image
+  gallery?:
+    | string[]
+    | Array<{
+        url: string;
+        alt: string;
+        caption?: string;
+      }>; // Support both string array and object array
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
@@ -119,11 +122,31 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
         lastUpdated && !isNaN(lastUpdated.getTime()) ? lastUpdated : undefined,
       imageUrl: frontmatter.imageUrl,
       imageAlt: frontmatter.imageAlt,
-      gallery: frontmatter.gallery?.map((img) => ({
-        url: img.url,
-        alt: img.alt,
-        caption: img.caption,
-      })),
+      gallery: frontmatter.gallery
+        ? Array.isArray(frontmatter.gallery)
+          ? typeof frontmatter.gallery[0] === 'string'
+            ? // Convert string array to object array
+              (frontmatter.gallery as string[]).map((img) => ({
+                url: `/blog/posts/${slug}/images/${img}`,
+                alt: img
+                  .replace(/\.(jpg|jpeg|png|gif|webp)$/i, '')
+                  .replace(/[_-]/g, ' '),
+                caption: undefined,
+              }))
+            : // Already object array
+              (
+                frontmatter.gallery as Array<{
+                  url: string;
+                  alt: string;
+                  caption?: string;
+                }>
+              ).map((img) => ({
+                url: img.url,
+                alt: img.alt,
+                caption: img.caption,
+              }))
+          : []
+        : undefined,
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
       category: frontmatter.category,
       featured: frontmatter.featured ?? false,
