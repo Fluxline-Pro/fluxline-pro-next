@@ -20,11 +20,11 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
   const router = useRouter();
 
   const handleTagClick = (tag: string) => {
-    router.push(`/blog/tag/${encodeURIComponent(tag)}`);
+    router.push(`/blog/tag/${tag}`);
   };
 
   const handleCategoryClick = () => {
-    router.push(`/blog/category/${encodeURIComponent(post.category)}`);
+    router.push(`/blog/category/${post.category}`);
   };
 
   const config: UnifiedContentDetailConfig = {

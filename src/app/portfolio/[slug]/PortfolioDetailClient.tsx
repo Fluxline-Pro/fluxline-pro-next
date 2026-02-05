@@ -36,11 +36,11 @@ export default function PortfolioDetailClient({
   }
 
   const handleTagClick = (tag: string) => {
-    router.push(`/portfolio/tag/${encodeURIComponent(tag)}`);
+    router.push(`/portfolio/tag/${tag}`);
   };
 
   const handleTechnologyClick = (technology: string) => {
-    router.push(`/portfolio/technology/${encodeURIComponent(technology)}`);
+    router.push(`/portfolio/technology/${technology}`);
   };
 
   const config: UnifiedContentDetailConfig = {

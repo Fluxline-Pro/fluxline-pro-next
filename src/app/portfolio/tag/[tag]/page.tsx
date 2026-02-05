@@ -18,8 +18,9 @@ export async function generateStaticParams() {
     return [];
   }
 
+  // Return encoded tags to match incoming route params
   return tags.map((tag) => ({
-    tag: tag,
+    tag: encodeURIComponent(tag),
   }));
 }
 
