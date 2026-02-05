@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { getAllBlogPosts, getAllTags } from '../../lib/blogLoader';
 import { BlogTagClient } from './BlogTagClient';
 import { notFound } from 'next/navigation';
+import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
 
 // Generate static params for all tags
 export async function generateStaticParams() {
@@ -14,6 +15,7 @@ export async function generateStaticParams() {
     return [];
   }
 
+  // Return encoded tags to match incoming route params
   return tags.map((tag) => ({
     tag: encodeURIComponent(tag),
   }));
@@ -61,18 +63,32 @@ interface BlogTagPageProps {
 /**
  * Blog Tag Filter Page - Server Component
  * Handles static generation and passes data to client component
+ * Uses fuzzy tag matching to handle spaces and case variations
  */
 export default async function BlogTagPage({ params }: BlogTagPageProps) {
   const { tag } = await params;
   const decodedTag = decodeURIComponent(tag);
 
-  // Get all posts and filter by tag
+  // Get all posts and filter by tag (with fuzzy matching)
   const allPosts = getAllBlogPosts();
-  const posts = allPosts.filter((post) => post.tags.includes(decodedTag));
+  const allTags = getAllTags();
+
+  // Find the canonical tag that matches (handles "Personal Growth" vs "PersonalGrowth")
+  const matchedTag = findMatchingTag(decodedTag, allTags);
+
+  if (!matchedTag) {
+    notFound();
+  }
+
+  // Filter posts using fuzzy tag matching
+  const posts = allPosts.filter((post) =>
+    post.tags.some((postTag) => tagsMatch(postTag, decodedTag))
+  );
 
   if (posts.length === 0) {
     notFound();
   }
 
-  return <BlogTagClient tag={decodedTag} posts={posts} />;
+  // Use the canonical matched tag for display
+  return <BlogTagClient tag={matchedTag} posts={posts} />;
 }
