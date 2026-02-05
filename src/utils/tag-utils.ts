@@ -106,11 +106,14 @@ export function validateTags(tags: string[]): {
  * formatTag("personal growth") // "Personal Growth"
  * formatTag("PERSONAL-GROWTH") // "Personal Growth"
  * formatTag("personalGrowth") // "Personal Growth"
+ * formatTag("XMLParser") // "XML Parser"
+ * formatTag("HTTPSConnection") // "Https Connection"
  */
 export function formatTag(tag: string): string {
-  // Convert camelCase to space-separated
+  // Convert camelCase and handle acronyms to space-separated
   const withSpaces = tag
-    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // Handle lowercase to uppercase (camelCase)
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2') // Handle acronyms (XMLParser → XML Parser)
     .replace(/[-_]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
