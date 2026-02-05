@@ -5,6 +5,9 @@ import { BlogCategoryClient } from './BlogCategoryClient';
 import { notFound } from 'next/navigation';
 import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
 
+// Disable dynamic params - we only serve pre-generated static pages
+export const dynamicParams = false;
+
 // Generate static params for all categories
 export async function generateStaticParams() {
   const categories = getAllCategories();
@@ -15,9 +18,10 @@ export async function generateStaticParams() {
     return [];
   }
 
-  // Return encoded categories to match incoming route params
+  // Return unencoded categories - filesystem will have real spaces,
+  // browser and Azure will handle URL encoding automatically
   return categories.map((category) => ({
-    category: encodeURIComponent(category),
+    category: category,
   }));
 }
 
