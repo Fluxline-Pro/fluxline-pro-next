@@ -65,7 +65,7 @@ gallery:
 
 Today marks an important milestone for Fluxline Resonance Group — and for me personally. After months of research, testing, refinement, and lived application, I'm excited to share the first public preview of **The Resonance Core Framework™**, a system designed to help people create meaningful, aligned, and sustainable change in their lives.
 
-## You may read its introduction page here: **[Download the Introduction Preview PDF](/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf)**
+## **[📄 Download the Introduction Preview PDF by clicking here](/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf)**
 
 This framework didn't begin as a business initiative. It began as a necessity.
 
