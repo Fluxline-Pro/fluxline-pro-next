@@ -133,7 +133,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
                   .replace(/[_-]/g, ' '),
                 caption: undefined,
               }))
-            : // Already object array
+            : // Already object array - ensure URLs have full path
               (
                 frontmatter.gallery as Array<{
                   url: string;
@@ -141,7 +141,9 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
                   caption?: string;
                 }>
               ).map((img) => ({
-                url: img.url,
+                url: img.url.startsWith('/')
+                  ? img.url
+                  : `/blog/posts/${slug}/images/${img.url}`,
                 alt: img.alt,
                 caption: img.caption,
               }))
