@@ -15,8 +15,9 @@ export async function generateStaticParams() {
     return [];
   }
 
+  // Return encoded categories to match incoming route params
   return categories.map((category) => ({
-    category: category,
+    category: encodeURIComponent(category),
   }));
 }
 

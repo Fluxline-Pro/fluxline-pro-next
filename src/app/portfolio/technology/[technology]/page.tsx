@@ -18,8 +18,9 @@ export async function generateStaticParams() {
     return [];
   }
 
+  // Return encoded technologies to match incoming route params
   return technologies.map((technology) => ({
-    technology: technology,
+    technology: encodeURIComponent(technology),
   }));
 }
 
