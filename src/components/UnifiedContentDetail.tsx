@@ -110,6 +110,12 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const { theme } = useAppTheme();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Prevent hydration mismatch from FluentUI dynamic class names
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleImageClick = React.useCallback(() => {
     if (config.imageConfig) {
@@ -432,31 +438,41 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
                   marginRight: theme.spacing.l,
                 }}
               >
-                <IconButton
-                  iconProps={{ iconName: 'Back' }}
-                  title={config.backLink.label}
-                  ariaLabel={config.backLink.label}
-                  onClick={handleBack}
-                  styles={{
-                    root: {
-                      color: theme.palette.themePrimary,
-                      backgroundColor: 'transparent',
-                    },
-                    rootHovered: {
-                      color: theme.palette.themeDark,
-                      backgroundColor: 'transparent',
-                      transform: 'translateX(-4px)',
-                      transition: 'transform 0.2s ease-in-out',
-                    },
-                    rootPressed: {
-                      backgroundColor: 'transparent',
-                    },
-                    icon: {
-                      fontSize: '2rem',
-                      fontWeight: 'bold',
-                    },
-                  }}
-                />
+                {isMounted ? (
+                  <IconButton
+                    iconProps={{ iconName: 'Back' }}
+                    title={config.backLink.label}
+                    ariaLabel={config.backLink.label}
+                    onClick={handleBack}
+                    styles={{
+                      root: {
+                        color: theme.palette.themePrimary,
+                        backgroundColor: 'transparent',
+                      },
+                      rootHovered: {
+                        color: theme.palette.themeDark,
+                        backgroundColor: 'transparent',
+                        transform: 'translateX(-4px)',
+                        transition: 'transform 0.2s ease-in-out',
+                      },
+                      rootPressed: {
+                        backgroundColor: 'transparent',
+                      },
+                      icon: {
+                        fontSize: '2rem',
+                        fontWeight: 'bold',
+                      },
+                    }}
+                  />
+                ) : (
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      width: '2rem',
+                      height: '2rem',
+                    }}
+                  />
+                )}
               </div>
               <Typography
                 variant='h1'

@@ -29,11 +29,14 @@ interface BlogFrontmatter {
   featured?: boolean;
   imageUrl?: string;
   imageAlt?: string;
-  gallery?: Array<{
-    url: string;
-    alt: string;
-    caption?: string;
-  }>;
+  featuredImage?: string; // Simple image filename for featured image
+  gallery?:
+    | string[]
+    | Array<{
+        url: string;
+        alt: string;
+        caption?: string;
+      }>; // Support both string array and object array
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
@@ -82,6 +85,30 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
 
     const frontmatter = data as BlogFrontmatter;
 
+    // Parse dates with validation
+    const publishedDate = frontmatter.publishedDate
+      ? new Date(frontmatter.publishedDate)
+      : new Date();
+
+    // Validate the date is not invalid
+    if (isNaN(publishedDate.getTime())) {
+      console.warn(
+        `Invalid publishedDate for ${slug}: ${frontmatter.publishedDate}`
+      );
+      return null;
+    }
+
+    const lastUpdated = frontmatter.lastUpdated
+      ? new Date(frontmatter.lastUpdated)
+      : undefined;
+
+    // Validate lastUpdated if present
+    if (lastUpdated && isNaN(lastUpdated.getTime())) {
+      console.warn(
+        `Invalid lastUpdated for ${slug}: ${frontmatter.lastUpdated}`
+      );
+    }
+
     // Convert to BlogPost format
     const blogPost: BlogPost = {
       id: slug,
@@ -90,17 +117,38 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
       excerpt: frontmatter.excerpt,
       content: content,
       author: frontmatter.author,
-      publishedDate: new Date(frontmatter.publishedDate),
-      lastUpdated: frontmatter.lastUpdated
-        ? new Date(frontmatter.lastUpdated)
-        : undefined,
+      publishedDate,
+      lastUpdated:
+        lastUpdated && !isNaN(lastUpdated.getTime()) ? lastUpdated : undefined,
       imageUrl: frontmatter.imageUrl,
       imageAlt: frontmatter.imageAlt,
-      gallery: frontmatter.gallery?.map((img) => ({
-        url: img.url,
-        alt: img.alt,
-        caption: img.caption,
-      })),
+      gallery: frontmatter.gallery
+        ? Array.isArray(frontmatter.gallery)
+          ? typeof frontmatter.gallery[0] === 'string'
+            ? // Convert string array to object array
+              (frontmatter.gallery as string[]).map((img) => ({
+                url: `/blog/posts/${slug}/images/${img}`,
+                alt: img
+                  .replace(/\.(jpg|jpeg|png|gif|webp)$/i, '')
+                  .replace(/[_-]/g, ' '),
+                caption: undefined,
+              }))
+            : // Already object array - ensure URLs have full path
+              (
+                frontmatter.gallery as Array<{
+                  url: string;
+                  alt: string;
+                  caption?: string;
+                }>
+              ).map((img) => ({
+                url: img.url.startsWith('/')
+                  ? img.url
+                  : `/blog/posts/${slug}/images/${img.url}`,
+                alt: img.alt,
+                caption: img.caption,
+              }))
+          : []
+        : undefined,
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
       category: frontmatter.category,
       featured: frontmatter.featured ?? false,
@@ -139,7 +187,13 @@ export function getAllTags(): string[] {
   const tagsSet = new Set<string>();
 
   posts.forEach((post) => {
-    post.tags.forEach((tag) => tagsSet.add(tag));
+    if (Array.isArray(post.tags)) {
+      post.tags.forEach((tag) => {
+        if (tag && typeof tag === 'string' && tag.trim().length > 0) {
+          tagsSet.add(tag);
+        }
+      });
+    }
   });
 
   return Array.from(tagsSet).sort();
@@ -153,7 +207,13 @@ export function getAllCategories(): string[] {
   const categoriesSet = new Set<string>();
 
   posts.forEach((post) => {
-    categoriesSet.add(post.category);
+    if (
+      post.category &&
+      typeof post.category === 'string' &&
+      post.category.trim().length > 0
+    ) {
+      categoriesSet.add(post.category);
+    }
   });
 
   return Array.from(categoriesSet).sort();
