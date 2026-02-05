@@ -18,7 +18,7 @@ export async function generateStaticParams() {
   }
 
   return technologies.map((technology) => ({
-    technology: technology,
+    technology: encodeURIComponent(technology),
   }));
 }
 

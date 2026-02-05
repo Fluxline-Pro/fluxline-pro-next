@@ -10,7 +10,7 @@ import notFound from '@/app/services/scrolls/[scroll]/not-found';
 export async function generateStaticParams() {
   const ids = getAllPressReleaseIds();
   return ids.map((id) => ({
-    id: id,
+    id: encodeURIComponent(id),
   }));
 }
 
