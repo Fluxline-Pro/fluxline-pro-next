@@ -21,7 +21,7 @@ export async function generateStaticParams() {
   // Return unencoded categories - filesystem will have real spaces,
   // browser and Azure will handle URL encoding automatically
   return categories.map((category) => ({
-    category: category,
+    category: encodeURIComponent(category),
   }));
 }
 
