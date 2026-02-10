@@ -1,102 +1,66 @@
 'use client';
 
 import React from 'react';
+import { format } from 'date-fns';
+import { ContentListingPage } from '@/components/ContentListingPage';
+import { getIconForPath } from '@/utils/navigation-icons';
 import { Book } from './types';
-import { useTheme } from '@fluentui/react';
-import { InteractiveCard } from '@/components/InteractiveCard';
 
 interface BooksListingClientProps {
   books: Book[];
 }
 
 /**
- * Books Listing - Client Component
- * Simple display of available books without filters
- * As per requirements: "DO NOT show the main page with the filters"
+ * Books Listing Client Wrapper
+ * Transforms book data for the unified ContentListingPage
+ * No filters shown per requirements: "DO NOT show the main page with the filters"
  */
 export default function BooksListingClient({
   books,
 }: BooksListingClientProps) {
-  const theme = useTheme();
+  // Transform books to card format
+  const cards = React.useMemo(() => {
+    return books.map((book) => ({
+      id: book.slug,
+      title: book.title,
+      description: book.excerpt,
+      imageUrl: book.coverImageUrl,
+      imageAlt: book.coverImageAlt || book.title,
+      imageText: `${book.author}${book.publishedDate ? ` • ${format(book.publishedDate, 'MMMM yyyy')}` : ''}`,
+    }));
+  }, [books]);
 
-  // If only one book, could redirect directly, but showing simple grid is better UX
+  // Build results message
+  const resultsMessage = `${books.length} ${books.length === 1 ? 'book' : 'books'} available`;
+
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        backgroundColor: theme.palette.neutralLighterAlt,
-        padding: '4rem 1rem',
+    <ContentListingPage
+      title="Books"
+      iconName={getIconForPath('/books') || 'BookAnswers'}
+      description="Explore our collection of transformative books and resources. Purchase directly from Fluxline.pro or through major retailers."
+      basePath="/books"
+      cards={cards}
+      filters={[]} // No filters per requirements
+      resultsMessage={resultsMessage}
+      emptyStateTitle="No Books Available Yet"
+      emptyStateMessage="Check back soon for our upcoming publications."
+      ctaSection={{
+        title: 'Stay Updated on New Releases',
+        description:
+          "Be the first to know when new books and resources become available. Join our mailing list for exclusive content and early access.",
+        buttons: [
+          {
+            label: 'Get in Touch',
+            variant: 'primary',
+            path: '/contact',
+          },
+          {
+            label: 'Explore Our Services',
+            variant: 'secondary',
+            path: '/services',
+          },
+        ],
       }}
-    >
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-        }}
-      >
-        {/* Page Header */}
-        <div
-          style={{
-            textAlign: 'center',
-            marginBottom: '3rem',
-          }}
-        >
-          <h1
-            className="text-4xl font-bold mb-4"
-            style={{ color: theme.palette.themePrimary }}
-          >
-            Books
-          </h1>
-          <p
-            className="text-lg"
-            style={{ color: theme.palette.neutralPrimary, maxWidth: '800px', margin: '0 auto' }}
-          >
-            Explore our collection of transformative books and resources. Purchase directly from
-            Fluxline.pro or through major retailers.
-          </p>
-        </div>
-
-        {/* Books Grid */}
-        <div
-          className="grid gap-6"
-          style={{
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          }}
-        >
-          {books.map((book) => (
-            <InteractiveCard
-              key={book.id}
-              id={book.id}
-              title={book.title}
-              description={book.excerpt}
-              icon="BookAnswers"
-              href={`/books/${book.slug}`}
-              iconPosition="center"
-              showLearnMore={true}
-            />
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {books.length === 0 && (
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '4rem 2rem',
-            }}
-          >
-            <h2
-              className="text-2xl font-bold mb-4"
-              style={{ color: theme.palette.neutralPrimary }}
-            >
-              No Books Available Yet
-            </h2>
-            <p style={{ color: theme.palette.neutralSecondary }}>
-              Check back soon for our upcoming publications.
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
+    />
   );
 }
