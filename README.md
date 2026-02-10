@@ -431,6 +431,58 @@ Run Storybook for visual testing:
 yarn storybook
 ```
 
+### Testing Tag Navigation Locally
+
+**⚠️ Known Behavior**: Tag/category/technology navigation with spaces (e.g., "Personal Growth", "Machine Learning") **will show validation errors in development mode** (`yarn dev`). This is a Next.js limitation with static export validation and is **expected behavior**.
+
+**To test tag navigation properly:**
+
+```bash
+# 1. Build the production static export
+yarn build
+
+# 2. Serve the static files (NOT yarn dev)
+npx serve@latest out -p 3000
+
+# 3. Test tag navigation at http://localhost:3000
+# All tags with spaces should work correctly
+```
+
+**Why this happens:**
+
+- Development mode validates incoming params (encoded) against `generateStaticParams()` output (unencoded)
+- Production static export has no validation - just serves files from disk
+- Azure deployment works correctly (same as production build)
+
+**Critical Configuration (DO NOT CHANGE):**
+
+```typescript
+// ✅ CORRECT - Creates folders with REAL SPACES
+export async function generateStaticParams() {
+  return tags.map((tag) => ({
+    tag: tag, // Unencoded! Creates "Personal Growth/" folder
+  }));
+}
+
+// ❌ WRONG - Creates folders with ENCODED SPACES (causes 404s on Azure)
+export async function generateStaticParams() {
+  return tags.map((tag) => ({
+    tag: encodeURIComponent(tag), // Bad! Creates "Personal%20Growth/" folder
+  }));
+}
+```
+
+**This was a bug in blog tag/category pages (fixed in PR #111)** - they were encoding in `generateStaticParams()` while portfolio pages were not, causing 404s on Azure.
+
+**Do not:**
+
+- ❌ Remove `dynamicParams = false` from tag/category/technology pages
+- ❌ Add `encodeURIComponent()` to `generateStaticParams()` returns (causes 404s)
+- ❌ Remove `encodeURIComponent()` from navigation calls in client components
+- ❌ Worry about dev mode validation errors when testing tags with spaces
+
+This configuration is **correct for production** - ignore dev mode errors when testing tags.
+
 ### Accessibility Testing
 
 Built-in accessibility checks:

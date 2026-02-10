@@ -24,3 +24,4 @@ export type {
   FilterConfig,
   ContentListingPageProps,
 } from './ContentListingPage';
+export { AccessGate } from './AccessGate';

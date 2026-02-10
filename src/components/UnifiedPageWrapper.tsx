@@ -45,7 +45,7 @@ import ResonanceCoreImage from '../assets/images/LifeCoachingResonanceCore.jpg';
 import DesignImage from '../assets/images/Portfolio1280x1815.jpg';
 import BlogImage from '../assets/images/Blog1280x1815.png';
 import ContactImage from '../assets/images/ContactMe2400x1600.jpg';
-import BooksImage from '../assets/images/EducationTrainingPortrait.jpg';
+// import BooksImage from '../assets/images/EducationTrainingPortrait.jpg';
 import ContentImage from '../assets/images/Content1280x1815.jpg';
 import PortfolioImage from '../assets/images/Portfolio1280x1815.jpg';
 
@@ -153,10 +153,11 @@ const PAGE_CONFIGS: Record<
     image: ContactImage.src,
     imageText: "Let's Connect",
   },
-  '/books': {
-    image: BooksImage.src,
-    imageText: 'Books',
-  },
+  // Books page not yet implemented
+  // '/books': {
+  //   image: BooksImage.src,
+  //   imageText: 'Books',
+  // },
   '/github': {
     image: GitHubImage.src,
     imageText: 'GitHub',

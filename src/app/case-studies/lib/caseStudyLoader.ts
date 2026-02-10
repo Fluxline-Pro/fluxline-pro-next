@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { CaseStudy, ServiceCategory } from '../types';
+import { validateTags } from '@/utils/tag-utils';
 
 /**
  * Case Study Loader Utilities
@@ -191,6 +192,7 @@ export function getAllServices(): ServiceCategory[] {
 
 /**
  * Get all unique industries from all case studies
+ * Validates for potential duplicate industries (e.g., "Financial Services" vs "FinancialServices")
  */
 export function getAllIndustries(): string[] {
   const caseStudies = getAllCaseStudies();
@@ -200,7 +202,28 @@ export function getAllIndustries(): string[] {
     industriesSet.add(study.industry);
   });
 
-  return Array.from(industriesSet).sort();
+  const allIndustries = Array.from(industriesSet).sort();
+
+  // Validate industries for potential duplicates (development warning only)
+  if (process.env.NODE_ENV !== 'production') {
+    const validation = validateTags(allIndustries);
+    if (!validation.isValid) {
+      console.warn(
+        '⚠️  [Case Studies] Potential duplicate industries detected (different formatting):',
+        validation.duplicates
+          .map(
+            (d) =>
+              `"${d.tag}" matches: [${d.matches.map((m) => `"${m}"`).join(', ')}]`
+          )
+          .join('\n  ')
+      );
+      console.warn(
+        '💡 Tip: Use consistent industry formatting. Recommended: Title Case with spaces'
+      );
+    }
+  }
+
+  return allIndustries;
 }
 
 /**

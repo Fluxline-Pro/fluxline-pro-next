@@ -140,6 +140,116 @@ This repository contains the Fluxline Resonance Group's web platform. It is buil
   - Pass data from Server Components to Client Components via props
   - Never use `'use client'` in components that read from file system
 
+### Tag/Category/Technology Navigation (Critical Configuration)
+
+**⚠️ DO NOT MODIFY**: The following configuration is required for tags with spaces to work on Azure deployment.
+
+**Tag/Category/Technology Page Configuration:**
+
+All dynamic route pages for tags, categories, and technologies **must** include:
+
+```typescript
+// Required: Disable dynamic params for static export
+export const dynamicParams = false;
+
+// Required: Return UNENCODED strings (real spaces, not %20)
+export async function generateStaticParams() {
+  const tags = getAllTags();
+  return tags.map((tag) => ({
+    tag: tag, // ← CRITICAL: Do NOT use encodeURIComponent() here!
+  }));
+}
+
+// Required: Decode incoming params
+export default async function TagPage({ params }: Props) {
+  const { tag } = await params;
+  const decodedTag = decodeURIComponent(tag);
+  // ... rest of component
+}
+```
+
+**Client Component Navigation:**
+
+All navigation to tag/category/technology pages **must** use encoding:
+
+```typescript
+// Required: Encode URLs in navigation
+const handleTagClick = (tag: string) => {
+  router.push(`/blog/tag/${encodeURIComponent(tag)}`);
+};
+```
+
+**Why This Configuration:**
+
+1. **Production Build**: Creates directories with real spaces (e.g., `Personal Growth/`, not `Personal%20Growth/`)
+2. **Browser Navigation**: Automatically encodes URLs (e.g., `/blog/tag/Personal%20Growth`)
+3. **Azure SWA**: Decodes incoming URLs and matches against directories with real spaces
+4. **Development Mode**: Will show validation errors - this is **expected** and **safe to ignore**
+
+**How It Works:**
+
+```
+1. generateStaticParams() returns: { tag: "Personal Growth" }
+2. Next.js creates folder: /blog/tag/Personal Growth/
+3. Client navigation encodes: router.push("/blog/tag/Personal%20Growth")
+4. Browser requests: /blog/tag/Personal%20Growth
+5. Azure decodes and serves: /blog/tag/Personal Growth/index.html ✅
+```
+
+**⚠️ CRITICAL BUG TO AVOID:**
+
+**DO NOT encode in `generateStaticParams()` - this was a known bug fixed in PR #111:**
+
+```typescript
+// ❌ WRONG - This creates "/blog/tag/Personal%20Growth/" folder
+return tags.map((tag) => ({
+  tag: encodeURIComponent(tag), // BAD! Creates literal %20 in folder names
+}));
+
+// ✅ CORRECT - This creates "/blog/tag/Personal Growth/" folder
+return tags.map((tag) => ({
+  tag: tag, // GOOD! Real spaces in folder names
+}));
+```
+
+**Why the wrong way breaks:**
+
+- `encodeURIComponent()` in `generateStaticParams()` creates folders like `Personal%20Growth/`
+- Browser encodes to `Personal%20Growth` → becomes `Personal%2520Growth` (double encoded) → 404
+- This bug was present in blog tag/category pages but NOT portfolio pages (which worked correctly)
+
+**Testing Tag Navigation:**
+
+```bash
+# ❌ WRONG: Don't test with dev mode
+yarn dev  # Will show validation errors for tags with spaces
+
+# ✅ CORRECT: Test with production build
+yarn build
+npx serve@latest out -p 3000
+# Now test tag navigation - should work perfectly
+
+# Verify folder structure has REAL SPACES:
+ls -la out/blog/tag/
+# Should show: "Personal Growth/", not "Personal%20Growth/"
+```
+
+**Files Using This Pattern:**
+
+- `src/app/blog/tag/[tag]/page.tsx` ✅ Fixed in PR #111
+- `src/app/blog/category/[category]/page.tsx` ✅ Fixed in PR #111
+- `src/app/portfolio/tag/[tag]/page.tsx` ✅ Always correct
+- `src/app/portfolio/technology/[technology]/page.tsx` ✅ Always correct
+
+**Common Mistakes to Avoid:**
+
+- ❌ Removing `dynamicParams = false` (breaks static export validation)
+- ❌ Adding `encodeURIComponent()` to `generateStaticParams()` returns (creates literal `%20` in directory names - causes 404s)
+- ❌ Removing `encodeURIComponent()` from navigation calls (creates unencoded URLs - breaks routing)
+- ❌ Testing only in dev mode and thinking it's broken (dev mode has validation limitations)
+
+**This is a Next.js static export limitation, not a bug.** The configuration is correct for production deployment.
+
 ### Content Listing System (Unified)
 
 **Location**: `src/components/ContentListingPage.tsx`
