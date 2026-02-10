@@ -460,14 +460,14 @@ npx serve@latest out -p 3000
 // ✅ CORRECT - Creates folders with REAL SPACES
 export async function generateStaticParams() {
   return tags.map((tag) => ({
-    tag: tag,  // Unencoded! Creates "Personal Growth/" folder
+    tag: tag, // Unencoded! Creates "Personal Growth/" folder
   }));
 }
 
 // ❌ WRONG - Creates folders with ENCODED SPACES (causes 404s on Azure)
 export async function generateStaticParams() {
   return tags.map((tag) => ({
-    tag: encodeURIComponent(tag),  // Bad! Creates "Personal%20Growth/" folder
+    tag: encodeURIComponent(tag), // Bad! Creates "Personal%20Growth/" folder
   }));
 }
 ```

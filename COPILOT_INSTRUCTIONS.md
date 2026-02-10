@@ -156,7 +156,7 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const tags = getAllTags();
   return tags.map((tag) => ({
-    tag: tag,  // ← CRITICAL: Do NOT use encodeURIComponent() here!
+    tag: tag, // ← CRITICAL: Do NOT use encodeURIComponent() here!
   }));
 }
 
@@ -203,12 +203,12 @@ const handleTagClick = (tag: string) => {
 ```typescript
 // ❌ WRONG - This creates "/blog/tag/Personal%20Growth/" folder
 return tags.map((tag) => ({
-  tag: encodeURIComponent(tag),  // BAD! Creates literal %20 in folder names
+  tag: encodeURIComponent(tag), // BAD! Creates literal %20 in folder names
 }));
 
 // ✅ CORRECT - This creates "/blog/tag/Personal Growth/" folder
 return tags.map((tag) => ({
-  tag: tag,  // GOOD! Real spaces in folder names
+  tag: tag, // GOOD! Real spaces in folder names
 }));
 ```
 
