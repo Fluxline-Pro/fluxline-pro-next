@@ -66,6 +66,19 @@ Choose one or more services that apply to your case study:
 - `education` - Coaching & Education
 - `wellness` - Wellness & Holistic Health
 
+## Available Industries
+
+Common industry categories (you can use others as needed):
+
+- `Technology` - Technology companies and IT solutions
+- `Healthcare` - Healthcare providers and medical services
+- `Healthcare IT` - Healthcare technology and systems
+- `Health & Wellness` - Wellness coaching and holistic health
+- `Finance` - Financial services and fintech
+- `Education` - Educational institutions and e-learning
+- `Retail` - Retail and e-commerce
+- `Professional Services` - Consulting, legal, accounting
+
 ## Required Frontmatter Fields
 
 | Field            | Type    | Description                               |
