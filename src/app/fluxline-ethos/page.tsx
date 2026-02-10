@@ -43,7 +43,6 @@ export default function FluxlineEthosPage() {
               color: theme.palette.themePrimary,
               fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
               fontWeight: theme.typography.fontWeights.semiBold,
-              marginBottom: '1.5rem',
             }}
           >
             {ethosAbout.sectionTitle}

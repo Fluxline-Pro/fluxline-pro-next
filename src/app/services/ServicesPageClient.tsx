@@ -92,8 +92,7 @@ export default function ServicesPageClient() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Physical training and wellness support for sustainable
-              transformation.
+              Physical training and transformational frameworks rooted in identity work and embodiment.
             </Typography>
             <div
               className='grid gap-6'
@@ -185,8 +184,7 @@ export default function ServicesPageClient() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Coaching, strategic consulting, and transformational frameworks
-              for clarity and growth.
+              Strategic consulting and transformational frameworks for clarity and growth.
             </Typography>
             <div
               className='grid gap-6'
@@ -196,7 +194,7 @@ export default function ServicesPageClient() {
               }}
             >
               {SERVICE_CATEGORIES.filter(
-                (s) => s.category === 'depth-strategy'
+                (s) => s.category === 'depth-strategy' && s.id !== 'education-training'
               ).map((service) => (
                 <InteractiveCard
                   key={service.id}
@@ -216,10 +214,10 @@ export default function ServicesPageClient() {
         <Callout
           variant='accent'
           title='Not sure where to start?'
-          subtitle="Share with us your needs in a free, no obligation consultation. We'll map the right first step together."
+          subtitle="Share your needs in a free consultation. We'll map the right first step together."
           action={
             <FormButton
-              text='Book a Consultation'
+              text='Start a Conversation'
               variant='primary'
               size='large'
               icon='ChevronRight'

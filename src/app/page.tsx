@@ -15,23 +15,6 @@ import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { IExtendedTheme, ThemeMode } from '@/theme/theme';
 
 /**
- * HighlightText Component - displays highlighted text in white
- */
-const HighlightText: React.FC<{ text: string; theme: IExtendedTheme }> = ({
-  text,
-  theme,
-}) => (
-  <span
-    style={{
-      color: theme.palette.white,
-      fontWeight: theme.typography.fontWeights.extraLight,
-    }}
-  >
-    {text}
-  </span>
-);
-
-/**
  * Home Page Content Component
  * Displays the main hero section with animated text and CTA
  */
@@ -44,12 +27,7 @@ const HomeContent: React.FC<{
   const [animateDivider, setAnimateDivider] = React.useState(false);
   const [animateHeader, setAnimateHeader] = React.useState(false);
   const [animateSubHeader, setAnimateSubHeader] = React.useState(false);
-  const [animateSubHeaderLines, setAnimateSubHeaderLines] = React.useState([
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [animateBlurb, setAnimateBlurb] = React.useState(false);
 
   React.useEffect(() => {
     // Only start animations when background is ready
@@ -65,23 +43,11 @@ const HomeContent: React.FC<{
       setAnimateDivider(true);
     }, 800);
 
-    // Subheader lines animations
+    // Blurb fade-in animation
     setTimeout(() => {
       setAnimateSubHeader(true);
-      setAnimateSubHeaderLines([true, false, false, false]);
+      setAnimateBlurb(true);
     }, 1400);
-
-    setTimeout(() => {
-      setAnimateSubHeaderLines([true, true, false, false]);
-    }, 1800);
-
-    setTimeout(() => {
-      setAnimateSubHeaderLines([true, true, true, false]);
-    }, 2400);
-
-    setTimeout(() => {
-      setAnimateSubHeaderLines([true, true, true, true]);
-    }, 2800);
   }, [shouldStartAnimations]);
 
   const isMobileLandscape = orientation === 'mobile-landscape';
@@ -129,7 +95,7 @@ const HomeContent: React.FC<{
       textShadow: `0 0 5px ${theme.palette.neutralDark}`,
       fontSize: isMobileLandscape
         ? 'clamp(1rem, 3vw, 1.5rem)'
-        : 'clamp(1.5rem, 4vw, 2.5rem)',
+        : 'clamp(2rem, 4vw, 2.5rem)',
       fontWeight: theme.typography.fontWeights.light,
       ...animationStyles.slideInRight,
     },
@@ -144,18 +110,19 @@ const HomeContent: React.FC<{
       textShadow: `0 0 5px ${theme.palette.neutralDark}`,
       ...animationStyles.slideInRightDelayed,
     },
-    subHeaderLine: {
-      color:
-        themeMode === 'grayscale'
-          ? theme.palette.neutralTertiary
-          : theme.palette.themePrimary,
-      lineHeight: theme.typography.lineHeights.tight,
-      fontWeight: theme.typography.fontWeights.extraLight,
+    blurbText: {
+      color: theme.palette.white,
+      lineHeight: theme.typography.lineHeights.relaxed,
+      fontWeight: theme.typography.fontWeights.light,
       fontSize: isMobileLandscape
-        ? 'clamp(0.9rem, 2.5vw, 1.4rem)'
-        : 'clamp(1.2rem, 3vw, 2rem)',
-      textTransform: 'capitalize' as const,
+        ? 'clamp(1rem, 2.5vw, 1.3rem)'
+        : 'clamp(1.1rem, 2.5vw, 1.5rem)',
       textShadow: `1px 2px 5px ${theme.palette.black}`,
+      textAlign: 'left' as const,
+      maxWidth: '700px',
+      opacity: 0,
+      animation: animateBlurb ? 'fadeIn 0.8s ease-in-out forwards' : 'none',
+      animationDelay: '0.3s',
     },
   };
 
@@ -200,6 +167,7 @@ const HomeContent: React.FC<{
     buttonContainer: {
       display: 'flex',
       flexDirection: 'column' as const,
+      justifyContent: 'flex-start',
       gap: '0.5rem',
       width: '100%',
       maxWidth: '500px',
@@ -235,7 +203,7 @@ const HomeContent: React.FC<{
       </style>
       <div style={containerStyles.main}>
         <Typography variant='h2' style={textStyles.welcomeText}>
-          welcome to
+          step into
         </Typography>
         <Typography variant='h1' style={textStyles.mainTitle}>
           fluxline
@@ -244,28 +212,12 @@ const HomeContent: React.FC<{
         <hr style={containerStyles.divider} />
 
         <div style={containerStyles.subHeaderContainer}>
-          <Typography variant='h3' style={textStyles.subHeaderLine}>
-            {[
-              { highlight: 'strategic', text: 'consulting' },
-              { highlight: 'brand', text: 'establishment' },
-              { highlight: 'personal training', text: '& wellness' },
-              { highlight: 'mentoring', text: '& coaching' },
-            ].map((line, index) => (
-              <div
-                key={index}
-                style={{
-                  ...textStyles.subHeaderLine,
-                  opacity: 0,
-                  transform: 'translateY(-10px)',
-                  animation: animateSubHeaderLines[index]
-                    ? 'slideInDown 0.4s ease-in-out forwards'
-                    : 'none',
-                }}
-              >
-                <HighlightText text={line.highlight} theme={theme} />{' '}
-                {line.text}
-              </div>
-            ))}
+          <Typography variant='p' style={textStyles.blurbText}>
+            We build <em>congruence.</em><br />
+            <em>Strong</em> bodies. <em>Clear</em> brands. <em>Resilient</em> systems.<br />
+            Whether you need <em>development</em>, <em>design</em>, <em>coaching</em>, or
+            <em>strategy</em>, we integrate technical precision with emotional
+            intelligence so your inner and outer work finally match.
           </Typography>
         </div>
         <div style={containerStyles.buttonContainer}>

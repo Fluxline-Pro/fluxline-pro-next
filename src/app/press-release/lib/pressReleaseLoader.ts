@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { PressRelease } from '../types';
+import { validateTags } from '@/utils/tag-utils';
 
 /**
  * Press Release Loader Utilities
@@ -136,6 +137,7 @@ export function getAllPressReleases(): PressRelease[] {
 
 /**
  * Get all unique categories from all press releases
+ * Validates for potential duplicate categories (different formatting)
  */
 export function getAllCategories(): string[] {
   const releases = getAllPressReleases();
@@ -145,11 +147,30 @@ export function getAllCategories(): string[] {
     categoriesSet.add(release.category);
   });
 
-  return Array.from(categoriesSet).sort();
+  const allCategories = Array.from(categoriesSet).sort();
+
+  // Validate categories for potential duplicates (development warning only)
+  if (process.env.NODE_ENV !== 'production') {
+    const validation = validateTags(allCategories);
+    if (!validation.isValid) {
+      console.warn(
+        '⚠️  [Press Releases] Potential duplicate categories detected:',
+        validation.duplicates
+          .map(
+            (d) =>
+              `"${d.tag}" matches: [${d.matches.map((m) => `"${m}"`).join(', ')}]`
+          )
+          .join('\n  ')
+      );
+    }
+  }
+
+  return allCategories;
 }
 
 /**
  * Get all unique tags from all press releases
+ * Validates for potential duplicate tags (different formatting)
  */
 export function getAllTags(): string[] {
   const releases = getAllPressReleases();
@@ -159,7 +180,25 @@ export function getAllTags(): string[] {
     release.tags.forEach((tag) => tagsSet.add(tag));
   });
 
-  return Array.from(tagsSet).sort();
+  const allTags = Array.from(tagsSet).sort();
+
+  // Validate tags for potential duplicates (development warning only)
+  if (process.env.NODE_ENV !== 'production') {
+    const validation = validateTags(allTags);
+    if (!validation.isValid) {
+      console.warn(
+        '⚠️  [Press Releases] Potential duplicate tags detected:',
+        validation.duplicates
+          .map(
+            (d) =>
+              `"${d.tag}" matches: [${d.matches.map((m) => `"${m}"`).join(', ')}]`
+          )
+          .join('\n  ')
+      );
+    }
+  }
+
+  return allTags;
 }
 
 /**

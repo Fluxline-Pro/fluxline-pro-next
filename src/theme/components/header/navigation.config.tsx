@@ -79,7 +79,7 @@ export const navItems: NavItem[] = [
   //   description: 'Upcoming events',
   // },
   {
-    label: 'contact',
+    label: 'contact us',
     path: '/contact',
     view: 'contact',
     iconName: 'PublicContactCard',

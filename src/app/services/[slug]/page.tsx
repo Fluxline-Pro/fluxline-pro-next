@@ -75,12 +75,12 @@ export default function ServiceDetailPage() {
         'Flexible scheduling and remote coaching options',
       ],
       'resonance-core': [
-        'Archetypal mapping and identity exploration',
-        'Emotional emergence and breakthrough documentation',
-        'Symbolic rituals and transformational practices',
-        'Legacy building and mission alignment',
-        'Community resonance and network cultivation',
-        'Ongoing mentorship and evolutionary support',
+        'Understand the signals your body and emotions send',
+        "Reveal the stories you've been living inside",
+        'Name the outdated identities shaping your choices',
+        'Update your internal predictions and interpretations',
+        "Choose the identity that supports who you're becoming",
+        'Take aligned action from your chosen identity',
       ],
       'education-training': [
         'Experiential learning and leadership workshops',
@@ -266,7 +266,7 @@ export default function ServiceDetailPage() {
         <Callout
           variant='accent'
           title='Ready to Begin?'
-          subtitle="Book a 20–30 minute consultation to see if this is a fit."
+          subtitle="Book a 20–30 minute consultation to explore your personal identity and aligning your decisions with it."
           action={
             <FormButton
               text='Book a Consultation'

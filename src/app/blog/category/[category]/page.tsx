@@ -3,6 +3,10 @@ import type { Metadata } from 'next';
 import { getAllBlogPosts, getAllCategories } from '../../lib/blogLoader';
 import { BlogCategoryClient } from './BlogCategoryClient';
 import { notFound } from 'next/navigation';
+import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
+
+// Disable dynamic params - we only serve pre-generated static pages
+export const dynamicParams = false;
 
 // Generate static params for all categories
 export async function generateStaticParams() {
@@ -14,6 +18,8 @@ export async function generateStaticParams() {
     return [];
   }
 
+  // Return unencoded categories - filesystem will have real spaces,
+  // browser and Azure will handle URL encoding automatically
   return categories.map((category) => ({
     category: category,
   }));
@@ -61,6 +67,7 @@ interface BlogCategoryPageProps {
 /**
  * Blog Category Filter Page - Server Component
  * Handles static generation and passes data to client component
+ * Uses fuzzy matching to handle spaces and case variations
  */
 export default async function BlogCategoryPage({
   params,
@@ -68,13 +75,25 @@ export default async function BlogCategoryPage({
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
 
-  // Get all posts and filter by category
+  // Get all posts and filter by category (with fuzzy matching)
   const allPosts = getAllBlogPosts();
-  const posts = allPosts.filter((post) => post.category === decodedCategory);
+  const allCategories = getAllCategories();
+
+  // Find the canonical category that matches
+  const matchedCategory = findMatchingTag(decodedCategory, allCategories);
+
+  if (!matchedCategory) {
+    notFound();
+  }
+
+  // Filter posts using fuzzy category matching
+  const posts = allPosts.filter((post) =>
+    tagsMatch(post.category, decodedCategory)
+  );
 
   if (posts.length === 0) {
     notFound();
   }
 
-  return <BlogCategoryClient category={decodedCategory} posts={posts} />;
+  return <BlogCategoryClient category={matchedCategory} posts={posts} />;
 }

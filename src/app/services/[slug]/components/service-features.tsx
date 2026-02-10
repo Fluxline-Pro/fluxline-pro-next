@@ -51,10 +51,12 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
         'Team leadership and influence cultivation',
       ],
       'resonance-core': [
-        'Archetypal mapping and identity exploration',
-        'Emotional emergence and breakthrough documentation',
-        'Symbolic rituals and transformational practices',
-        'Legacy building and mission alignment',
+        'Understand the signals your body and emotions send',
+        "Reveal the stories you've been living inside",
+        'Name the outdated identities shaping your choices',
+        'Update your internal predictions and interpretations',
+        "Choose the identity that supports who you're becoming",
+        'Take aligned action from your chosen identity',
       ],
     };
 

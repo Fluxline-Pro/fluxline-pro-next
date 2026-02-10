@@ -42,9 +42,12 @@ export function BlogListingClientWrapper({
       filtered = filtered.filter((post) => post.category === selectedCategory);
     }
 
-    return filtered.sort(
-      (a, b) => b.publishedDate.getTime() - a.publishedDate.getTime()
-    );
+    // Sort by date with null safety
+    return filtered.sort((a, b) => {
+      const dateA = a.publishedDate?.getTime() ?? 0;
+      const dateB = b.publishedDate?.getTime() ?? 0;
+      return dateB - dateA;
+    });
   }, [initialPosts, selectedTag, selectedCategory]);
 
   // Transform blog posts to card format
@@ -55,7 +58,9 @@ export function BlogListingClientWrapper({
       description: post.excerpt,
       imageUrl: post.imageUrl,
       imageAlt: post.imageAlt || post.title,
-      imageText: format(post.publishedDate, 'MMMM d, yyyy'),
+      imageText: post.publishedDate
+        ? format(post.publishedDate, 'MMMM d, yyyy')
+        : 'Date unknown',
     }));
   }, [blogPosts]);
 
@@ -66,7 +71,9 @@ export function BlogListingClientWrapper({
       label: 'Category',
       options: [
         { key: '', text: 'All Categories' },
-        ...allCategories.map((cat) => ({ key: cat, text: cat })),
+        ...allCategories
+          .filter((cat) => cat && typeof cat === 'string')
+          .map((cat) => ({ key: cat, text: cat })),
       ],
       value: selectedCategory,
       onChange: setSelectedCategory,
@@ -76,7 +83,9 @@ export function BlogListingClientWrapper({
       label: 'Tag',
       options: [
         { key: '', text: 'All Tags' },
-        ...allTags.map((tag) => ({ key: tag, text: tag })),
+        ...allTags
+          .filter((tag) => tag && typeof tag === 'string')
+          .map((tag) => ({ key: tag, text: tag })),
       ],
       value: selectedTag,
       onChange: setSelectedTag,
