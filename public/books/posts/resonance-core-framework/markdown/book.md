@@ -1,74 +1,74 @@
 ---
-title: "The Resonance Core Framework"
-subtitle: "A Comprehensive Guide to Personal and Professional Transformation"
-author: "Fluxline Resonance Group"
-publisher: "Fluxline Publishing"
-publishedDate: "2026-02-15"
-isbn: "978-0-000000-00-0"
-description: "The Resonance Core Framework is a groundbreaking approach to personal and professional transformation. This comprehensive guide provides the tools, strategies, and insights you need to align your life with your deepest values and create lasting change."
-excerpt: "Transform your life with the Resonance Core Framework - a proven methodology for aligning your personal and professional goals with your core values."
-coverImageUrl: "/books/posts/resonance-core-framework/images/cover.jpg"
-coverImageAlt: "The Resonance Core Framework book cover"
-category: "Business & Self-Help"
+title: 'The Resonance Core Framework'
+subtitle: 'A Comprehensive Guide to Personal and Professional Transformation'
+author: 'Fluxline Resonance Group'
+publisher: 'Fluxline Publishing'
+publishedDate: '2026-02-15'
+isbn: '978-0-000000-00-0'
+description: 'The Resonance Core Framework is a groundbreaking approach to personal and professional transformation. This comprehensive guide provides the tools, strategies, and insights you need to align your life with your deepest values and create lasting change.'
+excerpt: 'Transform your life with the Resonance Core Framework - a proven methodology for aligning your personal and professional goals with your core values.'
+coverImageUrl: '/books/posts/resonance-core-framework/images/The-Resonance-Core-Book.jpg'
+coverImageAlt: 'The Resonance Core Framework book cover'
+category: 'Business & Self-Help'
 tags:
-  - "transformation"
-  - "resonance"
-  - "framework"
-  - "business"
-  - "self-help"
-  - "personal-development"
+  - 'transformation'
+  - 'resonance'
+  - 'framework'
+  - 'business'
+  - 'self-help'
+  - 'personal-development'
 featured: true
-status: "pre-order"
+status: 'pre-order'
 formats:
-  - "hardcover"
-  - "softcover"
-  - "ebook"
+  - 'hardcover'
+  - 'softcover'
+  - 'ebook'
 prices:
-  - format: "hardcover"
+  - format: 'hardcover'
     price: 34.99
-    currency: "USD"
-    retailer: "Amazon"
-    url: "#"
-  - format: "softcover"
+    currency: 'USD'
+    retailer: 'Amazon'
+    url: '#'
+  - format: 'softcover'
     price: 24.99
-    currency: "USD"
-    retailer: "Amazon"
-    url: "#"
-  - format: "ebook"
+    currency: 'USD'
+    retailer: 'Amazon'
+    url: '#'
+  - format: 'ebook'
     price: 14.99
-    currency: "USD"
-    retailer: "Fluxline.pro"
-    url: "#"
+    currency: 'USD'
+    retailer: 'Fluxline.pro'
+    url: '#'
 retailers:
-  - name: "Amazon"
-    url: "#"
-    formats: ["hardcover", "softcover", "ebook"]
-    icon: "ShoppingCart"
-  - name: "Barnes & Noble"
-    url: "#"
-    formats: ["ebook"]
-    icon: "BookAnswers"
-  - name: "Apple Books"
-    url: "#"
-    formats: ["ebook"]
-    icon: "BookAnswers"
+  - name: 'Amazon'
+    url: '#'
+    formats: ['hardcover', 'softcover', 'ebook']
+    icon: 'ShoppingCart'
+  - name: 'Barnes & Noble'
+    url: '#'
+    formats: ['ebook']
+    icon: 'BookAnswers'
+  - name: 'Apple Books'
+    url: '#'
+    formats: ['ebook']
+    icon: 'BookAnswers'
 directPurchaseAvailable: true
 directPurchasePrice: 12.99
 includesWorkbook: true
 workbookPrice: 9.99
 bundlePrice: 19.99
 pageCount: 342
-language: "English"
-dimensions: "6 x 9 inches"
-seoTitle: "The Resonance Core Framework - Transform Your Life | Fluxline"
-seoDescription: "Discover the Resonance Core Framework, a comprehensive guide to personal and professional transformation. Available in hardcover, softcover, and eBook formats."
+language: 'English'
+dimensions: '6 x 9 inches'
+seoTitle: 'The Resonance Core Framework - Transform Your Life | Fluxline'
+seoDescription: 'Discover the Resonance Core Framework, a comprehensive guide to personal and professional transformation. Available in hardcover, softcover, and eBook formats.'
 seoKeywords:
-  - "resonance core framework"
-  - "personal transformation"
-  - "professional development"
-  - "business framework"
-  - "self-help book"
-  - "transformation guide"
+  - 'resonance core framework'
+  - 'personal transformation'
+  - 'professional development'
+  - 'business framework'
+  - 'self-help book'
+  - 'transformation guide'
 ---
 
 ## About The Book
@@ -157,6 +157,7 @@ Our eBook editions include enhanced digital features:
 - **Regular Updates**: Access to updated content and resources
 
 Purchase the PDF edition directly from Fluxline.pro and receive:
+
 - **Discounted Pricing**: Save compared to retail editions
 - **Instant Access**: Download immediately after purchase
 - **Personalized Copy**: Each PDF is watermarked with your information
