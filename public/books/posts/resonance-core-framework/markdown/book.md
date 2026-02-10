@@ -26,7 +26,7 @@ formats:
   - 'ebook'
 prices:
   - format: 'hardcover'
-    price: 59.99
+    price: 54.99
     currency: 'USD'
     retailer: 'Amazon'
     url: '#'
@@ -36,7 +36,7 @@ prices:
     retailer: 'Amazon'
     url: '#'
   - format: 'ebook'
-    price: 24.99
+    price: 21.99
     currency: 'USD'
     retailer: 'Fluxline.pro'
     url: '#'
