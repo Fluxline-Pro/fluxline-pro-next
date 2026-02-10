@@ -1,36 +1,32 @@
 ---
 title: 'When the System You Built Tests You First'
-excerpt: 'This morning wasn't a setback—it was a case study. A stress test. A moment of truth where the Fluxline Framework met the raw terrain of my own nervous system.'
+excerpt: "This morning wasn't a setback - it was a case study. A stress test. A moment of truth where the Fluxline Framework met the raw terrain of my own nervous system."
 author: 'Terence Waters'
 publishedDate: '2026-02-10'
 category: 'Personal Growth'
 tags:
-  [
-    'Fluxline Framework',
-    'Identity Architecture',
-    'Resonance',
-    'Resonance Core Framework',
-    'DRIVE Model',
-    'Transformation',
-    'Somatic Discipline',
-    'Personal Growth',
-  ]
+  - 'Fluxline Framework'
+  - 'Identity Architecture'
+  - 'Resonance'
+  - 'Resonance Core Framework'
+  - 'DRIVE Model'
+  - 'Transformation'
+  - 'Somatic Discipline'
+  - 'Personal Growth'
 imageUrl: '/blog/posts/system-tests-and-reaffirmations/images/systems-testing-process.jpg'
 imageAlt: 'Visual representation of the systems testing process showing integration of emotional waves with framework principles'
 featured: true
 seoTitle: 'When Your Framework Tests You: Real-Time Identity Transformation'
-seoDescription: 'A founder's raw account of applying the Fluxline Framework during an emotional crisis. Discover how systems thinking meets somatic discipline in real transformation.'
+seoDescription: "A founder's raw account of applying the Fluxline Framework during an emotional crisis. Discover how systems thinking meets somatic discipline in real transformation."
 seoKeywords:
-  [
-    'Fluxline Framework',
-    'identity transformation',
-    'somatic discipline',
-    'resonance',
-    'emotional architecture',
-    'personal growth',
-    'systems thinking',
-    'identity shift',
-  ]
+  - 'Fluxline Framework'
+  - 'identity transformation'
+  - 'somatic discipline'
+  - 'resonance'
+  - 'emotional architecture'
+  - 'personal growth'
+  - 'systems thinking'
+  - 'identity shift'
 ---
 
 # When the System You Built Tests You First
