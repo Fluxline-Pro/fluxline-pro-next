@@ -122,6 +122,7 @@ export function ContentListingPage({
   description,
   basePath,
   cards,
+  totalCount = cards.length,
   filters,
   resultsMessage,
   emptyStateTitle = 'No items found',
@@ -141,6 +142,31 @@ export function ContentListingPage({
     { key: 'large-tile', text: 'Large Tile' },
   ];
 
+  React.useEffect(() => {
+    if (title === 'Books') {
+      setViewType('large-tile'); // Force large tile view for Books page as per requirements
+    }
+  }, [title, setViewType]);
+
+  // Ensure filters array is always defined
+  if (!filters) {
+    console.warn('Filters prop is undefined, defaulting to empty array');
+    filters = [];
+  }
+
+  // Ensure cards array is always defined
+  if (!cards) {
+    console.warn('Cards prop is undefined, defaulting to empty array');
+    cards = [];
+  }
+
+  // Log if resultsMessage is missing when totalCount is provided
+  if (totalCount !== undefined && !resultsMessage) {
+    console.warn(
+      'totalCount prop is provided without resultsMessage. Consider providing a resultsMessage for better user feedback.'
+    );
+  }
+
   // Map view type for grid component
   const getViewType = () => {
     if (viewType === 'small-tile') return 'small';
@@ -159,7 +185,7 @@ export function ContentListingPage({
 
   // Render filter controls
   const renderFilters = () => {
-    return (
+    return title !== 'Books' ? ( // Only show filters if not on the Books Listing page, per requirements
       <>
         {filters.map((filter, index) => (
           <div key={index} style={{ minWidth: '200px', flex: '1 1 200px' }}>
@@ -198,7 +224,7 @@ export function ContentListingPage({
           />
         </div>
       </>
-    );
+    ) : null /* No filters for Books page as per requirements */;
   };
 
   return (
@@ -237,6 +263,7 @@ export function ContentListingPage({
             <AdaptiveCardGrid
               cards={cards}
               viewType={getViewType()}
+              gridColumns={title === 'Books' ? 2 : undefined} // Force 2 columns for Books page as per requirements
               gap={theme.spacing.m}
               onCardClick={handleCardClick}
             />
