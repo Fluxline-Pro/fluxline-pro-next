@@ -1,8 +1,8 @@
 ---
 title: 'The Resonance Core Framework'
 subtitle: 'A Comprehensive Guide to Personal and Professional Transformation'
-author: 'Fluxline Resonance Group'
-publisher: 'Fluxline Publishing'
+author: 'Terence Waters'
+publisher: 'Fluxline Resonance Group Publishing'
 publishedDate: '2026-02-15'
 isbn: '978-0-000000-00-0'
 description: 'The Resonance Core Framework is a groundbreaking approach to personal and professional transformation. This comprehensive guide provides the tools, strategies, and insights you need to align your life with your deepest values and create lasting change.'
@@ -11,12 +11,13 @@ coverImageUrl: '/books/posts/resonance-core-framework/images/The-Resonance-Core-
 coverImageAlt: 'The Resonance Core Framework book cover'
 category: 'Business & Self-Help'
 tags:
-  - 'transformation'
-  - 'resonance'
-  - 'framework'
-  - 'business'
-  - 'self-help'
-  - 'personal-development'
+  - 'Transformation'
+  - 'Resonance'
+  - 'Resonance Core Framework'
+  - 'Framework'
+  - 'Business'
+  - 'Self-Help'
+  - 'Personal Development'
 featured: true
 status: 'pre-order'
 formats:
@@ -25,17 +26,17 @@ formats:
   - 'ebook'
 prices:
   - format: 'hardcover'
-    price: 34.99
+    price: 59.99
     currency: 'USD'
     retailer: 'Amazon'
     url: '#'
   - format: 'softcover'
-    price: 24.99
+    price: 39.99
     currency: 'USD'
     retailer: 'Amazon'
     url: '#'
   - format: 'ebook'
-    price: 14.99
+    price: 24.99
     currency: 'USD'
     retailer: 'Fluxline.pro'
     url: '#'
@@ -53,10 +54,10 @@ retailers:
     formats: ['ebook']
     icon: 'BookAnswers'
 directPurchaseAvailable: true
-directPurchasePrice: 12.99
+directPurchasePrice: 24.99
 includesWorkbook: true
-workbookPrice: 9.99
-bundlePrice: 19.99
+workbookPrice: 19.99
+bundlePrice: 39.99
 pageCount: 342
 language: 'English'
 dimensions: '6 x 9 inches'
