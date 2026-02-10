@@ -28,7 +28,7 @@ export default function ContactPage() {
         {/* Hero Section */}
         <Hero
           title="Let's Connect"
-          iconName={getIconForPath('/contact-us')}
+          iconName={getIconForPath('/contact')}
           description="Reach out in the way that feels most natural to you — social media, a direct conversation, or the form below. We'd love to connect with you! You're also welcome to schedule a free consultation using the booking button to explore your needs together."
         >
           {/* Social Links */}

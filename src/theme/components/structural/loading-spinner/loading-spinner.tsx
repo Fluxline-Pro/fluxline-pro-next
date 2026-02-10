@@ -47,7 +47,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   const { theme } = useAppTheme();
 
   const spinnerStyles = {
-    color: theme.palette.themePrimary,
+    color: theme.palette.themeSecondary,
     fontSize: '4rem',
   };
 
