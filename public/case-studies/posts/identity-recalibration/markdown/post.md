@@ -18,13 +18,13 @@ technologies:
 publishedDate: '2026-02-10'
 projectDuration: 'Single morning session'
 featured: true
-imageUrl: '/case-studies/posts/system-test-qa-resonance-core/images/systems-testing-process.jpg'
+imageUrl: '/case-studies/posts/identity-recalibration/images/systems-testing-process.jpg'
 imageAlt: 'Visual representation of the systems testing process showing integration of emotional waves with framework principles'
 gallery:
-  - url: '/case-studies/posts/system-test-qa-resonance-core/images/systems-testing-process.jpg'
+  - url: '/case-studies/posts/identity-recalibration/images/systems-testing-process.jpg'
     alt: 'Systems testing process diagram'
     caption: 'The Fluxline Framework applied under acute somatic load'
-  - url: '/case-studies/posts/system-test-qa-resonance-core/images/the-resonance-core-glyph.jpg'
+  - url: '/case-studies/posts/identity-recalibration/images/the-resonance-core-glyph.jpg'
     alt: 'The Resonance Core Framework glyph'
     caption: 'Symbolic representation of the framework architecture'
 seoTitle: 'Fluxline Framework QA: Identity Recalibration Under Stress'
@@ -286,7 +286,7 @@ This is emotional intelligence as **engineering discipline**.
 This case study embodies the integration of:
 
 - **[Resonance Core Framework™](/services/resonance-core/)**: Deep transformation through systematic identity architecture
-- **[Blog Post: When the System Tests You](/blog/system-test-qa-resonance-core)**: The personal narrative version of this case study
+- **[Blog Post: When the System Tests You](/blog/when-the-system-tests-first)**: The personal narrative version of this case study
 - **[Blog Post: Philosophy of Resonance](/blog/philosophy-of-resonance)**: Understanding the foundation of transformation
 - **[Blog Post: Discipline vs. Resonance](/blog/discipline-vs-resonance)**: How to sustain momentum through resistance
 

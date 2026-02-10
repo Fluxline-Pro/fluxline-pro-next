@@ -13,7 +13,7 @@ tags:
   - 'Transformation'
   - 'Somatic Discipline'
   - 'Personal Growth'
-imageUrl: '/blog/posts/system-tests-and-reaffirmations/images/systems-testing-process.jpg'
+imageUrl: '/blog/posts/when-the-system-tests-first/images/systems-testing-process.jpg'
 imageAlt: 'Visual representation of the systems testing process showing integration of emotional waves with framework principles'
 featured: true
 seoTitle: 'When Your Framework Tests You: Real-Time Identity Transformation'
