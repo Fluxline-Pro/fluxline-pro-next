@@ -7,6 +7,7 @@ import { Book } from '../types';
 import { InteractiveCard } from '@/components/InteractiveCard';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
+import { Typography } from '@/theme/components/typography/';
 
 interface BookDetailClientProps {
   book: Book;
@@ -22,6 +23,7 @@ const handleShopIntegrationPlaceholder = () => {
 /**
  * Purchase Options Section Component
  * Multi-stage purchase flow unique to books
+ * Uses progressive disclosure - stages stack vertically
  */
 function PurchaseOptionsSection({ book }: { book: Book }) {
   const { theme } = useAppTheme();
@@ -33,10 +35,6 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
     setSelectedFormat(format);
   };
 
-  const handleReset = () => {
-    setSelectedFormat(null);
-  };
-
   return (
     <div
       id='purchase'
@@ -44,18 +42,40 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
         padding: theme.spacing.xl,
         backgroundColor: theme.palette.neutralLighterAlt,
         borderRadius: theme.effects.roundedCorner6,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing.xl,
       }}
     >
-      {/* Stage 1: Format Selection */}
-      {!selectedFormat && (
-        <div>
-          <p
-            className='text-center mb-8 text-lg'
-            style={{ color: theme.palette.neutralPrimary }}
+      {/* Stage 1: Format Selection - Always Visible */}
+      <div>
+        <Typography
+          variant='h3'
+          className='mb-4'
+          style={{
+            color: theme.palette.themePrimary,
+          }}
+        >
+          Step 1: Choose Your Format
+        </Typography>
+        <div
+          className='grid md:grid-cols-3 gap-6'
+          style={{ marginTop: theme.spacing.l }}
+        >
+          <div
+            style={{
+              border:
+                selectedFormat === 'hardcopy'
+                  ? `3px solid ${theme.palette.themePrimary}`
+                  : '3px solid transparent',
+              borderRadius: theme.effects.roundedCorner6,
+              padding: selectedFormat === 'hardcopy' ? '2px' : '0',
+              backgroundColor:
+                selectedFormat === 'hardcopy'
+                  ? theme.palette.themeLighterAlt
+                  : 'transparent',
+            }}
           >
-            Choose your preferred format:
-          </p>
-          <div className='grid md:grid-cols-3 gap-6'>
             <InteractiveCard
               id='hardcopy'
               title='Hard Copy'
@@ -64,58 +84,89 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
               iconPosition='center'
               onClick={() => handleFormatSelect('hardcopy')}
             />
+          </div>
+          <div
+            style={{
+              border:
+                selectedFormat === 'softcopy'
+                  ? `3px solid ${theme.palette.themePrimary}`
+                  : '3px solid transparent',
+              borderRadius: theme.effects.roundedCorner6,
+              padding: selectedFormat === 'softcopy' ? '2px' : '0',
+              backgroundColor:
+                selectedFormat === 'softcopy'
+                  ? theme.palette.themeLighterAlt
+                  : 'transparent',
+            }}
+          >
             <InteractiveCard
               id='softcopy'
               title='Soft Copy'
               description='Softcover paperback edition available through Amazon'
-              icon='BookSearch'
+              icon='BookAnswers'
               iconPosition='center'
               onClick={() => handleFormatSelect('softcopy')}
             />
+          </div>
+          <div
+            style={{
+              border:
+                selectedFormat === 'digital'
+                  ? `3px solid ${theme.palette.themePrimary}`
+                  : '3px solid transparent',
+              borderRadius: theme.effects.roundedCorner6,
+              padding: selectedFormat === 'digital' ? '2px' : '0',
+              backgroundColor:
+                selectedFormat === 'digital'
+                  ? theme.palette.themeLighterAlt
+                  : 'transparent',
+            }}
+          >
             <InteractiveCard
               id='digital'
               title='Digital / eBook'
               description='Instant access to PDF or eBook formats from multiple retailers'
-              icon='BookAnswers'
+              icon='Tablet'
               iconPosition='center'
               onClick={() => handleFormatSelect('digital')}
             />
           </div>
         </div>
-      )}
+      </div>
 
-      {/* Stage 2: Format-Specific Options */}
+      {/* Stage 2: Format-Specific Options - Appears Below Stage 1 */}
       {selectedFormat && (
-        <div>
-          {/* Back Button */}
-          <button
-            onClick={handleReset}
-            className='mb-6 px-4 py-2 rounded'
-            style={{
-              backgroundColor: theme.palette.neutralLighter,
-              color: theme.palette.themePrimary,
-              border: `1px solid ${theme.palette.neutralTertiary}`,
-              cursor: 'pointer',
-            }}
+        <div
+          style={{
+            borderTop: `2px solid ${theme.palette.themePrimary}`,
+            paddingTop: theme.spacing.xl,
+          }}
+        >
+          <Typography
+            variant='h3'
+            className='mb-6'
+            style={{ color: theme.palette.themePrimary }}
           >
-            ← Back to Format Selection
-          </button>
+            Step 2: Select Your Purchase Option
+          </Typography>
 
           {/* Hard Copy Options */}
           {selectedFormat === 'hardcopy' && (
             <div>
-              <h3
-                className='text-2xl font-bold mb-4'
+              <Typography
+                variant='h4'
+                className='mb-4'
                 style={{ color: theme.palette.themePrimary }}
               >
-                Hard Copy Editions
-              </h3>
-              <p
+                Hardcover Editions
+              </Typography>
+              <Typography
+                variant='body'
                 className='mb-6'
                 style={{ color: theme.palette.neutralPrimary }}
               >
                 Choose your preferred hardcover edition from Amazon:
-              </p>
+              </Typography>
               <div className='grid md:grid-cols-2 gap-6'>
                 {book.retailers
                   .filter((r) => r.formats.includes('hardcover'))
@@ -151,21 +202,26 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             e.currentTarget.style.transform = 'translateY(0)';
                           }}
                         >
-                          <h4
-                            className='text-xl font-bold mb-2'
+                          <Typography
+                            variant='h4'
+                            className='mb-2'
                             style={{ color: theme.palette.themePrimary }}
                           >
                             {retailer.name} - Hardcover
-                          </h4>
-                          <p
+                          </Typography>
+                          <Typography
+                            variant='body'
                             className='mb-4'
                             style={{ color: theme.palette.neutralPrimary }}
                           >
                             {price ? `$${price.price}` : 'View Price'}
-                          </p>
-                          <span style={{ color: theme.palette.themePrimary }}>
+                          </Typography>
+                          <Typography
+                            variant='span'
+                            style={{ color: theme.palette.themePrimary }}
+                          >
                             Purchase on {retailer.name} →
-                          </span>
+                          </Typography>
                         </div>
                       </a>
                     );
@@ -177,18 +233,20 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
           {/* Soft Copy Options */}
           {selectedFormat === 'softcopy' && (
             <div>
-              <h3
-                className='text-2xl font-bold mb-4'
+              <Typography
+                variant='h4'
+                className='mb-4'
                 style={{ color: theme.palette.themePrimary }}
               >
-                Soft Copy Editions
-              </h3>
-              <p
+                Softcover Editions
+              </Typography>
+              <Typography
+                variant='body'
                 className='mb-6'
                 style={{ color: theme.palette.neutralPrimary }}
               >
                 Choose your preferred softcover edition from Amazon:
-              </p>
+              </Typography>
               <div className='grid md:grid-cols-2 gap-6'>
                 {book.retailers
                   .filter((r) => r.formats.includes('softcover'))
@@ -224,21 +282,26 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             e.currentTarget.style.transform = 'translateY(0)';
                           }}
                         >
-                          <h4
-                            className='text-xl font-bold mb-2'
+                          <Typography
+                            variant='h4'
+                            className='mb-2'
                             style={{ color: theme.palette.themePrimary }}
                           >
                             {retailer.name} - Softcover
-                          </h4>
-                          <p
+                          </Typography>
+                          <Typography
+                            variant='body'
                             className='mb-4'
                             style={{ color: theme.palette.neutralPrimary }}
                           >
                             {price ? `$${price.price}` : 'View Price'}
-                          </p>
-                          <span style={{ color: theme.palette.themePrimary }}>
+                          </Typography>
+                          <Typography
+                            variant='span'
+                            style={{ color: theme.palette.themePrimary }}
+                          >
                             Purchase on {retailer.name} →
-                          </span>
+                          </Typography>
                         </div>
                       </a>
                     );
@@ -250,22 +313,24 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
           {/* Digital / eBook Options */}
           {selectedFormat === 'digital' && (
             <div>
-              <h3
-                className='text-2xl font-bold mb-4'
+              <Typography
+                variant='h4'
+                className='mb-4'
                 style={{ color: theme.palette.themePrimary }}
               >
-                Digital / eBook Editions
-              </h3>
+                Digital & eBook Options
+              </Typography>
 
               {/* Direct Purchase from Fluxline.pro */}
               {book.directPurchaseAvailable && (
                 <div className='mb-8'>
-                  <h4
-                    className='text-xl font-bold mb-4'
+                  <Typography
+                    variant='h5'
+                    className='mb-4'
                     style={{ color: theme.palette.themePrimary }}
                   >
                     Purchase Directly from Fluxline.pro
-                  </h4>
+                  </Typography>
                   <div className='grid md:grid-cols-3 gap-6'>
                     {/* eBook Only */}
                     <div
@@ -275,21 +340,27 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                         border: `2px solid ${theme.palette.neutralTertiary}`,
                       }}
                     >
-                      <h5 className='text-lg font-bold mb-2'>
+                      <Typography variant='h5' className='mb-2'>
                         eBook Only (PDF)
-                      </h5>
-                      <p
-                        className='text-2xl font-bold mb-4'
-                        style={{ color: theme.palette.themePrimary }}
+                      </Typography>
+                      <Typography
+                        variant='body'
+                        className='mb-4'
+                        style={{
+                          color: theme.palette.themePrimary,
+                          fontSize: '24px',
+                          fontWeight: 'bold',
+                        }}
                       >
                         ${book.directPurchasePrice}
-                      </p>
-                      <p
-                        className='text-sm mb-4'
+                      </Typography>
+                      <Typography
+                        variant='bodySmall'
+                        className='mb-4'
                         style={{ color: theme.palette.neutralSecondary }}
                       >
                         Instant download. Watermarked PDF with your information.
-                      </p>
+                      </Typography>
                       <button
                         className='w-full py-3 px-4 rounded font-bold transition-all'
                         style={{
@@ -323,17 +394,23 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                         >
                           BEST VALUE
                         </div>
-                        <h5 className='text-lg font-bold mb-2'>
+                        <Typography variant='h5' className='mb-2'>
                           eBook + Workbook Bundle
-                        </h5>
-                        <p
-                          className='text-2xl font-bold mb-1'
-                          style={{ color: theme.palette.themePrimary }}
+                        </Typography>
+                        <Typography
+                          variant='body'
+                          className='mb-1'
+                          style={{
+                            color: theme.palette.themePrimary,
+                            fontSize: '24px',
+                            fontWeight: 'bold',
+                          }}
                         >
                           ${book.bundlePrice}
-                        </p>
-                        <p
-                          className='text-sm mb-4'
+                        </Typography>
+                        <Typography
+                          variant='bodySmall'
+                          className='mb-4'
                           style={{ color: theme.palette.neutralSecondary }}
                         >
                           {(() => {
@@ -349,14 +426,15 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                               </>
                             );
                           })()}
-                        </p>
-                        <p
-                          className='text-sm mb-4'
+                        </Typography>
+                        <Typography
+                          variant='bodySmall'
+                          className='mb-4'
                           style={{ color: theme.palette.neutralSecondary }}
                         >
                           Both PDFs with instant download. Watermarked with your
                           information.
-                        </p>
+                        </Typography>
                         <button
                           className='w-full py-3 px-4 rounded font-bold transition-all'
                           style={{
@@ -381,21 +459,27 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                           border: `2px solid ${theme.palette.neutralTertiary}`,
                         }}
                       >
-                        <h5 className='text-lg font-bold mb-2'>
+                        <Typography variant='h5' className='mb-2'>
                           Workbook Only (PDF)
-                        </h5>
-                        <p
-                          className='text-2xl font-bold mb-4'
-                          style={{ color: theme.palette.themePrimary }}
+                        </Typography>
+                        <Typography
+                          variant='body'
+                          className='mb-4'
+                          style={{
+                            color: theme.palette.themePrimary,
+                            fontSize: '24px',
+                            fontWeight: 'bold',
+                          }}
                         >
                           ${book.workbookPrice}
-                        </p>
-                        <p
-                          className='text-sm mb-4'
+                        </Typography>
+                        <Typography
+                          variant='bodySmall'
+                          className='mb-4'
                           style={{ color: theme.palette.neutralSecondary }}
                         >
                           Companion workbook with exercises and templates.
-                        </p>
+                        </Typography>
                         <button
                           className='w-full py-3 px-4 rounded font-bold transition-all'
                           style={{
@@ -416,12 +500,13 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
 
               {/* External Retailers */}
               <div>
-                <h4
-                  className='text-xl font-bold mb-4'
+                <Typography
+                  variant='h5'
+                  className='mb-4'
                   style={{ color: theme.palette.themePrimary }}
                 >
                   Or Purchase from Other Retailers
-                </h4>
+                </Typography>
                 <div className='grid md:grid-cols-3 gap-6'>
                   {book.retailers
                     .filter((r) => r.formats.includes('ebook'))
@@ -452,13 +537,15 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             e.currentTarget.style.transform = 'translateY(0)';
                           }}
                         >
-                          <h5
-                            className='text-lg font-bold mb-2'
+                          <Typography
+                            variant='h5'
+                            className='mb-2'
                             style={{ color: theme.palette.themePrimary }}
                           >
                             {retailer.name}
-                          </h5>
-                          <p
+                          </Typography>
+                          <Typography
+                            variant='body'
                             className='mb-4'
                             style={{ color: theme.palette.neutralPrimary }}
                           >
@@ -467,10 +554,13 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                               'Nook Edition'}
                             {retailer.name === 'Apple Books' &&
                               'iBooks Edition'}
-                          </p>
-                          <span style={{ color: theme.palette.themePrimary }}>
+                          </Typography>
+                          <Typography
+                            variant='span'
+                            style={{ color: theme.palette.themePrimary }}
+                          >
                             View on {retailer.name} →
-                          </span>
+                          </Typography>
                         </div>
                       </a>
                     ))}
