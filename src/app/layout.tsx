@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 
 // Theme and layout components
@@ -75,6 +75,12 @@ export const metadata: Metadata = {
   other: {
     'theme-color': '#010101',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({

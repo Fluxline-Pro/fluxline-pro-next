@@ -226,6 +226,10 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             : 'rgba(255, 255, 255, 0.5)',
           backdropFilter: 'blur(12px)',
           borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
+          // iOS safe area support - prevent overlap with notch/status bar
+          paddingTop: 'env(safe-area-inset-top)',
+          paddingLeft: 'env(safe-area-inset-left)',
+          paddingRight: 'env(safe-area-inset-right)',
         }}
       >
         <div
