@@ -152,11 +152,11 @@ All dynamic route pages for tags, categories, and technologies **must** include:
 // Required: Disable dynamic params for static export
 export const dynamicParams = false;
 
-// Required: Return unencoded strings (real spaces, not %20)
+// Required: Return UNENCODED strings (real spaces, not %20)
 export async function generateStaticParams() {
   const tags = getAllTags();
   return tags.map((tag) => ({
-    tag: tag, // Unencoded! Creates directories with real spaces
+    tag: tag, // ← CRITICAL: Do NOT use encodeURIComponent() here!
   }));
 }
 
@@ -181,35 +181,71 @@ const handleTagClick = (tag: string) => {
 
 **Why This Configuration:**
 
-1. **Production Build**: Creates directories with real spaces (e.g., `Resonance Core Framework/`)
-2. **Browser Navigation**: Encodes URLs automatically (e.g., `Resonance%20Core%20Framework`)
-3. **Azure SWA**: Decodes incoming URLs and matches directories with real spaces
+1. **Production Build**: Creates directories with real spaces (e.g., `Personal Growth/`, not `Personal%20Growth/`)
+2. **Browser Navigation**: Automatically encodes URLs (e.g., `/blog/tag/Personal%20Growth`)
+3. **Azure SWA**: Decodes incoming URLs and matches against directories with real spaces
 4. **Development Mode**: Will show validation errors - this is **expected** and **safe to ignore**
+
+**How It Works:**
+
+```
+1. generateStaticParams() returns: { tag: "Personal Growth" }
+2. Next.js creates folder: /blog/tag/Personal Growth/
+3. Client navigation encodes: router.push("/blog/tag/Personal%20Growth")
+4. Browser requests: /blog/tag/Personal%20Growth
+5. Azure decodes and serves: /blog/tag/Personal Growth/index.html ✅
+```
+
+**⚠️ CRITICAL BUG TO AVOID:**
+
+**DO NOT encode in `generateStaticParams()` - this was a known bug fixed in PR #111:**
+
+```typescript
+// ❌ WRONG - This creates "/blog/tag/Personal%20Growth/" folder
+return tags.map((tag) => ({
+  tag: encodeURIComponent(tag), // BAD! Creates literal %20 in folder names
+}));
+
+// ✅ CORRECT - This creates "/blog/tag/Personal Growth/" folder
+return tags.map((tag) => ({
+  tag: tag, // GOOD! Real spaces in folder names
+}));
+```
+
+**Why the wrong way breaks:**
+
+- `encodeURIComponent()` in `generateStaticParams()` creates folders like `Personal%20Growth/`
+- Browser encodes to `Personal%20Growth` → becomes `Personal%2520Growth` (double encoded) → 404
+- This bug was present in blog tag/category pages but NOT portfolio pages (which worked correctly)
 
 **Testing Tag Navigation:**
 
 ```bash
 # ❌ WRONG: Don't test with dev mode
-yarn dev  # Will show errors for tags with spaces
+yarn dev  # Will show validation errors for tags with spaces
 
 # ✅ CORRECT: Test with production build
 yarn build
 npx serve@latest out -p 3000
 # Now test tag navigation - should work perfectly
+
+# Verify folder structure has REAL SPACES:
+ls -la out/blog/tag/
+# Should show: "Personal Growth/", not "Personal%20Growth/"
 ```
 
 **Files Using This Pattern:**
 
-- `src/app/blog/tag/[tag]/page.tsx`
-- `src/app/blog/category/[category]/page.tsx`
-- `src/app/portfolio/tag/[tag]/page.tsx`
-- `src/app/portfolio/technology/[technology]/page.tsx`
+- `src/app/blog/tag/[tag]/page.tsx` ✅ Fixed in PR #111
+- `src/app/blog/category/[category]/page.tsx` ✅ Fixed in PR #111
+- `src/app/portfolio/tag/[tag]/page.tsx` ✅ Always correct
+- `src/app/portfolio/technology/[technology]/page.tsx` ✅ Always correct
 
 **Common Mistakes to Avoid:**
 
 - ❌ Removing `dynamicParams = false` (breaks static export validation)
-- ❌ Adding `encodeURIComponent()` to `generateStaticParams()` returns (creates literal `%20` in directory names)
-- ❌ Removing `encodeURIComponent()` from navigation calls (creates unencoded URLs)
+- ❌ Adding `encodeURIComponent()` to `generateStaticParams()` returns (creates literal `%20` in directory names - causes 404s)
+- ❌ Removing `encodeURIComponent()` from navigation calls (creates unencoded URLs - breaks routing)
 - ❌ Testing only in dev mode and thinking it's broken (dev mode has validation limitations)
 
 **This is a Next.js static export limitation, not a bug.** The configuration is correct for production deployment.
