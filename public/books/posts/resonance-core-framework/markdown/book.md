@@ -36,7 +36,7 @@ prices:
     retailer: 'Amazon'
     url: '#'
   - format: 'ebook'
-    price: 21.99
+    price: 24.99
     currency: 'USD'
     retailer: 'Fluxline.pro'
     url: '#'
