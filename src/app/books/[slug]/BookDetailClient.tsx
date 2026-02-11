@@ -10,6 +10,7 @@ import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { Typography } from '@/theme/components/typography/';
 import { FadeUp, FadeIn } from '@/animations/fade-animations';
+import { FormButton } from '@/theme/components/form/FormButton';
 
 interface BookDetailClientProps {
   book: Book;
@@ -155,7 +156,10 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
             <Typography
               variant='h3'
               className='mb-6'
-              style={{ color: theme.palette.themePrimary }}
+              style={{
+                color: theme.palette.themePrimary,
+                marginBottom: theme.spacing.s,
+              }}
             >
               Step 2: Select Your Purchase Option
             </Typography>
@@ -166,16 +170,12 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                 <Typography
                   variant='h4'
                   className='mb-4'
-                  style={{ color: theme.palette.themePrimary }}
+                  style={{
+                    color: theme.palette.themePrimary,
+                    marginBottom: theme.spacing.l,
+                  }}
                 >
                   Hardcover Editions
-                </Typography>
-                <Typography
-                  variant='body'
-                  className='mb-6'
-                  style={{ color: theme.palette.neutralPrimary }}
-                >
-                  Choose your preferred hardcover edition:
                 </Typography>
                 <div className='grid md:grid-cols-2 gap-6'>
                   {book.retailers
@@ -253,16 +253,12 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                 <Typography
                   variant='h4'
                   className='mb-4'
-                  style={{ color: theme.palette.themePrimary }}
+                  style={{
+                    color: theme.palette.themePrimary,
+                    marginBottom: theme.spacing.l,
+                  }}
                 >
                   Softcover Editions
-                </Typography>
-                <Typography
-                  variant='body'
-                  className='mb-6'
-                  style={{ color: theme.palette.neutralPrimary }}
-                >
-                  Choose your preferred softcover edition:
                 </Typography>
                 <div className='grid md:grid-cols-2 gap-6'>
                   {book.retailers
@@ -364,10 +360,10 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             }}
                           >
                             <div
-                              className='absolute top-0 right-0 px-3 py-1 text-xs font-bold'
+                              className='absolute top-0 right-0 px-4 py-1 text-xs font-bold'
                               style={{
                                 backgroundColor: theme.palette.themePrimary,
-                                color: theme.palette.white,
+                                color: theme.palette.black,
                                 borderBottomLeftRadius: '8px',
                               }}
                             >
@@ -418,18 +414,12 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                               Both PDFs with instant download. Watermarked with
                               your information.
                             </Typography>
-                            <button
-                              className='w-full py-3 px-4 rounded font-bold transition-all'
-                              style={{
-                                backgroundColor: theme.palette.themePrimary,
-                                color: theme.palette.white,
-                                border: 'none',
-                                cursor: 'pointer',
-                              }}
-                              onClick={() => handleShopIntegrationPlaceholder()}
-                            >
-                              Add to Cart
-                            </button>
+                            <FormButton
+                              variant='primary'
+                              text='Add to Cart'
+                              fullWidth
+                              onClick={handleShopIntegrationPlaceholder}
+                            />
                           </div>
                         </FadeIn>
                       )}
@@ -468,18 +458,12 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             Instant download. Watermarked PDF with your
                             information.
                           </Typography>
-                          <button
-                            className='w-full py-3 px-4 rounded font-bold transition-all'
-                            style={{
-                              backgroundColor: theme.palette.themePrimary,
-                              color: theme.palette.white,
-                              border: 'none',
-                              cursor: 'pointer',
-                            }}
-                            onClick={() => handleShopIntegrationPlaceholder()}
-                          >
-                            Add to Cart
-                          </button>
+                          <FormButton
+                            variant='primary'
+                            text='Add to Cart'
+                            fullWidth
+                            onClick={handleShopIntegrationPlaceholder}
+                          />
                         </div>
                       </FadeIn>
 
@@ -514,18 +498,12 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             >
                               Companion workbook with exercises and templates.
                             </Typography>
-                            <button
-                              className='w-full py-3 px-4 rounded font-bold transition-all'
-                              style={{
-                                backgroundColor: theme.palette.themePrimary,
-                                color: theme.palette.white,
-                                border: 'none',
-                                cursor: 'pointer',
-                              }}
-                              onClick={() => handleShopIntegrationPlaceholder()}
-                            >
-                              Add to Cart
-                            </button>
+                            <FormButton
+                              variant='primary'
+                              text='Add to Cart'
+                              fullWidth
+                              onClick={handleShopIntegrationPlaceholder}
+                            />
                           </div>
                         </FadeIn>
                       )}
@@ -538,9 +516,12 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                   <Typography
                     variant='h5'
                     className='mb-4'
-                    style={{ color: theme.palette.themePrimary, marginBottom: theme.spacing.l }}
+                    style={{
+                      color: theme.palette.themePrimary,
+                      marginBottom: theme.spacing.l,
+                    }}
                   >
-                    Or Purchase from Other Retailers
+                    Or Purchase from These Other Retailers:
                   </Typography>
                   <div className='grid md:grid-cols-3 gap-6'>
                     {book.retailers
