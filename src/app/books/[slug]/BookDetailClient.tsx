@@ -85,6 +85,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
               icon='BookmarkReport'
               iconPosition='center'
               onClick={() => handleFormatSelect('hardcopy')}
+              tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
             />
           </div>
           <div
@@ -108,6 +109,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
               icon='BookAnswers'
               iconPosition='center'
               onClick={() => handleFormatSelect('softcopy')}
+              tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
             />
           </div>
           <div
@@ -130,6 +132,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
               description='Instant access to PDF or eBook formats from multiple retailers'
               icon='Tablet'
               iconPosition='center'
+              tooltip='Full-color, illustration-rich edition available from Fluxline.pro and Apple Books. Kindle and Nook versions are $14.99 but only include black-and-white text without the premium visual experience.'
               onClick={() => handleFormatSelect('digital')}
             />
           </div>
@@ -370,7 +373,11 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             >
                               BEST VALUE
                             </div>
-                            <Typography variant='h5' className='mb-2' style={{ textTransform: 'none' }}>
+                            <Typography
+                              variant='h5'
+                              className='mb-2'
+                              style={{ textTransform: 'none' }}
+                            >
                               eBook + Workbook Bundle
                             </Typography>
                             <Typography
@@ -531,7 +538,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                   <Typography
                     variant='h5'
                     className='mb-4'
-                    style={{ color: theme.palette.themePrimary }}
+                    style={{ color: theme.palette.themePrimary, marginBottom: theme.spacing.l }}
                   >
                     Or Purchase from Other Retailers
                   </Typography>
