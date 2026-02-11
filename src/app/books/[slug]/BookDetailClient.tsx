@@ -69,62 +69,74 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
             style={{
               border:
                 selectedFormat === 'hardcopy'
-                  ? `3px solid ${theme.palette.themePrimary}`
-                  : '3px solid transparent',
+                  ? `2px solid ${theme.palette.themePrimary}`
+                  : '2px solid transparent',
               borderRadius: theme.effects.roundedCorner6,
-              padding: selectedFormat === 'hardcopy' ? '2px' : '0',
-              backgroundColor:
-                selectedFormat === 'hardcopy'
-                  ? theme.palette.themeLighterAlt
-                  : 'transparent',
+              boxShadow:
+                selectedFormat === 'hardcopy' ? theme.shadows.xl : 'none',
+              transition: 'all 0.2s ease',
+              transform:
+                selectedFormat === 'hardcopy' ? 'translateY(-2px)' : 'none',
             }}
           >
             <InteractiveCard
               id='hardcopy'
-              title='Hard Copy'
+              title='Hardcover'
               description='Premium hardcover or softcover editions available through Amazon'
               icon='BookmarkReport'
               iconPosition='center'
               onClick={() => handleFormatSelect('hardcopy')}
               tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
+              style={{
+                backgroundColor:
+                  selectedFormat === 'hardcopy'
+                    ? theme.palette.neutralLighter
+                    : theme.palette.neutralLighterAlt,
+              }}
             />
           </div>
           <div
             style={{
               border:
                 selectedFormat === 'softcopy'
-                  ? `3px solid ${theme.palette.themePrimary}`
-                  : '3px solid transparent',
+                  ? `2px solid ${theme.palette.themePrimary}`
+                  : '2px solid transparent',
               borderRadius: theme.effects.roundedCorner6,
-              padding: selectedFormat === 'softcopy' ? '2px' : '0',
-              backgroundColor:
-                selectedFormat === 'softcopy'
-                  ? theme.palette.themeLighterAlt
-                  : 'transparent',
+              boxShadow:
+                selectedFormat === 'softcopy' ? theme.shadows.xl : 'none',
+              transition: 'all 0.2s ease',
+              transform:
+                selectedFormat === 'softcopy' ? 'translateY(-2px)' : 'none',
             }}
           >
             <InteractiveCard
               id='softcopy'
-              title='Soft Copy'
+              title='Softcover'
               description='Softcover paperback edition available through Amazon'
               icon='BookAnswers'
               iconPosition='center'
               onClick={() => handleFormatSelect('softcopy')}
               tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
+              style={{
+                backgroundColor:
+                  selectedFormat === 'softcopy'
+                    ? theme.palette.neutralLighter
+                    : theme.palette.neutralLighterAlt,
+              }}
             />
           </div>
           <div
             style={{
               border:
                 selectedFormat === 'digital'
-                  ? `3px solid ${theme.palette.themePrimary}`
-                  : '3px solid transparent',
+                  ? `2px solid ${theme.palette.themePrimary}`
+                  : '2px solid transparent',
               borderRadius: theme.effects.roundedCorner6,
-              padding: selectedFormat === 'digital' ? '2px' : '0',
-              backgroundColor:
-                selectedFormat === 'digital'
-                  ? theme.palette.themeLighterAlt
-                  : 'transparent',
+              boxShadow:
+                selectedFormat === 'digital' ? theme.shadows.xl : 'none',
+              transition: 'all 0.2s ease',
+              transform:
+                selectedFormat === 'digital' ? 'translateY(-2px)' : 'none',
             }}
           >
             <InteractiveCard
@@ -135,6 +147,12 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
               iconPosition='center'
               tooltip='Full-color, illustration-rich edition available from Fluxline.pro and Apple Books. Kindle and Nook versions are $14.99 but only include black-and-white text without the premium visual experience.'
               onClick={() => handleFormatSelect('digital')}
+              style={{
+                backgroundColor:
+                  selectedFormat === 'digital'
+                    ? theme.palette.neutralLighter
+                    : theme.palette.neutralLighterAlt,
+              }}
             />
           </div>
         </div>
@@ -390,7 +408,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             <Typography
                               variant='bodySmall'
                               className='mb-4'
-                              style={{ color: theme.palette.neutralSecondary }}
+                              style={{ color: theme.palette.neutralSecondary, fontWeight: 'bold' }}
                             >
                               {(() => {
                                 const originalPrice =

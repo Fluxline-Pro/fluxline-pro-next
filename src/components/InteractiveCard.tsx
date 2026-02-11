@@ -109,6 +109,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
               style={{
                 color: theme.palette.themePrimary,
                 fontSize: '1.25rem',
+                textTransform: 'none',
                 fontWeight: theme.typography.fontWeights.semiBold,
                 marginBottom: '0.5rem',
                 textAlign: 'center',
