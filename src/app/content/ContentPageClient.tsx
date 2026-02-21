@@ -50,13 +50,20 @@ export default function ContentPageClient() {
       color: theme.palette.tealLight,
     },
     {
-      title: 'Media',
+      title: 'Video',
       description:
-        'Videos, podcasts, and multimedia content showcasing our expertise and insights.',
-      path: '/media',
+        'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
+      path: '/video',
       iconName: 'Video',
       color: theme.palette.magentaLight,
-      comingSoon: true,
+    },
+    {
+      title: 'Podcasts',
+      description:
+        '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
+      path: '/podcasts',
+      iconName: 'Microphone',
+      color: theme.palette.tealLight,
     },
     {
       title: 'GitHub',
