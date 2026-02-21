@@ -88,6 +88,8 @@ export interface ContentListingPageProps {
 
   // Navigation
   onCardClick?: (id: string) => void;
+  backArrow?: boolean;
+  backArrowPath?: string;
 }
 
 /**
@@ -129,6 +131,8 @@ export function ContentListingPage({
   emptyStateMessage = 'Try adjusting your filters to see more items.',
   ctaSection,
   onCardClick,
+  backArrow = false,
+  backArrowPath = '/content',
 }: ContentListingPageProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
@@ -241,6 +245,8 @@ export function ContentListingPage({
           iconName={iconName}
           description={description}
           filters={renderFilters()}
+          backArrow={backArrow}
+          backArrowPath={backArrowPath}
         />
 
         {/* Results Count */}

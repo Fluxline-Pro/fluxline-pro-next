@@ -38,7 +38,9 @@ function VideoCard({
         border: `1px solid ${hovered ? theme.palette.themePrimary : theme.palette.neutralLight}`,
         transition: 'all 0.2s ease',
         transform: hovered ? 'translateY(-4px)' : 'none',
-        boxShadow: hovered ? theme.effects.elevation16 : theme.effects.elevation4,
+        boxShadow: hovered
+          ? theme.effects.elevation16
+          : theme.effects.elevation4,
         backgroundColor: theme.palette.neutralLighterAlt,
       }}
     >
@@ -71,7 +73,11 @@ function VideoCard({
               justifyContent: 'center',
             }}
           >
-            <FluentIcon iconName='Video' size='xLarge' color={theme.palette.neutralSecondary} />
+            <FluentIcon
+              iconName='Video'
+              size='xLarge'
+              color={theme.palette.neutralSecondary}
+            />
           </div>
         )}
         {/* Play overlay */}
@@ -89,7 +95,11 @@ function VideoCard({
               justifyContent: 'center',
             }}
           >
-            <FluentIcon iconName='Play' size='xLarge' color={theme.palette.white} />
+            <FluentIcon
+              iconName='Play'
+              size='xLarge'
+              color={theme.palette.white}
+            />
           </div>
         )}
         {/* Duration badge */}
@@ -135,7 +145,9 @@ function VideoCard({
         <Typography
           variant='h3'
           style={{
-            color: hovered ? theme.palette.themePrimary : theme.palette.neutralPrimary,
+            color: hovered
+              ? theme.palette.themePrimary
+              : theme.palette.neutralPrimary,
             fontSize: '1rem',
             fontWeight: 600,
             marginBottom: theme.spacing.s2,
@@ -190,7 +202,13 @@ function VideoModal({
       maxWidth='900px'
       maxHeight='95vh'
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.m }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing.m,
+        }}
+      >
         {/* Embedded player */}
         <div style={{ position: 'relative', paddingTop: '56.25%' }}>
           <iframe
@@ -223,7 +241,13 @@ function VideoModal({
         </Typography>
 
         {publishDate && (
-          <Typography variant='p' style={{ color: theme.palette.neutralSecondary, fontSize: '0.9rem' }}>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '0.9rem',
+            }}
+          >
             Published: {publishDate}
           </Typography>
         )}
@@ -252,7 +276,12 @@ function VideoModal({
             rel='noopener noreferrer'
             style={{ textDecoration: 'none' }}
           >
-            <FormButton variant='primary' size='medium' icon='OpenInNewTab' iconPosition='right'>
+            <FormButton
+              variant='primary'
+              size='medium'
+              icon='OpenInNewTab'
+              iconPosition='right'
+            >
               View on YouTube
             </FormButton>
           </a>
@@ -273,7 +302,9 @@ export function VideoListingClient() {
   const [videos, setVideos] = React.useState<YouTubeVideo[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
-  const [selectedVideo, setSelectedVideo] = React.useState<YouTubeVideo | null>(null);
+  const [selectedVideo, setSelectedVideo] = React.useState<YouTubeVideo | null>(
+    null
+  );
 
   React.useEffect(() => {
     let cancelled = false;
@@ -314,9 +345,11 @@ export function VideoListingClient() {
       >
         {/* Page Header */}
         <Hero
-          title='Video'
+          title='Videos'
           iconName='Video'
           description='Watch videos from the @aplusinflux YouTube channel — tutorials, live streams, playlists, and more.'
+          backArrow={true}
+          backArrowPath='/content'
         />
 
         {/* Tab Navigation */}
@@ -344,7 +377,9 @@ export function VideoListingClient() {
                   borderBottom: `3px solid ${isActive ? theme.palette.themePrimary : 'transparent'}`,
                   backgroundColor: 'transparent',
                   cursor: 'pointer',
-                  color: isActive ? theme.palette.themePrimary : theme.palette.neutralSecondary,
+                  color: isActive
+                    ? theme.palette.themePrimary
+                    : theme.palette.neutralSecondary,
                   fontWeight: isActive ? 600 : 400,
                   fontSize: '1rem',
                   transition: 'all 0.2s ease',
@@ -354,7 +389,11 @@ export function VideoListingClient() {
                 <FluentIcon
                   iconName={tab.iconName}
                   size='small'
-                  color={isActive ? theme.palette.themePrimary : theme.palette.neutralSecondary}
+                  color={
+                    isActive
+                      ? theme.palette.themePrimary
+                      : theme.palette.neutralSecondary
+                  }
                 />
                 {tab.label}
               </button>
@@ -372,7 +411,10 @@ export function VideoListingClient() {
               minHeight: '300px',
             }}
           >
-            <Typography variant='p' style={{ color: theme.palette.neutralSecondary }}>
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
               Loading videos…
             </Typography>
           </div>
@@ -390,8 +432,15 @@ export function VideoListingClient() {
               gap: theme.spacing.m,
             }}
           >
-            <FluentIcon iconName='ErrorBadge' size='xLarge' color={theme.palette.neutralSecondary} />
-            <Typography variant='p' style={{ color: theme.palette.neutralSecondary }}>
+            <FluentIcon
+              iconName='ErrorBadge'
+              size='xLarge'
+              color={theme.palette.neutralSecondary}
+            />
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
               {error}
             </Typography>
           </div>
@@ -409,8 +458,15 @@ export function VideoListingClient() {
               gap: theme.spacing.m,
             }}
           >
-            <FluentIcon iconName='Video' size='xLarge' color={theme.palette.neutralSecondary} />
-            <Typography variant='p' style={{ color: theme.palette.neutralSecondary }}>
+            <FluentIcon
+              iconName='Video'
+              size='xLarge'
+              color={theme.palette.neutralSecondary}
+            />
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
               No {activeTab} found.
             </Typography>
           </div>
@@ -438,7 +494,10 @@ export function VideoListingClient() {
 
       {/* Video Modal */}
       {selectedVideo && (
-        <VideoModal video={selectedVideo} onDismiss={() => setSelectedVideo(null)} />
+        <VideoModal
+          video={selectedVideo}
+          onDismiss={() => setSelectedVideo(null)}
+        />
       )}
     </UnifiedPageWrapper>
   );
