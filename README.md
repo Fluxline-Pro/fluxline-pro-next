@@ -53,7 +53,9 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app.
 - 📊 **Case Studies** - File-based case studies with industry/service filtering and metrics visualization
 - 🎨 **Portfolio** - Markdown project showcases with galleries, tags, and external links
 - 📄 **Scrolls/White Papers** - Downloadable strategic insights with metadata
-- 🏢 **Services** - Dynamic service pages with detailed information
+- � **Video Section** - YouTube channel integration with automatic video fetching
+- 🎙️ **Podcast Section** - Azure-backed podcast episodes with RSS feed generation
+- �🏢 **Services** - Dynamic service pages with detailed information
 
 ### Development Tools
 
@@ -339,6 +341,8 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 - **[public/portfolio/posts/HOW_TO_CREATE_A_PORTFOLIO_PROJECT.md](public/portfolio/posts/HOW_TO_CREATE_A_PORTFOLIO_PROJECT.md)** - Portfolio project guide
 - **[public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md](public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md)** - Press release creation guide
 - **[public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md](public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md)** - Case study creation guide
+- **[api/HOW_TO_ADD_PODCAST_EPISODE.md](api/HOW_TO_ADD_PODCAST_EPISODE.md)** - Podcast episode upload guide
+- **[VIDEO_UPLOAD_INSTRUCTIONS.md](VIDEO_UPLOAD_INSTRUCTIONS.md)** - YouTube video instructions
 
 ## 🚢 Deployment
 

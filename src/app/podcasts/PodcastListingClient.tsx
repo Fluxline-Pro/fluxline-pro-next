@@ -1,0 +1,534 @@
+'use client';
+
+import React from 'react';
+import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
+import { Typography } from '@/theme/components/typography';
+import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { Hero } from '@/theme/components/hero/Hero';
+import { FluentIcon } from '@/theme/components/fluent-icon';
+import { FormButton } from '@/theme/components/form';
+import { Modal } from '@/components/Modal';
+import { PodcastEpisode, RSS_ENDPOINT } from './types';
+
+/**
+ * PodcastCard Component
+ * Displays a podcast episode as a large-tile card
+ */
+function PodcastCard({
+  episode,
+  onClick,
+}: {
+  episode: PodcastEpisode;
+  onClick: () => void;
+}) {
+  const { theme } = useAppTheme();
+  const [hovered, setHovered] = React.useState(false);
+
+  const publishDate = episode.publish_date
+    ? new Date(episode.publish_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : undefined;
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
+  return (
+    <div
+      role='button'
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        cursor: 'pointer',
+        borderRadius: theme.effects.roundedCorner6,
+        overflow: 'hidden',
+        border: `1px solid ${hovered ? theme.palette.themePrimary : theme.palette.neutralLight}`,
+        transition: 'all 0.2s ease',
+        transform: hovered ? 'translateY(-4px)' : 'none',
+        boxShadow: hovered
+          ? theme.effects.elevation16
+          : theme.effects.elevation4,
+        backgroundColor: theme.palette.neutralLighterAlt,
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '220px',
+      }}
+    >
+      {/* Thumbnail or placeholder */}
+      {episode.imageUrl ? (
+        <div style={{ height: '180px', overflow: 'hidden' }}>
+          <img
+            src={episode.imageUrl}
+            alt={episode.episode_title}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </div>
+      ) : (
+        <div
+          style={{
+            height: '120px',
+            backgroundColor: theme.palette.neutralLight,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <FluentIcon
+            iconName='Microphone'
+            size='xLarge'
+            color={
+              hovered
+                ? theme.palette.themePrimary
+                : theme.palette.neutralSecondary
+            }
+          />
+        </div>
+      )}
+
+      {/* Card body */}
+      <div
+        style={{
+          padding: theme.spacing.m,
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing.s2,
+        }}
+      >
+        {/* Podcast name badge */}
+        <Typography
+          variant='p'
+          style={{
+            fontSize: '0.7rem',
+            fontWeight: 700,
+            color: theme.palette.themePrimary,
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+          }}
+        >
+          {episode.podcast_name}
+          {episode.episode_number !== undefined &&
+            ` · Ep. ${episode.episode_number}`}
+        </Typography>
+
+        {/* Title */}
+        <Typography
+          variant='h3'
+          style={{
+            color: hovered
+              ? theme.palette.themePrimary
+              : theme.palette.neutralPrimary,
+            fontSize: '1rem',
+            fontWeight: 600,
+            transition: 'color 0.2s ease',
+            flex: 1,
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}
+        >
+          {episode.episode_title}
+        </Typography>
+
+        {/* Description */}
+        {episode.description && (
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '0.875rem',
+              lineHeight: 1.5,
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
+            {episode.description}
+          </Typography>
+        )}
+
+        {/* Date */}
+        {publishDate && (
+          <Typography
+            variant='p'
+            style={{ color: theme.palette.neutralTertiary, fontSize: '0.8rem' }}
+          >
+            {publishDate}
+            {episode.duration ? ` · ${episode.duration}` : ''}
+          </Typography>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * PodcastDetailModal Component
+ * Shows full episode detail with audio player
+ */
+function PodcastDetailModal({
+  episode,
+  onDismiss,
+}: {
+  episode: PodcastEpisode;
+  onDismiss: () => void;
+}) {
+  const { theme } = useAppTheme();
+
+  const publishDate = episode.publish_date
+    ? new Date(episode.publish_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : undefined;
+
+  return (
+    <Modal
+      isOpen={true}
+      onDismiss={onDismiss}
+      ariaLabel={episode.episode_title}
+      maxWidth='700px'
+      maxHeight='90vh'
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing.m,
+        }}
+      >
+        {/* Episode header */}
+        <Typography
+          variant='p'
+          style={{
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            color: theme.palette.themePrimary,
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+          }}
+        >
+          {episode.podcast_name}
+          {episode.episode_number !== undefined &&
+            ` · Episode ${episode.episode_number}`}
+        </Typography>
+
+        <Typography
+          variant='h2'
+          style={{
+            color: theme.palette.themePrimary,
+            fontSize: '1.5rem',
+            fontWeight: 700,
+          }}
+        >
+          {episode.episode_title}
+        </Typography>
+
+        {/* Meta */}
+        <div
+          style={{ display: 'flex', gap: theme.spacing.m, flexWrap: 'wrap' }}
+        >
+          {publishDate && (
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '0.875rem',
+              }}
+            >
+              {publishDate}
+            </Typography>
+          )}
+          {episode.duration && (
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '0.875rem',
+              }}
+            >
+              · {episode.duration}
+            </Typography>
+          )}
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '0.875rem',
+            }}
+          >
+            · By {episode.author_name}
+          </Typography>
+        </div>
+
+        {/* Audio player */}
+        {episode.audio_url && (
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+          >
+            <audio
+              controls
+              style={{
+                width: '100%',
+                borderRadius: theme.effects.roundedCorner4,
+                accentColor: theme.palette.themePrimary,
+              }}
+            >
+              <source src={episode.audio_url} type='audio/mpeg' />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        )}
+
+        {/* Description */}
+        {episode.description && (
+          <Typography
+            variant='p'
+            style={{ color: theme.palette.neutralPrimary, lineHeight: 1.7 }}
+          >
+            {episode.description}
+          </Typography>
+        )}
+
+        {/* RSS link */}
+        <Typography
+          variant='p'
+          style={{ color: theme.palette.neutralSecondary, fontSize: '0.85rem' }}
+        >
+          <a
+            href={RSS_ENDPOINT}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            RSS Feed
+          </a>{' '}
+          · Subscribe on Apple Podcasts, Spotify, or Spreaker
+        </Typography>
+      </div>
+    </Modal>
+  );
+}
+
+/**
+ * PodcastListingClient Component
+ * Main client component for the /podcasts page
+ */
+export function PodcastListingClient() {
+  const { theme } = useAppTheme();
+  const isMobile = useIsMobile();
+  const [episodes, setEpisodes] = React.useState<PodcastEpisode[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+  const [selectedEpisode, setSelectedEpisode] =
+    React.useState<PodcastEpisode | null>(null);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch('/api/podcasts/episodes');
+        if (!res.ok) throw new Error('Failed to fetch episodes');
+        const data = await res.json();
+        if (!cancelled) {
+          setEpisodes(data.episodes || []);
+        }
+      } catch {
+        if (!cancelled) {
+          setError('Unable to load episodes at this time.');
+          setEpisodes([]);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const gridColumns = isMobile ? 1 : 3;
+
+  return (
+    <UnifiedPageWrapper layoutType='responsive-grid'>
+      <div
+        style={{
+          padding: isMobile ? theme.spacing.m : theme.spacing.xl,
+          width: '100%',
+        }}
+      >
+        {/* Page Header */}
+        <Hero
+          title='Podcasts'
+          iconName='Microphone'
+          description='"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.'
+          backArrow={true}
+          backArrowPath='/content'
+        />
+
+        {/* RSS subscription link */}
+        <div
+          style={{
+            marginTop: theme.spacing.m,
+            marginBottom: theme.spacing.l1,
+            display: 'flex',
+            gap: theme.spacing.m,
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <a
+            href={RSS_ENDPOINT}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ textDecoration: 'none' }}
+          >
+            <FormButton
+              variant='secondary'
+              size='small'
+              icon='RSSFeed'
+              iconPosition='left'
+            >
+              RSS Feed
+            </FormButton>
+          </a>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '0.875rem',
+            }}
+          >
+            Subscribe on Apple Podcasts, Spotify, or Spreaker
+          </Typography>
+        </div>
+
+        {/* Loading state */}
+        {loading && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '300px',
+            }}
+          >
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
+              Loading episodes…
+            </Typography>
+          </div>
+        )}
+
+        {/* Error state */}
+        {!loading && error && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '300px',
+              flexDirection: 'column',
+              gap: theme.spacing.m,
+            }}
+          >
+            <FluentIcon
+              iconName='ErrorBadge'
+              size='xLarge'
+              color={theme.palette.neutralSecondary}
+            />
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
+              {error}
+            </Typography>
+          </div>
+        )}
+
+        {/* Empty state */}
+        {!loading && !error && episodes.length === 0 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '300px',
+              flexDirection: 'column',
+              gap: theme.spacing.m,
+            }}
+          >
+            <FluentIcon
+              iconName='Microphone'
+              size='xLarge'
+              color={theme.palette.neutralSecondary}
+            />
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
+              No episodes available yet.
+            </Typography>
+          </div>
+        )}
+
+        {/* Episode Grid */}
+        {!loading && !error && episodes.length > 0 && (
+          <>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                marginBottom: theme.spacing.l1,
+              }}
+            >
+              Showing {episodes.length}{' '}
+              {episodes.length === 1 ? 'episode' : 'episodes'}
+            </Typography>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
+                gap: theme.spacing.l1,
+              }}
+            >
+              {episodes.map((episode) => (
+                <PodcastCard
+                  key={episode.id}
+                  episode={episode}
+                  onClick={() => setSelectedEpisode(episode)}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Episode Detail Modal */}
+      {selectedEpisode && (
+        <PodcastDetailModal
+          episode={selectedEpisode}
+          onDismiss={() => setSelectedEpisode(null)}
+        />
+      )}
+    </UnifiedPageWrapper>
+  );
+}
