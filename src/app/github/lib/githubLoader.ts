@@ -4,72 +4,89 @@ const GITHUB_ORGS = ['fluxline-pro'];
 const GITHUB_USERS = ['aplusandminus'];
 
 /**
- * Fetch repositories from a single GitHub organization.
+ * Parse GitHub Link header to extract next page URL.
  */
-async function fetchOrgRepos(orgName: string): Promise<GitHubRepo[]> {
-  try {
-    const url = `https://api.github.com/orgs/${orgName}/repos?per_page=100&sort=updated`;
-    const response = await fetch(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-      // Cache for 15 minutes where supported (ISR-compatible environments)
-      next: { revalidate: 900 },
-    });
+function parseLinkHeader(linkHeader: string | null): string | null {
+  if (!linkHeader) return null;
 
-    if (!response.ok) {
-      console.warn(
-        `GitHub API returned ${response.status} for org ${orgName}: ${response.statusText}`
-      );
-      return [];
+  const links = linkHeader.split(',');
+  for (const link of links) {
+    const match = link.match(/<([^>]+)>;\s*rel="next"/);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+/**
+ * Fetch all pages of repositories from a given URL.
+ */
+async function fetchAllPages(
+  initialUrl: string,
+  prefix: string
+): Promise<GitHubRepo[]> {
+  const allRepos: GitHubRepo[] = [];
+  let nextUrl: string | null = initialUrl;
+  let pageCount = 0;
+  const MAX_PAGES = 10; // Safety limit to prevent infinite loops
+
+  try {
+    while (nextUrl && pageCount < MAX_PAGES) {
+      const response = await fetch(nextUrl, {
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+        // Cache for 15 minutes where supported (ISR-compatible environments)
+        next: { revalidate: 900 },
+      });
+
+      if (!response.ok) {
+        console.warn(
+          `GitHub API returned ${response.status} for ${prefix}: ${response.statusText}`
+        );
+        break;
+      }
+
+      const data = await response.json();
+      allRepos.push(...(data as GitHubRepo[]));
+
+      // Check for next page in Link header
+      const linkHeader = response.headers.get('Link');
+      nextUrl = parseLinkHeader(linkHeader);
+      pageCount++;
     }
 
-    const data = await response.json();
-    return data as GitHubRepo[];
+    if (pageCount >= MAX_PAGES) {
+      console.warn(`${prefix}: Reached maximum page limit (${MAX_PAGES})`);
+    }
   } catch (error) {
-    console.error(
-      `Failed to fetch GitHub repositories for org ${orgName}:`,
-      error
-    );
-    return [];
+    console.error(`Failed to fetch repositories for ${prefix}:`, error);
   }
+
+  return allRepos;
+}
+
+/**
+ * Fetch repositories from a single GitHub organization.
+ * Automatically handles pagination to retrieve all repositories.
+ */
+async function fetchOrgRepos(orgName: string): Promise<GitHubRepo[]> {
+  const url = `https://api.github.com/orgs/${orgName}/repos?per_page=100&sort=updated`;
+  return fetchAllPages(url, `org ${orgName}`);
 }
 
 /**
  * Fetch repositories from a single GitHub user.
+ * Automatically handles pagination to retrieve all repositories.
  */
 async function fetchUserRepos(username: string): Promise<GitHubRepo[]> {
-  try {
-    const url = `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`;
-    const response = await fetch(url, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-      // Cache for 15 minutes where supported (ISR-compatible environments)
-      next: { revalidate: 900 },
-    });
-
-    if (!response.ok) {
-      console.warn(
-        `GitHub API returned ${response.status} for user ${username}: ${response.statusText}`
-      );
-      return [];
-    }
-
-    const data = await response.json();
-    return data as GitHubRepo[];
-  } catch (error) {
-    console.error(
-      `Failed to fetch GitHub repositories for user ${username}:`,
-      error
-    );
-    return [];
-  }
+  const url = `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`;
+  return fetchAllPages(url, `user ${username}`);
 }
 
 /**
  * Fetch all public repositories from multiple GitHub organizations and users.
  * Fetches from fluxline-pro org and aplusandminus user in parallel.
+ * Automatically handles pagination to retrieve all repositories (up to 1000 per source).
  * Runs at build time for static export; returns empty array on failure.
  */
 export async function getGitHubRepos(): Promise<GitHubRepo[]> {
