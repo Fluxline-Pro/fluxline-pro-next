@@ -64,6 +64,7 @@ export default function ContentPageClient() {
       path: '/podcasts',
       iconName: 'Microphone',
       color: theme.palette.yellowDark,
+      comingSoon: true,
     },
     {
       title: 'GitHub',
