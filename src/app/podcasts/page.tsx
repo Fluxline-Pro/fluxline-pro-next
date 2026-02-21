@@ -33,10 +33,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/podcasts',
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  // robots: {
+  //   index: true,
+  //   follow: true,
+  // },
+  // For now, we will noindex the podcasts page until we have episodes and content to show
+  // This is to prevent a thin content page from being indexed by search engines
+
+  robots: 'noindex, nofollow',
 };
 
 /**

@@ -230,7 +230,8 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                                 className='mb-4'
                                 style={{ color: theme.palette.neutralPrimary }}
                               >
-                                {price ? `$${price.price}` : 'View Price'}
+                                {/* {price ? `$${price.price}` : 'View Price'} */}
+                                $XX.XX (pricing disclosed at launch)
                               </Typography>
                               <Typography
                                 variant='span'
@@ -313,7 +314,8 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                                 className='mb-4'
                                 style={{ color: theme.palette.neutralPrimary }}
                               >
-                                {price ? `$${price.price}` : 'View Price'}
+                                {/* {price ? `$${price.price}` : 'View Price'} */}
+                                $XX.XX (pricing disclosed at launch)
                               </Typography>
                               <Typography
                                 variant='span'
@@ -385,7 +387,8 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                                 fontWeight: 'bold',
                               }}
                             >
-                              ${book.bundlePrice}
+                              {/* ${book.bundlePrice} */}
+                              $XX.XX (pricing disclosed at launch)
                             </Typography>
                             <Typography
                               variant='bodySmall'
@@ -395,7 +398,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                                 fontWeight: 'bold',
                               }}
                             >
-                              {(() => {
+                              {/* {(() => {
                                 const originalPrice =
                                   (book.directPurchasePrice || 0) +
                                   (book.workbookPrice || 0);
@@ -407,7 +410,8 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                                     {savings.toFixed(2)}
                                   </>
                                 );
-                              })()}
+                              })()}} */}
+                              Best value - pricing disclosed at launch
                             </Typography>
                             <Typography
                               variant='bodySmall'
@@ -451,7 +455,8 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                               fontWeight: 'bold',
                             }}
                           >
-                            ${book.directPurchasePrice}
+                            {/* ${book.directPurchasePrice} */}
+                            $XX.XX (pricing disclosed at launch)
                           </Typography>
                           <Typography
                             variant='bodySmall'
@@ -465,6 +470,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             variant='primary'
                             text='Add to Cart'
                             fullWidth
+                            disabled
                             onClick={handleShopIntegrationPlaceholder}
                           />
                         </div>

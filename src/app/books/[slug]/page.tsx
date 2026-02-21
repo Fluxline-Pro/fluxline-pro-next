@@ -54,6 +54,11 @@ export async function generateMetadata({
       description: book.seoMetadata.description,
       images: book.coverImageUrl ? [book.coverImageUrl] : undefined,
     },
+    // robots: { removing the indexing off books while the book is being published- QA testing only
+    //   index: true,
+    //   follow: true,
+    // },
+    robots: 'noindex, nofollow',
   };
 }
 
