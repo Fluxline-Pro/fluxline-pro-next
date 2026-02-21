@@ -69,6 +69,13 @@ export const navItems: NavItem[] = [
         iconName: 'BookAnswers',
         description: 'Browse our published books',
       },
+      {
+        label: 'github',
+        path: '/github',
+        view: 'github',
+        iconName: 'BranchMerge',
+        description: 'Open-source repositories',
+      },
     ],
   },
   {

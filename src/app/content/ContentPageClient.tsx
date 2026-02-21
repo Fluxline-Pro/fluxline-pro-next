@@ -65,7 +65,6 @@ export default function ContentPageClient() {
       path: '/github',
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
-      comingSoon: true,
     },
   ];
 
