@@ -35,10 +35,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/books',
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  // For now, we will noindex the books page until we have the book content and purchase options to show
+  // This is to prevent a thin content page from being indexed by search engines
+  // robots: {
+  //   index: true,
+  //   follow: true,
+  // },
+  robots: 'noindex, nofollow',
 };
 
 /**

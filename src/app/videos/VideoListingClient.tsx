@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -10,6 +11,7 @@ import { Modal } from '@/components/Modal';
 import { FormButton } from '@/theme/components/form';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { YouTubeVideo, VideoType, VIDEO_TABS, formatDuration } from './types';
+import { FadeIn } from '@/animations/fade-animations';
 
 /**
  * VideoCard Component
@@ -484,21 +486,25 @@ export function VideoListingClient() {
 
         {/* Video Grid */}
         {!loading && !error && videos.length > 0 && (
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-              gap: theme.spacing.l1,
-            }}
-          >
-            {videos.map((video) => (
-              <VideoCard
-                key={video.id}
-                video={video}
-                onClick={() => setSelectedVideo(video)}
-              />
-            ))}
-          </div>
+          <AnimatePresence mode='wait'>
+            <div
+              key={activeTab}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
+                gap: theme.spacing.l1,
+              }}
+            >
+              {videos.map((video, index) => (
+                <FadeIn key={video.id} delay={index * 0.05} duration={0.3}>
+                  <VideoCard
+                    video={video}
+                    onClick={() => setSelectedVideo(video)}
+                  />
+                </FadeIn>
+              ))}
+            </div>
+          </AnimatePresence>
         )}
       </div>
 
