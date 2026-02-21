@@ -76,7 +76,7 @@ const PAGE_CONFIGS: Record<
     imageText: 'Strategic Insights',
   },
   '/content': {
-    image: PortfolioImage.src,
+    image: '/images/home/ContentHubDefault.jpg',
     imageText: 'Content Hub',
   },
   '/legal': {

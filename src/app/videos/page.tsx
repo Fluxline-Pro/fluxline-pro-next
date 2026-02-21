@@ -2,16 +2,16 @@ import type { Metadata } from 'next';
 import { VideoListingClient } from './VideoListingClient';
 
 export const metadata: Metadata = {
-  title: 'Video',
+  title: 'Videos',
   description:
     'Watch videos from the @aplusinflux YouTube channel — tutorials, live streams, playlists, and more.',
   keywords:
-    'video, YouTube, tutorials, live stream, playlists, Fluxline, aplusinflux, content',
+    'videos, YouTube, tutorials, live stream, playlists, Fluxline, aplusinflux, content',
   openGraph: {
-    title: 'Video - Fluxline',
+    title: 'Videos - Fluxline',
     description:
       'Watch videos from the @aplusinflux YouTube channel — tutorials, live streams, playlists, and more.',
-    url: 'https://www.fluxline.pro/video',
+    url: 'https://www.fluxline.pro/videos',
     siteName: 'Fluxline',
     type: 'website',
     images: [
@@ -19,19 +19,19 @@ export const metadata: Metadata = {
         url: '/images/FluxlineLogo.png',
         width: 1200,
         height: 630,
-        alt: 'Fluxline Video',
+        alt: 'Fluxline Videos',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Video - Fluxline',
+    title: 'Videos - Fluxline',
     description:
       'Watch videos from the @aplusinflux YouTube channel — tutorials, live streams, playlists, and more.',
     images: ['/images/FluxlineLogo.png'],
   },
   alternates: {
-    canonical: '/video',
+    canonical: '/videos',
   },
   robots: {
     index: true,

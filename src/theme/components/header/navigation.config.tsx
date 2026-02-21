@@ -28,34 +28,11 @@ export const navItems: NavItem[] = [
     description: 'View our services',
   },
   {
-    label: 'content',
+    label: 'content hub',
     path: '/content',
     view: 'content',
     iconName: 'Documentation',
-    description: 'Explore video, podcasts, and more',
-    children: [
-      {
-        label: 'video',
-        path: '/video',
-        view: 'video',
-        iconName: 'Video',
-        description: 'Videos from YouTube',
-      },
-      {
-        label: 'podcasts',
-        path: '/podcasts',
-        view: 'podcasts',
-        iconName: 'Microphone',
-        description: 'A+ In FLUX Mythmaker podcast',
-      },
-      {
-        label: 'my content',
-        path: '/content',
-        view: 'content',
-        iconName: 'Documentation',
-        description: 'All content hub',
-      },
-    ],
+    description: 'Explore blog, portfolio, videos, and podcasts',
   },
   {
     label: 'scrolls',
@@ -63,6 +40,20 @@ export const navItems: NavItem[] = [
     view: 'scrolls',
     iconName: 'DocumentSet',
     description: 'Explore strategic insights',
+  },
+  {
+    label: 'case studies',
+    path: '/case-studies',
+    view: 'case-studies',
+    iconName: 'ReadingMode',
+    description: 'Client success stories',
+  },
+  {
+    label: 'press releases',
+    path: '/press-release',
+    view: 'press-release',
+    iconName: 'News',
+    description: 'Company news and announcements',
   },
   // {
   //   label: 'events',

@@ -213,7 +213,9 @@ export const HomeFooter: React.FC = () => {
             Services
           </Typography>
           <StyledLink href='/services'>All Services</StyledLink>
-          <StyledLink href='/services/resonance-core'>The Resonance Core Framework™</StyledLink>
+          <StyledLink href='/services/resonance-core'>
+            The Resonance Core Framework™
+          </StyledLink>
           <StyledLink href='/services/personal-training'>
             Personal Training
           </StyledLink>
@@ -229,6 +231,7 @@ export const HomeFooter: React.FC = () => {
           </Typography>
           <StyledLink href='/blog'>Blog</StyledLink>
           <StyledLink href='/portfolio'>Portfolio</StyledLink>
+          <StyledLink href='/content'>Content Hub</StyledLink>
           <StyledLink href='/services/scrolls'>Scrolls</StyledLink>
           <StyledLink href='/legal'>Legal</StyledLink>
           <StyledLink href='/contact'>Contact Us</StyledLink>

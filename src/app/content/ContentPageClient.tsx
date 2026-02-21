@@ -50,10 +50,10 @@ export default function ContentPageClient() {
       color: theme.palette.tealLight,
     },
     {
-      title: 'Video',
+      title: 'Videos',
       description:
         'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
-      path: '/video',
+      path: '/videos',
       iconName: 'Video',
       color: theme.palette.magentaLight,
     },
@@ -63,7 +63,7 @@ export default function ContentPageClient() {
         '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
       path: '/podcasts',
       iconName: 'Microphone',
-      color: theme.palette.tealLight,
+      color: theme.palette.yellowDark,
     },
     {
       title: 'GitHub',
@@ -177,15 +177,18 @@ export default function ContentPageClient() {
                   </div>
                 )}
 
-                {/* Icon */}
+                {/* Icon and Title */}
                 <div
                   style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: theme.spacing.m,
                     marginBottom: theme.spacing.m,
                   }}
                 >
                   <FluentIcon
                     iconName={category.iconName}
-                    size='xLarge'
+                    size='large'
                     color={
                       isHovered
                         ? category.color
@@ -193,25 +196,24 @@ export default function ContentPageClient() {
                     }
                     style={{
                       transition: 'color 0.3s ease',
+                      flexShrink: 0,
                     }}
                   />
+                  <Typography
+                    variant='h2'
+                    style={{
+                      color: isHovered
+                        ? category.color
+                        : theme.palette.neutralPrimary,
+                      fontSize: '1.75rem',
+                      fontWeight: theme.typography.fontWeights.semiBold,
+                      transition: 'color 0.3s ease',
+                      margin: 0,
+                    }}
+                  >
+                    {category.title}
+                  </Typography>
                 </div>
-
-                {/* Title */}
-                <Typography
-                  variant='h2'
-                  style={{
-                    color: isHovered
-                      ? category.color
-                      : theme.palette.neutralPrimary,
-                    marginBottom: theme.spacing.s1,
-                    fontSize: '1.75rem',
-                    fontWeight: theme.typography.fontWeights.semiBold,
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  {category.title}
-                </Typography>
 
                 {/* Description */}
                 <Typography

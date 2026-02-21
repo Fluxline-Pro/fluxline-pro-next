@@ -45,7 +45,9 @@ function PodcastCard({
         border: `1px solid ${hovered ? theme.palette.themePrimary : theme.palette.neutralLight}`,
         transition: 'all 0.2s ease',
         transform: hovered ? 'translateY(-4px)' : 'none',
-        boxShadow: hovered ? theme.effects.elevation16 : theme.effects.elevation4,
+        boxShadow: hovered
+          ? theme.effects.elevation16
+          : theme.effects.elevation4,
         backgroundColor: theme.palette.neutralLighterAlt,
         display: 'flex',
         flexDirection: 'column',
@@ -74,13 +76,25 @@ function PodcastCard({
           <FluentIcon
             iconName='Microphone'
             size='xLarge'
-            color={hovered ? theme.palette.themePrimary : theme.palette.neutralSecondary}
+            color={
+              hovered
+                ? theme.palette.themePrimary
+                : theme.palette.neutralSecondary
+            }
           />
         </div>
       )}
 
       {/* Card body */}
-      <div style={{ padding: theme.spacing.m, flex: 1, display: 'flex', flexDirection: 'column', gap: theme.spacing.s2 }}>
+      <div
+        style={{
+          padding: theme.spacing.m,
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing.s2,
+        }}
+      >
         {/* Podcast name badge */}
         <Typography
           variant='p'
@@ -93,14 +107,17 @@ function PodcastCard({
           }}
         >
           {episode.podcast_name}
-          {episode.episode_number !== undefined && ` · Ep. ${episode.episode_number}`}
+          {episode.episode_number !== undefined &&
+            ` · Ep. ${episode.episode_number}`}
         </Typography>
 
         {/* Title */}
         <Typography
           variant='h3'
           style={{
-            color: hovered ? theme.palette.themePrimary : theme.palette.neutralPrimary,
+            color: hovered
+              ? theme.palette.themePrimary
+              : theme.palette.neutralPrimary,
             fontSize: '1rem',
             fontWeight: 600,
             transition: 'color 0.2s ease',
@@ -176,7 +193,13 @@ function PodcastDetailModal({
       maxWidth='700px'
       maxHeight='90vh'
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.m }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing.m,
+        }}
+      >
         {/* Episode header */}
         <Typography
           variant='p'
@@ -189,36 +212,63 @@ function PodcastDetailModal({
           }}
         >
           {episode.podcast_name}
-          {episode.episode_number !== undefined && ` · Episode ${episode.episode_number}`}
+          {episode.episode_number !== undefined &&
+            ` · Episode ${episode.episode_number}`}
         </Typography>
 
         <Typography
           variant='h2'
-          style={{ color: theme.palette.themePrimary, fontSize: '1.5rem', fontWeight: 700 }}
+          style={{
+            color: theme.palette.themePrimary,
+            fontSize: '1.5rem',
+            fontWeight: 700,
+          }}
         >
           {episode.episode_title}
         </Typography>
 
         {/* Meta */}
-        <div style={{ display: 'flex', gap: theme.spacing.m, flexWrap: 'wrap' }}>
+        <div
+          style={{ display: 'flex', gap: theme.spacing.m, flexWrap: 'wrap' }}
+        >
           {publishDate && (
-            <Typography variant='p' style={{ color: theme.palette.neutralSecondary, fontSize: '0.875rem' }}>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '0.875rem',
+              }}
+            >
               {publishDate}
             </Typography>
           )}
           {episode.duration && (
-            <Typography variant='p' style={{ color: theme.palette.neutralSecondary, fontSize: '0.875rem' }}>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '0.875rem',
+              }}
+            >
               · {episode.duration}
             </Typography>
           )}
-          <Typography variant='p' style={{ color: theme.palette.neutralSecondary, fontSize: '0.875rem' }}>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '0.875rem',
+            }}
+          >
             · By {episode.author_name}
           </Typography>
         </div>
 
         {/* Audio player */}
         {episode.audio_url && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+          >
             <audio
               controls
               style={{
@@ -273,7 +323,8 @@ export function PodcastListingClient() {
   const [episodes, setEpisodes] = React.useState<PodcastEpisode[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
-  const [selectedEpisode, setSelectedEpisode] = React.useState<PodcastEpisode | null>(null);
+  const [selectedEpisode, setSelectedEpisode] =
+    React.useState<PodcastEpisode | null>(null);
 
   React.useEffect(() => {
     let cancelled = false;
@@ -317,6 +368,8 @@ export function PodcastListingClient() {
           title='Podcasts'
           iconName='Microphone'
           description='"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.'
+          backArrow={true}
+          backArrowPath='/content'
         />
 
         {/* RSS subscription link */}
@@ -336,13 +389,21 @@ export function PodcastListingClient() {
             rel='noopener noreferrer'
             style={{ textDecoration: 'none' }}
           >
-            <FormButton variant='secondary' size='small' icon='RSSFeed' iconPosition='left'>
+            <FormButton
+              variant='secondary'
+              size='small'
+              icon='RSSFeed'
+              iconPosition='left'
+            >
               RSS Feed
             </FormButton>
           </a>
           <Typography
             variant='p'
-            style={{ color: theme.palette.neutralSecondary, fontSize: '0.875rem' }}
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '0.875rem',
+            }}
           >
             Subscribe on Apple Podcasts, Spotify, or Spreaker
           </Typography>
@@ -358,7 +419,10 @@ export function PodcastListingClient() {
               minHeight: '300px',
             }}
           >
-            <Typography variant='p' style={{ color: theme.palette.neutralSecondary }}>
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
               Loading episodes…
             </Typography>
           </div>
@@ -376,8 +440,15 @@ export function PodcastListingClient() {
               gap: theme.spacing.m,
             }}
           >
-            <FluentIcon iconName='ErrorBadge' size='xLarge' color={theme.palette.neutralSecondary} />
-            <Typography variant='p' style={{ color: theme.palette.neutralSecondary }}>
+            <FluentIcon
+              iconName='ErrorBadge'
+              size='xLarge'
+              color={theme.palette.neutralSecondary}
+            />
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
               {error}
             </Typography>
           </div>
@@ -395,8 +466,15 @@ export function PodcastListingClient() {
               gap: theme.spacing.m,
             }}
           >
-            <FluentIcon iconName='Microphone' size='xLarge' color={theme.palette.neutralSecondary} />
-            <Typography variant='p' style={{ color: theme.palette.neutralSecondary }}>
+            <FluentIcon
+              iconName='Microphone'
+              size='xLarge'
+              color={theme.palette.neutralSecondary}
+            />
+            <Typography
+              variant='p'
+              style={{ color: theme.palette.neutralSecondary }}
+            >
               No episodes available yet.
             </Typography>
           </div>
@@ -407,9 +485,13 @@ export function PodcastListingClient() {
           <>
             <Typography
               variant='p'
-              style={{ color: theme.palette.neutralSecondary, marginBottom: theme.spacing.l1 }}
+              style={{
+                color: theme.palette.neutralSecondary,
+                marginBottom: theme.spacing.l1,
+              }}
             >
-              Showing {episodes.length} {episodes.length === 1 ? 'episode' : 'episodes'}
+              Showing {episodes.length}{' '}
+              {episodes.length === 1 ? 'episode' : 'episodes'}
             </Typography>
             <div
               style={{
