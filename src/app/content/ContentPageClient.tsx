@@ -51,20 +51,20 @@ export default function ContentPageClient() {
       color: theme.palette.tealLight,
     },
     {
+      title: 'Videos',
+      description:
+        'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
+      path: '/videos',
+      iconName: 'Video',
+      color: theme.palette.magentaLight,
+    },
+    {
       title: 'GitHub',
       description:
       'Open source projects, code samples, and technical resources from our development team.',
       path: '/github',
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
-    },
-    {
-      title: 'Videos',
-      description:
-      'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
-      path: '/videos',
-      iconName: 'Video',
-      color: theme.palette.magentaLight,
     },
     {
       title: 'Books',
