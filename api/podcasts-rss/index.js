@@ -49,6 +49,41 @@ async function getAllEpisodes() {
   return data.value || [];
 }
 
+/**
+ * Escape XML attribute values
+ */
+function escapeXmlAttr(str) {
+  if (!str) return '';
+  return String(str).replace(
+    /[<>&"']/g,
+    (c) =>
+      ({
+        '<': '&lt;',
+        '>': '&gt;',
+        '&': '&amp;',
+        '"': '&quot;',
+        "'": '&apos;',
+      })[c] || c
+  );
+}
+
+/**
+ * Validate and sanitize URL for RSS feed
+ * Returns the URL if valid, or null if invalid
+ */
+function validateAudioUrl(url) {
+  if (!url || typeof url !== 'string') return null;
+
+  try {
+    const parsed = new URL(url);
+    // Only allow HTTPS URLs for security
+    if (parsed.protocol !== 'https:') return null;
+    return url;
+  } catch {
+    return null;
+  }
+}
+
 module.exports = async function (context, req) {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
@@ -72,12 +107,12 @@ module.exports = async function (context, req) {
         const pubDate = row.publish_date
           ? new Date(row.publish_date).toUTCString()
           : new Date().toUTCString();
-        const title = (row.episode_title || slug).replace(/[<>&"']/g, (c) =>
-          ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c] || c)
-        );
-        const description = (row.description || '').replace(/[<>&"']/g, (c) =>
-          ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c] || c)
-        );
+        const title = escapeXmlAttr(row.episode_title || slug);
+        const description = escapeXmlAttr(row.description || '');
+
+        // Validate and escape audio URL
+        const audioUrl = validateAudioUrl(row.audio_url);
+        const escapedAudioUrl = audioUrl ? escapeXmlAttr(audioUrl) : null;
 
         return `
     <item>
@@ -86,7 +121,7 @@ module.exports = async function (context, req) {
       <link>${episodeUrl}</link>
       <guid isPermaLink="true">${episodeUrl}</guid>
       <pubDate>${pubDate}</pubDate>
-      ${row.audio_url ? `<enclosure url="${row.audio_url}" type="audio/mpeg" length="${row.audio_size_bytes || 0}" />` : ''}
+      ${escapedAudioUrl ? `<enclosure url="${escapedAudioUrl}" type="audio/mpeg" length="${row.audio_size_bytes || 0}" />` : ''}
       ${row.duration ? `<itunes:duration>${row.duration}</itunes:duration>` : ''}
       ${row.episode_number !== undefined ? `<itunes:episode>${row.episode_number}</itunes:episode>` : ''}
       <itunes:author>${PODCAST_AUTHOR}</itunes:author>
