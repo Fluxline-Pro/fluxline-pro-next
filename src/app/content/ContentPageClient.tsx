@@ -35,18 +35,9 @@ export default function ContentPageClient() {
 
   const contentCategories: ContentCategory[] = [
     {
-      title: 'Books',
-      description:
-        'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
-      path: '/books',
-      iconName: 'BookAnswers',
-      color: theme.palette.blueLight,
-      isHighlighted: true,
-    },
-    {
       title: 'Blog',
       description:
-        'Insights, best practices, and thoughts on technology, design, and business transformation.',
+      'Insights, best practices, and thoughts on technology, design, and business transformation.',
       path: '/blog',
       iconName: 'TextDocumentShared',
       color: theme.palette.themePrimary,
@@ -54,7 +45,7 @@ export default function ContentPageClient() {
     {
       title: 'Portfolio',
       description:
-        'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
+      'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
       path: '/portfolio',
       iconName: 'FolderQuery',
       color: theme.palette.tealLight,
@@ -62,7 +53,7 @@ export default function ContentPageClient() {
     {
       title: 'GitHub',
       description:
-        'Open source projects, code samples, and technical resources from our development team.',
+      'Open source projects, code samples, and technical resources from our development team.',
       path: '/github',
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
@@ -70,10 +61,20 @@ export default function ContentPageClient() {
     {
       title: 'Videos',
       description:
-        'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
+      'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
       path: '/videos',
       iconName: 'Video',
       color: theme.palette.magentaLight,
+    },
+    {
+      title: 'Books',
+      description:
+        'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
+      path: '/books',
+      iconName: 'BookAnswers',
+      color: theme.palette.blueLight,
+      // isHighlighted: true,
+      comingSoon: true,
     },
     {
       title: 'Podcasts',
