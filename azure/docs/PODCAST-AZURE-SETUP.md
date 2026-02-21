@@ -230,17 +230,19 @@ az staticwebapp appsettings set \
 
 ## Step 6: Understanding SAS Token Expiration
 
-⚠️ **Important:** Your current SAS tokens expire on **February 22, 2026** (24 hours from creation).
+⚠️ **Important:** Set the SAS Token to expire two years from today's date.
 
 ### Expiration Details
 
 **DEV Table SAS:**
 
-- Expires: `2026-02-22T19:16:12Z`
+- Issued: `2026-02-22T19:16:12Z`
+- Expires: `2028-02-22T19:16:12Z`
 
 **PROD Table SAS:**
 
-- Expires: `2026-02-22T19:14:53Z`
+- Issued: `2026-02-22T19:16:12Z`
+- Expires: `2028-02-22T19:14:53Z`
 
 ### Generating Long-Lived SAS Tokens
 
