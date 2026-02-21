@@ -87,12 +87,6 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
               iconPosition='center'
               onClick={() => handleFormatSelect('hardcopy')}
               tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
-              style={{
-                backgroundColor:
-                  selectedFormat === 'hardcopy'
-                    ? theme.palette.neutralLighter
-                    : theme.palette.neutralLighterAlt,
-              }}
             />
           </div>
           <div
@@ -117,12 +111,6 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
               iconPosition='center'
               onClick={() => handleFormatSelect('softcopy')}
               tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
-              style={{
-                backgroundColor:
-                  selectedFormat === 'softcopy'
-                    ? theme.palette.neutralLighter
-                    : theme.palette.neutralLighterAlt,
-              }}
             />
           </div>
           <div
@@ -147,12 +135,6 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
               iconPosition='center'
               tooltip='Full-color, illustration-rich edition available from Fluxline.pro and Apple Books. Kindle and Nook versions are $14.99 but only include black-and-white text without the premium visual experience.'
               onClick={() => handleFormatSelect('digital')}
-              style={{
-                backgroundColor:
-                  selectedFormat === 'digital'
-                    ? theme.palette.neutralLighter
-                    : theme.palette.neutralLighterAlt,
-              }}
             />
           </div>
         </div>
@@ -408,7 +390,10 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             <Typography
                               variant='bodySmall'
                               className='mb-4'
-                              style={{ color: theme.palette.neutralSecondary, fontWeight: 'bold' }}
+                              style={{
+                                color: theme.palette.neutralSecondary,
+                                fontWeight: 'bold',
+                              }}
                             >
                               {(() => {
                                 const originalPrice =
