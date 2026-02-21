@@ -37,7 +37,7 @@ export default function ContentPageClient() {
     {
       title: 'Blog',
       description:
-      'Insights, best practices, and thoughts on technology, design, and business transformation.',
+        'Insights, best practices, and thoughts on technology, design, and business transformation.',
       path: '/blog',
       iconName: 'TextDocumentShared',
       color: theme.palette.themePrimary,
@@ -45,7 +45,7 @@ export default function ContentPageClient() {
     {
       title: 'Portfolio',
       description:
-      'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
+        'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
       path: '/portfolio',
       iconName: 'FolderQuery',
       color: theme.palette.tealLight,
@@ -61,7 +61,7 @@ export default function ContentPageClient() {
     {
       title: 'GitHub',
       description:
-      'Open source projects, code samples, and technical resources from our development team.',
+        'Open source projects, code samples, and technical resources from our development team.',
       path: '/github',
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
@@ -160,11 +160,12 @@ export default function ContentPageClient() {
                 style={{
                   position: 'relative',
                   padding: theme.spacing.l1,
-                  backgroundColor: isHovered || category.isHighlighted
-                    ? theme.palette.neutralQuaternaryAlt
-                    : theme.themeMode === 'dark'
-                      ? theme.palette.themeDark
-                      : theme.palette.white,
+                  backgroundColor:
+                    isHovered || category.isHighlighted
+                      ? theme.palette.neutralQuaternaryAlt
+                      : theme.themeMode === 'dark'
+                        ? theme.palette.themeDark
+                        : theme.palette.white,
                   border: `2px solid ${isHovered || category.isHighlighted ? category.color : theme.palette.neutralLight}`,
                   borderRadius: theme.effects.roundedCorner6,
                   cursor: isDisabled ? 'not-allowed' : 'pointer',
