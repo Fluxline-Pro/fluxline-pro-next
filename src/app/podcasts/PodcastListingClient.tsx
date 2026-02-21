@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -10,6 +11,7 @@ import { FluentIcon } from '@/theme/components/fluent-icon';
 import { FormButton } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
 import { PodcastEpisode, RSS_ENDPOINT } from './types';
+import { FadeIn } from '@/animations/fade-animations';
 
 /**
  * PodcastCard Component
@@ -503,21 +505,25 @@ export function PodcastListingClient() {
               Showing {episodes.length}{' '}
               {episodes.length === 1 ? 'episode' : 'episodes'}
             </Typography>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-                gap: theme.spacing.l1,
-              }}
-            >
-              {episodes.map((episode) => (
-                <PodcastCard
-                  key={episode.id}
-                  episode={episode}
-                  onClick={() => setSelectedEpisode(episode)}
-                />
-              ))}
-            </div>
+            <AnimatePresence mode='wait'>
+              <div
+                key='podcast-episodes'
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
+                  gap: theme.spacing.l1,
+                }}
+              >
+                {episodes.map((episode, index) => (
+                  <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
+                    <PodcastCard
+                      episode={episode}
+                      onClick={() => setSelectedEpisode(episode)}
+                    />
+                  </FadeIn>
+                ))}
+              </div>
+            </AnimatePresence>
           </>
         )}
       </div>
