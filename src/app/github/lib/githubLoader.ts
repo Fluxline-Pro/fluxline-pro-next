@@ -48,9 +48,9 @@ async function fetchAllPages(
 
       if (!response.ok) {
         console.error(
-          `GitHub API error for ${prefix}: ${response.status} ${response.statusText}`,
-          `Rate limit remaining: ${response.headers.get('x-ratelimit-remaining')}`,
-          `Rate limit reset: ${response.headers.get('x-ratelimit-reset')}`
+          `GitHub API error for ${prefix}: ${response.status} ${response.statusText} | ` +
+            `Rate limit remaining: ${response.headers.get('x-ratelimit-remaining')} | ` +
+            `Rate limit reset: ${response.headers.get('x-ratelimit-reset')}`
         );
         break;
       }
