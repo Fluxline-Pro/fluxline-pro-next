@@ -19,11 +19,54 @@ interface BookDetailClientProps {
 type SelectedFormat = 'hardcopy' | 'softcopy' | 'digital';
 type PdfProductType = 'book' | 'workbook' | 'bundle';
 
+interface FormatSelectionCardProps {
+  id: SelectedFormat;
+  title: string;
+  description: string;
+  icon: string;
+  tooltip: string;
+  isSelected: boolean;
+  onClick: () => void;
+}
+
+/**
+ * FormatSelectionCard Component
+ * Reusable card for format selection with conditional styling based on selection state
+ */
+function FormatSelectionCard({
+  id,
+  title,
+  description,
+  icon,
+  tooltip,
+  isSelected,
+  onClick,
+}: FormatSelectionCardProps) {
+  return (
+    <InteractiveCard
+      id={id}
+      title={title}
+      description={description}
+      icon={icon}
+      iconPosition='center'
+      onClick={onClick}
+      tooltip={tooltip}
+      isSelected={isSelected}
+    />
+  );
+}
+
 /**
  * BuyPdfButton Component
  * Renders an inline name-collection form and initiates Stripe checkout for PDF purchases.
  */
-function BuyPdfButton({ productType, label }: { productType: PdfProductType; label: string }) {
+function BuyPdfButton({
+  productType,
+  label,
+}: {
+  productType: PdfProductType;
+  label: string;
+}) {
   const { theme } = useAppTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
@@ -80,7 +123,10 @@ function BuyPdfButton({ productType, label }: { productType: PdfProductType; lab
         gap: theme.spacing.s,
       }}
     >
-      <Typography variant='bodySmall' style={{ color: theme.palette.neutralPrimary }}>
+      <Typography
+        variant='bodySmall'
+        style={{ color: theme.palette.neutralPrimary }}
+      >
         Enter your full name for your personalized PDF:
       </Typography>
       <input
@@ -103,7 +149,10 @@ function BuyPdfButton({ productType, label }: { productType: PdfProductType; lab
         aria-label='Your full name'
       />
       {error && (
-        <Typography variant='bodySmall' style={{ color: theme.semanticColors.errorText }}>
+        <Typography
+          variant='bodySmall'
+          style={{ color: theme.semanticColors.errorText }}
+        >
           {error}
         </Typography>
       )}
@@ -118,7 +167,11 @@ function BuyPdfButton({ productType, label }: { productType: PdfProductType; lab
           variant='tertiary'
           text='Cancel'
           disabled={loading}
-          onClick={() => { setIsOpen(false); setName(''); setError(null); }}
+          onClick={() => {
+            setIsOpen(false);
+            setName('');
+            setError(null);
+          }}
         />
       </div>
     </div>
@@ -167,78 +220,33 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
           className='grid md:grid-cols-3 gap-6'
           style={{ marginTop: theme.spacing.l }}
         >
-          <div
-            style={{
-              border:
-                selectedFormat === 'hardcopy'
-                  ? `2px solid ${theme.palette.themePrimary}`
-                  : '2px solid transparent',
-              borderRadius: theme.effects.roundedCorner6,
-              boxShadow:
-                selectedFormat === 'hardcopy' ? theme.shadows.xl : 'none',
-              transition: 'all 0.2s ease',
-              transform:
-                selectedFormat === 'hardcopy' ? 'translateY(-2px)' : 'none',
-            }}
-          >
-            <InteractiveCard
-              id='hardcopy'
-              title='Hardcover'
-              description='Premium hardcover or softcover editions available through Amazon'
-              icon='BookmarkReport'
-              iconPosition='center'
-              onClick={() => handleFormatSelect('hardcopy')}
-              tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
-            />
-          </div>
-          <div
-            style={{
-              border:
-                selectedFormat === 'softcopy'
-                  ? `2px solid ${theme.palette.themePrimary}`
-                  : '2px solid transparent',
-              borderRadius: theme.effects.roundedCorner6,
-              boxShadow:
-                selectedFormat === 'softcopy' ? theme.shadows.xl : 'none',
-              transition: 'all 0.2s ease',
-              transform:
-                selectedFormat === 'softcopy' ? 'translateY(-2px)' : 'none',
-            }}
-          >
-            <InteractiveCard
-              id='softcopy'
-              title='Softcover'
-              description='Softcover paperback edition available through Amazon'
-              icon='BookAnswers'
-              iconPosition='center'
-              onClick={() => handleFormatSelect('softcopy')}
-              tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
-            />
-          </div>
-          <div
-            style={{
-              border:
-                selectedFormat === 'digital'
-                  ? `2px solid ${theme.palette.themePrimary}`
-                  : '2px solid transparent',
-              borderRadius: theme.effects.roundedCorner6,
-              boxShadow:
-                selectedFormat === 'digital' ? theme.shadows.xl : 'none',
-              transition: 'all 0.2s ease',
-              transform:
-                selectedFormat === 'digital' ? 'translateY(-2px)' : 'none',
-            }}
-          >
-            <InteractiveCard
-              id='digital'
-              title='Digital / eBook'
-              description='Instant access to PDF or eBook formats from multiple retailers'
-              icon='Tablet'
-              iconPosition='center'
-              tooltip='Full-color, illustration-rich edition available from Fluxline.pro and Apple Books. Kindle and Nook versions are $14.99 but only include black-and-white text without the premium visual experience.'
-              onClick={() => handleFormatSelect('digital')}
-            />
-          </div>
+          <FormatSelectionCard
+            id='hardcopy'
+            title='Hardcover'
+            description='Premium hardcover or softcover editions available through Amazon'
+            icon='BookmarkReport'
+            tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
+            isSelected={selectedFormat === 'hardcopy'}
+            onClick={() => handleFormatSelect('hardcopy')}
+          />
+          <FormatSelectionCard
+            id='softcopy'
+            title='Softcover'
+            description='Softcover paperback edition available through Amazon'
+            icon='BookAnswers'
+            tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
+            isSelected={selectedFormat === 'softcopy'}
+            onClick={() => handleFormatSelect('softcopy')}
+          />
+          <FormatSelectionCard
+            id='digital'
+            title='Digital / eBook'
+            description='Instant access to PDF or eBook formats from multiple retailers'
+            icon='Tablet'
+            tooltip='Full-color, illustration-rich edition available from Fluxline.pro and Apple Books. Kindle and Nook versions are $14.99 but only include black-and-white text without the premium visual experience.'
+            isSelected={selectedFormat === 'digital'}
+            onClick={() => handleFormatSelect('digital')}
+          />
         </div>
       </div>
 
@@ -523,7 +531,10 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                               Both PDFs with instant download. Watermarked with
                               your information.
                             </Typography>
-                            <BuyPdfButton productType='bundle' label='Buy Bundle PDF' />
+                            <BuyPdfButton
+                              productType='bundle'
+                              label='Buy Bundle PDF'
+                            />
                           </div>
                         </FadeIn>
                       )}
@@ -563,7 +574,10 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             Instant download. Watermarked PDF with your
                             information.
                           </Typography>
-                          <BuyPdfButton productType='book' label='Buy eBook PDF' />
+                          <BuyPdfButton
+                            productType='book'
+                            label='Buy eBook PDF'
+                          />
                         </div>
                       </FadeIn>
 
@@ -599,7 +613,10 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             >
                               Companion workbook with exercises and templates.
                             </Typography>
-                            <BuyPdfButton productType='workbook' label='Buy Workbook PDF' />
+                            <BuyPdfButton
+                              productType='workbook'
+                              label='Buy Workbook PDF'
+                            />
                           </div>
                         </FadeIn>
                       )}
