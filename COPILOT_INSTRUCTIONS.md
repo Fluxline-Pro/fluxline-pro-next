@@ -452,6 +452,171 @@ For complete documentation, see `/public/case-studies/posts/HOW_TO_CREATE_A_CASE
 
 For complete scrolls documentation, see `SCROLLS_IMPLEMENTATION_SUMMARY.md`
 
+### Video Section (YouTube Integration)
+
+- **Location**: `/src/app/video/`
+- **Data Source**: YouTube Data API v3 (fetches from @aplusinflux channel)
+- **Architecture**: Azure Function proxy at `/api/youtube`
+
+**How It Works**:
+
+1. You upload videos directly to YouTube Studio (youtube.com)
+2. Azure Function fetches videos via YouTube Data API v3
+3. Frontend displays in responsive grid with modal player
+4. No manual updates needed - videos appear automatically
+
+**Component Architecture**:
+
+- `VideoListingClient.tsx`: Client component with three tabs (Videos, Live, Playlists)
+- `VideoCard`: Individual video card with thumbnail and metadata
+- `VideoModal`: Fullscreen modal with embedded YouTube player
+- Uses unified layout patterns with responsive grids
+- Pagination support for large video libraries
+
+**Features**:
+
+- Three content tabs: Videos, Live Streams, Playlists
+- Responsive 3-column grid (adjusts for mobile/tablet)
+- Click-to-play modal with embedded YouTube player
+- Duration badges, view counts, and publish dates
+- Automatic caching (1 hour) to reduce API calls
+- CORS-enabled for frontend consumption
+
+**Configuration**:
+
+```bash
+# Required environment variable in Azure Static Web App
+YOUTUBE_API_KEY=your-youtube-data-api-v3-key  # Server-side only
+```
+
+**Setup**:
+
+1. Get API key from Google Cloud Console (console.cloud.google.com)
+2. Enable "YouTube Data API v3" in the API Library
+3. Restrict key to YouTube Data API v3 only (security best practice)
+4. Add to Azure Static Web App application settings
+5. Upload videos to YouTube - they automatically appear on site
+
+**Azure Function** (`api/youtube/index.js`):
+
+- Proxies YouTube API to keep API key server-side
+- Handles CORS and caching headers
+- Fetches channel ID via handle (@aplusinflux)
+- Returns video metadata (title, description, thumbnail, duration, views)
+- Error handling with graceful fallbacks
+
+**Important Notes**:
+
+- Videos are NOT uploaded through your web app
+- All video management happens in YouTube Studio
+- The app only displays videos from your YouTube channel
+- No backend storage or database needed for videos
+
+For details, see `/api/README.md` and `VIDEO_UPLOAD_INSTRUCTIONS.md`
+
+### Podcast Section (Azure Storage)
+
+- **Location**: `/src/app/podcasts/`
+- **Data Storage**: Azure Table Storage (metadata) + Azure Blob Storage (audio files)
+- **Architecture**: Azure Functions for API endpoints and RSS feed
+
+**How It Works**:
+
+1. Upload .mp3 audio files to Azure Blob Storage
+2. Add episode metadata to Azure Table Storage
+3. Frontend fetches episodes from `/api/podcasts/episodes`
+4. RSS feed auto-generated at `/api/podcasts/rss`
+
+**Component Architecture**:
+
+- `PodcastListingClient.tsx`: Client component for episode listing
+- `PodcastCard`: Individual episode card with metadata
+- `PodcastDetailModal`: Modal with HTML5 audio player
+- Uses unified `ContentListingPage` pattern
+- Server-side data loading with client-side interactivity
+
+**Azure Functions**:
+
+- `/api/podcasts/episodes` - Lists all episodes from Table Storage
+- `/api/podcasts/rss` - Generates RSS 2.0 feed for podcast platforms
+
+**Episode Metadata Schema**:
+
+```typescript
+{
+  RowKey: 'episode-1',           // Unique ID
+  episode_title: string,          // Episode title
+  description: string,            // Full description
+  audio_url: string,              // Blob storage URL
+  duration: string,               // MM:SS or ISO 8601
+  publish_date: string,           // ISO 8601 date
+  episode_number: number,         // Episode number
+  audio_size_bytes: number,       // File size in bytes
+  podcast_name: string,           // Show name (optional)
+  author_name: string,            // Host name (optional)
+  tags: string,                   // Comma-separated (optional)
+  imageUrl: string,               // Episode art URL (optional)
+  slug: string                    // URL slug (optional)
+}
+```
+
+**Environment Separation**:
+
+- **Dev/Test**: Uses `podcastsdev` table
+- **Production**: Uses `podcasts` table
+- Controlled by `NEXT_PUBLIC_ENVIRONMENT` variable
+- Blob storage typically organized by container or path (e.g., `/podcasts-dev/` vs `/podcasts/`)
+
+**Configuration**:
+
+```bash
+# Required environment variables in Azure Static Web App
+AZURE_TABLE_STORAGE_URL=https://yourstore.table.core.windows.net
+AZURE_TABLE_SAS_TOKEN=sv=2020-08-04&ss=t&srt=sco&...
+AZURE_PODCAST_TABLE_DEV=podcastsdev
+AZURE_PODCAST_TABLE_PROD=podcasts
+NEXT_PUBLIC_ENVIRONMENT=prod  # or 'dev'/'test'
+```
+
+**Adding Episodes Workflow**:
+
+1. **Prepare audio**: Export as MP3, 128-192 kbps, normalize audio levels
+2. **Upload to Blob Storage**: Via Azure Portal, Azure Storage Explorer, or CLI
+3. **Get blob URL**: Copy the public URL of the uploaded file
+4. **Add to Table Storage**: Create entity with episode metadata
+5. **Verify**: Episode automatically appears on `/podcasts` page and in RSS feed
+
+**RSS Feed Features**:
+
+- Valid RSS 2.0 format with iTunes extensions
+- Compatible with Apple Podcasts, Spotify, Spreaker
+- Includes audio enclosures with proper MIME types
+- Auto-sorted by publish date (newest first)
+- Podcast metadata configured in `api/podcasts-rss/index.js`
+
+**Storage Organization**:
+
+- Audio files can be organized by environment:
+  - `https://storage.../podcasts-dev/episode.mp3` (dev)
+  - `https://storage.../podcasts/episode.mp3` (prod)
+- Separation achieved via different URLs stored in different tables
+- No code changes needed to maintain environment separation
+
+**Important Notes**:
+
+- Audio files are NOT uploaded through the web interface
+- All uploads happen via Azure Portal, Azure Storage Explorer, or CLI
+- The app only displays metadata and streams audio from Azure
+- Table Storage provides the "database" for episode information
+- RSS feed enables distribution to major podcast platforms
+
+For complete podcast documentation, see:
+
+- `/api/HOW_TO_ADD_PODCAST_EPISODE.md` - Step-by-step episode upload guide
+- `/api/README.md` - API documentation
+- `/api/podcasts-episodes/index.js` - Episodes API implementation
+- `/api/podcasts-rss/index.js` - RSS feed implementation
+
 ---
 
 ## Coding Best Practices

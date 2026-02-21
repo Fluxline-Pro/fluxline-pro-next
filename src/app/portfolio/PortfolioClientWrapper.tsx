@@ -118,6 +118,8 @@ export function PortfolioClientWrapper({
           },
         ],
       }}
+      backArrow={true}
+      backArrowPath='/content'
     />
   );
 }
