@@ -10,6 +10,7 @@ export interface UnifiedCardContainerProps {
   className?: string;
   gap?: string;
   viewType: 'grid' | 'small' | 'large' | 'image';
+  gridColumns?: number;
 }
 
 export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
@@ -17,6 +18,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   className = '',
   gap = '1rem',
   viewType,
+  gridColumns,
 }) => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
@@ -46,6 +48,11 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
     } else {
       // Desktop
       columns = viewType === 'grid' ? 4 : 3;
+    }
+
+    // Override columns if gridColumns prop is provided
+    if (gridColumns !== undefined) {
+      columns = gridColumns;
     }
 
     return {

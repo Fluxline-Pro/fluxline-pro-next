@@ -18,6 +18,7 @@ interface ContentCategory {
   path: string;
   iconName: string;
   color: string;
+  isHighlighted?: boolean;
   comingSoon?: boolean;
 }
 
@@ -36,7 +37,7 @@ export default function ContentPageClient() {
     {
       title: 'Blog',
       description:
-        'Insights, best practices, and thoughts on technology, design, and business transformation.',
+      'Insights, best practices, and thoughts on technology, design, and business transformation.',
       path: '/blog',
       iconName: 'TextDocumentShared',
       color: theme.palette.themePrimary,
@@ -44,7 +45,7 @@ export default function ContentPageClient() {
     {
       title: 'Portfolio',
       description:
-        'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
+      'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
       path: '/portfolio',
       iconName: 'FolderQuery',
       color: theme.palette.tealLight,
@@ -60,10 +61,20 @@ export default function ContentPageClient() {
     {
       title: 'GitHub',
       description:
-        'Open source projects, code samples, and technical resources from our development team.',
+      'Open source projects, code samples, and technical resources from our development team.',
       path: '/github',
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
+    },
+    {
+      title: 'Books',
+      description:
+        'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
+      path: '/books',
+      iconName: 'BookAnswers',
+      color: theme.palette.blueLight,
+      // isHighlighted: true,
+      comingSoon: true,
     },
     {
       title: 'Podcasts',
@@ -80,6 +91,20 @@ export default function ContentPageClient() {
     if (!comingSoon) {
       router.push(path);
     }
+  };
+
+  const badgeStyles = {
+    position: 'absolute',
+    top: theme.spacing.m,
+    right: theme.spacing.m,
+    padding: `${theme.spacing.s2} ${theme.spacing.s1}`,
+    backgroundColor: theme.palette.themePrimary,
+    color: theme.palette.black,
+    borderRadius: theme.effects.roundedCorner4,
+    fontSize: '1rem',
+    fontWeight: theme.typography.fontWeights.semiBold,
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
   };
 
   const isMobile =
@@ -135,12 +160,12 @@ export default function ContentPageClient() {
                 style={{
                   position: 'relative',
                   padding: theme.spacing.l1,
-                  backgroundColor: isHovered
-                    ? theme.palette.neutralLighter
+                  backgroundColor: isHovered || category.isHighlighted
+                    ? theme.palette.neutralQuaternaryAlt
                     : theme.themeMode === 'dark'
                       ? theme.palette.themeDark
                       : theme.palette.white,
-                  border: `2px solid ${isHovered ? category.color : theme.palette.neutralLight}`,
+                  border: `2px solid ${isHovered || category.isHighlighted ? category.color : theme.palette.neutralLight}`,
                   borderRadius: theme.effects.roundedCorner6,
                   cursor: isDisabled ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s ease',
@@ -156,24 +181,26 @@ export default function ContentPageClient() {
                   flexDirection: 'column',
                 }}
               >
+                {/* Highlight New Badge */}
+                {category.isHighlighted && (
+                  <div
+                    style={{
+                      ...badgeStyles,
+                      backgroundColor: theme.palette.greenLight,
+                    }}
+                  >
+                    New!
+                  </div>
+                )}
                 {/* Coming Soon Badge */}
                 {category.comingSoon && (
                   <div
                     style={{
-                      position: 'absolute',
-                      top: theme.spacing.m,
-                      right: theme.spacing.m,
-                      padding: `${theme.spacing.s2} ${theme.spacing.s1}`,
+                      ...badgeStyles,
                       backgroundColor: theme.palette.themePrimary,
-                      color: theme.palette.white,
-                      borderRadius: theme.effects.roundedCorner4,
-                      fontSize: '0.75rem',
-                      fontWeight: theme.typography.fontWeights.semiBold,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px',
                     }}
                   >
-                    Coming Soon
+                    Coming Soon!
                   </div>
                 )}
 
