@@ -93,7 +93,7 @@ export default function ContentPageClient() {
     }
   };
 
-  const badgeStyles = {
+  const badgeStyles: React.CSSProperties = {
     position: 'absolute',
     top: theme.spacing.m,
     right: theme.spacing.m,
