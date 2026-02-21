@@ -62,6 +62,13 @@ export const navItems: NavItem[] = [
         iconName: 'ReadingMode',
         description: 'In-depth project analyses',
       },
+      {
+        label: 'github',
+        path: '/github',
+        view: 'github',
+        iconName: 'BranchMerge',
+        description: 'Open-source repositories',
+      },
     ],
   },
   {
