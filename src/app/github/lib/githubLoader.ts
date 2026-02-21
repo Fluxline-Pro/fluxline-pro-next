@@ -29,19 +29,28 @@ async function fetchAllPages(
   let pageCount = 0;
   const MAX_PAGES = 10; // Safety limit to prevent infinite loops
 
+  // Use GitHub token for authenticated requests (higher rate limit: 5000/hour vs 60/hour)
+  const githubToken = process.env.GITHUB_TOKEN || process.env.GITHUB_API_TOKEN;
+  const headers: HeadersInit = {
+    Accept: 'application/vnd.github.v3+json',
+  };
+  if (githubToken) {
+    headers['Authorization'] = `Bearer ${githubToken}`;
+  }
+
   try {
     while (nextUrl && pageCount < MAX_PAGES) {
       const response = await fetch(nextUrl, {
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-        },
+        headers,
         // Cache for 15 minutes where supported (ISR-compatible environments)
         next: { revalidate: 900 },
       });
 
       if (!response.ok) {
-        console.warn(
-          `GitHub API returned ${response.status} for ${prefix}: ${response.statusText}`
+        console.error(
+          `GitHub API error for ${prefix}: ${response.status} ${response.statusText} | ` +
+            `Rate limit remaining: ${response.headers.get('x-ratelimit-remaining')} | ` +
+            `Rate limit reset: ${response.headers.get('x-ratelimit-reset')}`
         );
         break;
       }
@@ -90,6 +99,14 @@ async function fetchUserRepos(username: string): Promise<GitHubRepo[]> {
  * Runs at build time for static export; returns empty array on failure.
  */
 export async function getGitHubRepos(): Promise<GitHubRepo[]> {
+  const isAuthenticated = !!(
+    process.env.GITHUB_TOKEN || process.env.GITHUB_API_TOKEN
+  );
+
+  console.log(
+    `Fetching GitHub repos (authenticated: ${isAuthenticated ? 'yes' : 'no'})`
+  );
+
   try {
     // Fetch from all organizations and users in parallel
     const orgRepoPromises = GITHUB_ORGS.map((org) => fetchOrgRepos(org));
@@ -102,6 +119,14 @@ export async function getGitHubRepos(): Promise<GitHubRepo[]> {
 
     // Flatten and merge all repos
     const allRepos = repoArrays.flat();
+
+    console.log(`Successfully fetched ${allRepos.length} repositories`);
+
+    if (allRepos.length === 0) {
+      console.warn(
+        'WARNING: No repositories were fetched. This may indicate a rate limit issue or API failure.'
+      );
+    }
 
     // Sort by updated_at descending (most recently updated first)
     return allRepos.sort((a, b) => {
