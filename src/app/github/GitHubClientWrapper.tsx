@@ -69,7 +69,7 @@ export function GitHubClientWrapper({
   // Transform repos to card format expected by ContentListingPage
   const cards = React.useMemo(() => {
     return filteredRepos.map((repo) => ({
-      id: repo.name,
+      id: repo.full_name,
       title: repo.name,
       description: repo.description ?? '',
       imageAlt: repo.name,
@@ -88,7 +88,7 @@ export function GitHubClientWrapper({
   // Build a lookup map so onCardClick can open the correct URL
   const repoUrlMap = React.useMemo(() => {
     const map = new Map<string, string>();
-    repos.forEach((repo) => map.set(repo.name, repo.html_url));
+    repos.forEach((repo) => map.set(repo.full_name, repo.html_url));
     return map;
   }, [repos]);
 
@@ -145,7 +145,8 @@ export function GitHubClientWrapper({
           boxShadow: theme.effects.elevation4,
         }}
       >
-        <Typography variant='h3'
+        <Typography
+          variant='h3'
           style={{
             margin: 0,
             fontSize: '1.25rem',
