@@ -54,6 +54,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
   const [tooltipPosition, setTooltipPosition] = React.useState({
     top: 0,
     left: 0,
+    arrowOffset: 0, // How far from left edge the arrow should be
   });
   const infoIconRef = React.useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = React.useState(false);
@@ -65,9 +66,36 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
   const updateTooltipPosition = React.useCallback(() => {
     if (infoIconRef.current) {
       const rect = infoIconRef.current.getBoundingClientRect();
+      const tooltipWidth =
+        window.innerWidth < 500 ? window.innerWidth * 0.9 : 400;
+      const viewportWidth = window.innerWidth;
+      const padding = 16;
+
+      // Icon center position (absolute, includes scroll)
+      const iconCenterX = rect.left + window.scrollX + rect.width / 2;
+
+      // Ideal tooltip left edge (centered under icon)
+      let tooltipLeft = iconCenterX - tooltipWidth / 2;
+
+      // Arrow offset from tooltip's left edge (starts at center)
+      let arrowOffset = tooltipWidth / 2;
+
+      // Adjust if tooltip would go off screen
+      if (tooltipLeft < padding) {
+        // Tooltip too far left, move it right
+        arrowOffset = iconCenterX - padding; // Arrow moves left relative to tooltip
+        tooltipLeft = padding;
+      } else if (tooltipLeft + tooltipWidth > viewportWidth - padding) {
+        // Tooltip too far right, move it left
+        const adjustedLeft = viewportWidth - tooltipWidth - padding;
+        arrowOffset = iconCenterX - adjustedLeft; // Arrow position relative to new left edge
+        tooltipLeft = adjustedLeft;
+      }
+
       setTooltipPosition({
         top: rect.bottom + window.scrollY + 8,
-        left: rect.left + window.scrollX + rect.width / 2,
+        left: tooltipLeft,
+        arrowOffset,
       });
     }
   }, []);
@@ -181,21 +209,24 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
                         <AnimatePresence>
                           {showTooltip && (
                             <motion.div
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
+                              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                              animate={{ opacity: 1, scale: 1, y: 0 }}
+                              exit={{ opacity: 0, scale: 0.95, y: -10 }}
                               transition={{ duration: 0.2, ease: 'easeOut' }}
                               style={{
                                 position: 'absolute',
                                 top: tooltipPosition.top,
                                 left: tooltipPosition.left,
-                                transform: 'translateX(-50%)',
                                 padding: theme.spacing.m,
-                                backgroundColor: theme.palette.white,
-                                color: theme.palette.neutralPrimary,
+                                backgroundColor: isDark
+                                  ? theme.palette.neutralLighter
+                                  : theme.palette.white,
+                                color: isDark
+                                  ? theme.palette.white
+                                  : theme.palette.neutralPrimary,
                                 borderRadius:
                                   theme.borderRadius.container.medium,
-                                boxShadow: theme.shadows.l,
+                                boxShadow: theme.shadows.tooltip,
                                 width: '90vw',
                                 maxWidth: '400px',
                                 zIndex: 10000,
@@ -206,7 +237,9 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
                               <Typography
                                 variant='bodySmall'
                                 style={{
-                                  color: theme.palette.neutralPrimary,
+                                  color: isDark
+                                    ? theme.palette.white
+                                    : theme.palette.neutralPrimary,
                                   lineHeight:
                                     theme.typography.lineHeights.relaxed,
                                 }}
@@ -217,7 +250,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
                                 style={{
                                   position: 'absolute',
                                   bottom: '100%',
-                                  left: '50%',
+                                  left: `${tooltipPosition.arrowOffset}px`,
                                   transform: 'translateX(-50%)',
                                   width: 0,
                                   height: 0,
