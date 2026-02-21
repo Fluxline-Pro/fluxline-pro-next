@@ -88,6 +88,11 @@ export interface ContentListingPageProps {
 
   // Navigation
   onCardClick?: (id: string) => void;
+  backArrow?: boolean;
+  backArrowPath?: string;
+
+  // Custom section (e.g., for GitHub contributions graph)
+  customSection?: React.ReactNode;
 }
 
 /**
@@ -122,12 +127,16 @@ export function ContentListingPage({
   description,
   basePath,
   cards,
+  totalCount = cards.length,
   filters,
   resultsMessage,
   emptyStateTitle = 'No items found',
   emptyStateMessage = 'Try adjusting your filters to see more items.',
   ctaSection,
   onCardClick,
+  backArrow = false,
+  backArrowPath = '/content',
+  customSection,
 }: ContentListingPageProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
@@ -140,6 +149,31 @@ export function ContentListingPage({
     { key: 'small-tile', text: 'Small Tile' },
     { key: 'large-tile', text: 'Large Tile' },
   ];
+
+  React.useEffect(() => {
+    if (title === 'Books') {
+      setViewType('large-tile'); // Force large tile view for Books page as per requirements
+    }
+  }, [title, setViewType]);
+
+  // Ensure filters array is always defined
+  if (!filters) {
+    console.warn('Filters prop is undefined, defaulting to empty array');
+    filters = [];
+  }
+
+  // Ensure cards array is always defined
+  if (!cards) {
+    console.warn('Cards prop is undefined, defaulting to empty array');
+    cards = [];
+  }
+
+  // Log if resultsMessage is missing when totalCount is provided
+  if (totalCount !== undefined && !resultsMessage) {
+    console.warn(
+      'totalCount prop is provided without resultsMessage. Consider providing a resultsMessage for better user feedback.'
+    );
+  }
 
   // Map view type for grid component
   const getViewType = () => {
@@ -159,7 +193,7 @@ export function ContentListingPage({
 
   // Render filter controls
   const renderFilters = () => {
-    return (
+    return title !== 'Books' ? ( // Only show filters if not on the Books Listing page, per requirements
       <>
         {filters.map((filter, index) => (
           <div key={index} style={{ minWidth: '200px', flex: '1 1 200px' }}>
@@ -198,7 +232,7 @@ export function ContentListingPage({
           />
         </div>
       </>
-    );
+    ) : null /* No filters for Books page as per requirements */;
   };
 
   return (
@@ -215,6 +249,8 @@ export function ContentListingPage({
           iconName={iconName}
           description={description}
           filters={renderFilters()}
+          backArrow={backArrow}
+          backArrowPath={backArrowPath}
         />
 
         {/* Results Count */}
@@ -231,12 +267,18 @@ export function ContentListingPage({
           </Typography>
         )}
 
+        {/* Custom Section (e.g., GitHub contributions) */}
+        {customSection && (
+          <div style={{ marginBottom: theme.spacing.xl }}>{customSection}</div>
+        )}
+
         {/* Content Cards */}
         {cards.length > 0 ? (
           <div>
             <AdaptiveCardGrid
               cards={cards}
               viewType={getViewType()}
+              gridColumns={title === 'Books' ? 2 : undefined} // Force 2 columns for Books page as per requirements
               gap={theme.spacing.m}
               onCardClick={handleCardClick}
             />

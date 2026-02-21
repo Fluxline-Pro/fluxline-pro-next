@@ -29,6 +29,8 @@ export interface InteractiveCardProps {
   showLearnMore?: boolean;
   /** Custom onClick handler (ignored if href is provided) */
   onClick?: () => void;
+  /** Optional tooltip text to display on hover */
+  tooltip?: string;
 }
 
 export const InteractiveCard: React.FC<InteractiveCardProps> = ({
@@ -39,9 +41,11 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
   iconPosition = 'center',
   showLearnMore = false,
   onClick,
+  tooltip,
 }) => {
   const { theme } = useAppTheme();
   const [isHovered, setIsHovered] = React.useState(false);
+  const [showTooltip, setShowTooltip] = React.useState(false);
 
   const isDark =
     theme.themeMode === 'dark' ||
@@ -91,12 +95,21 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
               style={{ marginBottom: '1rem', fontSize: '3rem' }}
             />
           )}
-          {hasTitle && (
+          <div
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
+            }}
+          >
             <Typography
               variant='h3'
               style={{
                 color: theme.palette.themePrimary,
                 fontSize: '1.25rem',
+                textTransform: 'none',
                 fontWeight: theme.typography.fontWeights.semiBold,
                 marginBottom: '0.5rem',
                 textAlign: 'center',
@@ -104,7 +117,67 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
             >
               {title}
             </Typography>
-          )}
+            {tooltip && (
+              <div
+                style={{ position: 'relative', marginBottom: '0.5rem' }}
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              >
+                <FluentIcon
+                  iconName='Info'
+                  size='small'
+                  color={theme.palette.themePrimary}
+                  style={{ cursor: 'help' }}
+                />
+                {showTooltip && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      marginTop: '8px',
+                      padding: theme.spacing.m,
+                      backgroundColor: isHovered
+                        ? isDark
+                          ? theme.palette.neutralLighter
+                          : theme.palette.neutralLighterAlt
+                        : theme.palette.neutralLighterAlt,
+                      color: theme.palette.neutralPrimary,
+                      borderRadius: theme.borderRadius.container.medium,
+                      boxShadow: theme.shadows.l,
+                      width: '320px',
+                      zIndex: 1000,
+                      border: `1px solid ${theme.palette.themePrimary}`,
+                    }}
+                  >
+                    <Typography
+                      variant='bodySmall'
+                      style={{
+                        color: theme.palette.neutralPrimary,
+                        lineHeight: theme.typography.lineHeights.relaxed,
+                      }}
+                    >
+                      {tooltip}
+                    </Typography>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        bottom: '100%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: 0,
+                        height: 0,
+                        borderLeft: '8px solid transparent',
+                        borderRight: '8px solid transparent',
+                        borderBottom: `8px solid ${theme.palette.themePrimary}`,
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
           <Typography
             variant='p'
             style={{

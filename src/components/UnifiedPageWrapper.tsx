@@ -58,6 +58,14 @@ const getFluxlineLogo = (themeMode: ThemeMode): string => {
   return FluxlineLogoLightMode.src;
 };
 
+// Helper function to get the appropriate Content Hub image based on theme mode
+const getContentHubImage = (themeMode: ThemeMode): string => {
+  if (darkModeThemes.includes(themeMode)) {
+    return '/images/home/ContentHubDefault.jpg';
+  }
+  return '/images/home/ContentHubDefaultLight.jpg';
+};
+
 // Unified page configurations
 const PAGE_CONFIGS: Record<
   string,
@@ -76,7 +84,7 @@ const PAGE_CONFIGS: Record<
     imageText: 'Strategic Insights',
   },
   '/content': {
-    image: PortfolioImage.src,
+    image: '/images/home/ContentHubDefault.jpg',
     imageText: 'Content Hub',
   },
   '/legal': {
@@ -341,6 +349,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     }
   } else if (configImage === 'FLUXLINE_LOGO') {
     configImage = getFluxlineLogo(themeMode);
+  } else if (normalizedPathname === '/content') {
+    // Apply theme-aware Content Hub image
+    configImage = getContentHubImage(themeMode);
   }
 
   // Use the selected post's image if available and we're in detail view
@@ -746,6 +757,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   objectFit: 'contain',
                   filter: filter,
                 }}
+                loading='eager'
                 priority
                 placeholder='blur'
                 blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
