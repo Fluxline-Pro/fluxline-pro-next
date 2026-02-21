@@ -2,12 +2,15 @@
 
 import React from 'react';
 import { format } from 'date-fns';
+import Image from 'next/image';
 import {
   ContentListingPage,
   FilterConfig,
 } from '@/components/ContentListingPage';
 import { getIconForPath } from '@/utils/navigation-icons';
+import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { GitHubRepo } from './types';
+import { Typography } from '@/theme/components/typography/typography';
 
 interface GitHubClientWrapperProps {
   repos: GitHubRepo[];
@@ -23,15 +26,45 @@ export function GitHubClientWrapper({
   repos,
   allLanguages,
 }: GitHubClientWrapperProps) {
+  const { theme } = useAppTheme();
   const [selectedLanguage, setSelectedLanguage] = React.useState<
     string | undefined
   >();
+  const [selectedOwner, setSelectedOwner] = React.useState<
+    string | undefined
+  >();
 
-  // Filter repos by selected language
+  // Get unique owners
+  const allOwners = React.useMemo(() => {
+    const owners = new Set<string>();
+    repos.forEach((repo) => {
+      if (repo.owner?.login) owners.add(repo.owner.login);
+    });
+    return Array.from(owners).sort();
+  }, [repos]);
+
+  // Get user owners only (exclude organizations for contributions graph)
+  const userOwners = React.useMemo(() => {
+    const users = new Set<string>();
+    repos.forEach((repo) => {
+      if (repo.owner?.login && repo.owner?.type === 'User') {
+        users.add(repo.owner.login);
+      }
+    });
+    return Array.from(users).sort();
+  }, [repos]);
+
+  // Filter repos by selected language and owner
   const filteredRepos = React.useMemo(() => {
-    if (!selectedLanguage) return repos;
-    return repos.filter((repo) => repo.language === selectedLanguage);
-  }, [repos, selectedLanguage]);
+    let filtered = repos;
+    if (selectedLanguage) {
+      filtered = filtered.filter((repo) => repo.language === selectedLanguage);
+    }
+    if (selectedOwner) {
+      filtered = filtered.filter((repo) => repo.owner?.login === selectedOwner);
+    }
+    return filtered;
+  }, [repos, selectedLanguage, selectedOwner]);
 
   // Transform repos to card format expected by ContentListingPage
   const cards = React.useMemo(() => {
@@ -70,8 +103,18 @@ export function GitHubClientWrapper({
     [repoUrlMap]
   );
 
-  // Configure language filter
+  // Configure filters
   const filters: FilterConfig[] = [
+    {
+      type: 'single',
+      label: 'Owner',
+      options: [
+        { key: '', text: 'All Owners' },
+        ...allOwners.map((owner) => ({ key: owner, text: owner })),
+      ],
+      value: selectedOwner,
+      onChange: setSelectedOwner,
+    },
     {
       type: 'single',
       label: 'Language',
@@ -84,7 +127,78 @@ export function GitHubClientWrapper({
     },
   ];
 
-  const resultsMessage = `Showing ${filteredRepos.length} ${filteredRepos.length === 1 ? 'repository' : 'repositories'}${selectedLanguage ? ` in ${selectedLanguage}` : ''}`;
+  const resultsMessage = `Showing ${filteredRepos.length} ${filteredRepos.length === 1 ? 'repository' : 'repositories'}${selectedOwner ? ` from ${selectedOwner}` : ''}${selectedLanguage ? ` in ${selectedLanguage}` : ''}`;
+
+  // GitHub contributions graph (only for user accounts, not organizations)
+  const contributionsSection = React.useMemo(() => {
+    if (userOwners.length === 0) return null;
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing.m,
+          padding: theme.spacing.l,
+          backgroundColor: theme.palette.neutralLighter,
+          borderRadius: theme.effects.roundedCorner6,
+          boxShadow: theme.effects.elevation4,
+        }}
+      >
+        <Typography variant='h3'
+          style={{
+            margin: 0,
+            fontSize: '1.25rem',
+            fontWeight: 600,
+            color: theme.semanticColors.bodyText,
+          }}
+        >
+          GitHub Contributions
+        </Typography>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: theme.spacing.m,
+          }}
+        >
+          {userOwners.map((owner) => (
+            <div
+              key={owner}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: theme.spacing.s,
+              }}
+            >
+              <Typography
+                variant='p'
+                style={{
+                  fontSize: '1.125rem',
+                  fontWeight: 500,
+                  color: theme.palette.themePrimary,
+                }}
+              >
+                {owner}
+              </Typography>
+              <Image
+                src={`https://ghchart.rshah.org/${owner}`}
+                alt={`${owner} GitHub contributions`}
+                width={800}
+                height={150}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: theme.effects.roundedCorner4,
+                }}
+                unoptimized
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }, [userOwners, theme]);
 
   return (
     <ContentListingPage
@@ -97,11 +211,12 @@ export function GitHubClientWrapper({
       resultsMessage={resultsMessage}
       emptyStateTitle='No repositories found'
       emptyStateMessage={
-        selectedLanguage
-          ? 'Try selecting a different language filter.'
+        selectedLanguage || selectedOwner
+          ? 'Try adjusting your filters to see more repositories.'
           : 'Check back soon for new repositories.'
       }
       onCardClick={handleCardClick}
+      customSection={contributionsSection}
     />
   );
 }
