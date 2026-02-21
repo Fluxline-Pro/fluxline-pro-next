@@ -58,6 +58,14 @@ const getFluxlineLogo = (themeMode: ThemeMode): string => {
   return FluxlineLogoLightMode.src;
 };
 
+// Helper function to get the appropriate Content Hub image based on theme mode
+const getContentHubImage = (themeMode: ThemeMode): string => {
+  if (darkModeThemes.includes(themeMode)) {
+    return '/images/home/ContentHubDefault.jpg';
+  }
+  return '/images/home/ContentHubDefaultLight.jpg';
+};
+
 // Unified page configurations
 const PAGE_CONFIGS: Record<
   string,
@@ -341,6 +349,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     }
   } else if (configImage === 'FLUXLINE_LOGO') {
     configImage = getFluxlineLogo(themeMode);
+  } else if (normalizedPathname === '/content') {
+    // Apply theme-aware Content Hub image
+    configImage = getContentHubImage(themeMode);
   }
 
   // Use the selected post's image if available and we're in detail view
