@@ -1,11 +1,4 @@
-The PodcastCard uses a <div> with onClick handler but lacks keyboard accessibility attributes. Users who navigate with keyboard won't be able to activate the podcast cards.
-
-Add the following attributes to make it keyboard accessible:
-
-role="button" - Indicates this is an interactive element
-tabIndex={0} - Makes it focusable via keyboard
-onKeyDown handler - Handle Enter and Space keys to trigger onClick
-This is the same accessibility issue as in VideoCard.{
+{
   "$schema": "https://json.schemastore.org/staticwebapp.config.json",
   "platform": {
     "apiRuntime": "node:20"
