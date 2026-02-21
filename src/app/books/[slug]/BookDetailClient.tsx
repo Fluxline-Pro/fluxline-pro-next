@@ -425,6 +425,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                               variant='primary'
                               text='Add to Cart'
                               fullWidth
+                              disabled
                               onClick={handleShopIntegrationPlaceholder}
                             />
                           </div>
@@ -498,7 +499,8 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                                 fontWeight: 'bold',
                               }}
                             >
-                              ${book.workbookPrice}
+                              {/* ${book.workbookPrice} */}
+                              $XX.XX (pricing disclosed at launch)
                             </Typography>
                             <Typography
                               variant='bodySmall'
@@ -510,6 +512,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             <FormButton
                               variant='primary'
                               text='Add to Cart'
+                              disabled
                               fullWidth
                               onClick={handleShopIntegrationPlaceholder}
                             />
