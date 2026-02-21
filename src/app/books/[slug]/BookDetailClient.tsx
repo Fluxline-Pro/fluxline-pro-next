@@ -17,11 +17,113 @@ interface BookDetailClientProps {
 }
 
 type SelectedFormat = 'hardcopy' | 'softcopy' | 'digital';
+type PdfProductType = 'book' | 'workbook' | 'bundle';
 
-// Placeholder function for Shop integration
-const handleShopIntegrationPlaceholder = () => {
-  alert('Shop integration coming soon');
-};
+/**
+ * BuyPdfButton Component
+ * Renders an inline name-collection form and initiates Stripe checkout for PDF purchases.
+ */
+function BuyPdfButton({ productType, label }: { productType: PdfProductType; label: string }) {
+  const { theme } = useAppTheme();
+  const [isOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleCheckout = async () => {
+    const trimmedName = name.trim();
+    if (!trimmedName) {
+      setError('Please enter your full name.');
+      return;
+    }
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productType, customerName: trimmedName }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.url) {
+        setError(data.error || 'Unable to start checkout. Please try again.');
+        setLoading(false);
+        return;
+      }
+      window.location.href = data.url;
+    } catch {
+      setError('Network error. Please try again.');
+      setLoading(false);
+    }
+  };
+
+  if (!isOpen) {
+    return (
+      <FormButton
+        variant='primary'
+        text={label}
+        fullWidth
+        onClick={() => setIsOpen(true)}
+      />
+    );
+  }
+
+  return (
+    <div
+      style={{
+        border: `1px solid ${theme.palette.neutralTertiary}`,
+        borderRadius: theme.effects.roundedCorner4,
+        padding: theme.spacing.m,
+        backgroundColor: theme.palette.neutralLighterAlt,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing.s,
+      }}
+    >
+      <Typography variant='bodySmall' style={{ color: theme.palette.neutralPrimary }}>
+        Enter your full name for your personalized PDF:
+      </Typography>
+      <input
+        type='text'
+        placeholder='Your full name'
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && handleCheckout()}
+        maxLength={100}
+        style={{
+          padding: '0.5rem 0.75rem',
+          borderRadius: theme.effects.roundedCorner4,
+          border: `1px solid ${theme.palette.neutralTertiary}`,
+          fontFamily: theme.typography.fonts.body.fontFamily,
+          fontSize: '0.95rem',
+          color: theme.palette.neutralPrimary,
+          backgroundColor: theme.palette.white,
+          outline: 'none',
+        }}
+        aria-label='Your full name'
+      />
+      {error && (
+        <Typography variant='bodySmall' style={{ color: theme.semanticColors.errorText }}>
+          {error}
+        </Typography>
+      )}
+      <div style={{ display: 'flex', gap: theme.spacing.s }}>
+        <FormButton
+          variant='primary'
+          text={loading ? 'Redirecting…' : 'Proceed to Checkout'}
+          disabled={loading}
+          onClick={handleCheckout}
+        />
+        <FormButton
+          variant='tertiary'
+          text='Cancel'
+          disabled={loading}
+          onClick={() => { setIsOpen(false); setName(''); setError(null); }}
+        />
+      </div>
+    </div>
+  );
+}
 
 /**
  * Purchase Options Section Component
@@ -421,13 +523,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                               Both PDFs with instant download. Watermarked with
                               your information.
                             </Typography>
-                            <FormButton
-                              variant='primary'
-                              text='Add to Cart'
-                              fullWidth
-                              disabled
-                              onClick={handleShopIntegrationPlaceholder}
-                            />
+                            <BuyPdfButton productType='bundle' label='Buy Bundle PDF' />
                           </div>
                         </FadeIn>
                       )}
@@ -467,13 +563,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             Instant download. Watermarked PDF with your
                             information.
                           </Typography>
-                          <FormButton
-                            variant='primary'
-                            text='Add to Cart'
-                            fullWidth
-                            disabled
-                            onClick={handleShopIntegrationPlaceholder}
-                          />
+                          <BuyPdfButton productType='book' label='Buy eBook PDF' />
                         </div>
                       </FadeIn>
 
@@ -509,13 +599,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             >
                               Companion workbook with exercises and templates.
                             </Typography>
-                            <FormButton
-                              variant='primary'
-                              text='Add to Cart'
-                              disabled
-                              fullWidth
-                              onClick={handleShopIntegrationPlaceholder}
-                            />
+                            <BuyPdfButton productType='workbook' label='Buy Workbook PDF' />
                           </div>
                         </FadeIn>
                       )}
