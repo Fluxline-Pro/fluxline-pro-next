@@ -58,21 +58,20 @@ export default function ContentPageClient() {
       color: theme.palette.magentaLight,
     },
     {
-      title: 'Podcasts',
-      description:
-        '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
-      path: '/podcasts',
-      iconName: 'Microphone',
-      color: theme.palette.yellowDark,
-      comingSoon: true,
-    },
-    {
       title: 'GitHub',
       description:
         'Open source projects, code samples, and technical resources from our development team.',
       path: '/github',
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
+    },
+    {
+      title: 'Podcasts',
+      description:
+        '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
+      path: '/podcasts',
+      iconName: 'Microphone',
+      color: theme.palette.yellowDark,
       comingSoon: true,
     },
   ];

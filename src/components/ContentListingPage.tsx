@@ -90,6 +90,9 @@ export interface ContentListingPageProps {
   onCardClick?: (id: string) => void;
   backArrow?: boolean;
   backArrowPath?: string;
+
+  // Custom section (e.g., for GitHub contributions graph)
+  customSection?: React.ReactNode;
 }
 
 /**
@@ -132,6 +135,7 @@ export function ContentListingPage({
   onCardClick,
   backArrow = false,
   backArrowPath = '/content',
+  customSection,
 }: ContentListingPageProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
@@ -235,6 +239,11 @@ export function ContentListingPage({
           >
             {resultsMessage}
           </Typography>
+        )}
+
+        {/* Custom Section (e.g., GitHub contributions) */}
+        {customSection && (
+          <div style={{ marginBottom: theme.spacing.xl }}>{customSection}</div>
         )}
 
         {/* Content Cards */}
