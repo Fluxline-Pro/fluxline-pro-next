@@ -217,6 +217,8 @@ export function GitHubClientWrapper({
       }
       onCardClick={handleCardClick}
       customSection={contributionsSection}
+      backArrow
+      backArrowPath={'/content'}
     />
   );
 }
