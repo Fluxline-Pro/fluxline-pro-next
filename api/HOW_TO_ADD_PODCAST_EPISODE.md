@@ -67,7 +67,7 @@ You have three options for uploading:
 **Example URL:**
 
 ```
-https://fluxlinestorage.blob.core.windows.net/podcasts/episode-1-intro.mp3
+https://azfluxlinewebstorage.blob.core.windows.net/podcasts/episode-1-intro.mp3
 ```
 
 #### Option B: Azure Storage Explorer (Recommended)
@@ -84,7 +84,7 @@ https://fluxlinestorage.blob.core.windows.net/podcasts/episode-1-intro.mp3
 ```bash
 # Upload audio file
 az storage blob upload \
-  --account-name fluxlinestorage \
+  --account-name azfluxlinewebstorage \
   --container-name podcasts \
   --name episode-1-intro.mp3 \
   --file /path/to/your/episode-1-intro.mp3 \
@@ -92,7 +92,7 @@ az storage blob upload \
 
 # Get the blob URL
 az storage blob url \
-  --account-name fluxlinestorage \
+  --account-name azfluxlinewebstorage \
   --container-name podcasts \
   --name episode-1-intro.mp3
 ```
@@ -144,7 +144,7 @@ PartitionKey: podcast
 RowKey: episode-001
 episode_title: Introduction to Mythmaking
 description: In this inaugural episode, we explore the art of mythmaking...
-audio_url: https://fluxline.blob.core.windows.net/podcasts/episode-1.mp3
+audio_url: https://azfluxlinewebstorage.blob.core.windows.net/podcasts/episode-1.mp3
 duration: 32:45
 publish_date: 2026-02-21T00:00:00Z
 episode_number: 1
@@ -168,14 +168,14 @@ tags: business,strategy,transformation
 
 ```bash
 az storage entity insert \
-  --account-name fluxlinestorage \
+  --account-name azfluxlinewebstorage \
   --table-name podcasts \
   --entity \
     PartitionKey=podcast \
     RowKey=episode-001 \
     episode_title="Introduction to Mythmaking" \
     description="In this inaugural episode..." \
-    audio_url="https://fluxline.blob.core.windows.net/podcasts/episode-1.mp3" \
+    audio_url="https://azfluxlinewebstorage.blob.core.windows.net/podcasts/episode-1.mp3" \
     duration="32:45" \
     publish_date="2026-02-21T00:00:00Z" \
     episode_number@odata.type=Edm.Int32 \
@@ -323,7 +323,7 @@ $episodes = @(
     }
 )
 
-$storageAccount = "fluxlinestorage"
+$storageAccount = "azfluxlinewebstorage"
 $container = "podcasts"
 
 foreach ($episode in $episodes) {
