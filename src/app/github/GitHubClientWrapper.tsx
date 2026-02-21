@@ -10,7 +10,7 @@ import {
 import { getIconForPath } from '@/utils/navigation-icons';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { GitHubRepo } from './types';
-import { Typography } from '@/theme/components/typography/typography';
+import { Typography } from '@/theme/components/typography';
 
 interface GitHubClientWrapperProps {
   repos: GitHubRepo[];
