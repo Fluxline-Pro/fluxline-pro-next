@@ -72,6 +72,31 @@ function parseConnectionString(connectionString) {
   };
 }
 
+/** Check if an order already exists in Azure Table Storage */
+async function getExistingOrder(connectionString, partitionKey, rowKey) {
+  const creds = parseConnectionString(connectionString);
+  if (!creds) throw new Error('Invalid Azure storage connection string');
+
+  const credential = new AzureNamedKeyCredential(
+    creds.accountName,
+    creds.accountKey
+  );
+  const tableClient = new TableClient(
+    `https://${creds.accountName}.table.core.windows.net`,
+    ORDERS_TABLE,
+    credential
+  );
+
+  try {
+    const entity = await tableClient.getEntity(partitionKey, rowKey);
+    return entity;
+  } catch (err) {
+    // Entity not found (404) means order doesn't exist yet
+    if (err.statusCode === 404) return null;
+    throw err;
+  }
+}
+
 /** Store order metadata in Azure Table Storage */
 async function storeOrder(connectionString, order) {
   const creds = parseConnectionString(connectionString);
@@ -456,6 +481,43 @@ module.exports = async function (context, req) {
       body: JSON.stringify({ error: 'Storage not configured.' }),
     };
     return;
+  }
+
+  // Idempotency check: prevent duplicate processing on webhook retries
+  try {
+    const existingOrder = await getExistingOrder(
+      storageConnectionString,
+      productType,
+      orderId
+    );
+
+    if (existingOrder) {
+      if (existingOrder.status === 'completed') {
+        context.log(
+          `stripe-webhook: order already completed orderId=${orderId}, skipping duplicate webhook`
+        );
+        context.res = {
+          status: 200,
+          headers: CORS_HEADERS,
+          body: JSON.stringify({ received: true, duplicate: true }),
+        };
+        return;
+      }
+      context.log.warn(
+        `stripe-webhook: order already exists with status=${existingOrder.status} orderId=${orderId}, skipping to prevent duplicate processing`
+      );
+      context.res = {
+        status: 200,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({ received: true, duplicate: true }),
+      };
+      return;
+    }
+  } catch (err) {
+    context.log.warn(
+      `stripe-webhook: failed to check existing order: ${err.message}, proceeding with caution`
+    );
+    // Continue processing if check fails - better to risk duplicate than miss an order
   }
 
   // 1. Store order in Azure Table Storage
