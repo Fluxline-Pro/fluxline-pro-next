@@ -1,47 +1,65 @@
-# Testing the Contact API Locally
+# Testing the Azure Functions API
 
 ## Prerequisites
 
 1. **Azure Functions Core Tools** (already installed via winget)
 2. **Node.js** (already installed)
-3. **SMTP credentials configured** in `local.settings.json`
+3. **SMTP credentials configured** in `local.settings.json` (for integration tests)
 
-## Quick Start
+## Test Types
 
-### Method 1: Using the Test Script (Recommended)
+This project includes two types of tests:
 
-1. **Start the Azure Functions runtime:**
+### 1. Unit Tests (Jest)
 
-   ```powershell
-   cd api
-   npm start
-   ```
+Fast, isolated tests that don't require a running server or external services.
 
-   You should see output like:
+**Run all unit tests:**
 
-   ```
-   Azure Functions Core Tools
-   Core Tools Version: 4.x.x
-   Function Runtime Version: 4.x.x
+```powershell
+cd api
+npm test
+```
 
-   Functions:
+**Run unit tests only:**
 
-   contact: [POST] http://localhost:7071/api/contact
-   ```
+```powershell
+npm run test:unit
+```
 
-2. **In a NEW terminal, run the test script:**
+**Available test files:**
 
-   ```powershell
-   cd api
-   npm test
-   ```
+- `create-checkout-session/index.test.js` - Tests Stripe checkout session creation
+- `stripe-webhook/index.test.js` - Tests Stripe webhook handling
 
-   The test script will:
-   - Send a valid submission
-   - Test validation errors (missing fields, invalid email, etc.)
-   - Show you the API responses
+**Benefits:**
 
-3. **Check your email** at `support@fluxline.pro` for the test message!
+- ✅ Fast execution (< 1 second)
+- ✅ No external dependencies required
+- ✅ Tests validation logic and error handling
+- ✅ Can run in CI/CD pipelines
+
+### 2. Integration Tests
+
+End-to-end tests against a running Azure Functions server.
+
+**Run integration test:**
+
+```powershell
+# Terminal 1: Start the server
+cd api
+npm start
+
+# Terminal 2: Run integration test
+npm run test:integration
+```
+
+The integration test (`test-contact.js`) will:
+
+- Send a valid submission
+- Test validation errors (missing fields, invalid email, etc.)
+- Show you the API responses
+- Send actual emails (check your inbox!)
 
 ### Method 2: Using cURL
 

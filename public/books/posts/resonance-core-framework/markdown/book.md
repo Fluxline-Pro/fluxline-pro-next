@@ -47,11 +47,15 @@ retailers:
     icon: 'ShoppingCart'
   - name: 'Barnes & Noble'
     url: '#'
-    formats: ['ebook']
+    formats: ['hardcover', 'softcover', 'ebook']
     icon: 'BookAnswers'
   - name: 'Apple Books'
     url: '#'
     formats: ['ebook']
+    icon: 'BookAnswers'
+  - name: 'Local Bookstores'
+    url: '#'
+    formats: ['hardcover', 'softcover']
     icon: 'BookAnswers'
 directPurchaseAvailable: true
 directPurchasePrice: 24.99
@@ -166,10 +170,4 @@ Purchase the PDF edition directly from Fluxline.pro and receive:
 
 ## Reviews (Coming Soon)
 
-Pre-order now and be among the first to experience the transformative power of the Resonance Core Framework.
-
----
-
-**Available February 2026**
-
-Pre-order your copy today and begin your transformation journey.
+**Available April 2026**
