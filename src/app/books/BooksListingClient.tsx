@@ -41,6 +41,8 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       filters={[]} // No filters per requirements
       resultsMessage={resultsMessage}
       emptyStateTitle='No Books Available Yet'
+      backArrow
+      backArrowPath='/content'
       emptyStateMessage='Check back soon for our upcoming publications.'
       ctaSection={{
         title: 'Stay Updated on New Releases',
