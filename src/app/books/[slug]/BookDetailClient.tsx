@@ -83,11 +83,14 @@ function BuyPdfButton({
     setLoading(true);
     try {
       const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
-      const response = await fetch(`${apiBaseUrl}/api/create-checkout-session`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productType, customerName: trimmedName }),
-      });
+      const response = await fetch(
+        `${apiBaseUrl}/api/create-checkout-session`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productType, customerName: trimmedName }),
+        }
+      );
       const data = await response.json();
       if (!response.ok || !data.url) {
         setError(data.error || 'Unable to start checkout. Please try again.');
