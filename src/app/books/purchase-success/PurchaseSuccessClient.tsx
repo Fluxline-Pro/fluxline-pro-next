@@ -19,6 +19,18 @@ interface OrderDetails {
 }
 
 /**
+ * Validates that a session ID matches the expected Stripe checkout session format.
+ * Stripe checkout session IDs start with "cs_" followed by alphanumeric characters and underscores.
+ * @param sessionId - The session ID to validate
+ * @returns true if valid, false otherwise
+ */
+function isValidStripeSessionId(sessionId: string): boolean {
+  // Stripe checkout session IDs start with "cs_" and contain alphanumeric + underscore chars
+  const stripeSessionPattern = /^cs_[a-zA-Z0-9_]+$/;
+  return stripeSessionPattern.test(sessionId);
+}
+
+/**
  * Purchase Success page shown after a successful Stripe checkout.
  * Informs the customer that their personalized PDF will arrive by email.
  */
@@ -33,6 +45,13 @@ export function PurchaseSuccessClient() {
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
     if (!sessionId) {
+      setOrderLoading(false);
+      return;
+    }
+
+    // Validate session ID format before making API call
+    if (!isValidStripeSessionId(sessionId)) {
+      console.warn('Invalid Stripe session ID format:', sessionId);
       setOrderLoading(false);
       return;
     }
