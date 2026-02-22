@@ -165,10 +165,10 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
  */
 export const COMPANY_VALUES: CompanyValue[] = [
   {
-    id: 'emotional-intelligence',
-    title: 'Emotional Intelligence',
+    id: 'embodied-awareness',
+    title: 'Embodied Awareness',
     description:
-      'We honor the emotional landscape of transformation, recognizing that lasting change comes from within.',
+      'Integrating mind, body, and spirit for holistic transformation and authentic connection.',
     icon: 'HeartFill',
   },
   {
