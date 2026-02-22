@@ -124,7 +124,7 @@ async function storeOrder(connectionString, order) {
     }
   }
 
-  await tableClient.createEntity({
+  const entity = {
     partitionKey: order.productType,
     rowKey: order.orderId,
     customerName: order.customerName,
@@ -132,8 +132,16 @@ async function storeOrder(connectionString, order) {
     productType: order.productType,
     stripeSessionId: order.stripeSessionId,
     timestamp: order.timestamp,
-    status: 'processing',
-  });
+    status: order.status || 'processing',
+    fulfillmentStatus: order.fulfillmentStatus || 'immediate',
+  };
+
+  // Add optional fields
+  if (order.releaseDate) {
+    entity.releaseDate = order.releaseDate;
+  }
+
+  await tableClient.createEntity(entity);
 }
 
 /** Update order status in Azure Table Storage */
@@ -288,6 +296,67 @@ function generateSasUrl(connectionString, blobName) {
   ).toString();
 
   return `https://${creds.accountName}.blob.core.windows.net/${STAMPED_PDFS_CONTAINER}/${blobName}?${sasQuery}`;
+}
+
+/** Send pre-order confirmation email (no download link yet) */
+async function sendPreOrderConfirmationEmail(
+  customerEmail,
+  customerName,
+  productType,
+  releaseDate
+) {
+  const smtpHost = process.env.SMTP_HOST || 'mail.smtp2go.com';
+  const smtpPort = parseInt(process.env.SMTP_PORT || '2525', 10);
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+  const smtpFrom = process.env.SMTP_FROM || 'no-reply@fluxline.pro';
+
+  if (!smtpUser || !smtpPass) {
+    throw new Error('SMTP credentials not configured');
+  }
+
+  const productNames = {
+    book: 'Resonance Core Framework eBook',
+    workbook: 'Resonance Core Framework Workbook',
+    bundle: 'Resonance Core Framework Bundle',
+  };
+  const productName = productNames[productType] || 'PDF';
+
+  const transporter = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: false,
+    auth: { user: smtpUser, pass: smtpPass },
+  });
+
+  const releaseDateStr = releaseDate
+    ? `We're currently working on the final production version and expect to deliver your personalized PDF by ${releaseDate}.`
+    : "We're currently working on the final production version and will notify you as soon as it's ready.";
+
+  const emailBody = `
+Hi ${customerName},
+
+Thank you for pre-ordering the ${productName}!
+
+Your order has been confirmed and your payment has been processed. ${releaseDateStr}
+
+You'll receive another email with your personalized download link as soon as the book is released.
+
+We appreciate your patience and support!
+
+If you have any questions, please contact us at support@fluxline.pro.
+
+Warm regards,
+The Fluxline Team
+fluxline.pro
+  `.trim();
+
+  await transporter.sendMail({
+    from: smtpFrom,
+    to: customerEmail,
+    subject: `Pre-Order Confirmation: ${productName}`,
+    text: emailBody,
+  });
 }
 
 /** Send thank-you email with download link(s) */
@@ -536,7 +605,98 @@ module.exports = async function (context, req) {
     // Non-fatal: continue to PDF processing
   }
 
-  // 2. Generate and deliver PDFs
+  // Check if this is a pre-order by examining the line items
+  try {
+    // Expand line items to get product details
+    const stripe = new Stripe(stripeSecretKey);
+    const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
+      session.id,
+      {
+        expand: ['line_items.data.price.product'],
+      }
+    );
+
+    const lineItem = sessionWithLineItems.line_items?.data?.[0];
+    const product = lineItem?.price?.product;
+
+    // Check product metadata for pre-order flag
+    const isPreOrder =
+      product?.metadata?.fulfillmentType === 'pre-order' ||
+      product?.metadata?.isPreOrder === 'true';
+    const releaseDate = product?.metadata?.releaseDate || '';
+
+    if (isPreOrder) {
+      context.log(
+        `stripe-webhook: pre-order detected orderId=${orderId}, deferring fulfillment`
+      );
+
+      // Update order status to pre-order
+      await updateOrderStatus(
+        storageConnectionString,
+        productType,
+        orderId,
+        'confirmed'
+      ).catch((err) =>
+        context.log.warn(
+          `stripe-webhook: failed to update pre-order status: ${err.message}`
+        )
+      );
+
+      // Update order with fulfillmentStatus and releaseDate
+      const creds = parseConnectionString(storageConnectionString);
+      if (creds) {
+        const credential = new AzureNamedKeyCredential(
+          creds.accountName,
+          creds.accountKey
+        );
+        const tableClient = new TableClient(
+          `https://${creds.accountName}.table.core.windows.net`,
+          ORDERS_TABLE,
+          credential
+        );
+        await tableClient.updateEntity(
+          {
+            partitionKey: productType,
+            rowKey: orderId,
+            fulfillmentStatus: 'pre-order',
+            releaseDate: releaseDate,
+          },
+          'Merge'
+        );
+      }
+
+      // Send pre-order confirmation email
+      try {
+        await sendPreOrderConfirmationEmail(
+          customerEmail,
+          customerName,
+          productType,
+          releaseDate
+        );
+        context.log(
+          `stripe-webhook: pre-order confirmation email sent to ${maskEmailForLogging(customerEmail)}`
+        );
+      } catch (emailErr) {
+        context.log.error(
+          `stripe-webhook: failed to send pre-order confirmation email: ${emailErr.message}`
+        );
+      }
+
+      context.res = {
+        status: 200,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({ received: true, preOrder: true }),
+      };
+      return; // Stop here - no PDF generation for pre-orders
+    }
+  } catch (preOrderCheckErr) {
+    context.log.warn(
+      `stripe-webhook: failed to check pre-order status: ${preOrderCheckErr.message}, continuing with immediate fulfillment`
+    );
+    // Continue with normal flow if pre-order check fails
+  }
+
+  // 2. Generate and deliver PDFs (immediate fulfillment)
   try {
     let downloadUrl;
 
