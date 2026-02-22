@@ -15,7 +15,12 @@
 
 const Stripe = require('stripe');
 const { TableClient, AzureNamedKeyCredential } = require('@azure/data-tables');
-const { BlobServiceClient, StorageSharedKeyCredential, generateBlobSASQueryParameters, BlobSASPermissions } = require('@azure/storage-blob');
+const {
+  BlobServiceClient,
+  StorageSharedKeyCredential,
+  generateBlobSASQueryParameters,
+  BlobSASPermissions,
+} = require('@azure/storage-blob');
 const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 const nodemailer = require('nodemailer');
 
@@ -23,18 +28,36 @@ const CORS_HEADERS = {
   'Content-Type': 'application/json',
 };
 
-const ORDERS_TABLE = process.env.ENVIRONMENT === 'prod' ? 'pdforders' : 'pdfordersdev';
+const ORDERS_TABLE =
+  process.env.ENVIRONMENT === 'prod' ? 'pdforders' : 'pdfordersdev';
 const BASE_PDFS_CONTAINER = 'base-pdfs';
 const STAMPED_PDFS_CONTAINER = 'stamped-pdfs';
 const SAS_VALIDITY_DAYS = 7;
 
+/**
+ * Mask email address for logging to protect PII
+ * Shows only domain portion: ***@example.com
+ * @param {string} email - The email address to mask
+ * @returns {string} Masked email safe for logging
+ */
+function maskEmailForLogging(email) {
+  if (!email || typeof email !== 'string') return '***@unknown';
+  const atIndex = email.indexOf('@');
+  if (atIndex === -1) return '***@invalid';
+  return `***${email.substring(atIndex)}`;
+}
+
 /** Product type to base PDF blob name mapping */
 function getBasePdfBlob(productType) {
   switch (productType) {
-    case 'book': return 'resonance-core-framework-book.pdf';
-    case 'workbook': return 'resonance-core-framework-workbook.pdf';
-    case 'bundle': return null; // bundle handled specially
-    default: return null;
+    case 'book':
+      return 'resonance-core-framework-book.pdf';
+    case 'workbook':
+      return 'resonance-core-framework-workbook.pdf';
+    case 'bundle':
+      return null; // bundle handled specially
+    default:
+      return null;
   }
 }
 
@@ -54,7 +77,10 @@ async function storeOrder(connectionString, order) {
   const creds = parseConnectionString(connectionString);
   if (!creds) throw new Error('Invalid Azure storage connection string');
 
-  const credential = new AzureNamedKeyCredential(creds.accountName, creds.accountKey);
+  const credential = new AzureNamedKeyCredential(
+    creds.accountName,
+    creds.accountKey
+  );
   const tableClient = new TableClient(
     `https://${creds.accountName}.table.core.windows.net`,
     ORDERS_TABLE,
@@ -62,8 +88,13 @@ async function storeOrder(connectionString, order) {
   );
 
   // Ensure table exists
-  try { await tableClient.createTable(); } catch (err) {
-    if (!err.message?.includes('exists') && !err.code?.includes('TableAlreadyExists')) {
+  try {
+    await tableClient.createTable();
+  } catch (err) {
+    if (
+      !err.message?.includes('exists') &&
+      !err.code?.includes('TableAlreadyExists')
+    ) {
       throw err;
     }
   }
@@ -81,11 +112,20 @@ async function storeOrder(connectionString, order) {
 }
 
 /** Update order status in Azure Table Storage */
-async function updateOrderStatus(connectionString, partitionKey, rowKey, status, downloadUrl) {
+async function updateOrderStatus(
+  connectionString,
+  partitionKey,
+  rowKey,
+  status,
+  downloadUrl
+) {
   const creds = parseConnectionString(connectionString);
   if (!creds) return;
 
-  const credential = new AzureNamedKeyCredential(creds.accountName, creds.accountKey);
+  const credential = new AzureNamedKeyCredential(
+    creds.accountName,
+    creds.accountKey
+  );
   const tableClient = new TableClient(
     `https://${creds.accountName}.table.core.windows.net`,
     ORDERS_TABLE,
@@ -99,8 +139,10 @@ async function updateOrderStatus(connectionString, partitionKey, rowKey, status,
 
 /** Download base PDF bytes from Azure Blob Storage */
 async function downloadBasePdf(connectionString, blobName) {
-  const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
-  const containerClient = blobServiceClient.getContainerClient(BASE_PDFS_CONTAINER);
+  const blobServiceClient =
+    BlobServiceClient.fromConnectionString(connectionString);
+  const containerClient =
+    blobServiceClient.getContainerClient(BASE_PDFS_CONTAINER);
   const blobClient = containerClient.getBlobClient(blobName);
 
   const downloadResponse = await blobClient.download();
@@ -120,7 +162,11 @@ async function stampPdf(pdfBytes, customerName, customerEmail) {
   const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
   const stampFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const pages = pdfDoc.getPages();
-  const stampDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  const stampDate = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
 
   for (const page of pages) {
     const { width, height } = page.getSize();
@@ -178,8 +224,11 @@ async function stampPdf(pdfBytes, customerName, customerEmail) {
 
 /** Upload stamped PDF to Azure Blob Storage and return the blob name */
 async function uploadStampedPdf(connectionString, blobName, pdfBuffer) {
-  const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
-  const containerClient = blobServiceClient.getContainerClient(STAMPED_PDFS_CONTAINER);
+  const blobServiceClient =
+    BlobServiceClient.fromConnectionString(connectionString);
+  const containerClient = blobServiceClient.getContainerClient(
+    STAMPED_PDFS_CONTAINER
+  );
 
   // Ensure container exists with private access (no public blob access)
   await containerClient.createIfNotExists();
@@ -196,7 +245,10 @@ function generateSasUrl(connectionString, blobName) {
   const creds = parseConnectionString(connectionString);
   if (!creds) throw new Error('Invalid Azure storage connection string');
 
-  const sharedKeyCredential = new StorageSharedKeyCredential(creds.accountName, creds.accountKey);
+  const sharedKeyCredential = new StorageSharedKeyCredential(
+    creds.accountName,
+    creds.accountKey
+  );
   const expiresOn = new Date();
   expiresOn.setDate(expiresOn.getDate() + SAS_VALIDITY_DAYS);
 
@@ -214,7 +266,12 @@ function generateSasUrl(connectionString, blobName) {
 }
 
 /** Send thank-you email with download link(s) */
-async function sendDownloadEmail(customerEmail, customerName, productType, downloadUrl) {
+async function sendDownloadEmail(
+  customerEmail,
+  customerName,
+  productType,
+  downloadUrl
+) {
   const smtpHost = process.env.SMTP_HOST || 'mail.smtp2go.com';
   const smtpPort = parseInt(process.env.SMTP_PORT || '2525', 10);
   const smtpUser = process.env.SMTP_USER;
@@ -225,7 +282,11 @@ async function sendDownloadEmail(customerEmail, customerName, productType, downl
     throw new Error('SMTP credentials not configured');
   }
 
-  const productNames = { book: 'Resonance Core Framework eBook', workbook: 'Resonance Core Framework Workbook', bundle: 'Resonance Core Framework Bundle' };
+  const productNames = {
+    book: 'Resonance Core Framework eBook',
+    workbook: 'Resonance Core Framework Workbook',
+    bundle: 'Resonance Core Framework Bundle',
+  };
   const productName = productNames[productType] || 'PDF';
 
   const transporter = nodemailer.createTransport({
@@ -237,15 +298,27 @@ async function sendDownloadEmail(customerEmail, customerName, productType, downl
 
   const expiryDate = new Date();
   expiryDate.setDate(expiryDate.getDate() + SAS_VALIDITY_DAYS);
-  const expiryStr = expiryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const expiryStr = expiryDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
   // Format download links: bundle has JSON-encoded { book, workbook } URLs; others have a single URL
   let downloadSection;
   if (productType === 'bundle') {
     let urls;
-    try { urls = JSON.parse(downloadUrl); } catch (_) { urls = { book: downloadUrl }; }
+    try {
+      urls = JSON.parse(downloadUrl);
+    } catch (_) {
+      urls = { book: downloadUrl };
+    }
     downloadSection = [
-      'Your download links (each valid for ' + SAS_VALIDITY_DAYS + ' days, until ' + expiryStr + '):',
+      'Your download links (each valid for ' +
+        SAS_VALIDITY_DAYS +
+        ' days, until ' +
+        expiryStr +
+        '):',
       '',
       'eBook PDF:',
       urls.book || '',
@@ -282,7 +355,13 @@ fluxline.pro
 }
 
 /** Process a single PDF product type: stamp, upload, return SAS URL */
-async function processSinglePdf(connectionString, productType, customerName, customerEmail, orderId) {
+async function processSinglePdf(
+  connectionString,
+  productType,
+  customerName,
+  customerEmail,
+  orderId
+) {
   const baseBlobName = getBasePdfBlob(productType);
   if (!baseBlobName) throw new Error(`Unknown productType: ${productType}`);
 
@@ -314,7 +393,11 @@ module.exports = async function (context, req) {
 
   if (!signature) {
     context.log.warn('stripe-webhook: missing stripe-signature header');
-    context.res = { status: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Missing signature.' }) };
+    context.res = {
+      status: 400,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ error: 'Missing signature.' }),
+    };
     return;
   }
 
@@ -326,31 +409,52 @@ module.exports = async function (context, req) {
   try {
     event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
   } catch (err) {
-    context.log.warn(`stripe-webhook: signature verification failed: ${err.message}`);
-    context.res = { status: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Invalid signature.' }) };
+    context.log.warn(
+      `stripe-webhook: signature verification failed: ${err.message}`
+    );
+    context.res = {
+      status: 400,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ error: 'Invalid signature.' }),
+    };
     return;
   }
 
   // Acknowledge receipt immediately
   if (event.type !== 'checkout.session.completed') {
-    context.res = { status: 200, headers: CORS_HEADERS, body: JSON.stringify({ received: true }) };
+    context.res = {
+      status: 200,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ received: true }),
+    };
     return;
   }
 
   const session = event.data.object;
   const customerEmail = session.customer_details?.email || '';
-  const customerName = session.metadata?.customerName || session.customer_details?.name || 'Valued Customer';
+  const customerName =
+    session.metadata?.customerName ||
+    session.customer_details?.name ||
+    'Valued Customer';
   const productType = session.metadata?.productType || 'book';
   const orderId = session.id;
   const timestamp = new Date().toISOString();
 
-  context.log(`stripe-webhook: processing order orderId=${orderId} productType=${productType} email=${customerEmail}`);
+  context.log(
+    `stripe-webhook: processing order orderId=${orderId} productType=${productType} email=${maskEmailForLogging(customerEmail)}`
+  );
 
   const storageConnectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
 
   if (!storageConnectionString) {
-    context.log.error('stripe-webhook: AZURE_STORAGE_CONNECTION_STRING not configured');
-    context.res = { status: 500, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Storage not configured.' }) };
+    context.log.error(
+      'stripe-webhook: AZURE_STORAGE_CONNECTION_STRING not configured'
+    );
+    context.res = {
+      status: 500,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ error: 'Storage not configured.' }),
+    };
     return;
   }
 
@@ -377,36 +481,82 @@ module.exports = async function (context, req) {
     if (productType === 'bundle') {
       // For bundles, generate both book and workbook PDFs
       const [bookUrl, workbookUrl] = await Promise.all([
-        processSinglePdf(storageConnectionString, 'book', customerName, customerEmail, `${orderId}-book`),
-        processSinglePdf(storageConnectionString, 'workbook', customerName, customerEmail, `${orderId}-workbook`),
+        processSinglePdf(
+          storageConnectionString,
+          'book',
+          customerName,
+          customerEmail,
+          `${orderId}-book`
+        ),
+        processSinglePdf(
+          storageConnectionString,
+          'workbook',
+          customerName,
+          customerEmail,
+          `${orderId}-workbook`
+        ),
       ]);
       downloadUrl = JSON.stringify({ book: bookUrl, workbook: workbookUrl });
     } else {
-      downloadUrl = await processSinglePdf(storageConnectionString, productType, customerName, customerEmail, orderId);
+      downloadUrl = await processSinglePdf(
+        storageConnectionString,
+        productType,
+        customerName,
+        customerEmail,
+        orderId
+      );
     }
 
-    context.log(`stripe-webhook: PDF generated and uploaded orderId=${orderId}`);
+    context.log(
+      `stripe-webhook: PDF generated and uploaded orderId=${orderId}`
+    );
 
     // 3. Update order status with download URL
-    await updateOrderStatus(storageConnectionString, productType, orderId, 'completed', downloadUrl).catch((err) =>
-      context.log.warn(`stripe-webhook: failed to update order status: ${err.message}`)
+    await updateOrderStatus(
+      storageConnectionString,
+      productType,
+      orderId,
+      'completed',
+      downloadUrl
+    ).catch((err) =>
+      context.log.warn(
+        `stripe-webhook: failed to update order status: ${err.message}`
+      )
     );
 
     // 4. Send email with download link
     try {
-      await sendDownloadEmail(customerEmail, customerName, productType, downloadUrl);
-      context.log(`stripe-webhook: email sent to ${customerEmail}`);
+      await sendDownloadEmail(
+        customerEmail,
+        customerName,
+        productType,
+        downloadUrl
+      );
+      context.log(
+        `stripe-webhook: email sent to ${maskEmailForLogging(customerEmail)}`
+      );
     } catch (emailErr) {
-      context.log.error(`stripe-webhook: failed to send email: ${emailErr.message}`);
+      context.log.error(
+        `stripe-webhook: failed to send email: ${emailErr.message}`
+      );
       // Non-fatal: order still processed
     }
 
-    context.res = { status: 200, headers: CORS_HEADERS, body: JSON.stringify({ received: true }) };
+    context.res = {
+      status: 200,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ received: true }),
+    };
   } catch (err) {
     context.log.error(`stripe-webhook: PDF processing failed: ${err.message}`);
 
     // Mark order as failed
-    await updateOrderStatus(storageConnectionString, productType, orderId, 'failed').catch(() => {});
+    await updateOrderStatus(
+      storageConnectionString,
+      productType,
+      orderId,
+      'failed'
+    ).catch(() => {});
 
     context.res = {
       status: 500,
