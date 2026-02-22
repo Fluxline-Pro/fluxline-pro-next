@@ -186,18 +186,18 @@ export const COMPANY_VALUES: CompanyValue[] = [
     icon: 'Globe',
   },
   {
+    id: 'somatic-discipline',
+    title: 'Somatic Discipline',
+    description:
+    'Recognizing the wisdom of the body and integrating physical practices with strategic thinking.',
+    icon: 'Health',
+  },
+  {
     id: 'creative-truth',
     title: 'Creative Truth',
     description:
       'Authentic expression and honest communication guide every interaction and deliverable.',
     icon: 'Lightbulb',
-  },
-  {
-    id: 'somatic-discipline',
-    title: 'Somatic Discipline',
-    description:
-      'Recognizing the wisdom of the body and integrating physical practices with strategic thinking.',
-    icon: 'Health',
   },
   {
     id: 'strategic-innovation',
