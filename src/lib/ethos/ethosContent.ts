@@ -40,7 +40,7 @@ export const ethosHero: EthosHeroContent = {
   subtitle:
     'A Framework for Transformation: Building systems that work, brands that connect, practices that last',
   description:
-    'At Fluxline, we help you build systems that integrate emotional intelligence, technical precision, and strategic clarity. Through coaching, brand design, web development, and consulting, we guide individuals and organizations to create pathways that honor authenticity, purpose, and long-term vision.',
+    'At Fluxline, we help you build systems that integrate embodied awareness, technical precision, and strategic clarity. Through coaching, brand design, web development, and consulting, we guide individuals and organizations to create pathways that honor authenticity, purpose, and long-term vision.',
 };
 
 // About Fluxline Section Content
@@ -48,8 +48,8 @@ export const ethosAbout: EthosAboutContent = {
   sectionTitle: 'About Fluxline',
   paragraphs: [
     'Fluxline is built on the belief that congruence creates momentum.',
-    'We build systems that integrate emotional intelligence, technical precision, and strategic clarity—empowering individuals and businesses to work with purpose and vision.',
-    'Our work spans development, design, coaching, and strategy. We help you build systems that work, brands that connect, and practices that last.',
+    'We build systems that integrate emotional awareness, embodied awareness, technical precision, and strategic clarity—empowering individuals and businesses to work with purpose and vision.',
+    'Our work spans development, design, coaching, and strategy. We help you build systems that work, brands that connect, and practices that last, making maximum impact through shared resonance and identity alignment.',
   ],
 };
 
