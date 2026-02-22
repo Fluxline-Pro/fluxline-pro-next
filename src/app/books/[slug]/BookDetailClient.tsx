@@ -252,7 +252,7 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
             title='Digital / eBook'
             description='Instant access to PDF or eBook formats from multiple retailers'
             icon='Tablet'
-            tooltip='Full-color, illustration-rich edition available from Fluxline.pro and Apple Books. Kindle and Nook versions are $XX.XX but only include black-and-white text without the premium visual experience.' // $14.99
+            tooltip='Full-color, illustration-rich edition available from Fluxline.pro and Apple Books. Kindle and Nook versions are $14.99 but only include black-and-white text without the premium visual experience.'
             isSelected={selectedFormat === 'digital'}
             onClick={() => handleFormatSelect('digital')}
           />
