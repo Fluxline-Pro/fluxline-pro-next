@@ -66,3 +66,4 @@ playwright/.cache/
 # Azure Functions
 api/local.settings.json
 api/node_modules/
+api/package-lock.json

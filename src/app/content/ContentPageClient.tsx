@@ -35,6 +35,15 @@ export default function ContentPageClient() {
 
   const contentCategories: ContentCategory[] = [
     {
+      title: 'Books',
+      description:
+        'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
+      path: '/books',
+      iconName: 'BookAnswers',
+      color: theme.palette.blueLight,
+      isHighlighted: true,
+    },
+    {
       title: 'Blog',
       description:
         'Insights, best practices, and thoughts on technology, design, and business transformation.',
@@ -65,16 +74,6 @@ export default function ContentPageClient() {
       path: '/github',
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
-    },
-    {
-      title: 'Books',
-      description:
-        'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
-      path: '/books',
-      iconName: 'BookAnswers',
-      color: theme.palette.blueLight,
-      // isHighlighted: true,
-      comingSoon: true,
     },
     {
       title: 'Podcasts',

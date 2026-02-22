@@ -23,7 +23,7 @@ const CORS_HEADERS = {
   'Content-Type': 'application/json',
 };
 
-const ORDERS_TABLE = 'pdforders';
+const ORDERS_TABLE = process.env.ENVIRONMENT === 'prod' ? 'pdforders' : 'pdfordersdev';
 const BASE_PDFS_CONTAINER = 'base-pdfs';
 const STAMPED_PDFS_CONTAINER = 'stamped-pdfs';
 const SAS_VALIDITY_DAYS = 7;

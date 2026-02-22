@@ -137,15 +137,23 @@ function BuyPdfButton({
         onKeyDown={(e) => e.key === 'Enter' && handleCheckout()}
         maxLength={100}
         style={{
-          padding: '0.5rem 0.75rem',
-          borderRadius: theme.effects.roundedCorner4,
-          border: `1px solid ${theme.palette.neutralTertiary}`,
-          fontFamily: theme.typography.fonts.body.fontFamily,
-          fontSize: '0.95rem',
+          width: '100%',
+          padding: theme.spacing.m,
+          fontSize: '1rem',
+          fontFamily: theme.typography.fontFamilies.base,
+          backgroundColor: theme.palette.neutralLighter,
           color: theme.palette.neutralPrimary,
-          backgroundColor: theme.palette.white,
+          border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+          borderRadius: theme.borderRadius.s,
           outline: 'none',
+          transition: 'border-color 0.2s ease',
         }}
+        onFocus={(e) =>
+          (e.target.style.borderColor = theme.palette.themePrimary)
+        }
+        onBlur={(e) =>
+          (e.target.style.borderColor = theme.palette.neutralQuaternaryAlt)
+        }
         aria-label='Your full name'
       />
       {error && (
