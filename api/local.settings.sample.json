@@ -14,6 +14,13 @@
     "AZURE_TABLE_SAS_TOKEN": "<your-sas-token>",
     "AZURE_PODCAST_TABLE_DEV": "podcastsdev",
     "AZURE_PODCAST_TABLE_PROD": "podcasts",
+    "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=<account>;AccountKey=<key>;EndpointSuffix=core.windows.net",
+    "STRIPE_SECRET_KEY": "sk_test_<your-stripe-test-secret-key>",
+    "STRIPE_PRICE_ID_BOOK": "price_<book-price-id>",
+    "STRIPE_PRICE_ID_WORKBOOK": "price_<workbook-price-id>",
+    "STRIPE_PRICE_ID_BUNDLE": "price_<bundle-price-id>",
+    "STRIPE_WEBHOOK_SECRET": "whsec_<your-webhook-signing-secret>",
+    "SITE_URL": "http://localhost:3000",
     "NEXT_PUBLIC_ENVIRONMENT": "dev"
   }
 }
