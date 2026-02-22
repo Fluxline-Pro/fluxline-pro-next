@@ -73,6 +73,9 @@ function BuyPdfButton({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Disable checkout in production environment
+  const isProduction = process.env.NEXT_PUBLIC_ENVIRONMENT === 'prod';
+
   const handleCheckout = async () => {
     const trimmedName = name.trim();
     if (!trimmedName) {
@@ -106,12 +109,27 @@ function BuyPdfButton({
 
   if (!isOpen) {
     return (
-      <FormButton
-        variant='primary'
-        text={label}
-        fullWidth
-        onClick={() => setIsOpen(true)}
-      />
+      <>
+        <FormButton
+          variant='primary'
+          text={isProduction ? 'Checkout Disabled' : label}
+          fullWidth
+          onClick={() => !isProduction && setIsOpen(true)}
+          disabled={isProduction}
+        />
+        {isProduction && (
+          <Typography
+            variant='bodySmall'
+            style={{
+              color: theme.palette.neutralSecondary,
+              marginTop: theme.spacing.s,
+              textAlign: 'center',
+            }}
+          >
+            Purchases are disabled for now. Please check back later.
+          </Typography>
+        )}
+      </>
     );
   }
 
@@ -168,11 +186,22 @@ function BuyPdfButton({
           {error}
         </Typography>
       )}
+      {isProduction && (
+        <Typography
+          variant='bodySmall'
+          style={{
+            color: theme.palette.neutralSecondary,
+            textAlign: 'center',
+          }}
+        >
+          Purchases are disabled in production.
+        </Typography>
+      )}
       <div style={{ display: 'flex', gap: theme.spacing.s }}>
         <FormButton
           variant='primary'
           text={loading ? 'Redirecting…' : 'Proceed to Checkout'}
-          disabled={loading}
+          disabled={loading || isProduction}
           onClick={handleCheckout}
         />
         <FormButton
