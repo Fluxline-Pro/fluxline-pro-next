@@ -82,7 +82,8 @@ function BuyPdfButton({
     setError(null);
     setLoading(true);
     try {
-      const response = await fetch('/api/create-checkout-session', {
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/api/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productType, customerName: trimmedName }),
