@@ -3,6 +3,12 @@
   "Values": {
     "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "node",
+    "API_BASE_URL": "http://localhost:7071",
+    "ENVIRONMENT": "dev",
+    "SITE_URL": "http://localhost:3000",
+    "ACCESS_TOKEN": "<your-dev-access-token>",
+    "RECAPTCHA_SECRET_KEY": "<your-recaptcha-secret-key>",
+    "RECAPTCHA_HOSTNAME": "localhost",
     "SMTP_HOST": "mail.smtp2go.com",
     "SMTP_PORT": "2525",
     "SMTP_USER": "<your-smtp2go-username>",
@@ -19,8 +25,6 @@
     "STRIPE_PRICE_ID_BOOK": "price_<book-price-id>",
     "STRIPE_PRICE_ID_WORKBOOK": "price_<workbook-price-id>",
     "STRIPE_PRICE_ID_BUNDLE": "price_<bundle-price-id>",
-    "STRIPE_WEBHOOK_SECRET": "whsec_<your-webhook-signing-secret>",
-    "SITE_URL": "http://localhost:3000",
-    "NEXT_PUBLIC_ENVIRONMENT": "dev"
+    "STRIPE_WEBHOOK_SECRET": "whsec_<your-webhook-signing-secret>"
   }
 }

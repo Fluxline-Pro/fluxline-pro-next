@@ -1,15 +1,8 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
-// Theme and layout components
-import ThemeProvider from '../theme/contexts/ThemeProvider';
-import { ThemeOverrideProvider } from '../theme/contexts/ThemeOverrideContext';
-import { FontScaleProvider } from '../theme/providers';
-import { Header } from '../theme/components/header';
-import { SkipToContent } from '../theme/components/skip-to-content';
-import { GlobalFooter } from '../theme/components/layout/global-footer';
-import { IosDetector } from '../components/IosDetector';
-import { AccessGate } from '../components/AccessGate';
+// Providers wrapper
+import { Providers } from './providers';
 
 // Global styles
 import './tailwind.css'; // ← Tailwind base/utilities first
@@ -205,19 +198,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <IosDetector />
-        <FontScaleProvider>
-          <ThemeOverrideProvider>
-            <ThemeProvider>
-              <AccessGate>
-                <SkipToContent />
-                <Header />
-                {children}
-                <GlobalFooter />
-              </AccessGate>
-            </ThemeProvider>
-          </ThemeOverrideProvider>
-        </FontScaleProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
