@@ -10,6 +10,7 @@ import { SkipToContent } from '../theme/components/skip-to-content';
 import { GlobalFooter } from '../theme/components/layout/global-footer';
 import { IosDetector } from '../components/IosDetector';
 import { AccessGate } from '../components/AccessGate';
+import { ReCaptchaProvider } from '../components/ReCaptchaProvider';
 
 // Global styles
 import './tailwind.css'; // ← Tailwind base/utilities first
@@ -208,14 +209,14 @@ export default function RootLayout({
         <IosDetector />
         <FontScaleProvider>
           <ThemeOverrideProvider>
-            <ThemeProvider>
+            <ReCaptchaProvider>
               <AccessGate>
                 <SkipToContent />
                 <Header />
                 {children}
                 <GlobalFooter />
               </AccessGate>
-            </ThemeProvider>
+            </ReCaptchaProvider>
           </ThemeOverrideProvider>
         </FontScaleProvider>
       </body>
