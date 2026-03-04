@@ -10,7 +10,8 @@ import { Hero } from '@/theme/components/hero/Hero';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { FormButton } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
-import { PodcastEpisode, RSS_ENDPOINT } from './types';
+import { getApiEndpoint } from '@/lib/getApiUrl';
+import { PodcastEpisode } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 
 /**
@@ -188,6 +189,7 @@ function PodcastDetailModal({
   onDismiss: () => void;
 }) {
   const { theme } = useAppTheme();
+  const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
 
   const publishDate = episode.publish_date
     ? new Date(episode.publish_date).toLocaleDateString('en-US', {
@@ -311,7 +313,7 @@ function PodcastDetailModal({
           style={{ color: theme.palette.neutralSecondary, fontSize: '0.85rem' }}
         >
           <a
-            href={RSS_ENDPOINT}
+            href={rssEndpoint}
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
@@ -331,6 +333,7 @@ function PodcastDetailModal({
  */
 export function PodcastListingClient() {
   const { theme } = useAppTheme();
+  const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
   const isMobile = useIsMobile();
   const [episodes, setEpisodes] = React.useState<PodcastEpisode[]>([]);
   const [loading, setLoading] = React.useState(true);
@@ -344,7 +347,7 @@ export function PodcastListingClient() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch('/api/podcasts/episodes');
+        const res = await fetch(getApiEndpoint('/api/podcasts/episodes'));
         if (!res.ok) throw new Error('Failed to fetch episodes');
         const data = await res.json();
         if (!cancelled) {
@@ -396,7 +399,7 @@ export function PodcastListingClient() {
           }}
         >
           <a
-            href={RSS_ENDPOINT}
+            href={rssEndpoint}
             target='_blank'
             rel='noopener noreferrer'
             style={{ textDecoration: 'none' }}

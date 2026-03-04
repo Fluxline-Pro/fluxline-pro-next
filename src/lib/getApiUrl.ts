@@ -17,7 +17,25 @@
 export function getApiUrl(): string {
   // In Next.js, build-time variables with NEXT_PUBLIC_ prefix are available
   // at runtime as process.env.NEXT_PUBLIC_*
-  return process.env.NEXT_PUBLIC_API_BASE_URL || '';
+  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || '';
+
+  // Safety guard: if a localhost API URL is accidentally baked into a deployed build,
+  // fall back to relative /api routing so Azure Static Web Apps proxy still works.
+  if (configuredBaseUrl && typeof window !== 'undefined') {
+    const configuredIsLocalhost =
+      /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(
+        configuredBaseUrl
+      );
+    const runningOnLocalhost = /^(localhost|127\.0\.0\.1)$/i.test(
+      window.location.hostname
+    );
+
+    if (configuredIsLocalhost && !runningOnLocalhost) {
+      return '';
+    }
+  }
+
+  return configuredBaseUrl;
 }
 
 /**
