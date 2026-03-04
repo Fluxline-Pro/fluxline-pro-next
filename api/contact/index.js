@@ -223,6 +223,45 @@ module.exports = async function (context, req) {
           return;
         }
 
+        // Validate action matches expected contact_form_submit
+        if (verificationResult.action !== 'contact_form_submit') {
+          context.log.warn(
+            'reCAPTCHA action mismatch. Expected: contact_form_submit, Received:',
+            verificationResult.action
+          );
+          context.res = {
+            status: 400,
+            headers,
+            body: JSON.stringify({
+              message: 'reCAPTCHA validation failed. Please try again.',
+            }),
+          };
+          return;
+        }
+
+        // Validate hostname is expected domain (if configured)
+        const expectedHostname =
+          process.env.RECAPTCHA_HOSTNAME || 'fluxline.pro';
+        if (
+          verificationResult.hostname &&
+          !verificationResult.hostname.includes(expectedHostname)
+        ) {
+          context.log.warn(
+            'reCAPTCHA hostname mismatch. Expected:',
+            expectedHostname,
+            'Received:',
+            verificationResult.hostname
+          );
+          context.res = {
+            status: 400,
+            headers,
+            body: JSON.stringify({
+              message: 'reCAPTCHA validation failed. Please try again.',
+            }),
+          };
+          return;
+        }
+
         // Check score exists and is numeric
         if (typeof verificationResult.score !== 'number') {
           context.log.warn(
