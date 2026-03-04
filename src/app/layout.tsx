@@ -208,16 +208,18 @@ export default function RootLayout({
         />
         <IosDetector />
         <FontScaleProvider>
-          <ThemeOverrideProvider>
-            <ReCaptchaProvider>
-              <AccessGate>
-                <SkipToContent />
-                <Header />
-                {children}
-                <GlobalFooter />
-              </AccessGate>
-            </ReCaptchaProvider>
-          </ThemeOverrideProvider>
+          <ThemeProvider>
+            <ThemeOverrideProvider>
+              <ReCaptchaProvider>
+                <AccessGate>
+                  <SkipToContent />
+                  <Header />
+                  {children}
+                  <GlobalFooter />
+                </AccessGate>
+              </ReCaptchaProvider>
+            </ThemeOverrideProvider>
+          </ThemeProvider>
         </FontScaleProvider>
       </body>
     </html>
