@@ -223,6 +223,22 @@ module.exports = async function (context, req) {
           return;
         }
 
+        // Check score exists and is numeric
+        if (typeof verificationResult.score !== 'number') {
+          context.log.warn(
+            'reCAPTCHA score missing or non-numeric:',
+            verificationResult.score
+          );
+          context.res = {
+            status: 400,
+            headers,
+            body: JSON.stringify({
+              message: 'reCAPTCHA validation failed. Please try again.',
+            }),
+          };
+          return;
+        }
+
         // Check score threshold
         if (verificationResult.score < RECAPTCHA_MIN_SCORE) {
           context.log.warn(
