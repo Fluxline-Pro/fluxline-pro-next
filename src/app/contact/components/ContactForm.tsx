@@ -5,6 +5,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FormButton } from '@/theme/components/form';
 import { Typography } from '@/theme/components/typography';
+import { getApiEndpoint } from '@/lib/getApiUrl';
 
 interface FormData {
   name: string;
@@ -115,7 +116,8 @@ export const ContactForm: React.FC = () => {
       // Generate reCAPTCHA token
       const recaptchaToken = await executeRecaptcha('contact_form_submit');
 
-      const response = await fetch('/api/contact', {
+      const apiUrl = getApiEndpoint('/api/contact');
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
