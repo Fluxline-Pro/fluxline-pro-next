@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FormButton } from '@/theme/components/form';
 import { Typography } from '@/theme/components/typography';
+import { getApiEndpoint } from '@/lib/getApiUrl';
 
 interface FormData {
   name: string;
@@ -22,6 +24,7 @@ interface FormErrors {
 type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export const ContactForm: React.FC = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const { theme } = useAppTheme();
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -45,6 +48,8 @@ export const ContactForm: React.FC = () => {
 
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 10) {
+      newErrors.name = 'Name must be at least 10 characters';
     }
 
     if (!formData.email.trim()) {
@@ -55,6 +60,8 @@ export const ContactForm: React.FC = () => {
 
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 15) {
+      newErrors.message = 'Message must be at least 15 characters';
     } else if (formData.message.length > 1000) {
       newErrors.message = 'Message must be 1000 characters or less';
     }
@@ -92,11 +99,25 @@ export const ContactForm: React.FC = () => {
       return;
     }
 
+    // Check if reCAPTCHA is available
+    if (!executeRecaptcha) {
+      setStatus('error');
+      setErrors({
+        submit:
+          'reCAPTCHA not available. Please refresh the page and try again.',
+      });
+      return;
+    }
+
     setStatus('submitting');
     setErrors({});
 
     try {
-      const response = await fetch('/api/contact', {
+      // Generate reCAPTCHA token
+      const recaptchaToken = await executeRecaptcha('contact_form_submit');
+
+      const apiUrl = getApiEndpoint('/api/contact');
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,6 +126,7 @@ export const ContactForm: React.FC = () => {
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          recaptchaToken, // Include reCAPTCHA token
         }),
       });
 

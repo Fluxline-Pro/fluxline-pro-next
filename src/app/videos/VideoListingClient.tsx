@@ -10,6 +10,7 @@ import { Hero } from '@/theme/components/hero/Hero';
 import { Modal } from '@/components/Modal';
 import { FormButton } from '@/theme/components/form';
 import { FluentIcon } from '@/theme/components/fluent-icon';
+import { getApiEndpoint } from '@/lib/getApiUrl';
 import { YouTubeVideo, VideoType, VIDEO_TABS, formatDuration } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 
@@ -324,7 +325,9 @@ export function VideoListingClient() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`/api/youtube?type=${activeTab}`);
+        const res = await fetch(
+          getApiEndpoint(`/api/youtube?type=${activeTab}`)
+        );
         if (!res.ok) throw new Error('Failed to fetch videos');
         const data = await res.json();
         if (!cancelled) {

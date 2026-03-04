@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { getApiEndpoint } from '@/lib/getApiUrl';
 import { Book } from '../types';
 import { InteractiveCard } from '@/components/InteractiveCard';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
@@ -85,15 +86,12 @@ function BuyPdfButton({
     setError(null);
     setLoading(true);
     try {
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
-      const response = await fetch(
-        `${apiBaseUrl}/api/create-checkout-session`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ productType, customerName: trimmedName }),
-        }
-      );
+      const apiUrl = getApiEndpoint('/api/create-checkout-session');
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productType, customerName: trimmedName }),
+      });
       const data = await response.json();
       if (!response.ok || !data.url) {
         setError(data.error || 'Unable to start checkout. Please try again.');

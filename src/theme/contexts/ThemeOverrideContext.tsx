@@ -39,14 +39,18 @@ export const ThemeOverrideProvider: React.FC<{ children: ReactNode }> = ({
  * useThemeOverride
  *
  * Hook to access and set temporary theme overrides.
- * Returns null if no override is active.
+ * Returns a default context value if no provider is available (e.g., during SSR).
+ * This prevents errors during server-side rendering and static prerendering.
  */
 export const useThemeOverride = () => {
   const context = useContext(ThemeOverrideContext);
+  // During SSR/prerendering, the context may not be available.
+  // Return a default context that treats no override as active.
   if (context === undefined) {
-    throw new Error(
-      'useThemeOverride must be used within a ThemeOverrideProvider'
-    );
+    return {
+      overrideThemeMode: null,
+      setOverrideThemeMode: () => {},
+    };
   }
   return context;
 };

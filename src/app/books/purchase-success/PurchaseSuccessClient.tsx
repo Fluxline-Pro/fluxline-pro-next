@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { getApiEndpoint } from '@/lib/getApiUrl';
 import { Typography } from '@/theme/components/typography/';
 import { FormButton } from '@/theme/components/form/FormButton';
 import { Hero } from '@/theme/components/hero';
@@ -59,10 +60,8 @@ export function PurchaseSuccessClient() {
     // Fetch order details from backend
     const fetchOrder = async () => {
       try {
-        const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
-        const response = await fetch(
-          `${apiBaseUrl}/api/get-order?session_id=${sessionId}`
-        );
+        const apiUrl = getApiEndpoint(`/api/get-order?session_id=${sessionId}`);
+        const response = await fetch(apiUrl);
 
         if (response.ok) {
           const data = await response.json();
