@@ -113,7 +113,6 @@ Create `.env.local` in project root:
 ```bash
 # reCAPTCHA Keys
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-site-key-here
-RECAPTCHA_SECRET_KEY=your-secret-key-here
 ```
 
 ### 3. Configure GitHub Secrets
