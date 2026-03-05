@@ -346,7 +346,7 @@ Shared `ContentNotFound` component provides consistent error states:
 - ⚠️ Content-specific wrappers preserved to avoid complex configuration system
 - 📄 This approach balances code reuse with maintainability
 
-For complete documentation, see `UNIFIED_CONTENT_DETAIL_SUMMARY.md`
+For complete documentation, see `src/components/UnifiedContentDetail.tsx` and the component's inline JSDoc.
 
 ### Blog System
 
@@ -450,7 +450,7 @@ For complete documentation, see `/public/case-studies/posts/HOW_TO_CREATE_A_CASE
 - Client Components used only for interactive download buttons
 - Static generation for all scroll detail pages via `generateStaticParams`
 
-For complete scrolls documentation, see `SCROLLS_IMPLEMENTATION_SUMMARY.md`
+For complete scrolls documentation, see `src/app/services/scrolls/README.md`
 
 ### Video Section (YouTube Integration)
 
@@ -743,13 +743,14 @@ For complete podcast documentation, see:
 - **Babel React Compiler** - React optimization
 - **TypeScript** - Static type checking
 
-### Backend Integration (Planned)
+### Backend Integration
 
-- **Next.js API Routes** - Server-side API endpoints
-- **Azure Static Web Apps** - Hosting platform
-- **Azure Storage** - Media and asset storage
-- **Azure CDN** - Content delivery network
-- **Azure Functions** - External serverless functions (if needed)
+- **Next.js API Routes** - Server-side API endpoints (`/app/api`)
+- **Azure Static Web Apps** - Hosting platform with built-in CI/CD
+- **Azure Functions** - Serverless functions for YouTube, Podcasts, Stripe, Token validation
+- **Azure Storage** - Audio files (podcasts) and media assets
+- **Azure Table Storage** - Podcast episode metadata
+- **Azure Key Vault** - Secrets management
 
 ---
 
@@ -759,34 +760,66 @@ For complete podcast documentation, see:
 
 ```text
 /
-├── app/                     # App Router directory
-│   ├── globals.css         # Global styles
-│   ├── layout.tsx          # Root layout
-│   ├── page.tsx            # Home page
-│   ├── loading.tsx         # Global loading UI
-│   ├── error.tsx           # Global error UI
-│   ├── not-found.tsx       # 404 page
-│   ├── api/                # API routes
-│   │   └── example/
-│   │       └── route.ts    # API endpoint
-│   └── (routes)/           # Route groups
-│       ├── about/
-│       │   ├── page.tsx    # About page
-│       │   └── layout.tsx  # About layout
-│       └── blog/
-│           ├── page.tsx    # Blog listing
-│           ├── [slug]/
-│           │   └── page.tsx # Blog post
-│           └── layout.tsx  # Blog layout
-├── components/             # Reusable components
-│   ├── ui/                # Basic UI components
-│   └── layout/            # Layout components
-├── lib/                   # Utility functions
-├── types/                 # TypeScript type definitions
-├── styles/                # Additional CSS files
-├── public/                # Static assets
-├── docs/                  # Documentation
-└── config files           # Next.js, TypeScript, etc.
+├── src/
+│   ├── app/                     # App Router directory
+│   │   ├── globals.css          # Global styles
+│   │   ├── layout.tsx           # Root layout
+│   │   ├── page.tsx             # Home page
+│   │   ├── loading.tsx          # Global loading UI
+│   │   ├── error.tsx            # Global error UI
+│   │   ├── not-found.tsx        # 404 page
+│   │   ├── api/                 # Next.js API routes
+│   │   ├── blog/                # Blog system (Markdown-based)
+│   │   ├── portfolio/           # Portfolio projects
+│   │   ├── case-studies/        # Case studies
+│   │   ├── press-release/       # Press releases
+│   │   ├── services/            # Services pages + scrolls/white papers
+│   │   ├── about/               # About page
+│   │   ├── contact/             # Contact form
+│   │   ├── content/             # Content hub
+│   │   ├── videos/              # YouTube integration
+│   │   ├── podcasts/            # Podcast player (Azure Storage)
+│   │   ├── books/               # Books section
+│   │   ├── cue-cards/           # Cue cards
+│   │   ├── fluxline-ethos/      # Brand ethos
+│   │   ├── legal/               # Legal pages
+│   │   └── github/              # GitHub integration
+│   ├── components/              # Shared components
+│   │   ├── ContentListingPage.tsx   # Unified listing component
+│   │   ├── UnifiedContentDetail.tsx # Unified detail component
+│   │   ├── PageWrapper.tsx          # Page layout wrapper
+│   │   ├── AccessGate.tsx           # Token-based access control
+│   │   └── ...
+│   ├── hooks/                   # Custom React hooks
+│   ├── lib/                     # Utility functions
+│   ├── store/                   # Zustand state management
+│   ├── theme/                   # Fluent UI theme system
+│   │   ├── theme.ts             # Main theme configuration
+│   │   ├── _theme.scss          # SCSS variables
+│   │   ├── components/          # Theme components
+│   │   ├── hooks/               # useAppTheme, useMediaQuery, etc.
+│   │   ├── contexts/            # ThemeProvider, ThemeOverrideContext
+│   │   └── providers/           # Theme providers
+│   ├── animations/              # Framer Motion animations
+│   └── utils/                   # Utility functions
+├── api/                         # Azure Functions
+│   ├── youtube/                 # YouTube Data API proxy
+│   ├── podcasts-episodes/       # Podcast episodes endpoint
+│   ├── podcasts-rss/            # RSS feed generator
+│   ├── create-checkout-session/ # Stripe checkout
+│   ├── get-order/               # Order retrieval
+│   ├── stripe-webhook/          # Stripe webhook handler
+│   └── auth/                    # Token validation
+├── public/                      # Static assets
+│   ├── blog/posts/              # Blog Markdown content
+│   ├── portfolio/posts/         # Portfolio Markdown content
+│   ├── case-studies/posts/      # Case studies Markdown content
+│   ├── press-release/posts/     # Press release Markdown content
+│   ├── books/                   # Books metadata
+│   ├── scrolls/                 # White paper PDFs
+│   └── videos/                  # Local video files
+├── azure/                       # Azure deployment documentation
+└── config files                 # next.config.ts, tsconfig.json, etc.
 ```
 
 ### Key Configuration Files
@@ -898,20 +931,17 @@ yarn build-storybook         # Build for deployment
 
 ## Notes
 
-- This site is being migrated from a Create React App codebase to Next.js
-- **Theme System Migration (Completed)**: The complete theme system has been successfully migrated from the React app, including:
-  - Core theme configuration with 1888 lines of theme definitions
+- The project uses **Next.js App Router** (not Pages Router)
+- All routing uses Next.js file-based routing conventions
+- Build output is optimized for **Azure Static Web Apps** deployment
+- **Theme System**: Complete Fluent UI v8 custom theme system with:
+  - Core theme configuration in `src/theme/theme.ts`
   - Zustand-based state management for user preferences
-  - Fluent UI v8 integration with custom Fluxline Pro themes
-  - Theme hooks (useAppTheme, useMediaQuery, useThemeColor, useReducedMotion)
-  - Core components (Button, Card) with full theme integration
+  - Theme hooks: `useAppTheme`, `useMediaQuery`, `useThemeColor`, `useReducedMotion`
   - Support for dark mode (default), light mode, and high-contrast themes
   - SSR-compatible ThemeProvider with proper hydration handling
-- API integration will initially use Next.js API routes, with potential Azure Functions for complex operations
-- Environment variables should be properly configured for different deployment environments
-- The project uses Next.js App Router (not Pages Router)
-- All routing uses Next.js file-based routing conventions
-- Build output is optimized for Azure Static Web Apps deployment
+- **Azure Integration**: Azure Functions are implemented for YouTube, podcasts, Stripe, and token validation
+- Environment variables should be configured per environment (see `ENVIRONMENT_VARIABLES.md`)
 
 ## Theme System Architecture
 
@@ -1051,4 +1081,4 @@ PageWrapper includes pre-configured routes for:
 
 **Built with strategic precision for modern business transformation.**
 
-### Last Updated: 2025-12-04 - Migrated press releases and case studies to markdown-based file system. Updated all documentation to reflect markdown architecture for blog, portfolio, press releases, and case studies.
+### Last Updated: 2026-03-05 - Technical debt review: removed obsolete implementation summary docs, updated project structure to match actual codebase, updated Azure integration and Notes sections to reflect completed state.

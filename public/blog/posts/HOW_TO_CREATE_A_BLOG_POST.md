@@ -552,7 +552,6 @@ Happy coding! 🚀
 ## Need Help?
 
 - **Full Documentation**: See `FILE_BASED_BLOG_GUIDE.md` in the root directory
-- **Technical Details**: See `BLOG_IMPLEMENTATION.md`
 - **Quick Reference**: See `BLOG_README.md`
 
 ---

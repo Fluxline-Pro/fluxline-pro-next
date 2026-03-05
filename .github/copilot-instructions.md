@@ -186,26 +186,52 @@ yarn build-storybook               # Build Storybook for deployment
 
 ```
 src/app/                    # Next.js pages and routes
-  ├── blog/                 # Blog system
-  ├── portfolio/            # Portfolio projects
-  ├── case-studies/         # Case studies
-  ├── press-release/        # Press releases
+  ├── blog/                 # Blog system (Markdown-based)
+  ├── portfolio/            # Portfolio projects (Markdown-based)
+  ├── case-studies/         # Case studies (Markdown-based)
+  ├── press-release/        # Press releases (Markdown-based)
+  ├── videos/               # YouTube integration
+  ├── podcasts/             # Podcast player (Azure Storage)
+  ├── services/             # Services + scrolls/white papers
+  ├── content/              # Content hub
   └── ...
 src/components/             # Shared components
-  ├── ContentListingPage.tsx    # Unified listing
-  ├── UnifiedContentDetail.tsx  # Unified detail
-  └── ...
-src/hooks/                  # Custom hooks (12 available)
-src/theme/                  # Theme system & styled components
+  ├── ContentListingPage.tsx    # Unified listing (~85% code reduction)
+  ├── UnifiedContentDetail.tsx  # Unified detail view
+  ├── PageWrapper.tsx           # Page layout wrapper
+  └── AccessGate.tsx            # Token-based access control
+src/hooks/                  # Custom React hooks
+src/theme/                  # Fluent UI theme system
+  ├── theme.ts              # Main theme configuration
+  ├── components/           # Theme-aware components
+  ├── hooks/                # useAppTheme, useMediaQuery, etc.
+  └── contexts/             # ThemeProvider, ThemeOverrideContext
 src/animations/             # Framer Motion animations
 src/utils/                  # Utility functions
 src/store/                  # Zustand state management
 public/                     # Static assets
-  ├── blog/                 # Blog content & images
-  ├── portfolio/            # Portfolio content & images
+  ├── blog/posts/           # Blog Markdown content
+  ├── portfolio/posts/      # Portfolio Markdown content
+  ├── case-studies/posts/   # Case studies Markdown content
+  ├── press-release/posts/  # Press release Markdown content
   └── ...
-azure/                      # Azure infrastructure & docs
+api/                        # Azure Functions
+azure/                      # Azure deployment documentation
 ```
+
+## Available Documentation
+
+- `COPILOT_INSTRUCTIONS.md` - Comprehensive development guidelines (start here)
+- `HOOKS.md` - Custom hooks reference
+- `ANIMATIONS.md` - Animation system guide
+- `ENVIRONMENT_VARIABLES.md` - Environment variable reference
+- `FILE_BASED_BLOG_GUIDE.md` - Blog post creation guide
+- `QUICK_SETUP_GUIDE.md` - Token access control setup
+- `TOKEN_ACCESS_README.md` - Detailed token access implementation
+- `VIDEO_UPLOAD_INSTRUCTIONS.md` - Testimonial video upload guide
+- `src/theme/THEMING.md` - Theme system architecture
+- `api/README.md` - Azure Functions API documentation
+- `azure/README.md` - Azure deployment guides
 
 ---
 

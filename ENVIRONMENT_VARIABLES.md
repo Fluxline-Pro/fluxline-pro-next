@@ -206,6 +206,5 @@ env:
 ## Reference
 
 - [Environment Variables Documentation](#)
-- [reCAPTCHA Setup Guide](RECAPTCHA_IMPLEMENTATION.md)
 - [Azure Static Web Apps Configuration](azure/docs/SETUP-GUIDE.md)
 - [GitHub Actions Workflows](.github/workflows/)

@@ -172,7 +172,7 @@ fluxline-pro-next/
 ├── docs/                         # Documentation
 │   ├── ANIMATIONS.md             # Animation system guide
 │   ├── HOOKS.md                  # Custom hooks reference
-│   ├── BLOG_IMPLEMENTATION.md    # Blog system docs
+│   ├── FILE_BASED_BLOG_GUIDE.md  # Blog content guide
 │   └── ... (more docs)
 └── scripts/                      # Build scripts
     └── generate-component.js     # Component generator
@@ -316,20 +316,12 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 
 ### Feature Documentation
 
-- **[BLOG_IMPLEMENTATION.md](BLOG_IMPLEMENTATION.md)** - Blog system overview
-- **[FILE_BASED_BLOG_GUIDE.md](FILE_BASED_BLOG_GUIDE.md)** - Complete blog guide
-- **[PORTFOLIO_REFACTORING_SUMMARY.md](PORTFOLIO_REFACTORING_SUMMARY.md)** - Portfolio markdown migration
-- **[CASE_STUDIES_IMPLEMENTATION.md](CASE_STUDIES_IMPLEMENTATION.md)** - Case studies markdown system
-- **[CONTENT_LISTING_CONSOLIDATION.md](CONTENT_LISTING_CONSOLIDATION.md)** - Unified listing system
-- **[UNIFIED_CONTENT_DETAIL_SUMMARY.md](UNIFIED_CONTENT_DETAIL_SUMMARY.md)** - Unified detail pages
-- **[SCROLLS_IMPLEMENTATION_SUMMARY.md](SCROLLS_IMPLEMENTATION_SUMMARY.md)** - Scrolls/white papers system
+- **[FILE_BASED_BLOG_GUIDE.md](FILE_BASED_BLOG_GUIDE.md)** - Complete blog system guide
+- **[ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md)** - Environment variables reference
+- **[TOKEN_ACCESS_README.md](TOKEN_ACCESS_README.md)** - Token-based access control
+- **[VIDEO_UPLOAD_INSTRUCTIONS.md](VIDEO_UPLOAD_INSTRUCTIONS.md)** - Testimonial video upload guide
 
 ### Phase Documentation
-
-- **[PHASE_2_COMPLETION.md](PHASE_2_COMPLETION.md)** - Phase 2 migration summary
-- **[SCROLLS_IMPLEMENTATION_SUMMARY.md](SCROLLS_IMPLEMENTATION_SUMMARY.md)** - Scrolls implementation
-
-### Azure Documentation
 
 - **[azure/README.md](azure/README.md)** - Azure infrastructure overview
 - **[azure/docs/SETUP-GUIDE.md](azure/docs/SETUP-GUIDE.md)** - Complete Azure setup
