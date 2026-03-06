@@ -157,6 +157,12 @@
     #e5e5e5 40%,
     #dadada 100%
   );
+
+  // Solid background fallback for iOS safe areas and elements that cannot use gradients
+  --theme-background-solid: #dadada;
+
+  // CSS color-scheme: tells iOS/browsers to render system UI (scrollbars, safe areas) in light mode
+  color-scheme: light;
 }
 
 // Dark Theme Variables - Fluxline Pro Default
@@ -216,6 +222,12 @@
     #1a1a1a 40%,
     #010101 100%
   );
+
+  // Solid background fallback for iOS safe areas and elements that cannot use gradients
+  --theme-background-solid: #010101;
+
+  // CSS color-scheme: tells iOS/browsers to render system UI (scrollbars, safe areas) in dark mode
+  color-scheme: dark;
 }
 
 // High Contrast Theme - Pure black background for maximum contrast
@@ -262,6 +274,12 @@
 
   // Gradient Backgrounds - High Contrast (solid black)
   --theme-gradient-background: #000000;
+
+  // Solid background fallback for iOS safe areas
+  --theme-background-solid: #000000;
+
+  // CSS color-scheme: tells iOS/browsers to render system UI in dark mode
+  color-scheme: dark;
 }
 
 // SCSS Mixins for common theme patterns
