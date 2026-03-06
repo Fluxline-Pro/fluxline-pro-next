@@ -321,7 +321,7 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 - **[TOKEN_ACCESS_README.md](TOKEN_ACCESS_README.md)** - Token-based access control
 - **[VIDEO_UPLOAD_INSTRUCTIONS.md](VIDEO_UPLOAD_INSTRUCTIONS.md)** - Testimonial video upload guide
 
-### Phase Documentation
+### Azure Documentation
 
 - **[azure/README.md](azure/README.md)** - Azure infrastructure overview
 - **[azure/docs/SETUP-GUIDE.md](azure/docs/SETUP-GUIDE.md)** - Complete Azure setup

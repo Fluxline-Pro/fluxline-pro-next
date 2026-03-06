@@ -198,7 +198,7 @@ src/app/                    # Next.js pages and routes
 src/components/             # Shared components
   ├── ContentListingPage.tsx    # Unified listing (~85% code reduction)
   ├── UnifiedContentDetail.tsx  # Unified detail view
-  ├── PageWrapper.tsx           # Page layout wrapper
+  ├── UnifiedPageWrapper.tsx           # Page layout wrapper
   └── AccessGate.tsx            # Token-based access control
 src/hooks/                  # Custom React hooks
 src/theme/                  # Fluent UI theme system

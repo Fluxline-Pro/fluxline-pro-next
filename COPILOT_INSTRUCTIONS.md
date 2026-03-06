@@ -762,7 +762,7 @@ For complete podcast documentation, see:
 /
 ├── src/
 │   ├── app/                     # App Router directory
-│   │   ├── globals.css          # Global styles
+│   │   ├── globals.scss          # Global styles
 │   │   ├── layout.tsx           # Root layout
 │   │   ├── page.tsx             # Home page
 │   │   ├── loading.tsx          # Global loading UI
@@ -787,7 +787,7 @@ For complete podcast documentation, see:
 │   ├── components/              # Shared components
 │   │   ├── ContentListingPage.tsx   # Unified listing component
 │   │   ├── UnifiedContentDetail.tsx # Unified detail component
-│   │   ├── PageWrapper.tsx          # Page layout wrapper
+│   │   ├── UnifiedPageWrapper.tsx          # Page layout wrapper
 │   │   ├── AccessGate.tsx           # Token-based access control
 │   │   └── ...
 │   ├── hooks/                   # Custom React hooks
