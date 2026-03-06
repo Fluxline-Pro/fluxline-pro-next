@@ -43,6 +43,17 @@ body {
 }
 
 /* =============================================
+   iOS SAFE AREA SUPPORT
+   ============================================= */
+
+/* Ensure body padding accounts for safe areas on notched/dynamic-island devices.
+   viewport-fit=cover extends layout behind safe zones; these paddings protect
+   scrollable content from being obscured by system UI at the bottom. */
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* =============================================
    TAILWIND CSS THEME INTEGRATION
    ============================================= */
 
