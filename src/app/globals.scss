@@ -73,11 +73,34 @@ html::after {
 }
 
 body {
-  /* Add padding for all sides to protect scrollable content from safe areas */
-  padding-top: env(safe-area-inset-top);
+  /* Add padding for bottom and sides to protect scrollable content from safe areas.
+     Top padding is omitted because header's safe area top inset is already measured by
+     useHeaderHeight() and included in the page content's paddingTop calculation. */
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: -1; /* Behind content but above default background */
+  background-color: var(--background);
+}
+
+/* Fill left safe area (notch on sides in landscape) */
+body::before {
+  left: 0;
+  width: env(safe-area-inset-left);
+}
+
+/* Fill right safe area (notch on sides in landscape) */
+body::after {
+  right: 0;
+  width: env(safe-area-inset-right);
 }
 
 /* =============================================
