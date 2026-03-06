@@ -793,7 +793,6 @@ public/blog/posts/
 
 - **Documentation**: This file
 - **Example Post**: See `public/blog/posts/embracing-nextjs-16/`
-- **Blog Implementation**: See `BLOG_IMPLEMENTATION.md`
 - **Next.js Docs**: https://nextjs.org/docs
 - **Markdown Guide**: https://www.markdownguide.org/
 

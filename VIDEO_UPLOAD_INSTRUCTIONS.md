@@ -115,9 +115,8 @@ For creating WebVTT captions:
 ## Need Help?
 
 If you have questions or need different video specifications:
-1. Check `TESTIMONIAL_VIDEO_IMPLEMENTATION.md` for full technical details
-2. Ask the development team
-3. Test with shorter/lower quality versions first if needed
+1. Ask the development team
+2. Test with shorter/lower quality versions first if needed
 
 ## Committing the Videos
 
