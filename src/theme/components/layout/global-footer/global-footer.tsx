@@ -34,25 +34,9 @@ export const GlobalFooter: React.FC = () => {
     return null;
   }
 
-  // Mobile non-home pages: always show footer (not collapsible)
+  // Mobile non-home pages: HomeFooter returns null in portrait, so don't render wrapper
   if (isMobile && !isHomePage) {
-    return (
-      <div
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1,
-          paddingBottom: 'env(safe-area-inset-bottom)',
-          paddingLeft: 'env(safe-area-inset-left)',
-          paddingRight: 'env(safe-area-inset-right)',
-          backgroundColor: theme.palette.neutralLighterAlt,
-        }}
-      >
-        <HomeFooter />
-      </div>
-    );
+    return null;
   }
 
   // Desktop/tablet home page: render fixed footer directly
