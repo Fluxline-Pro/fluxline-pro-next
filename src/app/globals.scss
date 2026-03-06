@@ -12,6 +12,7 @@
 // Root CSS Custom Properties - Fluxline Pro Theme Variables
 :root {
   --background: var(--theme-semantic-bodyBackground, #010101);
+  --background-solid: var(--theme-background-solid, #010101);
   --foreground: var(--theme-semantic-bodyText, #ffffff);
   --font-inter: var(--theme-fonts-family);
   --font-mono: var(--theme-fonts-mono);
@@ -57,7 +58,7 @@ html::after {
   left: 0;
   right: 0;
   z-index: -1; /* Behind content but above default background */
-  background-color: var(--background);
+  background-color: var(--background-solid);
 }
 
 /* Fill top safe area (notch/status bar) */
@@ -88,7 +89,7 @@ body::after {
   top: 0;
   bottom: 0;
   z-index: -1; /* Behind content but above default background */
-  background-color: var(--background);
+  background-color: var(--background-solid);
 }
 
 /* Fill left safe area (notch on sides in landscape) */
@@ -115,14 +116,13 @@ body::after {
   --font-mono: var(--font-mono);
 }
 
-// Ln 57-68: Apply background to html element for full viewport coverage
+// Apply background to html element for full viewport coverage
 // iOS Safari has issues with background-attachment: fixed, so we conditionally apply it
 html {
-  -webkit-background-color: var(
-    --theme-semantic-bodyBackground
-  ); // iOS fallback
-  background-color: var(--theme-semantic-bodyBackground); // Standard fallback
-  background: var(--background); // Radial gradient (if set in theme)
+  background-color: var(
+    --background-solid
+  ); // Solid color fallback (gradient can't be used with background-color)
+  background: var(--background); // Radial gradient override (if set in theme)
   background-repeat: no-repeat;
   background-position: center;
 
