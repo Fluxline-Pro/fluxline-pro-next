@@ -44,6 +44,7 @@ export const GlobalFooter: React.FC = () => {
           left: 0,
           right: 0,
           zIndex: 1,
+          paddingBottom: 'env(safe-area-inset-bottom)',
         }}
       >
         <HomeFooter />
@@ -61,6 +62,7 @@ export const GlobalFooter: React.FC = () => {
           left: 0,
           right: 0,
           zIndex: 1,
+          paddingBottom: 'env(safe-area-inset-bottom)',
         }}
       >
         <HomeFooter />
@@ -98,6 +100,7 @@ export const GlobalFooter: React.FC = () => {
     left: 0,
     right: 0,
     zIndex: 40,
+    paddingBottom: 'env(safe-area-inset-bottom)',
   };
 
   const slideVariants = {
