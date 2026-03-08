@@ -1,6 +1,6 @@
 ---
 title: 'We're Not Robots — We're Rhythmic'
-excerpt: "Why sustainable fitness isn't about perfection, but about pattern."
+excerpt: 'Why sustainable fitness isn''t about perfection, but about pattern.'
 author: 'Terence Waters'
 publishedDate: '2025-09-15'
 category: 'Personal Growth'
