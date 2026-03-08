@@ -32,6 +32,7 @@ export interface PressRelease {
   tags: string[];
   glyphTag?: string;
   emotionalCue?: string;
+  generatedWithAI?: boolean;
   seoMetadata?: {
     title: string;
     description: string;

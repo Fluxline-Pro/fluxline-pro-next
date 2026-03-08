@@ -165,6 +165,7 @@ export default function CaseStudyDetailClient({
       })),
     ],
     sectionsPosition: 'before', // Show testimonial and metrics before body content
+    generatedWithAI: caseStudy.generatedWithAI,
     sections: [
       ...(testimonialSection
         ? [

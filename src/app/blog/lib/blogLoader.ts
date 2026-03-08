@@ -41,6 +41,7 @@ interface BlogFrontmatter {
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
+  generatedWithAI?: boolean;
 }
 
 /**
@@ -153,6 +154,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
       category: frontmatter.category,
       featured: frontmatter.featured ?? false,
+      generatedWithAI: frontmatter.generatedWithAI ?? false,
       seoMetadata: {
         title: frontmatter.seoTitle,
         description: frontmatter.seoDescription,

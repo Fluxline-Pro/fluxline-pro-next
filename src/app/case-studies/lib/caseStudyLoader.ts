@@ -39,6 +39,7 @@ export interface CaseStudyFrontmatter {
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
+  generatedWithAI?: boolean;
   metrics?: Array<{
     label: string;
     value: string;
@@ -118,6 +119,7 @@ export function getCaseStudyById(id: string): CaseStudy | null {
       featured: frontmatter.featured,
       publishedDate: new Date(frontmatter.publishedDate),
       projectDuration: frontmatter.projectDuration,
+      generatedWithAI: frontmatter.generatedWithAI ?? false,
       testimonial: frontmatter.testimonial,
       seoMetadata: {
         title: frontmatter.seoTitle,
