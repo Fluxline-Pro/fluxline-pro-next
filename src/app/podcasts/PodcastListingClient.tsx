@@ -388,7 +388,8 @@ export function PodcastListingClient() {
       });
     }
     if (endDate) {
-      const end = new Date(endDate + 'T23:59:59');
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
       result = result.filter((ep) => {
         if (!ep.publish_date) return true;
         return new Date(ep.publish_date) <= end;
@@ -665,8 +666,9 @@ export function PodcastListingClient() {
             >
               Showing {processedEpisodes.length}{' '}
               {processedEpisodes.length === 1 ? 'episode' : 'episodes'}
-              {processedEpisodes.length !== episodes.length &&
-                ` of ${episodes.length}`}
+              {(startDate || endDate) &&
+                processedEpisodes.length !== episodes.length &&
+                ` · ${processedEpisodes.length} matching date range`}
             </Typography>
             <AnimatePresence mode='wait'>
               <div

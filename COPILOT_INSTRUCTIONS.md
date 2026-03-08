@@ -269,14 +269,26 @@ The application uses a unified content listing system that consolidates all list
 - Three view types: Grid View, Small Tile, Large Tile
 - Responsive column layouts (1-4 columns based on device orientation)
 - Integrated filtering system with single and multi-select support
+- **Sort Order**: Newest First, Oldest First, A–Z, Z–A (always shown, except Books page)
+- **Date Range Filter**: Date From / Date To inputs — **desktop only** (hidden on mobile per requirements)
+- **Clear Filters button**: shown when sort, date range, or any wrapper filter is active
 - Optional CTA sections per page
 - Theme-aware styling with Fluent UI
 - Orientation-aware column calculations
 - Empty states and results messaging
 
+**Sort & Date Range Behavior**:
+
+- Mobile: shows only Sort dropdown (no date range, per requirements)
+- Desktop/Tablet: shows Sort + Date From + Date To + Clear Filters (when active)
+- `date?: Date` field on `ContentCard` drives sort order and date range filtering
+- Clear Filters resets sort to "Newest First", clears date range, and calls `onClearFilters()` on the wrapper
+
 **Component Interface**:
 
 ```typescript
+type SortOrder = 'newest' | 'oldest' | 'a-z' | 'z-a';
+
 interface ContentCard {
   id: string;
   title: string;
@@ -284,6 +296,7 @@ interface ContentCard {
   imageUrl?: string;
   imageAlt: string;
   imageText: string;
+  date?: Date; // Used for sort and date-range filtering
 }
 
 interface FilterConfig {
@@ -296,6 +309,13 @@ interface FilterConfig {
   onChange: (value: any) => void;
 }
 ```
+
+**Wrapper Integration**:
+
+Each content wrapper should:
+1. Add `date` to every card object (from `publishedDate`, `updated_at`, etc.)
+2. Pass `hasActiveFilters={boolean}` (true when wrapper-specific filters like category/tag are selected)
+3. Pass `onClearFilters={() => { /* reset wrapper state */ }}` so Clear Filters resets everything
 
 ### Detail Pages System
 

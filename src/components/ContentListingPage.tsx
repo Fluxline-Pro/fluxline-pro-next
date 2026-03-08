@@ -212,7 +212,8 @@ export function ContentListingPage({
       result = result.filter((card) => !card.date || card.date >= start);
     }
     if (endDate) {
-      const end = new Date(endDate + 'T23:59:59');
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
       result = result.filter((card) => !card.date || card.date <= end);
     }
 
@@ -435,7 +436,7 @@ export function ContentListingPage({
             {resultsMessage}
             {(startDate || endDate) &&
               processedCards.length !== cards.length &&
-              ` · ${processedCards.length} shown after date filter`}
+              ` · ${processedCards.length} matching date range`}
           </Typography>
         )}
 
