@@ -107,13 +107,14 @@ The section between `---` marks is called "frontmatter" - it's metadata about yo
 
 #### Optional Fields
 
-| Field         | Example                                   | Description                  |
-| ------------- | ----------------------------------------- | ---------------------------- |
-| `imageUrl`    | `"/blog/posts/your-post/images/hero.jpg"` | Hero image path              |
-| `imageAlt`    | `"React hooks diagram"`                   | Hero image description       |
-| `gallery`     | See gallery section below                 | Array of images for carousel |
-| `featured`    | `true`                                    | Mark as featured post        |
-| `lastUpdated` | `"2025-11-25"`                            | When you last updated        |
+| Field              | Example                                   | Description                                     |
+| ------------------ | ----------------------------------------- | ----------------------------------------------- |
+| `imageUrl`         | `"/blog/posts/your-post/images/hero.jpg"` | Hero image path                                 |
+| `imageAlt`         | `"React hooks diagram"`                   | Hero image description                          |
+| `gallery`          | See gallery section below                 | Array of images for carousel                    |
+| `featured`         | `true`                                    | Mark as featured post                           |
+| `lastUpdated`      | `"2025-11-25"`                            | When you last updated                           |
+| `generatedWithAI`  | `true`                                    | Display a "Generated with AI" badge on the post |
 
 #### Image Gallery & Carousel (Optional)
 

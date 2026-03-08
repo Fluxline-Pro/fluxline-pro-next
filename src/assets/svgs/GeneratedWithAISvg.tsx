@@ -1,7 +1,6 @@
 import React from 'react';
 
 interface GeneratedWithAISvgProps {
-  isDarkMode?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }

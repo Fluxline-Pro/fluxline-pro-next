@@ -23,7 +23,7 @@ export const GeneratedWithAIBadge: React.FC = () => {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '6px',
-    padding: `${theme.spacing.s2} ${theme.spacing.s1}`,
+    padding: `${theme.spacing.s1} ${theme.spacing.xs}`,
     backgroundColor: isDark
       ? theme.palette.themeDarker
       : theme.palette.themeLighterAlt,
@@ -60,8 +60,8 @@ export const GeneratedWithAIBadge: React.FC = () => {
     color: isDark ? theme.palette.white : theme.palette.white,
     padding: '6px 10px',
     borderRadius: theme.effects.roundedCorner4,
-    fontSize: '0.7rem',
-    fontFamily: theme.fonts.small.fontFamily as string,
+    fontSize: '0.75rem',
+    fontFamily: (theme.fonts.small.fontFamily as string) || 'inherit',
     whiteSpace: 'nowrap',
     pointerEvents: 'none',
     zIndex: 1000,
