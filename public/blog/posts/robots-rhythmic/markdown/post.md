@@ -1,8 +1,8 @@
 ---
-title: 'We're Not Robots — We're Rhythmic'
-excerpt: 'Why sustainable fitness isn''t about perfection, but about pattern.'
+title: "We're Not Robots — We're Rhythmic"
+excerpt: 'Why sustainable fitness is not about perfection, but about pattern.'
 author: 'Terence Waters'
-publishedDate: '2025-09-15'
+publishedDate: '2026-03-08'
 category: 'Personal Growth'
 tags:
   [
@@ -16,17 +16,17 @@ tags:
     'Human Performance',
   ]
 imageUrl: '/blog/posts/robots-rhythmic/images/robots-rhythmic-image-one.jpg'
-imageAlt: 'We're Not Robots — We're Rhythmic'
+imageAlt: "We're Not Robots — We're Rhythmic"
 gallery:
   - url: '/blog/posts/robots-rhythmic/images/robots-rhythmic-image-one.jpg'
-    alt: 'We're Not Robots — We're Rhythmic'
-    caption: 'We're Not Robots — We're Rhythmic'
+    alt: "We're Not Robots — We're Rhythmic"
+    caption: "We're Not Robots — We're Rhythmic"
   - url: '/blog/posts/robots-rhythmic/images/robots-rhythmic-image-two.jpg'
     alt: 'Most people think they need a perfect routine'
     caption: 'Most people think they need a perfect routine- humans do not work that way.'
   - url: '/blog/posts/robots-rhythmic/images/robots-rhythmic-image-three.jpg'
-    alt: 'We don't run on programming'
-    caption: 'We don't run on programming- We run on readiness, energy, and rhythm.'
+    alt: "We don't run on programming"
+    caption: 'We do not run on programming- We run on readiness, energy, and rhythm.'
   - url: '/blog/posts/robots-rhythmic/images/robots-rhythmic-image-four.jpg'
     alt: 'Consistency beats rigidity'
     caption: 'Consistency beats rigidity- Showing up matters more than following a flawless plan.'
@@ -34,13 +34,13 @@ gallery:
     alt: 'Auto-regulation is a superpower'
     caption: 'Auto-regulation is a superpower- Your body is talking. Your job is to listen.'
   - url: '/blog/posts/robots-rhythmic/images/robots-rhythmic-image-six.jpg'
-    alt: 'You don't need a perfect routine. You need a rhythmic one.'
-    caption: 'You don't need a perfect routine. You need a rhythmic one. Daily movement. Flexible structure. Sustainable progress.'
+    alt: 'You do not need a perfect routine. You need a rhythmic one.'
+    caption: 'You do not need a perfect routine. You need a rhythmic one. Daily movement. Flexible structure. Sustainable progress.'
   - url: '/blog/posts/robots-rhythmic/images/robots-rhythmic-image-seven.jpg'
     alt: 'When you train like a human, you grow like one'
     caption: 'When you train like a human — not a robot — you grow like one.'
 featured: true
-seoTitle: 'We're Not Robots — We're Rhythmic: Sustainable Fitness | Fluxline Pro'
+seoTitle: "We're Not Robots — We're Rhythmic: Sustainable Fitness | Fluxline Pro"
 seoDescription: 'Discover why sustainable fitness is about rhythm, not rigidity. Learn how consistency beats perfection and auto-regulation unlocks your training potential.'
 seoKeywords:
   [
