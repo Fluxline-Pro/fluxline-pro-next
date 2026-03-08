@@ -49,6 +49,8 @@ export function PressReleaseListingClient({
   // Build results message
   const resultsMessage = `Showing ${filteredCards.length} ${filteredCards.length === 1 ? 'press release' : 'press releases'}${selectedYear ? ` from ${selectedYear}` : ''}`;
 
+  const hasActiveFilters = !!selectedYear;
+
   return (
     <ContentListingPage
       title='Press Release'
@@ -60,6 +62,8 @@ export function PressReleaseListingClient({
       resultsMessage={resultsMessage}
       emptyStateTitle='No press releases found'
       emptyStateMessage='Check back soon for updates and announcements.'
+      hasActiveFilters={hasActiveFilters}
+      onClearFilters={() => setSelectedYear(undefined)}
     />
   );
 }

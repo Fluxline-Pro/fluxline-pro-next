@@ -13,6 +13,11 @@ import { FormButton, FormSelect } from '@/theme/components/form';
 import { Hero } from '@/theme/components/hero/Hero';
 
 /**
+ * Sort order options for content listing
+ */
+export type SortOrder = 'newest' | 'oldest' | 'a-z' | 'z-a';
+
+/**
  * Base card item interface for content listing
  */
 export interface ContentCard {
@@ -22,6 +27,8 @@ export interface ContentCard {
   imageUrl?: string;
   imageAlt: string;
   imageText: string;
+  /** Optional date used for sorting and date-range filtering */
+  date?: Date;
 }
 
 /**
@@ -93,6 +100,12 @@ export interface ContentListingPageProps {
 
   // Custom section (e.g., for GitHub contributions graph)
   customSection?: React.ReactNode;
+
+  // Sort and filter controls
+  /** Called when user clicks "Clear All Filters" – wrapper resets its own state */
+  onClearFilters?: () => void;
+  /** Set true when wrapper-specific filters (category, tag, etc.) are active */
+  hasActiveFilters?: boolean;
 }
 
 /**
@@ -137,17 +150,31 @@ export function ContentListingPage({
   backArrow = false,
   backArrowPath = '/content',
   customSection,
+  onClearFilters,
+  hasActiveFilters = false,
 }: ContentListingPageProps) {
   const router = useRouter();
-  const { theme } = useAppTheme();
+  const { theme, themeMode } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
   const isMobile = useIsMobile();
+
+  // Sort and date range state (local – independent per page)
+  const [sortOrder, setSortOrder] = React.useState<SortOrder>('newest');
+  const [startDate, setStartDate] = React.useState<string>('');
+  const [endDate, setEndDate] = React.useState<string>('');
 
   // View type options for dropdown
   const viewOptions = [
     { key: 'grid', text: 'Grid View' },
     { key: 'small-tile', text: 'Small Tile' },
     { key: 'large-tile', text: 'Large Tile' },
+  ];
+
+  const sortOptions = [
+    { key: 'newest', text: 'Newest First' },
+    { key: 'oldest', text: 'Oldest First' },
+    { key: 'a-z', text: 'A – Z' },
+    { key: 'z-a', text: 'Z – A' },
   ];
 
   React.useEffect(() => {
@@ -175,6 +202,58 @@ export function ContentListingPage({
     );
   }
 
+  // Apply date-range filter then sort to the cards received from the wrapper
+  const processedCards = React.useMemo(() => {
+    let result = [...cards];
+
+    // Date-range filter (only for cards that carry a date)
+    if (startDate) {
+      const start = new Date(startDate);
+      result = result.filter((card) => !card.date || card.date >= start);
+    }
+    if (endDate) {
+      const end = new Date(endDate + 'T23:59:59');
+      result = result.filter((card) => !card.date || card.date <= end);
+    }
+
+    // Sort
+    switch (sortOrder) {
+      case 'newest':
+        return result.sort((a, b) => {
+          if (!a.date && !b.date) return 0;
+          if (!a.date) return 1;
+          if (!b.date) return -1;
+          return b.date.getTime() - a.date.getTime();
+        });
+      case 'oldest':
+        return result.sort((a, b) => {
+          if (!a.date && !b.date) return 0;
+          if (!a.date) return 1;
+          if (!b.date) return -1;
+          return a.date.getTime() - b.date.getTime();
+        });
+      case 'a-z':
+        return result.sort((a, b) => a.title.localeCompare(b.title));
+      case 'z-a':
+        return result.sort((a, b) => b.title.localeCompare(a.title));
+      default:
+        return result;
+    }
+  }, [cards, startDate, endDate, sortOrder]);
+
+  // Determine whether any sort/date filters are active
+  const internalHasActiveFilters =
+    sortOrder !== 'newest' || startDate !== '' || endDate !== '';
+  const showClearAll = internalHasActiveFilters || hasActiveFilters;
+
+  // Reset all filters (internal + wrapper)
+  const handleClearAll = () => {
+    setSortOrder('newest');
+    setStartDate('');
+    setEndDate('');
+    onClearFilters?.();
+  };
+
   // Map view type for grid component
   const getViewType = () => {
     if (viewType === 'small-tile') return 'small';
@@ -193,8 +272,34 @@ export function ContentListingPage({
 
   // Render filter controls
   const renderFilters = () => {
-    return title !== 'Books' ? ( // Only show filters if not on the Books Listing page, per requirements
+    if (title === 'Books') return null; // No filters for Books page as per requirements
+
+    // Shared style for native date inputs
+    const dateInputStyle: React.CSSProperties = {
+      width: '100%',
+      padding: '0.5rem',
+      borderRadius: theme.effects.roundedCorner2,
+      backgroundColor: theme.palette.neutralLight,
+      border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+      color: theme.palette.neutralPrimary,
+      fontSize: '0.875rem',
+      fontFamily: theme.typography.fonts.body.fontFamily,
+      cursor: 'pointer',
+      outline: 'none',
+      colorScheme: themeMode === 'dark' || themeMode === 'high-contrast' ? 'dark' : 'light',
+    };
+
+    const labelStyle: React.CSSProperties = {
+      color: theme.palette.neutralPrimary,
+      fontSize: '1rem',
+      fontWeight: theme.typography.fontWeights.semiBold,
+      marginBottom: '0.5rem',
+      display: 'block',
+    };
+
+    return (
       <>
+        {/* Wrapper-supplied filters (category, tag, etc.) */}
         {filters.map((filter, index) => (
           <div key={index} style={{ minWidth: '200px', flex: '1 1 200px' }}>
             {filter.type === 'single' ? (
@@ -220,8 +325,50 @@ export function ContentListingPage({
           </div>
         ))}
 
+        {/* Sort Order */}
+        <div style={{ minWidth: '160px', flex: '1 1 160px' }}>
+          <FormSelect
+            label='Sort By'
+            options={sortOptions}
+            value={sortOrder}
+            onChange={(value) => setSortOrder(value as SortOrder)}
+          />
+        </div>
+
+        {/* Date Range – desktop only (per requirements: mobile must NOT show date range) */}
+        {!isMobile && (
+          <>
+            <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
+              <label>
+                <span style={labelStyle}>Date From</span>
+                <input
+                  type='date'
+                  value={startDate}
+                  max={endDate || undefined}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  aria-label='Filter from date'
+                  style={dateInputStyle}
+                />
+              </label>
+            </div>
+            <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
+              <label>
+                <span style={labelStyle}>Date To</span>
+                <input
+                  type='date'
+                  value={endDate}
+                  min={startDate || undefined}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  aria-label='Filter to date'
+                  style={dateInputStyle}
+                />
+              </label>
+            </div>
+          </>
+        )}
+
         {/* View Type Selector */}
-        <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+        <div style={{ minWidth: '160px', flex: '1 1 160px' }}>
           <FormSelect
             label='View Type'
             options={viewOptions}
@@ -231,8 +378,30 @@ export function ContentListingPage({
             }}
           />
         </div>
+
+        {/* Clear All Filters – shown when any filter is active */}
+        {showClearAll && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              flex: '0 0 auto',
+            }}
+          >
+            <FormButton
+              variant='secondary'
+              size='small'
+              icon='ClearFilter'
+              iconPosition='left'
+              onClick={handleClearAll}
+              aria-label='Clear all filters'
+            >
+              Clear Filters
+            </FormButton>
+          </div>
+        )}
       </>
-    ) : null /* No filters for Books page as per requirements */;
+    );
   };
 
   return (
@@ -264,6 +433,9 @@ export function ContentListingPage({
             }}
           >
             {resultsMessage}
+            {(startDate || endDate) &&
+              processedCards.length !== cards.length &&
+              ` · ${processedCards.length} shown after date filter`}
           </Typography>
         )}
 
@@ -273,10 +445,10 @@ export function ContentListingPage({
         )}
 
         {/* Content Cards */}
-        {cards.length > 0 ? (
+        {processedCards.length > 0 ? (
           <div>
             <AdaptiveCardGrid
-              cards={cards}
+              cards={processedCards}
               viewType={getViewType()}
               gridColumns={title === 'Books' ? 2 : undefined} // Force 2 columns for Books page as per requirements
               gap={theme.spacing.m}
