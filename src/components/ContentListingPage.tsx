@@ -9,7 +9,7 @@ import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
-import { FormButton, FormSelect } from '@/theme/components/form';
+import { FormButton, FormDateInput, FormSelect } from '@/theme/components/form';
 import { Hero } from '@/theme/components/hero/Hero';
 
 /**
@@ -154,7 +154,7 @@ export function ContentListingPage({
   hasActiveFilters = false,
 }: ContentListingPageProps) {
   const router = useRouter();
-  const { theme, themeMode } = useAppTheme();
+  const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
@@ -277,32 +277,6 @@ export function ContentListingPage({
   const renderFilters = () => {
     if (title === 'Books') return null; // No filters for Books page as per requirements
 
-    // Shared style for native date inputs
-    const dateInputStyle: React.CSSProperties = {
-      width: '100%',
-      padding: '0.5rem',
-      borderRadius: theme.effects.roundedCorner2,
-      backgroundColor: theme.palette.neutralLight,
-      border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-      color: theme.palette.neutralPrimary,
-      fontSize: '0.875rem',
-      fontFamily: theme.typography.fonts.body.fontFamily,
-      cursor: 'pointer',
-      outline: 'none',
-      colorScheme:
-        themeMode === 'dark' || themeMode === 'high-contrast'
-          ? 'dark'
-          : 'light',
-    };
-
-    const labelStyle: React.CSSProperties = {
-      color: theme.palette.neutralPrimary,
-      fontSize: '1rem',
-      fontWeight: theme.typography.fontWeights.semiBold,
-      marginBottom: '0.5rem',
-      display: 'block',
-    };
-
     const filterGridStyle: React.CSSProperties = {
       width: '100%',
       display: 'grid',
@@ -366,30 +340,22 @@ export function ContentListingPage({
         {!isCompactFilterLayout && (
           <>
             <div style={filterCellStyle}>
-              <label>
-                <span style={labelStyle}>Date From</span>
-                <input
-                  type='date'
-                  value={startDate}
-                  max={endDate || undefined}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  aria-label='Filter from date'
-                  style={dateInputStyle}
-                />
-              </label>
+              <FormDateInput
+                label='Date From'
+                value={startDate}
+                max={endDate || undefined}
+                onChange={setStartDate}
+                aria-label='Filter from date'
+              />
             </div>
             <div style={filterCellStyle}>
-              <label>
-                <span style={labelStyle}>Date To</span>
-                <input
-                  type='date'
-                  value={endDate}
-                  min={startDate || undefined}
-                  onChange={(e) => setEndDate(e.target.value)}
-                  aria-label='Filter to date'
-                  style={dateInputStyle}
-                />
-              </label>
+              <FormDateInput
+                label='Date To'
+                value={endDate}
+                min={startDate || undefined}
+                onChange={setEndDate}
+                aria-label='Filter to date'
+              />
             </div>
           </>
         )}

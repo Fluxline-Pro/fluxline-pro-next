@@ -35,7 +35,7 @@ export interface FormSelectProps {
  * - Optional icon and description
  * - Support for both single and multi-select
  * - Accessible with ARIA labels
- * - Responsive font scaling
+ * - Theme-typography-aligned sizing
  */
 export const FormSelect: React.FC<FormSelectProps> = ({
   label,
@@ -52,9 +52,13 @@ export const FormSelect: React.FC<FormSelectProps> = ({
   onMultiChange,
   'aria-label': ariaLabel,
 }) => {
-  const { theme, fontScale } = useAppTheme();
+  const { theme } = useAppTheme();
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  const labelFontSize = theme.typography.fonts.label.fontSize;
+  const descriptionFontSize = theme.typography.fonts.bodySmall.fontSize;
+  const controlFontSize = theme.typography.fonts.body.fontSize;
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -116,7 +120,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
           variant='p'
           style={{
             color: theme.palette.neutralPrimary,
-            fontSize: `${1 * fontScale}rem`,
+            fontSize: labelFontSize,
             fontWeight: theme.typography.fontWeights.semiBold,
             marginBottom: description ? '0.25rem' : '0.5rem',
             display: 'block',
@@ -130,7 +134,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
           variant='p'
           style={{
             color: theme.palette.neutralSecondary,
-            fontSize: `${0.875 * fontScale}rem`,
+            fontSize: descriptionFontSize,
             lineHeight: theme.typography.lineHeights.normal,
             marginBottom: '0.5rem',
             display: 'block',
@@ -148,7 +152,6 @@ export const FormSelect: React.FC<FormSelectProps> = ({
             onClick={() => !disabled && setIsOpen(!isOpen)}
             disabled={disabled}
             aria-label={ariaLabel || label}
-            aria-expanded={isOpen}
             style={{
               width: '100%',
               padding: '0.5rem',
@@ -159,7 +162,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                 selectedKeys.length === 0
                   ? theme.palette.neutralSecondary
                   : theme.palette.neutralPrimary,
-              fontSize: `${0.875 * fontScale}rem`,
+              fontSize: controlFontSize,
               cursor: disabled ? 'not-allowed' : 'pointer',
               fontFamily: theme.typography.fonts.body.fontFamily,
               opacity: disabled ? 0.6 : 1,
@@ -235,7 +238,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                     variant='p'
                     style={{
                       color: theme.palette.neutralPrimary,
-                      fontSize: `${0.875 * fontScale}rem`,
+                      fontSize: controlFontSize,
                     }}
                   >
                     {option.text}
@@ -259,7 +262,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
             backgroundColor: theme.palette.neutralLight,
             border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
             color: theme.palette.neutralPrimary,
-            fontSize: `${0.875 * fontScale}rem`,
+            fontSize: controlFontSize,
             cursor: disabled ? 'not-allowed' : 'pointer',
             fontFamily: theme.typography.fonts.body.fontFamily,
             opacity: disabled ? 0.6 : 1,
