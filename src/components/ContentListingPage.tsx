@@ -8,7 +8,7 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { FormButton, FormSelect } from '@/theme/components/form';
 import { Hero } from '@/theme/components/hero/Hero';
 
@@ -157,6 +157,8 @@ export function ContentListingPage({
   const { theme, themeMode } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  const isCompactFilterLayout = isMobile || isTablet;
 
   // Sort and date range state (local – independent per page)
   const [sortOrder, setSortOrder] = React.useState<SortOrder>('newest');
@@ -287,7 +289,10 @@ export function ContentListingPage({
       fontFamily: theme.typography.fonts.body.fontFamily,
       cursor: 'pointer',
       outline: 'none',
-      colorScheme: themeMode === 'dark' || themeMode === 'high-contrast' ? 'dark' : 'light',
+      colorScheme:
+        themeMode === 'dark' || themeMode === 'high-contrast'
+          ? 'dark'
+          : 'light',
     };
 
     const labelStyle: React.CSSProperties = {
@@ -298,11 +303,32 @@ export function ContentListingPage({
       display: 'block',
     };
 
+    const filterGridStyle: React.CSSProperties = {
+      width: '100%',
+      display: 'grid',
+      gridTemplateColumns: isCompactFilterLayout
+        ? 'repeat(2, minmax(0, 1fr))'
+        : 'repeat(3, minmax(0, 1fr))',
+      gap: isMobile ? theme.spacing.s1 : theme.spacing.m,
+      alignItems: 'end',
+    };
+
+    const filterCellStyle: React.CSSProperties = {
+      minWidth: 0,
+      width: '100%',
+    };
+
+    const clearButtonCellStyle: React.CSSProperties = {
+      display: 'flex',
+      alignItems: 'flex-end',
+      gridColumn: '1 / -1',
+    };
+
     return (
-      <>
+      <div style={filterGridStyle}>
         {/* Wrapper-supplied filters (category, tag, etc.) */}
         {filters.map((filter, index) => (
-          <div key={index} style={{ minWidth: '200px', flex: '1 1 200px' }}>
+          <div key={index} style={filterCellStyle}>
             {filter.type === 'single' ? (
               <FormSelect
                 label={filter.label}
@@ -327,7 +353,7 @@ export function ContentListingPage({
         ))}
 
         {/* Sort Order */}
-        <div style={{ minWidth: '160px', flex: '1 1 160px' }}>
+        <div style={filterCellStyle}>
           <FormSelect
             label='Sort By'
             options={sortOptions}
@@ -337,9 +363,9 @@ export function ContentListingPage({
         </div>
 
         {/* Date Range – desktop only (per requirements: mobile must NOT show date range) */}
-        {!isMobile && (
+        {!isCompactFilterLayout && (
           <>
-            <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
+            <div style={filterCellStyle}>
               <label>
                 <span style={labelStyle}>Date From</span>
                 <input
@@ -352,7 +378,7 @@ export function ContentListingPage({
                 />
               </label>
             </div>
-            <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
+            <div style={filterCellStyle}>
               <label>
                 <span style={labelStyle}>Date To</span>
                 <input
@@ -369,7 +395,7 @@ export function ContentListingPage({
         )}
 
         {/* View Type Selector */}
-        <div style={{ minWidth: '160px', flex: '1 1 160px' }}>
+        <div style={filterCellStyle}>
           <FormSelect
             label='View Type'
             options={viewOptions}
@@ -382,13 +408,7 @@ export function ContentListingPage({
 
         {/* Clear All Filters – shown when any filter is active */}
         {showClearAll && (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'flex-end',
-              flex: '0 0 auto',
-            }}
-          >
+          <div style={clearButtonCellStyle}>
             <FormButton
               variant='secondary'
               size='small'
@@ -401,7 +421,7 @@ export function ContentListingPage({
             </FormButton>
           </div>
         )}
-      </>
+      </div>
     );
   };
 
