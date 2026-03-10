@@ -17,7 +17,6 @@ export interface UnifiedCardProps {
   imageUrl?: string;
   imageAlt?: string;
   onClick?: () => void;
-  isLoading?: boolean;
   elevation?: 'low' | 'medium' | 'high';
   viewType: CardViewType;
   // Image card specific props
@@ -61,7 +60,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   imageUrl,
   imageAlt,
   onClick,
-  isLoading = false,
   elevation = 'medium',
   viewType,
   imageText,
@@ -88,18 +86,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [isLandscape, setIsLandscape] = React.useState(false);
-  const [imageDimensions, setImageDimensions] = React.useState<{
-    width: number;
-    height: number;
-    aspectRatio: number;
-  } | null>(null);
 
   // Check if image is landscape and handle image loading
   React.useEffect(() => {
     if (imageUrl) {
       // Reset loading state when imageUrl changes
       setImageLoaded(false);
-      setImageDimensions(null);
       setIsLandscape(false);
       // Clear dimensions in parent container
       onImageDimensionsChange?.(null);
@@ -111,17 +103,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         const naturalHeight = img.naturalHeight;
         const aspectRatio = naturalWidth / naturalHeight;
 
-        // Store image dimensions for container sizing
-        const dimensions = {
+        // Notify parent container of dimensions change
+        onImageDimensionsChange?.({
           width: naturalWidth,
           height: naturalHeight,
           aspectRatio: aspectRatio,
-        };
-
-        setImageDimensions(dimensions);
-
-        // Notify parent container of dimensions change
-        onImageDimensionsChange?.(dimensions);
+        });
 
         // Mark image as loaded first
         setImageLoaded(true);
@@ -144,7 +131,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
       img.onerror = () => {
         // Still mark as loaded on error to prevent infinite loading state
         setImageLoaded(true);
-        setImageDimensions(null);
         // Notify parent container that dimensions are cleared
         onImageDimensionsChange?.(null);
       };
