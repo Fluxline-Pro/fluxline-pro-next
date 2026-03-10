@@ -256,7 +256,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     fontSize: theme.typography.fonts.xLarge.fontSize,
                     fontWeight: theme.typography.fonts.xLarge.fontWeight,
                     fontFamily: `${theme.typography.fonts.xLarge.fontFamily} !important`,
-                    color: '#FFF', 
+                    color: '#FFF',
                   }}
                 >
                   {imageText}
