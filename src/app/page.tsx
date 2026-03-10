@@ -1,22 +1,26 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { ViewportGrid } from '@/theme/components/layout/ViewportGrid';
 import { BackgroundLayer } from '@/theme/components/layout/background-layer';
 import { HomeFooter } from '@/theme/components/layout/home-footer';
 import { HomeCtaBanner } from '@/theme/components/layout/home-cta-banner';
 import { Typography } from '@/theme/components/typography';
-import { BookingsButton } from '@/theme/components/button/bookings-button';
+import { FormButton } from '@/theme/components/form/FormButton';
 import { FadeUp } from '@/animations/fade-animations';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useThemeOverride } from '@/theme/contexts/ThemeOverrideContext';
-import { useBackgroundImage } from '@/theme/hooks/useBackgroundImage';
 import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
-import type { IExtendedTheme, ThemeMode } from '@/theme/theme';
+import type { ThemeMode } from '@/theme/theme';
+
+const BOOKINGS_URL =
+  'https://outlook.office.com/owa/calendar/Bookings@terencewaters.com/bookings/';
 
 /**
  * Home Page Content Component
- * Displays the main hero section with animated text and CTA
+ * Translucent card with animated text and dual CTA buttons.
+ * Conforms to the 3×9 responsive grid: card on left, background on right.
  */
 const HomeContent: React.FC<{
   isMobile: boolean;
@@ -26,205 +30,194 @@ const HomeContent: React.FC<{
   const orientation = useDeviceOrientation();
   const [animateDivider, setAnimateDivider] = React.useState(false);
   const [animateHeader, setAnimateHeader] = React.useState(false);
-  const [animateSubHeader, setAnimateSubHeader] = React.useState(false);
   const [animateBlurb, setAnimateBlurb] = React.useState(false);
+  const [animateButtons, setAnimateButtons] = React.useState(false);
 
   React.useEffect(() => {
-    // Only start animations when background is ready
     if (!shouldStartAnimations) return;
 
-    // First line animation
+    setTimeout(() => setAnimateHeader(true), 300);
+    setTimeout(() => setAnimateDivider(true), 800);
     setTimeout(() => {
-      setAnimateHeader(true);
-    }, 300);
-
-    // Name and HR animation
-    setTimeout(() => {
-      setAnimateDivider(true);
-    }, 800);
-
-    // Blurb fade-in animation
-    setTimeout(() => {
-      setAnimateSubHeader(true);
       setAnimateBlurb(true);
+      setAnimateButtons(true);
     }, 1400);
   }, [shouldStartAnimations]);
 
   const isMobileLandscape = orientation === 'mobile-landscape';
 
-  // Consolidated animation styles
-  const animationStyles = {
-    fadeIn: {
-      animation: 'fadeIn 0.4s ease-in-out forwards',
-    },
-    slideInRight: {
-      opacity: 0,
-      transform: 'translateX(-20px)',
-      animation: animateHeader
-        ? 'slideInRight 0.4s ease-in-out forwards'
-        : 'none',
-    },
-    slideInRightDelayed: {
-      opacity: 0,
-      transform: 'translateX(-20px)',
-      animation: animateHeader
-        ? 'slideInRight 0.4s ease-in-out forwards'
-        : 'none',
-      animationDelay: '0.5s',
-    },
-    slideInDown: {
-      opacity: 0,
-      transform: 'translateY(-10px)',
-    },
-    drawLine: {
-      transform: 'scaleX(0)',
-      transformOrigin: 'left',
-      animation: animateDivider ? 'drawLine 0.4s ease-in-out forwards' : 'none',
-    },
+  // ── Card wrapper ──────────────────────────────────────────────────────
+  const cardStyle: React.CSSProperties = {
+    background: 'rgba(1, 1, 1, 0.72)',
+    backdropFilter: 'blur(14px)',
+    WebkitBackdropFilter: 'blur(14px)',
+    border: `1px solid rgba(175, 202, 252, 0.18)`,
+    borderRadius: isMobile ? '8px' : '12px',
+    padding: isMobileLandscape
+      ? '1rem 1.25rem'
+      : isMobile
+        ? '1.5rem'
+        : '2.5rem 2.75rem',
+    width: '100%',
+    boxSizing: 'border-box' as const,
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: isMobileLandscape ? '0.25rem' : '0.5rem',
   };
 
-  // Base typography styles
-  const textStyles = {
-    welcomeText: {
-      color:
-        themeMode === 'grayscale'
-          ? theme.palette.neutralTertiary
-          : theme.palette.themePrimary,
-      marginBottom: isMobileLandscape ? '-0.25rem' : '-0.5rem',
-      textTransform: 'capitalize' as const,
-      textShadow: `0 0 5px ${theme.palette.neutralDark}`,
-      fontSize: isMobileLandscape
-        ? 'clamp(1rem, 3vw, 1.5rem)'
-        : 'clamp(2rem, 4vw, 2.5rem)',
-      fontWeight: theme.typography.fontWeights.light,
-      ...animationStyles.slideInRight,
-    },
-    mainTitle: {
-      color: theme.palette.white,
-      marginBottom: isMobileLandscape ? '0.25rem' : theme.spacing.s,
-      fontSize: isMobileLandscape
-        ? 'clamp(1.8rem, 6vw, 3rem)'
-        : 'clamp(2.5rem, 8vw, 5rem)',
-      fontWeight: theme.typography.fontWeights.bold,
-      textTransform: 'uppercase' as const,
-      textShadow: `0 0 5px ${theme.palette.neutralDark}`,
-      ...animationStyles.slideInRightDelayed,
-    },
-    blurbText: {
-      color: theme.palette.white,
-      lineHeight: theme.typography.lineHeights.relaxed,
-      fontWeight: theme.typography.fontWeights.light,
-      fontSize: isMobileLandscape
-        ? 'clamp(1rem, 2.5vw, 1.3rem)'
-        : 'clamp(1.1rem, 2.5vw, 1.5rem)',
-      textShadow: `1px 2px 5px ${theme.palette.black}`,
-      textAlign: 'left' as const,
-      maxWidth: '700px',
-      opacity: 0,
-      animation: animateBlurb ? 'fadeIn 0.8s ease-in-out forwards' : 'none',
-      animationDelay: '0.3s',
-    },
+  // ── Typography styles ─────────────────────────────────────────────────
+  const accentColor =
+    themeMode === 'grayscale'
+      ? theme.palette.neutralTertiary
+      : theme.palette.themePrimary;
+
+  const welcomeStyle: React.CSSProperties = {
+    color: accentColor,
+    fontSize: isMobileLandscape
+      ? 'clamp(0.85rem, 2.5vw, 1.1rem)'
+      : 'clamp(1rem, 2.5vw, 1.4rem)',
+    fontWeight: theme.typography.fontWeights.light,
+    textTransform: 'capitalize' as const,
+    letterSpacing: '0.08em',
+    marginBottom: isMobileLandscape ? '-0.1rem' : '-0.25rem',
+    opacity: 0,
+    animation: animateHeader ? 'fl-slideInRight 0.4s ease-in-out forwards' : 'none',
   };
 
-  // Container styles
-  const containerStyles = {
-    main: {
-      display: 'flex',
-      flexDirection: 'column' as const,
-      alignItems: 'center',
-      justifyContent: isMobile ? 'flex-end' : 'center',
-      gap: isMobile ? (isMobileLandscape ? '0.05rem' : '0.125rem') : '0.25rem',
-      padding: isMobileLandscape ? '1rem' : '2rem',
-      textAlign: 'center' as const,
-      width: '100%',
-      maxWidth: '800px',
-      margin: isMobile
-        ? isMobileLandscape
-          ? '2rem 0 0'
-          : '6rem 0 0'
-        : orientation === 'tablet-portrait'
-          ? '3rem 0 0 3rem'
-          : '0 auto',
-      minHeight: isMobileLandscape ? '60vh' : '80vh',
-    },
-    divider: {
-      width: '95%',
-      height:
-        orientation === 'portrait' || orientation === 'mobile-landscape'
-          ? '1px'
-          : '2px',
-      color: theme.palette.themePrimary,
-      backgroundColor: theme.palette.themePrimary,
-      margin: 0,
-      opacity: 1,
-      boxShadow: `0 0 1px ${theme.palette.neutralPrimary}`,
-      ...animationStyles.drawLine,
-    },
-    subHeaderContainer: {
-      marginTop: isMobileLandscape ? '0.5rem' : theme.spacing.m,
-      marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.l,
-    },
-    buttonContainer: {
-      display: 'flex',
-      flexDirection: 'column' as const,
-      justifyContent: 'flex-start',
-      gap: '0.5rem',
-      width: '100%',
-      maxWidth: '500px',
-      paddingBottom: !isMobile ? '125px' : undefined, // Extra space for footer on desktop
-    },
+  const mainTitleStyle: React.CSSProperties = {
+    color: theme.palette.white,
+    fontSize: isMobileLandscape
+      ? 'clamp(2rem, 7vw, 3rem)'
+      : 'clamp(2.75rem, 8vw, 5rem)',
+    fontWeight: theme.typography.fontWeights.bold,
+    textTransform: 'uppercase' as const,
+    letterSpacing: '0.04em',
+    lineHeight: 1.1,
+    marginBottom: isMobileLandscape ? '0.25rem' : theme.spacing.s,
+    opacity: 0,
+    animation: animateHeader
+      ? 'fl-slideInRight 0.4s ease-in-out 0.2s forwards'
+      : 'none',
+  };
+
+  const dividerStyle: React.CSSProperties = {
+    width: '95%',
+    height: isMobile ? '1px' : '2px',
+    backgroundColor: accentColor,
+    border: 'none',
+    margin: isMobileLandscape ? '0.25rem 0' : `${theme.spacing.s} 0`,
+    transform: 'scaleX(0)',
+    transformOrigin: 'left',
+    animation: animateDivider ? 'fl-drawLine 0.4s ease-in-out forwards' : 'none',
+    boxShadow: `0 0 6px ${accentColor}40`,
+  };
+
+  const blurbStyle: React.CSSProperties = {
+    color: theme.palette.white,
+    fontSize: isMobileLandscape
+      ? 'clamp(0.85rem, 2vw, 1.1rem)'
+      : 'clamp(1rem, 2vw, 1.3rem)',
+    lineHeight: theme.typography.lineHeights.relaxed,
+    fontWeight: theme.typography.fontWeights.light,
+    opacity: 0,
+    animation: animateBlurb ? 'fl-fadeIn 0.8s ease-in-out forwards' : 'none',
+    animationDelay: animateBlurb ? '0.2s' : '0s',
+    marginTop: isMobileLandscape ? '0.25rem' : theme.spacing.s,
+    marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.m,
+  };
+
+  const buttonRowStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: isMobile && !isMobileLandscape ? ('column' as const) : ('row' as const),
+    gap: '0.75rem',
+    flexWrap: 'wrap' as const,
+    paddingBottom: !isMobile ? '120px' : undefined,
+    opacity: 0,
+    animation: animateButtons
+      ? 'fl-slideInUp 0.4s ease-in-out 0.6s forwards'
+      : 'none',
+  };
+
+  const buttonBaseStyle: React.CSSProperties = {
+    minWidth: isMobile ? '100%' : '180px',
+    fontSize: isMobileLandscape
+      ? 'clamp(0.85rem, 2vw, 1rem)'
+      : 'clamp(0.95rem, 1.5vw, 1.1rem)',
+    fontWeight: theme.typography.fontWeights.semiBold,
   };
 
   return (
     <>
-      <style>
-        {`
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-          }
-          @keyframes slideInDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes drawLine {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
-          }
-        `}
-      </style>
-      <div style={containerStyles.main}>
-        <Typography variant='h2' style={textStyles.welcomeText}>
-          step into
+      <style>{`
+        @keyframes fl-fadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        @keyframes fl-slideInRight {
+          from { opacity: 0; transform: translateX(-20px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fl-drawLine {
+          from { transform: scaleX(0); }
+          to   { transform: scaleX(1); }
+        }
+        @keyframes fl-slideInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
+      <div style={cardStyle}>
+        {/* Welcome line */}
+        <Typography variant='h2' style={welcomeStyle}>
+          welcome to
         </Typography>
-        <Typography variant='h1' style={textStyles.mainTitle}>
+
+        {/* Brand name */}
+        <Typography variant='h1' style={mainTitleStyle}>
           fluxline
         </Typography>
 
-        <hr style={containerStyles.divider} />
+        {/* Animated divider */}
+        <hr style={dividerStyle} />
 
-        <div style={containerStyles.subHeaderContainer}>
-          <Typography variant='p' style={textStyles.blurbText}>
-            We build <em>congruence.</em><br />
-            <em>Strong</em> bodies. <em>Clear</em> brands. <em>Resilient</em> systems.<br />
-            Whether you need <em>development</em>, <em>design</em>, <em>coaching</em>, or
-            <em>strategy</em>, we integrate technical precision with emotional
-            intelligence so your inner and outer work finally match.
-          </Typography>
-        </div>
-        <div style={containerStyles.buttonContainer}>
-          <BookingsButton
-            animateSubHeader={animateSubHeader}
-            willAnimate={true}
-          />
+        {/* Tagline / blurb */}
+        <Typography variant='p' style={blurbStyle}>
+          We build <em>congruence.</em>
+          <br />
+          <em>Strong</em> bodies. <em>Clear</em> brands. <em>Resilient</em>{' '}
+          systems.
+          <br />
+          Whether you need <em>development</em>, <em>design</em>,{' '}
+          <em>coaching</em>, or <em>strategy</em>, we integrate technical
+          precision with emotional intelligence so your inner and outer work
+          finally match.
+        </Typography>
+
+        {/* CTA buttons */}
+        <div style={buttonRowStyle}>
+          <Link href='/about' style={{ textDecoration: 'none' }}>
+            <FormButton
+              variant='secondary'
+              size='medium'
+              style={buttonBaseStyle}
+            >
+              About Us
+            </FormButton>
+          </Link>
+
+          <FormButton
+            variant='primary'
+            size='medium'
+            style={buttonBaseStyle}
+            aria-label='Book a Consultation (opens in a new tab)'
+            onClick={() =>
+              window.open(BOOKINGS_URL, '_blank', 'noopener,noreferrer')
+            }
+            id='bookings-button'
+          >
+            Book a Consultation
+          </FormButton>
         </div>
       </div>
     </>
@@ -233,24 +226,21 @@ const HomeContent: React.FC<{
 
 /**
  * Home Page
- * Landing page with hero section, animated text, and call-to-action button
- * Uses ViewportGrid with background image positioning logic
- * Forces dark mode for this page only without affecting user's saved preference
+ * Landing page with hero section card, animated text, and dual CTA buttons.
+ * Background: gradient + geometric CSS animations (desktop/tablet) or portrait
+ * photo (mobile). Content card is always on the LEFT using the 3×9 grid.
  */
 export default function Home() {
-  const { backgroundImage } = useBackgroundImage();
   const { theme, themeMode, layoutPreference } = useAppTheme();
   const { setOverrideThemeMode } = useThemeOverride();
   const isMobile = useIsMobile();
   const orientation = useDeviceOrientation();
-  // For home page layout, treat tablet portrait like mobile (content at bottom)
   const shouldUseMobileLayout = isMobile || orientation === 'tablet-portrait';
   const [backgroundLoaded, setBackgroundLoaded] = React.useState(false);
   const [shouldStartAnimations, setShouldStartAnimations] =
     React.useState(false);
 
   // Force dark mode for home page unless user has accessibility preference
-  // Respect high-contrast and colorblindness modes for accessibility
   React.useEffect(() => {
     const accessibilityModes: ThemeMode[] = [
       'high-contrast',
@@ -258,94 +248,53 @@ export default function Home() {
       'deuteranopia',
       'tritanopia',
     ];
-
-    // If user has an accessibility mode, keep it; otherwise force dark mode
     const shouldOverride = !accessibilityModes.includes(themeMode);
-
-    if (shouldOverride) {
-      setOverrideThemeMode('dark');
-    }
-
+    if (shouldOverride) setOverrideThemeMode('dark');
     return () => {
-      // Clear override when leaving the page
-      if (shouldOverride) {
-        setOverrideThemeMode(null);
-      }
+      if (shouldOverride) setOverrideThemeMode(null);
     };
   }, [setOverrideThemeMode, themeMode]);
 
   // Add home-page class to body for transparent background
   React.useEffect(() => {
     document.body.classList.add('home-page');
-    return () => {
-      document.body.classList.remove('home-page');
-    };
+    return () => document.body.classList.remove('home-page');
   }, []);
 
-  // Preload the background image based on orientation and background type
+  // For mobile orientations, preload the portrait image before starting animations.
+  // For desktop the CSS gradient is instant, so we mark loaded immediately.
   React.useEffect(() => {
-    const getBackgroundImageSrc = () => {
-      // Use background images from public/images/home/
-      const backgroundImageOneLandscape =
-        '/images/home/HomePageCover4kLandscape.jpg';
-      const backgroundImageOnePortrait =
-        '/images/home/HomePageCover4kPortrait.jpeg';
+    const isMobileOrientation =
+      orientation === 'portrait' ||
+      orientation === 'mobile-landscape' ||
+      orientation === 'tablet-portrait';
 
-      // For now, we only use background 'one' as per useBackgroundImage
-      return orientation === 'landscape' || orientation === 'ultrawide'
-        ? backgroundImageOneLandscape
-        : orientation === 'portrait'
-          ? backgroundImageOnePortrait
-          : backgroundImageOneLandscape;
-    };
+    if (!isMobileOrientation) {
+      // Gradient background – no image to wait for
+      setBackgroundLoaded(true);
+      setTimeout(() => setShouldStartAnimations(true), 100);
+      return;
+    }
 
-    const imageUrl = getBackgroundImageSrc();
     const img = new Image();
-
     img.onload = () => {
       setBackgroundLoaded(true);
-      // Start animations after background loads + small delay for smooth transition
-      setTimeout(() => {
-        setShouldStartAnimations(true);
-      }, 200);
+      setTimeout(() => setShouldStartAnimations(true), 200);
     };
-
     img.onerror = () => {
-      // If image fails to load, still proceed with animations
       setBackgroundLoaded(true);
       setShouldStartAnimations(true);
     };
-
-    img.src = imageUrl;
-
+    img.src = '/images/home/HomePageCoverPortrait2.jpg';
     return () => {
       img.onload = null;
       img.onerror = null;
     };
-  }, [backgroundImage, orientation]);
-
-  // Determine which side should show content based on orientation and background image
-  // Portrait: Show content on bottom (rightChildren in portrait stacked layout)
-  // Landscape with backgroundImage 'one': Show content on left (leftChildren) so face shows on right
-  // Landscape with backgroundImage 'two': Show content on right (rightChildren) so face shows on left
-  // Left-handed mode: Flip the above
-  const shouldShowContentOnLeft = React.useMemo(() => {
-    if (orientation === 'portrait') {
-      // In portrait mode, content always goes to rightChildren (which becomes bottom)
-      return false;
-    }
-
-    // For landscape/ultrawide/square:
-    // backgroundImage 'one' = face on right, text on left
-    // backgroundImage 'two' = face on left, text on right
-    // Left-handed mode flips this
-    const baseLeft = backgroundImage === 'one';
-    return layoutPreference === 'left-handed' ? !baseLeft : baseLeft;
-  }, [orientation, backgroundImage, layoutPreference]);
+  }, [orientation]);
 
   const contentNode = (
     <FadeUp
-      key={`home-content-${backgroundImage}-${backgroundLoaded}`}
+      key={`home-content-${backgroundLoaded}`}
       delay={backgroundLoaded ? 0.1 : 0}
       duration={0.5}
       style={shouldUseMobileLayout ? { width: '100%' } : undefined}
@@ -361,7 +310,7 @@ export default function Home() {
     <>
       <BackgroundLayer
         isHomePage={true}
-        backgroundImage={backgroundImage as 'one' | 'two'}
+        backgroundImage='one'
         orientation={orientation}
         themeMode={themeMode}
         theme={theme}
@@ -372,15 +321,14 @@ export default function Home() {
         style={{
           position: 'relative',
           minHeight: '100vh',
-          backgroundColor: '#010101', // Ensure dark background while theme loads
+          backgroundColor: '#010101',
         }}
       >
         <ViewportGrid
-          leftChildren={shouldShowContentOnLeft ? contentNode : undefined}
-          rightChildren={!shouldShowContentOnLeft ? contentNode : undefined}
+          leftChildren={contentNode}
           isHomePage={true}
           respectLayoutPreference={true}
-          backgroundImage={backgroundImage as 'one' | 'two'}
+          backgroundImage='one'
         />
         <div
           style={{
