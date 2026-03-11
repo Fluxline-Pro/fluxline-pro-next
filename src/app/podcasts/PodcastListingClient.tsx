@@ -333,7 +333,7 @@ function PodcastDetailModal({
  * Main client component for the /podcasts page
  */
 export function PodcastListingClient() {
-  const { theme, themeMode } = useAppTheme();
+  const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
