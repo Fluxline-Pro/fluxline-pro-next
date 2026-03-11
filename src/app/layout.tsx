@@ -5,7 +5,7 @@ import Script from 'next/script';
 import { Providers } from './providers';
 
 // Global styles
-import './tailwind.css'; // ← Tailwind base/utilities first
+import './tailwind.css'; // ← Tailwind base/utilities and Typekit content first
 import './globals.scss'; // ← Your custom styles override Tailwind
 
 export const metadata: Metadata = {
@@ -84,8 +84,6 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
-        {/* Typekit stylesheet for custom typography */}
-        <link rel='stylesheet' href='https://use.typekit.net/qmh5dow.css' />
         {/* Font Awesome icons */}
         <link
           rel='stylesheet'

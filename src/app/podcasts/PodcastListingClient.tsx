@@ -5,14 +5,15 @@ import { AnimatePresence } from 'framer-motion';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { Hero } from '@/theme/components/hero/Hero';
 import { FluentIcon } from '@/theme/components/fluent-icon';
-import { FormButton } from '@/theme/components/form';
+import { FormButton, FormDateInput, FormSelect } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { PodcastEpisode } from './types';
 import { FadeIn } from '@/animations/fade-animations';
+import { SortOrder } from '@/components/ContentListingPage';
 
 /**
  * PodcastCard Component
@@ -335,11 +336,17 @@ export function PodcastListingClient() {
   const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
   const [episodes, setEpisodes] = React.useState<PodcastEpisode[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
   const [selectedEpisode, setSelectedEpisode] =
     React.useState<PodcastEpisode | null>(null);
+
+  // Sort and date range state
+  const [sortOrder, setSortOrder] = React.useState<SortOrder>('newest');
+  const [startDate, setStartDate] = React.useState<string>('');
+  const [endDate, setEndDate] = React.useState<string>('');
 
   React.useEffect(() => {
     let cancelled = false;
@@ -368,7 +375,127 @@ export function PodcastListingClient() {
     };
   }, []);
 
-  const gridColumns = isMobile ? 1 : 3;
+  // Apply sort and date range to episodes
+  const processedEpisodes = React.useMemo(() => {
+    let result = [...episodes];
+
+    // Date range filter
+    if (startDate) {
+      const start = new Date(startDate);
+      result = result.filter((ep) => {
+        if (!ep.publish_date) return true;
+        return new Date(ep.publish_date) >= start;
+      });
+    }
+    if (endDate) {
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
+      result = result.filter((ep) => {
+        if (!ep.publish_date) return true;
+        return new Date(ep.publish_date) <= end;
+      });
+    }
+
+    // Sort
+    switch (sortOrder) {
+      case 'newest':
+        return result.sort((a, b) => {
+          const da = a.publish_date ? new Date(a.publish_date).getTime() : 0;
+          const db = b.publish_date ? new Date(b.publish_date).getTime() : 0;
+          return db - da;
+        });
+      case 'oldest':
+        return result.sort((a, b) => {
+          const da = a.publish_date ? new Date(a.publish_date).getTime() : 0;
+          const db = b.publish_date ? new Date(b.publish_date).getTime() : 0;
+          return da - db;
+        });
+      case 'a-z':
+        return result.sort((a, b) =>
+          a.episode_title.localeCompare(b.episode_title)
+        );
+      case 'z-a':
+        return result.sort((a, b) =>
+          b.episode_title.localeCompare(a.episode_title)
+        );
+      default:
+        return result;
+    }
+  }, [episodes, sortOrder, startDate, endDate]);
+
+  const sortOptions = [
+    { key: 'newest', text: 'Newest First' },
+    { key: 'oldest', text: 'Oldest First' },
+    { key: 'a-z', text: 'A – Z' },
+    { key: 'z-a', text: 'Z – A' },
+  ];
+
+  const hasActiveFilters =
+    sortOrder !== 'newest' || startDate !== '' || endDate !== '';
+
+  const handleClearAll = () => {
+    setSortOrder('newest');
+    setStartDate('');
+    setEndDate('');
+  };
+
+  const podcastFilters = (
+    <>
+      {/* Sort Order */}
+      <div style={{ minWidth: '160px', flex: '1 1 160px' }}>
+        <FormSelect
+          label='Sort By'
+          options={sortOptions}
+          value={sortOrder}
+          onChange={(value) => setSortOrder(value as SortOrder)}
+        />
+      </div>
+
+      {/* Date Range – desktop only (hidden on mobile and tablet) */}
+      {!(isMobile || isTablet) && (
+        <>
+          <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
+            <FormDateInput
+              label='Date From'
+              value={startDate}
+              max={endDate || undefined}
+              onChange={setStartDate}
+              aria-label='Filter from date'
+            />
+          </div>
+          <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
+            <FormDateInput
+              label='Date To'
+              value={endDate}
+              min={startDate || undefined}
+              onChange={setEndDate}
+              aria-label='Filter to date'
+            />
+          </div>
+        </>
+      )}
+
+      {/* Clear All Filters */}
+      {hasActiveFilters && (
+        <div
+          style={{ display: 'flex', alignItems: 'flex-end', flex: '0 0 auto' }}
+        >
+          <FormButton
+            variant='secondary'
+            size='small'
+            icon='ClearFilter'
+            iconPosition='left'
+            onClick={handleClearAll}
+            aria-label='Clear all filters'
+          >
+            Clear Filters
+          </FormButton>
+        </div>
+      )}
+    </>
+  );
+
+  const gridColumns = isMobile ? 1 : isTablet ? 2 : 3;
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -385,6 +512,7 @@ export function PodcastListingClient() {
           description='"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.'
           backArrow={true}
           backArrowPath='/content'
+          filters={podcastFilters}
         />
 
         {/* RSS subscription link */}
@@ -470,7 +598,7 @@ export function PodcastListingClient() {
         )}
 
         {/* Empty state */}
-        {!loading && !error && episodes.length === 0 && (
+        {!loading && !error && processedEpisodes.length === 0 && (
           <div
             style={{
               display: 'flex',
@@ -490,13 +618,15 @@ export function PodcastListingClient() {
               variant='p'
               style={{ color: theme.palette.neutralSecondary }}
             >
-              No episodes available yet.
+              {episodes.length > 0
+                ? 'No episodes match your filters.'
+                : 'No episodes available yet.'}
             </Typography>
           </div>
         )}
 
         {/* Episode Grid */}
-        {!loading && !error && episodes.length > 0 && (
+        {!loading && !error && processedEpisodes.length > 0 && (
           <>
             <Typography
               variant='p'
@@ -505,8 +635,11 @@ export function PodcastListingClient() {
                 marginBottom: theme.spacing.l1,
               }}
             >
-              Showing {episodes.length}{' '}
-              {episodes.length === 1 ? 'episode' : 'episodes'}
+              Showing {processedEpisodes.length}{' '}
+              {processedEpisodes.length === 1 ? 'episode' : 'episodes'}
+              {(startDate || endDate) &&
+                processedEpisodes.length !== episodes.length &&
+                ` · ${processedEpisodes.length} matching date range`}
             </Typography>
             <AnimatePresence mode='wait'>
               <div
@@ -517,7 +650,7 @@ export function PodcastListingClient() {
                   gap: theme.spacing.l1,
                 }}
               >
-                {episodes.map((episode, index) => (
+                {processedEpisodes.map((episode, index) => (
                   <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
                     <PodcastCard
                       episode={episode}

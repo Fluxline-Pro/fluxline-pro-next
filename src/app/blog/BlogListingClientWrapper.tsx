@@ -42,12 +42,7 @@ export function BlogListingClientWrapper({
       filtered = filtered.filter((post) => post.category === selectedCategory);
     }
 
-    // Sort by date with null safety
-    return filtered.sort((a, b) => {
-      const dateA = a.publishedDate?.getTime() ?? 0;
-      const dateB = b.publishedDate?.getTime() ?? 0;
-      return dateB - dateA;
-    });
+    return filtered;
   }, [initialPosts, selectedTag, selectedCategory]);
 
   // Transform blog posts to card format
@@ -61,6 +56,7 @@ export function BlogListingClientWrapper({
       imageText: post.publishedDate
         ? format(post.publishedDate, 'MMMM d, yyyy')
         : 'Date unknown',
+      date: post.publishedDate,
     }));
   }, [blogPosts]);
 
@@ -95,6 +91,8 @@ export function BlogListingClientWrapper({
   // Build results message
   const resultsMessage = `Showing ${blogPosts.length} ${blogPosts.length === 1 ? 'post' : 'posts'}${selectedCategory ? ` in ${selectedCategory}` : ''}${selectedTag ? ` tagged with ${selectedTag}` : ''}`;
 
+  const hasActiveFilters = !!selectedCategory || !!selectedTag;
+
   return (
     <ContentListingPage
       title='Blog'
@@ -108,6 +106,11 @@ export function BlogListingClientWrapper({
       emptyStateMessage='Try adjusting your filters to see more posts.'
       backArrow={true}
       backArrowPath='/content'
+      hasActiveFilters={hasActiveFilters}
+      onClearFilters={() => {
+        setSelectedCategory(undefined);
+        setSelectedTag(undefined);
+      }}
     />
   );
 }
