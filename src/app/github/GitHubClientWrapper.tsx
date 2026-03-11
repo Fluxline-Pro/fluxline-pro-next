@@ -82,6 +82,7 @@ export function GitHubClientWrapper({
       ]
         .filter(Boolean)
         .join(' · '),
+      date: repo.updated_at ? new Date(repo.updated_at) : undefined,
     }));
   }, [filteredRepos]);
 
@@ -128,6 +129,8 @@ export function GitHubClientWrapper({
   ];
 
   const resultsMessage = `Showing ${filteredRepos.length} ${filteredRepos.length === 1 ? 'repository' : 'repositories'}${selectedOwner ? ` from ${selectedOwner}` : ''}${selectedLanguage ? ` in ${selectedLanguage}` : ''}`;
+
+  const hasActiveFilters = !!selectedLanguage || !!selectedOwner;
 
   // GitHub contributions graph (only for user accounts, not organizations)
   const contributionsSection = React.useMemo(() => {
@@ -220,6 +223,11 @@ export function GitHubClientWrapper({
       customSection={contributionsSection}
       backArrow
       backArrowPath={'/content'}
+      hasActiveFilters={hasActiveFilters}
+      onClearFilters={() => {
+        setSelectedLanguage(undefined);
+        setSelectedOwner(undefined);
+      }}
     />
   );
 }

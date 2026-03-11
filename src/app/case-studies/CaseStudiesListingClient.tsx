@@ -50,6 +50,7 @@ export default function CaseStudiesListingClient({
       imageUrl: study.imageUrl || FluxlineLogoDarkMode.src,
       imageAlt: study.imageAlt || study.title,
       imageText: `${study.client} • ${study.industry}`,
+      date: study.publishedDate,
     }));
   }, [caseStudies]);
 
@@ -71,6 +72,8 @@ export default function CaseStudiesListingClient({
   // Build results message
   const resultsMessage = `Showing ${caseStudies.length} ${caseStudies.length === 1 ? 'case study' : 'case studies'}${selectedIndustries.length > 0 ? ` in: ${selectedIndustries.join(', ')}` : ''}`;
 
+  const hasActiveFilters = selectedIndustries.length > 0;
+
   return (
     <ContentListingPage
       title='Case Studies'
@@ -82,6 +85,8 @@ export default function CaseStudiesListingClient({
       resultsMessage={resultsMessage}
       emptyStateTitle='No case studies found'
       emptyStateMessage='Check back soon for client success stories.'
+      hasActiveFilters={hasActiveFilters}
+      onClearFilters={() => setSelectedIndustries([])}
       ctaSection={{
         title: 'Ready to Transform Your Business?',
         description:

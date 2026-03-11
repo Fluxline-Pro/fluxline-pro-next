@@ -309,7 +309,7 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 
 ### Core Documentation
 
-- **[COPILOT_INSTRUCTIONS.md](COPILOT_INSTRUCTIONS.md)** - Development guidelines and architecture (⭐ Start here)
+- **[GitHub Copilot Instructions](.github/copilot-instructions.md)** - Development guidelines and architecture (⭐ Start here)
 - **[ANIMATIONS.md](ANIMATIONS.md)** - Animation system guide
 - **[HOOKS.md](HOOKS.md)** - Custom React hooks reference
 - **[src/theme/THEMING.md](src/theme/THEMING.md)** - Theme system documentation
@@ -582,7 +582,7 @@ See [LICENSE](LICENSE) file for details.
 
 ## 🙋 Support
 
-- **Documentation**: Start with [COPILOT_INSTRUCTIONS.md](COPILOT_INSTRUCTIONS.md)
+- **Documentation**: Start with [GitHub Copilot Instructions](.github/copilot-instructions.md)
 - **Issues**: Open GitHub issues for bugs
 - **Questions**: Check existing documentation first
 
