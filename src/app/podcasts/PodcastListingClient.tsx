@@ -8,7 +8,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { Hero } from '@/theme/components/hero/Hero';
 import { FluentIcon } from '@/theme/components/fluent-icon';
-import { FormButton, FormSelect } from '@/theme/components/form';
+import { FormButton, FormDateInput, FormSelect } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { PodcastEpisode } from './types';
@@ -439,29 +439,6 @@ export function PodcastListingClient() {
     setEndDate('');
   };
 
-  const dateInputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '0.5rem',
-    borderRadius: theme.effects.roundedCorner2,
-    backgroundColor: theme.palette.neutralLight,
-    border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-    color: theme.palette.neutralPrimary,
-    fontSize: '0.875rem',
-    fontFamily: theme.typography.fonts.body.fontFamily,
-    cursor: 'pointer',
-    outline: 'none',
-    colorScheme:
-      themeMode === 'dark' || themeMode === 'high-contrast' ? 'dark' : 'light',
-  };
-
-  const labelStyle: React.CSSProperties = {
-    color: theme.palette.neutralPrimary,
-    fontSize: '1rem',
-    fontWeight: theme.typography.fontWeights.semiBold,
-    marginBottom: '0.5rem',
-    display: 'block',
-  };
-
   const podcastFilters = (
     <>
       {/* Sort Order */}
@@ -474,41 +451,35 @@ export function PodcastListingClient() {
         />
       </div>
 
-      {/* Date Range – desktop only */}
-      {!isMobile && (
+      {/* Date Range – desktop only (hidden on mobile and tablet) */}
+      {!(isMobile || isTablet) && (
         <>
           <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
-            <label>
-              <span style={labelStyle}>Date From</span>
-              <input
-                type='date'
-                value={startDate}
-                max={endDate || undefined}
-                onChange={(e) => setStartDate(e.target.value)}
-                aria-label='Filter from date'
-                style={dateInputStyle}
-              />
-            </label>
+            <FormDateInput
+              label='Date From'
+              value={startDate}
+              max={endDate || undefined}
+              onChange={setStartDate}
+              aria-label='Filter from date'
+            />
           </div>
           <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
-            <label>
-              <span style={labelStyle}>Date To</span>
-              <input
-                type='date'
-                value={endDate}
-                min={startDate || undefined}
-                onChange={(e) => setEndDate(e.target.value)}
-                aria-label='Filter to date'
-                style={dateInputStyle}
-              />
-            </label>
+            <FormDateInput
+              label='Date To'
+              value={endDate}
+              min={startDate || undefined}
+              onChange={setEndDate}
+              aria-label='Filter to date'
+            />
           </div>
         </>
       )}
 
       {/* Clear All Filters */}
       {hasActiveFilters && (
-        <div style={{ display: 'flex', alignItems: 'flex-end', flex: '0 0 auto' }}>
+        <div
+          style={{ display: 'flex', alignItems: 'flex-end', flex: '0 0 auto' }}
+        >
           <FormButton
             variant='secondary'
             size='small'
