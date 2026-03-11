@@ -61,6 +61,7 @@ export default function PressReleasePage() {
     imageUrl: release.imageUrl,
     imageAlt: release.imageAlt || release.title,
     imageText: format(release.publishedDate, 'MMMM d, yyyy'),
+    date: release.publishedDate,
   }));
 
   return (
