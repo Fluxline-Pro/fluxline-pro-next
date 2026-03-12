@@ -162,6 +162,25 @@ module.exports = async function (context, req) {
   try {
     const token = await getGraphToken(tenantId, clientId, clientSecret);
 
+    // Check for duplicate subscription before adding
+    const safeEmail = email.replace(/'/g, "''");
+    const encodedFilter = encodeURIComponent(`fields/Email eq '${safeEmail}'`);
+    const existing = await graphRequest(
+      'GET',
+      `/v1.0/sites/${siteId}/lists/${listId}/items?$filter=${encodedFilter}&$select=id`,
+      token
+    );
+
+    if (existing.status === 200 && existing.body?.value?.length > 0) {
+      context.log(`Newsletter subscription already exists for: ${email}`);
+      context.res = {
+        status: 200,
+        headers: CORS_HEADERS,
+        body: { success: true, message: 'You are already subscribed.' },
+      };
+      return;
+    }
+
     const result = await graphRequest(
       'POST',
       `/v1.0/sites/${siteId}/lists/${listId}/items`,

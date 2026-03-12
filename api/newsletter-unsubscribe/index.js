@@ -162,8 +162,9 @@ module.exports = async function (context, req) {
   try {
     const token = await getGraphToken(tenantId, clientId, clientSecret);
 
-    // Search for the email in the list using a $filter query on the Email field
-    const encodedEmail = encodeURIComponent(`fields/Email eq '${email}'`);
+    // Escape single quotes in email to prevent OData filter injection
+    const safeEmail = email.replace(/'/g, "''");
+    const encodedEmail = encodeURIComponent(`fields/Email eq '${safeEmail}'`);
     const searchResult = await graphRequest(
       'GET',
       `/v1.0/sites/${siteId}/lists/${listId}/items?$filter=${encodedEmail}&$select=id`,
@@ -184,7 +185,7 @@ module.exports = async function (context, req) {
 
     if (items.length === 0) {
       // Per AC 4d: no error shown to user, but log a warning
-      console.warn(`No email found in distribution list for unsubscribe: ${email}`);
+      context.log.warn(`No email found in distribution list for unsubscribe: ${email}`);
       // Still return 200 to the front-end — user sees the confirmation regardless
       context.res = {
         status: 200,

@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { FormInput } from '@/theme/components/form/FormInput';
@@ -19,6 +20,7 @@ type PageState = 'idle' | 'loading' | 'success' | 'error';
 
 export default function UnsubscribePage() {
   const { theme } = useAppTheme();
+  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [pageState, setPageState] = useState<PageState>('idle');
@@ -142,7 +144,7 @@ export default function UnsubscribePage() {
                 size='large'
                 icon='Home'
                 iconPosition='left'
-                onClick={() => (window.location.href = '/')}
+                onClick={() => router.push('/')}
               />
             </div>
           ) : (

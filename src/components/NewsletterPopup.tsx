@@ -44,6 +44,7 @@ export const NewsletterPopup: React.FC = () => {
     useNewsletterStore();
 
   const [isVisible, setIsVisible] = useState(false);
+  const [hasDecided, setHasDecided] = useState(false); // Track random decision for this session
   const [email, setEmail] = useState('');
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -60,13 +61,18 @@ export const NewsletterPopup: React.FC = () => {
     // Don't show on excluded pages
     if (EXCLUDED_PATHS.some((p) => pathname === p)) return;
 
-    // Random chance to show
-    if (Math.random() > SHOW_PROBABILITY) return;
+    // Decide once per session whether to show the popup
+    if (!hasDecided) {
+      if (Math.random() > SHOW_PROBABILITY) {
+        setHasDecided(true);
+        return;
+      }
+      setHasDecided(true);
+    }
 
     const timer = setTimeout(() => setIsVisible(true), SHOW_DELAY_MS);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [pathname, newsletterDismissed, newsletterSubscribed, hasDecided]);
 
   const handleDismiss = () => {
     setIsVisible(false);
@@ -343,7 +349,7 @@ export const NewsletterPopup: React.FC = () => {
                     <a
                       href='/unsubscribe'
                       style={{ color: theme.palette.themePrimary }}
-                      onClick={() => setIsVisible(false)}
+                      onClick={() => { setIsVisible(false); dismissNewsletter(); }}
                     >
                       fluxline.pro/unsubscribe
                     </a>
