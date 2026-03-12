@@ -5,7 +5,7 @@
  * Information about Fluxline and the company mission
  */
 
-import { UnifiedPageWrapper, InteractiveCard } from '@/components';
+import { UnifiedPageWrapper, InteractiveCard, NewsletterCTA } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
 import { FormButton } from '@/theme/components/form/FormButton';
@@ -304,6 +304,9 @@ export default function AboutPage() {
             consulting, coaching, and development services.
           </Typography>
         </Callout> */}
+
+        {/* Newsletter CTA */}
+        <NewsletterCTA />
       </div>
     </UnifiedPageWrapper>
   );

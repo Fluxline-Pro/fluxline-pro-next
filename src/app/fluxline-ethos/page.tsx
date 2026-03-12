@@ -5,7 +5,7 @@
  * Presents the Fluxline philosophy, mission, and service framework
  */
 
-import { UnifiedPageWrapper, InteractiveCard } from '@/components';
+import { UnifiedPageWrapper, InteractiveCard, NewsletterCTA } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -179,6 +179,9 @@ export default function FluxlineEthosPage() {
             {ethosCTA.description}
           </Typography>
         </Callout>
+
+        {/* Newsletter CTA */}
+        <NewsletterCTA />
       </div>
     </UnifiedPageWrapper>
   );
