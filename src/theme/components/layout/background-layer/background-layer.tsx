@@ -6,6 +6,11 @@ import { useColorVisionFilter } from '../../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../../hooks/useReducedMotion';
 import type { IExtendedTheme, ThemeMode } from '../../../theme';
 
+const MOBILE_BACKGROUND_IMAGE_PATH =
+  '/images/home/HomePageMobileGeometricBackground.png';
+const MOBILE_BACKGROUND_FALLBACK_PATH =
+  '/images/home/HomePageCoverPortrait2.jpg';
+
 interface BackgroundLayerProps {
   isHomePage: boolean;
   backgroundImage: 'one' | 'two';
@@ -35,6 +40,7 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
   isHomePage,
   orientation,
   themeMode,
+  theme,
   backgroundLoaded = true,
 }) => {
   const { filter } = useColorVisionFilter(true);
@@ -52,12 +58,12 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
 
   // ── Mobile background: portrait photo ───────────────────────────────────
   if (isMobileOrientation) {
-    const mobileImagePath = '/images/home/HomePageCoverPortrait2.jpg';
+    const mobileImagePath = MOBILE_BACKGROUND_IMAGE_PATH;
 
     const mobileOverlay =
       themeMode === 'high-contrast'
         ? 'rgba(0,0,0,0.6)'
-        : 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(1,1,5,0.6) 100%)';
+        : 'linear-gradient(to bottom, rgba(0,0,8,0.12) 0%, rgba(0,0,0,0.28) 38%, rgba(1,1,5,0.72) 100%)';
 
     return (
       <div
@@ -79,9 +85,9 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: `url(${mobileImagePath})`,
+            backgroundImage: `url(${mobileImagePath}), url(${MOBILE_BACKGROUND_FALLBACK_PATH})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: 'center center, center',
             backgroundRepeat: 'no-repeat',
             filter: filter,
           }}
@@ -98,14 +104,40 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
     );
   }
 
-  // ── Desktop / large-tablet background: gradient + geometric animations ──
-  // Horizontal gradient – dark left, blue-navy right
-  const gradientBg =
+  // ── Desktop / large-tablet background: left-right geometric SVG mesh ──
+  const isMonochromeMode =
+    themeMode === 'grayscale' || themeMode === 'grayscale-dark';
+  const primaryColor = isMonochromeMode
+    ? '#b8b8b8'
+    : (theme.palette.themePrimary ?? '#00f0ff');
+  const secondaryColor = isMonochromeMode
+    ? '#8a8a8a'
+    : (theme.palette.themeTertiary ?? '#5a7ca0');
+  const accentGlow = isMonochromeMode
+    ? '#e6e6e6'
+    : (theme.palette.themePrimary ?? '#afcafc');
+  const tertiaryLineColor = isMonochromeMode
+    ? '#d2d2d2'
+    : (theme.palette.themePrimary ?? '#7dc9ff');
+  const subtleFillColor = isMonochromeMode
+    ? '#6f6f6f'
+    : (theme.palette.themeLighterAlt ?? '#1f2d42');
+  const deepAccentColor = isMonochromeMode
+    ? '#a0a0a0'
+    : (theme.palette.themeDark ?? '#1f1f1f');
+
+  const bgColorStart =
     themeMode === 'high-contrast'
       ? '#000000'
-      : themeMode === 'grayscale' || themeMode === 'grayscale-dark'
-        ? 'linear-gradient(to right, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%)'
-        : 'linear-gradient(to right, #010105 0%, #040c1a 20%, #0a1628 40%, #0f2240 60%, #153058 80%, #0d1f3d 100%)';
+      : isMonochromeMode
+        ? '#111111'
+        : (theme.palette.themeDarker ?? '#021626');
+  const bgColorEnd =
+    themeMode === 'high-contrast'
+      ? '#000000'
+      : isMonochromeMode
+        ? '#050505'
+        : (theme.palette.neutralDark ?? '#010a12');
 
   return (
     <div
@@ -119,74 +151,105 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
         height: '100dvh',
         zIndex: 1,
         overflow: 'hidden',
+        filter,
+        ['--background-accent-glow' as string]: accentGlow,
       }}
     >
       {/* Gradient base */}
-      <div style={{ position: 'absolute', inset: 0, background: gradientBg }} />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: `linear-gradient(135deg, ${bgColorStart} 0%, ${bgColorEnd} 100%)`,
+        }}
+      />
 
-      {/* Constellation wireframe – interconnected nodes & edges, right-biased */}
+      {/* Left/right geometric background mesh */}
       {!shouldReduceMotion && (
         <>
           <style>{`
-            /* ── Node glow pulse ─────────────────────────────────── */
-            @keyframes fl-node-pulse {
-              0%, 100% { box-shadow: 0 0 4px 1px rgba(95,196,190,0.6), 0 0 12px 3px rgba(95,196,190,0.2); transform: scale(1); }
-              50%      { box-shadow: 0 0 8px 3px rgba(95,196,190,0.9), 0 0 24px 6px rgba(95,196,190,0.35); transform: scale(1.3); }
+            @keyframes drawLine {
+              0% { stroke-dashoffset: 3000; opacity: 0; }
+              5% { opacity: 1; }
+              100% { stroke-dashoffset: 0; opacity: 1; }
             }
-            @keyframes fl-node-pulse-blue {
-              0%, 100% { box-shadow: 0 0 4px 1px rgba(175,202,252,0.6), 0 0 12px 3px rgba(175,202,252,0.2); transform: scale(1); }
-              50%      { box-shadow: 0 0 8px 3px rgba(175,202,252,0.9), 0 0 24px 6px rgba(175,202,252,0.35); transform: scale(1.3); }
+            @keyframes fadeIn {
+              0% { opacity: 0; }
+              100% { opacity: 0.25; }
             }
-            /* Softer secondary pulse for smaller / dimmer nodes */
-            @keyframes fl-node-dim {
-              0%, 100% { box-shadow: 0 0 3px 1px rgba(95,196,190,0.3); opacity: 0.4; }
-              50%      { box-shadow: 0 0 6px 2px rgba(95,196,190,0.5); opacity: 0.7; }
+            @keyframes pulseGlow {
+              0%, 100% { opacity: 0.5; r: 2.5; }
+              50% { opacity: 1; r: 4.5; }
             }
-
-            /* ── Mesh drift – slow positional sway ───────────────── */
-            @keyframes fl-mesh-drift {
-              0%   { transform: translate(0, 0); }
-              25%  { transform: translate(6px, -10px); }
-              50%  { transform: translate(-4px, -6px); }
-              75%  { transform: translate(8px, 4px); }
-              100% { transform: translate(0, 0); }
+            @keyframes pulseIntense {
+              0%, 100% { opacity: 0.7; r: 4; }
+              50% { opacity: 1; r: 7; }
             }
-            @keyframes fl-mesh-drift-alt {
-              0%   { transform: translate(0, 0); }
-              30%  { transform: translate(-8px, 6px); }
-              60%  { transform: translate(5px, 12px); }
-              100% { transform: translate(0, 0); }
+            @keyframes slowTurnRight {
+              0% { transform: rotate(0deg) translate(0px, 0px) scale(1); }
+              100% { transform: rotate(-3deg) translate(-30px, 20px) scale(1.03); }
             }
-
-            /* ── Edge glow – line brightness breathe ─────────────── */
-            @keyframes fl-edge-glow {
+            @keyframes driftLeft {
+              0% { transform: translate(0px, 0px) rotate(0deg); }
+              100% { transform: translate(15px, -15px) rotate(1deg); }
+            }
+            @keyframes panBridge {
+              0% { opacity: 0.1; }
+              50% { opacity: 0.4; }
+              100% { opacity: 0.1; }
+            }
+            @keyframes scaffoldPulse {
               0%, 100% { opacity: 0.12; }
-              50%      { opacity: 0.3; }
+              50% { opacity: 0.32; }
             }
-            @keyframes fl-edge-glow-alt {
-              0%, 100% { opacity: 0.08; }
-              40%      { opacity: 0.22; }
-              80%      { opacity: 0.14; }
-            }
-            @keyframes fl-edge-glow-bright {
-              0%, 100% { opacity: 0.18; }
-              50%      { opacity: 0.45; }
+            @keyframes polygonBreathe {
+              0%, 100% { opacity: 0.025; }
+              50% { opacity: 0.08; }
             }
 
-            /* ── Draw-in for lines (one-time feel, loops slowly) ── */
-            @keyframes fl-line-draw {
-              0%   { stroke-dashoffset: 1000; opacity: 0; }
-              15%  { opacity: 0.25; }
-              100% { stroke-dashoffset: 0; opacity: 0.25; }
+            .animated-path {
+              stroke-dasharray: 3000;
+              stroke-dashoffset: 3000;
+              animation: drawLine 5s ease-out forwards;
+            }
+
+            .delay-1 { animation-delay: 0.5s; }
+            .delay-2 { animation-delay: 1.5s; }
+            .delay-3 { animation-delay: 2.5s; }
+            .delay-4 { animation-delay: 3.5s; }
+
+            .right-cluster {
+              transform-origin: 1600px 540px;
+              animation: slowTurnRight 18s infinite alternate ease-in-out;
+            }
+
+            .left-cluster {
+              transform-origin: 300px 300px;
+              animation: driftLeft 20s infinite alternate ease-in-out;
+            }
+
+            .node-pulse { animation: pulseGlow 4s infinite ease-in-out; }
+            .node-intense { animation: pulseIntense 3s infinite ease-in-out; fill: var(--background-accent-glow); }
+
+            .faint-poly {
+              opacity: 0;
+              animation: fadeIn 6s ease-in forwards;
+              animation-delay: 2s;
+            }
+
+            .bridge-line {
+              animation: panBridge 8s infinite alternate ease-in-out;
+            }
+
+            .scaffold-line {
+              animation: scaffoldPulse 9s infinite alternate ease-in-out;
+            }
+
+            .scaffold-poly {
+              animation: polygonBreathe 11s infinite alternate ease-in-out;
             }
           `}</style>
 
-          {/* ═══════════════════════════════════════════════════════════
-              SVG wireframe mesh – right side constellation
-              Nodes are circles with glow; edges are lines between them.
-              The viewBox covers the full viewport; shapes are positioned
-              in the right ~60% of the screen.
-              ═══════════════════════════════════════════════════════════ */}
           <svg
             aria-hidden='true'
             style={{
@@ -201,814 +264,445 @@ export const BackgroundLayer: React.FC<BackgroundLayerProps> = ({
             xmlns='http://www.w3.org/2000/svg'
           >
             <defs>
-              {/* Glow filter for edges */}
-              <filter
-                id='fl-edge-blur'
-                x='-20%'
-                y='-20%'
-                width='140%'
-                height='140%'
-              >
-                <feGaussianBlur stdDeviation='1.5' />
+              <filter id='glow' x='-20%' y='-20%' width='140%' height='140%'>
+                <feGaussianBlur stdDeviation='6' result='blur' />
+                <feComposite in='SourceGraphic' in2='blur' operator='over' />
               </filter>
-              {/* Stronger glow for primary nodes */}
+
               <filter
-                id='fl-node-glow'
+                id='intense-glow'
                 x='-50%'
                 y='-50%'
                 width='200%'
                 height='200%'
               >
-                <feGaussianBlur stdDeviation='3' result='blur' />
+                <feGaussianBlur stdDeviation='12' result='blur1' />
+                <feGaussianBlur stdDeviation='4' result='blur2' />
                 <feMerge>
-                  <feMergeNode in='blur' />
-                  <feMergeNode in='SourceGraphic' />
-                </feMerge>
-              </filter>
-              <filter
-                id='fl-node-glow-lg'
-                x='-80%'
-                y='-80%'
-                width='260%'
-                height='260%'
-              >
-                <feGaussianBlur stdDeviation='5' result='blur' />
-                <feMerge>
-                  <feMergeNode in='blur' />
-                  <feMergeNode in='blur' />
+                  <feMergeNode in='blur1' />
+                  <feMergeNode in='blur2' />
                   <feMergeNode in='SourceGraphic' />
                 </feMerge>
               </filter>
             </defs>
 
-            {/* ── GROUP 1: Upper-right cluster (primary) ──────────── */}
-            <g style={{ animation: 'fl-mesh-drift 30s ease-in-out infinite' }}>
-              {/* Edges */}
-              <line
-                x1='1180'
-                y1='120'
-                x2='1340'
-                y2='200'
-                stroke='#5FC4BE'
-                strokeWidth='1'
-                style={{ animation: 'fl-edge-glow 8s ease-in-out infinite' }}
-                filter='url(#fl-edge-blur)'
+            <g className='left-cluster'>
+              <polygon
+                points='100,50 400,150 250,350'
+                fill={secondaryColor}
+                className='faint-poly'
+                style={{ opacity: 0.03 }}
               />
-              <line
-                x1='1340'
-                y1='200'
-                x2='1500'
-                y2='140'
-                stroke='#AFCAFC'
-                strokeWidth='1'
-                style={{
-                  animation: 'fl-edge-glow 10s ease-in-out infinite 1s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <polygon
+                points='250,350 400,150 600,450'
+                fill={primaryColor}
+                className='faint-poly'
+                style={{ opacity: 0.02 }}
               />
-              <line
-                x1='1500'
-                y1='140'
-                x2='1620'
-                y2='260'
-                stroke='#5FC4BE'
-                strokeWidth='1.2'
-                style={{
-                  animation: 'fl-edge-glow-bright 9s ease-in-out infinite 0.5s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <polygon
+                points='-40,260 120,140 220,420 30,520'
+                fill={subtleFillColor}
+                className='scaffold-poly'
+                style={{ animationDelay: '1.1s' }}
               />
-              <line
-                x1='1340'
-                y1='200'
-                x2='1620'
-                y2='260'
-                stroke='#AFCAFC'
-                strokeWidth='0.8'
-                style={{
-                  animation: 'fl-edge-glow-alt 12s ease-in-out infinite 2s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1180'
-                y1='120'
-                x2='1500'
-                y2='140'
-                stroke='#5FC4BE'
-                strokeWidth='0.6'
-                style={{
-                  animation: 'fl-edge-glow-alt 14s ease-in-out infinite',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1340'
-                y1='200'
-                x2='1280'
-                y2='340'
-                stroke='#AFCAFC'
-                strokeWidth='0.8'
-                style={{
-                  animation: 'fl-edge-glow 11s ease-in-out infinite 3s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1500'
-                y1='140'
-                x2='1700'
-                y2='180'
-                stroke='#5FC4BE'
-                strokeWidth='0.7'
-                style={{
-                  animation: 'fl-edge-glow-alt 13s ease-in-out infinite 1s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1700'
-                y1='180'
-                x2='1620'
-                y2='260'
-                stroke='#AFCAFC'
-                strokeWidth='1'
-                style={{ animation: 'fl-edge-glow 9s ease-in-out infinite 2s' }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1180'
-                y1='120'
-                x2='1080'
-                y2='220'
-                stroke='#5FC4BE'
-                strokeWidth='0.6'
-                style={{
-                  animation: 'fl-edge-glow-alt 15s ease-in-out infinite',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1080'
-                y1='220'
-                x2='1280'
-                y2='340'
-                stroke='#AFCAFC'
-                strokeWidth='0.7'
-                style={{
-                  animation: 'fl-edge-glow 12s ease-in-out infinite 4s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <polygon
+                points='220,420 430,300 560,520 300,640'
+                fill={deepAccentColor}
+                className='scaffold-poly'
+                style={{ animationDelay: '2.3s' }}
               />
 
-              {/* Nodes – upper right */}
-              <circle
-                cx='1180'
-                cy='120'
-                r='3'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{
-                  animation: 'fl-node-pulse 6s ease-in-out infinite 1s',
-                }}
-              />
-              <circle
-                cx='1340'
-                cy='200'
-                r='4'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow-lg)'
-                style={{
-                  animation: 'fl-node-pulse-blue 5s ease-in-out infinite',
-                }}
-              />
-              <circle
-                cx='1500'
-                cy='140'
-                r='3.5'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow-lg)'
-                style={{
-                  animation: 'fl-node-pulse 7s ease-in-out infinite 2s',
-                }}
-              />
-              <circle
-                cx='1620'
-                cy='260'
-                r='3'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{
-                  animation: 'fl-node-pulse-blue 8s ease-in-out infinite 1s',
-                }}
-              />
-              <circle
-                cx='1700'
-                cy='180'
-                r='2.5'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{
-                  animation: 'fl-node-pulse 9s ease-in-out infinite 3s',
-                }}
-              />
-              <circle
-                cx='1080'
-                cy='220'
-                r='2'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 10s ease-in-out infinite' }}
-              />
-              <circle
-                cx='1280'
-                cy='340'
-                r='2.5'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 8s ease-in-out infinite 2s' }}
-              />
+              <g
+                stroke={primaryColor}
+                strokeWidth='1'
+                fill='none'
+                style={{ opacity: 0.6 }}
+              >
+                <path
+                  className='animated-path delay-1'
+                  d='M -50 150 L 100 50 L 400 150 L 600 450'
+                />
+                <path
+                  className='animated-path delay-2'
+                  d='M 100 50 L 250 350 L 400 150'
+                />
+                <path
+                  className='animated-path delay-3'
+                  d='M -100 400 L 250 350 L 300 600'
+                />
+                <path
+                  className='animated-path delay-4'
+                  d='M 250 350 L 600 450'
+                />
+                <path
+                  className='animated-path delay-2'
+                  d='M -60 250 L 220 420 L 430 300 L 560 520'
+                  stroke={tertiaryLineColor}
+                  style={{ opacity: 0.55 }}
+                />
+                <path
+                  className='animated-path delay-4'
+                  d='M 120 140 L 30 520 L 300 640 L 560 520'
+                  stroke={secondaryColor}
+                  style={{ opacity: 0.45 }}
+                />
+              </g>
+
+              <g
+                stroke={tertiaryLineColor}
+                strokeWidth='0.75'
+                fill='none'
+                strokeDasharray='5 10'
+                style={{ opacity: 0.35 }}
+              >
+                <path
+                  className='scaffold-line'
+                  d='M -40 260 L 220 420 L 300 640'
+                />
+                <path
+                  className='scaffold-line'
+                  d='M 120 140 L 430 300 L 560 520'
+                  style={{ animationDelay: '1.8s' }}
+                />
+              </g>
+
+              <g fill={primaryColor} filter='url(#glow)'>
+                <circle
+                  cx='100'
+                  cy='50'
+                  className='node-pulse'
+                  style={{ animationDelay: '0.2s' }}
+                />
+                <circle
+                  cx='400'
+                  cy='150'
+                  className='node-pulse'
+                  style={{ animationDelay: '1.1s' }}
+                />
+                <circle
+                  cx='250'
+                  cy='350'
+                  className='node-pulse'
+                  style={{ animationDelay: '0.7s' }}
+                />
+                <circle
+                  cx='600'
+                  cy='450'
+                  className='node-intense'
+                  filter='url(#intense-glow)'
+                  style={{ animationDelay: '1.5s' }}
+                />
+                <circle
+                  cx='300'
+                  cy='600'
+                  className='node-pulse'
+                  style={{ animationDelay: '2.0s' }}
+                />
+              </g>
             </g>
 
-            {/* ── GROUP 2: Center-right / mid-screen cluster ─────── */}
             <g
-              style={{
-                animation: 'fl-mesh-drift-alt 35s ease-in-out infinite',
-              }}
+              stroke={secondaryColor}
+              strokeWidth='0.75'
+              fill='none'
+              className='bridge-line'
+              strokeDasharray='10 15'
             >
-              {/* Edges */}
-              <line
-                x1='1280'
-                y1='340'
-                x2='1460'
-                y2='420'
-                stroke='#5FC4BE'
-                strokeWidth='1'
-                style={{
-                  animation: 'fl-edge-glow 10s ease-in-out infinite 2s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <path
+                className='animated-path delay-3'
+                d='M 600 450 Q 1000 300 1300 150'
               />
-              <line
-                x1='1460'
-                y1='420'
-                x2='1600'
-                y2='380'
-                stroke='#AFCAFC'
-                strokeWidth='1.2'
-                style={{
-                  animation: 'fl-edge-glow-bright 8s ease-in-out infinite 1s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <path
+                className='animated-path delay-4'
+                d='M 400 150 Q 900 600 1100 650'
               />
-              <line
-                x1='1600'
-                y1='380'
-                x2='1620'
-                y2='260'
-                stroke='#5FC4BE'
-                strokeWidth='0.8'
-                style={{
-                  animation: 'fl-edge-glow-alt 11s ease-in-out infinite',
-                }}
-                filter='url(#fl-edge-blur)'
+              <path
+                className='animated-path delay-4'
+                d='M 300 600 Q 800 900 1400 1050'
               />
-              <line
-                x1='1460'
-                y1='420'
-                x2='1560'
-                y2='540'
-                stroke='#AFCAFC'
-                strokeWidth='1'
-                style={{ animation: 'fl-edge-glow 9s ease-in-out infinite 3s' }}
-                filter='url(#fl-edge-blur)'
+              <path
+                className='animated-path delay-2'
+                d='M 560 520 Q 1040 480 1700 360'
+                stroke={tertiaryLineColor}
               />
-              <line
-                x1='1600'
-                y1='380'
-                x2='1740'
-                y2='440'
-                stroke='#5FC4BE'
-                strokeWidth='0.7'
-                style={{
-                  animation: 'fl-edge-glow-alt 13s ease-in-out infinite 2s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1740'
-                y1='440'
-                x2='1560'
-                y2='540'
-                stroke='#AFCAFC'
-                strokeWidth='0.8'
-                style={{
-                  animation: 'fl-edge-glow 11s ease-in-out infinite 1s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1280'
-                y1='340'
-                x2='1200'
-                y2='480'
-                stroke='#5FC4BE'
-                strokeWidth='0.6'
-                style={{
-                  animation: 'fl-edge-glow-alt 14s ease-in-out infinite 4s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1200'
-                y1='480'
-                x2='1460'
-                y2='420'
-                stroke='#AFCAFC'
-                strokeWidth='0.6'
-                style={{ animation: 'fl-edge-glow 12s ease-in-out infinite' }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1740'
-                y1='440'
-                x2='1820'
-                y2='350'
-                stroke='#5FC4BE'
-                strokeWidth='0.5'
-                style={{
-                  animation: 'fl-edge-glow-alt 16s ease-in-out infinite',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-
-              {/* Nodes – center right */}
-              <circle
-                cx='1460'
-                cy='420'
-                r='4'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow-lg)'
-                style={{
-                  animation: 'fl-node-pulse 6s ease-in-out infinite 3s',
-                }}
-              />
-              <circle
-                cx='1600'
-                cy='380'
-                r='3'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{
-                  animation: 'fl-node-pulse-blue 7s ease-in-out infinite 1s',
-                }}
-              />
-              <circle
-                cx='1740'
-                cy='440'
-                r='2.5'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-pulse 8s ease-in-out infinite' }}
-              />
-              <circle
-                cx='1560'
-                cy='540'
-                r='3'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{
-                  animation: 'fl-node-pulse-blue 6s ease-in-out infinite 2s',
-                }}
-              />
-              <circle
-                cx='1200'
-                cy='480'
-                r='2'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 9s ease-in-out infinite 1s' }}
-              />
-              <circle
-                cx='1820'
-                cy='350'
-                r='1.5'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 12s ease-in-out infinite' }}
+              <path
+                className='animated-path delay-3'
+                d='M 430 300 Q 980 130 1500 140'
+                stroke={tertiaryLineColor}
               />
             </g>
 
-            {/* ── GROUP 3: Lower-right dense cluster ─────────────── */}
             <g
-              style={{ animation: 'fl-mesh-drift 28s ease-in-out infinite 5s' }}
+              stroke={tertiaryLineColor}
+              strokeWidth='0.6'
+              fill='none'
+              strokeDasharray='4 12'
+              style={{ opacity: 0.28 }}
             >
-              {/* Edges – dense triangular mesh, bottom-right */}
-              <line
-                x1='1560'
-                y1='540'
-                x2='1380'
-                y2='660'
-                stroke='#5FC4BE'
-                strokeWidth='1'
-                style={{ animation: 'fl-edge-glow 9s ease-in-out infinite' }}
-                filter='url(#fl-edge-blur)'
+              <path
+                className='scaffold-line'
+                d='M 300 640 Q 900 760 1550 750'
               />
-              <line
-                x1='1380'
-                y1='660'
-                x2='1540'
-                y2='740'
-                stroke='#AFCAFC'
-                strokeWidth='1.2'
-                style={{
-                  animation: 'fl-edge-glow-bright 7s ease-in-out infinite 2s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1540'
-                y1='740'
-                x2='1700'
-                y2='660'
-                stroke='#5FC4BE'
-                strokeWidth='1'
-                style={{
-                  animation: 'fl-edge-glow 10s ease-in-out infinite 1s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1700'
-                y1='660'
-                x2='1560'
-                y2='540'
-                stroke='#AFCAFC'
-                strokeWidth='0.8'
-                style={{
-                  animation: 'fl-edge-glow-alt 12s ease-in-out infinite 3s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1380'
-                y1='660'
-                x2='1700'
-                y2='660'
-                stroke='#5FC4BE'
-                strokeWidth='0.7'
-                style={{
-                  animation: 'fl-edge-glow 11s ease-in-out infinite 2s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1540'
-                y1='740'
-                x2='1560'
-                y2='540'
-                stroke='#AFCAFC'
-                strokeWidth='0.6'
-                style={{
-                  animation: 'fl-edge-glow-alt 13s ease-in-out infinite',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              {/* Extensions into bottom-right corner */}
-              <line
-                x1='1700'
-                y1='660'
-                x2='1820'
-                y2='720'
-                stroke='#5FC4BE'
-                strokeWidth='1'
-                style={{
-                  animation: 'fl-edge-glow-bright 8s ease-in-out infinite 1s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1820'
-                y1='720'
-                x2='1760'
-                y2='850'
-                stroke='#AFCAFC'
-                strokeWidth='0.8'
-                style={{
-                  animation: 'fl-edge-glow 10s ease-in-out infinite 3s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1540'
-                y1='740'
-                x2='1480'
-                y2='880'
-                stroke='#5FC4BE'
-                strokeWidth='0.7'
-                style={{
-                  animation: 'fl-edge-glow-alt 11s ease-in-out infinite 2s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1480'
-                y1='880'
-                x2='1760'
-                y2='850'
-                stroke='#AFCAFC'
-                strokeWidth='1'
-                style={{ animation: 'fl-edge-glow 9s ease-in-out infinite' }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1760'
-                y1='850'
-                x2='1880'
-                y2='920'
-                stroke='#5FC4BE'
-                strokeWidth='0.8'
-                style={{
-                  animation: 'fl-edge-glow-bright 7s ease-in-out infinite 4s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1480'
-                y1='880'
-                x2='1360'
-                y2='940'
-                stroke='#AFCAFC'
-                strokeWidth='0.6'
-                style={{
-                  animation: 'fl-edge-glow-alt 14s ease-in-out infinite',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1820'
-                y1='720'
-                x2='1700'
-                y2='660'
-                stroke='#5FC4BE'
-                strokeWidth='0.5'
-                style={{
-                  animation: 'fl-edge-glow 13s ease-in-out infinite 1s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1380'
-                y1='660'
-                x2='1260'
-                y2='760'
-                stroke='#AFCAFC'
-                strokeWidth='0.6'
-                style={{
-                  animation: 'fl-edge-glow-alt 12s ease-in-out infinite 3s',
-                }}
-                filter='url(#fl-edge-blur)'
-              />
-              <line
-                x1='1260'
-                y1='760'
-                x2='1480'
-                y2='880'
-                stroke='#5FC4BE'
-                strokeWidth='0.5'
-                style={{ animation: 'fl-edge-glow 15s ease-in-out infinite' }}
-                filter='url(#fl-edge-blur)'
-              />
-
-              {/* Nodes – lower right */}
-              <circle
-                cx='1380'
-                cy='660'
-                r='3.5'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow-lg)'
-                style={{
-                  animation: 'fl-node-pulse 5s ease-in-out infinite 2s',
-                }}
-              />
-              <circle
-                cx='1540'
-                cy='740'
-                r='3'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{
-                  animation: 'fl-node-pulse-blue 6s ease-in-out infinite',
-                }}
-              />
-              <circle
-                cx='1700'
-                cy='660'
-                r='4'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow-lg)'
-                style={{
-                  animation: 'fl-node-pulse 7s ease-in-out infinite 1s',
-                }}
-              />
-              <circle
-                cx='1820'
-                cy='720'
-                r='3.5'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow-lg)'
-                style={{
-                  animation: 'fl-node-pulse-blue 5s ease-in-out infinite 3s',
-                }}
-              />
-              <circle
-                cx='1760'
-                cy='850'
-                r='3'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{
-                  animation: 'fl-node-pulse 8s ease-in-out infinite 2s',
-                }}
-              />
-              <circle
-                cx='1480'
-                cy='880'
-                r='2.5'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{
-                  animation: 'fl-node-pulse-blue 6s ease-in-out infinite 4s',
-                }}
-              />
-              <circle
-                cx='1880'
-                cy='920'
-                r='2'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 7s ease-in-out infinite 1s' }}
-              />
-              <circle
-                cx='1360'
-                cy='940'
-                r='2'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 9s ease-in-out infinite' }}
-              />
-              <circle
-                cx='1260'
-                cy='760'
-                r='2'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 11s ease-in-out infinite 2s' }}
+              <path
+                className='scaffold-line'
+                d='M 100 50 Q 740 10 1300 150'
+                style={{ animationDelay: '2.1s' }}
               />
             </g>
 
-            {/* ── GROUP 4: Far-scattered peripheral nodes ─────────── */}
-            <g>
-              {/* Faint connecting threads from main mesh to edges */}
-              <line
-                x1='1080'
-                y1='220'
-                x2='920'
-                y2='320'
-                stroke='#5FC4BE'
-                strokeWidth='0.4'
-                style={{
-                  animation: 'fl-edge-glow-alt 18s ease-in-out infinite',
-                }}
-                filter='url(#fl-edge-blur)'
+            <g className='right-cluster'>
+              <polygon
+                points='1300,150 1700,50 1650,450'
+                fill={secondaryColor}
+                className='faint-poly'
+                style={{ opacity: 0.05 }}
               />
-              <line
-                x1='920'
-                y1='320'
-                x2='1000'
-                y2='500'
-                stroke='#AFCAFC'
-                strokeWidth='0.4'
-                style={{
-                  animation: 'fl-edge-glow-alt 20s ease-in-out infinite 2s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <polygon
+                points='1650,450 1850,350 1550,750 1100,650'
+                fill={primaryColor}
+                className='faint-poly'
+                style={{ opacity: 0.04 }}
               />
-              <line
-                x1='1000'
-                y1='500'
-                x2='1200'
-                y2='480'
-                stroke='#5FC4BE'
-                strokeWidth='0.4'
-                style={{
-                  animation: 'fl-edge-glow-alt 16s ease-in-out infinite 4s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <polygon
+                points='1100,650 1550,750 1400,1050 850,950'
+                fill={secondaryColor}
+                className='faint-poly'
+                style={{ opacity: 0.03 }}
               />
-              <line
-                x1='1260'
-                y1='760'
-                x2='1140'
-                y2='860'
-                stroke='#AFCAFC'
-                strokeWidth='0.3'
-                style={{
-                  animation: 'fl-edge-glow-alt 22s ease-in-out infinite',
-                }}
-                filter='url(#fl-edge-blur)'
+              <polygon
+                points='1850,350 2050,600 1750,900 1550,750'
+                fill={primaryColor}
+                className='faint-poly'
+                style={{ opacity: 0.02 }}
               />
-              <line
-                x1='1360'
-                y1='940'
-                x2='1200'
-                y2='1000'
-                stroke='#5FC4BE'
-                strokeWidth='0.3'
-                style={{
-                  animation: 'fl-edge-glow-alt 19s ease-in-out infinite 3s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <polygon
+                points='1400,1050 1750,900 1500,1200'
+                fill={secondaryColor}
+                className='faint-poly'
+                style={{ opacity: 0.03 }}
               />
-              <line
-                x1='1880'
-                y1='920'
-                x2='1900'
-                y2='1060'
-                stroke='#AFCAFC'
-                strokeWidth='0.3'
-                style={{
-                  animation: 'fl-edge-glow-alt 17s ease-in-out infinite 1s',
-                }}
-                filter='url(#fl-edge-blur)'
+              <polygon
+                points='1180,220 1480,90 1780,260 1450,420'
+                fill={subtleFillColor}
+                className='scaffold-poly'
+                style={{ animationDelay: '0.9s' }}
+              />
+              <polygon
+                points='1220,600 1500,520 1780,700 1580,920 1320,860'
+                fill={deepAccentColor}
+                className='scaffold-poly'
+                style={{ animationDelay: '1.9s' }}
               />
 
-              {/* Distant dim nodes */}
-              <circle
-                cx='920'
-                cy='320'
-                r='1.5'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 14s ease-in-out infinite' }}
+              <path
+                d='M 1300 150 L 1650 450 M 1100 650 L 1400 1050 M 1650 450 L 1100 650 M 1550 750 L 1750 900'
+                stroke={secondaryColor}
+                strokeWidth='1.5'
+                strokeDasharray='2 6'
+                fill='none'
+                style={{ opacity: 0.5 }}
               />
-              <circle
-                cx='1000'
-                cy='500'
-                r='1.5'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 12s ease-in-out infinite 3s' }}
-              />
-              <circle
-                cx='1140'
-                cy='860'
-                r='1.5'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 16s ease-in-out infinite 1s' }}
-              />
-              <circle
-                cx='1200'
-                cy='1000'
-                r='1'
-                fill='#5FC4BE'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 18s ease-in-out infinite' }}
-              />
-              <circle
-                cx='1900'
-                cy='1060'
-                r='1'
-                fill='#AFCAFC'
-                filter='url(#fl-node-glow)'
-                style={{ animation: 'fl-node-dim 15s ease-in-out infinite 5s' }}
-              />
-            </g>
 
-            {/* ── Faint dashed triangles (background depth) ──────── */}
-            <g opacity='0.06'>
-              <polygon
-                points='1100,100 1300,50 1200,250'
+              <g stroke={primaryColor} strokeWidth='1.5' fill='none'>
+                <path
+                  className='animated-path'
+                  d='M 1950 -50 L 1300 150 L 1700 50 L 1850 350 Z'
+                />
+                <path
+                  className='animated-path delay-1'
+                  d='M 1300 150 L 1650 450 L 1850 350'
+                />
+                <path
+                  className='animated-path delay-1'
+                  d='M 1650 450 L 1550 750 L 1850 350'
+                />
+                <path
+                  className='animated-path delay-2'
+                  d='M 1100 650 L 1650 450'
+                />
+                <path
+                  className='animated-path delay-2'
+                  d='M 1100 650 L 1550 750 L 1400 1050'
+                />
+                <path
+                  className='animated-path delay-3'
+                  d='M 1100 650 L 850 950 L 1400 1050 Z'
+                />
+                <path
+                  className='animated-path delay-3'
+                  d='M 850 950 L 700 1150 L 1400 1050'
+                />
+                <path
+                  className='animated-path delay-2'
+                  d='M 1850 350 L 2050 600 L 1750 900 L 1550 750'
+                />
+                <path
+                  className='animated-path delay-4'
+                  d='M 1550 750 L 1750 900 L 1400 1050'
+                />
+                <path
+                  className='animated-path delay-4'
+                  d='M 1400 1050 L 1500 1200 L 1750 900'
+                />
+                <path
+                  className='animated-path delay-1'
+                  d='M 1180 220 L 1480 90 L 1780 260 L 1650 450'
+                  stroke={tertiaryLineColor}
+                  strokeWidth='1.2'
+                  style={{ opacity: 0.7 }}
+                />
+                <path
+                  className='animated-path delay-3'
+                  d='M 1220 600 L 1500 520 L 1780 700 L 1580 920 L 1320 860 Z'
+                  stroke={secondaryColor}
+                  strokeWidth='1.1'
+                  style={{ opacity: 0.55 }}
+                />
+                <path
+                  className='animated-path delay-2'
+                  d='M 1450 420 L 1500 520 L 1650 450 L 1780 700'
+                  stroke={deepAccentColor}
+                  strokeWidth='1'
+                  style={{ opacity: 0.55 }}
+                />
+              </g>
+
+              <g
+                stroke={tertiaryLineColor}
+                strokeWidth='0.9'
                 fill='none'
-                stroke='#AFCAFC'
-                strokeWidth='0.5'
-                strokeDasharray='4 6'
-              />
-              <polygon
-                points='1500,350 1750,300 1650,550'
-                fill='none'
-                stroke='#5FC4BE'
-                strokeWidth='0.5'
-                strokeDasharray='4 6'
-              />
-              <polygon
-                points='1300,700 1500,600 1450,850'
-                fill='none'
-                stroke='#AFCAFC'
-                strokeWidth='0.5'
-                strokeDasharray='4 6'
-              />
+                strokeDasharray='3 8'
+                style={{ opacity: 0.42 }}
+              >
+                <path
+                  className='scaffold-line'
+                  d='M 1180 220 L 1450 420 L 1220 600 L 1320 860'
+                />
+                <path
+                  className='scaffold-line'
+                  d='M 1480 90 L 1700 50 L 1850 350 L 1780 700 L 1750 900'
+                  style={{ animationDelay: '1.6s' }}
+                />
+                <path
+                  className='scaffold-line'
+                  d='M 1400 1050 L 1580 920 L 1500 520'
+                  style={{ animationDelay: '2.2s' }}
+                />
+              </g>
+
+              <g fill={primaryColor} filter='url(#glow)'>
+                <circle
+                  cx='1300'
+                  cy='150'
+                  className='node-intense'
+                  filter='url(#intense-glow)'
+                  style={{ animationDelay: '0s' }}
+                />
+                <circle
+                  cx='1700'
+                  cy='50'
+                  className='node-pulse'
+                  style={{ animationDelay: '1s' }}
+                />
+                <circle
+                  cx='1650'
+                  cy='450'
+                  className='node-pulse'
+                  style={{ animationDelay: '0.5s' }}
+                />
+                <circle
+                  cx='1850'
+                  cy='350'
+                  className='node-pulse'
+                  style={{ animationDelay: '1.5s' }}
+                />
+                <circle
+                  cx='1100'
+                  cy='650'
+                  className='node-intense'
+                  filter='url(#intense-glow)'
+                  style={{ animationDelay: '2s' }}
+                />
+                <circle
+                  cx='1550'
+                  cy='750'
+                  className='node-pulse'
+                  style={{ animationDelay: '0.3s' }}
+                />
+                <circle
+                  cx='850'
+                  cy='950'
+                  className='node-pulse'
+                  style={{ animationDelay: '1.2s' }}
+                />
+                <circle
+                  cx='1400'
+                  cy='1050'
+                  className='node-pulse'
+                  style={{ animationDelay: '0.8s' }}
+                />
+                <circle
+                  cx='2050'
+                  cy='600'
+                  className='node-pulse'
+                  style={{ animationDelay: '0.9s' }}
+                />
+                <circle
+                  cx='1480'
+                  cy='90'
+                  className='node-pulse'
+                  style={{ animationDelay: '1.4s' }}
+                  fill={tertiaryLineColor}
+                />
+                <circle
+                  cx='1450'
+                  cy='420'
+                  className='node-pulse'
+                  style={{ animationDelay: '2.1s' }}
+                  fill={tertiaryLineColor}
+                />
+                <circle
+                  cx='1500'
+                  cy='520'
+                  className='node-pulse'
+                  style={{ animationDelay: '0.6s' }}
+                  fill={secondaryColor}
+                />
+                <circle
+                  cx='1780'
+                  cy='700'
+                  className='node-pulse'
+                  style={{ animationDelay: '1.7s' }}
+                  fill={deepAccentColor}
+                />
+                <circle
+                  cx='1580'
+                  cy='920'
+                  className='node-pulse'
+                  style={{ animationDelay: '2.7s' }}
+                  fill={tertiaryLineColor}
+                />
+                <circle
+                  cx='1320'
+                  cy='860'
+                  className='node-pulse'
+                  style={{ animationDelay: '1.3s' }}
+                  fill={secondaryColor}
+                />
+                <circle
+                  cx='1750'
+                  cy='900'
+                  className='node-intense'
+                  filter='url(#intense-glow)'
+                  style={{ animationDelay: '2.5s' }}
+                />
+                <circle
+                  cx='1500'
+                  cy='1200'
+                  className='node-pulse'
+                  style={{ animationDelay: '1.8s' }}
+                />
+              </g>
             </g>
           </svg>
         </>

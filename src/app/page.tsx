@@ -11,11 +11,19 @@ import { FormButton } from '@/theme/components/form/FormButton';
 import { FadeUp } from '@/animations/fade-animations';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useThemeOverride } from '@/theme/contexts/ThemeOverrideContext';
-import { useDeviceOrientation, useIsMobile } from '@/theme/hooks/useMediaQuery';
+import {
+  useDeviceOrientation,
+  useIsMobile,
+  useIsDesktop,
+} from '@/theme/hooks/useMediaQuery';
+import { useHeaderHeight } from '@/theme/hooks/useHeaderHeight';
+import { useFooterHeight } from '@/theme/hooks/useFooterHeight';
 import type { ThemeMode } from '@/theme/theme';
 
 const BOOKINGS_URL =
   'https://outlook.office.com/owa/calendar/Bookings@terencewaters.com/bookings/';
+const MOBILE_BACKGROUND_IMAGE_PATH =
+  '/images/home/HomePageMobileGeometricBackground.png';
 
 /**
  * Home Page Content Component
@@ -32,6 +40,8 @@ const HomeContent: React.FC<{
   const [animateHeader, setAnimateHeader] = React.useState(false);
   const [animateBlurb, setAnimateBlurb] = React.useState(false);
   const [animateButtons, setAnimateButtons] = React.useState(false);
+  const isDesktop = useIsDesktop();
+  const headerHeight = useHeaderHeight();
 
   React.useEffect(() => {
     if (!shouldStartAnimations) return;
@@ -48,7 +58,7 @@ const HomeContent: React.FC<{
 
   // ── Card wrapper ──────────────────────────────────────────────────────
   const cardStyle: React.CSSProperties = {
-    background: 'rgba(1, 1, 1, 0.72)',
+    background: 'rgba(0, 0, 0, 0.5)',
     backdropFilter: 'blur(14px)',
     WebkitBackdropFilter: 'blur(14px)',
     border: `1px solid rgba(175, 202, 252, 0.18)`,
@@ -63,6 +73,8 @@ const HomeContent: React.FC<{
     display: 'flex',
     flexDirection: 'column' as const,
     gap: isMobileLandscape ? '0.25rem' : '0.5rem',
+    maxWidth: '600px',
+    marginBottom: isDesktop ? '80px' : undefined, // to push up the card to center it with the height of the fixed header
   };
 
   // ── Typography styles ─────────────────────────────────────────────────
@@ -81,7 +93,9 @@ const HomeContent: React.FC<{
     letterSpacing: '0.08em',
     marginBottom: isMobileLandscape ? '-0.1rem' : '-0.25rem',
     opacity: 0,
-    animation: animateHeader ? 'fl-slideInRight 0.4s ease-in-out forwards' : 'none',
+    animation: animateHeader
+      ? 'fl-slideInRight 0.4s ease-in-out forwards'
+      : 'none',
   };
 
   const mainTitleStyle: React.CSSProperties = {
@@ -108,7 +122,9 @@ const HomeContent: React.FC<{
     margin: isMobileLandscape ? '0.25rem 0' : `${theme.spacing.s} 0`,
     transform: 'scaleX(0)',
     transformOrigin: 'left',
-    animation: animateDivider ? 'fl-drawLine 0.4s ease-in-out forwards' : 'none',
+    animation: animateDivider
+      ? 'fl-drawLine 0.4s ease-in-out forwards'
+      : 'none',
     boxShadow: `0 0 6px ${accentColor}40`,
   };
 
@@ -128,10 +144,10 @@ const HomeContent: React.FC<{
 
   const buttonRowStyle: React.CSSProperties = {
     display: 'flex',
-    flexDirection: isMobile && !isMobileLandscape ? ('column' as const) : ('row' as const),
+    flexDirection:
+      isMobile && !isMobileLandscape ? ('column' as const) : ('row' as const),
     gap: '0.75rem',
     flexWrap: 'wrap' as const,
-    paddingBottom: !isMobile ? '120px' : undefined,
     opacity: 0,
     animation: animateButtons
       ? 'fl-slideInUp 0.4s ease-in-out 0.6s forwards'
@@ -147,7 +163,7 @@ const HomeContent: React.FC<{
   };
 
   return (
-    <>
+    <div style={{ marginBottom: isDesktop ? `-${headerHeight}px` : undefined }}>
       <style>{`
         @keyframes fl-fadeIn {
           from { opacity: 0; }
@@ -183,15 +199,15 @@ const HomeContent: React.FC<{
 
         {/* Tagline / blurb */}
         <Typography variant='p' style={blurbStyle}>
-          We build <em>congruence.</em>
+          We build <strong>congruence.</strong>
           <br />
-          <em>Strong</em> bodies. <em>Clear</em> brands. <em>Resilient</em>{' '}
-          systems.
+          <strong>Strong</strong> bodies. <strong>Clear</strong> brands.{' '}
+          <strong>Resilient</strong> systems.
           <br />
-          Whether you need <em>development</em>, <em>design</em>,{' '}
-          <em>coaching</em>, or <em>strategy</em>, we integrate technical
-          precision with emotional intelligence so your inner and outer work
-          finally match.
+          Whether you need <strong>development</strong>, <strong>design</strong>
+          , <strong>coaching</strong>, or <strong>strategy</strong>, we
+          integrate technical precision with emotional intelligence so your
+          inner and outer work finally match.
         </Typography>
 
         {/* CTA buttons */}
@@ -220,7 +236,7 @@ const HomeContent: React.FC<{
           </FormButton>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -235,6 +251,8 @@ export default function Home() {
   const { setOverrideThemeMode } = useThemeOverride();
   const isMobile = useIsMobile();
   const orientation = useDeviceOrientation();
+  const headerHeight = useHeaderHeight();
+  const footerHeight = useFooterHeight();
   const shouldUseMobileLayout = isMobile || orientation === 'tablet-portrait';
   const [backgroundLoaded, setBackgroundLoaded] = React.useState(false);
   const [shouldStartAnimations, setShouldStartAnimations] =
@@ -285,19 +303,33 @@ export default function Home() {
       setBackgroundLoaded(true);
       setShouldStartAnimations(true);
     };
-    img.src = '/images/home/HomePageCoverPortrait2.jpg';
+    img.src = MOBILE_BACKGROUND_IMAGE_PATH;
     return () => {
       img.onload = null;
       img.onerror = null;
     };
   }, [orientation]);
 
+  const mobileContentStyle: React.CSSProperties | undefined =
+    shouldUseMobileLayout
+      ? {
+          width: '100%',
+          minHeight: `calc(100dvh - ${headerHeight})`,
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          paddingTop: `calc(${headerHeight} + ${theme.spacing.s})`,
+          paddingBottom: `calc(${footerHeight} + ${theme.spacing.l})`,
+          boxSizing: 'border-box',
+        }
+      : undefined;
+
   const contentNode = (
     <FadeUp
       key={`home-content-${backgroundLoaded}`}
       delay={backgroundLoaded ? 0.1 : 0}
       duration={0.5}
-      style={shouldUseMobileLayout ? { width: '100%' } : undefined}
+      style={mobileContentStyle}
     >
       <HomeContent
         isMobile={shouldUseMobileLayout}
