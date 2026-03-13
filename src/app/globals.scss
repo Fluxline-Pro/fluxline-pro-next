@@ -44,6 +44,31 @@ body {
 }
 
 /* =============================================
+   HIDE SCROLLBARS GLOBALLY
+   ============================================= */
+
+/* Hide scrollbars for Chrome, Safari, Edge, and Opera */
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Hide scrollbars for IE, Edge (legacy), and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Ensure scroll functionality remains while hiding scrollbars */
+html,
+body,
+div {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* =============================================
    iOS SAFE AREA SUPPORT
    ============================================= */
 
