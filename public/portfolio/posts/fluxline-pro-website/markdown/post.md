@@ -48,6 +48,7 @@ seoKeywords:
     'Web Development',
     'Responsive Design',
   ]
+generatedWithAI: true
 ---
 
 # Fluxline Pro - Modern Business Platform

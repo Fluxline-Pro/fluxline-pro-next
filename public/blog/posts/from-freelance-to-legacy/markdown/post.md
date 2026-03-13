@@ -31,6 +31,7 @@ seoKeywords:
     'modular architecture',
     'transformation',
   ]
+generatedWithAI: true
 ---
 
 ## 🌱 Introduction

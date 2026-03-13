@@ -51,6 +51,7 @@ testimonial:
     This wasn't just technical troubleshooting—it was a masterclass in ITIL Problem Management. We identified a platform-level incompatibility that Azure's own tooling couldn't detect, implemented failover procedures to minimize business impact, and transformed 16 hours of downtime into a documented learning artifact. The fail-safe cutover reduced severity from critical to moderate while we completed root cause analysis. That's what resilient infrastructure looks like.
   author: 'Terence Waters'
   role: 'CEO & Founder, Fluxline Resonance Group'
+generatedWithAI: true
 ---
 
 # Case Study: Restoring Fluxline 2.0 with Resilience and Clarity

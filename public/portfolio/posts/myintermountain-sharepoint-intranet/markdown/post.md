@@ -50,6 +50,7 @@ seoKeywords:
   - Azure Entra ID
   - SPFx development
   - Agile leadership
+generatedWithAI: true
 ---
 
 # MyIntermountain - Enterprise SharePoint Intranet Infrastructure
