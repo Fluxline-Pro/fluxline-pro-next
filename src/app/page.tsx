@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ViewportGrid } from '@/theme/components/layout/ViewportGrid';
 import { BackgroundLayer } from '@/theme/components/layout/background-layer';
 import { HomeFooter } from '@/theme/components/layout/home-footer';
@@ -34,6 +34,7 @@ const HomeContent: React.FC<{
   isMobile: boolean;
   shouldStartAnimations: boolean;
 }> = ({ isMobile, shouldStartAnimations }) => {
+  const router = useRouter();
   const { theme, themeMode } = useAppTheme();
   const orientation = useDeviceOrientation();
   const [animateDivider, setAnimateDivider] = React.useState(false);
@@ -212,15 +213,14 @@ const HomeContent: React.FC<{
 
         {/* CTA buttons */}
         <div style={buttonRowStyle}>
-          <Link href='/about' style={{ textDecoration: 'none' }}>
-            <FormButton
-              variant='secondary'
-              size='medium'
-              style={buttonBaseStyle}
-            >
-              About Us
-            </FormButton>
-          </Link>
+          <FormButton
+            variant='secondary'
+            size='medium'
+            style={buttonBaseStyle}
+            onClick={() => router.push('/about')}
+          >
+            About Us
+          </FormButton>
 
           <FormButton
             variant='primary'
@@ -319,8 +319,12 @@ export default function Home() {
           alignItems: 'flex-end',
           justifyContent: 'center',
           // pushes the card down to the bottom of the page on mobile
-          paddingTop: isMobile ? 0 : `calc(${headerHeight} + ${theme.spacing.s})`,
-          paddingBottom: isMobile ? 0 : `calc(${footerHeight} + ${theme.spacing.l})`,
+          paddingTop: isMobile
+            ? 0
+            : `calc(${headerHeight} + ${theme.spacing.s})`,
+          paddingBottom: isMobile
+            ? 0
+            : `calc(${footerHeight} + ${theme.spacing.l})`,
           boxSizing: 'border-box',
         }
       : undefined;
