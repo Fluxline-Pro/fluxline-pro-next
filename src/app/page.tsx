@@ -318,8 +318,9 @@ export default function Home() {
           display: 'flex',
           alignItems: 'flex-end',
           justifyContent: 'center',
-          paddingTop: `calc(${headerHeight} + ${theme.spacing.s})`,
-          paddingBottom: `calc(${footerHeight} + ${theme.spacing.l})`,
+          // pushes the card down to the bottom of the page on mobile
+          paddingTop: isMobile ? 0 : `calc(${headerHeight} + ${theme.spacing.s})`,
+          paddingBottom: isMobile ? 0 : `calc(${footerHeight} + ${theme.spacing.l})`,
           boxSizing: 'border-box',
         }
       : undefined;
