@@ -15,6 +15,7 @@ import {
   type SocialLinksData,
 } from '@/app/about/components/SocialLinks';
 import { ImageCarouselModal, type CarouselImage } from './ImageCarouselModal';
+import { GeneratedWithAIBadge } from './GeneratedWithAIBadge';
 
 /**
  * Unified configuration interface for content detail pages
@@ -94,6 +95,9 @@ export interface UnifiedContentDetailConfig {
     url: string;
     variant: 'github' | 'live' | 'custom';
   }>;
+
+  // AI-generated content badge
+  generatedWithAI?: boolean;
 }
 
 interface UnifiedContentDetailProps {
@@ -590,6 +594,13 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
                     {badge.label}
                   </FormButton>
                 ))}
+              </div>
+            )}
+
+            {/* Generated with AI Badge */}
+            {config.generatedWithAI && (
+              <div style={{ marginBottom: theme.spacing.m }}>
+                <GeneratedWithAIBadge />
               </div>
             )}
           </header>

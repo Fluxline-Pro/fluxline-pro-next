@@ -47,6 +47,7 @@ testimonial:
     Building Fluxline's coaching business wasn't about competing on price—it was about creating something no one else could replicate. By integrating my personal transformation journey with NASM certification and the Resonance Core Framework™, I built a business that transforms lives while generating sustainable revenue. The authenticity of lived experience combined with professional credibility creates a competitive moat that traditional trainers can't match.
   author: 'Terence Waters'
   role: 'CEO & Founder, Fluxline Resonance Group'
+generatedWithAI: true
 ---
 
 # Scaling Personal Transformation: Building a Differentiated Coaching Business

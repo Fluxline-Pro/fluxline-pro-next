@@ -30,6 +30,7 @@ seoKeywords:
     'stoicism',
     'law of opposites',
   ]
+generatedWithAI: true
 ---
 
 # 💪 Resonance, Part 2: Discipline vs. Resonance

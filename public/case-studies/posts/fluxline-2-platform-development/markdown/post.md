@@ -50,6 +50,7 @@ testimonial:
   quote: 'Fluxline 2.0 represents a significant milestone in our mission to deliver strategic precision for modern business transformation. We built the platform we needed to showcase what we can do for clients—and it became a living demonstration of our capabilities.'
   author: 'Terence Waters'
   role: 'CEO & Founder, Fluxline Resonance Group'
+generatedWithAI: true
 ---
 
 # Fluxline 2.0 Platform Development — Brand Identity Rebirth
