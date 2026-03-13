@@ -7,9 +7,8 @@ import { useReducedMotion } from '../../../hooks/useReducedMotion';
 import type { IExtendedTheme, ThemeMode } from '../../../theme';
 
 const MOBILE_BACKGROUND_IMAGE_PATH =
-  '/images/home/HomePageMobileGeometricBackground.png';
-const MOBILE_BACKGROUND_FALLBACK_PATH =
-  '/images/home/HomePageCoverPortrait2.jpg';
+  '/images/home/HomePageMobileGeometricBackground.jpg';
+const MOBILE_BACKGROUND_FALLBACK_PATH = MOBILE_BACKGROUND_IMAGE_PATH;
 
 interface BackgroundLayerProps {
   isHomePage: boolean;

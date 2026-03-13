@@ -23,7 +23,7 @@ import type { ThemeMode } from '@/theme/theme';
 const BOOKINGS_URL =
   'https://outlook.office.com/owa/calendar/Bookings@terencewaters.com/bookings/';
 const MOBILE_BACKGROUND_IMAGE_PATH =
-  '/images/home/HomePageMobileGeometricBackground.png';
+  '/images/home/HomePageMobileGeometricBackground.jpg';
 
 /**
  * Home Page Content Component
