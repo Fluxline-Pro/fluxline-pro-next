@@ -18,6 +18,7 @@ seoKeywords:
     'accessible design',
     'inclusive web',
   ]
+generatedWithAI: true
 ---
 
 # Building Accessible Web Applications: A Guide to WCAG 2.1

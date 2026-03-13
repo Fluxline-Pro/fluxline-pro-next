@@ -192,12 +192,13 @@ public/blog/posts/
 
 ### Optional Fields
 
-| Field         | Type                | Description                            |
-| ------------- | ------------------- | -------------------------------------- |
-| `lastUpdated` | string (YYYY-MM-DD) | Date of last update                    |
-| `featured`    | boolean             | Mark as featured post (default: false) |
-| `imageUrl`    | string              | Path to hero image                     |
-| `imageAlt`    | string              | Alt text for hero image                |
+| Field              | Type                | Description                                     |
+| ------------------ | ------------------- | ----------------------------------------------- |
+| `lastUpdated`      | string (YYYY-MM-DD) | Date of last update                             |
+| `featured`         | boolean             | Mark as featured post (default: false)          |
+| `imageUrl`         | string              | Path to hero image                              |
+| `imageAlt`         | string              | Alt text for hero image                         |
+| `generatedWithAI`  | boolean             | Show "Generated with AI" badge (default: false) |
 
 ### Example Frontmatter
 

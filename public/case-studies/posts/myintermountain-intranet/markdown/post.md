@@ -53,6 +53,7 @@ testimonial:
   quote: "This project demonstrates Fluxline's capability to architect enterprise-grade infrastructure, lead cross-functional teams through complex integrations, and deliver scalable solutions on compressed timelines. The MyIntermountain platform became a future-ready hub for organizational clarity and employee experience."
   author: 'Terence Waters'
   role: 'CEO & Founder, Fluxline Resonance Group'
+generatedWithAI: true
 ---
 
 # MyIntermountain Enterprise Intranet - Azure & SharePoint Infrastructure

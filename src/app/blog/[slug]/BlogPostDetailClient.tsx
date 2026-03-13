@@ -64,6 +64,7 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
         onClick: () => handleTagClick(tag),
       })),
     ],
+    generatedWithAI: post.generatedWithAI,
     cta: {
       title: 'Stay Connected',
       description:

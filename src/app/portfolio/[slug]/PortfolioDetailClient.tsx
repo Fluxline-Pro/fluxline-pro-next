@@ -106,6 +106,7 @@ export default function PortfolioDetailClient({
     ],
     showGallerySection: project.gallery && project.gallery.length > 0,
     sectionsPosition: 'before', // Show gallery at top of page
+    generatedWithAI: project.generatedWithAI,
     cta: {
       title: 'Interested in Working Together?',
       description: "Let's discuss how we can help bring your project to life.",

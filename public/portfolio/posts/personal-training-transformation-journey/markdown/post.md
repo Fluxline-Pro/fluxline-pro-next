@@ -48,6 +48,7 @@ seoKeywords:
     'emotional intelligence',
     'body transformation',
   ]
+generatedWithAI: true
 ---
 
 # Personal Training Transformation Journey

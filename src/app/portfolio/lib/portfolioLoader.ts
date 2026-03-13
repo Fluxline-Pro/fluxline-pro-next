@@ -81,6 +81,7 @@ export function getPortfolioBySlug(slug: string): PortfolioProject | null {
       featured: frontmatter.featured || false,
       githubUrl: frontmatter.githubUrl,
       liveUrl: frontmatter.liveUrl,
+      generatedWithAI: frontmatter.generatedWithAI ?? false,
       content: content,
       seoMetadata: {
         title: frontmatter.seoTitle || frontmatter.title,

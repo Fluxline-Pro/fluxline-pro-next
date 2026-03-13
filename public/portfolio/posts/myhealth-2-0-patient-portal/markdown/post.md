@@ -49,6 +49,7 @@ seoKeywords:
   - patient portal
   - Agile development
   - healthcare IT
+generatedWithAI: true
 ---
 
 # MyHealth 2.0 - Healthcare Patient Portal

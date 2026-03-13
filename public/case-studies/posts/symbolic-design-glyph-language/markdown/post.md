@@ -62,6 +62,7 @@ testimonial:
   quote: 'The glyph system transformed how we communicate transformation. What was once abstract became visible, tangible, and teachable. Clients now track their own curriculum gates using our symbolic language—it has become part of their journey.'
   author: 'Terence Waters'
   role: 'CEO & Founder, Fluxline Resonance Group'
+generatedWithAI: true
 ---
 
 # Symbolic Design & Glyph Language — Emergence of Resonant Visuals
