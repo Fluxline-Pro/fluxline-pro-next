@@ -59,7 +59,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
       <div
         style={{
           position: 'absolute',
-          top: '80%',
+          top: '70%',
           left: '50%',
           transform: 'translateX(-50%)',
           backgroundColor: 'transparent',
