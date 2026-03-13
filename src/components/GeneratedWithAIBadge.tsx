@@ -1,6 +1,11 @@
 'use client';
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useSyncExternalStore,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -19,6 +24,11 @@ const TOOLTIP_TEXT =
 export const GeneratedWithAIBadge: React.FC = () => {
   const { theme } = useAppTheme();
   const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null);
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const badgeRef = useRef<HTMLDivElement>(null);
 
   const showTooltip = useCallback(() => {
@@ -84,40 +94,41 @@ export const GeneratedWithAIBadge: React.FC = () => {
       </div>
 
       {/* Portal tooltip — renders into document.body to escape all parent constraints */}
-      {createPortal(
-        <AnimatePresence>
-          {isVisible && tooltipRect && (
-            <motion.div
-              id='ai-badge-tooltip'
-              role='tooltip'
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15, ease: 'easeOut' }}
-              style={{
-                position: 'fixed',
-                top: tooltipRect.top + tooltipRect.height / 2,
-                left: tooltipRect.right + 8,
-                transform: 'translateY(-50%)',
-                zIndex: 9999,
-                width: '256px',
-                padding: '8px 12px',
-                borderRadius: '6px',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
-                pointerEvents: 'none',
-                backgroundColor: theme.palette.neutralLighter,
-                color: theme.palette.neutralPrimary,
-                border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
-                fontSize: '0.875rem',
-                lineHeight: '1.5',
-              }}
-            >
-              {TOOLTIP_TEXT}
-            </motion.div>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
+      {isMounted &&
+        createPortal(
+          <AnimatePresence>
+            {isVisible && tooltipRect && (
+              <motion.div
+                id='ai-badge-tooltip'
+                role='tooltip'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+                style={{
+                  position: 'fixed',
+                  top: tooltipRect.top + tooltipRect.height / 2,
+                  left: tooltipRect.right + 8,
+                  transform: 'translateY(-50%)',
+                  zIndex: 9999,
+                  width: '256px',
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+                  pointerEvents: 'none',
+                  backgroundColor: theme.palette.neutralLighter,
+                  color: theme.palette.neutralPrimary,
+                  border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+                  fontSize: '0.875rem',
+                  lineHeight: '1.5',
+                }}
+              >
+                {TOOLTIP_TEXT}
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </div>
   );
 };

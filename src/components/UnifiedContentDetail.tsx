@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -114,12 +114,11 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const { theme } = useAppTheme();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
-
-  // Prevent hydration mismatch from FluentUI dynamic class names
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   const handleImageClick = React.useCallback(() => {
     if (config.imageConfig) {

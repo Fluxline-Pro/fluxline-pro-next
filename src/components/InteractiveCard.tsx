@@ -6,7 +6,7 @@
  * Used for value cards, service cards, and other clickable/interactive content
  */
 
-import React from 'react';
+import React, { useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -57,11 +57,11 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
     arrowOffset: 0, // How far from left edge the arrow should be
   });
   const infoIconRef = React.useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   const updateTooltipPosition = React.useCallback(() => {
     if (infoIconRef.current) {
