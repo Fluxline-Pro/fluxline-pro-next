@@ -1,73 +1,53 @@
 import React from 'react';
+import { mergeStyles } from '@fluentui/react';
+import { useAppTheme } from '../../theme/hooks/useAppTheme';
 
 interface GeneratedWithAISvgProps {
+  isDarkMode?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
 /**
  * Generated With AI SVG Icon
- * Card-style AI badge icon with directional arrow indicator
+ * Three-sparkle icon indicating AI-assisted content.
  */
 export const GeneratedWithAISvg: React.FC<GeneratedWithAISvgProps> = ({
   className,
   style,
 }) => {
+  const { theme } = useAppTheme();
+  const rootClass = mergeStyles(
+    {
+      width: '24px',
+      height: '24px',
+    },
+    className
+  );
+
   return (
     <svg
-      className={className}
+      className={rootClass}
       style={style}
       xmlns='http://www.w3.org/2000/svg'
-      viewBox='0 0 22 22'
+      viewBox='0 0 24 24'
       fill='none'
       aria-hidden='true'
     >
-      {/* Card outline */}
-      <rect
-        x='1.5'
-        y='4'
-        width='12'
-        height='14'
-        rx='2.5'
-        stroke='currentColor'
-        strokeWidth='1.5'
-      />
-      {/* Letter A — diagonals */}
+      {/* Large sparkle — centre-left */}
       <path
-        d='M4.5 16L6.75 10.5L9 16'
-        stroke='currentColor'
-        strokeWidth='1.35'
-        strokeLinecap='round'
-        strokeLinejoin='round'
+        d='M8.5 8.5L9.7 12.8L14 14L9.7 15.2L8.5 19.5L7.3 15.2L3 14L7.3 12.8Z'
+        fill={theme.palette.themePrimary}
       />
-      {/* Letter A — crossbar */}
+      {/* Medium sparkle — upper-right */}
       <path
-        d='M5.3 14H8.2'
-        stroke='currentColor'
-        strokeWidth='1.35'
-        strokeLinecap='round'
+        d='M18 2.5L18.7 4.8L21 5.5L18.7 6.2L18 8.5L17.3 6.2L15 5.5L17.3 4.8Z'
+        fill={theme.palette.themePrimary}
       />
-      {/* Letter I */}
+      {/* Small sparkle — lower-right */}
       <path
-        d='M11 10.5V16'
-        stroke='currentColor'
-        strokeWidth='1.35'
-        strokeLinecap='round'
-      />
-      {/* Corner arrow indicator (upper-right) — L bracket */}
-      <path
-        d='M14.5 2H20.5V8'
-        stroke='currentColor'
-        strokeWidth='1.4'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-      {/* Corner arrow — diagonal slash */}
-      <path
-        d='M20.5 2L14.5 8'
-        stroke='currentColor'
-        strokeWidth='1.4'
-        strokeLinecap='round'
+        d='M20 15.7L20.55 17.45L22.3 18L20.55 18.55L20 20.3L19.45 18.55L17.7 18L19.45 17.45Z'
+        fill={theme.palette.themePrimary}
       />
     </svg>
   );

@@ -77,7 +77,6 @@ export const GeneratedWithAIBadge: React.FC = () => {
               width: '20px',
               height: '20px',
               flexShrink: 0,
-              color: theme.palette.themePrimary,
             }}
           />
           <span>Generated with AI</span>
