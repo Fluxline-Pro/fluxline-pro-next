@@ -284,6 +284,37 @@ button {
 }
 
 /* =============================================
+   REDUCED TRANSPARENCY ACCESSIBILITY
+   ============================================= */
+
+/**
+ * CSS custom properties exposed for components that use inline styles.
+ * --surface-opacity : default fractional opacity for glass/frosted surfaces
+ * --blur-strength   : default blur value for backdrop-filter effects
+ *
+ * When the user enables "Reduce Transparency" in Settings, the
+ * `reduced-transparency` class is added to <body> by useReducedTransparency(),
+ * which overrides both variables and strips all backdrop-filter effects.
+ */
+:root {
+  --surface-opacity: 0.9;
+  --blur-strength: 10px;
+}
+
+body.reduced-transparency {
+  --surface-opacity: 1;
+  --blur-strength: 0px;
+
+  // Strip every backdrop-filter and -webkit-backdrop-filter on the page
+  *,
+  *::before,
+  *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* =============================================
    REDUCED MOTION SUPPORT
    ============================================= */
 

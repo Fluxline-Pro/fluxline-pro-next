@@ -56,6 +56,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
     setPreference('reducedMotion', enabled);
   };
 
+  const handleReducedTransparencyChange = (enabled: boolean) => {
+    setPreference('reducedTransparency', enabled);
+  };
+
   const handleHighContrastChange = (enabled: boolean) => {
     if (enabled) {
       setThemeMode('high-contrast');
@@ -215,6 +219,14 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
               icon='Motion'
               checked={preferences.reducedMotion}
               onChange={handleReducedMotionChange}
+            />
+
+            <FormToggle
+              label='Reduce Transparency'
+              description='Remove blur and frosted-glass effects for improved readability'
+              icon='FullScreen'
+              checked={preferences.reducedTransparency}
+              onChange={handleReducedTransparencyChange}
             />
           </div>
         </div>
