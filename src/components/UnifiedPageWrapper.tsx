@@ -365,9 +365,15 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
       ? selectedPost.imageUrl
       : contentImage || configImage;
 
-  // Reset image loaded state when image changes
+  // Reset and preload image — resolves spinner even when browser cache skips onLoad
   React.useEffect(() => {
+    if (!imageToDisplay) return;
     setImageLoaded(false);
+    const img = new window.Image();
+    img.src = imageToDisplay;
+    img.onload = () => setImageLoaded(true);
+    // If already cached, onload may not fire — complete flag catches it
+    if (img.complete) setImageLoaded(true);
   }, [imageToDisplay]);
 
   // Use the selected post's title if available and we're in detail view
