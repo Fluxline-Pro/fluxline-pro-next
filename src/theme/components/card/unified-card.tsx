@@ -105,6 +105,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         const naturalHeight = img.naturalHeight;
         const aspectRatio = naturalWidth / naturalHeight;
 
+        // Mark as loaded here — the preload caches the image, so the rendered
+        // <Image> onLoad may never fire if the browser already has it cached.
+        setImageLoaded(true);
+
         // Notify parent container of dimensions change
         onImageDimensionsChange?.({
           width: naturalWidth,
