@@ -161,6 +161,7 @@ export const Hero: React.FC<HeroProps> = ({
           justifyContent: 'flex-start',
           gap: isMobile ? '0.25rem' : theme.spacing.xs,
           flexWrap: isMobile ? 'nowrap' : 'wrap',
+          paddingLeft: backArrow ? '0.5rem' : undefined, // for the back arrow icon
         }}
       >
         {backArrow && (

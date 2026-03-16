@@ -9,6 +9,7 @@ import { useAppTheme } from '../../hooks/useAppTheme';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { LoadingSpinner } from '../structural/loading-spinner';
+import { Typography } from '../typography';
 
 export type CardViewType = 'grid' | 'small' | 'large' | 'image';
 
@@ -243,17 +244,15 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   color: theme.palette.white,
                 }}
               >
-                <h2
+                <Typography
+                  variant='h4'
                   style={{
                     margin: 0,
-                    fontSize: theme.typography.fonts.xLarge.fontSize,
-                    fontWeight: theme.typography.fonts.xLarge.fontWeight,
-                    fontFamily: `${theme.typography.fonts.xLarge.fontFamily} !important`,
                     color: '#FFF',
                   }}
                 >
                   {imageText}
-                </h2>
+                </Typography>
               </div>
             )}
           </Card>
@@ -332,33 +331,37 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   left: 0,
                   right: 0,
                   padding: theme.spacing.m,
-                  background: overlayGradient,
+                  background:
+                    theme.themeMode === 'dark' ||
+                    theme.themeMode === 'high-contrast' ||
+                    theme.themeMode === 'grayscale-dark'
+                      ? `linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35))`
+                      : overlayGradient,
                   color: theme.palette.white,
                 }}
               >
-                <h3
+                <Typography
+                  variant='h5'
                   style={{
                     margin: `0 0 ${theme.spacing.xs} 0`,
-                    fontSize: theme.fonts.large.fontSize,
-                    fontWeight: theme.fonts.large.fontWeight as number,
-                    fontFamily: `${theme.fonts.large.fontFamily} !important`,
                     lineHeight: 1.2,
+                    color: '#FFFFFF',
+                    textShadow: theme.shadows.m,
                   }}
                 >
                   {title}
-                </h3>
-                {imageText && (
-                  <p
+                </Typography>
+                {/* {imageText && (
+                  <Typography
+                    variant='label'
                     style={{
                       margin: 0,
-                      fontSize: theme.fonts.small.fontSize,
-                      fontFamily: `${theme.fonts.small.fontFamily} !important`,
                       opacity: 0.9,
                     }}
                   >
                     {imageText}
-                  </p>
-                )}
+                  </Typography>
+                )} */}
               </div>
             </div>
           ) : (
@@ -373,44 +376,39 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               }}
             >
               <div>
-                <h3
+                <Typography
+                  variant='h5'
                   style={{
                     margin: 0,
-                    fontSize: theme.fonts.large.fontSize,
-                    fontWeight: theme.fonts.large.fontWeight as number,
-                    fontFamily: `${theme.fonts.large.fontFamily} !important`,
                     color: theme.palette.neutralPrimary,
                     lineHeight: 1.3,
                   }}
                 >
                   {title}
-                </h3>
-                {description && (
-                  <p
+                </Typography>
+                {/* {description && (
+                  <Typography
+                    variant='label'
                     style={{
                       margin: `${theme.spacing.s} 0 0 0`,
-                      fontSize: theme.fonts.medium.fontSize,
-                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                       color: theme.palette.neutralSecondary,
                       lineHeight: 1.5,
                     }}
                   >
                     {description}
-                  </p>
-                )}
+                  </Typography>
+                )} */}
               </div>
-              {imageText && (
-                <p
+              {/* {imageText && (
+                <Typography variant='label'
                   style={{
                     margin: 0,
-                    fontSize: theme.fonts.medium.fontSize,
-                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                     color: theme.palette.neutralSecondary,
                   }}
                 >
                   {imageText}
-                </p>
-              )}
+                </Typography>
+              )} */}
             </div>
           )}
         </Card>
@@ -514,44 +512,40 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 }}
               >
                 <div style={{ flex: imageUrl ? '0 0 auto' : '1 1 auto' }}>
-                  <h3
+                  <Typography
+                    variant='h5'
                     style={{
                       margin: 0,
-                      fontSize: theme.fonts.large.fontSize,
-                      fontWeight: theme.fonts.large.fontWeight as number,
-                      fontFamily: `${theme.fonts.large.fontFamily} !important`,
                       color: theme.palette.neutralPrimary,
                       lineHeight: 1.3,
                     }}
                   >
                     {title}
-                  </h3>
+                  </Typography>
                   {!imageUrl && description && (
-                    <p
+                    <Typography
+                      variant='label'
                       style={{
                         margin: `${theme.spacing.s} 0 0 0`,
-                        fontSize: theme.fonts.medium.fontSize,
-                        fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                         color: theme.palette.neutralSecondary,
                         lineHeight: 1.5,
                       }}
                     >
                       {description}
-                    </p>
+                    </Typography>
                   )}
                 </div>
                 {imageText && (
-                  <p
+                  <Typography
+                    variant='label'
                     style={{
                       margin: `${theme.spacing.xs} 0 0 0`,
-                      fontSize: theme.fonts.medium.fontSize,
-                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                       color: theme.palette.neutralSecondary,
                       marginTop: imageUrl ? 'auto' : '0',
                     }}
                   >
                     {imageText}
-                  </p>
+                  </Typography>
                 )}
               </div>
             </div>
@@ -652,44 +646,39 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 }}
               >
                 <div>
-                  <h3
+                  <Typography
+                    variant='h5'
                     style={{
                       margin: `0 0 ${theme.spacing.s} 0`,
-                      fontSize: theme.fonts.xLarge.fontSize,
-                      fontWeight: theme.fonts.xLarge.fontWeight as number,
-                      fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                       color: theme.palette.neutralPrimary,
                       lineHeight: 1.3,
                     }}
                   >
                     {title}
-                  </h3>
+                  </Typography>
                   {description && (
-                    <p
+                    <Typography
+                      variant='label'
                       style={{
                         margin: `${theme.spacing.xs} 0 0 0`,
-                        fontSize: theme.fonts.medium.fontSize,
-                        fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                         color: theme.palette.neutralSecondary,
                         lineHeight: 1.5,
                       }}
                     >
                       {description}
-                    </p>
+                    </Typography>
                   )}
                 </div>
                 {imageText && (
-                  <p
+                  <Typography
+                    variant='label'
                     style={{
                       margin: 0,
-                      fontSize: theme.fonts.medium.fontSize,
-                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                       color: theme.palette.themePrimary,
-                      fontWeight: 500,
                     }}
                   >
                     {imageText}
-                  </p>
+                  </Typography>
                 )}
               </div>
             </div>
@@ -741,29 +730,26 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           }}
         >
           {title && (
-            <h3
+            <Typography
+              variant='h5'
               style={{
                 margin: `0 0 ${theme.spacing.s} 0`,
-                fontSize: theme.fonts.large.fontSize,
-                fontWeight: theme.fonts.large.fontWeight as number,
-                fontFamily: `${theme.fonts.large.fontFamily} !important`,
                 color: theme.palette.neutralPrimary,
               }}
             >
               {title}
-            </h3>
+            </Typography>
           )}
           {description && (
-            <p
+            <Typography
+              variant='label'
               style={{
                 margin: 0,
-                fontSize: theme.fonts.medium.fontSize,
-                fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                 color: theme.palette.neutralSecondary,
               }}
             >
               {description}
-            </p>
+            </Typography>
           )}
           {imageUrl && (
             <div
