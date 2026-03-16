@@ -5,10 +5,12 @@ import { usePathname, useParams } from 'next/navigation';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { SpinnerSize } from '@fluentui/react/lib/Spinner';
 
 import { Typography } from '../theme/components/typography';
 import { UnifiedMarkdownRenderer } from '../utils/markdownRenderer';
 import { ProtectedEmail } from './ProtectedEmail';
+import { LoadingSpinner } from '../theme/components/structural/loading-spinner';
 
 import { useContentFilterStore } from '../store/store';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
@@ -23,7 +25,7 @@ import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { useColorVisionFilter } from '@/theme/hooks/useColorVisionFilter';
 import { useHoverEffects } from '../hooks/useHoverEffects';
 import { useHeaderHeight } from '../theme/hooks/useHeaderHeight';
-import { ThemeMode } from '../theme/theme';
+import { IExtendedTheme, ThemeMode } from '../theme/theme';
 import { FadeUp } from '@/animations/fade-animations';
 
 import { typography, spacing } from '../theme/theme';
@@ -252,6 +254,204 @@ export interface UnifiedPageWrapperProps {
   legalPageConfig?: LegalPageConfig;
 }
 
+// Shared base64 blur placeholder used by both image panel variants
+const PAGE_IMAGE_BLUR_PLACEHOLDER =
+  'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';
+
+interface ImagePanelProps {
+  src: string;
+  alt: string;
+  imageWidth: number;
+  imageSizes: string;
+  objectFit: 'cover' | 'contain';
+  /** CSS height value for the <Image> element, e.g. '100%' or 'auto' */
+  imageHeight: string;
+  containerMaxWidth: string;
+  containerMaxHeight?: string;
+  /** Scale multiplier applied on hover */
+  hoverScale: number;
+  /** Pixel size of the clickable-image arrow icon button */
+  clickIconSize: number;
+  /** CSS spacing value for icon bottom/right offset */
+  clickIconSpacing: string;
+  imageLoaded: boolean;
+  onImageLoad: () => void;
+  isHovered: boolean;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+  onClick?: () => void;
+  filter: string;
+  fadeInVariants: Variants;
+  shouldReduceMotion: boolean;
+  theme: IExtendedTheme;
+  /** Set true to add loading='eager' to the Next.js Image */
+  loadingEager?: boolean;
+  /** When provided, renders a gradient title overlay at the image bottom */
+  titleOverlay?: { text: string };
+}
+
+/**
+ * ImagePanel
+ *
+ * Shared image pane rendered in both the stacked (mobile/tablet) and fixed
+ * (desktop) layouts of UnifiedPageWrapper. Encapsulates the loading spinner,
+ * Next.js Image, clickable-arrow icon, and optional title overlay so that
+ * behaviour is guaranteed to be identical in both layout contexts.
+ */
+const ImagePanel: React.FC<ImagePanelProps> = ({
+  src,
+  alt,
+  imageWidth,
+  imageSizes,
+  objectFit,
+  imageHeight,
+  containerMaxWidth,
+  containerMaxHeight,
+  hoverScale,
+  clickIconSize,
+  clickIconSpacing,
+  imageLoaded,
+  onImageLoad,
+  isHovered,
+  onMouseEnter,
+  onMouseLeave,
+  onClick,
+  filter,
+  fadeInVariants,
+  shouldReduceMotion,
+  theme,
+  loadingEager,
+  titleOverlay,
+}) => {
+  const svgSize = Math.round(clickIconSize * 0.5);
+  return (
+    <motion.div
+      initial='hidden'
+      animate='visible'
+      variants={fadeInVariants}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      style={{
+        position: 'relative',
+        width: '100%',
+        maxWidth: containerMaxWidth,
+        ...(containerMaxHeight ? { maxHeight: containerMaxHeight } : {}),
+        height: 'auto',
+        borderRadius: theme.borderRadius.m,
+        overflow: 'hidden',
+        backgroundColor: theme.palette.neutralLighter,
+        boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
+        pointerEvents: 'auto',
+        cursor: onClick ? 'pointer' : 'default',
+        transform: isHovered ? `scale(${hoverScale})` : 'scale(1)',
+        transition: 'transform 0.3s ease-in-out',
+      }}
+    >
+      {/* Loading Spinner */}
+      {!imageLoaded && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 10,
+          }}
+        >
+          <LoadingSpinner size={SpinnerSize.large} />
+        </div>
+      )}
+
+      <Image
+        src={src}
+        alt={alt}
+        width={imageWidth}
+        height={0}
+        sizes={imageSizes}
+        style={{
+          width: '100%',
+          height: imageHeight,
+          objectFit,
+          filter,
+          opacity: imageLoaded ? 1 : 0,
+          transition: shouldReduceMotion ? 'none' : 'opacity 0.3s ease-in-out',
+        }}
+        {...(loadingEager ? { loading: 'eager' as const } : {})}
+        priority
+        placeholder='blur'
+        blurDataURL={PAGE_IMAGE_BLUR_PLACEHOLDER}
+        onLoad={onImageLoad}
+      />
+
+      {/* Arrow icon indicator for clickable images */}
+      {onClick && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: clickIconSpacing,
+            right: clickIconSpacing,
+            width: `${clickIconSize}px`,
+            height: `${clickIconSize}px`,
+            borderRadius: '50%',
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: isHovered ? 1 : 0.8,
+            transition: 'opacity 0.2s ease-in-out',
+            pointerEvents: 'none',
+          }}
+        >
+          <svg
+            width={svgSize}
+            height={svgSize}
+            viewBox='0 0 24 24'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <path
+              d='M7 17L17 7M17 7H7M17 7V17'
+              stroke='white'
+              strokeWidth='2.5'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            />
+          </svg>
+        </div>
+      )}
+
+      {/* Title overlay — desktop/fixed layout only */}
+      {titleOverlay && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            padding: theme.spacing.l,
+            background: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent)`,
+            color: '#FFFFFF',
+          }}
+        >
+          <h2
+            style={{
+              margin: 0,
+              fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
+              fontWeight: theme.fonts.xLarge.fontWeight as number,
+              fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
+              lineHeight: 1.2,
+              color: '#FFFFFF', // hard-coded so text is always white regardless of themeMode
+            }}
+          >
+            {titleOverlay.text}
+          </h2>
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
 /**
  * UnifiedPageWrapper - Unified layout wrapper consolidating:
  * - PageWrapper and SimplePageWrapper (responsive-grid layout)
@@ -298,6 +498,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   // Hover state for image gallery
   const [isImageHovered, setIsImageHovered] = React.useState(false);
+
+  // Image loading state
+  const [imageLoaded, setImageLoaded] = React.useState(false);
 
   // Check if current path should use the wrapper
   // const shouldUseWrapper = !EXCLUDED_PAGES.includes(pathname);
@@ -359,6 +562,17 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     id && selectedPost && selectedPost.imageUrl
       ? selectedPost.imageUrl
       : contentImage || configImage;
+
+  // Reset and preload image — resolves spinner even when browser cache skips onLoad
+  React.useEffect(() => {
+    if (!imageToDisplay) return;
+    setImageLoaded(false);
+    const img = new window.Image();
+    img.src = imageToDisplay;
+    img.onload = () => setImageLoaded(true);
+    // If already cached, onload may not fire — complete flag catches it
+    if (img.complete) setImageLoaded(true);
+  }, [imageToDisplay]);
 
   // Use the selected post's title if available and we're in detail view
   const imageTextToDisplay =
@@ -617,85 +831,33 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         <div style={adjustedContainerStyle}>
           {/* Image Panel */}
           <div style={adjustedImageStyle}>
-            <motion.div
-              initial='hidden'
-              animate='visible'
-              variants={fadeInVariants}
-              onClick={imageConfig?.onClick}
+            <ImagePanel
+              src={imageToDisplay}
+              alt={imageAltText}
+              imageWidth={300}
+              imageSizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 300px'
+              objectFit='cover'
+              imageHeight='100%'
+              containerMaxWidth='300px'
+              containerMaxHeight={isMobile ? '275px' : undefined}
+              hoverScale={1.25}
+              clickIconSize={48}
+              clickIconSpacing={theme.spacing.m}
+              imageLoaded={imageLoaded}
+              onImageLoad={() => setImageLoaded(true)}
+              isHovered={isImageHovered}
               onMouseEnter={() =>
                 imageConfig?.onClick && setIsImageHovered(true)
               }
               onMouseLeave={() =>
                 imageConfig?.onClick && setIsImageHovered(false)
               }
-              style={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '300px', // Smaller max width for mobile/tablet
-                maxHeight: isMobile ? '275px' : 'none', // Limit height on mobile to keep content visible
-                height: 'auto',
-                borderRadius: theme.borderRadius.m,
-                overflow: 'hidden',
-                backgroundColor: theme.palette.neutralLighter,
-                boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
-                cursor: imageConfig?.onClick ? 'pointer' : 'default',
-                transform: isImageHovered ? 'scale(1.25)' : 'scale(1)',
-                transition: 'transform 0.3s ease-in-out',
-              }}
-            >
-              <Image
-                src={imageToDisplay}
-                alt={imageAltText}
-                width={300}
-                height={0}
-                sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 300px'
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  filter: filter,
-                }}
-                priority
-                placeholder='blur'
-                blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
-              />
-              {/* Arrow icon indicator for clickable images */}
-              {imageConfig?.onClick && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: theme.spacing.m,
-                    right: theme.spacing.m,
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    opacity: isImageHovered ? 1 : 0.8,
-                    transition: 'opacity 0.2s ease-in-out',
-                    pointerEvents: 'none',
-                  }}
-                >
-                  <svg
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path
-                      d='M7 17L17 7M17 7H7M17 7V17'
-                      stroke='white'
-                      strokeWidth='2.5'
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                    />
-                  </svg>
-                </div>
-              )}
-            </motion.div>
+              onClick={imageConfig?.onClick}
+              filter={filter}
+              fadeInVariants={fadeInVariants}
+              shouldReduceMotion={shouldReduceMotion}
+              theme={theme}
+            />
           </div>
 
           {/* Content Panel */}
@@ -721,112 +883,38 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         <>
           {/* Image Panel - Fixed to viewport */}
           <div style={adjustedImageStyle}>
-            <motion.div
-              initial='hidden'
-              animate='visible'
-              variants={fadeInVariants}
-              onClick={imageConfig?.onClick}
+            <ImagePanel
+              src={imageToDisplay}
+              alt={imageAltText}
+              imageWidth={400}
+              imageSizes='(max-width: 768px) 100vw, 400px'
+              objectFit='contain'
+              imageHeight='auto'
+              containerMaxWidth='400px'
+              hoverScale={1.15}
+              clickIconSize={56}
+              clickIconSpacing={theme.spacing.l}
+              imageLoaded={imageLoaded}
+              onImageLoad={() => setImageLoaded(true)}
+              isHovered={isImageHovered}
               onMouseEnter={() =>
                 imageConfig?.onClick && setIsImageHovered(true)
               }
               onMouseLeave={() =>
                 imageConfig?.onClick && setIsImageHovered(false)
               }
-              style={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '400px',
-                height: 'auto',
-                borderRadius: theme.borderRadius.m,
-                overflow: 'hidden',
-                backgroundColor: theme.palette.neutralLighter,
-                boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
-                pointerEvents: 'auto',
-                cursor: imageConfig?.onClick ? 'pointer' : 'default',
-                transform: isImageHovered ? 'scale(1.15)' : 'scale(1)',
-                transition: 'transform 0.3s ease-in-out',
-              }}
-            >
-              <Image
-                src={imageToDisplay}
-                alt={imageAltText}
-                width={400}
-                height={0}
-                sizes='(max-width: 768px) 100vw, 400px'
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  objectFit: 'contain',
-                  filter: filter,
-                }}
-                loading='eager'
-                priority
-                placeholder='blur'
-                blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
-              />
-              {/* Arrow icon indicator for clickable images */}
-              {imageConfig?.onClick && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: theme.spacing.l,
-                    right: theme.spacing.l,
-                    width: '56px',
-                    height: '56px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    opacity: isImageHovered ? 1 : 0.8,
-                    transition: 'opacity 0.2s ease-in-out',
-                    pointerEvents: 'none',
-                  }}
-                >
-                  <svg
-                    width='28'
-                    height='28'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path
-                      d='M7 17L17 7M17 7H7M17 7V17'
-                      stroke='white'
-                      strokeWidth='2.5'
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                    />
-                  </svg>
-                </div>
-              )}
-              {shouldShowTitle && imageTextToDisplay && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: theme.spacing.l,
-                    background: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent)`,
-                    color: '#FFFFFF',
-                  }}
-                >
-                  <h2
-                    style={{
-                      margin: 0,
-                      fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-                      fontWeight: theme.fonts.xLarge.fontWeight as number,
-                      fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
-                      lineHeight: 1.2,
-                      color: '#FFFFFF', // hard-coded so the text is always white despite themeMode changes
-                    }}
-                  >
-                    {imageTextToDisplay}
-                  </h2>
-                </div>
-              )}
-            </motion.div>
+              onClick={imageConfig?.onClick}
+              filter={filter}
+              fadeInVariants={fadeInVariants}
+              shouldReduceMotion={shouldReduceMotion}
+              theme={theme}
+              loadingEager
+              titleOverlay={
+                shouldShowTitle && imageTextToDisplay
+                  ? { text: imageTextToDisplay }
+                  : undefined
+              }
+            />
           </div>
 
           {/* Content Container */}

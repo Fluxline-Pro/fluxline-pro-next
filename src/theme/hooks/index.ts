@@ -12,6 +12,7 @@ export * from './useContentScrollable';
 export * from './useLayoutConfig';
 export * from './useColorVisionFilter';
 export * from './useDateFormatter';
+export * from './useReducedTransparency';
 export * from './useFooterHeight';
 export * from './useHeaderHeight';
 export * from './useIosDetection';

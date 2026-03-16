@@ -407,7 +407,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 iconName={themeMode === 'dark' ? 'ClearNight' : 'Sunny'}
                 color={buttonIconColor}
                 ariaLabel='Toggle theme'
-                tooltipText={themeMode === 'dark' ? 'Dark Mode' : 'Light Mode'}
+                tooltipText={themeMode === 'dark' ? 'Dark' : 'Light'}
                 hoverScale={1.05}
               />
             )}

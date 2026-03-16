@@ -34,6 +34,7 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
             display: 'flex',
             gap: '1.5rem',
             position: 'relative',
+            overflow: 'hidden',
           }}
         >
           {/* Timeline Line */}

@@ -10,6 +10,7 @@ export interface UserPreferences {
   maxFontScale: number;
   fontScaleManuallySet: boolean;
   reducedMotion: boolean;
+  reducedTransparency: boolean;
   highContrast: boolean;
   themeMode: ThemeMode;
   isOnboarded: boolean;
@@ -41,6 +42,7 @@ const defaultPreferences: UserPreferences = {
   maxFontScale: 1.5,
   fontScaleManuallySet: false,
   reducedMotion: false,
+  reducedTransparency: false,
   highContrast: false,
   themeMode: 'dark', // Fluxline Pro default: dark mode for focused aesthetic
   isOnboarded: true,

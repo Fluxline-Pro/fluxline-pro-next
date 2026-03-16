@@ -3,10 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { SpinnerSize } from '@fluentui/react/lib/Spinner';
 import { Card } from '../card/card';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { LoadingSpinner } from '../structural/loading-spinner';
+import { Typography } from '../typography';
 
 export type CardViewType = 'grid' | 'small' | 'large' | 'image';
 
@@ -22,7 +25,6 @@ export interface UnifiedCardProps {
   // Image card specific props
   imageText?: string;
   delay?: number;
-  useSpinner?: boolean;
   altText?: string;
   // Optional flag to show title on image
   showTitleOnImage?: boolean;
@@ -44,14 +46,16 @@ export interface UnifiedCardProps {
 }
 
 /**
- * UnifiedCard - Flexible card component for image display
- * Simplified version focused on page-wrapper image card use case
- * Handles:
- * - Image loading with spinner
+ * UnifiedCard - Flexible card component for content display
+ *
+ * Features:
+ * - Automatic loading spinners for all images
  * - Aspect ratio preservation for landscape images
- * - Dark mode filtering
+ * - Dark mode filtering with accessibility support
  * - Title overlay on images
  * - Responsive sizing
+ * - Dimension detection for viewport optimization
+ * - Multiple view types: grid, small, large, image
  */
 export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   id,
@@ -64,7 +68,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   viewType,
   imageText,
   delay = 0,
-  useSpinner = false,
   altText,
   showTitleOnImage = false,
   imageContainerStyle,
@@ -87,10 +90,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [isLandscape, setIsLandscape] = React.useState(false);
 
-  // Check if image is landscape and handle image loading
+  // Check if image is landscape and handle dimension detection (separate from visual loading)
   React.useEffect(() => {
     if (imageUrl) {
-      // Reset loading state when imageUrl changes
+      // Reset all states when imageUrl changes
       setImageLoaded(false);
       setIsLandscape(false);
       // Clear dimensions in parent container
@@ -103,15 +106,16 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         const naturalHeight = img.naturalHeight;
         const aspectRatio = naturalWidth / naturalHeight;
 
+        // Mark as loaded here — the preload caches the image, so the rendered
+        // <Image> onLoad may never fire if the browser already has it cached.
+        setImageLoaded(true);
+
         // Notify parent container of dimensions change
         onImageDimensionsChange?.({
           width: naturalWidth,
           height: naturalHeight,
           aspectRatio: aspectRatio,
         });
-
-        // Mark image as loaded first
-        setImageLoaded(true);
 
         // Only apply landscape detection when this card is in the ViewportGrid left panel
         if (isViewportLeftPanel) {
@@ -186,7 +190,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             onClick={onClick}
           >
             {/* Loading Spinner */}
-            {useSpinner && !imageLoaded && (
+            {!imageLoaded && (
               <div
                 style={{
                   position: 'absolute',
@@ -196,18 +200,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   zIndex: 10,
                 }}
               >
-                <div
-                  style={{
-                    width: 40,
-                    height: 40,
-                    border: `4px solid ${theme.palette.neutralLight}`,
-                    borderTop: `4px solid ${theme.palette.themePrimary}`,
-                    borderRadius: '50%',
-                    animation: shouldReduceMotion
-                      ? 'none'
-                      : 'spin 1s linear infinite',
-                  }}
-                />
+                <LoadingSpinner size={SpinnerSize.large} />
               </div>
             )}
 
@@ -234,6 +227,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     ? 'none'
                     : 'opacity 0.3s ease-in-out',
                 }}
+                onLoad={() => setImageLoaded(true)}
               />
             </div>
 
@@ -250,17 +244,15 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   color: theme.palette.white,
                 }}
               >
-                <h2
+                <Typography
+                  variant='h4'
                   style={{
                     margin: 0,
-                    fontSize: theme.typography.fonts.xLarge.fontSize,
-                    fontWeight: theme.typography.fonts.xLarge.fontWeight,
-                    fontFamily: `${theme.typography.fonts.xLarge.fontFamily} !important`,
                     color: '#FFF',
                   }}
                 >
                   {imageText}
-                </h2>
+                </Typography>
               </div>
             )}
           </Card>
@@ -301,6 +293,21 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 minHeight: '200px',
               }}
             >
+              {/* Loading Spinner */}
+              {!imageLoaded && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 10,
+                  }}
+                >
+                  <LoadingSpinner size={SpinnerSize.medium} />
+                </div>
+              )}
+
               <Image
                 src={imageUrl}
                 alt={altText || imageAlt || title}
@@ -308,7 +315,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 style={{
                   objectFit: 'cover',
                   filter: filter,
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: shouldReduceMotion
+                    ? 'none'
+                    : 'opacity 0.3s ease-in-out',
                 }}
+                onLoad={() => setImageLoaded(true)}
               />
 
               {/* Title and date overlay */}
@@ -319,33 +331,37 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   left: 0,
                   right: 0,
                   padding: theme.spacing.m,
-                  background: overlayGradient,
+                  background:
+                    theme.themeMode === 'dark' ||
+                    theme.themeMode === 'high-contrast' ||
+                    theme.themeMode === 'grayscale-dark'
+                      ? `linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35))`
+                      : overlayGradient,
                   color: theme.palette.white,
                 }}
               >
-                <h3
+                <Typography
+                  variant='h5'
                   style={{
                     margin: `0 0 ${theme.spacing.xs} 0`,
-                    fontSize: theme.fonts.large.fontSize,
-                    fontWeight: theme.fonts.large.fontWeight as number,
-                    fontFamily: `${theme.fonts.large.fontFamily} !important`,
                     lineHeight: 1.2,
+                    color: '#FFFFFF',
+                    textShadow: theme.shadows.m,
                   }}
                 >
                   {title}
-                </h3>
-                {imageText && (
-                  <p
+                </Typography>
+                {/* {imageText && (
+                  <Typography
+                    variant='label'
                     style={{
                       margin: 0,
-                      fontSize: theme.fonts.small.fontSize,
-                      fontFamily: `${theme.fonts.small.fontFamily} !important`,
                       opacity: 0.9,
                     }}
                   >
                     {imageText}
-                  </p>
-                )}
+                  </Typography>
+                )} */}
               </div>
             </div>
           ) : (
@@ -360,44 +376,39 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               }}
             >
               <div>
-                <h3
+                <Typography
+                  variant='h5'
                   style={{
                     margin: 0,
-                    fontSize: theme.fonts.large.fontSize,
-                    fontWeight: theme.fonts.large.fontWeight as number,
-                    fontFamily: `${theme.fonts.large.fontFamily} !important`,
                     color: theme.palette.neutralPrimary,
                     lineHeight: 1.3,
                   }}
                 >
                   {title}
-                </h3>
-                {description && (
-                  <p
+                </Typography>
+                {/* {description && (
+                  <Typography
+                    variant='label'
                     style={{
                       margin: `${theme.spacing.s} 0 0 0`,
-                      fontSize: theme.fonts.medium.fontSize,
-                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                       color: theme.palette.neutralSecondary,
                       lineHeight: 1.5,
                     }}
                   >
                     {description}
-                  </p>
-                )}
+                  </Typography>
+                )} */}
               </div>
-              {imageText && (
-                <p
+              {/* {imageText && (
+                <Typography variant='label'
                   style={{
                     margin: 0,
-                    fontSize: theme.fonts.medium.fontSize,
-                    fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                     color: theme.palette.neutralSecondary,
                   }}
                 >
                   {imageText}
-                </p>
-              )}
+                </Typography>
+              )} */}
             </div>
           )}
         </Card>
@@ -458,6 +469,21 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     flexShrink: 0,
                   }}
                 >
+                  {/* Loading Spinner */}
+                  {!imageLoaded && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: 10,
+                      }}
+                    >
+                      <LoadingSpinner size={SpinnerSize.medium} />
+                    </div>
+                  )}
+
                   <Image
                     src={imageUrl}
                     alt={altText || imageAlt || title}
@@ -465,7 +491,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     style={{
                       objectFit: 'cover',
                       filter: filter,
+                      opacity: imageLoaded ? 1 : 0,
+                      transition: shouldReduceMotion
+                        ? 'none'
+                        : 'opacity 0.3s ease-in-out',
                     }}
+                    onLoad={() => setImageLoaded(true)}
                   />
                 </div>
               )}
@@ -481,44 +512,40 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 }}
               >
                 <div style={{ flex: imageUrl ? '0 0 auto' : '1 1 auto' }}>
-                  <h3
+                  <Typography
+                    variant='h5'
                     style={{
                       margin: 0,
-                      fontSize: theme.fonts.large.fontSize,
-                      fontWeight: theme.fonts.large.fontWeight as number,
-                      fontFamily: `${theme.fonts.large.fontFamily} !important`,
                       color: theme.palette.neutralPrimary,
                       lineHeight: 1.3,
                     }}
                   >
                     {title}
-                  </h3>
+                  </Typography>
                   {!imageUrl && description && (
-                    <p
+                    <Typography
+                      variant='label'
                       style={{
                         margin: `${theme.spacing.s} 0 0 0`,
-                        fontSize: theme.fonts.medium.fontSize,
-                        fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                         color: theme.palette.neutralSecondary,
                         lineHeight: 1.5,
                       }}
                     >
                       {description}
-                    </p>
+                    </Typography>
                   )}
                 </div>
                 {imageText && (
-                  <p
+                  <Typography
+                    variant='label'
                     style={{
                       margin: `${theme.spacing.xs} 0 0 0`,
-                      fontSize: theme.fonts.medium.fontSize,
-                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                       color: theme.palette.neutralSecondary,
                       marginTop: imageUrl ? 'auto' : '0',
                     }}
                   >
                     {imageText}
-                  </p>
+                  </Typography>
                 )}
               </div>
             </div>
@@ -577,6 +604,21 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     borderRadius: '6px 6px 0 0',
                   }}
                 >
+                  {/* Loading Spinner */}
+                  {!imageLoaded && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: 10,
+                      }}
+                    >
+                      <LoadingSpinner size={SpinnerSize.large} />
+                    </div>
+                  )}
+
                   <Image
                     src={imageUrl}
                     alt={altText || imageAlt || title}
@@ -584,7 +626,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     style={{
                       objectFit: 'cover',
                       filter: filter,
+                      opacity: imageLoaded ? 1 : 0,
+                      transition: shouldReduceMotion
+                        ? 'none'
+                        : 'opacity 0.3s ease-in-out',
                     }}
+                    onLoad={() => setImageLoaded(true)}
                   />
                 </div>
               )}
@@ -599,44 +646,39 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 }}
               >
                 <div>
-                  <h3
+                  <Typography
+                    variant='h5'
                     style={{
                       margin: `0 0 ${theme.spacing.s} 0`,
-                      fontSize: theme.fonts.xLarge.fontSize,
-                      fontWeight: theme.fonts.xLarge.fontWeight as number,
-                      fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
                       color: theme.palette.neutralPrimary,
                       lineHeight: 1.3,
                     }}
                   >
                     {title}
-                  </h3>
+                  </Typography>
                   {description && (
-                    <p
+                    <Typography
+                      variant='label'
                       style={{
                         margin: `${theme.spacing.xs} 0 0 0`,
-                        fontSize: theme.fonts.medium.fontSize,
-                        fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                         color: theme.palette.neutralSecondary,
                         lineHeight: 1.5,
                       }}
                     >
                       {description}
-                    </p>
+                    </Typography>
                   )}
                 </div>
                 {imageText && (
-                  <p
+                  <Typography
+                    variant='label'
                     style={{
                       margin: 0,
-                      fontSize: theme.fonts.medium.fontSize,
-                      fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                       color: theme.palette.themePrimary,
-                      fontWeight: 500,
                     }}
                   >
                     {imageText}
-                  </p>
+                  </Typography>
                 )}
               </div>
             </div>
@@ -688,29 +730,26 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           }}
         >
           {title && (
-            <h3
+            <Typography
+              variant='h5'
               style={{
                 margin: `0 0 ${theme.spacing.s} 0`,
-                fontSize: theme.fonts.large.fontSize,
-                fontWeight: theme.fonts.large.fontWeight as number,
-                fontFamily: `${theme.fonts.large.fontFamily} !important`,
                 color: theme.palette.neutralPrimary,
               }}
             >
               {title}
-            </h3>
+            </Typography>
           )}
           {description && (
-            <p
+            <Typography
+              variant='label'
               style={{
                 margin: 0,
-                fontSize: theme.fonts.medium.fontSize,
-                fontFamily: `${theme.fonts.medium.fontFamily} !important`,
                 color: theme.palette.neutralSecondary,
               }}
             >
               {description}
-            </p>
+            </Typography>
           )}
           {imageUrl && (
             <div
