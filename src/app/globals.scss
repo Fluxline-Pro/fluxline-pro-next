@@ -12,6 +12,7 @@
 // Root CSS Custom Properties - Fluxline Pro Theme Variables
 :root {
   --background: var(--theme-semantic-bodyBackground, #010101);
+  --background-solid: var(--theme-background-solid, #010101);
   --foreground: var(--theme-semantic-bodyText, #ffffff);
   --font-inter: var(--theme-fonts-family);
   --font-mono: var(--theme-fonts-mono);
@@ -43,6 +44,92 @@ body {
 }
 
 /* =============================================
+   HIDE SCROLLBARS GLOBALLY
+   ============================================= */
+
+/* Hide scrollbars for Chrome, Safari, Edge, and Opera */
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Hide scrollbars for IE, Edge (legacy), and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Ensure scroll functionality remains while hiding scrollbars */
+html,
+body,
+div {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* =============================================
+   iOS SAFE AREA SUPPORT
+   ============================================= */
+
+/* Ensure html and body backgrounds extend to fill safe areas on notched/dynamic-island devices.
+   viewport-fit=cover extends layout behind safe zones; we need pseudo-elements
+   to fill these areas with the theme background color, not white. */
+
+html::before,
+html::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1; /* Behind content but above default background */
+  background-color: var(--background-solid);
+}
+
+/* Fill top safe area (notch/status bar) */
+html::before {
+  top: 0;
+  height: env(safe-area-inset-top);
+}
+
+/* Fill bottom safe area (home indicator) */
+html::after {
+  bottom: 0;
+  height: env(safe-area-inset-bottom);
+}
+
+body {
+  /* Add padding for bottom and sides to protect scrollable content from safe areas.
+     Top padding is omitted because header's safe area top inset is already measured by
+     useHeaderHeight() and included in the page content's paddingTop calculation. */
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: -1; /* Behind content but above default background */
+  background-color: var(--background-solid);
+}
+
+/* Fill left safe area (notch on sides in landscape) */
+body::before {
+  left: 0;
+  width: env(safe-area-inset-left);
+}
+
+/* Fill right safe area (notch on sides in landscape) */
+body::after {
+  right: 0;
+  width: env(safe-area-inset-right);
+}
+
+/* =============================================
    TAILWIND CSS THEME INTEGRATION
    ============================================= */
 
@@ -54,14 +141,13 @@ body {
   --font-mono: var(--font-mono);
 }
 
-// Ln 57-68: Apply background to html element for full viewport coverage
+// Apply background to html element for full viewport coverage
 // iOS Safari has issues with background-attachment: fixed, so we conditionally apply it
 html {
-  -webkit-background-color: var(
-    --theme-semantic-bodyBackground
-  ); // iOS fallback
-  background-color: var(--theme-semantic-bodyBackground); // Standard fallback
-  background: var(--background); // Radial gradient (if set in theme)
+  background-color: var(
+    --background-solid
+  ); // Solid color fallback (gradient can't be used with background-color)
+  background: var(--background); // Radial gradient override (if set in theme)
   background-repeat: no-repeat;
   background-position: center;
 

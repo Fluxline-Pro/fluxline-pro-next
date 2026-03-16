@@ -17,3 +17,12 @@ export type { FormToggleProps } from './FormToggle';
 
 export { FormSlider } from './FormSlider';
 export type { FormSliderProps } from './FormSlider';
+
+export { FormDateInput } from './FormDateInput';
+export type { FormDateInputProps } from './FormDateInput';
+
+export { FormInput } from './FormInput';
+export type { FormInputProps } from './FormInput';
+
+export { FormTextarea } from './FormTextarea';
+export type { FormTextareaProps } from './FormTextarea';

@@ -48,6 +48,7 @@ export interface PortfolioProject {
   featured: boolean;
   githubUrl?: string;
   liveUrl?: string;
+  generatedWithAI?: boolean;
   content: string; // MDX content
   seoMetadata: {
     title: string;
@@ -87,6 +88,7 @@ export interface PortfolioFrontmatter {
   featured: boolean;
   githubUrl?: string;
   liveUrl?: string;
+  generatedWithAI?: boolean;
   seoTitle?: string;
   seoDescription?: string;
   seoKeywords?: string[];

@@ -23,19 +23,24 @@ export const GlobalFooter: React.FC = () => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const isHomePage = pathname === '/';
-
-  // Only show on desktop and widescreen tablet (landscape orientations)
-  const shouldShowFooter =
+  const isMobile = orientation === 'portrait';
+  const isDesktopOrTablet =
     orientation === 'landscape' ||
     orientation === 'ultrawide' ||
     orientation === 'square';
 
-  if (!shouldShowFooter) {
+  // Mobile home page: no footer
+  if (isMobile && isHomePage) {
     return null;
   }
 
-  // Home page: render fixed footer directly
-  if (isHomePage) {
+  // Mobile non-home pages: HomeFooter returns null in portrait, so don't render wrapper
+  if (isMobile && !isHomePage) {
+    return null;
+  }
+
+  // Desktop/tablet home page: render fixed footer directly
+  if (isDesktopOrTablet && isHomePage) {
     return (
       <div
         style={{
@@ -44,6 +49,10 @@ export const GlobalFooter: React.FC = () => {
           left: 0,
           right: 0,
           zIndex: 1,
+          paddingBottom: 'env(safe-area-inset-bottom)',
+          paddingLeft: 'env(safe-area-inset-left)',
+          paddingRight: 'env(safe-area-inset-right)',
+          backgroundColor: theme.palette.neutralLighterAlt,
         }}
       >
         <HomeFooter />
@@ -51,7 +60,7 @@ export const GlobalFooter: React.FC = () => {
     );
   }
 
-  // Other pages: collapsible footer with overlay trigger
+  // Desktop/tablet non-home pages: collapsible footer with overlay trigger
   const overlayStyle: React.CSSProperties = {
     position: 'fixed',
     bottom: 0,
@@ -67,7 +76,11 @@ export const GlobalFooter: React.FC = () => {
     cursor: 'pointer',
     zIndex: 41,
     boxShadow: theme.shadows.l,
-    transition: 'all 0.2s ease',
+    transition: shouldReduceMotion
+      ? 'none'
+      : 'opacity 0.3s ease, background-color 0.2s ease, box-shadow 0.2s ease',
+    opacity: isExpanded ? 0 : 1,
+    pointerEvents: isExpanded ? 'none' : 'auto',
     userSelect: 'none',
   };
 
@@ -77,6 +90,10 @@ export const GlobalFooter: React.FC = () => {
     left: 0,
     right: 0,
     zIndex: 40,
+    paddingBottom: 'env(safe-area-inset-bottom)',
+    paddingLeft: 'env(safe-area-inset-left)',
+    paddingRight: 'env(safe-area-inset-right)',
+    backgroundColor: theme.palette.neutralLighterAlt,
   };
 
   const slideVariants = {

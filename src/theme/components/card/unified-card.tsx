@@ -105,15 +105,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         const naturalHeight = img.naturalHeight;
         const aspectRatio = naturalWidth / naturalHeight;
 
-        // Store image dimensions for container sizing
-        const dimensions = {
+        // Notify parent container of dimensions change
+        onImageDimensionsChange?.({
           width: naturalWidth,
           height: naturalHeight,
           aspectRatio: aspectRatio,
-        };
-
-        // Notify parent container of dimensions change
-        onImageDimensionsChange?.(dimensions);
+        });
 
         // Only apply landscape detection when this card is in the ViewportGrid left panel
         if (isViewportLeftPanel) {

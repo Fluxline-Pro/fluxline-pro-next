@@ -37,6 +37,7 @@ interface PressReleaseFrontmatter {
   }>;
   glyphTag?: string;
   emotionalCue?: string;
+  generatedWithAI?: boolean;
   seoTitle: string;
   seoDescription: string;
   seoKeywords: string[];
@@ -108,6 +109,7 @@ export function getPressReleaseById(id: string): PressRelease | null {
       tags: frontmatter.tags,
       glyphTag: frontmatter.glyphTag,
       emotionalCue: frontmatter.emotionalCue,
+      generatedWithAI: frontmatter.generatedWithAI ?? false,
       seoMetadata: {
         title: frontmatter.seoTitle,
         description: frontmatter.seoDescription,

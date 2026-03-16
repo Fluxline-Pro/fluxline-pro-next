@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const https = require('https');
 
 // Simple rate limiting store (in-memory)
 // Note: In-memory rate limiting has limitations in serverless environments due to cold starts
@@ -6,6 +7,10 @@ const nodemailer = require('nodemailer');
 const rateLimit = new Map();
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
 const MAX_REQUESTS = 5; // 5 requests per hour
+
+// reCAPTCHA configuration
+const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
+const RECAPTCHA_MIN_SCORE = 0.5; // Minimum score to consider valid (0.0 - 1.0)
 
 function checkRateLimit(ip) {
   const now = Date.now();
@@ -34,6 +39,49 @@ function sanitizeInput(input) {
   // Since we send emails as plain text (not HTML), full XSS sanitization isn't required
   // The angle brackets are removed to prevent potential email client HTML interpretation
   return input.replace(/[<>]/g, '').trim();
+}
+
+async function verifyRecaptcha(token) {
+  return new Promise((resolve, reject) => {
+    const postData = new URLSearchParams({
+      secret: RECAPTCHA_SECRET_KEY,
+      response: token,
+    }).toString();
+
+    const options = {
+      hostname: 'www.google.com',
+      path: '/recaptcha/api/siteverify',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData),
+      },
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      res.on('end', () => {
+        try {
+          const result = JSON.parse(data);
+          resolve(result);
+        } catch (error) {
+          reject(new Error('Failed to parse reCAPTCHA response'));
+        }
+      });
+    });
+
+    req.on('error', (error) => {
+      reject(error);
+    });
+
+    req.write(postData);
+    req.end();
+  });
 }
 
 module.exports = async function (context, req) {
@@ -88,7 +136,7 @@ module.exports = async function (context, req) {
       return;
     }
 
-    const { name, email, message } = body;
+    const { name, email, message, recaptchaToken } = body;
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -96,6 +144,18 @@ module.exports = async function (context, req) {
         status: 400,
         headers,
         body: JSON.stringify({ message: 'All fields are required' }),
+      };
+      return;
+    }
+
+    // Validate name length
+    if (name.trim().length < 10) {
+      context.res = {
+        status: 400,
+        headers,
+        body: JSON.stringify({
+          message: 'Name must be at least 10 characters',
+        }),
       };
       return;
     }
@@ -111,6 +171,17 @@ module.exports = async function (context, req) {
     }
 
     // Validate message length
+    if (message.trim().length < 15) {
+      context.res = {
+        status: 400,
+        headers,
+        body: JSON.stringify({
+          message: 'Message must be at least 15 characters',
+        }),
+      };
+      return;
+    }
+
     if (message.length > 1000) {
       context.res = {
         status: 400,
@@ -120,6 +191,124 @@ module.exports = async function (context, req) {
         }),
       };
       return;
+    }
+
+    // Verify reCAPTCHA token
+    if (RECAPTCHA_SECRET_KEY) {
+      if (!recaptchaToken) {
+        context.log.warn('reCAPTCHA token missing from request');
+        context.res = {
+          status: 400,
+          headers,
+          body: JSON.stringify({ message: 'reCAPTCHA verification required' }),
+        };
+        return;
+      }
+
+      try {
+        const verificationResult = await verifyRecaptcha(recaptchaToken);
+
+        if (!verificationResult.success) {
+          context.log.warn(
+            'reCAPTCHA verification failed:',
+            verificationResult['error-codes']
+          );
+          context.res = {
+            status: 400,
+            headers,
+            body: JSON.stringify({
+              message: 'Failed to verify reCAPTCHA. Please try again.',
+            }),
+          };
+          return;
+        }
+
+        // Validate action matches expected contact_form_submit
+        if (verificationResult.action !== 'contact_form_submit') {
+          context.log.warn(
+            'reCAPTCHA action mismatch. Expected: contact_form_submit, Received:',
+            verificationResult.action
+          );
+          context.res = {
+            status: 400,
+            headers,
+            body: JSON.stringify({
+              message: 'reCAPTCHA validation failed. Please try again.',
+            }),
+          };
+          return;
+        }
+
+        // Validate hostname is expected domain (if configured)
+        const expectedHostname =
+          process.env.RECAPTCHA_HOSTNAME || 'fluxline.pro';
+        if (
+          verificationResult.hostname &&
+          !verificationResult.hostname.includes(expectedHostname)
+        ) {
+          context.log.warn(
+            'reCAPTCHA hostname mismatch. Expected:',
+            expectedHostname,
+            'Received:',
+            verificationResult.hostname
+          );
+          context.res = {
+            status: 400,
+            headers,
+            body: JSON.stringify({
+              message: 'reCAPTCHA validation failed. Please try again.',
+            }),
+          };
+          return;
+        }
+
+        // Check score exists and is numeric
+        if (typeof verificationResult.score !== 'number') {
+          context.log.warn(
+            'reCAPTCHA score missing or non-numeric:',
+            verificationResult.score
+          );
+          context.res = {
+            status: 400,
+            headers,
+            body: JSON.stringify({
+              message: 'reCAPTCHA validation failed. Please try again.',
+            }),
+          };
+          return;
+        }
+
+        // Check score threshold
+        if (verificationResult.score < RECAPTCHA_MIN_SCORE) {
+          context.log.warn(
+            `reCAPTCHA score too low: ${verificationResult.score} (minimum: ${RECAPTCHA_MIN_SCORE})`
+          );
+          context.res = {
+            status: 400,
+            headers,
+            body: JSON.stringify({
+              message: 'Suspicious activity detected. Please try again later.',
+            }),
+          };
+          return;
+        }
+
+        context.log('reCAPTCHA verification successful');
+      } catch (error) {
+        context.log.error('reCAPTCHA verification error:', error);
+        context.res = {
+          status: 500,
+          headers,
+          body: JSON.stringify({
+            message: 'Failed to verify reCAPTCHA. Please try again.',
+          }),
+        };
+        return;
+      }
+    } else {
+      context.log.warn(
+        'RECAPTCHA_SECRET_KEY not configured, skipping verification'
+      );
     }
 
     // Sanitize inputs
@@ -191,7 +380,8 @@ IP Address: ${ip}
   } catch (error) {
     context.log.error('Error processing contact form:', error);
 
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
     context.log.error('Error details:', errorMessage);
 
     context.res = {

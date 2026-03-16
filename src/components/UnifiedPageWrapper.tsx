@@ -60,6 +60,14 @@ const getFluxlineLogo = (themeMode: ThemeMode): string => {
   return FluxlineLogoLightMode.src;
 };
 
+// Helper function to get the appropriate Content Hub image based on theme mode
+const getContentHubImage = (themeMode: ThemeMode): string => {
+  if (darkModeThemes.includes(themeMode)) {
+    return '/images/home/ContentHubDefault.jpg';
+  }
+  return '/images/home/ContentHubDefaultLight.jpg';
+};
+
 // Unified page configurations
 const PAGE_CONFIGS: Record<
   string,
@@ -78,7 +86,7 @@ const PAGE_CONFIGS: Record<
     imageText: 'Strategic Insights',
   },
   '/content': {
-    image: PortfolioImage.src,
+    image: '/images/home/ContentHubDefault.jpg',
     imageText: 'Content Hub',
   },
   '/legal': {
@@ -346,6 +354,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     }
   } else if (configImage === 'FLUXLINE_LOGO') {
     configImage = getFluxlineLogo(themeMode);
+  } else if (normalizedPathname === '/content') {
+    // Apply theme-aware Content Hub image
+    configImage = getContentHubImage(themeMode);
   }
 
   // Use the selected post's image if available and we're in detail view
@@ -592,6 +603,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         : 'flex-start',
     maxWidth: '1200px',
     margin: !isMobile && !shouldUseStackedLayout ? '0 auto' : undefined,
+    paddingLeft: isMobile ? '1rem' : contentStyle.paddingLeft,
+    paddingRight: isMobile ? '1rem' : contentStyle.paddingRight,
   };
 
   // Adjust image style for stacked layout
@@ -795,6 +808,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                     ? 'none'
                     : 'opacity 0.3s ease-in-out',
                 }}
+                loading='eager'
                 priority
                 placeholder='blur'
                 blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='

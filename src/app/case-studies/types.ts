@@ -41,6 +41,7 @@ export interface CaseStudy {
   featured: boolean;
   publishedDate: Date;
   projectDuration?: string;
+  generatedWithAI?: boolean;
   testimonial?: {
     quote: string;
     author: string;

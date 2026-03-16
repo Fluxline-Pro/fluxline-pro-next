@@ -192,12 +192,13 @@ public/blog/posts/
 
 ### Optional Fields
 
-| Field         | Type                | Description                            |
-| ------------- | ------------------- | -------------------------------------- |
-| `lastUpdated` | string (YYYY-MM-DD) | Date of last update                    |
-| `featured`    | boolean             | Mark as featured post (default: false) |
-| `imageUrl`    | string              | Path to hero image                     |
-| `imageAlt`    | string              | Alt text for hero image                |
+| Field              | Type                | Description                                     |
+| ------------------ | ------------------- | ----------------------------------------------- |
+| `lastUpdated`      | string (YYYY-MM-DD) | Date of last update                             |
+| `featured`         | boolean             | Mark as featured post (default: false)          |
+| `imageUrl`         | string              | Path to hero image                              |
+| `imageAlt`         | string              | Alt text for hero image                         |
+| `generatedWithAI`  | boolean             | Show "Generated with AI" badge (default: false) |
 
 ### Example Frontmatter
 
@@ -793,7 +794,6 @@ public/blog/posts/
 
 - **Documentation**: This file
 - **Example Post**: See `public/blog/posts/embracing-nextjs-16/`
-- **Blog Implementation**: See `BLOG_IMPLEMENTATION.md`
 - **Next.js Docs**: https://nextjs.org/docs
 - **Markdown Guide**: https://www.markdownguide.org/
 

@@ -8,9 +8,14 @@ import { AdaptiveCardGrid } from '@/theme/components/card/AdaptiveCardGrid';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useContentFilterStore } from '@/store/store';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
-import { FormButton, FormSelect } from '@/theme/components/form';
+import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
+import { FormButton, FormDateInput, FormSelect } from '@/theme/components/form';
 import { Hero } from '@/theme/components/hero/Hero';
+
+/**
+ * Sort order options for content listing
+ */
+export type SortOrder = 'newest' | 'oldest' | 'a-z' | 'z-a';
 
 /**
  * Base card item interface for content listing
@@ -22,6 +27,8 @@ export interface ContentCard {
   imageUrl?: string;
   imageAlt: string;
   imageText: string;
+  /** Optional date used for sorting and date-range filtering */
+  date?: Date;
 }
 
 /**
@@ -88,6 +95,17 @@ export interface ContentListingPageProps {
 
   // Navigation
   onCardClick?: (id: string) => void;
+  backArrow?: boolean;
+  backArrowPath?: string;
+
+  // Custom section (e.g., for GitHub contributions graph)
+  customSection?: React.ReactNode;
+
+  // Sort and filter controls
+  /** Called when user clicks "Clear All Filters" – wrapper resets its own state */
+  onClearFilters?: () => void;
+  /** Set true when wrapper-specific filters (category, tag, etc.) are active */
+  hasActiveFilters?: boolean;
 }
 
 /**
@@ -122,17 +140,30 @@ export function ContentListingPage({
   description,
   basePath,
   cards,
+  totalCount = cards.length,
   filters,
   resultsMessage,
   emptyStateTitle = 'No items found',
   emptyStateMessage = 'Try adjusting your filters to see more items.',
   ctaSection,
   onCardClick,
+  backArrow = false,
+  backArrowPath = '/content',
+  customSection,
+  onClearFilters,
+  hasActiveFilters = false,
 }: ContentListingPageProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  const isCompactFilterLayout = isMobile || isTablet;
+
+  // Sort and date range state (local – independent per page)
+  const [sortOrder, setSortOrder] = React.useState<SortOrder>('newest');
+  const [startDate, setStartDate] = React.useState<string>('');
+  const [endDate, setEndDate] = React.useState<string>('');
 
   // View type options for dropdown
   const viewOptions = [
@@ -140,6 +171,91 @@ export function ContentListingPage({
     { key: 'small-tile', text: 'Small Tile' },
     { key: 'large-tile', text: 'Large Tile' },
   ];
+
+  const sortOptions = [
+    { key: 'newest', text: 'Newest First' },
+    { key: 'oldest', text: 'Oldest First' },
+    { key: 'a-z', text: 'A – Z' },
+    { key: 'z-a', text: 'Z – A' },
+  ];
+
+  React.useEffect(() => {
+    if (title === 'Books') {
+      setViewType('large-tile'); // Force large tile view for Books page as per requirements
+    }
+  }, [title, setViewType]);
+
+  // Ensure filters array is always defined
+  if (!filters) {
+    console.warn('Filters prop is undefined, defaulting to empty array');
+    filters = [];
+  }
+
+  // Ensure cards array is always defined
+  if (!cards) {
+    console.warn('Cards prop is undefined, defaulting to empty array');
+    cards = [];
+  }
+
+  // Log if resultsMessage is missing when totalCount is provided
+  if (totalCount !== undefined && !resultsMessage) {
+    console.warn(
+      'totalCount prop is provided without resultsMessage. Consider providing a resultsMessage for better user feedback.'
+    );
+  }
+
+  // Apply date-range filter then sort to the cards received from the wrapper
+  const processedCards = React.useMemo(() => {
+    let result = [...cards];
+
+    // Date-range filter (only for cards that carry a date)
+    if (startDate) {
+      const start = new Date(startDate);
+      result = result.filter((card) => !card.date || card.date >= start);
+    }
+    if (endDate) {
+      const end = new Date(endDate);
+      end.setHours(23, 59, 59, 999);
+      result = result.filter((card) => !card.date || card.date <= end);
+    }
+
+    // Sort
+    switch (sortOrder) {
+      case 'newest':
+        return result.sort((a, b) => {
+          if (!a.date && !b.date) return 0;
+          if (!a.date) return 1;
+          if (!b.date) return -1;
+          return b.date.getTime() - a.date.getTime();
+        });
+      case 'oldest':
+        return result.sort((a, b) => {
+          if (!a.date && !b.date) return 0;
+          if (!a.date) return 1;
+          if (!b.date) return -1;
+          return a.date.getTime() - b.date.getTime();
+        });
+      case 'a-z':
+        return result.sort((a, b) => a.title.localeCompare(b.title));
+      case 'z-a':
+        return result.sort((a, b) => b.title.localeCompare(a.title));
+      default:
+        return result;
+    }
+  }, [cards, startDate, endDate, sortOrder]);
+
+  // Determine whether any sort/date filters are active
+  const internalHasActiveFilters =
+    sortOrder !== 'newest' || startDate !== '' || endDate !== '';
+  const showClearAll = internalHasActiveFilters || hasActiveFilters;
+
+  // Reset all filters (internal + wrapper)
+  const handleClearAll = () => {
+    setSortOrder('newest');
+    setStartDate('');
+    setEndDate('');
+    onClearFilters?.();
+  };
 
   // Map view type for grid component
   const getViewType = () => {
@@ -159,10 +275,34 @@ export function ContentListingPage({
 
   // Render filter controls
   const renderFilters = () => {
+    if (title === 'Books') return null; // No filters for Books page as per requirements
+
+    const filterGridStyle: React.CSSProperties = {
+      width: '100%',
+      display: 'grid',
+      gridTemplateColumns: isCompactFilterLayout
+        ? 'repeat(2, minmax(0, 1fr))'
+        : 'repeat(3, minmax(0, 1fr))',
+      gap: isMobile ? theme.spacing.s1 : theme.spacing.m,
+      alignItems: 'end',
+    };
+
+    const filterCellStyle: React.CSSProperties = {
+      minWidth: 0,
+      width: '100%',
+    };
+
+    const clearButtonCellStyle: React.CSSProperties = {
+      display: 'flex',
+      alignItems: 'flex-end',
+      gridColumn: '1 / -1',
+    };
+
     return (
-      <>
+      <div style={filterGridStyle}>
+        {/* Wrapper-supplied filters (category, tag, etc.) */}
         {filters.map((filter, index) => (
-          <div key={index} style={{ minWidth: '200px', flex: '1 1 200px' }}>
+          <div key={index} style={filterCellStyle}>
             {filter.type === 'single' ? (
               <FormSelect
                 label={filter.label}
@@ -186,8 +326,42 @@ export function ContentListingPage({
           </div>
         ))}
 
+        {/* Sort Order */}
+        <div style={filterCellStyle}>
+          <FormSelect
+            label='Sort By'
+            options={sortOptions}
+            value={sortOrder}
+            onChange={(value) => setSortOrder(value as SortOrder)}
+          />
+        </div>
+
+        {/* Date Range – desktop only (per requirements: mobile must NOT show date range) */}
+        {!isCompactFilterLayout && (
+          <>
+            <div style={filterCellStyle}>
+              <FormDateInput
+                label='Date From'
+                value={startDate}
+                max={endDate || undefined}
+                onChange={setStartDate}
+                aria-label='Filter from date'
+              />
+            </div>
+            <div style={filterCellStyle}>
+              <FormDateInput
+                label='Date To'
+                value={endDate}
+                min={startDate || undefined}
+                onChange={setEndDate}
+                aria-label='Filter to date'
+              />
+            </div>
+          </>
+        )}
+
         {/* View Type Selector */}
-        <div style={{ minWidth: '200px', flex: '1 1 200px' }}>
+        <div style={filterCellStyle}>
           <FormSelect
             label='View Type'
             options={viewOptions}
@@ -197,7 +371,23 @@ export function ContentListingPage({
             }}
           />
         </div>
-      </>
+
+        {/* Clear All Filters – shown when any filter is active */}
+        {showClearAll && (
+          <div style={clearButtonCellStyle}>
+            <FormButton
+              variant='secondary'
+              size='small'
+              icon='ClearFilter'
+              iconPosition='left'
+              onClick={handleClearAll}
+              aria-label='Clear all filters'
+            >
+              Clear Filters
+            </FormButton>
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -215,6 +405,8 @@ export function ContentListingPage({
           iconName={iconName}
           description={description}
           filters={renderFilters()}
+          backArrow={backArrow}
+          backArrowPath={backArrowPath}
         />
 
         {/* Results Count */}
@@ -228,15 +420,24 @@ export function ContentListingPage({
             }}
           >
             {resultsMessage}
+            {(startDate || endDate) &&
+              processedCards.length !== cards.length &&
+              ` · ${processedCards.length} matching date range`}
           </Typography>
         )}
 
+        {/* Custom Section (e.g., GitHub contributions) */}
+        {customSection && (
+          <div style={{ marginBottom: theme.spacing.xl }}>{customSection}</div>
+        )}
+
         {/* Content Cards */}
-        {cards.length > 0 ? (
+        {processedCards.length > 0 ? (
           <div>
             <AdaptiveCardGrid
-              cards={cards}
+              cards={processedCards}
               viewType={getViewType()}
+              gridColumns={title === 'Books' ? 2 : undefined} // Force 2 columns for Books page as per requirements
               gap={theme.spacing.m}
               onCardClick={handleCardClick}
             />

@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { FormButton } from '@/theme/components/form';
+import { FormButton, FormInput, FormTextarea } from '@/theme/components/form';
 import { Typography } from '@/theme/components/typography';
+import { getApiEndpoint } from '@/lib/getApiUrl';
 
 interface FormData {
   name: string;
@@ -22,6 +24,7 @@ interface FormErrors {
 type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export const ContactForm: React.FC = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const { theme } = useAppTheme();
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -45,6 +48,8 @@ export const ContactForm: React.FC = () => {
 
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 10) {
+      newErrors.name = 'Name must be at least 10 characters';
     }
 
     if (!formData.email.trim()) {
@@ -55,6 +60,8 @@ export const ContactForm: React.FC = () => {
 
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 15) {
+      newErrors.message = 'Message must be at least 15 characters';
     } else if (formData.message.length > 1000) {
       newErrors.message = 'Message must be 1000 characters or less';
     }
@@ -63,21 +70,23 @@ export const ContactForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
+  const updateField = (name: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Update character count for message
     if (name === 'message') {
       setCharCount(value.length);
     }
 
-    // Clear error for this field
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    updateField(name as keyof FormData, value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,11 +101,25 @@ export const ContactForm: React.FC = () => {
       return;
     }
 
+    // Check if reCAPTCHA is available
+    if (!executeRecaptcha) {
+      setStatus('error');
+      setErrors({
+        submit:
+          'reCAPTCHA not available. Please refresh the page and try again.',
+      });
+      return;
+    }
+
     setStatus('submitting');
     setErrors({});
 
     try {
-      const response = await fetch('/api/contact', {
+      // Generate reCAPTCHA token
+      const recaptchaToken = await executeRecaptcha('contact_form_submit');
+
+      const apiUrl = getApiEndpoint('/api/contact');
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,6 +128,7 @@ export const ContactForm: React.FC = () => {
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          recaptchaToken, // Include reCAPTCHA token
         }),
       });
 
@@ -151,23 +175,6 @@ export const ContactForm: React.FC = () => {
     }
   };
 
-  const inputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: theme.spacing.m,
-    fontSize: '1rem',
-    fontFamily: theme.typography.fontFamilies.base,
-    backgroundColor: theme.palette.neutralLighter,
-    color: theme.palette.neutralPrimary,
-    border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
-    borderRadius: theme.borderRadius.s,
-    outline: 'none',
-    transition: 'border-color 0.2s ease',
-  };
-
-  const inputFocusStyle = {
-    borderColor: theme.palette.themePrimary,
-  };
-
   const errorStyle: React.CSSProperties = {
     color: theme.semanticColors.errorText || theme.palette.red,
     fontSize: '0.875rem',
@@ -190,43 +197,20 @@ export const ContactForm: React.FC = () => {
 
       {/* Name Field */}
       <div>
-        <label
-          htmlFor='name'
-          style={{
-            display: 'block',
-            marginBottom: theme.spacing.xs,
-            fontSize: '1rem',
-            fontWeight: theme.typography.fontWeights.semiBold,
-            color: theme.palette.neutralSecondary,
-          }}
-        >
-          Name{' '}
-          <span
-            style={{
-              color: theme.semanticColors.errorText || theme.palette.red,
-            }}
-          >
-            *
-          </span>
-        </label>
-        <input
+        <FormInput
+          label='Name'
           id='name'
           name='name'
           type='text'
           value={formData.name}
-          onChange={handleChange}
+          onChange={(value) => updateField('name', value)}
           placeholder='Your first and last name'
           required
+          requiredIndicator
           aria-required='true'
-          {...(errors.name && { 'aria-invalid': 'true' })}
+          aria-invalid={errors.name ? 'true' : undefined}
           aria-describedby={errors.name ? 'name-error' : undefined}
-          style={inputStyle}
-          onFocus={(e) =>
-            (e.target.style.borderColor = inputFocusStyle.borderColor)
-          }
-          onBlur={(e) =>
-            (e.target.style.borderColor = theme.palette.neutralQuaternaryAlt)
-          }
+          aria-label='Name'
         />
         {errors.name && (
           <div id='name-error' role='alert' style={errorStyle}>
@@ -237,43 +221,20 @@ export const ContactForm: React.FC = () => {
 
       {/* Email Field */}
       <div>
-        <label
-          htmlFor='email'
-          style={{
-            display: 'block',
-            marginBottom: theme.spacing.xs,
-            fontSize: '1rem',
-            fontWeight: theme.typography.fontWeights.semiBold,
-            color: theme.palette.neutralSecondary,
-          }}
-        >
-          E-mail{' '}
-          <span
-            style={{
-              color: theme.semanticColors.errorText || theme.palette.red,
-            }}
-          >
-            *
-          </span>
-        </label>
-        <input
+        <FormInput
+          label='E-mail'
           id='email'
           name='email'
           type='email'
           value={formData.email}
-          onChange={handleChange}
+          onChange={(value) => updateField('email', value)}
           placeholder='E-mail address'
           required
+          requiredIndicator
           aria-required='true'
-          {...(errors.email && { 'aria-invalid': 'true' })}
+          aria-invalid={errors.email ? 'true' : undefined}
           aria-describedby={errors.email ? 'email-error' : undefined}
-          style={inputStyle}
-          onFocus={(e) =>
-            (e.target.style.borderColor = inputFocusStyle.borderColor)
-          }
-          onBlur={(e) =>
-            (e.target.style.borderColor = theme.palette.neutralQuaternaryAlt)
-          }
+          aria-label='E-mail'
         />
         {errors.email && (
           <div id='email-error' role='alert' style={errorStyle}>
@@ -284,50 +245,27 @@ export const ContactForm: React.FC = () => {
 
       {/* Message Field */}
       <div>
-        <label
-          htmlFor='message'
-          style={{
-            display: 'block',
-            marginBottom: theme.spacing.xs,
-            fontSize: '1rem',
-            fontWeight: theme.typography.fontWeights.semiBold,
-            color: theme.palette.neutralSecondary,
-          }}
-        >
-          Message{' '}
-          <span
-            style={{
-              color: theme.semanticColors.errorText || theme.palette.red,
-            }}
-          >
-            *
-          </span>
-        </label>
-        <textarea
+        <FormTextarea
+          label='Message'
           id='message'
           name='message'
           value={formData.message}
-          onChange={handleChange}
+          onChange={(value) => updateField('message', value)}
           placeholder='Type your message here...'
           required
+          requiredIndicator
           aria-required='true'
-          {...(errors.message && { 'aria-invalid': 'true' })}
+          aria-invalid={errors.message ? 'true' : undefined}
           aria-describedby={
             errors.message ? 'message-error' : 'message-counter'
           }
+          aria-label='Message'
           maxLength={1000}
           rows={6}
           style={{
-            ...inputStyle,
             resize: 'vertical',
             minHeight: '150px',
           }}
-          onFocus={(e) =>
-            (e.target.style.borderColor = inputFocusStyle.borderColor)
-          }
-          onBlur={(e) =>
-            (e.target.style.borderColor = theme.palette.neutralQuaternaryAlt)
-          }
         />
         <div
           style={{

@@ -82,6 +82,7 @@ export function PressReleaseDetailClient({
         variant: 'secondary' as const,
       })),
     ],
+    generatedWithAI: pressRelease.generatedWithAI,
   };
 
   return <UnifiedContentDetail config={config} />;

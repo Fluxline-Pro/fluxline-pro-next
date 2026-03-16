@@ -8,6 +8,9 @@
     "exclude": [
       "/api/*",
       "/_next/*",
+      "/_next/static/*",
+      "/_next/static/chunks/*",
+      "/_next/data/*",
       "/favicon.ico",
       "/images/*",
       "/assets/*",
@@ -16,6 +19,7 @@
       "/case-studies/*",
       "/press-release/*",
       "/videos/*",
+      "/podcasts/*",
       "/scrolls/*",
       "/*.{css,js,png,jpg,jpeg,gif,ico,svg,woff,woff2,ttf,eot,webp,mp4,webm}"
     ]
@@ -79,8 +83,10 @@
     ".ttf": "font/ttf",
     ".eot": "application/vnd.ms-fontobject",
     ".pdf": "application/pdf",
+    ".mp3": "audio/mpeg",
     ".mp4": "video/mp4",
-    ".webm": "video/webm"
+    ".webm": "video/webm",
+    ".xml": "application/rss+xml"
   },
   "globalHeaders": {
     "X-Content-Type-Options": "nosniff",

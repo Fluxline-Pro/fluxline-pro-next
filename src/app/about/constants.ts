@@ -165,10 +165,10 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
  */
 export const COMPANY_VALUES: CompanyValue[] = [
   {
-    id: 'emotional-intelligence',
-    title: 'Emotional Intelligence',
+    id: 'embodied-awareness',
+    title: 'Embodied Awareness',
     description:
-      'We honor the emotional landscape of transformation, recognizing that lasting change comes from within.',
+      'Integrating mind, body, and spirit for holistic transformation and authentic connection.',
     icon: 'HeartFill',
   },
   {
@@ -186,18 +186,18 @@ export const COMPANY_VALUES: CompanyValue[] = [
     icon: 'Globe',
   },
   {
+    id: 'somatic-discipline',
+    title: 'Somatic Discipline',
+    description:
+    'Recognizing the wisdom of the body and integrating physical practices with strategic thinking.',
+    icon: 'Health',
+  },
+  {
     id: 'creative-truth',
     title: 'Creative Truth',
     description:
       'Authentic expression and honest communication guide every interaction and deliverable.',
     icon: 'Lightbulb',
-  },
-  {
-    id: 'somatic-discipline',
-    title: 'Somatic Discipline',
-    description:
-      'Recognizing the wisdom of the body and integrating physical practices with strategic thinking.',
-    icon: 'Health',
   },
   {
     id: 'strategic-innovation',

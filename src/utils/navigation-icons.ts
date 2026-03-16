@@ -4,6 +4,20 @@
  */
 
 import { navItems } from '@/theme/components/header/navigation.config';
+import type { NavItem } from '@/theme/components/header/navigation.types';
+
+/**
+ * Flatten nav items including children for exhaustive lookup
+ */
+function flattenNavItems(items: NavItem[]): NavItem[] {
+  return items.reduce<NavItem[]>((acc, item) => {
+    acc.push(item);
+    if (item.children) acc.push(...flattenNavItems(item.children));
+    return acc;
+  }, []);
+}
+
+const allNavItems = flattenNavItems(navItems);
 
 /**
  * Get the icon name for a given path from the navigation configuration
@@ -11,12 +25,12 @@ import { navItems } from '@/theme/components/header/navigation.config';
  * @returns The Fluent UI icon name, or undefined if not found
  */
 export const getIconForPath = (path: string): string | undefined => {
-  // Exact match first
-  const exactMatch = navItems.find((item) => item.path === path);
+  // Exact match first (including children)
+  const exactMatch = allNavItems.find((item) => item.path === path);
   if (exactMatch) return exactMatch.iconName;
 
   // Check if path starts with any nav item path (for nested routes)
-  const partialMatch = navItems.find((item) => {
+  const partialMatch = allNavItems.find((item) => {
     // Skip root path for partial matching
     if (item.path === '/') return false;
     return path.startsWith(item.path);
@@ -31,10 +45,10 @@ export const getIconForPath = (path: string): string | undefined => {
  * @returns The full NavItem object, or undefined if not found
  */
 export const getNavItemForPath = (path: string) => {
-  const exactMatch = navItems.find((item) => item.path === path);
+  const exactMatch = allNavItems.find((item) => item.path === path);
   if (exactMatch) return exactMatch;
 
-  const partialMatch = navItems.find((item) => {
+  const partialMatch = allNavItems.find((item) => {
     if (item.path === '/') return false;
     return path.startsWith(item.path);
   });

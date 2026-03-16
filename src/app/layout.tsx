@@ -1,18 +1,11 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 
-// Theme and layout components
-import ThemeProvider from '../theme/contexts/ThemeProvider';
-import { ThemeOverrideProvider } from '../theme/contexts/ThemeOverrideContext';
-import { FontScaleProvider } from '../theme/providers';
-import { Header } from '../theme/components/header';
-import { SkipToContent } from '../theme/components/skip-to-content';
-import { GlobalFooter } from '../theme/components/layout/global-footer';
-import { IosDetector } from '../components/IosDetector';
-import { AccessGate } from '../components/AccessGate';
+// Providers wrapper
+import { Providers } from './providers';
 
 // Global styles
-import './tailwind.css'; // ← Tailwind base/utilities first
+import './tailwind.css'; // ← Tailwind base/utilities and Typekit content first
 import './globals.scss'; // ← Your custom styles override Tailwind
 
 export const metadata: Metadata = {
@@ -77,6 +70,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,8 +84,6 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
-        {/* Typekit stylesheet for custom typography */}
-        <link rel='stylesheet' href='https://use.typekit.net/qmh5dow.css' />
         {/* Font Awesome icons */}
         <link
           rel='stylesheet'
@@ -205,19 +202,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <IosDetector />
-        <FontScaleProvider>
-          <ThemeOverrideProvider>
-            <ThemeProvider>
-              <AccessGate>
-                <SkipToContent />
-                <Header />
-                {children}
-                <GlobalFooter />
-              </AccessGate>
-            </ThemeProvider>
-          </ThemeOverrideProvider>
-        </FontScaleProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

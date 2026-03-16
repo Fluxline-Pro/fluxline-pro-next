@@ -5,6 +5,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '@/theme/components/typography';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { FluentIcon } from '@/theme/components/fluent-icon';
+import { FormButton } from '@/theme/components/form/FormButton';
 import Link from 'next/link';
 
 export interface HeroProps {
@@ -106,6 +107,7 @@ export const Hero: React.FC<HeroProps> = ({
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const [isExpanded, setIsExpanded] = React.useState(false);
 
   /**
    * Truncates text to first sentence (up to and including first period)
@@ -117,6 +119,14 @@ export const Hero: React.FC<HeroProps> = ({
       return text; // No period found, return full text
     }
     return text.substring(0, periodIndex + 1); // Include the period
+  };
+
+  /**
+   * Checks if description has more content beyond first sentence
+   */
+  const hasMoreContent = (text: string): boolean => {
+    const firstSentence = getFirstSentence(text);
+    return text.length > firstSentence.length;
   };
 
   return (
@@ -147,8 +157,9 @@ export const Hero: React.FC<HeroProps> = ({
       <div
         style={{
           display: 'flex',
-          alignItems: isMobile ? 'flex-start' : 'center',
-          gap: isMobile ? '0.75rem' : theme.spacing.xs,
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          gap: isMobile ? '0.25rem' : theme.spacing.xs,
           flexWrap: isMobile ? 'nowrap' : 'wrap',
         }}
       >
@@ -201,10 +212,10 @@ export const Hero: React.FC<HeroProps> = ({
           variant='h1'
           style={{
             color: theme.palette.themePrimary,
-            fontSize: isMobile ? '1.75rem' : 'clamp(2rem, 5vw, 3rem)',
+            fontSize: isMobile ? '2.25rem' : 'clamp(2rem, 5vw, 3rem)',
             fontWeight: theme.typography.fontWeights.bold,
             lineHeight: isMobile ? '1.2' : '1.3',
-            margin: 0,
+            margin: '0.25rem 0 0 0',
             flex: 1,
           }}
         >
@@ -267,18 +278,40 @@ export const Hero: React.FC<HeroProps> = ({
       )}
 
       {description && (
-        <Typography
-          variant='p'
-          style={{
-            color: theme.palette.neutralSecondary,
-            fontSize: isMobile ? '1rem' : '1.125rem',
-            lineHeight: isMobile ? '1.6' : theme.typography.lineHeights.relaxed,
-            marginTop: '1rem',
-            marginBottom: '1rem',
-          }}
-        >
-          {isMobile ? getFirstSentence(description) : description}
-        </Typography>
+        <div style={{ margin: !isMobile ? '1rem 0' : '0' }}>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: isMobile ? '1rem' : '1.125rem',
+              lineHeight: isMobile
+                ? '1.6'
+                : theme.typography.lineHeights.relaxed,
+              margin: 0,
+            }}
+          >
+            {isMobile && !isExpanded
+              ? getFirstSentence(description)
+              : description}
+          </Typography>
+          {isMobile && hasMoreContent(description) && (
+            <FormButton
+              variant='secondary'
+              size='medium'
+              icon={isExpanded ? 'ChevronUp' : 'ChevronDown'}
+              iconPosition='right'
+              onClick={() => setIsExpanded(!isExpanded)}
+              aria-expanded={isExpanded}
+              aria-label={isExpanded ? 'Read less' : 'Read more'}
+              style={{
+                marginTop: '0.5rem',
+                alignSelf: 'flex-start',
+              }}
+            >
+              {isExpanded ? 'Read less' : 'Read more'}
+            </FormButton>
+          )}
+        </div>
       )}
       {filters && (
         <div

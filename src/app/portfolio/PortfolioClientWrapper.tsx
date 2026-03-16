@@ -57,6 +57,7 @@ export function PortfolioClientWrapper({
       imageUrl: project.featuredImage.url,
       imageAlt: project.featuredImage.alt,
       imageText: `${project.role}${project.client ? ` • ${project.client}` : ''}`,
+      date: project.publishedDate,
     }));
   }, [filteredProjects]);
 
@@ -101,6 +102,11 @@ export function PortfolioClientWrapper({
           ? 'Try adjusting your filters to see more projects.'
           : 'Check back soon for new projects.'
       }
+      hasActiveFilters={hasActiveFilters}
+      onClearFilters={() => {
+        setSelectedTags([]);
+        setSelectedTechnologies([]);
+      }}
       ctaSection={{
         title: "Let's Build Something Amazing Together",
         description:
@@ -118,6 +124,8 @@ export function PortfolioClientWrapper({
           },
         ],
       }}
+      backArrow={true}
+      backArrowPath='/content'
     />
   );
 }

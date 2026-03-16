@@ -18,6 +18,7 @@ interface ContentCategory {
   path: string;
   iconName: string;
   color: string;
+  isHighlighted?: boolean;
   comingSoon?: boolean;
 }
 
@@ -36,7 +37,7 @@ export default function ContentPageClient() {
     {
       title: 'Blog',
       description:
-        'Insights, best practices, and thoughts on technology, design, and business transformation.',
+      'Insights, best practices, and thoughts on technology, design, and business transformation.',
       path: '/blog',
       iconName: 'TextDocumentShared',
       color: theme.palette.themePrimary,
@@ -44,27 +45,44 @@ export default function ContentPageClient() {
     {
       title: 'Portfolio',
       description:
-        'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
+      'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
       path: '/portfolio',
       iconName: 'FolderQuery',
       color: theme.palette.tealLight,
     },
     {
-      title: 'Media',
+      title: 'Videos',
       description:
-        'Videos, podcasts, and multimedia content showcasing our expertise and insights.',
-      path: '/media',
+      'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
+      path: '/videos',
       iconName: 'Video',
       color: theme.palette.magentaLight,
-      comingSoon: true,
     },
     {
       title: 'GitHub',
       description:
-        'Open source projects, code samples, and technical resources from our development team.',
+      'Open source projects, code samples, and technical resources from our development team.',
       path: '/github',
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
+    },
+    // TODO: move Books to the top once launched, and add a "New!" badge to it -TW
+    {
+      title: 'Books',
+      description:
+        'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
+      path: '/books',
+      iconName: 'BookAnswers',
+      color: theme.palette.blueLight,
+      comingSoon: true,
+    },
+    {
+      title: 'Podcasts',
+      description:
+        '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
+      path: '/podcasts',
+      iconName: 'Microphone',
+      color: theme.palette.yellowDark,
       comingSoon: true,
     },
   ];
@@ -73,6 +91,20 @@ export default function ContentPageClient() {
     if (!comingSoon) {
       router.push(path);
     }
+  };
+
+  const badgeStyles: React.CSSProperties = {
+    position: 'absolute',
+    top: theme.spacing.m,
+    right: theme.spacing.m,
+    padding: `${theme.spacing.s2} ${theme.spacing.s1}`,
+    backgroundColor: theme.palette.themePrimary,
+    color: theme.palette.black,
+    borderRadius: theme.effects.roundedCorner4,
+    fontSize: '1rem',
+    fontWeight: theme.typography.fontWeights.semiBold,
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
   };
 
   const isMobile =
@@ -128,12 +160,13 @@ export default function ContentPageClient() {
                 style={{
                   position: 'relative',
                   padding: theme.spacing.l1,
-                  backgroundColor: isHovered
-                    ? theme.palette.neutralLighter
-                    : theme.themeMode === 'dark'
-                      ? theme.palette.themeDark
-                      : theme.palette.white,
-                  border: `2px solid ${isHovered ? category.color : theme.palette.neutralLight}`,
+                  backgroundColor:
+                    isHovered || category.isHighlighted
+                      ? theme.palette.neutralQuaternaryAlt
+                      : theme.themeMode === 'dark'
+                        ? theme.palette.themeDark
+                        : theme.palette.white,
+                  border: `2px solid ${isHovered || category.isHighlighted ? category.color : theme.palette.neutralLight}`,
                   borderRadius: theme.effects.roundedCorner6,
                   cursor: isDisabled ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s ease',
@@ -149,36 +182,41 @@ export default function ContentPageClient() {
                   flexDirection: 'column',
                 }}
               >
+                {/* Highlight New Badge */}
+                {category.isHighlighted && (
+                  <div
+                    style={{
+                      ...badgeStyles,
+                      backgroundColor: theme.palette.greenLight,
+                    }}
+                  >
+                    New!
+                  </div>
+                )}
                 {/* Coming Soon Badge */}
                 {category.comingSoon && (
                   <div
                     style={{
-                      position: 'absolute',
-                      top: theme.spacing.m,
-                      right: theme.spacing.m,
-                      padding: `${theme.spacing.s2} ${theme.spacing.s1}`,
+                      ...badgeStyles,
                       backgroundColor: theme.palette.themePrimary,
-                      color: theme.palette.white,
-                      borderRadius: theme.effects.roundedCorner4,
-                      fontSize: '0.75rem',
-                      fontWeight: theme.typography.fontWeights.semiBold,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px',
                     }}
                   >
-                    Coming Soon
+                    Coming Soon!
                   </div>
                 )}
 
-                {/* Icon */}
+                {/* Icon and Title */}
                 <div
                   style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: theme.spacing.m,
                     marginBottom: theme.spacing.m,
                   }}
                 >
                   <FluentIcon
                     iconName={category.iconName}
-                    size='xLarge'
+                    size='large'
                     color={
                       isHovered
                         ? category.color
@@ -186,25 +224,24 @@ export default function ContentPageClient() {
                     }
                     style={{
                       transition: 'color 0.3s ease',
+                      flexShrink: 0,
                     }}
                   />
+                  <Typography
+                    variant='h2'
+                    style={{
+                      color: isHovered
+                        ? category.color
+                        : theme.palette.neutralPrimary,
+                      fontSize: '1.75rem',
+                      fontWeight: theme.typography.fontWeights.semiBold,
+                      transition: 'color 0.3s ease',
+                      margin: 0,
+                    }}
+                  >
+                    {category.title}
+                  </Typography>
                 </div>
-
-                {/* Title */}
-                <Typography
-                  variant='h2'
-                  style={{
-                    color: isHovered
-                      ? category.color
-                      : theme.palette.neutralPrimary,
-                    marginBottom: theme.spacing.s1,
-                    fontSize: '1.75rem',
-                    fontWeight: theme.typography.fontWeights.semiBold,
-                    transition: 'color 0.3s ease',
-                  }}
-                >
-                  {category.title}
-                </Typography>
 
                 {/* Description */}
                 <Typography

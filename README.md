@@ -53,7 +53,9 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app.
 - 📊 **Case Studies** - File-based case studies with industry/service filtering and metrics visualization
 - 🎨 **Portfolio** - Markdown project showcases with galleries, tags, and external links
 - 📄 **Scrolls/White Papers** - Downloadable strategic insights with metadata
-- 🏢 **Services** - Dynamic service pages with detailed information
+- � **Video Section** - YouTube channel integration with automatic video fetching
+- 🎙️ **Podcast Section** - Azure-backed podcast episodes with RSS feed generation
+- �🏢 **Services** - Dynamic service pages with detailed information
 
 ### Development Tools
 
@@ -170,7 +172,7 @@ fluxline-pro-next/
 ├── docs/                         # Documentation
 │   ├── ANIMATIONS.md             # Animation system guide
 │   ├── HOOKS.md                  # Custom hooks reference
-│   ├── BLOG_IMPLEMENTATION.md    # Blog system docs
+│   ├── FILE_BASED_BLOG_GUIDE.md  # Blog content guide
 │   └── ... (more docs)
 └── scripts/                      # Build scripts
     └── generate-component.js     # Component generator
@@ -307,25 +309,17 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 
 ### Core Documentation
 
-- **[COPILOT_INSTRUCTIONS.md](COPILOT_INSTRUCTIONS.md)** - Development guidelines and architecture (⭐ Start here)
+- **[GitHub Copilot Instructions](.github/copilot-instructions.md)** - Development guidelines and architecture (⭐ Start here)
 - **[ANIMATIONS.md](ANIMATIONS.md)** - Animation system guide
 - **[HOOKS.md](HOOKS.md)** - Custom React hooks reference
 - **[src/theme/THEMING.md](src/theme/THEMING.md)** - Theme system documentation
 
 ### Feature Documentation
 
-- **[BLOG_IMPLEMENTATION.md](BLOG_IMPLEMENTATION.md)** - Blog system overview
-- **[FILE_BASED_BLOG_GUIDE.md](FILE_BASED_BLOG_GUIDE.md)** - Complete blog guide
-- **[PORTFOLIO_REFACTORING_SUMMARY.md](PORTFOLIO_REFACTORING_SUMMARY.md)** - Portfolio markdown migration
-- **[CASE_STUDIES_IMPLEMENTATION.md](CASE_STUDIES_IMPLEMENTATION.md)** - Case studies markdown system
-- **[CONTENT_LISTING_CONSOLIDATION.md](CONTENT_LISTING_CONSOLIDATION.md)** - Unified listing system
-- **[UNIFIED_CONTENT_DETAIL_SUMMARY.md](UNIFIED_CONTENT_DETAIL_SUMMARY.md)** - Unified detail pages
-- **[SCROLLS_IMPLEMENTATION_SUMMARY.md](SCROLLS_IMPLEMENTATION_SUMMARY.md)** - Scrolls/white papers system
-
-### Phase Documentation
-
-- **[PHASE_2_COMPLETION.md](PHASE_2_COMPLETION.md)** - Phase 2 migration summary
-- **[SCROLLS_IMPLEMENTATION_SUMMARY.md](SCROLLS_IMPLEMENTATION_SUMMARY.md)** - Scrolls implementation
+- **[FILE_BASED_BLOG_GUIDE.md](FILE_BASED_BLOG_GUIDE.md)** - Complete blog system guide
+- **[ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md)** - Environment variables reference
+- **[TOKEN_ACCESS_README.md](TOKEN_ACCESS_README.md)** - Token-based access control
+- **[VIDEO_UPLOAD_INSTRUCTIONS.md](VIDEO_UPLOAD_INSTRUCTIONS.md)** - Testimonial video upload guide
 
 ### Azure Documentation
 
@@ -339,6 +333,8 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 - **[public/portfolio/posts/HOW_TO_CREATE_A_PORTFOLIO_PROJECT.md](public/portfolio/posts/HOW_TO_CREATE_A_PORTFOLIO_PROJECT.md)** - Portfolio project guide
 - **[public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md](public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md)** - Press release creation guide
 - **[public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md](public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md)** - Case study creation guide
+- **[api/HOW_TO_ADD_PODCAST_EPISODE.md](api/HOW_TO_ADD_PODCAST_EPISODE.md)** - Podcast episode upload guide
+- **[VIDEO_UPLOAD_INSTRUCTIONS.md](VIDEO_UPLOAD_INSTRUCTIONS.md)** - YouTube video instructions
 
 ## 🚢 Deployment
 
@@ -586,7 +582,7 @@ See [LICENSE](LICENSE) file for details.
 
 ## 🙋 Support
 
-- **Documentation**: Start with [COPILOT_INSTRUCTIONS.md](COPILOT_INSTRUCTIONS.md)
+- **Documentation**: Start with [GitHub Copilot Instructions](.github/copilot-instructions.md)
 - **Issues**: Open GitHub issues for bugs
 - **Questions**: Check existing documentation first
 
