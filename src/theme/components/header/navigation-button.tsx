@@ -59,7 +59,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
       <div
         style={{
           position: 'absolute',
-          top: '70%',
+          top: '72%',
           left: '50%',
           transform: 'translateX(-50%)',
           backgroundColor: 'transparent',
@@ -82,24 +82,6 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
         }}
       >
         {tooltipText}
-        {/* Tooltip arrow
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '100%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 0,
-            height: 0,
-            color:
-              themeMode === 'dark'
-                ? theme.palette.neutralLighterAlt
-                : theme.palette.black,
-            borderLeft: '4px solid transparent',
-            borderRight: '4px solid transparent',
-            borderBottom: '4px solid rgba(0, 0, 0, 0.9)',
-          }}
-        /> */}
       </div>
     </div>
   );
