@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import { useDeviceOrientation } from '../../../hooks/useMediaQuery';
 import { Typography } from '../../typography';
-import { themeMap } from '@/theme/theme';
+import theme, { themeMap } from '@/theme/theme';
 import { useColorVisionFilter } from '@/theme/hooks';
 import { useNewsletterStore } from '@/store/store';
 import { getApiEndpoint } from '@/lib/getApiUrl';
@@ -64,7 +64,7 @@ export const StyledLink: React.FC<{
 
   const linkStyle: React.CSSProperties = {
     color: getFooterTextColor(themeMode), // don't change the text color on any mode changes
-    fontSize: '0.875rem',
+    fontSize: '1rem',
     textDecoration: 'none',
     transition:
       'color 0.2s ease-in-out, font-variation-settings 0.2s ease-in-out',
@@ -144,7 +144,7 @@ const FooterNewsletterSignup: React.FC = () => {
 
   const headStyle: React.CSSProperties = {
     color: accentColor,
-    fontSize: '1rem',
+    fontSize: '1.25rem',
     fontWeight: 600,
     marginBottom: '0.5rem',
     textTransform: 'capitalize',
@@ -156,9 +156,15 @@ const FooterNewsletterSignup: React.FC = () => {
         <Typography variant='h3' style={headStyle}>
           Newsletter
         </Typography>
-        <span style={{ color: '#4CAF50', fontSize: '0.875rem' }}>
+        <Typography
+          variant='label'
+          style={{
+            color: theme.semanticColors.successIcon,
+            fontSize: '1.125rem',
+          }}
+        >
           ✓ You&apos;re subscribed!
-        </span>
+        </Typography>
       </div>
     );
   }
@@ -286,7 +292,7 @@ export const HomeFooter: React.FC = () => {
 
   const headingStyle: React.CSSProperties = {
     color: getHoverLinkAndHeaderColor(themeMode), // don't change the text color on any mode changes
-    fontSize: '1rem',
+    fontSize: '1.25rem',
     fontWeight: theme.typography.fontWeights.semiBold,
     marginBottom: '0.5rem',
     textTransform: 'capitalize',
@@ -294,7 +300,7 @@ export const HomeFooter: React.FC = () => {
 
   const contactInfoStyle: React.CSSProperties = {
     color: theme.palette.neutralSecondary,
-    fontSize: '0.875rem',
+    fontSize: '1rem',
     lineHeight: '1.6',
   };
 

@@ -76,7 +76,7 @@ async function getGraphToken(tenantId, clientId, clientSecret) {
 /**
  * Makes a JSON request to the Microsoft Graph API.
  */
-async function graphRequest(method, path, token, body) {
+async function graphRequest(method, path, token, body, extraHeaders) {
   return new Promise((resolve, reject) => {
     const bodyStr = body ? JSON.stringify(body) : null;
 
@@ -88,6 +88,7 @@ async function graphRequest(method, path, token, body) {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
         ...(bodyStr && { 'Content-Length': Buffer.byteLength(bodyStr) }),
+        ...extraHeaders,
       },
     };
 
@@ -183,7 +184,9 @@ module.exports = async function (context, req) {
     const searchResult = await graphRequest(
       'GET',
       `/v1.0/sites/${siteId}/lists/${listId}/items?$filter=${encodedEmail}&$select=id`,
-      token
+      token,
+      null,
+      { Prefer: 'HonorNonIndexedQueriesWarningMayFailRandomly' }
     );
 
     if (searchResult.status !== 200) {

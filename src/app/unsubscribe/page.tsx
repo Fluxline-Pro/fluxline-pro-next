@@ -71,7 +71,7 @@ export default function UnsubscribePage() {
   };
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper isUnsubscribe layoutType='responsive-grid'>
       {/* Full-height centred container */}
       <div
         style={{
@@ -118,11 +118,12 @@ export default function UnsubscribePage() {
                 }
               />
               <Typography
-                variant='h2'
+                variant='h3'
                 style={{
                   color: theme.palette.themePrimary,
                   fontWeight: theme.typography.fontWeights.bold,
                   margin: 0,
+                  lineHeight: 1.1,
                 }}
               >
                 You&apos;ve been unsubscribed
@@ -133,6 +134,7 @@ export default function UnsubscribePage() {
                   color: theme.palette.neutralSecondary,
                   margin: 0,
                   lineHeight: theme.typography.lineHeights.relaxed,
+                  textAlign: 'left',
                 }}
               >
                 Your email has been removed from the A+ in FLUX – Mythmaker Drop
@@ -160,16 +162,16 @@ export default function UnsubscribePage() {
               >
                 <FluentIcon
                   iconName='MailAlert'
-                  size='medium'
+                  size='large'
                   color={theme.palette.themePrimary}
+                  style={{ marginRight: '0.25rem' }}
                 />
                 <Typography
-                  variant='h2'
+                  variant='h3'
                   style={{
                     color: theme.palette.themePrimary,
                     fontWeight: theme.typography.fontWeights.bold,
                     margin: 0,
-                    fontSize: '1.5rem',
                   }}
                 >
                   Unsubscribe
