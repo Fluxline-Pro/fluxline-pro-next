@@ -40,8 +40,12 @@ export const NewsletterPopup: React.FC = () => {
   const { shouldReduceMotion } = useReducedMotion();
   const pathname = usePathname();
 
-  const { newsletterDismissed, newsletterSubscribed, dismissNewsletter, setNewsletterSubscribed } =
-    useNewsletterStore();
+  const {
+    newsletterDismissed,
+    newsletterSubscribed,
+    dismissNewsletter,
+    setNewsletterSubscribed,
+  } = useNewsletterStore();
 
   const [isVisible, setIsVisible] = useState(false);
   const [hasDecided, setHasDecided] = useState(false); // Track random decision for this session
@@ -94,11 +98,14 @@ export const NewsletterPopup: React.FC = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch(getApiEndpoint('/api/newsletter-subscribe'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
+      const response = await fetch(
+        getApiEndpoint('/api/newsletter-subscribe'),
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        }
+      );
 
       if (response.ok) {
         setSubmitState('success');
@@ -108,7 +115,9 @@ export const NewsletterPopup: React.FC = () => {
         setTimeout(() => setIsVisible(false), 2500);
       } else {
         const data = await response.json().catch(() => ({}));
-        setErrorMessage(data?.error || 'Something went wrong. Please try again.');
+        setErrorMessage(
+          data?.error || 'Something went wrong. Please try again.'
+        );
         setSubmitState('error');
       }
     } catch {
@@ -224,7 +233,8 @@ export const NewsletterPopup: React.FC = () => {
                 e.currentTarget.style.backgroundColor = 'rgba(128,128,128,0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(128,128,128,0.15)';
+                e.currentTarget.style.backgroundColor =
+                  'rgba(128,128,128,0.15)';
               }}
             >
               <FluentIcon
@@ -234,9 +244,21 @@ export const NewsletterPopup: React.FC = () => {
               />
             </button>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.m }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: theme.spacing.m,
+              }}
+            >
               {/* Heading */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.s1 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: theme.spacing.s1,
+                }}
+              >
                 <FluentIcon
                   iconName='Mail'
                   size='medium'
@@ -264,9 +286,20 @@ export const NewsletterPopup: React.FC = () => {
                   margin: 0,
                 }}
               >
-                Subscribe to my free, biweekly newsletter — where I share
-                insights on Fluxline, The Resonance Core, and practical ways to
-                improve your life using this powerful framework.
+                Subscribe to our free, biweekly newsletter — where we share
+                insights on Fluxline, The Resonance Core Framework, and
+                practical ways to improve your life using it. <br />
+                <br />
+                Also, join our{' '}
+                <a
+                  href='https://www.facebook.com/groups/aplusinfluxmythmaker'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={{ color: theme.palette.themePrimary }}
+                >
+                  Facebook group
+                </a>
+                .
               </Typography>
 
               {submitState === 'success' ? (
@@ -280,12 +313,15 @@ export const NewsletterPopup: React.FC = () => {
                   <FluentIcon
                     iconName='CheckMark'
                     size='medium'
-                    color={theme.semanticColors.successIcon || theme.palette.green}
+                    color={
+                      theme.semanticColors.successIcon || theme.palette.green
+                    }
                   />
                   <Typography
                     variant='p'
                     style={{
-                      color: theme.semanticColors.successIcon || theme.palette.green,
+                      color:
+                        theme.semanticColors.successIcon || theme.palette.green,
                       fontWeight: theme.typography.fontWeights.semiBold,
                       margin: 0,
                     }}
@@ -314,7 +350,9 @@ export const NewsletterPopup: React.FC = () => {
                       />
                     </div>
                     <FormButton
-                      text={submitState === 'loading' ? 'Subscribing…' : 'Subscribe'}
+                      text={
+                        submitState === 'loading' ? 'Subscribing…' : 'Subscribe'
+                      }
                       variant='primary'
                       size='medium'
                       icon='Mail'
@@ -327,7 +365,8 @@ export const NewsletterPopup: React.FC = () => {
                   {errorMessage && (
                     <p
                       style={{
-                        color: theme.semanticColors.errorText || theme.palette.red,
+                        color:
+                          theme.semanticColors.errorText || theme.palette.red,
                         fontSize: '0.875rem',
                         margin: 0,
                       }}
@@ -349,7 +388,10 @@ export const NewsletterPopup: React.FC = () => {
                     <a
                       href='/unsubscribe'
                       style={{ color: theme.palette.themePrimary }}
-                      onClick={() => { setIsVisible(false); dismissNewsletter(); }}
+                      onClick={() => {
+                        setIsVisible(false);
+                        dismissNewsletter();
+                      }}
                     >
                       fluxline.pro/unsubscribe
                     </a>

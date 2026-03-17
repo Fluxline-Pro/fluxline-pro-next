@@ -47,11 +47,14 @@ export const NewsletterCTA: React.FC = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch(getApiEndpoint('/api/newsletter-subscribe'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
+      const response = await fetch(
+        getApiEndpoint('/api/newsletter-subscribe'),
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        }
+      );
 
       if (response.ok) {
         setSubmitState('success');
@@ -81,6 +84,8 @@ export const NewsletterCTA: React.FC = () => {
         border: `1px solid ${theme.palette.neutralQuaternary}`,
         borderRadius: theme.borderRadius.container.medium,
         padding: theme.spacing.xl,
+        maxWidth: '600px',
+        margin: '0 auto',
       }}
       aria-label='Newsletter sign-up'
     >
@@ -90,10 +95,17 @@ export const NewsletterCTA: React.FC = () => {
           flexDirection: 'column',
           gap: theme.spacing.m,
           maxWidth: '600px',
+          margin: '0 auto',
         }}
       >
         {/* Heading row */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.s1 }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: theme.spacing.s1,
+          }}
+        >
           <FluentIcon
             iconName='Mail'
             size='medium'
@@ -120,9 +132,10 @@ export const NewsletterCTA: React.FC = () => {
             margin: 0,
           }}
         >
-          Subscribe to my free, biweekly newsletter — where I share insights on
-          Fluxline, The Resonance Core, and practical ways to improve your life
-          using this powerful framework. Also available as a{' '}
+          Subscribe to our free, biweekly newsletter — where we share insights
+          on Fluxline, The Resonance Core Framework, and practical ways to
+          improve your life using it. <br /><br />
+          Also, join our{' '}
           <a
             href='https://www.facebook.com/groups/aplusinfluxmythmaker'
             target='_blank'
