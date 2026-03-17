@@ -84,8 +84,6 @@ export const NewsletterCTA: React.FC = () => {
         border: `1px solid ${theme.palette.neutralQuaternary}`,
         borderRadius: theme.borderRadius.container.medium,
         padding: theme.spacing.xl,
-        maxWidth: '600px',
-        margin: '0 auto',
       }}
       aria-label='Newsletter sign-up'
     >
@@ -94,8 +92,6 @@ export const NewsletterCTA: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: theme.spacing.m,
-          maxWidth: '600px',
-          margin: '0 auto',
         }}
       >
         {/* Heading row */}
@@ -108,7 +104,7 @@ export const NewsletterCTA: React.FC = () => {
         >
           <FluentIcon
             iconName='Mail'
-            size='medium'
+            size='large'
             color={theme.palette.themePrimary}
           />
           <Typography
@@ -156,7 +152,7 @@ export const NewsletterCTA: React.FC = () => {
               color: theme.semanticColors.successIcon || theme.palette.green,
             }}
           >
-            <FluentIcon iconName='CheckMark' size='medium' />
+            <FluentIcon iconName='CheckMark' size='large' />
             <Typography
               variant='p'
               style={{
