@@ -108,7 +108,7 @@ export default function ContactPage() {
             Let&apos;s Build Something Extraordinary
           </Typography>
 
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-1'>
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'>
             {/* Design Services Card */}
             <InteractiveCard
               id='design-services'

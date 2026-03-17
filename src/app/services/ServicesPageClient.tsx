@@ -95,7 +95,7 @@ export default function ServicesPageClient() {
               Physical training and transformational frameworks rooted in identity work and embodiment.
             </Typography>
             <div
-              className='grid gap-6'
+              className='grid gap-6 pt-1'
               style={{
                 gridTemplateColumns:
                   'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
@@ -141,7 +141,7 @@ export default function ServicesPageClient() {
               Web development and brand design to build your digital foundation.
             </Typography>
             <div
-              className='grid gap-6'
+              className='grid gap-6 pt-1'
               style={{
                 gridTemplateColumns:
                   'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
@@ -187,7 +187,7 @@ export default function ServicesPageClient() {
               Strategic consulting and transformational frameworks for clarity and growth.
             </Typography>
             <div
-              className='grid gap-6'
+              className='grid gap-6 pt-1'
               style={{
                 gridTemplateColumns:
                   'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',

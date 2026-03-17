@@ -35,7 +35,7 @@ export const RelatedServices: React.FC<{ currentServiceId: string }> = ({
         Related Services
       </Typography>
 
-      <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+      <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'>
         {relatedServices.map((service) => (
           <InteractiveCard
             key={service.id}
