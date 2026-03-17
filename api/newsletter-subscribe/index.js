@@ -7,9 +7,9 @@
  * Required Environment Variables:
  * - ENTRAID_SP_APP_REGISTRATION_CLIENT_ID  — Entra ID app registration client ID
  * - ENTRAID_SP_CLIENT_SECRET               — Entra ID app registration client secret
- * - ENTRAID_SP_TENANT_ID                   — Azure AD tenant ID
- * - SHAREPOINT_SITE_ID                     — SharePoint site ID (or use SHAREPOINT_SITE_URL)
- * - SHAREPOINT_LIST_ID                     — SharePoint list ID for the Email Distribution List
+ * - ENTRAID_SP_TENANT_ID                   — Azure AD tenant ID (GUID format)
+ * - SHAREPOINT_SITE_ID                     — SharePoint site ID (GUID format)
+ * - SHAREPOINT_LIST_ID                     — SharePoint list ID for the Email Distribution List (GUID format)
  * - SHAREPOINT_EMAIL_FIELD                 — SharePoint list field name for email address
  * - SHAREPOINT_PLATFORM_FIELD              — SharePoint list field name for platform/source
  * - SHAREPOINT_TIMESTAMP_FIELD             — SharePoint list field name for submission timestamp

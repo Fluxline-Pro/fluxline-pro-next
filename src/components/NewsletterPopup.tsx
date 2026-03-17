@@ -13,7 +13,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
@@ -404,7 +404,7 @@ export const NewsletterPopup: React.FC = () => {
                     }}
                   >
                     No spam, ever. Unsubscribe anytime at{' '}
-                    <a
+                    <Link
                       href='/unsubscribe'
                       style={{ color: theme.palette.themePrimary }}
                       onClick={() => {
@@ -413,7 +413,7 @@ export const NewsletterPopup: React.FC = () => {
                       }}
                     >
                       fluxline.pro/unsubscribe
-                    </a>
+                    </Link>
                     .
                   </Typography>
                 </>

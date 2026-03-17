@@ -8,6 +8,7 @@
  */
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '@/theme/components/typography';
 import { FormInput } from '@/theme/components/form/FormInput';
@@ -217,12 +218,12 @@ export const NewsletterCTA: React.FC = () => {
               }}
             >
               No spam, ever. Unsubscribe anytime at{' '}
-              <a
+              <Link
                 href='/unsubscribe'
                 style={{ color: theme.palette.themePrimary }}
               >
                 fluxline.pro/unsubscribe
-              </a>
+              </Link>
               .
             </Typography>
           </>

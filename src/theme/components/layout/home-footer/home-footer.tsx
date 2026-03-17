@@ -105,16 +105,26 @@ const FooterNewsletterSignup: React.FC = () => {
     useNewsletterStore();
   const [email, setEmail] = useState('');
   const [submitState, setSubmitState] = useState<FooterSubmitState>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const textColor = getFooterTextColor(themeMode);
   const accentColor = getHoverLinkAndHeaderColor(themeMode);
   const isLightMode = themeMode === 'light' || themeMode === 'grayscale';
 
   const handleSubscribe = async () => {
-    if (!email.trim()) return;
+    if (!email.trim()) {
+      setErrorMessage('Please enter your email address.');
+      setSubmitState('error');
+      return;
+    }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return;
+    if (!emailRegex.test(email)) {
+      setErrorMessage('Please enter a valid email address.');
+      setSubmitState('error');
+      return;
+    }
     setSubmitState('loading');
+    setErrorMessage('');
     try {
       const response = await fetch(
         getApiEndpoint('/api/newsletter-subscribe'),
@@ -129,9 +139,11 @@ const FooterNewsletterSignup: React.FC = () => {
         setNewsletterSubscribed(true);
         setEmail('');
       } else {
+        setErrorMessage('Something went wrong. Please try again.');
         setSubmitState('error');
       }
     } catch {
+      setErrorMessage('Unable to connect. Please try again later.');
       setSubmitState('error');
     }
   };
@@ -225,9 +237,9 @@ const FooterNewsletterSignup: React.FC = () => {
       >
         {submitState === 'loading' ? 'Subscribing…' : 'Subscribe'}
       </button>
-      {submitState === 'error' && (
+      {submitState === 'error' && errorMessage && (
         <span style={{ color: '#ff6b6b', fontSize: '0.75rem' }} role='alert'>
-          Something went wrong. Please try again.
+          {errorMessage}
         </span>
       )}
     </div>
