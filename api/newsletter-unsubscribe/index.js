@@ -10,6 +10,7 @@
  * - ENTRAID_SP_TENANT_ID                   — Azure AD tenant ID
  * - SHAREPOINT_SITE_ID                     — SharePoint site ID
  * - SHAREPOINT_LIST_ID                     — SharePoint list ID for the Email Distribution List
+ * - SHAREPOINT_EMAIL_FIELD                 — SharePoint list field name for email address
  *
  * POST /api/newsletter-unsubscribe
  * Body: { email: string }
@@ -57,7 +58,9 @@ async function getGraphToken(tenantId, clientId, clientSecret) {
           if (parsed.access_token) {
             resolve(parsed.access_token);
           } else {
-            reject(new Error(parsed.error_description || 'Failed to obtain token'));
+            reject(
+              new Error(parsed.error_description || 'Failed to obtain token')
+            );
           }
         } catch (e) {
           reject(e);
@@ -148,9 +151,19 @@ module.exports = async function (context, req) {
   const clientSecret = process.env.ENTRAID_SP_CLIENT_SECRET;
   const siteId = process.env.SHAREPOINT_SITE_ID;
   const listId = process.env.SHAREPOINT_LIST_ID;
+  const emailField = process.env.SHAREPOINT_EMAIL_FIELD;
 
-  if (!tenantId || !clientId || !clientSecret || !siteId || !listId) {
-    context.log.error('Missing required environment variables for SharePoint integration.');
+  if (
+    !tenantId ||
+    !clientId ||
+    !clientSecret ||
+    !siteId ||
+    !listId ||
+    !emailField
+  ) {
+    context.log.error(
+      'Missing required environment variables for SharePoint integration.'
+    );
     context.res = {
       status: 500,
       headers: CORS_HEADERS,
@@ -164,7 +177,9 @@ module.exports = async function (context, req) {
 
     // Escape single quotes in email to prevent OData filter injection
     const safeEmail = email.replace(/'/g, "''");
-    const encodedEmail = encodeURIComponent(`fields/Email eq '${safeEmail}'`);
+    const encodedEmail = encodeURIComponent(
+      `fields/${emailField} eq '${safeEmail}'`
+    );
     const searchResult = await graphRequest(
       'GET',
       `/v1.0/sites/${siteId}/lists/${listId}/items?$filter=${encodedEmail}&$select=id`,
@@ -185,7 +200,9 @@ module.exports = async function (context, req) {
 
     if (items.length === 0) {
       // Per AC 4d: no error shown to user, but log a warning
-      context.log.warn(`No email found in distribution list for unsubscribe: ${email}`);
+      context.log.warn(
+        `No email found in distribution list for unsubscribe: ${email}`
+      );
       // Still return 200 to the front-end — user sees the confirmation regardless
       context.res = {
         status: 200,

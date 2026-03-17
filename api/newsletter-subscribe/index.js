@@ -10,6 +10,9 @@
  * - ENTRAID_SP_TENANT_ID                   — Azure AD tenant ID
  * - SHAREPOINT_SITE_ID                     — SharePoint site ID (or use SHAREPOINT_SITE_URL)
  * - SHAREPOINT_LIST_ID                     — SharePoint list ID for the Email Distribution List
+ * - SHAREPOINT_EMAIL_FIELD                 — SharePoint list field name for email address
+ * - SHAREPOINT_PLATFORM_FIELD              — SharePoint list field name for platform/source
+ * - SHAREPOINT_TIMESTAMP_FIELD             — SharePoint list field name for submission timestamp
  *
  * POST /api/newsletter-subscribe
  * Body: { email: string }
@@ -57,7 +60,9 @@ async function getGraphToken(tenantId, clientId, clientSecret) {
           if (parsed.access_token) {
             resolve(parsed.access_token);
           } else {
-            reject(new Error(parsed.error_description || 'Failed to obtain token'));
+            reject(
+              new Error(parsed.error_description || 'Failed to obtain token')
+            );
           }
         } catch (e) {
           reject(e);
@@ -148,9 +153,23 @@ module.exports = async function (context, req) {
   const clientSecret = process.env.ENTRAID_SP_CLIENT_SECRET;
   const siteId = process.env.SHAREPOINT_SITE_ID;
   const listId = process.env.SHAREPOINT_LIST_ID;
+  const emailField = process.env.SHAREPOINT_EMAIL_FIELD;
+  const platformField = process.env.SHAREPOINT_PLATFORM_FIELD;
+  const timestampField = process.env.SHAREPOINT_TIMESTAMP_FIELD;
 
-  if (!tenantId || !clientId || !clientSecret || !siteId || !listId) {
-    context.log.error('Missing required environment variables for SharePoint integration.');
+  if (
+    !tenantId ||
+    !clientId ||
+    !clientSecret ||
+    !siteId ||
+    !listId ||
+    !emailField ||
+    !platformField ||
+    !timestampField
+  ) {
+    context.log.error(
+      'Missing required environment variables for SharePoint integration.'
+    );
     context.res = {
       status: 500,
       headers: CORS_HEADERS,
@@ -164,7 +183,9 @@ module.exports = async function (context, req) {
 
     // Check for duplicate subscription before adding
     const safeEmail = email.replace(/'/g, "''");
-    const encodedFilter = encodeURIComponent(`fields/Email eq '${safeEmail}'`);
+    const encodedFilter = encodeURIComponent(
+      `fields/${emailField} eq '${safeEmail}'`
+    );
     const existing = await graphRequest(
       'GET',
       `/v1.0/sites/${siteId}/lists/${listId}/items?$filter=${encodedFilter}&$select=id`,
@@ -187,9 +208,9 @@ module.exports = async function (context, req) {
       token,
       {
         fields: {
-          Email: email,
-          LeadPlatform: 'Fluxline.pro',
-          Timestamp: new Date().toISOString(),
+          [emailField]: email,
+          [platformField]: 'Fluxline.pro',
+          [timestampField]: new Date().toISOString(),
         },
       }
     );
