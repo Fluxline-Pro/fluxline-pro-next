@@ -63,7 +63,8 @@ export const NewsletterPopup: React.FC = () => {
     if (newsletterDismissed || newsletterSubscribed) return;
 
     // Don't show on excluded pages
-    if (EXCLUDED_PATHS.some((p) => pathname === p)) return;
+    const normalizedPath = pathname.replace(/\/$/, '') || '/';
+    if (EXCLUDED_PATHS.some((p) => normalizedPath === p)) return;
 
     // Decide once per session whether to show the popup
     if (!hasDecided) {
