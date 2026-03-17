@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { UnifiedPageWrapper, InteractiveCard } from '@/components';
+import { UnifiedPageWrapper, InteractiveCard, NewsletterCTA } from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -148,6 +148,9 @@ export default function ContactPage() {
             )}
           </div>
         </section>
+
+        {/* Newsletter CTA */}
+        <NewsletterCTA />
       </div>
     </UnifiedPageWrapper>
   );

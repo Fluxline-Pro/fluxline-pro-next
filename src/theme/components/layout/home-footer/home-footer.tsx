@@ -1,13 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAppTheme } from '../../../hooks/useAppTheme';
 import { useDeviceOrientation } from '../../../hooks/useMediaQuery';
 import { Typography } from '../../typography';
-import { themeMap } from '@/theme/theme';
+import theme, { themeMap } from '@/theme/theme';
 import { useColorVisionFilter } from '@/theme/hooks';
+import { useNewsletterStore } from '@/store/store';
+import { getApiEndpoint } from '@/lib/getApiUrl';
 
 /**
  * HomeFooter Component
@@ -62,7 +64,7 @@ export const StyledLink: React.FC<{
 
   const linkStyle: React.CSSProperties = {
     color: getFooterTextColor(themeMode), // don't change the text color on any mode changes
-    fontSize: '0.875rem',
+    fontSize: '1rem',
     textDecoration: 'none',
     transition:
       'color 0.2s ease-in-out, font-variation-settings 0.2s ease-in-out',
@@ -92,6 +94,155 @@ export const StyledLink: React.FC<{
     >
       {children}
     </Link>
+  );
+};
+
+type FooterSubmitState = 'idle' | 'loading' | 'success' | 'error';
+
+const FooterNewsletterSignup: React.FC = () => {
+  const { themeMode } = useAppTheme();
+  const { newsletterSubscribed, setNewsletterSubscribed } =
+    useNewsletterStore();
+  const [email, setEmail] = useState('');
+  const [submitState, setSubmitState] = useState<FooterSubmitState>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const textColor = getFooterTextColor(themeMode);
+  const accentColor = getHoverLinkAndHeaderColor(themeMode);
+  const isLightMode = themeMode === 'light' || themeMode === 'grayscale';
+
+  const handleSubscribe = async () => {
+    if (!email.trim()) {
+      setErrorMessage('Please enter your email address.');
+      setSubmitState('error');
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMessage('Please enter a valid email address.');
+      setSubmitState('error');
+      return;
+    }
+    setSubmitState('loading');
+    setErrorMessage('');
+    try {
+      const response = await fetch(
+        getApiEndpoint('/api/newsletter-subscribe'),
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        }
+      );
+      if (response.ok) {
+        setSubmitState('success');
+        setNewsletterSubscribed(true);
+        setEmail('');
+      } else {
+        setErrorMessage('Something went wrong. Please try again.');
+        setSubmitState('error');
+      }
+    } catch {
+      setErrorMessage('Unable to connect. Please try again later.');
+      setSubmitState('error');
+    }
+  };
+
+  const colStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem',
+  };
+
+  const headStyle: React.CSSProperties = {
+    color: accentColor,
+    fontSize: '1.25rem',
+    fontWeight: 600,
+    marginBottom: '0.5rem',
+    textTransform: 'capitalize',
+  };
+
+  if (newsletterSubscribed || submitState === 'success') {
+    return (
+      <div style={colStyle}>
+        <Typography variant='h3' style={headStyle}>
+          Newsletter
+        </Typography>
+        <Typography
+          variant='label'
+          style={{
+            color: theme.semanticColors.successIcon,
+            fontSize: '1.125rem',
+          }}
+        >
+          ✓ You&apos;re subscribed!
+        </Typography>
+      </div>
+    );
+  }
+
+  return (
+    <div style={colStyle}>
+      <Typography variant='h3' style={headStyle}>
+        Stay in the Loop
+      </Typography>
+      <Typography
+        variant='p'
+        style={{
+          color: textColor,
+          fontSize: '0.8rem',
+          margin: 0,
+          lineHeight: '1.5',
+        }}
+      >
+        Biweekly insights on Fluxline and The Resonance Core Framework.
+      </Typography>
+      <input
+        type='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        onKeyDown={(e) => e.key === 'Enter' && handleSubscribe()}
+        placeholder='your@email.com'
+        aria-label='Email address for newsletter'
+        style={{
+          backgroundColor: isLightMode
+            ? 'rgba(0, 0, 0, 0.08)'
+            : 'rgba(255, 255, 255, 0.1)',
+          border: `1px solid ${accentColor}`,
+          borderRadius: '4px',
+          color: textColor,
+          fontSize: '0.8rem',
+          padding: '0.4rem 0.6rem',
+          outline: 'none',
+          width: '100%',
+          boxSizing: 'border-box',
+        }}
+      />
+      <button
+        onClick={handleSubscribe}
+        disabled={submitState === 'loading'}
+        style={{
+          backgroundColor: accentColor,
+          border: 'none',
+          borderRadius: '4px',
+          color: accentColor === '#FFFFFF' ? '#000000' : '#ffffff',
+          cursor: submitState === 'loading' ? 'not-allowed' : 'pointer',
+          fontSize: '0.8rem',
+          fontWeight: 600,
+          opacity: submitState === 'loading' ? 0.7 : 1,
+          padding: '0.4rem 1rem',
+          transition: 'opacity 0.2s ease',
+          width: '100%',
+        }}
+      >
+        {submitState === 'loading' ? 'Subscribing…' : 'Subscribe'}
+      </button>
+      {submitState === 'error' && errorMessage && (
+        <span style={{ color: '#ff6b6b', fontSize: '0.75rem' }} role='alert'>
+          {errorMessage}
+        </span>
+      )}
+    </div>
   );
 };
 
@@ -138,7 +289,7 @@ export const HomeFooter: React.FC = () => {
     backdropFilter: 'blur(10px)',
     padding: '2rem 4rem',
     display: 'grid',
-    gridTemplateColumns: '1fr 2fr 1fr',
+    gridTemplateColumns: '1fr 2fr 1fr 1fr',
     gap: '3rem',
     alignItems: 'start',
     borderTop: `2px solid ${theme.palette.themePrimary}`,
@@ -153,7 +304,7 @@ export const HomeFooter: React.FC = () => {
 
   const headingStyle: React.CSSProperties = {
     color: getHoverLinkAndHeaderColor(themeMode), // don't change the text color on any mode changes
-    fontSize: '1rem',
+    fontSize: '1.25rem',
     fontWeight: theme.typography.fontWeights.semiBold,
     marginBottom: '0.5rem',
     textTransform: 'capitalize',
@@ -161,7 +312,7 @@ export const HomeFooter: React.FC = () => {
 
   const contactInfoStyle: React.CSSProperties = {
     color: theme.palette.neutralSecondary,
-    fontSize: '0.875rem',
+    fontSize: '1rem',
     lineHeight: '1.6',
   };
 
@@ -276,6 +427,9 @@ export const HomeFooter: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Newsletter Sign-up */}
+      <FooterNewsletterSignup />
     </footer>
   );
 };

@@ -10,6 +10,7 @@ import { Header } from '../theme/components/header';
 import { SkipToContent } from '../theme/components/skip-to-content';
 import { GlobalFooter } from '../theme/components/layout/global-footer';
 import { IosDetector } from '../components/IosDetector';
+import { NewsletterPopup } from '../components/NewsletterPopup';
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -33,6 +34,7 @@ export function Providers({ children }: ProvidersProps) {
                 <SkipToContent />
                 <Header />
                 {children}
+                <NewsletterPopup />
                 <GlobalFooter />
               </AccessGate>
             </ReCaptchaProvider>

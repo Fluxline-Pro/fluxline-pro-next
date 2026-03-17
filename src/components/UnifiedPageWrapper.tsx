@@ -241,6 +241,9 @@ export interface UnifiedPageWrapperProps {
   // PageWrapper props
   respectLayoutPreference?: boolean;
 
+  // isUnsubscribe to vertically center content
+  isUnsubscribe?: boolean;
+
   // Unified options
   imageConfig?: ImageConfig;
 
@@ -472,6 +475,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   imageConfig,
   forceImageConfig,
   legalPageConfig,
+  isUnsubscribe = false,
 }) => {
   const pathname = usePathname();
 
@@ -791,7 +795,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
           layoutPreference === 'left-handed'
             ? `calc(25vw + ${theme.spacing.l})`
             : containerStyle.padding,
-        alignItems: !isMobile && isContentScrollable ? 'start' : 'center',
+        alignItems: !isMobile && isContentScrollable ? isUnsubscribe ? 'center' : 'start' : 'center',
       };
 
   // Adjust content style based on scrollability and layout

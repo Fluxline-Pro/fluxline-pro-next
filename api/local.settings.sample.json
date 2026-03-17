@@ -25,6 +25,14 @@
     "STRIPE_PRICE_ID_BOOK": "price_<book-price-id>",
     "STRIPE_PRICE_ID_WORKBOOK": "price_<workbook-price-id>",
     "STRIPE_PRICE_ID_BUNDLE": "price_<bundle-price-id>",
-    "STRIPE_WEBHOOK_SECRET": "whsec_<your-webhook-signing-secret>"
+    "STRIPE_WEBHOOK_SECRET": "whsec_<your-webhook-signing-secret>",
+    "ENTRAID_SP_APP_REGISTRATION_CLIENT_ID": "<your-app-registration-client-id>",
+    "ENTRAID_SP_CLIENT_SECRET": "<your-app-registration-client-secret>",
+    "ENTRAID_SP_TENANT_ID": "<your-tenant-id>",
+    "SHAREPOINT_SITE_ID": "<your-sharepoint-site-id>",
+    "SHAREPOINT_LIST_ID": "<your-sharepoint-list-id>",
+    "SHAREPOINT_EMAIL_FIELD": "Title",
+    "SHAREPOINT_PLATFORM_FIELD": "field_1",
+    "SHAREPOINT_TIMESTAMP_FIELD": "Timestamp"
   }
 }

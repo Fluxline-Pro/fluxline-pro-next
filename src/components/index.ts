@@ -25,3 +25,5 @@ export type {
   ContentListingPageProps,
 } from './ContentListingPage';
 export { AccessGate } from './AccessGate';
+export { NewsletterCTA } from './NewsletterCTA';
+export { NewsletterPopup } from './NewsletterPopup';
