@@ -83,6 +83,25 @@ export const NewsletterPopup: React.FC = () => {
     dismissNewsletter();
   };
 
+  // ESC to close and scroll lock while visible
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isVisible) {
+        handleDismiss();
+      }
+    };
+
+    if (isVisible) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isVisible]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleSubscribe = async () => {
     if (!email.trim()) {
       setErrorMessage('Please enter your email address.');
