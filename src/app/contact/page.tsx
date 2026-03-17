@@ -14,13 +14,14 @@ import { getIconForPath } from '@/utils/navigation-icons';
 import { ContactForm } from './components/ContactForm';
 import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
 import { SocialLinks } from '@/app/about/components/SocialLinks';
 import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -107,7 +108,7 @@ export default function ContactPage() {
             Let&apos;s Build Something Extraordinary
           </Typography>
 
-          <div className='grid gap-6 md:grid-cols-2'>
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-1'>
             {/* Design Services Card */}
             <InteractiveCard
               id='design-services'
@@ -136,13 +137,15 @@ export default function ContactPage() {
             />
 
             {/* Tutoring Services Card */}
-            <InteractiveCard
-              id='tutoring-services'
-              title='Training & Mentorship'
-              description='One-on-one tutoring and mentorship in design, development, and creative technologies. Empowering the next generation of creators.'
-              icon='Education'
-              iconPosition='center'
-            />
+            {!isDesktop && (
+              <InteractiveCard
+                id='tutoring-services'
+                title='Training & Mentorship'
+                description='One-on-one tutoring and mentorship in design, development, and creative technologies. Empowering the next generation of creators.'
+                icon='Education'
+                iconPosition='center'
+              />
+            )}
           </div>
         </section>
 

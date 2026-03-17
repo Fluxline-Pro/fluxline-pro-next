@@ -87,7 +87,7 @@ export const FormInput: React.FC<FormInputProps> = ({
         onChange={(e) => onChange?.(e.target.value)}
         style={{
           width: '100%',
-          padding: '0.5rem',
+          padding: '0.5rem 0.5rem 0.5rem 0.75rem',
           borderRadius: theme.borderRadius.container.small,
           backgroundColor: theme.palette.neutralLight,
           border: `1px solid ${theme.palette.neutralTertiaryAlt}`,

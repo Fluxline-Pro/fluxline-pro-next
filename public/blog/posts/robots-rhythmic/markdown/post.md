@@ -53,6 +53,7 @@ seoKeywords:
     'intelligent training',
     'body awareness',
   ]
+generatedWithAI: true
 ---
 
 # We're Not Robots — We're Rhythmic

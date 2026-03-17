@@ -31,6 +31,7 @@ seoKeywords:
     'intentional design',
     'Resonance Core Framework',
   ]
+generatedWithAI: true
 ---
 
 # ✨ The Fluxline Philosophy

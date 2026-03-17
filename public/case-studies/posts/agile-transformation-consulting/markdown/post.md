@@ -48,6 +48,7 @@ testimonial:
     Terence transformed our development team from a collection of individuals working in isolation into a synchronized, high-performing Agile unit. The infrastructure he built and the processes he established became the foundation for all our future enterprise projects. His leadership as Principal Engineer and Scrum Lead was instrumental in delivering MyIntermountain on time and setting new standards for our organization.
   author: 'Sarah Mitchell'
   role: 'Director of Digital Workplace, Intermountain Health'
+generatedWithAI: true
 ---
 
 # Intermountain Health: Agile Transformation & Infrastructure

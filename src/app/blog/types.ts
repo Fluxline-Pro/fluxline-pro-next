@@ -23,6 +23,7 @@ export interface BlogPost {
   tags: string[];
   category: string;
   featured?: boolean;
+  generatedWithAI?: boolean;
   seoMetadata: {
     title: string;
     description: string;

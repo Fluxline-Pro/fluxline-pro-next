@@ -28,6 +28,7 @@ seoKeywords:
     'brand identity',
   ]
 featured: true
+generatedWithAI: true
 ---
 
 # How We Built Fluxline 2.0: A Technical and Strategic Breakdown

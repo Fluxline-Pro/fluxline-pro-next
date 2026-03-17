@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { ThemeProvider as FluentThemeProvider } from '@fluentui/react';
 import { setIconOptions } from '@fluentui/react/lib/Styling';
 import { useAppTheme } from '../hooks/useAppTheme';
+import { useReducedTransparency } from '../hooks/useReducedTransparency';
 import { applyThemeToDocument } from '../theme';
 
 // Disable warnings about icon fonts to reduce noise
@@ -24,6 +25,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { theme, themeMode } = useAppTheme();
+
+  // Activate reduced-transparency body class side effect globally
+  useReducedTransparency();
 
   // Apply theme to document when theme mode changes
   useEffect(() => {

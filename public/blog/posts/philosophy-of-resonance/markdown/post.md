@@ -28,6 +28,7 @@ seoKeywords:
     'drive',
     'Ryan Reynolds',
   ]
+generatedWithAI: true
 ---
 
 # 🧠 Resonance, Part 1: The Philosophy of Resonance

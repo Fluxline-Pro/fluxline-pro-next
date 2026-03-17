@@ -7,6 +7,7 @@ import { useAppTheme } from '../../../hooks/useAppTheme';
 import { useDeviceOrientation } from '../../../hooks/useMediaQuery';
 import { Typography } from '../../typography';
 import { themeMap } from '@/theme/theme';
+import { useColorVisionFilter } from '@/theme/hooks';
 
 /**
  * HomeFooter Component
@@ -97,6 +98,7 @@ export const StyledLink: React.FC<{
 export const HomeFooter: React.FC = () => {
   const { theme, themeMode } = useAppTheme();
   const orientation = useDeviceOrientation();
+  const { filter: logoFilter } = useColorVisionFilter();
 
   const getBackground = (): string => {
     switch (themeMode) {
@@ -173,16 +175,20 @@ export const HomeFooter: React.FC = () => {
       {/* Logo Section */}
       <div style={columnStyle}>
         <Image
-          src='/images/home/FluxlineLogoHomePage.png'
+          src={
+            themeMode === 'light'
+              ? '/images/home/FluxlineLogoLightMode.png'
+              : '/images/home/FluxlineLogoHomePage.png'
+          }
           alt='Fluxline Logo'
           width={200}
           height={60}
           style={{
             objectFit: 'contain',
             filter:
-              themeMode === 'light' || themeMode === 'grayscale'
-                ? 'invert(1)'
-                : 'none',
+              themeMode === 'grayscale'
+                ? `invert(1) ${logoFilter}`
+                : logoFilter,
           }}
         />
       </div>

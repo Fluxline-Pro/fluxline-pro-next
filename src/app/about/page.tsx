@@ -141,7 +141,7 @@ export default function AboutPage() {
           >
             Our Values
           </Typography>
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+          <div className='grid gap-6 md:grid-cols-2 pt-1 lg:grid-cols-3'>
             {COMPANY_VALUES.map((value) => (
               <InteractiveCard
                 key={value.id}
@@ -211,6 +211,7 @@ export default function AboutPage() {
               {TEAM_MEMBERS.map((member) => (
                 <div
                   key={member.id}
+                  className='pt-1'
                   style={{
                     maxWidth: '400px',
                     width: '100%',
