@@ -96,6 +96,11 @@ export default function RootLayout({
           href='https://fonts.gstatic.com'
           crossOrigin='anonymous'
         />
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7691902367885014'
+          crossOrigin='anonymous'
+        ></script>
       </head>
       <body className='antialiased' suppressHydrationWarning>
         {/* Organization structured data for SEO */}
