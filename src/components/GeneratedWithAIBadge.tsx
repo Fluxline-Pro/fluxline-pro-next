@@ -110,7 +110,7 @@ export const GeneratedWithAIBadge: React.FC = () => {
                   top: tooltipRect.top + tooltipRect.height / 2,
                   left: tooltipRect.right + 8,
                   transform: 'translateY(-50%)',
-                  zIndex: 9999,
+                  zIndex: 50,
                   width: '256px',
                   padding: '8px 12px',
                   borderRadius: '6px',

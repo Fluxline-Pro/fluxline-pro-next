@@ -824,7 +824,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         width: '100%',
         height: 'auto',
         padding: theme.spacing.m,
-        paddingTop: `calc(${headerHeight} + ${theme.spacing.m})`, // Dynamic header height + margin
+        paddingTop: theme.spacing.m, // Container already offsets by headerHeight; image only needs its own spacing
       }
     : imageStyle;
 

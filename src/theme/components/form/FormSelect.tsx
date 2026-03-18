@@ -199,7 +199,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                 borderRadius: theme.borderRadius.container.small,
                 backgroundColor: theme.palette.neutralLight,
                 boxShadow: theme.effects.elevation8,
-                zIndex: 1000,
+                zIndex: 500,
               }}
             >
               {options.map((option) => (

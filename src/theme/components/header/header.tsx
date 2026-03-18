@@ -220,7 +220,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 50,
+          zIndex: 1000,
           backgroundColor: theme.isInverted
             ? 'rgba(0, 0, 0, 0.5)'
             : 'rgba(255, 255, 255, 0.5)',
@@ -408,7 +408,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 color={buttonIconColor}
                 ariaLabel='Toggle theme'
                 tooltipText={themeMode === 'dark' ? 'Dark' : 'Light'}
-                hoverScale={1.05}
+                hoverScale={1.1}
               />
             )}
             <NavigationButton
@@ -417,7 +417,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               color={buttonIconColor}
               ariaLabel='Open settings'
               tooltipText='Settings'
-              hoverScale={1.05}
+              isHoveredSettings
             />
             <NavigationButton
               onClick={handleMenuClick}
@@ -442,7 +442,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             style={{
               position: 'fixed',
               inset: 0,
-              zIndex: 120,
+              zIndex: 10001,
               backgroundColor: 'rgba(0, 0, 0, 0.8)',
               backdropFilter: 'blur(8px)',
             }}
