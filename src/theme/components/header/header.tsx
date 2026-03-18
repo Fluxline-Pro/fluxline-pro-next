@@ -220,7 +220,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 50,
+          zIndex: 100,
           backgroundColor: theme.isInverted
             ? 'rgba(0, 0, 0, 0.5)'
             : 'rgba(255, 255, 255, 0.5)',
@@ -442,7 +442,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             style={{
               position: 'fixed',
               inset: 0,
-              zIndex: 120,
+              zIndex: 10001,
               backgroundColor: 'rgba(0, 0, 0, 0.8)',
               backdropFilter: 'blur(8px)',
             }}

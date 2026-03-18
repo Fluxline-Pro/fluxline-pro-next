@@ -62,10 +62,8 @@ body {
 
 /* Ensure scroll functionality remains while hiding scrollbars */
 html,
-body,
-div {
+body {
   overflow: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 /* =============================================

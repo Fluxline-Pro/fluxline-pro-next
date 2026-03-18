@@ -38,7 +38,7 @@ export const useSimpleLayout = (
       minHeight: '100vh',
       gap: isMobile ? theme.spacing.s : theme.spacing.m,
       padding: isMobile ? theme.spacing.s : theme.spacing.l,
-      paddingTop: isMobile ? '1rem' : `calc(${headerHeight} + 1rem)`, // Mobile: 1rem only, Desktop: Dynamic header height + 1rem
+      paddingTop: `calc(${headerHeight} + ${theme.spacing.m})`, // Always include header height + theme.spacing.m to prevent content starting under fixed header
       backgroundColor: 'transparent', // Always transparent to show fixed background
     };
 
