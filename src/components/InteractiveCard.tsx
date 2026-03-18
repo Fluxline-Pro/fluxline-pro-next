@@ -229,7 +229,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
                                 boxShadow: theme.shadows.tooltip,
                                 width: '90vw',
                                 maxWidth: '400px',
-                                zIndex: 10000,
+                                zIndex: 50,
                                 border: `2px solid ${theme.palette.themePrimary}`,
                                 pointerEvents: 'none',
                               }}
