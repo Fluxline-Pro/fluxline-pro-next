@@ -16,6 +16,7 @@ interface NavigationButtonProps {
   color: string;
   ariaLabel: string;
   tooltipText: string;
+  isHoveredSettings?: boolean;
   hoverScale?: number;
   className?: string;
 }
@@ -26,6 +27,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
   color,
   ariaLabel,
   tooltipText,
+  isHoveredSettings = false,
   hoverScale = 1.15,
   className,
 }) => {
@@ -45,7 +47,11 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
           padding: isMobile ? '0.75rem' : '1rem',
           display: 'flex',
           alignItems: 'center',
-          transform: isHovered ? `scale(${hoverScale})` : 'scale(1)',
+          transform: isHoveredSettings && isHovered
+            ? 'rotate(90deg)'
+            : isHovered
+              ? `scale(${hoverScale})`
+              : 'scale(1)',
           transition: 'background-color 0.2s ease, transform 0.2s ease',
         }}
         onMouseEnter={() => setIsHovered(true)}

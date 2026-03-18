@@ -408,7 +408,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                 color={buttonIconColor}
                 ariaLabel='Toggle theme'
                 tooltipText={themeMode === 'dark' ? 'Dark' : 'Light'}
-                hoverScale={1.05}
+                hoverScale={1.1}
               />
             )}
             <NavigationButton
@@ -417,7 +417,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
               color={buttonIconColor}
               ariaLabel='Open settings'
               tooltipText='Settings'
-              hoverScale={1.05}
+              isHoveredSettings
             />
             <NavigationButton
               onClick={handleMenuClick}
