@@ -297,10 +297,12 @@ export const ContactForm: React.FC = () => {
       <FormButton
         type='submit'
         variant='primary'
+        size='medium'
         fullWidth
         disabled={status === 'submitting'}
         text={status === 'submitting' ? 'Sending...' : 'Submit'}
         aria-busy={status === 'submitting'}
+        style={{ fontSize: '1.25rem' }}
       />
 
       {/* Success Message */}
