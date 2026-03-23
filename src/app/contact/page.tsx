@@ -6,14 +6,18 @@
  */
 
 import React from 'react';
-import { UnifiedPageWrapper, InteractiveCard, NewsletterCTA } from '@/components';
+import {
+  UnifiedPageWrapper,
+  InteractiveCard,
+  NewsletterCTA,
+} from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { getIconForPath } from '@/utils/navigation-icons';
 import { ContactForm } from './components/ContactForm';
 import { Callout } from '@/theme/components/callout/Callout';
-import { FormButton } from '@/theme/components/form/FormButton';
+import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
 import { SocialLinks } from '@/app/about/components/SocialLinks';
 import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';
@@ -50,16 +54,7 @@ export default function ContactPage() {
             variant='accent'
             title='Ready to Build?'
             subtitle="Each service is designed to align your vision with reality. Let's design the systems, strategies, and practices that work for you."
-            action={
-              <FormButton
-                text='View Our Services'
-                variant='primary'
-                size='large'
-                icon='ChevronRight'
-                iconPosition='right'
-                onClick={() => (window.location.href = '/services')}
-              />
-            }
+            action={<BookingsButton isHero />}
           />
         </Hero>
 

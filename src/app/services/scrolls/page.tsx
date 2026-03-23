@@ -56,22 +56,14 @@ export default function ScrollsPage() {
           variant='subtle'
           title='Ready to Transform?'
           action={
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <FormButton
-                text='Explore Our Services'
-                variant='primary'
-                size='large'
-                icon='ChevronRight'
-                iconPosition='right'
-                onClick={() => (window.location.href = '/services')}
-              />
-              <FormButton
-                text='Get In Touch'
-                variant='outline'
-                size='large'
-                onClick={() => (window.location.href = '/contact')}
-              />
-            </div>
+            <FormButton
+              text='Explore Our Services'
+              variant='primary'
+              size='large'
+              icon='ChevronRight'
+              iconPosition='right'
+              onClick={() => (window.location.href = '/services')}
+            />
           }
         >
           <Typography

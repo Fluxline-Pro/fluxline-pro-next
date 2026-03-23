@@ -6,7 +6,8 @@
  * Supports custom content and styling with smooth animations
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
@@ -47,6 +48,14 @@ export const Modal: React.FC<ModalProps> = ({
     theme.themeMode === 'dark' ||
     theme.themeMode === 'high-contrast' ||
     theme.themeMode === 'grayscale-dark';
+
+  // useSyncExternalStore returns false on server and true on client —
+  // the React-recommended way to detect the client without an effect.
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   // Handle ESC key to close modal
   useEffect(() => {
@@ -114,7 +123,9 @@ export const Modal: React.FC<ModalProps> = ({
     },
   };
 
-  return (
+  if (!isClient) return null;
+
+  return createPortal(
     <AnimatePresence mode='wait'>
       {isOpen && (
         <motion.div
@@ -128,12 +139,12 @@ export const Modal: React.FC<ModalProps> = ({
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            zIndex: 2000,
-            padding: '2rem',
+            zIndex: 9999,
+            padding: '1rem',
           }}
           onClick={onDismiss}
           role='dialog'
@@ -202,7 +213,8 @@ export const Modal: React.FC<ModalProps> = ({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

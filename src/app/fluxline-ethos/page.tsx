@@ -5,7 +5,11 @@
  * Presents the Fluxline philosophy, mission, and service framework
  */
 
-import { UnifiedPageWrapper, InteractiveCard, NewsletterCTA } from '@/components';
+import {
+  UnifiedPageWrapper,
+  InteractiveCard,
+  NewsletterCTA,
+} from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -19,6 +23,7 @@ import {
   ethosCTA,
 } from '@/lib/ethos/ethosContent';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { BookingsButton } from '@/theme/components/button/bookings-button';
 
 export default function FluxlineEthosPage() {
   const { theme } = useAppTheme();
@@ -157,16 +162,7 @@ export default function FluxlineEthosPage() {
         <Callout
           variant='accent'
           title={ethosCTA.title}
-          action={
-            <FormButton
-              text={ethosCTA.buttonText}
-              variant='primary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => (window.location.href = ethosCTA.buttonLink)}
-            />
-          }
+          action={<BookingsButton isHero />}
         >
           <Typography
             variant='p'

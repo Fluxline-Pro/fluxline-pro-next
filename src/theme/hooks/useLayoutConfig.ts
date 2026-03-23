@@ -43,15 +43,7 @@ export const useLayoutConfig = (
             right: 6,
           };
         case 'tablet-portrait':
-          return isLeftHanded
-            ? {
-                left: backgroundImage === 'one' ? 2 : 10,
-                right: backgroundImage === 'one' ? 10 : 2,
-              }
-            : {
-                left: backgroundImage === 'one' ? 10 : 2,
-                right: backgroundImage === 'one' ? 2 : 10,
-              };
+          return { left: 12, right: 12 };
         case 'landscape':
         case 'large-portrait':
         case 'ultrawide':
@@ -116,6 +108,7 @@ export const useLayoutConfig = (
 
   const gridTemplateColumns = useMemo(() => {
     if (orientation === 'portrait') return '1fr'; // Single column for stacked layout
+    if (isHomePage && orientation === 'tablet-portrait') return '1fr'; // Full-width centered layout for tablet portrait home page
 
     // Special handling for home page in mobile landscape
     if (isHomePage && orientation === 'mobile-landscape') {
@@ -155,6 +148,8 @@ export const useLayoutConfig = (
       : orientation === 'mobile-landscape'
         ? 'min(100vh, 800px)'
         : '100vh',
+    height:
+      isHomePage && orientation === 'tablet-portrait' ? '100vh' : undefined,
     maxHeight:
       (orientation === 'landscape' || orientation === 'ultrawide') &&
       !isHomePage
@@ -176,7 +171,7 @@ export const useLayoutConfig = (
       orientation !== 'portrait' &&
       orientation !== 'tablet-portrait' &&
       orientation !== 'mobile-landscape'
-        ? isHomePage ? '200px' : footerHeight || '200px' // Use dynamic footer height, fallback to 200px if not provided or on home page
+        ? footerHeight || '200px' // Use dynamic footer height, fallback to 200px if not provided or on home page
         : undefined,
     gap:
       orientation === 'portrait' ||
