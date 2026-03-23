@@ -13,7 +13,6 @@ import React, { useCallback, useEffect } from 'react';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '@/theme/components/typography';
 import { Modal } from '@/components/Modal';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useConsultationStorage } from './useConsultationStorage';
 import { StepServiceSelection } from './StepServiceSelection';
 import { StepContextualQuestions } from './StepContextualQuestions';
@@ -21,6 +20,7 @@ import { StepContactSchedule } from './StepContactSchedule';
 import { TIDYCAL_LINKS } from './constants';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { LeadPayload, MeetingLength, StepperStep, SubmitStatus } from './types';
+import { FormButton } from '@/theme/components/form/FormButton';
 
 declare global {
   interface Window {
@@ -164,7 +164,7 @@ function StepIndicator({
   );
 }
 
-function SuccessView({ zoomLink, onClose }: { zoomLink: string; onClose: () => void }) {
+function SuccessView({ onClose }: { onClose: () => void }) {
   const { theme } = useAppTheme();
   return (
     <div
@@ -190,7 +190,7 @@ function SuccessView({ zoomLink, onClose }: { zoomLink: string; onClose: () => v
         Your consultation has been scheduled. Check your inbox for a confirmation
         email with all the details.
       </Typography>
-      {zoomLink && (
+      {/* {zoomLink && (
         <a
           href={zoomLink}
           target='_blank'
@@ -210,8 +210,8 @@ function SuccessView({ zoomLink, onClose }: { zoomLink: string; onClose: () => v
           <FluentIcon iconName='Video' size='small' color={theme.palette.white} />
           Join Zoom Meeting
         </a>
-      )}
-      <button
+      )} */}
+      <FormButton
         type='button'
         onClick={onClose}
         style={{
@@ -225,7 +225,7 @@ function SuccessView({ zoomLink, onClose }: { zoomLink: string; onClose: () => v
         }}
       >
         Close
-      </button>
+      </FormButton>
     </div>
   );
 }

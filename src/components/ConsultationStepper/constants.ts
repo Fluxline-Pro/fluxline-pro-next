@@ -372,12 +372,12 @@ export function getQuestionSet(services: ServiceKey[]): QuestionSet {
   return QUESTION_SETS.generic;
 }
 
-export const TIDYCAL_BASE_URL = 'https://tidycal.com/fluxline';
+export const TIDYCAL_BASE_URL = 'https://tidycal.com/terencewaters';
 
 export const TIDYCAL_LINKS: Record<string, string> = {
-  '20': `${TIDYCAL_BASE_URL}/20-minute-consultation`,
-  '30': `${TIDYCAL_BASE_URL}/30-minute-consultation`,
-  '45': `${TIDYCAL_BASE_URL}/45-minute-consultation`,
+  '20': `${TIDYCAL_BASE_URL}/20-minute-consultation-client-services`,
+  '30': `${TIDYCAL_BASE_URL}/30-minute-consultation-client-services`,
+  '45': `${TIDYCAL_BASE_URL}/45-minute-consultation-client-services`,
 };
 
 export const LOCAL_STORAGE_KEY = 'fluxline_consultation_draft';

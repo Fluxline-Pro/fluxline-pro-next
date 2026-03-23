@@ -6,7 +6,7 @@
  * Supports custom content and styling with smooth animations
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -49,11 +49,13 @@ export const Modal: React.FC<ModalProps> = ({
     theme.themeMode === 'high-contrast' ||
     theme.themeMode === 'grayscale-dark';
 
-  // Track portal mount point — only available client-side
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // useSyncExternalStore returns false on server and true on client —
+  // the React-recommended way to detect the client without an effect.
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   // Handle ESC key to close modal
   useEffect(() => {
@@ -121,7 +123,7 @@ export const Modal: React.FC<ModalProps> = ({
     },
   };
 
-  if (!mounted) return null;
+  if (!isClient) return null;
 
   return createPortal(
     <AnimatePresence mode='wait'>
