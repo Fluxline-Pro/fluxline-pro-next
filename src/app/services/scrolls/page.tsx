@@ -10,7 +10,6 @@ import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Hero } from '@/theme/components/hero/Hero';
 import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
-import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { Typography } from '@/theme/components/typography';
 import { ScrollsGrid } from './components/ScrollsGrid';
 import { getAllScrolls } from './scrollsData';

@@ -190,7 +190,7 @@ module.exports = async function (context, req) {
     context.res = {
       status: 200,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ success: true, logged: false }),
+      body: JSON.stringify({ success: true, logged: true }),
     };
   }
 };
