@@ -74,7 +74,6 @@ const HomeContent: React.FC<{
     flexDirection: 'column' as const,
     gap: isMobileLandscape ? '0.25rem' : '0.5rem',
     maxWidth: '600px',
-    marginBottom: isDesktop ? '80px' : undefined, // to push up the card to center it with the height of the fixed header
   };
 
   // ── Typography styles ─────────────────────────────────────────────────
