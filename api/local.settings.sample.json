@@ -38,7 +38,7 @@
     "LEADS_LIST_ID": "<your-leads-list-id>",
     "LEAD_API_SECRET": "<generate-a-random-secret-and-copy-to-NEXT_PUBLIC_LEAD_API_SECRET>",
     "LEAD_STORE_RAW_PAYLOAD": "false",
-    "LEAD_QUEUE_NAME": "leadsqueuefluxline",
+    "LEAD_QUEUE_NAME": "leadsqueuefluxlinedev",
     "TIDYCAL_WEBHOOK_SECRET": "<your-tidycal-webhook-hmac-secret>"
   }
 }
