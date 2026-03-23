@@ -19,9 +19,8 @@ import {
 import { useHeaderHeight } from '@/theme/hooks/useHeaderHeight';
 import { useFooterHeight } from '@/theme/hooks/useFooterHeight';
 import type { ThemeMode } from '@/theme/theme';
+import { BookingsButton } from '@/theme';
 
-const BOOKINGS_URL =
-  'https://outlook.office.com/owa/calendar/Bookings@terencewaters.com/bookings/';
 const MOBILE_BACKGROUND_IMAGE_PATH =
   '/images/home/HomePageMobileGeometricBackground.jpg';
 
@@ -149,6 +148,7 @@ const HomeContent: React.FC<{
       isMobile && !isMobileLandscape ? ('column' as const) : ('row' as const),
     gap: '0.75rem',
     flexWrap: 'wrap' as const,
+    marginTop: isMobile ? undefined : theme.spacing.m,
     opacity: 0,
     animation: animateButtons
       ? 'fl-slideInUp 0.4s ease-in-out 0.6s forwards'
@@ -156,10 +156,11 @@ const HomeContent: React.FC<{
   };
 
   const buttonBaseStyle: React.CSSProperties = {
-    minWidth: isMobile ? '100%' : '180px',
+    minWidth: isMobile ? '100%' : '240px',
+    height: isMobile ? '48px' : '60px',
     fontSize: isMobileLandscape
       ? 'clamp(0.85rem, 2vw, 1rem)'
-      : 'clamp(0.95rem, 1.5vw, 1.1rem)',
+      : 'clamp(1.125rem, 1.5vw, 1.25rem)',
     fontWeight: theme.typography.fontWeights.semiBold,
   };
 
@@ -222,18 +223,7 @@ const HomeContent: React.FC<{
             About Us
           </FormButton>
 
-          <FormButton
-            variant='primary'
-            size='medium'
-            style={buttonBaseStyle}
-            aria-label='Book a Consultation (opens in a new tab)'
-            onClick={() =>
-              window.open(BOOKINGS_URL, '_blank', 'noopener,noreferrer')
-            }
-            id='bookings-button'
-          >
-            Book a Consultation
-          </FormButton>
+          <BookingsButton isHomePage style={buttonBaseStyle} />
         </div>
       </div>
     </div>

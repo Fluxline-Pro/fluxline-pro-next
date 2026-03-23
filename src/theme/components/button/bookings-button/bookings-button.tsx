@@ -10,6 +10,7 @@ interface BookingsButtonProps {
   willAnimate?: boolean;
   style?: React.CSSProperties;
   className?: string;
+  isHomePage?: boolean;
 }
 
 /**
@@ -23,6 +24,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   willAnimate,
   style,
   className,
+  isHomePage = false,
 }) => {
   const orientation = useDeviceOrientation();
   const [stepperOpen, setStepperOpen] = React.useState(false);
@@ -47,11 +49,11 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   };
 
   const buttonStyles: React.CSSProperties = {
-    marginTop: orientation === 'portrait' ? '0' : '1rem',
-    padding: '12px 16px',
+    marginTop: orientation === 'portrait' || isHomePage ? '0 !important' : '1rem',
+    padding: '0.75rem 1rem',
     minHeight: orientation === 'portrait' ? '40px' : undefined,
     minWidth: '250px',
-    maxWidth: '500px',
+    maxWidth: isHomePage ? undefined : '500px',
     width: animateSubHeader || orientation === 'portrait' ? '100%' : 'auto',
     fontSize: getResponsiveFontSize(),
     fontWeight: '600',
