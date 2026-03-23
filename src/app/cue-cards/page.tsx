@@ -11,6 +11,7 @@ import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Hero } from '@/theme/components/hero/Hero';
 import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
+import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { Typography } from '@/theme/components/typography';
 import { CueCardsGrid } from './components/CueCardsGrid';
 import { getAllCueCards, getFeaturedCueCards } from './cueCardsData';
@@ -107,12 +108,7 @@ export default function CueCardsPage() {
                 iconPosition='right'
                 onClick={() => (window.location.href = '/services')}
               />
-              <FormButton
-                text='Begin Your Journey'
-                variant='outline'
-                size='large'
-                onClick={() => (window.location.href = '/contact')}
-              />
+              <BookingsButton isHero />
             </div>
           }
         >

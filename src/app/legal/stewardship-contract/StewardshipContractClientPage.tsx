@@ -10,6 +10,7 @@ import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { content } from '../../../assets/legal/stewardship-contract';
 import { FadeUp } from '@/animations/fade-animations';
+import { BookingsButton } from '@/theme/components/button/bookings-button';
 
 export default function StewardshipContractClientPage() {
   const router = useRouter();
@@ -50,28 +51,7 @@ export default function StewardshipContractClientPage() {
             variant='accent'
             title='Partner With Us'
             subtitle='Experience the difference of working with a team committed to your success.'
-            action={
-              <div
-                style={{
-                  display: 'flex',
-                  gap: theme.spacing.m,
-                  flexWrap: 'wrap',
-                }}
-              >
-                <FormButton
-                  text='View Our Services'
-                  variant='primary'
-                  size='large'
-                  onClick={() => router.push('/services')}
-                />
-                <FormButton
-                  text='Get in Touch'
-                  variant='secondary'
-                  size='large'
-                  onClick={() => router.push('/contact')}
-                />
-              </div>
-            }
+            action={<BookingsButton isHero />}
           />
 
           {/* Copyright Footer */}

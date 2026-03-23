@@ -12,6 +12,7 @@ interface BookingsButtonProps {
   className?: string;
   isHomePage?: boolean;
   isHeader?: boolean;
+  isHero?: boolean;
 }
 
 /**
@@ -27,6 +28,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   className,
   isHomePage = false,
   isHeader = false,
+  isHero = false,
 }) => {
   const orientation = useDeviceOrientation();
   const [stepperOpen, setStepperOpen] = React.useState(false);
@@ -52,8 +54,16 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
 
   const buttonStyles: React.CSSProperties = {
     marginTop:
-      orientation === 'portrait' || isHomePage || isHeader ? '0 !important' : '1rem',
-    padding: isHeader ? '0.5rem' : !isHomePage ? '0.5rem 0.25rem' : '0.75rem 1rem',
+      orientation === 'portrait' || isHomePage || isHeader || isHero
+        ? '0 !important'
+        : '1rem',
+    padding: isHeader
+      ? '0.5rem'
+      : isHero
+        ? '1rem 1.25rem'
+        : !isHomePage
+          ? '0.5rem 0.25rem'
+          : '0.75rem 1rem',
     minHeight: orientation === 'portrait' ? '40px' : undefined,
     minWidth: isHeader ? '225px' : '250px',
     maxWidth: isHomePage ? undefined : '500px',
@@ -90,7 +100,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
     <>
       <FormButton
         variant='primary'
-        size={isHomePage ? 'medium' : 'small'}
+        size={isHero ? 'large' : isHomePage ? 'medium' : 'small'}
         onClick={handleClick}
         style={buttonStyles}
         className={className}
