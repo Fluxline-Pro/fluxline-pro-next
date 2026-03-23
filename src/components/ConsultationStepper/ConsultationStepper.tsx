@@ -24,7 +24,11 @@ import { FormButton } from '@/theme/components/form/FormButton';
 
 declare global {
   interface Window {
-    gtag?: (cmd: string, event: string, params?: Record<string, unknown>) => void;
+    gtag?: (
+      cmd: string,
+      event: string,
+      params?: Record<string, unknown>
+    ) => void;
   }
 }
 
@@ -77,7 +81,11 @@ function StepIndicator({
           return (
             <React.Fragment key={step}>
               <li
-                style={{ display: 'flex', alignItems: 'center', flex: idx < 2 ? 1 : undefined }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  flex: idx < 2 ? 1 : undefined,
+                }}
               >
                 <button
                   type='button'
@@ -111,9 +119,10 @@ function StepIndicator({
                         : isCurrent
                           ? theme.palette.themePrimary
                           : theme.palette.neutralQuaternaryAlt,
-                      color: isCompleted || isCurrent
-                        ? theme.palette.white
-                        : theme.palette.neutralSecondary,
+                      color:
+                        isCompleted || isCurrent
+                          ? theme.palette.white
+                          : theme.palette.neutralSecondary,
                       border: isCurrent
                         ? `3px solid ${theme.palette.themeDark}`
                         : 'none',
@@ -148,9 +157,10 @@ function StepIndicator({
                       marginBottom: '20px',
                       marginLeft: '8px',
                       marginRight: '8px',
-                      backgroundColor: step < currentStep
-                        ? theme.palette.themePrimary
-                        : theme.palette.neutralQuaternaryAlt,
+                      backgroundColor:
+                        step < currentStep
+                          ? theme.palette.themePrimary
+                          : theme.palette.neutralQuaternaryAlt,
                       transition: 'background-color 0.3s ease',
                     }}
                   />
@@ -179,38 +189,23 @@ function SuccessView({ onClose }: { onClose: () => void }) {
       role='status'
       aria-live='polite'
     >
-      <div style={{ fontSize: '4rem' }} aria-hidden='true'>🎉</div>
-      <Typography variant='h3' style={{ color: theme.palette.themePrimary, marginBottom: 0 }}>
+      <div style={{ fontSize: '4rem' }} aria-hidden='true'>
+        🎉
+      </div>
+      <Typography
+        variant='h3'
+        style={{ color: theme.palette.themePrimary, marginBottom: 0 }}
+      >
         You&apos;re all set!
       </Typography>
       <Typography
         variant='p'
         style={{ color: theme.palette.neutralSecondary, maxWidth: '400px' }}
       >
-        Your consultation has been scheduled. Check your inbox for a confirmation
-        email with all the details.
+        Your consultation has been scheduled. Check your inbox for a
+        confirmation email with all the details.
       </Typography>
-      {/* {zoomLink && (
-        <a
-          href={zoomLink}
-          target='_blank'
-          rel='noopener noreferrer'
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: `${theme.spacing.s2} ${theme.spacing.l}`,
-            backgroundColor: theme.palette.themePrimary,
-            color: theme.palette.white,
-            borderRadius: theme.effects.roundedCorner6,
-            fontWeight: theme.typography.fontWeights.semiBold,
-            textDecoration: 'none',
-          }}
-        >
-          <FluentIcon iconName='Video' size='small' color={theme.palette.white} />
-          Join Zoom Meeting
-        </a>
-      )} */}
+
       <FormButton
         type='button'
         onClick={onClose}
@@ -264,10 +259,17 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
   const { theme } = useAppTheme();
   const [currentStep, setCurrentStep] = React.useState<StepperStep>(1);
   const [status, setStatus] = React.useState<SubmitStatus>('idle');
-  const [zoomLink, setZoomLink] = React.useState('');
 
-  const { step1, step2, step3, hasDraft, setStep1, setStep2, setStep3, clearDraft } =
-    useConsultationStorage();
+  const {
+    step1,
+    step2,
+    step3,
+    hasDraft,
+    setStep1,
+    setStep2,
+    setStep3,
+    clearDraft,
+  } = useConsultationStorage();
 
   // Fire "stepper opened" event on open
   useEffect(() => {
@@ -347,8 +349,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
       });
 
       if (response.ok) {
-        const data = await response.json().catch(() => ({}));
-        setZoomLink(data.zoomLink ?? '');
+        await response.json().catch(() => ({}));
         fireEvent('consultation_booking_confirmed');
       } else {
         // Still show success — booking was opened, lead will be retried
@@ -369,7 +370,6 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
     setTimeout(() => {
       setCurrentStep(1);
       setStatus('idle');
-      setZoomLink('');
     }, 300);
   }, [onDismiss]);
 
@@ -430,7 +430,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
         )}
 
         {status === 'success' ? (
-          <SuccessView zoomLink={zoomLink} onClose={handleClose} />
+          <SuccessView onClose={handleClose} />
         ) : (
           <>
             <StepIndicator currentStep={currentStep} onStepClick={goToStep} />
