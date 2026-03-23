@@ -306,7 +306,7 @@ export default function Home() {
           width: '100%',
           minHeight: `calc(100dvh - ${headerHeight})`,
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: orientation === 'tablet-portrait' ? 'center' : 'flex-end',
           justifyContent: 'center',
           // pushes the card down to the bottom of the page on mobile
           paddingTop: isMobile
