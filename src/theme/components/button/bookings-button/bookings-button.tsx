@@ -11,6 +11,7 @@ interface BookingsButtonProps {
   style?: React.CSSProperties;
   className?: string;
   isHomePage?: boolean;
+  isHeader?: boolean;
 }
 
 /**
@@ -25,6 +26,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   style,
   className,
   isHomePage = false,
+  isHeader = false,
 }) => {
   const orientation = useDeviceOrientation();
   const [stepperOpen, setStepperOpen] = React.useState(false);
@@ -36,23 +38,24 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   // Build responsive font size based on orientation
   const getResponsiveFontSize = () => {
     if (orientation === 'portrait') {
-      return 'clamp(1.1rem, 3.2cqi, 1.5rem)';
+      return 'clamp(0.75rem, 2cqi, 1rem)';
     }
     if (orientation === 'square') {
-      return 'clamp(1.25rem, 3.7cqi, 1.3rem)';
+      return 'clamp(1.1rem, 3.7cqi, 1.125rem)';
     }
     if (orientation === 'mobile-landscape') {
-      return 'clamp(1.2rem, 3.2cqi, 1.5rem)';
+      return 'clamp(0.85rem, 3.2cqi, 1rem)';
     }
     // landscape or ultrawide
-    return 'clamp(1.25rem, 2.2cqi, 1.5rem)';
+    return 'clamp(0.825rem, 2cqi, 1rem)';
   };
 
   const buttonStyles: React.CSSProperties = {
-    marginTop: orientation === 'portrait' || isHomePage ? '0 !important' : '1rem',
-    padding: '0.75rem 1rem',
+    marginTop:
+      orientation === 'portrait' || isHomePage || isHeader ? '0 !important' : '1rem',
+    padding: isHeader ? '0.5rem' : !isHomePage ? '0.5rem 0.25rem' : '0.75rem 1rem',
     minHeight: orientation === 'portrait' ? '40px' : undefined,
-    minWidth: '250px',
+    minWidth: isHeader ? '225px' : '250px',
     maxWidth: isHomePage ? undefined : '500px',
     width: animateSubHeader || orientation === 'portrait' ? '100%' : 'auto',
     fontSize: getResponsiveFontSize(),
@@ -87,10 +90,11 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
     <>
       <FormButton
         variant='primary'
-        size='medium'
+        size={isHomePage ? 'medium' : 'small'}
         onClick={handleClick}
         style={buttonStyles}
         className={className}
+        icon={!isHomePage ? 'calendar' : undefined}
         id='bookings-button'
       >
         Start a Conversation
