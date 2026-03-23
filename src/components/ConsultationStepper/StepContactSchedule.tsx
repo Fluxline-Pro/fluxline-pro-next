@@ -22,7 +22,11 @@ interface StepContactScheduleProps {
   status: SubmitStatus;
 }
 
-const MEETING_LENGTHS: Array<{ value: MeetingLength; label: string; description: string }> = [
+const MEETING_LENGTHS: Array<{
+  value: MeetingLength;
+  label: string;
+  description: string;
+}> = [
   { value: '20', label: '20 min', description: 'Quick intro & fit check' },
   { value: '30', label: '30 min', description: 'Discovery & overview' },
   { value: '45', label: '45 min', description: 'Deep-dive & planning' },
@@ -36,11 +40,23 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
   status,
 }) => {
   const { theme } = useAppTheme();
-  const [errors, setErrors] = React.useState<Partial<Record<keyof StepThreeData, string>>>({});
+  const [errors, setErrors] = React.useState<
+    Partial<Record<keyof StepThreeData, string>>
+  >({});
 
-  const update = <K extends keyof StepThreeData>(key: K, value: StepThreeData[K]) => {
+  const update = <K extends keyof StepThreeData>(
+    key: K,
+    value: StepThreeData[K]
+  ) => {
     onChange({ ...data, [key]: value });
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
+  };
+
+  const formatPhone = (value: string): string => {
+    const digits = value.replace(/\D/g, '').slice(0, 10);
+    if (digits.length <= 3) return digits.length ? `(${digits}` : '';
+    if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
   };
 
   const validate = (): boolean => {
@@ -51,8 +67,10 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       newErrors.email = 'Please enter a valid email address.';
     }
-    if (!data.referralSource) newErrors.referralSource = 'Please let us know how you heard about us.';
-    if (!data.consent) newErrors.consent = 'You must consent to be contacted to proceed.';
+    if (!data.referralSource)
+      newErrors.referralSource = 'Please let us know how you heard about us.';
+    if (!data.consent)
+      newErrors.consent = 'You must consent to be contacted to proceed.';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -68,7 +86,10 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
     <div>
       <Typography
         variant='h3'
-        style={{ color: theme.palette.themePrimary, marginBottom: theme.spacing.xs }}
+        style={{
+          color: theme.palette.themePrimary,
+          marginBottom: theme.spacing.xs,
+        }}
       >
         Step 3 — Contact &amp; Schedule
       </Typography>
@@ -80,7 +101,8 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
           fontSize: theme.typography.fonts.bodySmall.fontSize,
         }}
       >
-        Enter your details below. After clicking &ldquo;Schedule a time&rdquo; you&apos;ll be taken to our booking calendar to pick a slot.
+        Enter your details below. After clicking &ldquo;Schedule a time&rdquo;
+        you&apos;ll be taken to our booking calendar to pick a slot.
       </Typography>
 
       <div className='flex flex-col gap-4'>
@@ -118,8 +140,8 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
         <FormInput
           label='Phone (optional)'
           value={data.phone}
-          onChange={(v) => update('phone', v)}
-          placeholder='+1 (555) 000-0000'
+          onChange={(v) => update('phone', formatPhone(v))}
+          placeholder='(555) 000-0000'
           type='tel'
           aria-label='Phone number (optional)'
         />
@@ -129,7 +151,7 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
           label='Company (optional)'
           value={data.company}
           onChange={(v) => update('company', v)}
-          placeholder='Your company or organisation'
+          placeholder='Your company or organization'
           type='text'
           aria-label='Company (optional)'
         />
@@ -150,7 +172,13 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
               fontSize: theme.typography.fonts.body.fontSize,
             }}
           >
-            Preferred Meeting Length <span aria-hidden='true' style={{ color: theme.semanticColors.errorIcon }}>*</span>
+            Preferred Meeting Length{' '}
+            <span
+              aria-hidden='true'
+              style={{ color: theme.semanticColors.errorIcon }}
+            >
+              *
+            </span>
           </legend>
           <div className='flex flex-col gap-2 mt-2'>
             {MEETING_LENGTHS.map(({ value, label, description }) => (
@@ -188,8 +216,7 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
                     }}
                   >
                     {label}
-                  </Typography>
-                  {' '}
+                  </Typography>{' '}
                   <Typography
                     variant='p'
                     style={{
@@ -217,7 +244,9 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
             placeholder='Select an option…'
             aria-label='How did you hear about us?'
           />
-          {errors.referralSource && <ErrorMsg>{errors.referralSource}</ErrorMsg>}
+          {errors.referralSource && (
+            <ErrorMsg>{errors.referralSource}</ErrorMsg>
+          )}
         </div>
 
         {/* Referral "other" text */}
@@ -265,8 +294,8 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
                 margin: 0,
               }}
             >
-              I consent to be contacted by Fluxline and to the storage of my
-              information for the purposes of this consultation. See our{' '}
+              I consent for Fluxline Resonance Group to contact me and store my
+              information for the sole purpose of this consultation. See our{' '}
               <a
                 href='/legal/privacy-policy'
                 target='_blank'
@@ -276,8 +305,14 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
               >
                 Privacy Policy
                 <span className='sr-only'> (opens in new window)</span>
-              </a>
-              . <span aria-hidden='true' style={{ color: theme.semanticColors.errorIcon }}>*</span>
+              </a>{' '}
+              for more info on how we use your data.{' '}
+              <span
+                aria-hidden='true'
+                style={{ color: theme.semanticColors.errorIcon }}
+              >
+                *
+              </span>
             </Typography>
           </label>
           {errors.consent && <ErrorMsg>{errors.consent}</ErrorMsg>}
@@ -297,7 +332,10 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
         >
           <Typography variant='p' style={{ margin: 0 }}>
             Something went wrong. Please try again or{' '}
-            <a href='/contact' style={{ color: theme.semanticColors.errorText, fontWeight: 600 }}>
+            <a
+              href='/contact'
+              style={{ color: theme.semanticColors.errorText, fontWeight: 600 }}
+            >
               contact us directly
             </a>
             .
