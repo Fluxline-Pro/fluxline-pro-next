@@ -1,11 +1,8 @@
 'use client';
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
 import { Hero } from '@/theme/components/hero/Hero';
 import { Callout } from '@/theme/components/callout';
-import { FormButton } from '@/theme/components/form';
 import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { content } from '../../../assets/legal/stewardship-contract';
@@ -13,7 +10,6 @@ import { FadeUp } from '@/animations/fade-animations';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
 
 export default function StewardshipContractClientPage() {
-  const router = useRouter();
   const { theme } = useAppTheme();
   const currentYear = new Date().getFullYear();
 

@@ -18,7 +18,6 @@ import { getIconForPath } from '@/utils/navigation-icons';
 import { ContactForm } from './components/ContactForm';
 import { Callout } from '@/theme/components/callout/Callout';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
-import { FormButton } from '@/theme/components/form/FormButton';
 import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
 import { SocialLinks } from '@/app/about/components/SocialLinks';
 import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';

@@ -55,7 +55,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   const buttonStyles: React.CSSProperties = {
     marginTop:
       orientation === 'portrait' || isHomePage || isHeader || isHero
-        ? '0 !important'
+        ? '0'
         : '1rem',
     padding: isHeader
       ? '0.5rem'
@@ -105,7 +105,6 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
         style={buttonStyles}
         className={className}
         icon={!isHomePage ? 'calendar' : undefined}
-        id='bookings-button'
       >
         Start a Conversation
       </FormButton>

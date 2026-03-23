@@ -11,7 +11,7 @@ import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form/FormButton';
 import { FormInput } from '@/theme/components/form/FormInput';
 import { FormSelect } from '@/theme/components/form/FormSelect';
-import { REFERRAL_OPTIONS, TIDYCAL_LINKS } from './constants';
+import { REFERRAL_OPTIONS } from './constants';
 import { MeetingLength, StepThreeData, SubmitStatus } from './types';
 
 interface StepContactScheduleProps {
