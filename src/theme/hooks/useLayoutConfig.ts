@@ -148,6 +148,8 @@ export const useLayoutConfig = (
       : orientation === 'mobile-landscape'
         ? 'min(100vh, 800px)'
         : '100vh',
+    height:
+      isHomePage && orientation === 'tablet-portrait' ? '100vh' : undefined,
     maxHeight:
       (orientation === 'landscape' || orientation === 'ultrawide') &&
       !isHomePage
@@ -169,7 +171,9 @@ export const useLayoutConfig = (
       orientation !== 'portrait' &&
       orientation !== 'tablet-portrait' &&
       orientation !== 'mobile-landscape'
-        ? isHomePage ? '200px' : footerHeight || '200px' // Use dynamic footer height, fallback to 200px if not provided or on home page
+        ? isHomePage
+          ? '200px'
+          : footerHeight || '200px' // Use dynamic footer height, fallback to 200px if not provided or on home page
         : undefined,
     gap:
       orientation === 'portrait' ||

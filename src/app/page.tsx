@@ -302,21 +302,30 @@ export default function Home() {
 
   const mobileContentStyle: React.CSSProperties | undefined =
     shouldUseMobileLayout
-      ? {
-          width: '100%',
-          minHeight: `calc(100dvh - ${headerHeight})`,
-          display: 'flex',
-          alignItems: orientation === 'tablet-portrait' ? 'center' : 'flex-end',
-          justifyContent: 'center',
-          // pushes the card down to the bottom of the page on mobile
-          paddingTop: isMobile
-            ? 0
-            : `calc(${headerHeight} + ${theme.spacing.s})`,
-          paddingBottom: isMobile
-            ? 0
-            : `calc(${footerHeight} + ${theme.spacing.l})`,
-          boxSizing: 'border-box',
-        }
+      ? orientation === 'tablet-portrait'
+        ? {
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxSizing: 'border-box' as const,
+          }
+        : {
+            width: '100%',
+            minHeight: `calc(100dvh - ${headerHeight})`,
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            // pushes the card down to the bottom of the page on mobile
+            paddingTop: isMobile
+              ? 0
+              : `calc(${headerHeight} + ${theme.spacing.s})`,
+            paddingBottom: isMobile
+              ? 0
+              : `calc(${footerHeight} + ${theme.spacing.l})`,
+            boxSizing: 'border-box' as const,
+          }
       : undefined;
 
   const contentNode = (
