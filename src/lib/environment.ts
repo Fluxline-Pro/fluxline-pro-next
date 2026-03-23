@@ -27,9 +27,23 @@ export function getEnvironment(): Environment {
 }
 
 /**
- * Checks if the current environment requires token authentication
+ * Checks if the current environment requires token authentication.
+ * Authentication is never required when running on localhost.
+ *
+ * Note: The localhost check relies on `window.location.hostname` and is only
+ * meaningful in browser (client) contexts. This function is intentionally
+ * called from client-only hooks (useAccessControl), so the server-side
+ * fallback (env check only) is safe and expected.
  */
 export function requiresAuthentication(): boolean {
+  // Skip authentication entirely for local development
+  if (
+    typeof window !== 'undefined' &&
+    /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname)
+  ) {
+    return false;
+  }
+
   const env = getEnvironment();
   return env === 'dev' || env === 'test';
 }
