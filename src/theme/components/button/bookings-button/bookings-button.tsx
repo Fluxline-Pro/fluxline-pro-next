@@ -3,6 +3,7 @@
 import React from 'react';
 import { FormButton } from '@/theme/components/form';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
+import { ConsultationStepper } from '@/components/ConsultationStepper';
 
 interface BookingsButtonProps {
   animateSubHeader?: boolean;
@@ -13,8 +14,8 @@ interface BookingsButtonProps {
 
 /**
  * BookingsButton Component
- * 
- * Specialized button for opening booking calendar.
+ *
+ * Opens the ConsultationStepper modal for guided onboarding.
  * Adapts styling based on device orientation and animation state.
  */
 export const BookingsButton: React.FC<BookingsButtonProps> = ({
@@ -24,11 +25,10 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   className,
 }) => {
   const orientation = useDeviceOrientation();
+  const [stepperOpen, setStepperOpen] = React.useState(false);
 
   const handleClick = () => {
-    const url =
-      'https://outlook.office.com/owa/calendar/Bookings@terencewaters.com/bookings/';
-    window.open(url, '_blank', 'noopener,noreferrer');
+    setStepperOpen(true);
   };
 
   // Build responsive font size based on orientation
@@ -82,16 +82,22 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   };
 
   return (
-    <FormButton
-      variant='primary'
-      size='medium'
-      onClick={handleClick}
-      style={buttonStyles}
-      className={className}
-      id='bookings-button'
-    >
-      Start a Conversation
-    </FormButton>
+    <>
+      <FormButton
+        variant='primary'
+        size='medium'
+        onClick={handleClick}
+        style={buttonStyles}
+        className={className}
+        id='bookings-button'
+      >
+        Start a Conversation
+      </FormButton>
+      <ConsultationStepper
+        isOpen={stepperOpen}
+        onDismiss={() => setStepperOpen(false)}
+      />
+    </>
   );
 };
 
