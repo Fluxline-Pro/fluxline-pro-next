@@ -8,6 +8,18 @@
 export type Environment = 'dev' | 'test' | 'prod';
 
 /**
+ * Returns true when a hostname resolves to the local machine only.
+ * Covers: 'localhost', IPv4 loopback (127.0.0.1), IPv6 loopback (::1),
+ * and the all-interfaces address (0.0.0.0) commonly used by dev servers.
+ *
+ * Note: `window.location.hostname` strips brackets from IPv6, so ::1 is
+ * expected without brackets here.
+ */
+export function isLoopbackHost(hostname: string): boolean {
+  return /^(localhost|127\.0\.0\.1|::1|0\.0\.0\.0)$/i.test(hostname);
+}
+
+/**
  * Gets the current environment
  * In production build, this is determined by NEXT_PUBLIC_ENVIRONMENT at build time
  */
@@ -27,9 +39,23 @@ export function getEnvironment(): Environment {
 }
 
 /**
- * Checks if the current environment requires token authentication
+ * Checks if the current environment requires token authentication.
+ * Authentication is never required when running on localhost.
+ *
+ * Note: The localhost check relies on `window.location.hostname` and is only
+ * meaningful in browser (client) contexts. This function is intentionally
+ * called from client-only hooks (useAccessControl), so the server-side
+ * fallback (env check only) is safe and expected.
  */
 export function requiresAuthentication(): boolean {
+  // Skip authentication entirely for local development
+  if (
+    typeof window !== 'undefined' &&
+    isLoopbackHost(window.location.hostname)
+  ) {
+    return false;
+  }
+
   const env = getEnvironment();
   return env === 'dev' || env === 'test';
 }
@@ -48,13 +74,12 @@ export function getApiBaseUrl(): string {
 
   // Safety guard: ignore localhost API host if app is running on a non-localhost domain.
   if (typeof window !== 'undefined') {
+    // IPv6 loopback is bracketed in URLs ([::1]) but unbracketed in hostname (::1).
     const configuredIsLocalhost =
-      /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(
+      /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)(:\d+)?(\/|$)/i.test(
         configuredBaseUrl
       );
-    const runningOnLocalhost = /^(localhost|127\.0\.0\.1)$/i.test(
-      window.location.hostname
-    );
+    const runningOnLocalhost = isLoopbackHost(window.location.hostname);
 
     if (configuredIsLocalhost && !runningOnLocalhost) {
       return '/api';
