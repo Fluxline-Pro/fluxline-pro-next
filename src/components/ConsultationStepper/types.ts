@@ -76,7 +76,6 @@ export interface LeadPayload {
   referralSource: string;
   consent: boolean;
   tidycalBookingId: string;
-  zoomLink: string;
   submittedAt: string;
   utmSource?: string;
   utmMedium?: string;

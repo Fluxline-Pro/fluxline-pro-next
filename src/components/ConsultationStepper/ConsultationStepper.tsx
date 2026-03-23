@@ -335,7 +335,6 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
             : step3.referralSource,
         consent: step3.consent,
         tidycalBookingId: '',
-        zoomLink: '',
         submittedAt: new Date().toISOString(),
         utmSource: utmParams.get('utm_source') ?? undefined,
         utmMedium: utmParams.get('utm_medium') ?? undefined,
