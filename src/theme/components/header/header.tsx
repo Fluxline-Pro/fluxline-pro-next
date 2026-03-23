@@ -17,8 +17,7 @@ import { NavigationButton } from './navigation-button';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { Typography } from '@/theme/components/typography';
 import { SettingsPanel } from '@/theme/components/settings-panel';
-import { FormButton } from '@/theme/components/form';
-import { useRouter } from 'next/navigation';
+import { BookingsButton } from '@/theme/components/button/bookings-button/bookings-button';
 
 export interface BreadcrumbItem {
   label: string;
@@ -38,8 +37,6 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
   const [isMounted, setIsMounted] = React.useState(false);
   const { theme, themeMode, setThemeMode, layoutPreference } = useAppTheme();
   const pathname = usePathname();
-  const router = useRouter();
-  // Defer isMobile evaluation until after mount to prevent hydration mismatch
   const isMobileHook = useIsMobile();
   const isMobile = isMounted ? isMobileHook : false;
   const isLeftHanded = layoutPreference === 'left-handed';
@@ -287,6 +284,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                       display: 'flex',
                       alignItems: 'baseline',
                       justifyContent: isLeftHanded ? 'flex-end' : 'flex-start',
+                      fontSize: '1.25rem',
                       gap: '0.5rem',
                       flexWrap: 'wrap',
                       margin: 0,
@@ -321,7 +319,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                               variant='p'
                               style={{
                                 color: theme.palette.neutralPrimary,
-                                fontSize: '1.125rem',
+                                fontSize: '1.25rem',
                                 fontWeight:
                                   theme.typography.fontWeights.semiBold,
                                 margin: 0,
@@ -389,17 +387,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             suppressHydrationWarning
           >
             {!isMobile && !isHomePage && (
-              <FormButton
-                variant='primary'
-                size='medium'
-                onClick={() => router.push('/contact')}
-                icon='Calendar'
-                style={{
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                Book a Consultation
-              </FormButton>
+              <BookingsButton isHeader isHomePage={isHomePage} />
             )}
             {!isHomePage && (
               <NavigationButton
