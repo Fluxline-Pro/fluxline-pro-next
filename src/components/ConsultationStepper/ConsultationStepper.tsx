@@ -341,9 +341,16 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
         utmCampaign: utmParams.get('utm_campaign') ?? undefined,
       };
 
+      // Build request headers — include API key when configured
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      const leadApiKey = process.env.NEXT_PUBLIC_LEAD_API_SECRET;
+      if (leadApiKey) {
+        headers['X-Lead-Key'] = leadApiKey;
+      }
+
       const response = await fetch(getApiEndpoint('/api/lead'), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(payload),
       });
 

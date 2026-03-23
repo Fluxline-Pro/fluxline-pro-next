@@ -75,7 +75,10 @@ export interface LeadPayload {
   preferredMeetingLength: MeetingLength;
   referralSource: string;
   consent: boolean;
-  tidycalBookingId: string;
+  /** TidyCal booking ID — populated by webhook after booking is confirmed */
+  tidycalBookingId?: string;
+  /** Zoom meeting link — populated by webhook after booking is confirmed */
+  zoomLink?: string;
   submittedAt: string;
   utmSource?: string;
   utmMedium?: string;

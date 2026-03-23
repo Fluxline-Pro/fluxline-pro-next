@@ -34,6 +34,11 @@
     "SHAREPOINT_EMAIL_FIELD": "Title",
     "SHAREPOINT_PLATFORM_FIELD": "field_1",
     "SHAREPOINT_TIMESTAMP_FIELD": "Timestamp",
-    "LEADS_LIST_ID": "<your-leads-list-id>"
+    "LEADS_LIST_ID": "<your-leads-list-id>",
+    "LEAD_API_SECRET": "<generate-a-random-secret-and-copy-to-NEXT_PUBLIC_LEAD_API_SECRET>",
+    "LEAD_STORE_RAW_PAYLOAD": "false",
+    "AZURE_QUEUE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=<account>;AccountKey=<key>;EndpointSuffix=core.windows.net",
+    "LEAD_QUEUE_NAME": "lead-queue",
+    "TIDYCAL_WEBHOOK_SECRET": "<your-tidycal-webhook-hmac-secret>"
   }
 }
