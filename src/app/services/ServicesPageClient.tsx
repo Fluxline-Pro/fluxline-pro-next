@@ -198,8 +198,7 @@ export default function ServicesPageClient() {
             >
               {SERVICE_CATEGORIES.filter(
                 (s) =>
-                  s.category === 'depth-strategy' &&
-                  s.id !== 'education-training'
+                  s.category === 'depth-strategy'
               ).map((service) => (
                 <InteractiveCard
                   key={service.id}
