@@ -293,7 +293,7 @@ async function enqueuePayload(payload, queueName, connectionString, log) {
 
   if (!accountMatch || !keyMatch) {
     log('Lead: cannot parse AZURE_QUEUE_CONNECTION_STRING — skip queue');
-    return;
+    return false;
   }
 
   const accountName = accountMatch[1];
@@ -349,11 +349,14 @@ async function enqueuePayload(payload, queueName, connectionString, log) {
 
     if (statusCode >= 200 && statusCode < 300) {
       log('Lead: payload queued successfully');
+      return true;
     } else {
       log(`Lead: queue returned HTTP ${statusCode}`);
+      return false;
     }
   } catch (queueErr) {
     log(`Lead: failed to enqueue payload — ${queueErr.message}`);
+    return false;
   }
 }
 
@@ -568,15 +571,44 @@ module.exports = async function (context, req) {
   const tenantId = process.env.ENTRAID_SP_TENANT_ID;
   const siteId = process.env.SHAREPOINT_SITE_ID;
   const listId = process.env.LEADS_LIST_ID;
+  const queueConnStr = process.env.AZURE_QUEUE_CONNECTION_STRING;
+  const queueName = process.env.LEAD_QUEUE_NAME || 'lead-queue';
 
   if (!clientId || !clientSecret || !tenantId || !siteId || !listId) {
     logWarn(
       'Lead: SharePoint env vars not configured — accepted without persisting'
     );
+
+    if (queueConnStr) {
+      const queued = await enqueuePayload(
+        { ...fields, _requestId: requestId },
+        queueName,
+        queueConnStr,
+        log
+      );
+
+      if (queued) {
+        context.res = {
+          status: 202,
+          headers: corsHeaders,
+          body: JSON.stringify({
+            success: true,
+            requestId,
+            note: 'accepted — queued because persistence is unavailable',
+          }),
+        };
+        return;
+      }
+    }
+
     context.res = {
       status: 200,
       headers: corsHeaders,
-      body: JSON.stringify({ success: true, requestId, note: 'queued' }),
+      body: JSON.stringify({
+        success: true,
+        requestId,
+        note: 'accepted but not persisted',
+      }),
     };
     return;
   }
@@ -610,25 +642,36 @@ module.exports = async function (context, req) {
     logError(`Lead: submission failed — ${error.message}`);
 
     // On transient errors, attempt to queue the payload for later retry
-    const queueConnStr = process.env.AZURE_QUEUE_CONNECTION_STRING;
-    const queueName = process.env.LEAD_QUEUE_NAME || 'lead-queue';
-
     if (error.transient && queueConnStr) {
-      await enqueuePayload(
+      const queued = await enqueuePayload(
         { ...fields, _requestId: requestId },
         queueName,
         queueConnStr,
         log
       );
+
+      if (queued) {
+        context.res = {
+          status: 202,
+          headers: corsHeaders,
+          body: JSON.stringify({
+            success: true,
+            requestId,
+            note: 'accepted — will be retried',
+          }),
+        };
+        return;
+      }
+
       context.res = {
-        status: 202,
+        status: 500,
         headers: corsHeaders,
         body: JSON.stringify({
-          success: true,
+          error: 'An unexpected error occurred. Please try again.',
           requestId,
-          note: 'accepted — will be retried',
         }),
       };
+      return;
     } else {
       context.res = {
         status: 500,
