@@ -284,10 +284,10 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
   } = useConsultationStorage();
 
   // Ensure component is mounted before rendering dynamic content
-    // This prevents hydration mismatches by only rendering client-specific content after mount
-    React.useEffect(() => {
-      setIsMounted(true);
-    }, []);
+  // This prevents hydration mismatches by only rendering client-specific content after mount
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Fire "stepper opened" event on open
   useEffect(() => {
@@ -351,12 +351,9 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
       utmMedium: utmParams.get('utm_medium') ?? undefined,
       utmCampaign: utmParams.get('utm_campaign') ?? undefined,
     };
-    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-    const leadApiKey = process.env.NEXT_PUBLIC_LEAD_API_SECRET;
-    if (leadApiKey) headers['X-Lead-Key'] = leadApiKey;
     fetch(getApiEndpoint('/api/lead'), {
       method: 'POST',
-      headers,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }).catch(() => {});
 

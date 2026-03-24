@@ -12,14 +12,16 @@
  * - LEADS_LIST_ID                          — SharePoint list ID for consultation leads
  *
  * Optional Environment Variables:
- * - LEAD_API_SECRET                        — Shared secret for X-Lead-Key request auth
+ * - LEAD_ALLOWED_ORIGINS                   — Comma-separated allowed browser origins
+ * - LEAD_RATE_LIMIT_WINDOW_MS              — Rate-limit window in ms (default: 900000)
+ * - LEAD_RATE_LIMIT_MAX_REQUESTS           — Max requests per IP per window (default: 10)
  * - AZURE_QUEUE_CONNECTION_STRING          — Azure Storage connection string for fallback queue
  * - LEAD_QUEUE_NAME                        — Queue name for failed/transient submissions (default: lead-queue)
  *
  * POST /api/lead
  * Body: LeadPayload (see ConsultationStepper/types.ts)
  *
- * Security: Send X-Lead-Key header matching LEAD_API_SECRET env var.
+ * Security: Apply origin allowlisting and function-side rate limiting.
  */
 
 'use strict';
@@ -31,11 +33,10 @@ const crypto = require('crypto');
 // Constants
 // ---------------------------------------------------------------------------
 
-const CORS_HEADERS = {
+const CORS_BASE_HEADERS = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, X-Lead-Key',
+  'Access-Control-Allow-Headers': 'Content-Type',
 };
 
 /** Maps frontend service keys to display labels used in SharePoint */
@@ -49,6 +50,9 @@ const SERVICE_LABELS = {
 };
 
 const VALID_MEETING_LENGTHS = ['20', '30', '45'];
+const DEFAULT_RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const DEFAULT_RATE_LIMIT_MAX_REQUESTS = 10;
+const leadRateLimitStore = new Map();
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -62,6 +66,105 @@ function newRequestId() {
 /** Validates an email address format */
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/** Normalizes an Origin header value for exact allowlist matching */
+function normalizeOrigin(origin) {
+  return String(origin || '')
+    .trim()
+    .replace(/\/+$/, '')
+    .toLowerCase();
+}
+
+/** Parses a comma-separated allowlist of browser origins */
+function getAllowedOrigins() {
+  return String(process.env.LEAD_ALLOWED_ORIGINS || '')
+    .split(',')
+    .map(normalizeOrigin)
+    .filter(Boolean);
+}
+
+/** Builds CORS headers for the current request origin */
+function getCorsHeaders(origin, allowedOrigins) {
+  const normalizedOrigin = normalizeOrigin(origin);
+  const canReflectOrigin =
+    normalizedOrigin &&
+    (allowedOrigins.length === 0 || allowedOrigins.includes(normalizedOrigin));
+
+  return {
+    ...CORS_BASE_HEADERS,
+    'Access-Control-Allow-Origin': canReflectOrigin ? origin : '*',
+  };
+}
+
+/** Returns true when the request origin is permitted */
+function isAllowedOrigin(origin, allowedOrigins) {
+  if (allowedOrigins.length === 0) return true;
+  const normalizedOrigin = normalizeOrigin(origin);
+  return Boolean(normalizedOrigin) && allowedOrigins.includes(normalizedOrigin);
+}
+
+/** Extracts the client IP from common Azure/App Service forwarding headers */
+function getClientIp(req) {
+  const forwardedFor = req.headers['x-forwarded-for'];
+  if (typeof forwardedFor === 'string' && forwardedFor.trim()) {
+    return forwardedFor.split(',')[0].trim();
+  }
+
+  const clientIp = req.headers['x-client-ip'];
+  if (typeof clientIp === 'string' && clientIp.trim()) {
+    return clientIp.trim();
+  }
+
+  return 'unknown';
+}
+
+/** Consumes one rate-limit slot for the given IP using an in-memory store */
+function takeRateLimitToken(ipAddress) {
+  const windowMs = Number(process.env.LEAD_RATE_LIMIT_WINDOW_MS);
+  const maxRequests = Number(process.env.LEAD_RATE_LIMIT_MAX_REQUESTS);
+  const effectiveWindowMs =
+    Number.isFinite(windowMs) && windowMs > 0
+      ? windowMs
+      : DEFAULT_RATE_LIMIT_WINDOW_MS;
+  const effectiveMaxRequests =
+    Number.isFinite(maxRequests) && maxRequests > 0
+      ? maxRequests
+      : DEFAULT_RATE_LIMIT_MAX_REQUESTS;
+  const key = ipAddress || 'unknown';
+  const now = Date.now();
+  const existing = leadRateLimitStore.get(key);
+
+  if (!existing || now >= existing.resetTime) {
+    leadRateLimitStore.set(key, {
+      count: 1,
+      resetTime: now + effectiveWindowMs,
+    });
+
+    return {
+      allowed: true,
+      retryAfterSeconds: Math.ceil(effectiveWindowMs / 1000),
+    };
+  }
+
+  if (existing.count >= effectiveMaxRequests) {
+    return {
+      allowed: false,
+      retryAfterSeconds: Math.max(
+        1,
+        Math.ceil((existing.resetTime - now) / 1000)
+      ),
+    };
+  }
+
+  existing.count += 1;
+  return {
+    allowed: true,
+    retryAfterSeconds: Math.max(
+      1,
+      Math.ceil((existing.resetTime - now) / 1000)
+    ),
+  };
 }
 
 /** Performs an HTTPS request, resolving with { statusCode, body } */
@@ -263,37 +366,64 @@ module.exports = async function (context, req) {
   const log = (msg) => context.log(`[${requestId}] ${msg}`);
   const logWarn = (msg) => context.log.warn(`[${requestId}] ${msg}`);
   const logError = (msg) => context.log.error(`[${requestId}] ${msg}`);
+  const origin = req.headers.origin || req.headers.Origin || '';
+  const allowedOrigins = getAllowedOrigins();
+  const corsHeaders = getCorsHeaders(origin, allowedOrigins);
 
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    context.res = { status: 204, headers: CORS_HEADERS, body: '' };
+    if (!isAllowedOrigin(origin, allowedOrigins)) {
+      context.res = {
+        status: 403,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: 'Origin not allowed.', requestId }),
+      };
+      return;
+    }
+
+    context.res = { status: 204, headers: corsHeaders, body: '' };
     return;
   }
 
   if (req.method !== 'POST') {
     context.res = {
       status: 405,
-      headers: CORS_HEADERS,
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Method Not Allowed', requestId }),
     };
     return;
   }
 
   // ---------------------------------------------------------------------------
-  // Authentication — X-Lead-Key header check (when LEAD_API_SECRET is configured)
+  // Request protection — best-effort origin allowlist and rate limiting
   // ---------------------------------------------------------------------------
-  const expectedSecret = process.env.LEAD_API_SECRET;
-  if (expectedSecret) {
-    const providedKey = req.headers['x-lead-key'] || '';
-    if (!providedKey || providedKey !== expectedSecret) {
-      logWarn('Lead: rejected — invalid or missing X-Lead-Key header');
-      context.res = {
-        status: 401,
-        headers: CORS_HEADERS,
-        body: JSON.stringify({ error: 'Unauthorized', requestId }),
-      };
-      return;
-    }
+  if (!isAllowedOrigin(origin, allowedOrigins)) {
+    logWarn(`Lead: rejected — origin not allowed (${origin || 'missing'})`);
+    context.res = {
+      status: 403,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: 'Origin not allowed.', requestId }),
+    };
+    return;
+  }
+
+  const clientIp = getClientIp(req);
+  const rateLimit = takeRateLimitToken(clientIp);
+
+  if (!rateLimit.allowed) {
+    logWarn(`Lead: rate limit exceeded for IP ${clientIp}`);
+    context.res = {
+      status: 429,
+      headers: {
+        ...corsHeaders,
+        'Retry-After': String(rateLimit.retryAfterSeconds),
+      },
+      body: JSON.stringify({
+        error: 'Too many requests. Please try again later.',
+        requestId,
+      }),
+    };
+    return;
   }
 
   // ---------------------------------------------------------------------------
@@ -304,7 +434,7 @@ module.exports = async function (context, req) {
   if (!payload || typeof payload !== 'object') {
     context.res = {
       status: 400,
-      headers: CORS_HEADERS,
+      headers: corsHeaders,
       body: JSON.stringify({
         error: 'Request body must be a JSON object.',
         requestId,
@@ -356,7 +486,7 @@ module.exports = async function (context, req) {
     logWarn(`Lead: validation failed — ${validationErrors.join(' | ')}`);
     context.res = {
       status: 400,
-      headers: CORS_HEADERS,
+      headers: corsHeaders,
       body: JSON.stringify({
         error: 'Validation failed.',
         details: validationErrors,
@@ -445,7 +575,7 @@ module.exports = async function (context, req) {
     );
     context.res = {
       status: 200,
-      headers: CORS_HEADERS,
+      headers: corsHeaders,
       body: JSON.stringify({ success: true, requestId, note: 'queued' }),
     };
     return;
@@ -469,7 +599,7 @@ module.exports = async function (context, req) {
 
     context.res = {
       status: 200,
-      headers: CORS_HEADERS,
+      headers: corsHeaders,
       body: JSON.stringify({
         success: true,
         requestId,
@@ -492,7 +622,7 @@ module.exports = async function (context, req) {
       );
       context.res = {
         status: 202,
-        headers: CORS_HEADERS,
+        headers: corsHeaders,
         body: JSON.stringify({
           success: true,
           requestId,
@@ -502,7 +632,7 @@ module.exports = async function (context, req) {
     } else {
       context.res = {
         status: 500,
-        headers: CORS_HEADERS,
+        headers: corsHeaders,
         body: JSON.stringify({
           error: 'An unexpected error occurred. Please try again.',
           requestId,
