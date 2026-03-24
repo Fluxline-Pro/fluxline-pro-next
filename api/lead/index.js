@@ -201,17 +201,22 @@ async function enqueuePayload(payload, queueName, connectionString, log) {
   const messageXml = `<QueueMessage><MessageText>${Buffer.from(JSON.stringify(payload)).toString('base64')}</MessageText></QueueMessage>`;
   const contentLength = Buffer.byteLength(messageXml);
   const date = new Date().toUTCString();
-  const path = `/${accountName}/${queueName}/messages`;
+  // The HTTP request path on the Queue service host is /{queueName}/messages.
+  // The host already encodes the account (${accountName}.queue.core.windows.net),
+  // so prepending the account name again would produce a 404.
+  const requestPath = `/${queueName}/messages`;
+  // The canonicalized resource used in the Shared Key signature always includes
+  // the account name as a prefix, regardless of the actual HTTP path.
+  const canonicalizedResource = `/${accountName}/${queueName}/messages`;
 
   // Build HMAC-SHA256 signature for Shared Key auth
-  // The canonicalizedResource path must match the actual request path
   const stringToSign = [
     'POST',
     '', // Content-MD5
     'application/xml', // Content-Type
     '', // Date (use x-ms-date instead)
     `x-ms-date:${date}\nx-ms-version:2020-10-02`,
-    path, // Must match the request path used below
+    canonicalizedResource,
   ].join('\n');
 
   const signature = crypto
@@ -225,7 +230,7 @@ async function enqueuePayload(payload, queueName, connectionString, log) {
     const { statusCode } = await httpsRequest(
       {
         hostname: host,
-        path,
+        path: requestPath,
         method: 'POST',
         headers: {
           Authorization: authHeader,
