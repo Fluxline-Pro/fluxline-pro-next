@@ -375,7 +375,9 @@ module.exports = async function (context, req) {
     Email: payload.email.trim(),
     Phone: payload.phone || '',
     Company: payload.company || '',
-    // Multi-select Choice column — array of strings for Graph API v1.0
+    // Multi-select Choice column — Graph API v1.0 requires the @odata.type annotation
+    // alongside the array, otherwise it returns invalidRequest 400.
+    'ServicesSelected@odata.type': 'Collection(Edm.String)',
     ServicesSelected: serviceLabels,
     AnswersJSON: JSON.stringify(payload.answers || {}),
     PreferredMeetingLength: String(payload.preferredMeetingLength || ''),
@@ -466,6 +468,30 @@ module.exports = async function (context, req) {
     };
   } catch (error) {
     logError(`Lead: submission failed — ${error.message}`);
+
+    // If Graph returned 400, run a minimal probe (Title only) to distinguish
+    // field-level errors from auth/list configuration issues.
+    if (error.message.includes('400')) {
+      try {
+        const probeToken = await getGraphToken(
+          tenantId,
+          clientId,
+          clientSecret
+        );
+        await createSharePointItem(
+          probeToken,
+          siteId,
+          listId,
+          { Title: 'debug-probe' },
+          log
+        );
+        logError(
+          'Lead: DEBUG probe succeeded — issue is in a specific field value'
+        );
+      } catch (probeErr) {
+        logError(`Lead: DEBUG probe also failed — ${probeErr.message}`);
+      }
+    }
 
     // On transient errors, attempt to queue the payload for later retry
     const queueConnStr = process.env.AZURE_QUEUE_CONNECTION_STRING;
