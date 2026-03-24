@@ -23,6 +23,7 @@ import { TIDYCAL_LINKS } from './constants';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { LeadPayload, MeetingLength, StepperStep, SubmitStatus } from './types';
 import { FormButton } from '@/theme/components/form/FormButton';
+import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
 
 declare global {
   interface Window {
@@ -192,7 +193,11 @@ function SuccessView({ onClose }: { onClose: () => void }) {
       aria-live='polite'
     >
       <div style={{ fontSize: '4rem' }} aria-hidden='true'>
-        🎉
+        <FluentIcon
+          iconName='CheckMark'
+          size='large'
+          color={theme.palette.themePrimary}
+        />
       </div>
       <Typography
         variant='h3'
@@ -218,7 +223,6 @@ function SuccessView({ onClose }: { onClose: () => void }) {
           color: theme.palette.neutralSecondary,
           cursor: 'pointer',
           fontSize: theme.typography.fonts.bodySmall.fontSize,
-          textDecoration: 'underline',
         }}
       >
         Close

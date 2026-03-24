@@ -125,7 +125,7 @@ All API tokens are retrieved from Key Vault at runtime!
 2. **Service Principal** retrieves API token from Key Vault
 3. **Workflow** deploys to Static Web App using the token
 
-No secrets stored in GitHub beyond the 5 Client IDs! 🎉
+No secrets stored in GitHub beyond the 5 Client IDs!
 
 ## 🔧 Maintenance Scripts
 
