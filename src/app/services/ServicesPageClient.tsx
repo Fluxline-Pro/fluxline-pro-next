@@ -19,6 +19,7 @@ import {
 } from './constants';
 import { Callout } from '@/theme/components/callout/Callout';
 import { FormButton } from '@/theme/components/form/FormButton';
+import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 export default function ServicesPageClient() {
@@ -92,7 +93,8 @@ export default function ServicesPageClient() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Physical training and transformational frameworks rooted in identity work and embodiment.
+              Physical training and transformational frameworks rooted in
+              identity work and embodiment.
             </Typography>
             <div
               className='grid gap-6 pt-1'
@@ -184,7 +186,8 @@ export default function ServicesPageClient() {
                 marginBottom: theme.spacing.m,
               }}
             >
-              Strategic consulting and transformational frameworks for clarity and growth.
+              Strategic consulting and transformational frameworks for clarity
+              and growth.
             </Typography>
             <div
               className='grid gap-6 pt-1'
@@ -194,7 +197,8 @@ export default function ServicesPageClient() {
               }}
             >
               {SERVICE_CATEGORIES.filter(
-                (s) => s.category === 'depth-strategy' && s.id !== 'education-training'
+                (s) =>
+                  s.category === 'depth-strategy'
               ).map((service) => (
                 <InteractiveCard
                   key={service.id}
@@ -215,16 +219,7 @@ export default function ServicesPageClient() {
           variant='accent'
           title='Not sure where to start?'
           subtitle="Share your needs in a free consultation. We'll map the right first step together."
-          action={
-            <FormButton
-              text='Start a Conversation'
-              variant='primary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => (window.location.href = '/contact')}
-            />
-          }
+          action={<BookingsButton isHero />}
         />
 
         <Callout
@@ -235,7 +230,7 @@ export default function ServicesPageClient() {
             <FormButton
               text='View Legal Documents'
               variant='secondary'
-              size='medium'
+              size='large'
               icon='ChevronRight'
               iconPosition='right'
               onClick={() => (window.location.href = '/legal')}

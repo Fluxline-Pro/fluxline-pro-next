@@ -25,6 +25,7 @@ import { SERVICE_SCROLL_MAPPING } from '../scroll-mapping';
 import { getScrollById } from '../scrolls/scrollsData';
 import { RelatedServices } from './components/related-services';
 import { ServiceScrollSection } from './components/service-scroll-section';
+import { BookingsButton } from '@/theme/components/button/bookings-button';
 
 /**
  * Service Detail Page Component
@@ -266,17 +267,8 @@ export default function ServiceDetailPage() {
         <Callout
           variant='accent'
           title='Ready to Begin?'
-          subtitle="Book a 20–30 minute consultation to explore your personal identity and aligning your decisions with it."
-          action={
-            <FormButton
-              text='Book a Consultation'
-              variant='primary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => (window.location.href = '/contact')}
-            />
-          }
+          subtitle='Book a 20–30 minute consultation to explore your personal identity and aligning your decisions with it.'
+          action={<BookingsButton isHero />}
         />
         {/* Related Services */}
         <RelatedServices currentServiceId={service.id} />
