@@ -198,8 +198,7 @@ export default function ServicesPageClient() {
             >
               {SERVICE_CATEGORIES.filter(
                 (s) =>
-                  s.category === 'depth-strategy' &&
-                  s.id !== 'education-training'
+                  s.category === 'depth-strategy'
               ).map((service) => (
                 <InteractiveCard
                   key={service.id}
@@ -231,7 +230,7 @@ export default function ServicesPageClient() {
             <FormButton
               text='View Legal Documents'
               variant='secondary'
-              size='medium'
+              size='large'
               icon='ChevronRight'
               iconPosition='right'
               onClick={() => (window.location.href = '/legal')}

@@ -10,9 +10,11 @@
  */
 
 import React, { useCallback, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '@/theme/components/typography';
 import { Modal } from '@/components/Modal';
+import { FadeIn } from '@/animations/fade-animations';
 import { useConsultationStorage } from './useConsultationStorage';
 import { StepServiceSelection } from './StepServiceSelection';
 import { StepContextualQuestions } from './StepContextualQuestions';
@@ -21,6 +23,9 @@ import { TIDYCAL_LINKS } from './constants';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { LeadPayload, MeetingLength, StepperStep, SubmitStatus } from './types';
 import { FormButton } from '@/theme/components/form/FormButton';
+import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
+import { StepTidyCal } from './StepTidyCal';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 declare global {
   interface Window {
@@ -190,7 +195,11 @@ function SuccessView({ onClose }: { onClose: () => void }) {
       aria-live='polite'
     >
       <div style={{ fontSize: '4rem' }} aria-hidden='true'>
-        🎉
+        <FluentIcon
+          iconName='CheckMark'
+          size='large'
+          color={theme.palette.themePrimary}
+        />
       </div>
       <Typography
         variant='h3'
@@ -216,7 +225,6 @@ function SuccessView({ onClose }: { onClose: () => void }) {
           color: theme.palette.neutralSecondary,
           cursor: 'pointer',
           fontSize: theme.typography.fonts.bodySmall.fontSize,
-          textDecoration: 'underline',
         }}
       >
         Close
@@ -259,6 +267,10 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
   const { theme } = useAppTheme();
   const [currentStep, setCurrentStep] = React.useState<StepperStep>(1);
   const [status, setStatus] = React.useState<SubmitStatus>('idle');
+  const [isMounted, setIsMounted] = React.useState(false);
+  const [tidyCalUrl, setTidyCalUrl] = React.useState('');
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
 
   const {
     step1,
@@ -270,6 +282,12 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
     setStep3,
     clearDraft,
   } = useConsultationStorage();
+
+  // Ensure component is mounted before rendering dynamic content
+  // This prevents hydration mismatches by only rendering client-specific content after mount
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Fire "stepper opened" event on open
   useEffect(() => {
@@ -295,7 +313,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
 
   const handleSchedule = useCallback(async () => {
     fireEvent('consultation_booking_initiated');
-    setStatus('booking');
+    setStatus('submitting');
 
     // Build a brief note for TidyCal prefill
     const answerLines = Object.entries(step2.answers)
@@ -304,64 +322,51 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
     const services = step1.services.join(', ');
     const note = `Services: ${services}\n${answerLines}`.trim();
 
-    const tidyCalUrl = buildTidyCalUrl(
+    const url = buildTidyCalUrl(
       step3.preferredMeetingLength,
       step3.fullName,
       step3.email,
       note
     );
+    setTidyCalUrl(url);
 
-    // Open TidyCal in a new tab
-    window.open(tidyCalUrl, '_blank', 'noopener,noreferrer');
+    // Post lead to backend in the background — does not block showing the calendar
+    const utmParams = new URLSearchParams(window.location.search);
+    const payload: LeadPayload = {
+      fullName: step3.fullName,
+      email: step3.email,
+      phone: step3.phone,
+      company: step3.company,
+      services: step1.services,
+      answers: step2.answers,
+      preferredMeetingLength: step3.preferredMeetingLength,
+      referralSource:
+        step3.referralSource === 'other'
+          ? step3.referralOther || 'Other'
+          : step3.referralSource,
+      consent: step3.consent,
+      tidycalBookingId: '',
+      submittedAt: new Date().toISOString(),
+      utmSource: utmParams.get('utm_source') ?? undefined,
+      utmMedium: utmParams.get('utm_medium') ?? undefined,
+      utmCampaign: utmParams.get('utm_campaign') ?? undefined,
+    };
+    fetch(getApiEndpoint('/api/lead'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).catch(() => {});
 
     fireEvent('consultation_step_completed', { step: 3 });
+    setStatus('schedule');
+  }, [step1, step2, step3]);
 
-    // Post lead payload to backend
-    try {
-      setStatus('submitting');
-
-      const utmParams = new URLSearchParams(window.location.search);
-      const payload: LeadPayload = {
-        fullName: step3.fullName,
-        email: step3.email,
-        phone: step3.phone,
-        company: step3.company,
-        services: step1.services,
-        answers: step2.answers,
-        preferredMeetingLength: step3.preferredMeetingLength,
-        referralSource:
-          step3.referralSource === 'other'
-            ? step3.referralOther || 'Other'
-            : step3.referralSource,
-        consent: step3.consent,
-        tidycalBookingId: '',
-        submittedAt: new Date().toISOString(),
-        utmSource: utmParams.get('utm_source') ?? undefined,
-        utmMedium: utmParams.get('utm_medium') ?? undefined,
-        utmCampaign: utmParams.get('utm_campaign') ?? undefined,
-      };
-
-      const response = await fetch(getApiEndpoint('/api/lead'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        await response.json().catch(() => ({}));
-        fireEvent('consultation_booking_confirmed');
-      } else {
-        // Still show success — booking was opened, lead will be retried
-        fireEvent('consultation_booking_confirmed');
-      }
-    } catch {
-      // Don't block the user — TidyCal was already opened
-      fireEvent('consultation_booking_failed');
-    }
-
+  /** Called when TidyCal booking is confirmed (postMessage or manual button) */
+  const handleBookingComplete = useCallback(() => {
+    fireEvent('consultation_booking_confirmed');
     clearDraft();
     setStatus('success');
-  }, [step1, step2, step3, clearDraft]);
+  }, [clearDraft]);
 
   const handleClose = useCallback(() => {
     onDismiss();
@@ -377,23 +382,27 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
       isOpen={isOpen}
       onDismiss={handleClose}
       ariaLabel='Book a consultation'
-      maxWidth='640px'
+      maxWidth={status === 'schedule' ? '800px' : '640px'}
     >
       <div
         style={{
-          padding: theme.spacing.xl,
+          padding: isMobile ? theme.spacing.s1 : theme.spacing.xl,
           paddingTop: theme.spacing.l,
         }}
       >
-        {/* Draft restore banner */}
+        {/* Draft restore toast */}
         {hasDraft && currentStep === 1 && status === 'idle' && (
           <div
+            role='status'
+            aria-live='polite'
             style={{
               marginBottom: theme.spacing.m,
-              padding: theme.spacing.s2,
-              backgroundColor: theme.palette.themeLighterAlt,
-              border: `1px solid ${theme.palette.themeLight}`,
+              padding: `${theme.spacing.s2} ${theme.spacing.m}`,
+              backgroundColor: theme.palette.neutralLighterAlt,
+              border: `1px solid ${theme.palette.neutralQuaternary}`,
+              borderLeft: `3px solid ${theme.palette.themePrimary}`,
               borderRadius: theme.effects.roundedCorner4,
+              boxShadow: theme.shadows.card,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -405,10 +414,11 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
               style={{
                 color: theme.palette.themePrimary,
                 fontSize: theme.typography.fonts.bodySmall.fontSize,
+                fontWeight: theme.typography.fontWeights.semiBold,
                 margin: 0,
               }}
             >
-              📋 Your previous answers have been restored.
+              Your previous answers have been restored.
             </Typography>
             <button
               type='button'
@@ -420,6 +430,9 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
                 cursor: 'pointer',
                 fontSize: theme.typography.fonts.bodySmall.fontSize,
                 flexShrink: 0,
+                padding: '0 4px',
+                textDecoration: 'underline',
+                marginRight: isMobile ? '2rem' : undefined,
               }}
               aria-label='Clear saved draft'
             >
@@ -428,47 +441,72 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
           </div>
         )}
 
-        {status === 'success' ? (
-          <SuccessView onClose={handleClose} />
-        ) : (
-          <>
-            <StepIndicator currentStep={currentStep} onStepClick={goToStep} />
-
-            {currentStep === 1 && (
-              <StepServiceSelection
-                data={step1}
-                onChange={setStep1}
-                onNext={handleStep1Next}
+        <AnimatePresence mode='wait'>
+          {status === 'success' ? (
+            <FadeIn key='success'>
+              <SuccessView onClose={handleClose} />
+            </FadeIn>
+          ) : status === 'schedule' ? (
+            <FadeIn key='schedule'>
+              <StepTidyCal
+                tidyCalUrl={tidyCalUrl}
+                onComplete={handleBookingComplete}
+                onBack={() => setStatus('idle')}
               />
-            )}
+            </FadeIn>
+          ) : (
+            <FadeIn key='stepper-views'>
+              <>
+                <StepIndicator
+                  currentStep={currentStep}
+                  onStepClick={goToStep}
+                />
 
-            {currentStep === 2 && (
-              <StepContextualQuestions
-                step1={step1}
-                data={step2}
-                onChange={setStep2}
-                onNext={handleStep2Next}
-                onBack={() => {
-                  fireEvent('consultation_step_back', { from: 2 });
-                  setCurrentStep(1);
-                }}
-              />
-            )}
+                <AnimatePresence mode='wait'>
+                  {currentStep === 1 && (
+                    <FadeIn key='step-1'>
+                      <StepServiceSelection
+                        data={step1}
+                        onChange={setStep1}
+                        onNext={handleStep1Next}
+                      />
+                    </FadeIn>
+                  )}
 
-            {currentStep === 3 && (
-              <StepContactSchedule
-                data={step3}
-                onChange={setStep3}
-                onBack={() => {
-                  fireEvent('consultation_step_back', { from: 3 });
-                  setCurrentStep(2);
-                }}
-                onSchedule={handleSchedule}
-                status={status}
-              />
-            )}
-          </>
-        )}
+                  {currentStep === 2 && (
+                    <FadeIn key='step-2'>
+                      <StepContextualQuestions
+                        step1={step1}
+                        data={step2}
+                        onChange={setStep2}
+                        onNext={handleStep2Next}
+                        onBack={() => {
+                          fireEvent('consultation_step_back', { from: 2 });
+                          setCurrentStep(1);
+                        }}
+                      />
+                    </FadeIn>
+                  )}
+
+                  {currentStep === 3 && (
+                    <FadeIn key='step-3'>
+                      <StepContactSchedule
+                        data={step3}
+                        onChange={setStep3}
+                        onBack={() => {
+                          fireEvent('consultation_step_back', { from: 3 });
+                          setCurrentStep(2);
+                        }}
+                        onSchedule={handleSchedule}
+                        status={status}
+                      />
+                    </FadeIn>
+                  )}
+                </AnimatePresence>
+              </>
+            </FadeIn>
+          )}
+        </AnimatePresence>
       </div>
     </Modal>
   );

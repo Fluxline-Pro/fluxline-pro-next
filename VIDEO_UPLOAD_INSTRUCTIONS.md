@@ -140,4 +140,4 @@ The feature is complete and working with fallback image. As soon as you upload t
 - ✅ Responsive behavior is ready
 - ✅ Footer and CTA banner are in place
 
-Just drop the files in `public/videos/home/` and you're done! 🎉
+Just drop the files in `public/videos/home/` and you're done!

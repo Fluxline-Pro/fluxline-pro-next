@@ -9,38 +9,43 @@ export const SERVICE_OPTIONS: ServiceOption[] = [
   {
     key: 'personal_training',
     label: 'Personal Training',
-    description: 'Fitness coaching, workout plans, and performance optimisation.',
-    icon: '💪',
+    description:
+      'Fitness coaching, workout plans, and performance optimisation.',
+    icon: 'Health',
   },
   {
     key: 'it_consulting',
     label: 'IT Business Consulting',
-    description: 'Technology strategy, system audits, and digital transformation.',
-    icon: '💻',
+    description:
+      'Technology strategy, system audits, and digital transformation.',
+    icon: 'Lightbulb',
   },
   {
     key: 'graphic_design',
     label: 'Graphic Design',
-    description: 'Brand identity, marketing materials, and visual storytelling.',
-    icon: '🎨',
+    description:
+      'Brand identity, marketing materials, and visual storytelling.',
+    icon: 'Design',
   },
   {
     key: 'web_development',
     label: 'Web Development',
     description: 'Custom websites, web apps, and modern digital experiences.',
-    icon: '🌐',
+    icon: 'Code',
   },
   {
     key: 'resonance_coaching',
     label: 'Resonance Core Framework Coaching',
-    description: 'Mindset alignment, life strategy, and personal resonance work.',
-    icon: '✨',
+    description:
+      'Mindset alignment, life strategy, and personal resonance work.',
+    icon: 'HeartFill',
   },
   {
     key: 'help_me_choose',
     label: "I don't know / Help me choose",
-    description: "Not sure which service fits? Select this and we'll guide you on the call.",
-    icon: '🤔',
+    description:
+      "Not sure which service fits? Select this and we'll guide you on the call.",
+    icon: 'Help',
   },
 ];
 
@@ -107,7 +112,8 @@ export const QUESTION_SETS: Record<ServiceKey | 'generic', QuestionSet> = {
       },
       {
         id: 'pt_constraints',
-        label: 'Any injuries, limitations, or health considerations we should know about?',
+        label:
+          'Any injuries, limitations, or health considerations we should know about?',
         type: 'textarea',
         placeholder: 'Optional — share anything relevant to your training.',
         required: false,
@@ -128,7 +134,8 @@ export const QUESTION_SETS: Record<ServiceKey | 'generic', QuestionSet> = {
         id: 'it_challenge',
         label: 'What is the main technology challenge you are facing?',
         type: 'textarea',
-        placeholder: 'e.g. Legacy system migration, security audit, cloud strategy…',
+        placeholder:
+          'e.g. Legacy system migration, security audit, cloud strategy…',
         required: true,
       },
       {
@@ -160,9 +167,11 @@ export const QUESTION_SETS: Record<ServiceKey | 'generic', QuestionSet> = {
       },
       {
         id: 'it_constraints',
-        label: 'Are there any regulatory, compliance, or technical constraints?',
+        label:
+          'Are there any regulatory, compliance, or technical constraints?',
         type: 'textarea',
-        placeholder: 'Optional — e.g. HIPAA, GDPR, specific tech stack requirements.',
+        placeholder:
+          'Optional — e.g. HIPAA, GDPR, specific tech stack requirements.',
         required: false,
       },
     ],
@@ -188,7 +197,8 @@ export const QUESTION_SETS: Record<ServiceKey | 'generic', QuestionSet> = {
         id: 'gd_style',
         label: 'How would you describe the style or feel you are going for?',
         type: 'text',
-        placeholder: 'e.g. Modern and minimal, bold and energetic, warm and approachable…',
+        placeholder:
+          'e.g. Modern and minimal, bold and energetic, warm and approachable…',
         required: true,
       },
       {
@@ -204,7 +214,8 @@ export const QUESTION_SETS: Record<ServiceKey | 'generic', QuestionSet> = {
       },
       {
         id: 'gd_file_upload',
-        label: 'Upload any reference files, inspiration, or existing assets (optional)',
+        label:
+          'Upload any reference files, inspiration, or existing assets (optional)',
         type: 'file',
         accept: 'image/*,.pdf,.ai,.psd',
         maxSize: 10 * 1024 * 1024,
@@ -240,7 +251,8 @@ export const QUESTION_SETS: Record<ServiceKey | 'generic', QuestionSet> = {
         id: 'wd_features',
         label: 'What key features or functionality do you need?',
         type: 'textarea',
-        placeholder: 'e.g. User authentication, booking system, payment gateway, CMS…',
+        placeholder:
+          'e.g. User authentication, booking system, payment gateway, CMS…',
         required: true,
       },
       {
@@ -276,14 +288,17 @@ export const QUESTION_SETS: Record<ServiceKey | 'generic', QuestionSet> = {
     questions: [
       {
         id: 'rc_focus',
-        label: 'What area of your life or work are you most focused on right now?',
+        label:
+          'What area of your life or work are you most focused on right now?',
         type: 'text',
-        placeholder: 'e.g. Career clarity, relationships, personal growth, creative direction…',
+        placeholder:
+          'e.g. Career clarity, relationships, personal growth, creative direction…',
         required: true,
       },
       {
         id: 'rc_challenge',
-        label: 'What is the biggest challenge or block you are currently experiencing?',
+        label:
+          'What is the biggest challenge or block you are currently experiencing?',
         type: 'textarea',
         placeholder: 'Be as open or as brief as you like.',
         required: true,
@@ -297,7 +312,8 @@ export const QUESTION_SETS: Record<ServiceKey | 'generic', QuestionSet> = {
       },
       {
         id: 'rc_experience',
-        label: 'Have you worked with a coach or done personal development work before?',
+        label:
+          'Have you worked with a coach or done personal development work before?',
         type: 'dropdown',
         options: [
           { key: 'yes_extensive', text: 'Yes — extensively' },

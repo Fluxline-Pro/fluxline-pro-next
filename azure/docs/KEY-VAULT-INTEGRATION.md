@@ -1,10 +1,10 @@
 # Azure Static Web Apps - Key Vault Integration
 
-## 🔐 Overview
+## Overview
 
 This setup uses **Azure Key Vault** to securely store Static Web App API tokens and other secrets, reducing the number of GitHub Secrets from **8 to just 5**!
 
-## 🎯 Benefits
+## Benefits
 
 ✅ **Fewer GitHub Secrets** - Only 5 secrets instead of 8  
 ✅ **Centralized Secret Management** - All API tokens in one Key Vault  
@@ -24,7 +24,7 @@ This setup uses **Azure Key Vault** to securely store Static Web App API tokens 
 
 **That's it!** No more API token secrets in GitHub.
 
-## 🗄️ Secrets Stored in Key Vault
+## Secrets Stored in Key Vault
 
 The following secrets are automatically stored in `kv-az-fluxline-next`:
 
@@ -46,7 +46,7 @@ The following secrets are automatically stored in `kv-az-fluxline-next`:
 - `github-client-id-prod` - App Registration Client ID
 - `environment-prod` - Environment identifier
 
-## 🚀 Setup Process
+## Setup Process
 
 ### Step 1: Clean Up Old Resources
 
@@ -141,7 +141,7 @@ graph LR
     # ... other settings
 ```
 
-## 🔐 Security Features
+## Security Features
 
 ### Token Masking
 
@@ -211,7 +211,7 @@ az monitor activity-log list `
     --output table
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Error: "Forbidden: Caller does not have permission"
 
@@ -266,7 +266,7 @@ az keyvault secret set `
 - [Managed Identities](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/)
 - [GitHub OIDC with Azure](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-azure)
 
-## 🎉 Summary
+### Summary
 
 **Before:**
 

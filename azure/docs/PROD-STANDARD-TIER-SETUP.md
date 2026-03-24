@@ -1,10 +1,10 @@
 # Standard Tier Azure Static Web App Setup Guide for Production
 
-## 🎯 Objective
+## Objective
 
 Create a new Standard Tier Azure Static Web App to replace the existing PROD environment, properly configured to avoid 403 Forbidden errors with custom 404 handling.
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Azure CLI installed and authenticated
 - Access to Azure subscription: `3912d915-b497-49b5-8c04-f9de63a523c1`
@@ -21,7 +21,7 @@ Create a new Standard Tier Azure Static Web App to replace the existing PROD env
 3. **Security Policy Enforcement**: More stringent security rules applied
 4. **Configuration Sensitivity**: Config file errors cause harder failures
 
-## 🚀 Step-by-Step Setup
+## Step-by-Step Setup
 
 ### Step 1: Create the Static Web App (Standard Tier)
 
@@ -187,7 +187,7 @@ az staticwebapp hostname show `
 
 Wait for SSL certificates to provision (can take 5-15 minutes).
 
-## 🔐 Entra ID Federated Credential Configuration
+## Entra ID Federated Credential Configuration
 
 ### Manual Steps in Azure Portal:
 
@@ -234,7 +234,7 @@ to:
 
 Or keep using `swa-api-token-prod` and update the Key Vault secret with the new token.
 
-## ✅ Verification Checklist
+## Verification Checklist
 
 After setup, verify:
 
@@ -252,7 +252,7 @@ After setup, verify:
 - [ ] Test API function (contact form)
 - [ ] Verify no 403 Forbidden errors
 
-## 🧪 Testing Procedure
+## Testing Procedure
 
 ### 1. Test Native Azure URL
 
@@ -278,7 +278,7 @@ Visit this URL and test all routes.
 
 Submit the contact form to ensure Azure Function works.
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### If you still get 403 Forbidden:
 
@@ -315,7 +315,7 @@ This indicates a domain binding or SSL issue. Verify:
 - SSL certificate provisioned successfully
 - Wait 15-30 minutes for full propagation
 
-## 📊 Post-Deployment Monitoring
+## Post-Deployment Monitoring
 
 ### Enable Application Insights (Recommended)
 
@@ -341,7 +341,7 @@ az staticwebapp appsettings set `
   --setting-names APPINSIGHTS_INSTRUMENTATIONKEY=$instrumentationKey
 ```
 
-## 🔄 Rollback Plan
+## Rollback Plan
 
 If issues occur, you can quickly switch back:
 
@@ -356,7 +356,7 @@ If issues occur, you can quickly switch back:
 - [Managed Identity for Static Web Apps](https://learn.microsoft.com/en-us/azure/static-web-apps/authentication-authorization)
 - [GitHub Actions Integration](https://learn.microsoft.com/en-us/azure/static-web-apps/github-actions-workflow)
 
-## 🎉 Success Criteria
+## Success Criteria
 
 Your new Standard Tier Static Web App is properly configured when:
 
