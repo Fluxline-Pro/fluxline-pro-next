@@ -35,13 +35,20 @@ const HomeContent: React.FC<{
 }> = ({ isMobile, shouldStartAnimations }) => {
   const router = useRouter();
   const { theme, themeMode } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
   const [animateDivider, setAnimateDivider] = React.useState(false);
   const [animateHeader, setAnimateHeader] = React.useState(false);
   const [animateBlurb, setAnimateBlurb] = React.useState(false);
   const [animateButtons, setAnimateButtons] = React.useState(false);
-  const isDesktop = useIsDesktop();
+  const isDesktopHook = useIsDesktop();
+  const isDesktop = isMounted ? isDesktopHook : false;
   const headerHeight = useHeaderHeight();
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     if (!shouldStartAnimations) return;
@@ -238,14 +245,21 @@ const HomeContent: React.FC<{
 export default function Home() {
   const { theme, themeMode, layoutPreference } = useAppTheme();
   const { setOverrideThemeMode } = useThemeOverride();
-  const isMobile = useIsMobile();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const orientationHook = useDeviceOrientation();
+  const isMobile = isMounted ? isMobileHook : false;
+  const orientation = isMounted ? orientationHook : 'landscape';
   const headerHeight = useHeaderHeight();
   const footerHeight = useFooterHeight();
   const shouldUseMobileLayout = isMobile || orientation === 'tablet-portrait';
   const [backgroundLoaded, setBackgroundLoaded] = React.useState(false);
   const [shouldStartAnimations, setShouldStartAnimations] =
     React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Force dark mode for home page unless user has accessibility preference
   React.useEffect(() => {

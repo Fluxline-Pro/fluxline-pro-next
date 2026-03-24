@@ -335,8 +335,11 @@ function PodcastDetailModal({
 export function PodcastListingClient() {
   const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
-  const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isTabletHook = useIsTablet();
+  const isMobile = isMounted ? isMobileHook : false;
+  const isTablet = isMounted ? isTabletHook : false;
   const [episodes, setEpisodes] = React.useState<PodcastEpisode[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -347,6 +350,10 @@ export function PodcastListingClient() {
   const [sortOrder, setSortOrder] = React.useState<SortOrder>('newest');
   const [startDate, setStartDate] = React.useState<string>('');
   const [endDate, setEndDate] = React.useState<string>('');
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     let cancelled = false;

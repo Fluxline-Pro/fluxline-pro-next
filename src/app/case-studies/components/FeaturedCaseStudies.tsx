@@ -25,7 +25,9 @@ import { Icon } from '@fluentui/react';
 export default function FeaturedCaseStudies() {
   const router = useRouter();
   const { theme } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
   const cardHoverEffects = useHoverEffects({
     type: 'card',
     hoverBorderColor: theme.palette.themePrimary,
@@ -43,6 +45,10 @@ export default function FeaturedCaseStudies() {
   const featuredStudies = React.useMemo(() => getFeaturedCaseStudies(), []);
   const isMobile =
     orientation === 'portrait' || orientation === 'tablet-portrait';
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   if (featuredStudies.length === 0) {
     return null;

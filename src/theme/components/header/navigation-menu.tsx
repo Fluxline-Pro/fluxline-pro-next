@@ -20,14 +20,21 @@ import { SocialLinks } from './social-links';
 export const NavigationMenu: React.FC<NavigationProps> = ({ onClose }) => {
   const { theme, layoutPreference } = useAppTheme();
   const isLeftHanded = layoutPreference === 'left-handed';
-  const isMobile = useIsMobile();
-  const isMobileLandscape = useIsMobileLandscape();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isMobileLandscapeHook = useIsMobileLandscape();
+  const isMobile = isMounted ? isMobileHook : false;
+  const isMobileLandscape = isMounted ? isMobileLandscapeHook : false;
   const { shouldReduceMotion } = useReducedMotion();
   const router = useRouter();
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(
     new Set()
   );
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleNavigation = (path: string) => {
     router.push(path);

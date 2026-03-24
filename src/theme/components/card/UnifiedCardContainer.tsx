@@ -20,9 +20,16 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   viewType,
   gridColumns,
 }) => {
-  const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isTabletHook = useIsTablet();
+  const isMobile = isMounted ? isMobileHook : false;
+  const isTablet = isMounted ? isTabletHook : false;
   const { theme } = useAppTheme();
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const getGridConfig = () => {
     // Special case: Image view type uses flexbox, not grid

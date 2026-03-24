@@ -24,7 +24,9 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const { theme } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
 
   // Determine card width based on orientation
   const cardMinWidth = React.useMemo(() => {
@@ -66,6 +68,10 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
       behavior: 'smooth',
     });
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     checkScroll();

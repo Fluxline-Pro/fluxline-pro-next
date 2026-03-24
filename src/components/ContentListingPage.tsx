@@ -156,8 +156,11 @@ export function ContentListingPage({
   const router = useRouter();
   const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
-  const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isTabletHook = useIsTablet();
+  const isMobile = isMounted ? isMobileHook : false;
+  const isTablet = isMounted ? isTabletHook : false;
   const isCompactFilterLayout = isMobile || isTablet;
 
   // Sort and date range state (local – independent per page)
@@ -165,6 +168,9 @@ export function ContentListingPage({
   const [startDate, setStartDate] = React.useState<string>('');
   const [endDate, setEndDate] = React.useState<string>('');
 
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
   // View type options for dropdown
   const viewOptions = [
     { key: 'grid', text: 'Grid View' },

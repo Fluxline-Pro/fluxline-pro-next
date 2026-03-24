@@ -483,9 +483,13 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   const params = useParams();
   const { themeMode, theme, layoutPreference } = useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
-  const isMobile = useIsMobile();
-  const isTabletPortrait = useIsTabletPortrait();
-  const isMobileLandscape = useIsMobileLandscape();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isTabletPortraitHook = useIsTabletPortrait();
+  const isMobileLandscapeHook = useIsMobileLandscape();
+  const isMobile = isMounted ? isMobileHook : false;
+  const isTabletPortrait = isMounted ? isTabletPortraitHook : false;
+  const isMobileLandscape = isMounted ? isMobileLandscapeHook : false;
   const headerHeight = useHeaderHeight();
   const { containerStyle, contentStyle, imageStyle } = useSimpleLayout(
     theme,
@@ -568,6 +572,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
       : contentImage || configImage;
 
   // Reset and preload image — resolves spinner even when browser cache skips onLoad
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   React.useEffect(() => {
     if (!imageToDisplay) return;
     setImageLoaded(false);

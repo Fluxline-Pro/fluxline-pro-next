@@ -33,7 +33,13 @@ import Image from 'next/image';
  */
 export default function TestimonialsPage() {
   const { theme } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Get testimonials data
   const allTestimonials = getAllTestimonials();

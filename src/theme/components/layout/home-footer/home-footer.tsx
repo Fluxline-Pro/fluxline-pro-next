@@ -248,8 +248,14 @@ const FooterNewsletterSignup: React.FC = () => {
 
 export const HomeFooter: React.FC = () => {
   const { theme, themeMode } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
   const { filter: logoFilter } = useColorVisionFilter();
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const getBackground = (): string => {
     switch (themeMode) {

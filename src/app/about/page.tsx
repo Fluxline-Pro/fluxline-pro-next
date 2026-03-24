@@ -23,11 +23,18 @@ import {
   COMPANY_TIMELINE,
   COMPANY_VALUES,
 } from './constants';
+import { useState, useEffect } from 'react';
 
 export default function AboutPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>

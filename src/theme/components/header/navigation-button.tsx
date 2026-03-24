@@ -31,9 +31,15 @@ export const NavigationButton: React.FC<NavigationButtonProps> = ({
   hoverScale = 1.15,
   className,
 }) => {
-  const isMobile = useIsMobile();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
   const [isHovered, setIsHovered] = React.useState(false);
   const { themeMode, theme } = useAppTheme();
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>

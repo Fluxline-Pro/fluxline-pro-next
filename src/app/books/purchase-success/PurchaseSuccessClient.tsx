@@ -38,10 +38,16 @@ function isValidStripeSessionId(sessionId: string): boolean {
 export function PurchaseSuccessClient() {
   const { theme } = useAppTheme();
   const router = useRouter();
-  const isMobile = useIsMobile();
+  const [isMounted, setIsMounted] = useState(false);
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
   const searchParams = useSearchParams();
   const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   const [orderLoading, setOrderLoading] = useState(true);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const sessionId = searchParams.get('session_id');

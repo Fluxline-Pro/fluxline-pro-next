@@ -27,8 +27,14 @@ export const FadeSlideIn: React.FC<FadeSlideInProps> = ({
   delay = 0,
   className = '',
 }) => {
-  const isMobile = useIsMobile();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
   const { shouldReduceMotion } = useReducedMotion();
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Adjust distance for mobile if needed
   const adjustedDistance = isMobile ? Math.min(distance, 10) : distance;

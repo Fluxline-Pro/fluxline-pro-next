@@ -24,7 +24,13 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
   onViewFull,
 }) => {
   const { theme } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const isMobile =
     orientation === 'portrait' || orientation === 'mobile-landscape';

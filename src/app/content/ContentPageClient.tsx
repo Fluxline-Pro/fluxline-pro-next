@@ -30,8 +30,14 @@ interface ContentCategory {
 export default function ContentPageClient() {
   const router = useRouter();
   const { theme } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
   const [hoveredCard, setHoveredCard] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const contentCategories: ContentCategory[] = [
     {

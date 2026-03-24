@@ -105,9 +105,16 @@ export const Hero: React.FC<HeroProps> = ({
   filters,
 }) => {
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isTabletHook = useIsTablet();
+  const isMobile = isMounted ? isMobileHook : false;
+  const isTablet = isMounted ? isTabletHook : false;
   const [isExpanded, setIsExpanded] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   /**
    * Truncates text to first sentence (up to and including first period)
