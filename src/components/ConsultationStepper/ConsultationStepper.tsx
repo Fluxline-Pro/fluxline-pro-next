@@ -25,6 +25,7 @@ import { LeadPayload, MeetingLength, StepperStep, SubmitStatus } from './types';
 import { FormButton } from '@/theme/components/form/FormButton';
 import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
 import { StepTidyCal } from './StepTidyCal';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 declare global {
   interface Window {
@@ -266,7 +267,10 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
   const { theme } = useAppTheme();
   const [currentStep, setCurrentStep] = React.useState<StepperStep>(1);
   const [status, setStatus] = React.useState<SubmitStatus>('idle');
+  const [isMounted, setIsMounted] = React.useState(false);
   const [tidyCalUrl, setTidyCalUrl] = React.useState('');
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
 
   const {
     step1,
@@ -278,6 +282,12 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
     setStep3,
     clearDraft,
   } = useConsultationStorage();
+
+  // Ensure component is mounted before rendering dynamic content
+    // This prevents hydration mismatches by only rendering client-specific content after mount
+    React.useEffect(() => {
+      setIsMounted(true);
+    }, []);
 
   // Fire "stepper opened" event on open
   useEffect(() => {
@@ -379,7 +389,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
     >
       <div
         style={{
-          padding: theme.spacing.xl,
+          padding: isMobile ? theme.spacing.s1 : theme.spacing.xl,
           paddingTop: theme.spacing.l,
         }}
       >
@@ -425,6 +435,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
                 flexShrink: 0,
                 padding: '0 4px',
                 textDecoration: 'underline',
+                marginRight: isMobile ? '2rem' : undefined,
               }}
               aria-label='Clear saved draft'
             >
