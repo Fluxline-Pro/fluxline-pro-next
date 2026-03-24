@@ -342,7 +342,9 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
       };
 
       // Build request headers — include API key when configured
-      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
       const leadApiKey = process.env.NEXT_PUBLIC_LEAD_API_SECRET;
       if (leadApiKey) {
         headers['X-Lead-Key'] = leadApiKey;
@@ -415,7 +417,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
                 margin: 0,
               }}
             >
-              📋 Your previous answers have been restored.
+              Your previous answers have been restored.
             </Typography>
             <button
               type='button'

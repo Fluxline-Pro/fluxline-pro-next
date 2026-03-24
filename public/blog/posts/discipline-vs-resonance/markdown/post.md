@@ -33,7 +33,7 @@ seoKeywords:
 generatedWithAI: true
 ---
 
-# 💪 Resonance, Part 2: Discipline vs. Resonance
+# Resonance, Part 2: Discipline vs. Resonance
 
 [In Part 1: The Philosophy of Resonance](/blog/philosophy-of-resonance), we explored how resonance becomes
 an inner glow—an emotional alignment that drives action. Whether you're learning
@@ -45,7 +45,7 @@ But how long does that momentum last?
 Anyone who’s set a New Year's resolution knows: it fades. It stops. It becomes
 irrelevant. And then… we give up.
 
-### 🧨 The Fade Happens Here
+### The Fade Happens Here
 
 - Relationship sparks fade into routine
 - New careers morph into the mundane
@@ -88,7 +88,7 @@ The desire (positive) always demands action through resistance (negative).
 
 ---
 
-## 🧱 The Obstacles Become the Way
+## The Obstacles Become the Way
 
 Here’s the irony: the path to achievement _is hard on purpose_. That discomfort
 is _the filter_—not the flaw.
@@ -109,7 +109,7 @@ You’ve moved closer to the resonance you first felt.
 
 ---
 
-## 🔄 Resonance + Discipline = Sustainable Clarity
+## Resonance + Discipline = Sustainable Clarity
 
 The strength to _continue_ is fueled by remembering why you started.
 
@@ -121,7 +121,7 @@ And lasting.
 
 ---
 
-## 💬 Need help staying disciplined?
+## Need help staying disciplined?
 
 **Let’s define your Why.**  
 Book a consultation, and together we’ll identify the patterns, stories, and

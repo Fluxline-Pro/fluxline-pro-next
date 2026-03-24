@@ -230,7 +230,7 @@ export default function ServicesPageClient() {
             <FormButton
               text='View Legal Documents'
               variant='secondary'
-              size='medium'
+              size='large'
               icon='ChevronRight'
               iconPosition='right'
               onClick={() => (window.location.href = '/legal')}

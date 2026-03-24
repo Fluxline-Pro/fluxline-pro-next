@@ -9,6 +9,7 @@ import React from 'react';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form/FormButton';
+import { FluentIcon } from '@/theme/components/fluent-icon';
 import { SERVICE_OPTIONS } from './constants';
 import { ServiceKey, StepOneData } from './types';
 
@@ -70,7 +71,8 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
           fontSize: theme.typography.fonts.bodySmall.fontSize,
         }}
       >
-        Select one or more services. If you&apos;re unsure, choose &ldquo;I don&apos;t know&rdquo; and we&apos;ll help on the call.
+        Select one or more services. If you&apos;re unsure, choose &ldquo;I
+        don&apos;t know&rdquo; and we&apos;ll help on the call.
       </Typography>
 
       <div className='flex flex-col gap-3'>
@@ -107,12 +109,16 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
                   flexShrink: 0,
                 }}
               />
-              <span
-                style={{ fontSize: '1.5rem', lineHeight: 1, flexShrink: 0 }}
-                aria-hidden='true'
-              >
-                {option.icon}
-              </span>
+              <FluentIcon
+                iconName={option.icon}
+                size='medium'
+                color={
+                  isSelected
+                    ? theme.palette.themePrimary
+                    : theme.palette.neutralSecondary
+                }
+                aria-hidden
+              />
               <div>
                 <Typography
                   variant='p'
