@@ -333,10 +333,9 @@ module.exports = async function (context, req) {
     validationErrors.push('submittedAt is required (ISO 8601 timestamp).');
   }
 
-  if (
-    payload.preferredMeetingLength &&
-    !VALID_MEETING_LENGTHS.includes(String(payload.preferredMeetingLength))
-  ) {
+  if (!payload.preferredMeetingLength) {
+    validationErrors.push('preferredMeetingLength is required.');
+  } else if (!VALID_MEETING_LENGTHS.includes(String(payload.preferredMeetingLength))) {
     validationErrors.push(
       `preferredMeetingLength must be one of: ${VALID_MEETING_LENGTHS.join(', ')}.`
     );
