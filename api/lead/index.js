@@ -115,8 +115,9 @@ async function getGraphToken(tenantId, clientId, clientSecret) {
  * Posts a new item to a SharePoint list via Graph API.
  * Returns the created item (including id/webUrl).
  */
-async function createSharePointItem(token, siteId, listId, fields) {
+async function createSharePointItem(token, siteId, listId, fields, log) {
   const body = JSON.stringify({ fields });
+  if (log) log(`Lead: Graph request body — ${body}`);
 
   const { statusCode, body: responseBody } = await httpsRequest(
     {
@@ -165,7 +166,7 @@ async function createSharePointItemWithRetry(
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     try {
-      return await createSharePointItem(token, siteId, listId, fields);
+      return await createSharePointItem(token, siteId, listId, fields, log);
     } catch (err) {
       if (attempt === MAX_ATTEMPTS || !err.transient) throw err;
       const delay = BASE_DELAY_MS * Math.pow(2, attempt - 1);
@@ -362,32 +363,40 @@ module.exports = async function (context, req) {
     ? payload.services.map((k) => SERVICE_LABELS[k] || k)
     : [];
 
-  const fields = {
-    // Title = FullName - PrimaryService
+  // Graph API v1.0 SharePoint list items — field value rules:
+  //   Choice (multi-select): semicolon-separated string, NOT an array
+  //   Choice (single-select): plain string
+  //   Yes/No: boolean true only (omit false — SharePoint defaults to false)
+  //   Date/Time: ISO 8601 without milliseconds, Z suffix
+  //   Text: omit empty strings rather than sending ""
+  const rawFields = {
     Title: `${payload.fullName.trim()} - ${serviceLabels[0] || 'Enquiry'}`,
     FullName: payload.fullName.trim(),
     Email: payload.email.trim(),
     Phone: payload.phone || '',
     Company: payload.company || '',
-    // Multi-select Choice column — Graph API expects an array of strings.
-    ServicesSelected: serviceLabels,
-    // Store Q&A as JSON string
+    // Multi-select Choice column — semicolon-separated string for Graph API v1.0
+    ServicesSelected: serviceLabels.join(';'),
     AnswersJSON: JSON.stringify(payload.answers || {}),
     PreferredMeetingLength: String(payload.preferredMeetingLength || ''),
     TidyCalBookingID: payload.tidycalBookingId || '',
     ZoomLink: payload.zoomLink || '',
     ReferralSource: payload.referralSource || '',
-    // Yes/No column — Graph API accepts boolean
     ConsentGiven: true,
-    // Date and Time — strip milliseconds; Graph API is stricter than the REST v1 endpoint
+    // Date and Time — ISO 8601, no milliseconds
     SubmittedAt: (payload.submittedAt || new Date().toISOString()).replace(
       /\.\d{3}Z$/,
       'Z'
     ),
-    // Default workflow fields
     Status: 'New',
-    NotificationSent: false,
+    // NotificationSent omitted — SharePoint Yes/No defaults to false; sending false explicitly
+    // can trigger invalidRequest on some tenants
   };
+
+  // Strip empty strings — Graph API returns 400 for empty string on some column types
+  const fields = Object.fromEntries(
+    Object.entries(rawFields).filter(([, v]) => v !== '')
+  );
 
   // Optionally store raw payload for audit
   const storeRawPayload = process.env.LEAD_STORE_RAW_PAYLOAD === 'true';
