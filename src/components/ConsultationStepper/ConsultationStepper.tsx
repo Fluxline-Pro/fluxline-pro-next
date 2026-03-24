@@ -10,9 +10,11 @@
  */
 
 import React, { useCallback, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '@/theme/components/typography';
 import { Modal } from '@/components/Modal';
+import { FadeIn } from '@/animations/fade-animations';
 import { useConsultationStorage } from './useConsultationStorage';
 import { StepServiceSelection } from './StepServiceSelection';
 import { StepContextualQuestions } from './StepContextualQuestions';
@@ -394,15 +396,19 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
           paddingTop: theme.spacing.l,
         }}
       >
-        {/* Draft restore banner */}
+        {/* Draft restore toast */}
         {hasDraft && currentStep === 1 && status === 'idle' && (
           <div
+            role='status'
+            aria-live='polite'
             style={{
               marginBottom: theme.spacing.m,
-              padding: theme.spacing.s2,
-              backgroundColor: theme.palette.themeLighterAlt,
-              border: `1px solid ${theme.palette.themeLight}`,
+              padding: `${theme.spacing.s2} ${theme.spacing.m}`,
+              backgroundColor: theme.palette.neutralLighterAlt,
+              border: `1px solid ${theme.palette.neutralQuaternary}`,
+              borderLeft: `3px solid ${theme.palette.themePrimary}`,
               borderRadius: theme.effects.roundedCorner4,
+              boxShadow: theme.shadows.card,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -414,6 +420,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
               style={{
                 color: theme.palette.themePrimary,
                 fontSize: theme.typography.fonts.bodySmall.fontSize,
+                fontWeight: theme.typography.fontWeights.semiBold,
                 margin: 0,
               }}
             >
@@ -429,6 +436,8 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
                 cursor: 'pointer',
                 fontSize: theme.typography.fonts.bodySmall.fontSize,
                 flexShrink: 0,
+                padding: '0 4px',
+                textDecoration: 'underline',
               }}
               aria-label='Clear saved draft'
             >
@@ -437,47 +446,64 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
           </div>
         )}
 
-        {status === 'success' ? (
-          <SuccessView onClose={handleClose} />
-        ) : (
-          <>
-            <StepIndicator currentStep={currentStep} onStepClick={goToStep} />
+        <AnimatePresence mode='wait'>
+          {status === 'success' ? (
+            <FadeIn key='success'>
+              <SuccessView onClose={handleClose} />
+            </FadeIn>
+          ) : (
+            <FadeIn key='stepper-views'>
+              <>
+                <StepIndicator
+                  currentStep={currentStep}
+                  onStepClick={goToStep}
+                />
 
-            {currentStep === 1 && (
-              <StepServiceSelection
-                data={step1}
-                onChange={setStep1}
-                onNext={handleStep1Next}
-              />
-            )}
+                <AnimatePresence mode='wait'>
+                  {currentStep === 1 && (
+                    <FadeIn key='step-1'>
+                      <StepServiceSelection
+                        data={step1}
+                        onChange={setStep1}
+                        onNext={handleStep1Next}
+                      />
+                    </FadeIn>
+                  )}
 
-            {currentStep === 2 && (
-              <StepContextualQuestions
-                step1={step1}
-                data={step2}
-                onChange={setStep2}
-                onNext={handleStep2Next}
-                onBack={() => {
-                  fireEvent('consultation_step_back', { from: 2 });
-                  setCurrentStep(1);
-                }}
-              />
-            )}
+                  {currentStep === 2 && (
+                    <FadeIn key='step-2'>
+                      <StepContextualQuestions
+                        step1={step1}
+                        data={step2}
+                        onChange={setStep2}
+                        onNext={handleStep2Next}
+                        onBack={() => {
+                          fireEvent('consultation_step_back', { from: 2 });
+                          setCurrentStep(1);
+                        }}
+                      />
+                    </FadeIn>
+                  )}
 
-            {currentStep === 3 && (
-              <StepContactSchedule
-                data={step3}
-                onChange={setStep3}
-                onBack={() => {
-                  fireEvent('consultation_step_back', { from: 3 });
-                  setCurrentStep(2);
-                }}
-                onSchedule={handleSchedule}
-                status={status}
-              />
-            )}
-          </>
-        )}
+                  {currentStep === 3 && (
+                    <FadeIn key='step-3'>
+                      <StepContactSchedule
+                        data={step3}
+                        onChange={setStep3}
+                        onBack={() => {
+                          fireEvent('consultation_step_back', { from: 3 });
+                          setCurrentStep(2);
+                        }}
+                        onSchedule={handleSchedule}
+                        status={status}
+                      />
+                    </FadeIn>
+                  )}
+                </AnimatePresence>
+              </>
+            </FadeIn>
+          )}
+        </AnimatePresence>
       </div>
     </Modal>
   );

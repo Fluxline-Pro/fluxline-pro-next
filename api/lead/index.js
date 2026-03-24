@@ -140,7 +140,11 @@ async function createSharePointItem(token, siteId, listId, fields) {
     }
   }
 
-  const isTransient = statusCode === 429 || statusCode === 503 || statusCode === 502 || statusCode === 504;
+  const isTransient =
+    statusCode === 429 ||
+    statusCode === 503 ||
+    statusCode === 502 ||
+    statusCode === 504;
   const err = new Error(`Graph API error ${statusCode}: ${responseBody}`);
   err.transient = isTransient;
   throw err;
@@ -149,7 +153,13 @@ async function createSharePointItem(token, siteId, listId, fields) {
 /**
  * Calls createSharePointItem with exponential-backoff retry (up to 3 attempts).
  */
-async function createSharePointItemWithRetry(token, siteId, listId, fields, log) {
+async function createSharePointItemWithRetry(
+  token,
+  siteId,
+  listId,
+  fields,
+  log
+) {
   const MAX_ATTEMPTS = 3;
   const BASE_DELAY_MS = 500;
 
@@ -159,7 +169,9 @@ async function createSharePointItemWithRetry(token, siteId, listId, fields, log)
     } catch (err) {
       if (attempt === MAX_ATTEMPTS || !err.transient) throw err;
       const delay = BASE_DELAY_MS * Math.pow(2, attempt - 1);
-      log(`Lead: transient error on attempt ${attempt}, retrying in ${delay}ms — ${err.message}`);
+      log(
+        `Lead: transient error on attempt ${attempt}, retrying in ${delay}ms — ${err.message}`
+      );
       await new Promise((r) => setTimeout(r, delay));
     }
   }
@@ -195,11 +207,11 @@ async function enqueuePayload(payload, queueName, connectionString, log) {
   // The canonicalizedResource path must match the actual request path
   const stringToSign = [
     'POST',
-    '',                // Content-MD5
+    '', // Content-MD5
     'application/xml', // Content-Type
-    '',                // Date (use x-ms-date instead)
+    '', // Date (use x-ms-date instead)
     `x-ms-date:${date}\nx-ms-version:2020-10-02`,
-    path,              // Must match the request path used below
+    path, // Must match the request path used below
   ].join('\n');
 
   const signature = crypto
@@ -294,7 +306,11 @@ module.exports = async function (context, req) {
 
   const validationErrors = [];
 
-  if (!payload.fullName || typeof payload.fullName !== 'string' || payload.fullName.trim().length < 2) {
+  if (
+    !payload.fullName ||
+    typeof payload.fullName !== 'string' ||
+    payload.fullName.trim().length < 2
+  ) {
     validationErrors.push('fullName is required (minimum 2 characters).');
   }
 
@@ -312,8 +328,13 @@ module.exports = async function (context, req) {
     validationErrors.push('submittedAt is required (ISO 8601 timestamp).');
   }
 
-  if (payload.preferredMeetingLength && !VALID_MEETING_LENGTHS.includes(String(payload.preferredMeetingLength))) {
-    validationErrors.push(`preferredMeetingLength must be one of: ${VALID_MEETING_LENGTHS.join(', ')}.`);
+  if (
+    payload.preferredMeetingLength &&
+    !VALID_MEETING_LENGTHS.includes(String(payload.preferredMeetingLength))
+  ) {
+    validationErrors.push(
+      `preferredMeetingLength must be one of: ${VALID_MEETING_LENGTHS.join(', ')}.`
+    );
   }
 
   // Consent must be explicitly true — reject with 400 if false or missing
@@ -326,7 +347,10 @@ module.exports = async function (context, req) {
     context.res = {
       status: 400,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ error: 'Validation failed.', details: validationErrors }),
+      body: JSON.stringify({
+        error: 'Validation failed.',
+        details: validationErrors,
+      }),
     };
     return;
   }
@@ -345,9 +369,7 @@ module.exports = async function (context, req) {
     Email: payload.email.trim(),
     Phone: payload.phone || '',
     Company: payload.company || '',
-    // Multi-choice column — pass as array.
-    // NOTE: Requires the SharePoint 'ServicesSelected' column to be configured
-    // as a Choice column with "Allow multiple selections" enabled.
+    // Multi-select Choice column — Graph API expects an array of strings.
     ServicesSelected: serviceLabels,
     // Store Q&A as JSON string
     AnswersJSON: JSON.stringify(payload.answers || {}),
@@ -355,9 +377,13 @@ module.exports = async function (context, req) {
     TidyCalBookingID: payload.tidycalBookingId || '',
     ZoomLink: payload.zoomLink || '',
     ReferralSource: payload.referralSource || '',
-    // Yes/No column
+    // Yes/No column — Graph API accepts boolean
     ConsentGiven: true,
-    SubmittedAt: payload.submittedAt || new Date().toISOString(),
+    // Date and Time — strip milliseconds; Graph API is stricter than the REST v1 endpoint
+    SubmittedAt: (payload.submittedAt || new Date().toISOString()).replace(
+      /\.\d{3}Z$/,
+      'Z'
+    ),
     // Default workflow fields
     Status: 'New',
     NotificationSent: false,
@@ -374,7 +400,9 @@ module.exports = async function (context, req) {
     if (rawJson.length <= 100000) {
       fields.RawPayload = rawJson;
     } else {
-      logWarn('Lead: raw payload exceeds 100 KB limit — RawPayload field omitted');
+      logWarn(
+        'Lead: raw payload exceeds 100 KB limit — RawPayload field omitted'
+      );
     }
   }
 
@@ -388,7 +416,9 @@ module.exports = async function (context, req) {
   const listId = process.env.LEADS_LIST_ID;
 
   if (!clientId || !clientSecret || !tenantId || !siteId || !listId) {
-    logWarn('Lead: SharePoint env vars not configured — accepted without persisting');
+    logWarn(
+      'Lead: SharePoint env vars not configured — accepted without persisting'
+    );
     context.res = {
       status: 200,
       headers: CORS_HEADERS,
@@ -401,8 +431,15 @@ module.exports = async function (context, req) {
   // Submit to SharePoint with retry, queue on transient failure
   // ---------------------------------------------------------------------------
   try {
+    log(`Lead: submitting fields — ${Object.keys(fields).join(', ')}`);
     const token = await getGraphToken(tenantId, clientId, clientSecret);
-    const created = await createSharePointItemWithRetry(token, siteId, listId, fields, log);
+    const created = await createSharePointItemWithRetry(
+      token,
+      siteId,
+      listId,
+      fields,
+      log
+    );
 
     log(`Lead: SharePoint item created — webUrl: ${created.webUrl || 'n/a'}`);
 
@@ -423,7 +460,12 @@ module.exports = async function (context, req) {
     const queueName = process.env.LEAD_QUEUE_NAME || 'lead-queue';
 
     if (error.transient && queueConnStr) {
-      await enqueuePayload({ ...fields, _requestId: requestId }, queueName, queueConnStr, log);
+      await enqueuePayload(
+        { ...fields, _requestId: requestId },
+        queueName,
+        queueConnStr,
+        log
+      );
       context.res = {
         status: 202,
         headers: CORS_HEADERS,
