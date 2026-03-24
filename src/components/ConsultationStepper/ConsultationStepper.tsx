@@ -24,6 +24,7 @@ import { getApiEndpoint } from '@/lib/getApiUrl';
 import { LeadPayload, MeetingLength, StepperStep, SubmitStatus } from './types';
 import { FormButton } from '@/theme/components/form/FormButton';
 import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
+import { StepTidyCal } from './StepTidyCal';
 
 declare global {
   interface Window {
@@ -265,6 +266,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
   const { theme } = useAppTheme();
   const [currentStep, setCurrentStep] = React.useState<StepperStep>(1);
   const [status, setStatus] = React.useState<SubmitStatus>('idle');
+  const [tidyCalUrl, setTidyCalUrl] = React.useState('');
 
   const {
     step1,
@@ -301,7 +303,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
 
   const handleSchedule = useCallback(async () => {
     fireEvent('consultation_booking_initiated');
-    setStatus('booking');
+    setStatus('submitting');
 
     // Build a brief note for TidyCal prefill
     const answerLines = Object.entries(step2.answers)
@@ -310,73 +312,54 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
     const services = step1.services.join(', ');
     const note = `Services: ${services}\n${answerLines}`.trim();
 
-    const tidyCalUrl = buildTidyCalUrl(
+    const url = buildTidyCalUrl(
       step3.preferredMeetingLength,
       step3.fullName,
       step3.email,
       note
     );
+    setTidyCalUrl(url);
 
-    // Open TidyCal in a new tab
-    window.open(tidyCalUrl, '_blank', 'noopener,noreferrer');
+    // Post lead to backend in the background — does not block showing the calendar
+    const utmParams = new URLSearchParams(window.location.search);
+    const payload: LeadPayload = {
+      fullName: step3.fullName,
+      email: step3.email,
+      phone: step3.phone,
+      company: step3.company,
+      services: step1.services,
+      answers: step2.answers,
+      preferredMeetingLength: step3.preferredMeetingLength,
+      referralSource:
+        step3.referralSource === 'other'
+          ? step3.referralOther || 'Other'
+          : step3.referralSource,
+      consent: step3.consent,
+      tidycalBookingId: '',
+      submittedAt: new Date().toISOString(),
+      utmSource: utmParams.get('utm_source') ?? undefined,
+      utmMedium: utmParams.get('utm_medium') ?? undefined,
+      utmCampaign: utmParams.get('utm_campaign') ?? undefined,
+    };
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    const leadApiKey = process.env.NEXT_PUBLIC_LEAD_API_SECRET;
+    if (leadApiKey) headers['X-Lead-Key'] = leadApiKey;
+    fetch(getApiEndpoint('/api/lead'), {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+    }).catch(() => {});
 
     fireEvent('consultation_step_completed', { step: 3 });
+    setStatus('schedule');
+  }, [step1, step2, step3]);
 
-    // Post lead payload to backend
-    try {
-      setStatus('submitting');
-
-      const utmParams = new URLSearchParams(window.location.search);
-      const payload: LeadPayload = {
-        fullName: step3.fullName,
-        email: step3.email,
-        phone: step3.phone,
-        company: step3.company,
-        services: step1.services,
-        answers: step2.answers,
-        preferredMeetingLength: step3.preferredMeetingLength,
-        referralSource:
-          step3.referralSource === 'other'
-            ? step3.referralOther || 'Other'
-            : step3.referralSource,
-        consent: step3.consent,
-        tidycalBookingId: '',
-        submittedAt: new Date().toISOString(),
-        utmSource: utmParams.get('utm_source') ?? undefined,
-        utmMedium: utmParams.get('utm_medium') ?? undefined,
-        utmCampaign: utmParams.get('utm_campaign') ?? undefined,
-      };
-
-      // Build request headers — include API key when configured
-      const headers: Record<string, string> = {
-        'Content-Type': 'application/json',
-      };
-      const leadApiKey = process.env.NEXT_PUBLIC_LEAD_API_SECRET;
-      if (leadApiKey) {
-        headers['X-Lead-Key'] = leadApiKey;
-      }
-
-      const response = await fetch(getApiEndpoint('/api/lead'), {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        await response.json().catch(() => ({}));
-        fireEvent('consultation_booking_confirmed');
-      } else {
-        // Still show success — booking was opened, lead will be retried
-        fireEvent('consultation_booking_confirmed');
-      }
-    } catch {
-      // Don't block the user — TidyCal was already opened
-      fireEvent('consultation_booking_failed');
-    }
-
+  /** Called when TidyCal booking is confirmed (postMessage or manual button) */
+  const handleBookingComplete = useCallback(() => {
+    fireEvent('consultation_booking_confirmed');
     clearDraft();
     setStatus('success');
-  }, [step1, step2, step3, clearDraft]);
+  }, [clearDraft]);
 
   const handleClose = useCallback(() => {
     onDismiss();
@@ -392,7 +375,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
       isOpen={isOpen}
       onDismiss={handleClose}
       ariaLabel='Book a consultation'
-      maxWidth='640px'
+      maxWidth={status === 'schedule' ? '800px' : '640px'}
     >
       <div
         style={{
@@ -454,6 +437,14 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
           {status === 'success' ? (
             <FadeIn key='success'>
               <SuccessView onClose={handleClose} />
+            </FadeIn>
+          ) : status === 'schedule' ? (
+            <FadeIn key='schedule'>
+              <StepTidyCal
+                tidyCalUrl={tidyCalUrl}
+                onComplete={handleBookingComplete}
+                onBack={() => setStatus('idle')}
+              />
             </FadeIn>
           ) : (
             <FadeIn key='stepper-views'>

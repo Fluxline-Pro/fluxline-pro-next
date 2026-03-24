@@ -87,4 +87,10 @@ export interface LeadPayload {
 
 export type StepperStep = 1 | 2 | 3;
 
-export type SubmitStatus = 'idle' | 'booking' | 'submitting' | 'success' | 'error';
+export type SubmitStatus =
+  | 'idle'
+  | 'booking'
+  | 'submitting'
+  | 'schedule'
+  | 'success'
+  | 'error';
