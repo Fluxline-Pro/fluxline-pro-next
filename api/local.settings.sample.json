@@ -36,7 +36,7 @@
     "SHAREPOINT_PLATFORM_FIELD": "field_1",
     "SHAREPOINT_TIMESTAMP_FIELD": "Timestamp",
     "LEADS_LIST_ID": "<your-leads-list-id>",
-    "LEAD_ALLOWED_ORIGINS": "http://localhost:3000,https://fluxline.pro",
+    "LEAD_ALLOWED_ORIGINS": "http://localhost:3000,http://localhost:7071,https://fluxline.pro,https://www.fluxline.pro,https://flx-next-dev.fluxline.pro,https://flx-next-test.fluxline.pro",
     "LEAD_RATE_LIMIT_WINDOW_MS": "900000",
     "LEAD_RATE_LIMIT_MAX_REQUESTS": "10",
     "LEAD_STORE_RAW_PAYLOAD": "false",
