@@ -364,7 +364,7 @@ module.exports = async function (context, req) {
     : [];
 
   // Graph API v1.0 SharePoint list items — field value rules:
-  //   Choice (multi-select): semicolon-separated string, NOT an array
+  //   Choice (multi-select): array of strings (Graph API v1.0 documented format)
   //   Choice (single-select): plain string
   //   Yes/No: boolean true only (omit false — SharePoint defaults to false)
   //   Date/Time: ISO 8601 without milliseconds, Z suffix
@@ -375,8 +375,8 @@ module.exports = async function (context, req) {
     Email: payload.email.trim(),
     Phone: payload.phone || '',
     Company: payload.company || '',
-    // Multi-select Choice column — semicolon-separated string for Graph API v1.0
-    ServicesSelected: serviceLabels.join(';'),
+    // Multi-select Choice column — array of strings for Graph API v1.0
+    ServicesSelected: serviceLabels,
     AnswersJSON: JSON.stringify(payload.answers || {}),
     PreferredMeetingLength: String(payload.preferredMeetingLength || ''),
     TidyCalBookingID: payload.tidycalBookingId || '',
@@ -393,9 +393,12 @@ module.exports = async function (context, req) {
     // can trigger invalidRequest on some tenants
   };
 
-  // Strip empty strings — Graph API returns 400 for empty string on some column types
+  // Strip empty strings — Graph API returns 400 for empty string on some column types.
+  // Arrays (ServicesSelected) are kept as-is.
   const fields = Object.fromEntries(
-    Object.entries(rawFields).filter(([, v]) => v !== '')
+    Object.entries(rawFields).filter(
+      ([, v]) => v !== '' && v !== null && v !== undefined
+    )
   );
 
   // Optionally store raw payload for audit
