@@ -179,7 +179,8 @@ async function createSharePointItemWithRetry(
 
 /**
  * Enqueues the payload to an Azure Storage Queue for later retry.
- * Uses the SAS-authenticated REST API extracted from AZURE_QUEUE_CONNECTION_STRING.
+ * Uses the Shared Key-authenticated Queue REST API with credentials
+ * extracted from AZURE_QUEUE_CONNECTION_STRING.
  */
 async function enqueuePayload(payload, queueName, connectionString, log) {
   // Parse account name and key from the connection string
@@ -273,7 +274,7 @@ module.exports = async function (context, req) {
     context.res = {
       status: 405,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ error: 'Method Not Allowed' }),
+      body: JSON.stringify({ error: 'Method Not Allowed', requestId }),
     };
     return;
   }
@@ -289,7 +290,7 @@ module.exports = async function (context, req) {
       context.res = {
         status: 401,
         headers: CORS_HEADERS,
-        body: JSON.stringify({ error: 'Unauthorized' }),
+        body: JSON.stringify({ error: 'Unauthorized', requestId }),
       };
       return;
     }
@@ -304,7 +305,10 @@ module.exports = async function (context, req) {
     context.res = {
       status: 400,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ error: 'Request body must be a JSON object.' }),
+      body: JSON.stringify({
+        error: 'Request body must be a JSON object.',
+        requestId,
+      }),
     };
     return;
   }
@@ -356,6 +360,7 @@ module.exports = async function (context, req) {
       body: JSON.stringify({
         error: 'Validation failed.',
         details: validationErrors,
+        requestId,
       }),
     };
     return;
