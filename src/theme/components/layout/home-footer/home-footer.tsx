@@ -288,18 +288,25 @@ export const HomeFooter: React.FC = () => {
     return null;
   }
 
-  const footerStyle: React.CSSProperties = {
+  const footerShellStyle: React.CSSProperties = {
     position: 'relative',
     width: '100%',
     background: getBackground(),
     backdropFilter: 'blur(10px)',
+    borderTop: `2px solid ${theme.palette.themePrimary}`,
+    zIndex: 5,
+  };
+
+  const footerContentStyle: React.CSSProperties = {
+    width: 'min(100%, var(--site-max-width, 2160px))',
+    maxWidth: 'var(--site-max-width, 2160px)',
+    margin: '0 auto',
     padding: '2rem 4rem',
     display: 'grid',
     gridTemplateColumns: '1fr 2fr 1fr 1fr',
     gap: '3rem',
     alignItems: 'start',
-    borderTop: `2px solid ${theme.palette.themePrimary}`,
-    zIndex: 5,
+    boxSizing: 'border-box',
   };
 
   const columnStyle: React.CSSProperties = {
@@ -328,114 +335,116 @@ export const HomeFooter: React.FC = () => {
   };
 
   return (
-    <footer style={footerStyle}>
-      {/* Logo Section */}
-      <div style={columnStyle}>
-        <Image
-          src={
-            themeMode === 'light'
-              ? '/images/home/FluxlineLogoLightMode.png'
-              : '/images/home/FluxlineLogoHomePage.png'
-          }
-          alt='Fluxline Logo'
-          width={200}
-          height={60}
+    <footer style={footerShellStyle}>
+      <div style={footerContentStyle}>
+        {/* Logo Section */}
+        <div style={columnStyle}>
+          <Image
+            src={
+              themeMode === 'light'
+                ? '/images/home/FluxlineLogoLightMode.png'
+                : '/images/home/FluxlineLogoHomePage.png'
+            }
+            alt='Fluxline Logo'
+            width={200}
+            height={60}
+            style={{
+              objectFit: 'contain',
+              filter:
+                themeMode === 'grayscale'
+                  ? `invert(1) ${logoFilter}`
+                  : logoFilter,
+            }}
+          />
+        </div>
+
+        {/* Navigation Columns */}
+        <div
           style={{
-            objectFit: 'contain',
-            filter:
-              themeMode === 'grayscale'
-                ? `invert(1) ${logoFilter}`
-                : logoFilter,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '2rem',
           }}
-        />
-      </div>
-
-      {/* Navigation Columns */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '2rem',
-        }}
-      >
-        {/* About Column */}
-        <div style={columnStyle}>
-          <Typography variant='h3' style={headingStyle}>
-            About
-          </Typography>
-          <StyledLink href='/about'>About Us</StyledLink>
-          <StyledLink href='/fluxline-ethos'>Fluxline Ethos</StyledLink>
-          <StyledLink href='/case-studies'>Case Studies</StyledLink>
-          <StyledLink href='/press-release'>Press Releases</StyledLink>
-          {/* <StyledLink href='/cue-cards'>Cue Cards</StyledLink> */}
-        </div>
-
-        {/* Services Column */}
-        <div style={columnStyle}>
-          <Typography variant='h3' style={headingStyle}>
-            Services
-          </Typography>
-          <StyledLink href='/services'>All Services</StyledLink>
-          <StyledLink href='/services/resonance-core'>
-            The Resonance Core Framework™
-          </StyledLink>
-          <StyledLink href='/services/personal-training'>
-            Personal Training
-          </StyledLink>
-          <StyledLink href='/services/design'>Design</StyledLink>
-          <StyledLink href='/services/development'>Development</StyledLink>
-          <StyledLink href='/services/consulting'>Consulting</StyledLink>
-        </div>
-
-        {/* Resources Column */}
-        <div style={columnStyle}>
-          <Typography variant='h3' style={headingStyle}>
-            Resources
-          </Typography>
-          <StyledLink href='/blog'>Blog</StyledLink>
-          <StyledLink href='/portfolio'>Portfolio</StyledLink>
-          <StyledLink href='/content'>Content Hub</StyledLink>
-          <StyledLink href='/services/scrolls'>Scrolls</StyledLink>
-          <StyledLink href='/legal'>Legal</StyledLink>
-          <StyledLink href='/contact'>Contact Us</StyledLink>
-        </div>
-      </div>
-
-      {/* Contact Information */}
-      <div style={columnStyle}>
-        <div style={contactInfoStyle}>
-          <Typography
-            variant='h3'
-            style={{ ...headingStyle, marginBottom: '1rem' }}
-          >
-            Get in Touch
-          </Typography>
-          <div style={{ marginBottom: '0.5rem' }}>
-            <span style={iconStyle}>📍</span>
-            <span style={{ color: getFooterTextColor(themeMode) }}>
-              Salt Lake City, Utah
-            </span>
+        >
+          {/* About Column */}
+          <div style={columnStyle}>
+            <Typography variant='h3' style={headingStyle}>
+              About
+            </Typography>
+            <StyledLink href='/about'>About Us</StyledLink>
+            <StyledLink href='/fluxline-ethos'>Fluxline Ethos</StyledLink>
+            <StyledLink href='/case-studies'>Case Studies</StyledLink>
+            <StyledLink href='/press-release'>Press Releases</StyledLink>
+            {/* <StyledLink href='/cue-cards'>Cue Cards</StyledLink> */}
           </div>
-          <div style={{ marginBottom: '0.5rem' }}>
-            <span style={iconStyle}>🔗</span>
-            <StyledLink href='https://www.fluxline.pro'>
-              www.fluxline.pro
+
+          {/* Services Column */}
+          <div style={columnStyle}>
+            <Typography variant='h3' style={headingStyle}>
+              Services
+            </Typography>
+            <StyledLink href='/services'>All Services</StyledLink>
+            <StyledLink href='/services/resonance-core'>
+              The Resonance Core Framework™
             </StyledLink>
+            <StyledLink href='/services/personal-training'>
+              Personal Training
+            </StyledLink>
+            <StyledLink href='/services/design'>Design</StyledLink>
+            <StyledLink href='/services/development'>Development</StyledLink>
+            <StyledLink href='/services/consulting'>Consulting</StyledLink>
           </div>
-          <div>
-            <span style={iconStyle}>✉️</span>
-            <StyledLink
-              href='https://outlook.office.com/book/Bookings@terencewaters.com/?ismsaljsauthenabled'
-              openInNewTab={true}
+
+          {/* Resources Column */}
+          <div style={columnStyle}>
+            <Typography variant='h3' style={headingStyle}>
+              Resources
+            </Typography>
+            <StyledLink href='/blog'>Blog</StyledLink>
+            <StyledLink href='/portfolio'>Portfolio</StyledLink>
+            <StyledLink href='/content'>Content Hub</StyledLink>
+            <StyledLink href='/services/scrolls'>Scrolls</StyledLink>
+            <StyledLink href='/legal'>Legal</StyledLink>
+            <StyledLink href='/contact'>Contact Us</StyledLink>
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div style={columnStyle}>
+          <div style={contactInfoStyle}>
+            <Typography
+              variant='h3'
+              style={{ ...headingStyle, marginBottom: '1rem' }}
             >
-              Book an appointment
-            </StyledLink>
+              Get in Touch
+            </Typography>
+            <div style={{ marginBottom: '0.5rem' }}>
+              <span style={iconStyle}>📍</span>
+              <span style={{ color: getFooterTextColor(themeMode) }}>
+                Salt Lake City, Utah
+              </span>
+            </div>
+            <div style={{ marginBottom: '0.5rem' }}>
+              <span style={iconStyle}>🔗</span>
+              <StyledLink href='https://www.fluxline.pro'>
+                www.fluxline.pro
+              </StyledLink>
+            </div>
+            <div>
+              <span style={iconStyle}>✉️</span>
+              <StyledLink
+                href='https://outlook.office.com/book/Bookings@terencewaters.com/?ismsaljsauthenabled'
+                openInNewTab={true}
+              >
+                Book an appointment
+              </StyledLink>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Newsletter Sign-up */}
-      <FooterNewsletterSignup />
+        {/* Newsletter Sign-up */}
+        <FooterNewsletterSignup />
+      </div>
     </footer>
   );
 };

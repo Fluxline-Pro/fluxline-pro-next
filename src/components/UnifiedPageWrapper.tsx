@@ -762,6 +762,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   // Mobile landscape uses the 3fr/9fr grid like tablet landscape
   const shouldUseStackedLayout =
     (isMobile && !isMobileLandscape) || isTabletPortrait;
+  const siteMaxWidth = 'var(--site-max-width, 2160px)';
+  const fixedPanelWidth = 'min(25vw, 540px)';
+  const centeredFrameInset = `max(calc((100vw - ${siteMaxWidth}) / 2), 0px)`;
 
   // Animation variants
   const fadeInVariants: Variants = {
@@ -787,6 +790,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
   const adjustedContainerStyle = shouldUseStackedLayout
     ? {
         ...containerStyle,
+        width: '100%',
+        maxWidth: siteMaxWidth,
+        margin: '0 auto',
         gridTemplateColumns: '1fr',
         gridTemplateRows: 'auto 1fr', // Smaller image area, more content space
         alignItems: 'start',
@@ -794,21 +800,30 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
       }
     : {
         ...containerStyle,
+        width: '100%',
+        maxWidth: siteMaxWidth,
+        margin: '0 auto',
         gridTemplateColumns: '1fr',
         paddingLeft:
           layoutPreference === 'left-handed'
             ? containerStyle.padding
-            : `calc(25vw + ${theme.spacing.l})`,
+            : `calc(${fixedPanelWidth} + ${theme.spacing.l})`,
         paddingRight:
           layoutPreference === 'left-handed'
-            ? `calc(25vw + ${theme.spacing.l})`
+            ? `calc(${fixedPanelWidth} + ${theme.spacing.l})`
             : containerStyle.padding,
-        alignItems: !isMobile && isContentScrollable ? isUnsubscribe ? 'center' : 'start' : 'center',
+        alignItems:
+          !isMobile && isContentScrollable
+            ? isUnsubscribe
+              ? 'center'
+              : 'start'
+            : 'center',
       };
 
   // Adjust content style based on scrollability and layout
   const adjustedContentStyle = {
     ...contentStyle,
+    width: '100%',
     flex:
       !isMobile && !shouldUseStackedLayout && !isContentScrollable
         ? 'none'
@@ -817,8 +832,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
       !isMobile && !shouldUseStackedLayout && !isContentScrollable
         ? 'center'
         : 'flex-start',
-    maxWidth: '1200px',
-    margin: !isMobile && !shouldUseStackedLayout ? '0 auto' : undefined,
+    maxWidth: '100%',
+    margin: '0 auto',
     paddingLeft: isMobile ? '0' : contentStyle.paddingLeft,
     paddingRight: isMobile ? '0' : contentStyle.paddingRight,
   };
@@ -834,7 +849,13 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         padding: theme.spacing.m,
         paddingTop: theme.spacing.m, // Container already offsets by headerHeight; image only needs its own spacing
       }
-    : imageStyle;
+    : {
+        ...imageStyle,
+        left: layoutPreference === 'left-handed' ? 'auto' : centeredFrameInset,
+        right: layoutPreference === 'left-handed' ? centeredFrameInset : 'auto',
+        width: fixedPanelWidth,
+        maxWidth: fixedPanelWidth,
+      };
 
   return (
     <>
