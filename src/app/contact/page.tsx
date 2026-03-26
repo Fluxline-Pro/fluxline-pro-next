@@ -39,7 +39,7 @@ export default function ContactPage() {
       <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
         {/* Hero Section */}
         <Hero
-          title="Start a Conversation"
+          title='Start a Conversation'
           iconName={getIconForPath('/contact')}
           description="The best place to start is a free consultation — a short call where we explore your goals together and map out what's possible. Book one in just a few steps."
         >
@@ -64,9 +64,6 @@ export default function ContactPage() {
             action={<BookingsButton isHero />}
           />
         </Hero>
-
-        {/* Newsletter CTA */}
-        <NewsletterCTA />
 
         {/* Business Cards / CTA Section */}
         <section className='space-y-8'>
@@ -124,6 +121,9 @@ export default function ContactPage() {
           </div>
         </section>
 
+        {/* Newsletter CTA */}
+        <NewsletterCTA />
+
         {/* Divider */}
         <hr
           style={{
@@ -133,17 +133,28 @@ export default function ContactPage() {
           }}
         />
 
-        {/* Contact Form */}
-        <section className='space-y-8'>
+        {/* Contact Form — secondary option */}
+        <section className='space-y-6'>
           <Typography
-            variant='h2'
+            variant='h3'
             style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
+              color: theme.palette.neutralSecondary,
+              fontSize: '1.25rem',
+              fontWeight: theme.typography.fontWeights.semiBold,
             }}
           >
-            Get in Touch
+            Prefer to write? Send us a note.
+          </Typography>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralTertiary,
+              fontSize: '0.9rem',
+              maxWidth: '480px',
+            }}
+          >
+            If you would rather drop us a message directly, feel free to use the
+            form below. We read every note and will respond as soon as we can.
           </Typography>
           <div
             style={{
