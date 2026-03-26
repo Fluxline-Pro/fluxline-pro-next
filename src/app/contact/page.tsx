@@ -39,9 +39,9 @@ export default function ContactPage() {
       <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
         {/* Hero Section */}
         <Hero
-          title="Let's Connect"
+          title="Start a Conversation"
           iconName={getIconForPath('/contact')}
-          description="Reach out in the way that feels most natural to you — social media, a direct conversation, or the form below. We'd love to connect with you! You're also welcome to schedule a free consultation using the booking button to explore your needs together."
+          description="The best place to start is a free consultation — a short call where we explore your goals together and map out what's possible. Book one in just a few steps."
         >
           {/* Social Links */}
           <div
@@ -59,41 +59,11 @@ export default function ContactPage() {
 
           <Callout
             variant='accent'
-            title='Ready to Build?'
-            subtitle="Each service is designed to align your vision with reality. Let's design the systems, strategies, and practices that work for you."
+            title='Book a Free Consultation'
+            subtitle="Walk us through your vision and we'll design the systems, strategies, and practices that move it forward. No commitment required."
             action={<BookingsButton isHero />}
           />
         </Hero>
-
-        {/* Contact Form */}
-        <section className='space-y-8'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
-            }}
-          >
-            Get in Touch
-          </Typography>
-          <div
-            style={{
-              maxWidth: '600px',
-            }}
-          >
-            <ContactForm />
-          </div>
-        </section>
-
-        {/* Divider */}
-        <hr
-          style={{
-            border: 'none',
-            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            margin: `${theme.spacing.xxl} 0`,
-          }}
-        />
 
         {/* Business Cards / CTA Section */}
         <section className='space-y-8'>
@@ -153,6 +123,49 @@ export default function ContactPage() {
 
         {/* Newsletter CTA */}
         <NewsletterCTA />
+
+        {/* Divider */}
+        <hr
+          style={{
+            border: 'none',
+            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+            margin: `${theme.spacing.xxl} 0`,
+          }}
+        />
+
+        {/* Contact Form — secondary option */}
+        <section className='space-y-6'>
+          <Typography
+            variant='h3'
+            style={{
+              color: theme.palette.neutralSecondary,
+              fontSize: '1.25rem',
+              fontWeight: theme.typography.fontWeights.semiBold,
+            }}
+          >
+            Prefer to write? Send us a note.
+          </Typography>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralTertiary,
+              fontSize: '0.9rem',
+              maxWidth: '480px',
+            }}
+          >
+            If you'd rather drop us a message directly, feel free to use
+            the form below. We read every note and will respond as soon as we
+            can.
+          </Typography>
+          <div
+            style={{
+              maxWidth: '600px',
+              opacity: 0.9,
+            }}
+          >
+            <ContactForm />
+          </div>
+        </section>
       </div>
     </UnifiedPageWrapper>
   );
