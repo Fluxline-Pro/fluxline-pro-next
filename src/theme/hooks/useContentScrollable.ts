@@ -40,6 +40,10 @@ export const useContentScrollable = (
       resizeTimer = setTimeout(checkScrollable, delay);
     };
 
+    const handleResize = () => {
+      scheduleCheck();
+    };
+
     // Initial check with delays to ensure content is rendered
     const initialTimer = setTimeout(checkScrollable, INITIAL_CHECK_DELAY);
     const secondaryTimer = setTimeout(checkScrollable, SECONDARY_CHECK_DELAY);
@@ -71,11 +75,11 @@ export const useContentScrollable = (
     }
 
     // Also listen for window resize
-    window.addEventListener('resize', checkScrollable);
+    window.addEventListener('resize', handleResize);
 
     // Browser zoom and devtools docking can change the visual viewport without
     // producing descendant resize events in time for our existing checks.
-    window.visualViewport?.addEventListener('resize', checkScrollable);
+    window.visualViewport?.addEventListener('resize', handleResize);
 
     // Re-check after fonts finish loading because text reflow can change whether
     // the content area needs scrolling.
@@ -89,8 +93,8 @@ export const useContentScrollable = (
       }
       resizeObserver.disconnect();
       mutationObserver.disconnect();
-      window.removeEventListener('resize', checkScrollable);
-      window.visualViewport?.removeEventListener('resize', checkScrollable);
+      window.removeEventListener('resize', handleResize);
+      window.visualViewport?.removeEventListener('resize', handleResize);
     };
   }, [ref]);
 
