@@ -39,6 +39,16 @@ export function getEnvironment(): Environment {
 }
 
 /**
+ * Checks if a build environment requires token authentication.
+ * This is safe to use during SSR because it does not depend on browser APIs.
+ */
+export function environmentRequiresAuthentication(
+  environment: Environment = getEnvironment()
+): boolean {
+  return environment === 'dev' || environment === 'test';
+}
+
+/**
  * Checks if the current environment requires token authentication.
  * Authentication is never required when running on localhost.
  *
@@ -48,6 +58,8 @@ export function getEnvironment(): Environment {
  * fallback (env check only) is safe and expected.
  */
 export function requiresAuthentication(): boolean {
+  const env = getEnvironment();
+
   // Skip authentication entirely for local development
   if (
     typeof window !== 'undefined' &&
@@ -56,8 +68,7 @@ export function requiresAuthentication(): boolean {
     return false;
   }
 
-  const env = getEnvironment();
-  return env === 'dev' || env === 'test';
+  return environmentRequiresAuthentication(env);
 }
 
 /**
