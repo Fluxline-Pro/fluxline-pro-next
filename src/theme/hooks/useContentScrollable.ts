@@ -18,9 +18,14 @@ export const useContentScrollable = (
   const [isScrollable, setIsScrollable] = React.useState(false);
 
   React.useEffect(() => {
+    let isActive = true;
     let resizeTimer: ReturnType<typeof setTimeout> | null = null;
 
     const checkScrollable = () => {
+      if (!isActive) {
+        return;
+      }
+
       if (!ref.current) {
         setIsScrollable(false);
         return;
@@ -33,6 +38,10 @@ export const useContentScrollable = (
     };
 
     const scheduleCheck = (delay = RESIZE_DEBOUNCE_DELAY) => {
+      if (!isActive) {
+        return;
+      }
+
       if (resizeTimer) {
         clearTimeout(resizeTimer);
       }
@@ -83,9 +92,16 @@ export const useContentScrollable = (
 
     // Re-check after fonts finish loading because text reflow can change whether
     // the content area needs scrolling.
-    document.fonts?.ready.then(() => scheduleCheck(0));
+    document.fonts?.ready.then(() => {
+      if (!isActive) {
+        return;
+      }
+
+      scheduleCheck(0);
+    });
 
     return () => {
+      isActive = false;
       clearTimeout(initialTimer);
       clearTimeout(secondaryTimer);
       if (resizeTimer) {
