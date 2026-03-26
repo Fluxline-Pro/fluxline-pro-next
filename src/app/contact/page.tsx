@@ -160,7 +160,6 @@ export default function ContactPage() {
           <div
             style={{
               maxWidth: '600px',
-              opacity: 0.9,
             }}
           >
             <ContactForm />
