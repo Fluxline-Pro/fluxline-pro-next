@@ -90,6 +90,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const publicationLabel = publicationDateText
     ? `Published ${publicationDateText}`
     : undefined;
+  const smallTileHeight = 'clamp(150px, 16vw, 180px)';
 
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
@@ -431,7 +432,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           width: '100%',
           maxWidth: '100%',
           boxSizing: 'border-box',
-          height: '100%',
+          height: smallTileHeight,
           display: 'flex',
         }}
         initial={{ y: 0, opacity: 0 }}
@@ -459,15 +460,16 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 flexDirection: 'row',
                 alignItems: 'stretch',
                 width: '100%',
-                height: '100%',
-                minHeight: imageUrl ? '160px' : '150px',
+                height: smallTileHeight,
+                minHeight: smallTileHeight,
+                maxHeight: smallTileHeight,
               }}
             >
               {imageUrl && (
                 <div
                   style={{
                     position: 'relative',
-                    flex: '0 0 clamp(120px, 32%, 180px)',
+                    height: '100%',
                     aspectRatio: '1 / 1',
                     overflow: 'hidden',
                     borderRadius: '6px 0 0 6px',
@@ -518,12 +520,16 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               >
                 <div style={{ flex: '1 1 auto' }}>
                   <Typography
-                    variant='h4'
+                    variant='h5'
                     style={{
                       margin: 0,
                       color: theme.palette.neutralPrimary,
                       lineHeight: 1.3,
                       marginBottom: theme.spacing.s2,
+                      display: '-webkit-box',
+                      WebkitBoxOrient: 'vertical',
+                      WebkitLineClamp: 2,
+                      overflow: 'hidden',
                     }}
                   >
                     {title}
@@ -535,24 +541,32 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                         margin: `${theme.spacing.s} 0 0 0`,
                         color: theme.palette.neutralSecondary,
                         lineHeight: 1.5,
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 3,
+                        overflow: 'hidden',
                       }}
                     >
                       {description}
                     </Typography>
                   )}
                 </div>
-                {imageText && (
+                {/* {imageText && (
                   <Typography
                     variant='label'
                     style={{
                       margin: `${theme.spacing.xs} 0 0 0`,
                       color: theme.palette.neutralSecondary,
                       marginTop: 'auto',
+                      display: '-webkit-box',
+                      WebkitBoxOrient: 'vertical',
+                      WebkitLineClamp: 1,
+                      overflow: 'hidden',
                     }}
                   >
                     {imageText}
                   </Typography>
-                )}
+                )} */}
               </div>
             </div>
           </Card>
