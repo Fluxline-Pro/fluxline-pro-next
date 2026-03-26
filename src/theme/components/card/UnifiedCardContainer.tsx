@@ -2,11 +2,7 @@
 
 import React from 'react';
 
-import {
-  useIsMobile,
-  useIsTablet,
-  useMediaQuery,
-} from '../../hooks/useMediaQuery';
+import { useIsMobile, useIsTablet, useIsXXL } from '../../hooks/useMediaQuery';
 import { useAppTheme } from '../../hooks/useAppTheme';
 
 export interface UnifiedCardContainerProps {
@@ -27,7 +23,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
   const isTabletHook = useIsTablet();
-  const isXXLHook = useMediaQuery('xxl');
+  const isXXLHook = useIsXXL();
   const isMobile = isMounted ? isMobileHook : false;
   const isTablet = isMounted ? isTabletHook : false;
   const isXXL = isMounted ? isXXLHook : false;

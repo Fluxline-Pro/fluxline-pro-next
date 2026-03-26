@@ -113,6 +113,10 @@ export const useIsLargeDesktop = () => {
   return useMediaQuery(`(min-width: ${breakpoints.xl}px)`);
 };
 
+export const useIsXXL = () => {
+  return useMediaQuery(`(min-width: ${breakpoints.xxl}px)`);
+};
+
 export const useIsLandscape = () => {
   const { windowHeight, windowWidth } = useWindowSize();
   return windowWidth > windowHeight;
