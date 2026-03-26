@@ -819,8 +819,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         : 'flex-start',
     maxWidth: '1200px',
     margin: !isMobile && !shouldUseStackedLayout ? '0 auto' : undefined,
-    paddingLeft: isMobile ? '1rem' : contentStyle.paddingLeft,
-    paddingRight: isMobile ? '1rem' : contentStyle.paddingRight,
+    paddingLeft: isMobile ? '0' : contentStyle.paddingLeft,
+    paddingRight: isMobile ? '0' : contentStyle.paddingRight,
   };
 
   // Adjust image style for stacked layout

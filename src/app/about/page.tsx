@@ -5,11 +5,14 @@
  * Information about Fluxline and the company mission
  */
 
-import { UnifiedPageWrapper, InteractiveCard, NewsletterCTA } from '@/components';
+import {
+  UnifiedPageWrapper,
+  InteractiveCard,
+  NewsletterCTA,
+} from '@/components';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
 import { FormButton } from '@/theme/components/form/FormButton';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { Hero } from '@/theme/components/hero';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useRouter } from 'next/navigation';
@@ -23,22 +26,14 @@ import {
   COMPANY_TIMELINE,
   COMPANY_VALUES,
 } from './constants';
-import { useState, useEffect } from 'react';
 
 export default function AboutPage() {
-  const [isMounted, setIsMounted] = useState(false);
   const { theme } = useAppTheme();
-  const isMobileHook = useIsMobile();
-  const isMobile = isMounted ? isMobileHook : false;
   const router = useRouter();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
+      <div className='space-y-8 lg:space-y-16'>
         {/* Hero Section */}
         <Hero
           title='About Fluxline'
@@ -173,13 +168,10 @@ export default function AboutPage() {
 
         {/* Journey & Team - Flex Layout */}
         <div
+          className='flex flex-col justify-between gap-8 lg:flex-row'
           style={{
-            display: 'flex',
-            flexDirection: isMobile ? 'column' : 'row',
-            justifyContent: 'space-between',
             gap: theme.spacing.xxl,
           }}
-          className='lg:flex-row'
         >
           {/* Company Timeline */}
           <section className='space-y-8 flex-1'>

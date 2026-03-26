@@ -143,7 +143,7 @@ export const COMPANY_TIMELINE: TimelineEvent[] = [
     icon: 'Code',
   },
   {
-    id: 'platform-launch',
+    id: 'platform-launch-v2',
     year: 'December 2025',
     title: 'Fluxline 2.0 Platform Launch',
     description:
@@ -189,7 +189,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: 'somatic-discipline',
     title: 'Somatic Discipline',
     description:
-    'Recognizing the wisdom of the body and integrating physical practices with strategic thinking.',
+      'Recognizing the wisdom of the body and integrating physical practices with strategic thinking.',
     icon: 'Health',
   },
   {
