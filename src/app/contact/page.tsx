@@ -24,8 +24,15 @@ import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
-  const isDesktop = useIsDesktop();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isDesktopHook = useIsDesktop();
+  const isMobile = isMounted ? isMobileHook : false;
+  const isDesktop = isMounted ? isDesktopHook : false;
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>

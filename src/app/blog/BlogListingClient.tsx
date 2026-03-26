@@ -38,7 +38,13 @@ export function BlogListingClient({
   const [selectedCategory, setSelectedCategory] = React.useState<
     string | undefined
   >();
-  const isMobile = useIsMobile();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Filter blog posts based on selected filters
   const blogPosts = React.useMemo(() => {

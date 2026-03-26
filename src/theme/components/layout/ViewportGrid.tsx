@@ -53,9 +53,12 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
 }) => {
   const { layoutPreference, readingDirection, theme } = useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
+  const [isMounted, setIsMounted] = React.useState(false);
   const [isEntering, setIsEntering] = React.useState(false);
-  const orientation = useDeviceOrientation();
-  const isXLScreen = useIsLargeDesktop();
+  const orientationHook = useDeviceOrientation();
+  const isXLScreenHook = useIsLargeDesktop();
+  const orientation = isMounted ? orientationHook : 'landscape';
+  const isXLScreen = isMounted ? isXLScreenHook : false;
   const pathname = usePathname();
   const headerHeight = useHeaderHeight();
   const footerHeight = useFooterHeight();
@@ -63,6 +66,10 @@ export const ViewportGrid: React.FC<ViewportGridProps> = ({
   // Create ref for right content area to detect scrollability
   const rightContentRef = React.useRef<HTMLDivElement>(null);
   const isRightContentScrollable = useContentScrollable(rightContentRef);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Handle route changes
   React.useEffect(() => {

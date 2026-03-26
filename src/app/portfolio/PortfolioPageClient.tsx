@@ -39,14 +39,21 @@ export default function PortfolioPageClient({
   const router = useRouter();
   const { theme } = useAppTheme();
   const { viewType, setViewType } = useContentFilterStore();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
 
   // Filter state
   const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
   const [selectedTechnologies, setSelectedTechnologies] = React.useState<
     string[]
   >([]);
-  const isMobile = useIsMobile();
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // View type options for dropdown
   const viewOptions = [

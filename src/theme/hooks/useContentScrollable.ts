@@ -18,7 +18,14 @@ export const useContentScrollable = (
   const [isScrollable, setIsScrollable] = React.useState(false);
 
   React.useEffect(() => {
+    let isActive = true;
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
+
     const checkScrollable = () => {
+      if (!isActive) {
+        return;
+      }
+
       if (!ref.current) {
         setIsScrollable(false);
         return;
@@ -30,28 +37,80 @@ export const useContentScrollable = (
       setIsScrollable(hasVerticalScroll);
     };
 
+    const scheduleCheck = (delay = RESIZE_DEBOUNCE_DELAY) => {
+      if (!isActive) {
+        return;
+      }
+
+      if (resizeTimer) {
+        clearTimeout(resizeTimer);
+      }
+
+      resizeTimer = setTimeout(checkScrollable, delay);
+    };
+
+    const handleResize = () => {
+      scheduleCheck();
+    };
+
     // Initial check with delays to ensure content is rendered
     const initialTimer = setTimeout(checkScrollable, INITIAL_CHECK_DELAY);
     const secondaryTimer = setTimeout(checkScrollable, SECONDARY_CHECK_DELAY);
 
     // Set up ResizeObserver to monitor size changes
     const resizeObserver = new ResizeObserver(() => {
-      // Small delay to ensure layout is complete after resize
-      setTimeout(checkScrollable, RESIZE_DEBOUNCE_DELAY);
+      scheduleCheck();
+    });
+
+    const mutationObserver = new MutationObserver(() => {
+      scheduleCheck();
     });
 
     if (ref.current) {
       resizeObserver.observe(ref.current);
+
+      // Observe the immediate content node as well because scrollHeight can change
+      // without the wrapper element's own box dimensions changing.
+      const contentNode = ref.current.firstElementChild;
+      if (contentNode instanceof HTMLElement) {
+        resizeObserver.observe(contentNode);
+      }
+
+      mutationObserver.observe(ref.current, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
     }
 
     // Also listen for window resize
-    window.addEventListener('resize', checkScrollable);
+    window.addEventListener('resize', handleResize);
+
+    // Browser zoom and devtools docking can change the visual viewport without
+    // producing descendant resize events in time for our existing checks.
+    window.visualViewport?.addEventListener('resize', handleResize);
+
+    // Re-check after fonts finish loading because text reflow can change whether
+    // the content area needs scrolling.
+    document.fonts?.ready.then(() => {
+      if (!isActive) {
+        return;
+      }
+
+      scheduleCheck(0);
+    });
 
     return () => {
+      isActive = false;
       clearTimeout(initialTimer);
       clearTimeout(secondaryTimer);
+      if (resizeTimer) {
+        clearTimeout(resizeTimer);
+      }
       resizeObserver.disconnect();
-      window.removeEventListener('resize', checkScrollable);
+      mutationObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
+      window.visualViewport?.removeEventListener('resize', handleResize);
     };
   }, [ref]);
 

@@ -235,7 +235,8 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0.75rem 1rem',
-            maxWidth: '1920px',
+            width: '100%',
+            maxWidth: 'var(--site-max-width, 2160px)',
             margin: '0 auto',
           }}
           suppressHydrationWarning

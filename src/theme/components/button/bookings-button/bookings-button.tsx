@@ -30,8 +30,14 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
   isHeader = false,
   isHero = false,
 }) => {
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
   const [stepperOpen, setStepperOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleClick = () => {
     setStepperOpen(true);

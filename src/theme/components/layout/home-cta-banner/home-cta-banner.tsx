@@ -13,7 +13,13 @@ import { useDeviceOrientation } from '../../../hooks/useMediaQuery';
  */
 export const HomeCtaBanner: React.FC = () => {
   const { theme } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Only show on desktop and widescreen tablet (landscape orientations)
   const shouldShowBanner =

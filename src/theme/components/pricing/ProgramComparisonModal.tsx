@@ -25,13 +25,19 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
   pricingData,
 }) => {
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
   const isDark =
     theme.themeMode === 'dark' ||
     theme.themeMode === 'high-contrast' ||
     theme.themeMode === 'grayscale-dark';
 
   const { tiers, features, comparison } = pricingData;
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Convert feature names to keys for comparison lookup
   const featureToKey = (featureName: string): string => {

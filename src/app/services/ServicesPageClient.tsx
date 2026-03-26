@@ -24,7 +24,13 @@ import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 export default function ServicesPageClient() {
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>

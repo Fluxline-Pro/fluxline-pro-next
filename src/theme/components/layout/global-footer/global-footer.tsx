@@ -18,9 +18,15 @@ import { HomeFooter } from '../home-footer/home-footer';
 export const GlobalFooter: React.FC = () => {
   const pathname = usePathname();
   const { theme } = useAppTheme();
-  const orientation = useDeviceOrientation();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const orientationHook = useDeviceOrientation();
+  const orientation = isMounted ? orientationHook : 'landscape';
   const { shouldReduceMotion } = useReducedMotion();
   const [isExpanded, setIsExpanded] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const isHomePage = pathname === '/';
   const isMobile = orientation === 'portrait';

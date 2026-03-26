@@ -310,7 +310,9 @@ function VideoModal({
  */
 export function VideoListingClient() {
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
   const [activeTab, setActiveTab] = React.useState<VideoType>('videos');
   const [videos, setVideos] = React.useState<YouTubeVideo[]>([]);
   const [loading, setLoading] = React.useState(true);
@@ -318,6 +320,10 @@ export function VideoListingClient() {
   const [selectedVideo, setSelectedVideo] = React.useState<YouTubeVideo | null>(
     null
   );
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   React.useEffect(() => {
     let cancelled = false;

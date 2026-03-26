@@ -25,12 +25,19 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
   subtitle = 'Choose your path based on your archetype assessment and personal goals.',
 }) => {
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
-  const isTablet = useIsTablet();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const isMobileHook = useIsMobile();
+  const isTabletHook = useIsTablet();
+  const isMobile = isMounted ? isMobileHook : false;
+  const isTablet = isMounted ? isTabletHook : false;
   const isDark =
     theme.themeMode === 'dark' ||
     theme.themeMode === 'high-contrast' ||
     theme.themeMode === 'grayscale-dark';
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <div className='space-y-6'>

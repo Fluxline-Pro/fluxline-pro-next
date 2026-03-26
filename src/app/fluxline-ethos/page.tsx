@@ -24,10 +24,17 @@ import {
 } from '@/lib/ethos/ethosContent';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
+import { useState, useEffect } from 'react';
 
 export default function FluxlineEthosPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const { theme } = useAppTheme();
-  const isMobile = useIsMobile();
+  const isMobileHook = useIsMobile();
+  const isMobile = isMounted ? isMobileHook : false;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>

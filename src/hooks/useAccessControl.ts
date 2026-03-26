@@ -10,6 +10,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   getEnvironment,
+  environmentRequiresAuthentication,
   requiresAuthentication,
   getApiBaseUrl,
 } from '@/lib/environment';
@@ -24,11 +25,14 @@ interface ValidationResponse {
 }
 
 export function useAccessControl() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
   const environment = getEnvironment();
-  const authRequired = requiresAuthentication();
+  const initialAuthRequired = environmentRequiresAuthentication(environment);
+  const [isAuthenticated, setIsAuthenticated] =
+    useState<boolean>(!initialAuthRequired);
+  const [isLoading, setIsLoading] = useState<boolean>(initialAuthRequired);
+  const [authRequired, setAuthRequired] =
+    useState<boolean>(initialAuthRequired);
+  const [error, setError] = useState<string>('');
 
   /**
    * Validates a token against the server
@@ -101,14 +105,12 @@ export function useAccessControl() {
   // Check for stored token on mount
   useEffect(() => {
     const initializeAuth = async () => {
-      if (!authRequired) {
-        setIsAuthenticated(true);
-        setIsLoading(false);
-        return;
-      }
+      const authenticationRequired = requiresAuthentication();
 
-      // Check if we're in a browser environment
-      if (typeof window === 'undefined') {
+      setAuthRequired(authenticationRequired);
+
+      if (!authenticationRequired) {
+        setIsAuthenticated(true);
         setIsLoading(false);
         return;
       }
@@ -124,7 +126,7 @@ export function useAccessControl() {
     initializeAuth();
     // validateToken is stable (empty deps in useCallback), safe to omit from dependencies
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authRequired]);
+  }, []);
 
   /**
    * Submits a token for validation
