@@ -65,35 +65,8 @@ export default function ContactPage() {
           />
         </Hero>
 
-        {/* Contact Form */}
-        <section className='space-y-8'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
-            }}
-          >
-            Get in Touch
-          </Typography>
-          <div
-            style={{
-              maxWidth: '600px',
-            }}
-          >
-            <ContactForm />
-          </div>
-        </section>
-
-        {/* Divider */}
-        <hr
-          style={{
-            border: 'none',
-            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            margin: `${theme.spacing.xxl} 0`,
-          }}
-        />
+        {/* Newsletter CTA */}
+        <NewsletterCTA />
 
         {/* Business Cards / CTA Section */}
         <section className='space-y-8'>
@@ -151,8 +124,35 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Newsletter CTA */}
-        <NewsletterCTA />
+        {/* Divider */}
+        <hr
+          style={{
+            border: 'none',
+            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+            margin: `${theme.spacing.xxl} 0`,
+          }}
+        />
+
+        {/* Contact Form */}
+        <section className='space-y-8'>
+          <Typography
+            variant='h2'
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: '2rem',
+              fontWeight: theme.typography.fontWeights.bold,
+            }}
+          >
+            Get in Touch
+          </Typography>
+          <div
+            style={{
+              maxWidth: '600px',
+            }}
+          >
+            <ContactForm />
+          </div>
+        </section>
       </div>
     </UnifiedPageWrapper>
   );
