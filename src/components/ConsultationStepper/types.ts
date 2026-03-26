@@ -75,7 +75,10 @@ export interface LeadPayload {
   preferredMeetingLength: MeetingLength;
   referralSource: string;
   consent: boolean;
-  tidycalBookingId: string;
+  /** TidyCal booking ID — populated by webhook after booking is confirmed */
+  tidycalBookingId?: string;
+  /** Zoom meeting link — populated by webhook after booking is confirmed */
+  zoomLink?: string;
   submittedAt: string;
   utmSource?: string;
   utmMedium?: string;
@@ -84,4 +87,10 @@ export interface LeadPayload {
 
 export type StepperStep = 1 | 2 | 3;
 
-export type SubmitStatus = 'idle' | 'booking' | 'submitting' | 'success' | 'error';
+export type SubmitStatus =
+  | 'idle'
+  | 'booking'
+  | 'submitting'
+  | 'schedule'
+  | 'success'
+  | 'error';

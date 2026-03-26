@@ -21,6 +21,7 @@
     "AZURE_PODCAST_TABLE_DEV": "podcastsdev",
     "AZURE_PODCAST_TABLE_PROD": "podcasts",
     "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=<account>;AccountKey=<key>;EndpointSuffix=core.windows.net",
+    "AZURE_QUEUE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=<account>;AccountKey=<key>;EndpointSuffix=core.windows.net",
     "STRIPE_SECRET_KEY": "sk_test_<your-stripe-test-secret-key>",
     "STRIPE_PRICE_ID_BOOK": "price_<book-price-id>",
     "STRIPE_PRICE_ID_WORKBOOK": "price_<workbook-price-id>",
@@ -34,6 +35,12 @@
     "SHAREPOINT_EMAIL_FIELD": "Title",
     "SHAREPOINT_PLATFORM_FIELD": "field_1",
     "SHAREPOINT_TIMESTAMP_FIELD": "Timestamp",
-    "LEADS_LIST_ID": "<your-leads-list-id>"
+    "LEADS_LIST_ID": "<your-leads-list-id>",
+    "LEAD_ALLOWED_ORIGINS": "http://localhost:3000,http://localhost:7071,https://fluxline.pro,https://www.fluxline.pro,https://flx-next-dev.fluxline.pro,https://flx-next-test.fluxline.pro",
+    "LEAD_RATE_LIMIT_WINDOW_MS": "900000",
+    "LEAD_RATE_LIMIT_MAX_REQUESTS": "10",
+    "LEAD_STORE_RAW_PAYLOAD": "false",
+    "LEAD_QUEUE_NAME": "leadsqueuefluxlinedev",
+    "TIDYCAL_WEBHOOK_SECRET": "<your-tidycal-webhook-hmac-secret>"
   }
 }
