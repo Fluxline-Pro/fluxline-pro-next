@@ -32,16 +32,16 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   }, []);
 
   const getGridConfig = () => {
-    // Special case: Image view type uses flexbox, not grid
-    if (viewType === 'image') {
+    // Special cases: image and small-tile views use flexbox, not grid
+    if (viewType === 'image' || viewType === 'small') {
       return {
         display: 'flex' as const,
         flexDirection: 'column' as const,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
         gap,
         width: '100%',
-        height: '100%',
+        height: viewType === 'image' ? '100%' : undefined,
       };
     }
 
@@ -73,7 +73,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
 
   const config = getGridConfig();
 
-  // For flex layouts (large and image view types)
+  // For flex layouts
   if (config.display === 'flex') {
     return (
       <div
@@ -86,6 +86,8 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
           gap: config.gap,
           width: config.width || '100%',
           height: config.height,
+          maxWidth: '100%',
+          padding: viewType === 'small' ? (isMobile ? '0.5rem 0' : '1rem') : 0,
           transition: theme.animations.transitions.card,
         }}
       >

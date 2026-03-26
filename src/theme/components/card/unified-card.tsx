@@ -341,7 +341,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 }}
               >
                 <Typography
-                  variant='h5'
+                  variant='h4'
                   style={{
                     margin: `0 0 ${theme.spacing.xs} 0`,
                     lineHeight: 1.2,
@@ -377,7 +377,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             >
               <div>
                 <Typography
-                  variant='h5'
+                  variant='h4'
                   style={{
                     margin: 0,
                     color: theme.palette.neutralPrimary,
@@ -416,14 +416,14 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
     );
   }
 
-  // For small tile view - vertical layout with image on top
+  // For small tile view - horizontal row layout with image on the left
   if (viewType === 'small') {
     return (
       <motion.div
         data-card-id={id}
         style={{
           cursor: onClick ? 'pointer' : 'default',
-          width: 'auto',
+          width: '100%',
           maxWidth: '100%',
           boxSizing: 'border-box',
           height: '100%',
@@ -451,21 +451,21 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'column',
+                flexDirection: 'row',
+                alignItems: 'stretch',
                 width: '100%',
                 height: '100%',
-                minHeight: imageUrl ? '270px' : '150px',
-                maxHeight: imageUrl ? '300px' : 'none',
+                minHeight: imageUrl ? '160px' : '150px',
               }}
             >
               {imageUrl && (
                 <div
                   style={{
                     position: 'relative',
-                    width: '100%',
-                    paddingBottom: '35%', // Reduced from 60% for more compact image
+                    flex: '0 0 clamp(120px, 32%, 180px)',
+                    aspectRatio: '1 / 1',
                     overflow: 'hidden',
-                    borderRadius: '6px 6px 0 0',
+                    borderRadius: '6px 0 0 6px',
                     flexShrink: 0,
                   }}
                 >
@@ -507,11 +507,11 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   flexDirection: 'column',
                   flex: 1,
                   minHeight: 0,
-                  justifyContent: imageUrl ? 'flex-start' : 'space-between',
+                  justifyContent: 'space-between',
                   overflow: 'hidden',
                 }}
               >
-                <div style={{ flex: imageUrl ? '0 0 auto' : '1 1 auto' }}>
+                <div style={{ flex: '1 1 auto' }}>
                   <Typography
                     variant='h5'
                     style={{
@@ -522,7 +522,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   >
                     {title}
                   </Typography>
-                  {!imageUrl && description && (
+                  {description && (
                     <Typography
                       variant='label'
                       style={{
@@ -541,7 +541,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     style={{
                       margin: `${theme.spacing.xs} 0 0 0`,
                       color: theme.palette.neutralSecondary,
-                      marginTop: imageUrl ? 'auto' : '0',
+                      marginTop: 'auto',
                     }}
                   >
                     {imageText}
