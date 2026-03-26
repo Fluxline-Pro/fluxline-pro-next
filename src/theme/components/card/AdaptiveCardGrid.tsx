@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { format } from 'date-fns';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { UnifiedCard } from './unified-card';
 import { UnifiedCardContainer } from './UnifiedCardContainer';
@@ -14,6 +15,7 @@ export interface AdaptiveCardGridProps {
     imageUrl?: string;
     imageAlt?: string;
     imageText?: string;
+    date?: Date;
   }>;
   viewType?: 'grid' | 'small' | 'large' | 'image';
   gap?: string;
@@ -86,6 +88,9 @@ export const AdaptiveCardGrid: React.FC<AdaptiveCardGridProps> = ({
               imageUrl={card.imageUrl}
               imageAlt={card.imageAlt}
               imageText={card.imageText}
+              publicationDateText={
+                card.date ? format(card.date, 'MMMM d, yyyy') : undefined
+              }
               viewType={viewType}
               delay={index * 25} // Much faster stagger: 25ms per card
               showTitleOnImage={viewType === 'image'}

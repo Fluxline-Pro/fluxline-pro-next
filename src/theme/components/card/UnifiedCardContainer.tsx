@@ -2,7 +2,11 @@
 
 import React from 'react';
 
-import { useIsMobile, useIsTablet } from '../../hooks/useMediaQuery';
+import {
+  useIsMobile,
+  useIsTablet,
+  useMediaQuery,
+} from '../../hooks/useMediaQuery';
 import { useAppTheme } from '../../hooks/useAppTheme';
 
 export interface UnifiedCardContainerProps {
@@ -23,8 +27,10 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
   const isTabletHook = useIsTablet();
+  const isXXLHook = useMediaQuery('xxl');
   const isMobile = isMounted ? isMobileHook : false;
   const isTablet = isMounted ? isTabletHook : false;
+  const isXXL = isMounted ? isXXLHook : false;
   const { theme } = useAppTheme();
 
   React.useEffect(() => {
@@ -32,8 +38,8 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   }, []);
 
   const getGridConfig = () => {
-    // Special cases: image and small-tile views use flexbox, not grid
-    if (viewType === 'image' || viewType === 'small') {
+    // Special case: image view uses flexbox, not grid
+    if (viewType === 'image') {
       return {
         display: 'flex' as const,
         flexDirection: 'column' as const,
@@ -41,14 +47,24 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
         justifyContent: 'flex-start',
         gap,
         width: '100%',
-        height: viewType === 'image' ? '100%' : undefined,
+        height: '100%',
       };
     }
 
     // Determine columns based on view type and device
     let columns: number;
 
-    if (isMobile) {
+    if (viewType === 'small') {
+      if (isMobile || isTablet) {
+        columns = 1;
+      } else if (isXXL) {
+        columns = 3;
+      } else {
+        columns = 2;
+      }
+    } else if (viewType === 'large') {
+      columns = isXXL ? 2 : 1;
+    } else if (isMobile) {
       columns = 1;
     } else if (isTablet) {
       columns = viewType === 'grid' ? 3 : 2;
@@ -87,7 +103,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
           width: config.width || '100%',
           height: config.height,
           maxWidth: '100%',
-          padding: viewType === 'small' ? (isMobile ? '0.5rem 0' : '1rem') : 0,
+          padding: 0,
           transition: theme.animations.transitions.card,
         }}
       >
