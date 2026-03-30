@@ -29,6 +29,13 @@ This directory contains Azure Functions that power backend functionality for the
 - Auto-updates when episodes are added to Table Storage
 - See [Podcast Setup](#podcast-api-setup) below for configuration
 
+### Ping Warmup (`/api/ping-warmup`)
+
+- Timer-triggered CRON job that runs every 15 minutes
+- Keeps the Azure Functions host warm on the **PROD** environment only
+- On DEV and TEST environments the function exits immediately without doing any work
+- Requires the `ENVIRONMENT` application setting to be set to `prod` in the Azure Static Web App
+
 ---
 
 ## Contact API Setup
@@ -416,8 +423,10 @@ SMTP_PASS=@Microsoft.KeyVault(SecretUri=https://your-vault.vault.azure.net/secre
 
 ## Files
 
-- `contact/index.js` - Main Azure Function handler
-- `contact/function.json` - Function binding configuration
+- `contact/index.js` - Contact form Azure Function handler
+- `contact/function.json` - Contact function binding configuration
+- `ping-warmup/index.js` - CRON keep-warm Azure Function handler (PROD only)
+- `ping-warmup/function.json` - Ping warmup timer trigger binding configuration
 - `host.json` - Azure Functions host configuration
 - `package.json` - Dependencies (nodemailer)
 - `local.settings.sample.json` - Template for local development settings
