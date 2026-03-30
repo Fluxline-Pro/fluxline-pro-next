@@ -1,6 +1,6 @@
 # Responsible AI Usage
 
-**Effective Date:** October 12, 2025
+**Effective Date:** March 30, 2026
 **Last Updated:** March 30, 2026
 **Version:** 1.0
 
@@ -31,7 +31,7 @@ We leverage AI tools across several areas of our work:
 ### 2.1 Content Creation
 
 - Drafting and refining written content (blog posts, scripts, episode outlines)
-- Developing ccreative concepts, designs, code, and frameworks for projects and client work
+- Developing creative concepts, designs, code, and frameworks for projects and client work
 - Generating ideas and creative frameworks that we then shape with our own voice and expertise
 - Editing for clarity, tone, and structure — _always with a human final pass_
 

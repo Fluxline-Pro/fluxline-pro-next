@@ -33,7 +33,7 @@ We leverage AI tools across several areas of our work:
 ### 2.1 Content Creation
 
 - Drafting and refining written content (blog posts, scripts, episode outlines)
-- Developing ccreative concepts, designs, code, and frameworks for projects and client work
+- Developing creative concepts, designs, code, and frameworks for projects and client work
 - Generating ideas and creative frameworks that we then shape with our own voice and expertise
 - Editing for clarity, tone, and structure — *always with a human final pass*
 
@@ -112,7 +112,7 @@ At Fluxline Resonance Group and TerenceWaters.com, we take **full accountability
 
 **_The AI landscape evolves quickly. So do our practices._**
 
-We are committed to staying informed about new developments in AI te  chnology, ethics, and industry standards.
+We are committed to staying informed about new developments in AI technology, ethics, and industry standards.
 
 We regularly review our AI usage policies and update them as tools, industry standards, and best practices change. This page will reflect those updates. Check the **Last Updated** date at the top of this page to know if anything has changed.
 
