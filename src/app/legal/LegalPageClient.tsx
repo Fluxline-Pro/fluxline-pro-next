@@ -47,6 +47,12 @@ const LEGAL_DOCUMENTS: LegalDocument[] = [
       'View or download the official Articles of Conversion document (PDF).',
     href: '/legal/articles-of-conversion',
   },
+  {
+    title: 'Responsible AI Usage',
+    description:
+      'Learn how we use AI tools responsibly, transparently, and with full human accountability across our content and services.',
+    href: '/legal/responsible-ai-usage',
+  },
 ];
 
 /**
