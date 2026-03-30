@@ -80,7 +80,7 @@ export default function LegalPageClient() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(325px, 1fr))',
               gap: spacing.l,
             }}
           >
