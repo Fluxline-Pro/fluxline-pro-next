@@ -1,6 +1,6 @@
 # Responsible AI Usage
 
-**Effective Date:** October 12, 2025
+**Effective Date:** March 30, 2026
 **Last Updated:** March 30, 2026
 **Version:** 1.0
 
@@ -31,7 +31,7 @@ We leverage AI tools across several areas of our work:
 ### 2.1 Content Creation
 
 - Drafting and refining written content (blog posts, scripts, episode outlines)
-- Developing ccreative concepts, designs, code, and frameworks for projects and client work
+- Developing creative concepts, designs, code, and frameworks for projects and client work
 - Generating ideas and creative frameworks that we then shape with our own voice and expertise
 - Editing for clarity, tone, and structure — _always with a human final pass_
 
@@ -48,13 +48,17 @@ Our podcast episodes may include AI-generated components. **Every episode is rev
 
 ### 2.4 Business Consulting and Client Work
 
-When AI tools are used in client engagements, we disclose this explicitly to clients. Our consultants provide the strategic judgment, contextual understanding, and accountability — AI provides efficiency and support.
+_When AI tools are used in client engagements, we disclose this explicitly to clients._
+
+We use AI to enhance our strategic thinking and creative output, but **our consultants are always in the driver's seat of our discussions and decisions** — making the final calls, ensuring quality, and taking full accountability for the work we deliver.
+
+Our consultants provide the strategic judgment, contextual understanding, and accountability — AI provides efficiency and support.
 
 ---
 
 ## 3. What We Do Not Do
 
-We are committed to the following practices, and we take them seriously:
+_We are committed to the following practices, and we take them seriously:_
 
 - ❌ **We do not publish AI-generated content without human review.**
 - ❌ **We do not use AI to fabricate facts, quotes, or credentials.**
@@ -66,7 +70,7 @@ We are committed to the following practices, and we take them seriously:
 
 ## 4. Transparency as a Practice
 
-We believe the conversation around AI should be **open, ongoing, and honest** — not defensive or vague.
+_We believe the conversation around AI should be **open, ongoing, and honest** — not defensive or vague._
 
 When AI meaningfully contributes to something we create, **we say so**.
 
@@ -76,7 +80,7 @@ You may see disclosures like these on our content:
 
 > _"We are using AI to help us generate more relevant content for you and your business."_
 
-This is intentional. It reflects our belief that transparency builds trust — and trust is the foundation of everything we do as part of Fluxline's Core Values and Mission Statement.
+This is intentional. It reflects our belief that transparency builds trust — and trust is the foundation of everything we do.
 
 ---
 
@@ -106,6 +110,8 @@ _If you ever have concerns about any content we've produced, we want to hear fro
 
 **_The AI landscape evolves quickly. So do our practices._**
 
+We are committed to staying informed about new developments in AI technology, ethics, and industry standards.
+
 We regularly review our AI usage policies and update them as tools, industry standards, and best practices change. This page will reflect those updates. Check the **Last Updated** date at the top of this page to know if anything has changed.
 
 ---
@@ -122,6 +128,6 @@ Website: [Contact Us](https://www.fluxline.pro/contact)
 
 ---
 
-_To learn more about Fluxline Resonance Group and our values, visit [Fluxline.pro](https://www.fluxline.pro/about)._
+_To learn more about Fluxline Resonance Group and our values, visit [Fluxline.pro](https://www.fluxline.pro)._
 
 **Last Updated:** March 30, 2026

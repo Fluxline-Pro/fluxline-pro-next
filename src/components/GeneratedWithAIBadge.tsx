@@ -27,7 +27,7 @@ const RESPONSIBLE_AI_LABEL = 'Read our Responsible AI Usage policy';
  * tooltip that appears on hover or keyboard focus (TAB).
  * The tooltip renders via a React portal into document.body to escape any
  * parent overflow/stacking-context constraints.
- * The OpenInNewTab icon links to our Responsible AI Usage page for transparency and education around our AI practices.
+ * The OpenInNewTab icon opens our Responsible AI Usage page in a modal for transparency and education around our AI practices.
  * This badge is intended to be used on any content that was created with AI assistance, to promote transparency and responsible AI use.
  */
 export const GeneratedWithAIBadge: React.FC = () => {
@@ -59,7 +59,7 @@ export const GeneratedWithAIBadge: React.FC = () => {
         <div
           tabIndex={0}
           role='img'
-          aria-label='Generated with AI. This content was drafted with AI assistance and carefully verified by our team for accuracy.'
+          aria-label='Generated with AI. This content was created with AI assistance and reviewed by our team for accuracy.'
           aria-describedby={isVisible ? 'ai-badge-tooltip' : undefined}
           className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full'
           style={{
@@ -105,6 +105,7 @@ export const GeneratedWithAIBadge: React.FC = () => {
       </div>
 
       <button
+        type='button'
         onClick={() => setIsPolicyOpen(true)}
         aria-label={RESPONSIBLE_AI_LABEL}
         title={RESPONSIBLE_AI_LABEL}
