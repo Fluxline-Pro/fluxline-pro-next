@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import React, {
   useState,
   useRef,
@@ -12,12 +11,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { GeneratedWithAISvg } from '@/assets/svgs/GeneratedWithAISvg';
 import { FluentIcon } from '@/theme/components/fluent-icon';
+import { Modal } from '@/components/Modal';
+import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
+import { content as responsibleAIContent } from '@/assets/legal/responsible-ai-usage';
+import { Typography } from '@/theme/components/typography';
 
 const TOOLTIP_TEXT =
   'This content was created with AI assistance and reviewed by our team. Click the icon to read our Responsible AI Usage guidelines.';
 
-const RESPONSIBLE_AI_HREF = '/legal/responsible-ai-usage';
-const RESPONSIBLE_AI_LABEL = 'Read our Responsible AI Usage page';
+const RESPONSIBLE_AI_LABEL = 'Read our Responsible AI Usage policy';
 
 /**
  * GeneratedWithAIBadge Component
@@ -31,6 +33,7 @@ const RESPONSIBLE_AI_LABEL = 'Read our Responsible AI Usage page';
 export const GeneratedWithAIBadge: React.FC = () => {
   const { theme } = useAppTheme();
   const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null);
+  const [isPolicyOpen, setIsPolicyOpen] = useState(false);
   const isMounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -101,8 +104,8 @@ export const GeneratedWithAIBadge: React.FC = () => {
         </div>
       </div>
 
-      <Link
-        href={RESPONSIBLE_AI_HREF}
+      <button
+        onClick={() => setIsPolicyOpen(true)}
         aria-label={RESPONSIBLE_AI_LABEL}
         title={RESPONSIBLE_AI_LABEL}
         className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full'
@@ -113,7 +116,7 @@ export const GeneratedWithAIBadge: React.FC = () => {
           width: '38px',
           height: '38px',
           borderRadius: '999px',
-          textDecoration: 'none',
+          cursor: 'pointer',
           color: theme.palette.themePrimary,
           backgroundColor: theme.palette.neutralLighterAlt,
           border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
@@ -125,7 +128,25 @@ export const GeneratedWithAIBadge: React.FC = () => {
           size='small'
           color={theme.palette.themePrimary}
         />
-      </Link>
+      </button>
+
+      <Modal
+        isOpen={isPolicyOpen}
+        onDismiss={() => setIsPolicyOpen(false)}
+        ariaLabel='Responsible AI Usage Policy'
+        maxWidth='860px'
+      >
+        <Typography
+          variant='h3'
+          style={{
+            color: theme.palette.themePrimary,
+            marginBottom: theme.spacing.l,
+          }}
+        >
+          Responsible AI Usage
+        </Typography>
+        <UnifiedMarkdownRenderer content={responsibleAIContent} />
+      </Modal>
 
       {isMounted &&
         createPortal(
