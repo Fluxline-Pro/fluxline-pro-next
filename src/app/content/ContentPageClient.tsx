@@ -74,6 +74,15 @@ export default function ContentPageClient() {
     },
     // TODO: move Books to the top once launched, and add a "New!" badge to it -TW
     {
+      title: 'Podcasts',
+      description:
+        '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
+      path: '/podcasts',
+      iconName: 'Microphone',
+      color: theme.palette.yellowDark,
+      isHighlighted: true,
+    },
+    {
       title: 'Books',
       description:
         'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
@@ -81,14 +90,6 @@ export default function ContentPageClient() {
       iconName: 'BookAnswers',
       color: theme.palette.blueLight,
       comingSoon: true,
-    },
-    {
-      title: 'Podcasts',
-      description:
-        '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
-      path: '/podcasts',
-      iconName: 'Microphone',
-      color: theme.palette.yellowDark,
     },
   ];
 

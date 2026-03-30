@@ -194,6 +194,7 @@ function SpreakerEmbed() {
         variant='h3'
         style={{
           color: theme.palette.neutralPrimary,
+          marginTop: theme.spacing.m,
           marginBottom: theme.spacing.m,
           fontSize: '1.25rem',
           fontWeight: 600,
@@ -576,69 +577,65 @@ export function PodcastListingClient() {
           backArrow={true}
           backArrowPath='/content'
           filters={podcastFilters}
-        />
-
-        {/* Spreaker Embedded Player */}
-        <SpreakerEmbed />
-
-        {/* Platform Subscription Buttons */}
-        <div
-          style={{
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.l1,
-            display: 'flex',
-            gap: theme.spacing.m,
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}
         >
-          <a
-            href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
-            target='_blank'
-            rel='noopener noreferrer'
-            style={{ textDecoration: 'none' }}
+          <div
+            style={{
+              marginTop: theme.spacing.m,
+              display: 'flex',
+              gap: theme.spacing.m,
+              alignItems: 'center',
+              flexWrap: 'wrap',
+            }}
           >
-            <FormButton
-              variant='primary'
-              size='small'
-              icon='Microphone'
-              iconPosition='left'
+            {/* Platform Subscription Buttons */}
+            <a
+              href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
+              target='_blank'
+              rel='noopener noreferrer'
+              style={{ textDecoration: 'none' }}
             >
-              Listen on Spreaker
-            </FormButton>
-          </a>
-          <FormButton
-            variant='secondary'
-            size='small'
-            disabled
-            title='Apple Podcasts link coming soon'
-          >
-            Apple Podcasts
-          </FormButton>
-          <FormButton
-            variant='secondary'
-            size='small'
-            disabled
-            title='Spotify link coming soon'
-          >
-            Spotify
-          </FormButton>
-          <a
-            href={rssEndpoint}
-            target='_blank'
-            rel='noopener noreferrer'
-            style={{ textDecoration: 'none' }}
-          >
+              <FormButton
+                variant='primary'
+                size='medium'
+                icon='Microphone'
+                iconPosition='left'
+              >
+                Listen on Spreaker
+              </FormButton>
+            </a>
             <FormButton
               variant='secondary'
-              size='small'
-              icon='RSSFeed'
-              iconPosition='left'
+              size='medium'
+              disabled
+              title='Apple Podcasts link coming soon'
             >
-              RSS Feed
+              Apple Podcasts
             </FormButton>
-          </a>
-        </div>
+            <FormButton
+              variant='secondary'
+              size='medium'
+              disabled
+              title='Spotify link coming soon'
+            >
+              Spotify
+            </FormButton>
+            <a
+              href={rssEndpoint}
+              target='_blank'
+              rel='noopener noreferrer'
+              style={{ textDecoration: 'none' }}
+            >
+              <FormButton
+                variant='secondary'
+                size='medium'
+                icon='ActivityFeed'
+                iconPosition='left'
+              >
+                RSS Feed
+              </FormButton>
+            </a>
+          </div>{' '}
+        </Hero>
 
         {/* Loading state */}
         {loading && (
@@ -751,6 +748,9 @@ export function PodcastListingClient() {
           </>
         )}
       </div>
+
+      {/* Spreaker Embedded Player */}
+      <SpreakerEmbed />
 
       {/* Episode Detail Modal */}
       {selectedEpisode && (
