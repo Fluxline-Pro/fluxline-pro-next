@@ -179,6 +179,62 @@ function PodcastCard({
 }
 
 /**
+ * SpreakerEmbed Component
+ * Renders the Spreaker embedded player for the "A+ in FLUX Mythmaker Series" show.
+ * The Spreaker widget script (loaded via layout.tsx) replaces this anchor tag with
+ * an interactive iframe player on the client. The anchor text provides a fallback
+ * link if the widget script is unavailable or the show cannot be loaded.
+ */
+function SpreakerEmbed() {
+  const { theme } = useAppTheme();
+
+  return (
+    <div style={{ marginBottom: theme.spacing.xl }}>
+      <Typography
+        variant='h3'
+        style={{
+          color: theme.palette.neutralPrimary,
+          marginBottom: theme.spacing.m,
+          fontSize: '1.25rem',
+          fontWeight: 600,
+        }}
+      >
+        A+ in FLUX Mythmaker Series
+      </Typography>
+      {/* Spreaker player anchor — replaced by widget.js with an embedded player iframe.
+          If the script fails to load or the show is unavailable, the anchor remains as a
+          plain hyperlink ("This podcast is currently unavailable" is surfaced by Spreaker
+          within the player; the link here serves as a direct fallback). */}
+      <div
+        style={{
+          borderRadius: theme.effects.roundedCorner6,
+          overflow: 'hidden',
+          width: '100%',
+        }}
+      >
+        <a
+          className='spreaker-player'
+          href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
+          data-resource='show_id=6933506'
+          data-width='100%'
+          data-height='350px'
+          data-theme='dark'
+          data-playlist='show'
+          data-playlist-continuous='true'
+          data-hide-logo='false'
+          data-hide-likes='false'
+          data-hide-comments='false'
+          data-hide-sharing='false'
+          data-hide-download='true'
+        >
+          Listen to &quot;A+ in FLUX Mythmaker Series&quot; on Spreaker.
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/**
  * PodcastDetailModal Component
  * Shows full episode detail with audio player
  */
@@ -522,7 +578,10 @@ export function PodcastListingClient() {
           filters={podcastFilters}
         />
 
-        {/* RSS subscription link */}
+        {/* Spreaker Embedded Player */}
+        <SpreakerEmbed />
+
+        {/* Platform Subscription Buttons */}
         <div
           style={{
             marginTop: theme.spacing.m,
@@ -533,6 +592,37 @@ export function PodcastListingClient() {
             flexWrap: 'wrap',
           }}
         >
+          <a
+            href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ textDecoration: 'none' }}
+          >
+            <FormButton
+              variant='primary'
+              size='small'
+              icon='Microphone'
+              iconPosition='left'
+            >
+              Listen on Spreaker
+            </FormButton>
+          </a>
+          <FormButton
+            variant='secondary'
+            size='small'
+            disabled
+            title='Apple Podcasts link coming soon'
+          >
+            Apple Podcasts
+          </FormButton>
+          <FormButton
+            variant='secondary'
+            size='small'
+            disabled
+            title='Spotify link coming soon'
+          >
+            Spotify
+          </FormButton>
           <a
             href={rssEndpoint}
             target='_blank'
@@ -548,15 +638,6 @@ export function PodcastListingClient() {
               RSS Feed
             </FormButton>
           </a>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '0.875rem',
-            }}
-          >
-            Subscribe on Apple Podcasts, Spotify, or Spreaker
-          </Typography>
         </div>
 
         {/* Loading state */}
