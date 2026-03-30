@@ -18,7 +18,7 @@ import { content as responsibleAIContent } from '@/assets/legal/responsible-ai-u
 import { Typography } from '@/theme/components/typography';
 
 const TOOLTIP_TEXT =
-  'This content was created with AI assistance and reviewed by our team. Click the icon to read our Responsible AI Usage guidelines.';
+  'This content was created with AI assistance and reviewed by our team.\nClick the icon to read our Responsible AI Usage guidelines.';
 
 const RESPONSIBLE_AI_LABEL = 'Read our Responsible AI Usage policy';
 
@@ -188,6 +188,7 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
                   border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
                   fontSize: '0.875rem',
                   lineHeight: '1.5',
+                  whiteSpace: 'pre-line',
                 }}
               >
                 {TOOLTIP_TEXT}
