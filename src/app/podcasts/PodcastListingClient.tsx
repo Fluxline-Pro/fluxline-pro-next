@@ -750,7 +750,7 @@ export function PodcastListingClient() {
       </div>
 
       {/* Spreaker Embedded Player */}
-      <SpreakerEmbed />
+      {!loading && <SpreakerEmbed />}
 
       {/* Episode Detail Modal */}
       {selectedEpisode && (
