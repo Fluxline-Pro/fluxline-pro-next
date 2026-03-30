@@ -9,6 +9,7 @@ import React, {
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { GeneratedWithAISvg } from '@/assets/svgs/GeneratedWithAISvg';
 
 const TOOLTIP_TEXT =
@@ -21,8 +22,12 @@ const TOOLTIP_TEXT =
  * The tooltip renders via a React portal into document.body to escape any
  * parent overflow/stacking-context constraints.
  */
-export const GeneratedWithAIBadge: React.FC = () => {
+export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
+  isHero = false,
+}) => {
   const { theme } = useAppTheme();
+  const isMobile = useIsMobile();
+  const showBelow = isMobile || isHero;
   const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null);
   const isMounted = useSyncExternalStore(
     () => () => {},
@@ -107,11 +112,18 @@ export const GeneratedWithAIBadge: React.FC = () => {
                 transition={{ duration: 0.15, ease: 'easeOut' }}
                 style={{
                   position: 'fixed',
-                  top: tooltipRect.top + tooltipRect.height / 2,
-                  left: tooltipRect.right + 8,
-                  transform: 'translateY(-50%)',
+                  top: showBelow
+                    ? tooltipRect.bottom + 8
+                    : tooltipRect.top + tooltipRect.height / 2,
+                  left: showBelow
+                    ? tooltipRect.left + tooltipRect.width / 2
+                    : tooltipRect.right + 8,
+                  transform: showBelow
+                    ? 'translateX(-50%)'
+                    : 'translateY(-50%)',
+                  maxWidth: showBelow ? '90vw' : '256px',
                   zIndex: 50,
-                  width: '256px',
+                  width: showBelow ? 'max-content' : '256px',
                   padding: '8px 12px',
                   borderRadius: '6px',
                   boxShadow: '0 4px 16px rgba(0,0,0,0.2)',

@@ -14,6 +14,7 @@ import { getApiEndpoint } from '@/lib/getApiUrl';
 import { PodcastEpisode } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
+import GeneratedWithAIBadge from '@/components/GeneratedWithAIBadge';
 
 /**
  * PodcastCard Component
@@ -578,63 +579,68 @@ export function PodcastListingClient() {
           backArrowPath='/content'
           filters={podcastFilters}
         >
-          <div
-            style={{
-              marginTop: theme.spacing.m,
-              display: 'flex',
-              gap: theme.spacing.m,
-              alignItems: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            {/* Platform Subscription Buttons */}
-            <a
-              href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
-              target='_blank'
-              rel='noopener noreferrer'
-              style={{ textDecoration: 'none' }}
+          <div className='flex flex-row justify-between items-center gap-2 flex-wrap'>
+            <div
+              style={{
+                marginTop: theme.spacing.m,
+                display: 'flex',
+                gap: theme.spacing.m,
+                alignItems: 'center',
+                flexWrap: 'wrap',
+              }}
             >
-              <FormButton
-                variant='primary'
-                size='medium'
-                icon='Microphone'
-                iconPosition='left'
+              {/* Platform Subscription Buttons */}
+              <a
+                href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
               >
-                Listen on Spreaker
-              </FormButton>
-            </a>
-            <FormButton
-              variant='secondary'
-              size='medium'
-              disabled
-              title='Apple Podcasts link coming soon'
-            >
-              Apple Podcasts
-            </FormButton>
-            <FormButton
-              variant='secondary'
-              size='medium'
-              disabled
-              title='Spotify link coming soon'
-            >
-              Spotify
-            </FormButton>
-            <a
-              href={rssEndpoint}
-              target='_blank'
-              rel='noopener noreferrer'
-              style={{ textDecoration: 'none' }}
-            >
+                <FormButton
+                  variant='primary'
+                  size='medium'
+                  icon='Microphone'
+                  iconPosition='left'
+                >
+                  Listen on Spreaker
+                </FormButton>
+              </a>
               <FormButton
                 variant='secondary'
                 size='medium'
-                icon='ActivityFeed'
-                iconPosition='left'
+                disabled
+                title='Apple Podcasts link coming soon'
               >
-                RSS Feed
+                Apple Podcasts
               </FormButton>
-            </a>
-          </div>{' '}
+              <FormButton
+                variant='secondary'
+                size='medium'
+                disabled
+                title='Spotify link coming soon'
+              >
+                Spotify
+              </FormButton>
+              <a
+                href={rssEndpoint}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  icon='ActivityFeed'
+                  iconPosition='left'
+                >
+                  RSS Feed
+                </FormButton>
+              </a>
+            </div>{' '}
+            <div className='mt-4'>
+              <GeneratedWithAIBadge isHero />
+            </div>
+          </div>
         </Hero>
 
         {/* Loading state */}
