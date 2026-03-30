@@ -749,7 +749,7 @@ export function PodcastListingClient() {
         )}
       </div>
 
-      {/* Spreaker Embedded Player */}
+      {/* Spreaker Embedded Player -- we may not need this because the loading Azure Function takes care of it from an RSS Feed -TW */}
       {!loading && <SpreakerEmbed />}
 
       {/* Episode Detail Modal */}
