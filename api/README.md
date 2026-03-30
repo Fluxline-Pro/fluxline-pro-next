@@ -29,7 +29,7 @@ This directory contains Azure Functions that power backend functionality for the
 - Auto-updates when episodes are added to Table Storage
 - See [Podcast Setup](#podcast-api-setup) below for configuration
 
-### Ping Warmup (`/api/ping-warmup`)
+### Ping Warmup (timer-triggered function, no public HTTP endpoint)
 
 - Timer-triggered CRON job that runs every 15 minutes
 - Keeps the Azure Functions host warm on the **PROD** environment only

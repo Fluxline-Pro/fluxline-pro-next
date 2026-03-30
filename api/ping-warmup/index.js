@@ -31,5 +31,5 @@ module.exports = async function (context, myTimer) {
     context.log.warn(`Ping warmup: timer is past due at ${timestamp}`);
   }
 
-  context.log(`200: OK Refreshed – ${timestamp}`);
+  context.log(`Ping warmup: completed successfully at ${timestamp}`);
 };
