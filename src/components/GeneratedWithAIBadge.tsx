@@ -11,9 +11,16 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { GeneratedWithAISvg } from '@/assets/svgs/GeneratedWithAISvg';
+import { FluentIcon } from '@/theme/components/fluent-icon';
+import { Modal } from '@/components/Modal';
+import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
+import { content as responsibleAIContent } from '@/assets/legal/responsible-ai-usage';
+import { Typography } from '@/theme/components/typography';
 
 const TOOLTIP_TEXT =
-  'This content was drafted with AI assistance and carefully verified by our team for accuracy. We take full responsibility for what we publish and advocate transparent, responsible AI use.';
+  'This content was created with AI assistance and reviewed by our team. Click the icon to read our Responsible AI Usage guidelines.';
+
+const RESPONSIBLE_AI_LABEL = 'Read our Responsible AI Usage policy';
 
 /**
  * GeneratedWithAIBadge Component
@@ -21,6 +28,8 @@ const TOOLTIP_TEXT =
  * tooltip that appears on hover or keyboard focus (TAB).
  * The tooltip renders via a React portal into document.body to escape any
  * parent overflow/stacking-context constraints.
+ * The OpenInNewTab icon opens our Responsible AI Usage page in a modal for transparency and education around our AI practices.
+ * This badge is intended to be used on any content that was created with AI assistance, to promote transparency and responsible AI use.
  */
 export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
   isHero = false,
@@ -29,6 +38,7 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
   const isMobile = useIsMobile();
   const showBelow = isMobile || isHero;
   const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null);
+  const [isPolicyOpen, setIsPolicyOpen] = useState(false);
   const isMounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -49,56 +59,101 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
   const isVisible = tooltipRect !== null;
 
   return (
-    <div ref={badgeRef} className='inline-block'>
-      {/* Gradient border wrapper — padding trick creates the border */}
-      <div
-        tabIndex={0}
-        role='img'
-        aria-label='Generated with AI. This content was drafted with AI assistance and carefully verified by our team for accuracy.'
-        aria-describedby={isVisible ? 'ai-badge-tooltip' : undefined}
-        className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full'
-        style={{
-          display: 'inline-block',
-          background: 'linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%)',
-          padding: '1.5px',
-          borderRadius: '999px',
-          cursor: 'default',
-        }}
-        onMouseEnter={showTooltip}
-        onMouseLeave={hideTooltip}
-        onFocus={showTooltip}
-        onBlur={hideTooltip}
-      >
-        {/* Inner pill */}
+    <div className='inline-flex items-center gap-2'>
+      <div ref={badgeRef} className='inline-block'>
         <div
+          tabIndex={0}
+          role='img'
+          aria-label='Generated with AI. This content was created with AI assistance and reviewed by our team for accuracy.'
+          aria-describedby={isVisible ? 'ai-badge-tooltip' : undefined}
+          className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full'
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '8px 18px',
-            backgroundColor: theme.palette.neutralLighterAlt,
+            display: 'inline-block',
+            background: 'linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%)',
+            padding: '1.5px',
             borderRadius: '999px',
-            color: theme.palette.themePrimary,
-            fontSize: '0.875rem',
-            fontFamily: (theme.fonts.medium.fontFamily as string) || 'inherit',
-            fontWeight: 600,
-            letterSpacing: '0.01em',
-            userSelect: 'none',
-            whiteSpace: 'nowrap',
+            cursor: 'default',
           }}
+          onMouseEnter={showTooltip}
+          onMouseLeave={hideTooltip}
+          onFocus={showTooltip}
+          onBlur={hideTooltip}
         >
-          <GeneratedWithAISvg
+          <div
             style={{
-              width: '20px',
-              height: '20px',
-              flexShrink: 0,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 18px',
+              backgroundColor: theme.palette.neutralLighterAlt,
+              borderRadius: '999px',
+              color: theme.palette.themePrimary,
+              fontSize: '0.875rem',
+              fontFamily:
+                (theme.fonts.medium.fontFamily as string) || 'inherit',
+              fontWeight: 600,
+              letterSpacing: '0.01em',
+              userSelect: 'none',
+              whiteSpace: 'nowrap',
             }}
-          />
-          <span>Generated with AI</span>
+          >
+            <GeneratedWithAISvg
+              style={{
+                width: '20px',
+                height: '20px',
+                flexShrink: 0,
+              }}
+            />
+            <span>Generated with AI</span>
+          </div>
         </div>
       </div>
 
-      {/* Portal tooltip — renders into document.body to escape all parent constraints */}
+      <button
+        type='button'
+        onClick={() => setIsPolicyOpen(true)}
+        aria-label={RESPONSIBLE_AI_LABEL}
+        title={RESPONSIBLE_AI_LABEL}
+        className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full'
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '38px',
+          height: '38px',
+          borderRadius: '999px',
+          cursor: 'pointer',
+          color: theme.palette.themePrimary,
+          backgroundColor: theme.palette.neutralLighterAlt,
+          border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+          boxShadow: theme.effects.elevation4,
+        }}
+      >
+        <FluentIcon
+          iconName='OpenInNewTab'
+          size='small'
+          color={theme.palette.themePrimary}
+        />
+      </button>
+
+      <Modal
+        isOpen={isPolicyOpen}
+        onDismiss={() => setIsPolicyOpen(false)}
+        ariaLabel='Responsible AI Usage Policy'
+        maxWidth='860px'
+      >
+        <Typography
+          variant='h3'
+          style={{
+            color: theme.palette.themePrimary,
+            marginBottom: theme.spacing.l,
+          }}
+        >
+          Responsible AI Usage
+        </Typography>
+        <UnifiedMarkdownRenderer content={responsibleAIContent} />
+      </Modal>
+
       {isMounted &&
         createPortal(
           <AnimatePresence>

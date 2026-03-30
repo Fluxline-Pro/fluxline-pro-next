@@ -236,7 +236,13 @@ Privacy Officer
 Email: [privacy@fluxline.pro](mailto:privacy@fluxline.pro)  
 Website: [https://www.fluxline.pro/contact](https://www.fluxline.pro/contact)
 
-## 15. Accessibility
+## 15. Responsible AI Usage
+
+We use artificial intelligence tools to assist in content creation, research, and service delivery. Every AI-assisted output is reviewed and verified by a real person before publication or use. We are committed to transparent, ethical, and accountable AI practices.
+
+For full details on how we use AI, our ethical standards, and our commitment to transparency, please review our dedicated [Responsible AI Usage Policy](/legal/responsible-ai-usage).
+
+## 16. Accessibility
 
 We are committed to ensuring this Privacy Policy is accessible to all users. If you need this policy in an alternative format, please contact us.
 
