@@ -616,6 +616,12 @@ export function PodcastListingClient() {
 
   const gridColumns = isMobile ? 1 : isTablet ? 2 : 3;
 
+  // Brand colors only in light/dark mode; accessible modes use default secondary styling
+  const useBrandColors =
+    theme.themeMode === 'light' || theme.themeMode === 'dark';
+  const platformStyle = (color: string): React.CSSProperties =>
+    useBrandColors ? { color, border: `2px solid ${color}` } : {};
+
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
@@ -656,7 +662,7 @@ export function PodcastListingClient() {
                   size='medium'
                   icon='Microphone'
                   iconPosition='left'
-                  style={{ color: '#EE722E', borderColor: '#EE722E' }}
+                  style={platformStyle('#EE722E')}
                 >
                   Listen on Spreaker
                 </FormButton>
@@ -671,7 +677,7 @@ export function PodcastListingClient() {
                 <FormButton
                   variant='secondary'
                   size='medium'
-                  style={{ color: '#B150E2', borderColor: '#B150E2' }}
+                  style={platformStyle('#B150E2')}
                 >
                   Apple Podcasts
                 </FormButton>
@@ -686,7 +692,7 @@ export function PodcastListingClient() {
                 <FormButton
                   variant='secondary'
                   size='medium'
-                  style={{ color: '#1DB954', borderColor: '#1DB954' }}
+                  style={platformStyle('#1DB954')}
                 >
                   Spotify
                 </FormButton>
@@ -701,7 +707,7 @@ export function PodcastListingClient() {
                 <FormButton
                   variant='secondary'
                   size='medium'
-                  style={{ color: '#00A8E1', borderColor: '#00A8E1' }}
+                  style={platformStyle('#00A8E1')}
                 >
                   Amazon Music
                 </FormButton>
@@ -716,7 +722,7 @@ export function PodcastListingClient() {
                 <FormButton
                   variant='secondary'
                   size='medium'
-                  style={{ color: '#A238FF', borderColor: '#A238FF' }}
+                  style={platformStyle('#A238FF')}
                 >
                   Deezer
                 </FormButton>
@@ -731,7 +737,7 @@ export function PodcastListingClient() {
                 <FormButton
                   variant='secondary'
                   size='medium'
-                  style={{ color: '#2EBFA5', borderColor: '#2EBFA5' }}
+                  style={platformStyle('#2EBFA5')}
                 >
                   Podchaser
                 </FormButton>
