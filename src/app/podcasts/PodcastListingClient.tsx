@@ -764,7 +764,8 @@ export function PodcastListingClient() {
             </div>
           </div>
         </Hero>
-
+        {/* Spreaker Embedded Player */}
+        <SpreakerEmbed />
         {/* Loading state */}
         {loading && (
           <div
@@ -876,9 +877,6 @@ export function PodcastListingClient() {
           </>
         )}
       </div>
-
-      {/* Spreaker Embedded Player -- we may not need this because the loading Azure Function takes care of it from an RSS Feed -TW */}
-      {!loading && <SpreakerEmbed />}
 
       {/* Episode Detail Modal */}
       {selectedEpisode && (
