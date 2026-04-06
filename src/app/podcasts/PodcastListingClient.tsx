@@ -11,7 +11,7 @@ import { FluentIcon } from '@/theme/components/fluent-icon';
 import { FormButton, FormDateInput, FormSelect } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
 import { getApiEndpoint } from '@/lib/getApiUrl';
-import { PodcastEpisode } from './types';
+import { PodcastEpisode, PODCAST_PLATFORMS } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
 import GeneratedWithAIBadge from '@/components/GeneratedWithAIBadge';
@@ -216,7 +216,7 @@ function SpreakerEmbed() {
       >
         <a
           className='spreaker-player'
-          href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
+          href={PODCAST_PLATFORMS.spreaker}
           data-resource='show_id=6933506'
           data-width='100%'
           data-height='350px'
@@ -373,7 +373,7 @@ function PodcastDetailModal({
         >
           Subscribe:{' '}
           <a
-            href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
+            href={PODCAST_PLATFORMS.spreaker}
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
@@ -382,7 +382,7 @@ function PodcastDetailModal({
           </a>
           {' · '}
           <a
-            href='https://podcasts.apple.com/us/podcast/a+-in-flux-mythmaker-series/id1891152754'
+            href={PODCAST_PLATFORMS.applePodcasts}
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
@@ -391,7 +391,7 @@ function PodcastDetailModal({
           </a>
           {' · '}
           <a
-            href='https://open.spotify.com/show/0kmCO10TwluoHUYdD3v4Qe'
+            href={PODCAST_PLATFORMS.spotify}
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
@@ -400,7 +400,7 @@ function PodcastDetailModal({
           </a>
           {' · '}
           <a
-            href='https://music.amazon.com/podcasts/b4d2ead1-4aaa-4189-b4bd-bd41141030a7'
+            href={PODCAST_PLATFORMS.amazonMusic}
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
@@ -409,7 +409,7 @@ function PodcastDetailModal({
           </a>
           {' · '}
           <a
-            href='https://www.deezer.com/show/1002848441'
+            href={PODCAST_PLATFORMS.deezer}
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
@@ -418,7 +418,7 @@ function PodcastDetailModal({
           </a>
           {' · '}
           <a
-            href='https://www.podchaser.com/podcasts/a-in-flux-mythmaker-series-6436183'
+            href={PODCAST_PLATFORMS.podchaser}
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
@@ -645,7 +645,7 @@ export function PodcastListingClient() {
             >
               {/* Platform Subscription Buttons */}
               <a
-                href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
+                href={PODCAST_PLATFORMS.spreaker}
                 target='_blank'
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
@@ -660,7 +660,7 @@ export function PodcastListingClient() {
                 </FormButton>
               </a>
               <a
-                href='https://podcasts.apple.com/us/podcast/a+-in-flux-mythmaker-series/id1891152754'
+                href={PODCAST_PLATFORMS.applePodcasts}
                 target='_blank'
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
@@ -670,7 +670,7 @@ export function PodcastListingClient() {
                 </FormButton>
               </a>
               <a
-                href='https://open.spotify.com/show/0kmCO10TwluoHUYdD3v4Qe'
+                href={PODCAST_PLATFORMS.spotify}
                 target='_blank'
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
@@ -680,7 +680,7 @@ export function PodcastListingClient() {
                 </FormButton>
               </a>
               <a
-                href='https://music.amazon.com/podcasts/b4d2ead1-4aaa-4189-b4bd-bd41141030a7'
+                href={PODCAST_PLATFORMS.amazonMusic}
                 target='_blank'
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
@@ -690,7 +690,7 @@ export function PodcastListingClient() {
                 </FormButton>
               </a>
               <a
-                href='https://www.deezer.com/show/1002848441'
+                href={PODCAST_PLATFORMS.deezer}
                 target='_blank'
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
@@ -700,7 +700,7 @@ export function PodcastListingClient() {
                 </FormButton>
               </a>
               <a
-                href='https://www.podchaser.com/podcasts/a-in-flux-mythmaker-series-6436183'
+                href={PODCAST_PLATFORMS.podchaser}
                 target='_blank'
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
