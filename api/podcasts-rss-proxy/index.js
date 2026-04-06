@@ -177,7 +177,15 @@ module.exports = async function (context, req) {
       body: JSON.stringify({ episodes }),
     };
   } catch (error) {
-    context.log.error('Podcast RSS proxy error:', error.message);
+    const errorMessage = String(error);
+    const errorStack =
+      error && typeof error === 'object' && 'stack' in error
+        ? error.stack
+        : undefined;
+    context.log.error('Podcast RSS proxy error:', errorMessage);
+    if (errorStack) {
+      context.log.error(errorStack);
+    }
     context.res = {
       status: 500,
       headers: CORS_HEADERS,
