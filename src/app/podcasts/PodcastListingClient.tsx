@@ -650,11 +650,13 @@ export function PodcastListingClient() {
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
               >
+                {/* Spreaker — brand orange */}
                 <FormButton
-                  variant='primary'
+                  variant='secondary'
                   size='medium'
                   icon='Microphone'
                   iconPosition='left'
+                  style={{ color: '#EE722E', borderColor: '#EE722E' }}
                 >
                   Listen on Spreaker
                 </FormButton>
@@ -665,7 +667,12 @@ export function PodcastListingClient() {
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
               >
-                <FormButton variant='secondary' size='medium'>
+                {/* Apple Podcasts — brand purple */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={{ color: '#B150E2', borderColor: '#B150E2' }}
+                >
                   Apple Podcasts
                 </FormButton>
               </a>
@@ -675,7 +682,12 @@ export function PodcastListingClient() {
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
               >
-                <FormButton variant='secondary' size='medium'>
+                {/* Spotify — brand green */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={{ color: '#1DB954', borderColor: '#1DB954' }}
+                >
                   Spotify
                 </FormButton>
               </a>
@@ -685,7 +697,12 @@ export function PodcastListingClient() {
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
               >
-                <FormButton variant='secondary' size='medium'>
+                {/* Amazon Music — brand blue */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={{ color: '#00A8E1', borderColor: '#00A8E1' }}
+                >
                   Amazon Music
                 </FormButton>
               </a>
@@ -695,7 +712,12 @@ export function PodcastListingClient() {
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
               >
-                <FormButton variant='secondary' size='medium'>
+                {/* Deezer — brand violet */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={{ color: '#A238FF', borderColor: '#A238FF' }}
+                >
                   Deezer
                 </FormButton>
               </a>
@@ -705,7 +727,12 @@ export function PodcastListingClient() {
                 rel='noopener noreferrer'
                 style={{ textDecoration: 'none' }}
               >
-                <FormButton variant='secondary' size='medium'>
+                {/* Podchaser — brand teal */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={{ color: '#2EBFA5', borderColor: '#2EBFA5' }}
+                >
                   Podchaser
                 </FormButton>
               </a>
