@@ -366,11 +366,66 @@ function PodcastDetailModal({
           </Typography>
         )}
 
-        {/* RSS link */}
+        {/* Subscribe links */}
         <Typography
           variant='p'
           style={{ color: theme.palette.neutralSecondary, fontSize: '0.85rem' }}
         >
+          Subscribe:{' '}
+          <a
+            href='https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Spreaker
+          </a>
+          {' · '}
+          <a
+            href='https://podcasts.apple.com/us/podcast/a+-in-flux-mythmaker-series/id1891152754'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Apple Podcasts
+          </a>
+          {' · '}
+          <a
+            href='https://open.spotify.com/show/0kmCO10TwluoHUYdD3v4Qe'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Spotify
+          </a>
+          {' · '}
+          <a
+            href='https://music.amazon.com/podcasts/b4d2ead1-4aaa-4189-b4bd-bd41141030a7'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Amazon Music
+          </a>
+          {' · '}
+          <a
+            href='https://www.deezer.com/show/1002848441'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Deezer
+          </a>
+          {' · '}
+          <a
+            href='https://www.podchaser.com/podcasts/a-in-flux-mythmaker-series-6436183'
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Podchaser
+          </a>
+          {' · '}
           <a
             href={rssEndpoint}
             target='_blank'
@@ -378,8 +433,7 @@ function PodcastDetailModal({
             style={{ color: theme.palette.themePrimary }}
           >
             RSS Feed
-          </a>{' '}
-          · Subscribe on Apple Podcasts, Spotify, or Spreaker
+          </a>
         </Typography>
       </div>
     </Modal>
@@ -419,7 +473,7 @@ export function PodcastListingClient() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(getApiEndpoint('/api/podcasts/episodes'));
+        const res = await fetch(getApiEndpoint('/api/podcasts/rss-proxy'));
         if (!res.ok) throw new Error('Failed to fetch episodes');
         const data = await res.json();
         if (!cancelled) {
@@ -605,22 +659,56 @@ export function PodcastListingClient() {
                   Listen on Spreaker
                 </FormButton>
               </a>
-              <FormButton
-                variant='secondary'
-                size='medium'
-                disabled
-                title='Apple Podcasts link coming soon'
+              <a
+                href='https://podcasts.apple.com/us/podcast/a+-in-flux-mythmaker-series/id1891152754'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
               >
-                Apple Podcasts
-              </FormButton>
-              <FormButton
-                variant='secondary'
-                size='medium'
-                disabled
-                title='Spotify link coming soon'
+                <FormButton variant='secondary' size='medium'>
+                  Apple Podcasts
+                </FormButton>
+              </a>
+              <a
+                href='https://open.spotify.com/show/0kmCO10TwluoHUYdD3v4Qe'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
               >
-                Spotify
-              </FormButton>
+                <FormButton variant='secondary' size='medium'>
+                  Spotify
+                </FormButton>
+              </a>
+              <a
+                href='https://music.amazon.com/podcasts/b4d2ead1-4aaa-4189-b4bd-bd41141030a7'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                <FormButton variant='secondary' size='medium'>
+                  Amazon Music
+                </FormButton>
+              </a>
+              <a
+                href='https://www.deezer.com/show/1002848441'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                <FormButton variant='secondary' size='medium'>
+                  Deezer
+                </FormButton>
+              </a>
+              <a
+                href='https://www.podchaser.com/podcasts/a-in-flux-mythmaker-series-6436183'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                <FormButton variant='secondary' size='medium'>
+                  Podchaser
+                </FormButton>
+              </a>
               <a
                 href={rssEndpoint}
                 target='_blank'
