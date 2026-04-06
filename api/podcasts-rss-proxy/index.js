@@ -74,6 +74,22 @@ function formatDuration(duration) {
 }
 
 /**
+ * Validate a URL for safe use in src/href attributes.
+ * Requires https: scheme and rejects javascript:/data: and other dangerous schemes.
+ * Returns the original URL if valid, or null otherwise.
+ */
+function validateUrl(url) {
+  if (!url || typeof url !== 'string') return null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') return null;
+    return url;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Strip HTML tags from a string, converting <br> to newlines.
  */
 function stripHtml(html) {
@@ -99,11 +115,11 @@ function parseRSSItems(xml) {
     const description = stripHtml(getTagContent(item, 'description'));
     const guid = getTagContent(item, 'guid');
     const pubDate = getTagContent(item, 'pubDate');
-    const audioUrl = getAttrValue(item, 'enclosure', 'url');
+    const audioUrl = validateUrl(getAttrValue(item, 'enclosure', 'url'));
     const audioLength = getAttrValue(item, 'enclosure', 'length');
     const duration = getTagContent(item, 'itunes:duration');
     const author = getTagContent(item, 'itunes:author');
-    const imageHref = getAttrValue(item, 'itunes:image', 'href');
+    const imageHref = validateUrl(getAttrValue(item, 'itunes:image', 'href'));
     const episodeNumber = getTagContent(item, 'itunes:episode');
     const keywords = getTagContent(item, 'itunes:keywords');
 
@@ -121,7 +137,7 @@ function parseRSSItems(xml) {
       description,
       publish_date: pubDate ? new Date(pubDate).toISOString() : '',
       duration: formatDuration(duration),
-      audio_url: audioUrl,
+      audio_url: audioUrl || undefined,
       audio_size_bytes: audioLength ? parseInt(audioLength, 10) : undefined,
       episode_number: episodeNumber ? parseInt(episodeNumber, 10) : undefined,
       tags: keywords
