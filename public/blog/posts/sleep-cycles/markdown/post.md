@@ -44,6 +44,7 @@ seoKeywords:
     'consistent sleep schedule',
     'sleep and training',
   ]
+generatedWithAI: true
 ---
 
 # **Why Sleep (and Sleep Cycles) Matter More Than You Think**

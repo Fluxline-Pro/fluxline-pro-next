@@ -11,9 +11,10 @@ import { FluentIcon } from '@/theme/components/fluent-icon';
 import { FormButton, FormDateInput, FormSelect } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
 import { getApiEndpoint } from '@/lib/getApiUrl';
-import { PodcastEpisode } from './types';
+import { PodcastEpisode, PODCAST_PLATFORMS } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
+import GeneratedWithAIBadge from '@/components/GeneratedWithAIBadge';
 
 /**
  * PodcastCard Component
@@ -179,6 +180,63 @@ function PodcastCard({
 }
 
 /**
+ * SpreakerEmbed Component
+ * Renders the Spreaker embedded player for the "A+ in FLUX Mythmaker Series" show.
+ * The Spreaker widget script (loaded via layout.tsx) replaces this anchor tag with
+ * an interactive iframe player on the client. The anchor text provides a fallback
+ * link if the widget script is unavailable or the show cannot be loaded.
+ */
+function SpreakerEmbed() {
+  const { theme } = useAppTheme();
+
+  return (
+    <div style={{ marginBottom: theme.spacing.xl }}>
+      <Typography
+        variant='h3'
+        style={{
+          color: theme.palette.neutralPrimary,
+          marginTop: theme.spacing.m,
+          marginBottom: theme.spacing.m,
+          fontSize: '1.25rem',
+          fontWeight: 600,
+        }}
+      >
+        A+ in FLUX Mythmaker Series
+      </Typography>
+      {/* Spreaker player anchor — replaced by widget.js with an embedded player iframe.
+          If the script fails to load or the show is unavailable, the anchor remains as a
+          plain hyperlink ("This podcast is currently unavailable" is surfaced by Spreaker
+          within the player; the link here serves as a direct fallback). */}
+      <div
+        style={{
+          borderRadius: theme.effects.roundedCorner6,
+          overflow: 'hidden',
+          width: '100%',
+        }}
+      >
+        <a
+          className='spreaker-player'
+          href={PODCAST_PLATFORMS.spreaker}
+          data-resource='show_id=6933506'
+          data-width='100%'
+          data-height='350px'
+          data-theme='dark'
+          data-playlist='show'
+          data-playlist-continuous='true'
+          data-hide-logo='false'
+          data-hide-likes='false'
+          data-hide-comments='false'
+          data-hide-sharing='false'
+          data-hide-download='true'
+        >
+          Listen to &quot;A+ in FLUX Mythmaker Series&quot; on Spreaker.
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/**
  * PodcastDetailModal Component
  * Shows full episode detail with audio player
  */
@@ -308,11 +366,66 @@ function PodcastDetailModal({
           </Typography>
         )}
 
-        {/* RSS link */}
+        {/* Subscribe links */}
         <Typography
           variant='p'
           style={{ color: theme.palette.neutralSecondary, fontSize: '0.85rem' }}
         >
+          Subscribe:{' '}
+          <a
+            href={PODCAST_PLATFORMS.spreaker}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Spreaker
+          </a>
+          {' · '}
+          <a
+            href={PODCAST_PLATFORMS.applePodcasts}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Apple Podcasts
+          </a>
+          {' · '}
+          <a
+            href={PODCAST_PLATFORMS.spotify}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Spotify
+          </a>
+          {' · '}
+          <a
+            href={PODCAST_PLATFORMS.amazonMusic}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Amazon Music
+          </a>
+          {' · '}
+          <a
+            href={PODCAST_PLATFORMS.deezer}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Deezer
+          </a>
+          {' · '}
+          <a
+            href={PODCAST_PLATFORMS.podchaser}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Podchaser
+          </a>
+          {' · '}
           <a
             href={rssEndpoint}
             target='_blank'
@@ -320,8 +433,7 @@ function PodcastDetailModal({
             style={{ color: theme.palette.themePrimary }}
           >
             RSS Feed
-          </a>{' '}
-          · Subscribe on Apple Podcasts, Spotify, or Spreaker
+          </a>
         </Typography>
       </div>
     </Modal>
@@ -361,7 +473,7 @@ export function PodcastListingClient() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(getApiEndpoint('/api/podcasts/episodes'));
+        const res = await fetch(getApiEndpoint('/api/podcasts/rss-proxy'));
         if (!res.ok) throw new Error('Failed to fetch episodes');
         const data = await res.json();
         if (!cancelled) {
@@ -504,6 +616,12 @@ export function PodcastListingClient() {
 
   const gridColumns = isMobile ? 1 : isTablet ? 2 : 3;
 
+  // Brand colors only in light/dark mode; accessible modes use default secondary styling
+  const useBrandColors =
+    theme.themeMode === 'light' || theme.themeMode === 'dark';
+  const platformStyle = (color: string): React.CSSProperties =>
+    useBrandColors ? { color, border: `2px solid ${color}` } : {};
+
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
@@ -520,44 +638,132 @@ export function PodcastListingClient() {
           backArrow={true}
           backArrowPath='/content'
           filters={podcastFilters}
-        />
-
-        {/* RSS subscription link */}
-        <div
-          style={{
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.l1,
-            display: 'flex',
-            gap: theme.spacing.m,
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}
         >
-          <a
-            href={rssEndpoint}
-            target='_blank'
-            rel='noopener noreferrer'
-            style={{ textDecoration: 'none' }}
-          >
-            <FormButton
-              variant='secondary'
-              size='small'
-              icon='RSSFeed'
-              iconPosition='left'
+          <div className='flex flex-row justify-between items-center gap-2 flex-wrap'>
+            <div
+              style={{
+                marginTop: theme.spacing.m,
+                display: 'flex',
+                gap: theme.spacing.m,
+                alignItems: 'center',
+                flexWrap: 'wrap',
+              }}
             >
-              RSS Feed
-            </FormButton>
-          </a>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '0.875rem',
-            }}
-          >
-            Subscribe on Apple Podcasts, Spotify, or Spreaker
-          </Typography>
-        </div>
+              {/* Platform Subscription Buttons */}
+              {/* Colors were hardcoded because these are not part of the original theme.ts but are important for brand recognition on the podcast platforms */}
+              <a
+                href={PODCAST_PLATFORMS.spreaker}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                {/* Spreaker — brand orange */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  icon='Microphone'
+                  iconPosition='left'
+                  style={platformStyle('#EE722E')}
+                >
+                  Listen on Spreaker
+                </FormButton>
+              </a>
+              <a
+                href={PODCAST_PLATFORMS.applePodcasts}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                {/* Apple Podcasts — brand purple */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={platformStyle('#B150E2')}
+                >
+                  Apple Podcasts
+                </FormButton>
+              </a>
+              <a
+                href={PODCAST_PLATFORMS.spotify}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                {/* Spotify — brand green */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={platformStyle('#1DB954')}
+                >
+                  Spotify
+                </FormButton>
+              </a>
+              <a
+                href={PODCAST_PLATFORMS.amazonMusic}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                {/* Amazon Music — brand blue */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={platformStyle('#00A8E1')}
+                >
+                  Amazon Music
+                </FormButton>
+              </a>
+              <a
+                href={PODCAST_PLATFORMS.deezer}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                {/* Deezer — brand violet */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={platformStyle('#A238FF')}
+                >
+                  Deezer
+                </FormButton>
+              </a>
+              <a
+                href={PODCAST_PLATFORMS.podchaser}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                {/* Podchaser — brand teal */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  style={platformStyle('#2EBFA5')}
+                >
+                  Podchaser
+                </FormButton>
+              </a>
+              <a
+                href={rssEndpoint}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ textDecoration: 'none' }}
+              >
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  icon='ActivityFeed'
+                  iconPosition='left'
+                >
+                  RSS Feed
+                </FormButton>
+              </a>
+            </div>{' '}
+            <div className='mt-4'>
+              <GeneratedWithAIBadge isHero />
+            </div>
+          </div>
+        </Hero>
 
         {/* Loading state */}
         {loading && (
@@ -670,6 +876,9 @@ export function PodcastListingClient() {
           </>
         )}
       </div>
+
+      {/* Spreaker Embedded Player -- we may not need this because the loading Azure Function takes care of it from an RSS Feed -TW */}
+      {!loading && <SpreakerEmbed />}
 
       {/* Episode Detail Modal */}
       {selectedEpisode && (
