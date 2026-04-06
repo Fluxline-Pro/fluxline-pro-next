@@ -650,6 +650,7 @@ export function PodcastListingClient() {
               }}
             >
               {/* Platform Subscription Buttons */}
+              {/* Colors were hardcoded because these are not part of the original theme.tsle but are important for brand recognition on the podcast platforms */}
               <a
                 href={PODCAST_PLATFORMS.spreaker}
                 target='_blank'
