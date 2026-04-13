@@ -16,10 +16,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/FluxlineLogo.png',
-        width: 1200,
-        height: 630,
-        alt: 'A+ In FLUX Mythmaker Podcast',
+        url: '/images/APlusLogo_11052025.png',
+        width: 2048,
+        height: 2048,
+        alt: 'The Authentic Growth Mythmaker Series',
       },
     ],
   },
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Podcasts - Fluxline',
     description:
-      '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
-    images: ['/images/FluxlineLogo.png'],
+      '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.',
+    images: ['/images/APlusLogo_11052025.png'],
   },
   alternates: {
     canonical: '/podcasts',

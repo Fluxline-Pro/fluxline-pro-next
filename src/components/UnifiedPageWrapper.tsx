@@ -48,6 +48,7 @@ import ContactImage from '../assets/images/ContactMe2400x1600.jpg';
 // import BooksImage from '../assets/images/EducationTrainingPortrait.jpg';
 import ContentImage from '../assets/images/Content1280x1815.jpg';
 import PortfolioImage from '../assets/images/Portfolio1280x1815.jpg';
+import APlusLogoPodcast from '../assets/images/APlusLogo_11052025.png';
 
 // Dark mode themes: dark, high-contrast, grayscale-dark
 const darkModeThemes: ThemeMode[] = ['dark', 'high-contrast', 'grayscale-dark'];
@@ -182,6 +183,11 @@ const PAGE_CONFIGS: Record<
     image: PressReleaseImage.src,
     imageText: 'Press Release',
   },
+  '/podcasts': {
+    image: APlusLogoPodcast.src,
+    imageText: 'Podcasts',
+  },
+
   // Testimonials page hidden until client testimonials are available
   // '/testimonials': {
   //   image: FluxlineTestimonials.src,
