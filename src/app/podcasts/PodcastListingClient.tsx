@@ -663,131 +663,91 @@ export function PodcastListingClient() {
             >
               {/* Platform Subscription Buttons */}
               {/* Colors were hardcoded because these are not part of the original theme.ts but are important for brand recognition on the podcast platforms */}
-              <a
+              {/* Spreaker — brand orange */}
+              <FormButton
+                variant='secondary'
+                size='medium'
+                icon='Microphone'
+                iconPosition='left'
                 href={PODCAST_PLATFORMS.spreaker}
                 target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
+                style={platformStyle('#EE722E')}
               >
-                {/* Spreaker — brand orange */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  icon='Microphone'
-                  iconPosition='left'
-                  style={platformStyle('#EE722E')}
-                >
-                  Listen on Spreaker
-                </FormButton>
-              </a>
-              <a
+                Listen on Spreaker
+              </FormButton>
+              {/* Spotify — brand green */}
+              <FormButton
+                variant='secondary'
+                size='medium'
                 href={PODCAST_PLATFORMS.spotify}
                 target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
+                style={platformStyle('#1DB954')}
               >
-                {/* Spotify — brand green */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  style={platformStyle('#1DB954')}
-                >
-                  Spotify
-                </FormButton>
-              </a>
-              <a
+                Spotify
+              </FormButton>
+              {/* Apple Podcasts — brand purple */}
+              <FormButton
+                variant='secondary'
+                size='medium'
                 href={PODCAST_PLATFORMS.applePodcasts}
                 target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
+                style={platformStyle('#B150E2')}
               >
-                {/* Apple Podcasts — brand purple */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  style={platformStyle('#B150E2')}
-                >
-                  Apple Podcasts
-                </FormButton>
-              </a>
+                Apple Podcasts
+              </FormButton>
               {/* On mobile, only the first 3 buttons are shown initially; the rest are revealed via Show More */}
               {(!isMobile || showAllButtons) && (
                 <>
-                  <a
+                  {/* iHeartRadio — brand red */}
+                  <FormButton
+                    variant='secondary'
+                    size='medium'
                     href={PODCAST_PLATFORMS.iHeartRadio}
                     target='_blank'
-                    rel='noopener noreferrer'
-                    style={{ textDecoration: 'none' }}
+                    style={platformStyle('#C6002B')}
                   >
-                    {/* iHeartRadio — brand red */}
-                    <FormButton
-                      variant='secondary'
-                      size='medium'
-                      style={platformStyle('#C6002B')}
-                    >
-                      iHeartRadio
-                    </FormButton>
-                  </a>
-                  <a
+                    iHeartRadio
+                  </FormButton>
+                  {/* Amazon Music — brand blue */}
+                  <FormButton
+                    variant='secondary'
+                    size='medium'
                     href={PODCAST_PLATFORMS.amazonMusic}
                     target='_blank'
-                    rel='noopener noreferrer'
-                    style={{ textDecoration: 'none' }}
+                    style={platformStyle('#00A8E1')}
                   >
-                    {/* Amazon Music — brand blue */}
-                    <FormButton
-                      variant='secondary'
-                      size='medium'
-                      style={platformStyle('#00A8E1')}
-                    >
-                      Amazon Music
-                    </FormButton>
-                  </a>
-                  <a
+                    Amazon Music
+                  </FormButton>
+                  {/* Deezer — brand violet */}
+                  <FormButton
+                    variant='secondary'
+                    size='medium'
                     href={PODCAST_PLATFORMS.deezer}
                     target='_blank'
-                    rel='noopener noreferrer'
-                    style={{ textDecoration: 'none' }}
+                    style={platformStyle('#A238FF')}
                   >
-                    {/* Deezer — brand violet */}
-                    <FormButton
-                      variant='secondary'
-                      size='medium'
-                      style={platformStyle('#A238FF')}
-                    >
-                      Deezer
-                    </FormButton>
-                  </a>
-                  <a
+                    Deezer
+                  </FormButton>
+                  {/* Podchaser — brand teal */}
+                  <FormButton
+                    variant='secondary'
+                    size='medium'
                     href={PODCAST_PLATFORMS.podchaser}
                     target='_blank'
-                    rel='noopener noreferrer'
-                    style={{ textDecoration: 'none' }}
+                    style={platformStyle('#2EBFA5')}
                   >
-                    {/* Podchaser — brand teal */}
-                    <FormButton
-                      variant='secondary'
-                      size='medium'
-                      style={platformStyle('#2EBFA5')}
-                    >
-                      Podchaser
-                    </FormButton>
-                  </a>
-                  <a
+                    Podchaser
+                  </FormButton>
+                  <FormButton
+                    variant='secondary'
+                    size='medium'
+                    icon='ActivityFeed'
+                    iconPosition='left'
                     href={rssEndpoint}
                     target='_blank'
-                    rel='noopener noreferrer'
-                    style={{ textDecoration: 'none' }}
                   >
-                    <FormButton
-                      variant='secondary'
-                      size='medium'
-                      icon='ActivityFeed'
-                      iconPosition='left'
-                    >
-                      RSS Feed
-                    </FormButton>
-                  </a>
+                    RSS Feed
+                  </FormButton>
                 </>
               )}
               {/* Show More / Show Less toggle — mobile only */}
