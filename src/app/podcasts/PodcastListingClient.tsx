@@ -799,6 +799,11 @@ export function PodcastListingClient() {
                   iconPosition='right'
                   onClick={() => setShowAllButtons((prev) => !prev)}
                   aria-expanded={showAllButtons}
+                  aria-label={
+                    showAllButtons
+                      ? 'Show fewer podcast platforms'
+                      : 'Show more podcast platforms'
+                  }
                 >
                   {showAllButtons ? 'Show Less' : 'Show More'}
                 </FormButton>
