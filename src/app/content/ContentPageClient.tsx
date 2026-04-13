@@ -59,7 +59,7 @@ export default function ContentPageClient() {
     {
       title: 'Podcasts',
       description:
-        '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.',
+        'The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
       path: '/podcasts',
       iconName: 'Microphone',
       color: theme.palette.yellowDark,

@@ -4,13 +4,13 @@ import { PodcastListingClient } from './PodcastListingClient';
 export const metadata: Metadata = {
   title: 'Podcasts',
   description:
-    '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development by Fluxline.',
+    'The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
   keywords:
-    'podcast, audio, The Authentic Growth Mythmaker Series, Fluxline, transformation, strategy, personal development, Apple Podcasts, Spotify, Amazon Music, Deezer, Podchaser, Spreaker',
+    'podcast, audio, The Authentic Growth Mythmaker Series, Fluxline, transformation, strategy, identity, authenticity, mental health, self-help, self-improvement, personal development, Apple Podcasts, Spotify, Amazon Music, Deezer, Podchaser, Spreaker',
   openGraph: {
     title: 'Podcasts - Fluxline',
     description:
-      '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.',
+      'The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
     url: 'https://www.fluxline.pro/podcasts',
     siteName: 'Fluxline',
     type: 'website',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Podcasts - Fluxline',
     description:
-      '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.',
+      'The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
     images: ['/images/APlusLogo_11052025.png'],
   },
   alternates: {

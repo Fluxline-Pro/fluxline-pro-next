@@ -647,7 +647,7 @@ export function PodcastListingClient() {
         <Hero
           title='Podcasts'
           iconName='Microphone'
-          description='"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.'
+          description='The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
           backArrow={true}
           backArrowPath='/content'
           filters={podcastFilters}
@@ -867,7 +867,8 @@ export function PodcastListingClient() {
               {processedEpisodes.length === 1 ? 'episode' : 'episodes'}
               {(startDate || endDate) &&
                 processedEpisodes.length !== episodes.length &&
-                ` · ${processedEpisodes.length} matching date range`}
+                ` · ${processedEpisodes.length} matching date range`}{' '}
+              of The Authentic Growth Mythmaker Series
             </Typography>
             <AnimatePresence mode='wait'>
               <div
