@@ -181,7 +181,7 @@ function PodcastCard({
 
 /**
  * SpreakerEmbed Component
- * Renders the Spreaker embedded player for the "A+ in FLUX Mythmaker Series" show.
+ * Renders the Spreaker embedded player for the "The Authentic Growth Mythmaker Series" show.
  * The Spreaker widget script (loaded via layout.tsx) replaces this anchor tag with
  * an interactive iframe player on the client. The anchor text provides a fallback
  * link if the widget script is unavailable or the show cannot be loaded.
@@ -201,7 +201,7 @@ function SpreakerEmbed() {
           fontWeight: 600,
         }}
       >
-        A+ in FLUX Mythmaker Series
+        The Authentic Growth Mythmaker Series
       </Typography>
       {/* Spreaker player anchor — replaced by widget.js with an embedded player iframe.
           If the script fails to load or the show is unavailable, the anchor remains as a
@@ -229,7 +229,8 @@ function SpreakerEmbed() {
           data-hide-sharing='false'
           data-hide-download='true'
         >
-          Listen to &quot;A+ in FLUX Mythmaker Series&quot; on Spreaker.
+          Listen to &quot;The Authentic Growth Mythmaker Series&quot; on
+          Spreaker.
         </a>
       </div>
     </div>
@@ -646,7 +647,7 @@ export function PodcastListingClient() {
         <Hero
           title='Podcasts'
           iconName='Microphone'
-          description='"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.'
+          description='"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.'
           backArrow={true}
           backArrowPath='/content'
           filters={podcastFilters}
@@ -699,7 +700,9 @@ export function PodcastListingClient() {
                   CSS handles the initial visibility so there is no JS-dependent layout shift:
                   - 'hidden sm:contents' → hidden on mobile (< 640px), visible as flex children on desktop
                   - 'contents' → visible everywhere when showAllButtons is true */}
-              <div className={showAllButtons ? 'contents' : 'hidden sm:contents'}>
+              <div
+                className={showAllButtons ? 'contents' : 'hidden sm:contents'}
+              >
                 {/* iHeartRadio — brand red */}
                 <FormButton
                   variant='secondary'

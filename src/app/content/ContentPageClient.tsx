@@ -76,7 +76,7 @@ export default function ContentPageClient() {
     {
       title: 'Podcasts',
       description:
-        '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
+        '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.',
       path: '/podcasts',
       iconName: 'Microphone',
       color: theme.palette.yellowDark,

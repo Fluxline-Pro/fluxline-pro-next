@@ -19,7 +19,7 @@ export interface PodcastEpisode {
   imageUrl?: string;
 }
 
-export const PODCAST_NAME = 'A+ In FLUX Mythmaker';
+export const PODCAST_NAME = 'The Authentic Growth Mythmaker Series';
 export const PODCAST_AUTHOR = 'Fluxline';
 export const RSS_ENDPOINT = '/api/podcasts/rss';
 export const SPREAKER_RSS_URL =

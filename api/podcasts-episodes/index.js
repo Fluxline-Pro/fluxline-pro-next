@@ -40,14 +40,16 @@ async function getAllEpisodes() {
   return (data.value || []).map((row) => ({
     id: row.RowKey,
     slug: row.slug || row.RowKey,
-    podcast_name: row.podcast_name || 'A+ In FLUX Mythmaker',
+    podcast_name: row.podcast_name || 'The Authentic Growth Mythmaker Series',
     episode_title: row.episode_title || row.RowKey,
     author_name: row.author_name || 'Fluxline',
     description: row.description || '',
     publish_date: row.publish_date || row.Timestamp || '',
     duration: row.duration || '',
     audio_url: row.audio_url || '',
-    audio_size_bytes: row.audio_size_bytes ? Number(row.audio_size_bytes) : undefined,
+    audio_size_bytes: row.audio_size_bytes
+      ? Number(row.audio_size_bytes)
+      : undefined,
     episode_number: row.episode_number ? Number(row.episode_number) : undefined,
     tags: row.tags ? row.tags.split(',').map((t) => t.trim()) : [],
     imageUrl: row.imageUrl,
@@ -79,7 +81,10 @@ module.exports = async function (context, req) {
     context.res = {
       status: 500,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ episodes: [], error: 'Failed to fetch podcast episodes' }),
+      body: JSON.stringify({
+        episodes: [],
+        error: 'Failed to fetch podcast episodes',
+      }),
     };
   }
 };

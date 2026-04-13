@@ -4,13 +4,13 @@ import { PodcastListingClient } from './PodcastListingClient';
 export const metadata: Metadata = {
   title: 'Podcasts',
   description:
-    '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development by Fluxline.',
+    '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development by Fluxline.',
   keywords:
-    'podcast, audio, A+ In FLUX Mythmaker, Fluxline, transformation, strategy, personal development, Apple Podcasts, Spotify, Amazon Music, Deezer, Podchaser, Spreaker',
+    'podcast, audio, The Authentic Growth Mythmaker Series, Fluxline, transformation, strategy, personal development, Apple Podcasts, Spotify, Amazon Music, Deezer, Podchaser, Spreaker',
   openGraph: {
     title: 'Podcasts - Fluxline',
     description:
-      '"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.',
+      '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.',
     url: 'https://www.fluxline.pro/podcasts',
     siteName: 'Fluxline',
     type: 'website',
