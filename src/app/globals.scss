@@ -249,6 +249,20 @@ a {
   }
 }
 
+/* Footer link visited/active/focus reset
+   Overrides the browser/WebKit native dark-mode visited-link rule
+   (html[native-dark-active] a:not(svg) { color: !important }) so footer
+   links keep the same colour as their unvisited state on all pseudo-states
+   except :hover, which is handled by the component's onMouseEnter handler. */
+a.footer-link {
+  &:visited,
+  &:active,
+  &:focus {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+}
+
 /* =============================================
    LISTS
    ============================================= */

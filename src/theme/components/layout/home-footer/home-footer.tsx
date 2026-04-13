@@ -86,6 +86,7 @@ export const StyledLink: React.FC<{
   return (
     <Link
       href={href}
+      className='footer-link'
       style={linkStyle}
       target={openInNewTab ? '_blank' : '_self'}
       rel={openInNewTab ? 'noopener noreferrer' : undefined}
