@@ -676,19 +676,6 @@ export function PodcastListingClient() {
               >
                 Listen on Spreaker
               </FormButton>
-<<<<<<< Updated upstream
-=======
-              {/* Apple Podcasts — brand purple */}
-              <FormButton
-                variant='secondary'
-                size='medium'
-                href={PODCAST_PLATFORMS.applePodcasts}
-                target='_blank'
-                style={platformStyle('#B150E2')}
-              >
-                Apple Podcasts
-              </FormButton>
->>>>>>> Stashed changes
               {/* Spotify — brand green */}
               <FormButton
                 variant='secondary'
@@ -699,7 +686,6 @@ export function PodcastListingClient() {
               >
                 Spotify
               </FormButton>
-<<<<<<< Updated upstream
               {/* Apple Podcasts — brand purple */}
               <FormButton
                 variant='secondary'
@@ -786,48 +772,6 @@ export function PodcastListingClient() {
                   {showAllButtons ? 'Show Less' : 'Show More'}
                 </FormButton>
               </div>
-=======
-              {/* Amazon Music — brand blue */}
-              <FormButton
-                variant='secondary'
-                size='medium'
-                href={PODCAST_PLATFORMS.amazonMusic}
-                target='_blank'
-                style={platformStyle('#00A8E1')}
-              >
-                Amazon Music
-              </FormButton>
-              {/* Deezer — brand violet */}
-              <FormButton
-                variant='secondary'
-                size='medium'
-                href={PODCAST_PLATFORMS.deezer}
-                target='_blank'
-                style={platformStyle('#A238FF')}
-              >
-                Deezer
-              </FormButton>
-              {/* Podchaser — brand teal */}
-              <FormButton
-                variant='secondary'
-                size='medium'
-                href={PODCAST_PLATFORMS.podchaser}
-                target='_blank'
-                style={platformStyle('#2EBFA5')}
-              >
-                Podchaser
-              </FormButton>
-              <FormButton
-                variant='secondary'
-                size='medium'
-                icon='ActivityFeed'
-                iconPosition='left'
-                href={rssEndpoint}
-                target='_blank'
-              >
-                RSS Feed
-              </FormButton>
->>>>>>> Stashed changes
             </div>{' '}
             <div className='mt-4'>
               <GeneratedWithAIBadge isHero />
