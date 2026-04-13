@@ -4,15 +4,24 @@ import React from 'react';
 import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
-export interface FormButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'default' | 'outline';
+export interface FormButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'tertiary'
+    | 'danger'
+    | 'default'
+    | 'outline';
   icon?: string;
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean;
   size?: 'small' | 'medium' | 'large';
   children?: React.ReactNode;
   text?: string;
+  /** When provided, clicking the button navigates to this URL. */
+  href?: string;
+  /** Target for href navigation. Defaults to '_blank'. */
+  target?: string;
 }
 
 /**
@@ -37,6 +46,9 @@ export const FormButton: React.FC<FormButtonProps> = ({
   disabled = false,
   className,
   style,
+  href,
+  target,
+  onClick,
   ...rest
 }) => {
   const { theme, fontScale } = useAppTheme();
@@ -116,16 +128,15 @@ export const FormButton: React.FC<FormButtonProps> = ({
         return {
           ...baseStyles,
           backgroundColor:
+            isHovered && !disabled ? theme.palette.themePrimary : 'transparent',
+          color:
             isHovered && !disabled
-              ? theme.palette.themePrimary
-              : 'transparent',
-          color: isHovered && !disabled
-            ? theme.themeMode === 'dark' ||
-              theme.themeMode === 'high-contrast' ||
-              theme.themeMode === 'grayscale-dark'
-              ? theme.palette.black
-              : theme.palette.white
-            : theme.palette.themePrimary,
+              ? theme.themeMode === 'dark' ||
+                theme.themeMode === 'high-contrast' ||
+                theme.themeMode === 'grayscale-dark'
+                ? theme.palette.black
+                : theme.palette.white
+              : theme.palette.themePrimary,
           border: `2px solid ${theme.palette.themePrimary}`,
         };
 
@@ -184,6 +195,13 @@ export const FormButton: React.FC<FormButtonProps> = ({
 
   const content = text || children;
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (href && !disabled) {
+      window.open(href, target ?? '_blank', 'noopener,noreferrer');
+    }
+    onClick?.(e);
+  };
+
   return (
     <button
       {...rest}
@@ -192,6 +210,7 @@ export const FormButton: React.FC<FormButtonProps> = ({
       style={buttonStyles}
       onMouseEnter={() => !disabled && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
     >
       {icon && iconPosition === 'left' && (
         <FluentIcon iconName={icon} size='small' color={iconColor} />

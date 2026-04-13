@@ -260,7 +260,7 @@ Fetch all podcast episodes.
     {
       "id": "episode-1",
       "slug": "episode-1",
-      "podcast_name": "A+ In FLUX Mythmaker",
+      "podcast_name": "The Authentic Growth Mythmaker Series",
       "episode_title": "Introduction",
       "author_name": "Fluxline",
       "description": "Episode description",

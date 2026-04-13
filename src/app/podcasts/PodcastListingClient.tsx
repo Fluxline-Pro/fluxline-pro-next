@@ -181,7 +181,7 @@ function PodcastCard({
 
 /**
  * SpreakerEmbed Component
- * Renders the Spreaker embedded player for the "A+ in FLUX Mythmaker Series" show.
+ * Renders the Spreaker embedded player for the "The Authentic Growth Mythmaker Series" show.
  * The Spreaker widget script (loaded via layout.tsx) replaces this anchor tag with
  * an interactive iframe player on the client. The anchor text provides a fallback
  * link if the widget script is unavailable or the show cannot be loaded.
@@ -201,7 +201,7 @@ function SpreakerEmbed() {
           fontWeight: 600,
         }}
       >
-        A+ in FLUX Mythmaker Series
+        The Authentic Growth Mythmaker Series
       </Typography>
       {/* Spreaker player anchor — replaced by widget.js with an embedded player iframe.
           If the script fails to load or the show is unavailable, the anchor remains as a
@@ -229,7 +229,8 @@ function SpreakerEmbed() {
           data-hide-sharing='false'
           data-hide-download='true'
         >
-          Listen to &quot;A+ in FLUX Mythmaker Series&quot; on Spreaker.
+          Listen to &quot;The Authentic Growth Mythmaker Series&quot; on
+          Spreaker.
         </a>
       </div>
     </div>
@@ -382,6 +383,15 @@ function PodcastDetailModal({
           </a>
           {' · '}
           <a
+            href={PODCAST_PLATFORMS.spotify}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: theme.palette.themePrimary }}
+          >
+            Spotify
+          </a>
+          {' · '}
+          <a
             href={PODCAST_PLATFORMS.applePodcasts}
             target='_blank'
             rel='noopener noreferrer'
@@ -391,12 +401,12 @@ function PodcastDetailModal({
           </a>
           {' · '}
           <a
-            href={PODCAST_PLATFORMS.spotify}
+            href={PODCAST_PLATFORMS.iHeartRadio}
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
           >
-            Spotify
+            iHeartRadio
           </a>
           {' · '}
           <a
@@ -462,6 +472,9 @@ export function PodcastListingClient() {
   const [sortOrder, setSortOrder] = React.useState<SortOrder>('newest');
   const [startDate, setStartDate] = React.useState<string>('');
   const [endDate, setEndDate] = React.useState<string>('');
+
+  // Mobile "Show More" state for platform buttons
+  const [showAllButtons, setShowAllButtons] = React.useState(false);
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -634,7 +647,7 @@ export function PodcastListingClient() {
         <Hero
           title='Podcasts'
           iconName='Microphone'
-          description='"A+ In FLUX Mythmaker" — audio episodes covering transformation, strategy, and personal development.'
+          description='"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.'
           backArrow={true}
           backArrowPath='/content'
           filters={podcastFilters}
@@ -651,113 +664,114 @@ export function PodcastListingClient() {
             >
               {/* Platform Subscription Buttons */}
               {/* Colors were hardcoded because these are not part of the original theme.ts but are important for brand recognition on the podcast platforms */}
-              <a
+              {/* Spreaker — brand orange */}
+              <FormButton
+                variant='secondary'
+                size='medium'
+                icon='Microphone'
+                iconPosition='left'
                 href={PODCAST_PLATFORMS.spreaker}
                 target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
+                style={platformStyle('#EE722E')}
               >
-                {/* Spreaker — brand orange */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  icon='Microphone'
-                  iconPosition='left'
-                  style={platformStyle('#EE722E')}
-                >
-                  Listen on Spreaker
-                </FormButton>
-              </a>
-              <a
-                href={PODCAST_PLATFORMS.applePodcasts}
-                target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
-              >
-                {/* Apple Podcasts — brand purple */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  style={platformStyle('#B150E2')}
-                >
-                  Apple Podcasts
-                </FormButton>
-              </a>
-              <a
+                Listen on Spreaker
+              </FormButton>
+              {/* Spotify — brand green */}
+              <FormButton
+                variant='secondary'
+                size='medium'
                 href={PODCAST_PLATFORMS.spotify}
                 target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
+                style={platformStyle('#1DB954')}
               >
-                {/* Spotify — brand green */}
+                Spotify
+              </FormButton>
+              {/* Apple Podcasts — brand purple */}
+              <FormButton
+                variant='secondary'
+                size='medium'
+                href={PODCAST_PLATFORMS.applePodcasts}
+                target='_blank'
+                style={platformStyle('#B150E2')}
+              >
+                Apple Podcasts
+              </FormButton>
+              {/* On mobile, only the first 3 buttons are shown initially; the rest are revealed via Show More.
+                  CSS handles the initial visibility so there is no JS-dependent layout shift:
+                  - 'hidden sm:contents' → hidden on mobile (< 640px), visible as flex children on desktop
+                  - 'contents' → visible everywhere when showAllButtons is true */}
+              <div
+                className={showAllButtons ? 'contents' : 'hidden sm:contents'}
+              >
+                {/* iHeartRadio — brand red */}
                 <FormButton
                   variant='secondary'
                   size='medium'
-                  style={platformStyle('#1DB954')}
+                  href={PODCAST_PLATFORMS.iHeartRadio}
+                  target='_blank'
+                  style={platformStyle('#C6002B')}
                 >
-                  Spotify
+                  iHeartRadio
                 </FormButton>
-              </a>
-              <a
-                href={PODCAST_PLATFORMS.amazonMusic}
-                target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
-              >
                 {/* Amazon Music — brand blue */}
                 <FormButton
                   variant='secondary'
                   size='medium'
+                  href={PODCAST_PLATFORMS.amazonMusic}
+                  target='_blank'
                   style={platformStyle('#00A8E1')}
                 >
                   Amazon Music
                 </FormButton>
-              </a>
-              <a
-                href={PODCAST_PLATFORMS.deezer}
-                target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
-              >
                 {/* Deezer — brand violet */}
                 <FormButton
                   variant='secondary'
                   size='medium'
+                  href={PODCAST_PLATFORMS.deezer}
+                  target='_blank'
                   style={platformStyle('#A238FF')}
                 >
                   Deezer
                 </FormButton>
-              </a>
-              <a
-                href={PODCAST_PLATFORMS.podchaser}
-                target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
-              >
                 {/* Podchaser — brand teal */}
                 <FormButton
                   variant='secondary'
                   size='medium'
+                  href={PODCAST_PLATFORMS.podchaser}
+                  target='_blank'
                   style={platformStyle('#2EBFA5')}
                 >
                   Podchaser
                 </FormButton>
-              </a>
-              <a
-                href={rssEndpoint}
-                target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'none' }}
-              >
                 <FormButton
                   variant='secondary'
                   size='medium'
                   icon='ActivityFeed'
                   iconPosition='left'
+                  href={rssEndpoint}
+                  target='_blank'
                 >
                   RSS Feed
                 </FormButton>
-              </a>
+              </div>
+              {/* Show More / Show Less toggle — mobile only (hidden on sm+ via CSS) */}
+              <div className='sm:hidden'>
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  icon={showAllButtons ? 'ChevronUp' : 'ChevronDown'}
+                  iconPosition='right'
+                  onClick={() => setShowAllButtons((prev) => !prev)}
+                  aria-expanded={showAllButtons}
+                  aria-label={
+                    showAllButtons
+                      ? 'Show fewer podcast platforms'
+                      : 'Show more podcast platforms'
+                  }
+                >
+                  {showAllButtons ? 'Show Less' : 'Show More'}
+                </FormButton>
+              </div>
             </div>{' '}
             <div className='mt-4'>
               <GeneratedWithAIBadge isHero />
