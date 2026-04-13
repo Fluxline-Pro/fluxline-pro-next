@@ -695,63 +695,64 @@ export function PodcastListingClient() {
               >
                 Apple Podcasts
               </FormButton>
-              {/* On mobile, only the first 3 buttons are shown initially; the rest are revealed via Show More */}
-              {(!isMobile || showAllButtons) && (
-                <>
-                  {/* iHeartRadio — brand red */}
-                  <FormButton
-                    variant='secondary'
-                    size='medium'
-                    href={PODCAST_PLATFORMS.iHeartRadio}
-                    target='_blank'
-                    style={platformStyle('#C6002B')}
-                  >
-                    iHeartRadio
-                  </FormButton>
-                  {/* Amazon Music — brand blue */}
-                  <FormButton
-                    variant='secondary'
-                    size='medium'
-                    href={PODCAST_PLATFORMS.amazonMusic}
-                    target='_blank'
-                    style={platformStyle('#00A8E1')}
-                  >
-                    Amazon Music
-                  </FormButton>
-                  {/* Deezer — brand violet */}
-                  <FormButton
-                    variant='secondary'
-                    size='medium'
-                    href={PODCAST_PLATFORMS.deezer}
-                    target='_blank'
-                    style={platformStyle('#A238FF')}
-                  >
-                    Deezer
-                  </FormButton>
-                  {/* Podchaser — brand teal */}
-                  <FormButton
-                    variant='secondary'
-                    size='medium'
-                    href={PODCAST_PLATFORMS.podchaser}
-                    target='_blank'
-                    style={platformStyle('#2EBFA5')}
-                  >
-                    Podchaser
-                  </FormButton>
-                  <FormButton
-                    variant='secondary'
-                    size='medium'
-                    icon='ActivityFeed'
-                    iconPosition='left'
-                    href={rssEndpoint}
-                    target='_blank'
-                  >
-                    RSS Feed
-                  </FormButton>
-                </>
-              )}
-              {/* Show More / Show Less toggle — mobile only */}
-              {isMobile && (
+              {/* On mobile, only the first 3 buttons are shown initially; the rest are revealed via Show More.
+                  CSS handles the initial visibility so there is no JS-dependent layout shift:
+                  - 'hidden sm:contents' → hidden on mobile (< 640px), visible as flex children on desktop
+                  - 'contents' → visible everywhere when showAllButtons is true */}
+              <div className={showAllButtons ? 'contents' : 'hidden sm:contents'}>
+                {/* iHeartRadio — brand red */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  href={PODCAST_PLATFORMS.iHeartRadio}
+                  target='_blank'
+                  style={platformStyle('#C6002B')}
+                >
+                  iHeartRadio
+                </FormButton>
+                {/* Amazon Music — brand blue */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  href={PODCAST_PLATFORMS.amazonMusic}
+                  target='_blank'
+                  style={platformStyle('#00A8E1')}
+                >
+                  Amazon Music
+                </FormButton>
+                {/* Deezer — brand violet */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  href={PODCAST_PLATFORMS.deezer}
+                  target='_blank'
+                  style={platformStyle('#A238FF')}
+                >
+                  Deezer
+                </FormButton>
+                {/* Podchaser — brand teal */}
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  href={PODCAST_PLATFORMS.podchaser}
+                  target='_blank'
+                  style={platformStyle('#2EBFA5')}
+                >
+                  Podchaser
+                </FormButton>
+                <FormButton
+                  variant='secondary'
+                  size='medium'
+                  icon='ActivityFeed'
+                  iconPosition='left'
+                  href={rssEndpoint}
+                  target='_blank'
+                >
+                  RSS Feed
+                </FormButton>
+              </div>
+              {/* Show More / Show Less toggle — mobile only (hidden on sm+ via CSS) */}
+              <div className='sm:hidden'>
                 <FormButton
                   variant='secondary'
                   size='medium'
@@ -767,7 +768,7 @@ export function PodcastListingClient() {
                 >
                   {showAllButtons ? 'Show Less' : 'Show More'}
                 </FormButton>
-              )}
+              </div>
             </div>{' '}
             <div className='mt-4'>
               <GeneratedWithAIBadge isHero />
