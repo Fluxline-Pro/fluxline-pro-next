@@ -57,12 +57,13 @@ export default function ContentPageClient() {
       color: theme.palette.tealLight,
     },
     {
-      title: 'Videos',
+      title: 'Podcasts',
       description:
-        'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
-      path: '/videos',
-      iconName: 'Video',
-      color: theme.palette.magentaLight,
+        '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.',
+      path: '/podcasts',
+      iconName: 'Microphone',
+      color: theme.palette.yellowDark,
+      isHighlighted: true,
     },
     {
       title: 'GitHub',
@@ -72,16 +73,15 @@ export default function ContentPageClient() {
       iconName: 'BranchMerge',
       color: theme.palette.purpleLight,
     },
-    // TODO: move Books to the top once launched, and add a "New!" badge to it -TW
     {
-      title: 'Podcasts',
+      title: 'Videos',
       description:
-        '"The Authentic Growth Mythmaker Series" — audio episodes covering transformation, strategy, and personal development.',
-      path: '/podcasts',
-      iconName: 'Microphone',
-      color: theme.palette.yellowDark,
-      isHighlighted: true,
+        'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
+      path: '/videos',
+      iconName: 'Video',
+      color: theme.palette.magentaLight,
     },
+    // TODO: move Books to the top once launched, and add a "New!" badge to it -TW
     {
       title: 'Books',
       description:
