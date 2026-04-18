@@ -8,12 +8,12 @@
  * Route: /api/podcasts/rss
  */
 
-const PODCAST_NAME = 'The Authentic Growth Mythmaker Series';
+const PODCAST_NAME = 'The Resonant Identity';
 const PODCAST_AUTHOR = 'Fluxline';
 const PODCAST_DESCRIPTION =
-  'The Authentic Growth Mythmaker Series — audio episodes covering transformation, strategy, and personal development by Fluxline.';
+  'The Resonant Identity — audio episodes covering transformation, strategy, and personal development by Fluxline.';
 const PODCAST_LINK = 'https://www.fluxline.pro/podcasts';
-const PODCAST_IMAGE = 'https://www.fluxline.pro/images/FluxlineLogo.png';
+const PODCAST_IMAGE = 'https://www.fluxline.pro/images/podcast/the-resonant-identity-logo.png';
 const PODCAST_LANGUAGE = 'en-us';
 const PODCAST_CATEGORY = 'Business';
 

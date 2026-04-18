@@ -181,7 +181,7 @@ function PodcastCard({
 
 /**
  * SpreakerEmbed Component
- * Renders the Spreaker embedded player for the "The Authentic Growth Mythmaker Series" show.
+ * Renders the Spreaker embedded player for the "The Resonant Identity" show.
  * The Spreaker widget script (loaded via layout.tsx) replaces this anchor tag with
  * an interactive iframe player on the client. The anchor text provides a fallback
  * link if the widget script is unavailable or the show cannot be loaded.
@@ -201,7 +201,7 @@ function SpreakerEmbed() {
           fontWeight: 600,
         }}
       >
-        The Authentic Growth Mythmaker Series
+        The Resonant Identity
       </Typography>
       {/* Spreaker player anchor — replaced by widget.js with an embedded player iframe.
           If the script fails to load or the show is unavailable, the anchor remains as a
@@ -229,7 +229,7 @@ function SpreakerEmbed() {
           data-hide-sharing='false'
           data-hide-download='true'
         >
-          Listen to &quot;The Authentic Growth Mythmaker Series&quot; on
+          Listen to &quot;The Resonant Identity&quot; on
           Spreaker.
         </a>
       </div>
@@ -647,7 +647,7 @@ export function PodcastListingClient() {
         <Hero
           title='Podcasts'
           iconName='Microphone'
-          description='The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
+          description='The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
           backArrow={true}
           backArrowPath='/content'
           filters={podcastFilters}
@@ -868,7 +868,7 @@ export function PodcastListingClient() {
               {(startDate || endDate) &&
                 processedEpisodes.length !== episodes.length &&
                 ` · ${processedEpisodes.length} matching date range`}{' '}
-              of The Authentic Growth Mythmaker Series
+              of The Resonant Identity
             </Typography>
             <AnimatePresence mode='wait'>
               <div

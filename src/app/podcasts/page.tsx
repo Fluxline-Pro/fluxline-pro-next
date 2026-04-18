@@ -4,22 +4,22 @@ import { PodcastListingClient } from './PodcastListingClient';
 export const metadata: Metadata = {
   title: 'Podcasts',
   description:
-    'The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
+    'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
   keywords:
-    'podcast, audio, The Authentic Growth Mythmaker Series, Fluxline, transformation, strategy, identity, authenticity, mental health, self-help, self-improvement, personal development, Apple Podcasts, Spotify, Amazon Music, Deezer, Podchaser, Spreaker',
+    'podcast, audio, The Resonant Identity, Fluxline, transformation, strategy, identity, authenticity, mental health, self-help, self-improvement, personal development, Apple Podcasts, Spotify, Amazon Music, Deezer, Podchaser, Spreaker',
   openGraph: {
     title: 'Podcasts - Fluxline',
     description:
-      'The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
+      'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
     url: 'https://www.fluxline.pro/podcasts',
     siteName: 'Fluxline',
     type: 'website',
     images: [
       {
-        url: '/images/APlusLogo_11052025.png',
+        url: '/images/podcast/the-resonant-identity-logo.png',
         width: 2048,
         height: 2048,
-        alt: 'The Authentic Growth Mythmaker Series',
+        alt: 'The Resonant Identity Podcast',
       },
     ],
   },
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Podcasts - Fluxline',
     description:
-      'The Authentic Growth Mythmaker Series- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
-    images: ['/images/APlusLogo_11052025.png'],
+      'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
+    images: ['/images/podcast/the-resonant-identity-logo.png'],
   },
   alternates: {
     canonical: '/podcasts',

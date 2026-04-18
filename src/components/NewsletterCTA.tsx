@@ -3,7 +3,7 @@
 /**
  * NewsletterCTA Component
  * Inline call-to-action section inviting users to subscribe to the
- * A+ in FLUX – Mythmaker Drop biweekly email newsletter.
+ * The Resonant Identity email newsletter.
  * Used on /about, /fluxline-ethos, and /contact pages.
  */
 
@@ -116,7 +116,7 @@ export const NewsletterCTA: React.FC = () => {
               margin: 0,
             }}
           >
-            A+ in FLUX – Mythmaker Drop
+            The Resonant Identity
           </Typography>
         </div>
 
@@ -129,9 +129,9 @@ export const NewsletterCTA: React.FC = () => {
             margin: 0,
           }}
         >
-          Subscribe to our free, biweekly newsletter — where we share insights
-          on Fluxline, The Resonance Core Framework, and practical ways to
-          improve your life using it. <br /><br />
+          Subscribe to The Resonant Identity email newsletter — where we share
+          insights on Fluxline, The Resonance Core Framework, and practical
+          ways to improve your life using it. <br /><br />
           Also, join our{' '}
           <a
             href='https://www.facebook.com/groups/aplusinfluxmythmaker'

@@ -40,7 +40,7 @@ async function getAllEpisodes() {
   return (data.value || []).map((row) => ({
     id: row.RowKey,
     slug: row.slug || row.RowKey,
-    podcast_name: row.podcast_name || 'The Authentic Growth Mythmaker Series',
+    podcast_name: row.podcast_name || 'The Resonant Identity',
     episode_title: row.episode_title || row.RowKey,
     author_name: row.author_name || 'Fluxline',
     description: row.description || '',

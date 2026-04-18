@@ -166,9 +166,25 @@ const FooterNewsletterSignup: React.FC = () => {
   if (newsletterSubscribed || submitState === 'success') {
     return (
       <div style={colStyle}>
-        <Typography variant='h3' style={headStyle}>
-          Newsletter
-        </Typography>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            marginBottom: '0.25rem',
+          }}
+        >
+          <Image
+            src='/images/podcast/the-resonant-identity-avatar.png'
+            alt='The Resonant Identity'
+            width={40}
+            height={40}
+            style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+          />
+          <Typography variant='h3' style={headStyle}>
+            The Resonant Identity
+          </Typography>
+        </div>
         <Typography
           variant='label'
           style={{
@@ -184,9 +200,25 @@ const FooterNewsletterSignup: React.FC = () => {
 
   return (
     <div style={colStyle}>
-      <Typography variant='h3' style={headStyle}>
-        Stay in the Loop
-      </Typography>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem',
+          marginBottom: '0.25rem',
+        }}
+      >
+        <Image
+          src='/images/podcast/the-resonant-identity-avatar.png'
+          alt='The Resonant Identity'
+          width={40}
+          height={40}
+          style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+        />
+        <Typography variant='h3' style={headStyle}>
+          The Resonant Identity
+        </Typography>
+      </div>
       <Typography
         variant='p'
         style={{
@@ -196,7 +228,7 @@ const FooterNewsletterSignup: React.FC = () => {
           lineHeight: '1.5',
         }}
       >
-        Biweekly insights on Fluxline and The Resonance Core Framework.
+        Subscribe to The Resonant Identity email newsletter.
       </Typography>
       <input
         type='email'

@@ -2,7 +2,7 @@
 
 /**
  * Unsubscribe Page
- * Allows users to remove their email from the A+ in FLUX newsletter.
+ * Allows users to remove their email from The Resonant Identity newsletter.
  * Centered card layout with FormInput and FormButton.
  */
 
@@ -137,7 +137,7 @@ export default function UnsubscribePage() {
                   textAlign: 'left',
                 }}
               >
-                Your email has been removed from the A+ in FLUX – Mythmaker Drop
+                Your email has been removed from The Resonant Identity
                 newsletter. We&apos;re sorry to see you go!
               </Typography>
               <FormButton
@@ -187,7 +187,7 @@ export default function UnsubscribePage() {
                 }}
               >
                 Enter your email address below to remove yourself from the{' '}
-                <strong>A+ in FLUX – Mythmaker Drop</strong> newsletter.
+                <strong>The Resonant Identity</strong> newsletter.
               </Typography>
 
               <FormInput
