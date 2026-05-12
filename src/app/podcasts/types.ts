@@ -19,21 +19,19 @@ export interface PodcastEpisode {
   imageUrl?: string;
 }
 
-export const PODCAST_NAME = 'The Authentic Growth Mythmaker Series';
+export const PODCAST_NAME = 'The Resonant Identity';
 export const PODCAST_AUTHOR = 'Fluxline';
 export const RSS_ENDPOINT = '/api/podcasts/rss';
 export const SPREAKER_RSS_URL =
   'https://www.spreaker.com/show/6933506/episodes/feed';
 export const PODCAST_PLATFORMS = {
-  spreaker:
-    'https://www.spreaker.com/podcast/a-in-flux-mythmaker-series--6933506',
+  spreaker: 'https://www.spreaker.com/podcast/the-resonant-identity--6933506',
   applePodcasts:
-    'https://podcasts.apple.com/us/podcast/a+-in-flux-mythmaker-series/id1891152754',
+    'https://podcasts.apple.com/us/podcast/the-resonant-identity/id1891152754',
   spotify: 'https://open.spotify.com/show/0kmCO10TwluoHUYdD3v4Qe',
   iHeartRadio: 'https://iheart.com/podcast/329383182',
   amazonMusic:
     'https://music.amazon.com/podcasts/b4d2ead1-4aaa-4189-b4bd-bd41141030a7',
   deezer: 'https://www.deezer.com/show/1002848441',
-  podchaser:
-    'https://www.podchaser.com/podcasts/a-in-flux-mythmaker-series-6436183',
+  podchaser: 'https://www.podchaser.com/podcasts/the-resonant-identity-6436183',
 } as const;

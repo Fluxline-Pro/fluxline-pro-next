@@ -2,7 +2,7 @@
 
 /**
  * Podcast RSS Proxy - Azure Function
- * Fetches and parses the Spreaker RSS feed for "The Authentic Growth Mythmaker Series Series",
+ * Fetches and parses the Spreaker RSS feed for "The Resonant Identity Series",
  * returning episodes in the PodcastEpisode schema consumed by the front-end.
  *
  * Route: GET /api/podcasts/rss-proxy
@@ -131,7 +131,7 @@ function parseRSSItems(xml) {
     episodes.push({
       id: episodeId,
       slug: episodeId,
-      podcast_name: 'The Authentic Growth Mythmaker Series',
+      podcast_name: 'The Resonant Identity',
       episode_title: title,
       author_name: author || 'Terence Waters',
       description,

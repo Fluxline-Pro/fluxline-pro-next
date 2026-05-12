@@ -3,7 +3,7 @@
 /**
  * NewsletterPopup Component
  * A bottom-drawer popup that randomly appears on non-home pages asking the
- * user to subscribe to the A+ in FLUX – Mythmaker Drop newsletter.
+ * user to subscribe to The Resonant Identity newsletter.
  *
  * Behaviour:
  * - Shows on a random non-home page visit after a short delay.
@@ -294,7 +294,7 @@ export const NewsletterPopup: React.FC = () => {
                     fontSize: '1.25rem',
                   }}
                 >
-                  A+ in FLUX – Mythmaker Drop
+                  The Resonant Identity Newsletter
                 </Typography>
               </div>
 
@@ -313,7 +313,7 @@ export const NewsletterPopup: React.FC = () => {
                 <br />
                 Also, join our{' '}
                 <a
-                  href='https://www.facebook.com/groups/aplusinfluxmythmaker'
+                  href='https://www.facebook.com/groups/theresonantid'
                   target='_blank'
                   rel='noopener noreferrer'
                   style={{ color: theme.palette.themePrimary }}
