@@ -771,8 +771,18 @@ export function PodcastListingClient() {
                   {showAllButtons ? 'Show Less' : 'Show More'}
                 </FormButton>
               </div>
-            </div>{' '}
-            <div className='mt-4'>
+            </div>
+            <div className='mt-4 flex flex-row items-center gap-3 flex-wrap'>
+              <FormButton
+                variant='secondary'
+                size='medium'
+                icon='Info'
+                iconPosition='left'
+                href='/podcasts/theresonantid'
+                aria-label='About The Resonant Identity'
+              >
+                About TRI
+              </FormButton>
               <GeneratedWithAIBadge isHero />
             </div>
           </div>
