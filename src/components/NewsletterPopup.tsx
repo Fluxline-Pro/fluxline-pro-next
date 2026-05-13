@@ -12,7 +12,7 @@
  * - Successful subscription also closes the popup and stores state.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
@@ -48,8 +48,8 @@ export const NewsletterPopup: React.FC = () => {
     setNewsletterSubscribed,
   } = useNewsletterStore();
 
+  const showDecisionRef = useRef<boolean | null>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [hasDecided, setHasDecided] = useState(false); // Track random decision for this session
   const [email, setEmail] = useState('');
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -68,17 +68,17 @@ export const NewsletterPopup: React.FC = () => {
     if (EXCLUDED_PATHS.some((p) => normalizedPath === p)) return;
 
     // Decide once per session whether to show the popup
-    if (!hasDecided) {
-      if (Math.random() > SHOW_PROBABILITY) {
-        setHasDecided(true);
-        return;
-      }
-      setHasDecided(true);
+    if (showDecisionRef.current === null) {
+      showDecisionRef.current = Math.random() <= SHOW_PROBABILITY;
+    }
+
+    if (!showDecisionRef.current) {
+      return;
     }
 
     const timer = setTimeout(() => setIsVisible(true), SHOW_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [pathname, newsletterDismissed, newsletterSubscribed, hasDecided]);
+  }, [pathname, newsletterDismissed, newsletterSubscribed]);
 
   const handleDismiss = () => {
     setIsVisible(false);
