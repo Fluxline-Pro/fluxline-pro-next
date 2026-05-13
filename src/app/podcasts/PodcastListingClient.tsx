@@ -229,8 +229,7 @@ function SpreakerEmbed() {
           data-hide-sharing='false'
           data-hide-download='true'
         >
-          Listen to &quot;The Resonant Identity&quot; on
-          Spreaker.
+          Listen to &quot;The Resonant Identity&quot; on Spreaker.
         </a>
       </div>
     </div>

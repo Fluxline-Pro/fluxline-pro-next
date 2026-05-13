@@ -1,6 +1,6 @@
 # How to Add a Podcast Episode
 
-This guide shows you how to add a new podcast episode to the "The Authentic Growth Mythmaker Series" podcast on the Fluxline Pro website.
+This guide shows you how to add a new podcast episode to the "The Resonant Identity" podcast on the Fluxline Pro website.
 
 ## Quick Overview
 
@@ -113,7 +113,7 @@ Before adding to Table Storage, gather this information:
 | **publish_date**     | Publication date                        | `2026-02-21T00:00:00Z` (ISO 8601)          |
 | **episode_number**   | Episode number                          | `1`                                        |
 | **audio_size_bytes** | File size in bytes                      | `15728640` (get from file properties)      |
-| **podcast_name**     | Show name (optional)                    | `The Authentic Growth Mythmaker Series`    |
+| **podcast_name**     | Show name (optional)                    | `The Resonant Identity`                    |
 | **author_name**      | Host name (optional)                    | `Fluxline`                                 |
 | **tags**             | Comma-separated tags (optional)         | `business,strategy,transformation`         |
 | **imageUrl**         | Episode artwork URL (optional)          | `https://...`                              |
@@ -149,7 +149,7 @@ duration: 32:45
 publish_date: 2026-02-21T00:00:00Z
 episode_number: 1
 audio_size_bytes: 15728640
-podcast_name: The Authentic Growth Mythmaker Series
+podcast_name: The Resonant Identity
 author_name: Fluxline
 tags: business,strategy,transformation
 ```
@@ -182,7 +182,7 @@ az storage entity insert \
     episode_number=1 \
     audio_size_bytes@odata.type=Edm.Int64 \
     audio_size_bytes=15728640 \
-    podcast_name="The Authentic Growth Mythmaker Series" \
+    podcast_name="The Resonant Identity" \
     author_name="Fluxline" \
     tags="business,strategy,transformation"
 ```

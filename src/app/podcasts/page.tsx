@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/podcast/the-resonant-identity-logo.png',
+        url: '/images/TheResonantIdentity_Logo.png',
         width: 2048,
         height: 2048,
         alt: 'The Resonant Identity Podcast',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: 'Podcasts - Fluxline',
     description:
       'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
-    images: ['/images/podcast/the-resonant-identity-logo.png'],
+    images: ['/images/TheResonantIdentity_Logo.png'],
   },
   alternates: {
     canonical: '/podcasts',

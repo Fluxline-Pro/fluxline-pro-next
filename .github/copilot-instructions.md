@@ -559,7 +559,7 @@ For complete scrolls documentation, see `src/app/services/scrolls/README.md`
 ### Video Section (YouTube Integration)
 
 - **Location**: `/src/app/video/`
-- **Data Source**: YouTube Data API v3 (fetches from @aplusinflux channel)
+- **Data Source**: YouTube Data API v3 (fetches from @TerenceWaters channel)
 - **Architecture**: Azure Function proxy at `/api/youtube`
 
 **How It Works**:
@@ -605,7 +605,7 @@ YOUTUBE_API_KEY=your-youtube-data-api-v3-key  # Server-side only
 
 - Proxies YouTube API to keep API key server-side
 - Handles CORS and caching headers
-- Fetches channel ID via handle (@aplusinflux)
+- Fetches channel ID via handle (@TerenceWaters)
 - Returns video metadata (title, description, thumbnail, duration, views)
 - Error handling with graceful fallbacks
 

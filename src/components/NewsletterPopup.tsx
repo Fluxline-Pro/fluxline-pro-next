@@ -294,7 +294,7 @@ export const NewsletterPopup: React.FC = () => {
                     fontSize: '1.25rem',
                   }}
                 >
-                  The Resonant Identity
+                  The Resonant Identity Newsletter
                 </Typography>
               </div>
 
@@ -313,7 +313,7 @@ export const NewsletterPopup: React.FC = () => {
                 <br />
                 Also, join our{' '}
                 <a
-                  href='https://www.facebook.com/groups/aplusinfluxmythmaker'
+                  href='https://www.facebook.com/groups/theresonantid'
                   target='_blank'
                   rel='noopener noreferrer'
                   style={{ color: theme.palette.themePrimary }}

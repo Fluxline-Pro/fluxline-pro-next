@@ -113,9 +113,7 @@ export default function UnsubscribePage() {
               <FluentIcon
                 iconName='CheckMark'
                 size='xLarge'
-                color={
-                  theme.semanticColors.successIcon || theme.palette.green
-                }
+                color={theme.semanticColors.successIcon || theme.palette.green}
               />
               <Typography
                 variant='h3'
@@ -137,8 +135,9 @@ export default function UnsubscribePage() {
                   textAlign: 'left',
                 }}
               >
-                Your email has been removed from The Resonant Identity
-                newsletter. We&apos;re sorry to see you go!
+                Your email has been removed from the{' '}
+                <strong>The Resonant Identity</strong> newsletter. We&apos;re
+                sorry to see you go!
               </Typography>
               <FormButton
                 text='Go to Home Page'
@@ -203,8 +202,7 @@ export default function UnsubscribePage() {
               {errorMessage && (
                 <p
                   style={{
-                    color:
-                      theme.semanticColors.errorText || theme.palette.red,
+                    color: theme.semanticColors.errorText || theme.palette.red,
                     fontSize: '0.875rem',
                     margin: 0,
                   }}

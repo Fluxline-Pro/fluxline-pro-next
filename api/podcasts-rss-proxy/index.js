@@ -2,7 +2,7 @@
 
 /**
  * Podcast RSS Proxy - Azure Function
- * Fetches and parses the Spreaker RSS feed for "The Resonant Identity",
+ * Fetches and parses the Spreaker RSS feed for "The Resonant Identity Series",
  * returning episodes in the PodcastEpisode schema consumed by the front-end.
  *
  * Route: GET /api/podcasts/rss-proxy

@@ -368,7 +368,7 @@ export function VideoListingClient() {
         <Hero
           title='Videos'
           iconName='Video'
-          description='Watch videos from the @aplusinflux YouTube channel — tutorials, live streams, playlists, and more.'
+          description='Watch videos from the @TerenceWaters YouTube channel — tutorials, live streams, playlists, and more.'
           backArrow={true}
           backArrowPath='/content'
         />

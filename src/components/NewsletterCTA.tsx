@@ -3,7 +3,7 @@
 /**
  * NewsletterCTA Component
  * Inline call-to-action section inviting users to subscribe to the
- * The Resonant Identity email newsletter.
+ * The Resonant Identity biweekly email newsletter.
  * Used on /about, /fluxline-ethos, and /contact pages.
  */
 
@@ -116,7 +116,7 @@ export const NewsletterCTA: React.FC = () => {
               margin: 0,
             }}
           >
-            The Resonant Identity
+            The Resonant Identity Newsletter
           </Typography>
         </div>
 
@@ -134,7 +134,7 @@ export const NewsletterCTA: React.FC = () => {
           ways to improve your life using it. <br /><br />
           Also, join our{' '}
           <a
-            href='https://www.facebook.com/groups/aplusinfluxmythmaker'
+            href='https://www.facebook.com/groups/theresonantid'
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: theme.palette.themePrimary }}
