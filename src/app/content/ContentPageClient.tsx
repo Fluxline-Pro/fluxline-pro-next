@@ -59,7 +59,7 @@ export default function ContentPageClient() {
     {
       title: 'Podcasts',
       description:
-        'The Resonant Identity- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
+        'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
       path: '/podcasts',
       iconName: 'Microphone',
       color: theme.palette.yellowDark,

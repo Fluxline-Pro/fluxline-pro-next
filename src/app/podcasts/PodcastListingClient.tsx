@@ -646,7 +646,7 @@ export function PodcastListingClient() {
         <Hero
           title='Podcasts'
           iconName='Microphone'
-          description='The Resonant Identity- blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
+          description='The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
           backArrow={true}
           backArrowPath='/content'
           filters={podcastFilters}

@@ -2,7 +2,7 @@
 
 /**
  * Unsubscribe Page
- * Allows users to remove their email from the A+ in FLUX newsletter.
+ * Allows users to remove their email from The Resonant Identity newsletter.
  * Centered card layout with FormInput and FormButton.
  */
 

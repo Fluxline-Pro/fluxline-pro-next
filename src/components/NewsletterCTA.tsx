@@ -129,9 +129,9 @@ export const NewsletterCTA: React.FC = () => {
             margin: 0,
           }}
         >
-          Subscribe to our free, biweekly newsletter — where we share insights
-          on Fluxline, The Resonance Core Framework, and practical ways to
-          improve your life using it. <br /><br />
+          Subscribe to The Resonant Identity email newsletter — where we share
+          insights on Fluxline, The Resonance Core Framework, and practical
+          ways to improve your life using it. <br /><br />
           Also, join our{' '}
           <a
             href='https://www.facebook.com/groups/theresonantid'
