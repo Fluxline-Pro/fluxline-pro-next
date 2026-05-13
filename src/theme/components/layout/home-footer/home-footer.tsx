@@ -175,7 +175,7 @@ const FooterNewsletterSignup: React.FC = () => {
           }}
         >
           <Image
-            src='/images/podcast/the-resonant-identity-avatar.png'
+            src='/images/TheResonantIdentity_Logo.png'
             alt='The Resonant Identity'
             width={40}
             height={40}
@@ -209,7 +209,7 @@ const FooterNewsletterSignup: React.FC = () => {
         }}
       >
         <Image
-          src='/images/podcast/the-resonant-identity-avatar.png'
+          src='/images/TheResonantIdentity_Logo.png'
           alt='The Resonant Identity'
           width={40}
           height={40}
