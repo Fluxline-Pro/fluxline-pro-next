@@ -76,7 +76,7 @@ export default function ContentPageClient() {
     {
       title: 'Videos',
       description:
-        'Watch videos from the YouTube channel @aplusinflux, including tutorials, live streams, and playlists.',
+        'Watch videos from the YouTube channel @TerenceWaters, including tutorials, live streams, and playlists.',
       path: '/videos',
       iconName: 'Video',
       color: theme.palette.magentaLight,

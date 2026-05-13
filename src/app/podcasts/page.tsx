@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/APlusLogo_11052025.png',
+        url: '/images/TheResonantIdentity_Logo.png',
         width: 2048,
         height: 2048,
         alt: 'The Resonant Identity',

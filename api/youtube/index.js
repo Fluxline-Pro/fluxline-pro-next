@@ -2,7 +2,7 @@
 
 /**
  * YouTube API Proxy - Azure Function
- * Fetches videos, live streams, and playlists from the @aplusinflux YouTube channel
+ * Fetches videos, live streams, and playlists from the @TerenceWaters YouTube channel
  *
  * Query params:
  *   - type: 'videos' | 'live' | 'playlists' (default: 'videos')
@@ -12,7 +12,7 @@
  */
 
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
-const CHANNEL_HANDLE = 'aplusinflux';
+const CHANNEL_HANDLE = 'TerenceWaters';
 
 const CORS_HEADERS = {
   'Content-Type': 'application/json',

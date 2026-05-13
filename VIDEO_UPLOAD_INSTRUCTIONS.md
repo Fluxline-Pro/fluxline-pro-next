@@ -1,4 +1,4 @@
-# Video Upload Instructions for Aplus (Terence)
+# Video Upload Instructions for TerenceWaters YouTube Channel
 
 ## Overview
 The testimonial video feature has been fully implemented and is ready for your video files. Once you upload the videos, they will automatically replace the static background on the home page.
