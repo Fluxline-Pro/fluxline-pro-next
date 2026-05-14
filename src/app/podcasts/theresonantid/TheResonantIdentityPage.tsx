@@ -22,7 +22,6 @@ import { InstagramIcon } from '@/assets/svgs/InstagramLogo';
 import { FacebookIcon } from '@/assets/svgs/FacebookLogo';
 import { TwitterLogo } from '@/assets/svgs/TwitterLogo';
 import { TiktokLogo } from '@/assets/svgs/TiktokLogo';
-import { PODCAST_PLATFORMS } from '../types';
 import ResonanceCoreImage from '@/assets/images/LifeCoachingResonanceCore.jpg';
 
 // External ecosystem link URLs
@@ -30,7 +29,7 @@ const TRI_LINKS = {
   instagram: 'https://www.instagram.com/theresonantid',
   twitter: 'https://x.com/theresonantid',
   tiktok: 'https://www.tiktok.com/@theresonantid',
-  podcast: PODCAST_PLATFORMS.spreaker,
+  podcast: '/podcasts',
   facebookGroup: 'https://www.facebook.com/groups/theresonantid',
   facebookPage: 'https://www.facebook.com/theresonantid',
   sevenDaySetup: 'https://www.facebook.com/groups/theresonantid',
@@ -131,6 +130,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
         color: theme.palette.themePrimary,
         fontSize: '2rem',
         fontWeight: theme.typography.fontWeights.bold,
+        textTransform: 'unset',
       }}
     >
       {children}
@@ -174,7 +174,7 @@ export function TheResonantIdentityPage() {
           {/* ─── 1. Hero Section ─── */}
           <Hero
             title='The Resonant Identity'
-            subtitle='A living extension of the Resonance Core Framework — where identity becomes practice.'
+            subtitle='A living extension of the Resonance Core Framework where identity becomes practice and is formed through coherence.'
             backArrow={true}
             backArrowPath='/podcasts'
           >
@@ -321,13 +321,29 @@ export function TheResonantIdentityPage() {
                   color: theme.palette.neutralSecondary,
                   fontSize: '1.125rem',
                   lineHeight: theme.typography.lineHeights.relaxed,
+                  paddingBottom: theme.spacing.m,
                 }}
               >
-                The Resonant Identity is a space for identity transformation,
-                micro-lessons, and applied resonance. It extends the Resonance
-                Core Framework into a living, accessible rhythm — helping you
-                build an identity that feels aligned, coherent, and grounded in
-                who you&apos;re becoming.
+                The Resonant Identity (TRI) is a space for identity
+                transformation, micro-lessons, and applied resonance. It extends
+                the Resonance Core Framework into a living, accessible rhythm —
+                helping you build an identity that feels aligned, coherent, and
+                grounded in who you&apos;re becoming.
+              </Typography>
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '1.125rem',
+                  lineHeight: theme.typography.lineHeights.relaxed,
+                  marginBottom: 0,
+                }}
+              >
+                TRI is not about quick fixes or surface-level hacks. It&apos;s
+                about cultivating a deeper relationship with yourself through
+                resonance — learning to listen to the subtle cues of what feels
+                right, and building an identity that reflects that resonance in
+                daily life.
               </Typography>
             </div>
           </section>
@@ -356,9 +372,11 @@ export function TheResonantIdentityPage() {
 
           <Divider />
 
-          {/* ─── 4. Connection to the RCF ─── */}
+          {/* ─── 4. The Resonance Core Framework™ Connection ─── */}
           <section className='space-y-6'>
-            <SectionHeading>Connection to the RCF</SectionHeading>
+            <SectionHeading>
+              The Resonance Core Framework™ Connection
+            </SectionHeading>
 
             <div
               className={`flex gap-8 ${isMobile ? 'flex-col' : 'flex-row items-center'}`}
@@ -372,7 +390,7 @@ export function TheResonantIdentityPage() {
                 <div style={{ flexShrink: 0, width: '280px' }}>
                   <Image
                     src={ResonanceCoreImage}
-                    alt='Resonance Core Framework'
+                    alt='Resonance Core Framework™'
                     width={280}
                     height={373}
                     style={{
@@ -394,7 +412,7 @@ export function TheResonantIdentityPage() {
               >
                 <Callout
                   variant='accent'
-                  title='Built on the Resonance Core Framework'
+                  title='Built on the Resonance Core Framework™'
                 >
                   <Typography
                     variant='p'
@@ -405,7 +423,7 @@ export function TheResonantIdentityPage() {
                     }}
                   >
                     The Resonant Identity is built on the foundations of the
-                    Resonance Core Framework — a model for identity formation
+                    Resonance Core Framework™ — a model for identity formation
                     rooted in coherence, clarity, and intentional
                     self-construction. TRI is the practical, community-based
                     expression of that framework.
@@ -442,7 +460,17 @@ export function TheResonantIdentityPage() {
                   The Facebook Group is the collaborative heart of TRI.
                   It&apos;s where members share reflections, integrate the
                   micro-lessons, and support each other through identity shifts.
-                  It&apos;s a space for resonance, not performance — a place to
+                </Typography>
+                <Typography
+                  variant='p'
+                  style={{
+                    color: theme.palette.neutralSecondary,
+                    fontSize: '1.125rem',
+                    lineHeight: theme.typography.lineHeights.relaxed,
+                    marginTop: theme.spacing.m,
+                  }}
+                >
+                  It&apos;s a space for resonance and congruence — a place to
                   practice becoming.
                 </Typography>
               </div>
@@ -470,240 +498,248 @@ export function TheResonantIdentityPage() {
 
           <Divider />
 
-          {/* ─── 6. Ecosystem Links ─── */}
-          <section className='space-y-6'>
-            <SectionHeading>Find us on social media!</SectionHeading>
+          {/* ─── 6 & 7. Ecosystem Links + Call to Action Grid ─── */}
+          <div
+            className={`grid gap-16 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-2'}`}
+            style={{
+              width: '100%',
+              maxWidth: '100%',
+              alignItems: 'center',
+            }}
+          >
+            {/* ─── 6. Call to Action ─── */}
+            <section className='space-y-6'>
+              <Callout
+                variant='accent'
+                title='Begin Your 7-Day Setup'
+                subtitle='Start building an identity that resonates.'
+                action={
+                  <FormButton
+                    variant='primary'
+                    size='large'
+                    icon='ChevronRight'
+                    iconPosition='right'
+                    href={TRI_LINKS.sevenDaySetup}
+                    target='_blank'
+                  >
+                    Begin Your 7-Day Setup
+                  </FormButton>
+                }
+              />
+            </section>
 
-            {/* Horizontally scrollable row on mobile */}
-            <div
-              style={{
-                display: 'flex',
-                gap: theme.spacing.m,
-                flexWrap: isMobile ? 'nowrap' : 'wrap',
-                overflowX: isMobile ? 'auto' : 'visible',
-                paddingBottom: isMobile ? theme.spacing.s1 : 0,
-              }}
-            >
-              {/* Instagram */}
-              <EcosystemLink
-                href={TRI_LINKS.instagram}
-                label='The Resonant Identity on Instagram (@theresonantid)'
+            {/* ─── 7. Ecosystem Links ─── */}
+            <section className='space-y-6'>
+              <SectionHeading>Find us on Social Media!</SectionHeading>
+
+              {/* Horizontally scrollable row on mobile */}
+              <div
+                style={{
+                  display: 'flex',
+                  gap: theme.spacing.m,
+                  flexWrap: isMobile ? 'nowrap' : 'wrap',
+                  overflowX: isMobile ? 'auto' : 'visible',
+                  paddingBottom: isMobile ? theme.spacing.s1 : 0,
+                }}
               >
-                <div style={iconButtonStyle}>
-                  <InstagramIcon style={{ width: '24px', height: '24px' }} />
-                </div>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '0.75rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
+                {/* Instagram */}
+                <EcosystemLink
+                  href={TRI_LINKS.instagram}
+                  label='The Resonant Identity on Instagram (@theresonantid)'
                 >
-                  Instagram
-                </Typography>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralTertiary,
-                    fontSize: '0.7rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  @theresonantid
-                </Typography>
-              </EcosystemLink>
+                  <div style={iconButtonStyle}>
+                    <InstagramIcon style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '0.75rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Instagram
+                  </Typography>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralTertiary,
+                      fontSize: '0.7rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    @theresonantid
+                  </Typography>
+                </EcosystemLink>
 
-              {/* X / Twitter */}
-              <EcosystemLink
-                href={TRI_LINKS.twitter}
-                label='The Resonant Identity on X (@theresonantid)'
-              >
-                <div style={iconButtonStyle}>
-                  <TwitterLogo style={{ width: '24px', height: '24px' }} />
-                </div>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '0.75rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
+                {/* X / Twitter */}
+                <EcosystemLink
+                  href={TRI_LINKS.twitter}
+                  label='The Resonant Identity on X (@theresonantid)'
                 >
-                  X
-                </Typography>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralTertiary,
-                    fontSize: '0.7rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  @theresonantid
-                </Typography>
-              </EcosystemLink>
+                  <div style={iconButtonStyle}>
+                    <TwitterLogo style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '0.75rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    X
+                  </Typography>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralTertiary,
+                      fontSize: '0.7rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    @theresonantid
+                  </Typography>
+                </EcosystemLink>
 
-              {/* Podcast */}
-              <EcosystemLink
-                href={TRI_LINKS.podcast}
-                label='The Resonant Identity Podcast on Spreaker'
-              >
-                <div style={iconButtonStyle}>
-                  <FluentIcon
-                    iconName='Microphone'
-                    size='medium'
-                    color={theme.palette.themePrimary}
-                  />
-                </div>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '0.75rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
+                {/* Podcast
+                <EcosystemLink
+                  href={TRI_LINKS.podcast}
+                  label='The Resonant Identity Podcast on Spreaker'
                 >
-                  Podcast
-                </Typography>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralTertiary,
-                    fontSize: '0.7rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  The Resonant Identity
-                </Typography>
-              </EcosystemLink>
+                  <div style={iconButtonStyle}>
+                    <FluentIcon
+                      iconName='Microphone'
+                      size='medium'
+                      color={theme.palette.themePrimary}
+                    />
+                  </div>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '0.75rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Podcast
+                  </Typography>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralTertiary,
+                      fontSize: '0.7rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    The Resonant Identity
+                  </Typography>
+                </EcosystemLink> */}
 
-              {/* Facebook Group */}
-              <EcosystemLink
-                href={TRI_LINKS.facebookGroup}
-                label='The Resonant Identity Community Facebook Group'
-              >
-                <div style={iconButtonStyle}>
-                  <FacebookIcon style={{ width: '24px', height: '24px' }} />
-                </div>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '0.75rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
+                {/* TikTok */}
+                <EcosystemLink
+                  href={TRI_LINKS.tiktok}
+                  label='The Resonant Identity on TikTok (@theresonantid)'
                 >
-                  FB Group
-                </Typography>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralTertiary,
-                    fontSize: '0.7rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  TRI Community
-                </Typography>
-              </EcosystemLink>
+                  <div style={iconButtonStyle}>
+                    <TiktokLogo style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '0.75rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    TikTok
+                  </Typography>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralTertiary,
+                      fontSize: '0.7rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    @theresonantid
+                  </Typography>
+                </EcosystemLink>
 
-              {/* Facebook Page */}
-              <EcosystemLink
-                href={TRI_LINKS.facebookPage}
-                label='The Resonant Identity Facebook Page'
-              >
-                <div style={iconButtonStyle}>
-                  <FacebookIcon style={{ width: '24px', height: '24px' }} />
-                </div>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '0.75rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
+                {/* Facebook Group */}
+                <EcosystemLink
+                  href={TRI_LINKS.facebookGroup}
+                  label='The Resonant Identity Community Facebook Group'
                 >
-                  FB Page
-                </Typography>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralTertiary,
-                    fontSize: '0.7rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  The Resonant Identity
-                </Typography>
-              </EcosystemLink>
+                  <div style={iconButtonStyle}>
+                    <FacebookIcon style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '0.75rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Facebook Group
+                  </Typography>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralTertiary,
+                      fontSize: '0.7rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    TRI Community
+                  </Typography>
+                </EcosystemLink>
 
-              {/* TikTok */}
-              <EcosystemLink
-                href={TRI_LINKS.tiktok}
-                label='The Resonant Identity on TikTok (@theresonantid)'
-              >
-                <div style={iconButtonStyle}>
-                  <TiktokLogo style={{ width: '24px', height: '24px' }} />
-                </div>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '0.75rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
+                {/* Facebook Page */}
+                <EcosystemLink
+                  href={TRI_LINKS.facebookPage}
+                  label='The Resonant Identity Facebook Page'
                 >
-                  TikTok
-                </Typography>
-                <Typography
-                  variant='caption'
-                  style={{
-                    color: theme.palette.neutralTertiary,
-                    fontSize: '0.7rem',
-                    textAlign: 'center',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  @theresonantid
-                </Typography>
-              </EcosystemLink>
-            </div>
-          </section>
-
-          <Divider />
-
-          {/* ─── 7. Call to Action ─── */}
-          <section>
-            <Callout
-              variant='accent'
-              title='Begin Your 7-Day Setup'
-              subtitle='Start building an identity that resonates.'
-              action={
-                <FormButton
-                  variant='primary'
-                  size='large'
-                  icon='ChevronRight'
-                  iconPosition='right'
-                  href={TRI_LINKS.sevenDaySetup}
-                  target='_blank'
-                >
-                  Begin Your 7-Day Setup
-                </FormButton>
-              }
-            />
-          </section>
+                  <div style={iconButtonStyle}>
+                    <FacebookIcon style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '0.75rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Facebook Page
+                  </Typography>
+                  <Typography
+                    variant='caption'
+                    style={{
+                      color: theme.palette.neutralTertiary,
+                      fontSize: '0.7rem',
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    The Resonant Identity
+                  </Typography>
+                </EcosystemLink>
+              </div>
+            </section>
+          </div>
 
           {/* ─── Author Attribution ─── */}
           <div

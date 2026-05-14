@@ -189,7 +189,7 @@ const PAGE_CONFIGS: Record<
   },
   '/podcasts/theresonantid': {
     image: TheResonantIdentityLogo.src,
-    imageText: 'The Resonant Identity',
+    imageText: '',
   },
 
   // Testimonials page hidden until client testimonials are available
