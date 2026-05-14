@@ -187,6 +187,14 @@ const PAGE_CONFIGS: Record<
     image: TheResonantIdentityLogo.src,
     imageText: '',
   },
+  '/podcasts/theresonantid': {
+    image: TheResonantIdentityLogo.src,
+    imageText: '',
+  },
+  '/podcasts/theresonantid/about': {
+    image: TheResonantIdentityLogo.src,
+    imageText: '',
+  },
 
   // Testimonials page hidden until client testimonials are available
   // '/testimonials': {

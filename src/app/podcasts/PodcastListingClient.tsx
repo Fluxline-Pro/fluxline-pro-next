@@ -1,8 +1,12 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { AnimatePresence } from 'framer-motion';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
+import {
+  UnifiedPageWrapper,
+  UnifiedPageWrapperProps,
+} from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
@@ -15,6 +19,80 @@ import { PodcastEpisode, PODCAST_PLATFORMS } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
 import GeneratedWithAIBadge from '@/components/GeneratedWithAIBadge';
+import { Callout } from '@/theme/components/callout/Callout';
+import SpreakerLogo from '@/assets/svgs/SpreakerLogo';
+import SpotifyLogo from '@/assets/svgs/SpotifyLogo';
+import ApplePodcastsLogo from '@/assets/svgs/ApplePodcastsLogo';
+import IHeartRadioLogo from '@/assets/svgs/IHeartRadioLogo';
+import AmazonMusicLogo from '@/assets/svgs/AmazonMusicLogo';
+import DeezerLogo from '@/assets/svgs/DeezerLogo';
+import PodchaserLogo from '@/assets/svgs/PodchaserLogo';
+import RSSLogo from '@/assets/svgs/RSSLogo';
+
+/**
+ * PodcastListingClient Props
+ */
+interface PodcastListingClientProps {
+  imageConfig?: UnifiedPageWrapperProps['imageConfig'];
+}
+
+interface PlatformIconLinkProps {
+  href: string;
+  label: string;
+  Icon: React.ComponentType<{
+    color?: string;
+    style?: React.CSSProperties;
+  }>;
+  useBrandColors: boolean;
+  brandColor?: string;
+}
+
+function PlatformIconLink({
+  href,
+  label,
+  Icon,
+  useBrandColors,
+  brandColor,
+}: PlatformIconLinkProps) {
+  const { theme } = useAppTheme();
+  const [hovered, setHovered] = React.useState(false);
+
+  const hasBrandColor = Boolean(brandColor) && useBrandColors;
+  const iconColor = hasBrandColor
+    ? '#FFFFFF'
+    : brandColor || theme.palette.themePrimary;
+
+  return (
+    <Link
+      href={href}
+      target='_blank'
+      rel='noopener noreferrer'
+      aria-label={label}
+      title={label}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '48px',
+        height: '48px',
+        borderRadius: '50%',
+        backgroundColor: hasBrandColor
+          ? brandColor
+          : theme.palette.neutralLighter,
+        transition: 'all 0.2s ease',
+        border: hasBrandColor
+          ? 'none'
+          : `2px solid ${theme.palette.neutralLight}`,
+        transform: hovered ? 'scale(1.1)' : 'scale(1)',
+        boxShadow: hovered ? theme.effects.elevation8 : 'none',
+      }}
+    >
+      <Icon color={iconColor} style={{ width: '28px', height: '28px' }} />
+    </Link>
+  );
+}
 
 /**
  * PodcastCard Component
@@ -133,14 +211,15 @@ function PodcastCard({
             color: hovered
               ? theme.palette.themePrimary
               : theme.palette.neutralPrimary,
-            fontSize: '1rem',
+            fontSize: '1.25rem',
             fontWeight: 600,
             transition: 'color 0.2s ease',
             flex: 1,
             display: '-webkit-box',
-            WebkitLineClamp: 2,
+            WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
+            marginBottom: theme.spacing.m,
           }}
         >
           {episode.episode_title}
@@ -453,7 +532,9 @@ function PodcastDetailModal({
  * PodcastListingClient Component
  * Main client component for the /podcasts page
  */
-export function PodcastListingClient() {
+export function PodcastListingClient({
+  imageConfig,
+}: PodcastListingClientProps = {}) {
   const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
   const [isMounted, setIsMounted] = React.useState(false);
@@ -471,9 +552,6 @@ export function PodcastListingClient() {
   const [sortOrder, setSortOrder] = React.useState<SortOrder>('newest');
   const [startDate, setStartDate] = React.useState<string>('');
   const [endDate, setEndDate] = React.useState<string>('');
-
-  // Mobile "Show More" state for platform buttons
-  const [showAllButtons, setShowAllButtons] = React.useState(false);
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -570,6 +648,7 @@ export function PodcastListingClient() {
     setEndDate('');
   };
 
+  // For this initial launch, we'll surface the Spreaker embed for "The Resonant Identity" show and hide the episode listing and filters until we have more episodes and search functionality built out. Once we have a larger catalog of episodes, we can prominently feature the listing with the embed as a highlighted player within the page.
   const podcastFilters = (
     <>
       {/* Sort Order */}
@@ -631,11 +710,9 @@ export function PodcastListingClient() {
   // Brand colors only in light/dark mode; accessible modes use default secondary styling
   const useBrandColors =
     theme.themeMode === 'light' || theme.themeMode === 'dark';
-  const platformStyle = (color: string): React.CSSProperties =>
-    useBrandColors ? { color, border: `2px solid ${color}` } : {};
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid' imageConfig={imageConfig}>
       <div
         style={{
           padding: isMobile ? theme.spacing.m : theme.spacing.xl,
@@ -644,12 +721,12 @@ export function PodcastListingClient() {
       >
         {/* Page Header */}
         <Hero
-          title='Podcasts'
+          title='The Resonant Identity'
           iconName='Microphone'
-          description='The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
+          description='The Resonant Identity is a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention. It is a living extension of the Resonance Core Framework where identity becomes practice and is formed through coherence.'
           backArrow={true}
-          backArrowPath='/content'
-          filters={podcastFilters}
+          backArrowPath='/podcasts'
+          // filters={podcastFilters} - will add later once more episodes are available and search is built out
         >
           <div className='flex flex-row justify-between items-center gap-2 flex-wrap'>
             <div
@@ -661,127 +738,115 @@ export function PodcastListingClient() {
                 flexWrap: 'wrap',
               }}
             >
-              {/* Platform Subscription Buttons */}
-              {/* Colors were hardcoded because these are not part of the original theme.ts but are important for brand recognition on the podcast platforms */}
-              {/* Spreaker — brand orange */}
-              <FormButton
-                variant='secondary'
-                size='medium'
-                icon='Microphone'
-                iconPosition='left'
+              {/* Platform Subscription Icons */}
+              <PlatformIconLink
                 href={PODCAST_PLATFORMS.spreaker}
-                target='_blank'
-                style={platformStyle('#EE722E')}
-              >
-                Listen on Spreaker
-              </FormButton>
-              {/* Spotify — brand green */}
-              <FormButton
-                variant='secondary'
-                size='medium'
+                label='Listen on Spreaker'
+                Icon={SpreakerLogo}
+                brandColor='#EE722E'
+                useBrandColors={useBrandColors}
+              />
+              <PlatformIconLink
                 href={PODCAST_PLATFORMS.spotify}
-                target='_blank'
-                style={platformStyle('#1DB954')}
-              >
-                Spotify
-              </FormButton>
-              {/* Apple Podcasts — brand purple */}
-              <FormButton
-                variant='secondary'
-                size='medium'
+                label='Listen on Spotify'
+                Icon={SpotifyLogo}
+                brandColor='#1DB954'
+                useBrandColors={useBrandColors}
+              />
+              <PlatformIconLink
                 href={PODCAST_PLATFORMS.applePodcasts}
-                target='_blank'
-                style={platformStyle('#B150E2')}
-              >
-                Apple Podcasts
-              </FormButton>
-              {/* On mobile, only the first 3 buttons are shown initially; the rest are revealed via Show More.
-                  CSS handles the initial visibility so there is no JS-dependent layout shift:
-                  - 'hidden sm:contents' → hidden on mobile (< 640px), visible as flex children on desktop
-                  - 'contents' → visible everywhere when showAllButtons is true */}
-              <div
-                className={showAllButtons ? 'contents' : 'hidden sm:contents'}
-              >
-                {/* iHeartRadio — brand red */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  href={PODCAST_PLATFORMS.iHeartRadio}
-                  target='_blank'
-                  style={platformStyle('#C6002B')}
-                >
-                  iHeartRadio
-                </FormButton>
-                {/* Amazon Music — brand blue */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  href={PODCAST_PLATFORMS.amazonMusic}
-                  target='_blank'
-                  style={platformStyle('#00A8E1')}
-                >
-                  Amazon Music
-                </FormButton>
-                {/* Deezer — brand violet */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  href={PODCAST_PLATFORMS.deezer}
-                  target='_blank'
-                  style={platformStyle('#A238FF')}
-                >
-                  Deezer
-                </FormButton>
-                {/* Podchaser — brand teal */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  href={PODCAST_PLATFORMS.podchaser}
-                  target='_blank'
-                  style={platformStyle('#2EBFA5')}
-                >
-                  Podchaser
-                </FormButton>
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  icon='ActivityFeed'
-                  iconPosition='left'
-                  href={rssEndpoint}
-                  target='_blank'
-                >
-                  RSS Feed
-                </FormButton>
-              </div>
-              {/* Show More / Show Less toggle — mobile only (hidden on sm+ via CSS) */}
-              <div className='sm:hidden'>
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  icon={showAllButtons ? 'ChevronUp' : 'ChevronDown'}
-                  iconPosition='right'
-                  onClick={() => setShowAllButtons((prev) => !prev)}
-                  aria-expanded={showAllButtons}
-                  aria-label={
-                    showAllButtons
-                      ? 'Show fewer podcast platforms'
-                      : 'Show more podcast platforms'
-                  }
-                >
-                  {showAllButtons ? 'Show Less' : 'Show More'}
-                </FormButton>
-              </div>
-            </div>{' '}
-            <div className='mt-4'>
-              <GeneratedWithAIBadge isHero />
+                label='Listen on Apple Podcasts'
+                Icon={ApplePodcastsLogo}
+                brandColor='#B150E2'
+                useBrandColors={useBrandColors}
+              />
+              <PlatformIconLink
+                href={PODCAST_PLATFORMS.iHeartRadio}
+                label='Listen on iHeartRadio'
+                Icon={IHeartRadioLogo}
+                brandColor='#C6002B'
+                useBrandColors={useBrandColors}
+              />
+              <PlatformIconLink
+                href={PODCAST_PLATFORMS.amazonMusic}
+                label='Listen on Amazon Music'
+                Icon={AmazonMusicLogo}
+                brandColor='#00A8E1'
+                useBrandColors={useBrandColors}
+              />
+              <PlatformIconLink
+                href={PODCAST_PLATFORMS.deezer}
+                label='Listen on Deezer'
+                Icon={DeezerLogo}
+                brandColor='#A238FF'
+                useBrandColors={useBrandColors}
+              />
+              <PlatformIconLink
+                href={PODCAST_PLATFORMS.podchaser}
+                label='Listen on Podchaser'
+                Icon={PodchaserLogo}
+                brandColor='#2EBFA5'
+                useBrandColors={useBrandColors}
+              />
+              <PlatformIconLink
+                href={rssEndpoint}
+                label='Subscribe via RSS Feed'
+                Icon={RSSLogo}
+                useBrandColors={useBrandColors}
+              />
             </div>
           </div>
+          {/* Featured Episode CTA */}
+          {!loading && !error && processedEpisodes.length > 0 && (
+            <div className='pt-8'>
+              <Callout
+                variant='accent'
+                title='Listen to the Most Recent Episode'
+                subtitle={
+                  processedEpisodes[0]?.episode_title || 'Start listening now'
+                }
+                action={
+                  <FormButton
+                    variant='secondary'
+                    size='large'
+                    icon='Play'
+                    iconPosition='left'
+                    onClick={() => setSelectedEpisode(processedEpisodes[0])}
+                    aria-label='Play most recent episode'
+                  >
+                    Listen Now
+                  </FormButton>
+                }
+              />
+            </div>
+          )}
         </Hero>
-        {/* Spreaker Embedded Player */}
-        <SpreakerEmbed />
+
+        {/* Callout to learn more about The Resonant Identity */}
+        <div className='pt-16 pb-4'>
+          <Callout
+            variant='neutral'
+            title='About The Resonant Identity Podcast'
+            subtitle='Learn more about the philosophy, community, and mission behind The Resonant Identity (TRI).'
+            action={
+              <FormButton
+                variant='primary'
+                size='large'
+                icon='ChevronRight'
+                iconPosition='right'
+                href='/podcasts/theresonantid/about'
+                aria-label='Learn about The Resonant Identity'
+              >
+                About TRI
+              </FormButton>
+            }
+          />
+        </div>
+
         {/* Loading state */}
         {loading && (
           <div
+            className='pt-8 pb-8'
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -801,6 +866,7 @@ export function PodcastListingClient() {
         {/* Error state */}
         {!loading && error && (
           <div
+            className='pt-8 pb-8'
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -827,6 +893,7 @@ export function PodcastListingClient() {
         {/* Empty state */}
         {!loading && !error && processedEpisodes.length === 0 && (
           <div
+            className='pt-8 pb-8'
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -854,20 +921,19 @@ export function PodcastListingClient() {
 
         {/* Episode Grid */}
         {!loading && !error && processedEpisodes.length > 0 && (
-          <>
+          <div className='pt-12 pb-8'>
             <Typography
-              variant='p'
+              variant='h5'
               style={{
                 color: theme.palette.neutralSecondary,
-                marginBottom: theme.spacing.l1,
+                marginBottom: theme.spacing.xl,
               }}
             >
-              Showing {processedEpisodes.length}{' '}
-              {processedEpisodes.length === 1 ? 'episode' : 'episodes'}
+              Episodes (Showing {processedEpisodes.length}
               {(startDate || endDate) &&
                 processedEpisodes.length !== episodes.length &&
-                ` · ${processedEpisodes.length} matching date range`}{' '}
-              of The Resonant Identity
+                ` · ${processedEpisodes.length} matching date range`}
+              )
             </Typography>
             <AnimatePresence mode='wait'>
               <div
@@ -888,9 +954,11 @@ export function PodcastListingClient() {
                 ))}
               </div>
             </AnimatePresence>
-          </>
+          </div>
         )}
       </div>
+      {/* Spreaker Embedded Player */}
+      {/* <SpreakerEmbed /> */}
 
       {/* Episode Detail Modal */}
       {selectedEpisode && (
