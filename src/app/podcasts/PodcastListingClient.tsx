@@ -671,7 +671,7 @@ export function PodcastListingClient({
         <Hero
           title='The Resonant Identity'
           iconName='Microphone'
-          description='A podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
+          description='The Resonant Identity is a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention. It is a living extension of the Resonance Core Framework where identity becomes practice and is formed through coherence.'
           backArrow={true}
           backArrowPath='/podcasts'
           // filters={podcastFilters} - will add later once more episodes are available and search is built out
@@ -985,7 +985,7 @@ export function PodcastListingClient({
           {!loading && !error && processedEpisodes.length > 0 && (
             <div className='pt-8'>
               <Callout
-                variant='subtle'
+                variant='accent'
                 title='Listen to the Most Recent Episode'
                 subtitle={
                   processedEpisodes[0]?.episode_title || 'Start listening now'
@@ -1008,9 +1008,9 @@ export function PodcastListingClient({
         </Hero>
 
         {/* Callout to learn more about The Resonant Identity */}
-        <div className='pt-8 pb-4'>
+        <div className='pt-16 pb-4'>
           <Callout
-            variant='accent'
+            variant='neutral'
             title='About The Resonant Identity Podcast'
             subtitle='Learn more about the philosophy, community, and mission behind The Resonant Identity (TRI).'
             action={
