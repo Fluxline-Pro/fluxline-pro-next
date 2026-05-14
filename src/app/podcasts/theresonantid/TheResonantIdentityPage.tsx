@@ -23,6 +23,7 @@ import { FacebookIcon } from '@/assets/svgs/FacebookLogo';
 import { TwitterLogo } from '@/assets/svgs/TwitterLogo';
 import { TiktokLogo } from '@/assets/svgs/TiktokLogo';
 import { PODCAST_PLATFORMS } from '../types';
+import ResonanceCoreImage from '@/assets/images/LifeCoachingResonanceCore.jpg';
 
 // External ecosystem link URLs
 const TRI_LINKS = {
@@ -178,25 +179,110 @@ export function TheResonantIdentityPage() {
             backArrow={true}
             backArrowPath='/podcasts'
           >
-            {/* TRI icon displayed beneath the hero subtitle */}
+            {/* Social icons displayed beneath the hero subtitle */}
             <div
               style={{
                 display: 'flex',
                 justifyContent: 'center',
+                gap: theme.spacing.m,
                 marginTop: theme.spacing.l,
+                flexWrap: 'wrap',
               }}
             >
-              <Image
-                src='/images/TheResonantIdentity_Icon.png'
-                alt='The Resonant Identity icon'
-                width={96}
-                height={96}
+              <Link
+                href={TRI_LINKS.instagram}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='The Resonant Identity on Instagram'
                 style={{
-                  borderRadius: theme.borderRadius.container.medium,
-                  objectFit: 'contain',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
                 }}
-                priority
-              />
+              >
+                <InstagramIcon style={{ width: '24px', height: '24px' }} />
+              </Link>
+              <Link
+                href={TRI_LINKS.twitter}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='The Resonant Identity on X'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <TwitterLogo style={{ width: '24px', height: '24px' }} />
+              </Link>
+              <Link
+                href={TRI_LINKS.tiktok}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='The Resonant Identity on TikTok'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <TiktokLogo style={{ width: '24px', height: '24px' }} />
+              </Link>
+              <Link
+                href={TRI_LINKS.facebookGroup}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='The Resonant Identity Community Facebook Group'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <FacebookIcon style={{ width: '24px', height: '24px' }} />
+              </Link>
+              <Link
+                href={TRI_LINKS.podcast}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='The Resonant Identity Podcast'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <FluentIcon
+                  iconName='Microphone'
+                  size='medium'
+                  color={theme.palette.themePrimary}
+                />
+              </Link>
             </div>
           </Hero>
 
@@ -218,21 +304,29 @@ export function TheResonantIdentityPage() {
               <SectionHeading>What The Resonant Identity Is</SectionHeading>
             </div>
 
-            <div style={{ maxWidth: '680px' }}>
-              <Typography
-                variant='p'
-                style={{
-                  color: theme.palette.neutralSecondary,
-                  fontSize: '1.125rem',
-                  lineHeight: theme.typography.lineHeights.relaxed,
-                }}
-              >
-                The Resonant Identity is a space for identity transformation,
-                micro-lessons, and applied resonance. It extends the Resonance
-                Core Framework into a living, accessible rhythm — helping you
-                build an identity that feels aligned, coherent, and grounded in
-                who you&apos;re becoming.
-              </Typography>
+            <div
+              className={`grid gap-6 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-2'}`}
+              style={{
+                width: '100%',
+                maxWidth: '100%',
+              }}
+            >
+              <div>
+                <Typography
+                  variant='p'
+                  style={{
+                    color: theme.palette.neutralSecondary,
+                    fontSize: '1.125rem',
+                    lineHeight: theme.typography.lineHeights.relaxed,
+                  }}
+                >
+                  The Resonant Identity is a space for identity transformation,
+                  micro-lessons, and applied resonance. It extends the Resonance
+                  Core Framework into a living, accessible rhythm — helping you
+                  build an identity that feels aligned, coherent, and grounded
+                  in who you&apos;re becoming.
+                </Typography>
+              </div>
             </div>
           </section>
 
@@ -265,32 +359,57 @@ export function TheResonantIdentityPage() {
             <SectionHeading>Connection to the RCF</SectionHeading>
 
             <div
+              className={`flex gap-8 ${isMobile ? 'flex-col' : 'flex-row items-center'}`}
               style={{
-                borderRadius: theme.borderRadius.container.medium,
-                backgroundColor: theme.palette.neutralLighterAlt,
-                padding: `${theme.spacing.xl} ${theme.spacing.l}`,
-                maxWidth: '680px',
+                width: '100%',
+                maxWidth: '100%',
               }}
             >
-              <Callout
-                variant='accent'
-                title='Built on the Resonance Core Framework'
+              {/* Left: Image */}
+              {!isMobile && (
+                <div style={{ flexShrink: 0, width: '280px' }}>
+                  <Image
+                    src={ResonanceCoreImage}
+                    alt='Resonance Core Framework'
+                    width={280}
+                    height={373}
+                    style={{
+                      borderRadius: theme.borderRadius.container.medium,
+                      objectFit: 'cover',
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Right: Content */}
+              <div
+                style={{
+                  flex: 1,
+                  borderRadius: theme.borderRadius.container.medium,
+                  backgroundColor: theme.palette.neutralLighterAlt,
+                  padding: `${theme.spacing.xl} ${theme.spacing.l}`,
+                }}
               >
-                <Typography
-                  variant='p'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '1.125rem',
-                    lineHeight: theme.typography.lineHeights.relaxed,
-                  }}
+                <Callout
+                  variant='accent'
+                  title='Built on the Resonance Core Framework'
                 >
-                  The Resonant Identity is built on the foundations of the
-                  Resonance Core Framework — a model for identity formation
-                  rooted in coherence, clarity, and intentional
-                  self-construction. TRI is the practical, community-based
-                  expression of that framework.
-                </Typography>
-              </Callout>
+                  <Typography
+                    variant='p'
+                    style={{
+                      color: theme.palette.neutralSecondary,
+                      fontSize: '1.125rem',
+                      lineHeight: theme.typography.lineHeights.relaxed,
+                    }}
+                  >
+                    The Resonant Identity is built on the foundations of the
+                    Resonance Core Framework — a model for identity formation
+                    rooted in coherence, clarity, and intentional
+                    self-construction. TRI is the practical, community-based
+                    expression of that framework.
+                  </Typography>
+                </Callout>
+              </div>
             </div>
           </section>
 
@@ -301,10 +420,15 @@ export function TheResonantIdentityPage() {
             <SectionHeading>Community Layer</SectionHeading>
 
             <div
-              className={`flex gap-8 ${isMobile ? 'flex-col' : 'flex-row items-center justify-between'}`}
+              className={`grid gap-6 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-2'}`}
+              style={{
+                width: '100%',
+                maxWidth: '100%',
+                alignItems: 'center',
+              }}
             >
               {/* Left: description */}
-              <div style={{ flex: 1, maxWidth: '580px' }}>
+              <div>
                 <Typography
                   variant='p'
                   style={{
@@ -313,16 +437,21 @@ export function TheResonantIdentityPage() {
                     lineHeight: theme.typography.lineHeights.relaxed,
                   }}
                 >
-                  The Facebook Group is the collaborative heart of TRI. It&apos;s
-                  where members share reflections, integrate the micro-lessons,
-                  and support each other through identity shifts. It&apos;s a
-                  space for resonance, not performance — a place to practice
-                  becoming.
+                  The Facebook Group is the collaborative heart of TRI.
+                  It&apos;s where members share reflections, integrate the
+                  micro-lessons, and support each other through identity shifts.
+                  It&apos;s a space for resonance, not performance — a place to
+                  practice becoming.
                 </Typography>
               </div>
 
               {/* Right: CTA */}
-              <div style={{ flexShrink: 0 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: isMobile ? 'flex-start' : 'flex-end',
+                }}
+              >
                 <FormButton
                   variant='primary'
                   size='large'

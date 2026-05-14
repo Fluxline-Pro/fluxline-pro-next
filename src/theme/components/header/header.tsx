@@ -61,15 +61,24 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
       '/press-release/year',
     ];
 
+    // Define custom breadcrumb labels for specific paths
+    const customLabels: Record<string, string> = {
+      '/podcasts/theresonantid': 'The Resonant Identity',
+    };
+
     let currentPath = '';
     paths.forEach((path) => {
       currentPath += `/${path}`;
       // Decode URI component and capitalize and format the path
       const decodedPath = decodeURIComponent(path);
-      const label = decodedPath
-        .split('-')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
+
+      // Use custom label if defined, otherwise generate from path
+      const label =
+        customLabels[currentPath] ||
+        decodedPath
+          .split('-')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
 
       // Check if this path should be non-clickable
       const isClickable = !nonClickablePaths.includes(currentPath);
