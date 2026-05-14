@@ -107,44 +107,44 @@ function EcosystemLink({
 }
 
 function SocialIconLink({
-  href,
-  label,
-  external = true,
-  children,
+href,
+label,
+external = true,
+children,
 }: {
-  href: string;
-  label: string;
-  external?: boolean;
-  children: React.ReactNode;
+href: string;
+label: string;
+external?: boolean;
+children: React.ReactNode;
 }) {
-  const { theme } = useAppTheme();
-  const [hovered, setHovered] = React.useState(false);
+const { theme } = useAppTheme();
+const [hovered, setHovered] = React.useState(false);
 
-  return (
-    <Link
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      aria-label={label}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '48px',
-        height: '48px',
-        borderRadius: '50%',
-        backgroundColor: hovered
-          ? theme.palette.neutralLighterAlt
-          : theme.palette.neutralLighter,
-        border: `1px solid ${hovered ? theme.palette.themePrimary : 'transparent'}`,
-        transition: 'all 0.2s ease',
-      }}
-    >
-      {children}
-    </Link>
-  );
+return (
+  <Link
+    href={href}
+    target={external ? '_blank' : undefined}
+    rel={external ? 'noopener noreferrer' : undefined}
+    aria-label={label}
+    onMouseEnter={() => setHovered(true)}
+    onMouseLeave={() => setHovered(false)}
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '48px',
+      height: '48px',
+      borderRadius: '50%',
+      backgroundColor: hovered
+        ? theme.palette.neutralLighterAlt
+        : theme.palette.neutralLighter,
+      border: `1px solid ${hovered ? theme.palette.themePrimary : 'transparent'}`,
+      transition: 'all 0.2s ease',
+    }}
+  >
+    {children}
+  </Link>
+);
 }
 
 // Shared section divider — defined outside render to satisfy react-hooks/static-components
