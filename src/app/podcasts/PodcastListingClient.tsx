@@ -471,13 +471,6 @@ function PodcastDetailModal({
 }
 
 /**
- * PodcastListingClient Props
- */
-interface PodcastListingClientProps {
-  imageConfig?: UnifiedPageWrapperProps['imageConfig'];
-}
-
-/**
  * PodcastListingClient Component
  * Main client component for the /podcasts page
  */
