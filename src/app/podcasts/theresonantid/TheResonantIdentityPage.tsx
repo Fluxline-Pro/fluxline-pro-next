@@ -131,7 +131,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
         color: theme.palette.themePrimary,
         fontSize: '2rem',
         fontWeight: theme.typography.fontWeights.bold,
-        marginBottom: theme.spacing.l,
       }}
     >
       {children}
@@ -180,12 +179,22 @@ export function TheResonantIdentityPage() {
             backArrowPath='/podcasts'
           >
             {/* Social icons displayed beneath the hero subtitle */}
+            <Typography
+              variant='h5'
+              style={{
+                color: theme.palette.neutralSecondary,
+                marginTop: theme.spacing.l,
+                textTransform: 'unset',
+              }}
+            >
+              Social Media:
+            </Typography>
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
                 gap: theme.spacing.m,
-                marginTop: theme.spacing.l,
                 flexWrap: 'wrap',
               }}
             >
@@ -298,35 +307,28 @@ export function TheResonantIdentityPage() {
             >
               <FluentIcon
                 iconName='ContactInfo'
-                size='medium'
+                size='large'
                 color={theme.palette.themePrimary}
+                style={{ marginRight: '0.5rem' }}
               />
-              <SectionHeading>What The Resonant Identity Is</SectionHeading>
+              <SectionHeading>What is The Resonant Identity?</SectionHeading>
             </div>
 
-            <div
-              className={`grid gap-6 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-2'}`}
-              style={{
-                width: '100%',
-                maxWidth: '100%',
-              }}
-            >
-              <div>
-                <Typography
-                  variant='p'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '1.125rem',
-                    lineHeight: theme.typography.lineHeights.relaxed,
-                  }}
-                >
-                  The Resonant Identity is a space for identity transformation,
-                  micro-lessons, and applied resonance. It extends the Resonance
-                  Core Framework into a living, accessible rhythm — helping you
-                  build an identity that feels aligned, coherent, and grounded
-                  in who you&apos;re becoming.
-                </Typography>
-              </div>
+            <div>
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '1.125rem',
+                  lineHeight: theme.typography.lineHeights.relaxed,
+                }}
+              >
+                The Resonant Identity is a space for identity transformation,
+                micro-lessons, and applied resonance. It extends the Resonance
+                Core Framework into a living, accessible rhythm — helping you
+                build an identity that feels aligned, coherent, and grounded in
+                who you&apos;re becoming.
+              </Typography>
             </div>
           </section>
 
@@ -420,15 +422,15 @@ export function TheResonantIdentityPage() {
             <SectionHeading>Community Layer</SectionHeading>
 
             <div
-              className={`grid gap-6 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-2'}`}
+              className={`grid gap-6 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-3'}`}
               style={{
                 width: '100%',
                 maxWidth: '100%',
                 alignItems: 'center',
               }}
             >
-              {/* Left: description */}
-              <div>
+              {/* Left: description - spans 2 columns */}
+              <div className={isMobile ? '' : 'md:col-span-2'}>
                 <Typography
                   variant='p'
                   style={{
@@ -445,11 +447,11 @@ export function TheResonantIdentityPage() {
                 </Typography>
               </div>
 
-              {/* Right: CTA */}
+              {/* Right: CTA - spans 1 column */}
               <div
                 style={{
                   display: 'flex',
-                  justifyContent: isMobile ? 'flex-start' : 'flex-end',
+                  justifyContent: 'flex-start',
                 }}
               >
                 <FormButton
@@ -470,7 +472,7 @@ export function TheResonantIdentityPage() {
 
           {/* ─── 6. Ecosystem Links ─── */}
           <section className='space-y-6'>
-            <SectionHeading>Find Us in the Ecosystem</SectionHeading>
+            <SectionHeading>Find us on social media!</SectionHeading>
 
             {/* Horizontally scrollable row on mobile */}
             <div
