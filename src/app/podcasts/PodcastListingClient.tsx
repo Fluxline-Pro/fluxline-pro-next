@@ -153,14 +153,15 @@ function PodcastCard({
             color: hovered
               ? theme.palette.themePrimary
               : theme.palette.neutralPrimary,
-            fontSize: '1rem',
+            fontSize: '1.25rem',
             fontWeight: 600,
             transition: 'color 0.2s ease',
             flex: 1,
             display: '-webkit-box',
-            WebkitLineClamp: 2,
+            WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
+            marginBottom: theme.spacing.m,
           }}
         >
           {episode.episode_title}
