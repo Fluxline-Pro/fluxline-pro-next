@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { AnimatePresence } from 'framer-motion';
 import {
   UnifiedPageWrapper,
@@ -19,6 +20,14 @@ import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
 import GeneratedWithAIBadge from '@/components/GeneratedWithAIBadge';
 import { Callout } from '@/theme/components/callout/Callout';
+import SpreakerLogo from '@/assets/svgs/SpreakerLogo';
+import SpotifyLogo from '@/assets/svgs/SpotifyLogo';
+import ApplePodcastsLogo from '@/assets/svgs/ApplePodcastsLogo';
+import IHeartRadioLogo from '@/assets/svgs/IHeartRadioLogo';
+import AmazonMusicLogo from '@/assets/svgs/AmazonMusicLogo';
+import DeezerLogo from '@/assets/svgs/DeezerLogo';
+import PodchaserLogo from '@/assets/svgs/PodchaserLogo';
+import RSSLogo from '@/assets/svgs/RSSLogo';
 
 /**
  * PodcastListingClient Props
@@ -492,9 +501,6 @@ export function PodcastListingClient({
   const [startDate, setStartDate] = React.useState<string>('');
   const [endDate, setEndDate] = React.useState<string>('');
 
-  // Mobile "Show More" state for platform buttons
-  const [showAllButtons, setShowAllButtons] = React.useState(false);
-
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -590,6 +596,7 @@ export function PodcastListingClient({
     setEndDate('');
   };
 
+  // For this initial launch, we'll surface the Spreaker embed for "The Resonant Identity" show and hide the episode listing and filters until we have more episodes and search functionality built out. Once we have a larger catalog of episodes, we can prominently feature the listing with the embed as a highlighted player within the page.
   const podcastFilters = (
     <>
       {/* Sort Order */}
@@ -651,8 +658,6 @@ export function PodcastListingClient({
   // Brand colors only in light/dark mode; accessible modes use default secondary styling
   const useBrandColors =
     theme.themeMode === 'light' || theme.themeMode === 'dark';
-  const platformStyle = (color: string): React.CSSProperties =>
-    useBrandColors ? { color, border: `2px solid ${color}` } : {};
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid' imageConfig={imageConfig}>
@@ -669,14 +674,9 @@ export function PodcastListingClient({
           description='A podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
           backArrow={true}
           backArrowPath='/podcasts'
+          // filters={podcastFilters} - will add later once more episodes are available and search is built out
         >
           <div className='flex flex-row justify-between items-center gap-2 flex-wrap'>
-            <Typography
-              variant='h5'
-              style={{ color: theme.palette.neutralPrimary }}
-            >
-              Listen to the Podcast
-            </Typography>
             <div
               style={{
                 marginTop: theme.spacing.m,
@@ -686,125 +686,333 @@ export function PodcastListingClient({
                 flexWrap: 'wrap',
               }}
             >
-              {/* Platform Subscription Buttons */}
-              {/* Colors were hardcoded because these are not part of the original theme.ts but are important for brand recognition on the podcast platforms */}
+              {/* Platform Subscription Icons */}
+              {/* Circular icon buttons with brand colors */}
               {/* Spreaker — brand orange */}
-              <FormButton
-                variant='secondary'
-                size='medium'
-                icon='Microphone'
-                iconPosition='left'
+              <Link
                 href={PODCAST_PLATFORMS.spreaker}
                 target='_blank'
-                style={platformStyle('#EE722E')}
+                rel='noopener noreferrer'
+                aria-label='Listen on Spreaker'
+                title='Listen on Spreaker'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: useBrandColors
+                    ? '#EE722E'
+                    : theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                  border: useBrandColors
+                    ? 'none'
+                    : `2px solid ${theme.palette.neutralLight}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.boxShadow = theme.effects.elevation8;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
-                Listen on Spreaker
-              </FormButton>
+                <SpreakerLogo
+                  color={useBrandColors ? '#FFFFFF' : '#EE722E'}
+                  style={{ width: '28px', height: '28px' }}
+                />
+              </Link>
+
               {/* Spotify — brand green */}
-              <FormButton
-                variant='secondary'
-                size='medium'
+              <Link
                 href={PODCAST_PLATFORMS.spotify}
                 target='_blank'
-                style={platformStyle('#1DB954')}
+                rel='noopener noreferrer'
+                aria-label='Listen on Spotify'
+                title='Listen on Spotify'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: useBrandColors
+                    ? '#1DB954'
+                    : theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                  border: useBrandColors
+                    ? 'none'
+                    : `2px solid ${theme.palette.neutralLight}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.boxShadow = theme.effects.elevation8;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
-                Spotify
-              </FormButton>
+                <SpotifyLogo
+                  color={useBrandColors ? '#FFFFFF' : '#1DB954'}
+                  style={{ width: '28px', height: '28px' }}
+                />
+              </Link>
+
               {/* Apple Podcasts — brand purple */}
-              <FormButton
-                variant='secondary'
-                size='medium'
+              <Link
                 href={PODCAST_PLATFORMS.applePodcasts}
                 target='_blank'
-                style={platformStyle('#B150E2')}
+                rel='noopener noreferrer'
+                aria-label='Listen on Apple Podcasts'
+                title='Listen on Apple Podcasts'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: useBrandColors
+                    ? '#B150E2'
+                    : theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                  border: useBrandColors
+                    ? 'none'
+                    : `2px solid ${theme.palette.neutralLight}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.boxShadow = theme.effects.elevation8;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
-                Apple Podcasts
-              </FormButton>
-              {/* On mobile, only the first 3 buttons are shown initially; the rest are revealed via Show More.
-                  CSS handles the initial visibility so there is no JS-dependent layout shift:
-                  - 'hidden sm:contents' → hidden on mobile (< 640px), visible as flex children on desktop
-                  - 'contents' → visible everywhere when showAllButtons is true */}
-              <div
-                className={showAllButtons ? 'contents' : 'hidden sm:contents'}
+                <ApplePodcastsLogo
+                  color={useBrandColors ? '#FFFFFF' : '#B150E2'}
+                  style={{ width: '28px', height: '28px' }}
+                />
+              </Link>
+
+              {/* iHeartRadio — brand red */}
+              <Link
+                href={PODCAST_PLATFORMS.iHeartRadio}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Listen on iHeartRadio'
+                title='Listen on iHeartRadio'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: useBrandColors
+                    ? '#C6002B'
+                    : theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                  border: useBrandColors
+                    ? 'none'
+                    : `2px solid ${theme.palette.neutralLight}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.boxShadow = theme.effects.elevation8;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
-                {/* iHeartRadio — brand red */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  href={PODCAST_PLATFORMS.iHeartRadio}
-                  target='_blank'
-                  style={platformStyle('#C6002B')}
-                >
-                  iHeartRadio
-                </FormButton>
-                {/* Amazon Music — brand blue */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  href={PODCAST_PLATFORMS.amazonMusic}
-                  target='_blank'
-                  style={platformStyle('#00A8E1')}
-                >
-                  Amazon Music
-                </FormButton>
-                {/* Deezer — brand violet */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  href={PODCAST_PLATFORMS.deezer}
-                  target='_blank'
-                  style={platformStyle('#A238FF')}
-                >
-                  Deezer
-                </FormButton>
-                {/* Podchaser — brand teal */}
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  href={PODCAST_PLATFORMS.podchaser}
-                  target='_blank'
-                  style={platformStyle('#2EBFA5')}
-                >
-                  Podchaser
-                </FormButton>
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  icon='ActivityFeed'
-                  iconPosition='left'
-                  href={rssEndpoint}
-                  target='_blank'
-                >
-                  RSS Feed
-                </FormButton>
-              </div>
-              {/* Show More / Show Less toggle — mobile only (hidden on sm+ via CSS) */}
-              <div className='sm:hidden'>
-                <FormButton
-                  variant='secondary'
-                  size='medium'
-                  icon={showAllButtons ? 'ChevronUp' : 'ChevronDown'}
-                  iconPosition='right'
-                  onClick={() => setShowAllButtons((prev) => !prev)}
-                  aria-expanded={showAllButtons}
-                  aria-label={
-                    showAllButtons
-                      ? 'Show fewer podcast platforms'
-                      : 'Show more podcast platforms'
-                  }
-                >
-                  {showAllButtons ? 'Show Less' : 'Show More'}
-                </FormButton>
-              </div>
+                <IHeartRadioLogo
+                  color={useBrandColors ? '#FFFFFF' : '#C6002B'}
+                  style={{ width: '28px', height: '28px' }}
+                />
+              </Link>
+
+              {/* Amazon Music — brand blue */}
+              <Link
+                href={PODCAST_PLATFORMS.amazonMusic}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Listen on Amazon Music'
+                title='Listen on Amazon Music'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: useBrandColors
+                    ? '#00A8E1'
+                    : theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                  border: useBrandColors
+                    ? 'none'
+                    : `2px solid ${theme.palette.neutralLight}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.boxShadow = theme.effects.elevation8;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <AmazonMusicLogo
+                  color={useBrandColors ? '#FFFFFF' : '#00A8E1'}
+                  style={{ width: '28px', height: '28px' }}
+                />
+              </Link>
+
+              {/* Deezer — brand violet */}
+              <Link
+                href={PODCAST_PLATFORMS.deezer}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Listen on Deezer'
+                title='Listen on Deezer'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: useBrandColors
+                    ? '#A238FF'
+                    : theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                  border: useBrandColors
+                    ? 'none'
+                    : `2px solid ${theme.palette.neutralLight}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.boxShadow = theme.effects.elevation8;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <DeezerLogo
+                  color={useBrandColors ? '#FFFFFF' : '#A238FF'}
+                  style={{ width: '28px', height: '28px' }}
+                />
+              </Link>
+
+              {/* Podchaser — brand teal */}
+              <Link
+                href={PODCAST_PLATFORMS.podchaser}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Listen on Podchaser'
+                title='Listen on Podchaser'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: useBrandColors
+                    ? '#2EBFA5'
+                    : theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                  border: useBrandColors
+                    ? 'none'
+                    : `2px solid ${theme.palette.neutralLight}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.boxShadow = theme.effects.elevation8;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <PodchaserLogo
+                  color={useBrandColors ? '#FFFFFF' : '#2EBFA5'}
+                  style={{ width: '28px', height: '28px' }}
+                />
+              </Link>
+
+              {/* RSS Feed */}
+              <Link
+                href={rssEndpoint}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Subscribe via RSS Feed'
+                title='Subscribe via RSS Feed'
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.neutralLighter,
+                  transition: 'all 0.2s ease',
+                  border: `2px solid ${theme.palette.neutralLight}`,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.boxShadow = theme.effects.elevation8;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <RSSLogo
+                  color={theme.palette.themePrimary}
+                  style={{ width: '28px', height: '28px' }}
+                />
+              </Link>
             </div>
           </div>
+          {/* Featured Episode CTA */}
+          {!loading && !error && processedEpisodes.length > 0 && (
+            <div className='pt-8'>
+              <Callout
+                variant='subtle'
+                title='Listen to the Most Recent Episode'
+                subtitle={
+                  processedEpisodes[0]?.episode_title || 'Start listening now'
+                }
+                action={
+                  <FormButton
+                    variant='secondary'
+                    size='large'
+                    icon='Play'
+                    iconPosition='left'
+                    onClick={() => setSelectedEpisode(processedEpisodes[0])}
+                    aria-label='Play most recent episode'
+                  >
+                    Listen Now
+                  </FormButton>
+                }
+              />
+            </div>
+          )}
         </Hero>
 
-        <div className='pt-12 pb-8'>
+        {/* Callout to learn more about The Resonant Identity */}
+        <div className='pt-8 pb-4'>
           <Callout
             variant='accent'
-            title='About The Resonant Identity'
-            subtitle='Learn more about the philosophy, community, and mission behind TRI.'
+            title='About The Resonant Identity Podcast'
+            subtitle='Learn more about the philosophy, community, and mission behind The Resonant Identity (TRI).'
             action={
               <FormButton
                 variant='primary'
@@ -906,12 +1114,11 @@ export function PodcastListingClient({
                 marginBottom: theme.spacing.xl,
               }}
             >
-              Showing {processedEpisodes.length}{' '}
-              {processedEpisodes.length === 1 ? 'episode' : 'episodes'}
+              Episodes (Showing {processedEpisodes.length}
               {(startDate || endDate) &&
                 processedEpisodes.length !== episodes.length &&
-                ` · ${processedEpisodes.length} matching date range`}{' '}
-              of The Resonant Identity
+                ` · ${processedEpisodes.length} matching date range`}
+              )
             </Typography>
             <AnimatePresence mode='wait'>
               <div

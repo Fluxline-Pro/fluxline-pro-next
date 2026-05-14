@@ -295,6 +295,27 @@ export function TheResonantIdentityPage() {
             </div>
           </Hero>
 
+          {/* Featured Podcast CTA */}
+          <div className='pb-4'>
+            <Callout
+              variant='subtle'
+              title='Listen to the Podcast'
+              subtitle='Explore episodes blending identity architecture, self-improvement, and practical frameworks.'
+              action={
+                <FormButton
+                  variant='secondary'
+                  size='large'
+                  icon='Microphone'
+                  iconPosition='left'
+                  href='/podcasts/theresonantid'
+                  aria-label='Listen to The Resonant Identity Podcast'
+                >
+                  Browse Episodes
+                </FormButton>
+              }
+            />
+          </div>
+
           {/* ─── 2. What TRI Is ─── */}
           <section className='space-y-6'>
             <div
