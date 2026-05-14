@@ -9,6 +9,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
@@ -105,6 +106,47 @@ function EcosystemLink({
   );
 }
 
+function SocialIconLink({
+  href,
+  label,
+  external = true,
+  children,
+}: {
+  href: string;
+  label: string;
+  external?: boolean;
+  children: React.ReactNode;
+}) {
+  const { theme } = useAppTheme();
+  const [hovered, setHovered] = React.useState(false);
+
+  return (
+    <Link
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      aria-label={label}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '48px',
+        height: '48px',
+        borderRadius: '50%',
+        backgroundColor: hovered
+          ? theme.palette.neutralLighterAlt
+          : theme.palette.neutralLighter,
+        border: `1px solid ${hovered ? theme.palette.themePrimary : 'transparent'}`,
+        transition: 'all 0.2s ease',
+      }}
+    >
+      {children}
+    </Link>
+  );
+}
+
 // Shared section divider — defined outside render to satisfy react-hooks/static-components
 function Divider() {
   const { theme } = useAppTheme();
@@ -143,6 +185,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
  */
 export function TheResonantIdentityPage() {
   const { theme } = useAppTheme();
+  const router = useRouter();
   const isMobileHook = useIsMobile();
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobile = isMounted ? isMobileHook : false;
@@ -197,100 +240,41 @@ export function TheResonantIdentityPage() {
                 flexWrap: 'wrap',
               }}
             >
-              <Link
+              <SocialIconLink
                 href={TRI_LINKS.instagram}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='The Resonant Identity on Instagram'
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  backgroundColor: theme.palette.neutralLighter,
-                  transition: 'all 0.2s ease',
-                }}
+                label='The Resonant Identity on Instagram'
               >
                 <InstagramIcon style={{ width: '24px', height: '24px' }} />
-              </Link>
-              <Link
+              </SocialIconLink>
+              <SocialIconLink
                 href={TRI_LINKS.twitter}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='The Resonant Identity on X'
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  backgroundColor: theme.palette.neutralLighter,
-                  transition: 'all 0.2s ease',
-                }}
+                label='The Resonant Identity on X'
               >
                 <TwitterLogo style={{ width: '24px', height: '24px' }} />
-              </Link>
-              <Link
+              </SocialIconLink>
+              <SocialIconLink
                 href={TRI_LINKS.tiktok}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='The Resonant Identity on TikTok'
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  backgroundColor: theme.palette.neutralLighter,
-                  transition: 'all 0.2s ease',
-                }}
+                label='The Resonant Identity on TikTok'
               >
                 <TiktokLogo style={{ width: '24px', height: '24px' }} />
-              </Link>
-              <Link
+              </SocialIconLink>
+              <SocialIconLink
                 href={TRI_LINKS.facebookGroup}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='The Resonant Identity Community Facebook Group'
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  backgroundColor: theme.palette.neutralLighter,
-                  transition: 'all 0.2s ease',
-                }}
+                label='The Resonant Identity Community Facebook Group'
               >
                 <FacebookIcon style={{ width: '24px', height: '24px' }} />
-              </Link>
-              <Link
+              </SocialIconLink>
+              <SocialIconLink
                 href={TRI_LINKS.podcast}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='The Resonant Identity Podcast'
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  backgroundColor: theme.palette.neutralLighter,
-                  transition: 'all 0.2s ease',
-                }}
+                label='The Resonant Identity Podcast'
+                external={false}
               >
                 <FluentIcon
                   iconName='Microphone'
                   size='medium'
                   color={theme.palette.themePrimary}
                 />
-              </Link>
+              </SocialIconLink>
             </div>
           </Hero>
 
@@ -306,7 +290,7 @@ export function TheResonantIdentityPage() {
                   size='large'
                   icon='Microphone'
                   iconPosition='left'
-                  href='/podcasts/theresonantid'
+                  onClick={() => router.push(TRI_LINKS.podcast)}
                   aria-label='Listen to The Resonant Identity Podcast'
                 >
                   Browse Episodes
