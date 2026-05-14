@@ -2,7 +2,10 @@
 
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
+import {
+  UnifiedPageWrapper,
+  UnifiedPageWrapperProps,
+} from '@/components/UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
@@ -15,6 +18,14 @@ import { PodcastEpisode, PODCAST_PLATFORMS } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
 import GeneratedWithAIBadge from '@/components/GeneratedWithAIBadge';
+import { Callout } from '@/theme/components/callout/Callout';
+
+/**
+ * PodcastListingClient Props
+ */
+interface PodcastListingClientProps {
+  imageConfig?: UnifiedPageWrapperProps['imageConfig'];
+}
 
 /**
  * PodcastCard Component
@@ -450,10 +461,19 @@ function PodcastDetailModal({
 }
 
 /**
+ * PodcastListingClient Props
+ */
+interface PodcastListingClientProps {
+  imageConfig?: UnifiedPageWrapperProps['imageConfig'];
+}
+
+/**
  * PodcastListingClient Component
  * Main client component for the /podcasts page
  */
-export function PodcastListingClient() {
+export function PodcastListingClient({
+  imageConfig,
+}: PodcastListingClientProps = {}) {
   const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
   const [isMounted, setIsMounted] = React.useState(false);
@@ -635,7 +655,7 @@ export function PodcastListingClient() {
     useBrandColors ? { color, border: `2px solid ${color}` } : {};
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <UnifiedPageWrapper layoutType='responsive-grid' imageConfig={imageConfig}>
       <div
         style={{
           padding: isMobile ? theme.spacing.m : theme.spacing.xl,
@@ -644,14 +664,19 @@ export function PodcastListingClient() {
       >
         {/* Page Header */}
         <Hero
-          title='Podcasts'
+          title='The Resonant Identity'
           iconName='Microphone'
-          description='The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
+          description='A podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
           backArrow={true}
-          backArrowPath='/content'
-          filters={podcastFilters}
+          backArrowPath='/podcasts'
         >
           <div className='flex flex-row justify-between items-center gap-2 flex-wrap'>
+            <Typography
+              variant='h5'
+              style={{ color: theme.palette.neutralPrimary }}
+            >
+              Listen to the Podcast
+            </Typography>
             <div
               style={{
                 marginTop: theme.spacing.m,
@@ -772,26 +797,33 @@ export function PodcastListingClient() {
                 </FormButton>
               </div>
             </div>
-            <div className='mt-4 flex flex-row items-center gap-3 flex-wrap'>
+          </div>
+        </Hero>
+
+        <div className='pt-12 pb-8'>
+          <Callout
+            variant='accent'
+            title='About The Resonant Identity'
+            subtitle='Learn more about the philosophy, community, and mission behind TRI.'
+            action={
               <FormButton
-                variant='secondary'
-                size='medium'
-                icon='Info'
-                iconPosition='left'
-                href='/podcasts/theresonantid'
-                aria-label='About The Resonant Identity'
+                variant='primary'
+                size='large'
+                icon='ChevronRight'
+                iconPosition='right'
+                href='/podcasts/theresonantid/about'
+                aria-label='Learn about The Resonant Identity'
               >
                 About TRI
               </FormButton>
-              <GeneratedWithAIBadge isHero />
-            </div>
-          </div>
-        </Hero>
-        {/* Spreaker Embedded Player */}
-        <SpreakerEmbed />
+            }
+          />
+        </div>
+
         {/* Loading state */}
         {loading && (
           <div
+            className='pt-8 pb-8'
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -811,6 +843,7 @@ export function PodcastListingClient() {
         {/* Error state */}
         {!loading && error && (
           <div
+            className='pt-8 pb-8'
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -837,6 +870,7 @@ export function PodcastListingClient() {
         {/* Empty state */}
         {!loading && !error && processedEpisodes.length === 0 && (
           <div
+            className='pt-8 pb-8'
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -864,12 +898,12 @@ export function PodcastListingClient() {
 
         {/* Episode Grid */}
         {!loading && !error && processedEpisodes.length > 0 && (
-          <>
+          <div className='pt-12 pb-8'>
             <Typography
-              variant='p'
+              variant='h5'
               style={{
                 color: theme.palette.neutralSecondary,
-                marginBottom: theme.spacing.l1,
+                marginBottom: theme.spacing.xl,
               }}
             >
               Showing {processedEpisodes.length}{' '}
@@ -898,9 +932,11 @@ export function PodcastListingClient() {
                 ))}
               </div>
             </AnimatePresence>
-          </>
+          </div>
         )}
       </div>
+      {/* Spreaker Embedded Player */}
+      {/* <SpreakerEmbed /> */}
 
       {/* Episode Detail Modal */}
       {selectedEpisode && (

@@ -176,7 +176,7 @@ export function TheResonantIdentityPage() {
             title='The Resonant Identity'
             subtitle='A living extension of the Resonance Core Framework where identity becomes practice and is formed through coherence.'
             backArrow={true}
-            backArrowPath='/podcasts'
+            backArrowPath='/podcasts/theresonantid'
           >
             {/* Social icons displayed beneath the hero subtitle */}
             <Typography

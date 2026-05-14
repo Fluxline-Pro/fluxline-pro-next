@@ -63,7 +63,9 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
 
     // Define custom breadcrumb labels for specific paths
     const customLabels: Record<string, string> = {
+      '/podcasts': 'Podcasts',
       '/podcasts/theresonantid': 'The Resonant Identity',
+      '/podcasts/theresonantid/about': 'About',
     };
 
     let currentPath = '';

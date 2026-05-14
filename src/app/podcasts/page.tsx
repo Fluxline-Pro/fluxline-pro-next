@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
-import { PodcastListingClient } from './PodcastListingClient';
+import { PodcastsDirectoryClient } from './PodcastsDirectoryClient';
 
 export const metadata: Metadata = {
   title: 'Podcasts',
   description:
-    'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
+    'Long-form audio exploring identity, technology, and transformation. Discover The Resonant Identity podcast and more.',
   keywords:
-    'podcast, audio, The Resonant Identity, Fluxline, transformation, strategy, identity, authenticity, mental health, self-help, self-improvement, personal development, Apple Podcasts, Spotify, Amazon Music, Deezer, Podchaser, Spreaker',
+    'podcast, audio, The Resonant Identity, Fluxline, transformation, strategy, identity, authenticity, mental health, self-help, self-improvement, personal development',
   openGraph: {
     title: 'Podcasts - Fluxline',
     description:
-      'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
+      'Long-form audio exploring identity, technology, and transformation. Discover The Resonant Identity podcast and more.',
     url: 'https://www.fluxline.pro/podcasts',
     siteName: 'Fluxline',
     type: 'website',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: '/images/TheResonantIdentity_Logo.png',
         width: 2048,
         height: 2048,
-        alt: 'The Resonant Identity Podcast',
+        alt: 'Podcasts Directory',
       },
     ],
   },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Podcasts - Fluxline',
     description:
-      'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
+      'Long-form audio exploring identity, technology, and transformation.',
     images: ['/images/TheResonantIdentity_Logo.png'],
   },
   alternates: {
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * Podcasts Page - Server Component
- * Renders the podcast listing client component which fetches episodes at runtime
+ * Podcasts Directory Page - Server Component
+ * Shows all available podcasts as cards
  */
 export default function PodcastsPage() {
-  return <PodcastListingClient />;
+  return <PodcastsDirectoryClient />;
 }

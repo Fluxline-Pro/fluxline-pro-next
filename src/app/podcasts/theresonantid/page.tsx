@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
-import { TheResonantIdentityPage } from './TheResonantIdentityPage';
+import { PodcastListingClient } from '../PodcastListingClient';
+import { PodcastPageWrapper } from '../PodcastPageWrapper';
 
 export const metadata: Metadata = {
-  title: 'About The Resonant Identity',
+  title: 'The Resonant Identity Podcast',
   description:
-    'The Resonant Identity is a space for identity transformation, micro-lessons, and applied resonance — extending the Resonance Core Framework into a living, accessible practice.',
+    'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
   keywords:
-    'The Resonant Identity, TRI, identity transformation, resonance, micro-lessons, 7-day setup, identity practice, Resonance Core Framework, community, Facebook Group, Terence Waters, Fluxline',
+    'podcast, audio, The Resonant Identity, Fluxline, transformation, strategy, identity, authenticity, mental health, self-help, self-improvement, personal development, Apple Podcasts, Spotify, Amazon Music, Deezer, Podchaser, Spreaker',
   openGraph: {
-    title: 'About The Resonant Identity — Fluxline',
+    title: 'The Resonant Identity Podcast — Fluxline',
     description:
-      'A living extension of the Resonance Core Framework — where identity becomes practice. Explore micro-lessons, the 7-day setup, and the TRI community.',
+      'A podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
     url: 'https://www.fluxline.pro/podcasts/theresonantid',
     siteName: 'Fluxline',
     type: 'website',
@@ -19,15 +20,15 @@ export const metadata: Metadata = {
         url: '/images/TheResonantIdentity_Logo.png',
         width: 2048,
         height: 2048,
-        alt: 'The Resonant Identity',
+        alt: 'The Resonant Identity Podcast',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About The Resonant Identity — Fluxline',
+    title: 'The Resonant Identity Podcast — Fluxline',
     description:
-      'A living extension of the Resonance Core Framework — where identity becomes practice.',
+      'A podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
     images: ['/images/TheResonantIdentity_Logo.png'],
   },
   alternates: {
@@ -40,9 +41,14 @@ export const metadata: Metadata = {
 };
 
 /**
- * The Resonant Identity — About Page
+ * The Resonant Identity Podcast Home Page
  * URL: /podcasts/theresonantid
+ * Shows episodes, player, and platform links
  */
-export default function TheResonantIdentityAboutPage() {
-  return <TheResonantIdentityPage />;
+export default function TheResonantIdentityPodcastPage() {
+  return (
+    <PodcastPageWrapper>
+      <PodcastListingClient />
+    </PodcastPageWrapper>
+  );
 }
