@@ -61,7 +61,10 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
       '/press-release/year',
     ];
 
-    // Define custom breadcrumb labels for specific paths
+    // Define custom breadcrumb labels for specific paths.
+    // Keep TRI podcast routes in sync here as new subroutes are added under
+    // /podcasts/theresonantid/*, otherwise deeper routes will fall back to
+    // slug formatting in the breadcrumb trail.
     const customLabels: Record<string, string> = {
       '/podcasts': 'Podcasts',
       '/podcasts/theresonantid': 'The Resonant Identity',
