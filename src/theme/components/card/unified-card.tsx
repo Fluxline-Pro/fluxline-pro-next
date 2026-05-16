@@ -362,6 +362,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     WebkitLineClamp: 3,
                     lineClamp: 3,
                     display: '-webkit-box',
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
                   }}
                 >
                   {title}
