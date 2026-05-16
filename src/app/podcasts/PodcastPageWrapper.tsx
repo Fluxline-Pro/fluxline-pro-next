@@ -6,9 +6,10 @@ import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.pn
 import { UnifiedPageWrapperProps } from '@/components/UnifiedPageWrapper';
 
 interface PodcastPageWrapperProps {
-  children: React.ReactElement<{
-    imageConfig?: UnifiedPageWrapperProps['imageConfig'];
-  }>;
+  // Allow any additional props so cloneElement only injects imageConfig
+  // while preserving other props (e.g. triPosts) set by the parent page.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  children: React.ReactElement<Record<string, any>>;
 }
 
 /**

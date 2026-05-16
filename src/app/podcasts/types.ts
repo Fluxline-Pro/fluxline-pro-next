@@ -3,6 +3,19 @@
  * Matches Azure Table Storage fields for podcast metadata
  */
 
+/**
+ * Serializable blog post snapshot used for TRI content sections.
+ * Dates are ISO strings so the data can be safely passed from Server → Client components.
+ */
+export interface TRIPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  imageUrl?: string;
+  tags: string[];
+  publishedDate: string; // ISO date string
+}
+
 export interface PodcastEpisode {
   id: string;
   slug: string;

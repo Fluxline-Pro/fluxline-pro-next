@@ -15,7 +15,7 @@ import { FluentIcon } from '@/theme/components/fluent-icon';
 import { FormButton, FormDateInput, FormSelect } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
 import { getApiEndpoint } from '@/lib/getApiUrl';
-import { PodcastEpisode, PODCAST_PLATFORMS } from './types';
+import { PodcastEpisode, PODCAST_PLATFORMS, TRIPost } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
 import GeneratedWithAIBadge from '@/components/GeneratedWithAIBadge';
@@ -34,6 +34,11 @@ import RSSLogo from '@/assets/svgs/RSSLogo';
  */
 interface PodcastListingClientProps {
   imageConfig?: UnifiedPageWrapperProps['imageConfig'];
+  /**
+   * Blog posts with category "Resonant Identity" — loaded server-side and
+   * serialised so they can be passed safely to this client component.
+   */
+  triPosts?: TRIPost[];
 }
 
 interface PlatformIconLinkProps {
@@ -534,6 +539,7 @@ function PodcastDetailModal({
  */
 export function PodcastListingClient({
   imageConfig,
+  triPosts = [],
 }: PodcastListingClientProps = {}) {
   const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
@@ -647,6 +653,15 @@ export function PodcastListingClient({
     setStartDate('');
     setEndDate('');
   };
+
+  // Derive TRI content sections from the pre-loaded Resonant Identity posts
+  const triCompanionArticles = triPosts.filter((p) =>
+    p.tags.includes('Episode Companion')
+  );
+  const triChallenges = triPosts.filter((p) =>
+    p.tags.includes('Identity Challenge')
+  );
+  const triDemos = triPosts.filter((p) => p.tags.includes('Interactive Demo'));
 
   // For this initial launch, we'll surface the Spreaker embed for "The Resonant Identity" show and hide the episode listing and filters until we have more episodes and search functionality built out. Once we have a larger catalog of episodes, we can prominently feature the listing with the embed as a highlighted player within the page.
   const podcastFilters = (
@@ -957,6 +972,65 @@ export function PodcastListingClient({
           </div>
         )}
       </div>
+
+      {/* ─── TRI Content Sections ─── */}
+      {/* These sections auto-populate from blog posts categorised as "Resonant Identity" */}
+      {(triCompanionArticles.length > 0 ||
+        triChallenges.length > 0 ||
+        triDemos.length > 0) && (
+        <div
+          style={{
+            padding: isMobile ? theme.spacing.m : theme.spacing.xl,
+            width: '100%',
+            borderTop: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+          }}
+        >
+          <div className='space-y-12'>
+            {/* ─── A. Companion Articles ─── */}
+            {triCompanionArticles.length > 0 && (
+              <TRISection
+                iconName='TextDocumentShared'
+                title='Companion Articles'
+                description='Deep-dive articles paired with TRI episodes — designed to help you apply the frameworks from each episode to your own identity work.'
+                posts={triCompanionArticles.slice(0, 3)}
+                viewAllLabel='View All Articles'
+                viewAllHref='/podcasts/theresonantid/library'
+                isMobile={isMobile}
+                theme={theme}
+              />
+            )}
+
+            {/* ─── B. 7-Day Challenges ─── */}
+            {triChallenges.length > 0 && (
+              <TRISection
+                iconName='CalendarDay'
+                title='7-Day Challenges'
+                description='Structured 7-day challenges that help you build your personal resonance baseline through daily identity-focused exercises.'
+                posts={triChallenges.slice(0, 3)}
+                viewAllLabel='View All Challenges'
+                viewAllHref='/podcasts/theresonantid/library'
+                isMobile={isMobile}
+                theme={theme}
+              />
+            )}
+
+            {/* ─── C. Interactive Demos ─── */}
+            {triDemos.length > 0 && (
+              <TRISection
+                iconName='LightningBolt'
+                title='Interactive Demos'
+                description='Hands-on tools and self-assessments that let you directly experience the Resonance Core Framework concepts in action.'
+                posts={triDemos.slice(0, 1)}
+                viewAllLabel='Explore All Demos'
+                viewAllHref='/podcasts/theresonantid/library'
+                isMobile={isMobile}
+                theme={theme}
+              />
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Spreaker Embedded Player */}
       {/* <SpreakerEmbed /> */}
 
@@ -968,5 +1042,234 @@ export function PodcastListingClient({
         />
       )}
     </UnifiedPageWrapper>
+  );
+}
+
+// ─── TRI Section Helper ───────────────────────────────────────────────────────
+
+interface TRISectionProps {
+  iconName: string;
+  title: string;
+  description: string;
+  posts: TRIPost[];
+  viewAllLabel: string;
+  viewAllHref: string;
+  isMobile: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  theme: any;
+}
+
+/**
+ * TRISection
+ * Renders a lightweight content section for one TRI content type
+ * (Companion Articles, 7-Day Challenges, or Interactive Demos).
+ */
+function TRISection({
+  iconName,
+  title,
+  description,
+  posts,
+  viewAllLabel,
+  viewAllHref,
+  isMobile,
+  theme,
+}: TRISectionProps) {
+  const gridColumns = isMobile ? 1 : Math.min(posts.length, 3);
+
+  return (
+    <section className='space-y-6'>
+      {/* Section header */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: theme.spacing.s1,
+        }}
+      >
+        <FluentIcon
+          iconName={iconName}
+          size='medium'
+          color={theme.palette.themeSecondary}
+        />
+        <Typography
+          variant='h3'
+          style={{
+            color: theme.palette.neutralPrimary,
+            fontSize: '1.25rem',
+            fontWeight: theme.typography.fontWeights.semiBold,
+            textTransform: 'unset',
+          }}
+        >
+          {title}
+        </Typography>
+      </div>
+
+      <Typography
+        variant='p'
+        style={{
+          color: theme.palette.neutralSecondary,
+          fontSize: '0.9375rem',
+          lineHeight: 1.6,
+          marginTop: 0,
+        }}
+      >
+        {description}
+      </Typography>
+
+      {/* Post cards */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
+          gap: theme.spacing.l1,
+        }}
+      >
+        {posts.map((post) => (
+          <TRIPostCard key={post.slug} post={post} theme={theme} />
+        ))}
+      </div>
+
+      {/* View All button */}
+      <div>
+        <FormButton
+          variant='secondary'
+          size='small'
+          icon='ChevronRight'
+          iconPosition='right'
+          href={viewAllHref}
+          aria-label={viewAllLabel}
+        >
+          {viewAllLabel}
+        </FormButton>
+      </div>
+    </section>
+  );
+}
+
+// ─── TRI Post Card ────────────────────────────────────────────────────────────
+
+interface TRIPostCardProps {
+  post: TRIPost;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  theme: any;
+}
+
+/**
+ * TRIPostCard
+ * A lightweight card linking to a Resonant Identity blog post.
+ */
+function TRIPostCard({ post, theme }: TRIPostCardProps) {
+  const [hovered, setHovered] = React.useState(false);
+  // Encode the slug to prevent any path-injection issues
+  const safeHref = `/blog/${encodeURIComponent(post.slug)}`;
+
+  return (
+    <Link
+      href={safeHref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing.s2,
+        padding: theme.spacing.m,
+        borderRadius: theme.borderRadius.container.medium,
+        border: `1px solid ${hovered ? theme.palette.themeSecondary : theme.palette.neutralQuaternaryAlt}`,
+        backgroundColor: hovered
+          ? theme.palette.neutralLighterAlt
+          : 'transparent',
+        transition: 'all 0.2s ease',
+        textDecoration: 'none',
+        transform: hovered ? 'translateY(-2px)' : 'none',
+        boxShadow: hovered ? theme.effects.elevation4 : 'none',
+      }}
+      aria-label={`Read: ${post.title}`}
+    >
+      {/* Tag chips */}
+      <div
+        style={{ display: 'flex', gap: theme.spacing.s2, flexWrap: 'wrap' }}
+      >
+        {post.tags.slice(0, 2).map((tag) => (
+          <span
+            key={tag}
+            style={{
+              fontSize: '0.7rem',
+              fontWeight: 600,
+              color: theme.palette.themeSecondary,
+              backgroundColor: theme.palette.neutralLighter,
+              padding: `2px ${theme.spacing.s2}`,
+              borderRadius: '999px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.4px',
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      {/* Title */}
+      <Typography
+        variant='h4'
+        style={{
+          color: hovered ? theme.palette.themePrimary : theme.palette.neutralPrimary,
+          fontSize: '1rem',
+          fontWeight: theme.typography.fontWeights.semiBold,
+          transition: 'color 0.2s ease',
+          textTransform: 'unset',
+          margin: 0,
+        }}
+      >
+        {post.title}
+      </Typography>
+
+      {/* Excerpt */}
+      <Typography
+        variant='p'
+        style={{
+          color: theme.palette.neutralSecondary,
+          fontSize: '0.875rem',
+          lineHeight: 1.5,
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          margin: 0,
+        }}
+      >
+        {post.excerpt}
+      </Typography>
+
+      {/* Read more indicator */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px',
+          marginTop: 'auto',
+          paddingTop: theme.spacing.s2,
+        }}
+      >
+        <Typography
+          variant='caption'
+          style={{
+            color: theme.palette.themeSecondary,
+            fontSize: '0.8rem',
+            fontWeight: 600,
+          }}
+        >
+          Read article
+        </Typography>
+        <FluentIcon
+          iconName='ChevronRight'
+          size='small'
+          color={theme.palette.themeSecondary}
+          style={{
+            transition: 'transform 0.2s ease',
+            transform: hovered ? 'translateX(4px)' : 'none',
+          }}
+        />
+      </div>
+    </Link>
   );
 }
