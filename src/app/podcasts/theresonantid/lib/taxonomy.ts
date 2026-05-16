@@ -29,6 +29,7 @@ export const TAG_GROUPS = {
    * Topics are dynamic and extracted from actual blog post tags.
    * Any tag that isn't a content type becomes a topic.
    * Use extractTopics() to derive topics from a post's tags.
+   * This is left empty here because it's derived dynamically from blog post metadata at runtime.
    */
   topics: [],
 };
