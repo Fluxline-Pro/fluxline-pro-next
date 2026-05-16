@@ -13,7 +13,7 @@ import {
   TAG_GROUPS,
   extractTopics,
   normalizeTag,
-  getContentType,
+  getContentTypeTag,
 } from '../lib/taxonomy';
 
 interface TRILibraryClientProps {
@@ -99,13 +99,8 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
 
   const cards = React.useMemo(() => {
     return filteredPosts.map((post) => {
-      // Determine content type from taxonomy
-      const contentType = getContentType(post.tags);
-      const contentTypeLabels = {
-        article: 'Article',
-        challenge: 'Challenge',
-        demo: 'Interactive Demo',
-      };
+      // Get the actual content type tag from the post
+      const contentTypeTag = getContentTypeTag(post.tags);
 
       return {
         id: post.slug,
@@ -113,7 +108,7 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
         description: post.excerpt,
         imageUrl: post.imageUrl,
         imageAlt: post.imageAlt || post.title,
-        imageText: contentTypeLabels[contentType], // Content type badge
+        imageText: contentTypeTag || 'Article', // Use actual tag or default
         date: post.publishedDate,
       };
     });

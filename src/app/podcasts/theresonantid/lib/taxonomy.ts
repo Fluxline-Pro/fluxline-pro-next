@@ -64,20 +64,32 @@ export function extractTopics(tags: string[]): string[] {
 }
 
 /**
- * Detect content type based on tags
- * Maps blog post tags to content delivery format
+ * Get the content type tag from a post's tags
+ * Returns the first content type tag found, or null if none exists
  *
  * @param tags - Array of tags from blog post frontmatter
- * @returns Content type: "article" | "challenge" | "demo"
+ * @returns The original-cased content type tag, or null if no content type found
+ *
+ * @example
+ * getContentTypeTag(['Episode Companion', 'Truth', 'Shadow Work'])
+ * // Returns: 'Episode Companion'
+ *
+ * getContentTypeTag(['Deep Dive', 'Foundations', 'Identity'])
+ * // Returns: 'Deep Dive' (first match)
+ *
+ * getContentTypeTag(['Personal Growth', 'Shadow Work'])
+ * // Returns: null (no content type tag)
  */
-export function getContentType(
-  tags: string[]
-): 'article' | 'challenge' | 'demo' {
+export function getContentTypeTag(tags: string[]): string | null {
   const normalized = tags.map(normalizeTag);
+  const contentTypeTags = TAG_GROUPS.contentTypes.map(normalizeTag);
 
-  if (normalized.includes('episode companion')) return 'article';
-  if (normalized.includes('identity challenge')) return 'challenge';
-  if (normalized.includes('interactive demo')) return 'demo';
+  // Find the first content type tag and return it with original casing
+  for (let i = 0; i < tags.length; i++) {
+    if (contentTypeTags.includes(normalized[i])) {
+      return tags[i];
+    }
+  }
 
-  return 'article'; // default fallback
+  return null;
 }
