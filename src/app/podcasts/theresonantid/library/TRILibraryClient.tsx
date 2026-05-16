@@ -269,6 +269,7 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
       }}
       customSection={tagChips}
       onCardClick={(slug) => router.push(`/blog/${slug}`)}
+      availableViewTypes={['small-tile', 'large-tile']}
     />
   );
 }

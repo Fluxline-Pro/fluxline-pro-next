@@ -41,6 +41,15 @@ export default function ContentPageClient() {
 
   const contentCategories: ContentCategory[] = [
     {
+      title: 'Podcasts',
+      description:
+        'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
+      path: '/podcasts',
+      iconName: 'Microphone',
+      color: theme.palette.yellowDark,
+      isHighlighted: true,
+    },
+    {
       title: 'Blog',
       description:
         'Insights, best practices, and thoughts on technology, design, and business transformation.',
@@ -55,15 +64,6 @@ export default function ContentPageClient() {
       path: '/portfolio',
       iconName: 'FolderQuery',
       color: theme.palette.tealLight,
-    },
-    {
-      title: 'Podcasts',
-      description:
-        'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
-      path: '/podcasts',
-      iconName: 'Microphone',
-      color: theme.palette.yellowDark,
-      isHighlighted: true,
     },
     {
       title: 'GitHub',

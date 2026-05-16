@@ -77,6 +77,9 @@ export interface ContentListingPageProps {
   // Filters
   filters: FilterConfig[];
 
+  // View configuration
+  availableViewTypes?: Array<'grid' | 'small-tile' | 'large-tile'>;
+
   // Results messaging
   resultsMessage?: string;
   emptyStateTitle?: string;
@@ -152,6 +155,7 @@ export function ContentListingPage({
   customSection,
   onClearFilters,
   hasActiveFilters = false,
+  availableViewTypes = ['grid', 'small-tile', 'large-tile'],
 }: ContentListingPageProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
@@ -171,17 +175,16 @@ export function ContentListingPage({
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
-  // View type options for dropdown
-  // For TRI Library page, exclude Grid View option
+
+  // Build view options from available view types
   const allViewOptions = [
     { key: 'grid', text: 'Grid View' },
     { key: 'small-tile', text: 'Small Tile' },
     { key: 'large-tile', text: 'Large Tile' },
   ];
-  const viewOptions =
-    title === 'Resonant Identity Library'
-      ? allViewOptions.filter((opt) => opt.key !== 'grid')
-      : allViewOptions;
+  const viewOptions = allViewOptions.filter((opt) =>
+    availableViewTypes.includes(opt.key as 'grid' | 'small-tile' | 'large-tile')
+  );
 
   const sortOptions = [
     { key: 'newest', text: 'Newest First' },
