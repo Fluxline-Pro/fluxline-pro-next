@@ -173,6 +173,43 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
           theme={theme}
         />
       ))}
+      {(selectedContentTypes.length > 0 || selectedTopics.length > 0) && (
+        <button
+          onClick={() => {
+            setSelectedContentTypes([]);
+            setSelectedTopics([]);
+          }}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            whiteSpace: 'nowrap',
+            cursor: 'pointer',
+            border: `1px solid ${theme.palette.themePrimary}`,
+            borderRadius: '999px',
+            padding: `${theme.spacing.s2} ${theme.spacing.m}`,
+            backgroundColor: 'transparent',
+            transition: 'all 0.15s ease',
+            outline: 'none',
+            marginTop: theme.spacing.l,
+          }}
+          aria-label='Clear all tag selections'
+        >
+          <Typography
+            variant='caption'
+            style={{
+              color: theme.palette.themePrimary,
+              fontSize: '0.8125rem',
+              fontWeight: 600,
+              transition: 'color 0.15s ease',
+              margin: 0,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Clear Tags
+          </Typography>
+        </button>
+      )}
     </div>
   );
 
@@ -238,8 +275,20 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
       onMouseLeave={() => setHovered(false)}
       aria-pressed={isActive}
       style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: theme.spacing.xxs,
+        marginRight: theme.spacing.s2,
+        whiteSpace: 'nowrap',
         cursor: 'pointer',
-        border: `1px solid ${isActive ? theme.palette.themePrimary : hovered ? theme.palette.themeSecondary : theme.palette.neutralQuaternaryAlt}`,
+        border: `1px solid ${
+          isActive
+            ? theme.palette.themePrimary
+            : hovered
+              ? theme.palette.themeSecondary
+              : theme.palette.neutralQuaternary
+        }`,
         borderRadius: '999px',
         padding: `${theme.spacing.s2} ${theme.spacing.m}`,
         backgroundColor: isActive
@@ -263,6 +312,7 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
           fontWeight: isActive ? 600 : 400,
           transition: 'color 0.15s ease',
           margin: 0,
+          whiteSpace: 'nowrap',
         }}
       >
         {label}
