@@ -28,6 +28,7 @@ import AmazonMusicLogo from '@/assets/svgs/AmazonMusicLogo';
 import DeezerLogo from '@/assets/svgs/DeezerLogo';
 import PodchaserLogo from '@/assets/svgs/PodchaserLogo';
 import RSSLogo from '@/assets/svgs/RSSLogo';
+import { normalizeTag } from './theresonantid/lib/taxonomy';
 
 /**
  * PodcastListingClient Props
@@ -655,13 +656,20 @@ export function PodcastListingClient({
   };
 
   // Derive TRI content sections from the pre-loaded Resonant Identity posts
+  // Uses taxonomy mapping to detect content types
   const triCompanionArticles = triPosts.filter((p) =>
-    p.tags.includes('Episode Companion')
+    p.tags.some(
+      (tag) => normalizeTag(tag) === normalizeTag('Episode Companion')
+    )
   );
   const triChallenges = triPosts.filter((p) =>
-    p.tags.includes('Identity Challenge')
+    p.tags.some(
+      (tag) => normalizeTag(tag) === normalizeTag('Identity Challenge')
+    )
   );
-  const triDemos = triPosts.filter((p) => p.tags.includes('Interactive Demo'));
+  const triDemos = triPosts.filter((p) =>
+    p.tags.some((tag) => normalizeTag(tag) === normalizeTag('Interactive Demo'))
+  );
 
   // For this initial launch, we'll surface the Spreaker embed for "The Resonant Identity" show and hide the episode listing and filters until we have more episodes and search functionality built out. Once we have a larger catalog of episodes, we can prominently feature the listing with the embed as a highlighted player within the page.
   const podcastFilters = (
@@ -1186,9 +1194,7 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
       aria-label={`Read: ${post.title}`}
     >
       {/* Tag chips */}
-      <div
-        style={{ display: 'flex', gap: theme.spacing.s2, flexWrap: 'wrap' }}
-      >
+      <div style={{ display: 'flex', gap: theme.spacing.s2, flexWrap: 'wrap' }}>
         {post.tags.slice(0, 2).map((tag) => (
           <span
             key={tag}
@@ -1212,7 +1218,9 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
       <Typography
         variant='h4'
         style={{
-          color: hovered ? theme.palette.themePrimary : theme.palette.neutralPrimary,
+          color: hovered
+            ? theme.palette.themePrimary
+            : theme.palette.neutralPrimary,
           fontSize: '1rem',
           fontWeight: theme.typography.fontWeights.semiBold,
           transition: 'color 0.2s ease',

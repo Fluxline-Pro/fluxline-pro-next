@@ -3,39 +3,20 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
-import { ContentListingPage, FilterConfig } from '@/components/ContentListingPage';
+import {
+  ContentListingPage,
+  FilterConfig,
+} from '@/components/ContentListingPage';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { BlogPost } from '@/app/blog/types';
+import { TAG_GROUPS } from '../lib/taxonomy';
 
 /**
  * TRI taxonomy tags available as filter chips in the library.
- * Grouped for clarity but flattened to a single filter dropdown.
+ * Imported from centralized taxonomy mapping layer.
  */
-const TRI_CONTENT_TYPE_TAGS = [
-  'Episode Companion',
-  'Identity Challenge',
-  'Interactive Demo',
-  'Foundations',
-  'Deep Dive',
-];
-
-const TRI_TOPIC_TAGS = [
-  'Truth',
-  'Distortion',
-  'Perception',
-  'Interpretive Hygiene',
-  'The Triad',
-  'Resonance & Dissonance',
-  'Identity Coherence',
-  'Identity Erosion',
-  'Agency',
-  'Somatic Cues',
-  'Narrative Cues',
-  'Emotional Cues',
-];
-
-const ALL_TRI_TAGS = [...TRI_CONTENT_TYPE_TAGS, ...TRI_TOPIC_TAGS];
+const ALL_TRI_TAGS = [...TAG_GROUPS.contentTypes, ...TAG_GROUPS.topics];
 
 interface TRILibraryClientProps {
   /** All blog posts with category "Resonant Identity" */
@@ -185,7 +166,11 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
       <Typography
         variant='caption'
         style={{
-          color: isActive ? theme.palette.white : hovered ? theme.palette.themePrimary : theme.palette.neutralSecondary,
+          color: isActive
+            ? theme.palette.white
+            : hovered
+              ? theme.palette.themePrimary
+              : theme.palette.neutralSecondary,
           fontSize: '0.8125rem',
           fontWeight: isActive ? 600 : 400,
           transition: 'color 0.15s ease',
