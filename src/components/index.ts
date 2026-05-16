@@ -29,3 +29,25 @@ export { NewsletterCTA } from './NewsletterCTA';
 export { NewsletterPopup } from './NewsletterPopup';
 export { ConsultationStepper } from './ConsultationStepper';
 export type { ConsultationStepperProps, LeadPayload, ServiceKey } from './ConsultationStepper';
+export {
+  TRILayout,
+  SectionHeader,
+  ContentSection,
+  LargeTileGrid,
+  FeaturedCard,
+  TagChip,
+  HeroSimple,
+  HeroWithFilters,
+  FilteredContentList,
+} from './tri';
+export type {
+  TRILayoutProps,
+  SectionHeaderProps,
+  ContentSectionProps,
+  LargeTileGridProps,
+  FeaturedCardProps,
+  TagChipProps,
+  HeroSimpleProps,
+  HeroWithFiltersProps,
+  FilteredContentListProps,
+} from './tri';
