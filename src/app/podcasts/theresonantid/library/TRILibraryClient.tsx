@@ -51,19 +51,24 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
     );
 
     // Extract topics from posts (any tag that isn't a content type)
-    const topicsSet = new Set<string>();
+    // Use Map to canonicalize casing: key = normalized, value = first casing seen
+    const topicsMap = new Map<string, string>();
     initialPosts.forEach((post) => {
-      const topics = extractTopics(post.tags);
-      // Get original casing from post.tags
+      const topics = extractTopics(post.tags); // Returns normalized topics
       topics.forEach((normalizedTopic) => {
-        const originalTag = post.tags.find(
-          (t) => normalizeTag(t) === normalizedTopic
-        );
-        if (originalTag) topicsSet.add(originalTag);
+        // Only store the first casing variant we encounter
+        if (!topicsMap.has(normalizedTopic)) {
+          const originalTag = post.tags.find(
+            (t) => normalizeTag(t) === normalizedTopic
+          );
+          if (originalTag) {
+            topicsMap.set(normalizedTopic, originalTag);
+          }
+        }
       });
     });
 
-    const topics = Array.from(topicsSet).sort();
+    const topics = Array.from(topicsMap.values()).sort();
 
     return {
       availableContentTypes: contentTypes,
