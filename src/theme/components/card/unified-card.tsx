@@ -8,6 +8,7 @@ import { Card } from '../card/card';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useIsTablet, useDeviceOrientation } from '../../hooks/useMediaQuery';
 import { LoadingSpinner } from '../structural/loading-spinner';
 import { Typography } from '../typography';
 
@@ -81,9 +82,14 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const { theme } = useAppTheme();
   const { filter } = useColorVisionFilter(skipDarkModeFilter);
   const { shouldReduceMotion } = useReducedMotion();
+  const isTablet = useIsTablet();
+  const orientation = useDeviceOrientation();
 
   // Calculate elevation level once
   const elevationLevel = elevation === 'low' ? 1 : elevation === 'high' ? 3 : 2;
+
+  // Determine if we should use tighter line clamping for descriptions
+  const shouldClampDescription = isTablet || orientation === 'square';
 
   // Common overlay gradient for image text
   const overlayGradient = `linear-gradient(to top, ${theme.palette.black}CC, transparent)`;
@@ -547,7 +553,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                         lineHeight: 1.5,
                         display: '-webkit-box',
                         WebkitBoxOrient: 'vertical',
-                        WebkitLineClamp: 3,
+                        WebkitLineClamp: shouldClampDescription ? 2 : 3,
                         overflow: 'hidden',
                       }}
                     >
@@ -714,6 +720,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                         margin: `${theme.spacing.xs} 0 0 0`,
                         color: theme.palette.neutralSecondary,
                         lineHeight: 1.5,
+                        ...(shouldClampDescription && {
+                          display: '-webkit-box',
+                          WebkitBoxOrient: 'vertical',
+                          WebkitLineClamp: 2,
+                          overflow: 'hidden',
+                        }),
                       }}
                     >
                       {description}
