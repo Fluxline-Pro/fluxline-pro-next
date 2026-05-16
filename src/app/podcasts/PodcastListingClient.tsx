@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 import {
   UnifiedPageWrapper,
@@ -542,6 +543,7 @@ export function PodcastListingClient({
   imageConfig,
   triPosts = [],
 }: PodcastListingClientProps = {}) {
+  const router = useRouter();
   const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
   const [isMounted, setIsMounted] = React.useState(false);
@@ -1005,6 +1007,7 @@ export function PodcastListingClient({
                 viewAllHref='/podcasts/theresonantid/library'
                 isMobile={isMobile}
                 theme={theme}
+                router={router}
               />
             )}
 
@@ -1019,6 +1022,7 @@ export function PodcastListingClient({
                 viewAllHref='/podcasts/theresonantid/library'
                 isMobile={isMobile}
                 theme={theme}
+                router={router}
               />
             )}
 
@@ -1033,6 +1037,7 @@ export function PodcastListingClient({
                 viewAllHref='/podcasts/theresonantid/library'
                 isMobile={isMobile}
                 theme={theme}
+                router={router}
               />
             )}
           </div>
@@ -1065,6 +1070,7 @@ interface TRISectionProps {
   isMobile: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   theme: any;
+  router: ReturnType<typeof useRouter>;
 }
 
 /**
@@ -1081,6 +1087,7 @@ function TRISection({
   viewAllHref,
   isMobile,
   theme,
+  router,
 }: TRISectionProps) {
   const gridColumns = isMobile ? 1 : Math.min(posts.length, 3);
 
@@ -1144,7 +1151,7 @@ function TRISection({
           size='small'
           icon='ChevronRight'
           iconPosition='right'
-          href={viewAllHref}
+          onClick={() => router.push(viewAllHref)}
           aria-label={viewAllLabel}
         >
           {viewAllLabel}
