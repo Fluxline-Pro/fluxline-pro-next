@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { format } from 'date-fns';
 import {
   ContentListingPage,
   FilterConfig,
@@ -53,9 +52,7 @@ export function BlogListingClientWrapper({
       description: post.excerpt,
       imageUrl: post.imageUrl,
       imageAlt: post.imageAlt || post.title,
-      imageText: post.publishedDate
-        ? format(post.publishedDate, 'MMMM d, yyyy')
-        : 'Date unknown',
+      imageText: post.category || 'Article',
       date: post.publishedDate,
     }));
   }, [blogPosts]);
