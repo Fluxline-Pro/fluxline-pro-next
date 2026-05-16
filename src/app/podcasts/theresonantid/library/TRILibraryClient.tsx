@@ -28,17 +28,20 @@ interface TRILibraryClientProps {
 export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
   const { theme } = useAppTheme();
   const router = useRouter();
-  const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
+  const [selectedContentTypes, setSelectedContentTypes] = React.useState<
+    string[]
+  >([]);
+  const [selectedTopics, setSelectedTopics] = React.useState<string[]>([]);
 
-  // Dynamically extract all available tags from posts
+  // Dynamically extract available content types and topics from posts
   // Content types come from taxonomy, topics come from post tags
-  const availableTags = React.useMemo(() => {
+  const { availableContentTypes, availableTopics } = React.useMemo(() => {
     const allTagsInPosts = new Set<string>();
     initialPosts.forEach((post) => {
       post.tags.forEach((t) => allTagsInPosts.add(t));
     });
 
-    // Separate content types and topics
+    // Content types from taxonomy that exist in posts
     const contentTypes = TAG_GROUPS.contentTypes.filter((ct) =>
       allTagsInPosts.has(ct)
     );
@@ -58,14 +61,31 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
 
     const topics = Array.from(topicsSet).sort();
 
-    // Return content types first, then topics
-    return [...contentTypes, ...topics];
+    return {
+      availableContentTypes: contentTypes,
+      availableTopics: topics,
+    };
   }, [initialPosts]);
 
   const filteredPosts = React.useMemo(() => {
-    if (!selectedTag) return initialPosts;
-    return initialPosts.filter((post) => post.tags.includes(selectedTag));
-  }, [initialPosts, selectedTag]);
+    let filtered = initialPosts;
+
+    // Filter by content types if any selected
+    if (selectedContentTypes.length > 0) {
+      filtered = filtered.filter((post) =>
+        selectedContentTypes.some((ct) => post.tags.includes(ct))
+      );
+    }
+
+    // Filter by topics if any selected
+    if (selectedTopics.length > 0) {
+      filtered = filtered.filter((post) =>
+        selectedTopics.some((topic) => post.tags.includes(topic))
+      );
+    }
+
+    return filtered;
+  }, [initialPosts, selectedContentTypes, selectedTopics]);
 
   const cards = React.useMemo(() => {
     return filteredPosts.map((post) => ({
@@ -83,14 +103,18 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
 
   const filters: FilterConfig[] = [
     {
-      type: 'single',
-      label: 'Filter by Tag',
-      options: [
-        { key: '', text: 'All Content' },
-        ...availableTags.map((tag) => ({ key: tag, text: tag })),
-      ],
-      value: selectedTag,
-      onChange: setSelectedTag,
+      type: 'multi',
+      label: 'Content Type',
+      options: availableContentTypes.map((ct) => ({ key: ct, text: ct })),
+      selectedKeys: selectedContentTypes,
+      onChange: setSelectedContentTypes,
+    },
+    {
+      type: 'multi',
+      label: 'Topic',
+      options: availableTopics.map((topic) => ({ key: topic, text: topic })),
+      selectedKeys: selectedTopics,
+      onChange: setSelectedTopics,
     },
   ];
 
@@ -108,23 +132,65 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
     >
       <TagChip
         label='All Content'
-        isActive={!selectedTag}
-        onClick={() => setSelectedTag(undefined)}
+        isActive={
+          selectedContentTypes.length === 0 && selectedTopics.length === 0
+        }
+        onClick={() => {
+          setSelectedContentTypes([]);
+          setSelectedTopics([]);
+        }}
         theme={theme}
       />
-      {availableTags.map((tag) => (
+      {availableContentTypes.map((tag) => (
         <TagChip
           key={tag}
           label={tag}
-          isActive={selectedTag === tag}
-          onClick={() => setSelectedTag(selectedTag === tag ? undefined : tag)}
+          isActive={selectedContentTypes.includes(tag)}
+          onClick={() => {
+            if (selectedContentTypes.includes(tag)) {
+              setSelectedContentTypes(
+                selectedContentTypes.filter((t) => t !== tag)
+              );
+            } else {
+              setSelectedContentTypes([...selectedContentTypes, tag]);
+            }
+          }}
+          theme={theme}
+        />
+      ))}
+      {availableTopics.map((tag) => (
+        <TagChip
+          key={tag}
+          label={tag}
+          isActive={selectedTopics.includes(tag)}
+          onClick={() => {
+            if (selectedTopics.includes(tag)) {
+              setSelectedTopics(selectedTopics.filter((t) => t !== tag));
+            } else {
+              setSelectedTopics([...selectedTopics, tag]);
+            }
+          }}
           theme={theme}
         />
       ))}
     </div>
   );
 
-  const resultsMessage = `Showing ${filteredPosts.length} ${filteredPosts.length === 1 ? 'article' : 'articles'}${selectedTag ? ` tagged with "${selectedTag}"` : ''}`;
+  const resultsMessage = (() => {
+    const count = filteredPosts.length;
+    const article = count === 1 ? 'article' : 'articles';
+    const filters: string[] = [];
+
+    if (selectedContentTypes.length > 0) {
+      filters.push(`type: ${selectedContentTypes.join(', ')}`);
+    }
+    if (selectedTopics.length > 0) {
+      filters.push(`topic: ${selectedTopics.join(', ')}`);
+    }
+
+    const filterText = filters.length > 0 ? ` (${filters.join(' | ')})` : '';
+    return `Showing ${count} ${article}${filterText}`;
+  })();
 
   return (
     <ContentListingPage
@@ -136,11 +202,16 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
       filters={filters}
       resultsMessage={resultsMessage}
       emptyStateTitle='No content found'
-      emptyStateMessage='Try selecting a different tag to see more content.'
+      emptyStateMessage='Try selecting different filters to see more content.'
       backArrow={true}
       backArrowPath='/podcasts/theresonantid'
-      hasActiveFilters={!!selectedTag}
-      onClearFilters={() => setSelectedTag(undefined)}
+      hasActiveFilters={
+        selectedContentTypes.length > 0 || selectedTopics.length > 0
+      }
+      onClearFilters={() => {
+        setSelectedContentTypes([]);
+        setSelectedTopics([]);
+      }}
       customSection={tagChips}
       onCardClick={(slug) => router.push(`/blog/${slug}`)}
     />
