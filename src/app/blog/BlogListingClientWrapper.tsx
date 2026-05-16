@@ -53,6 +53,7 @@ export function BlogListingClientWrapper({
       description: post.excerpt,
       imageUrl: post.imageUrl,
       imageAlt: post.imageAlt || post.title,
+      imageText: post.category || 'Article',
       date: post.publishedDate,
     }));
   }, [blogPosts]);
