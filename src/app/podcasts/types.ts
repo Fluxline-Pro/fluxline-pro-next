@@ -12,6 +12,7 @@ export interface TRIPost {
   title: string;
   excerpt: string;
   imageUrl?: string;
+  imageAlt?: string;
   tags: string[];
   publishedDate: string; // ISO date string
 }

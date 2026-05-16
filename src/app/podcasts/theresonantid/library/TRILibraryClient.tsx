@@ -8,7 +8,7 @@ import {
 } from '@/components/ContentListingPage';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { BlogPost } from '@/app/blog/types';
+import { TRIPost } from '@/app/podcasts/types';
 import {
   TAG_GROUPS,
   extractTopics,
@@ -17,8 +17,8 @@ import {
 } from '../lib/taxonomy';
 
 interface TRILibraryClientProps {
-  /** All blog posts with category "Resonant Identity" */
-  initialPosts: BlogPost[];
+  /** Serialized blog posts with category "Resonant Identity" */
+  initialPosts: TRIPost[];
 }
 
 /**
@@ -114,7 +114,7 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
         imageUrl: post.imageUrl,
         imageAlt: post.imageAlt || post.title,
         imageText: contentTypeTag || 'Article', // Use actual tag or default
-        date: post.publishedDate,
+        date: new Date(post.publishedDate), // Parse ISO string back to Date for sorting
       };
     });
   }, [filteredPosts]);

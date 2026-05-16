@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getFilteredBlogPosts } from '@/app/blog/lib/blogLoader';
+import { TRIPost } from '@/app/podcasts/types';
 import { TRILibraryClient } from './TRILibraryClient';
 
 export const metadata: Metadata = {
@@ -45,10 +46,22 @@ export const metadata: Metadata = {
  * URL: /podcasts/theresonantid/library
  *
  * Loads all blog posts tagged with category "Resonant Identity" at build time
- * and passes them to the client component for interactive tag filtering.
+ * and serializes them to TRIPost[] for safe Server→Client transfer.
  */
 export default function TRILibraryPage() {
-  const posts = getFilteredBlogPosts({ category: 'Resonant Identity' });
+  // Load all Resonant Identity blog posts at build time (Server Component)
+  const rawPosts = getFilteredBlogPosts({ category: 'Resonant Identity' });
 
-  return <TRILibraryClient initialPosts={posts} />;
+  // Serialize to TRIPost[] for safe Server→Client boundary crossing
+  const triPosts: TRIPost[] = rawPosts.map((post) => ({
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    imageUrl: post.imageUrl,
+    imageAlt: post.imageAlt,
+    tags: post.tags,
+    publishedDate: post.publishedDate.toISOString(),
+  }));
+
+  return <TRILibraryClient initialPosts={triPosts} />;
 }
