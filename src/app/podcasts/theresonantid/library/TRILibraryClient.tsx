@@ -76,16 +76,22 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
 
     // Filter by content types if any selected
     if (selectedContentTypes.length > 0) {
-      filtered = filtered.filter((post) =>
-        selectedContentTypes.some((ct) => post.tags.includes(ct))
-      );
+      filtered = filtered.filter((post) => {
+        const normalizedPostTags = post.tags.map(normalizeTag);
+        return selectedContentTypes.some((ct) =>
+          normalizedPostTags.includes(normalizeTag(ct))
+        );
+      });
     }
 
     // Filter by topics if any selected
     if (selectedTopics.length > 0) {
-      filtered = filtered.filter((post) =>
-        selectedTopics.some((topic) => post.tags.includes(topic))
-      );
+      filtered = filtered.filter((post) => {
+        const normalizedPostTags = post.tags.map(normalizeTag);
+        return selectedTopics.some((topic) =>
+          normalizedPostTags.includes(normalizeTag(topic))
+        );
+      });
     }
 
     return filtered;
