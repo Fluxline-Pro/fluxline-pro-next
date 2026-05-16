@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { format } from 'date-fns';
 import {
   ContentListingPage,
   FilterConfig,
@@ -10,7 +9,12 @@ import {
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { BlogPost } from '@/app/blog/types';
-import { TAG_GROUPS, extractTopics, normalizeTag } from '../lib/taxonomy';
+import {
+  TAG_GROUPS,
+  extractTopics,
+  normalizeTag,
+  getContentType,
+} from '../lib/taxonomy';
 
 interface TRILibraryClientProps {
   /** All blog posts with category "Resonant Identity" */
@@ -88,17 +92,25 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
   }, [initialPosts, selectedContentTypes, selectedTopics]);
 
   const cards = React.useMemo(() => {
-    return filteredPosts.map((post) => ({
-      id: post.slug,
-      title: post.title,
-      description: post.excerpt,
-      imageUrl: post.imageUrl,
-      imageAlt: post.imageAlt || post.title,
-      imageText: post.publishedDate
-        ? format(post.publishedDate, 'MMMM d, yyyy')
-        : 'Date unknown',
-      date: post.publishedDate,
-    }));
+    return filteredPosts.map((post) => {
+      // Determine content type from taxonomy
+      const contentType = getContentType(post.tags);
+      const contentTypeLabels = {
+        article: 'Article',
+        challenge: 'Challenge',
+        demo: 'Interactive Demo',
+      };
+
+      return {
+        id: post.slug,
+        title: post.title,
+        description: post.excerpt,
+        imageUrl: post.imageUrl,
+        imageAlt: post.imageAlt || post.title,
+        imageText: contentTypeLabels[contentType], // Content type badge
+        date: post.publishedDate,
+      };
+    });
   }, [filteredPosts]);
 
   const filters: FilterConfig[] = [

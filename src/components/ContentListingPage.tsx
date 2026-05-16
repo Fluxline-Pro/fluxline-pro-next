@@ -172,11 +172,16 @@ export function ContentListingPage({
     setIsMounted(true);
   }, []);
   // View type options for dropdown
-  const viewOptions = [
+  // For TRI Library page, exclude Grid View option
+  const allViewOptions = [
     { key: 'grid', text: 'Grid View' },
     { key: 'small-tile', text: 'Small Tile' },
     { key: 'large-tile', text: 'Large Tile' },
   ];
+  const viewOptions =
+    title === 'Resonant Identity Library'
+      ? allViewOptions.filter((opt) => opt.key !== 'grid')
+      : allViewOptions;
 
   const sortOptions = [
     { key: 'newest', text: 'Newest First' },

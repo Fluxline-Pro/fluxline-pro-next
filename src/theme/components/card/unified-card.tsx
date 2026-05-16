@@ -90,7 +90,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const publicationLabel = publicationDateText
     ? `Published ${publicationDateText}`
     : undefined;
-  const smallTileHeight = 'clamp(150px, 16vw, 180px)';
+  const smallTileHeight = 'clamp(150px, 16vw, 225px)';
 
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
@@ -353,21 +353,25 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     lineHeight: 1.2,
                     color: '#FFFFFF',
                     textShadow: theme.shadows.m,
+                    WebkitLineClamp: 3,
+                    lineClamp: 3,
+                    display: '-webkit-box',
                   }}
                 >
                   {title}
                 </Typography>
-                {/* {imageText && (
+                {publicationDateText && (
                   <Typography
                     variant='label'
                     style={{
                       margin: 0,
                       opacity: 0.9,
+                      color: '#FFFFFF',
                     }}
                   >
-                    {imageText}
+                    {publicationLabel}
                   </Typography>
-                )} */}
+                )}
               </div>
             </div>
           ) : (
@@ -551,22 +555,35 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     </Typography>
                   )}
                 </div>
-                {/* {imageText && (
-                  <Typography
-                    variant='label'
-                    style={{
-                      margin: `${theme.spacing.xs} 0 0 0`,
-                      color: theme.palette.neutralSecondary,
-                      marginTop: 'auto',
-                      display: '-webkit-box',
-                      WebkitBoxOrient: 'vertical',
-                      WebkitLineClamp: 1,
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {imageText}
-                  </Typography>
-                )} */}
+                <div
+                  style={{ marginTop: 'auto', paddingTop: theme.spacing.xs }}
+                >
+                  {imageText && (
+                    <Typography
+                      variant='label'
+                      style={{
+                        margin: 0,
+                        color: theme.palette.themePrimary,
+                        fontWeight: 600,
+                        display: 'block',
+                      }}
+                    >
+                      {imageText}
+                    </Typography>
+                  )}
+                  {publicationDateText && (
+                    <Typography
+                      variant='label'
+                      style={{
+                        margin: `${theme.spacing.xxs} 0 0 0`,
+                        color: theme.palette.neutralSecondary,
+                        display: 'block',
+                      }}
+                    >
+                      {publicationLabel}
+                    </Typography>
+                  )}
+                </div>
               </div>
             </div>
           </Card>
