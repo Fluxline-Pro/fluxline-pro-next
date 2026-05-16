@@ -10,13 +10,7 @@ import {
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { BlogPost } from '@/app/blog/types';
-import { TAG_GROUPS } from '../lib/taxonomy';
-
-/**
- * TRI taxonomy tags available as filter chips in the library.
- * Imported from centralized taxonomy mapping layer.
- */
-const ALL_TRI_TAGS = [...TAG_GROUPS.contentTypes, ...TAG_GROUPS.topics];
+import { TAG_GROUPS, extractTopics, normalizeTag } from '../lib/taxonomy';
 
 interface TRILibraryClientProps {
   /** All blog posts with category "Resonant Identity" */
@@ -28,6 +22,7 @@ interface TRILibraryClientProps {
  *
  * Client component for the Resonant Identity Library page.
  * Displays all TRI content with tag-chip filtering.
+ * Topics are dynamically extracted from actual post tags.
  * URL: /podcasts/theresonantid/library
  */
 export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
@@ -35,14 +30,36 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
   const router = useRouter();
   const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
 
-  // Collect tags that actually exist in the loaded posts (intersection with taxonomy)
+  // Dynamically extract all available tags from posts
+  // Content types come from taxonomy, topics come from post tags
   const availableTags = React.useMemo(() => {
-    const tagsInPosts = new Set<string>();
+    const allTagsInPosts = new Set<string>();
     initialPosts.forEach((post) => {
-      post.tags.forEach((t) => tagsInPosts.add(t));
+      post.tags.forEach((t) => allTagsInPosts.add(t));
     });
-    // Preserve taxonomy order, only show tags that have content
-    return ALL_TRI_TAGS.filter((t) => tagsInPosts.has(t));
+
+    // Separate content types and topics
+    const contentTypes = TAG_GROUPS.contentTypes.filter((ct) =>
+      allTagsInPosts.has(ct)
+    );
+
+    // Extract topics from posts (any tag that isn't a content type)
+    const topicsSet = new Set<string>();
+    initialPosts.forEach((post) => {
+      const topics = extractTopics(post.tags);
+      // Get original casing from post.tags
+      topics.forEach((normalizedTopic) => {
+        const originalTag = post.tags.find(
+          (t) => normalizeTag(t) === normalizedTopic
+        );
+        if (originalTag) topicsSet.add(originalTag);
+      });
+    });
+
+    const topics = Array.from(topicsSet).sort();
+
+    // Return content types first, then topics
+    return [...contentTypes, ...topics];
   }, [initialPosts]);
 
   const filteredPosts = React.useMemo(() => {

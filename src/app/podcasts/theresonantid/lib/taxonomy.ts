@@ -9,10 +9,14 @@
 /**
  * TAG_GROUPS
  * Defines the two main tag taxonomies for TRI content:
- * - contentTypes: How content is delivered (format/type)
- * - topics: What content is about (subject matter)
+ * - contentTypes: How content is delivered (format/type) — HARDCODED & STRUCTURAL
+ * - topics: What content is about (subject matter) — DYNAMIC (extracted from tags)
  */
 export const TAG_GROUPS = {
+  /**
+   * Content types are hardcoded structural tags that define delivery format.
+   * These are part of the TRI architecture and should NOT be dynamic.
+   */
   contentTypes: [
     'Episode Companion',
     'Identity Challenge',
@@ -21,20 +25,12 @@ export const TAG_GROUPS = {
     'Deep Dive',
   ],
 
-  topics: [
-    'Truth',
-    'Distortion',
-    'Perception',
-    'Interpretive Hygiene',
-    'The Triad',
-    'Resonance & Dissonance',
-    'Identity Coherence',
-    'Identity Erosion',
-    'Agency',
-    'Somatic Cues',
-    'Narrative Cues',
-    'Emotional Cues',
-  ],
+  /**
+   * Topics are dynamic and extracted from actual blog post tags.
+   * Any tag that isn't a content type becomes a topic.
+   * Use extractTopics() to derive topics from a post's tags.
+   */
+  topics: [],
 };
 
 /**
@@ -43,6 +39,28 @@ export const TAG_GROUPS = {
  */
 export function normalizeTag(tag: string): string {
   return tag.trim().toLowerCase();
+}
+
+/**
+ * Extract dynamic topics from tags
+ * Removes content-type tags and returns normalized topic tags.
+ * Any tag that isn't a structural content type becomes a topic.
+ *
+ * @param tags - Array of tags from blog post frontmatter
+ * @returns Array of topic tags (excluding content types)
+ *
+ * @example
+ * extractTopics(['Episode Companion', 'Truth', 'Identity Erosion'])
+ * // Returns: ['truth', 'identity erosion']
+ *
+ * extractTopics(['Interactive Demo', 'Shadow Work', 'Cognitive Drift'])
+ * // Returns: ['shadow work', 'cognitive drift']
+ */
+export function extractTopics(tags: string[]): string[] {
+  const normalized = tags.map(normalizeTag);
+  const contentTypeTags = TAG_GROUPS.contentTypes.map(normalizeTag);
+
+  return normalized.filter((tag) => !contentTypeTags.includes(tag));
 }
 
 /**

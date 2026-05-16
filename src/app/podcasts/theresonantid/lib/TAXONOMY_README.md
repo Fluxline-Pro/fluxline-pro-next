@@ -4,6 +4,11 @@
 
 The taxonomy mapping layer provides centralized tag management for all TRI (The Resonant Identity) content. This ensures consistency across filtering, categorization, and content-type detection.
 
+**Key Architecture Decision:**
+
+- **Content Types** - Hardcoded structural tags (Episode Companion, Identity Challenge, etc.)
+- **Topics** - Dynamically extracted from blog post tags (any tag that isn't a content type)
+
 ## Core Files
 
 ### `src/app/podcasts/theresonantid/lib/taxonomy.ts`
@@ -12,13 +17,16 @@ The authoritative source for all TRI content categorization.
 
 **Exports:**
 
-- `TAG_GROUPS` - Object containing contentTypes and topics arrays
+- `TAG_GROUPS` - Object containing contentTypes (hardcoded) and topics (empty, use extractTopics())
 - `normalizeTag()` - Normalizes tags for comparison (lowercase, trimmed)
-- `getContentType()` - Maps tags to content delivery format
+- `getContentType()` - Maps tags to content delivery format (article/challenge/demo)
+- `extractTopics()` - Filters out content type tags and returns topic tags
 
 ## Tag Groups
 
-### Content Types (How content is delivered)
+### Content Types (Hardcoded — Structural)
+
+These are fixed architectural tags that define content delivery format:
 
 - **Episode Companion** - Deep-dive articles paired with podcast episodes
 - **Identity Challenge** - 7-day structured challenges for building resonance
@@ -26,20 +34,31 @@ The authoritative source for all TRI content categorization.
 - **Foundations** - Core concepts and framework explanations
 - **Deep Dive** - In-depth explorations of specific topics
 
-### Topics (What content is about)
+**⚠️ DO NOT make content types dynamic.** They are structural and part of the TRI architecture.
 
-- Truth
-- Distortion
-- Perception
-- Interpretive Hygiene
-- The Triad
-- Resonance & Dissonance
-- Identity Coherence
-- Identity Erosion
-- Agency
-- Somatic Cues
-- Narrative Cues
-- Emotional Cues
+### Topics (Dynamic — Extracted from Content)
+
+Topics are **NOT hardcoded**. They are dynamically extracted from blog post tags using `extractTopics()`.
+
+**How it works:**
+
+- Creator tags a post with `['Episode Companion', 'Truth', 'Identity Erosion']`
+- Content type: `'Episode Companion'` (structural)
+- Topics: `['Truth', 'Identity Erosion']` (dynamic)
+
+**Examples of dynamic topics:**
+
+- Truth, Distortion, Perception (Resonance Core Framework concepts)
+- The Triad, Somatic Cues, Narrative Cues (Framework elements)
+- Shadow Work, Cognitive Drift (new topics invented by creators)
+- Any other tag that isn't a content type
+
+**Why dynamic?**
+
+- Topics evolve as the framework grows
+- Creators can introduce new concepts without code changes
+- No maintenance burden for topic taxonomy
+- Topics reflect actual content, not predictions
 
 ## Usage
 
@@ -50,7 +69,27 @@ import {
   TAG_GROUPS,
   normalizeTag,
   getContentType,
+  extractTopics,
 } from '@/app/podcasts/theresonantid/lib/taxonomy';
+```
+
+### Extracting Dynamic Topics
+
+```typescript
+// ✅ CORRECT - Extract topics from post tags
+const topics = extractTopics([
+  'Episode Companion',
+  'Truth',
+  'Identity Erosion',
+]);
+// Returns: ['truth', 'identity erosion'] (normalized, content types removed)
+
+// Get all unique topics from multiple posts
+const allTopics = new Set<string>();
+posts.forEach((post) => {
+  const topics = extractTopics(post.tags);
+  topics.forEach((topic) => allTopics.add(topic));
+});
 ```
 
 ### Filtering by Content Type
@@ -74,10 +113,39 @@ const contentType = getContentType(post.tags);
 // Returns: 'article' | 'challenge' | 'demo'
 ```
 
-### Using Tag Groups for Filters
+### Using Tag Groups for Filters (Dynamic Approach)
 
 ```typescript
-const allTags = [...TAG_GROUPS.contentTypes, ...TAG_GROUPS.topics];
+// Extract all available tags dynamically from posts
+const availableTags = React.useMemo(() => {
+  const allTagsInPosts = new Set<string>();
+  posts.forEach((post) => {
+    post.tags.forEach((t) => allTagsInPosts.add(t));
+  });
+
+  // Separate content types and topics
+  const contentTypes = TAG_GROUPS.contentTypes.filter((ct) =>
+    allTagsInPosts.has(ct)
+  );
+
+  // Extract topics (any tag that isn't a content type)
+  const topicsSet = new Set<string>();
+  posts.forEach((post) => {
+    const topics = extractTopics(post.tags);
+    topics.forEach((normalizedTopic) => {
+      // Get original casing from post.tags
+      const originalTag = post.tags.find(
+        (t) => normalizeTag(t) === normalizedTopic
+      );
+      if (originalTag) topicsSet.add(originalTag);
+    });
+  });
+
+  const topics = Array.from(topicsSet).sort();
+
+  // Return content types first, then topics
+  return [...contentTypes, ...topics];
+}, [posts]);
 
 const filters: FilterConfig[] = [
   {
@@ -117,11 +185,13 @@ When creating new TRI content pages (e.g., `/articles`, `/challenges`, `/demos`)
 
 ## Benefits
 
-✅ **Single source of truth** - All tags defined in one place  
+✅ **Single source of truth** - Content types defined in one place  
+✅ **Dynamic topics** - Topics automatically extracted from content tags  
+✅ **Zero maintenance for topics** - Add new topics just by tagging posts  
 ✅ **Case-insensitive matching** - `normalizeTag()` handles variations  
-✅ **Type safety** - TypeScript autocomplete for tag names  
-✅ **Easy maintenance** - Add/edit tags in taxonomy.ts, changes propagate automatically  
-✅ **Content routing** - `getContentType()` enables smart routing/filtering
+✅ **Type safety** - TypeScript autocomplete for content types  
+✅ **Content routing** - `getContentType()` enables smart routing/filtering  
+✅ **Framework evolution** - New concepts appear automatically as content is created
 
 ## Best Practices
 
@@ -139,7 +209,35 @@ When creating new TRI content pages (e.g., `/articles`, `/challenges`, `/demos`)
 - Duplicate tag arrays across multiple files
 - Modify tags without updating taxonomy.ts
 
-## Example: Adding a New Tag
+## Example: Adding New Tags
+
+### Adding a New Topic (Automatic — No Code Changes)
+
+Topics are automatically extracted from blog post tags. Just tag your post!
+
+1. **Create blog post with new topic:**
+
+   ```yaml
+   ---
+   title: 'Understanding Shadow Work'
+   category: 'Resonant Identity'
+   tags:
+     - 'Episode Companion'
+     - 'Shadow Work' # ← New topic, automatically detected
+     - 'Identity Coherence'
+   ---
+   ```
+
+2. **That's it!** The topic automatically appears in:
+   - Library page filters
+   - Tag chips
+   - Topic extraction logic
+
+**No code changes required for topics.**
+
+### Adding a New Content Type (Manual — Code Update Required)
+
+Content types are structural and must be added to taxonomy.ts:
 
 1. **Update taxonomy.ts:**
 
@@ -151,26 +249,44 @@ When creating new TRI content pages (e.g., `/articles`, `/challenges`, `/demos`)
        'Interactive Demo',
        'Foundations',
        'Deep Dive',
-       'New Content Type', // ← Add here
+       'Masterclass', // ← Add new content type here
      ],
-     // ...
+     topics: [], // Always empty
    };
    ```
 
-2. **No other code changes needed!**
-   - Filter dropdowns automatically include the new tag
-   - Tag chips automatically render
-   - Content detection continues working
+2. **Update getContentType() if needed:**
 
-3. **Test:** Create blog post with new tag, verify it appears in filters
+   ```typescript
+   export function getContentType(
+     tags: string[]
+   ): 'article' | 'challenge' | 'demo' | 'masterclass' {
+     const normalized = tags.map(normalizeTag);
+
+     if (normalized.includes('episode companion')) return 'article';
+     if (normalized.includes('identity challenge')) return 'challenge';
+     if (normalized.includes('interactive demo')) return 'demo';
+     if (normalized.includes('masterclass')) return 'masterclass'; // ← Add routing
+
+     return 'article';
+   }
+   ```
+
+3. **Test:** Create blog post with new content type, verify filtering works
 
 ## Troubleshooting
 
 **Tags not matching?**  
 → Use `normalizeTag()` for comparison instead of `.includes()`
 
-**Content not appearing in sections?**  
-→ Verify tag name matches exactly (after normalization) in taxonomy.ts
+**Content type not being detected?**  
+→ Verify the tag name matches exactly (after normalization) in `TAG_GROUPS.contentTypes`
 
-**New tag not showing in filters?**  
-→ Check that posts actually exist with that tag (availableTags only shows tags that have content)
+**New topic not showing in filters?**  
+→ Topics are auto-extracted. Just add the tag to a blog post and it will appear automatically.
+
+**Content not appearing in sections?**  
+→ Check that the content type tag is correctly spelled in the blog post frontmatter
+
+**How do I remove a topic?**  
+→ Topics are dynamic. If you remove a tag from all posts, it automatically disappears from filters.
