@@ -157,9 +157,10 @@ export function PodcastsDirectoryClient() {
                   size='large'
                   icon='Info'
                   iconPosition='left'
+                  aria-label='Learn About The Resonant Identity Podcast'
                   onClick={() => router.push('/podcasts/theresonantid/about')}
                 >
-                  About TRI
+                  About The Resonant Identity
                 </FormButton>
               </div>
             </div>

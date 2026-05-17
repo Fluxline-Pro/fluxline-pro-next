@@ -14,6 +14,7 @@ export interface HeroSimpleProps {
   backArrow?: boolean;
   backArrowPath?: string;
   animationDelay?: number;
+  isMobile?: boolean; // Optional prop to adjust styling for mobile devices
   /** Latest podcast episode for the featured callout */
   latestEpisode?: PodcastEpisode | null;
   /** Handler for when user clicks "Listen Now" */
@@ -34,6 +35,7 @@ export function HeroSimple({
   description,
   backArrowPath,
   animationDelay = 0,
+  isMobile = false,
   latestEpisode,
   onPlayLatestEpisode,
   episodesLoading = false,
@@ -46,6 +48,7 @@ export function HeroSimple({
         backArrow={backArrow}
         backArrowPath={backArrowPath}
         description={description}
+        style={{ marginTop: isMobile ? '2rem' : undefined }}
       >
         {/* Featured Latest Episode Callout */}
         {!episodesLoading && latestEpisode && onPlayLatestEpisode && (

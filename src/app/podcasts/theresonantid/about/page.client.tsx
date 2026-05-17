@@ -84,6 +84,7 @@ export function TheResonantIdentityAboutPageClient({
         {/* Hero Section */}
         <HeroSimple
           {...heroConfig}
+          isMobile={isMobile}
           animationDelay={0}
           latestEpisode={latestEpisode}
           onPlayLatestEpisode={() =>

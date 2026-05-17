@@ -860,9 +860,9 @@ export function PodcastListingClient({
                 icon='ChevronRight'
                 iconPosition='right'
                 href='/podcasts/theresonantid/about'
-                aria-label='Learn about The Resonant Identity'
+                aria-label='About The Resonant Identity Podcast'
               >
-                About TRI
+                About The Resonant Identity
               </FormButton>
             }
           />
