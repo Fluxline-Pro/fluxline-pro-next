@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
@@ -12,6 +13,8 @@ import {
   ContentSection,
   CardGrid,
   FilteredContentList,
+  EpisodeModal,
+  useTRILatestEpisode,
   type CardGridItem,
 } from '../components';
 
@@ -27,11 +30,16 @@ export function TheResonantIdentityAboutPageClient({
   const { theme } = useAppTheme();
   const router = useRouter();
 
+  const { latestEpisode, episodesLoading, selectedEpisode, setSelectedEpisode } =
+    useTRILatestEpisode();
+
   // Configuration: Hero Section
   const heroConfig = {
     title: 'The Resonant Identity',
     subtitle:
       'A living extension of the Resonance Core Framework where identity becomes practice and is formed through coherence.',
+    description:
+      "Explore micro-lessons, applied challenges, and a supportive community to help you build an identity that feels aligned and grounded in who you're becoming.",
     backArrow: true,
     backArrowPath: '/podcasts/theresonantid',
   };
@@ -65,106 +73,125 @@ export function TheResonantIdentityAboutPageClient({
   ];
 
   return (
-    <TRILayout tabletPortraitLayout='side-by-side'>
-      {/* Hero Section */}
-      <HeroSimple {...heroConfig} animationDelay={0} />
+    <>
+      <TRILayout tabletPortraitLayout='side-by-side'>
+        {/* Hero Section */}
+        <HeroSimple
+          {...heroConfig}
+          animationDelay={0}
+          latestEpisode={latestEpisode}
+          onPlayLatestEpisode={() =>
+            latestEpisode && setSelectedEpisode(latestEpisode)
+          }
+          episodesLoading={episodesLoading}
+        />
 
-      {/* What is TRI Section */}
-      <FadeUp delay={0.1}>
-        <ContentSection>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.neutralPrimary,
-              marginBottom: theme.spacing.l,
-            }}
-          >
-            What is The Resonant Identity?
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.m,
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            The Resonant Identity (TRI) is a space for identity transformation,
-            micro-lessons, and applied resonance. It extends the Resonance Core
-            Framework into a living, accessible rhythm — helping you build an
-            identity that feels aligned, coherent, and grounded in who
-            you&apos;re becoming.
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            TRI is not about quick fixes or surface-level hacks. It&apos;s about
-            cultivating a deeper relationship with yourself through resonance —
-            learning to listen to the subtle cues of what feels right, and
-            building an identity that reflects that resonance in daily life.
-          </Typography>
-        </ContentSection>
-      </FadeUp>
+        {/* What is TRI Section */}
+        <FadeUp delay={0.1}>
+          <ContentSection>
+            <Typography
+              variant='h3'
+              style={{
+                color: theme.palette.neutralPrimary,
+                marginBottom: theme.spacing.l,
+                marginTop: theme.spacing.xxxl,
+              }}
+            >
+              What is The Resonant Identity?
+            </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                marginBottom: theme.spacing.m,
+                lineHeight: theme.typography.lineHeights.relaxed,
+              }}
+            >
+              The Resonant Identity (TRI) is a space for identity
+              transformation, micro-lessons, and applied resonance. It extends
+              the Resonance Core Framework into a living, accessible rhythm —
+              helping you build an identity that feels aligned, coherent, and
+              grounded in who you&apos;re becoming.
+            </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                lineHeight: theme.typography.lineHeights.relaxed,
+              }}
+            >
+              TRI is not about quick fixes or surface-level hacks. It&apos;s
+              about cultivating a deeper relationship with yourself through
+              resonance — learning to listen to the subtle cues of what feels
+              right, and building an identity that reflects that resonance in
+              daily life.
+            </Typography>
+          </ContentSection>
+        </FadeUp>
 
-      {/* How TRI Works Section */}
-      <FadeUp delay={0.2}>
-        <ContentSection
-          backgroundColor={theme.palette.neutralLighterAlt}
-          padding={true}
-          borderRadius={true}
-        >
-          <Typography
-            variant='h3'
-            style={{
-              color: theme.palette.neutralPrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: '2.25rem',
-            }}
+        {/* How TRI Works Section */}
+        <FadeUp delay={0.2}>
+          <ContentSection
+            backgroundColor={theme.palette.neutralLighterAlt}
+            padding={true}
+            borderRadius={true}
           >
-            How TRI Works
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.l,
-            }}
-          >
-            Explore the core pathways designed to help identity become a lived,
-            repeatable practice.
-          </Typography>
+            <Typography
+              variant='h3'
+              style={{
+                color: theme.palette.neutralPrimary,
+                marginBottom: theme.spacing.m,
+                fontSize: '2.25rem',
+              }}
+            >
+              How TRI Works
+            </Typography>
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                marginBottom: theme.spacing.l,
+              }}
+            >
+              Explore the core pathways designed to help identity become a
+              lived, repeatable practice.
+            </Typography>
 
-          <CardGrid
-            cards={triWorksCards}
-            columns={3}
-            animationDelay={0.25}
-            animationStagger={0.05}
-          />
-        </ContentSection>
-      </FadeUp>
+            <CardGrid
+              cards={triWorksCards}
+              columns={3}
+              animationDelay={0.25}
+              animationStagger={0.05}
+            />
+          </ContentSection>
+        </FadeUp>
 
-      {/* Latest TRI Content Section */}
-      <FadeUp delay={0.4}>
-        <ContentSection>
-          <SectionHeader
-            title='Latest TRI Content'
-            subtitle='Auto-populated from markdown metadata in the Resonant Identity content stream.'
-            cta={{
-              label: 'Open TRI Library',
-              onClick: () => router.push('/podcasts/theresonantid/library'),
-              icon: 'Library',
-              iconPosition: 'left',
-              variant: 'primary',
-            }}
-          />
+        {/* Latest TRI Content Section */}
+        <FadeUp delay={0.4}>
+          <ContentSection>
+            <SectionHeader
+              title='Latest TRI Content'
+              subtitle='Auto-populated from markdown metadata in the Resonant Identity content stream.'
+              cta={{
+                label: 'Open TRI Library',
+                onClick: () => router.push('/podcasts/theresonantid/library'),
+                icon: 'Library',
+                iconPosition: 'left',
+                variant: 'primary',
+              }}
+            />
 
-          <FilteredContentList posts={triPosts} limit={6} />
-        </ContentSection>
-      </FadeUp>
-    </TRILayout>
+            <FilteredContentList posts={triPosts} limit={6} />
+          </ContentSection>
+        </FadeUp>
+      </TRILayout>
+
+      {selectedEpisode && (
+        <EpisodeModal
+          episode={selectedEpisode}
+          onDismiss={() => setSelectedEpisode(null)}
+        />
+      )}
+    </>
   );
 }

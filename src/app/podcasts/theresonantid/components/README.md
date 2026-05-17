@@ -27,27 +27,52 @@ import { TRILayout } from '../components';
 
 ### 2. **HeroSimple**
 
-Hero section with title, subtitle, and optional back arrow navigation.
+Hero section with title, subtitle, optional back arrow navigation, and **optional latest episode callout**.
 
 ```tsx
 import { HeroSimple } from '../components';
+import type { PodcastEpisode } from '@/app/podcasts/types';
 
+// With latest episode callout
 <HeroSimple
   title='The Resonant Identity'
   subtitle='A living extension of the Resonance Core Framework'
   backArrow={true}
   backArrowPath='/podcasts/theresonantid'
   animationDelay={0}
-/>;
+  latestEpisode={latestEpisode}
+  onPlayLatestEpisode={() => setSelectedEpisode(latestEpisode)}
+  episodesLoading={false}
+/>
+
+// Without latest episode callout
+<HeroSimple
+  title='Page Title'
+  subtitle='Page subtitle'
+  animationDelay={0}
+/>
 ```
 
 **Props:**
 
 - `title: string` - Hero title (required)
 - `subtitle?: string` - Hero subtitle
+- `description?: string` - Additional description text
 - `backArrow?: boolean` - Show back arrow navigation
 - `backArrowPath?: string` - Back arrow destination URL
 - `animationDelay?: number` - FadeUp animation delay (default: 0)
+- `latestEpisode?: PodcastEpisode | null` - Latest podcast episode for featured callout
+- `onPlayLatestEpisode?: () => void` - Handler when user clicks "Listen Now"
+- `episodesLoading?: boolean` - Loading state for episodes (default: false)
+
+**Latest Episode Callout:**
+
+When `latestEpisode` and `onPlayLatestEpisode` are provided, a featured callout appears below the hero with:
+
+- Episode title as the subtitle
+- "Listen Now" button that triggers `onPlayLatestEpisode`
+- Accent variant styling for visual prominence
+- Only displays after episodes finish loading (`!episodesLoading`)
 
 ---
 
@@ -189,10 +214,13 @@ See [page.client.tsx](../about/page.client.tsx) for a complete implementation ex
 ```tsx
 'use client';
 
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FadeUp } from '@/animations/fade-animations';
+import { getApiEndpoint } from '@/lib/getApiUrl';
+import type { PodcastEpisode } from '@/app/podcasts/types';
 import {
   TRILayout,
   HeroSimple,
@@ -206,6 +234,40 @@ import {
 export function MyTRIPageClient({ triPosts }: { triPosts: BlogPost[] }) {
   const { theme } = useAppTheme();
   const router = useRouter();
+
+  // Podcast episode state for featured callout
+  const [episodes, setEpisodes] = React.useState<PodcastEpisode[]>([]);
+  const [episodesLoading, setEpisodesLoading] = React.useState(true);
+  const [selectedEpisode, setSelectedEpisode] =
+    React.useState<PodcastEpisode | null>(null);
+
+  // Fetch podcast episodes
+  React.useEffect(() => {
+    let cancelled = false;
+
+    async function fetchEpisodes() {
+      try {
+        const endpoint = getApiEndpoint('/api/podcasts/episodes');
+        const response = await fetch(endpoint);
+        if (!response.ok) throw new Error(`Failed to fetch episodes`);
+        const data = await response.json();
+        if (!cancelled) {
+          setEpisodes(data.episodes || []);
+          setEpisodesLoading(false);
+        }
+      } catch (err) {
+        console.error('Error fetching podcast episodes:', err);
+        if (!cancelled) setEpisodesLoading(false);
+      }
+    }
+
+    fetchEpisodes();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const latestEpisode = episodes.length > 0 ? episodes[0] : null;
 
   // Configuration: Hero Section
   const heroConfig = {
@@ -228,55 +290,75 @@ export function MyTRIPageClient({ triPosts }: { triPosts: BlogPost[] }) {
   ];
 
   return (
-    <TRILayout tabletPortraitLayout='side-by-side'>
-      {/* Hero Section */}
-      <HeroSimple {...heroConfig} animationDelay={0} />
+    <>
+      <TRILayout tabletPortraitLayout='side-by-side'>
+        {/* Hero Section with Latest Episode Callout */}
+        <HeroSimple
+          {...heroConfig}
+          animationDelay={0}
+          latestEpisode={latestEpisode}
+          onPlayLatestEpisode={() =>
+            latestEpisode && setSelectedEpisode(latestEpisode)
+          }
+          episodesLoading={episodesLoading}
+        />
 
-      {/* Introduction Section */}
-      <FadeUp delay={0.1}>
-        <ContentSection>
-          <Typography variant='h2'>Section Title</Typography>
-          <Typography variant='p'>Section content...</Typography>
-        </ContentSection>
-      </FadeUp>
+        {/* Introduction Section */}
+        <FadeUp delay={0.1}>
+          <ContentSection>
+            <Typography variant='h2'>Section Title</Typography>
+            <Typography variant='p'>Section content...</Typography>
+          </ContentSection>
+        </FadeUp>
 
-      {/* Features Section */}
-      <FadeUp delay={0.2}>
-        <ContentSection
-          backgroundColor={theme.palette.neutralLighterAlt}
-          padding={true}
-          borderRadius={true}
-        >
-          <Typography variant='h2'>Features</Typography>
-          <CardGrid
-            cards={featureCards}
-            columns={3}
-            animationDelay={0.25}
-            animationStagger={0.05}
-          />
-        </ContentSection>
-      </FadeUp>
+        {/* Features Section */}
+        <FadeUp delay={0.2}>
+          <ContentSection
+            backgroundColor={theme.palette.neutralLighterAlt}
+            padding={true}
+            borderRadius={true}
+          >
+            <Typography variant='h2'>Features</Typography>
+            <CardGrid
+              cards={featureCards}
+              columns={3}
+              animationDelay={0.25}
+              animationStagger={0.05}
+            />
+          </ContentSection>
+        </FadeUp>
 
-      {/* Content List Section */}
-      <FadeUp delay={0.4}>
-        <ContentSection>
-          <SectionHeader
-            title='Latest Content'
-            subtitle='Auto-populated from markdown'
-            cta={{
-              label: 'View All',
-              onClick: () => router.push('/library'),
-              icon: 'Library',
-              iconPosition: 'left',
-              variant: 'primary',
-            }}
-          />
-          <FilteredContentList posts={triPosts} limit={6} />
-        </ContentSection>
-      </FadeUp>
-    </TRILayout>
+        {/* Content List Section */}
+        <FadeUp delay={0.4}>
+          <ContentSection>
+            <SectionHeader
+              title='Latest Content'
+              subtitle='Auto-populated from markdown'
+              cta={{
+                label: 'View All',
+                onClick: () => router.push('/library'),
+                icon: 'Library',
+                iconPosition: 'left',
+                variant: 'primary',
+              }}
+            />
+            <FilteredContentList posts={triPosts} limit={6} />
+          </ContentSection>
+        </FadeUp>
+      </TRILayout>
+
+      {/* Episode Modal - automatically shows when user clicks "Listen Now" */}
+      {selectedEpisode && (
+        <PodcastDetailModal
+          episode={selectedEpisode}
+          onDismiss={() => setSelectedEpisode(null)}
+        />
+      )}
+    </>
   );
 }
+
+// Note: PodcastDetailModal implementation is in page.client.tsx
 ```
 
 ---

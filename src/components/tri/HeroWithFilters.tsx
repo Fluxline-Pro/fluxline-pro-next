@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { useAppTheme } from '../../theme/hooks/useAppTheme';
 import { HeroSimple, HeroSimpleProps } from './HeroSimple';
 import { TagChip } from './TagChip';

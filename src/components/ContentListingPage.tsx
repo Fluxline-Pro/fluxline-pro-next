@@ -109,6 +109,9 @@ export interface ContentListingPageProps {
   onClearFilters?: () => void;
   /** Set true when wrapper-specific filters (category, tag, etc.) are active */
   hasActiveFilters?: boolean;
+
+  /** Extra content rendered inside the Hero (below description/filters) */
+  heroChildren?: React.ReactNode;
 }
 
 /**
@@ -156,6 +159,7 @@ export function ContentListingPage({
   onClearFilters,
   hasActiveFilters = false,
   availableViewTypes = ['grid', 'small-tile', 'large-tile'],
+  heroChildren,
 }: ContentListingPageProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
@@ -421,7 +425,9 @@ export function ContentListingPage({
           filters={renderFilters()}
           backArrow={backArrow}
           backArrowPath={backArrowPath}
-        />
+        >
+          {heroChildren}
+        </Hero>
 
         {/* Results Count */}
         {resultsMessage && (

@@ -16,3 +16,6 @@ export type { CardGridProps, CardGridItem } from './CardGrid';
 
 export { FilteredContentList } from './FilteredContentList';
 export type { FilteredContentListProps } from './FilteredContentList';
+
+export { EpisodeModal } from './EpisodeModal';
+export { useTRILatestEpisode } from './useTRILatestEpisode';
