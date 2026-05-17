@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Identity Challenges — The Resonant Identity',
     description:
       'Structured 7-day challenges for identity coherence from The Resonant Identity.',
-    url: 'https://www.fluxline.pro/blog/resonant-identity/challenges',
+    url: 'https://www.fluxline.pro/podcasts/theresonantid/challenges',
     siteName: 'Fluxline',
     type: 'website',
     images: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     images: ['/images/TheResonantIdentity_Logo.png'],
   },
   alternates: {
-    canonical: '/blog/resonant-identity/challenges',
+    canonical: '/podcasts/theresonantid/challenges',
   },
   robots: {
     index: true,
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 
 /**
  * Resonant Identity Challenges Page — Server Component
- * URL: /blog/resonant-identity/challenges
+ * URL: /podcasts/theresonantid/challenges
  *
  * Loads all blog posts in the "Resonant Identity" category that carry
  * the "Identity Challenge" tag, serializes them for safe Server→Client

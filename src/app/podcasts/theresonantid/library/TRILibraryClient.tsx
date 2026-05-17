@@ -292,7 +292,7 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
         title='Resonant Identity Library'
         iconName='Library'
         description='All articles, challenges, and interactive demos from The Resonant Identity — a living extension of the Resonance Core Framework™. Use the tag filters to explore content by type or topic.'
-        basePath='/blog'
+        basePath='/podcasts/theresonantid/library'
         cards={cards}
         filters={filters}
         resultsMessage={resultsMessage}
