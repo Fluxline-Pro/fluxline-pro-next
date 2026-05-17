@@ -1134,6 +1134,7 @@ function TRISection({
           fontSize: '0.9375rem',
           lineHeight: 1.6,
           marginTop: 0,
+          maxWidth: '600px',
         }}
       >
         {description}
@@ -1201,6 +1202,7 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
           : theme.palette.neutralLighter,
         transition: 'all 0.2s ease',
         textDecoration: 'none',
+        maxWidth: '325px', // need to remove this value once we have 2 or more posts on all three sections and can rely on the grid to manage card widths
         transform: hovered ? 'translateY(-2px)' : 'none',
         boxShadow: hovered ? theme.effects.elevation4 : 'none',
       }}
