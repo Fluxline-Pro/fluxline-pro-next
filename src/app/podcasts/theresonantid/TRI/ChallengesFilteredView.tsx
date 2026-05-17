@@ -139,17 +139,28 @@ export function ChallengesFilteredView({
 
   // ── Tag chips (rendered above the grid as customSection) ────────────────────
   const tagChips = (
-    <div
-      style={{
-        display: 'flex',
-        gap: theme.spacing.s2,
-        flexWrap: 'wrap',
-        paddingBottom: theme.spacing.m,
-        marginTop: theme.spacing.l,
-      }}
-      role='group'
-      aria-label='Filter challenges by tag'
-    >
+    <div style={{ marginTop: theme.spacing.l }}>
+      <Typography
+        variant='h3'
+        style={{
+          color: theme.palette.themePrimary,
+          textAlign: 'left',
+          marginBottom: theme.spacing.m,
+          marginTop: theme.spacing.xxxl,
+        }}
+      >
+        All Challenges
+      </Typography>
+      <div
+        style={{
+          display: 'flex',
+          gap: theme.spacing.s2,
+          flexWrap: 'wrap',
+          paddingBottom: theme.spacing.m,
+        }}
+        role='group'
+        aria-label='Filter challenges by tag'
+      >
       <TagChip
         label='All Challenges'
         isActive={!selectedTag}
@@ -165,6 +176,7 @@ export function ChallengesFilteredView({
           theme={theme}
         />
       ))}
+      </div>
     </div>
   );
 
