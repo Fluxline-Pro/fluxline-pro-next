@@ -17,6 +17,14 @@ export interface TRIPost {
   publishedDate: string; // ISO date string
 }
 
+/**
+ * Challenge post — extends TRIPost with the `featured` flag from blog frontmatter.
+ * Used by ChallengesFilteredView and the /blog/resonant-identity/challenges page.
+ */
+export interface ChallengePost extends TRIPost {
+  featured?: boolean;
+}
+
 export interface PodcastEpisode {
   id: string;
   slug: string;
