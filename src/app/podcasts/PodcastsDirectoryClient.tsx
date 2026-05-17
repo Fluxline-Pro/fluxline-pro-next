@@ -7,7 +7,6 @@ import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Hero } from '@/theme/components/hero/Hero';
 import { FormButton } from '@/theme/components/form';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.png';
 import Image from 'next/image';
@@ -157,9 +156,10 @@ export function PodcastsDirectoryClient() {
                   size='large'
                   icon='Info'
                   iconPosition='left'
+                  aria-label='Learn About The Resonant Identity Podcast'
                   onClick={() => router.push('/podcasts/theresonantid/about')}
                 >
-                  About TRI
+                  About The Resonant Identity
                 </FormButton>
               </div>
             </div>
@@ -167,7 +167,7 @@ export function PodcastsDirectoryClient() {
         </div>
 
         {/* Empty state message for future podcasts */}
-        <div
+        {/* <div
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -193,7 +193,7 @@ export function PodcastsDirectoryClient() {
           >
             More podcasts coming soon.
           </Typography>
-        </div>
+        </div> */}
       </div>
     </UnifiedPageWrapper>
   );

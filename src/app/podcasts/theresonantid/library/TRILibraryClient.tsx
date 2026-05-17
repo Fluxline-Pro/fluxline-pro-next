@@ -8,6 +8,8 @@ import {
 } from '@/components/ContentListingPage';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { Callout } from '@/theme/components/callout';
+import { FormButton } from '@/theme/components/form/FormButton';
 import { TRIPost } from '@/app/podcasts/types';
 import {
   TAG_GROUPS,
@@ -15,6 +17,7 @@ import {
   normalizeTag,
   getContentTypeTag,
 } from '../lib/taxonomy';
+import { useTRILatestEpisode, EpisodeModal } from '../TRI';
 
 interface TRILibraryClientProps {
   /** Serialized blog posts with category "Resonant Identity" */
@@ -32,6 +35,13 @@ interface TRILibraryClientProps {
 export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
   const { theme } = useAppTheme();
   const router = useRouter();
+
+  const {
+    latestEpisode,
+    episodesLoading,
+    selectedEpisode,
+    setSelectedEpisode,
+  } = useTRILatestEpisode();
   const [selectedContentTypes, setSelectedContentTypes] = React.useState<
     string[]
   >([]);
@@ -148,86 +158,92 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
       role='group'
       aria-label='Filter by tag'
     >
-      <TagChip
-        label='All Content'
-        isActive={
-          selectedContentTypes.length === 0 && selectedTopics.length === 0
-        }
-        onClick={() => {
-          setSelectedContentTypes([]);
-          setSelectedTopics([]);
-        }}
-        theme={theme}
-      />
-      {availableContentTypes.map((tag) => (
-        <TagChip
-          key={tag}
-          label={tag}
-          isActive={selectedContentTypes.includes(tag)}
-          onClick={() => {
-            if (selectedContentTypes.includes(tag)) {
-              setSelectedContentTypes(
-                selectedContentTypes.filter((t) => t !== tag)
-              );
-            } else {
-              setSelectedContentTypes([...selectedContentTypes, tag]);
+      <div className='flex-column gap-2 sm:flex-row'>
+        <div className='mb-4 flex-row gap-2'>
+          <TagChip
+            label='All Content'
+            isActive={
+              selectedContentTypes.length === 0 && selectedTopics.length === 0
             }
-          }}
-          theme={theme}
-        />
-      ))}
-      {availableTopics.map((tag) => (
-        <TagChip
-          key={tag}
-          label={tag}
-          isActive={selectedTopics.includes(tag)}
-          onClick={() => {
-            if (selectedTopics.includes(tag)) {
-              setSelectedTopics(selectedTopics.filter((t) => t !== tag));
-            } else {
-              setSelectedTopics([...selectedTopics, tag]);
-            }
-          }}
-          theme={theme}
-        />
-      ))}
-      {(selectedContentTypes.length > 0 || selectedTopics.length > 0) && (
-        <button
-          onClick={() => {
-            setSelectedContentTypes([]);
-            setSelectedTopics([]);
-          }}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            whiteSpace: 'nowrap',
-            cursor: 'pointer',
-            border: `1px solid ${theme.palette.themePrimary}`,
-            borderRadius: '999px',
-            padding: `${theme.spacing.s2} ${theme.spacing.m}`,
-            backgroundColor: 'transparent',
-            transition: 'all 0.15s ease',
-            outline: 'none',
-            marginTop: theme.spacing.l,
-          }}
-          aria-label='Clear all tag selections'
-        >
-          <Typography
-            variant='caption'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '0.8125rem',
-              fontWeight: 600,
-              transition: 'color 0.15s ease',
-              margin: 0,
-              whiteSpace: 'nowrap',
+            onClick={() => {
+              setSelectedContentTypes([]);
+              setSelectedTopics([]);
             }}
-          >
-            Clear Tags
-          </Typography>
-        </button>
-      )}
+            theme={theme}
+          />
+          {(selectedContentTypes.length > 0 || selectedTopics.length > 0) && (
+            <button
+              onClick={() => {
+                setSelectedContentTypes([]);
+                setSelectedTopics([]);
+              }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                whiteSpace: 'nowrap',
+                cursor: 'pointer',
+                border: `1px solid ${theme.palette.themePrimary}`,
+                borderRadius: '999px',
+                padding: `${theme.spacing.s2} ${theme.spacing.m}`,
+                backgroundColor: 'transparent',
+                transition: 'all 0.15s ease',
+                outline: 'none',
+                marginTop: theme.spacing.l,
+              }}
+              aria-label='Clear all tag selections'
+            >
+              <Typography
+                variant='caption'
+                style={{
+                  color: theme.palette.themePrimary,
+                  fontSize: '0.8125rem',
+                  fontWeight: 600,
+                  transition: 'color 0.15s ease',
+                  margin: 0,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Clear Tags
+              </Typography>
+            </button>
+          )}
+        </div>
+        <div>
+          {availableContentTypes.map((tag) => (
+            <TagChip
+              key={tag}
+              label={tag}
+              isActive={selectedContentTypes.includes(tag)}
+              onClick={() => {
+                if (selectedContentTypes.includes(tag)) {
+                  setSelectedContentTypes(
+                    selectedContentTypes.filter((t) => t !== tag)
+                  );
+                } else {
+                  setSelectedContentTypes([...selectedContentTypes, tag]);
+                }
+              }}
+              theme={theme}
+            />
+          ))}
+          {availableTopics.map((tag) => (
+            <TagChip
+              key={tag}
+              label={tag}
+              isActive={selectedTopics.includes(tag)}
+              onClick={() => {
+                if (selectedTopics.includes(tag)) {
+                  setSelectedTopics(selectedTopics.filter((t) => t !== tag));
+                } else {
+                  setSelectedTopics([...selectedTopics, tag]);
+                }
+              }}
+              theme={theme}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 
@@ -247,36 +263,70 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
     return `Showing ${count} ${article}${filterText}`;
   })();
 
+  const episodeCallout =
+    !episodesLoading && latestEpisode ? (
+      <div className='pt-8'>
+        <Callout
+          variant='accent'
+          title='Listen to the Most Recent Episode'
+          subtitle={latestEpisode.episode_title || 'Start listening now'}
+          action={
+            <FormButton
+              variant='secondary'
+              size='large'
+              icon='Play'
+              iconPosition='left'
+              onClick={() => setSelectedEpisode(latestEpisode)}
+              aria-label='Play most recent episode'
+            >
+              Listen Now
+            </FormButton>
+          }
+        />
+      </div>
+    ) : null;
+
   return (
-    <ContentListingPage
-      title='Resonant Identity Library'
-      iconName='Library'
-      description='All articles, challenges, and interactive demos from The Resonant Identity — a living extension of the Resonance Core Framework™. Use the tag filters to explore content by type or topic.'
-      basePath='/blog'
-      cards={cards}
-      filters={filters}
-      resultsMessage={resultsMessage}
-      emptyStateTitle='No content found'
-      emptyStateMessage='Try selecting different filters to see more content.'
-      backArrow={true}
-      backArrowPath='/podcasts/theresonantid'
-      hasActiveFilters={
-        selectedContentTypes.length > 0 || selectedTopics.length > 0
-      }
-      onClearFilters={() => {
-        setSelectedContentTypes([]);
-        setSelectedTopics([]);
-      }}
-      customSection={tagChips}
-      onCardClick={(slug) => router.push(`/blog/${slug}`)}
-      availableViewTypes={['small-tile', 'large-tile']}
-    />
+    <>
+      <ContentListingPage
+        title='Resonant Identity Library'
+        iconName='Library'
+        description='All articles, challenges, and interactive demos from The Resonant Identity — a living extension of the Resonance Core Framework™. Use the tag filters to explore content by type or topic.'
+        basePath='/blog'
+        cards={cards}
+        filters={filters}
+        resultsMessage={resultsMessage}
+        emptyStateTitle='No content found'
+        emptyStateMessage='Try selecting different filters to see more content.'
+        backArrow={true}
+        backArrowPath='/podcasts/theresonantid'
+        hasActiveFilters={
+          selectedContentTypes.length > 0 || selectedTopics.length > 0
+        }
+        onClearFilters={() => {
+          setSelectedContentTypes([]);
+          setSelectedTopics([]);
+        }}
+        customSection={tagChips}
+        onCardClick={(slug) => router.push(`/blog/${slug}`)}
+        availableViewTypes={['small-tile', 'large-tile']}
+        heroChildren={episodeCallout}
+      />
+
+      {selectedEpisode && (
+        <EpisodeModal
+          episode={selectedEpisode}
+          onDismiss={() => setSelectedEpisode(null)}
+        />
+      )}
+    </>
   );
 }
 
 // ─── TagChip helper ───────────────────────────────────────────────────────────
 
 interface TagChipProps {
+  className?: string;
   label: string;
   isActive: boolean;
   onClick: () => void;
@@ -309,7 +359,7 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
               : theme.palette.neutralQuaternary
         }`,
         borderRadius: '999px',
-        padding: `${theme.spacing.s2} ${theme.spacing.m}`,
+        padding: `${theme.spacing.s1} ${theme.spacing.m}`,
         backgroundColor: isActive
           ? theme.palette.themePrimary
           : hovered

@@ -860,9 +860,9 @@ export function PodcastListingClient({
                 icon='ChevronRight'
                 iconPosition='right'
                 href='/podcasts/theresonantid/about'
-                aria-label='Learn about The Resonant Identity'
+                aria-label='About The Resonant Identity Podcast'
               >
-                About TRI
+                About The Resonant Identity
               </FormButton>
             }
           />
@@ -1092,7 +1092,13 @@ function TRISection({
   const gridColumns = isMobile ? 1 : Math.min(posts.length, 3);
 
   return (
-    <section className='space-y-6'>
+    <section
+      className='space-y-8 rounded-lg p-6 mb-6'
+      style={{
+        backgroundColor: theme.palette.neutralDark,
+        borderTop: `2px solid ${theme.palette.neutralQuaternaryAlt}`,
+      }}
+    >
       {/* Section header */}
       <div
         style={{
@@ -1104,15 +1110,17 @@ function TRISection({
         <FluentIcon
           iconName={iconName}
           size='medium'
-          color={theme.palette.themeSecondary}
+          color={theme.palette.themePrimary}
+          style={{ marginRight: theme.spacing.s }}
         />
         <Typography
           variant='h3'
           style={{
-            color: theme.palette.neutralPrimary,
-            fontSize: '1.25rem',
+            color: theme.palette.themePrimary,
+            fontSize: '1.5rem',
             fontWeight: theme.typography.fontWeights.semiBold,
             textTransform: 'unset',
+            marginBottom: `${theme.spacing.s1}`,
           }}
         >
           {title}
@@ -1126,6 +1134,7 @@ function TRISection({
           fontSize: '0.9375rem',
           lineHeight: 1.6,
           marginTop: 0,
+          maxWidth: '600px',
         }}
       >
         {description}
@@ -1145,18 +1154,16 @@ function TRISection({
       </div>
 
       {/* View All button */}
-      <div>
-        <FormButton
-          variant='secondary'
-          size='small'
-          icon='ChevronRight'
-          iconPosition='right'
-          onClick={() => router.push(viewAllHref)}
-          aria-label={viewAllLabel}
-        >
-          {viewAllLabel}
-        </FormButton>
-      </div>
+      <FormButton
+        variant='secondary'
+        size='medium'
+        icon='ChevronRight'
+        iconPosition='right'
+        onClick={() => router.push(viewAllHref)}
+        aria-label={viewAllLabel}
+      >
+        {viewAllLabel}
+      </FormButton>
     </section>
   );
 }
@@ -1189,19 +1196,27 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
         gap: theme.spacing.s2,
         padding: theme.spacing.m,
         borderRadius: theme.borderRadius.container.medium,
-        border: `1px solid ${hovered ? theme.palette.themeSecondary : theme.palette.neutralQuaternaryAlt}`,
+        border: `1px solid ${hovered ? theme.palette.themeSecondary : theme.palette.themePrimary}`,
         backgroundColor: hovered
           ? theme.palette.neutralLighterAlt
-          : 'transparent',
+          : theme.palette.neutralLighter,
         transition: 'all 0.2s ease',
         textDecoration: 'none',
+        maxWidth: '325px', // need to remove this value once we have 2 or more posts on all three sections and can rely on the grid to manage card widths
         transform: hovered ? 'translateY(-2px)' : 'none',
         boxShadow: hovered ? theme.effects.elevation4 : 'none',
       }}
       aria-label={`Read: ${post.title}`}
     >
       {/* Tag chips */}
-      <div style={{ display: 'flex', gap: theme.spacing.s2, flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: theme.spacing.s,
+          marginBottom: theme.spacing.s,
+          flexWrap: 'wrap',
+        }}
+      >
         {post.tags.slice(0, 2).map((tag) => (
           <span
             key={tag}
@@ -1210,7 +1225,7 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
               fontWeight: 600,
               color: theme.palette.themeSecondary,
               backgroundColor: theme.palette.neutralLighter,
-              padding: `2px ${theme.spacing.s2}`,
+              padding: `2px ${theme.spacing.s}`,
               borderRadius: '999px',
               textTransform: 'uppercase',
               letterSpacing: '0.4px',
@@ -1223,16 +1238,16 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
 
       {/* Title */}
       <Typography
-        variant='h4'
+        variant='h3'
         style={{
           color: hovered
-            ? theme.palette.themePrimary
-            : theme.palette.neutralPrimary,
-          fontSize: '1rem',
+            ? theme.palette.themeSecondary
+            : theme.palette.themePrimary,
+          fontSize: '1.25rem',
           fontWeight: theme.typography.fontWeights.semiBold,
           transition: 'color 0.2s ease',
           textTransform: 'unset',
-          margin: 0,
+          margin: `0 0 ${theme.spacing.s1} 0`,
         }}
       >
         {post.title}
@@ -1269,7 +1284,8 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
           variant='caption'
           style={{
             color: theme.palette.themeSecondary,
-            fontSize: '0.8rem',
+            fontSize: '0.875rem',
+            margin: `${theme.spacing.s1} 0`,
             fontWeight: 600,
           }}
         >

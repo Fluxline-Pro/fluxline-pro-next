@@ -20,6 +20,7 @@ import { TeamMemberCard } from './components/TeamMemberCard';
 import { CompanyStatistics } from './components/CompanyStatistics';
 import { CompanyTimeline } from './components/CompanyTimeline';
 import { getIconForPath } from '@/utils/navigation-icons';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import {
   TEAM_MEMBERS,
   COMPANY_STATISTICS,
@@ -30,151 +31,36 @@ import {
 export default function AboutPage() {
   const { theme } = useAppTheme();
   const router = useRouter();
+  const isMobileHook = useIsMobile();
+  const isMobile = isMobileHook; // No need for mounted check here since we're not doing animations in this component
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-8 lg:space-y-16'>
-        {/* Hero Section */}
-        <Hero
-          title='About Fluxline'
-          iconName={getIconForPath('/about')}
-          subtitle='Fluxline builds systems that work, brands that connect, and 
+    // line 39 padding was missing on mobile for some reason so only adding to this page, not the unified page wrapper component itself
+    <div style={{ padding: isMobile ? '1rem' : undefined }}>
+      <UnifiedPageWrapper layoutType='responsive-grid'>
+        <div className='space-y-8 lg:space-y-16'>
+          {/* Hero Section */}
+          <Hero
+            title='About Fluxline'
+            iconName={getIconForPath('/about')}
+            subtitle='Fluxline builds systems that work, brands that connect, and 
           practices that last'
-          description='We help individuals and businesses build with clarity and
+            description='We help individuals and businesses build with clarity and
                   purpose. Our work spans development, design, coaching, and
                   strategy — blending technical precision with emotional
                   intelligence to create systems, brands, and practices that
                   truly work.'
-        >
-          {/* Quote Callout */}
-          <Callout
-            variant='accent'
-            title="We're not done yet—but we're already extraordinary."
-            subtitle='Modular by design. Resonant by nature.'
-          />
-        </Hero>
-
-        {/* Company Statistics */}
-        <section className='space-y-8'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
-            }}
           >
-            Our Impact
-          </Typography>
-          <CompanyStatistics statistics={COMPANY_STATISTICS} />
-        </section>
+            {/* Quote Callout */}
+            <Callout
+              variant='accent'
+              title="We're not done yet—but we're already extraordinary."
+              subtitle='Modular by design. Resonant by nature.'
+            />
+          </Hero>
 
-        {/* Divider */}
-        <hr
-          style={{
-            border: 'none',
-            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            margin: `${theme.spacing.xxl} 0`,
-          }}
-        />
-
-        {/* Mission & Vision */}
-        <section className='space-y-8'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
-            }}
-          >
-            Our Mission & Vision
-          </Typography>
-
-          <div className='space-y-6'>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1.5rem',
-                fontWeight: 'bolder' as const,
-                lineHeight: theme.typography.lineHeights.tight,
-              }}
-            >
-              Fluxline is built on the belief that congruence creates momentum.
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1.125rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
-              }}
-            >
-              We build systems that integrate emotional intelligence, financial
-              clarity, and physical discipline — empowering individuals and
-              brands to work with purpose and precision.
-            </Typography>
-
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1.125rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
-              }}
-            >
-              Fluxline envisions a world where individuals and businesses become
-              intentional stewards of their growth—where identity is clarified
-              through practice, reflection, and continuous improvement.
-            </Typography>
-          </div>
-        </section>
-
-        {/* Company Values */}
-        <section className='space-y-8'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
-            }}
-          >
-            Our Values
-          </Typography>
-          <div className='grid gap-6 md:grid-cols-2 pt-1 lg:grid-cols-3'>
-            {COMPANY_VALUES.map((value) => (
-              <InteractiveCard
-                key={value.id}
-                id={value.id}
-                title={value.title}
-                description={value.description}
-                icon={value.icon}
-                iconPosition='center'
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* Divider */}
-        <hr
-          style={{
-            border: 'none',
-            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            margin: `${theme.spacing.xxl} 0`,
-          }}
-        />
-
-        {/* Journey & Team - Flex Layout */}
-        <div
-          className='flex flex-col justify-between gap-8 lg:flex-row'
-          style={{
-            gap: theme.spacing.xxl,
-          }}
-        >
-          {/* Company Timeline */}
-          <section className='space-y-8 flex-1'>
+          {/* Company Statistics */}
+          <section className='space-y-8'>
             <Typography
               variant='h2'
               style={{
@@ -183,13 +69,22 @@ export default function AboutPage() {
                 fontWeight: theme.typography.fontWeights.bold,
               }}
             >
-              Our Journey
+              Our Impact
             </Typography>
-            <CompanyTimeline events={COMPANY_TIMELINE} />
+            <CompanyStatistics statistics={COMPANY_STATISTICS} />
           </section>
 
-          {/* Team Section */}
-          <section className='space-y-8 flex-1'>
+          {/* Divider */}
+          <hr
+            style={{
+              border: 'none',
+              borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+              margin: `${theme.spacing.xxl} 0`,
+            }}
+          />
+
+          {/* Mission & Vision */}
+          <section className='space-y-8'>
             <Typography
               variant='h2'
               style={{
@@ -198,87 +93,199 @@ export default function AboutPage() {
                 fontWeight: theme.typography.fontWeights.bold,
               }}
             >
-              Our Team
+              Our Mission & Vision
             </Typography>
-            <div
+
+            <div className='space-y-6'>
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '1.5rem',
+                  fontWeight: 'bolder' as const,
+                  lineHeight: theme.typography.lineHeights.tight,
+                }}
+              >
+                Fluxline is built on the belief that congruence creates
+                momentum.
+              </Typography>
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '1.125rem',
+                  lineHeight: theme.typography.lineHeights.relaxed,
+                }}
+              >
+                We build systems that integrate emotional intelligence,
+                financial clarity, and physical discipline — empowering
+                individuals and brands to work with purpose and precision.
+              </Typography>
+
+              <Typography
+                variant='p'
+                style={{
+                  color: theme.palette.neutralSecondary,
+                  fontSize: '1.125rem',
+                  lineHeight: theme.typography.lineHeights.relaxed,
+                }}
+              >
+                Fluxline envisions a world where individuals and businesses
+                become intentional stewards of their growth—where identity is
+                clarified through practice, reflection, and continuous
+                improvement.
+              </Typography>
+            </div>
+          </section>
+
+          {/* Company Values */}
+          <section className='space-y-8'>
+            <Typography
+              variant='h2'
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                maxWidth: '400px',
+                color: theme.palette.themePrimary,
+                fontSize: '2rem',
+                fontWeight: theme.typography.fontWeights.bold,
               }}
             >
-              {TEAM_MEMBERS.map((member) => (
-                <div
-                  key={member.id}
-                  className='pt-1'
-                  style={{
-                    maxWidth: '400px',
-                    width: '100%',
-                  }}
-                >
-                  <TeamMemberCard member={member} />
-                </div>
+              Our Values
+            </Typography>
+            <div className='grid gap-6 md:grid-cols-2 pt-1 lg:grid-cols-3'>
+              {COMPANY_VALUES.map((value) => (
+                <InteractiveCard
+                  key={value.id}
+                  id={value.id}
+                  title={value.title}
+                  description={value.description}
+                  icon={value.icon}
+                  iconPosition='center'
+                />
               ))}
             </div>
           </section>
-        </div>
 
-        {/* Divider */}
-        <hr
-          style={{
-            border: 'none',
-            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            margin: `${theme.spacing.xxl} 0`,
-          }}
-        />
-
-        {/* Fluxline Ethos CTA */}
-        <Callout
-          variant='accent'
-          title='Discover the Fluxline Ethos'
-          subtitle='Modular by design. Resonant by nature.'
-          action={
-            <FormButton
-              text='Explore Our Philosophy'
-              variant='primary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => router.push('/fluxline-ethos')}
-            />
-          }
-        >
-          <Typography
-            variant='p'
+          {/* Divider */}
+          <hr
             style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
+              border: 'none',
+              borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+              margin: `${theme.spacing.xxl} 0`,
+            }}
+          />
+
+          {/* Journey & Team - Flex Layout */}
+          <div
+            className='flex flex-col justify-between gap-8 lg:flex-row'
+            style={{
+              gap: theme.spacing.xxl,
             }}
           >
-            Learn more about our philosophy, mission, and the service framework
-            that guides everything we do at Fluxline.
-          </Typography>
-        </Callout>
+            {/* Company Timeline */}
+            <section className='space-y-8 flex-1'>
+              <Typography
+                variant='h2'
+                style={{
+                  color: theme.palette.themePrimary,
+                  fontSize: '2rem',
+                  fontWeight: theme.typography.fontWeights.bold,
+                }}
+              >
+                Our Journey
+              </Typography>
+              <CompanyTimeline events={COMPANY_TIMELINE} />
+            </section>
 
-        {/* Content Navigation Callout-- move back under "Our Values" once testimonials is added back -TW */}
-        <Callout
-          variant='subtle'
-          title="See what we've been working on!"
-          subtitle='Review case studies, client work, and upcoming announcements.'
-          action={
-            <FormButton
-              text='Explore Our Content'
-              variant='primary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => router.push('/content')}
-            />
-          }
-        />
+            {/* Team Section */}
+            <section className='space-y-8 flex-1'>
+              <Typography
+                variant='h2'
+                style={{
+                  color: theme.palette.themePrimary,
+                  fontSize: '2rem',
+                  fontWeight: theme.typography.fontWeights.bold,
+                }}
+              >
+                Our Team
+              </Typography>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  maxWidth: '400px',
+                }}
+              >
+                {TEAM_MEMBERS.map((member) => (
+                  <div
+                    key={member.id}
+                    className='pt-1'
+                    style={{
+                      maxWidth: '400px',
+                      width: '100%',
+                    }}
+                  >
+                    <TeamMemberCard member={member} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
 
-        {/* Testimonials Callout -- commented out for now since no testimonials have been given -TW*
+          {/* Divider */}
+          <hr
+            style={{
+              border: 'none',
+              borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+              margin: `${theme.spacing.xxl} 0`,
+            }}
+          />
+
+          {/* Fluxline Ethos CTA */}
+          <Callout
+            variant='accent'
+            title='Discover the Fluxline Ethos'
+            subtitle='Modular by design. Resonant by nature.'
+            action={
+              <FormButton
+                text='Explore Our Philosophy'
+                variant='primary'
+                size='large'
+                icon='ChevronRight'
+                iconPosition='right'
+                onClick={() => router.push('/fluxline-ethos')}
+              />
+            }
+          >
+            <Typography
+              variant='p'
+              style={{
+                color: theme.palette.neutralSecondary,
+                fontSize: '1.125rem',
+                lineHeight: theme.typography.lineHeights.relaxed,
+              }}
+            >
+              Learn more about our philosophy, mission, and the service
+              framework that guides everything we do at Fluxline.
+            </Typography>
+          </Callout>
+
+          {/* Content Navigation Callout-- move back under "Our Values" once testimonials is added back -TW */}
+          <Callout
+            variant='subtle'
+            title="See what we've been working on!"
+            subtitle='Review case studies, client work, and upcoming announcements.'
+            action={
+              <FormButton
+                text='Explore Our Content'
+                variant='primary'
+                size='large'
+                icon='ChevronRight'
+                iconPosition='right'
+                onClick={() => router.push('/content')}
+              />
+            }
+          />
+
+          {/* Testimonials Callout -- commented out for now since no testimonials have been given -TW*
         <Callout
           variant='subtle'
           title='Hear From Our Clients'
@@ -305,9 +312,10 @@ export default function AboutPage() {
           </Typography>
         </Callout> */}
 
-        {/* Newsletter CTA */}
-        <NewsletterCTA />
-      </div>
-    </UnifiedPageWrapper>
+          {/* Newsletter CTA */}
+          <NewsletterCTA />
+        </div>
+      </UnifiedPageWrapper>
+    </div>
   );
 }

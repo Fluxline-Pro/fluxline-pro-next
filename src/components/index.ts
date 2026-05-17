@@ -28,4 +28,10 @@ export { AccessGate } from './AccessGate';
 export { NewsletterCTA } from './NewsletterCTA';
 export { NewsletterPopup } from './NewsletterPopup';
 export { ConsultationStepper } from './ConsultationStepper';
-export type { ConsultationStepperProps, LeadPayload, ServiceKey } from './ConsultationStepper';
+export type {
+  ConsultationStepperProps,
+  LeadPayload,
+  ServiceKey,
+} from './ConsultationStepper';
+
+

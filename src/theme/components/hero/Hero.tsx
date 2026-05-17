@@ -221,10 +221,10 @@ export const Hero: React.FC<HeroProps> = ({
           variant='h1'
           style={{
             color: theme.palette.themePrimary,
-            fontSize: isMobile ? '2.25rem' : 'clamp(2rem, 5vw, 3rem)',
+            fontSize: 'clamp(2rem, 5vw, 3rem)',
             fontWeight: theme.typography.fontWeights.bold,
-            lineHeight: isMobile ? '1.2' : '1.3',
-            margin: '0.25rem 0 0 0',
+            lineHeight: 'clamp(1.2, 2vw, 1.3)',
+            margin: '0.25rem 0 0',
             flex: 1,
           }}
         >

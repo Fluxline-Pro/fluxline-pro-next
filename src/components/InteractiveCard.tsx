@@ -114,7 +114,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: isCentered ? 'center' : 'stretch',
-    padding: isCentered ? '2rem 1.5rem' : '1rem',
+    padding: isCentered ? '2rem 1.5rem' : '1.25rem',
     borderRadius: theme.borderRadius.container.medium,
     border: isSelected
       ? `2px solid ${theme.palette.themePrimary}`

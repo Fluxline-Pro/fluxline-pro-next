@@ -36,6 +36,7 @@ import FluxlineLogoLightMode from '../assets/images/FluxlineLogoLightMode.png';
 import FluxlineEthos from '../assets/images/FluxlineEthos.png';
 // import FluxlineTestimonials from '../assets/images/FluxlineTestimonials.png';
 import OurServicesImage from '../assets/images/OurServices1197x1600.jpg';
+import PodcastsImage from '../assets/images/Podcasts.jpg';
 import ConsultingImage from '../assets/images/ConsultingPortrait.jpg';
 import GitHubImage from '../assets/images/GitHubPortrait.jpg';
 import EducationImage from '../assets/images/EducationTrainingPortrait.jpg';
@@ -46,7 +47,7 @@ import DesignImage from '../assets/images/Portfolio1280x1815.jpg';
 import BlogImage from '../assets/images/Blog1280x1815.png';
 import ContactImage from '../assets/images/ContactMe2400x1600.jpg';
 // import BooksImage from '../assets/images/EducationTrainingPortrait.jpg';
-import ContentImage from '../assets/images/Content1280x1815.jpg';
+import ContentImage from '../assets/images/ContentHub.jpg';
 import PortfolioImage from '../assets/images/Portfolio1280x1815.jpg';
 import TheResonantIdentityLogo from '../assets/images/TheResonantIdentity_Logo.png';
 
@@ -61,12 +62,8 @@ const getFluxlineLogo = (themeMode: ThemeMode): string => {
   return FluxlineLogoLightMode.src;
 };
 
-// Helper function to get the appropriate Content Hub image based on theme mode
-const getContentHubImage = (themeMode: ThemeMode): string => {
-  if (darkModeThemes.includes(themeMode)) {
-    return '/images/home/ContentHubDefault.jpg';
-  }
-  return '/images/home/ContentHubDefaultLight.jpg';
+const getContentHubImage = (_themeMode: ThemeMode): string => {
+  return ContentImage.src;
 };
 
 // Unified page configurations
@@ -87,7 +84,7 @@ const PAGE_CONFIGS: Record<
     imageText: 'Strategic Insights',
   },
   '/content': {
-    image: '/images/home/ContentHubDefault.jpg',
+    image: ContentImage.src,
     imageText: 'Content Hub',
   },
   '/legal': {
@@ -184,8 +181,8 @@ const PAGE_CONFIGS: Record<
     imageText: 'Press Release',
   },
   '/podcasts': {
-    image: TheResonantIdentityLogo.src,
-    imageText: '',
+    image: PodcastsImage.src,
+    imageText: 'Podcasts',
   },
   '/podcasts/theresonantid': {
     image: TheResonantIdentityLogo.src,
@@ -195,7 +192,10 @@ const PAGE_CONFIGS: Record<
     image: TheResonantIdentityLogo.src,
     imageText: '',
   },
-
+  '/podcasts/theresonantid/library': {
+    image: TheResonantIdentityLogo.src,
+    imageText: '',
+  },
   // Testimonials page hidden until client testimonials are available
   // '/testimonials': {
   //   image: FluxlineTestimonials.src,
