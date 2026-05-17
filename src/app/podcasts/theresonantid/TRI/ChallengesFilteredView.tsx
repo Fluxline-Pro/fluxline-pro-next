@@ -16,6 +16,7 @@ import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { ChallengePost } from '@/app/podcasts/types';
 import { ContentSection } from './ContentSection';
 import { SectionHeader } from './SectionHeader';
+import { Divider } from './Divider';
 
 export interface ChallengesFilteredViewProps {
   /** Challenge posts pre-filtered to category "Resonant Identity" + tag "Identity Challenge" */
@@ -139,23 +140,12 @@ export function ChallengesFilteredView({
 
   // ── Tag chips (rendered above the grid as customSection) ────────────────────
   const tagChips = (
-    <div
-      style={{
-        marginTop: theme.spacing.l,
-        borderTop: `1px solid ${theme.palette.neutralPrimary}`,
-      }}
-    >
-      <Typography
-        variant='h3'
-        style={{
-          color: theme.palette.themePrimary,
-          textAlign: 'left',
-          marginBottom: theme.spacing.m,
-          marginTop: theme.spacing.xxxl,
-        }}
-      >
-        All Challenges
-      </Typography>
+    <>
+      <Divider />
+      <SectionHeader
+        title='All Challenges'
+        style={{ marginTop: theme.spacing.l }}
+      />
       <div
         style={{
           display: 'flex',
@@ -184,7 +174,7 @@ export function ChallengesFilteredView({
           />
         ))}
       </div>
-    </div>
+    </>
   );
 
   // ── Featured challenge callout ──────────────────────────────────────────────

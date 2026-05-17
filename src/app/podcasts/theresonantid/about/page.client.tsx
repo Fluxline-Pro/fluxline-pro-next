@@ -17,6 +17,7 @@ import {
   useTRILatestEpisode,
   type CardGridItem,
 } from '../TRI';
+import { Divider } from '../TRI/Divider';
 
 /**
  * The Resonant Identity — About/Philosophy Page Client Component
@@ -95,6 +96,7 @@ export function TheResonantIdentityAboutPageClient({
 
         {/* What is TRI Section */}
         <FadeUp delay={0.1}>
+          <Divider top />
           <ContentSection>
             <SectionHeader
               isMobile={isMobile}
@@ -129,6 +131,7 @@ export function TheResonantIdentityAboutPageClient({
               daily life.
             </Typography>
           </ContentSection>
+          <Divider bottom />
         </FadeUp>
 
         {/* How TRI Works Section */}
@@ -144,7 +147,8 @@ export function TheResonantIdentityAboutPageClient({
               title='How TRI Works'
               subtitle='Explore the core pathways designed to help identity become a lived, repeatable practice.'
               isMobile={isMobile}
-              style={{ marginBottom: theme.spacing.m }}
+              isWithinCta
+              style={{ marginBottom: theme.spacing.m, marginTop: 0 }}
             />
 
             <CardGrid
@@ -158,6 +162,13 @@ export function TheResonantIdentityAboutPageClient({
 
         {/* Latest TRI Content Section */}
         <FadeUp delay={0.4}>
+          <div
+            style={{
+              borderTop: `1px solid ${theme.palette.neutralPrimary}`,
+              marginTop: theme.spacing.xxxl,
+              marginBottom: theme.spacing.m,
+            }}
+          />
           <ContentSection>
             <SectionHeader
               isMobile={isMobile}

@@ -19,7 +19,6 @@ import { getApiEndpoint } from '@/lib/getApiUrl';
 import { PodcastEpisode, PODCAST_PLATFORMS, TRIPost } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
-import GeneratedWithAIBadge from '@/components/GeneratedWithAIBadge';
 import { Callout } from '@/theme/components/callout/Callout';
 import SpreakerLogo from '@/assets/svgs/SpreakerLogo';
 import SpotifyLogo from '@/assets/svgs/SpotifyLogo';
@@ -30,6 +29,7 @@ import DeezerLogo from '@/assets/svgs/DeezerLogo';
 import PodchaserLogo from '@/assets/svgs/PodchaserLogo';
 import RSSLogo from '@/assets/svgs/RSSLogo';
 import { normalizeTag } from './theresonantid/lib/taxonomy';
+import { SectionHeader } from './theresonantid/TRI/SectionHeader';
 
 /**
  * PodcastListingClient Props
@@ -946,20 +946,18 @@ export function PodcastListingClient({
 
         {/* Episode Grid */}
         {!loading && !error && processedEpisodes.length > 0 && (
-          <div className='pt-12 pb-8'>
-            <Typography
-              variant='h5'
-              style={{
-                color: theme.palette.neutralSecondary,
-                marginBottom: theme.spacing.xl,
-              }}
-            >
-              Episodes (Showing {processedEpisodes.length}
-              {(startDate || endDate) &&
+          <div
+            className='pb-8 mt-8'
+            style={{ borderTop: `1px solid ${theme.palette.neutralPrimary}` }}
+          >
+            <SectionHeader
+              title={`All Episodes: Showing ${processedEpisodes.length} ${
+                (startDate || endDate) &&
                 processedEpisodes.length !== episodes.length &&
-                ` · ${processedEpisodes.length} matching date range`}
-              )
-            </Typography>
+                `${processedEpisodes.length} matching date range`
+                }`}
+              style={{ marginBottom: theme.spacing.l1 }}
+            />
             <AnimatePresence mode='wait'>
               <div
                 key='podcast-episodes'
@@ -990,12 +988,13 @@ export function PodcastListingClient({
         triDemos.length > 0) && (
         <div
           style={{
-            padding: isMobile ? theme.spacing.m : theme.spacing.xl,
+            padding: isMobile ? theme.spacing.m : theme.spacing.l1,
             width: '100%',
-            borderTop: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+            borderTop: `1px solid ${theme.palette.neutralPrimary}`,
           }}
         >
-          <div className='space-y-12'>
+          <SectionHeader title='Explore TRI Resources' style={{ marginTop: theme.spacing.m, marginBottom: theme.spacing.l }}/>
+          <div className='space-y-8'>
             {/* ─── A. Companion Articles ─── */}
             {triCompanionArticles.length > 0 && (
               <TRISection
@@ -1093,10 +1092,12 @@ function TRISection({
 
   return (
     <section
-      className='space-y-8 rounded-lg p-6 mb-6'
+      className='space-y-8 rounded-lg p-8 mb-6'
       style={{
         backgroundColor: theme.palette.neutralDark,
-        borderTop: `2px solid ${theme.palette.neutralQuaternaryAlt}`,
+        borderTop: `1px solid ${theme.palette.neutralPrimary}`,
+        marginTop: theme.spacing.m,
+        marginBottom: theme.spacing.xxxl,
       }}
     >
       {/* Section header */}
@@ -1105,11 +1106,12 @@ function TRISection({
           display: 'flex',
           alignItems: 'center',
           gap: theme.spacing.s1,
+          marginBottom: theme.spacing.m,
         }}
       >
         <FluentIcon
           iconName={iconName}
-          size='medium'
+          size='large'
           color={theme.palette.themePrimary}
           style={{ marginRight: theme.spacing.s }}
         />
@@ -1117,7 +1119,7 @@ function TRISection({
           variant='h3'
           style={{
             color: theme.palette.themePrimary,
-            fontSize: '1.5rem',
+            fontSize: '1.75rem',
             fontWeight: theme.typography.fontWeights.semiBold,
             textTransform: 'unset',
             marginBottom: `${theme.spacing.s1}`,

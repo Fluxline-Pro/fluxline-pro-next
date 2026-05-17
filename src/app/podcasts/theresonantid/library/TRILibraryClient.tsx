@@ -17,7 +17,7 @@ import {
   normalizeTag,
   getContentTypeTag,
 } from '../lib/taxonomy';
-import { useTRILatestEpisode, EpisodeModal } from '../TRI';
+import { useTRILatestEpisode, EpisodeModal, SectionHeader } from '../TRI';
 
 interface TRILibraryClientProps {
   /** Serialized blog posts with category "Resonant Identity" */
@@ -160,6 +160,7 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
     >
       <div className='flex-column gap-2 sm:flex-row'>
         <div className='mb-4 flex-row gap-2'>
+          <SectionHeader title='All Articles' />
           <TagChip
             label='All Content'
             isActive={
