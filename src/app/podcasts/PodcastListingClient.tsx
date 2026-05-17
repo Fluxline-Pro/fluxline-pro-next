@@ -1000,6 +1000,17 @@ export function PodcastListingClient({
               marginBottom: theme.spacing.l,
             }}
           />
+          <div style={{ marginBottom: theme.spacing.l }}>
+            <FormButton
+              variant='secondary'
+              icon='Library'
+              iconPosition='left'
+              onClick={() => router.push('/podcasts/theresonantid/library')}
+              aria-label='Access The Full Library'
+            >
+              Access The Full Library
+            </FormButton>
+          </div>
           <div className='space-y-8'>
             {/* ─── A. Companion Articles ─── */}
             {triCompanionArticles.length > 0 && (
@@ -1009,7 +1020,7 @@ export function PodcastListingClient({
                 description='Deep-dive articles paired with TRI episodes — designed to help you apply the frameworks from each episode to your own identity work.'
                 posts={triCompanionArticles.slice(0, 3)}
                 viewAllLabel='View All Articles'
-                viewAllHref='/podcasts/theresonantid/library'
+                viewAllHref='/podcasts/theresonantid/articles'
                 isMobile={isMobile}
                 theme={theme}
                 router={router}
