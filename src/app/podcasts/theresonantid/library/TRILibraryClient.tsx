@@ -17,7 +17,7 @@ import {
   normalizeTag,
   getContentTypeTag,
 } from '../lib/taxonomy';
-import { useTRILatestEpisode, EpisodeModal } from '../components';
+import { useTRILatestEpisode, EpisodeModal } from '../TRI';
 
 interface TRILibraryClientProps {
   /** Serialized blog posts with category "Resonant Identity" */

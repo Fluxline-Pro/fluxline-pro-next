@@ -16,7 +16,7 @@ import {
   EpisodeModal,
   useTRILatestEpisode,
   type CardGridItem,
-} from '../components';
+} from '../TRI';
 
 /**
  * The Resonant Identity — About/Philosophy Page Client Component
