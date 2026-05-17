@@ -5,7 +5,7 @@ import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FadeUp } from '@/animations/fade-animations';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
-import type { BlogPost } from '@/app/blog/types';
+import type { TRIPost } from '../../types';
 import {
   TRILayout,
   HeroSimple,
@@ -25,7 +25,7 @@ import {
 export function TheResonantIdentityAboutPageClient({
   triPosts,
 }: {
-  triPosts: BlogPost[];
+  triPosts: TRIPost[];
 }) {
   const { theme } = useAppTheme();
   const router = useRouter();

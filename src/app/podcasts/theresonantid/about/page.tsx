@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { TheResonantIdentityAboutPageClient } from './page.client';
 import { getFilteredBlogPosts } from '@/app/blog/lib/blogLoader';
+import type { TRIPost } from '../../types';
 
 export const metadata: Metadata = {
   title: 'About The Resonant Identity',
@@ -49,7 +50,17 @@ export const metadata: Metadata = {
  */
 export default function TheResonantIdentityAboutPage() {
   // Load TRI blog posts server-side for the content section
-  const triPosts = getFilteredBlogPosts({ category: 'Resonant Identity' });
+  const rawPosts = getFilteredBlogPosts({ category: 'Resonant Identity' });
+
+  const triPosts: TRIPost[] = rawPosts.map((post) => ({
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    imageUrl: post.imageUrl,
+    imageAlt: post.imageAlt,
+    tags: post.tags,
+    publishedDate: post.publishedDate.toISOString(),
+  }));
 
   return <TheResonantIdentityAboutPageClient triPosts={triPosts} />;
 }

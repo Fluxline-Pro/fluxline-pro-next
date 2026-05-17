@@ -3,11 +3,11 @@
 import { InteractiveCard } from '@/components/InteractiveCard';
 import { FadeUp } from '@/animations/fade-animations';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { BlogPost } from '@/app/blog/types';
 import { Typography } from '@/theme/components/typography/typography';
+import type { TRIPost } from '../../types';
 
 export interface FilteredContentListProps {
-  posts: BlogPost[];
+  posts: TRIPost[];
   basePath?: string;
   limit?: number;
 }
@@ -27,10 +27,7 @@ export function FilteredContentList({
 
   if (visiblePosts.length === 0) {
     return (
-      <Typography
-        variant='h4'
-        data-testid='tri-filtered-content-empty'
-      >
+      <Typography variant='h4' data-testid='tri-filtered-content-empty'>
         No content matched the current filters.
       </Typography>
     );
