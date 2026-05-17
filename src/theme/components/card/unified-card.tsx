@@ -96,7 +96,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const publicationLabel = publicationDateText
     ? `Published ${publicationDateText}`
     : undefined;
-  const smallTileHeight = 'clamp(150px, 16vw, 225px)';
+  const smallTileHeight = 'clamp(200px, 16vw, 275px)';
 
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);

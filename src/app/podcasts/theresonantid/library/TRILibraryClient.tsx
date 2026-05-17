@@ -359,7 +359,7 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
               : theme.palette.neutralQuaternary
         }`,
         borderRadius: '999px',
-        padding: `${theme.spacing.s2} ${theme.spacing.m}`,
+        padding: `${theme.spacing.s1} ${theme.spacing.m}`,
         backgroundColor: isActive
           ? theme.palette.themePrimary
           : hovered

@@ -64,9 +64,9 @@ export function HeroSimple({
                   icon='Play'
                   iconPosition='left'
                   onClick={onPlayLatestEpisode}
-                  aria-label='Play most recent episode'
+                  aria-label='Listen to the latest episode of The Resonant Identity'
                 >
-                  Listen Now
+                  Listen to Latest Episode
                 </FormButton>
               }
             />
