@@ -1019,7 +1019,7 @@ export function PodcastListingClient({
                 description='Structured 7-day challenges that help you build your personal resonance baseline through daily identity-focused exercises.'
                 posts={triChallenges.slice(0, 3)}
                 viewAllLabel='View All Challenges'
-                viewAllHref='/podcasts/theresonantid/library'
+                viewAllHref='/podcasts/theresonantid/challenges'
                 isMobile={isMobile}
                 theme={theme}
                 router={router}

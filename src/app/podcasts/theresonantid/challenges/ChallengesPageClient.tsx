@@ -18,9 +18,9 @@ export function ChallengesPageClient({ posts }: ChallengesPageClientProps) {
   return (
     <ChallengesFilteredView
       posts={posts}
-      basePath='/podcasts/theresonantid'
+      basePath='/blog'
       backArrowPath='/podcasts/theresonantid'
-      title='Identity Challenges'
+      title='TRI Challenges'
       description='7-day guided practices for identity coherence — structured challenges rooted in the Resonance Core Framework™.'
     />
   );

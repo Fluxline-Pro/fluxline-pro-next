@@ -45,7 +45,7 @@ export interface ChallengesFilteredViewProps {
 export function ChallengesFilteredView({
   posts,
   basePath = '/blog',
-  backArrowPath = '/blog',
+  backArrowPath = '/podcast/theresonantid',
   title = 'Identity Challenges',
   description = '7-day guided practices for identity coherence — structured challenges rooted in the Resonance Core Framework™.',
 }: ChallengesFilteredViewProps) {
@@ -145,6 +145,7 @@ export function ChallengesFilteredView({
         gap: theme.spacing.s2,
         flexWrap: 'wrap',
         paddingBottom: theme.spacing.m,
+        marginTop: theme.spacing.l,
       }}
       role='group'
       aria-label='Filter challenges by tag'
@@ -160,9 +161,7 @@ export function ChallengesFilteredView({
           key={tag}
           label={tag}
           isActive={selectedTag === tag}
-          onClick={() =>
-            setSelectedTag(selectedTag === tag ? undefined : tag)
-          }
+          onClick={() => setSelectedTag(selectedTag === tag ? undefined : tag)}
           theme={theme}
         />
       ))}
@@ -173,19 +172,24 @@ export function ChallengesFilteredView({
   const featuredSection = featuredPost ? (
     <FadeUp>
       <ContentSection
-        backgroundColor={theme.palette.neutralLighterAlt}
+        backgroundColor={theme.palette.neutralLighter}
         padding
         borderRadius
         isMobile={isMobile}
-        style={{ marginBottom: theme.spacing.l }}
+        style={{
+          marginTop: theme.spacing.xxxxl,
+          marginBottom: theme.spacing.l,
+          maxWidth: '800px',
+        }}
       >
         <SectionHeader
           title='Featured Challenge'
+          isWithinCta
           isMobile={isMobile}
           style={{ marginBottom: theme.spacing.m }}
         />
         <Callout
-          variant='subtle'
+          variant='neutral'
           title={featuredPost.title}
           subtitle={featuredPost.excerpt}
           action={
@@ -206,12 +210,13 @@ export function ChallengesFilteredView({
               color: theme.palette.neutralSecondary,
               display: 'block',
               marginTop: theme.spacing.s2,
+              textAlign: 'left',
             }}
           >
-            {format(new Date(featuredPost.publishedDate), 'MMMM d, yyyy')}
+            {format(new Date(featuredPost.publishedDate), 'MMMM d, yyyy')}<br />
             {featuredPost.tags.filter((t) => t !== 'Identity Challenge')
               .length > 0 &&
-              ` · ${featuredPost.tags
+              ` ${featuredPost.tags
                 .filter((t) => t !== 'Identity Challenge')
                 .join(' · ')}`}
           </Typography>
@@ -225,7 +230,7 @@ export function ChallengesFilteredView({
     <div className='pt-8'>
       <Callout
         variant='accent'
-        title='Start the Most Recent Challenge'
+        title='Start the Latest 7-day Challenge'
         subtitle={newestChallenge.title}
         action={
           <FormButton
@@ -233,12 +238,10 @@ export function ChallengesFilteredView({
             size='large'
             icon='FitPage'
             iconPosition='left'
-            onClick={() =>
-              router.push(`${basePath}/${newestChallenge.slug}`)
-            }
+            onClick={() => router.push(`${basePath}/${newestChallenge.slug}`)}
             aria-label={`Start the most recent challenge: ${newestChallenge.title}`}
           >
-            Start Challenge
+            Start the Latest Challenge
           </FormButton>
         }
       />
@@ -326,7 +329,7 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
             : hovered
               ? theme.palette.themePrimary
               : theme.palette.neutralSecondary,
-          fontSize: '0.8125rem',
+          fontSize: '0.825rem',
           fontWeight: isActive ? 600 : 400,
           transition: 'color 0.15s ease',
           margin: 0,
