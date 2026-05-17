@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
 import { InteractiveCard } from '@/components/InteractiveCard';
 import { FadeUp } from '@/animations/fade-animations';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { BlogPost } from '@/app/blog/types';
+import { Typography } from '@/theme/components/typography/typography';
 
 export interface FilteredContentListProps {
   posts: BlogPost[];
@@ -23,21 +22,17 @@ export function FilteredContentList({
   limit = 6,
 }: FilteredContentListProps) {
   const { theme } = useAppTheme();
-  const router = useRouter();
 
   const visiblePosts = posts.slice(0, limit);
 
   if (visiblePosts.length === 0) {
     return (
-      <p
-        style={{
-          color: theme.palette.neutralSecondary,
-          fontSize: theme.typography.fontSizes.sm,
-        }}
+      <Typography
+        variant='h4'
         data-testid='tri-filtered-content-empty'
       >
         No content matched the current filters.
-      </p>
+      </Typography>
     );
   }
 

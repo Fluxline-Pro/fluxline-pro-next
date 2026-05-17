@@ -8,6 +8,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 export interface SectionHeaderProps {
   title: string;
   subtitle?: string;
+  isWithinCta?: boolean;
   cta?: {
     label: string;
     onClick: () => void;
@@ -26,6 +27,7 @@ export interface SectionHeaderProps {
 export function SectionHeader({
   title,
   subtitle,
+  isWithinCta = false,
   cta,
   className,
   style,
@@ -38,8 +40,8 @@ export function SectionHeader({
       style={{
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        marginBottom: theme.spacing.l,
+        alignItems: 'flex-end',
+        marginBottom: theme.spacing.xl,
         flexWrap: 'wrap',
         gap: theme.spacing.m,
         ...style,
@@ -47,10 +49,11 @@ export function SectionHeader({
     >
       <div>
         <Typography
-          variant='h2'
+          variant='h3'
           style={{
-            color: theme.palette.neutralPrimary,
-            marginBottom: subtitle ? theme.spacing.s : 0,
+            ...style,
+            color: theme.palette.themePrimary,
+            margin: isWithinCta ? 0 : `${theme.spacing.xl} 0 0`,
           }}
         >
           {title}
@@ -60,6 +63,7 @@ export function SectionHeader({
             variant='p'
             style={{
               color: theme.palette.neutralSecondary,
+              marginTop: theme.spacing.m,
             }}
           >
             {subtitle}

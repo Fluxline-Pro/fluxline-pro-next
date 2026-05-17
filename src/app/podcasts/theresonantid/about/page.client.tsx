@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FadeUp } from '@/animations/fade-animations';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { BlogPost } from '@/app/blog/types';
 import {
   TRILayout,
@@ -29,9 +30,15 @@ export function TheResonantIdentityAboutPageClient({
 }) {
   const { theme } = useAppTheme();
   const router = useRouter();
+  const isMobileHook = useIsMobile();
+  const isMobile = isMobileHook; // No need for mounted check here since we're not doing animations in this component
 
-  const { latestEpisode, episodesLoading, selectedEpisode, setSelectedEpisode } =
-    useTRILatestEpisode();
+  const {
+    latestEpisode,
+    episodesLoading,
+    selectedEpisode,
+    setSelectedEpisode,
+  } = useTRILatestEpisode();
 
   // Configuration: Hero Section
   const heroConfig = {
@@ -89,16 +96,10 @@ export function TheResonantIdentityAboutPageClient({
         {/* What is TRI Section */}
         <FadeUp delay={0.1}>
           <ContentSection>
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.neutralPrimary,
-                marginBottom: theme.spacing.l,
-                marginTop: theme.spacing.xxxl,
-              }}
-            >
-              What is The Resonant Identity?
-            </Typography>
+            <SectionHeader
+              title='What is The Resonant Identity?'
+              style={{ marginBottom: '0.625rem' }}
+            />
             <Typography
               variant='p'
               style={{
@@ -133,29 +134,17 @@ export function TheResonantIdentityAboutPageClient({
         <FadeUp delay={0.2}>
           <ContentSection
             backgroundColor={theme.palette.neutralLighterAlt}
-            padding={true}
-            borderRadius={true}
+            padding
+            borderRadius
+            isWithinCta
+            isMobile={isMobile}
           >
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.neutralPrimary,
-                marginBottom: theme.spacing.m,
-                fontSize: '2.25rem',
-              }}
-            >
-              How TRI Works
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                marginBottom: theme.spacing.l,
-              }}
-            >
-              Explore the core pathways designed to help identity become a
-              lived, repeatable practice.
-            </Typography>
+            <SectionHeader
+              title='How TRI Works'
+              subtitle='Explore the core pathways designed to help identity become a lived, repeatable practice.'
+              isWithinCta
+              style={{ marginBottom: theme.spacing.m }}
+            />
 
             <CardGrid
               cards={triWorksCards}

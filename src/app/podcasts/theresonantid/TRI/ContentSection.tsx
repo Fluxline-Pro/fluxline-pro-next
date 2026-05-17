@@ -10,6 +10,8 @@ export interface ContentSectionProps {
   borderRadius?: boolean;
   className?: string;
   style?: React.CSSProperties;
+  isWithinCta?: boolean; // New prop to indicate if this section is within a CTA context
+  isMobile?: boolean; // Optional prop to allow mobile-specific styling if needed
 }
 
 /**
@@ -23,6 +25,8 @@ export function ContentSection({
   borderRadius = false,
   className,
   style,
+  isWithinCta = false,
+  isMobile = false,
 }: ContentSectionProps) {
   const { theme } = useAppTheme();
 
@@ -30,9 +34,9 @@ export function ContentSection({
     <section
       className={className}
       style={{
-        marginBottom: theme.spacing.xxl,
+        marginBottom: isWithinCta ? 0 : theme.spacing.xxl,
         ...(backgroundColor && { backgroundColor }),
-        ...(padding && { padding: theme.spacing.xl }),
+        ...(padding && { padding: isMobile ? theme.spacing.l : theme.spacing.xl }),
         ...(borderRadius && {
           borderRadius: theme.borderRadius.container.medium,
         }),
