@@ -863,7 +863,7 @@ export function PodcastListingClient({
                 size='large'
                 icon='ChevronRight'
                 iconPosition='right'
-                href='/podcasts/theresonantid/about'
+                onClick={() => router.push('/podcasts/theresonantid/about')}
                 aria-label='About The Resonant Identity Podcast'
               >
                 About The Resonant Identity
@@ -995,11 +995,25 @@ export function PodcastListingClient({
         >
           <SectionHeader
             title='Explore TRI Resources'
+            iconName='Library'
+            subtitle='Dive deeper into the Resonant Identity philosophy with companion articles, identity challenges, and interactive demos that complement the podcast episodes.'
             style={{
               marginTop: theme.spacing.m,
               marginBottom: theme.spacing.l,
             }}
           />
+          <div style={{ marginBottom: theme.spacing.xxl }}>
+            <FormButton
+              variant='primary'
+              icon='Library'
+              iconPosition='left'
+              fullWidth={isMobile}
+              onClick={() => router.push('/podcasts/theresonantid/library')}
+              aria-label='Explore The Full Library'
+            >
+              Explore The Full Library
+            </FormButton>
+          </div>
           <div className='space-y-8'>
             {/* ─── A. Companion Articles ─── */}
             {triCompanionArticles.length > 0 && (
@@ -1009,7 +1023,7 @@ export function PodcastListingClient({
                 description='Deep-dive articles paired with TRI episodes — designed to help you apply the frameworks from each episode to your own identity work.'
                 posts={triCompanionArticles.slice(0, 3)}
                 viewAllLabel='View All Articles'
-                viewAllHref='/podcasts/theresonantid/library'
+                viewAllHref='/podcasts/theresonantid/articles'
                 isMobile={isMobile}
                 theme={theme}
                 router={router}

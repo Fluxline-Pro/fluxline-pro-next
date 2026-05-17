@@ -20,6 +20,9 @@ export type { FilteredContentListProps } from './FilteredContentList';
 export { ChallengesFilteredView } from './ChallengesFilteredView';
 export type { ChallengesFilteredViewProps } from './ChallengesFilteredView';
 
+export { ArticlesFilteredView } from './ArticlesFilteredView';
+export type { ArticlesFilteredViewProps } from './ArticlesFilteredView';
+
 export { EpisodeModal } from './EpisodeModal';
 export { useTRILatestEpisode } from './useTRILatestEpisode';
 

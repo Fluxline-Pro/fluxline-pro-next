@@ -4,12 +4,14 @@ import React from 'react';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
 
 export interface SectionHeaderProps {
   title: string;
   subtitle?: string;
   isMobile?: boolean; // Optional prop to allow mobile-specific styling if needed
   isWithinCta?: boolean;
+  iconName?: string; // Optional icon name for the title
   cta?: {
     label: string;
     onClick: () => void;
@@ -30,6 +32,7 @@ export function SectionHeader({
   subtitle,
   isWithinCta = false,
   isMobile = false,
+  iconName,
   cta,
   className,
   style,
@@ -51,22 +54,37 @@ export function SectionHeader({
       }}
     >
       <div>
-        <Typography
-          variant='h3'
-          style={{
-            ...style,
-            color: theme.palette.themePrimary,
-            margin: isWithinCta
-              ? isMobile
-                ? `${theme.spacing.m} 0`
-                : 0
-              : isMobile
-                ? `${theme.spacing.xxl} 0 ${theme.spacing.m} 0`
-                : `${theme.spacing.xl} 0 0`,
-          }}
+        <div
+          className='flex flex-row items-center justify-start'
+          style={{ gap: theme.spacing.s1 }}
         >
-          {title}
-        </Typography>
+          {iconName && (
+            <FluentIcon
+              iconName={iconName}
+              size='large'
+              color={theme.palette.themePrimary}
+              style={{ marginRight: theme.spacing.m }}
+            />
+          )}
+          <Typography
+            variant='h3'
+            style={{
+              ...style,
+              color: theme.palette.themePrimary,
+              margin: iconName
+                ? '0'
+                : isWithinCta
+                  ? isMobile
+                    ? `${theme.spacing.m} 0`
+                    : 0
+                  : isMobile
+                    ? `${theme.spacing.xxl} 0 ${theme.spacing.m} 0`
+                    : `${theme.spacing.xl} 0 0`,
+            }}
+          >
+            {title}
+          </Typography>
+        </div>
         {subtitle && (
           <Typography
             variant='p'

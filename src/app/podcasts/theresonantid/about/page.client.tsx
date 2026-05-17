@@ -162,13 +162,7 @@ export function TheResonantIdentityAboutPageClient({
 
         {/* Latest TRI Content Section */}
         <FadeUp delay={0.4}>
-          <div
-            style={{
-              borderTop: `1px solid ${theme.palette.neutralPrimary}`,
-              marginTop: theme.spacing.xxxl,
-              marginBottom: theme.spacing.m,
-            }}
-          />
+          <Divider top />
           <ContentSection>
             <SectionHeader
               isMobile={isMobile}
@@ -182,7 +176,8 @@ export function TheResonantIdentityAboutPageClient({
                 variant: 'primary',
               }}
             />
-
+            <div className='mt-8' />
+            {/* Add spacing between header and content */}
             <FilteredContentList posts={triPosts} limit={6} />
           </ContentSection>
         </FadeUp>
