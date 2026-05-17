@@ -23,6 +23,15 @@ export type { ChallengesFilteredViewProps } from './ChallengesFilteredView';
 export { ArticlesFilteredView } from './ArticlesFilteredView';
 export type { ArticlesFilteredViewProps } from './ArticlesFilteredView';
 
+export { DemosFilteredView } from './DemosFilteredView';
+export type { DemosFilteredViewProps } from './DemosFilteredView';
+
+export { TRIContentFilteredView } from './TRIContentFilteredView';
+export type {
+  TRIContentFilteredViewProps,
+  TRIContentPost,
+} from './TRIContentFilteredView';
+
 export { EpisodeModal } from './EpisodeModal';
 export { useTRILatestEpisode } from './useTRILatestEpisode';
 

@@ -1053,7 +1053,7 @@ export function PodcastListingClient({
                 description='Hands-on tools and self-assessments that let you directly experience the Resonance Core Framework concepts in action.'
                 posts={triDemos.slice(0, 1)}
                 viewAllLabel='Explore All Demos'
-                viewAllHref='/podcasts/theresonantid/library'
+                viewAllHref='/blog/resonant-identity/demos'
                 isMobile={isMobile}
                 theme={theme}
                 router={router}
