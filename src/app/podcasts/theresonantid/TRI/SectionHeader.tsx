@@ -55,7 +55,7 @@ export function SectionHeader({
     >
       <div>
         <div
-          className='flex justify-start align-center flex-row align-center'
+          className='flex flex-row items-center justify-start'
           style={{ gap: theme.spacing.s1 }}
         >
           {iconName && (
@@ -63,7 +63,7 @@ export function SectionHeader({
               iconName={iconName}
               size='large'
               color={theme.palette.themePrimary}
-              style={{ marginRight: theme.spacing.m, marginTop: theme.spacing.s1 }}
+              style={{ marginRight: theme.spacing.m }}
             />
           )}
           <Typography
