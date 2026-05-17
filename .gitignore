@@ -67,3 +67,6 @@ playwright/.cache/
 api/local.settings.json
 api/node_modules/
 api/package-lock.json
+
+# local agent settings
+.claude/settings.local.json

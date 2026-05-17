@@ -33,26 +33,5 @@ export type {
   LeadPayload,
   ServiceKey,
 } from './ConsultationStepper';
-// Old TRI components - deprecated, moved to page-specific components
-// export {
-//   TRILayout,
-//   SectionHeader,
-//   ContentSection,
-//   LargeTileGrid,
-//   FeaturedCard,
-//   TagChip,
-//   HeroSimple,
-//   HeroWithFilters,
-//   FilteredContentList,
-// } from './tri';
-// export type {
-//   TRILayoutProps,
-//   SectionHeaderProps,
-//   ContentSectionProps,
-//   LargeTileGridProps,
-//   FeaturedCardProps,
-//   TagChipProps,
-//   HeroSimpleProps,
-//   HeroWithFiltersProps,
-//   FilteredContentListProps,
-// } from './tri';
+
+
