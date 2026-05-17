@@ -139,7 +139,12 @@ export function ChallengesFilteredView({
 
   // ── Tag chips (rendered above the grid as customSection) ────────────────────
   const tagChips = (
-    <div style={{ marginTop: theme.spacing.l }}>
+    <div
+      style={{
+        marginTop: theme.spacing.l,
+        borderTop: `1px solid ${theme.palette.neutralPrimary}`,
+      }}
+    >
       <Typography
         variant='h3'
         style={{
@@ -161,21 +166,23 @@ export function ChallengesFilteredView({
         role='group'
         aria-label='Filter challenges by tag'
       >
-      <TagChip
-        label='All Challenges'
-        isActive={!selectedTag}
-        onClick={() => setSelectedTag(undefined)}
-        theme={theme}
-      />
-      {availableTags.map((tag) => (
         <TagChip
-          key={tag}
-          label={tag}
-          isActive={selectedTag === tag}
-          onClick={() => setSelectedTag(selectedTag === tag ? undefined : tag)}
+          label='All Challenges'
+          isActive={!selectedTag}
+          onClick={() => setSelectedTag(undefined)}
           theme={theme}
         />
-      ))}
+        {availableTags.map((tag) => (
+          <TagChip
+            key={tag}
+            label={tag}
+            isActive={selectedTag === tag}
+            onClick={() =>
+              setSelectedTag(selectedTag === tag ? undefined : tag)
+            }
+            theme={theme}
+          />
+        ))}
       </div>
     </div>
   );
@@ -198,7 +205,7 @@ export function ChallengesFilteredView({
           title='Featured Challenge'
           isWithinCta
           isMobile={isMobile}
-          style={{ marginBottom: theme.spacing.m }}
+          style={{ marginBottom: theme.spacing.m, marginTop: theme.spacing.s1 }}
         />
         <Callout
           variant='neutral'
@@ -225,7 +232,8 @@ export function ChallengesFilteredView({
               textAlign: 'left',
             }}
           >
-            {format(new Date(featuredPost.publishedDate), 'MMMM d, yyyy')}<br />
+            {format(new Date(featuredPost.publishedDate), 'MMMM d, yyyy')}
+            <br />
             {featuredPost.tags.filter((t) => t !== 'Identity Challenge')
               .length > 0 &&
               ` ${featuredPost.tags
