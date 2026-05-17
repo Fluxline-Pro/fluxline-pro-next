@@ -13,7 +13,7 @@ This folder contains the scaffolding components that provide a consistent struct
 Base layout wrapper for all TRI pages. Provides responsive grid layout with optional TRI logo sidebar.
 
 ```tsx
-import { TRILayout } from '../components';
+import { TRILayout } from '../TRI';
 
 <TRILayout tabletPortraitLayout='side-by-side'>{/* Page content */}</TRILayout>;
 ```
@@ -30,7 +30,7 @@ import { TRILayout } from '../components';
 Hero section with title, subtitle, optional back arrow navigation, and **optional latest episode callout**.
 
 ```tsx
-import { HeroSimple } from '../components';
+import { HeroSimple } from '../TRI';
 import type { PodcastEpisode } from '@/app/podcasts/types';
 
 // With latest episode callout
@@ -81,7 +81,7 @@ When `latestEpisode` and `onPlayLatestEpisode` are provided, a featured callout 
 Reusable section header with title, optional subtitle, and optional CTA button.
 
 ```tsx
-import { SectionHeader } from '../components';
+import { SectionHeader } from '../TRI';
 
 <SectionHeader
   title='Latest TRI Content'
@@ -116,7 +116,7 @@ import { SectionHeader } from '../components';
 Wrapper component for content sections with consistent spacing and optional styling.
 
 ```tsx
-import { ContentSection } from '../components';
+import { ContentSection } from '../TRI';
 
 <ContentSection
   backgroundColor={theme.palette.neutralLighterAlt}
@@ -143,7 +143,7 @@ import { ContentSection } from '../components';
 Responsive grid of InteractiveCards with fade-up animations.
 
 ```tsx
-import { CardGrid, type CardGridItem } from '../components';
+import { CardGrid, type CardGridItem } from '../TRI';
 
 const cards: CardGridItem[] = [
   {
@@ -194,14 +194,14 @@ interface CardGridItem {
 Displays filtered blog posts using InteractiveCard components.
 
 ```tsx
-import { FilteredContentList } from '../components';
+import { FilteredContentList } from '../TRI';
 
 <FilteredContentList posts={triPosts} basePath='/blog' limit={6} />;
 ```
 
 **Props:**
 
-- `posts: BlogPost[]` - Array of blog posts (required)
+- `posts: TRIPost[]` - Array of serializable TRI posts (required)
 - `basePath?: string` - Base URL path for links (default: '/blog')
 - `limit?: number` - Maximum number of posts to display (default: 6)
 
@@ -221,6 +221,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { FadeUp } from '@/animations/fade-animations';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import type { PodcastEpisode } from '@/app/podcasts/types';
+import type { TRIPost } from '@/app/podcasts/types';
 import {
   TRILayout,
   HeroSimple,
@@ -229,9 +230,9 @@ import {
   CardGrid,
   FilteredContentList,
   type CardGridItem,
-} from '../components';
+} from '../TRI';
 
-export function MyTRIPageClient({ triPosts }: { triPosts: BlogPost[] }) {
+export function MyTRIPageClient({ triPosts }: { triPosts: TRIPost[] }) {
   const { theme } = useAppTheme();
   const router = useRouter();
 
@@ -458,3 +459,5 @@ See the About page implementation for a complete working example:
 
 - [page.tsx](../about/page.tsx) - Server Component (data loading)
 - [page.client.tsx](../about/page.client.tsx) - Client Component (UI with configuration)
+
+For files created inside this `TRI/` directory, import from `./`. For sibling TRI subpages such as `about/`, `library/`, or `challenges/`, import from `../TRI`.
