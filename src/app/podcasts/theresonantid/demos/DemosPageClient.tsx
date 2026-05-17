@@ -7,12 +7,19 @@ interface DemosPageClientProps {
   posts: DemoPost[];
 }
 
+/**
+ * DemosPageClient
+ *
+ * Thin client wrapper for /podcasts/theresonantid/demos.
+ * Receives serialized demo posts from the server component and passes them
+ * to the reusable DemosFilteredView.
+ */
 export function DemosPageClient({ posts }: DemosPageClientProps) {
   return (
     <DemosFilteredView
       posts={posts}
       basePath='/blog'
-      backArrowPath='/blog'
+      backArrowPath='/podcasts/theresonantid'
       title='Interactive Demos'
       description='Experience perception, distortion, and identity through interactive visuals'
     />

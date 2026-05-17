@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { getFilteredBlogPosts } from '../../lib/blogLoader';
+import { getFilteredBlogPosts } from '@/app/blog/lib/blogLoader';
 import ResonantIdentityDemosPage from './page';
 
-jest.mock('../../lib/blogLoader', () => ({
+jest.mock('@/app/blog/lib/blogLoader', () => ({
   getFilteredBlogPosts: jest.fn(),
 }));
 
@@ -13,7 +13,7 @@ jest.mock('./DemosPageClient', () => ({
   ),
 }));
 
-describe('/blog/resonant-identity/demos page', () => {
+describe('/podcasts/theresonantid/demos page', () => {
   it('loads Resonant Identity interactive demos and passes serialized posts to client', () => {
     (getFilteredBlogPosts as jest.Mock).mockReturnValue([
       {

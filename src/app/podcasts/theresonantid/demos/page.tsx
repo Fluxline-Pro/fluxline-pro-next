@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Interactive Demos — The Resonant Identity',
     description:
       'Hands-on interactive demos exploring perception, distortion, and identity.',
-    url: 'https://www.fluxline.pro/blog/resonant-identity/demos',
+    url: 'https://www.fluxline.pro/podcasts/theresonantid/demos',
     siteName: 'Fluxline',
     type: 'website',
     images: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     images: ['/images/TheResonantIdentity_Logo.png'],
   },
   alternates: {
-    canonical: '/blog/resonant-identity/demos',
+    canonical: '/podcasts/theresonantid/demos',
   },
   robots: {
     index: true,
@@ -41,6 +41,14 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Resonant Identity Demos Page — Server Component
+ * URL: /podcasts/theresonantid/demos
+ *
+ * Loads all blog posts in the "Resonant Identity" category that carry
+ * the "Interactive Demo" tag, serializes them for safe Server→Client
+ * boundary crossing, and renders DemosFilteredView via DemosPageClient.
+ */
 export default function ResonantIdentityDemosPage() {
   const rawPosts = getFilteredBlogPosts({
     category: 'Resonant Identity',
