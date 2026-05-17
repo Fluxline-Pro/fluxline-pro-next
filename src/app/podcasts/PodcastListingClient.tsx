@@ -995,16 +995,19 @@ export function PodcastListingClient({
         >
           <SectionHeader
             title='Explore TRI Resources'
+            iconName='Library'
+            subtitle='Dive deeper into the Resonant Identity philosophy with companion articles, identity challenges, and interactive demos that complement the podcast episodes.'
             style={{
               marginTop: theme.spacing.m,
               marginBottom: theme.spacing.l,
             }}
           />
-          <div style={{ marginBottom: theme.spacing.l }}>
+          <div style={{ marginBottom: theme.spacing.xxl }}>
             <FormButton
-              variant='secondary'
+              variant='primary'
               icon='Library'
               iconPosition='left'
+              fullWidth={isMobile}
               onClick={() => router.push('/podcasts/theresonantid/library')}
               aria-label='Access The Full Library'
             >
