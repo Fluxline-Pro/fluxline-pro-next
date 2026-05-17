@@ -17,6 +17,7 @@ import type { ArticlePost } from '@/app/podcasts/types';
 import { ContentSection } from './ContentSection';
 import { SectionHeader } from './SectionHeader';
 import { Divider } from './Divider';
+import { IExtendedTheme } from '@/theme';
 
 export interface ArticlesFilteredViewProps {
   posts: ArticlePost[];
@@ -246,8 +247,7 @@ interface TagChipProps {
   label: string;
   isActive: boolean;
   onClick: () => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  theme: any;
+  theme: IExtendedTheme;
 }
 
 function TagChip({ label, isActive, onClick, theme }: TagChipProps) {

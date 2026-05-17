@@ -176,7 +176,7 @@ export function TheResonantIdentityAboutPageClient({
                 variant: 'primary',
               }}
             />
-            <div className='mt-8' />{' '}
+            <div className='mt-8' />
             {/* Add spacing between header and content */}
             <FilteredContentList posts={triPosts} limit={6} />
           </ContentSection>
