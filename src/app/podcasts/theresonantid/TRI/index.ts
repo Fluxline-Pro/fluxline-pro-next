@@ -17,5 +17,14 @@ export type { CardGridProps, CardGridItem } from './CardGrid';
 export { FilteredContentList } from './FilteredContentList';
 export type { FilteredContentListProps } from './FilteredContentList';
 
+export { ChallengesFilteredView } from './ChallengesFilteredView';
+export type { ChallengesFilteredViewProps } from './ChallengesFilteredView';
+
 export { EpisodeModal } from './EpisodeModal';
 export { useTRILatestEpisode } from './useTRILatestEpisode';
+
+export { Divider } from './Divider';
+
+// /blog is where the content is found under tag "Resonant Identity"
+// setup has been placed so if a user hits back on this page, it auto sends them back to TRI library page
+// remaining URLs and content lead to /podcasts/theresonantid structure depending on the page

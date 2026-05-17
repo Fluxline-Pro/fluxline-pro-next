@@ -429,6 +429,11 @@ export function ContentListingPage({
           {heroChildren}
         </Hero>
 
+        {/* Custom Section (e.g., GitHub contributions) */}
+        {customSection && (
+          <div style={{ marginBottom: theme.spacing.xl }}>{customSection}</div>
+        )}
+
         {/* Results Count */}
         {resultsMessage && (
           <Typography
@@ -444,11 +449,6 @@ export function ContentListingPage({
               processedCards.length !== cards.length &&
               ` · ${processedCards.length} matching date range`}
           </Typography>
-        )}
-
-        {/* Custom Section (e.g., GitHub contributions) */}
-        {customSection && (
-          <div style={{ marginBottom: theme.spacing.xl }}>{customSection}</div>
         )}
 
         {/* Content Cards */}

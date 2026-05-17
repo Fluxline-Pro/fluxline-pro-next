@@ -43,7 +43,8 @@ export function SectionHeader({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
-        marginBottom: theme.spacing.xl,
+        marginBottom: theme.spacing.m,
+        marginTop: theme.spacing.xl,
         flexWrap: 'wrap',
         gap: theme.spacing.m,
         ...style,
@@ -56,7 +57,9 @@ export function SectionHeader({
             ...style,
             color: theme.palette.themePrimary,
             margin: isWithinCta
-              ? isMobile ? `${theme.spacing.m} 0` : 0
+              ? isMobile
+                ? `${theme.spacing.m} 0`
+                : 0
               : isMobile
                 ? `${theme.spacing.xxl} 0 ${theme.spacing.m} 0`
                 : `${theme.spacing.xl} 0 0`,
