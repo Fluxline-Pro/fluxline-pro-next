@@ -62,6 +62,10 @@ const getFluxlineLogo = (themeMode: ThemeMode): string => {
   return FluxlineLogoLightMode.src;
 };
 
+const getContentHubImage = (_themeMode: ThemeMode): string => {
+  return ContentImage.src;
+};
+
 // Unified page configurations
 const PAGE_CONFIGS: Record<
   string,
