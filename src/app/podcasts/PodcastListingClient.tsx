@@ -863,7 +863,7 @@ export function PodcastListingClient({
                 size='large'
                 icon='ChevronRight'
                 iconPosition='right'
-                href='/podcasts/theresonantid/about'
+                onClick={() => router.push('/podcasts/theresonantid/about')}
                 aria-label='About The Resonant Identity Podcast'
               >
                 About The Resonant Identity
@@ -1009,9 +1009,9 @@ export function PodcastListingClient({
               iconPosition='left'
               fullWidth={isMobile}
               onClick={() => router.push('/podcasts/theresonantid/library')}
-              aria-label='Access The Full Library'
+              aria-label='Explore The Full Library'
             >
-              Access The Full Library
+              Explore The Full Library
             </FormButton>
           </div>
           <div className='space-y-8'>
