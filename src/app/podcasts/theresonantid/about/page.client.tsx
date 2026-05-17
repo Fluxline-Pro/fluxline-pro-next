@@ -96,6 +96,7 @@ export function TheResonantIdentityAboutPageClient({
         <FadeUp delay={0.1}>
           <ContentSection>
             <SectionHeader
+              isMobile={isMobile}
               title='What is The Resonant Identity?'
               style={{ marginBottom: '0.625rem' }}
             />
@@ -141,7 +142,7 @@ export function TheResonantIdentityAboutPageClient({
             <SectionHeader
               title='How TRI Works'
               subtitle='Explore the core pathways designed to help identity become a lived, repeatable practice.'
-              isWithinCta
+              isMobile={isMobile}
               style={{ marginBottom: theme.spacing.m }}
             />
 
@@ -158,10 +159,11 @@ export function TheResonantIdentityAboutPageClient({
         <FadeUp delay={0.4}>
           <ContentSection>
             <SectionHeader
+              isMobile={isMobile}
               title='Latest TRI Content'
               subtitle='Auto-populated from markdown metadata in the Resonant Identity content stream.'
               cta={{
-                label: 'Open TRI Library',
+                label: 'Explore the Full Library',
                 onClick: () => router.push('/podcasts/theresonantid/library'),
                 icon: 'Library',
                 iconPosition: 'left',

@@ -8,6 +8,7 @@ import { useAppTheme } from '@/theme/hooks/useAppTheme';
 export interface SectionHeaderProps {
   title: string;
   subtitle?: string;
+  isMobile?: boolean; // Optional prop to allow mobile-specific styling if needed
   isWithinCta?: boolean;
   cta?: {
     label: string;
@@ -28,6 +29,7 @@ export function SectionHeader({
   title,
   subtitle,
   isWithinCta = false,
+  isMobile = false,
   cta,
   className,
   style,
@@ -53,7 +55,11 @@ export function SectionHeader({
           style={{
             ...style,
             color: theme.palette.themePrimary,
-            margin: isWithinCta ? 0 : `${theme.spacing.xl} 0 0`,
+            margin: isWithinCta
+              ? isMobile ? `${theme.spacing.m} 0` : 0
+              : isMobile
+                ? `${theme.spacing.xxl} 0 ${theme.spacing.m} 0`
+                : `${theme.spacing.xl} 0 0`,
           }}
         >
           {title}
