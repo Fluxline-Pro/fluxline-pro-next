@@ -731,6 +731,10 @@ export function PodcastListingClient({
   );
 
   const gridColumns = isMobile ? 1 : isTablet ? 2 : 3;
+  const dateRangeResultsSuffix =
+    (startDate || endDate) && processedEpisodes.length !== episodes.length
+      ? ` ${processedEpisodes.length} matching date range`
+      : '';
 
   // Brand colors only in light/dark mode; accessible modes use default secondary styling
   const useBrandColors =
@@ -951,11 +955,7 @@ export function PodcastListingClient({
             style={{ borderTop: `1px solid ${theme.palette.neutralPrimary}` }}
           >
             <SectionHeader
-              title={`All Episodes: Showing ${processedEpisodes.length} ${
-                (startDate || endDate) &&
-                processedEpisodes.length !== episodes.length &&
-                `${processedEpisodes.length} matching date range`
-                }`}
+              title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
               style={{ marginBottom: theme.spacing.l1 }}
             />
             <AnimatePresence mode='wait'>
@@ -993,7 +993,13 @@ export function PodcastListingClient({
             borderTop: `1px solid ${theme.palette.neutralPrimary}`,
           }}
         >
-          <SectionHeader title='Explore TRI Resources' style={{ marginTop: theme.spacing.m, marginBottom: theme.spacing.l }}/>
+          <SectionHeader
+            title='Explore TRI Resources'
+            style={{
+              marginTop: theme.spacing.m,
+              marginBottom: theme.spacing.l,
+            }}
+          />
           <div className='space-y-8'>
             {/* ─── A. Companion Articles ─── */}
             {triCompanionArticles.length > 0 && (

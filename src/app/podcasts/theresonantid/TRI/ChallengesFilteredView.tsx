@@ -40,8 +40,10 @@ export interface ChallengesFilteredViewProps {
  *  - Featured challenge callout (most recent with `featured: true`)
  *  - Full-page grid using ContentListingPage (mirrors main blog page look/feel)
  *  - Hero CTA auto-linked to the newest featured or newest-by-date challenge
+ *  - /blog is still the basepath due to taxonomy setup and blog post structure
+ *  - The /podcast/resonant-identity/challenges page takes TRI posts and filters them down by the tag "Resonant Identity"
  *
- * Used on /blog/resonant-identity/challenges and embeddable in other TRI sections.
+ * Used on /podcast/resonant-identity/challenges and embeddable in other TRI sections.
  */
 export function ChallengesFilteredView({
   posts,
