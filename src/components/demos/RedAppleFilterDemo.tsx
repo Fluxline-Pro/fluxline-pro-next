@@ -84,7 +84,7 @@ const APPLE_IMAGE_PATH =
  * filter modes. Uses `getImageFilterCss()` from `useColorVisionFilter` to apply
  * CSS filter chains that simulate different vision conditions.
  */
-export function RedAppleFilterDemo() {
+export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
   const { theme } = useAppTheme();
   const [activeMode, setActiveMode] = useState<ImageFilterMode>('normal');
   const isMobileHook = useIsMobile();
@@ -157,6 +157,20 @@ export function RedAppleFilterDemo() {
       role='region'
       aria-label='Red Apple Perception Filter Demo'
     >
+      {isModal && (
+        <Typography
+          variant='h3'
+          style={{
+            padding: theme.spacing.m,
+            color: theme.palette.themePrimary,
+            marginTop: theme.spacing.m,
+            marginBottom: theme.spacing.m,
+            marginLeft: theme.spacing.s,
+          }}
+        >
+          Red Apple Perception Demo
+        </Typography>
+      )}
       {/* ── Image panel ──────────────────────────────────────────────────────── */}
       <div style={imageWrapStyle}>
         {/* eslint-disable-next-line @next/next/no-img-element */}

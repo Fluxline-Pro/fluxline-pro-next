@@ -15,6 +15,7 @@ import {
   type SocialLinksData,
 } from '@/app/about/components/SocialLinks';
 import { ImageCarouselModal, type CarouselImage } from './ImageCarouselModal';
+import { Modal } from './Modal';
 import { GeneratedWithAIBadge } from './GeneratedWithAIBadge';
 
 /**
@@ -98,6 +99,9 @@ export interface UnifiedContentDetailConfig {
 
   // AI-generated content badge
   generatedWithAI?: boolean;
+
+  // Optional custom modal content — replaces the image carousel when the left image is clicked
+  customModalContent?: React.ReactNode;
 }
 
 interface UnifiedContentDetailProps {
@@ -885,14 +889,25 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         </div>
       </UnifiedPageWrapper>
 
-      {/* Image Carousel Modal */}
-      {imageGallery && (
-        <ImageCarouselModal
+      {/* Image Modal — custom component or standard carousel */}
+      {config.customModalContent ? (
+        <Modal
           isOpen={isCarouselOpen}
           onDismiss={handleCarouselClose}
-          images={imageGallery}
-          initialIndex={carouselInitialIndex}
-        />
+          ariaLabel='Interactive Demo'
+          maxWidth='640px'
+        >
+          {config.customModalContent}
+        </Modal>
+      ) : (
+        imageGallery && (
+          <ImageCarouselModal
+            isOpen={isCarouselOpen}
+            onDismiss={handleCarouselClose}
+            images={imageGallery}
+            initialIndex={carouselInitialIndex}
+          />
+        )
       )}
     </>
   );

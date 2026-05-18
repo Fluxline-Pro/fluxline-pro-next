@@ -81,6 +81,7 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
         },
       ],
       sectionsPosition: 'before' as const,
+      customModalContent: <RedAppleFilterDemo isModal />,
     }),
     cta: {
       title: 'Stay Connected',
@@ -91,7 +92,9 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
         {
           label: isTRIPost ? 'Explore TRI Library' : 'Explore More Articles',
           onClick: () =>
-            router.push(isTRIPost ? '/podcasts/theresonantid/library' : '/blog'),
+            router.push(
+              isTRIPost ? '/podcasts/theresonantid/library' : '/blog'
+            ),
           variant: 'primary',
         },
         {
