@@ -75,7 +75,8 @@ export default function ContactPage() {
         </Hero>
 
         {/* Business Cards / CTA Section */}
-        <section className='space-y-8'>
+        {/* commenting out this section to make the page less messy because it doesn't belong here */}
+        {/* <section className='space-y-8'>
           <Typography
             variant='h2'
             style={{
@@ -89,36 +90,36 @@ export default function ContactPage() {
             Let&apos;s Build Something Extraordinary
           </Typography>
 
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'>
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'> */}
             {/* Design Services Card */}
-            <InteractiveCard
+            {/* <InteractiveCard
               id='design-services'
               title='Design & Branding'
               description='From logo design to complete brand identities, I create visual systems that resonate with your audience and stand the test of time.'
               icon='Design'
               iconPosition='center'
-            />
+            /> */}
 
             {/* Development Services Card */}
-            <InteractiveCard
+            {/* <InteractiveCard
               id='development-services'
               title='Web Development'
               description='Building modern, scalable web applications with cutting-edge technologies. From concept to deployment, I deliver solutions that drive results.'
               icon='Code'
               iconPosition='center'
-            />
+            /> */}
 
             {/* Consulting Services Card */}
-            <InteractiveCard
+            {/* <InteractiveCard
               id='consulting-services'
               title='Strategic Consulting'
               description="Expert guidance on digital transformation, technology strategy, and business innovation. Let's align your vision with actionable solutions."
               icon='Lightbulb'
               iconPosition='center'
-            />
+            /> */}
 
             {/* Tutoring Services Card */}
-            {!isDesktop && (
+            {/* {!isDesktop && (
               <InteractiveCard
                 id='tutoring-services'
                 title='Training & Mentorship'
@@ -128,7 +129,7 @@ export default function ContactPage() {
               />
             )}
           </div>
-        </section>
+        </section> */}
 
         <section
           className='space-y-5'
