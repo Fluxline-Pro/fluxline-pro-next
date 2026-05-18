@@ -13,6 +13,7 @@
 import React, { useState } from 'react';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useWindowSize, useIsMobile } from '@/theme/hooks/useMediaQuery';
 import {
   getImageFilterCss,
   type ImageFilterMode,
@@ -79,6 +80,9 @@ const APPLE_IMAGE_PATH =
 export function RedAppleFilterDemo() {
   const { theme } = useAppTheme();
   const [activeMode, setActiveMode] = useState<ImageFilterMode>('normal');
+  const isMobileHook = useIsMobile();
+  const { windowWidth } = useWindowSize();
+  const isMobile = isMobileHook === null ? windowWidth < 768 : isMobileHook;
 
   const isDark =
     theme.themeMode === 'dark' ||
@@ -139,7 +143,7 @@ export function RedAppleFilterDemo() {
 
   return (
     <div
-      className='w-full max-w-xl mx-auto'
+      className={`w-full max-w-xl ${isMobile && 'mx-auto'}`}
       style={containerStyle}
       role='region'
       aria-label='Red Apple Perception Filter Demo'
