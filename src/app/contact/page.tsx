@@ -6,9 +6,10 @@
  */
 
 import React from 'react';
+import Image from 'next/image';
 import {
   UnifiedPageWrapper,
-  InteractiveCard,
+  // InteractiveCard,
   NewsletterCTA,
 } from '@/components';
 import { Typography } from '@/theme/components/typography';
@@ -18,21 +19,29 @@ import { getIconForPath } from '@/utils/navigation-icons';
 import { ContactForm } from './components/ContactForm';
 import { Callout } from '@/theme/components/callout/Callout';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
-import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { SocialLinks } from '@/app/about/components/SocialLinks';
 import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';
+import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.png';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
-  const isDesktopHook = useIsDesktop();
+  // const isDesktopHook = useIsDesktop();
   const isMobile = isMounted ? isMobileHook : false;
-  const isDesktop = isMounted ? isDesktopHook : false;
+  // const isDesktop = isMounted ? isDesktopHook : false;
 
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Email built from char codes at render time — avoids a plain-text address
+  // in the static bundle while working correctly as a React href prop.
+  const triEmailHref = `mailto:${String.fromCharCode(
+    116, 104, 101, 114, 101, 115, 111, 110, 97, 110, 116, 105, 100, 101, 110,
+    116, 105, 116, 121
+  )}@${String.fromCharCode(102, 108, 117, 120, 108, 105, 110, 101)}.${String.fromCharCode(112, 114, 111)}`;
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -66,7 +75,8 @@ export default function ContactPage() {
         </Hero>
 
         {/* Business Cards / CTA Section */}
-        <section className='space-y-8'>
+        {/* commenting out this section to make the page less messy because it doesn't belong here */}
+        {/* <section className='space-y-8'>
           <Typography
             variant='h2'
             style={{
@@ -80,36 +90,36 @@ export default function ContactPage() {
             Let&apos;s Build Something Extraordinary
           </Typography>
 
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'>
+          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'> */}
             {/* Design Services Card */}
-            <InteractiveCard
+            {/* <InteractiveCard
               id='design-services'
               title='Design & Branding'
               description='From logo design to complete brand identities, I create visual systems that resonate with your audience and stand the test of time.'
               icon='Design'
               iconPosition='center'
-            />
+            /> */}
 
             {/* Development Services Card */}
-            <InteractiveCard
+            {/* <InteractiveCard
               id='development-services'
               title='Web Development'
               description='Building modern, scalable web applications with cutting-edge technologies. From concept to deployment, I deliver solutions that drive results.'
               icon='Code'
               iconPosition='center'
-            />
+            /> */}
 
             {/* Consulting Services Card */}
-            <InteractiveCard
+            {/* <InteractiveCard
               id='consulting-services'
               title='Strategic Consulting'
               description="Expert guidance on digital transformation, technology strategy, and business innovation. Let's align your vision with actionable solutions."
               icon='Lightbulb'
               iconPosition='center'
-            />
+            /> */}
 
             {/* Tutoring Services Card */}
-            {!isDesktop && (
+            {/* {!isDesktop && (
               <InteractiveCard
                 id='tutoring-services'
                 title='Training & Mentorship'
@@ -119,6 +129,122 @@ export default function ContactPage() {
               />
             )}
           </div>
+        </section> */}
+
+        <section
+          className='space-y-5'
+          style={{
+            padding: isMobile ? theme.spacing.l : theme.spacing.xl,
+            borderRadius: theme.borderRadius.container.card,
+            background: theme.isInverted
+              ? theme.semanticColors.bodyBackground
+              : theme.palette.white,
+            border: `1px solid ${theme.palette.neutralQuaternary}`,
+            boxShadow: theme.shadows.card,
+          }}
+        >
+          <div
+            className={
+              isMobile
+                ? 'flex flex-col items-start gap-4'
+                : 'flex items-center gap-5'
+            }
+          >
+            <Image
+              src={TheResonantIdentityLogo}
+              alt='The Resonant Identity logo'
+              width={isMobile ? 88 : 112}
+              height={isMobile ? 88 : 112}
+              style={{
+                width: isMobile ? '88px' : '112px',
+                height: 'auto',
+                filter: theme.isInverted
+                  ? 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.35))'
+                  : undefined,
+              }}
+              priority={false}
+            />
+            <div className='space-y-2'>
+              <Typography
+                variant='h3'
+                style={{
+                  color: theme.palette.themePrimary,
+                  fontWeight: theme.typography.fontWeights.bold,
+                }}
+              >
+                The Resonant Identity
+              </Typography>
+              <Typography
+                variant='bodySmall'
+                style={{
+                  color: theme.palette.neutralTertiary,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Listener Contact
+              </Typography>
+            </div>
+          </div>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              maxWidth: '60ch',
+            }}
+          >
+            If you&apos;ve been listening to The Resonant Identity and want to
+            continue the conversation, reach out directly. Share your question,
+            idea, or collaboration concept and we&apos;ll take it from there.
+          </Typography>
+          <a
+            href={triEmailHref}
+            className='inline-flex w-fit items-center rounded-md px-4 py-3 transition-colors'
+            style={{
+              background: 'transparent',
+              textDecoration: 'none',
+              border: `1px solid ${theme.palette.themePrimary}`,
+              boxShadow: theme.shadows.button,
+              marginRight: theme.spacing.m,
+            }}
+          >
+            <Typography
+              variant='label'
+              aria-label='Email The Resonant Identity (opens email client)'
+              style={{
+                color: theme.isInverted
+                  ? theme.palette.white
+                  : theme.palette.black,
+                fontWeight: theme.typography.fontWeights.semiBold,
+              }}
+            >
+              Email The Resonant Identity
+            </Typography>
+          </a>
+          <a
+            href='https://facebook.com/theresonantid'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-flex w-fit items-center rounded-md px-4 py-3 transition-colors'
+            style={{
+              background: theme.palette.themePrimary,
+              textDecoration: 'none',
+              boxShadow: theme.shadows.button,
+            }}
+          >
+            <Typography
+              variant='label'
+              aria-label='Visit The Resonant Identity Facebook page (opens in new window)'
+              style={{
+                color: theme.isInverted
+                  ? theme.palette.black
+                  : theme.palette.white,
+                fontWeight: theme.typography.fontWeights.semiBold,
+              }}
+            >
+              Join the Conversation on Facebook
+            </Typography>
+          </a>
         </section>
 
         {/* Newsletter CTA */}

@@ -8,10 +8,11 @@ tags:
   [
     'Episode Companion',
     'Foundations',
+    'Personal Growth',
     'Identity Coherence',
     'Resonance & Dissonance',
   ]
-imageUrl: ''
+imageUrl: '/blog/posts/tri-ep1-companion-who-are-you-becoming/images/TheResonantIdentity_Logo.png'
 imageAlt: 'Who Are You Becoming — Episode 1 Companion'
 featured: true
 seoTitle: 'Who Are You Becoming? Episode 1 Companion | The Resonant Identity'
