@@ -15,7 +15,7 @@ tags:
   ]
 imageUrl: '/blog/posts/tri-interactive-resonance-assessment/images/6vs9test.png'
 imageAlt: 'The 6 vs. 9 test of reality: Resonance or Distortion — TRI Interactive Self-Assessment'
-featured: true
+featured: false
 seoTitle: 'The 6 vs. 9 test of reality: Resonance or Distortion? Interactive Self-Assessment | The Resonant Identity'
 seoDescription: 'Use this interactive self-assessment from The Resonant Identity to discover whether you are operating from resonance or distortion in your relationships, work, and identity. A practical tool from The Resonance Core Framework.'
 seoKeywords:
@@ -29,7 +29,7 @@ seoKeywords:
     'the resonant identity',
     'personal growth',
   ]
-generatedWithAI: false
+generatedWithAI: true
 ---
 
 # Resonance or Distortion? — An Interactive Self-Assessment

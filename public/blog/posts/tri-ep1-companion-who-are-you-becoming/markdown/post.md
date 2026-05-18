@@ -35,7 +35,7 @@ _A Companion Article to Episode 1 of The Resonant Identity_
 
 ---
 
-If you've just finished listening to "Episode 003- Inner Alignment" (which we call Episode 1 going forward), welcome. You arrived at the right question.
+If you've just finished listening to "Episode 003- Inner Alignment" (which we call Episode 1 going forward), welcome. You arrived at the right place.
 
 **Who are you becoming?**
 

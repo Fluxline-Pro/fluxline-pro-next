@@ -1051,7 +1051,7 @@ export function PodcastListingClient({
                 iconName='LightningBolt'
                 title='Interactive Demos'
                 description='Hands-on tools and self-assessments that let you directly experience The Resonance Core Framework concepts in action.'
-                posts={triDemos.slice(0, 1)}
+                posts={triDemos.slice(0, 3)}
                 viewAllLabel='Explore All Demos'
                 viewAllHref='/podcasts/theresonantid/demos'
                 isMobile={isMobile}

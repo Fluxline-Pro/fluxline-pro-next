@@ -2,7 +2,7 @@
 title: 'Red Apple Perception Demo — How Filters Change What You See'
 excerpt: 'An interactive demo that shows how a familiar object — a red apple — transforms under different perceptual filters. Experience protanopia, deuteranopia, tritanopia, grayscale, and low-light conditions, then ask: how much of what you see is real?'
 author: 'The Resonant Identity'
-publishedDate: '2026-05-18'
+publishedDate: '2026-05-19'
 category: 'Resonant Identity'
 tags:
   [
@@ -32,7 +32,7 @@ seoKeywords:
     'interactive demo',
     'perception filters',
   ]
-generatedWithAI: false
+generatedWithAI: true
 ---
 
 # Red Apple Perception Demo

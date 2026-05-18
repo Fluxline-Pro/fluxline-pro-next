@@ -512,8 +512,8 @@ export function TheResonantIdentityPage() {
               alignItems: 'center',
             }}
           >
-            {/* ─── 6. Call to Action ─── */}
-            <section className='space-y-6'>
+            {/* ─── 6. Call to Action ─── Not active yet -TW */}
+            {/* <section className='space-y-6'>
               <Callout
                 variant='accent'
                 title='Begin Your 7-Day Setup'
@@ -531,9 +531,9 @@ export function TheResonantIdentityPage() {
                   </FormButton>
                 }
               />
-            </section>
+            </section> */}
 
-            {/* ─── 7. Ecosystem Links ─── */}
+            {/* ─── 7. Social Media Links ─── */}
             <section className='space-y-6'>
               <SectionHeading>Find us on Social Media!</SectionHeading>
 
