@@ -1053,7 +1053,7 @@ export function PodcastListingClient({
                 description='Hands-on tools and self-assessments that let you directly experience the Resonance Core Framework concepts in action.'
                 posts={triDemos.slice(0, 1)}
                 viewAllLabel='Explore All Demos'
-                viewAllHref='/podcasts/theresonantid/library'
+                viewAllHref='/podcasts/theresonantid/demos'
                 isMobile={isMobile}
                 theme={theme}
                 router={router}
@@ -1114,7 +1114,7 @@ function TRISection({
     <section
       className='space-y-8 rounded-lg p-8 mb-6'
       style={{
-        backgroundColor: theme.palette.neutralDark,
+        backgroundColor: theme.palette.neutralQuaternaryAlt,
         borderTop: `1px solid ${theme.palette.neutralPrimary}`,
         marginTop: theme.spacing.m,
         marginBottom: theme.spacing.xxxl,

@@ -33,6 +33,14 @@ export interface ArticlePost extends TRIPost {
   featured?: boolean;
 }
 
+/**
+ * Interactive demo post — extends TRIPost with optional featured flag.
+ * Used by DemosFilteredView and the /blog/resonant-identity/demos page.
+ */
+export interface DemoPost extends TRIPost {
+  featured?: boolean;
+}
+
 export interface PodcastEpisode {
   id: string;
   slug: string;

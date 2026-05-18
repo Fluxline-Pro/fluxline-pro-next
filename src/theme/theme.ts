@@ -935,7 +935,7 @@ export const lightTheme: IExtendedTheme = createExtendedTheme(
       // Body and Background – Clean light aesthetic
       bodyText: '#2E2E2E',
       bodyBackground:
-        'radial-gradient(circle at 22% 48%, #FBFCFC 0%, #F3F4F6 36%, #EEF0F2 70%, #E4E6EA 100%)',
+        'radial-gradient(circle at 22% 48%, #d2d2d3 0%, #dcdee4 36%, #e0e1e1 70%, #d5d7da 100%)',
 
       // State Colors – Emotional clarity
       errorText: '#B0303C', // Refined red
@@ -1170,7 +1170,7 @@ export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
     semanticColors: {
       bodyText: '#333333',
       bodyBackground:
-        'radial-gradient(circle at 22% 48%, #FBFCFC 0%, #F3F4F6 36%, #EEF0F2 70%, #E4E6EA 100%)',
+        'radial-gradient(circle at 22% 48%, #F2F4F8 0%, #E5E8EF 36%, #D4D9E4 70%, #C6CCDA 100%)',
       errorText: '#0C8ECB', // Dark teal for error states
       errorBackground: '#C0D5DF', // Light teal background
       errorIcon: '#0C8ECB', // Dark teal for error states
@@ -1273,7 +1273,7 @@ export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
     semanticColors: {
       bodyText: '#333333',
       bodyBackground:
-        'radial-gradient(circle at 22% 48%, #FBFCFC 0%, #F3F4F6 36%, #EEF0F2 70%, #E4E6EA 100%)',
+        'radial-gradient(circle at 22% 48%, #F2F4F8 0%, #E5E8EF 36%, #D4D9E4 70%, #C6CCDA 100%)',
       errorText: '#B21623', // darker error text for visibility
       errorBackground: '#CEA9A9', // darker error background
       successText: '#3874C7', // soft, darker blue for success
@@ -1375,7 +1375,7 @@ export const tritanopiaTheme: IExtendedTheme = createExtendedTheme(
     semanticColors: {
       bodyText: '#333333',
       bodyBackground:
-        'radial-gradient(circle at 22% 48%, #FBFCFC 0%, #F3F4F6 36%, #EEF0F2 70%, #E4E6EA 100%)',
+        'radial-gradient(circle at 22% 48%, #F2F4F8 0%, #E5E8EF 36%, #D4D9E4 70%, #C6CCDA 100%)',
       errorText: '#FF8C00', // Orange for error states
       errorBackground: '#FFF3E0', // Light orange background
       successText: '#107C10', // Green for success states
@@ -1464,7 +1464,7 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
     semanticColors: {
       bodyText: '#000000',
       bodyBackground:
-        'radial-gradient(circle at 22% 48%, #FBFCFC 0%, #F3F4F6 36%, #EEF0F2 70%, #E4E6EA 100%)',
+        'radial-gradient(circle at 22% 48%, #F2F2F2 0%, #E4E4E4 36%, #D2D2D2 70%, #C2C2C2 100%)',
       errorText: '#888888', // Dark red in grayscale
       errorBackground: '#999999',
       errorIcon: '#888888',

@@ -45,10 +45,22 @@ export function PodcastsDirectoryClient() {
           backArrowPath='/content'
         />
 
+        {/* Section header */}
+        <Typography
+          variant='h3'
+          style={{
+            color: theme.palette.themePrimary,
+            textAlign: 'left',
+            marginTop: theme.spacing.xxxl,
+            marginBottom: theme.spacing.l,
+          }}
+        >
+          Current Show
+        </Typography>
+
         {/* Podcasts Grid - Currently one podcast */}
         <div
           style={{
-            marginTop: theme.spacing.xl,
             display: 'grid',
             gridTemplateColumns: isMobile
               ? '1fr'
@@ -64,7 +76,7 @@ export function PodcastsDirectoryClient() {
             style={{
               borderRadius: theme.effects.roundedCorner6,
               overflow: 'hidden',
-              border: `1px solid ${hovered ? theme.palette.themePrimary : theme.palette.neutralLight}`,
+              border: `2px solid ${theme.palette.themePrimary}`,
               transition: 'all 0.2s ease',
               transform: hovered ? 'translateY(-4px)' : 'none',
               boxShadow: hovered
@@ -84,6 +96,24 @@ export function PodcastsDirectoryClient() {
                 position: 'relative',
               }}
             >
+              {/* Featured badge */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: theme.spacing.m,
+                  right: theme.spacing.m,
+                  padding: `${theme.spacing.s2} ${theme.spacing.s1}`,
+                  backgroundColor: theme.palette.themeSecondary,
+                  color: theme.palette.black,
+                  borderRadius: theme.effects.roundedCorner4,
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
+                  zIndex: 1,
+                  textTransform: 'uppercase',
+                }}
+              >
+                Featured
+              </div>
               <Image
                 src={TheResonantIdentityLogo}
                 alt='The Resonant Identity Logo'
