@@ -14,7 +14,8 @@ tags:
     'Foundations',
     'Personal Growth',
     'Resonance',
-    'Truth and Distortion',
+    'Truth',
+    'Distortion',
     'Dissonance',
   ]
 imageUrl: '/blog/posts/tri-ep2-7day-refine-your-identity-in-truth/images/the-resonance-core-glyph.jpg'
@@ -130,11 +131,11 @@ Prompts to guide you:
 **Rewrite your identity statements using this structure:**
 
 > - Truth of Who I Was:  
-  _“In truth, I was someone who…”_
+>   _“In truth, I was someone who…”_
 > - Truth of Who I Am:  
-  _“In truth, I am someone who…”_
+>   _“In truth, I am someone who…”_
 > - Truth of Who I Am Becoming:  
-  _“In truth, I am becoming someone who…”_
+>   _“In truth, I am becoming someone who…”_
 
 Keep them short.  
 Keep them honest.  

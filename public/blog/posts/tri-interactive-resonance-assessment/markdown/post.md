@@ -11,7 +11,8 @@ tags:
     'Distortion',
     'Perception',
     'Interpretive Hygiene',
-    'The Triad',
+    'Reality',
+    'Self-Assessment',
   ]
 imageUrl: '/blog/posts/tri-interactive-resonance-assessment/images/6vs9test.png'
 imageAlt: 'The 6 vs. 9 test of reality: Resonance or Distortion — TRI Interactive Self-Assessment'
