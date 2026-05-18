@@ -7,16 +7,17 @@ category: 'Resonant Identity'
 tags:
   [
     'Identity Challenge',
-    'Agency',
-    'Foundations',
     'Identity Activation',
+    'Identity Refinement',
+    'Agency',
+    'Reality',
+    'Foundations',
     'Personal Growth',
     'Resonance',
     'Truth and Distortion',
     'Dissonance',
-    'Reality',
   ]
-imageUrl: '/blog/posts/tri-ep1-7day-define-your-identity/images/obstacle-pathway.png'
+imageUrl: '/blog/posts/tri-ep2-7day-refine-your-identity-in-truth/images/the-resonance-core-glyph.jpg'
 imageAlt: 'Episode 2: Identity Challenge — The pathway becomes clear when you define your true and chosen identity first.'
 featured: false
 seoTitle: 'Episode 2: Identity Challenge — Refining Your Identity Out of Distortion | The Resonant Identity'
@@ -128,11 +129,11 @@ Prompts to guide you:
 
 **Rewrite your identity statements using this structure:**
 
-- Truth of Who I Was:  
+> - Truth of Who I Was:  
   _“In truth, I was someone who…”_
-- Truth of Who I Am:  
+> - Truth of Who I Am:  
   _“In truth, I am someone who…”_
-- Truth of Who I Am Becoming:  
+> - Truth of Who I Am Becoming:  
   _“In truth, I am becoming someone who…”_
 
 Keep them short.  
