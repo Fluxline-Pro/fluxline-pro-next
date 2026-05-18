@@ -9,6 +9,7 @@ import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { IconButton } from '@fluentui/react';
 import {
   SocialLinks,
@@ -116,6 +117,7 @@ interface UnifiedContentDetailProps {
 export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
+  const isMobile = useIsMobile();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
   const isMounted = useSyncExternalStore(
@@ -428,7 +430,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         <div style={{ marginBottom: theme.spacing.l1 }}></div>
 
         {/* Article Header */}
-        <article>
+        <article style={isMobile ? { padding: `0 ${theme.spacing.m}` } : undefined}>
           <header style={{ marginBottom: theme.spacing.l2 }}>
             <div
               style={{
