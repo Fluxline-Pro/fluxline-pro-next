@@ -7,6 +7,42 @@ interface ColorVisionFilter {
   filter: string;
 }
 
+/**
+ * Supported explicit filter modes for standalone image filtering (e.g. demos).
+ * These are independent of the global theme mode.
+ */
+export type ImageFilterMode =
+  | 'normal'
+  | 'protanopia'
+  | 'tritanopia'
+  | 'grayscale'
+  | 'lowlight';
+
+/**
+ * Returns the raw CSS filter string for a given ImageFilterMode.
+ * Use this in components that need on-demand filter switching (e.g. RedAppleFilterDemo).
+ * This is a pure function — no hooks required.
+ */
+export function getImageFilterCss(mode: ImageFilterMode): string {
+  switch (mode) {
+    case 'protanopia':
+      // Red-colorblindness simulation: reds shift to brown/yellow, reds & greens converge
+      return 'saturate(70%) contrast(90%) hue-rotate(-15deg) sepia(20%)';
+    case 'tritanopia':
+      // Blue-yellow colorblindness: blues appear greenish, yellows appear pinkish
+      return 'saturate(90%) contrast(100%) hue-rotate(90deg) sepia(5%)';
+    case 'grayscale':
+      // Full desaturation
+      return 'grayscale(100%) contrast(100%)';
+    case 'lowlight':
+      // Simulate poor/dim lighting conditions
+      return 'brightness(28%) contrast(110%) saturate(70%)';
+    case 'normal':
+    default:
+      return 'none';
+  }
+}
+
 export const useColorVisionFilter = (
   skipDarkModeFilter?: boolean
 ): ColorVisionFilter => {

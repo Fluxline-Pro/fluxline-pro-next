@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import type { BlogPost } from '../types';
 import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
 import { getContentTypeTag } from '@/app/podcasts/theresonantid/lib/taxonomy';
+import { RedAppleFilterDemo } from '@/components/demos';
 
 interface BlogPostDetailClientProps {
   post: BlogPost;
@@ -31,6 +32,8 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
   const handleCategoryClick = () => {
     router.push(`/blog/category/${encodeURIComponent(post.category)}`);
   };
+
+  const isRedAppleDemo = post.slug === 'tri-red-apple-perception-demo';
 
   const config: UnifiedContentDetailConfig = {
     title: post.title,
@@ -69,6 +72,16 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
       })),
     ],
     generatedWithAI: post.generatedWithAI,
+    // Inject the interactive demo component for the Red Apple post
+    ...(isRedAppleDemo && {
+      sections: [
+        {
+          title: 'Interactive Filter Demo',
+          content: <RedAppleFilterDemo />,
+        },
+      ],
+      sectionsPosition: 'before' as const,
+    }),
     cta: {
       title: 'Stay Connected',
       description: isTRIPost
