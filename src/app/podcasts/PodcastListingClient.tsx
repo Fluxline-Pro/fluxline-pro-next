@@ -1015,21 +1015,6 @@ export function PodcastListingClient({
             </FormButton>
           </div>
           <div className='space-y-8'>
-            {/* ─── A. Companion Articles ─── */}
-            {triCompanionArticles.length > 0 && (
-              <TRISection
-                iconName='TextDocumentShared'
-                title='Companion Articles'
-                description='Deep-dive articles paired with TRI episodes — designed to help you apply the frameworks from each episode to your own identity work.'
-                posts={triCompanionArticles.slice(0, 3)}
-                viewAllLabel='View All Articles'
-                viewAllHref='/podcasts/theresonantid/articles'
-                isMobile={isMobile}
-                theme={theme}
-                router={router}
-              />
-            )}
-
             {/* ─── B. 7-Day Challenges ─── */}
             {triChallenges.length > 0 && (
               <TRISection
@@ -1054,6 +1039,21 @@ export function PodcastListingClient({
                 posts={triDemos.slice(0, 3)}
                 viewAllLabel='Explore All Demos'
                 viewAllHref='/podcasts/theresonantid/demos'
+                isMobile={isMobile}
+                theme={theme}
+                router={router}
+              />
+            )}
+
+            {/* ─── A. Companion Articles ─── */}
+            {triCompanionArticles.length > 0 && (
+              <TRISection
+                iconName='TextDocumentShared'
+                title='Companion Articles'
+                description='Deep-dive articles paired with TRI episodes — designed to help you apply the frameworks from each episode to your own identity work.'
+                posts={triCompanionArticles.slice(0, 3)}
+                viewAllLabel='View All Articles'
+                viewAllHref='/podcasts/theresonantid/articles'
                 isMobile={isMobile}
                 theme={theme}
                 router={router}
@@ -1224,7 +1224,6 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
           : theme.palette.neutralLighter,
         transition: 'all 0.2s ease',
         textDecoration: 'none',
-        maxWidth: '325px', // need to remove this value once we have 2 or more posts on all three sections and can rely on the grid to manage card widths
         transform: hovered ? 'translateY(-2px)' : 'none',
         boxShadow: hovered ? theme.effects.elevation4 : 'none',
       }}

@@ -16,7 +16,7 @@ tags:
     'Dissonance',
     'Reality',
   ]
-imageUrl: '/blog/posts/tri-ep1-7day-define-your-identity/images/obstacle-pathway.jpg'
+imageUrl: '/blog/posts/tri-ep1-7day-define-your-identity/images/obstacle-pathway.png'
 imageAlt: 'Episode 2: Identity Challenge — The pathway becomes clear when you define your true and chosen identity first.'
 featured: false
 seoTitle: 'Episode 2: Identity Challenge — Refining Your Identity Out of Distortion | The Resonant Identity'
