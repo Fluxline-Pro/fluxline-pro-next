@@ -1114,7 +1114,7 @@ function TRISection({
     <section
       className='space-y-8 rounded-lg p-8 mb-6'
       style={{
-        backgroundColor: theme.palette.neutralDark,
+        backgroundColor: theme.palette.neutralQuaternaryAlt,
         borderTop: `1px solid ${theme.palette.neutralPrimary}`,
         marginTop: theme.spacing.m,
         marginBottom: theme.spacing.xxxl,
