@@ -1,7 +1,7 @@
 ---
 title: 'Personal Training Transformation Journey'
 shortDescription: '8-year transformation integrating NASM certification with Resonance Core Framework™'
-longDescription: 'A personal journey from 120 lbs. to 185 lbs., integrating NASM-certified strength training with emotional intelligence, somatic practices, and the Resonance Core Framework™ to create a holistic transformation methodology.'
+longDescription: 'A personal journey from 120 lbs. to 185 lbs., integrating NASM-certified strength training with emotional intelligence, somatic practices, and The Resonance Core Framework™ to create a holistic transformation methodology.'
 role: 'Personal Trainer & Resonance Core Practitioner'
 client: 'Self-Directed Personal Development'
 category: 'other'

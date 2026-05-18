@@ -29,6 +29,7 @@ const TRI_LINKS = {
   instagram: 'https://www.instagram.com/theresonantid',
   twitter: 'https://x.com/theresonantid',
   tiktok: 'https://www.tiktok.com/@theresonantid',
+  bluesky: 'https://bsky.app/profile/theresonantid.bsky.social',
   podcast: '/podcasts/theresonantid/', // setting as the main podcast page for now since it links to all platforms
   facebookGroup: 'https://www.facebook.com/groups/theresonantid',
   facebookPage: 'https://www.facebook.com/theresonantid',
@@ -216,7 +217,7 @@ export function TheResonantIdentityPage() {
           {/* ─── 1. Hero Section ─── */}
           <Hero
             title='The Resonant Identity'
-            subtitle='A living extension of the Resonance Core Framework where identity becomes practice and is formed through coherence.'
+            subtitle='A living extension of The Resonance Core Framework where identity becomes practice and is formed through coherence.'
             backArrow={true}
             backArrowPath='/podcasts/theresonantid'
           >
@@ -330,7 +331,7 @@ export function TheResonantIdentityPage() {
               >
                 The Resonant Identity (TRI) is a space for identity
                 transformation, micro-lessons, and applied resonance. It extends
-                the Resonance Core Framework into a living, accessible rhythm —
+                The Resonance Core Framework into a living, accessible rhythm —
                 helping you build an identity that feels aligned, coherent, and
                 grounded in who you&apos;re becoming.
               </Typography>
@@ -416,7 +417,7 @@ export function TheResonantIdentityPage() {
               >
                 <Callout
                   variant='accent'
-                  title='Built on the Resonance Core Framework™'
+                  title='Built on The Resonance Core Framework™'
                 >
                   <Typography
                     variant='p'

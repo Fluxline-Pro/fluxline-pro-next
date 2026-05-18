@@ -1,6 +1,6 @@
 ---
 title: 'From Recovery to Resonance: My Personal Training Transformation'
-excerpt: 'My 8-year journey from 120 lbs. and fragility to 185 lbs. and sovereignty—how I integrated NASM certification with the Resonance Core Framework™ to transform my body and life.'
+excerpt: 'My 8-year journey from 120 lbs. and fragility to 185 lbs. and sovereignty—how I integrated NASM certification with The Resonance Core Framework™ to transform my body and life.'
 author: 'Terence Waters'
 publishedDate: '2025-12-08'
 category: 'Growth'
@@ -17,7 +17,7 @@ tags:
 imageUrl: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
 imageAlt: 'Before and after transformation showing strength training journey'
 seoTitle: 'From Recovery to Resonance: 8-Year Personal Training Transformation'
-seoDescription: 'A personal story of transformation from 120 lbs. to 185 lbs., integrating NASM-certified training with emotional intelligence and the Resonance Core Framework™.'
+seoDescription: 'A personal story of transformation from 120 lbs. to 185 lbs., integrating NASM-certified training with emotional intelligence and The Resonance Core Framework™.'
 seoKeywords:
   [
     'personal training transformation',
@@ -202,7 +202,7 @@ Looking back at that 120 lb. version of me, here's what I wish I'd known:
 - NASM Certified Personal Trainer
 - Training 5-6 days per week
 - Guiding clients through transformation
-- Continuously refining the Resonance Core Framework™
+- Continuously refining The Resonance Core Framework™
 
 **What's Next:**
 

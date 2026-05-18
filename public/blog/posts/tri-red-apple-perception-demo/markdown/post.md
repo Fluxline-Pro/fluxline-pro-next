@@ -1,7 +1,7 @@
 ---
 title: 'Red Apple Perception Demo — How Filters Change What You See'
 excerpt: 'An interactive demo that shows how a familiar object — a red apple — transforms under different perceptual filters. Experience protanopia, deuteranopia, tritanopia, grayscale, and low-light conditions, then ask: how much of what you see is real?'
-author: 'Terence Waters'
+author: 'The Resonant Identity'
 publishedDate: '2026-05-18'
 category: 'Resonant Identity'
 tags:
@@ -161,4 +161,4 @@ If this demo hit you in the gut (it usually does), continue the work:
 
 ---
 
-_Written by Terence Waters. The Resonant Identity podcast is a living extension of the Resonance Core Framework™._
+_Written by Terence Waters. The Resonant Identity podcast is a living extension of The Resonance Core Framework™._

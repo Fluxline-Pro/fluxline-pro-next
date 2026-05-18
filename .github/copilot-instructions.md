@@ -939,13 +939,14 @@ Each demo is a self-contained `'use client'` React component that can be embedde
 
 **Location**: `src/components/demos/RedAppleFilterDemo.tsx`
 
-**Purpose**: Interactive visual perception demo. Displays a red apple image and lets the user apply five CSS filter modes to simulate different visual conditions:
+**Purpose**: Interactive visual perception demo. Displays a red apple image and lets the user apply six CSS filter modes to simulate different visual conditions:
 
 | Mode | Description |
 |------|-------------|
 | `normal` | Original image — no filter |
 | `protanopia` | Red colorblindness simulation |
 | `tritanopia` | Red–blue colorblindness simulation |
+| `deuteranopia` | Green colorblindness simulation |
 | `grayscale` | Full desaturation |
 | `lowlight` | Dim-lighting simulation |
 
@@ -991,7 +992,7 @@ const config: UnifiedContentDetailConfig = {
 import { getImageFilterCss, type ImageFilterMode } from '@/theme/hooks/useColorVisionFilter';
 
 const cssFilter = getImageFilterCss('protanopia');
-// → "saturate(70%) contrast(90%) hue-rotate(-15deg) sepia(20%)"
+// Returns the CSS filter string for the selected image filter mode.
 ```
 
 ---

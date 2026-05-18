@@ -752,7 +752,7 @@ export function PodcastListingClient({
         <Hero
           title='The Resonant Identity'
           iconName='Microphone'
-          description='The Resonant Identity is a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention. It is a living extension of the Resonance Core Framework where identity becomes practice and is formed through coherence.'
+          description='The Resonant Identity is a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention. It is a living extension of The Resonance Core Framework where identity becomes practice and is formed through coherence.'
           backArrow={true}
           backArrowPath='/podcasts'
           // filters={podcastFilters} - will add later once more episodes are available and search is built out
@@ -1050,7 +1050,7 @@ export function PodcastListingClient({
               <TRISection
                 iconName='LightningBolt'
                 title='Interactive Demos'
-                description='Hands-on tools and self-assessments that let you directly experience the Resonance Core Framework concepts in action.'
+                description='Hands-on tools and self-assessments that let you directly experience The Resonance Core Framework concepts in action.'
                 posts={triDemos.slice(0, 1)}
                 viewAllLabel='Explore All Demos'
                 viewAllHref='/podcasts/theresonantid/demos'

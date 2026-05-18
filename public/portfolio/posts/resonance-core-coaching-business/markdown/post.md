@@ -50,7 +50,7 @@ The **Resonance Core Framework™** is a proprietary transformational coaching m
 
 The Resonance Core Framework™ represents a breakthrough in transformational coaching by addressing the fundamental fragmentation that limits personal evolution in traditional approaches. While conventional coaching modalities focus on isolated domains—physical training on body metrics, life coaching on goal achievement, therapy on past patterns, or spiritual work on transcendence—this framework integrates archetypal psychology, emotional intelligence, somatic practices, and purpose alignment into a cohesive methodology. By mapping unconscious patterns that drive behavior, creating safe containers for emotional emergence, and anchoring transformation through symbolic rituals, the framework facilitates deep identity shifts rather than surface-level behavioral changes.
 
-The primary goal of the Resonance Core Framework™ is to guide individuals through sustainable personal evolution by connecting their transformation to a larger purpose and contribution. Clients engage in structured phases that progress from archetypal assessment and identity mapping through emotional breakthrough work to legacy building and mission alignment. This integrated approach ensures that transformation is not merely intellectual understanding or temporary motivation, but embodied change that resonates across all life domains—relationships, career, health, creativity, and leadership. By treating personal evolution as inseparable from one's contribution to the world, the framework creates the sustainable motivation and meaning necessary for lasting transformation.
+The primary goal of The Resonance Core Framework™ is to guide individuals through sustainable personal evolution by connecting their transformation to a larger purpose and contribution. Clients engage in structured phases that progress from archetypal assessment and identity mapping through emotional breakthrough work to legacy building and mission alignment. This integrated approach ensures that transformation is not merely intellectual understanding or temporary motivation, but embodied change that resonates across all life domains—relationships, career, health, creativity, and leadership. By treating personal evolution as inseparable from one's contribution to the world, the framework creates the sustainable motivation and meaning necessary for lasting transformation.
 
 ## Project Overview
 
@@ -464,7 +464,7 @@ The Resonance Core Framework™ integrates with other Fluxline offerings to crea
 ## Related Resources
 
 - [From Recovery to Resonance Blog](/blog/from-recovery-to-resonance-personal-journey) — the founder's 8-year transformation story that created this methodology
-- [What is the Resonance Core Framework?](/blog/what-is-resonance-core-framework) — deep dive into archetypal mapping, emotional emergence, and symbolic integration
+- [What is The Resonance Core Framework?](/blog/what-is-resonance-core-framework) — deep dive into archetypal mapping, emotional emergence, and symbolic integration
 - [Archetypal Leadership & Identity Work](/blog/archetypal-leadership-identity-work) — applying Resonance Core principles to leadership development
 - [Resonance Core Launch Press Release](/press-release/resonance-core-launch-2025) — official framework and coaching program announcement
 

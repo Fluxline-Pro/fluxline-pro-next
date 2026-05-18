@@ -6,7 +6,7 @@ publisher: 'Fluxline Resonance Group Publishing'
 publishedDate: '2026-02-15'
 isbn: '978-0-000000-00-0'
 description: 'The Resonance Core Framework is a groundbreaking approach to personal and professional transformation. This comprehensive guide provides the tools, strategies, and insights you need to align your life with your deepest values and create lasting change.'
-excerpt: 'Transform your life with the Resonance Core Framework - a proven methodology for aligning your personal and professional goals with your core values.'
+excerpt: 'Transform your life with The Resonance Core Framework - a proven methodology for aligning your personal and professional goals with your core values.'
 coverImageUrl: '/books/posts/resonance-core-framework/images/The-Resonance-Core-Book.jpg'
 coverImageAlt: 'The Resonance Core Framework book cover'
 category: 'Business & Self-Help'
@@ -66,7 +66,7 @@ pageCount: 342
 language: 'English'
 dimensions: '6 x 9 inches'
 seoTitle: 'The Resonance Core Framework - Transform Your Life | Fluxline'
-seoDescription: 'Discover the Resonance Core Framework, a comprehensive guide to personal and professional transformation. Available in hardcover, softcover, and eBook formats.'
+seoDescription: 'Discover The Resonance Core Framework, a comprehensive guide to personal and professional transformation. Available in hardcover, softcover, and eBook formats.'
 seoKeywords:
   - 'resonance core framework'
   - 'personal transformation'
@@ -83,7 +83,7 @@ The Resonance Core Framework is more than just a book—it's a complete system f
 ### What You'll Learn
 
 - **The Foundation**: Understand the core principles of resonance and how they apply to your life and work
-- **The Framework**: Master the five pillars of the Resonance Core Framework
+- **The Framework**: Master the five pillars of The Resonance Core Framework
 - **Practical Application**: Implement proven strategies with step-by-step guidance
 - **Real-World Examples**: Learn from case studies and success stories
 - **Workbook Exercises**: Apply concepts immediately with guided exercises
@@ -110,7 +110,7 @@ The Resonance Core Framework was developed over years of working with individual
 
 ## About the Author
 
-The Fluxline Resonance Group is a strategic consulting firm specializing in transformation, innovation, and resonance-based frameworks. With decades of combined experience, our team has helped hundreds of individuals and organizations achieve their goals through the Resonance Core Framework.
+The Fluxline Resonance Group is a strategic consulting firm specializing in transformation, innovation, and resonance-based frameworks. With decades of combined experience, our team has helped hundreds of individuals and organizations achieve their goals through The Resonance Core Framework.
 
 ## Table of Contents
 

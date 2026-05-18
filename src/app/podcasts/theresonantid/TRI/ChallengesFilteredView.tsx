@@ -35,7 +35,7 @@ export function ChallengesFilteredView({
   basePath = '/blog',
   backArrowPath = '/podcast/theresonantid',
   title = 'Identity Challenges',
-  description = '7-day guided practices for identity coherence — structured challenges rooted in the Resonance Core Framework™.',
+  description = '7-day guided practices for identity coherence — structured challenges rooted in The Resonance Core Framework™.',
 }: ChallengesFilteredViewProps) {
   return (
     <TRIContentFilteredView

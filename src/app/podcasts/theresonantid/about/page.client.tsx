@@ -44,7 +44,7 @@ export function TheResonantIdentityAboutPageClient({
   const heroConfig = {
     title: 'The Resonant Identity',
     subtitle:
-      'A living extension of the Resonance Core Framework where identity becomes practice and is formed through coherence.',
+      'A living extension of The Resonance Core Framework where identity becomes practice and is formed through coherence.',
     description:
       "Explore micro-lessons, applied challenges, and a supportive community to help you build an identity that feels aligned and grounded in who you're becoming.",
     backArrow: true,
@@ -113,7 +113,7 @@ export function TheResonantIdentityAboutPageClient({
             >
               The Resonant Identity (TRI) is a space for identity
               transformation, micro-lessons, and applied resonance. It extends
-              the Resonance Core Framework into a living, accessible rhythm —
+              The Resonance Core Framework into a living, accessible rhythm —
               helping you build an identity that feels aligned, coherent, and
               grounded in who you&apos;re becoming.
             </Typography>
