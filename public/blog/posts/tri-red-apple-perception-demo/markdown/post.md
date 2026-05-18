@@ -2,7 +2,7 @@
 title: 'Red Apple Perception Demo — How Filters Change What You See'
 excerpt: 'An interactive demo that shows how a familiar object — a red apple — transforms under different perceptual filters. Experience protanopia, deuteranopia, tritanopia, grayscale, and low-light conditions, then ask: how much of what you see is real?'
 author: 'Terence Waters'
-publishedDate: '2025-10-01'
+publishedDate: '2026-05-18'
 category: 'Resonant Identity'
 tags:
   [
@@ -41,59 +41,85 @@ _Seeing is not always believing — A TRI Interactive Experience_
 
 ---
 
-You know what a red apple looks like.
+## You know what a red apple looks like... _Or do you?!_
 
-Or do you?
+> A red apple, of course, is simple.  
+> Familiar.  
+> Ordinary.
+>
+> **Until you change the filter you see it from, that is.**
 
-This demo asks a deceptively simple question: **if the same object appears completely different depending on how it is filtered, which version is the real one?**
+---
 
-That question is not just about vision. It is at the heart of every distortion pattern the Resonance Core Framework is built to address.
+## Demo Introduction
+
+This demo shows how a stable object  
+_— something your brain thinks it knows —_  
+shifts under different perceptual conditions:
+
+Protanopia.  
+Tritanopia.  
+Grayscale.  
+Low light.
+
+The apple stays the same.  
+**_But your interpretation does all the moving._**
+
+> This is a clear demo of perception and reality in action.
+
+---
+
+## Perception and Reality are Different
+
+Perception, and the Distortion that comes with it, is what causes us to lose understanding of ourselves.  
+Our Truth.  
+Our Resonance.  
+**_And therefore, our True and Chosen Identity._**
+
+> If perception can distort something this familiar, ask yourself this:  
+> **_What else in your life is being shaped by a filter you didn’t realize you were running?_**
 
 ---
 
 ## How to Use This Demo
 
-The interactive panel below shows a red apple. Use the filter buttons to switch between six perceptual modes:
+Move through each filter slowly by clicking on each button one at a time.  
+Notice what changes.  
+_— and what your mind insists on keeping the same._
 
-- **Normal** — the apple as most people perceive it
-- **Protanopia** — red colorblindness: reds collapse into dark brown and olive
-- **Deuteranopia** — green colorblindness (the most common form): reds and greens both shift toward the same dull olive-yellow, making the apple and leaf nearly indistinguishable from each other
-- **Tritanopia** — blue-yellow colorblindness: reds stay relatively intact, but blues, greens, and yellows become less reliable
-- **Grayscale** — all colour removed; meaning encoded in hue disappears completely
-- **Low Light** — dim conditions: detail collapses, shape becomes ambiguous
-
-Try each filter. Notice what changes — and what you assume when certain cues are missing.
-
----
+This isn’t about color blindness.  
+**It’s about interpretive hygiene:**  
+_— the discipline of noticing the lens you’re using before you mistake it for reality._
 
 ## What You're Seeing
 
-The apple doesn't change. The filter does.
-
+The apple doesn't change, just the lens that your mind perceives as "real".  
 Yet your _interpretation_ of the apple changes dramatically depending on the filter applied:
 
-- Under **protanopia**, the apple looks less like a ripe fruit and more like something old or bruised.
-- Under **deuteranopia**, the apple and the leaf converge on the same muted olive-yellow. The boundary between them blurs — not because the shapes changed, but because the colour contrast that defined them is gone.
-- Under **tritanopia**, the apple stays reddish, but the leaf and highlight cues drift enough to weaken the usual colour contrast.
-- Under **grayscale**, the apple becomes abstract. You know it's an apple from shape and context, not colour.
-- Under **low light**, even shape becomes uncertain.
+Every filter alters:
 
-In each case, **the same object carries different meaning** — not because the object changed, but because the perceptual filter changed.
+- **Hue** — which colors survive and are reconstructed
+- **Contrast** — what becomes foreground vs. background
+- **Detail** — what your brain fills in automatically from memory
+- **Meaning** — the story you tell about what you see
+
+The apple doesn’t change.
+_Your perceptual contract does._
+
+And because of this, **the same object carries different meaning...**  
+_— not because the object changed, but because the perceptual filter changed._
 
 ---
 
 ## Why Perception Matters
 
-The Resonance Core Framework begins with a foundational claim: **you do not experience reality directly**. You experience a filtered, interpreted, constructed version of it.
+You never see the world as it is  
+_— only as your past has trained you to see it._
 
-Your nervous system applies filters constantly:
-
-- **Emotional state** — fear narrows perception; safety expands it
-- **Cognitive schema** — past experiences shape what you notice and what you ignore
-- **Narrative identity** — the story you carry about yourself determines what you treat as signal and what you dismiss as noise
-- **Cultural and environmental conditioning** — shared assumptions create shared blind spots
-
-The apple demo makes this visible in a controlled way. The filter is obvious. In real life, **the filter is invisible** — which is precisely what makes it dangerous.
+The apple demo makes this visible in a controlled way.  
+The filter is obvious.  
+In real life, **the filter your body and mind place on life is invisible...**  
+_— which is precisely what makes it dangerous and equally important to spot._
 
 ---
 
@@ -101,43 +127,38 @@ The apple demo makes this visible in a controlled way. The filter is obvious. In
 
 **Interpretive hygiene** is the TRI practice of regularly auditing your perceptual filters.
 
-It asks:
+It asks us one simple question:
 
 > _What filter am I currently running? And does it match the situation I'm actually in?_
 
-Common distortion filters include:
+Most people never ask this.  
+That’s why their identity feels unstable.  
+You’re here to do it differently.
 
-- **The threat filter** — interpreting neutral events as hostile
-- **The validation filter** — interpreting ambiguous feedback as confirmation
-- **The inadequacy filter** — interpreting failure as evidence of a fixed identity deficit
-- **The nostalgia filter** — interpreting the past as more coherent than it was
-
-None of these filters are permanent. All of them can be changed — but only if you first acknowledge that they are active.
+Because the more you practice Interpretive Hygiene, the easier it gets to sort real signals from noise and stay aligned with yourself.
 
 ---
 
 ## Reflection Prompts
 
-After using the demo, consider:
+After using the demo, consider the following:
 
-1. When you are under stress, which perceptual "filter" tends to activate? What does the world look like through it?
-
-2. Think of a recent situation where your interpretation of an event turned out to be wrong. What filter were you running?
-
-3. Is there a person, context, or topic in your life right now where you suspect you are not seeing clearly? What would it take to change the filter?
+1. When you are under stress, which perceptual "filter" tends to activate?  
+   _—**What does the world look like through it?**_
+2. Think of a recent situation where your interpretation of an event turned out to be wrong.  
+   _—**What filter were you running?**_
+3. Is there a person, context, or topic in your life right now where you suspect you are not seeing clearly?  
+   _—**What would it take to change the filter?**_
 
 ---
 
 ## Your Next Step
 
-This demo is an entry point. The deeper work begins in the TRI framework.
+If this demo hit you in the gut (it usually does), continue the work:
 
-**If this resonated, your next steps are:**
-
-- [**Start Day 1 of the 7-Day Identity Activation Challenge**](/blog/tri-7day-identity-activation-challenge) — build your personal resonance baseline over one week
-- [**Read the Episode 1 Companion Article**](/blog/tri-ep1-companion-who-are-you-becoming) — go deeper on how identity is constructed and filtered
-- [**Explore the full TRI Library**](/blog) — all articles, challenges, and demos from The Resonant Identity
+- [**Read the Episode 003 Companion Article**](/blog/tri-ep1-companion-who-are-you-becoming) — go deeper on how identity is constructed and filtered
+- [**Explore the full TRI Library**](/podcasts/theresonantid/library) — all articles, challenges, and demos from The Resonant Identity
 
 ---
 
-_Written by Terence Waters. The Resonant Identity is a living extension of the Resonance Core Framework™._
+_Written by Terence Waters. The Resonant Identity podcast is a living extension of the Resonance Core Framework™._
