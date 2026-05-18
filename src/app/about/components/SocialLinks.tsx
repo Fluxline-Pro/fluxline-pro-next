@@ -14,6 +14,7 @@ import { FacebookIcon } from '@/assets/svgs/FacebookLogo';
 import { GitHubLogo } from '@/assets/svgs/GitHubLogo';
 import { TwitterLogo } from '@/assets/svgs/TwitterLogo';
 import { TiktokLogo } from '@/assets/svgs/TiktokLogo';
+import { BlueSkyLogo } from '@/assets/svgs/BlueSkyLogo';
 
 export interface SocialLinksData {
   linkedin?: string;
@@ -22,6 +23,7 @@ export interface SocialLinksData {
   github?: string;
   threads?: string;
   twitter?: string;
+  bluesky?: string;
   youtube?: string;
   tiktok?: string;
   email?: string;
@@ -131,6 +133,25 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           aria-label={`${name} on Twitter`}
         >
           <TwitterLogo
+            style={{
+              width: instagramIconSize,
+              height: instagramIconSize,
+            }}
+          />
+        </Link>
+      )}
+
+      {socialLinks.bluesky && (
+        <Link
+          href={socialLinks.bluesky}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={buttonStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label={`${name} on Bluesky`}
+        >
+          <BlueSkyLogo
             style={{
               width: instagramIconSize,
               height: instagramIconSize,

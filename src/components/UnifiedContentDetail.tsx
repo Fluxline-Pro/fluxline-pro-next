@@ -516,21 +516,20 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
                   {config.authorInfo.name}
                 </Typography>
 
-                {config.authorInfo.name === 'Terence Waters' &&
-                  config.authorInfo.socialLinks && (
-                    <div
-                      style={{
-                        marginTop: theme.spacing.s2,
-                        marginBottom: theme.spacing.s2,
-                      }}
-                    >
-                      <SocialLinks
-                        socialLinks={config.authorInfo.socialLinks}
-                        name={config.authorInfo.name}
-                        size='small'
-                      />
-                    </div>
-                  )}
+                {config.authorInfo.socialLinks && (
+                  <div
+                    style={{
+                      marginTop: theme.spacing.s2,
+                      marginBottom: theme.spacing.s2,
+                    }}
+                  >
+                    <SocialLinks
+                      socialLinks={config.authorInfo.socialLinks}
+                      name={config.authorInfo.name}
+                      size='small'
+                    />
+                  </div>
+                )}
 
                 <Typography
                   variant='p'

@@ -1,8 +1,8 @@
 ---
 title: "Resonance or Distortion? — An Interactive Self-Assessment"
 excerpt: "An interactive self-assessment to help you identify whether you're operating from resonance or distortion in key areas of your life. Use this as a starting point for your TRI journey."
-author: "Terence Waters"
-publishedDate: "2025-09-15"
+author: "The Resonant Identity"
+publishedDate: "2026-05-18"
 category: "Resonant Identity"
 tags:
   [

@@ -24,6 +24,18 @@ export const TERENCE_SOCIAL_LINKS: SocialLinksData = {
   email: 'terence@fluxline.pro',
 };
 
+/**
+ * The Resonant Identity Social Links
+ * Used on blog posts and content where author is "The Resonant Identity"
+ */
+export const TRI_SOCIAL_LINKS: SocialLinksData = {
+  instagram: 'https://www.instagram.com/theresonantid',
+  twitter: 'https://x.com/theresonantid',
+  bluesky: 'https://bsky.app/profile/theresonantid.bsky.social',
+  tiktok: 'https://www.tiktok.com/@theresonantid',
+  facebook: 'https://www.facebook.com/theresonantid',
+};
+
 export const FLUXLINE_SOCIAL_LINKS: SocialLinksData = {
   facebook: 'https://www.facebook.com/fluxline',
   instagram: 'https://instagram.com/fluxlineco',

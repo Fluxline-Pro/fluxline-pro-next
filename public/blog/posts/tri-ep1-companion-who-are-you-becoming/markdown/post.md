@@ -1,8 +1,8 @@
 ---
 title: "Who Are You Becoming? — Episode 1 Companion Article"
 excerpt: "A companion guide to Episode 1 of The Resonant Identity podcast. Explore the foundational question at the heart of TRI: identity isn't something you find — it's something you build."
-author: "Terence Waters"
-publishedDate: "2025-09-01"
+author: "The Resonant Identity"
+publishedDate: "2026-05-18"
 category: "Resonant Identity"
 tags:
   [

@@ -6,7 +6,7 @@ import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { format } from 'date-fns';
 import type { BlogPost } from '../types';
-import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
+import { TERENCE_SOCIAL_LINKS, TRI_SOCIAL_LINKS } from '@/app/about/constants';
 import { getContentTypeTag } from '@/app/podcasts/theresonantid/lib/taxonomy';
 import { RedAppleFilterDemo } from '@/components/demos';
 
@@ -57,7 +57,11 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
         ? format(post.lastUpdated, 'MMMM d, yyyy')
         : undefined,
       socialLinks:
-        post.author === 'Terence Waters' ? TERENCE_SOCIAL_LINKS : undefined,
+        post.author === 'Terence Waters'
+          ? TERENCE_SOCIAL_LINKS
+          : post.author === 'The Resonant Identity'
+            ? TRI_SOCIAL_LINKS
+            : undefined,
     },
     badges: [
       {

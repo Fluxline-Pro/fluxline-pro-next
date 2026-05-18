@@ -1,39 +1,39 @@
 ---
-title: "The 7-Day Identity Activation Challenge"
-excerpt: "A guided 7-day challenge to help you establish your personal resonance baseline. Each day targets a different dimension of identity — from somatic cues to narrative patterns to emotional clarity."
-author: "Terence Waters"
-publishedDate: "2025-09-08"
-category: "Resonant Identity"
+title: 'The 7-Day Identity Activation Challenge'
+excerpt: 'A guided 7-day challenge to help you establish your personal resonance baseline. Each day targets a different dimension of identity — from somatic cues to narrative patterns to emotional clarity.'
+author: 'The Resonant Identity'
+publishedDate: '2026-05-18'
+category: 'Resonant Identity'
 tags:
   [
-    "Identity Challenge",
-    "Agency",
-    "Somatic Cues",
-    "Narrative Cues",
-    "Emotional Cues",
-    "Foundations",
+    'Identity Challenge',
+    'Agency',
+    'Somatic Cues',
+    'Narrative Cues',
+    'Emotional Cues',
+    'Foundations',
   ]
-imageUrl: ""
-imageAlt: "The 7-Day Identity Activation Challenge"
+imageUrl: ''
+imageAlt: 'The 7-Day Identity Activation Challenge'
 featured: true
-seoTitle: "7-Day Identity Activation Challenge | The Resonant Identity"
-seoDescription: "A structured 7-day challenge from The Resonant Identity. Build your personal resonance baseline through daily identity-building exercises targeting somatic, narrative, and emotional cues."
+seoTitle: '7-Day Identity Activation Challenge | The Resonant Identity'
+seoDescription: 'A structured 7-day challenge from The Resonant Identity. Build your personal resonance baseline through daily identity-building exercises targeting somatic, narrative, and emotional cues.'
 seoKeywords:
   [
-    "identity challenge",
-    "7 day challenge",
-    "resonant identity",
-    "identity activation",
-    "personal growth challenge",
-    "somatic cues",
-    "resonance baseline",
+    'identity challenge',
+    '7 day challenge',
+    'resonant identity',
+    'identity activation',
+    'personal growth challenge',
+    'somatic cues',
+    'resonance baseline',
   ]
 generatedWithAI: false
 ---
 
 # The 7-Day Identity Activation Challenge
 
-*Build Your Resonance Baseline in One Week*
+_Build Your Resonance Baseline in One Week_
 
 ---
 
@@ -64,10 +64,12 @@ Just presence. And honesty.
 Your body holds information that your mind often overrides. Today, we pay attention to somatic cues — the physical sensations that signal alignment or misalignment.
 
 **Morning Prompt:**
+
 > Before you look at your phone, check your body. Where do you feel tension? Where do you feel ease? Notice without judgment.
 
 **Evening Reflection:**
-> When did your body feel most *right* today? When did it feel most *off*? What were you doing at each moment?
+
+> When did your body feel most _right_ today? When did it feel most _off_? What were you doing at each moment?
 
 **What to listen for:** Tightness in the chest when saying yes to something you mean no. A sense of lightness when engaging in work that fits. These are resonance signals.
 
@@ -80,9 +82,11 @@ Your body holds information that your mind often overrides. Today, we pay attent
 Every identity is held together by narrative. Today we examine the stories you tell about yourself — particularly the ones that operate below conscious awareness.
 
 **Morning Prompt:**
+
 > What is one story you tell regularly about why you are the way you are? ("I've always been..." / "I'm not really someone who...")
 
 **Evening Reflection:**
+
 > Is that story serving you? Who told it first — you, or someone else?
 
 **What to listen for:** Narratives that close doors ("I'm just not creative") vs. ones that open them ("I'm still figuring out what creative means for me").
@@ -93,12 +97,14 @@ Every identity is held together by narrative. Today we examine the stories you t
 
 **Theme: Emotion as Information, Not Instruction**
 
-Emotions are often treated as problems to manage or impulses to suppress. In the TRI framework, they are *data* — high-bandwidth signals about what matters to you.
+Emotions are often treated as problems to manage or impulses to suppress. In the TRI framework, they are _data_ — high-bandwidth signals about what matters to you.
 
 **Morning Prompt:**
+
 > What emotion have you been avoiding most this week? Why?
 
 **Evening Reflection:**
+
 > If that emotion had a message, what would it be? What is it asking you to pay attention to?
 
 ---
@@ -110,9 +116,11 @@ Emotions are often treated as problems to manage or impulses to suppress. In the
 Today we examine congruence — or the lack of it — between stated values and actual behavior.
 
 **Morning Prompt:**
+
 > Name three things you say are important to you. Look at how you spent your time yesterday. How much of it was actually in service of those three things?
 
 **Evening Reflection:**
+
 > Where is the gap between your stated values and your lived behavior? Is that gap intentional, or has it drifted there unconsciously?
 
 ---
@@ -124,9 +132,11 @@ Today we examine congruence — or the lack of it — between stated values and 
 Not every thought you have is accurate. Not every belief you hold was chosen. Today we practice filtering.
 
 **Morning Prompt:**
-> What is one belief you hold about yourself that you have *never seriously questioned*?
+
+> What is one belief you hold about yourself that you have _never seriously questioned_?
 
 **Evening Reflection:**
+
 > What evidence supports this belief? What evidence contradicts it? Is this belief a truth, or a distortion you've accepted as truth?
 
 ---
@@ -135,12 +145,14 @@ Not every thought you have is accurate. Not every belief you hold was chosen. To
 
 **Theme: Where You Are Choosing vs. Where You Are Drifting**
 
-Agency is not about control — it is about *conscious participation* in the direction of your life.
+Agency is not about control — it is about _conscious participation_ in the direction of your life.
 
 **Morning Prompt:**
+
 > In which areas of your life do you feel like an active agent? In which do you feel like a passenger?
 
 **Evening Reflection:**
+
 > Pick one area where you have been drifting. What is one small act of agency you could take tomorrow?
 
 ---
@@ -152,10 +164,12 @@ Agency is not about control — it is about *conscious participation* in the dir
 You've now spent six days gathering signals. Today, we synthesize.
 
 **Morning Prompt:**
+
 > Looking back at the week: What patterns emerged? What surprised you? What have you been ignoring that you can no longer afford to ignore?
 
 **Evening Reflection:**
-> Write (or mentally complete) this sentence: *"The version of me that resonates most is someone who ___________."*
+
+> Write (or mentally complete) this sentence: _"The version of me that resonates most is someone who ****\_\_\_****."_
 
 This is your resonance baseline. It is not a destination. It is a direction.
 
@@ -163,7 +177,7 @@ This is your resonance baseline. It is not a destination. It is a direction.
 
 ## What Comes Next
 
-If you've completed all seven days, you have done something most people never do: you have *listened to yourself deliberately*.
+If you've completed all seven days, you have done something most people never do: you have _listened to yourself deliberately_.
 
 The next step is to bring what you've learned into practice. That's what The Resonant Identity is built for.
 
@@ -173,4 +187,4 @@ The next step is to bring what you've learned into practice. That's what The Res
 
 ---
 
-*Written by Terence Waters. The Resonant Identity is a living extension of the Resonance Core Framework™.*
+_Written by Terence Waters. The Resonant Identity is a living extension of the Resonance Core Framework™._
