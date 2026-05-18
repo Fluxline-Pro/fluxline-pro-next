@@ -32,28 +32,28 @@ const FILTER_OPTIONS: FilterOption[] = [
   {
     mode: 'normal',
     label: 'Normal',
-    description: 'The apple as most people see it — vivid red, high contrast.',
+    description: 'The apple as most people see it — vivid red.',
     icon: '👁️',
   },
   {
     mode: 'protanopia',
     label: 'Protanopia',
     description:
-      'Red colorblindness. Reds shift to dark brown/yellow. The apple loses its signature hue.',
+      'Red colorblindness. Reds shift to a dark brown. The apple and the leaf lose their signature hues.',
     icon: '🔴',
   },
   {
     mode: 'tritanopia',
     label: 'Tritanopia',
     description:
-      'Red–blue colorblindness. Hues rotate — reds appear orange-ish, the green stem shifts.',
+      'Blue-yellow colorblindness. Blues and greens compress together, while yellow cues wash out. The apple stays muted red while the leaf shifts toward teal-gray.',
     icon: '🔵',
   },
   {
     mode: 'grayscale',
     label: 'Grayscale',
     description:
-      'All colour removed. Shape and brightness remain; meaning from colour is lost entirely.',
+      'All color has been removed. Shape and brightness remain; meaning from colour is lost entirely.',
     icon: '⬜',
   },
   {
@@ -110,7 +110,9 @@ export function RedAppleFilterDemo() {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: isDark ? '#111' : '#f9f9f9',
+    backgroundColor: isDark
+      ? theme.palette.neutralQuaternaryAlt
+      : theme.palette.white,
     overflow: 'hidden',
   };
 
@@ -189,8 +191,11 @@ export function RedAppleFilterDemo() {
             <button
               key={opt.mode}
               type='button'
-              aria-pressed={isActive}
-              aria-label={`Apply ${opt.label} filter`}
+              aria-label={
+                isActive
+                  ? `${opt.label} filter selected`
+                  : `Apply ${opt.label} filter`
+              }
               onClick={() => setActiveMode(opt.mode)}
               style={{
                 display: 'flex',

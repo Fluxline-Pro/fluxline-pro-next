@@ -26,11 +26,11 @@ export type ImageFilterMode =
 export function getImageFilterCss(mode: ImageFilterMode): string {
   switch (mode) {
     case 'protanopia':
-      // Red-colorblindness simulation: reds shift to brown/yellow, reds & greens converge
-      return 'saturate(70%) contrast(90%) hue-rotate(-15deg) sepia(20%)';
+      // Push reds much farther toward a dim ochre/brown profile for a clearer visual contrast
+      return 'sepia(88%) hue-rotate(-42deg) saturate(32%) brightness(68%) contrast(108%)';
     case 'tritanopia':
-      // Blue-yellow colorblindness: blues appear greenish, yellows appear pinkish
-      return 'saturate(90%) contrast(100%) hue-rotate(90deg) sepia(5%)';
+      // Blue-yellow colorblindness: preserve reds more closely while pushing greens/blues toward a compressed teal-gray range
+      return 'sepia(8%) hue-rotate(42deg) saturate(70%) brightness(104%) contrast(94%)';
     case 'grayscale':
       // Full desaturation
       return 'grayscale(100%) contrast(100%)';
@@ -69,7 +69,7 @@ export const useColorVisionFilter = (
         // Red-colorblindness simulation:
         // Reds appear darker and shift towards brown/yellow tones
         // Reds and greens become more similar (yellowy-brown range)
-        return `saturate(70%) contrast(90%) hue-rotate(-15deg) sepia(20%) ${darkModeBrightness}`;
+        return `sepia(88%) hue-rotate(-42deg) saturate(32%) brightness(68%) contrast(108%) ${darkModeBrightness}`;
       case 'deuteranopia':
         // Green-colorblindness simulation (most common):
         // Greens shift towards yellows and browns
@@ -78,9 +78,9 @@ export const useColorVisionFilter = (
         return `saturate(40%) contrast(95%) hue-rotate(180deg) sepia(15%) ${darkModeBrightness}`;
       case 'tritanopia':
         // Blue-yellow colorblindness simulation:
-        // Blues appear greenish, yellows appear pinkish
-        // Blue-yellow axis is confused
-        return `saturate(90%) contrast(100%) hue-rotate(90deg) sepia(5%) ${darkModeBrightness}`;
+        // Blues and greens compress together while yellows lose reliability
+        // Reds remain present, but secondary colour cues become less trustworthy
+        return `sepia(8%) hue-rotate(42deg) saturate(70%) brightness(104%) contrast(94%) ${darkModeBrightness}`;
       default:
         // Skip dark mode filter if explicitly requested (e.g., for Fluxline dark logo)
         if (skipDarkModeFilter && theme.isInverted) {

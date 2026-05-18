@@ -51,10 +51,8 @@
       <feGaussianBlur stdDeviation="1.5"/>
     </filter>
   </defs>
-
   <!-- Drop shadow ellipse -->
   <ellipse cx="200" cy="415" rx="100" ry="18" fill="rgba(0,0,0,0.22)" filter="url(#leafSheen)"/>
-
   <!-- Apple body - main shape -->
   <g filter="url(#dropShadow)">
     <!-- Left lobe -->
@@ -77,7 +75,6 @@
              C 217 148, 210 138, 200 135 Z" 
           fill="#A01010"/>
   </g>
-
   <!-- Color overlays for realism -->
   <path d="M 200 135 
            C 165 120, 78 130, 68 205 
@@ -87,7 +84,6 @@
            C 328 330, 342 270, 332 205 
            C 322 130, 235 120, 200 135" 
         fill="url(#leftHighlight)"/>
-
   <path d="M 200 135 
            C 165 120, 78 130, 68 205 
            C 58 270, 72 330, 105 365 
@@ -96,7 +92,6 @@
            C 328 330, 342 270, 332 205 
            C 322 130, 235 120, 200 135" 
         fill="url(#rightShade)"/>
-
   <path d="M 200 135 
            C 165 120, 78 130, 68 205 
            C 58 270, 72 330, 105 365 
@@ -105,27 +100,24 @@
            C 328 330, 342 270, 332 205 
            C 322 130, 235 120, 200 135" 
         fill="url(#bottomShadow)"/>
-
   <!-- Specular highlight (shiny spot) -->
   <ellipse cx="156" cy="178" rx="38" ry="28" fill="url(#specular)" transform="rotate(-20, 156, 178)"/>
   <!-- Smaller secondary highlight -->
   <ellipse cx="172" cy="162" rx="18" ry="12" fill="white" fill-opacity="0.4" transform="rotate(-20, 172, 162)"/>
-
   <!-- Stem -->
   <path d="M 196 136 C 194 115, 197 95, 208 78 C 215 65, 222 58, 228 55" 
         stroke="url(#stemGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
-
   <!-- Leaf -->
-  <path d="M 220 95 C 248 80, 270 68, 278 52 C 268 58, 252 65, 238 72 
-           C 256 52, 268 38, 272 26 C 258 42, 242 54, 228 68 
-           C 236 48, 240 30, 236 16 C 228 34, 222 52, 220 70 Z" 
+  <path d="M 228 60 C 248 46, 267 35, 279 20 C 267 26, 252 33, 240 41 
+         C 254 24, 264 12, 268 2 C 255 15, 242 26, 231 39 
+         C 236 22, 238 10, 235 0 C 229 15, 226 31, 228 48 Z" 
         fill="url(#leafGrad)"/>
   <!-- Leaf vein -->
-  <path d="M 224 88 C 240 72, 258 58, 266 44" 
+  <path d="M 229 55 C 241 40, 256 27, 268 14" 
         stroke="#1B5E20" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
   <!-- Leaf secondary veins -->
-  <path d="M 236 78 C 244 70, 250 64, 254 58" 
+  <path d="M 238 46 C 246 37, 252 30, 258 23" 
         stroke="#2E7D32" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
-  <path d="M 230 83 C 242 77, 248 70, 250 63" 
+  <path d="M 233 50 C 244 43, 250 35, 254 28" 
         stroke="#2E7D32" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
 </svg>
