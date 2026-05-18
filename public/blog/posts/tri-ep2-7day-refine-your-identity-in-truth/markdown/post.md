@@ -8,15 +8,12 @@ tags:
   [
     'Identity Challenge',
     'Identity Activation',
-    'Identity Refinement',
     'Agency',
     'Reality',
     'Foundations',
     'Personal Growth',
-    'Resonance',
-    'Truth',
-    'Distortion',
-    'Dissonance',
+    'Resonance & Dissonance',
+    'Truth & Distortion',
   ]
 imageUrl: '/blog/posts/tri-ep2-7day-refine-your-identity-in-truth/images/the-resonance-core-glyph.jpg'
 imageAlt: 'Episode 2: Identity Challenge — The pathway becomes clear when you define your true and chosen identity first.'

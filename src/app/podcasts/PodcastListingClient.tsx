@@ -1015,7 +1015,7 @@ export function PodcastListingClient({
             </FormButton>
           </div>
           <div className='space-y-8'>
-            {/* ─── B. 7-Day Challenges ─── */}
+            {/* ─── A. 7-Day Challenges ─── */}
             {triChallenges.length > 0 && (
               <TRISection
                 iconName='CalendarDay'
@@ -1030,7 +1030,7 @@ export function PodcastListingClient({
               />
             )}
 
-            {/* ─── C. Interactive Demos ─── */}
+            {/* ─── B. Interactive Demos ─── */}
             {triDemos.length > 0 && (
               <TRISection
                 iconName='LightningBolt'
@@ -1045,7 +1045,7 @@ export function PodcastListingClient({
               />
             )}
 
-            {/* ─── A. Companion Articles ─── */}
+            {/* ─── C. Companion Articles ─── */}
             {triCompanionArticles.length > 0 && (
               <TRISection
                 iconName='TextDocumentShared'

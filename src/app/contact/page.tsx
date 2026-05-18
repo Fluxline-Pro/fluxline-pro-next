@@ -36,9 +36,12 @@ export default function ContactPage() {
     setIsMounted(true);
   }, []);
 
-  // Email encoded as HTML decimal entities to avoid plain-text scraping.
-  const triEmailHref =
-    '&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#116;&#104;&#101;&#114;&#101;&#115;&#111;&#110;&#97;&#110;&#116;&#105;&#100;&#101;&#110;&#116;&#105;&#116;&#121;&#64;&#102;&#108;&#117;&#120;&#108;&#105;&#110;&#101;&#46;&#112;&#114;&#111;';
+  // Email built from char codes at render time — avoids a plain-text address
+  // in the static bundle while working correctly as a React href prop.
+  const triEmailHref = `mailto:${String.fromCharCode(
+    116, 104, 101, 114, 101, 115, 111, 110, 97, 110, 116, 105, 100, 101, 110,
+    116, 105, 116, 121
+  )}@${String.fromCharCode(102, 108, 117, 120, 108, 105, 110, 101)}.${String.fromCharCode(112, 114, 111)}`;
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -207,6 +210,7 @@ export default function ContactPage() {
           >
             <Typography
               variant='label'
+              aria-label='Email The Resonant Identity (opens email client)'
               style={{
                 color: theme.isInverted
                   ? theme.palette.white
@@ -230,6 +234,7 @@ export default function ContactPage() {
           >
             <Typography
               variant='label'
+              aria-label='Visit The Resonant Identity Facebook page (opens in new window)'
               style={{
                 color: theme.isInverted
                   ? theme.palette.black

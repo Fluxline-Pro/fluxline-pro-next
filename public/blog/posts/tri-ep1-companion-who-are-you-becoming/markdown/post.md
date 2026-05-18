@@ -8,6 +8,7 @@ tags:
   [
     'Episode Companion',
     'Foundations',
+    'Personal Growth',
     'Identity Coherence',
     'Resonance & Dissonance',
   ]
