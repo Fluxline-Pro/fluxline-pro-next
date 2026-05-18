@@ -31,7 +31,7 @@ seoKeywords:
     'resonant living',
     'self-help',
     'personal growth',
-    'recognize distortion,'
+    'recognize distortion',
     'identity activation',
     'personal growth challenge',
     'resonance baseline',
