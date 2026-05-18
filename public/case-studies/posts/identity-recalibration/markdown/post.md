@@ -251,7 +251,7 @@ By allowing both shadow and light signals to be named, the conflict resolved nat
 
 This case study validates the framework and informs the following actions:
 
-1. **Draft six remaining chapters** of the Resonance Core Framework™ book
+1. **Draft six remaining chapters** of The Resonance Core Framework™ book
 2. **Draft six corresponding worksheets** for practical application
 3. **Document this case study** in the Fluxline portfolio as QA validation
 4. **Continue somatic grounding** during future identity shifts

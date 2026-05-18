@@ -103,7 +103,7 @@ export const SCROLLS_DATA: ScrollItem[] = [
     seoMetadata: {
       title: 'Resonance Core Framework™ - Fluxline Strategic Insights',
       description:
-      'Deep dive into the Resonance Core Framework for personal transformation through archetypal mapping and emotional emergence.',
+      'Deep dive into The Resonance Core Framework™ for personal transformation through archetypal mapping and emotional emergence.',
       keywords: [
         'life coaching',
         'resonance core',

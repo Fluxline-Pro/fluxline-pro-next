@@ -2,7 +2,7 @@
 title: 'Personal Training Program Growth — From Recovery to Resonance'
 client: 'Self / Fluxline Resonance Group'
 industry: 'Health & Wellness'
-description: 'A personal journey of transformation integrating NASM-certified training, the Resonance Core Framework™, and OTP Model into a holistic wellness methodology.'
+description: 'A personal journey of transformation integrating NASM-certified training, The Resonance Core Framework™, and OTP Model into a holistic wellness methodology.'
 services:
   - wellness
   - training
@@ -24,7 +24,7 @@ featured: true
 imageUrl: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
 imageAlt: 'Personal Training Program Growth declaration and modeling'
 seoTitle: 'Personal Training Transformation Case Study - Resonance Core Framework'
-seoDescription: 'From 120 lbs. to 185 lbs., 10% body fat, and NASM certification—discover how the Resonance Core Framework™ integrates physical training with emotional stewardship.'
+seoDescription: 'From 120 lbs. to 185 lbs., 10% body fat, and NASM certification—discover how The Resonance Core Framework™ integrates physical training with emotional stewardship.'
 seoKeywords:
   [
     'resonance core framework',
@@ -86,7 +86,7 @@ I began with standard strength training, guided by a Tonal system in 2022. Over 
 
 - **Breathwork and Resonance Practices**: Anchoring emotional clarity alongside physical training
 - **NASM Certification** (December 2025): Formalizing knowledge and grounding it in professional standards
-- **OTP Model Integration**: Incorporating the Optimum Performance Training™ model from NASM curriculum into the Resonance Core Framework™
+- **OTP Model Integration**: Incorporating the Optimum Performance Training™ model from NASM curriculum into The Resonance Core Framework™
 - **Archetypal Mapping**: Structuring training cycles around emotional emergence and somatic alignment
 
 ### The Resonance Core Framework™ Emerges

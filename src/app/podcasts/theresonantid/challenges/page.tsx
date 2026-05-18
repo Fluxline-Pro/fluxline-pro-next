@@ -6,7 +6,7 @@ import { ChallengesPageClient } from './ChallengesPageClient';
 export const metadata: Metadata = {
   title: 'Identity Challenges | The Resonant Identity',
   description:
-    'Browse all 7-day identity challenges from The Resonant Identity. Structured practices rooted in the Resonance Core Framework™ to help you build identity coherence.',
+    'Browse all 7-day identity challenges from The Resonant Identity. Structured practices rooted in The Resonance Core Framework™ to help you build identity coherence.',
   keywords:
     'identity challenges, 7-day challenge, resonant identity, TRI, identity coherence, resonance core framework, Terence Waters, personal growth, identity activation',
   openGraph: {

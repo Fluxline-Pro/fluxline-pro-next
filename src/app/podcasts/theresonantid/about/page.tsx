@@ -6,13 +6,13 @@ import type { TRIPost } from '../../types';
 export const metadata: Metadata = {
   title: 'About The Resonant Identity',
   description:
-    'The Resonant Identity is a space for identity transformation, micro-lessons, and applied resonance — extending the Resonance Core Framework into a living, accessible practice.',
+    'The Resonant Identity is a space for identity transformation, micro-lessons, and applied resonance — extending The Resonance Core Framework into a living, accessible practice.',
   keywords:
     'The Resonant Identity, TRI, identity transformation, resonance, micro-lessons, 7-day setup, identity practice, Resonance Core Framework, community, Facebook Group, Terence Waters, Fluxline',
   openGraph: {
     title: 'About The Resonant Identity — Fluxline',
     description:
-      'A living extension of the Resonance Core Framework — where identity becomes practice. Explore micro-lessons, the 7-day setup, and the TRI community.',
+      'A living extension of The Resonance Core Framework — where identity becomes practice. Explore micro-lessons, the 7-day setup, and the TRI community.',
     url: 'https://www.fluxline.pro/podcasts/theresonantid/about',
     siteName: 'Fluxline',
     type: 'website',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'About The Resonant Identity — Fluxline',
     description:
-      'A living extension of the Resonance Core Framework — where identity becomes practice.',
+      'A living extension of The Resonance Core Framework — where identity becomes practice.',
     images: ['/images/TheResonantIdentity_Logo.png'],
   },
   alternates: {

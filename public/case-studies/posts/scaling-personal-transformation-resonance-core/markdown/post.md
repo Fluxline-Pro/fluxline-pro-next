@@ -2,7 +2,7 @@
 title: 'Scaling Personal Transformation: Building a Differentiated Coaching Business'
 client: 'Fluxline Resonance Group, LLC'
 industry: 'Wellness & Personal Development'
-description: 'How integrating NASM-certified training with the Resonance Core Framework™ created a scalable coaching business with 85% client retention, premium pricing, and sustainable revenue growth.'
+description: 'How integrating NASM-certified training with The Resonance Core Framework™ created a scalable coaching business with 85% client retention, premium pricing, and sustainable revenue growth.'
 services: ['personal-training', 'resonance-core', 'coaching']
 technologies:
   [
@@ -44,7 +44,7 @@ metrics:
     description: 'Sustainable profitability'
 testimonial:
   quote: >
-    Building Fluxline's coaching business wasn't about competing on price—it was about creating something no one else could replicate. By integrating my personal transformation journey with NASM certification and the Resonance Core Framework™, I built a business that transforms lives while generating sustainable revenue. The authenticity of lived experience combined with professional credibility creates a competitive moat that traditional trainers can't match.
+    Building Fluxline's coaching business wasn't about competing on price—it was about creating something no one else could replicate. By integrating my personal transformation journey with NASM certification and The Resonance Core Framework™, I built a business that transforms lives while generating sustainable revenue. The authenticity of lived experience combined with professional credibility creates a competitive moat that traditional trainers can't match.
   author: 'Terence Waters'
   role: 'CEO & Founder, Fluxline Resonance Group'
 generatedWithAI: true

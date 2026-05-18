@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Resonant Identity Library — Fluxline',
     description:
-      'All content from The Resonant Identity — articles, challenges, and demos built on the Resonance Core Framework™.',
+      'All content from The Resonant Identity — articles, challenges, and demos built on The Resonance Core Framework™.',
     url: 'https://www.fluxline.pro/podcasts/theresonantid/library',
     siteName: 'Fluxline',
     type: 'website',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Resonant Identity Library — Fluxline',
     description:
-      'All content from The Resonant Identity — articles, challenges, and demos built on the Resonance Core Framework™.',
+      'All content from The Resonant Identity — articles, challenges, and demos built on The Resonance Core Framework™.',
     images: ['/images/TheResonantIdentity_Logo.png'],
   },
   alternates: {

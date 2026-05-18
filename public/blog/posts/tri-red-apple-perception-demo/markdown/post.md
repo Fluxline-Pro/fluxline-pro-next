@@ -161,4 +161,4 @@ If this demo hit you in the gut (it usually does), continue the work:
 
 ---
 
-_Written by Terence Waters. The Resonant Identity podcast is a living extension of the Resonance Core Framework™._
+_Written by Terence Waters. The Resonant Identity podcast is a living extension of The Resonance Core Framework™._

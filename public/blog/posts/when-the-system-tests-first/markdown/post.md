@@ -215,6 +215,6 @@ Transformation is personal — but you don't have to navigate it alone.
 - [Discipline vs. Resonance](/blog/discipline-vs-resonance) — How to sustain momentum through resistance
 - [From Recovery to Resonance](/blog/from-recovery-to-resonance-personal-journey) — My personal transformation journey
 - [Scaling Personal Transformation Case Study](/case-studies/scaling-personal-transformation-resonance-core) — The business model behind resonance methodology
-- [Resonance Core Framework Service](/services/resonance-core) - How the Resonance Core Framework works in our service
+- [Resonance Core Framework Service](/services/resonance-core) - How The Resonance Core Framework works in our service
 
 ---

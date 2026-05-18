@@ -21,7 +21,7 @@ export function ChallengesPageClient({ posts }: ChallengesPageClientProps) {
       basePath='/blog'
       backArrowPath='/podcasts/theresonantid'
       title='TRI Challenges'
-      description='7-day guided practices for identity coherence — structured challenges rooted in the Resonance Core Framework™.'
+      description='7-day guided practices for identity coherence — structured challenges rooted in The Resonance Core Framework™.'
     />
   );
 }

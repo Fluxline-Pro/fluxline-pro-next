@@ -17,7 +17,7 @@ imageUrl: '/blog/posts/tri-interactive-resonance-assessment/images/6vs9test.png'
 imageAlt: 'The 6 vs. 9 test of reality: Resonance or Distortion — TRI Interactive Self-Assessment'
 featured: true
 seoTitle: 'The 6 vs. 9 test of reality: Resonance or Distortion? Interactive Self-Assessment | The Resonant Identity'
-seoDescription: 'Use this interactive self-assessment from The Resonant Identity to discover whether you are operating from resonance or distortion in your relationships, work, and identity. A practical tool from the Resonance Core Framework.'
+seoDescription: 'Use this interactive self-assessment from The Resonant Identity to discover whether you are operating from resonance or distortion in your relationships, work, and identity. A practical tool from The Resonance Core Framework.'
 seoKeywords:
   [
     'resonance assessment',
@@ -176,4 +176,4 @@ Based on your results, here are the recommended next steps:
 
 ---
 
-_Written by Terence Waters. The Resonant Identity is a living extension of the Resonance Core Framework™._
+_Written by Terence Waters. The Resonant Identity is a living extension of The Resonance Core Framework™._

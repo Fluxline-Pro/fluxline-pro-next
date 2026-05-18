@@ -36,7 +36,7 @@ import type { PodcastEpisode } from '@/app/podcasts/types';
 // With latest episode callout
 <HeroSimple
   title='The Resonant Identity'
-  subtitle='A living extension of the Resonance Core Framework'
+  subtitle='A living extension of The Resonance Core Framework'
   backArrow={true}
   backArrowPath='/podcasts/theresonantid'
   animationDelay={0}
