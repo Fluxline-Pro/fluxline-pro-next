@@ -1,40 +1,40 @@
 ---
-title: "Resonance or Distortion? — An Interactive Self-Assessment"
+title: 'Resonance or Distortion? — An Interactive Self-Assessment'
 excerpt: "An interactive self-assessment to help you identify whether you're operating from resonance or distortion in key areas of your life. Use this as a starting point for your TRI journey."
-author: "The Resonant Identity"
-publishedDate: "2026-05-18"
-category: "Resonant Identity"
+author: 'The Resonant Identity'
+publishedDate: '2026-05-18'
+category: 'Resonant Identity'
 tags:
   [
-    "Interactive Demo",
-    "Truth",
-    "Distortion",
-    "Perception",
-    "Interpretive Hygiene",
-    "The Triad",
+    'Interactive Demo',
+    'Truth',
+    'Distortion',
+    'Perception',
+    'Interpretive Hygiene',
+    'The Triad',
   ]
-imageUrl: ""
-imageAlt: "Resonance or Distortion — TRI Interactive Self-Assessment"
+imageUrl: '/blog/posts/tri-interactive-resonance-assessment/images/6vs9test.png'
+imageAlt: 'The 6 vs. 9 test of reality: Resonance or Distortion — TRI Interactive Self-Assessment'
 featured: true
-seoTitle: "Resonance or Distortion? Interactive Self-Assessment | The Resonant Identity"
-seoDescription: "Use this interactive self-assessment from The Resonant Identity to discover whether you are operating from resonance or distortion in your relationships, work, and identity. A practical tool from the Resonance Core Framework."
+seoTitle: 'The 6 vs. 9 test of reality: Resonance or Distortion? Interactive Self-Assessment | The Resonant Identity'
+seoDescription: 'Use this interactive self-assessment from The Resonant Identity to discover whether you are operating from resonance or distortion in your relationships, work, and identity. A practical tool from the Resonance Core Framework.'
 seoKeywords:
   [
-    "resonance assessment",
-    "identity assessment",
-    "self-assessment",
-    "resonance distortion",
-    "interpretive hygiene",
-    "TRI",
-    "the resonant identity",
-    "personal growth",
+    'resonance assessment',
+    'identity assessment',
+    'self-assessment',
+    'resonance distortion',
+    'interpretive hygiene',
+    'TRI',
+    'the resonant identity',
+    'personal growth',
   ]
 generatedWithAI: false
 ---
 
 # Resonance or Distortion? — An Interactive Self-Assessment
 
-*A Practical Tool from The Resonant Identity*
+_A Practical Tool from The Resonant Identity_
 
 ---
 
@@ -70,7 +70,7 @@ The Triad refers to the three channels through which identity is experienced: th
 
 2. I can distinguish between a belief I have genuinely examined and one I inherited from my environment.
 
-3. The story I tell about who I am feels *chosen* rather than imposed.
+3. The story I tell about who I am feels _chosen_ rather than imposed.
 
 4. I am aware of at least one narrative I carry about myself that may not be accurate.
 
@@ -86,7 +86,7 @@ The Triad refers to the three channels through which identity is experienced: th
 
 ## Section 2: Interpretive Hygiene
 
-Interpretive hygiene is the practice of regularly examining *how* you are interpreting your experiences, not just what is happening. Poor interpretive hygiene leads to distortion — reading threat where there is none, reading validation where you should be questioning, and so on.
+Interpretive hygiene is the practice of regularly examining _how_ you are interpreting your experiences, not just what is happening. Poor interpretive hygiene leads to distortion — reading threat where there is none, reading validation where you should be questioning, and so on.
 
 **Rate each statement (1–5):**
 
@@ -122,7 +122,7 @@ This section examines the degree to which your day-to-day life is aligned with y
 
 4. When I feel dissonance — that something is off — I treat it as information rather than something to suppress.
 
-5. At the end of most days, I feel like I showed up as *myself*, not a version of myself shaped by what others expected.
+5. At the end of most days, I feel like I showed up as _myself_, not a version of myself shaped by what others expected.
 
 **Your Resonance/Dissonance Score:** Add your scores for statements 11–15.
 
@@ -147,7 +147,7 @@ This section examines the degree to which your day-to-day life is aligned with y
 It's worth naming clearly what distortion patterns feel like from the inside:
 
 - Constantly second-guessing decisions that seemed clear
-- Feeling like you're performing a version of yourself rather than *being* yourself
+- Feeling like you're performing a version of yourself rather than _being_ yourself
 - Reacting strongly to feedback that doesn't match your self-image
 - Saying yes when you mean no — and rationalizing it
 - Feeling that your life "makes sense on paper" but feels hollow in practice
@@ -168,4 +168,4 @@ Based on your results, here are the recommended next steps:
 
 ---
 
-*Written by Terence Waters. The Resonant Identity is a living extension of the Resonance Core Framework™.*
+_Written by Terence Waters. The Resonant Identity is a living extension of the Resonance Core Framework™._

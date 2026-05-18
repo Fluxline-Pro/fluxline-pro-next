@@ -35,11 +35,15 @@ generatedWithAI: false
 
 ---
 
-If you've just finished listening to Episode 1, welcome. You arrived at the right question.
+If you've just finished listening to "Episode 003- Inner Alignment" (which we will call Episode 1 going forward), welcome. You arrived at the right question.
 
 **Who are you becoming?**
 
-Not who you were. Not who you think you should be. Not the version other people have decided you are. Who are *you becoming* — deliberately, coherently, with full awareness of the forces shaping your identity?
+Not who you were.  
+Not who you think you should be.  
+Not the version other people have decided you are.
+
+Who are *you becoming* — deliberately, coherently, with full awareness of the forces shaping your identity?
 
 That's the central question of The Resonant Identity. And this companion article is designed to help you go deeper with what was covered in the episode.
 
