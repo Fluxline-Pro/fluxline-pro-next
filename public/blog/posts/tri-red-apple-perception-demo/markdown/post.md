@@ -1,6 +1,6 @@
 ---
 title: 'Red Apple Perception Demo — How Filters Change What You See'
-excerpt: 'An interactive demo that shows how a familiar object — a red apple — transforms under different perceptual filters. Experience protanopia, tritanopia, grayscale, and low-light conditions, then ask: how much of what you see is real?'
+excerpt: 'An interactive demo that shows how a familiar object — a red apple — transforms under different perceptual filters. Experience protanopia, deuteranopia, tritanopia, grayscale, and low-light conditions, then ask: how much of what you see is real?'
 author: 'Terence Waters'
 publishedDate: '2025-10-01'
 category: 'Resonant Identity'
@@ -17,12 +17,13 @@ imageUrl: '/blog/posts/tri-red-apple-perception-demo/images/red-apple.svg'
 imageAlt: 'A red apple used to demonstrate how perception filters alter what we see'
 featured: true
 seoTitle: 'Red Apple Perception Demo — Colour Filters & Visual Distortion | The Resonant Identity'
-seoDescription: 'Use this interactive TRI demo to see how a red apple appears under protanopia, tritanopia, grayscale, and low-light conditions. A hands-on introduction to perceptual distortion and interpretive hygiene.'
+seoDescription: 'Use this interactive TRI demo to see how a red apple appears under protanopia, deuteranopia, tritanopia, grayscale, and low-light conditions. A hands-on introduction to perceptual distortion and interpretive hygiene.'
 seoKeywords:
   [
     'perception demo',
     'colour blindness simulation',
     'protanopia',
+    'deuteranopia',
     'tritanopia',
     'visual distortion',
     'interpretive hygiene',
@@ -36,7 +37,7 @@ generatedWithAI: false
 
 # Red Apple Perception Demo
 
-_Seeing Is Not Always Believing — A TRI Interactive Experience_
+_Seeing is not always believing — A TRI Interactive Experience_
 
 ---
 
@@ -52,10 +53,11 @@ That question is not just about vision. It is at the heart of every distortion p
 
 ## How to Use This Demo
 
-The interactive panel below shows a red apple. Use the filter buttons to switch between five perceptual modes:
+The interactive panel below shows a red apple. Use the filter buttons to switch between six perceptual modes:
 
 - **Normal** — the apple as most people perceive it
 - **Protanopia** — red colorblindness: reds collapse into dark brown and olive
+- **Deuteranopia** — green colorblindness (the most common form): reds and greens both shift toward the same dull olive-yellow, making the apple and leaf nearly indistinguishable from each other
 - **Tritanopia** — blue-yellow colorblindness: reds stay relatively intact, but blues, greens, and yellows become less reliable
 - **Grayscale** — all colour removed; meaning encoded in hue disappears completely
 - **Low Light** — dim conditions: detail collapses, shape becomes ambiguous
@@ -71,6 +73,7 @@ The apple doesn't change. The filter does.
 Yet your _interpretation_ of the apple changes dramatically depending on the filter applied:
 
 - Under **protanopia**, the apple looks less like a ripe fruit and more like something old or bruised.
+- Under **deuteranopia**, the apple and the leaf converge on the same muted olive-yellow. The boundary between them blurs — not because the shapes changed, but because the colour contrast that defined them is gone.
 - Under **tritanopia**, the apple stays reddish, but the leaf and highlight cues drift enough to weaken the usual colour contrast.
 - Under **grayscale**, the apple becomes abstract. You know it's an apple from shape and context, not colour.
 - Under **low light**, even shape becomes uncertain.
