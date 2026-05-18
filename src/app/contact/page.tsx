@@ -9,7 +9,7 @@ import React from 'react';
 import Image from 'next/image';
 import {
   UnifiedPageWrapper,
-  InteractiveCard,
+  // InteractiveCard,
   NewsletterCTA,
 } from '@/components';
 import { Typography } from '@/theme/components/typography';
@@ -19,29 +19,26 @@ import { getIconForPath } from '@/utils/navigation-icons';
 import { ContactForm } from './components/ContactForm';
 import { Callout } from '@/theme/components/callout/Callout';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
-import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { SocialLinks } from '@/app/about/components/SocialLinks';
 import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';
 import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.png';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
-  const [triEmail, setTriEmail] = React.useState('');
   const isMobileHook = useIsMobile();
-  const isDesktopHook = useIsDesktop();
+  // const isDesktopHook = useIsDesktop();
   const isMobile = isMounted ? isMobileHook : false;
-  const isDesktop = isMounted ? isDesktopHook : false;
+  // const isDesktop = isMounted ? isDesktopHook : false;
 
   React.useEffect(() => {
     setIsMounted(true);
-
-    const localPart = ['the', 'resonant', 'identity'].join('');
-    const domain = ['fluxline', 'pro'].join('.');
-
-    setTriEmail(`${localPart}@${domain}`);
   }, []);
+
+  // Email encoded as HTML decimal entities to avoid plain-text scraping.
+  const triEmailHref =
+    '&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#116;&#104;&#101;&#114;&#101;&#115;&#111;&#110;&#97;&#110;&#116;&#105;&#100;&#101;&#110;&#116;&#105;&#116;&#121;&#64;&#102;&#108;&#117;&#120;&#108;&#105;&#110;&#101;&#46;&#112;&#114;&#111;';
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
@@ -197,38 +194,29 @@ export default function ContactPage() {
             continue the conversation, reach out directly. Share your question,
             idea, or collaboration concept and we&apos;ll take it from there.
           </Typography>
-          {triEmail ? (
-            <a
-              href={`mailto:${triEmail}`}
-              className='inline-flex w-fit items-center rounded-md px-4 py-3 transition-colors'
+          <a
+            href={triEmailHref}
+            className='inline-flex w-fit items-center rounded-md px-4 py-3 transition-colors'
+            style={{
+              background: 'transparent',
+              textDecoration: 'none',
+              border: `1px solid ${theme.palette.themePrimary}`,
+              boxShadow: theme.shadows.button,
+              marginRight: theme.spacing.m,
+            }}
+          >
+            <Typography
+              variant='label'
               style={{
-                background: 'transparent',
-                textDecoration: 'none',
-                border: `1px solid ${theme.palette.themePrimary}`,
-                boxShadow: theme.shadows.button,
-                marginRight: theme.spacing.m,
+                color: theme.isInverted
+                  ? theme.palette.white
+                  : theme.palette.black,
+                fontWeight: theme.typography.fontWeights.semiBold,
               }}
             >
-              <Typography
-                variant='label'
-                style={{
-                  color: theme.isInverted
-                    ? theme.palette.white
-                    : theme.palette.black,
-                  fontWeight: theme.typography.fontWeights.semiBold,
-                }}
-              >
-                Email The Resonant Identity
-              </Typography>
-            </a>
-          ) : (
-            <Typography
-              variant='bodySmall'
-              style={{ color: theme.palette.neutralTertiary }}
-            >
-              Contact details are loading.
+              Email The Resonant Identity
             </Typography>
-          )}
+          </a>
           <a
             href='https://facebook.com/theresonantid'
             target='_blank'
