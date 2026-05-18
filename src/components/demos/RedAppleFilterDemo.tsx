@@ -4,8 +4,8 @@
  * RedAppleFilterDemo Component
  *
  * Interactive demo that applies visual perception filters to a red apple image,
- * illustrating how different visual conditions (protanopia, tritanopia, grayscale,
- * low light) alter what we think we see.
+ * illustrating how different visual conditions (protanopia, deuteranopia, tritanopia,
+ * grayscale, low light) alter what we think we see.
  *
  * Part of The Resonant Identity (TRI) — Perception & Interpretive Hygiene module.
  */
@@ -43,17 +43,24 @@ const FILTER_OPTIONS: FilterOption[] = [
     icon: '🔴',
   },
   {
+    mode: 'deuteranopia',
+    label: 'Deuteranopia',
+    description:
+      'Green colorblindness — the most common form. Reds and greens both collapse toward dull olive-yellow. The apple and the leaf lose their contrast with each other; both look like the same faded hue.',
+    icon: '🟡',
+  },
+  {
     mode: 'tritanopia',
     label: 'Tritanopia',
     description:
-      'Blue-yellow colorblindness. Blues and greens compress together, while yellow cues wash out. The apple stays muted red while the leaf shifts toward teal-gray.',
+      'Blue-yellow colorblindness. Reds shift toward orange, blues appear greenish, and yellows look pinkish. The red and green colors are mostly preserved, but they look faded.',
     icon: '🔵',
   },
   {
     mode: 'grayscale',
     label: 'Grayscale',
     description:
-      'All color has been removed. Shape and brightness remain; meaning from colour is lost entirely.',
+      'All color has been removed. Shape and brightness remain. The apple is still identifiable, but reduced to just black and white.',
     icon: '⬜',
   },
   {
@@ -111,7 +118,7 @@ export function RedAppleFilterDemo() {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: isDark
-      ? theme.palette.neutralQuaternaryAlt
+      ? `rgba(${theme.palette.black}, 0.8)`
       : theme.palette.white,
     overflow: 'hidden',
   };
@@ -168,7 +175,7 @@ export function RedAppleFilterDemo() {
             top: theme.spacing.s,
             right: theme.spacing.s,
             backgroundColor: theme.palette.themePrimary,
-            color: theme.palette.white,
+            color: isDark ? theme.palette.black : theme.palette.white,
             padding: `${theme.spacing.xxs} ${theme.spacing.s}`,
             borderRadius: theme.borderRadius.container.small,
             fontSize: '0.75rem',
@@ -233,12 +240,16 @@ export function RedAppleFilterDemo() {
       {/* ── Description ──────────────────────────────────────────────────────── */}
       <div style={descriptionAreaStyle}>
         <Typography
-          variant='p'
+          variant='bodySmall'
           style={{
             color: theme.palette.neutralSecondary,
             fontSize: '0.9rem',
             lineHeight: theme.typography.lineHeights.relaxed,
             margin: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
           }}
         >
           <strong style={{ color: theme.palette.themePrimary }}>

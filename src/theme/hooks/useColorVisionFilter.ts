@@ -14,6 +14,7 @@ interface ColorVisionFilter {
 export type ImageFilterMode =
   | 'normal'
   | 'protanopia'
+  | 'deuteranopia'
   | 'tritanopia'
   | 'grayscale'
   | 'lowlight';
@@ -28,9 +29,15 @@ export function getImageFilterCss(mode: ImageFilterMode): string {
     case 'protanopia':
       // Push reds much farther toward a dim ochre/brown profile for a clearer visual contrast
       return 'sepia(88%) hue-rotate(-42deg) saturate(32%) brightness(68%) contrast(108%)';
+    case 'deuteranopia':
+      // Green colorblindness (M-cones absent — most common form):
+      // Reds and greens both collapse toward dull olive-yellow; blues are preserved.
+      // Positive hue-rotate pushes reds toward olive-orange; lower contrast avoids crushing darks.
+      return 'sepia(48%) hue-rotate(22deg) saturate(38%) brightness(105%) contrast(92%)';
     case 'tritanopia':
-      // Blue-yellow colorblindness: preserve reds more closely while pushing greens/blues toward a compressed teal-gray range
-      return 'sepia(8%) hue-rotate(42deg) saturate(70%) brightness(104%) contrast(94%)';
+      // Blue-yellow colorblindness: S-cones (blue) are absent, so blues look greenish and yellows look pinkish.
+      // Reds shift toward orange-salmon; overall palette loses the blue-cool dimension and reads warmer.
+      return 'sepia(32%) saturate(52%) hue-rotate(-12deg) brightness(108%) contrast(90%)';
     case 'grayscale':
       // Full desaturation
       return 'grayscale(100%) contrast(100%)';
@@ -71,16 +78,15 @@ export const useColorVisionFilter = (
         // Reds and greens become more similar (yellowy-brown range)
         return `sepia(88%) hue-rotate(-42deg) saturate(32%) brightness(68%) contrast(108%) ${darkModeBrightness}`;
       case 'deuteranopia':
-        // Green-colorblindness simulation (most common):
-        // Greens shift towards yellows and browns
-        // Reds and greens become indistinguishable (both appear yellowish)
-        // More aggressive desaturation to remove green perception
-        return `saturate(40%) contrast(95%) hue-rotate(180deg) sepia(15%) ${darkModeBrightness}`;
+        // Green colorblindness simulation (M-cones absent — most common form):
+        // Reds and greens both collapse toward dull olive-yellow; blues are preserved.
+        // Positive hue-rotate pushes reds toward olive-orange; lower contrast avoids crushing darks.
+        return `sepia(48%) hue-rotate(22deg) saturate(38%) brightness(105%) contrast(92%) ${darkModeBrightness}`;
       case 'tritanopia':
-        // Blue-yellow colorblindness simulation:
-        // Blues and greens compress together while yellows lose reliability
-        // Reds remain present, but secondary colour cues become less trustworthy
-        return `sepia(8%) hue-rotate(42deg) saturate(70%) brightness(104%) contrast(94%) ${darkModeBrightness}`;
+        // Blue-yellow colorblindness simulation (S-cones absent):
+        // Blues appear greenish; yellows shift pinkish/violet.
+        // Reds shift toward orange-salmon; palette loses blue-cool dimension and reads warmer.
+        return `sepia(32%) saturate(52%) hue-rotate(-12deg) brightness(108%) contrast(90%) ${darkModeBrightness}`;
       default:
         // Skip dark mode filter if explicitly requested (e.g., for Fluxline dark logo)
         if (skipDarkModeFilter && theme.isInverted) {
