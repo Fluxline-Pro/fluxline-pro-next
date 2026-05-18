@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import Image from 'next/image';
 import {
   UnifiedPageWrapper,
   InteractiveCard,
@@ -21,10 +22,13 @@ import { BookingsButton } from '@/theme/components/button/bookings-button';
 import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
 import { SocialLinks } from '@/app/about/components/SocialLinks';
 import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';
+import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.png';
+import { FluentIcon } from '@/theme/components/fluent-icon';
 
 export default function ContactPage() {
   const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
+  const [triEmail, setTriEmail] = React.useState('');
   const isMobileHook = useIsMobile();
   const isDesktopHook = useIsDesktop();
   const isMobile = isMounted ? isMobileHook : false;
@@ -32,6 +36,11 @@ export default function ContactPage() {
 
   React.useEffect(() => {
     setIsMounted(true);
+
+    const localPart = ['the', 'resonant', 'identity'].join('');
+    const domain = ['fluxline', 'pro'].join('.');
+
+    setTriEmail(`${localPart}@${domain}`);
   }, []);
 
   return (
@@ -119,6 +128,129 @@ export default function ContactPage() {
               />
             )}
           </div>
+        </section>
+
+        <section
+          className='space-y-5'
+          style={{
+            padding: isMobile ? theme.spacing.l : theme.spacing.xl,
+            borderRadius: theme.borderRadius.container.card,
+            background: theme.isInverted
+              ? theme.semanticColors.bodyBackground
+              : theme.palette.white,
+            border: `1px solid ${theme.palette.neutralQuaternary}`,
+            boxShadow: theme.shadows.card,
+          }}
+        >
+          <div
+            className={
+              isMobile
+                ? 'flex flex-col items-start gap-4'
+                : 'flex items-center gap-5'
+            }
+          >
+            <Image
+              src={TheResonantIdentityLogo}
+              alt='The Resonant Identity logo'
+              width={isMobile ? 88 : 112}
+              height={isMobile ? 88 : 112}
+              style={{
+                width: isMobile ? '88px' : '112px',
+                height: 'auto',
+                filter: theme.isInverted
+                  ? 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.35))'
+                  : undefined,
+              }}
+              priority={false}
+            />
+            <div className='space-y-2'>
+              <Typography
+                variant='h3'
+                style={{
+                  color: theme.palette.themePrimary,
+                  fontWeight: theme.typography.fontWeights.bold,
+                }}
+              >
+                The Resonant Identity
+              </Typography>
+              <Typography
+                variant='bodySmall'
+                style={{
+                  color: theme.palette.neutralTertiary,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Listener Contact
+              </Typography>
+            </div>
+          </div>
+          <Typography
+            variant='p'
+            style={{
+              color: theme.palette.neutralSecondary,
+              maxWidth: '60ch',
+            }}
+          >
+            If you&apos;ve been listening to The Resonant Identity and want to
+            continue the conversation, reach out directly. Share your question,
+            idea, or collaboration concept and we&apos;ll take it from there.
+          </Typography>
+          {triEmail ? (
+            <a
+              href={`mailto:${triEmail}`}
+              className='inline-flex w-fit items-center rounded-md px-4 py-3 transition-colors'
+              style={{
+                background: 'transparent',
+                textDecoration: 'none',
+                border: `1px solid ${theme.palette.themePrimary}`,
+                boxShadow: theme.shadows.button,
+                marginRight: theme.spacing.m,
+              }}
+            >
+              <Typography
+                variant='label'
+                style={{
+                  color: theme.isInverted
+                    ? theme.palette.white
+                    : theme.palette.black,
+                  fontWeight: theme.typography.fontWeights.semiBold,
+                }}
+              >
+                Email The Resonant Identity
+              </Typography>
+            </a>
+          ) : (
+            <Typography
+              variant='bodySmall'
+              style={{ color: theme.palette.neutralTertiary }}
+            >
+              Contact details are loading.
+            </Typography>
+          )}
+          <a
+            href='https://facebook.com/theresonantid'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-flex w-fit items-center rounded-md px-4 py-3 transition-colors'
+            style={{
+              background: theme.palette.themePrimary,
+              textDecoration: 'none',
+              boxShadow: theme.shadows.button,
+            }}
+          >
+            <Typography
+              variant='label'
+              style={{
+                color: theme.isInverted
+                  ? theme.palette.black
+                  : theme.palette.white,
+                fontWeight: theme.typography.fontWeights.semiBold,
+              }}
+            >
+              Join the Conversation on Facebook
+            </Typography>
+          </a>
         </section>
 
         {/* Newsletter CTA */}
