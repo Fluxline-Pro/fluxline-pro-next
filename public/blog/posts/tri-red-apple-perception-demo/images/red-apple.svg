@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440" width="400" height="440">
+  <defs>
+    <!-- Main apple body gradient -->
+    <radialGradient id="appleBody" cx="42%" cy="38%" r="58%" fx="38%" fy="30%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="25%" stop-color="#E8231A"/>
+      <stop offset="60%" stop-color="#C0180E"/>
+      <stop offset="85%" stop-color="#8B0000"/>
+      <stop offset="100%" stop-color="#6B0000"/>
+    </radialGradient>
+    <!-- Left cheek highlight -->
+    <radialGradient id="leftHighlight" cx="35%" cy="32%" r="28%">
+      <stop offset="0%" stop-color="#FF9999" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#FF4444" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#CC0000" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Specular highlight -->
+    <radialGradient id="specular" cx="32%" cy="26%" r="18%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="white" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Right side darker gradient -->
+    <radialGradient id="rightShade" cx="72%" cy="55%" r="38%">
+      <stop offset="0%" stop-color="#600000" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#600000" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Bottom shadow -->
+    <radialGradient id="bottomShadow" cx="50%" cy="90%" r="40%">
+      <stop offset="0%" stop-color="#400000" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#400000" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Stem gradient -->
+    <linearGradient id="stemGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B2000"/>
+      <stop offset="40%" stop-color="#6B4000"/>
+      <stop offset="100%" stop-color="#3B2000"/>
+    </linearGradient>
+    <!-- Leaf gradient -->
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="50%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+    <!-- Drop shadow filter -->
+    <filter id="dropShadow" x="-10%" y="-5%" width="120%" height="120%">
+      <feDropShadow dx="6" dy="12" stdDeviation="14" flood-color="rgba(0,0,0,0.35)"/>
+    </filter>
+    <!-- Leaf vein -->
+    <filter id="leafSheen">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+  <!-- Drop shadow ellipse -->
+  <ellipse cx="200" cy="415" rx="100" ry="18" fill="rgba(0,0,0,0.22)" filter="url(#leafSheen)"/>
+  <!-- Apple body - main shape -->
+  <g filter="url(#dropShadow)">
+    <!-- Left lobe -->
+    <path d="M 200 135 
+             C 165 120, 78 130, 68 205 
+             C 58 270, 72 330, 105 365 
+             C 138 398, 170 405, 200 400" 
+          fill="url(#appleBody)"/>
+    <!-- Right lobe -->
+    <path d="M 200 135 
+             C 235 120, 322 130, 332 205 
+             C 342 270, 328 330, 295 365 
+             C 262 398, 230 405, 200 400" 
+          fill="url(#appleBody)"/>
+    <!-- Center indentation fill -->
+    <path d="M 200 135 
+             C 190 138, 183 148, 182 160 
+             C 181 172, 187 180, 200 185 
+             C 213 180, 219 172, 218 160 
+             C 217 148, 210 138, 200 135 Z" 
+          fill="#A01010"/>
+  </g>
+  <!-- Color overlays for realism -->
+  <path d="M 200 135 
+           C 165 120, 78 130, 68 205 
+           C 58 270, 72 330, 105 365 
+           C 138 398, 170 405, 200 400
+           C 230 405, 262 398, 295 365 
+           C 328 330, 342 270, 332 205 
+           C 322 130, 235 120, 200 135" 
+        fill="url(#leftHighlight)"/>
+  <path d="M 200 135 
+           C 165 120, 78 130, 68 205 
+           C 58 270, 72 330, 105 365 
+           C 138 398, 170 405, 200 400
+           C 230 405, 262 398, 295 365 
+           C 328 330, 342 270, 332 205 
+           C 322 130, 235 120, 200 135" 
+        fill="url(#rightShade)"/>
+  <path d="M 200 135 
+           C 165 120, 78 130, 68 205 
+           C 58 270, 72 330, 105 365 
+           C 138 398, 170 405, 200 400
+           C 230 405, 262 398, 295 365 
+           C 328 330, 342 270, 332 205 
+           C 322 130, 235 120, 200 135" 
+        fill="url(#bottomShadow)"/>
+  <!-- Specular highlight (shiny spot) -->
+  <ellipse cx="156" cy="178" rx="38" ry="28" fill="url(#specular)" transform="rotate(-20, 156, 178)"/>
+  <!-- Smaller secondary highlight -->
+  <ellipse cx="172" cy="162" rx="18" ry="12" fill="white" fill-opacity="0.4" transform="rotate(-20, 172, 162)"/>
+  <!-- Stem -->
+  <path d="M 196 136 C 194 115, 197 95, 208 78 C 215 65, 222 58, 228 55" 
+        stroke="url(#stemGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <!-- Leaf -->
+  <path d="M 228 60 C 248 46, 267 35, 279 20 C 267 26, 252 33, 240 41 
+         C 254 24, 264 12, 268 2 C 255 15, 242 26, 231 39 
+         C 236 22, 238 10, 235 0 C 229 15, 226 31, 228 48 Z" 
+        fill="url(#leafGrad)"/>
+  <!-- Leaf vein -->
+  <path d="M 229 55 C 241 40, 256 27, 268 14" 
+        stroke="#1B5E20" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Leaf secondary veins -->
+  <path d="M 238 46 C 246 37, 252 30, 258 23" 
+        stroke="#2E7D32" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 233 50 C 244 43, 250 35, 254 28" 
+        stroke="#2E7D32" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+</svg>

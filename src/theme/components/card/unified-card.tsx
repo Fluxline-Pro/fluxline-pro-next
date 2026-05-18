@@ -481,8 +481,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 <div
                   style={{
                     position: 'relative',
+                    flex: '0 0 clamp(96px, 35%, 145px)',
                     height: '100%',
-                    aspectRatio: '1 / 1',
                     overflow: 'hidden',
                     borderRadius: '6px 0 0 6px',
                     flexShrink: 0,
@@ -644,8 +644,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 <div
                   style={{
                     position: 'relative',
-                    flex: '0 0 clamp(180px, 36%, 280px)',
-                    aspectRatio: '1 / 1',
+                    flex: '0 0 clamp(140px, 30%, 220px)',
                     overflow: 'hidden',
                     borderRadius: '6px 0 0 6px',
                     flexShrink: 0,

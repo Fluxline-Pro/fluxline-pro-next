@@ -920,4 +920,80 @@ This configuration is **correct for production** - ignore dev mode errors when t
 
 ---
 
+## TRI Demo Components
+
+### Overview
+
+Interactive demo components for The Resonant Identity (TRI) live in:
+
+- **Components**: `src/components/demos/`
+- **Barrel export**: `src/components/demos/index.ts`
+
+Each demo is a self-contained `'use client'` React component that can be embedded into any blog post detail page via the `sections` prop of `UnifiedContentDetailConfig`.
+
+---
+
+### Existing Demos
+
+#### `RedAppleFilterDemo`
+
+**Location**: `src/components/demos/RedAppleFilterDemo.tsx`
+
+**Purpose**: Interactive visual perception demo. Displays a red apple image and lets the user apply five CSS filter modes to simulate different visual conditions:
+
+| Mode | Description |
+|------|-------------|
+| `normal` | Original image — no filter |
+| `protanopia` | Red colorblindness simulation |
+| `tritanopia` | Red–blue colorblindness simulation |
+| `grayscale` | Full desaturation |
+| `lowlight` | Dim-lighting simulation |
+
+**Usage in a blog post**:
+
+```tsx
+// In BlogPostDetailClient.tsx — detect the specific slug and inject the demo:
+import { RedAppleFilterDemo } from '@/components/demos';
+
+const isRedAppleDemo = post.slug === 'tri-red-apple-perception-demo';
+
+const config: UnifiedContentDetailConfig = {
+  // ...
+  ...(isRedAppleDemo && {
+    sections: [{ title: 'Interactive Filter Demo', content: <RedAppleFilterDemo /> }],
+    sectionsPosition: 'before',
+  }),
+};
+```
+
+**Filter logic**: Uses `getImageFilterCss(mode: ImageFilterMode)` exported from `src/theme/hooks/useColorVisionFilter.ts`. This is a pure function — no hooks required.
+
+---
+
+### Creating New TRI Demo Components
+
+1. **Create** `src/components/demos/YourDemoName.tsx` — mark `'use client'`
+2. **Export** from `src/components/demos/index.ts`
+3. **Add** a blog post in `public/blog/posts/[slug]/markdown/post.md` with:
+   - `category: "Resonant Identity"`
+   - `tags: ["Interactive Demo", ...]`
+4. **Inject** the component in `BlogPostDetailClient.tsx` using slug-based detection and `sections`/`sectionsPosition`
+
+**Styling rules** (same as all components):
+- Use `useAppTheme()` for all colours, spacing, and border-radius values
+- Use the `Typography` component for all text
+- Layout via Tailwind CSS utility classes
+- No hard-coded colours — pull from `theme.palette.*`
+
+**Filter hook**: If your demo needs colour-vision filter CSS strings, use `getImageFilterCss()`:
+
+```ts
+import { getImageFilterCss, type ImageFilterMode } from '@/theme/hooks/useColorVisionFilter';
+
+const cssFilter = getImageFilterCss('protanopia');
+// → "saturate(70%) contrast(90%) hue-rotate(-15deg) sepia(20%)"
+```
+
+---
+
 **For additional documentation, see the repository's other markdown files listed in the Available Documentation section above.**

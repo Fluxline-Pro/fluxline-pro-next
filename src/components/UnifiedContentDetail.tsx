@@ -9,12 +9,14 @@ import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { IconButton } from '@fluentui/react';
 import {
   SocialLinks,
   type SocialLinksData,
 } from '@/app/about/components/SocialLinks';
 import { ImageCarouselModal, type CarouselImage } from './ImageCarouselModal';
+import { Modal } from './Modal';
 import { GeneratedWithAIBadge } from './GeneratedWithAIBadge';
 
 /**
@@ -98,6 +100,9 @@ export interface UnifiedContentDetailConfig {
 
   // AI-generated content badge
   generatedWithAI?: boolean;
+
+  // Optional custom modal content — replaces the image carousel when the left image is clicked
+  customModalContent?: React.ReactNode;
 }
 
 interface UnifiedContentDetailProps {
@@ -112,6 +117,7 @@ interface UnifiedContentDetailProps {
 export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
+  const isMobile = useIsMobile();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
   const isMounted = useSyncExternalStore(
@@ -424,7 +430,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         <div style={{ marginBottom: theme.spacing.l1 }}></div>
 
         {/* Article Header */}
-        <article>
+        <article style={isMobile ? { padding: `0 ${theme.spacing.m}` } : undefined}>
           <header style={{ marginBottom: theme.spacing.l2 }}>
             <div
               style={{
@@ -885,14 +891,25 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         </div>
       </UnifiedPageWrapper>
 
-      {/* Image Carousel Modal */}
-      {imageGallery && (
-        <ImageCarouselModal
+      {/* Image Modal — custom component or standard carousel */}
+      {config.customModalContent ? (
+        <Modal
           isOpen={isCarouselOpen}
           onDismiss={handleCarouselClose}
-          images={imageGallery}
-          initialIndex={carouselInitialIndex}
-        />
+          ariaLabel='Interactive Demo'
+          maxWidth='640px'
+        >
+          {config.customModalContent}
+        </Modal>
+      ) : (
+        imageGallery && (
+          <ImageCarouselModal
+            isOpen={isCarouselOpen}
+            onDismiss={handleCarouselClose}
+            images={imageGallery}
+            initialIndex={carouselInitialIndex}
+          />
+        )
       )}
     </>
   );
