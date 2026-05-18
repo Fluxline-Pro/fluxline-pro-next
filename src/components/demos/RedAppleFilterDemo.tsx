@@ -13,7 +13,7 @@
 import React, { useState } from 'react';
 import { Typography } from '@/theme/components/typography';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useWindowSize, useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import {
   getImageFilterCss,
   type ImageFilterMode,
@@ -88,8 +88,7 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
   const { theme } = useAppTheme();
   const [activeMode, setActiveMode] = useState<ImageFilterMode>('normal');
   const isMobileHook = useIsMobile();
-  const { windowWidth } = useWindowSize();
-  const isMobile = isMobileHook === null ? windowWidth < 768 : isMobileHook;
+  const isMobile = isMobileHook;
 
   const isDark =
     theme.themeMode === 'dark' ||
@@ -118,7 +117,7 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: isDark
-      ? `rgba(${theme.palette.black}, 0.8)`
+      ? 'rgba(20,20,20,0.8)' // hardcoded to add opacity
       : theme.palette.white,
     overflow: 'hidden',
   };
@@ -152,7 +151,7 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
 
   return (
     <div
-      className={`w-full max-w-xl ${isMobile && 'mx-auto'}`}
+      className={`w-full max-w-xl ${isMobile ? 'mx-auto' : ''}`}
       style={containerStyle}
       role='region'
       aria-label='Red Apple Perception Filter Demo'
@@ -217,6 +216,7 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
                   ? `${opt.label} filter selected`
                   : `Apply ${opt.label} filter`
               }
+              aria-pressed={isActive}
               onClick={() => setActiveMode(opt.mode)}
               style={{
                 display: 'flex',
