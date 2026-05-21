@@ -1,3 +1,5 @@
+import React from 'react';
+import Script from 'next/script';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import {
@@ -27,7 +29,42 @@ export default async function PortfolioDetailPage({
     notFound();
   }
 
-  return <PortfolioDetailClient project={project} />;
+  // CreativeWork JSON-LD structured data for AI ingest and rich results
+  const projectSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    '@id': `https://www.fluxline.pro/portfolio/${slug}#project`,
+    name: project.title,
+    description: project.seoMetadata.description,
+    url: `https://www.fluxline.pro/portfolio/${slug}`,
+    datePublished: project.publishedDate.toISOString(),
+    image: project.featuredImage.url,
+    creator: {
+      '@type': 'Organization',
+      '@id': 'https://www.fluxline.pro/#organization',
+      name: 'Fluxline Resonance Group',
+    },
+    keywords: project.seoMetadata.keywords?.join(', '),
+    isPartOf: {
+      '@type': 'CollectionPage',
+      '@id': 'https://www.fluxline.pro/portfolio#collection',
+      name: 'Fluxline Portfolio',
+      publisher: {
+        '@id': 'https://www.fluxline.pro/#organization',
+      },
+    },
+  };
+
+  return (
+    <>
+      <Script
+        id={`portfolio-schema-${slug}`}
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
+      <PortfolioDetailClient project={project} />
+    </>
+  );
 }
 
 /**
@@ -66,6 +103,8 @@ export async function generateMetadata({
       type: 'article',
       publishedTime: project.publishedDate.toISOString(),
       tags: project.tags,
+      url: `https://www.fluxline.pro/portfolio/${slug}`,
+      siteName: 'Fluxline Resonance Group',
       images: [
         {
           url: project.featuredImage.url,
@@ -78,6 +117,10 @@ export async function generateMetadata({
       title: project.seoMetadata.title,
       description: project.seoMetadata.description,
       images: [project.featuredImage.url],
+      creator: '@fluxlinepro',
+    },
+    alternates: {
+      canonical: `/portfolio/${slug}`,
     },
   };
 }

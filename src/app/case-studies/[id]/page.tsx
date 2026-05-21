@@ -10,9 +10,11 @@
  * - Client testimonial
  * - Navigation CTAs
  * - Responsive layout
- * - SEO optimized with metadata
+ * - SEO optimized with metadata and JSON-LD structured data
  */
 
+import React from 'react';
+import Script from 'next/script';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllCaseStudySlugs, getCaseStudyById } from '../lib/caseStudyLoader';
@@ -50,11 +52,27 @@ export async function generateMetadata({
       description: caseStudy.seoMetadata.description,
       type: 'article',
       publishedTime: caseStudy.publishedDate.toISOString(),
+      url: `https://www.fluxline.pro/case-studies/${id}`,
+      siteName: 'Fluxline Resonance Group',
+      images: caseStudy.imageUrl
+        ? [{ url: caseStudy.imageUrl, alt: caseStudy.imageAlt || caseStudy.title }]
+        : [
+            {
+              url: '/images/FluxlineLogo.png',
+              width: 1200,
+              height: 630,
+              alt: caseStudy.title,
+            },
+          ],
     },
     twitter: {
       card: 'summary_large_image',
       title: caseStudy.seoMetadata.title,
       description: caseStudy.seoMetadata.description,
+      creator: '@fluxlinepro',
+    },
+    alternates: {
+      canonical: `/case-studies/${id}`,
     },
   };
 }
@@ -71,5 +89,53 @@ export default async function CaseStudyDetailPage({
     notFound();
   }
 
-  return <CaseStudyDetailClient caseStudy={caseStudy} />;
+  // Article/CaseStudy JSON-LD structured data for AI ingest and rich results
+  const caseStudySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `https://www.fluxline.pro/case-studies/${id}#article`,
+    headline: caseStudy.title,
+    description: caseStudy.seoMetadata.description,
+    url: `https://www.fluxline.pro/case-studies/${id}`,
+    datePublished: caseStudy.publishedDate.toISOString(),
+    image: caseStudy.imageUrl || 'https://www.fluxline.pro/images/FluxlineLogo.png',
+    author: {
+      '@type': 'Organization',
+      '@id': 'https://www.fluxline.pro/#organization',
+      name: 'Fluxline Resonance Group',
+    },
+    publisher: {
+      '@type': 'Organization',
+      '@id': 'https://www.fluxline.pro/#organization',
+      name: 'Fluxline Resonance Group',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.fluxline.pro/images/FluxlineLogo.png',
+      },
+    },
+    keywords: caseStudy.seoMetadata.keywords?.join(', '),
+    about: {
+      '@type': 'Thing',
+      name: caseStudy.industry,
+    },
+    isPartOf: {
+      '@type': 'CollectionPage',
+      '@id': 'https://www.fluxline.pro/case-studies#collection',
+      name: 'Fluxline Case Studies',
+      publisher: {
+        '@id': 'https://www.fluxline.pro/#organization',
+      },
+    },
+  };
+
+  return (
+    <>
+      <Script
+        id={`case-study-schema-${id}`}
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema) }}
+      />
+      <CaseStudyDetailClient caseStudy={caseStudy} />
+    </>
+  );
 }
