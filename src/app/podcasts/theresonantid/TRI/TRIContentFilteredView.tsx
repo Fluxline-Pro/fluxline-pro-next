@@ -91,7 +91,7 @@ export function TRIContentFilteredView({
     setIsMounted(true);
   }, []);
 
-  const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
+  const [requestedTag, setRequestedTag] = React.useState<string | undefined>();
   const normalizedExcludedTags = React.useMemo(
     () => new Set(excludedTags.map((tag) => tag.toLowerCase())),
     [excludedTags]
@@ -108,6 +108,23 @@ export function TRIContentFilteredView({
     });
     return Array.from(tagsSet).sort();
   }, [posts, normalizedExcludedTags]);
+  const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const tag = new URLSearchParams(window.location.search).get('tag') || undefined;
+    setRequestedTag(tag);
+  }, []);
+
+  React.useEffect(() => {
+    if (!requestedTag) {
+      setSelectedTag(undefined);
+      return;
+    }
+
+    setSelectedTag(availableTags.includes(requestedTag) ? requestedTag : undefined);
+  }, [requestedTag, availableTags]);
 
   const filteredPosts = React.useMemo(() => {
     if (!selectedTag) return posts;
