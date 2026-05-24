@@ -12,7 +12,7 @@ tags:
     'Identity Activation',
     'Personal Growth',
   ]
-imageUrl: '/blog/posts/tri-ep1-7day-define-your-identity/images/obstacle-pathway.png'
+imageUrl: '/blog/posts/tri-7day-define-your-identity/images/obstacle-pathway.png'
 imageAlt: 'Episode 1: Identity Challenge — The pathway becomes clear when you define your true and chosen identity first.'
 featured: false
 seoTitle: 'Episode 1: Identity Challenge — Who Were You, Who Are You, Who Are You Becoming | The Resonant Identity'

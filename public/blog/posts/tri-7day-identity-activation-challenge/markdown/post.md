@@ -1,4 +1,3 @@
-// DRAFT- not ready to publish yet
 ---
 title: 'The 7-Day Identity Activation Challenge'
 excerpt: 'A guided 7-day challenge to help you establish your personal resonance baseline. Each day targets a different dimension of identity — from somatic cues to narrative patterns to emotional clarity.'
