@@ -16,18 +16,29 @@ const BLOG_POSTS_DIRECTORY = path.join(
   'posts'
 );
 
+const TRI_DEMOS_DIRECTORY = path.join(
+  process.cwd(),
+  'public',
+  'blog',
+  'resonant-identity',
+  'demos'
+);
+
 /**
  * Frontmatter interface matching the Markdown frontmatter structure
  */
 interface BlogFrontmatter {
   title: string;
   excerpt: string;
+  description?: string;
   author: string;
   publishedDate: string;
+  date?: string;
   lastUpdated?: string;
   category: string;
   tags: string[];
   featured?: boolean;
+  isFeatured?: boolean;
   imageUrl?: string;
   imageAlt?: string;
   featuredImage?: string; // Simple image filename for featured image
@@ -44,25 +55,73 @@ interface BlogFrontmatter {
   generatedWithAI?: boolean;
 }
 
+function getTRIDemoSlugs(): string[] {
+  try {
+    if (!fs.existsSync(TRI_DEMOS_DIRECTORY)) {
+      return [];
+    }
+
+    return fs
+      .readdirSync(TRI_DEMOS_DIRECTORY)
+      .filter((item) => item.endsWith('.md'))
+      .map((item) => item.replace(/\.md$/i, ''));
+  } catch (error) {
+    console.error('Error reading TRI demo slugs:', error);
+    return [];
+  }
+}
+
+function resolveBlogMarkdownPath(slug: string): {
+  markdownPath: string;
+  imageBasePath: string;
+} | null {
+  const standardPostMarkdownPath = path.join(
+    BLOG_POSTS_DIRECTORY,
+    slug,
+    'markdown',
+    'post.md'
+  );
+  if (fs.existsSync(standardPostMarkdownPath)) {
+    return {
+      markdownPath: standardPostMarkdownPath,
+      imageBasePath: `/blog/posts/${slug}/images`,
+    };
+  }
+
+  const triDemoMarkdownPath = path.join(TRI_DEMOS_DIRECTORY, `${slug}.md`);
+  if (fs.existsSync(triDemoMarkdownPath)) {
+    return {
+      markdownPath: triDemoMarkdownPath,
+      imageBasePath: '/blog/resonant-identity/demos/images',
+    };
+  }
+
+  return null;
+}
+
 /**
  * Get all blog post slugs from the file system
  */
 export function getAllBlogPostSlugs(): string[] {
   try {
-    if (!fs.existsSync(BLOG_POSTS_DIRECTORY)) {
+    if (!fs.existsSync(BLOG_POSTS_DIRECTORY) && !fs.existsSync(TRI_DEMOS_DIRECTORY)) {
       console.warn(
-        'Blog posts directory does not exist:',
-        BLOG_POSTS_DIRECTORY
+        'Blog content directories do not exist:',
+        BLOG_POSTS_DIRECTORY,
+        TRI_DEMOS_DIRECTORY
       );
       return [];
     }
 
-    const slugs = fs.readdirSync(BLOG_POSTS_DIRECTORY).filter((item) => {
-      const itemPath = path.join(BLOG_POSTS_DIRECTORY, item);
-      return fs.statSync(itemPath).isDirectory();
-    });
+    const postSlugs = fs.existsSync(BLOG_POSTS_DIRECTORY)
+      ? fs.readdirSync(BLOG_POSTS_DIRECTORY).filter((item) => {
+          const itemPath = path.join(BLOG_POSTS_DIRECTORY, item);
+          return fs.statSync(itemPath).isDirectory();
+        })
+      : [];
 
-    return slugs;
+    const demoSlugs = getTRIDemoSlugs();
+    return Array.from(new Set([...postSlugs, ...demoSlugs]));
   } catch (error) {
     console.error('Error reading blog post slugs:', error);
     return [];
@@ -74,22 +133,22 @@ export function getAllBlogPostSlugs(): string[] {
  */
 export function getBlogPostBySlug(slug: string): BlogPost | null {
   try {
-    const postDirectory = path.join(BLOG_POSTS_DIRECTORY, slug);
-    const markdownPath = path.join(postDirectory, 'markdown', 'post.md');
-
-    if (!fs.existsSync(markdownPath)) {
-      console.warn(`Blog post not found: ${markdownPath}`);
+    const resolvedPaths = resolveBlogMarkdownPath(slug);
+    if (!resolvedPaths) {
+      console.warn(`Blog post not found for slug: ${slug}`);
       return null;
     }
 
+    const { markdownPath, imageBasePath } = resolvedPaths;
     const fileContents = fs.readFileSync(markdownPath, 'utf8');
     const { data, content } = matter(fileContents);
 
     const frontmatter = data as BlogFrontmatter;
 
     // Parse dates with validation
-    const publishedDate = frontmatter.publishedDate
-      ? new Date(frontmatter.publishedDate)
+    const publishedDateSource = frontmatter.publishedDate ?? frontmatter.date;
+    const publishedDate = publishedDateSource
+      ? new Date(publishedDateSource)
       : new Date();
 
     // Validate the date is not invalid
@@ -116,9 +175,9 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
       id: slug,
       slug: slug,
       title: frontmatter.title,
-      excerpt: frontmatter.excerpt,
+      excerpt: frontmatter.excerpt ?? frontmatter.description ?? '',
       content: content,
-      author: frontmatter.author,
+      author: frontmatter.author ?? 'The Resonant Identity',
       publishedDate,
       lastUpdated:
         lastUpdated && !isNaN(lastUpdated.getTime()) ? lastUpdated : undefined,
@@ -129,7 +188,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
           ? typeof frontmatter.gallery[0] === 'string'
             ? // Convert string array to object array
               (frontmatter.gallery as string[]).map((img) => ({
-                url: `/blog/posts/${slug}/images/${img}`,
+                url: `${imageBasePath}/${img}`,
                 alt: img
                   .replace(/\.(jpg|jpeg|png|gif|webp)$/i, '')
                   .replace(/[_-]/g, ' '),
@@ -145,7 +204,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
               ).map((img) => ({
                 url: img.url.startsWith('/')
                   ? img.url
-                  : `/blog/posts/${slug}/images/${img.url}`,
+                  : `${imageBasePath}/${img.url}`,
                 alt: img.alt,
                 caption: img.caption,
               }))
@@ -153,12 +212,16 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
         : undefined,
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
       category: frontmatter.category,
-      featured: frontmatter.featured ?? false,
+      featured: frontmatter.featured ?? frontmatter.isFeatured ?? false,
       generatedWithAI: frontmatter.generatedWithAI ?? false,
       seoMetadata: {
-        title: frontmatter.seoTitle,
-        description: frontmatter.seoDescription,
-        keywords: frontmatter.seoKeywords,
+        title: frontmatter.seoTitle ?? frontmatter.title,
+        description:
+          frontmatter.seoDescription ??
+          frontmatter.excerpt ??
+          frontmatter.description ??
+          '',
+        keywords: frontmatter.seoKeywords ?? frontmatter.tags ?? [],
       },
     };
 
