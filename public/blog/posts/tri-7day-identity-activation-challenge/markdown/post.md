@@ -17,8 +17,8 @@ tags:
 featured: false
 isFeatured: false
 imageUrl: '/images/TheResonantIdentity_Logo.png'
-imageAlt: 'Episode Somatic & Emotional Cue Mapping Challenge'
-seoTitle: 'Episode: Somatic & Emotional Cue Mapping Challenge | The Resonant Identity'
+imageAlt: 'Episode 3: Somatic & Emotional Cue Mapping Challenge'
+seoTitle: 'Episode 3: Somatic & Emotional Cue Mapping Challenge | The Resonant Identity'
 seoDescription: 'A guided 7-day identity challenge to build somatic literacy and emotional cue mapping connected to your Past Identity work from Episode 1.'
 seoKeywords:
   [
