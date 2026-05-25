@@ -2,7 +2,11 @@
 
 import React from 'react';
 
-import { useIsMobile, useIsTablet, useIsXXL } from '../../hooks/useMediaQuery';
+import {
+  useIsMobile,
+  useIsTablet,
+  useIsLargeDesktop,
+} from '../../hooks/useMediaQuery';
 import { useAppTheme } from '../../hooks/useAppTheme';
 
 export interface UnifiedCardContainerProps {
@@ -23,10 +27,10 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
   const isTabletHook = useIsTablet();
-  const isXXLHook = useIsXXL();
+  const isLargeDesktopHook = useIsLargeDesktop();
   const isMobile = isMounted ? isMobileHook : false;
   const isTablet = isMounted ? isTabletHook : false;
-  const isXXL = isMounted ? isXXLHook : false;
+  const isLargeDesktop = isMounted ? isLargeDesktopHook : false;
   const { theme } = useAppTheme();
 
   React.useEffect(() => {
@@ -51,15 +55,15 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
     let columns: number;
 
     if (viewType === 'small') {
-      if (isMobile || isTablet) {
+      if (isMobile) {
         columns = 1;
-      } else if (isXXL) {
+      } else if (isLargeDesktop) {
         columns = 3;
       } else {
         columns = 2;
       }
     } else if (viewType === 'large') {
-      columns = isXXL ? 2 : 1;
+      columns = isLargeDesktop ? 2 : 1;
     } else if (isMobile) {
       columns = 1;
     } else if (isTablet) {
@@ -77,7 +81,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
     return {
       display: 'grid' as const,
       templateColumns: `repeat(${columns}, 1fr)`,
-      gap,
+      gap: isMobile ? '1rem' : gap,
       gridAutoRows: '1fr',
       alignItems: 'stretch',
     };

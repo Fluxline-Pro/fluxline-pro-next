@@ -24,8 +24,16 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
   const isTRIPost =
     post.category === 'Resonant Identity' ||
     getContentTypeTag(post.tags) !== null;
+  const isIdentityChallengePost = post.tags.includes('Identity Challenge');
+  const primaryRelatedTag = post.tags.find((tag) => tag !== 'Identity Challenge');
 
   const handleTagClick = (tag: string) => {
+    if (isIdentityChallengePost) {
+      router.push(
+        `/podcasts/theresonantid/challenges?tag=${encodeURIComponent(tag)}`
+      );
+      return;
+    }
     router.push(`/blog/tag/${encodeURIComponent(tag)}`);
   };
 
@@ -40,7 +48,9 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
     content: post.content,
     contentType: 'markdown',
     excerpt: post.excerpt,
-    backLink: isTRIPost
+    backLink: isIdentityChallengePost
+      ? { url: '/podcasts/theresonantid/challenges', label: 'Back to Challenges' }
+      : isTRIPost
       ? { url: '/podcasts/theresonantid/library', label: 'Back to TRI Library' }
       : { url: '/blog', label: 'Back to Blog Entries' },
     imageConfig: {
@@ -88,25 +98,45 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
       customModalContent: <RedAppleFilterDemo isModal />,
     }),
     cta: {
-      title: 'Stay Connected',
-      description: isTRIPost
-        ? 'Explore more challenges, episode companions, and identity practices from The Resonant Identity.'
-        : 'Get insights on the latest trends, best practices, and industry news.',
-      buttons: [
-        {
-          label: isTRIPost ? 'Explore TRI Library' : 'Explore More Articles',
-          onClick: () =>
-            router.push(
-              isTRIPost ? '/podcasts/theresonantid/library' : '/blog'
-            ),
-          variant: 'primary',
-        },
-        {
-          label: 'Get in Touch',
-          onClick: () => router.push('/contact'),
-          variant: 'secondary',
-        },
-      ],
+      title: isIdentityChallengePost ? 'Continue the Challenge Path' : 'Stay Connected',
+      description: isIdentityChallengePost
+        ? 'Return to all TRI challenges or jump to related articles based on this challenge’s focus.'
+        : isTRIPost
+          ? 'Explore more challenges, episode companions, and identity practices from The Resonant Identity.'
+          : 'Get insights on the latest trends, best practices, and industry news.',
+      buttons: isIdentityChallengePost
+        ? [
+            {
+              label: 'Back to Challenges',
+              onClick: () => router.push('/podcasts/theresonantid/challenges'),
+              variant: 'primary' as const,
+            },
+            {
+              label: 'Related Articles',
+              onClick: () =>
+                router.push(
+                  primaryRelatedTag
+                    ? `/blog/tag/${encodeURIComponent(primaryRelatedTag)}`
+                    : '/blog/tag/Identity%20Challenge'
+                ),
+              variant: 'secondary' as const,
+            },
+          ]
+        : [
+            {
+              label: isTRIPost ? 'Explore TRI Library' : 'Explore More Articles',
+              onClick: () =>
+                router.push(
+                  isTRIPost ? '/podcasts/theresonantid/library' : '/blog'
+                ),
+              variant: 'primary' as const,
+            },
+            {
+              label: 'Get in Touch',
+              onClick: () => router.push('/contact'),
+              variant: 'secondary' as const,
+            },
+          ],
     },
   };
 

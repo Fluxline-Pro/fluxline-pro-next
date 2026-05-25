@@ -1000,9 +1000,17 @@ export function PodcastListingClient({
             style={{
               marginTop: theme.spacing.m,
               marginBottom: theme.spacing.l,
+              paddingLeft: isMobile ? theme.spacing.s : theme.spacing.l,
+              paddingRight: isMobile ? theme.spacing.s : theme.spacing.l,
             }}
           />
-          <div style={{ marginBottom: theme.spacing.xxl }}>
+          <div
+            style={{
+              marginBottom: theme.spacing.xxxxl,
+              paddingLeft: isMobile ? theme.spacing.s : theme.spacing.l,
+              paddingRight: isMobile ? theme.spacing.s : theme.spacing.l,
+            }}
+          >
             <FormButton
               variant='primary'
               icon='Library'
@@ -1112,7 +1120,7 @@ function TRISection({
 
   return (
     <section
-      className='space-y-8 rounded-lg p-8 mb-6'
+      className={`space-y-8 rounded-lg pt-8 pb-8 mb-6 ${isMobile ? 'pl-4 pr-6' : 'pl-8 pr-8'}`}
       style={{
         backgroundColor: theme.palette.neutralQuaternaryAlt,
         borderTop: `1px solid ${theme.palette.neutralPrimary}`,
@@ -1246,7 +1254,7 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
               fontWeight: 600,
               color: theme.palette.themeSecondary,
               backgroundColor: theme.palette.neutralLighter,
-              padding: `2px ${theme.spacing.s}`,
+              padding: `2px ${theme.spacing.s} 2px 0`,
               borderRadius: '999px',
               textTransform: 'uppercase',
               letterSpacing: '0.4px',
@@ -1302,7 +1310,7 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
         }}
       >
         <Typography
-          variant='caption'
+          variant='label'
           style={{
             color: theme.palette.themeSecondary,
             fontSize: '0.875rem',

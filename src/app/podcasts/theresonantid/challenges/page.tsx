@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { getFilteredBlogPosts } from '@/app/blog/lib/blogLoader';
 import type { ChallengePost } from '@/app/podcasts/types';
 import { ChallengesPageClient } from './ChallengesPageClient';
@@ -66,5 +67,9 @@ export default function ResonantIdentityChallengesPage() {
     featured: post.featured ?? false,
   }));
 
-  return <ChallengesPageClient posts={challengePosts} />;
+  return (
+    <Suspense fallback={null}>
+      <ChallengesPageClient posts={challengePosts} />
+    </Suspense>
+  );
 }
