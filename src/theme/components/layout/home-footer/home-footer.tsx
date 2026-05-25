@@ -433,6 +433,7 @@ export const HomeFooter: React.FC = () => {
             <Typography variant='h3' style={headingStyle}>
               Resources
             </Typography>
+            <StyledLink href='/podcasts/theresonantid'>The Resonant Identity</StyledLink>
             <StyledLink href='/blog'>Blog</StyledLink>
             <StyledLink href='/portfolio'>Portfolio</StyledLink>
             <StyledLink href='/content'>Content Hub</StyledLink>

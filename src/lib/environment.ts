@@ -39,6 +39,16 @@ export function getEnvironment(): Environment {
 }
 
 /**
+ * Checks if the current environment is production
+ * This is safe to use during SSR because it does not depend on browser APIs.
+ */
+export function isProduction(
+  environment: Environment = getEnvironment()
+): boolean {
+  return environment === 'prod';
+}
+
+/**
  * Checks if a build environment requires token authentication.
  * This is safe to use during SSR because it does not depend on browser APIs.
  */

@@ -49,6 +49,54 @@ This repository contains the **Fluxline Resonance Group's** web platform. It is 
 - Blog posts, portfolio, press releases, and case studies are wrapped in page/layout files
 - Page-level SEO is handled at the route level only
 
+### JSON-LD Structured Data & Security
+
+**⚠️ CRITICAL**: Always use `safeJsonLdStringify()` from `src/utils/jsonLd.ts` for all JSON-LD schemas. Never use plain `JSON.stringify()` in `dangerouslySetInnerHTML`.
+
+**Centralized Utility**:
+
+```typescript
+import { safeJsonLdStringify } from '@/utils/jsonLd';
+
+// Safe JSON-LD serialization
+<Script
+  id="schema-id"
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(schema) }}
+/>
+```
+
+**Security Features**:
+
+- Escapes HTML-significant characters (`<`, `>`, `&`) to prevent XSS
+- Prevents script tag breakout via literal `</script>` in content
+- Safe for user-generated content in structured data
+- Compatible with all schema.org types
+
+**Image URLs in JSON-LD**:
+
+- Always use **absolute URLs** for image fields in JSON-LD schemas
+- Prefix site-relative paths with `https://www.fluxline.pro`
+- Example: `image: post.imageUrl ? \`https://www.fluxline.pro\${post.imageUrl}\` : 'https://www.fluxline.pro/images/FluxlineLogo.png'`
+
+**Files Using This Pattern** (already standardized):
+
+- `src/utils/jsonLd.ts` - Source of truth for safe serialization
+- `src/app/layout.tsx` - Organization, Website, Person, Professional Service schemas
+- `src/app/blog/[slug]/page.tsx` - Article schema
+- `src/app/services/[slug]/layout.tsx` - Service + FAQ schemas
+- `src/app/services/page.tsx` - Service catalog schema
+- `src/app/case-studies/[id]/page.tsx` - Case study schema
+- `src/app/portfolio/[slug]/page.tsx` - Project schema
+- `src/app/about/layout.tsx` - About page schema
+
+**DO NOT**:
+
+- ❌ Use `JSON.stringify()` directly in `dangerouslySetInnerHTML`
+- ❌ Use relative paths for image URLs in JSON-LD
+- ❌ Create duplicate serialization functions
+- ❌ Skip escaping HTML-significant characters
+
 ### Content Policy
 
 - **Do NOT modify** existing copy or text content without explicit instructions
@@ -270,6 +318,73 @@ azure/                      # Azure deployment documentation
 - Development server: `yarn dev`
 - Production build: `yarn build`
 - Production server: `yarn start`
+
+### Environment Detection & Configuration
+
+**⚠️ CRITICAL**: Always use centralized environment helpers from `src/lib/environment.ts`. Never manually parse `NEXT_PUBLIC_ENVIRONMENT`.
+
+**Centralized Helpers**:
+
+```typescript
+import {
+  getEnvironment,
+  isProduction,
+  environmentRequiresAuthentication,
+} from '@/lib/environment';
+
+// Get normalized environment ('dev' | 'test' | 'prod')
+const env = getEnvironment();
+
+// Check if production
+const isProd = isProduction();
+
+// Check if environment requires authentication
+const needsAuth = environmentRequiresAuthentication();
+```
+
+**Environment Types**:
+
+- `'dev'` - Development environment (localhost or dev deployment)
+- `'test'` - Test environment (pre-production testing)
+- `'prod'` - Production environment (public website)
+
+**Key Features**:
+
+- Normalizes `'development'` → `'dev'` automatically
+- Defaults to `'prod'` when `NEXT_PUBLIC_ENVIRONMENT` is unset
+- Consistent behavior across robots.txt, sitemap, and metadata generation
+- Safe for SSR (no browser API dependencies)
+
+**Usage Examples**:
+
+```typescript
+// robots.ts - Control crawler access
+import { isProduction } from '@/lib/environment';
+const isProd = isProduction();
+
+// sitemap.ts - Generate environment-aware sitemaps
+import { isProduction } from '@/lib/environment';
+const isProd = isProduction();
+
+// layout.tsx - Set metadata robots
+import { isProduction } from '@/lib/environment';
+const _isProd = isProduction();
+```
+
+**DO NOT**:
+
+- ❌ Manually parse `process.env.NEXT_PUBLIC_ENVIRONMENT`
+- ❌ Write custom environment detection logic
+- ❌ Use inconsistent environment checks across files
+- ❌ Check for `'development'` string (use normalized `'dev'`)
+
+**Files Using Centralized Pattern** (already standardized):
+
+- `src/lib/environment.ts` - Source of truth
+- `src/app/robots.ts` - Crawler control
+- `src/app/sitemap.ts` - Sitemap generation
+- `src/app/layout.tsx` - Metadata configuration
+- All access control logic via `requiresAuthentication()`
 
 ### Component Reuse & Layout
 

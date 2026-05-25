@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import React from 'react';
+import Script from 'next/script';
 import { getBlogPostBySlug } from '../lib/blogLoader';
 import { BlogPostDetailClient } from './BlogPostDetailClient';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 // Conditionally import server-only functions
 let getAllBlogPostSlugs: (() => string[]) | undefined;
@@ -47,18 +49,39 @@ export async function generateMetadata({
     title: post.seoMetadata.title,
     description: post.seoMetadata.description,
     keywords: post.seoMetadata.keywords,
+    authors: [
+      { name: post.author },
+      { name: 'Fluxline Resonance Group', url: 'https://www.fluxline.pro' },
+    ],
     openGraph: {
       title: post.seoMetadata.title,
       description: post.seoMetadata.description,
       type: 'article',
       publishedTime: post.publishedDate.toISOString(),
+      modifiedTime: post.lastUpdated?.toISOString(),
       authors: [post.author],
       tags: post.tags,
+      url: `https://www.fluxline.pro/blog/${slug}`,
+      siteName: 'Fluxline Resonance Group',
+      images: post.imageUrl
+        ? [{ url: post.imageUrl, alt: post.imageAlt || post.title }]
+        : [
+            {
+              url: '/images/FluxlineLogo.png',
+              width: 1200,
+              height: 630,
+              alt: post.title,
+            },
+          ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.seoMetadata.title,
       description: post.seoMetadata.description,
+      creator: '@fluxlinepro',
+    },
+    alternates: {
+      canonical: `/blog/${slug}`,
     },
   };
 }
@@ -81,5 +104,59 @@ export default async function BlogPostDetailPage({
     notFound();
   }
 
-  return <BlogPostDetailClient post={post} />;
+  // Article JSON-LD structured data for AI ingest and rich results
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `https://www.fluxline.pro/blog/${slug}#article`,
+    headline: post.title,
+    description: post.seoMetadata.description,
+    url: `https://www.fluxline.pro/blog/${slug}`,
+    datePublished: post.publishedDate.toISOString(),
+    dateModified: (post.lastUpdated ?? post.publishedDate).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: post.author,
+      ...(post.author === 'Terence Waters' && {
+        '@id': 'https://www.terencewaters.com/#person',
+        url: 'https://www.terencewaters.com',
+      }),
+    },
+    publisher: {
+      '@type': 'Organization',
+      '@id': 'https://www.fluxline.pro/#organization',
+      name: 'Fluxline Resonance Group',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.fluxline.pro/images/FluxlineLogo.png',
+      },
+    },
+    image: post.imageUrl
+      ? `https://www.fluxline.pro${post.imageUrl}`
+      : 'https://www.fluxline.pro/images/FluxlineLogo.png',
+    keywords: post.seoMetadata.keywords?.join(', '),
+    articleSection: post.category,
+    ...(post.tags?.length > 0 && {
+      about: post.tags.map((tag) => ({ '@type': 'Thing', name: tag })),
+    }),
+    isPartOf: {
+      '@type': 'Blog',
+      '@id': 'https://www.fluxline.pro/blog#blog',
+      name: 'Fluxline Blog',
+      publisher: {
+        '@id': 'https://www.fluxline.pro/#organization',
+      },
+    },
+  };
+
+  return (
+    <>
+      <Script
+        id={`article-schema-${slug}`}
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(articleSchema) }}
+      />
+      <BlogPostDetailClient post={post} />
+    </>
+  );
 }

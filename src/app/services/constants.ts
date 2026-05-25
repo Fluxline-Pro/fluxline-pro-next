@@ -34,6 +34,11 @@ export type ServiceCategoryType =
   | 'brand-digital'
   | 'depth-strategy';
 
+export interface ServiceFAQ {
+  question: string;
+  answer: string;
+}
+
 export interface ServiceCategory {
   id: string;
   title: string;
@@ -42,6 +47,7 @@ export interface ServiceCategory {
   icon: string;
   path: string;
   category: ServiceCategoryType;
+  faqs?: ServiceFAQ[]; // FAQ items for FAQPage schema and AI ingest
 }
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -53,6 +59,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: 'Design',
     path: '/services/design',
     category: 'brand-digital',
+    faqs: [
+      {
+        question: "What does Fluxline's brand and experience design service include?",
+        answer:
+          'Our Brand & Experience Design service covers visual identity, logo design, design systems, digital experience design, and cross-platform UI/UX. Every deliverable is aligned with your brand story and strategic goals.',
+      },
+      {
+        question: "Who is Fluxline's brand design service best suited for?",
+        answer:
+          'Our design service is ideal for founders, creatives, and growing businesses who are launching, rebranding, or scaling and need a cohesive visual identity that connects emotionally with their audience.',
+      },
+      {
+        question: 'Does Fluxline offer standalone logo design or only full brand packages?',
+        answer:
+          'We offer modular design engagements — from standalone logo creation to complete brand identity systems and digital experience design — so you can start where you are and grow from there.',
+      },
+      {
+        question: 'How does Fluxline approach user experience design?',
+        answer:
+          'We combine user-centered design methodologies with strategic brand thinking to create interfaces that are intuitive, accessible, and emotionally resonant. Every design decision traces back to a clear user and business goal.',
+      },
+    ],
   },
   {
     id: 'development',
@@ -62,6 +90,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: 'Code',
     path: '/services/development',
     category: 'brand-digital',
+    faqs: [
+      {
+        question: 'What types of web development projects does Fluxline handle?',
+        answer:
+          'Fluxline builds custom web applications, full-stack platforms, MVPs, and cloud-deployed architectures. We work with Next.js, React, Azure, and modern tooling to deliver products that are maintainable and scalable.',
+      },
+      {
+        question: 'Does Fluxline provide cloud architecture consulting?',
+        answer:
+          'Yes. Cloud architecture is a core competency at Fluxline. We design and implement cloud infrastructure on Azure, including CI/CD pipelines, serverless functions, static web apps, and storage solutions.',
+      },
+      {
+        question: "What is Fluxline's web development process?",
+        answer:
+          'Our process is transparent and founder-friendly: discovery and requirements, architecture design, iterative development with regular check-ins, deployment, and post-launch support. Every build is documented for long-term maintainability.',
+      },
+      {
+        question: 'Can Fluxline help migrate an existing site to a modern stack?',
+        answer:
+          'Yes. We regularly help founders and businesses migrate from legacy systems to modern stacks like Next.js and Azure. We prioritize minimizing downtime and preserving SEO equity during the transition.',
+      },
+    ],
   },
   {
     id: 'personal-training',
@@ -71,6 +121,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: 'Health',
     path: '/services/personal-training',
     category: 'body-practice',
+    faqs: [
+      {
+        question: "What makes Fluxline's personal training different from a standard gym trainer?",
+        answer:
+          'Fluxline personal training integrates emotional intelligence and identity work into physical coaching. We design adaptive programs for all bodies and starting points, treating fitness as embodied identity work rather than just performance metrics.',
+      },
+      {
+        question: 'Does Fluxline offer remote personal training sessions?',
+        answer:
+          'Yes. We offer flexible remote coaching options alongside in-person sessions, designed around your schedule, goals, and physical starting point.',
+      },
+      {
+        question: "Can Fluxline's training programs accommodate chronic pain or physical limitations?",
+        answer:
+          'Absolutely. We specialize in adaptive training for clients managing chronic pain, returning from injury, or working with physical limitations. Every program is built around your body and its current needs.',
+      },
+      {
+        question: 'How is a Fluxline training program structured?',
+        answer:
+          'Programs begin with a comprehensive assessment of your goals, movement patterns, and lifestyle. We then build a phased program with regular check-ins, adjustments, and mindset support to ensure sustainable progress.',
+      },
+    ],
   },
   {
     id: 'resonance-core',
@@ -80,6 +152,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: 'HeartFill',
     path: '/services/resonance-core',
     category: 'body-practice',
+    faqs: [
+      {
+        question: 'What is the Resonance Core Framework™?',
+        answer:
+          'The Resonance Core Framework™ is a structured transformational system that helps you decode somatic, emotional, and narrative cues, reframe limiting patterns, and author the identity you choose to live from. It combines archetypal mapping, reflective inquiry, and identity recalibration.',
+      },
+      {
+        question: 'Who is the Resonance Core Framework™ designed for?',
+        answer:
+          'It is designed for individuals — founders, creatives, and professionals — who feel misaligned between who they are and how they show up in work, relationships, or daily life, and want a structured, coherent process to close that gap.',
+      },
+      {
+        question: 'How does the Resonance Core Framework™ differ from traditional coaching?',
+        answer:
+          'Unlike generic coaching, the Resonance Core Framework™ is a systematic identity architecture process. It addresses somatic cues, emotional patterns, and narrative structures simultaneously, producing deep and lasting identity coherence rather than surface-level behavior change.',
+      },
+      {
+        question: 'How long does a Resonance Core engagement typically take?',
+        answer:
+          'Engagements are modular and vary by individual need. Core programs typically run 8–12 weeks, with options for extended support as you integrate your new identity into daily life and work.',
+      },
+    ],
   },
   {
     id: 'consulting',
@@ -89,6 +183,28 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: 'Lightbulb',
     path: '/services/consulting',
     category: 'depth-strategy',
+    faqs: [
+      {
+        question: "What does Fluxline's business strategy and systems alignment service cover?",
+        answer:
+          'We offer strategic systems design, operational optimization, modular frameworks for scalable growth, tech integration, business soul alignment, change management, and leadership coaching — all tailored to your growth phase.',
+      },
+      {
+        question: "What types of businesses does Fluxline's consulting service serve?",
+        answer:
+          'We primarily serve founders, small teams, and growing businesses across industries who need practical, values-aligned strategy and operational clarity — not generic business advice.',
+      },
+      {
+        question: 'How does Fluxline approach strategic consulting engagements?',
+        answer:
+          'Every engagement begins with a discovery phase to understand your vision, current friction points, and operational reality. We then co-design a tailored strategy and implementation roadmap that is transparent, adaptable, and grounded in your core values.',
+      },
+      {
+        question: 'Can Fluxline help with content ecosystem design and content strategy?',
+        answer:
+          "Yes. Content ecosystem design — structuring, tagging, publishing, and distributing content so it works as a coherent, searchable, AI-ingestible knowledge base — is one of Fluxline's core competencies.",
+      },
+    ],
   },
   {
     id: 'education-training',
@@ -98,5 +214,27 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: 'Education',
     path: '/services/education',
     category: 'depth-strategy',
+    faqs: [
+      {
+        question: "What does Fluxline's coaching and education service include?",
+        answer:
+          'Our Coaching, Education & Leadership service includes experiential learning workshops, leadership development coaching, emotional intelligence training, custom curriculum design, team dynamics facilitation, and ongoing community support.',
+      },
+      {
+        question: 'Does Fluxline offer group workshops or only individual coaching?',
+        answer:
+          'We offer both. Individual coaching for founders and leaders, as well as group workshops for teams and organizations. Programs are custom-designed to fit your team size, goals, and industry context.',
+      },
+      {
+        question: "What leadership outcomes can clients expect from Fluxline's coaching programs?",
+        answer:
+          'Clients develop stronger leadership presence, clearer communication, improved emotional regulation, greater confidence in decision-making, and the ability to inspire and align their teams around a shared vision.',
+      },
+      {
+        question: 'Can Fluxline design custom training curricula for organizations?',
+        answer:
+          'Yes. We design and deliver custom educational programs for organizations that need tailored learning experiences — from onboarding frameworks to leadership development tracks aligned with company culture and values.',
+      },
+    ],
   },
 ];
