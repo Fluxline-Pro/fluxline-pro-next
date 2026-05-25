@@ -39,7 +39,9 @@ export default async function PortfolioDetailPage({
     description: project.seoMetadata.description,
     url: `https://www.fluxline.pro/portfolio/${slug}`,
     datePublished: project.publishedDate.toISOString(),
-    image: project.featuredImage.url,
+    image: project.featuredImage.url.startsWith('http')
+      ? project.featuredImage.url
+      : `https://www.fluxline.pro${project.featuredImage.url}`,
     creator: {
       '@type': 'Organization',
       '@id': 'https://www.fluxline.pro/#organization',
