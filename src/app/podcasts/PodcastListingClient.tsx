@@ -1000,9 +1000,17 @@ export function PodcastListingClient({
             style={{
               marginTop: theme.spacing.m,
               marginBottom: theme.spacing.l,
+              paddingLeft: isMobile ? theme.spacing.s : theme.spacing.l,
+              paddingRight: isMobile ? theme.spacing.s : theme.spacing.l,
             }}
           />
-          <div style={{ marginBottom: theme.spacing.xxl }}>
+          <div
+            style={{
+              marginBottom: theme.spacing.xxxxl,
+              paddingLeft: isMobile ? theme.spacing.s : theme.spacing.l,
+              paddingRight: isMobile ? theme.spacing.s : theme.spacing.l,
+            }}
+          >
             <FormButton
               variant='primary'
               icon='Library'
