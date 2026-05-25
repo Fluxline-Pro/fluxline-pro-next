@@ -86,12 +86,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const { theme } = useAppTheme();
   const { filter } = useColorVisionFilter(skipDarkModeFilter);
   const { shouldReduceMotion } = useReducedMotion();
-  const [isMobileMounted, setIsMobileMounted] = React.useState(false);
-  const [isTabletMounted, setIsTabletMounted] = React.useState(false);
   const isTabletHook = useIsTablet();
   const isMobileHook = useIsMobile();
-  const isMobile = isMobileMounted ? isMobileHook : false;
-  const isTablet = isTabletMounted ? isTabletHook : false;
+  const isMobile = isMobileHook ?? false;
+  const isTablet = isTabletHook ?? false;
   const orientation = useDeviceOrientation();
 
   // Calculate elevation level once
@@ -110,12 +108,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [isLandscape, setIsLandscape] = React.useState(false);
-
-  // Set mounted states for media queries to avoid hydration mismatch
-  React.useEffect(() => {
-    setIsMobileMounted(true);
-    setIsTabletMounted(true);
-  }, []);
 
   // Check if image is landscape and handle dimension detection (separate from visual loading)
   React.useEffect(() => {
@@ -653,8 +645,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 alignItems: 'stretch',
                 width: '100%',
                 height: isMobile ? 'auto' : '100%',
-                minHeight: imageUrl ? (isMobile ? 'none' : '220px') : '175px',
-                maxHeight: isMobile ? '125px' : 'none',
+                minHeight: imageUrl ? (isMobile ? 'auto' : '220px') : '175px',
+                maxHeight: isMobile ? '125px' : 'auto',
               }}
             >
               {imageUrl && (
