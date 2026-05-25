@@ -53,9 +53,10 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app.
 - 📊 **Case Studies** - File-based case studies with industry/service filtering and metrics visualization
 - 🎨 **Portfolio** - Markdown project showcases with galleries, tags, and external links
 - 📄 **Scrolls/White Papers** - Downloadable strategic insights with metadata
-- � **Video Section** - YouTube channel integration with automatic video fetching
+- 📹 **Video Section** - YouTube channel integration with automatic video fetching
 - 🎙️ **Podcast Section** - Azure-backed podcast episodes with RSS feed generation
-- �🏢 **Services** - Dynamic service pages with detailed information
+- 🎯 **The Resonant Identity (TRI)** - Tag-based content taxonomy for podcast-related blog posts (demos, challenges, companion articles)
+- 🏢 **Services** - Dynamic service pages with detailed information
 
 ### Development Tools
 
