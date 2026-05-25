@@ -1112,7 +1112,7 @@ function TRISection({
 
   return (
     <section
-      className={`space-y-8 rounded-lg pt-8 pb-8 ${isMobile ? 'pl-4 pr-6' : 'pl-8 pr-8'} mb-6`}
+      className={`space-y-8 rounded-lg pt-8 pb-8 mb-6 ${isMobile ? 'pl-4 pr-6' : 'pl-8 pr-8'}`}
       style={{
         backgroundColor: theme.palette.neutralQuaternaryAlt,
         borderTop: `1px solid ${theme.palette.neutralPrimary}`,
