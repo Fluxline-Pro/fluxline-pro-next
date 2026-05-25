@@ -500,11 +500,13 @@ If you're creating content for **The Resonant Identity** podcast, your blog post
 
 ### What is TRI Content?
 
-The Resonant Identity (TRI) is a podcast with accompanying blog content organized into three categories:
+The Resonant Identity (TRI) is a podcast with accompanying blog content organized into three main categories:
 
 1. **Interactive Demos** - Hands-on demonstrations and exercises
-2. **Episode Companion Articles** - Extended episode notes and context
+2. **Episode Companion Articles** - Extended episode notes, context, and foundational content
 3. **Identity Challenges** - 7-day challenges for each episode
+
+**Note**: Foundational articles (tagged with "Foundations") also appear under Companion Articles because they provide essential context for the podcast.
 
 ### Required TRI Frontmatter
 
@@ -533,17 +535,20 @@ generatedWithAI: true                   # Optional - if AI-assisted
 ---
 ````
 
-### The Three Core Tags
+### The Core Tags
 
-**You must include ONE of these three tags** in your `tags` array:
+**You must include ONE of these tags** in your `tags` array:
 
 | Tag                    | Category                     | Appears In                           | Example Content                         |
 | ---------------------- | ---------------------------- | ------------------------------------ | --------------------------------------- |
 | `"Interactive Demo"`   | Hands-on demonstrations      | `/podcasts/theresonantid/demos`      | Breathing exercises, grounding practice |
 | `"Episode Companion"`  | Companion articles           | `/podcasts/theresonantid/articles`   | Extended episode notes, deep dives      |
+| `"Foundations"`        | Foundational content         | `/podcasts/theresonantid/articles`   | Core framework, fundamental principles  |
 | `"Identity Challenge"` | 7-day challenges per episode | `/podcasts/theresonantid/challenges` | Weekly identity activation challenges   |
 
 **Important:** Use the exact tag name with proper spacing and capitalization.
+
+**Note on "Foundations"**: This tag shares the "Companion Articles" filtered view with "Episode Companion" because foundational content is companion content that provides essential context for understanding the podcast.
 
 ### Key Requirements
 
@@ -552,7 +557,7 @@ generatedWithAI: true                   # Optional - if AI-assisted
 - `author: "The Resonant Identity"` - Must be exactly this text
 - `featured: true` - Required for content to appear in TRI filtered views
 - `publishedDate` - REQUIRED for chronological sorting
-- One of the three core tags (Interactive Demo, Episode Companion, or Identity Challenge)
+- One of the core tags (Interactive Demo, Episode Companion, Foundations, or Identity Challenge)
 
 ✅ **Slug Naming Convention:**
 
