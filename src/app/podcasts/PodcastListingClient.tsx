@@ -1246,7 +1246,7 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
               fontWeight: 600,
               color: theme.palette.themeSecondary,
               backgroundColor: theme.palette.neutralLighter,
-              padding: `2px ${theme.spacing.s}`,
+              padding: `2px ${theme.spacing.s} 2px 0`,
               borderRadius: '999px',
               textTransform: 'uppercase',
               letterSpacing: '0.4px',
@@ -1302,7 +1302,7 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
         }}
       >
         <Typography
-          variant='caption'
+          variant='label'
           style={{
             color: theme.palette.themeSecondary,
             fontSize: '0.875rem',
