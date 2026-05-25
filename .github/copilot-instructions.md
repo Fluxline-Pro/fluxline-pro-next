@@ -807,14 +807,24 @@ generatedWithAI: true # If applicable
 6. Run `yarn build` to generate static pages
 7. Post automatically appears in appropriate TRI sections
 
+**Content Architecture**:
+
+- **TRI content IS standard blog content** - it follows the same file structure, loader, and routes as all other blog posts
+- **No special directories** - All blog posts (including TRI) live in `/public/blog/posts/[slug]/`
+- **No custom loaders** - The standard `blogLoader.ts` handles all blog content including TRI posts
+- **Filtering by tags** - TRI pages use the three core tags to filter and display relevant posts
+- **Example slug naming**: `tri-box-breathing-4-4-4-4`, `tri-sensory-grounding-3-2-1`, etc.
+
 **Important Notes**:
 
-- ⚠️ **DO NOT** create custom routes or loaders for TRI content - use the existing blog system with proper tags
+- ⚠️ **DO NOT** create custom routes, loaders, or directories for TRI content - it's standard blog content
 - ⚠️ **DO NOT** modify `TRIContentFilteredView` component's tag filtering logic
 - ⚠️ **DO NOT** change the three core tag names ("Interactive Demo", "Episode Companion", "Identity Challenge")
+- ⚠️ **DO NOT** add TRI-specific code to `blogLoader.ts` - it should treat TRI posts the same as any other blog post
 - ✅ **DO** use the existing blog post creation workflow with proper frontmatter
 - ✅ **DO** leverage the `featured` field to control visibility in TRI filtered views
 - ✅ **DO** use `useSearchParams()` for URL-based filtering (already implemented correctly)
+- ✅ **DO** use standard blog post structure: `/public/blog/posts/tri-[topic]/markdown/post.md`
 
 **Tag Filtering Behavior**:
 

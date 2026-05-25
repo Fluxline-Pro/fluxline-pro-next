@@ -16,23 +16,16 @@ const BLOG_POSTS_DIRECTORY = path.join(
   'posts'
 );
 
-const TRI_DEMOS_DIRECTORY = path.join(
-  process.cwd(),
-  'public',
-  'blog',
-  'resonant-identity',
-  'demos'
-);
-
 /**
  * Frontmatter interface matching the Markdown frontmatter structure
+ * Fields marked optional have fallback defaults in the loader
  */
 interface BlogFrontmatter {
   title: string;
-  excerpt: string;
+  excerpt?: string; // Falls back to description
   description?: string;
-  author: string;
-  publishedDate: string;
+  author?: string; // Falls back to 'The Resonant Identity'
+  publishedDate?: string; // Falls back to date or current date
   date?: string;
   lastUpdated?: string;
   category: string;
@@ -49,50 +42,32 @@ interface BlogFrontmatter {
         alt: string;
         caption?: string;
       }>; // Support both string array and object array
-  seoTitle: string;
-  seoDescription: string;
-  seoKeywords: string[];
+  seoTitle?: string; // Falls back to title
+  seoDescription?: string; // Falls back to excerpt or description
+  seoKeywords?: string[]; // Falls back to tags
   generatedWithAI?: boolean;
 }
 
-function getTRIDemoSlugs(): string[] {
-  try {
-    if (!fs.existsSync(TRI_DEMOS_DIRECTORY)) {
-      return [];
-    }
-
-    return fs
-      .readdirSync(TRI_DEMOS_DIRECTORY)
-      .filter((item) => item.endsWith('.md'))
-      .map((item) => item.replace(/\.md$/i, ''));
-  } catch (error) {
-    console.error('Error reading TRI demo slugs:', error);
-    return [];
-  }
-}
-
+/**
+ * Resolve the markdown file path for a blog post slug
+ * All blog posts (including TRI content) follow the standard structure:
+ * /public/blog/posts/[slug]/markdown/post.md
+ */
 function resolveBlogMarkdownPath(slug: string): {
   markdownPath: string;
   imageBasePath: string;
 } | null {
-  const standardPostMarkdownPath = path.join(
+  const markdownPath = path.join(
     BLOG_POSTS_DIRECTORY,
     slug,
     'markdown',
     'post.md'
   );
-  if (fs.existsSync(standardPostMarkdownPath)) {
-    return {
-      markdownPath: standardPostMarkdownPath,
-      imageBasePath: `/blog/posts/${slug}/images`,
-    };
-  }
 
-  const triDemoMarkdownPath = path.join(TRI_DEMOS_DIRECTORY, `${slug}.md`);
-  if (fs.existsSync(triDemoMarkdownPath)) {
+  if (fs.existsSync(markdownPath)) {
     return {
-      markdownPath: triDemoMarkdownPath,
-      imageBasePath: '/blog/resonant-identity/demos/images',
+      markdownPath,
+      imageBasePath: `/blog/posts/${slug}/images`,
     };
   }
 
@@ -101,27 +76,22 @@ function resolveBlogMarkdownPath(slug: string): {
 
 /**
  * Get all blog post slugs from the file system
+ * All blog posts (including TRI content) follow the standard directory structure
  */
 export function getAllBlogPostSlugs(): string[] {
   try {
-    if (!fs.existsSync(BLOG_POSTS_DIRECTORY) && !fs.existsSync(TRI_DEMOS_DIRECTORY)) {
+    if (!fs.existsSync(BLOG_POSTS_DIRECTORY)) {
       console.warn(
-        'Blog content directories do not exist:',
-        BLOG_POSTS_DIRECTORY,
-        TRI_DEMOS_DIRECTORY
+        'Blog posts directory does not exist:',
+        BLOG_POSTS_DIRECTORY
       );
       return [];
     }
 
-    const postSlugs = fs.existsSync(BLOG_POSTS_DIRECTORY)
-      ? fs.readdirSync(BLOG_POSTS_DIRECTORY).filter((item) => {
-          const itemPath = path.join(BLOG_POSTS_DIRECTORY, item);
-          return fs.statSync(itemPath).isDirectory();
-        })
-      : [];
-
-    const demoSlugs = getTRIDemoSlugs();
-    return Array.from(new Set([...postSlugs, ...demoSlugs]));
+    return fs.readdirSync(BLOG_POSTS_DIRECTORY).filter((item) => {
+      const itemPath = path.join(BLOG_POSTS_DIRECTORY, item);
+      return fs.statSync(itemPath).isDirectory();
+    });
   } catch (error) {
     console.error('Error reading blog post slugs:', error);
     return [];
