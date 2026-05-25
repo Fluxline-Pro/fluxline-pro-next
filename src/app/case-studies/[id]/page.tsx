@@ -18,6 +18,7 @@ import Script from 'next/script';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllCaseStudySlugs, getCaseStudyById } from '../lib/caseStudyLoader';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 import CaseStudyDetailClient from './CaseStudyDetailClient';
 
 // Generate static params for all case studies
@@ -55,7 +56,12 @@ export async function generateMetadata({
       url: `https://www.fluxline.pro/case-studies/${id}`,
       siteName: 'Fluxline Resonance Group',
       images: caseStudy.imageUrl
-        ? [{ url: caseStudy.imageUrl, alt: caseStudy.imageAlt || caseStudy.title }]
+        ? [
+            {
+              url: caseStudy.imageUrl,
+              alt: caseStudy.imageAlt || caseStudy.title,
+            },
+          ]
         : [
             {
               url: '/images/FluxlineLogo.png',
@@ -98,7 +104,8 @@ export default async function CaseStudyDetailPage({
     description: caseStudy.seoMetadata.description,
     url: `https://www.fluxline.pro/case-studies/${id}`,
     datePublished: caseStudy.publishedDate.toISOString(),
-    image: caseStudy.imageUrl || 'https://www.fluxline.pro/images/FluxlineLogo.png',
+    image:
+      caseStudy.imageUrl || 'https://www.fluxline.pro/images/FluxlineLogo.png',
     author: {
       '@type': 'Organization',
       '@id': 'https://www.fluxline.pro/#organization',
@@ -133,7 +140,9 @@ export default async function CaseStudyDetailPage({
       <Script
         id={`case-study-schema-${id}`}
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema) }}
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLdStringify(caseStudySchema),
+        }}
       />
       <CaseStudyDetailClient caseStudy={caseStudy} />
     </>

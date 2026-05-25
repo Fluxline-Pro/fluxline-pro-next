@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -72,7 +73,9 @@ export default function AboutLayout({
       <Script
         id='about-page-schema'
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLdStringify(aboutPageSchema),
+        }}
       />
       {children}
     </>

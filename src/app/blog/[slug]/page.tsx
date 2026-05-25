@@ -5,6 +5,7 @@ import { getBlogPostBySlug } from '../lib/blogLoader';
 import { BlogPostDetailClient } from './BlogPostDetailClient';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 // Conditionally import server-only functions
 let getAllBlogPostSlugs: (() => string[]) | undefined;
@@ -131,11 +132,13 @@ export default async function BlogPostDetailPage({
       },
     },
     image: post.imageUrl
-      ? post.imageUrl
+      ? `https://www.fluxline.pro${post.imageUrl}`
       : 'https://www.fluxline.pro/images/FluxlineLogo.png',
     keywords: post.seoMetadata.keywords?.join(', '),
     articleSection: post.category,
-    ...(post.tags?.length > 0 && { about: post.tags.map((tag) => ({ '@type': 'Thing', name: tag })) }),
+    ...(post.tags?.length > 0 && {
+      about: post.tags.map((tag) => ({ '@type': 'Thing', name: tag })),
+    }),
     isPartOf: {
       '@type': 'Blog',
       '@id': 'https://www.fluxline.pro/blog#blog',
@@ -151,7 +154,7 @@ export default async function BlogPostDetailPage({
       <Script
         id={`article-schema-${slug}`}
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(articleSchema) }}
       />
       <BlogPostDetailClient post={post} />
     </>

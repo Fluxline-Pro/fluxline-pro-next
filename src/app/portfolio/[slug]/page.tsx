@@ -7,6 +7,7 @@ import {
   getPortfolioBySlug,
 } from '../lib/portfolioLoader';
 import PortfolioDetailClient from './PortfolioDetailClient';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 interface PortfolioDetailPageProps {
   params: Promise<{
@@ -60,7 +61,7 @@ export default async function PortfolioDetailPage({
       <Script
         id={`portfolio-schema-${slug}`}
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(projectSchema) }}
       />
       <PortfolioDetailClient project={project} />
     </>

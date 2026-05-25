@@ -7,6 +7,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { SERVICE_CATEGORIES } from '../constants';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 interface ServiceDetailLayoutProps {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  
+
   // Find the service by slug
   const service = SERVICE_CATEGORIES.find((s) => {
     const serviceSlug = s.path.split('/').pop();
@@ -147,13 +148,13 @@ export default async function ServiceDetailLayout({
       <Script
         id={`service-schema-${slug}`}
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(serviceSchema) }}
       />
       {faqSchema && (
         <Script
           id={`faq-schema-${slug}`}
           type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqSchema) }}
         />
       )}
       {children}

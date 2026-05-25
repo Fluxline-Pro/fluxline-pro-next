@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 // Providers wrapper
 import { Providers } from './providers';
@@ -124,7 +125,7 @@ export default function RootLayout({
           id='organization-schema'
           type='application/ld+json'
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLdStringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               '@id': 'https://www.fluxline.pro/#organization',
@@ -241,7 +242,7 @@ export default function RootLayout({
           id='website-schema'
           type='application/ld+json'
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLdStringify({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               '@id': 'https://www.fluxline.pro/#website',
@@ -269,7 +270,7 @@ export default function RootLayout({
           id='person-schema'
           type='application/ld+json'
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLdStringify({
               '@context': 'https://schema.org',
               '@type': 'Person',
               '@id': 'https://www.terencewaters.com/#person',
@@ -301,7 +302,7 @@ export default function RootLayout({
           id='professional-service-schema'
           type='application/ld+json'
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLdStringify({
               '@context': 'https://schema.org',
               '@type': 'ProfessionalService',
               '@id': 'https://www.fluxline.pro/#professional-service',

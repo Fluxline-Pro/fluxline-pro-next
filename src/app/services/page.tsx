@@ -3,6 +3,7 @@ import Script from 'next/script';
 import type { Metadata } from 'next';
 import ServicesPageClient from './ServicesPageClient';
 import { SERVICE_CATEGORIES } from './constants';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -82,7 +83,7 @@ export default function ServicesPage() {
         id='services-catalog-schema'
         type='application/ld+json'
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceCatalogSchema),
+          __html: safeJsonLdStringify(serviceCatalogSchema),
         }}
       />
       <ServicesPageClient />
