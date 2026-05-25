@@ -285,8 +285,6 @@ This is just the beginning.
 In Episode 2, we explore what happens when the signal gets distorted — and how distortion shapes identity from the inside out.
 
 - [Listen to Episode 2: Distorted Reality →](/blog/tri-ep2-distorted-reality)
-- [Try the Week 1 Identity Challenge](/blog/tri-ep1-7day-define-your-identity)
-- [Explore Somatic Demo Exercises](/podcasts/theresonantid/demos)
 
 ---
 
@@ -296,8 +294,6 @@ In Episode 2, we explore what happens when the signal gets distorted — and how
 - [The Philosophy of Resonance](/blog/philosophy-of-resonance)
 - [Discipline vs. Resonance](/blog/discipline-vs-resonance)
 - [Week 1 Identity Challenge — Define Your Identity](/blog/tri-ep1-7day-define-your-identity)
-- [Box Breathing (4-4-4-4)](/blog/tri-box-breathing-4-4-4-4)
-- [Sensory Grounding (3-2-1)](/blog/tri-sensory-grounding-3-2-1)
 - [The Resonant Identity Community on Facebook](https://www.facebook.com/groups/theresonantid)
 
 ---
