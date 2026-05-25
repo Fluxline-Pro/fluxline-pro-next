@@ -19,7 +19,7 @@ imageUrl: '/blog/posts/tri-ep2-7day-refine-your-identity-in-truth/images/the-res
 imageAlt: 'Episode 2: Identity Challenge — The pathway becomes clear when you define your true and chosen identity first.'
 featured: false
 seoTitle: 'Episode 2: Identity Challenge — Refining Your Identity Out of Distortion | The Resonant Identity'
-seoDescription: 'Identity Challenge for The Resonant Identity Podcast that asks the listener to refine their identity definitions from Episode 1 out of Distortion and more aligned with Truth. Coincides with the 004- Distorted Reality episode.'
+seoDescription: 'Identity Challenge for The Resonant Identity Podcast that asks the listener to refine their identity definitions from Episode 1 out of Distortion and more aligned with Truth. Coincides with Episode 2: Distorted Reality.'
 seoKeywords:
   [
     'identity challenge',
