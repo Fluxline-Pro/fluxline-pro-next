@@ -16,8 +16,8 @@ import { isProduction } from '@/lib/environment';
  *   1.0 — Homepage + Service pages (core business offering)
  *   0.9 — About, Fluxline Ethos, Contact (identity + conversion)
  *   0.8 — Blog posts, Portfolio projects, Case studies (authority content)
- *   0.7 — Press releases, Content hub
- *   0.6 — Legal, Videos, Podcasts, Books
+ *   0.7 — Content hub, Press releases, Scrolls (resource content)
+ *   0.6 — Videos, Podcasts, Books (media content within Content Hub)
  *
  * Only generated for production builds. Returns minimal output for dev/test
  * to avoid seeding AI systems with non-canonical content.

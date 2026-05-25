@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description:
       'Cloud architecture, content ecosystem design, web development, brand identity engineering, personal training, coaching, and strategic consulting.',
     images: ['/images/FluxlineLogo.png'],
-    creator: '@fluxlinepro',
+    creator: '@fluxlineco',
   },
   alternates: {
     canonical: '/services',
