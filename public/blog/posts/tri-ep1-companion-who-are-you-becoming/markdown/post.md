@@ -14,7 +14,7 @@ tags:
   ]
 imageUrl: '/blog/posts/tri-ep1-companion-who-are-you-becoming/images/TheResonantIdentity_Logo.png'
 imageAlt: 'Who Are You Becoming — Episode 1 Companion'
-featured: false
+featured: true
 seoTitle: 'Who Are You Becoming? Episode 1 Companion | The Resonant Identity'
 seoDescription: 'A companion article to Episode 1 of The Resonant Identity podcast. Dive deeper into the foundational frameworks of identity formation, coherence, and the Resonance Core.'
 seoKeywords:
