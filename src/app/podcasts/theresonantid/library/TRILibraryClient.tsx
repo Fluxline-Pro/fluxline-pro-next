@@ -371,7 +371,7 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
       }}
     >
       <Typography
-        variant='caption'
+        variant='label'
         style={{
           color: isActive
             ? theme.palette.white

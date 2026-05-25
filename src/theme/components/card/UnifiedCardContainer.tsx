@@ -77,7 +77,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
     return {
       display: 'grid' as const,
       templateColumns: `repeat(${columns}, 1fr)`,
-      gap,
+      gap: isMobile ? '1rem' : gap,
       gridAutoRows: '1fr',
       alignItems: 'stretch',
     };
