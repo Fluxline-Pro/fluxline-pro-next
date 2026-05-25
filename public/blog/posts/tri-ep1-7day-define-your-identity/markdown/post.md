@@ -11,6 +11,7 @@ tags:
     'Foundations',
     'Identity Activation',
     'Personal Growth',
+    'Resonance Core Framework',
   ]
 imageUrl: '/blog/posts/tri-ep1-7day-define-your-identity/images/obstacle-pathway.png'
 imageAlt: 'Episode 1: Identity Challenge — The pathway becomes clear when you define your true and chosen identity first.'
@@ -24,6 +25,7 @@ seoKeywords:
     'identity activation',
     'personal growth challenge',
     'resonance baseline',
+    'identity foundations',
   ]
 generatedWithAI: true
 ---

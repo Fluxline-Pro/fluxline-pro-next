@@ -743,6 +743,13 @@ The Resonant Identity (TRI) is a podcast with accompanying blog content that use
    - Displays in: `/podcasts/theresonantid/challenges`
    - Example: Weekly identity activation challenges
 
+**Additional Tag with Shared Category**:
+
+- **"Foundations"** - Foundational articles that establish core concepts
+  - **Also displays in**: `/podcasts/theresonantid/articles` (alongside "Episode Companion")
+  - **Why**: Foundational content is companion content - it provides essential context
+  - Example: Core framework explanations, fundamental principles
+
 **Where TRI Content Appears**:
 
 - `/podcasts/theresonantid` - Main TRI page with `TRISection` component showing all three categories
@@ -782,7 +789,8 @@ generatedWithAI: true # If applicable
 - **`author: "The Resonant Identity"`** - REQUIRED for proper attribution
 - **`featured: true`** - REQUIRED for posts to appear in `/podcasts/theresonantid/demos`, `/challenges`, or `/articles`
 - **`publishedDate`** - REQUIRED for chronological sorting
-- **`tags`** - MUST include one of the three core tags ("Interactive Demo", "Episode Companion", or "Identity Challenge")
+- **`tags`** - MUST include one of the core tags ("Interactive Demo", "Episode Companion", "Identity Challenge", or "Foundations")
+  - Note: "Foundations" appears in the same filtered view as "Episode Companion" (/articles)
 
 **Component Architecture**:
 
@@ -801,7 +809,7 @@ generatedWithAI: true # If applicable
 
 1. Create blog post in standard location: `/public/blog/posts/[slug]/markdown/post.md`
 2. Add required frontmatter (see above)
-3. Include one of the three core tags: "Interactive Demo", "Episode Companion", or "Identity Challenge"
+3. Include one of the core tags: "Interactive Demo", "Episode Companion", "Identity Challenge", or "Foundations"
 4. Set `featured: true` to make it appear in filtered TRI views
 5. Set `author: "The Resonant Identity"`
 6. Run `yarn build` to generate static pages
@@ -819,7 +827,7 @@ generatedWithAI: true # If applicable
 
 - ⚠️ **DO NOT** create custom routes, loaders, or directories for TRI content - it's standard blog content
 - ⚠️ **DO NOT** modify `TRIContentFilteredView` component's tag filtering logic
-- ⚠️ **DO NOT** change the three core tag names ("Interactive Demo", "Episode Companion", "Identity Challenge")
+- ⚠️ **DO NOT** change the core tag names ("Interactive Demo", "Episode Companion", "Identity Challenge", "Foundations")
 - ⚠️ **DO NOT** add TRI-specific code to `blogLoader.ts` - it should treat TRI posts the same as any other blog post
 - ✅ **DO** use the existing blog post creation workflow with proper frontmatter
 - ✅ **DO** leverage the `featured` field to control visibility in TRI filtered views
