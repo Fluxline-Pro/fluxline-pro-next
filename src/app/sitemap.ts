@@ -3,6 +3,7 @@ import { getAllBlogPostSlugs } from './blog/lib/blogLoader';
 import { getAllPortfolioSlugs } from './portfolio/lib/portfolioLoader';
 import { getAllCaseStudySlugs } from './case-studies/lib/caseStudyLoader';
 import { SERVICE_CATEGORIES } from './services/constants';
+import { isProduction } from '@/lib/environment';
 
 /**
  * AI-Visibility Sitemap
@@ -26,8 +27,7 @@ import { SERVICE_CATEGORIES } from './services/constants';
 export const dynamic = 'force-static';
 
 const SITE_URL = process.env.SITE_URL || 'https://www.fluxline.pro';
-const env = process.env.NEXT_PUBLIC_ENVIRONMENT?.toLowerCase();
-const isProd = env !== 'dev' && env !== 'development' && env !== 'test';
+const isProd = isProduction();
 
 // Use a stable "last modified" date anchored to the build so every static
 // page in the same build shares the same lastmod value.

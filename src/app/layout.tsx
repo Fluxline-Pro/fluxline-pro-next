@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
+import { isProduction } from '@/lib/environment';
 
 // Providers wrapper
 import { Providers } from './providers';
@@ -10,8 +11,7 @@ import './tailwind.css'; // ← Tailwind base/utilities and Typekit content firs
 import './globals.scss'; // ← Your custom styles override Tailwind
 
 // Environment-aware robots: only allow indexing in production
-const _env = process.env.NEXT_PUBLIC_ENVIRONMENT?.toLowerCase();
-const _isProd = _env !== 'dev' && _env !== 'development' && _env !== 'test';
+const _isProd = isProduction();
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fluxline.pro'),

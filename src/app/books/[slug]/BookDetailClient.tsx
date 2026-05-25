@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { getApiEndpoint } from '@/lib/getApiUrl';
+import { isProduction } from '@/lib/environment';
 import { Book } from '../types';
 import { InteractiveCard } from '@/components/InteractiveCard';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
@@ -75,7 +76,7 @@ function BuyPdfButton({
   const [error, setError] = useState<string | null>(null);
 
   // Disable checkout in production environment
-  const isProduction = process.env.NEXT_PUBLIC_ENVIRONMENT === 'prod';
+  const isProdEnvironment = isProduction();
 
   const handleCheckout = async () => {
     const trimmedName = name.trim();
@@ -110,12 +111,12 @@ function BuyPdfButton({
       <>
         <FormButton
           variant='primary'
-          text={isProduction ? 'Checkout Disabled' : label}
+          text={isProdEnvironment ? 'Checkout Disabled' : label}
           fullWidth
-          onClick={() => !isProduction && setIsOpen(true)}
-          disabled={isProduction}
+          onClick={() => !isProdEnvironment && setIsOpen(true)}
+          disabled={isProdEnvironment}
         />
-        {isProduction && (
+        {isProdEnvironment && (
           <Typography
             variant='bodySmall'
             style={{
@@ -184,7 +185,7 @@ function BuyPdfButton({
           {error}
         </Typography>
       )}
-      {isProduction && (
+      {isProdEnvironment && (
         <Typography
           variant='bodySmall'
           style={{
@@ -199,7 +200,7 @@ function BuyPdfButton({
         <FormButton
           variant='primary'
           text={loading ? 'Redirecting…' : 'Proceed to Checkout'}
-          disabled={loading || isProduction}
+          disabled={loading || isProdEnvironment}
           onClick={handleCheckout}
         />
         <FormButton

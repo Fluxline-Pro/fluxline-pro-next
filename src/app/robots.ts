@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { isProduction } from '@/lib/environment';
 
 /**
  * Dynamic robots.txt generation
@@ -13,8 +14,7 @@ import { MetadataRoute } from 'next';
 export const dynamic = 'force-static';
 
 const SITE_URL = process.env.SITE_URL || 'https://www.fluxline.pro';
-const env = process.env.NEXT_PUBLIC_ENVIRONMENT?.toLowerCase();
-const isProd = env !== 'dev' && env !== 'development' && env !== 'test';
+const isProd = isProduction();
 
 export default function robots(): MetadataRoute.Robots {
   if (!isProd) {
