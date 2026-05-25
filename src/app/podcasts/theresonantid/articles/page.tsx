@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { getFilteredBlogPosts } from '@/app/blog/lib/blogLoader';
 import type { ArticlePost } from '@/app/podcasts/types';
 import { normalizeTag } from '../lib/taxonomy';
@@ -63,5 +64,9 @@ export default function ResonantIdentityArticlesPage() {
     featured: post.featured ?? false,
   }));
 
-  return <ArticlesPageClient posts={articlePosts} />;
+  return (
+    <Suspense fallback={null}>
+      <ArticlesPageClient posts={articlePosts} />
+    </Suspense>
+  );
 }

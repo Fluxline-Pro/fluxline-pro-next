@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { getFilteredBlogPosts } from '@/app/blog/lib/blogLoader';
 import type { DemoPost } from '@/app/podcasts/types';
 import { DemosPageClient } from './DemosPageClient';
@@ -66,5 +67,9 @@ export default function ResonantIdentityDemosPage() {
     featured: post.featured ?? false,
   }));
 
-  return <DemosPageClient posts={demoPosts} />;
+  return (
+    <Suspense fallback={null}>
+      <DemosPageClient posts={demoPosts} />
+    </Suspense>
+  );
 }
