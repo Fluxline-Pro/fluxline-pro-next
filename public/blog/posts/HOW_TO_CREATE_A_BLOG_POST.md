@@ -107,14 +107,14 @@ The section between `---` marks is called "frontmatter" - it's metadata about yo
 
 #### Optional Fields
 
-| Field              | Example                                   | Description                                     |
-| ------------------ | ----------------------------------------- | ----------------------------------------------- |
-| `imageUrl`         | `"/blog/posts/your-post/images/hero.jpg"` | Hero image path                                 |
-| `imageAlt`         | `"React hooks diagram"`                   | Hero image description                          |
-| `gallery`          | See gallery section below                 | Array of images for carousel                    |
-| `featured`         | `true`                                    | Mark as featured post                           |
-| `lastUpdated`      | `"2025-11-25"`                            | When you last updated                           |
-| `generatedWithAI`  | `true`                                    | Display a "Generated with AI" badge on the post |
+| Field             | Example                                   | Description                                     |
+| ----------------- | ----------------------------------------- | ----------------------------------------------- |
+| `imageUrl`        | `"/blog/posts/your-post/images/hero.jpg"` | Hero image path                                 |
+| `imageAlt`        | `"React hooks diagram"`                   | Hero image description                          |
+| `gallery`         | See gallery section below                 | Array of images for carousel                    |
+| `featured`        | `true`                                    | Mark as featured post                           |
+| `lastUpdated`     | `"2025-11-25"`                            | When you last updated                           |
+| `generatedWithAI` | `true`                                    | Display a "Generated with AI" badge on the post |
 
 #### Image Gallery & Carousel (Optional)
 
@@ -490,7 +490,203 @@ TypeScript is a powerful tool that enhances JavaScript development with type saf
 
 Happy coding! 🚀
 
+````
+
+---
+
+## Creating TRI (The Resonant Identity) Blog Posts
+
+If you're creating content for **The Resonant Identity** podcast, your blog post needs special frontmatter to appear in the TRI filtered views. TRI content follows the same blog post structure but uses specific tags and fields for automatic filtering.
+
+### What is TRI Content?
+
+The Resonant Identity (TRI) is a podcast with accompanying blog content organized into three categories:
+
+1. **Interactive Demos** - Hands-on demonstrations and exercises
+2. **Episode Companion Articles** - Extended episode notes and context
+3. **Identity Challenges** - 7-day challenges for each episode
+
+### Required TRI Frontmatter
+
+In addition to standard blog frontmatter, TRI posts must include:
+
+```yaml
+---
+title: 'Your TRI Post Title'
+excerpt: 'Brief description'
+author: 'The Resonant Identity'        # REQUIRED - Must be exactly this
+publishedDate: '2026-05-24'             # REQUIRED
+category: 'Resonant Identity'           # Recommended
+tags:
+  [
+    'Interactive Demo',                 # OR 'Episode Companion' OR 'Identity Challenge'
+    'Grounding',                        # Additional descriptive tags
+    'Somatic Practice',
+  ]
+featured: true                          # REQUIRED - Makes it appear in TRI filtered views
+imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageAlt: 'The Resonant Identity'
+seoTitle: 'Your SEO Title | The Resonant Identity'
+seoDescription: 'SEO description'
+seoKeywords: ['tri', 'resonant identity', 'your', 'keywords']
+generatedWithAI: true                   # Optional - if AI-assisted
+---
+````
+
+### The Three Core Tags
+
+**You must include ONE of these three tags** in your `tags` array:
+
+| Tag                    | Category                     | Appears In                           | Example Content                         |
+| ---------------------- | ---------------------------- | ------------------------------------ | --------------------------------------- |
+| `"Interactive Demo"`   | Hands-on demonstrations      | `/podcasts/theresonantid/demos`      | Breathing exercises, grounding practice |
+| `"Episode Companion"`  | Companion articles           | `/podcasts/theresonantid/articles`   | Extended episode notes, deep dives      |
+| `"Identity Challenge"` | 7-day challenges per episode | `/podcasts/theresonantid/challenges` | Weekly identity activation challenges   |
+
+**Important:** Use the exact tag name with proper spacing and capitalization.
+
+### Key Requirements
+
+✅ **Required Fields:**
+
+- `author: "The Resonant Identity"` - Must be exactly this text
+- `featured: true` - Required for content to appear in TRI filtered views
+- `publishedDate` - REQUIRED for chronological sorting
+- One of the three core tags (Interactive Demo, Episode Companion, or Identity Challenge)
+
+✅ **Slug Naming Convention:**
+
+TRI blog posts should use the `tri-` prefix for clarity:
+
+- `tri-box-breathing-4-4-4-4`
+- `tri-sensory-grounding-3-2-1`
+- `tri-ep1-companion-who-are-you-becoming`
+- `tri-7day-identity-activation-challenge`
+
+### Where TRI Content Appears
+
+TRI blog posts automatically appear in multiple locations:
+
+1. **Standard blog listing** (`/blog`) - Alongside all other blog posts
+2. **TRI main page** (`/podcasts/theresonantid`) - In the TRISection component
+3. **TRI library** (`/podcasts/theresonantid/library`) - Full library view
+4. **Filtered views:**
+   - `/podcasts/theresonantid/demos` - "Interactive Demo" tagged posts
+   - `/podcasts/theresonantid/articles` - "Episode Companion" tagged posts
+   - `/podcasts/theresonantid/challenges` - "Identity Challenge" tagged posts
+5. **Individual post page** (`/blog/tri-your-post-slug`) - Full blog post detail
+
+### Complete TRI Example
+
+**Folder:** `public/blog/posts/tri-box-breathing-4-4-4-4/`
+
 ```
+tri-box-breathing-4-4-4-4/
+├── markdown/
+│   └── post.md
+└── images/
+    └── (optional images)
+```
+
+**File:** `post.md`
+
+```markdown
+---
+title: 'Box Breathing (4-4-4-4 Method)'
+excerpt: 'A simple four-phase breathing technique to regulate your nervous system and anchor into the present moment.'
+author: 'The Resonant Identity'
+publishedDate: '2026-05-24'
+category: 'Resonant Identity'
+tags:
+  [
+    'Interactive Demo',
+    'Grounding',
+    'Breathwork',
+    'Somatic Practice',
+    'Nervous System Regulation',
+  ]
+featured: true
+imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageAlt: 'Box Breathing - The Resonant Identity'
+seoTitle: 'Box Breathing Demo (4-4-4-4) | Interactive Demos | The Resonant Identity'
+seoDescription: 'Learn the box breathing technique with our interactive demo. Four-phase breathing to calm your nervous system and increase present-moment awareness.'
+seoKeywords:
+  [
+    'interactive demos',
+    'box breathing',
+    '4-4-4-4 breathing',
+    'breathwork',
+    'nervous system regulation',
+    'TRI',
+  ]
+generatedWithAI: true
+---
+
+# Box Breathing (4-4-4-4 Method)
+
+_A simple regulation tool for moments when you need to reset._
+
+## What this practice is
+
+Box breathing (also called square breathing) uses equal counts for four phases:
+
+1. **Inhale** for 4 counts
+2. **Hold** for 4 counts
+3. **Exhale** for 4 counts
+4. **Hold** for 4 counts
+
+This creates a "box" pattern that calms the nervous system and brings you into the present moment.
+
+## When to use it
+
+- Before important conversations
+- During anxiety or stress
+- When you notice shallow breathing
+- As a morning or evening anchor practice
+
+## Guided Practice
+
+Find a comfortable seated position. Close your eyes or soften your gaze.
+
+**Round 1:**
+
+1. Inhale through your nose: 1... 2... 3... 4
+2. Hold at the top: 1... 2... 3... 4
+3. Exhale through your mouth: 1... 2... 3... 4
+4. Hold at the bottom: 1... 2... 3... 4
+
+Repeat for 5-10 rounds.
+
+## Why it supports identity work
+
+When you regulate your breath, you regulate your nervous system.
+When your nervous system is regulated, you have access to clearer perception and more coherent decision-making.
+
+---
+
+## Related Resources
+
+- [Try the Sensory Grounding (3-2-1) Demo](/blog/tri-sensory-grounding-3-2-1)
+- [Listen to The Resonant Identity podcast](/podcasts/theresonantid)
+- [Join The Resonant Identity Community on Facebook](https://www.facebook.com/groups/theresonantid)
+
+---
+
+_Written by Terence Waters. The Resonant Identity is a living extension of The Resonance Core Framework™._
+```
+
+### TRI Content Checklist
+
+Before publishing TRI content, verify:
+
+- [ ] Author is set to `"The Resonant Identity"`
+- [ ] `featured: true` is included
+- [ ] `publishedDate` is set in YYYY-MM-DD format
+- [ ] Includes ONE of the three core tags ("Interactive Demo", "Episode Companion", or "Identity Challenge")
+- [ ] Slug follows `tri-` naming convention
+- [ ] Category is set to `"Resonant Identity"` (recommended)
+- [ ] SEO fields are complete
+- [ ] Content provides value to TRI listeners/readers
 
 ---
 
@@ -521,6 +717,10 @@ Happy coding! 🚀
 - ❌ Not optimizing images (huge file sizes)
 - ❌ Missing required frontmatter fields
 - ❌ Inconsistent date formats (use YYYY-MM-DD)
+- ❌ **TRI-specific:** Missing `author: "The Resonant Identity"` (must be exact)
+- ❌ **TRI-specific:** Forgetting `featured: true` (post won't appear in filtered views)
+- ❌ **TRI-specific:** Using wrong tag names or missing core tag (must be one of: "Interactive Demo", "Episode Companion", "Identity Challenge")
+- ❌ **TRI-specific:** Not following `tri-` slug naming convention
 
 ---
 
@@ -548,6 +748,22 @@ Happy coding! 🚀
 3. Check for syntax errors in frontmatter (YAML format)
 4. Look at terminal output for specific error messages
 
+### TRI post doesn't appear in filtered views
+
+1. Verify `author: "The Resonant Identity"` (must be exact)
+2. Check that `featured: true` is set
+3. Confirm you included ONE of the three core tags:
+   - "Interactive Demo"
+   - "Episode Companion"
+   - "Identity Challenge"
+4. Make sure tag names use exact capitalization and spacing
+5. Verify `publishedDate` is set (required for sorting)
+6. Run `yarn build` to regenerate pages
+
+### TRI post appears in blog but not TRI pages
+
+This usually means `featured: true` is missing. TRI filtered views only show featured posts, while the main blog listing shows all posts.
+
 ---
 
 ## Need Help?
@@ -557,7 +773,10 @@ Happy coding! 🚀
 
 ---
 
-**Happy blogging!** 
+**Happy blogging!**
 
-*Last updated: November 24, 2025*
+_Last updated: November 24, 2025_
+
+```
+
 ```

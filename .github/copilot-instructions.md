@@ -721,6 +721,119 @@ For complete podcast documentation, see:
 - `/api/podcasts-episodes/index.js` - Episodes API implementation
 - `/api/podcasts-rss/index.js` - RSS feed implementation
 
+### The Resonant Identity (TRI) Content System
+
+**⚠️ CRITICAL**: Do NOT modify the TRI taxonomy processes or tag filtering logic. This system uses specific blog post tags to automatically organize and display content across multiple pages.
+
+**Overview**:
+
+The Resonant Identity (TRI) is a podcast with accompanying blog content that uses a tag-based taxonomy system to automatically filter and display related articles, demos, and challenges. Blog posts are tagged with specific keywords that control where they appear in the TRI section.
+
+**Three Core Tags**:
+
+1. **"Interactive Demo"** - Hands-on demonstrations and interactive exercises
+   - Displays in: `/podcasts/theresonantid/demos`
+   - Example: Sensory grounding exercises, breathing practices
+
+2. **"Episode Companion"** - Companion articles for podcast episodes
+   - Displays in: `/podcasts/theresonantid/articles`
+   - Example: Extended episode notes, additional context
+
+3. **"Identity Challenge"** - 7-day challenges for each episode
+   - Displays in: `/podcasts/theresonantid/challenges`
+   - Example: Weekly identity activation challenges
+
+**Where TRI Content Appears**:
+
+- `/podcasts/theresonantid` - Main TRI page with `TRISection` component showing all three categories
+- `/podcasts/theresonantid/library` - Full library view with `TRISection` component
+- `/podcasts/theresonantid/demos` - Filtered view of "Interactive Demo" posts
+- `/podcasts/theresonantid/articles` - Filtered view of "Episode Companion" posts
+- `/podcasts/theresonantid/challenges` - Filtered view of "Identity Challenge" posts
+- `/blog` - Standard blog listing (TRI posts appear alongside other blog content)
+- `/blog/[slug]` - Individual blog post detail pages
+
+**Required Frontmatter for TRI Blog Posts**:
+
+```yaml
+---
+title: 'Your Post Title'
+excerpt: 'Brief description'
+author: 'The Resonant Identity' # REQUIRED for TRI content
+publishedDate: '2026-05-24' # REQUIRED
+category: 'Resonant Identity' # Recommended
+tags: [
+    'Interactive Demo', # OR 'Episode Companion' OR 'Identity Challenge'
+    'Grounding', # Additional descriptive tags
+    'Somatic Practice',
+  ]
+featured: true # REQUIRED to appear in TRI filtered views
+imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageAlt: 'The Resonant Identity'
+seoTitle: 'Your SEO Title'
+seoDescription: 'SEO description'
+seoKeywords: ['keyword1', 'keyword2']
+generatedWithAI: true # If applicable
+---
+```
+
+**Key Frontmatter Fields**:
+
+- **`author: "The Resonant Identity"`** - REQUIRED for proper attribution
+- **`featured: true`** - REQUIRED for posts to appear in `/podcasts/theresonantid/demos`, `/challenges`, or `/articles`
+- **`publishedDate`** - REQUIRED for chronological sorting
+- **`tags`** - MUST include one of the three core tags ("Interactive Demo", "Episode Companion", or "Identity Challenge")
+
+**Component Architecture**:
+
+- **`TRIContentFilteredView`** (`src/app/podcasts/theresonantid/TRI/TRIContentFilteredView.tsx`):
+  - Client component that filters blog posts by tag
+  - Uses `useSearchParams()` for reactive URL-based filtering
+  - Supports featured posts, tag chips, and responsive layouts
+  - Powers all three TRI filtered views (demos, articles, challenges)
+
+- **`TRISection`** (used on main TRI pages):
+  - Displays cards for each content category
+  - Links to filtered views
+  - Shows count of posts in each category
+
+**Creating New TRI Content**:
+
+1. Create blog post in standard location: `/public/blog/posts/[slug]/markdown/post.md`
+2. Add required frontmatter (see above)
+3. Include one of the three core tags: "Interactive Demo", "Episode Companion", or "Identity Challenge"
+4. Set `featured: true` to make it appear in filtered TRI views
+5. Set `author: "The Resonant Identity"`
+6. Run `yarn build` to generate static pages
+7. Post automatically appears in appropriate TRI sections
+
+**Content Architecture**:
+
+- **TRI content IS standard blog content** - it follows the same file structure, loader, and routes as all other blog posts
+- **No special directories** - All blog posts (including TRI) live in `/public/blog/posts/[slug]/`
+- **No custom loaders** - The standard `blogLoader.ts` handles all blog content including TRI posts
+- **Filtering by tags** - TRI pages use the three core tags to filter and display relevant posts
+- **Example slug naming**: `tri-box-breathing-4-4-4-4`, `tri-sensory-grounding-3-2-1`, etc.
+
+**Important Notes**:
+
+- ⚠️ **DO NOT** create custom routes, loaders, or directories for TRI content - it's standard blog content
+- ⚠️ **DO NOT** modify `TRIContentFilteredView` component's tag filtering logic
+- ⚠️ **DO NOT** change the three core tag names ("Interactive Demo", "Episode Companion", "Identity Challenge")
+- ⚠️ **DO NOT** add TRI-specific code to `blogLoader.ts` - it should treat TRI posts the same as any other blog post
+- ✅ **DO** use the existing blog post creation workflow with proper frontmatter
+- ✅ **DO** leverage the `featured` field to control visibility in TRI filtered views
+- ✅ **DO** use `useSearchParams()` for URL-based filtering (already implemented correctly)
+- ✅ **DO** use standard blog post structure: `/public/blog/posts/tri-[topic]/markdown/post.md`
+
+**Tag Filtering Behavior**:
+
+- The `TRIContentFilteredView` component reads the `?tag=` query parameter from the URL
+- Users can click tag chips to filter content client-side
+- The filter state syncs with the URL for shareable links and browser navigation
+- Back/forward navigation automatically updates the filter state
+- Featured posts are highlighted at the top of filtered views
+
 ## Coding Best Practices
 
 ### Next.js Best Practices
@@ -941,14 +1054,14 @@ Each demo is a self-contained `'use client'` React component that can be embedde
 
 **Purpose**: Interactive visual perception demo. Displays a red apple image and lets the user apply six CSS filter modes to simulate different visual conditions:
 
-| Mode | Description |
-|------|-------------|
-| `normal` | Original image — no filter |
-| `protanopia` | Red colorblindness simulation |
-| `tritanopia` | Red–blue colorblindness simulation |
-| `deuteranopia` | Green colorblindness simulation |
-| `grayscale` | Full desaturation |
-| `lowlight` | Dim-lighting simulation |
+| Mode           | Description                        |
+| -------------- | ---------------------------------- |
+| `normal`       | Original image — no filter         |
+| `protanopia`   | Red colorblindness simulation      |
+| `tritanopia`   | Red–blue colorblindness simulation |
+| `deuteranopia` | Green colorblindness simulation    |
+| `grayscale`    | Full desaturation                  |
+| `lowlight`     | Dim-lighting simulation            |
 
 **Usage in a blog post**:
 
@@ -961,7 +1074,9 @@ const isRedAppleDemo = post.slug === 'tri-red-apple-perception-demo';
 const config: UnifiedContentDetailConfig = {
   // ...
   ...(isRedAppleDemo && {
-    sections: [{ title: 'Interactive Filter Demo', content: <RedAppleFilterDemo /> }],
+    sections: [
+      { title: 'Interactive Filter Demo', content: <RedAppleFilterDemo /> },
+    ],
     sectionsPosition: 'before',
   }),
 };
@@ -981,6 +1096,7 @@ const config: UnifiedContentDetailConfig = {
 4. **Inject** the component in `BlogPostDetailClient.tsx` using slug-based detection and `sections`/`sectionsPosition`
 
 **Styling rules** (same as all components):
+
 - Use `useAppTheme()` for all colours, spacing, and border-radius values
 - Use the `Typography` component for all text
 - Layout via Tailwind CSS utility classes
@@ -989,7 +1105,10 @@ const config: UnifiedContentDetailConfig = {
 **Filter hook**: If your demo needs colour-vision filter CSS strings, use `getImageFilterCss()`:
 
 ```ts
-import { getImageFilterCss, type ImageFilterMode } from '@/theme/hooks/useColorVisionFilter';
+import {
+  getImageFilterCss,
+  type ImageFilterMode,
+} from '@/theme/hooks/useColorVisionFilter';
 
 const cssFilter = getImageFilterCss('protanopia');
 // Returns the CSS filter string for the selected image filter mode.
