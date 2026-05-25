@@ -1,6 +1,8 @@
 ---
 title: 'Box Breathing (4–4–4–4)'
-description: 'A guided breathing practice to regulate the nervous system and restore grounded focus.'
+excerpt: 'A guided breathing practice to regulate the nervous system and restore grounded focus.'
+author: 'The Resonant Identity'
+publishedDate: '2026-05-24'
 category: 'Resonant Identity'
 tags:
   [
@@ -10,9 +12,9 @@ tags:
     'Nervous System Regulation',
     'Somatic Cues',
   ]
-isFeatured: true
-date: '2026-05-24'
-author: 'The Resonant Identity'
+imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageAlt: 'Box Breathing (4–4–4–4) — The Resonant Identity'
+featured: false
 seoTitle: 'Box Breathing (4–4–4–4) Demo | Interactive Demos | The Resonant Identity'
 seoDescription: 'Practice guided 4-4-4-4 box breathing to cue safety, improve vagal tone, and return to present-moment identity alignment.'
 seoKeywords:
@@ -24,8 +26,7 @@ seoKeywords:
     'nervous system regulation',
     'TRI',
   ]
-linkedChallengeUrl: '/blog/tri-7day-identity-activation-challenge'
-linkedChallengeLabel: 'Try this before Day 3 of the 7-Day Identity Activation Challenge'
+generatedWithAI: true
 ---
 
 # Box Breathing (4–4–4–4)
@@ -93,3 +94,15 @@ A longer, controlled exhale supports parasympathetic activation and helps your b
 - **Before a challenge:** Do 2 minutes before starting TRI challenge prompts.
 - **Pair with journaling:** Write one sentence: _"What changed in me after regulating first?"_
 - **When Past Identity activates:** Use this immediately when you feel old story loops taking over.
+
+---
+
+## Related Resources
+
+- [Try this before Day 3 of the 7-Day Identity Activation Challenge](/blog/tri-7day-identity-activation-challenge)
+- [Listen to The Resonant Identity podcast](/podcasts/theresonantid)
+- [Join The Resonant Identity Community on Facebook](https://www.facebook.com/groups/theresonantid)
+
+---
+
+_Written by Terence Waters. The Resonant Identity is a living extension of The Resonance Core Framework™._

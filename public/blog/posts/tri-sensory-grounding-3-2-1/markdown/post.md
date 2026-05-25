@@ -1,6 +1,8 @@
 ---
 title: 'Sensory Grounding (3–2–1 Method)'
-description: 'A present-moment anchoring sequence using visual, tactile, and auditory cueing.'
+excerpt: 'A present-moment anchoring sequence using visual, tactile, and auditory cueing.'
+author: 'The Resonant Identity'
+publishedDate: '2026-05-24'
 category: 'Resonant Identity'
 tags:
   [
@@ -11,9 +13,9 @@ tags:
     'Present-Moment Awareness',
     'Somatic Cues',
   ]
-isFeatured: false
-date: '2026-05-24'
-author: 'The Resonant Identity'
+imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageAlt: 'Sensory Grounding (3–2–1 Method) — The Resonant Identity'
+featured: false
 seoTitle: 'Sensory Grounding (3–2–1) Demo | Interactive Demos | The Resonant Identity'
 seoDescription: 'Use a 3-2-1 sensory grounding script with visual, tactile, and auditory cueing to anchor into the present moment.'
 seoKeywords:
@@ -25,8 +27,7 @@ seoKeywords:
     'somatic practice',
     'TRI',
   ]
-linkedChallengeUrl: '/blog/tri-7day-identity-activation-challenge'
-linkedChallengeLabel: 'Try this when challenge emotions feel overwhelming'
+generatedWithAI: true
 ---
 
 # Sensory Grounding (3–2–1 Method)
@@ -86,3 +87,15 @@ Pick one small, concrete action (drink water, stand up, open journal, send one c
 - **Before/after a challenge:** Use this 3-2-1 sequence before and after challenge prompts.
 - **Pair with journaling:** Prompt: _"What did I notice when I returned to direct experience?"_
 - **When Past Identity activates:** Use it the moment you feel narrative collapse or emotional time-travel.
+
+---
+
+## Related Resources
+
+- [Try this when challenge emotions feel overwhelming](/blog/tri-7day-identity-activation-challenge)
+- [Listen to The Resonant Identity podcast](/podcasts/theresonantid)
+- [Join The Resonant Identity Community on Facebook](https://www.facebook.com/groups/theresonantid)
+
+---
+
+_Written by Terence Waters. The Resonant Identity is a living extension of The Resonance Core Framework™._

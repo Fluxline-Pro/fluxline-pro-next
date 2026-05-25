@@ -1,6 +1,8 @@
 ---
 title: 'Diaphragmatic Breathing'
-description: 'Belly-first breathing with hand-placement cues to reduce reactivity and restore calm presence.'
+excerpt: 'Belly-first breathing with hand-placement cues to reduce reactivity and restore calm presence.'
+author: 'The Resonant Identity'
+publishedDate: '2026-05-24'
 category: 'Resonant Identity'
 tags:
   [
@@ -11,9 +13,9 @@ tags:
     'Interoception',
     'Somatic Cues',
   ]
-isFeatured: false
-date: '2026-05-24'
-author: 'The Resonant Identity'
+imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageAlt: 'Diaphragmatic Breathing — The Resonant Identity'
+featured: false
 seoTitle: 'Diaphragmatic Breathing Demo | Interactive Demos | The Resonant Identity'
 seoDescription: 'Practice belly-first diaphragmatic breathing with hand placement and slow exhale emphasis for grounded nervous system regulation.'
 seoKeywords:
@@ -25,8 +27,7 @@ seoKeywords:
     'interoception',
     'TRI',
   ]
-linkedChallengeUrl: '/blog/tri-7day-identity-activation-challenge'
-linkedChallengeLabel: 'Try this before your next TRI reflection block'
+generatedWithAI: true
 ---
 
 # Diaphragmatic Breathing
@@ -86,3 +87,15 @@ Name:
 - **Before a challenge:** Use 90 seconds before challenge writing.
 - **Pair with journaling:** Prompt: _"What did my body know before my story caught up?"_
 - **When Past Identity activates:** If you feel urgency or proving energy, take 5 slow exhales before responding.
+
+---
+
+## Related Resources
+
+- [Try this before your next TRI reflection block](/blog/tri-7day-identity-activation-challenge)
+- [Listen to The Resonant Identity podcast](/podcasts/theresonantid)
+- [Join The Resonant Identity Community on Facebook](https://www.facebook.com/groups/theresonantid)
+
+---
+
+_Written by Terence Waters. The Resonant Identity is a living extension of The Resonance Core Framework™._
