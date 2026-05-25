@@ -8,7 +8,11 @@ import { Card } from '../card/card';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { useIsTablet, useDeviceOrientation } from '../../hooks/useMediaQuery';
+import {
+  useIsTablet,
+  useDeviceOrientation,
+  useIsMobile,
+} from '../../hooks/useMediaQuery';
 import { LoadingSpinner } from '../structural/loading-spinner';
 import { Typography } from '../typography';
 
@@ -82,7 +86,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const { theme } = useAppTheme();
   const { filter } = useColorVisionFilter(skipDarkModeFilter);
   const { shouldReduceMotion } = useReducedMotion();
-  const isTablet = useIsTablet();
+  const isTabletHook = useIsTablet();
+  const isMobileHook = useIsMobile();
+  const isMobile = isMobileHook ?? false;
+  const isTablet = isTabletHook ?? false;
   const orientation = useDeviceOrientation();
 
   // Calculate elevation level once
@@ -96,7 +103,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const publicationLabel = publicationDateText
     ? `Published ${publicationDateText}`
     : undefined;
-  const smallTileHeight = 'clamp(200px, 16vw, 275px)';
+  const smallTileHeight = isMobile ? 'auto' : 'clamp(200px, 16vw, 275px)';
 
   // Loading state management
   const [imageLoaded, setImageLoaded] = React.useState(false);
@@ -482,7 +489,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   style={{
                     position: 'relative',
                     flex: '0 0 clamp(96px, 35%, 145px)',
-                    height: '100%',
+                    height: isMobile ? 'auto' : '100%',
                     overflow: 'hidden',
                     borderRadius: '6px 0 0 6px',
                     flexShrink: 0,
@@ -521,7 +528,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               )}
               <div
                 style={{
-                  padding: theme.spacing.m,
+                  padding: isMobile ? theme.spacing.s : theme.spacing.m,
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
@@ -537,7 +544,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                       margin: 0,
                       color: theme.palette.neutralPrimary,
                       lineHeight: 1.3,
-                      marginBottom: theme.spacing.s2,
+                      marginBottom: isMobile ? 0 : theme.spacing.s2,
                       display: '-webkit-box',
                       WebkitBoxOrient: 'vertical',
                       WebkitLineClamp: 2,
@@ -546,7 +553,8 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   >
                     {title}
                   </Typography>
-                  {description && (
+                  {/* Hide description on mobile for more compact small-tile cards */}
+                  {!isMobile && description && (
                     <Typography
                       variant='p'
                       style={{
@@ -608,7 +616,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
         style={{
           cursor: onClick ? 'pointer' : 'default',
           width: '100%',
-          height: '100%',
+          height: isMobile ? 'auto' : '100%',
           display: 'flex',
         }}
         initial={{ y: 0, opacity: 0 }}
@@ -623,7 +631,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           ease: 'easeOut',
         }}
       >
-        <div style={{ width: '100%', height: '100%' }}>
+        <div style={{ width: '100%', height: isMobile ? 'auto' : '100%' }}>
           <Card
             elevation={elevationLevel}
             padding='none'
@@ -636,8 +644,9 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 flexDirection: 'row',
                 alignItems: 'stretch',
                 width: '100%',
-                height: '100%',
-                minHeight: imageUrl ? '220px' : '175px',
+                height: isMobile ? 'auto' : '100%',
+                minHeight: imageUrl ? (isMobile ? 'auto' : '220px') : '175px',
+                maxHeight: isMobile ? '125px' : 'auto',
               }}
             >
               {imageUrl && (
@@ -714,7 +723,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                       {publicationLabel}
                     </Typography>
                   )}
-                  {description && (
+                  {!isMobile && description && (
                     <Typography
                       variant='p'
                       style={{
@@ -789,7 +798,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            height: '100%',
+            height: isMobile ? 'auto' : '100%',
             cursor: onClick ? 'pointer' : 'default',
           }}
         >
@@ -804,7 +813,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               {title}
             </Typography>
           )}
-          {description && (
+          {!isMobile && description && (
             <Typography
               variant='label'
               style={{
