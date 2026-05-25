@@ -300,7 +300,7 @@ In Episode 2, we explore what happens when the signal gets distorted — and how
 
 ## Episode Navigation
 
-- [← Back to All Episodes](/podcasts/theresonantid/articles)
+- [← Back to All Episodes](/podcasts/theresonantid)
 - [Next: Episode 2 — Distorted Reality →](/blog/tri-ep2-distorted-reality)
 
 ---
