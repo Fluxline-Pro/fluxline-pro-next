@@ -282,9 +282,7 @@ This is the beginning of learning to read your own resonance — the foundation 
 
 This is just the beginning.
 
-In Episode 2, we explore what happens when the signal gets distorted — and how distortion shapes identity from the inside out.
-
-- [Listen to Episode 2: Distorted Reality →](/blog/tri-ep2-distorted-reality)
+In Episode 2 (found below), we explore what happens when the signal gets distorted — and how distortion shapes identity from the inside out.
 
 ---
 
