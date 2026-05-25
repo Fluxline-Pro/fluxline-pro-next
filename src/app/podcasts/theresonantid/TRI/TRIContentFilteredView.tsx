@@ -1,9 +1,12 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { format } from 'date-fns';
-import { ContentListingPage, FilterConfig } from '@/components/ContentListingPage';
+import {
+  ContentListingPage,
+  FilterConfig,
+} from '@/components/ContentListingPage';
 import { FadeUp } from '@/animations/fade-animations';
 import { Callout } from '@/theme/components/callout';
 import { FormButton } from '@/theme/components/form/FormButton';
@@ -83,6 +86,7 @@ export function TRIContentFilteredView({
 }: TRIContentFilteredViewProps) {
   const { theme } = useAppTheme();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const isMobileHook = useIsMobile();
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobile = isMounted ? isMobileHook : false;
@@ -91,7 +95,9 @@ export function TRIContentFilteredView({
     setIsMounted(true);
   }, []);
 
-  const [requestedTag, setRequestedTag] = React.useState<string | undefined>();
+  // Derive requestedTag directly from URL search params (reactively updates on navigation)
+  const requestedTag = searchParams.get('tag') || undefined;
+
   const normalizedExcludedTags = React.useMemo(
     () => new Set(excludedTags.map((tag) => tag.toLowerCase())),
     [excludedTags]
@@ -111,19 +117,14 @@ export function TRIContentFilteredView({
   const [selectedTag, setSelectedTag] = React.useState<string | undefined>();
 
   React.useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const tag = new URLSearchParams(window.location.search).get('tag') || undefined;
-    setRequestedTag(tag);
-  }, []);
-
-  React.useEffect(() => {
     if (!requestedTag) {
       setSelectedTag(undefined);
       return;
     }
 
-    setSelectedTag(availableTags.includes(requestedTag) ? requestedTag : undefined);
+    setSelectedTag(
+      availableTags.includes(requestedTag) ? requestedTag : undefined
+    );
   }, [requestedTag, availableTags]);
 
   const filteredPosts = React.useMemo(() => {
@@ -136,7 +137,8 @@ export function TRIContentFilteredView({
     if (featured.length === 0) return null;
     return [...featured].sort(
       (a, b) =>
-        new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+        new Date(b.publishedDate).getTime() -
+        new Date(a.publishedDate).getTime()
     )[0];
   }, [posts]);
 
@@ -145,7 +147,8 @@ export function TRIContentFilteredView({
     if (posts.length === 0) return null;
     return [...posts].sort(
       (a, b) =>
-        new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+        new Date(b.publishedDate).getTime() -
+        new Date(a.publishedDate).getTime()
     )[0];
   }, [posts, featuredPost]);
 
@@ -183,7 +186,10 @@ export function TRIContentFilteredView({
   const tagChips = (
     <>
       <Divider />
-      <SectionHeader title={allItemsSectionTitle} style={{ marginTop: theme.spacing.l }} />
+      <SectionHeader
+        title={allItemsSectionTitle}
+        style={{ marginTop: theme.spacing.l }}
+      />
       <div
         style={{
           display: 'flex',
@@ -205,7 +211,9 @@ export function TRIContentFilteredView({
             key={tag}
             label={tag}
             isActive={selectedTag === tag}
-            onClick={() => setSelectedTag(selectedTag === tag ? undefined : tag)}
+            onClick={() =>
+              setSelectedTag(selectedTag === tag ? undefined : tag)
+            }
             theme={theme}
           />
         ))}
