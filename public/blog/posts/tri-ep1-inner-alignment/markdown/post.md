@@ -14,6 +14,7 @@ tags:
     'Personal Growth',
     'Identity Coherence',
     'Resonance & Dissonance',
+    'Resonance Core Framework',
   ]
 imageUrl: '/images/TheResonantIdentity_Logo.png'
 imageAlt: 'Episode 1: Inner Alignment — The Resonant Identity'

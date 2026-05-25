@@ -1,17 +1,24 @@
 ---
-title: 'Week 3: Somatic & Emotional Cue Mapping Challenge'
+title: 'Episode 3: Somatic & Emotional Cue Mapping Challenge'
 description: 'A 7-day practice to notice, name, and map your body’s signals to your Past Identity.'
 excerpt: 'A 7-day practice to notice, name, and map your body’s signals to your Past Identity.'
 author: 'The Resonant Identity'
 publishedDate: '2026-05-24'
 date: '2026-05-24'
 category: 'Resonant Identity'
-tags: ['Identity Challenge', 'Somatic Awareness', 'Interoception', 'Emotional Mapping']
+tags:
+  [
+    'Identity Challenge',
+    'Somatic Awareness',
+    'Interoception',
+    'Emotional Mapping',
+    'Resonance Core Framework',
+  ]
 featured: false
 isFeatured: false
 imageUrl: '/images/TheResonantIdentity_Logo.png'
-imageAlt: 'Week 3 Somatic & Emotional Cue Mapping Challenge'
-seoTitle: 'Week 3: Somatic & Emotional Cue Mapping Challenge | The Resonant Identity'
+imageAlt: 'Episode Somatic & Emotional Cue Mapping Challenge'
+seoTitle: 'Episode: Somatic & Emotional Cue Mapping Challenge | The Resonant Identity'
 seoDescription: 'A guided 7-day identity challenge to build somatic literacy and emotional cue mapping connected to your Past Identity work from Episode 1.'
 seoKeywords:
   [
@@ -20,14 +27,15 @@ seoKeywords:
     'somatic awareness',
     'interoception',
     'emotional mapping',
-    'week 3 challenge',
+    'episode 3 challenge',
+    'resonance core',
   ]
 generatedWithAI: false
 ---
 
-# Week 3: Somatic & Emotional Cue Mapping Challenge
+# Episode 3: Somatic & Emotional Cue Mapping Challenge
 
-This Week 3 challenge helps you build **somatic literacy**: the ability to notice your body’s signals, name them clearly, and connect them to emotional and identity patterns.
+This Episode 3 challenge helps you build **somatic literacy**: the ability to notice your body’s signals, name them clearly, and connect them to emotional and identity patterns.
 
 In Episode 1, you mapped **Past Identity** through the lens of who you were, who you are, and who you are becoming. This week deepens that work by asking:
 
