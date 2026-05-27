@@ -649,7 +649,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 alignItems: 'stretch',
                 width: '100%',
                 height: isMobile ? 'auto' : '100%',
-                minHeight: imageUrl ? (isMobile ? 'auto' : '220px') : '175px',
+                minHeight: imageUrl ? (isMobile ? 'auto' : '240px') : '200px',
                 maxHeight: isMobile ? '125px' : 'auto',
               }}
             >
@@ -734,12 +734,10 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                         margin: `${theme.spacing.xs} 0 0 0`,
                         color: theme.palette.neutralSecondary,
                         lineHeight: 1.5,
-                        ...(shouldClampDescription && {
-                          display: '-webkit-box',
-                          WebkitBoxOrient: 'vertical',
-                          WebkitLineClamp: 2,
-                          overflow: 'hidden',
-                        }),
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 3,
+                        overflow: 'hidden',
                       }}
                     >
                       {description}
