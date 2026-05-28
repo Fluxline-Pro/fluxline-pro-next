@@ -2,24 +2,59 @@
 title: 'How Fluxline Made Its Content Legible to AI'
 client: 'Fluxline Resonance Group'
 industry: 'Consulting'
-subtitle: 'Engineering AI-optimized content surfacing with JSON-LD, safe serialization, and environment-aware crawling (PR #193)'
-author: 'Fluxline Engineering'
-date: '2026-05-28'
-category: 'Engineering Case Study'
-tags:
-  - ai-visibility
-  - json-ld
-  - structured-data
-  - seo
-  - nextjs
-  - schema-org
-status: 'published'
+description: 'Engineered AI-optimized content surfacing infrastructure with JSON-LD schemas, safe serialization, environment-aware crawling controls, and three-layer architecture for AI retrieval systems.'
+services: ['consulting', 'development', 'infrastructure']
+technologies:
+  [
+    'Next.js',
+    'TypeScript',
+    'JSON-LD',
+    'Schema.org',
+    'React',
+    'Vercel',
+    'Node.js',
+    'SEO',
+  ]
+publishedDate: '2026-05-28'
+projectDuration: '3 weeks'
+featured: true
+imageUrl: '/case-studies/posts/fluxline-ai-agentic-surfacing/images/ai-agentic-seo-illustration.jpg'
+imageAlt: 'AI-powered content surfacing architecture diagram showing three-layer schema, index, and retrieval system for structured data optimization'
+seoTitle: 'AI Content Optimization Case Study - Fluxline JSON-LD Infrastructure'
+seoDescription: 'How Fluxline engineered AI-readable structured data with JSON-LD, safe serialization, and environment-aware crawling to increase AI visibility across LLM-powered search platforms.'
+seoKeywords:
+  [
+    'ai optimization',
+    'json-ld',
+    'structured data',
+    'seo',
+    'schema.org',
+    'nextjs',
+    'ai visibility',
+    'semantic web',
+    'ai search',
+    'llm retrieval',
+    'content surfacing',
+    'safe serialization',
+  ]
 slug: 'fluxline-ai-agentic-surfacing'
-description: >
-  A deep-dive into how Fluxline redesigned its web infrastructure to communicate
-  directly with AI retrieval systems — using structured JSON-LD schemas, safe
-  serialization, environment-aware crawling controls, and a three-layer
-  schema → index → retrieval architecture.
+metrics:
+  - label: 'Routes with valid JSON-LD schema'
+    value: '9 routes'
+    change: 'from 0'
+  - label: 'Schema types emitted'
+    value: '6 distinct types'
+    change: 'Organization, WebSite, BlogPosting, PortfolioArticle, AboutPage, Product'
+  - label: 'AI crawler explicit allowlist'
+    value: '6 named bots'
+    change: 'GPTBot, ChatGPT-User, PerplexityBot, anthropic-ai, ClaudeBot, BingBot'
+  - label: 'Absolute URL coverage in schemas'
+    value: '100%'
+    change: 'from 0%'
+  - label: 'Structured data validation'
+    value: 'Zero errors'
+    change: '100% of indexed pages parsing correctly'
+generatedWithAI: true
 ---
 
 # How Fluxline Made Its Content Legible to AI
