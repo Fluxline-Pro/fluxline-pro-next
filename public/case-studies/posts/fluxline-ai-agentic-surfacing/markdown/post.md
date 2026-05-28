@@ -81,19 +81,19 @@ PR #193 addressed all of this in a single cohesive change set.
 
 Before diving into implementation specifics, it helps to understand the conceptual model that unified the work. Fluxline's engineering team frames AI content surfacing as a **three-layer problem**:
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  Layer 1 — SCHEMA                                        │
-│  Structured JSON-LD embedded in each route's <head>      │
-│  Tells AI: "Here is what this page IS and MEANS"         │
+```text
+┌──────────────────────────────────┐
+│  Layer 1 — SCHEMA                                       │
+│  Structured JSON-LD embedded in each route's <head>     │
+│  Tells AI: "Here is what this page IS and MEANS"        │
 ├─────────────────────────────────────────────────────────┤
-│  Layer 2 — INDEX                                         │
-│  Sitemap.xml + robots.txt that are environment-aware     │
-│  Tells crawlers: "Here is what you MAY index and when"   │
+│  Layer 2 — INDEX                                        │
+│  Sitemap.xml + robots.txt that are environment-aware    │
+│  Tells crawlers: "Here is what you MAY index and when"  │
 ├─────────────────────────────────────────────────────────┤
-│  Layer 3 — RETRIEVAL                                     │
-│  Absolute, canonical URLs throughout all schemas         │
-│  Tells retrieval systems: "Here is WHERE to send users"  │
+│  Layer 3 — RETRIEVAL                                    │
+│  Absolute, canonical URLs throughout all schemas        │
+│  Tells retrieval systems: "Here is WHERE to send users" │
 └─────────────────────────────────────────────────────────┘
 ```
 
