@@ -59,9 +59,11 @@ generatedWithAI: true
 
 # How Fluxline Made Its Content Legible to AI
 
-> **Synopsis —** As AI-powered search and retrieval agents become primary content gatekeepers, Fluxline invested in making its site a first-class citizen of AI-readable structured data. PR #193 introduced a production-hardened JSON-LD pipeline, environment-aware crawling controls, absolute URL resolution, and a route-level schema distribution strategy — together forming a three-layer AI visibility architecture that lets language models surface Fluxline content with confidence and precision.
-
 > **Note on Code Examples —** This case study includes production code excerpts from the actual implementation. All file paths and function names reference the real codebase structure. Where examples are simplified for clarity, this is explicitly noted.
+
+## Synopsis
+
+As AI-powered search and retrieval agents become primary content gatekeepers, Fluxline invested in making its site a first-class citizen of AI-readable structured data. PR #193 introduced a production-hardened JSON-LD pipeline, environment-aware crawling controls, absolute URL resolution, and a route-level schema distribution strategy — together forming a three-layer AI visibility architecture that lets language models surface Fluxline content with confidence and precision.
 
 ---
 
@@ -143,28 +145,16 @@ export default async function BlogPostDetailPage({ params }) {
   const { slug } = await params;
   const post = getBlogPostBySlug(slug);
 
-  // Build Article JSON-LD schema inline
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     '@id': `https://www.fluxline.pro/blog/${slug}#article`,
     headline: post.title,
-    description: post.seoMetadata.description,
     url: `https://www.fluxline.pro/blog/${slug}`,
     datePublished: post.publishedDate.toISOString(),
-    dateModified: (post.lastUpdated ?? post.publishedDate).toISOString(),
-    author: {
-      '@type': 'Person',
-      name: post.author,
-    },
-    publisher: {
-      '@type': 'Organization',
-      '@id': 'https://www.fluxline.pro/#organization',
-      name: 'Fluxline Resonance Group',
-    },
-    image: post.imageUrl
-      ? `https://www.fluxline.pro${post.imageUrl}`
-      : 'https://www.fluxline.pro/images/FluxlineLogo.png',
+    author: { '@type': 'Person', name: post.author },
+    publisher: { '@type': 'Organization', name: 'Fluxline Resonance Group' },
+    // ... image, keywords, isPartOf (Blog), etc.
   };
 
   return (
@@ -180,7 +170,9 @@ export default async function BlogPostDetailPage({ params }) {
 }
 ```
 
-Schemas are built directly in route components rather than abstracted into separate builder functions, keeping the schema definition co-located with the route logic. This approach improves maintainability and makes it easier to see exactly what structured data each route emits.
+Schemas are built directly in route components rather than abstracted into separate builder functions, keeping the schema definition co-located with the route logic.
+
+---
 
 ### Multi-Schema Routes: Service + FAQPage Example
 
@@ -198,35 +190,24 @@ export default async function ServiceDetailLayout({ children, params }) {
     (s) => s.path.split('/').pop() === slug
   );
 
-  // Service schema — always emitted
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    '@id': `https://www.fluxline.pro${service.path}#service`,
     name: service.title,
-    description: service.summary.replace(/<[^>]*>/g, ''),
     url: `https://www.fluxline.pro${service.path}`,
-    provider: {
-      '@type': 'Organization',
-      '@id': 'https://www.fluxline.pro/#organization',
-      name: 'Fluxline Resonance Group',
-    },
-    serviceType: service.title,
+    provider: { '@type': 'Organization', name: 'Fluxline Resonance Group' },
+    // ... description, serviceType, areaServed, etc.
   };
 
-  // FAQPage schema — only if FAQ data exists
   const faqSchema =
-    service.faqs && service.faqs.length > 0
+    service.faqs?.length > 0
       ? {
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
           mainEntity: service.faqs.map((faq) => ({
             '@type': 'Question',
             name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
+            acceptedAnswer: { '@type': 'Answer', text: faq.answer },
           })),
         }
       : null;
@@ -293,14 +274,6 @@ The browser parser sees the first `</script>` it encounters as the end of the sc
 
 ```ts
 // Production code from src/utils/jsonLd.ts
-
-/**
- * Safely serialize JSON-LD for inline script tags
- * Escapes HTML-significant characters to prevent XSS via script tag breakout
- *
- * @param obj - The JSON-LD schema object to serialize
- * @returns Safely escaped JSON string for use in dangerouslySetInnerHTML
- */
 export function safeJsonLdStringify(obj: unknown): string {
   return JSON.stringify(obj)
     .replace(/</g, '\\u003c')
@@ -371,27 +344,13 @@ PR #193 solves both with a single environment-aware pattern applied consistently
 
 export type Environment = 'dev' | 'test' | 'prod';
 
-/**
- * Gets the current environment
- * In production build, this is determined by NEXT_PUBLIC_ENVIRONMENT at build time
- */
 export function getEnvironment(): Environment {
   const env = process.env.NEXT_PUBLIC_ENVIRONMENT?.toLowerCase();
-
-  if (env === 'dev' || env === 'development') {
-    return 'dev';
-  }
-
-  if (env === 'test') {
-    return 'test';
-  }
-
-  return 'prod';
+  if (env === 'dev' || env === 'development') return 'dev';
+  if (env === 'test') return 'test';
+  return 'prod'; // Default to production
 }
 
-/**
- * Checks if the current environment is production
- */
 export function isProduction(
   environment: Environment = getEnvironment()
 ): boolean {
@@ -423,20 +382,12 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/api/'],
-      },
-      // Explicitly allow major AI crawlers
+      { userAgent: '*', allow: '/', disallow: ['/api/'] },
+      // Explicitly allow 8 major AI crawlers:
+      // GPTBot, ChatGPT-User, CCBot, PerplexityBot, ClaudeBot, anthropic-ai, Googlebot, Bingbot
       { userAgent: 'GPTBot', allow: '/' },
       { userAgent: 'ChatGPT-User', allow: '/' },
-      { userAgent: 'CCBot', allow: '/' },
-      { userAgent: 'PerplexityBot', allow: '/' },
-      { userAgent: 'ClaudeBot', allow: '/' },
-      { userAgent: 'anthropic-ai', allow: '/' },
-      { userAgent: 'Googlebot', allow: '/' },
-      { userAgent: 'Bingbot', allow: '/' },
+      // ... (6 more AI crawlers)
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
@@ -472,7 +423,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   }
 
-  // Static core pages
+  // Static pages: homepage (1.0), services (1.0), about (0.9)
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: SITE_URL,
@@ -486,36 +437,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    {
-      url: `${SITE_URL}/services`,
-      lastModified: BUILD_DATE,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
+    // ... (additional static pages)
   ];
 
-  // Dynamic content routes
-  const blogSlugs = getAllBlogPostSlugs();
-  const blogRoutes: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
+  // Dynamic content routes — fetch slugs/IDs from loaders, map to sitemap entries
+  const blogRoutes = getAllBlogPostSlugs().map((slug) => ({
     url: `${SITE_URL}/blog/${slug}`,
     lastModified: BUILD_DATE,
-    changeFrequency: 'monthly',
     priority: 0.8,
   }));
 
-  const portfolioSlugs = getAllPortfolioSlugs();
-  const portfolioRoutes: MetadataRoute.Sitemap = portfolioSlugs.map((slug) => ({
+  const portfolioRoutes = getAllPortfolioSlugs().map((slug) => ({
     url: `${SITE_URL}/portfolio/${slug}`,
     lastModified: BUILD_DATE,
-    changeFrequency: 'monthly',
     priority: 0.8,
   }));
 
-  const caseStudySlugs = getAllCaseStudySlugs();
-  const caseStudyRoutes: MetadataRoute.Sitemap = caseStudySlugs.map((id) => ({
+  const caseStudyRoutes = getAllCaseStudySlugs().map((id) => ({
     url: `${SITE_URL}/case-studies/${id}`,
     lastModified: BUILD_DATE,
-    changeFrequency: 'yearly',
     priority: 0.8,
   }));
 
@@ -542,7 +482,7 @@ This matters practically because the `url` property in `Organization`, `BlogPost
 
 ### Absolute URL Implementation
 
-Absolute URLs are constructed inline within schema objects rather than through dedicated helper functions. The pattern ensures all schema `url` properties are fully qualified:
+Absolute URLs are constructed inline within schema objects. All `url`, `@id`, and `image` properties are prefixed with the site base to ensure AI retrieval systems have unambiguous, resolvable URLs:
 
 ```ts
 // Inline absolute URL pattern used across schema objects
@@ -551,26 +491,13 @@ const SITE_BASE = 'https://www.fluxline.pro';
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  // Absolute @id and url properties
   '@id': `${SITE_BASE}/blog/${slug}#article`,
   url: `${SITE_BASE}/blog/${slug}`,
-  // Image URLs also absolute
   image: post.imageUrl
-    ? `${SITE_BASE}${post.imageUrl}` // Site-relative path → absolute
-    : `${SITE_BASE}/images/FluxlineLogo.png`, // Already has leading slash
-  // ... rest of schema
+    ? `${SITE_BASE}${post.imageUrl}` // Prefix site-relative path
+    : `${SITE_BASE}/images/FluxlineLogo.png`, // Fallback
+  // ... author, publisher, datePublished, etc.
 };
-```
-
-**Key pattern:** All `url`, `@id`, and `image` properties in schemas are constructed as absolute URLs by prefixing with the site base. This ensures AI retrieval systems have unambiguous, resolvable URLs for citations and further crawling.
-
-For site-relative image paths (e.g., `/blog/posts/slug/images/cover.jpg`), the pattern conditionally prefixes:
-
-```ts
-// Conditional absolute URL construction
-image: post.imageUrl
-  ? `https://www.fluxline.pro${post.imageUrl}` // Prefix site-relative path
-  : 'https://www.fluxline.pro/images/FluxlineLogo.png'; // Full URL fallback
 ```
 
 This pattern is repeated consistently across all schema-bearing routes (blog posts, portfolio projects, case studies, services) to ensure 100% absolute URL coverage.

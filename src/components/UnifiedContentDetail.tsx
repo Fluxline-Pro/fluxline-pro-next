@@ -9,7 +9,7 @@ import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
 import { IconButton } from '@fluentui/react';
 import {
   SocialLinks,
@@ -118,6 +118,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
   const { theme } = useAppTheme();
   const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
   const isMounted = useSyncExternalStore(
@@ -264,6 +265,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           borderRadius: theme.effects.roundedCorner4,
           overflow: 'auto',
           marginBottom: theme.spacing.m,
+          ...(isDesktop && { maxWidth: '80%' }),
         }}
       >
         {children}
@@ -430,7 +432,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         <div style={{ marginBottom: theme.spacing.l1 }}></div>
 
         {/* Article Header */}
-        <article style={isMobile ? { padding: `0 ${theme.spacing.m}` } : undefined}>
+        <article
+          style={isMobile ? { padding: `0 ${theme.spacing.m}` } : undefined}
+        >
           <header style={{ marginBottom: theme.spacing.l2 }}>
             <div
               style={{
