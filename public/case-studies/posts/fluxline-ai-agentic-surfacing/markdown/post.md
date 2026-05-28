@@ -40,14 +40,14 @@ seoKeywords:
 slug: 'fluxline-ai-agentic-surfacing'
 metrics:
   - label: 'Routes with valid JSON-LD schema'
-    value: '9 routes'
+    value: '7 route patterns'
     change: 'from 0'
   - label: 'Schema types emitted'
-    value: '6 distinct types'
-    change: 'Organization, WebSite, BlogPosting, PortfolioArticle, AboutPage, Service'
+    value: '8 distinct types'
+    change: 'Organization, WebSite, Article, PortfolioArticle, AboutPage, ItemList, Service, FAQPage'
   - label: 'AI crawler explicit allowlist'
-    value: '7 named bots'
-    change: 'ChatGPT-User, CCBot, PerplexityBot, ClaudeBot, anthropic-ai, GoogleBot, BingBot'
+    value: '8 named bots'
+    change: 'GPTBot, ChatGPT-User, CCBot, PerplexityBot, ClaudeBot, anthropic-ai, Googlebot, Bingbot'
   - label: 'Absolute URL coverage in schemas'
     value: '100%'
     change: 'from 0%'
@@ -543,9 +543,9 @@ fluxline-pro-next/
 
 | Metric                           | Before     | After                                   |
 | -------------------------------- | ---------- | --------------------------------------- |
-| Routes with valid JSON-LD schema | 0          | 9                                       |
-| Schema types emitted             | —          | 6 distinct types                        |
-| AI crawler explicit allowlist    | None       | 6 named bots                            |
+| Routes with valid JSON-LD schema | 0          | 7 route patterns                        |
+| Schema types emitted             | —          | 8 distinct types                        |
+| AI crawler explicit allowlist    | None       | 8 named bots                            |
 | Sitemap entries (production)     | 0          | Dynamic (static + all posts + all docs) |
 | Staging crawlability             | Fully open | Blocked (`Disallow: /`)                 |
 | XSS-safe JSON-LD serialization   | No         | Yes (`safeJsonLdStringify`)             |
