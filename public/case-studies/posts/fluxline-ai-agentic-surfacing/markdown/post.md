@@ -182,6 +182,86 @@ export default async function BlogPostDetailPage({ params }) {
 
 Schemas are built directly in route components rather than abstracted into separate builder functions, keeping the schema definition co-located with the route logic. This approach improves maintainability and makes it easier to see exactly what structured data each route emits.
 
+### Multi-Schema Routes: Service + FAQPage Example
+
+Some routes emit multiple schemas when the content warrants it. The `/services/development` page demonstrates this pattern — it emits both a `Service` schema and a conditional `FAQPage` schema:
+
+```tsx
+// Production code from src/app/services/[slug]/layout.tsx
+import Script from 'next/script';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
+import { SERVICE_CATEGORIES } from '../constants';
+
+export default async function ServiceDetailLayout({ children, params }) {
+  const { slug } = await params;
+  const service = SERVICE_CATEGORIES.find(
+    (s) => s.path.split('/').pop() === slug
+  );
+
+  // Service schema — always emitted
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `https://www.fluxline.pro${service.path}#service`,
+    name: service.title,
+    description: service.summary.replace(/<[^>]*>/g, ''),
+    url: `https://www.fluxline.pro${service.path}`,
+    provider: {
+      '@type': 'Organization',
+      '@id': 'https://www.fluxline.pro/#organization',
+      name: 'Fluxline Resonance Group',
+    },
+    serviceType: service.title,
+  };
+
+  // FAQPage schema — only if FAQ data exists
+  const faqSchema =
+    service.faqs && service.faqs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: service.faqs.map((faq) => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
+  return (
+    <>
+      <Script
+        id={`service-schema-${slug}`}
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(serviceSchema) }}
+      />
+      {faqSchema && (
+        <Script
+          id={`faq-schema-${slug}`}
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqSchema) }}
+        />
+      )}
+      {children}
+    </>
+  );
+}
+```
+
+For the **development service**, the FAQ data includes questions like:
+
+- "What types of web development projects does Fluxline handle?"
+- "Does Fluxline provide cloud architecture consulting?"
+- "What is Fluxline's web development process?"
+- "Can Fluxline help migrate an existing site to a modern stack?"
+
+Each question-answer pair becomes a `Question` entity with an `acceptedAnswer` property. This structured FAQ data makes the page eligible for **Google's FAQ rich results** and provides AI systems with explicit question-answer pairs they can cite directly when responding to queries like _"Does Fluxline do cloud architecture?"_ or _"What's Fluxline's web development process?"_
+
+The conditional rendering (`{faqSchema && ...}`) ensures that only services with FAQ data emit the `FAQPage` schema, avoiding empty or invalid structured data.
+
 ---
 
 ## The `safeJsonLdStringify` Function
