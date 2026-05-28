@@ -51,9 +51,6 @@ metrics:
   - label: 'Absolute URL coverage in schemas'
     value: '100%'
     description: 'from 0%'
-  - label: 'Structured data validation'
-    value: 'Zero errors'
-    description: '100% of indexed pages parsing correctly'
 generatedWithAI: true
 ---
 
@@ -82,7 +79,7 @@ PR #193 addressed all of this in a single cohesive change set.
 Before diving into implementation specifics, it helps to understand the conceptual model that unified the work. Fluxline's engineering team frames AI content surfacing as a **three-layer problem**:
 
 ```text
-┌──────────────────────────────────┐
+┌─────────────────────────────────────────────────────────┐
 │  Layer 1 — SCHEMA                                       │
 │  Structured JSON-LD embedded in each route's <head>     │
 │  Tells AI: "Here is what this page IS and MEANS"        │
@@ -506,7 +503,7 @@ This pattern is repeated consistently across all schema-bearing routes (blog pos
 
 ## File Structure
 
-```
+```text
 fluxline-pro-next/
 ├── src/
 │   ├── app/

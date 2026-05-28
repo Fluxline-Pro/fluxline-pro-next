@@ -285,7 +285,10 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             fontSize: theme.fonts.medium.fontSize,
             fontFamily:
               '"Courier Prime", "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", Consolas, "Courier New", monospace',
-            ...(isDesktop && { maxWidth: '80%' }),
+            backgroundColor: isDark
+              ? theme.palette.neutralLight
+              : theme.palette.neutralLighter,
+            ...(isDesktop && { maxWidth: '900px' }),
           }}
           codeTagProps={{
             style: {
