@@ -409,29 +409,51 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         {children}
       </tr>
     ),
-    th: ({ children }: { children?: React.ReactNode }) => (
-      <th
-        style={{
-          padding: theme.spacing.s2,
-          textAlign: 'left',
-          fontWeight: 600,
-          color: theme.palette.themePrimary,
-          borderRight: `1px solid ${theme.palette.neutralLight}`,
-        }}
-      >
-        {children}
-      </th>
-    ),
-    td: ({ children }: { children?: React.ReactNode }) => (
-      <td
-        style={{
-          padding: theme.spacing.s2,
-          borderRight: `1px solid ${theme.palette.neutralLight}`,
-        }}
-      >
-        {children}
-      </td>
-    ),
+    th: ({ children }: { children?: React.ReactNode }) => {
+      const isDark =
+        themeMode === 'dark' ||
+        themeMode === 'high-contrast' ||
+        themeMode === 'grayscale-dark';
+
+      return (
+        <th
+          style={{
+            padding: theme.spacing.s2,
+            paddingLeft: theme.spacing.m,
+            textAlign: 'left',
+            fontWeight: 600,
+            color: theme.palette.themePrimary,
+            borderRight: `1px solid ${theme.palette.neutralLight}`,
+            backgroundColor: isDark
+              ? theme.palette.neutralQuaternaryAlt
+              : theme.palette.neutralLight,
+          }}
+        >
+          {children}
+        </th>
+      );
+    },
+    td: ({ children }: { children?: React.ReactNode }) => {
+      const isDark =
+        themeMode === 'dark' ||
+        themeMode === 'high-contrast' ||
+        themeMode === 'grayscale-dark';
+
+      return (
+        <td
+          style={{
+            padding: theme.spacing.s2,
+            paddingLeft: theme.spacing.m,
+            borderRight: `1px solid ${theme.palette.neutralLight}`,
+            backgroundColor: isDark
+              ? theme.palette.neutralLighter
+              : theme.palette.white,
+          }}
+        >
+          {children}
+        </td>
+      );
+    },
   };
 
   // Prepare image config with carousel functionality
