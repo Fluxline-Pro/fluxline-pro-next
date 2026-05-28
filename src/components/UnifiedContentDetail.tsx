@@ -4,6 +4,11 @@ import React, { useState, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {
+  vscDarkPlus,
+  vs,
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { UnifiedPageWrapper } from './UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
@@ -116,7 +121,7 @@ interface UnifiedContentDetailProps {
  */
 export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
-  const { theme } = useAppTheme();
+  const { theme, themeMode } = useAppTheme();
   const isMobile = useIsMobile();
   const isDesktop = useIsDesktop();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
@@ -240,36 +245,60 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       className?: string;
     }) => {
       const isInline = !className;
+      const match = /language-(\w+)/.exec(className || '');
+      const language = match ? match[1] : 'text';
+
+      // Inline code - simple styled span
+      if (isInline) {
+        return (
+          <code
+            style={{
+              backgroundColor: theme.palette.neutralLighter,
+              color: theme.palette.themePrimary,
+              padding: `2px ${theme.spacing.s1}`,
+              borderRadius: theme.effects.roundedCorner2,
+              fontSize: '0.9em',
+              fontFamily: 'monospace',
+            }}
+          >
+            {children}
+          </code>
+        );
+      }
+
+      // Code block - use syntax highlighter
+      const codeString = String(children).replace(/\n$/, '');
+      // Determine if current theme is dark-based
+      const isDark =
+        themeMode === 'dark' ||
+        themeMode === 'high-contrast' ||
+        themeMode === 'grayscale-dark';
+
       return (
-        <code
-          style={{
-            backgroundColor: theme.palette.neutralLighter,
-            color: theme.palette.themePrimary,
-            padding: isInline ? `2px ${theme.spacing.s1}` : theme.spacing.m,
-            borderRadius: theme.effects.roundedCorner2,
-            fontSize: isInline ? '0.9em' : theme.fonts.medium.fontSize,
-            display: isInline ? 'inline' : 'block',
-            overflowX: isInline ? 'visible' : 'auto',
-            fontFamily: 'monospace',
+        <SyntaxHighlighter
+          language={language}
+          style={isDark ? vscDarkPlus : vs}
+          customStyle={{
+            margin: 0,
+            padding: theme.spacing.m,
+            borderRadius: theme.effects.roundedCorner4,
+            fontSize: theme.fonts.medium.fontSize,
+            ...(isDesktop && { maxWidth: '80%' }),
           }}
+          wrapLongLines={false}
         >
-          {children}
-        </code>
+          {codeString}
+        </SyntaxHighlighter>
       );
     },
     pre: ({ children }: { children?: React.ReactNode }) => (
-      <pre
+      <div
         style={{
-          backgroundColor: theme.palette.neutralLighter,
-          padding: theme.spacing.m,
-          borderRadius: theme.effects.roundedCorner4,
-          overflow: 'auto',
           marginBottom: theme.spacing.m,
-          ...(isDesktop && { maxWidth: '80%' }),
         }}
       >
         {children}
-      </pre>
+      </div>
     ),
     blockquote: ({ children }: { children?: React.ReactNode }) => (
       <blockquote
