@@ -283,7 +283,15 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             padding: theme.spacing.m,
             borderRadius: theme.effects.roundedCorner4,
             fontSize: theme.fonts.medium.fontSize,
+            fontFamily:
+              '"Courier Prime", "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", Consolas, "Courier New", monospace',
             ...(isDesktop && { maxWidth: '80%' }),
+          }}
+          codeTagProps={{
+            style: {
+              fontFamily:
+                '"Courier Prime", "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", Consolas, "Courier New", monospace',
+            },
           }}
           wrapLongLines={false}
         >
