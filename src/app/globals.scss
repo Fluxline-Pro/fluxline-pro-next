@@ -236,6 +236,11 @@ div {
     sans-serif;
 }
 
+// override the p, span, div when using react-syntax-highlighter to use the mono font for code blocks
+pre > code > span {
+  font-family: var(--font-mono) !important;
+}
+
 /* =============================================
    LINKS
    ============================================= */

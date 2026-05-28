@@ -4,12 +4,17 @@ import React, { useState, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {
+  vscDarkPlus,
+  vs,
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { UnifiedPageWrapper } from './UnifiedPageWrapper';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
 import { Callout } from '@/theme/components/callout';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
 import { IconButton } from '@fluentui/react';
 import {
   SocialLinks,
@@ -116,8 +121,9 @@ interface UnifiedContentDetailProps {
  */
 export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
-  const { theme } = useAppTheme();
+  const { theme, themeMode } = useAppTheme();
   const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
   const isMounted = useSyncExternalStore(
@@ -239,35 +245,71 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       className?: string;
     }) => {
       const isInline = !className;
+      const match = /language-(\w+)/.exec(className || '');
+      const language = match ? match[1] : 'text';
+
+      // Inline code - simple styled span
+      if (isInline) {
+        return (
+          <code
+            style={{
+              backgroundColor: theme.palette.neutralLighter,
+              color: theme.palette.themePrimary,
+              padding: `2px ${theme.spacing.s1}`,
+              borderRadius: theme.effects.roundedCorner2,
+              fontSize: '0.9em',
+              fontFamily: 'monospace',
+            }}
+          >
+            {children}
+          </code>
+        );
+      }
+
+      // Code block - use syntax highlighter
+      const codeString = String(children).replace(/\n$/, '');
+      // Determine if current theme is dark-based
+      const isDark =
+        themeMode === 'dark' ||
+        themeMode === 'high-contrast' ||
+        themeMode === 'grayscale-dark';
+
       return (
-        <code
-          style={{
-            backgroundColor: theme.palette.neutralLighter,
-            color: theme.palette.themePrimary,
-            padding: isInline ? `2px ${theme.spacing.s1}` : theme.spacing.m,
-            borderRadius: theme.effects.roundedCorner2,
-            fontSize: isInline ? '0.9em' : theme.fonts.medium.fontSize,
-            display: isInline ? 'inline' : 'block',
-            overflowX: isInline ? 'visible' : 'auto',
-            fontFamily: 'monospace',
+        <SyntaxHighlighter
+          language={language}
+          style={isDark ? vscDarkPlus : vs}
+          customStyle={{
+            margin: 0,
+            padding: theme.spacing.m,
+            borderRadius: theme.effects.roundedCorner4,
+            fontSize: theme.fonts.medium.fontSize,
+            fontFamily:
+              '"Courier Prime", "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", Consolas, "Courier New", monospace',
+            backgroundColor: isDark
+              ? theme.palette.neutralLight
+              : theme.palette.neutralLighter,
+            ...(isDesktop && { maxWidth: '900px' }),
           }}
+          codeTagProps={{
+            style: {
+              fontFamily:
+                '"Courier Prime", "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", Consolas, "Courier New", monospace',
+            },
+          }}
+          wrapLongLines={false}
         >
-          {children}
-        </code>
+          {codeString}
+        </SyntaxHighlighter>
       );
     },
     pre: ({ children }: { children?: React.ReactNode }) => (
-      <pre
+      <div
         style={{
-          backgroundColor: theme.palette.neutralLighter,
-          padding: theme.spacing.m,
-          borderRadius: theme.effects.roundedCorner4,
-          overflow: 'auto',
           marginBottom: theme.spacing.m,
         }}
       >
         {children}
-      </pre>
+      </div>
     ),
     blockquote: ({ children }: { children?: React.ReactNode }) => (
       <blockquote
@@ -367,29 +409,51 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         {children}
       </tr>
     ),
-    th: ({ children }: { children?: React.ReactNode }) => (
-      <th
-        style={{
-          padding: theme.spacing.s2,
-          textAlign: 'left',
-          fontWeight: 600,
-          color: theme.palette.themePrimary,
-          borderRight: `1px solid ${theme.palette.neutralLight}`,
-        }}
-      >
-        {children}
-      </th>
-    ),
-    td: ({ children }: { children?: React.ReactNode }) => (
-      <td
-        style={{
-          padding: theme.spacing.s2,
-          borderRight: `1px solid ${theme.palette.neutralLight}`,
-        }}
-      >
-        {children}
-      </td>
-    ),
+    th: ({ children }: { children?: React.ReactNode }) => {
+      const isDark =
+        themeMode === 'dark' ||
+        themeMode === 'high-contrast' ||
+        themeMode === 'grayscale-dark';
+
+      return (
+        <th
+          style={{
+            padding: theme.spacing.s2,
+            paddingLeft: theme.spacing.m,
+            textAlign: 'left',
+            fontWeight: 600,
+            color: theme.palette.themePrimary,
+            borderRight: `1px solid ${theme.palette.neutralLight}`,
+            backgroundColor: isDark
+              ? theme.palette.neutralQuaternaryAlt
+              : theme.palette.neutralLight,
+          }}
+        >
+          {children}
+        </th>
+      );
+    },
+    td: ({ children }: { children?: React.ReactNode }) => {
+      const isDark =
+        themeMode === 'dark' ||
+        themeMode === 'high-contrast' ||
+        themeMode === 'grayscale-dark';
+
+      return (
+        <td
+          style={{
+            padding: theme.spacing.s2,
+            paddingLeft: theme.spacing.m,
+            borderRight: `1px solid ${theme.palette.neutralLight}`,
+            backgroundColor: isDark
+              ? theme.palette.neutralLighter
+              : theme.palette.white,
+          }}
+        >
+          {children}
+        </td>
+      );
+    },
   };
 
   // Prepare image config with carousel functionality
@@ -430,7 +494,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         <div style={{ marginBottom: theme.spacing.l1 }}></div>
 
         {/* Article Header */}
-        <article style={isMobile ? { padding: `0 ${theme.spacing.m}` } : undefined}>
+        <article
+          style={isMobile ? { padding: `0 ${theme.spacing.m}` } : undefined}
+        >
           <header style={{ marginBottom: theme.spacing.l2 }}>
             <div
               style={{
