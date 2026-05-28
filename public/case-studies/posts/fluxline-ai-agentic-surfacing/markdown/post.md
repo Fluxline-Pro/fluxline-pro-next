@@ -44,10 +44,10 @@ metrics:
     change: 'from 0'
   - label: 'Schema types emitted'
     value: '6 distinct types'
-    change: 'Organization, WebSite, BlogPosting, PortfolioArticle, AboutPage, Product'
+    change: 'Organization, WebSite, BlogPosting, PortfolioArticle, AboutPage, Service'
   - label: 'AI crawler explicit allowlist'
-    value: '6 named bots'
-    change: 'GPTBot, ChatGPT-User, PerplexityBot, anthropic-ai, ClaudeBot, BingBot'
+    value: '7 named bots'
+    change: 'ChatGPT-User, CCBot, PerplexityBot, ClaudeBot, anthropic-ai, GoogleBot, BingBot'
   - label: 'Absolute URL coverage in schemas'
     value: '100%'
     change: 'from 0%'
@@ -60,6 +60,8 @@ generatedWithAI: true
 # How Fluxline Made Its Content Legible to AI
 
 > **Synopsis —** As AI-powered search and retrieval agents become primary content gatekeepers, Fluxline invested in making its site a first-class citizen of AI-readable structured data. PR #193 introduced a production-hardened JSON-LD pipeline, environment-aware crawling controls, absolute URL resolution, and a route-level schema distribution strategy — together forming a three-layer AI visibility architecture that lets language models surface Fluxline content with confidence and precision.
+
+> **Note on Code Examples —** This case study includes production code excerpts from the actual implementation. All file paths and function names reference the real codebase structure. Where examples are simplified for clarity, this is explicitly noted.
 
 ---
 
@@ -115,50 +117,70 @@ JSON-LD won decisively: it lives in a `<script type="application/ld+json">` bloc
 
 Rather than a single global schema injected into `_document.tsx`, PR #193 distributes schema types to the routes where they are semantically appropriate. Each route owns its own schema identity:
 
-| Route               | Schema Type                  | Key Properties                                                                |
-| ------------------- | ---------------------------- | ----------------------------------------------------------------------------- |
-| `/` (homepage)      | `Organization` + `WebSite`   | `name`, `url`, `logo`, `sameAs`, `potentialAction` (SearchAction)             |
-| `/blog` (index)     | `Blog`                       | `name`, `url`, `description`, `publisher`                                     |
-| `/blog/[slug]`      | `BlogPosting`                | `headline`, `author`, `datePublished`, `dateModified`, `image`, `articleBody` |
-| `/portfolio`        | `Portfolio`                  | `name`, `description`, `author`, `version`                                    |
-| `/portfolio/[slug]` | `PortfolioArticle`           | `headline`, `proficiencyLevel`, `dependencies`                                |
-| `/about`            | `AboutPage` + `Organization` | `founder`, `foundingDate`, `numberOfEmployees`                                |
-| `/services`         | `Product` + `Offer`          | `name`, `price`, `priceCurrency`, `availability`                              |
+| Route                | Schema Type                  | Key Properties                                                                                      |
+| -------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------- |
+| `/` (homepage)       | `Organization` + `WebSite`   | `name`, `url`, `logo`, `sameAs`, `hasOfferCatalog` (OfferCatalog), `potentialAction` (SearchAction) |
+| `/blog/[slug]`       | `Article`                    | `headline`, `author`, `datePublished`, `dateModified`, `image`, `keywords`, `isPartOf` (Blog)       |
+| `/portfolio/[slug]`  | `PortfolioArticle`           | `headline`, `proficiencyLevel`, `dependencies`                                                      |
+| `/case-studies/[id]` | `Article`                    | `headline`, `author`, `datePublished`, `image`, `about`, `isPartOf` (CollectionPage)                |
+| `/about`             | `AboutPage` + `Organization` | `founder`, `foundingDate`, `numberOfEmployees`                                                      |
+| `/services`          | `ItemList` (of `Service`)    | `name`, `numberOfItems`, `itemListElement`                                                          |
+| `/services/[slug]`   | `Service` + `FAQPage`        | `name`, `description`, `provider`, `serviceType`, FAQ questions/answers                             |
 
-This approach means that when an AI retrieval system ingests a Fluxline blog post, it receives not just prose but a machine-verified declaration: _this is a `BlogPosting`, written by a named `Person`, published on this `datePublished`, under this `Organization` publisher_ — context that would otherwise require the LLM to infer and potentially hallucinate.
+This approach means that when an AI retrieval system ingests a Fluxline blog post, it receives not just prose but a machine-verified declaration: _this is an `Article`, written by a named `Person`, published on this `datePublished`, under this `Organization` publisher_ — context that would otherwise require the LLM to infer and potentially hallucinate.
 
 ### Schema Implementation Pattern
 
-Every schema-bearing route follows the same composition pattern:
+Every schema-bearing route follows the same composition pattern — schemas are built inline within the route component and rendered using Next.js's `Script` component:
 
 ```tsx
-// app/blog/[slug]/page.tsx
-import { buildBlogPostingSchema } from '@/lib/schema';
-import { JsonLd } from '@/components/JsonLd';
+// Production code from src/app/blog/[slug]/page.tsx
+import Script from 'next/script';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
+import { getBlogPostBySlug } from '../lib/blogLoader';
 
-export default async function BlogPostPage({ params }) {
-  const post = await getPost(params.slug);
+export default async function BlogPostDetailPage({ params }) {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
 
-  const schema = buildBlogPostingSchema({
+  // Build Article JSON-LD schema inline
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `https://www.fluxline.pro/blog/${slug}#article`,
     headline: post.title,
-    description: post.excerpt,
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt,
-    author: post.author,
-    image: post.coverImage,
-    url: post.canonicalUrl, // always absolute — see Layer 3
-  });
+    description: post.seoMetadata.description,
+    url: `https://www.fluxline.pro/blog/${slug}`,
+    datePublished: post.publishedDate.toISOString(),
+    dateModified: (post.lastUpdated ?? post.publishedDate).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      '@id': 'https://www.fluxline.pro/#organization',
+      name: 'Fluxline Resonance Group',
+    },
+    image: post.imageUrl
+      ? `https://www.fluxline.pro${post.imageUrl}`
+      : 'https://www.fluxline.pro/images/FluxlineLogo.png',
+  };
 
   return (
     <>
-      <JsonLd schema={schema} />
-      {/* ... page content */}
+      <Script
+        id={`article-schema-${slug}`}
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(articleSchema) }}
+      />
+      <BlogPostDetailClient post={post} />
     </>
   );
 }
 ```
 
-The `JsonLd` component is a thin wrapper whose sole responsibility is safe serialization — covered in detail in the next section.
+Schemas are built directly in route components rather than abstracted into separate builder functions, keeping the schema definition co-located with the route logic. This approach improves maintainability and makes it easier to see exactly what structured data each route emits.
 
 ---
 
@@ -190,72 +212,64 @@ The browser parser sees the first `</script>` it encounters as the end of the sc
 `safeJsonLdStringify` wraps `JSON.stringify` with a targeted escape pass that neutralizes the three character sequences that are dangerous inside HTML `<script>` blocks:
 
 ```ts
-// lib/schema/safeJsonLdStringify.ts
+// Production code from src/utils/jsonLd.ts
 
 /**
- * Safely serializes a JSON-LD object for inline <script> injection.
+ * Safely serialize JSON-LD for inline script tags
+ * Escapes HTML-significant characters to prevent XSS via script tag breakout
  *
- * Escapes three sequences that are hazardous inside HTML <script> tags:
- *   - </script>  → <\/script>
- *   - <!--       → <\!--
- *   - -->        → --\>
- *
- * This is NOT full HTML encoding — it is the minimal escaping required
- * to prevent premature script tag termination and HTML comment injection.
- *
- * @param schema - Any JSON-serializable object (Schema.org graph)
- * @returns A string safe for injection into <script type="application/ld+json">
+ * @param obj - The JSON-LD schema object to serialize
+ * @returns Safely escaped JSON string for use in dangerouslySetInnerHTML
  */
-export function safeJsonLdStringify(schema: Record<string, unknown>): string {
-  return JSON.stringify(
-    schema,
-    null,
-    process.env.NODE_ENV === 'development' ? 2 : 0
-  )
-    .replace(/<\/script>/gi, '<\\/script>')
-    .replace(/<!--/g, '<\\!--')
-    .replace(/-->/g, '--\\>');
+export function safeJsonLdStringify(obj: unknown): string {
+  return JSON.stringify(obj)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
 }
 ```
 
-And the consuming `JsonLd` component:
+And its usage in route components:
 
 ```tsx
-// components/JsonLd.tsx
-import { safeJsonLdStringify } from '@/lib/schema/safeJsonLdStringify';
+// Production pattern used across all schema-bearing routes
+import Script from 'next/script';
+import { safeJsonLdStringify } from '@/utils/jsonLd';
 
-interface JsonLdProps {
-  schema: Record<string, unknown> | Record<string, unknown>[];
-}
-
-export function JsonLd({ schema }: JsonLdProps) {
-  const schemas = Array.isArray(schema) ? schema : [schema];
+export default async function Page() {
+  // Build schema object...
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    // ... schema properties
+  };
 
   return (
     <>
-      {schemas.map((s, i) => (
-        <script
-          key={i}
-          type='application/ld+json'
-          // dangerouslySetInnerHTML is intentional and safe here:
-          // safeJsonLdStringify neutralizes all </script> injection vectors
-          dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(s) }}
-        />
-      ))}
+      <Script
+        id='unique-schema-id'
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(schema) }}
+      />
+      {/* Page content... */}
     </>
   );
 }
 ```
 
-Several design decisions here are worth calling out:
+**Key implementation decisions:**
 
-1. **Pretty-printing in development** — The `process.env.NODE_ENV` branch produces indented output in dev, making schemas trivially inspectable in DevTools, while production output is minified.
-2. **Array support** — Routes that need to emit multiple schemas (e.g., `Organization` + `WebSite` on the homepage) pass an array to a single `JsonLd` component rather than mounting multiple instances.
-3. **`dangerouslySetInnerHTML` is safe here** — React's prop name is intentionally alarming, but `safeJsonLdStringify` is precisely the guard that makes this usage safe. The comment lives at the call site so future engineers understand the reasoning without hunting for it.
+1. **Inline schema building** — Schemas are constructed directly in route components rather than abstracted into separate builder functions. This keeps schema logic co-located with the route it describes, improving maintainability.
+
+2. **Next.js Script component** — Using Next.js's `Script` component ensures proper script loading behavior and SSR compatibility.
+
+3. **Unicode escaping** — The three `replace()` calls use Unicode escape sequences (`\u003c`, `\u003e`, `\u0026`) rather than backslash escaping. This prevents the literal characters `<`, `>`, and `&` from appearing in the JSON string, which could cause premature script tag termination or HTML injection.
+
+4. **`dangerouslySetInnerHTML` is safe here** — React's prop name is intentionally alarming, but `safeJsonLdStringify` is precisely the guard that makes this usage safe. The escape pass neutralizes all script-breaking sequences.
 
 ### Security Notes
 
-The three-escape approach is intentional and minimal. Full HTML encoding (e.g., converting `<` to `&lt;` everywhere) would produce invalid JSON-LD — JSON parsers in browsers and crawlers do not decode HTML entities, so over-encoding breaks the schema. The three targeted replacements are the **complete set** of sequences that can cause premature script block termination or HTML injection in conforming browsers, and nothing more.
+The three-escape Unicode approach is intentional and minimal. Full HTML encoding (e.g., converting `<` to `&lt;` everywhere) would produce invalid JSON-LD — JSON parsers in browsers and crawlers do not decode HTML entities, so over-encoding breaks the schema. The three Unicode replacements (`\u003c`, `\u003e`, `\u0026`) are the **complete set** of sequences that can cause premature script block termination or HTML injection in conforming browsers, and nothing more.
 
 ---
 
@@ -273,31 +287,57 @@ PR #193 solves both with a single environment-aware pattern applied consistently
 ### Environment Helper
 
 ```ts
-// lib/env.ts
+// Production code from src/lib/environment.ts
 
-export const isProduction =
-  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ||
-  process.env.NODE_ENV === 'production';
+export type Environment = 'dev' | 'test' | 'prod';
 
-export const siteUrl = isProduction
-  ? 'https://fluxline.pro'
-  : (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000');
+/**
+ * Gets the current environment
+ * In production build, this is determined by NEXT_PUBLIC_ENVIRONMENT at build time
+ */
+export function getEnvironment(): Environment {
+  const env = process.env.NEXT_PUBLIC_ENVIRONMENT?.toLowerCase();
+
+  if (env === 'dev' || env === 'development') {
+    return 'dev';
+  }
+
+  if (env === 'test') {
+    return 'test';
+  }
+
+  return 'prod';
+}
+
+/**
+ * Checks if the current environment is production
+ */
+export function isProduction(
+  environment: Environment = getEnvironment()
+): boolean {
+  return environment === 'prod';
+}
 ```
 
-This helper is the single source of truth for both the crawl-permission decision and the base URL used in absolute URL construction. Centralizing it here means changing the production domain is a one-line edit that propagates automatically to robots, sitemap, and every schema's `url` property.
+This helper is the single source of truth for both the crawl-permission decision and environment-based behavior. The normalized environment types (`'dev'` | `'test'` | `'prod'`) are used consistently across robots.txt, sitemap generation, and metadata configuration.
 
 ### `robots.txt` — Environment-Conditional Disallow
 
 ```ts
-// app/robots.ts  (Next.js 13+ Metadata API)
+// Production code from src/app/robots.ts
 import { MetadataRoute } from 'next';
-import { isProduction, siteUrl } from '@/lib/env';
+import { isProduction } from '@/lib/environment';
+
+export const dynamic = 'force-static';
+
+const SITE_URL = process.env.SITE_URL || 'https://www.fluxline.pro';
+const isProd = isProduction();
 
 export default function robots(): MetadataRoute.Robots {
-  if (!isProduction) {
+  if (!isProd) {
     // Block all crawlers on non-production environments
     return {
-      rules: { userAgent: '*', disallow: '/' },
+      rules: [{ userAgent: '*', disallow: '/' }],
     };
   }
 
@@ -306,17 +346,19 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/_next/'],
+        disallow: ['/api/'],
       },
-      // Explicitly welcome AI crawlers that respect robots.txt
+      // Explicitly allow major AI crawlers
       { userAgent: 'GPTBot', allow: '/' },
       { userAgent: 'ChatGPT-User', allow: '/' },
+      { userAgent: 'CCBot', allow: '/' },
       { userAgent: 'PerplexityBot', allow: '/' },
-      { userAgent: 'anthropic-ai', allow: '/' },
       { userAgent: 'ClaudeBot', allow: '/' },
-      { userAgent: 'BingBot', allow: '/' },
+      { userAgent: 'anthropic-ai', allow: '/' },
+      { userAgent: 'Googlebot', allow: '/' },
+      { userAgent: 'Bingbot', allow: '/' },
     ],
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
 ```
@@ -324,70 +366,89 @@ export default function robots(): MetadataRoute.Robots {
 ### `sitemap.xml` — Dynamically Generated, Production-Only
 
 ```ts
-// app/sitemap.ts
+// Production code from src/app/sitemap.ts
 import { MetadataRoute } from 'next';
-import { isProduction, siteUrl } from '@/lib/env';
-import { getAllPosts } from '@/lib/content/posts';
-import { getAllDocs } from '@/lib/content/docs';
+import { getAllBlogPostSlugs } from './blog/lib/blogLoader';
+import { getAllPortfolioSlugs } from './portfolio/lib/portfolioLoader';
+import { getAllCaseStudySlugs } from './case-studies/lib/caseStudyLoader';
+import { isProduction } from '@/lib/environment';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  if (!isProduction) return []; // Never emit a sitemap on non-production
+export const dynamic = 'force-static';
 
-  const posts = await getAllPosts();
-  const docs = await getAllDocs();
+const SITE_URL = process.env.SITE_URL || 'https://www.fluxline.pro';
+const isProd = isProduction();
+const BUILD_DATE = new Date().toISOString();
 
+export default function sitemap(): MetadataRoute.Sitemap {
+  if (!isProd) {
+    // Return minimal sitemap for non-prod to prevent AI indexing
+    return [
+      {
+        url: SITE_URL,
+        lastModified: BUILD_DATE,
+        changeFrequency: 'never',
+        priority: 0,
+      },
+    ];
+  }
+
+  // Static core pages
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: siteUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
+      url: SITE_URL,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'monthly',
       priority: 1.0,
     },
     {
-      url: `${siteUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
+      url: `${SITE_URL}/about`,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: `${siteUrl}/portfolio`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/services`,
+      lastModified: BUILD_DATE,
       changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${siteUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 1.0,
     },
   ];
 
-  const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${siteUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt),
-    changeFrequency: 'weekly',
+  // Dynamic content routes
+  const blogSlugs = getAllBlogPostSlugs();
+  const blogRoutes: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
+    url: `${SITE_URL}/blog/${slug}`,
+    lastModified: BUILD_DATE,
+    changeFrequency: 'monthly',
     priority: 0.8,
   }));
 
-  const portfolioRoutes: MetadataRoute.Sitemap = docs.map((doc) => ({
-    url: `${siteUrl}/portfolio/${doc.slug}`,
-    lastModified: new Date(doc.updatedAt),
-    changeFrequency: 'weekly',
-    priority: 0.6,
+  const portfolioSlugs = getAllPortfolioSlugs();
+  const portfolioRoutes: MetadataRoute.Sitemap = portfolioSlugs.map((slug) => ({
+    url: `${SITE_URL}/portfolio/${slug}`,
+    lastModified: BUILD_DATE,
+    changeFrequency: 'monthly',
+    priority: 0.8,
   }));
 
-  return [...staticRoutes, ...postRoutes, ...portfolioRoutes];
+  const caseStudySlugs = getAllCaseStudySlugs();
+  const caseStudyRoutes: MetadataRoute.Sitemap = caseStudySlugs.map((id) => ({
+    url: `${SITE_URL}/case-studies/${id}`,
+    lastModified: BUILD_DATE,
+    changeFrequency: 'yearly',
+    priority: 0.8,
+  }));
+
+  return [
+    ...staticRoutes,
+    ...blogRoutes,
+    ...portfolioRoutes,
+    ...caseStudyRoutes,
+  ];
 }
 ```
 
-Key decisions: `priority` is meaningful (not uniform 1.0 noise), `changeFrequency` reflects actual update cadence, and the empty return on non-production environments is a valid spec-compliant response that avoids 404 log noise.
+Key decisions: `priority` is meaningful (not uniform 1.0 noise), `changeFrequency` reflects actual update cadence, and the minimal sitemap on non-production environments prevents accidental indexing of staging content.
 
 ---
 
@@ -399,102 +460,71 @@ Relative URLs are a reasonable optimization for human browsers, which fill in th
 
 This matters practically because the `url` property in `Organization`, `BlogPosting`, `TechArticle`, and other schema types is one of the primary signals retrieval systems use to construct citations. A citation to `/blog/my-post` is unresolvable; `https://fluxline.pro/blog/my-post` is a first-class web resource.
 
-### Absolute URL Helpers
+### Absolute URL Implementation
+
+Absolute URLs are constructed inline within schema objects rather than through dedicated helper functions. The pattern ensures all schema `url` properties are fully qualified:
 
 ```ts
-// lib/url.ts
-import { siteUrl } from './env';
+// Inline absolute URL pattern used across schema objects
+const SITE_BASE = 'https://www.fluxline.pro';
 
-/**
- * Ensures a URL is absolute. Idempotent — passing an already-absolute
- * URL returns it unchanged.
- */
-export function absoluteUrl(path: string): string {
-  if (path.startsWith('http://') || path.startsWith('https://')) {
-    return path;
-  }
-  return `${siteUrl}${path.startsWith('/') ? '' : '/'}${path}`;
-}
-
-export function canonicalUrl(
-  type: 'blog' | 'portfolio' | 'page',
-  slug: string
-): string {
-  const pathMap = {
-    blog: `/blog/${slug}`,
-    docs: `/portfolio/${slug}`,
-    page: `/${slug}`,
-  };
-  return absoluteUrl(pathMap[type]);
-}
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  // Absolute @id and url properties
+  '@id': `${SITE_BASE}/blog/${slug}#article`,
+  url: `${SITE_BASE}/blog/${slug}`,
+  // Image URLs also absolute
+  image: post.imageUrl
+    ? `${SITE_BASE}${post.imageUrl}` // Site-relative path → absolute
+    : `${SITE_BASE}/images/FluxlineLogo.png`, // Already has leading slash
+  // ... rest of schema
+};
 ```
 
-Every schema builder unconditionally applies `absoluteUrl` before emitting:
+**Key pattern:** All `url`, `@id`, and `image` properties in schemas are constructed as absolute URLs by prefixing with the site base. This ensures AI retrieval systems have unambiguous, resolvable URLs for citations and further crawling.
+
+For site-relative image paths (e.g., `/blog/posts/slug/images/cover.jpg`), the pattern conditionally prefixes:
 
 ```ts
-// lib/schema/buildBlogPostingSchema.ts
-import { absoluteUrl } from '@/lib/url';
-
-export function buildBlogPostingSchema(params: BlogPostingParams) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: params.headline,
-    description: params.description,
-    url: absoluteUrl(params.url), // ← always absolute
-    image: params.image ? absoluteUrl(params.image) : undefined,
-    datePublished: params.datePublished,
-    dateModified: params.dateModified ?? params.datePublished,
-    author: {
-      '@type': 'Person',
-      name: params.author.name,
-      url: params.author.url ? absoluteUrl(params.author.url) : undefined,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Fluxline',
-      url: absoluteUrl('/'),
-      logo: {
-        '@type': 'ImageObject',
-        url: absoluteUrl('/images/fluxline-logo.png'),
-      },
-    },
-  };
-}
+// Conditional absolute URL construction
+image: post.imageUrl
+  ? `https://www.fluxline.pro${post.imageUrl}` // Prefix site-relative path
+  : 'https://www.fluxline.pro/images/FluxlineLogo.png'; // Full URL fallback
 ```
 
-The `absoluteUrl` helper is idempotent, so content from an external CMS that already includes full URLs is handled safely without double-prefixing.
+This pattern is repeated consistently across all schema-bearing routes (blog posts, portfolio projects, case studies, services) to ensure 100% absolute URL coverage.
 
 ---
 
 ## File Structure
 
 ```
-fluxline/
-├── app/
-│   ├── robots.ts               # Environment-conditional crawl rules
-│   ├── sitemap.ts              # Dynamic, production-only sitemap
-│   ├── page.tsx                # Organization + WebSite schema
-│   ├── about/page.tsx          # AboutPage + Organization schema
-│   ├── pricing/page.tsx        # Product + Offer schema
-│   ├── blog/
-│   │   ├── page.tsx            # Blog schema
-│   │   └── [slug]/page.tsx     # BlogPosting schema
-│   └── portfolio/
-│       ├── page.tsx            # PortfolioArticle (index) schema
-│       └── [slug]/page.tsx     # PortfolioArticle schema
-├── components/
-│   └── JsonLd.tsx              # Safe JSON-LD renderer
-└── lib/
-    ├── env.ts                  # isProduction, siteUrl
-    ├── url.ts                  # absoluteUrl, canonicalUrl
-    └── schema/
-        ├── safeJsonLdStringify.ts
-        ├── buildOrganizationSchema.ts
-        ├── buildWebSiteSchema.ts
-        ├── buildBlogSchema.ts
-        ├── buildBlogPostingSchema.ts
-        └── buildTechArticleSchema.ts
+fluxline-pro-next/
+├── src/
+│   ├── app/
+│   │   ├── robots.ts               # Environment-conditional crawl rules
+│   │   ├── sitemap.ts              # Dynamic, production-only sitemap
+│   │   ├── layout.tsx              # Organization + WebSite schema
+│   │   ├── about/layout.tsx        # AboutPage schema
+│   │   ├── services/page.tsx       # Service catalog schema
+│   │   ├── blog/
+│   │   │   ├── [slug]/page.tsx     # Article schema (inline)
+│   │   │   └── lib/blogLoader.ts   # Content loader
+│   │   ├── portfolio/
+│   │   │   ├── [slug]/page.tsx     # Project schema (inline)
+│   │   │   └── lib/portfolioLoader.ts
+│   │   └── case-studies/
+│   │       ├── [id]/page.tsx       # Case study schema (inline)
+│   │       └── lib/caseStudyLoader.ts
+│   ├── lib/
+│   │   └── environment.ts          # getEnvironment(), isProduction()
+│   └── utils/
+│       └── jsonLd.ts               # safeJsonLdStringify()
+└── public/
+    ├── blog/posts/                 # Markdown content
+    ├── portfolio/posts/
+    └── case-studies/posts/
 ```
 
 ---
@@ -533,7 +563,7 @@ Think of JSON-LD schemas not as SEO decoration but as a **typed API contract** b
 
 ### 2. `dangerouslySetInnerHTML` requires a documented safety argument
 
-Using React's `dangerouslySetInnerHTML` for JSON-LD output is correct but alarming to reviewers. The right response is not to avoid it but to **document the safety argument at the call site** — specifically, that `safeJsonLdStringify` provides the necessary escape pass.
+Using `dangerouslySetInnerHTML` with Next.js `Script` component for JSON-LD output is correct but alarming to reviewers. The right response is not to avoid it but to **document the safety argument** — specifically, that `safeJsonLdStringify` provides the necessary escape pass to prevent XSS via script tag breakout.
 
 ### 3. Environment-awareness is not optional at scale
 
@@ -541,7 +571,7 @@ The `isProduction` gate on crawl permissions feels like paranoia until the first
 
 ### 4. Absolute URLs are cheap insurance
 
-Switching from relative to absolute URLs in schemas is a small diff but a category-changing correctness improvement for machine consumers. The `absoluteUrl` idempotent helper eliminates an entire class of retrieval failures.
+Switching from relative to absolute URLs in schemas is a small diff but a category-changing correctness improvement for machine consumers. The inline absolute URL pattern (prefixing all schema `url` properties with `https://www.fluxline.pro`) eliminates an entire class of retrieval failures.
 
 ### 5. Priority and `changeFrequency` in sitemaps should tell the truth
 
