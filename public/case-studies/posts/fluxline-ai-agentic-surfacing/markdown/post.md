@@ -59,7 +59,7 @@ generatedWithAI: true
 
 # How Fluxline Made Its Content Legible to AI
 
-> **TL;DR —** As AI-powered search and retrieval agents become primary content gatekeepers, Fluxline invested in making its site a first-class citizen of AI-readable structured data. PR #193 introduced a production-hardened JSON-LD pipeline, environment-aware crawling controls, absolute URL resolution, and a route-level schema distribution strategy — together forming a three-layer AI visibility architecture that lets language models surface Fluxline content with confidence and precision.
+> **Synopsis —** As AI-powered search and retrieval agents become primary content gatekeepers, Fluxline invested in making its site a first-class citizen of AI-readable structured data. PR #193 introduced a production-hardened JSON-LD pipeline, environment-aware crawling controls, absolute URL resolution, and a route-level schema distribution strategy — together forming a three-layer AI visibility architecture that lets language models surface Fluxline content with confidence and precision.
 
 ---
 
