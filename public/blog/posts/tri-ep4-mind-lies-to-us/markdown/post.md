@@ -36,7 +36,7 @@ seoKeywords:
 generatedWithAI: false
 ---
 
-# Episode 6: The Mind Lies to Us
+# Episode 4 (006): The Mind Lies to Us
 
 _A Comprehensive Companion Article to Episode 6 of The Resonant Identity_
 
@@ -339,7 +339,7 @@ In the next companion article, we explore how to work with the subconscious dire
 
 ## Related Resources
 
-- [Listen to Episode 6 of The Resonant Identity](/podcasts/theresonantid)
+- [Listen to Episode 006 of The Resonant Identity](/podcasts/theresonantid)
 - [The Resonance Core Framework](/services/resonance-core)
 - [Episode 1 Companion — Inner Alignment](/blog/tri-ep1-inner-alignment)
 - [Episode 2 Companion — Distorted Reality](/blog/tri-ep2-distorted-reality)
