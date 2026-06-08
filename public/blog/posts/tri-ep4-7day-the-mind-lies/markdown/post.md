@@ -15,7 +15,7 @@ tags:
     'Resonance Core Framework',
     'Truth & Distortion',
   ]
-imageUrl: '/blog/posts/tri-ep4-7day-the-mind-lies-to-us/images/the-mind-lies-to-us.jpg'
+imageUrl: '/blog/posts/tri-ep4-7day-the-mind-lies/images/the-mind-lies-to-us.jpg'
 imageAlt: 'Episode 4 (006): 7‑Day Challenge — The Mind Lies to Us'
 featured: false
 seoTitle: 'Episode 4: 7‑Day Challenge — The Mind Lies to Us | The Resonant Identity'
@@ -37,7 +37,7 @@ generatedWithAI: true
 
 # Episode 4: 7‑Day Challenge — The Mind Lies to Us
 
-🎙️ **Podcast‑Ready 7‑Day Challenge: “The Mind Lies to Us”**
+**Podcast‑Ready 7‑Day Challenge: “The Mind Lies to Us”**
 
 > “Alright — if this episode resonated with you, I want to leave you with a simple 7‑day practice.  
 > It’s not heavy. It’s not homework.  
@@ -135,7 +135,7 @@ That’s the architecture of coherence.
 
 ---
 
-🎙️ **Closing Line**
+## 🎙️ Closing Line
 
 > “This challenge isn’t about fixing your mind.  
 > It’s about reclaiming authorship.  

@@ -16,7 +16,7 @@ tags:
     'Resonance Core Framework',
     'The Triad',
   ]
-imageUrl: '/blog/posts/tri-ep4-the-mind-lies-to-us/images/the-mind-lies-to-us.jpg'
+imageUrl: '/blog/posts/tri-ep4-mind-lies-to-us/images/the-mind-lies-to-us.jpg'
 imageAlt: 'Episode 4: The Mind Lies to Us — The Resonant Identity'
 featured: true
 seoTitle: 'Episode 4: The Mind Lies to Us | The Resonant Identity'
@@ -33,7 +33,7 @@ seoKeywords:
     'somatic cues',
     'resonance core framework',
   ]
-generatedWithAI: false
+generatedWithAI: true
 ---
 
 # Episode 4 (006): The Mind Lies to Us
@@ -66,11 +66,11 @@ That’s the heart of this episode.
 The brain evolved for **survival, not accuracy**.  
 When data is missing, it fills the gaps with:
 
-- assumptions  
-- projections  
-- catastrophizing  
-- emotional reasoning  
-- stories drawn from your past identity  
+- assumptions
+- projections
+- catastrophizing
+- emotional reasoning
+- stories drawn from your past identity
 
 These stories feel real because they are paired with **somatic cues** and **emotional intensity**.  
 And intensity often masquerades as truth.
@@ -101,13 +101,14 @@ This creates three categories of mental lies.
 
 ## The Three Categories of Mental Lies
 
-### 1. Distortion  
+### 1. Distortion
+
 Psychology calls these **cognitive distortions**:
 
-- Catastrophizing  
-- Black‑and‑white thinking  
-- Personalization  
-- Emotional reasoning  
+- Catastrophizing
+- Black‑and‑white thinking
+- Personalization
+- Emotional reasoning
 
 Distortion compresses complexity into simple, emotionally charged stories:
 
@@ -120,14 +121,15 @@ These stories feel true because the body and emotions match them — not because
 
 ---
 
-### 2. Suppression  
+### 2. Suppression
+
 Suppression hides the truth to maintain internal stability.
 
 When the mind forms a distorted narrative, it suppresses:
 
-- nuance  
-- context  
-- the actual facts of the situation  
+- nuance
+- context
+- the actual facts of the situation
 
 Example from the episode:
 
@@ -139,15 +141,16 @@ Suppression pushes the truth out of view and amplifies the distortion until it b
 
 This happens in three steps:
 
-1. **Emotional Backlog** — shame, fear, guilt  
-2. **Somatic Tension** — chest tightening, tunnel vision, shallow breath  
-3. **Distorted Interpretation** — the story that “explains” the sensations  
+1. **Emotional Backlog** — shame, fear, guilt
+2. **Somatic Tension** — chest tightening, tunnel vision, shallow breath
+3. **Distorted Interpretation** — the story that “explains” the sensations
 
 The louder the body becomes, the more convincing the distortion feels.
 
 ---
 
-### 3. Confirmation Bias  
+### 3. Confirmation Bias
+
 Once the distortion takes hold, the mind begins searching for evidence to support it.
 
 Even if the evidence is wrong.  
@@ -155,9 +158,9 @@ Even if the conclusion is harmful.
 
 Confirmation bias creates:
 
-- post‑hoc rationalizations  
-- selective memory  
-- emotional relief when the distortion “makes sense”  
+- post‑hoc rationalizations
+- selective memory
+- emotional relief when the distortion “makes sense”
 
 And that relief releases **dopamine**, which reinforces the lie.
 
@@ -181,10 +184,10 @@ Workers (your subconscious processes) recording everything.
 
 The subconscious:
 
-- is always on  
-- records everything  
-- cannot distinguish truth from distortion  
-- stores every repeated self‑judgment as “fact”  
+- is always on
+- records everything
+- cannot distinguish truth from distortion
+- stores every repeated self‑judgment as “fact”
 
 So when you tell yourself:
 
@@ -205,21 +208,24 @@ It has data — just not accurate data.
 
 To understand how distortion forms, you must understand the **TRI Triad**:
 
-### **Ethos — The Body**  
+### **Ethos — The Body**
+
 The first gate of experience.  
 Raw somatic data: chest tightening, breath changes, tension, heat.
 
-### **Pathos — The Emotion**  
+### **Pathos — The Emotion**
+
 The interpretation of the body’s cues: fear, shame, anxiety, urgency.
 
-### **Logos — The Narrative**  
+### **Logos — The Narrative**
+
 The story the mind creates to explain the body and emotion.
 
 Example from the episode:
 
-- **Body:** chest tightens when you remember a test  
-- **Emotion:** anxiety  
-- **Narrative:** “I’m going to fail. I always do this. I can’t get it right.”  
+- **Body:** chest tightens when you remember a test
+- **Emotion:** anxiety
+- **Narrative:** “I’m going to fail. I always do this. I can’t get it right.”
 
 The narrative is almost always the distorted part — because it is based on incomplete data.
 
@@ -232,11 +238,11 @@ The mind does.
 
 Distortion feels true because:
 
-- the body reacts  
-- the emotions intensify  
-- the subconscious pulls matching memories  
-- the mind rationalizes the story  
-- dopamine rewards the “resolution”  
+- the body reacts
+- the emotions intensify
+- the subconscious pulls matching memories
+- the mind rationalizes the story
+- dopamine rewards the “resolution”
 
 Intensity becomes mistaken for truth.  
 Familiarity becomes mistaken for identity.
@@ -249,19 +255,19 @@ This is how identity erosion happens.
 
 When you align with distortion, you reinforce:
 
-- old narratives  
-- outdated identities  
-- survival‑based interpretations  
+- old narratives
+- outdated identities
+- survival‑based interpretations
 
 This erodes identity.
 
 Identity coherence requires:
 
-- truth  
-- nuance  
-- somatic awareness  
-- emotional honesty  
-- narrative correction  
+- truth
+- nuance
+- somatic awareness
+- emotional honesty
+- narrative correction
 
 You cannot evolve into who you are becoming if you keep reinforcing who you used to be.
 
@@ -275,12 +281,12 @@ This is the **Window of Choice**.
 
 In that window, you can:
 
-- pause  
-- ground  
-- notice the cue  
-- name the emotion  
-- question the narrative  
-- choose truth over distortion  
+- pause
+- ground
+- notice the cue
+- name the emotion
+- question the narrative
+- choose truth over distortion
 
 The more you practice this, the wider the window becomes.
 
@@ -290,31 +296,37 @@ The more you practice this, the wider the window becomes.
 
 Here is the process introduced in the episode:
 
-### **1. Ground the Body**  
+### **1. Ground the Body**
+
 Slow exhale.  
 Shoulders soften.  
 Attention widens.
 
-### **2. Name the Emotion**  
+### **2. Name the Emotion**
+
 “I feel anxious.”  
 “I feel ashamed.”  
 “I feel overwhelmed.”
 
-### **3. Identify the Narrative**  
+### **3. Identify the Narrative**
+
 “What story is my mind telling me right now?”
 
-### **4. Check for Distortion**  
+### **4. Check for Distortion**
+
 Is this story:
 
-- catastrophic?  
-- black‑and‑white?  
-- personalized?  
-- emotionally charged?  
+- catastrophic?
+- black‑and‑white?
+- personalized?
+- emotionally charged?
 
-### **5. Find the Truth**  
+### **5. Find the Truth**
+
 What is actually happening?
 
-### **6. Re‑align with Identity**  
+### **6. Re‑align with Identity**
+
 Who am I becoming?  
 What is true for that version of me?
 
