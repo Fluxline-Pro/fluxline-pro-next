@@ -1,6 +1,6 @@
 ---
-title: 'Episode 6: The Mind Lies to Us'
-excerpt: 'A comprehensive companion guide to Episode 6 of The Resonant Identity podcast. Explore why the mind lies, how distortion forms, the role of the subconscious “Vast Unknown,” and how to reclaim identity coherence through the TRI Triad.'
+title: 'Episode 4: The Mind Lies to Us'
+excerpt: 'A comprehensive companion guide to Episode 4 (006) of The Resonant Identity podcast. Explore why the mind lies, how distortion forms, the role of the subconscious “Vast Unknown,” and how to reclaim identity coherence through the TRI Triad.'
 author: 'The Resonant Identity'
 publishedDate: '2026-06-08'
 category: 'Resonant Identity'
@@ -16,11 +16,11 @@ tags:
     'Resonance Core Framework',
     'The Triad',
   ]
-imageUrl: '/images/TheResonantIdentity_Logo.png'
-imageAlt: 'Episode 6: The Mind Lies to Us — The Resonant Identity'
+imageUrl: '/blog/posts/tri-ep4-the-mind-lies-to-us/images/the-mind-lies-to-us.jpg'
+imageAlt: 'Episode 4: The Mind Lies to Us — The Resonant Identity'
 featured: true
-seoTitle: 'Episode 6: The Mind Lies to Us | The Resonant Identity'
-seoDescription: 'A companion article to Episode 6 of The Resonant Identity podcast. Learn why the mind lies, how distortion forms, and how to restore identity coherence using the Resonance Core Framework.'
+seoTitle: 'Episode 4: The Mind Lies to Us | The Resonant Identity'
+seoDescription: 'A companion article to Episode 4 (006) of The Resonant Identity podcast. Learn why the mind lies, how distortion forms, and how to restore identity coherence using the Resonance Core Framework.'
 seoKeywords:
   [
     'mind lies',
@@ -38,7 +38,7 @@ generatedWithAI: false
 
 # Episode 4 (006): The Mind Lies to Us
 
-_A Comprehensive Companion Article to Episode 6 of The Resonant Identity_
+_A Comprehensive Companion Article to Episode 4 of The Resonant Identity_
 
 ---
 
@@ -57,7 +57,7 @@ This article helps you understand why the mind lies, how distortion forms, how t
 
 ---
 
-## The Core Insight from Episode 6
+## The Core Insight from Episode 4
 
 Your mind would rather give you a **wrong answer** than give you **no answer at all**.
 

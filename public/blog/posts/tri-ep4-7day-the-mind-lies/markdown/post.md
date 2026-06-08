@@ -1,5 +1,5 @@
 ---
-title: 'Episode 6: 7‑Day Challenge — The Mind Lies to Us'
+title: 'Episode 4: 7‑Day Challenge — The Mind Lies to Us'
 excerpt: 'A reflective 7‑day identity challenge from The Resonant Identity podcast. Learn to notice, name, and rewrite the stories your mind tells — transforming distortion into truth and resonance.'
 author: 'The Resonant Identity'
 publishedDate: '2026-06-08'
@@ -15,10 +15,10 @@ tags:
     'Resonance Core Framework',
     'Truth & Distortion',
   ]
-imageUrl: '/blog/posts/tri-ep6-7day-the-mind-lies-to-us/images/the-mind-lies-to-us.jpg'
-imageAlt: 'Episode 6: 7‑Day Challenge — The Mind Lies to Us'
+imageUrl: '/blog/posts/tri-ep4-7day-the-mind-lies-to-us/images/the-mind-lies-to-us.jpg'
+imageAlt: 'Episode 4 (006): 7‑Day Challenge — The Mind Lies to Us'
 featured: false
-seoTitle: 'Episode 6: 7‑Day Challenge — The Mind Lies to Us | The Resonant Identity'
+seoTitle: 'Episode 4: 7‑Day Challenge — The Mind Lies to Us | The Resonant Identity'
 seoDescription: 'A 7‑day identity challenge companion to Episode 6 of The Resonant Identity podcast. Practice noticing, naming, and rewriting the stories your mind tells to restore coherence and truth.'
 seoKeywords:
   [
@@ -35,7 +35,7 @@ seoKeywords:
 generatedWithAI: true
 ---
 
-# Episode 6: 7‑Day Challenge — The Mind Lies to Us
+# Episode 4: 7‑Day Challenge — The Mind Lies to Us
 
 🎙️ **Podcast‑Ready 7‑Day Challenge: “The Mind Lies to Us”**
 
