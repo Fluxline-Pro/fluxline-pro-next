@@ -156,7 +156,7 @@ This is how identity evolves from reaction to resonance.
 
 - [Listen to Episode 006 of The Resonant Identity](/podcasts/theresonantid)
 - [Episode 4 Companion Article — The Mind Lies to Us](/blog/tri-ep4-the-mind-lies-to-us)
-- [The Resonance Core Framework](/blog/resonance-core-framework)
+- [The Resonance Core Framework](/services/resonance-core)
 - [The Resonant Identity Community on Facebook](https://www.facebook.com/groups/theresonantid)
 
 ---
