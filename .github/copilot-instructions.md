@@ -9,7 +9,7 @@ This repository contains the **Fluxline Resonance Group's** web platform. It is 
 ### Package Manager & Node
 
 - **Use `yarn` exclusively** - No npm, pnpm, or bun
-- **Node.js >= 20.0.0** required
+- **Node.js >= 20.18.0** required
 - Commands: `yarn dev`, `yarn build`, `yarn start`
 
 ### Static Export Constraints (CRITICAL)
@@ -41,7 +41,8 @@ This repository contains the **Fluxline Resonance Group's** web platform. It is 
 
 - Shared components → `src/components/`
 - Custom hooks → `src/hooks/`
-- Utilities → `src/lib/`
+- Environment & API helpers → `src/lib/` (server-side or environment-specific: `environment.ts`, `getApiUrl.ts`, etc.)
+- Isomorphic utilities → `src/utils/` (rendering, data helpers: `jsonLd.ts`, `tag-utils.ts`, etc.)
 - Theme components → `src/theme/components/`
 - Page components → `src/app/[route]/`
 
@@ -265,7 +266,8 @@ src/theme/                  # Fluent UI theme system
   ├── hooks/                # useAppTheme, useMediaQuery, etc.
   └── contexts/             # ThemeProvider, ThemeOverrideContext
 src/animations/             # Framer Motion animations
-src/utils/                  # Utility functions
+src/lib/                    # Environment & API helpers (server-side / env-specific)
+src/utils/                  # Isomorphic utility functions (client + server safe)
 src/store/                  # Zustand state management
 public/                     # Static assets
   ├── blog/posts/           # Blog Markdown content
@@ -315,13 +317,13 @@ azure/                      # Azure deployment documentation
 
 - **Use the `yarn` package manager exclusively** for all dependency management and scripts
   - Do not use `npm`, `pnpm`, or `bun` for installs, scripts, or lockfiles
-  - Current Node.js requirement: **>= 20.0.0** (specified in `package.json`)
+  - Current Node.js requirement: **>= 20.18.0** (specified in `package.json`)
   - Ensure all packages (Next.js, React, TypeScript, Tailwind, etc.) are kept up to date
   - If a version upgrade is required for any packages, do so under a separate feature branch request for full testing
 
 ### Node & Environment
 
-- The project uses **Node.js >= 20.0.0**
+- The project uses **Node.js >= 20.18.0**
 - `.nvmrc` file should be maintained if Node version needs to be pinned for consistency
 - Environment variables should be configured in `.env.local` (see `.env.example` for reference)
 - Development server: `yarn dev`
@@ -400,7 +402,7 @@ const _isProd = isProduction();
 - **Favor reusing existing components and Next.js patterns**:
   - Use Next.js built-in components: `Image`, `Link`, `Font`
   - Use `ContentListingPage` for all content listing views (Blog, Portfolio, Press Release, Case Studies)
-  - Use `PageWrapper` component for consistent page layouts
+  - Use `UnifiedPageWrapper` component for consistent page layouts
   - Create reusable layout components in `src/theme/components/layout/`
   - Implement consistent page layouts using `layout.tsx` files
   - Use Server Components for static content, Client Components for interactivity
@@ -420,14 +422,14 @@ const _isProd = isProduction();
 
   ```tsx
   // In your page.tsx file
-  import { PageWrapper } from '@/components';
+  import { UnifiedPageWrapper } from '@/components';
 
   export default function AboutPage() {
     return (
-      <PageWrapper>
+      <UnifiedPageWrapper>
         <h1>About Us</h1>
         <p>Your content here...</p>
-      </PageWrapper>
+      </UnifiedPageWrapper>
     );
   }
   ```
@@ -467,7 +469,7 @@ const _isProd = isProduction();
   - Dynamic routes with `[param]` directories
   - Route groups with `(group)` directories when needed
   - Nested layouts for consistent page structure
-  - Include image and routing within the PageWrapper.tsx file so images will appear based on route taken
+  - Include image and routing within the `UnifiedPageWrapper.tsx` file so images will appear based on route taken
 - **Content management with Server/Client Component pattern**:
   - **Server Components** for data loading from Markdown files or file system
   - **Client Components** for user interactions and filtering
