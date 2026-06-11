@@ -12,6 +12,14 @@ This repository contains the **Fluxline Resonance Group's** web platform. It is 
 - **Node.js >= 20.0.0** required
 - Commands: `yarn dev`, `yarn build`, `yarn start`
 
+### Static Export Constraints (CRITICAL)
+
+- This repository uses `output: 'export'` in `next.config.ts`
+- **Do NOT use** Server Actions, `/app/api` route handlers, middleware, ISR, or request-time/dynamic rendering patterns
+- Keep pages static-export compatible (build-time rendering + client-side interactivity)
+- All backend logic must live in Azure Functions under `/api`
+- Forms and client mutations must call Azure Function endpoints (for example `/api/lead`, `/api/contact`)
+
 ### Styling Priority (Strict Order)
 
 1. **Tailwind CSS** - Layout, spacing, all utilities
@@ -40,7 +48,7 @@ This repository contains the **Fluxline Resonance Group's** web platform. It is 
 
 - Use React Server Components for server-side data fetching
 - Use Zustand for client-side state
-- Use Server Actions for form handling and mutations
+- Use Azure Function endpoints for form handling and mutations
 - Use SWR or TanStack Query for client-side data fetching when needed
 
 ### SEO Requirements
@@ -290,8 +298,8 @@ azure/                      # Azure deployment documentation
 - **Always use Next.js App Router conventions**
   - App Router directory structure (`/app` directory)
   - Server Components by default, Client Components when needed
-  - File-based routing with `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`
-  - API routes in `/app/api` directory
+  - File-based routing with `page.tsx`, `layout.tsx`, and `error.tsx` for static-export routes
+  - Backend endpoints are Azure Functions in `/api` (not `/app/api`)
   - Leverage Next.js built-in optimizations (Image, Font, Bundle optimization)
 
 ### Theme & Design System
@@ -430,7 +438,7 @@ const _isProd = isProduction();
   - React state hooks (`useState`, `useReducer`) for local component state
   - Context API for shared client-side state
   - Consider Zustand or similar for complex client-side state management
-  - Server Actions for form handling and mutations
+  - Azure Function endpoints for form handling and mutations
 - **Data fetching patterns**:
   - Server Components for initial data loading
   - `fetch` API with Next.js caching for server-side requests
@@ -439,14 +447,11 @@ const _isProd = isProduction();
 
 ### API Routes & Backend Integration
 
-- **Use Next.js API Routes for backend functionality**
-  - API routes in `/app/api` directory
+- **Use Azure Functions for backend functionality**
+  - Backend endpoints live in `/api` (Azure Functions), not `/app/api`
   - Follow RESTful conventions and proper HTTP status codes
-  - Implement proper error handling and validation
-  - Use TypeScript for request/response types
-- **Future Azure integration**:
-  - API routes can interface with Azure services
-  - Consider Azure Functions for complex backend logic
+  - Implement proper error handling and validation in the function handlers
+  - Forms and client mutations should POST to function endpoints
   - Use Azure Storage for file uploads and media
 - **Environment variables for API configuration**:
   - `NEXT_PUBLIC_API_BASE_URL` (for client-side API calls)
@@ -967,15 +972,15 @@ generatedWithAI: true # If applicable
   - Keep Client Components small and focused
 - **Optimize performance**:
   - Use Next.js `Image` component for all images
-  - Implement proper loading states with `loading.tsx`
-  - Use `Suspense` boundaries for progressive loading
+  - Implement client-side loading states for interactive data requests
+  - Prefer build-time data loading and static pre-rendering for route content
   - Optimize bundle size with dynamic imports when needed
 
 ### TypeScript
 
 - Maintain **strict TypeScript typing** throughout the codebase
 - No implicit `any` types - define proper interfaces and types
-- Use Next.js TypeScript patterns for pages, layouts, and API routes
+- Use Next.js TypeScript patterns for pages/layouts and typed Azure Function contracts
 - Type definitions for external libraries should be kept up to date
 
 ### Component Development
