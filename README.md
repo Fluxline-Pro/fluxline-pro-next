@@ -602,6 +602,7 @@ See [LICENSE](LICENSE) file for details.
 - ✅ Next.js 16 migration
 - ✅ Theme system implementation
 - ✅ File-based blog system
+- ✅ MDX content support
 - ✅ Azure Static Web Apps integration
 - ✅ Component generator
 - ✅ Animation system
@@ -609,7 +610,6 @@ See [LICENSE](LICENSE) file for details.
 
 ### Planned
 
-- [ ] MDX support for blog posts
 - [ ] Search functionality
 - [ ] Newsletter integration
 - [ ] Analytics dashboard
@@ -620,4 +620,4 @@ See [LICENSE](LICENSE) file for details.
 
 **Built with precision for modern business transformation.**
 
-**Last Updated:** November 24, 2025
+**Last Updated:** June 11, 2026
