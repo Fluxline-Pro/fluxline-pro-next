@@ -15,7 +15,8 @@ This repository contains the **Fluxline Resonance Group's** web platform. It is 
 ### Static Export Constraints (CRITICAL)
 
 - This repository uses `output: 'export'` in `next.config.ts`
-- **Do NOT use** Server Actions, `/app/api` route handlers, middleware, ISR, or request-time/dynamic rendering patterns
+- **Do NOT use** Server Actions, middleware, ISR, or request-time/dynamic rendering patterns
+- Prefer Azure Functions under `/api` for backend endpoints; existing `/app/api` route handlers are legacy and should be migrated rather than expanded
 - Keep pages static-export compatible (build-time rendering + client-side interactivity)
 - All backend logic must live in Azure Functions under `/api`
 - Forms and client mutations must call Azure Function endpoints (for example `/api/lead`, `/api/contact`)
@@ -299,7 +300,7 @@ azure/                      # Azure deployment documentation
   - App Router directory structure (`/app` directory)
   - Server Components by default, Client Components when needed
   - File-based routing with `page.tsx`, `layout.tsx`, and `error.tsx` for static-export routes
-  - Backend endpoints are Azure Functions in `/api` (not `/app/api`)
+  - Backend endpoints should be implemented in Azure Functions under `/api`; any existing `/app/api` handlers are legacy and should be migrated over time
   - Leverage Next.js built-in optimizations (Image, Font, Bundle optimization)
 
 ### Theme & Design System
@@ -448,7 +449,7 @@ const _isProd = isProduction();
 ### API Routes & Backend Integration
 
 - **Use Azure Functions for backend functionality**
-  - Backend endpoints live in `/api` (Azure Functions), not `/app/api`
+  - Backend endpoints should live in `/api` (Azure Functions); avoid `/app/api` route handlers (migrate any legacy handlers).
   - Follow RESTful conventions and proper HTTP status codes
   - Implement proper error handling and validation in the function handlers
   - Forms and client mutations should POST to function endpoints
