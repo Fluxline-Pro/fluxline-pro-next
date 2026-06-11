@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node -e \"require('fs').copyFileSync('staticwebapp.config.json', 'out/staticwebapp.config.json')\"",
-    "build:azure": "next build && node -e \"require('fs').copyFileSync('staticwebapp.config.json', 'out/staticwebapp.config.json')\"",
+    "build": "next build && node scripts/generate-legacy-redirects.js",
+    "build:azure": "next build && node scripts/generate-legacy-redirects.js",
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",

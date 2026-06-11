@@ -9,6 +9,7 @@ import type { BlogPost } from '../types';
 import { TERENCE_SOCIAL_LINKS, TRI_SOCIAL_LINKS } from '@/app/about/constants';
 import { getContentTypeTag } from '@/app/podcasts/theresonantid/lib/taxonomy';
 import { RedAppleFilterDemo } from '@/components/demos';
+import { slugify } from '@/utils/slug';
 
 interface BlogPostDetailClientProps {
   post: BlogPost;
@@ -34,11 +35,11 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
       );
       return;
     }
-    router.push(`/blog/tag/${encodeURIComponent(tag)}`);
+    router.push(`/blog/tag/${slugify(tag)}`);
   };
 
   const handleCategoryClick = () => {
-    router.push(`/blog/category/${encodeURIComponent(post.category)}`);
+    router.push(`/blog/category/${slugify(post.category)}`);
   };
 
   const isRedAppleDemo = post.slug === 'tri-red-apple-perception-demo';
@@ -116,8 +117,8 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
               onClick: () =>
                 router.push(
                   primaryRelatedTag
-                    ? `/blog/tag/${encodeURIComponent(primaryRelatedTag)}`
-                    : '/blog/tag/Identity%20Challenge'
+                    ? `/blog/tag/${slugify(primaryRelatedTag)}`
+                    : `/blog/tag/${slugify('Identity Challenge')}`
                 ),
               variant: 'secondary' as const,
             },

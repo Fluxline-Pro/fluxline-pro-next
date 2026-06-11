@@ -1,12 +1,9 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import {
-  getAllPortfolioProjects,
-  getAllPortfolioTags,
-} from '../../lib/portfolioLoader';
+import { getAllPortfolioTags, getPortfolioByTag } from '../../lib/portfolioLoader';
 import { PortfolioTagClient } from './PortfolioTagClient';
 import { notFound } from 'next/navigation';
-import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
+import { buildSlugMap, resolveSlug } from '@/utils/slug';
 
 // Disable dynamic params - we only serve pre-generated static pages
 export const dynamicParams = false;
@@ -15,17 +12,12 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const tags = getAllPortfolioTags();
 
-  // Ensure we return an array even if empty
   if (!tags || tags.length === 0) {
     console.warn('No portfolio tags found for static generation');
     return [];
   }
 
-  // Return unencoded tags - filesystem will have real spaces,
-  // browser and Azure will handle URL encoding automatically
-  return tags.map((tag) => ({
-    tag: tag,
-  }));
+  return Array.from(buildSlugMap(tags).keys()).map((tag) => ({ tag }));
 }
 
 // Generate metadata for portfolio tag pages
@@ -35,27 +27,31 @@ export async function generateMetadata({
   params: Promise<{ tag: string }>;
 }): Promise<Metadata> {
   const { tag } = await params;
-  const decodedTag = decodeURIComponent(tag);
+  const displayTag = resolveSlug(tag, getAllPortfolioTags());
+
+  if (!displayTag) {
+    return {};
+  }
 
   return {
-    title: `Tag: ${decodedTag}`,
-    description: `Explore portfolio projects tagged with "${decodedTag}". View our work in ${decodedTag} and related areas.`,
-    keywords: `${decodedTag}, portfolio, projects, web development, design, case studies`,
+    title: `Tag: ${displayTag}`,
+    description: `Explore portfolio projects tagged with "${displayTag}". View our work in ${displayTag} and related areas.`,
+    keywords: `${displayTag}, portfolio, projects, web development, design, case studies`,
     openGraph: {
-      title: `Tag: ${decodedTag} - Fluxline Portfolio`,
-      description: `Explore portfolio projects tagged with "${decodedTag}".`,
-      url: `https://www.fluxline.pro/portfolio/tag/${encodeURIComponent(tag)}`,
+      title: `Tag: ${displayTag} - Fluxline Portfolio`,
+      description: `Explore portfolio projects tagged with "${displayTag}".`,
+      url: `https://www.fluxline.pro/portfolio/tag/${tag}`,
       siteName: 'Fluxline Resonance Group',
       type: 'website',
     },
     twitter: {
       card: 'summary',
-      title: `Tag: ${decodedTag} - Fluxline Portfolio`,
-      description: `Explore portfolio projects tagged with "${decodedTag}".`,
+      title: `Tag: ${displayTag} - Fluxline Portfolio`,
+      description: `Explore portfolio projects tagged with "${displayTag}".`,
       creator: '@aplusinflux',
     },
     alternates: {
-      canonical: `/portfolio/tag/${encodeURIComponent(tag)}`,
+      canonical: `/portfolio/tag/${tag}`,
     },
     robots: {
       index: true,
@@ -70,30 +66,19 @@ interface PortfolioTagPageProps {
 
 /**
  * Portfolio Tag Filter Page - Server Component
- * Handles static generation and passes data to client component
- * Uses fuzzy tag matching to handle spaces and case variations
+ * Handles static generation and resolves slugged tags for display.
  */
 export default async function PortfolioTagPage({
   params,
 }: PortfolioTagPageProps) {
   const { tag } = await params;
-  const decodedTag = decodeURIComponent(tag);
-
-  // Get all projects and filter by tag (with fuzzy matching)
-  const allProjects = getAllPortfolioProjects();
-  const allTags = getAllPortfolioTags();
-
-  // Find the canonical tag that matches
-  const matchedTag = findMatchingTag(decodedTag, allTags);
+  const matchedTag = resolveSlug(tag, getAllPortfolioTags());
 
   if (!matchedTag) {
     notFound();
   }
 
-  // Filter projects using fuzzy tag matching
-  const projects = allProjects.filter((project) =>
-    project.tags.some((projectTag) => tagsMatch(projectTag, decodedTag))
-  );
+  const projects = getPortfolioByTag(matchedTag);
 
   if (projects.length === 0) {
     notFound();

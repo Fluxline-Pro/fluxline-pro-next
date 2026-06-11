@@ -1,9 +1,18 @@
 import { MetadataRoute } from 'next';
-import { getAllBlogPostSlugs } from './blog/lib/blogLoader';
-import { getAllPortfolioSlugs } from './portfolio/lib/portfolioLoader';
+import {
+  getAllBlogPostSlugs,
+  getAllCategories,
+  getAllTags,
+} from './blog/lib/blogLoader';
+import {
+  getAllPortfolioSlugs,
+  getAllPortfolioTags,
+  getAllPortfolioTechnologies,
+} from './portfolio/lib/portfolioLoader';
 import { getAllCaseStudySlugs } from './case-studies/lib/caseStudyLoader';
 import { SERVICE_CATEGORIES } from './services/constants';
 import { isProduction } from '@/lib/environment';
+import { slugify } from '@/utils/slug';
 
 /**
  * AI-Visibility Sitemap
@@ -154,6 +163,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const blogTaxonomyPages: MetadataRoute.Sitemap = [
+    ...getAllTags().map((tag) => ({
+      url: `${SITE_URL}/blog/tag/${slugify(tag)}`,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+    ...getAllCategories().map((category) => ({
+      url: `${SITE_URL}/blog/category/${slugify(category)}`,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+  ];
+
   // ── Portfolio projects ─────────────────────────────────────────────────────
   const portfolioSlugs = getAllPortfolioSlugs();
   const portfolioPages: MetadataRoute.Sitemap = portfolioSlugs.map((slug) => ({
@@ -162,6 +186,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
+
+  const portfolioTaxonomyPages: MetadataRoute.Sitemap = [
+    ...getAllPortfolioTags().map((tag) => ({
+      url: `${SITE_URL}/portfolio/tag/${slugify(tag)}`,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+    ...getAllPortfolioTechnologies().map((technology) => ({
+      url: `${SITE_URL}/portfolio/technology/${slugify(technology)}`,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+  ];
 
   // ── Case studies ───────────────────────────────────────────────────────────
   const caseStudySlugs = getAllCaseStudySlugs();
@@ -176,7 +215,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...servicePages,
     ...blogPages,
+    ...blogTaxonomyPages,
     ...portfolioPages,
+    ...portfolioTaxonomyPages,
     ...caseStudyPages,
   ];
 }

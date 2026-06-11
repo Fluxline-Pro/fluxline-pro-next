@@ -1,9 +1,12 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { getAllBlogPosts, getAllCategories } from '../../lib/blogLoader';
+import {
+  getAllCategories,
+  getBlogPostsByCategory,
+} from '../../lib/blogLoader';
 import { BlogCategoryClient } from './BlogCategoryClient';
 import { notFound } from 'next/navigation';
-import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
+import { buildSlugMap, resolveSlug } from '@/utils/slug';
 
 // Disable dynamic params - we only serve pre-generated static pages
 export const dynamicParams = false;
@@ -12,16 +15,13 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const categories = getAllCategories();
 
-  // Ensure we return an array even if empty
   if (!categories || categories.length === 0) {
     console.warn('No blog categories found for static generation');
     return [];
   }
 
-  // Return unencoded categories - filesystem will have real spaces,
-  // browser and Azure will handle URL encoding automatically
-  return categories.map((category) => ({
-    category: category,
+  return Array.from(buildSlugMap(categories).keys()).map((category) => ({
+    category,
   }));
 }
 
@@ -32,26 +32,30 @@ export async function generateMetadata({
   params: Promise<{ category: string }>;
 }): Promise<Metadata> {
   const { category } = await params;
-  const decodedCategory = decodeURIComponent(category);
+  const displayCategory = resolveSlug(category, getAllCategories());
+
+  if (!displayCategory) {
+    return {};
+  }
 
   return {
-    title: `Category: ${decodedCategory}`,
-    description: `Explore blog posts in the "${decodedCategory}" category. Insights and articles about ${decodedCategory}.`,
-    keywords: `${decodedCategory}, blog, articles, category, technology, development, design`,
+    title: `Category: ${displayCategory}`,
+    description: `Explore blog posts in the "${displayCategory}" category. Insights and articles about ${displayCategory}.`,
+    keywords: `${displayCategory}, blog, articles, category, technology, development, design`,
     openGraph: {
-      title: `Category: ${decodedCategory} - Fluxline Blog`,
-      description: `Explore blog posts in the "${decodedCategory}" category.`,
-      url: `https://www.fluxline.pro/blog/category/${encodeURIComponent(category)}`,
+      title: `Category: ${displayCategory} - Fluxline Blog`,
+      description: `Explore blog posts in the "${displayCategory}" category.`,
+      url: `https://www.fluxline.pro/blog/category/${category}`,
       siteName: 'Fluxline',
       type: 'website',
     },
     twitter: {
       card: 'summary',
-      title: `Category: ${decodedCategory} - Fluxline Blog`,
-      description: `Explore blog posts in the "${decodedCategory}" category.`,
+      title: `Category: ${displayCategory} - Fluxline Blog`,
+      description: `Explore blog posts in the "${displayCategory}" category.`,
     },
     alternates: {
-      canonical: `/blog/category/${encodeURIComponent(category)}`,
+      canonical: `/blog/category/${category}`,
     },
     robots: {
       index: true,
@@ -66,30 +70,19 @@ interface BlogCategoryPageProps {
 
 /**
  * Blog Category Filter Page - Server Component
- * Handles static generation and passes data to client component
- * Uses fuzzy matching to handle spaces and case variations
+ * Handles static generation and resolves slugged categories for display.
  */
 export default async function BlogCategoryPage({
   params,
 }: BlogCategoryPageProps) {
   const { category } = await params;
-  const decodedCategory = decodeURIComponent(category);
-
-  // Get all posts and filter by category (with fuzzy matching)
-  const allPosts = getAllBlogPosts();
-  const allCategories = getAllCategories();
-
-  // Find the canonical category that matches
-  const matchedCategory = findMatchingTag(decodedCategory, allCategories);
+  const matchedCategory = resolveSlug(category, getAllCategories());
 
   if (!matchedCategory) {
     notFound();
   }
 
-  // Filter posts using fuzzy category matching
-  const posts = allPosts.filter((post) =>
-    tagsMatch(post.category, decodedCategory)
-  );
+  const posts = getBlogPostsByCategory(matchedCategory);
 
   if (posts.length === 0) {
     notFound();
