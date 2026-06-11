@@ -137,7 +137,12 @@ fluxline-pro-next/
 │   ├── store/                    # Zustand state management
 │   │   ├── store.ts              # Main store
 │   │   └── mock-data/            # Mock data for features
-│   └── utils/                    # Utility functions
+│   ├── lib/                      # Environment & API helpers (server-side / env-specific)
+   │   ├── environment.ts        # Centralized environment detection
+   │   └── getApiUrl.ts          # API URL helper
+   └── utils/                    # Isomorphic utilities (safe for client + server)
+       ├── jsonLd.ts             # Safe JSON-LD serialization
+       └── tag-utils.ts          # Tag/category helpers
 ├── public/                       # Static assets
 │   ├── blog/                     # Blog Markdown files & images
 │   │   └── posts/
@@ -170,13 +175,15 @@ fluxline-pro-next/
 │   ├── scripts/                  # Deployment scripts
 │   ├── arm-templates/            # ARM templates
 │   └── docs/                     # Azure documentation
-├── docs/                         # Documentation
-│   ├── ANIMATIONS.md             # Animation system guide
-│   ├── HOOKS.md                  # Custom hooks reference
-│   ├── FILE_BASED_BLOG_GUIDE.md  # Blog content guide
-│   └── ... (more docs)
-└── scripts/                      # Build scripts
-    └── generate-component.js     # Component generator
+├── scripts/                      # Build scripts
+│   └── generate-component.js     # Component generator
+├── ANIMATIONS.md                 # Animation system guide
+├── HOOKS.md                      # Custom hooks reference
+├── FILE_BASED_BLOG_GUIDE.md      # Blog content guide
+├── ENVIRONMENT_VARIABLES.md      # Environment variables reference
+├── TOKEN_ACCESS_README.md        # Token-based access control
+├── VIDEO_UPLOAD_INSTRUCTIONS.md  # Video upload guide
+└── QUICK_SETUP_GUIDE.md          # Quick setup reference
 ```
 
 ## 💻 Development
@@ -401,12 +408,13 @@ import styles from './component.module.scss';
 
 ### Responsive Breakpoints
 
-- **xs**: 0px (mobile portrait)
-- **sm**: 576px (mobile landscape)
+These are the standard Tailwind CSS 4 breakpoints used in this project (no custom overrides):
+
+- **sm**: 640px (small devices / mobile landscape)
 - **md**: 768px (tablet)
 - **lg**: 1024px (desktop)
-- **xl**: 1366px (large desktop)
-- **xxl**: 1920px (ultrawide)
+- **xl**: 1280px (large desktop)
+- **2xl**: 1536px (ultrawide)
 
 ## 🧪 Testing
 
@@ -513,7 +521,7 @@ NEXT_PUBLIC_ENABLE_ANALYTICS=true
 Key files:
 
 - `next.config.ts` - Next.js configuration
-- `tailwind.config.ts` - Tailwind CSS settings
+- `src/app/tailwind.css` - Tailwind CSS 4 entry point (CSS-based config; no `tailwind.config.ts`)
 - `tsconfig.json` - TypeScript compiler options
 - `eslint.config.mjs` - ESLint rules
 - `jest.config.js` - Jest testing configuration
