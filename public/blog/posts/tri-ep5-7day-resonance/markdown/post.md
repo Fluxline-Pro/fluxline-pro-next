@@ -16,7 +16,7 @@ tags:
     'Resonance Core Framework',
     'Personal Growth',
   ]
-imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageUrl: '/blog/posts/tri-ep5-7day-resonance/images/resonance-dissonance-illustration.jpg'
 imageAlt: 'Episode 5: Identity Challenge — Feel the Signal'
 featured: false
 seoTitle: 'Episode 5: Identity Challenge — Feel the Signal | The Resonant Identity'

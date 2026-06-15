@@ -17,7 +17,7 @@ tags:
     'Resonance Core Framework',
     'The Triad',
   ]
-imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageUrl: '/blog/posts/tri-ep5-resonance-and-dissonance/images/resonance-dissonance-illustration.jpg'
 imageAlt: 'Episode 5: Resonance and Dissonance — The Resonant Identity'
 featured: true
 seoTitle: 'Episode 5: Resonance and Dissonance | The Resonant Identity'
