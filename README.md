@@ -408,9 +408,10 @@ import styles from './component.module.scss';
 
 ### Responsive Breakpoints
 
-These are the standard Tailwind CSS 4 breakpoints used in this project (no custom overrides):
+These are the standard Fluent UI v8 breakpoints used in this project (no custom breakpoint overrides):
 
-- **sm**: 640px (small devices / mobile landscape)
+- **xs**: 0px (mobile portrait)
+- **sm**: 576px (mobile landscape)
 - **md**: 768px (tablet)
 - **lg**: 1024px (desktop)
 - **xl**: 1280px (large desktop)
