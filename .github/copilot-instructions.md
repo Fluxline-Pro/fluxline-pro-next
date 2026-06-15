@@ -266,8 +266,17 @@ src/theme/                  # Fluent UI theme system
   ├── hooks/                # useAppTheme, useMediaQuery, etc.
   └── contexts/             # ThemeProvider, ThemeOverrideContext
 src/animations/             # Framer Motion animations
-src/lib/                    # Environment & API helpers (server-side / env-specific)
-src/utils/                  # Isomorphic utility functions (client + server safe)
+src/lib/                    # Shared utilities and app logic
+  ├── environment.ts        # Environment normalization helpers
+  ├── getApiUrl.ts          # API URL resolution
+  ├── ethos/                # Fluxline Ethos content definitions
+  └── testimonials/         # Testimonial types and data
+src/utils/                  # Utility functions
+  ├── jsonLd.ts             # Safe JSON-LD serialization
+  ├── markdownRenderer.tsx  # Markdown rendering utilities
+  ├── navigation-icons.ts   # Shared navigation icon mappings
+  ├── placeholder.ts        # Placeholder asset helpers
+  └── tag-utils.ts          # Tag and category utilities
 src/store/                  # Zustand state management
 public/                     # Static assets
   ├── blog/posts/           # Blog Markdown content
@@ -1023,12 +1032,13 @@ generatedWithAI: true # If applicable
 - Provide appropriate ARIA labels and roles
 - Test with screen readers when implementing interactive components
 - Use Tailwind's responsive utilities for mobile-first design
-- Support all breakpoints:
-  - sm: 640px+ (small devices)
+- **Use project breakpoints** from [src/theme/theme.ts](src/theme/theme.ts) for media queries and theme hooks (`useMediaQuery`, `useDeviceType`, etc.):
+  - xs: 0px (extra small devices)
+  - sm: 576px+ (small devices)
   - md: 768px+ (medium devices)
   - lg: 1024px+ (large devices)
-  - xl: 1280px+ (extra large devices)
-  - 2xl: 1536px+ (2x extra large devices)
+  - xl: 1366px+ (extra large devices)
+  - xxl: 1920px+ (2x extra large devices)
 
 ### Theme Support
 
