@@ -1032,12 +1032,13 @@ generatedWithAI: true # If applicable
 - Provide appropriate ARIA labels and roles
 - Test with screen readers when implementing interactive components
 - Use Tailwind's responsive utilities for mobile-first design
-- Support all breakpoints:
-  - sm: 640px+ (small devices)
+- **Use project breakpoints** from [src/theme/theme.ts](src/theme/theme.ts) for media queries and theme hooks (`useMediaQuery`, `useDeviceType`, etc.):
+  - xs: 0px (extra small devices)
+  - sm: 576px+ (small devices)
   - md: 768px+ (medium devices)
   - lg: 1024px+ (large devices)
-  - xl: 1280px+ (extra large devices)
-  - 2xl: 1536px+ (2x extra large devices)
+  - xl: 1366px+ (extra large devices)
+  - xxl: 1920px+ (2x extra large devices)
 
 ### Theme Support
 

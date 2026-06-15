@@ -408,14 +408,14 @@ import styles from './component.module.scss';
 
 ### Responsive Breakpoints
 
-These are the standard Fluent UI v8 breakpoints used in this project (no custom breakpoint overrides):
+These are the project's breakpoints defined in [`src/theme/theme.ts`](src/theme/theme.ts), used for media queries and `useMediaQuery`/`useDeviceType` hooks:
 
-- **xs**: 0px (mobile portrait)
-- **sm**: 576px (mobile landscape)
-- **md**: 768px (tablet)
-- **lg**: 1024px (desktop)
-- **xl**: 1280px (large desktop)
-- **2xl**: 1536px (ultrawide)
+- **xs**: 0px (extra small devices)
+- **sm**: 576px (small devices)
+- **md**: 768px (tablets)
+- **lg**: 1024px (large tablets / small desktop)
+- **xl**: 1366px (desktop)
+- **xxl**: 1920px (large desktop / ultrawide)
 
 ## 🧪 Testing
 
