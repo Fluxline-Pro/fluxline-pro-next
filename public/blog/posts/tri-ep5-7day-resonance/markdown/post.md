@@ -1,40 +1,50 @@
 ---
-title: "Feel the Signal: A 7-Day Challenge to Trust Your Inner Resonance"
-date: 2026-06-15
-episode: "007"
+title: 'Episode 5: Identity Challenge — Feel the Signal'
+excerpt: 'A 7-day identity challenge from The Resonant Identity podcast that helps you read somatic, emotional, and narrative cues, apply interpretive hygiene, and trust resonance over noise.'
+author: 'The Resonant Identity'
 publishedDate: '2026-06-15'
-challenge: 5
-series: "Resonant Identity"
-slug: "feel-the-signal-7-day-challenge-episode-007"
-description: "A 7-day identity challenge from Episode 007 of Resonant Identity. Learn to read somatic, emotional, and narrative cues—and distinguish true resonance from noise."
-seo_title: "Feel the Signal | 7-Day Identity Challenge | Resonant Identity Episode 007"
-seo_description: "In this 7-day challenge from Resonant Identity Episode 007, you'll develop the skill of reading resonance and dissonance in your body, emotions, and story—so you can trust your inner signal and make clearer identity choices."
-og_image: "/images/challenges/feel-the-signal-og.jpg"
-author: "The Resonant Identity"
+category: 'Resonant Identity'
 tags:
-  - Identity Challenge
-  - Resonant Identity
-  - Episode 007
-  - Resonance
-  - Dissonance
-  - Somatic Cues
-  - Emotional Intelligence
-  - Narrative Cues
-  - Interpretive Hygiene
-  - Self-Awareness
-  - Personal Growth
-draft: false
+  [
+    'Identity Challenge',
+    'Resonance',
+    'Dissonance',
+    'Somatic Awareness',
+    'Interpretive Hygiene',
+    'Window of Choice',
+    'Identity Coherence',
+    'Resonance Core Framework',
+    'Personal Growth',
+  ]
+imageUrl: '/images/TheResonantIdentity_Logo.png'
+imageAlt: 'Episode 5: Identity Challenge — Feel the Signal'
+featured: false
+seoTitle: 'Episode 5: Identity Challenge — Feel the Signal | The Resonant Identity'
+seoDescription: 'A companion 7-day identity challenge to Episode 007 of The Resonant Identity podcast. Build signal literacy by tracking resonance and dissonance across body, emotion, and narrative with the Resonance Test.'
+seoKeywords:
+  [
+    'identity challenge',
+    'resonance test',
+    'resonance and dissonance',
+    'interpretive hygiene',
+    'somatic cues',
+    'narrative cues',
+    'emotional cues',
+    'identity coherence',
+    'resonant identity',
+  ]
+generatedWithAI: true
 ---
 
 # Feel the Signal: A 7-Day Challenge to Trust Your Inner Resonance
 
-*Episode 007 · Challenge 5 · Resonant Identity*
+_Episode 007 · Challenge 5 · Resonant Identity_
 
 ---
 
 > "Resonance isn't a feeling you manufacture. It's a signal you learn to read."
 >
-> — *Resonant Identity, Episode 007*
+> — _Resonant Identity, Episode 007_
 
 ---
 
@@ -42,7 +52,7 @@ There's a version of you that already knows. It knows which room you walk out of
 
 The problem isn't the signal. The problem is the noise—the interpretations we layer on top of what we actually feel, the stories we tell to explain away discomfort, the busyness that drowns out anything quiet enough to be true.
 
-Episode 007 of *Resonant Identity* is a master class in signal literacy: the practice of distinguishing genuine resonance and dissonance from every other sensation competing for your attention. In this 7-day challenge, you'll move through the full framework—somatic cues, emotional cues, narrative cues, interpretive hygiene, and the resonance test—one layer at a time. By Day 7, you won't just understand the concept. You'll have felt it in your own body, your own story, your own life.
+Episode 007 of _Resonant Identity_ is a master class in signal literacy: the practice of distinguishing genuine resonance and dissonance from every other sensation competing for your attention. In this 7-day challenge, you'll move through the full framework—somatic cues, emotional cues, narrative cues, interpretive hygiene, and the resonance test—one layer at a time. By Day 7, you won't just understand the concept. You'll have felt it in your own body, your own story, your own life.
 
 This is the challenge where the work gets physical.
 
@@ -87,7 +97,7 @@ Choose three ordinary interactions or decisions from your day—a conversation, 
 - Does your breath deepen or constrict?
 - Does any part of you lean toward or pull away from this thing?
 
-Write down the raw physical data first. Do not interpret it yet. Just report it like a scientist: *"Shoulders lifted slightly. Stomach tightened. Breath got shallow."*
+Write down the raw physical data first. Do not interpret it yet. Just report it like a scientist: _"Shoulders lifted slightly. Stomach tightened. Breath got shallow."_
 
 **Journal Prompt:**
 
@@ -103,13 +113,13 @@ Write down the raw physical data first. Do not interpret it yet. Just report it 
 
 Emotions are often treated as problems to manage rather than signals to read. We suppress the inconvenient ones, amplify the acceptable ones, and spend enormous energy performing the ones we're supposed to feel. In the process, the actual emotional signal—the one that tells us something true about alignment—gets buried under all that management.
 
-Today's work distinguishes between *performed* emotions and *signal* emotions.
+Today's work distinguishes between _performed_ emotions and _signal_ emotions.
 
 A performed emotion is what you produce for an audience—including yourself. It has a social function. It makes you look a certain way, justifies a certain choice, or keeps the peace. A signal emotion arises before you decide what to do with it. It doesn't care about your audience. It's just true.
 
 **Practice: The Emotional Lag Test**
 
-At three points today—morning, midday, and evening—stop and ask yourself: *What am I actually feeling right now, underneath what I'm presenting?*
+At three points today—morning, midday, and evening—stop and ask yourself: _What am I actually feeling right now, underneath what I'm presenting?_
 
 Write both answers:
 
@@ -136,18 +146,19 @@ Narrative cues are the clues embedded in the stories you find yourself telling a
 
 **Practice: Story Inventory**
 
-Today, write down three stories you currently tell about yourself—stories about your work, your relationships, your history, or your direction. They don't need to be dramatic. They can be as simple as *"I'm someone who always runs late"* or *"I ended up in this career by accident."*
+Today, write down three stories you currently tell about yourself—stories about your work, your relationships, your history, or your direction. They don't need to be dramatic. They can be as simple as _"I'm someone who always runs late"_ or _"I ended up in this career by accident."_
 
 For each story, ask:
+
 - Does telling this story feel expansive or contracting?
-- Is this story *mine*, or did someone else hand it to me?
+- Is this story _mine_, or did someone else hand it to me?
 - If I had to live this story for ten more years, would I? Why or why not?
 
 **Journal Prompt:**
 
 > Which of my current stories are load-bearing—stories I actually believe and live by? Which ones am I just carrying out of habit?
 
-**Signal to Watch For:** You catch a story mid-telling and think, *"Wait—do I actually believe this?"*
+**Signal to Watch For:** You catch a story mid-telling and think, _"Wait—do I actually believe this?"_
 
 ---
 
@@ -157,7 +168,7 @@ For each story, ask:
 
 Here's the uncomfortable truth: even if your somatic cues, emotional cues, and narrative cues are all firing clearly, they can still be misread. Interpretation is the lens through which you translate raw signal into meaning—and that lens has distortions built in.
 
-Interpretive hygiene is the practice of cleaning the lens. It asks: *Am I reading this signal accurately, or am I reading it through fear, conditioning, old wounds, or borrowed frameworks?*
+Interpretive hygiene is the practice of cleaning the lens. It asks: _Am I reading this signal accurately, or am I reading it through fear, conditioning, old wounds, or borrowed frameworks?_
 
 This is where the work gets subtle and important. A somatic signal that feels like dread might actually be excitement. An emotional signal that looks like grief might actually be relief. A narrative that feels wrong might feel wrong because it's genuinely misaligned—or because change is uncomfortable and your nervous system is misreporting danger.
 
@@ -188,22 +199,22 @@ Write what remains when you set those filters aside.
 
 **Theme: Resonance vs. Dissonance (Full Contrast)**
 
-By now you've been tracking signals across three channels and developing your interpretive awareness. Today's practice brings it all together and sharpens the central distinction: *resonance* versus *dissonance*.
+By now you've been tracking signals across three channels and developing your interpretive awareness. Today's practice brings it all together and sharpens the central distinction: _resonance_ versus _dissonance_.
 
-Resonance is not comfort. This is worth saying plainly, because comfort is one of the most common decoys. Resonance is alignment—the felt sense that something fits with who you actually are, even if it's hard, uncertain, or scary. Resonance has an *aliveness* to it. Things that resonate tend to make your thinking clearer, your energy more available, your engagement more genuine.
+Resonance is not comfort. This is worth saying plainly, because comfort is one of the most common decoys. Resonance is alignment—the felt sense that something fits with who you actually are, even if it's hard, uncertain, or scary. Resonance has an _aliveness_ to it. Things that resonate tend to make your thinking clearer, your energy more available, your engagement more genuine.
 
-Dissonance is not discomfort either. Sometimes the most painful thing in your life resonates deeply—it's yours, it's true, and moving through it is exactly what you need to do. Dissonance is *misalignment*—the felt sense that something doesn't fit, that you're running a program that isn't yours, that you're performing rather than being. Dissonance drains in a specific way. It tends to make your thinking muddier, your energy more effortful, your presence less available.
+Dissonance is not discomfort either. Sometimes the most painful thing in your life resonates deeply—it's yours, it's true, and moving through it is exactly what you need to do. Dissonance is _misalignment_—the felt sense that something doesn't fit, that you're running a program that isn't yours, that you're performing rather than being. Dissonance drains in a specific way. It tends to make your thinking muddier, your energy more effortful, your presence less available.
 
 **Practice: The Contrast Experiment**
 
 Choose two things from your current life: one you suspect resonates and one you suspect creates dissonance.
 
-For each one, sit quietly for two minutes and bring it fully into your awareness—not thinking *about* it, but inhabiting the felt sense of it. Notice what each of the three signal channels (body, emotion, story) is reporting. Write it all down.
+For each one, sit quietly for two minutes and bring it fully into your awareness—not thinking _about_ it, but inhabiting the felt sense of it. Notice what each of the three signal channels (body, emotion, story) is reporting. Write it all down.
 
 Then answer:
 
-- Which of these feels like *me*?
-- Which of these feels like *something I took on*?
+- Which of these feels like _me_?
+- Which of these feels like _something I took on_?
 - What is the difference in how they feel in my body right now?
 
 **Journal Prompt:**
@@ -275,7 +286,7 @@ Set aside the performed layer. Underneath what you'd say to someone else about t
 Write the story you tell about this element of your life. Then ask:
 
 - Does telling this story expand or contract me?
-- Is this story *mine*, or was it handed to me?
+- Is this story _mine_, or was it handed to me?
 - Can I tell this story with genuine authorship, or does it feel like recitation?
 
 **4. Hygiene Check**
@@ -286,7 +297,7 @@ Review what you've written across all three channels and ask:
 - Am I being honest, or am I being kind to myself in a way that prevents clarity?
 
 **5. The Signal**
-Now write the honest answer to: *Does this resonate or dissonant?*
+Now write the honest answer to: _Does this resonate or dissonant?_
 
 Not what you wish were true. Not what would be easiest to act on. What the full signal—body, emotion, story, after hygiene—is actually telling you.
 
@@ -322,15 +333,15 @@ And if this challenge surfaced something significant—something that deserves m
 
 ## Episode & Challenge Reference
 
-| Field | Value |
-|---|---|
-| **Episode** | 007 |
-| **Challenge Number** | 5 |
-| **Series** | Resonant Identity |
-| **Challenge Theme** | Feel the Signal |
-| **Core Framework** | Resonance · Dissonance · Somatic Cues · Emotional Cues · Narrative Cues · Interpretive Hygiene · The Resonance Test |
-| **Estimated Daily Time** | 15–20 minutes |
-| **Journal Required** | Yes |
+| Field                    | Value                                                                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| **Episode**              | 007                                                                                                                 |
+| **Challenge Number**     | 5                                                                                                                   |
+| **Series**               | Resonant Identity                                                                                                   |
+| **Challenge Theme**      | Feel the Signal                                                                                                     |
+| **Core Framework**       | Resonance · Dissonance · Somatic Cues · Emotional Cues · Narrative Cues · Interpretive Hygiene · The Resonance Test |
+| **Estimated Daily Time** | 15–20 minutes                                                                                                       |
+| **Journal Required**     | Yes                                                                                                                 |
 
 ---
 
@@ -343,4 +354,4 @@ And if this challenge surfaced something significant—something that deserves m
 
 ---
 
-*Resonant Identity is a podcast about the art and practice of becoming more fully yourself. New episodes drop weekly. This challenge post accompanies Episode 007.*
+_Resonant Identity is a podcast about the art and practice of becoming more fully yourself. New episodes drop weekly. This challenge post accompanies Episode 007._
