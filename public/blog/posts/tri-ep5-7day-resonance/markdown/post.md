@@ -297,7 +297,7 @@ Review what you've written across all three channels and ask:
 - Am I being honest, or am I being kind to myself in a way that prevents clarity?
 
 **5. The Signal**
-Now write the honest answer to: _Does this resonate or dissonant?_
+Now write the honest answer to: _Does this resonate or create dissonance within you?_
 
 Not what you wish were true. Not what would be easiest to act on. What the full signal—body, emotion, story, after hygiene—is actually telling you.
 

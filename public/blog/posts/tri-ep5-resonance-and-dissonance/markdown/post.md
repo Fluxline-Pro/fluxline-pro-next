@@ -223,7 +223,7 @@ The Window of Choice opens the moment you become aware of your resonant or disso
 
 ## The Seven-Day Challenge: Feeling the Signal
 
-We closes the episode with a structured, progressive challenge designed to help you internalize the Resonance Test one step at a time — before attempting it all at once.
+We close the episode with a structured, progressive challenge designed to help you internalize the Resonance Test one step at a time — before attempting it all at once.
 
 | Day   | Focus                       | Practice                                                                                                       |
 | ----- | --------------------------- | -------------------------------------------------------------------------------------------------------------- |
