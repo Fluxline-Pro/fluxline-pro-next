@@ -1,10 +1,10 @@
 # Token-Based Access Control Implementation
 
-This document describes the token-based access control system implemented for the Fluxline Pro Next.js application's DEV and TEST environments.
+This document describes the token-based access control system implemented for the Fluxline Pro Next.js application's TEST environment, with PROD remaining publicly accessible.
 
 ## Overview
 
-The implementation provides environment-specific access control to lock down non-production environments (DEV and TEST) while keeping PROD publicly accessible. It uses a simple token-based authentication system that:
+The implementation provides environment-specific access control to lock down non-production deployments (currently TEST) while keeping PROD publicly accessible. It uses a simple token-based authentication system that:
 
 - ✅ Runs entirely on Azure Static Web Apps (no additional infrastructure needed)
 - ✅ Uses Azure Functions for server-side token validation
@@ -45,7 +45,7 @@ The implementation provides environment-specific access control to lock down non
 2. AccessGate checks environment
    ↓
 3a. If PROD → Show site immediately
-3b. If DEV/TEST → Check localStorage for token
+3b. If TEST → Check localStorage for token
    ↓
 4. If no valid token → Show token input form
    ↓
@@ -59,14 +59,7 @@ The implementation provides environment-specific access control to lock down non
 
 ### 1. Environment Variables in Azure Static Web Apps
 
-For each environment (DEV and TEST), configure these variables in Azure Portal:
-
-**DEV Environment** (flx-next-dev.fluxline.pro):
-
-```
-ACCESS_TOKEN=your-dev-access-token-here
-ENVIRONMENT=dev
-```
+For deployed environments, configure these variables in Azure Portal:
 
 **TEST Environment** (flx-next-test.fluxline.pro):
 
@@ -98,11 +91,6 @@ ENVIRONMENT=prod
 #### Option B: Azure CLI
 
 ```bash
-# Set ACCESS_TOKEN for DEV environment
-az staticwebapp appsettings set \
-  --name flx-develop \
-  --setting-names ACCESS_TOKEN="your-dev-token" ENVIRONMENT="dev"
-
 # Set ACCESS_TOKEN for TEST environment
 az staticwebapp appsettings set \
   --name flx-test \
@@ -131,7 +119,7 @@ openssl rand -hex 32
 
 **Security Best Practices:**
 
-- Use different tokens for DEV and TEST environments
+- Use a unique token for TEST (and any future non-prod deployment environment)
 - Make tokens at least 32 characters long
 - Use a mix of letters, numbers, and special characters
 - Store tokens securely (Azure Key Vault is recommended)
@@ -141,15 +129,6 @@ openssl rand -hex 32
 ## Build-Time Configuration
 
 The environment is determined at build time using the `NEXT_PUBLIC_ENVIRONMENT` variable in the GitHub Actions workflows:
-
-### DEV Workflow (`azure-static-web-apps-dev.yml`)
-
-```yaml
-- name: Build Application
-  run: yarn build
-  env:
-    NEXT_PUBLIC_ENVIRONMENT: dev
-```
 
 ### TEST Workflow (`azure-static-web-apps-test.yml`)
 
@@ -171,12 +150,12 @@ The environment is determined at build time using the `NEXT_PUBLIC_ENVIRONMENT` 
 
 ## Local Development
 
-### Testing DEV/TEST Mode Locally
+### Testing TEST Mode Locally
 
 1. Create a `.env.local` file:
 
 ```bash
-NEXT_PUBLIC_ENVIRONMENT=dev
+NEXT_PUBLIC_ENVIRONMENT=test
 ```
 
 2. Run the development server:
@@ -200,7 +179,7 @@ yarn dev
     "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "node",
     "ACCESS_TOKEN": "test-token-12345",
-    "ENVIRONMENT": "dev"
+    "ENVIRONMENT": "test"
   }
 }
 ```
@@ -234,15 +213,15 @@ yarn start
 
 ## User Experience
 
-### First Visit (DEV/TEST)
+### First Visit (TEST)
 
-1. User navigates to flx-next-dev.fluxline.pro or flx-next-test.fluxline.pro
+1. User navigates to flx-next-test.fluxline.pro
 2. Full-screen token gate appears
 3. User enters access token
 4. On successful validation, site loads immediately
 5. Token is stored in browser localStorage
 
-### Return Visits (DEV/TEST)
+### Return Visits (TEST)
 
 1. User navigates to the site
 2. AccessGate checks localStorage
@@ -276,7 +255,7 @@ Validates an access token.
 ```json
 {
   "valid": true,
-  "environment": "dev",
+  "environment": "test",
   "message": "Token validated successfully"
 }
 ```
@@ -286,7 +265,7 @@ Validates an access token.
 ```json
 {
   "valid": false,
-  "environment": "dev",
+  "environment": "test",
   "error": "Invalid token"
 }
 ```
@@ -296,7 +275,7 @@ Validates an access token.
 ```json
 {
   "valid": false,
-  "environment": "dev",
+  "environment": "test",
   "error": "Token is required"
 }
 ```
@@ -327,7 +306,6 @@ Validates an access token.
 │       └── environment.ts          # Environment detection
 ├── .github/
 │   └── workflows/
-│       ├── azure-static-web-apps-dev.yml   # DEV deployment
 │       ├── azure-static-web-apps-test.yml  # TEST deployment
 │       └── azure-static-web-apps-prod.yml  # PROD deployment
 ├── .env.example                    # Environment variables template

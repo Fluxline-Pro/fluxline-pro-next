@@ -61,10 +61,10 @@ azure/
 
 ```powershell
 # PowerShell
-.\scripts\deployment\deploy.ps1 -Environment dev
+.\scripts\deployment\deploy.ps1 -Environment test
 
 # Bash
-./scripts/deployment/deploy.sh dev
+./scripts/deployment/deploy.sh test
 ```
 
 ## 🏗️ Architecture
@@ -73,15 +73,13 @@ azure/
 
 | Environment | SKU      | Branch  | Static Web App        | Identity Type     |
 | ----------- | -------- | ------- | --------------------- | ----------------- |
-| **Dev**     | Free     | develop | az-fluxline-next-dev  | Service Principal |
 | **Test**    | Free     | test    | az-fluxline-next-test | Service Principal |
 | **Prod**    | Standard | master  | az-fluxline-next-prod | User-Assigned MI  |
 
-> **Note:** Free tier Static Web Apps don't support managed identities, so dev/test use Service Principals instead.
+> **Note:** Free tier Static Web Apps don't support managed identities, so the TEST environment uses a Service Principal.
 
-### Service Principals (Free Tier Solution)
+### Service Principals
 
-- `github-fluxline-pro-next-dev` → Dev environment
 - `github-fluxline-pro-next-test` → Test environment
 - `github-fluxline-pro-next-prod` → Prod environment
 
@@ -95,7 +93,6 @@ azure/
 
 API tokens stored centrally:
 
-- `swa-api-token-dev`
 - `swa-api-token-test`
 - `swa-api-token-prod`
 
@@ -112,7 +109,6 @@ API tokens stored centrally:
 ```
 AZURE_TENANT_ID
 AZURE_SUBSCRIPTION_ID
-AZURE_CLIENT_ID_DEV
 AZURE_CLIENT_ID_TEST
 AZURE_CLIENT_ID_PROD
 ```
@@ -151,7 +147,6 @@ No secrets stored in GitHub beyond the 5 Client IDs!
 
 After deployment:
 
-- **Dev**: `https://az-fluxline-next-dev.azurestaticapps.net`
 - **Test**: `https://az-fluxline-next-test.azurestaticapps.net`
 - **Prod**: `https://az-fluxline-next-prod.azurestaticapps.net`
 

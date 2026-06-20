@@ -352,7 +352,6 @@ The project is configured for Azure Static Web Apps deployment:
 
 **Environments:**
 
-- **Dev** (`develop` branch) - Free tier
 - **Test** (`test` branch) - Free tier
 - **Production** (`master` branch) - Standard tier
 

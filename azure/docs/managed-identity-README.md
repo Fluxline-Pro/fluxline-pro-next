@@ -58,7 +58,6 @@ Once Managed Identity is working, you can remove these old API token secrets:
 The setup creates Federated Identity Credentials for:
 
 - **master branch**: Production deployments
-- **develop branch**: Development deployments
 - **test branch**: Test deployments
 - **Pull requests**: PR preview deployments
 

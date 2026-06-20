@@ -33,7 +33,7 @@ This directory contains Azure Functions that power backend functionality for the
 
 - Timer-triggered CRON job that runs every 15 minutes
 - Keeps the Azure Functions host warm on the **PROD** environment only
-- On DEV and TEST environments the function exits immediately without doing any work
+- On non-prod environments (including TEST and local DEV) the function exits immediately without doing any work
 - Requires the `ENVIRONMENT` application setting to be set to `prod` in the Azure Static Web App
 
 ---
@@ -122,9 +122,9 @@ Configure these application settings:
 | -------------------------- | ----------------------------------------- | ---------------------------------------- |
 | `AZURE_TABLE_STORAGE_URL`  | Base URL for Table Storage REST API       | https://yourstore.table.core.windows.net |
 | `AZURE_TABLE_SAS_TOKEN`    | SAS token for Table Storage (read access) | sv=2020-08-04&ss=t&srt=sco&sp=rl&...     |
-| `AZURE_PODCAST_TABLE_DEV`  | Table name for dev/test environment       | podcastsdev                              |
+| `AZURE_PODCAST_TABLE_DEV`  | Table name for local dev/test context     | podcastsdev                              |
 | `AZURE_PODCAST_TABLE_PROD` | Table name for production environment     | podcasts                                 |
-| `NEXT_PUBLIC_ENVIRONMENT`  | Environment identifier (dev/test/prod)    | prod                                     |
+| `NEXT_PUBLIC_ENVIRONMENT`  | Environment identifier (test/prod; dev for local use) | prod                           |
 
 ### Episode Metadata Schema
 
@@ -151,7 +151,7 @@ Each episode in Table Storage should have these fields:
 
 **Episode Display (`/api/podcasts/episodes`)**:
 
-1. Determines environment (dev/test vs prod)
+1. Determines environment (test/prod in deployed apps; dev supported locally)
 2. Queries appropriate Table Storage table
 3. Returns all episodes sorted by publish_date (newest first)
 4. Frontend displays with HTML5 audio player
@@ -174,7 +174,7 @@ See [HOW_TO_ADD_PODCAST_EPISODE.md](HOW_TO_ADD_PODCAST_EPISODE.md) for detailed 
 
 ### Environment Separation
 
-- **Dev/Test**: Use `podcastsdev` table and separate blob container
+- **Local Dev/Test Context**: Use `podcastsdev` table and separate blob container
 - **Production**: Use `podcasts` table and separate blob container
 - Organize audio files by path (e.g., `podcasts-dev/` vs `podcasts/`)
 - Store environment-specific URLs in respective tables

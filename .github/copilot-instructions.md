@@ -197,7 +197,7 @@ Azure decodes → /blog/tag/Personal Growth/index.html ✅
 ### Azure & Deployment
 
 - Environment: **Azure Static Web Apps**
-- Branches: `develop` (dev), `test` (test), `master` (production)
+- Branches: `test` (test), `master` (production)
 - CI/CD: GitHub Actions (automatic on push)
 - Secrets: Stored in GitHub and Azure Key Vault
 - Deployment: Automatic via GitHub Actions
