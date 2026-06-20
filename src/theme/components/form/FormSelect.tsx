@@ -152,9 +152,11 @@ export const FormSelect: React.FC<FormSelectProps> = ({
             onClick={() => !disabled && setIsOpen(!isOpen)}
             disabled={disabled}
             aria-label={ariaLabel || label}
+            aria-haspopup='listbox'
+            aria-expanded={isOpen}
             style={{
               width: '100%',
-              padding: '0.5rem',
+              padding: '0.5rem 2rem 0.5rem 0.75rem',
               borderRadius: theme.borderRadius.container.small,
               backgroundColor: theme.palette.neutralLight,
               border: `1px solid ${isOpen ? theme.palette.themePrimary : theme.palette.neutralTertiaryAlt}`,
@@ -172,14 +174,29 @@ export const FormSelect: React.FC<FormSelectProps> = ({
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
+              position: 'relative',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = theme.palette.themePrimary;
+            }}
+            onBlur={(e) => {
+              if (!isOpen)
+                e.currentTarget.style.borderColor =
+                  theme.palette.neutralTertiaryAlt;
             }}
           >
             <span>{getMultiSelectDisplayText()}</span>
             <span
               style={{
-                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                position: 'absolute',
+                right: '0.625rem',
+                top: '50%',
+                transform: isOpen
+                  ? 'translateY(-50%) rotate(180deg)'
+                  : 'translateY(-50%) rotate(0deg)',
                 transition: 'transform 0.2s ease',
-                fontSize: '0.7rem',
+                fontSize: '0.65rem',
+                pointerEvents: 'none',
               }}
             >
               ▼
@@ -188,6 +205,8 @@ export const FormSelect: React.FC<FormSelectProps> = ({
 
           {isOpen && (
             <div
+              role='listbox'
+              aria-multiselectable='true'
               style={{
                 position: 'absolute',
                 top: 'calc(100% + 4px)',
@@ -208,7 +227,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    padding: '0.5rem',
+                    padding: '0.5rem 0.75rem',
                     cursor: disabled ? 'not-allowed' : 'pointer',
                     borderBottom: `1px solid ${theme.palette.neutralLighter}`,
                   }}
@@ -249,41 +268,173 @@ export const FormSelect: React.FC<FormSelectProps> = ({
           )}
         </div>
       ) : (
-        // Standard single-select dropdown
-        <select
-          value={value || ''}
-          onChange={(e) => onChange?.(e.target.value)}
-          disabled={disabled}
-          aria-label={ariaLabel || label}
-          style={{
-            width: '100%',
-            padding: '0.5rem',
-            borderRadius: theme.borderRadius.container.small,
-            backgroundColor: theme.palette.neutralLight,
-            border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-            color: theme.palette.neutralPrimary,
-            fontSize: controlFontSize,
-            cursor: disabled ? 'not-allowed' : 'pointer',
-            fontFamily: theme.typography.fonts.body.fontFamily,
-            opacity: disabled ? 0.6 : 1,
-            transition: 'border-color 0.2s ease',
-            outline: 'none',
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = theme.palette.themePrimary;
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor =
-              theme.palette.neutralTertiaryAlt;
-          }}
-        >
-          {placeholder && <option value=''>{placeholder}</option>}
-          {options.map((option) => (
-            <option key={option.key} value={option.key}>
-              {option.text}
-            </option>
-          ))}
-        </select>
+        // Single-select: custom button + dropdown matching FormInput/FormDateInput styling
+        <div ref={dropdownRef} style={{ position: 'relative' }}>
+          <button
+            type='button'
+            onClick={() => !disabled && setIsOpen(!isOpen)}
+            disabled={disabled}
+            aria-label={ariaLabel || label}
+            aria-haspopup='listbox'
+            aria-expanded={isOpen}
+            style={{
+              width: '100%',
+              padding: '0.5rem 2rem 0.5rem 0.75rem',
+              borderRadius: theme.borderRadius.container.small,
+              backgroundColor: theme.palette.neutralLight,
+              border: `1px solid ${isOpen ? theme.palette.themePrimary : theme.palette.neutralTertiaryAlt}`,
+              color:
+                !value || value === ''
+                  ? theme.palette.neutralSecondary
+                  : theme.palette.neutralPrimary,
+              fontSize: controlFontSize,
+              cursor: disabled ? 'not-allowed' : 'pointer',
+              fontFamily: theme.typography.fonts.body.fontFamily,
+              opacity: disabled ? 0.6 : 1,
+              transition: 'border-color 0.2s ease',
+              outline: 'none',
+              textAlign: 'left',
+              display: 'block',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              position: 'relative',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = theme.palette.themePrimary;
+            }}
+            onBlur={(e) => {
+              if (!isOpen)
+                e.currentTarget.style.borderColor =
+                  theme.palette.neutralTertiaryAlt;
+            }}
+          >
+            {value
+              ? options.find((opt) => opt.key === value)?.text ??
+                (placeholder || 'Select...')
+              : placeholder || 'Select...'}
+            <span
+              style={{
+                position: 'absolute',
+                right: '0.625rem',
+                top: '50%',
+                transform: isOpen
+                  ? 'translateY(-50%) rotate(180deg)'
+                  : 'translateY(-50%) rotate(0deg)',
+                transition: 'transform 0.2s ease',
+                fontSize: '0.65rem',
+                pointerEvents: 'none',
+              }}
+            >
+              ▼
+            </span>
+          </button>
+
+          {isOpen && (
+            <div
+              role='listbox'
+              aria-label={ariaLabel || label}
+              style={{
+                position: 'absolute',
+                top: 'calc(100% + 4px)',
+                left: 0,
+                right: 0,
+                maxHeight: '200px',
+                overflowY: 'auto',
+                border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+                borderRadius: theme.borderRadius.container.small,
+                backgroundColor: theme.palette.neutralLight,
+                boxShadow: theme.effects.elevation8,
+                zIndex: 500,
+              }}
+            >
+              {placeholder && (
+                <button
+                  key='__placeholder__'
+                  role='option'
+                  aria-selected={!value || value === ''}
+                  type='button'
+                  onClick={() => {
+                    onChange?.('');
+                    setIsOpen(false);
+                  }}
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    padding: '0.5rem 0.75rem',
+                    textAlign: 'left',
+                    background:
+                      !value || value === ''
+                        ? theme.palette.neutralLighter
+                        : 'transparent',
+                    border: 'none',
+                    borderBottom: `1px solid ${theme.palette.neutralLighter}`,
+                    color: theme.palette.neutralSecondary,
+                    fontSize: controlFontSize,
+                    fontFamily: theme.typography.fonts.body.fontFamily,
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      theme.palette.neutralLighter;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      !value || value === ''
+                        ? theme.palette.neutralLighter
+                        : 'transparent';
+                  }}
+                >
+                  {placeholder}
+                </button>
+              )}
+              {options.map((option) => (
+                <button
+                  key={option.key}
+                  role='option'
+                  aria-selected={value === option.key}
+                  type='button'
+                  onClick={() => {
+                    onChange?.(option.key);
+                    setIsOpen(false);
+                  }}
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    padding: '0.5rem 0.75rem',
+                    textAlign: 'left',
+                    background:
+                      value === option.key
+                        ? theme.palette.neutralLighter
+                        : 'transparent',
+                    border: 'none',
+                    borderBottom: `1px solid ${theme.palette.neutralLighter}`,
+                    color: theme.palette.neutralPrimary,
+                    fontSize: controlFontSize,
+                    fontFamily: theme.typography.fonts.body.fontFamily,
+                    cursor: 'pointer',
+                    fontWeight:
+                      value === option.key
+                        ? theme.typography.fontWeights.semiBold
+                        : theme.typography.fontWeights.regular,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      theme.palette.neutralLighter;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      value === option.key
+                        ? theme.palette.neutralLighter
+                        : 'transparent';
+                  }}
+                >
+                  {option.text}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
