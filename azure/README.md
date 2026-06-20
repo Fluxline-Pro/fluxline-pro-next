@@ -71,10 +71,10 @@ azure/
 
 ### Environments
 
-| Environment | SKU      | Branch  | Static Web App        | Identity Type     |
-| ----------- | -------- | ------- | --------------------- | ----------------- |
-| **Test**    | Free     | test    | az-fluxline-next-test | Service Principal |
-| **Prod**    | Standard | master  | az-fluxline-next-prod | User-Assigned MI  |
+| Environment | SKU      | Branch | Static Web App        | Identity Type     |
+| ----------- | -------- | ------ | --------------------- | ----------------- |
+| **Test**    | Free     | test   | az-fluxline-next-test | Service Principal |
+| **Prod**    | Standard | master | az-fluxline-next-prod | User-Assigned MI  |
 
 > **Note:** Free tier Static Web Apps don't support managed identities, so the TEST environment uses a Service Principal.
 

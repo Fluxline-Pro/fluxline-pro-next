@@ -118,13 +118,13 @@ Podcasts use two Azure Storage services:
 
 Configure these application settings:
 
-| Setting                    | Description                               | Example                                  |
-| -------------------------- | ----------------------------------------- | ---------------------------------------- |
-| `AZURE_TABLE_STORAGE_URL`  | Base URL for Table Storage REST API       | https://yourstore.table.core.windows.net |
-| `AZURE_TABLE_SAS_TOKEN`    | SAS token for Table Storage (read access) | sv=2020-08-04&ss=t&srt=sco&sp=rl&...     |
-| `AZURE_PODCAST_TABLE_DEV`  | Table name for local dev/test context     | podcastsdev                              |
-| `AZURE_PODCAST_TABLE_PROD` | Table name for production environment     | podcasts                                 |
-| `NEXT_PUBLIC_ENVIRONMENT`  | Environment identifier (test/prod; dev for local use) | prod                           |
+| Setting                    | Description                                           | Example                                  |
+| -------------------------- | ----------------------------------------------------- | ---------------------------------------- |
+| `AZURE_TABLE_STORAGE_URL`  | Base URL for Table Storage REST API                   | https://yourstore.table.core.windows.net |
+| `AZURE_TABLE_SAS_TOKEN`    | SAS token for Table Storage (read access)             | sv=2020-08-04&ss=t&srt=sco&sp=rl&...     |
+| `AZURE_PODCAST_TABLE_DEV`  | Table name for local dev/test context                 | podcastsdev                              |
+| `AZURE_PODCAST_TABLE_PROD` | Table name for production environment                 | podcasts                                 |
+| `NEXT_PUBLIC_ENVIRONMENT`  | Environment identifier (test/prod; dev for local use) | prod                                     |
 
 ### Episode Metadata Schema
 
