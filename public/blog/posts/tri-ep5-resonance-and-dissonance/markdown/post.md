@@ -19,7 +19,7 @@ tags:
   ]
 imageUrl: '/blog/posts/tri-ep5-resonance-and-dissonance/images/resonance-dissonance-illustration.jpg'
 imageAlt: 'Episode 5: Resonance and Dissonance — The Resonant Identity'
-featured: true
+featured: false
 seoTitle: 'Episode 5: Resonance and Dissonance | The Resonant Identity'
 seoDescription: 'A companion article to Episode 5 of The Resonant Identity podcast. Learn how resonance and dissonance work across body, emotion, and narrative, and how to apply the Resonance Test with Interpretive Hygiene.'
 seoKeywords:
@@ -151,7 +151,7 @@ If your body and mind have been shaped by distorted beliefs about yourself or re
 
 > _"You may feel one hundred percent aligned in a resonant decision, but you may not be one hundred percent aware of actual truth. And if your body and mind are aligned in distorted views of reality... you could be making decisions that actually involve identity erosion."_
 
-This is not a flaw in the framework — it is precisely why **Interpretive Hygiene** and **the Triad** exist. No signal, however powerful, bypasses the obligation to verify it against reality.
+This is not a flaw in the framework — it is precisely why **Interpretive Hygiene** and **The Triad** exist. No signal, however powerful, bypasses the obligation to verify it against reality.
 
 ---
 
@@ -197,7 +197,7 @@ What is your mind saying? What stories are running? Are they forward-moving and 
 
 ### Step 5: Evaluate Through Interpretive Hygiene
 
-Now bring the Triad to bear. Does the narrative make logical sense? Is it rooted in fact, or is it built on assumption, fear, or old data? Does it align with who you are and who you are becoming — or is it echoing a past version of yourself that no longer applies? Apply the light/indifferent/shadow framework to the narrative just as you did to the emotions, and ask: _Is this distortion — or truth?_
+Now bring the Triad to bear. Does the narrative make logical sense? Is it rooted in fact, or is it built on assumption, fear, or old data? Does it align with who you are and who you are becoming — or is it echoing a past version of yourself that no longer applies? Apply the light/indifferent/shadow framework to the narrative just as you did to the emotions, and ask: _Is this Distortion — or Truth?_
 
 ### Step 6: Ask the Core Question
 
@@ -265,7 +265,7 @@ As a preview: resonance expands the Window of Choice, making action feel natural
 
 You can find _The Resonant Identity_ with Terence Waters on **Spotify**, **Apple Podcasts**, **Spreaker**, and wherever you get your podcasts. Follow the show, leave a review, and share it with someone whose identity journey you believe in.
 
-Find the show on social media under **The Resonant ID** on Instagram, Facebook, Bluesky, and X.
+Find the show on social media under **@theresonantid** on Instagram, Facebook, Bluesky, and X.
 
 ---
 
