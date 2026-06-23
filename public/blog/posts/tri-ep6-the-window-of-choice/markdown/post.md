@@ -208,12 +208,12 @@ That question widens the window.
 
 # **Related Resources**
 
-- [Somatic cues](ca://s?q=Somatic_cues_and_choice)
-- [Emotional clarity](ca://s?q=Emotional_clarity_explained)
-- [Interpretive hygiene](ca://s?q=Interpretive_hygiene)
-- [The Vast Unknown](ca://s?q=The_Vast_Unknown_explained)
-- [Identity as compass](ca://s?q=Identity_as_compass)
-- [Values](ca://s?q=Define_values_in_identity_work)
+- Somatic cues
+- Emotional clarity
+- Interpretive hygiene
+- The Vast Unknown
+- Identity as compass
+- Values
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 'Episode 8: Identity Challenge — Widening the Window'
+title: 'Episode 6: Identity Challenge — Widening the Window'
 excerpt: 'A 7-day identity challenge from The Resonant Identity podcast to help you widen your Window of Choice through somatic awareness, emotional clarity, narrative reframing, and identity alignment.'
 author: 'The Resonant Identity'
 publishedDate: '2026-06-21'
@@ -11,9 +11,9 @@ tags:
     'Emotional Intelligence',
     'Identity Architecture',
   ]
-featured: false
-seoTitle: 'Episode 8: Identity Challenge — Widening the Window | The Resonant Identity'
-seoDescription: 'A companion 7-day identity challenge to Episode 8 of The Resonant Identity podcast. Practice widening your Window of Choice with daily somatic, emotional, narrative, and identity-based reflection prompts.'
+featured: true
+seoTitle: 'Episode 6: Identity Challenge — Widening the Window | The Resonant Identity'
+seoDescription: 'A companion 7-day identity challenge to Episode 6 of The Resonant Identity podcast. Practice widening your Window of Choice with daily somatic, emotional, narrative, and identity-based reflection prompts.'
 seoKeywords:
   [
     'identity challenge',
@@ -50,7 +50,7 @@ Ask yourself:
 Write down the moment, what triggered it, and whether your Window felt wide, narrow, or collapsed.
 
 **Explore:**  
-[Window of Choice](ca://s?q=Define_the_Window_of_Choice)
+Window of Choice
 
 ---
 
@@ -68,7 +68,7 @@ and one moment when your emotions react first (frustration, excitement, fear).
 - Did I collapse, widen, or stay neutral?
 
 **Explore:**  
-[Somatic cues](ca://s?q=Somatic_cues_and_choice)
+Somatic cues
 
 ---
 
@@ -85,7 +85,7 @@ Ask:
 Write the story you told, then write an alternative story that widens your Window instead of collapsing it.
 
 **Explore:**  
-[Interpretive hygiene](ca://s?q=Interpretive_hygiene)
+Interpretive hygiene
 
 ---
 
@@ -105,7 +105,7 @@ Ask:
 Write what you discover about your relationship with uncertainty.
 
 **Explore:**  
-[The Vast Unknown](ca://s?q=The_Vast_Unknown_explained)
+The Vast Unknown
 
 ---
 
@@ -124,7 +124,7 @@ Then ask:
 Write the emotion, the meaning you assigned, and one alternative meaning that widens your Window.
 
 **Explore:**  
-[Emotional clarity](ca://s?q=Emotional_clarity_explained)
+Emotional clarity
 
 ---
 
@@ -141,7 +141,7 @@ Ask:
 Write the decision, the identity it aligns with, and one small adjustment you could make tomorrow to choose more from your future self.
 
 **Explore:**  
-[Identity as compass](ca://s?q=Identity_as_compass)
+Identity as compass
 
 ---
 
@@ -162,7 +162,7 @@ Which of these widened your Window the most?
 Write one value, one virtue, or one guardrail you want to explore next week as you begin building your identity architecture.
 
 **Explore:**  
-[Values](ca://s?q=Define_values_in_identity_work)
+Values
 
 ---
 

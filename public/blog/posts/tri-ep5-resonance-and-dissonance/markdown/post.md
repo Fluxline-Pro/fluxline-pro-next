@@ -19,7 +19,7 @@ tags:
   ]
 imageUrl: '/blog/posts/tri-ep5-resonance-and-dissonance/images/resonance-dissonance-illustration.jpg'
 imageAlt: 'Episode 5: Resonance and Dissonance — The Resonant Identity'
-featured: false
+featured: true
 seoTitle: 'Episode 5: Resonance and Dissonance | The Resonant Identity'
 seoDescription: 'A companion article to Episode 5 of The Resonant Identity podcast. Learn how resonance and dissonance work across body, emotion, and narrative, and how to apply the Resonance Test with Interpretive Hygiene.'
 seoKeywords:
