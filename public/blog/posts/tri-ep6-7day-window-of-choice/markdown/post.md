@@ -11,6 +11,8 @@ tags:
     'Emotional Intelligence',
     'Identity Architecture',
   ]
+imageUrl: '/blog/posts/tri-ep6-7day-window-of-choice/images/window-of-choice.jpg'
+imageAlt: 'Episode 6: Identity Challenge — Widening the Window | The Resonant Identity'
 featured: true
 seoTitle: 'Episode 6: Identity Challenge — Widening the Window | The Resonant Identity'
 seoDescription: 'A companion 7-day identity challenge to Episode 6 of The Resonant Identity podcast. Practice widening your Window of Choice with daily somatic, emotional, narrative, and identity-based reflection prompts.'

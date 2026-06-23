@@ -11,8 +11,8 @@ tags:
     'Window of Choice',
     'Emotional Intelligence',
   ]
-imageUrl: '/images/TheResonantIdentity_Logo.png'
-imageAlt: 'Episode 6: The Window of Choice — The Resonant Identity'
+imageUrl: '/blog/posts/tri-ep6-the-window-of-choice/images/window-of-choice.jpg'
+imageAlt: 'Episode 6: The Window of Choice | The Resonant Identity'
 featured: true
 seoTitle: 'Episode 6: The Window of Choice | The Resonant Identity'
 seoDescription: 'A companion article to Episode 6 of The Resonant Identity podcast. Explore how the Window of Choice is shaped by somatic, emotional, narrative, and identity signals, and how Emotional Intelligence widens your capacity for aligned action.'
