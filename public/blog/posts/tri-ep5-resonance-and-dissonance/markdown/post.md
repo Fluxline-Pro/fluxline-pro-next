@@ -39,13 +39,13 @@ generatedWithAI: true
 
 # Episode Companion: Resonance and Dissonance — Learning to Read Your Own Signal
 
-> _This is a companion guide to the podcast episode "Resonance and Dissonance" from The Resonant Identity with host Terrence Watters. It is intended to supplement your listening experience with structured reflection, key concepts, and a step-by-step breakdown of the practices introduced in the episode. The Resonant Identity is an educational and reflective framework, not a clinical service. If you are navigating significant emotional distress or mental health concerns, please seek support from a qualified mental health professional._
+> _This is a companion guide to the podcast episode "Resonance and Dissonance" from The Resonant Identity with host Terence Waters. It is intended to supplement your listening experience with structured reflection, key concepts, and a step-by-step breakdown of the practices introduced in the episode. The Resonant Identity is an educational and reflective framework, not a clinical service. If you are navigating significant emotional distress or mental health concerns, please seek support from a qualified mental health professional._
 
 ---
 
 ## Why This Episode Had to Wait
 
-If you've been listening since the beginning, you might have wondered why a podcast literally called _The Resonant Identity_ waited until this deep into its run to formally define **resonance**. As host Terence Watters explains in the episode:
+If you've been listening since the beginning, you might have wondered why a podcast literally called _The Resonant Identity_ waited until this deep into its run to formally define **resonance**. As host Terence Waters explains in the episode:
 
 > _"We wouldn't have been able to actually give you a full understanding of what resonance and dissonance is... we needed to give you information about the background of why we make the decisions that we do."_
 
@@ -57,7 +57,7 @@ Resonance is not a vague feeling. It's not just enthusiasm or a mood. And disson
 
 ## A Story Before the Theory: The Knot in the Stomach
 
-Before diving into definitions, Terrence shares a deeply personal story — one that illustrates resonance and dissonance far more vividly than any textbook definition could.
+Before diving into definitions, Terence shares a deeply personal story — one that illustrates resonance and dissonance far more vividly than any textbook definition could.
 
 He had built a successful corporate career: a six-figure salary, a clear path upward, a master's degree and bachelor's degree earned specifically to advance into leadership. By every external measure, he was doing everything right. And yet:
 
@@ -77,7 +77,7 @@ In the Resonance Core Framework, **resonance** is defined as a full alignment of
 
 This is not simply feeling excited. It is not thinking you've made the right choice. It is a **whole-system alignment** — body, emotions, and mind arriving at the same answer simultaneously.
 
-Terrence calls the physical sensation of resonance the **"jellies"** — those feelings of expansiveness, excitement, and even euphoria that arise when you are genuinely on the right track. In resonance, you might notice:
+Terence calls the physical sensation of resonance the **"jellies"** — those feelings of expansiveness, excitement, and even euphoria that arise when you are genuinely on the right track. In resonance, you might notice:
 
 - **Somatic cues:** Open chest, steady and easy breath, a sense of groundedness and presence, absence of threat
 - **Emotional cues:** Calm, curiosity, warmth, joy, excitement — what the framework calls **light cues**
@@ -151,7 +151,7 @@ If your body and mind have been shaped by distorted beliefs about yourself or re
 
 > _"You may feel one hundred percent aligned in a resonant decision, but you may not be one hundred percent aware of actual truth. And if your body and mind are aligned in distorted views of reality... you could be making decisions that actually involve identity erosion."_
 
-This is not a flaw in the framework — it is precisely why **Interpretive Hygiene** and **the Triad** exist. No signal, however powerful, bypasses the obligation to verify it against reality.
+This is not a flaw in the framework — it is precisely why **Interpretive Hygiene** and **The Triad** exist. No signal, however powerful, bypasses the obligation to verify it against reality.
 
 ---
 
@@ -175,7 +175,7 @@ If you're experiencing dissonance — or even resonance — and something is off
 
 This is the core practical tool of the episode — a real-time practice to be used whenever you experience either resonance or dissonance in your daily life. It bridges the gap between reactive impulse and thoughtful, identity-aligned response.
 
-The process begins with what Terrence calls the **causal reality** — the automatic, involuntary response of your body and mind — and ends in what he calls the **volition stage** and the **Window of Choice**, the moment where you take conscious ownership of what happens next.
+The process begins with what Terence calls the **causal reality** — the automatic, involuntary response of your body and mind — and ends in what he calls the **volition stage** and the **Window of Choice**, the moment where you take conscious ownership of what happens next.
 
 ### Step 1: Ground Yourself — Pause the Script
 
@@ -197,7 +197,7 @@ What is your mind saying? What stories are running? Are they forward-moving and 
 
 ### Step 5: Evaluate Through Interpretive Hygiene
 
-Now bring the Triad to bear. Does the narrative make logical sense? Is it rooted in fact, or is it built on assumption, fear, or old data? Does it align with who you are and who you are becoming — or is it echoing a past version of yourself that no longer applies? Apply the light/indifferent/shadow framework to the narrative just as you did to the emotions, and ask: _Is this distortion — or truth?_
+Now bring the Triad to bear. Does the narrative make logical sense? Is it rooted in fact, or is it built on assumption, fear, or old data? Does it align with who you are and who you are becoming — or is it echoing a past version of yourself that no longer applies? Apply the light/indifferent/shadow framework to the narrative just as you did to the emotions, and ask: _Is this Distortion — or Truth?_
 
 ### Step 6: Ask the Core Question
 
@@ -263,9 +263,9 @@ As a preview: resonance expands the Window of Choice, making action feel natural
 
 ## Listen to the Episode
 
-You can find _The Resonant Identity_ with Terrence Watters on **Spotify**, **Apple Podcasts**, **Spreaker**, and wherever you get your podcasts. Follow the show, leave a review, and share it with someone whose identity journey you believe in.
+You can find _The Resonant Identity_ with Terence Waters on **Spotify**, **Apple Podcasts**, **Spreaker**, and wherever you get your podcasts. Follow the show, leave a review, and share it with someone whose identity journey you believe in.
 
-Find the show on social media under **The Resonant ID** on Instagram, Facebook, Bluesky, and X.
+Find the show on social media under **@theresonantid** on Instagram, Facebook, Bluesky, and X.
 
 ---
 
