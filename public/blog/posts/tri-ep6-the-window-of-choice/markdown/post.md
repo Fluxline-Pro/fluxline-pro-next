@@ -5,27 +5,27 @@ author: 'The Resonant Identity'
 publishedDate: '2026-06-21'
 category: 'Resonant Identity'
 tags:
-	[
-		'Episode Companion',
-		'Identity Architecture',
-		'Window of Choice',
-		'Emotional Intelligence',
-	]
+  [
+    'Episode Companion',
+    'Identity Architecture',
+    'Window of Choice',
+    'Emotional Intelligence',
+  ]
 imageUrl: '/images/TheResonantIdentity_Logo.png'
 imageAlt: 'Episode 6: The Window of Choice — The Resonant Identity'
 featured: true
 seoTitle: 'Episode 6: The Window of Choice | The Resonant Identity'
 seoDescription: 'A companion article to Episode 6 of The Resonant Identity podcast. Explore how the Window of Choice is shaped by somatic, emotional, narrative, and identity signals, and how Emotional Intelligence widens your capacity for aligned action.'
 seoKeywords:
-	[
-		'window of choice',
-		'identity architecture',
-		'emotional intelligence',
-		'somatic cues',
-		'narrative awareness',
-		'identity alignment',
-		'resonant identity',
-	]
+  [
+    'window of choice',
+    'identity architecture',
+    'emotional intelligence',
+    'somatic cues',
+    'narrative awareness',
+    'identity alignment',
+    'resonant identity',
+  ]
 generatedWithAI: true
 ---
 
