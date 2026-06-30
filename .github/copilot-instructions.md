@@ -892,6 +892,13 @@ The Resonant Identity (TRI) is a podcast with accompanying blog content that use
 - `/blog` - Standard blog listing (TRI posts appear alongside other blog content)
 - `/blog/[slug]` - Individual blog post detail pages
 
+**TRI Contact & Social Links**:
+
+- **Contact email**: `mail@theresonantidentity.com` (used in `mailto:` links and buttons throughout the site)
+- Defined in `TRI_SOCIAL_LINKS` (`src/app/about/constants.ts`) — this is the canonical source for TRI social/contact links
+- The contact page (`src/app/contact/page.tsx`) renders a "Email The Resonant Identity" button using this email
+- Any new TRI contact links or email references must use `mail@theresonantidentity.com`
+
 **Required Frontmatter for TRI Blog Posts**:
 
 ```yaml

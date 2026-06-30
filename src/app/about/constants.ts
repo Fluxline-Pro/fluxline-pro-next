@@ -34,6 +34,7 @@ export const TRI_SOCIAL_LINKS: SocialLinksData = {
   bluesky: 'https://bsky.app/profile/theresonantid.bsky.social',
   tiktok: 'https://www.tiktok.com/@theresonantid',
   facebook: 'https://www.facebook.com/theresonantid',
+  email: 'mail@theresonantidentity.com',
 };
 
 export const FLUXLINE_SOCIAL_LINKS: SocialLinksData = {
