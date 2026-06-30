@@ -38,7 +38,6 @@ export default function ContactPage() {
 
   // Email built from char codes at render time — avoids a plain-text address
   // in the static bundle while working correctly as a React href prop.
-  // mail@theresonantidentity.com
   const triEmailHref = `mailto:${String.fromCharCode(
     109, 97, 105, 108
   )}@${String.fromCharCode(
