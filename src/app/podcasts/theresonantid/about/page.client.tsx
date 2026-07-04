@@ -1,8 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { FadeUp } from '@/animations/fade-animations';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { TRIPost } from '../../types';
@@ -20,7 +21,7 @@ import {
 import { Divider } from '../TRI/Divider';
 
 /**
- * The Resonant Identity — About/Philosophy Page Client Component
+ * The Resonant Identity -- About/Philosophy Page Client Component
  * Demonstrates the TRI scaffolding system with configurable sections
  */
 export function TheResonantIdentityAboutPageClient({
@@ -28,10 +29,9 @@ export function TheResonantIdentityAboutPageClient({
 }: {
   triPosts: TRIPost[];
 }) {
-  const { theme } = useAppTheme();
   const router = useRouter();
   const isMobileHook = useIsMobile();
-  const isMobile = isMobileHook; // No need for mounted check here since we're not doing animations in this component
+  const isMobile = isMobileHook;
 
   const {
     latestEpisode,
@@ -103,33 +103,33 @@ export function TheResonantIdentityAboutPageClient({
               title='What is The Resonant Identity?'
               style={{ marginBottom: '0.625rem' }}
             />
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
-                marginBottom: theme.spacing.m,
-                lineHeight: theme.typography.lineHeights.relaxed,
+                color: 'var(--fx-text-body)',
+                marginBottom: 12,
+                lineHeight: 'var(--fx-body-leading)',
+                fontSize: 'var(--fx-body-size)',
               }}
             >
               The Resonant Identity (TRI) is a space for identity
               transformation, micro-lessons, and applied resonance. It extends
-              The Resonance Core Framework into a living, accessible rhythm —
+              The Resonance Core Framework into a living, accessible rhythm --
               helping you build an identity that feels aligned, coherent, and
               grounded in who you&apos;re becoming.
-            </Typography>
-            <Typography
-              variant='p'
+            </p>
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
-                lineHeight: theme.typography.lineHeights.relaxed,
+                color: 'var(--fx-text-body)',
+                lineHeight: 'var(--fx-body-leading)',
+                fontSize: 'var(--fx-body-size)',
               }}
             >
               TRI is not about quick fixes or surface-level hacks. It&apos;s
               about cultivating a deeper relationship with yourself through
-              resonance — learning to listen to the subtle cues of what feels
+              resonance -- learning to listen to the subtle cues of what feels
               right, and building an identity that reflects that resonance in
               daily life.
-            </Typography>
+            </p>
           </ContentSection>
           <Divider bottom />
         </FadeUp>
@@ -137,7 +137,7 @@ export function TheResonantIdentityAboutPageClient({
         {/* How TRI Works Section */}
         <FadeUp delay={0.2}>
           <ContentSection
-            backgroundColor={theme.palette.neutralLighterAlt}
+            backgroundColor='var(--fx-surface-card)'
             padding
             borderRadius
             isWithinCta
@@ -148,7 +148,7 @@ export function TheResonantIdentityAboutPageClient({
               subtitle='Explore the core pathways designed to help identity become a lived, repeatable practice.'
               isMobile={isMobile}
               isWithinCta
-              style={{ marginBottom: theme.spacing.m, marginTop: 0 }}
+              style={{ marginBottom: 12, marginTop: 0 }}
             />
 
             <CardGrid
@@ -176,8 +176,7 @@ export function TheResonantIdentityAboutPageClient({
                 variant: 'primary',
               }}
             />
-            <div className='mt-8' />
-            {/* Add spacing between header and content */}
+            <div style={{ marginTop: 32 }} />
             <FilteredContentList posts={triPosts} limit={6} />
           </ContentSection>
         </FadeUp>

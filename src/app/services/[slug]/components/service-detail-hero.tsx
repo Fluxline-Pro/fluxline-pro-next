@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
 import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import type { ServiceCategory } from '../../constants';
 
 /**
@@ -13,38 +11,34 @@ import type { ServiceCategory } from '../../constants';
 export const ServiceDetailHero: React.FC<{ service: ServiceCategory }> = ({
   service,
 }) => {
-  const { theme } = useAppTheme();
-
   return (
-    <div className='space-y-6'>
-      <div className='flex items-center gap-4'>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
         <FluentIcon
           iconName={service.icon}
           size='xLarge'
-          color={theme.palette.themePrimary}
+          color='var(--fx-accent)'
         />
-        <Typography
-          variant='h1'
+        <h1
           style={{
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-            fontWeight: theme.typography.fontWeights.bold,
+            fontWeight: 700,
           }}
         >
           {service.title}
-        </Typography>
+        </h1>
       </div>
 
-      <Typography
-        variant='p'
+      <p
         style={{
-          color: theme.palette.neutralSecondary,
+          color: 'var(--fx-text-body)',
           fontSize: '1.25rem',
-          lineHeight: theme.typography.lineHeights.relaxed,
+          lineHeight: 1.7,
         }}
       >
         {service.description}
-      </Typography>
+      </p>
     </div>
   );
 };

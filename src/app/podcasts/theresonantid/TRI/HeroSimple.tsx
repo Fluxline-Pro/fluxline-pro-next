@@ -4,7 +4,7 @@ import React from 'react';
 import { Hero } from '@/theme/components/hero/Hero';
 import { FadeUp } from '@/animations/fade-animations';
 import { Callout } from '@/theme/components/callout';
-import { FormButton } from '@/theme/components/form/FormButton';
+import FxButton from '@/theme/components/dsm/FxButton';
 import type { PodcastEpisode } from '@/app/podcasts/types';
 
 export interface HeroSimpleProps {
@@ -52,22 +52,20 @@ export function HeroSimple({
       >
         {/* Featured Latest Episode Callout */}
         {!episodesLoading && latestEpisode && onPlayLatestEpisode && (
-          <div className='pt-8'>
+          <div style={{ paddingTop: 32 }}>
             <Callout
               variant='accent'
               title='Listen to the Most Recent Episode'
               subtitle={latestEpisode.episode_title || 'Start listening now'}
               action={
-                <FormButton
-                  variant='secondary'
-                  size='large'
-                  icon='Play'
-                  iconPosition='left'
+                <FxButton
+                  variant='outline'
+                  size='lg'
                   onClick={onPlayLatestEpisode}
                   aria-label='Listen to the latest episode of The Resonant Identity'
                 >
                   Listen to Latest Episode
-                </FormButton>
+                </FxButton>
               }
             />
           </div>

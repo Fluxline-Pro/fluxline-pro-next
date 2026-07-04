@@ -84,11 +84,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onClose }) => {
     { key: 'dark', text: 'Dark Mode' },
     { key: 'light', text: 'Light Mode' },
     { key: 'high-contrast', text: 'High Contrast' },
-    { key: 'grayscale', text: 'Grayscale Light' },
+    { key: 'grayscale-light', text: 'Grayscale Light' },
     { key: 'grayscale-dark', text: 'Grayscale Dark' },
-    { key: 'protanopia', text: 'Protanopia (Red-blind)' },
-    { key: 'deuteranopia', text: 'Deuteranopia (Green-blind)' },
-    { key: 'tritanopia', text: 'Tritanopia (Blue-blind)' },
+    { key: 'colorblind', text: 'Colorblind' },
   ];
 
   const layoutOptions = [

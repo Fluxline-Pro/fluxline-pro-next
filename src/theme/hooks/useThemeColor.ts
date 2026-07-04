@@ -10,7 +10,7 @@ export const useThemeColor = () => {
   ) => {
     if (
       theme.themeMode === 'high-contrast' ||
-      theme.themeMode === 'grayscale' ||
+      theme.themeMode === 'grayscale-light' ||
       theme.themeMode === 'grayscale-dark'
     ) {
       return theme.palette.themePrimary;
@@ -35,7 +35,7 @@ export const useThemeColor = () => {
   const getThemedBackgroundColor = () => {
     if (theme.themeMode === 'high-contrast') {
       return theme.palette.themePrimary;
-    } else if (theme.themeMode === 'grayscale') {
+    } else if (theme.themeMode === 'grayscale-light') {
       return theme.palette.neutralPrimary;
     }
     return theme.isInverted

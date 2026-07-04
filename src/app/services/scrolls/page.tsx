@@ -6,79 +6,66 @@
  */
 
 import React from 'react';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Hero } from '@/theme/components/hero/Hero';
-import { Callout } from '@/theme/components/callout/Callout';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { Typography } from '@/theme/components/typography';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxCallout from '@/theme/components/dsm/FxCallout';
+import FxButton from '@/theme/components/dsm/FxButton';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import { ScrollsGrid } from './components/ScrollsGrid';
 import { getAllScrolls } from './scrollsData';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { getIconForPath } from '@/utils/navigation-icons';
 
 export default function ScrollsPage() {
   const scrolls = getAllScrolls();
-  const { theme } = useAppTheme();
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-16'>
+    <FxContainer style={{ padding: '64px 32px 88px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 64 }}>
         {/* Hero Section */}
-        <Hero
-          title='Explore the Scrolls'
-          iconName={getIconForPath('/services/scrolls')}
-          description='Access our comprehensive collection of strategic insights and frameworks. Each scroll offers deep-dive guidance on transforming your business, craft, or personal practice with intentionality and resonance.'
-        >
-          <Callout
-            variant='accent'
-            title='Gates to Transformation'
-            subtitle='Curricula for your evolution—frameworks designed for sustainable growth.'
+        <div>
+          <FxSectionHeading
+            title="Explore the Scrolls"
+            subhead="Access our comprehensive collection of strategic insights and frameworks. Each scroll offers deep-dive guidance on transforming your business, craft, or personal practice with intentionality and resonance."
+            as="h1"
           />
-        </Hero>
+          <div style={{ marginTop: 32 }}>
+            <FxCallout tone="gold" title="Gates to Transformation">
+              <p
+                style={{
+                  color: 'var(--fx-text-body)',
+                  fontSize: 'var(--fx-body-size)',
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}
+              >
+                Curricula for your evolution—frameworks designed for sustainable growth.
+              </p>
+            </FxCallout>
+          </div>
+        </div>
 
         {/* Scrolls Grid Section */}
-        <section className='space-y-8'>
-          <Typography
-            variant='h2'
+        <section style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <h2
             style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
+              color: 'var(--fx-accent)',
+              fontSize: 'var(--fx-h2-size)',
+              fontWeight: 700,
+              margin: 0,
             }}
           >
             Strategic Insights Library
-          </Typography>
+          </h2>
           <ScrollsGrid scrolls={scrolls} />
         </section>
 
         {/* Call to Action */}
-        <Callout
-          variant='subtle'
-          title='Ready to Transform?'
-          action={
-            <FormButton
-              text='Explore Our Services'
-              variant='primary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => (window.location.href = '/services')}
-            />
-          }
-        >
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            Explore the insights that resonate with your current phase and
-            discover how our services can support your transformational journey.
-          </Typography>
-        </Callout>
+        <FxCTABand
+          title="Ready to Transform?"
+          body="Explore the insights that resonate with your current phase and discover how our services can support your transformational journey."
+          primaryLabel="Explore Our Services"
+          primaryHref="/services"
+        />
       </div>
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }

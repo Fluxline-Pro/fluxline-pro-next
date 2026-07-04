@@ -7,8 +7,8 @@ import { isProduction } from '@/lib/environment';
 import { Providers } from './providers';
 
 // Global styles
-import './tailwind.css'; // ← Tailwind base/utilities and Typekit content first
-import './globals.scss'; // ← Your custom styles override Tailwind
+import './dsm-globals.css'; // ← DSM design tokens (colors, typography, spacing, etc.)
+import './globals.scss'; // ← Global reset, typography, and utility styles
 
 // Environment-aware robots: only allow indexing in production
 const _isProd = isProduction();
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     // bing: 'verification_token',
   },
   other: {
-    'theme-color': '#010101',
+    'theme-color': '#0A0D13',
   },
 };
 
@@ -99,27 +99,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' data-fx-theme='dark'>
       <head>
-        {/* Font Awesome icons */}
-        <link
-          rel='stylesheet'
-          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
-        />
-        {/* Preconnect to external font sources */}
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link
-          rel='preconnect'
-          href='https://fonts.gstatic.com'
-          crossOrigin='anonymous'
-        />
         <script
           async
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7691902367885014'
           crossOrigin='anonymous'
         ></script>
       </head>
-      <body className='antialiased' suppressHydrationWarning>
+      <body suppressHydrationWarning>
         {/* Organization structured data for SEO and AI ingest */}
         <Script
           id='organization-schema'

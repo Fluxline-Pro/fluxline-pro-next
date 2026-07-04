@@ -6,7 +6,6 @@ import {
   FilterConfig,
   ContentCard,
 } from '@/components/ContentListingPage';
-import { getIconForPath } from '@/utils/navigation-icons';
 
 interface PressReleaseListingClientProps {
   cards: ContentCard[];
@@ -21,14 +20,11 @@ export function PressReleaseListingClient({
   cards,
   allYears,
 }: PressReleaseListingClientProps) {
-  // Filter state
   const [selectedYear, setSelectedYear] = React.useState<string | undefined>();
 
   // Filter cards based on selected year
   const filteredCards = React.useMemo(() => {
-    if (!selectedYear) {
-      return cards;
-    }
+    if (!selectedYear) return cards;
     return cards.filter((card) => card.imageText?.includes(selectedYear));
   }, [cards, selectedYear]);
 
@@ -38,7 +34,7 @@ export function PressReleaseListingClient({
       type: 'single',
       label: 'Year',
       options: [
-        { key: '', text: 'All Years' },
+        { key: '', text: 'All' },
         ...allYears.map((year) => ({ key: year, text: year })),
       ],
       value: selectedYear,
@@ -46,23 +42,17 @@ export function PressReleaseListingClient({
     },
   ];
 
-  // Build results message
-  const resultsMessage = `Showing ${filteredCards.length} ${filteredCards.length === 1 ? 'press release' : 'press releases'}${selectedYear ? ` from ${selectedYear}` : ''}`;
-
-  const hasActiveFilters = !!selectedYear;
-
   return (
     <ContentListingPage
-      title='Press Release'
-      iconName={getIconForPath('/press-release') || 'News'}
-      description='Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group. Stay informed about our latest developments, partnerships, and achievements.'
-      basePath='/press-release'
+      title="Announcements"
+      kicker="Press"
+      subhead="Official updates from Fluxline Resonance Group."
+      description="Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group."
+      basePath="/press-release"
       cards={filteredCards}
       filters={filters}
-      resultsMessage={resultsMessage}
-      emptyStateTitle='No press releases found'
-      emptyStateMessage='Check back soon for updates and announcements.'
-      hasActiveFilters={hasActiveFilters}
+      emptyStateTitle="No press releases found"
+      emptyStateMessage="Check back soon for updates and announcements."
       onClearFilters={() => setSelectedYear(undefined)}
     />
   );

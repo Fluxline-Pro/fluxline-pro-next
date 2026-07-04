@@ -1,8 +1,0 @@
-/**
- * Tailwind CSS 4+ Import
- * Plain CSS file to avoid Sass deprecation warnings
- * Also includes Typekit stylesheet for custom typography
- */
-
-@import url('https://use.typekit.net/qmh5dow.css');
-@import 'tailwindcss';

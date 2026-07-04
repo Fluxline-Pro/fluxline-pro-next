@@ -68,25 +68,14 @@ export const useColorVisionFilter = (
         : 'contrast(100%)';
 
     switch (mode) {
-      case 'grayscale':
+      case 'grayscale-light':
       case 'grayscale-dark':
         // Enhanced grayscale with better contrast and brightness
         return `grayscale(100%) ${darkModeContrast} ${darkModeBrightness}`;
-      case 'protanopia':
-        // Red-colorblindness simulation:
-        // Reds appear darker and shift towards brown/yellow tones
-        // Reds and greens become more similar (yellowy-brown range)
-        return `sepia(88%) hue-rotate(-42deg) saturate(32%) brightness(68%) contrast(108%) ${darkModeBrightness}`;
-      case 'deuteranopia':
-        // Green colorblindness simulation (M-cones absent — most common form):
-        // Reds and greens both collapse toward dull olive-yellow; blues are preserved.
-        // Positive hue-rotate pushes reds toward olive-orange; lower contrast avoids crushing darks.
+      case 'colorblind':
+        // Colorblind-friendly filter: reduces saturation and shifts hues
+        // to improve distinguishability across common CVD types.
         return `sepia(48%) hue-rotate(22deg) saturate(38%) brightness(105%) contrast(92%) ${darkModeBrightness}`;
-      case 'tritanopia':
-        // Blue-yellow colorblindness simulation (S-cones absent):
-        // Blues appear greenish; yellows shift pinkish/violet.
-        // Reds shift toward orange-salmon; palette loses blue-cool dimension and reads warmer.
-        return `sepia(32%) saturate(52%) hue-rotate(-12deg) brightness(108%) contrast(90%) ${darkModeBrightness}`;
       default:
         // Skip dark mode filter if explicitly requested (e.g., for Fluxline dark logo)
         if (skipDarkModeFilter && theme.isInverted) {

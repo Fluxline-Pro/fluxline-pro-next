@@ -136,16 +136,15 @@ body::after {
 }
 
 /* =============================================
-   TAILWIND CSS THEME INTEGRATION
+   UTILITY CLASSES (legacy compatibility)
    ============================================= */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-inter: var(--font-inter);
-  --font-mono: var(--font-mono);
-}
+.space-y-4 > * + * { margin-top: 16px; }
+.space-y-5 > * + * { margin-top: 20px; }
+.space-y-6 > * + * { margin-top: 24px; }
+.space-y-8 > * + * { margin-top: 32px; }
+.space-y-12 > * + * { margin-top: 48px; }
+.space-y-16 > * + * { margin-top: 64px; }
 
 // Apply background to html element for full viewport coverage
 // iOS Safari has issues with background-attachment: fixed, so we conditionally apply it
@@ -367,25 +366,3 @@ body.reduced-transparency {
   }
 }
 
-/* =============================================
-   VIEWPORT GRID STYLES (Home Page)
-   ============================================= */
-
-.viewport-grid {
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-
-  &.isHomePage {
-    /* Background handled by BackgroundLayer component */
-    background: transparent;
-  }
-}
-
-/* Allow scrolling in portrait mode for non-home pages */
-html.allow-scroll,
-body.allow-scroll {
-  overflow-y: auto !important;
-  height: auto !important;
-}

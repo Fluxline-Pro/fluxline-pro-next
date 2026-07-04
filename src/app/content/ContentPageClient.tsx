@@ -2,22 +2,15 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { Hero } from '@/theme/components/hero/Hero';
-import { Callout } from '@/theme/components/callout';
-import { getIconForPath } from '@/utils/navigation-icons';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxCard from '@/theme/components/dsm/FxCard';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
 
 interface ContentCategory {
   title: string;
   description: string;
   path: string;
-  iconName: string;
-  color: string;
   isHighlighted?: boolean;
   comingSoon?: boolean;
 }
@@ -25,19 +18,10 @@ interface ContentCategory {
 /**
  * Content Hub Page Client Component
  * Displays categories of content available on the site
- * Inspired by terencewaters.com/my-content layout
  */
 export default function ContentPageClient() {
   const router = useRouter();
-  const { theme } = useAppTheme();
-  const [isMounted, setIsMounted] = React.useState(false);
-  const orientationHook = useDeviceOrientation();
-  const orientation = isMounted ? orientationHook : 'landscape';
   const [hoveredCard, setHoveredCard] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const contentCategories: ContentCategory[] = [
     {
@@ -45,8 +29,6 @@ export default function ContentPageClient() {
       description:
         'The Resonant Identity — a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.',
       path: '/podcasts',
-      iconName: 'Microphone',
-      color: theme.palette.yellowDark,
       isHighlighted: true,
     },
     {
@@ -54,32 +36,24 @@ export default function ContentPageClient() {
       description:
         'Insights, best practices, and thoughts on technology, design, and business transformation.',
       path: '/blog',
-      iconName: 'TextDocumentShared',
-      color: theme.palette.themePrimary,
     },
     {
       title: 'Portfolio',
       description:
         'Explore our portfolio of innovative projects spanning web applications, mobile apps, and enterprise software.',
       path: '/portfolio',
-      iconName: 'FolderQuery',
-      color: theme.palette.tealLight,
     },
     {
       title: 'GitHub',
       description:
         'Open source projects, code samples, and technical resources from our development team.',
       path: '/github',
-      iconName: 'BranchMerge',
-      color: theme.palette.purpleLight,
     },
     {
       title: 'Videos',
       description:
         'Watch videos from the YouTube channel @TerenceWaters, including tutorials, live streams, and playlists.',
       path: '/videos',
-      iconName: 'Video',
-      color: theme.palette.magentaLight,
     },
     // TODO: move Books to the top once launched, and add a "New!" badge to it -TW
     {
@@ -87,8 +61,6 @@ export default function ContentPageClient() {
       description:
         'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
       path: '/books',
-      iconName: 'BookAnswers',
-      color: theme.palette.blueLight,
       comingSoon: true,
     },
   ];
@@ -99,57 +71,32 @@ export default function ContentPageClient() {
     }
   };
 
-  const badgeStyles: React.CSSProperties = {
-    position: 'absolute',
-    top: theme.spacing.m,
-    right: theme.spacing.m,
-    padding: `${theme.spacing.s2} ${theme.spacing.s1}`,
-    backgroundColor: theme.palette.themePrimary,
-    color: theme.palette.black,
-    borderRadius: theme.effects.roundedCorner4,
-    fontSize: '1rem',
-    fontWeight: theme.typography.fontWeights.semiBold,
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-  };
-
-  const isMobile =
-    orientation === 'portrait' || orientation === 'tablet-portrait';
-
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
+    <FxContainer style={{ padding: '64px 32px 88px' }}>
       <div
         style={{
-          padding: isMobile ? theme.spacing.m : theme.spacing.xl,
           width: '100%',
           maxWidth: '1400px',
           margin: '0 auto',
         }}
       >
         {/* Page Header */}
-        <Hero
-          title='Content Hub'
-          iconName={getIconForPath('/content')}
-          subtitle='Where Ideas Meet Execution'
-          description="Explore our collection of articles, projects, and insights. Discover
-            the work we've done and the ideas we're sharing with the
-            community."
-          backArrow={false}
+        <FxSectionHeading
+          title="Content Hub"
+          subhead="Where Ideas Meet Execution"
+          lede="Explore our collection of articles, projects, and insights. Discover the work we've done and the ideas we're sharing with the community."
+          as="h1"
         />
 
         {/* Content Categories Grid */}
         <div
-          className='pt-1'
           style={{
             display: 'grid',
-            gridTemplateColumns: isMobile
-              ? '1fr'
-              : orientation === 'ultrawide'
-                ? 'repeat(4, 1fr)'
-                : 'repeat(2, 1fr)',
-            gap: theme.spacing.l1,
-            marginBottom: theme.spacing.xxl,
-            marginTop: theme.spacing.xxl,
+            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+            gap: 24,
+            marginBottom: 44,
+            marginTop: 44,
+            paddingTop: 4,
           }}
         >
           {contentCategories.map((category) => {
@@ -166,23 +113,21 @@ export default function ContentPageClient() {
                 onMouseLeave={() => setHoveredCard(null)}
                 style={{
                   position: 'relative',
-                  padding: theme.spacing.l1,
+                  padding: 24,
                   backgroundColor:
                     isHovered || category.isHighlighted
-                      ? theme.palette.neutralQuaternaryAlt
-                      : theme.themeMode === 'dark'
-                        ? theme.palette.themeDark
-                        : theme.palette.white,
-                  border: `2px solid ${isHovered || category.isHighlighted ? category.color : theme.palette.neutralLight}`,
-                  borderRadius: theme.effects.roundedCorner6,
+                      ? 'var(--fx-surface-card)'
+                      : 'var(--fx-bg)',
+                  border: `2px solid ${isHovered || category.isHighlighted ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
+                  borderRadius: 12,
                   cursor: isDisabled ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s ease',
                   transform:
                     isHovered && !isDisabled ? 'translateY(-4px)' : 'none',
                   boxShadow:
                     isHovered && !isDisabled
-                      ? theme.effects.elevation16
-                      : theme.effects.elevation4,
+                      ? '0 8px 24px rgba(0,0,0,0.15)'
+                      : '0 2px 8px rgba(0,0,0,0.06)',
                   opacity: isDisabled ? 0.6 : 1,
                   minHeight: '200px',
                   display: 'flex',
@@ -193,8 +138,17 @@ export default function ContentPageClient() {
                 {category.isHighlighted && (
                   <div
                     style={{
-                      ...badgeStyles,
-                      backgroundColor: theme.palette.greenLight,
+                      position: 'absolute',
+                      top: 12,
+                      right: 12,
+                      padding: '4px 8px',
+                      backgroundColor: 'var(--fx-gold)',
+                      color: '#000',
+                      borderRadius: 4,
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px',
                     }}
                   >
                     New!
@@ -204,87 +158,73 @@ export default function ContentPageClient() {
                 {category.comingSoon && (
                   <div
                     style={{
-                      ...badgeStyles,
-                      backgroundColor: theme.palette.themePrimary,
+                      position: 'absolute',
+                      top: 12,
+                      right: 12,
+                      padding: '4px 8px',
+                      backgroundColor: 'var(--fx-accent)',
+                      color: '#000',
+                      borderRadius: 4,
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px',
                     }}
                   >
                     Coming Soon!
                   </div>
                 )}
 
-                {/* Icon and Title */}
-                <div
+                {/* Title */}
+                <h2
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: theme.spacing.m,
-                    marginBottom: theme.spacing.m,
+                    color: isHovered
+                      ? 'var(--fx-accent)'
+                      : 'var(--fx-text-heading)',
+                    fontSize: '1.75rem',
+                    fontWeight: 600,
+                    transition: 'color 0.3s ease',
+                    margin: '0 0 12px 0',
                   }}
                 >
-                  <FluentIcon
-                    iconName={category.iconName}
-                    size='large'
-                    color={
-                      isHovered
-                        ? category.color
-                        : theme.palette.neutralSecondary
-                    }
-                    style={{
-                      transition: 'color 0.3s ease',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <Typography
-                    variant='h2'
-                    style={{
-                      color: isHovered
-                        ? category.color
-                        : theme.palette.neutralPrimary,
-                      fontSize: '1.75rem',
-                      fontWeight: theme.typography.fontWeights.semiBold,
-                      transition: 'color 0.3s ease',
-                      margin: 0,
-                    }}
-                  >
-                    {category.title}
-                  </Typography>
-                </div>
+                  {category.title}
+                </h2>
 
                 {/* Description */}
-                <Typography
-                  variant='p'
+                <p
                   style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '1rem',
+                    color: 'var(--fx-text-body)',
+                    fontSize: 'var(--fx-body-size)',
                     lineHeight: 1.6,
                     flex: 1,
+                    margin: 0,
                   }}
                 >
                   {category.description}
-                </Typography>
+                </p>
 
-                {/* Arrow Icon */}
+                {/* Arrow */}
                 {!category.comingSoon && (
                   <div
                     style={{
-                      marginTop: theme.spacing.m,
+                      marginTop: 12,
                       display: 'flex',
                       alignItems: 'center',
-                      gap: theme.spacing.s2,
-                      color: category.color,
-                      fontWeight: theme.typography.fontWeights.semiBold,
+                      gap: 4,
+                      color: 'var(--fx-accent)',
+                      fontWeight: 600,
                     }}
                   >
                     <span>Explore</span>
-                    <FluentIcon
-                      iconName='ChevronRight'
-                      size='medium'
-                      color={category.color}
+                    <span
                       style={{
+                        display: 'inline-block',
                         transform: isHovered ? 'translateX(4px)' : 'none',
                         transition: 'transform 0.3s ease',
                       }}
-                    />
+                    >
+                      &rarr;
+                    </span>
                   </div>
                 )}
               </div>
@@ -293,23 +233,13 @@ export default function ContentPageClient() {
         </div>
 
         {/* Call to Action Section */}
-        <Callout
-          variant='neutral'
-          title='Stay Updated'
-          subtitle='Subscribe to our newsletter to get the latest updates on new blog posts, projects, and insights delivered to your inbox.'
-          action={
-            <FormButton
-              variant='primary'
-              size='medium'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => router.push('/contact')}
-            >
-              Get in Touch
-            </FormButton>
-          }
+        <FxCTABand
+          title="Stay Updated"
+          body="Subscribe to our newsletter to get the latest updates on new blog posts, projects, and insights delivered to your inbox."
+          primaryLabel="Get in Touch"
+          primaryHref="/contact"
         />
       </div>
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }

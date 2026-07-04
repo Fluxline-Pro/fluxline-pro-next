@@ -6,16 +6,12 @@
  */
 
 import React from 'react';
-import { UnifiedPageWrapper } from '@/components';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { ConsultationStepper } from '@/components/ConsultationStepper';
-import { Typography } from '@/theme/components/typography';
-import { Hero } from '@/theme/components/hero';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { getIconForPath } from '@/utils/navigation-icons';
 
 export default function BookPage() {
-  const { theme } = useAppTheme();
   const [stepperOpen, setStepperOpen] = React.useState(false);
 
   // Auto-open stepper on page load with a short delay to allow
@@ -26,46 +22,49 @@ export default function BookPage() {
   }, []);
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <Hero
+    <FxContainer style={{ padding: '64px 32px 88px' }}>
+      <FxSectionHeading
         title='Book a Consultation'
-        iconName={getIconForPath('/book')}
-        description='Tell us about your needs and schedule a Zoom call — all in three quick steps.'
-      >
-        <div style={{ marginTop: theme.spacing.l }}>
-          <FormButton
-            variant='primary'
-            size='large'
-            text='Start Your Consultation →'
-            onClick={() => setStepperOpen(true)}
-            style={{ minWidth: '260px' }}
-          />
-        </div>
-      </Hero>
+        subhead='Tell us about your needs and schedule a Zoom call — all in three quick steps.'
+        as='h1'
+      />
+
+      <div style={{ marginTop: 20 }}>
+        <FxButton
+          variant='primary'
+          size='lg'
+          onClick={() => setStepperOpen(true)}
+          style={{ minWidth: '260px' }}
+        >
+          Start Your Consultation →
+        </FxButton>
+      </div>
 
       {/* Brief description for SEO / non-JS fallback */}
       <section
         style={{
           maxWidth: '640px',
-          margin: `0 auto`,
-          padding: `0 ${theme.spacing.m}`,
+          margin: '0 auto',
+          padding: '0 12px',
+          marginTop: 44,
         }}
       >
-        <Typography
-          variant='h2'
+        <h2
           style={{
-            color: theme.palette.themePrimary,
-            marginBottom: theme.spacing.m,
+            fontSize: 'var(--fx-h2-size)',
+            color: 'var(--fx-accent)',
+            marginBottom: 12,
+            fontFamily: 'var(--fx-font)',
           }}
         >
           How it works
-        </Typography>
+        </h2>
         <ol
           style={{
-            paddingLeft: theme.spacing.l,
+            paddingLeft: 20,
             display: 'flex',
             flexDirection: 'column',
-            gap: theme.spacing.m,
+            gap: 12,
           }}
         >
           {[
@@ -74,12 +73,17 @@ export default function BookPage() {
             'Enter your contact details, pick a meeting length, and schedule your Zoom call.',
           ].map((step, i) => (
             <li key={i}>
-              <Typography
-                variant='p'
-                style={{ color: theme.palette.neutralPrimary, margin: 0 }}
+              <p
+                style={{
+                  color: 'var(--fx-text-heading)',
+                  margin: 0,
+                  fontSize: 'var(--fx-body-size)',
+                  lineHeight: 'var(--fx-body-leading)',
+                  fontFamily: 'var(--fx-font)',
+                }}
               >
                 {step}
-              </Typography>
+              </p>
             </li>
           ))}
         </ol>
@@ -89,6 +93,6 @@ export default function BookPage() {
         isOpen={stepperOpen}
         onDismiss={() => setStepperOpen(false)}
       />
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }

@@ -1,0 +1,258 @@
+/* ===== Color modes =====
+   Dark is the DEFAULT (:root, colors.css). Switch by setting data-fx-theme on <html>:
+   "light" | "grayscale-dark" | "grayscale-light" | "high-contrast" | "colorblind".
+   Every mode remaps the same semantic tokens — components never branch on mode. */
+
+/* ---------- Light (from the light-mode logo: navy on white, steel-blue structure) ---------- */
+[data-fx-theme="light"] {
+  --fx-bg-page: #F8FAFC;
+  --fx-bg-deep: #FFFFFF;
+  --fx-bg-hero-1: #FFFFFF;
+  --fx-bg-hero-2: #F2F6FB;
+  --fx-bg-hero-3: #E8EEF7;
+  --fx-gradient-band: linear-gradient(150deg, #E8EEF7, #D9E4F2); /* @kind color */
+  --fx-gradient-feature: linear-gradient(160deg, #EDF2F9, #FFFFFF); /* @kind color */
+
+  --fx-surface-card: #FFFFFF;
+  --fx-surface-alt: #EFF3F9;
+  --fx-hover-fill: #E8EEF7;
+  --fx-badge-bg: #E3E9F2;
+  --fx-surface-inset: #F1F5FA;
+  --fx-surface-raised: #FFFFFF;
+  --fx-surface-input: #FFFFFF;
+
+  --fx-border: #D5DEEA;
+  --fx-border-subtle: #E3E9F2;
+  --fx-border-strong: #A8BDD6;
+  --fx-border-hover: #4D6C96;
+
+  --fx-text-heading: #274770;
+  --fx-text-heading-display: #10203A;
+  --fx-text-base: #26303F;
+  --fx-text-bright: #10203A;
+  --fx-text-body: #2E3A4E;
+  --fx-text-muted: #5B6B80;
+  --fx-text-faint: #7E8A99;
+  --fx-text-soft: #4D6C96;
+  --fx-text-mist: #33506F;
+
+  --fx-accent: #274770;
+  --fx-accent-ink: #FFFFFF;
+  --fx-teal: #1F8079;
+  --fx-teal-bg: rgba(31, 128, 121, 0.10);
+  --fx-gold: #9A7B24;
+  --fx-gold-border: #C99B33;
+  --fx-gold-bg: rgba(224, 168, 60, 0.08);
+  --fx-line: #5E81A8;
+
+  --fx-success: #1F8079;
+  --fx-success-border: #9CCFC5;
+  --fx-success-bg: rgba(31, 128, 121, 0.06);
+  --fx-featured: #9A7B24;
+  --fx-error: #B0303C;
+  --fx-error-border: #E0ADB2;
+  --fx-error-bg: rgba(176, 48, 60, 0.06);
+  --fx-warning: #8A6D00;
+  --fx-warning-border: #D6BC66;
+  --fx-warning-bg: rgba(193, 156, 0, 0.08);
+  --fx-info: #274770;
+  --fx-info-border: #A8BDD6;
+  --fx-info-bg: rgba(39, 71, 112, 0.06);
+
+  --fx-toast-bg: #FFFFFF;
+  --fx-toast-border: #A8BDD6;
+  --fx-toast-shadow: 0 8px 28px rgba(16, 32, 58, 0.16); /* @kind shadow */
+  --fx-nav-bg: rgba(255, 255, 255, 0.85); /* @kind color */
+}
+
+/* ---------- Grayscale dark (zero chroma — WIDENED tonal ladder: surfaces step 4–6% each,
+   text steps clearly separated, states distinguished by lightness) ---------- */
+[data-fx-theme="grayscale-dark"] {
+  --fx-bg-page: #0C0C0D;
+  --fx-bg-deep: #060607;
+  --fx-bg-hero-1: #040405;
+  --fx-bg-hero-2: #101012;
+  --fx-bg-hero-3: #1A1A1D;
+  --fx-gradient-hero: linear-gradient(160deg, #040405 0%, #101012 55%, #1A1A1D 100%); /* @kind color */
+  --fx-gradient-band: linear-gradient(150deg, #1C1C20, #101014); /* @kind color */
+  --fx-gradient-feature: linear-gradient(160deg, #242429, #17171A); /* @kind color */
+  --fx-surface-card: #18181B;
+  --fx-surface-alt: #111113;
+  --fx-hover-fill: #202024;
+  --fx-badge-bg: #28282D;
+  --fx-surface-inset: #121214;
+  --fx-surface-raised: #212126;
+  --fx-surface-input: #0E0E10;
+  --fx-border: #323238;
+  --fx-border-subtle: #232327;
+  --fx-border-strong: #55555D;
+  --fx-border-hover: #8E8E98;
+  --fx-text-heading: #D4D4DA;
+  --fx-text-heading-display: #FFFFFF;
+  --fx-text-base: #D2D2D7;
+  --fx-text-bright: #F4F4F6;
+  --fx-text-body: #C4C4CA;
+  --fx-text-muted: #94949C;
+  --fx-text-faint: #77777F;
+  --fx-text-soft: #A6A6AF;
+  --fx-text-mist: #B8B8C0;
+  --fx-accent: #E2E2E7;
+  --fx-accent-ink: #0C0C0D;
+  --fx-teal: #C8C8CF;
+  --fx-teal-bg: rgba(200, 200, 207, 0.10);
+  --fx-gold: #DCDCE1;
+  --fx-gold-border: #96969E;
+  --fx-gold-bg: rgba(220, 220, 225, 0.06);
+  --fx-line: #8E8E98;
+  --fx-success: #C8C8CF;
+  --fx-success-border: #55555D;
+  --fx-success-bg: rgba(200, 200, 207, 0.06);
+  --fx-featured: #DCDCE1;
+  --fx-error: #EFEFF2;
+  --fx-error-border: #6E6E77;
+  --fx-error-bg: rgba(239, 239, 242, 0.07);
+  --fx-warning: #A9A9B2;
+  --fx-warning-border: #4A4A52;
+  --fx-warning-bg: rgba(169, 169, 178, 0.06);
+  --fx-info: #BCBCC4;
+  --fx-info-border: #55555D;
+  --fx-info-bg: rgba(188, 188, 196, 0.06);
+  --fx-toast-bg: #212126;
+  --fx-toast-border: #55555D;
+  --fx-nav-bg: rgba(6, 6, 7, 0.82); /* @kind color */
+}
+
+/* ---------- Grayscale light (zero chroma — WIDENED tonal ladder: tint steps between
+   white and #E0, ink steps clearly separated, states distinguished by darkness) ---------- */
+[data-fx-theme="grayscale-light"] {
+  --fx-bg-page: #FAFAFB;
+  --fx-bg-deep: #FFFFFF;
+  --fx-bg-hero-1: #FFFFFF;
+  --fx-bg-hero-2: #F3F3F5;
+  --fx-bg-hero-3: #E8E8EB;
+  --fx-gradient-hero: linear-gradient(160deg, #FFFFFF 0%, #F3F3F5 55%, #E8E8EB 100%); /* @kind color */
+  --fx-gradient-band: linear-gradient(150deg, #EBEBEE, #DADADE); /* @kind color */
+  --fx-gradient-feature: linear-gradient(160deg, #EEEEF1, #FFFFFF); /* @kind color */
+  --fx-surface-card: #FFFFFF;
+  --fx-surface-alt: #F4F4F6;
+  --fx-hover-fill: #EBEBEE;
+  --fx-badge-bg: #E2E2E6;
+  --fx-surface-inset: #F1F1F3;
+  --fx-surface-raised: #FFFFFF;
+  --fx-surface-input: #FDFDFD;
+  --fx-border: #D6D6DB;
+  --fx-border-subtle: #E6E6E9;
+  --fx-border-strong: #AAAAB2;
+  --fx-border-hover: #5F5F68;
+  --fx-text-heading: #2E2E36;
+  --fx-text-heading-display: #121216;
+  --fx-text-base: #34343C;
+  --fx-text-bright: #121216;
+  --fx-text-body: #42424A;
+  --fx-text-muted: #6E6E77;
+  --fx-text-faint: #8E8E96;
+  --fx-text-soft: #55555E;
+  --fx-text-mist: #3A3A44;
+  --fx-accent: #2A2A32;
+  --fx-accent-ink: #FFFFFF;
+  --fx-teal: #4A4A54;
+  --fx-teal-bg: rgba(74, 74, 84, 0.08);
+  --fx-gold: #63636C;
+  --fx-gold-border: #A2A2AA;
+  --fx-gold-bg: rgba(99, 99, 108, 0.05);
+  --fx-line: #8A8A93;
+  --fx-success: #4A4A54;
+  --fx-success-border: #C0C0C6;
+  --fx-success-bg: rgba(74, 74, 84, 0.05);
+  --fx-featured: #63636C;
+  --fx-error: #1C1C22;
+  --fx-error-border: #90909A;
+  --fx-error-bg: rgba(28, 28, 34, 0.06);
+  --fx-warning: #585862;
+  --fx-warning-border: #B4B4BC;
+  --fx-warning-bg: rgba(88, 88, 98, 0.05);
+  --fx-info: #36363E;
+  --fx-info-border: #AAAAB2;
+  --fx-info-bg: rgba(54, 54, 62, 0.05);
+  --fx-toast-bg: #FFFFFF;
+  --fx-toast-border: #AAAAB2;
+  --fx-toast-shadow: 0 8px 28px rgba(18, 18, 22, 0.14); /* @kind shadow */
+  --fx-nav-bg: rgba(255, 255, 255, 0.88); /* @kind color */
+}
+
+/* ---------- High contrast (WHCM-style: pure black field, white structure, gold links) ---------- */
+[data-fx-theme="high-contrast"] {
+  --fx-bg-page: #000000;
+  --fx-bg-deep: #000000;
+  --fx-bg-hero-1: #000000;
+  --fx-bg-hero-2: #000000;
+  --fx-bg-hero-3: #000000;
+  --fx-gradient-hero: linear-gradient(160deg, #000000, #000000); /* @kind color */
+  --fx-gradient-band: linear-gradient(150deg, #000000, #000000); /* @kind color */
+  --fx-gradient-feature: linear-gradient(160deg, #000000, #000000); /* @kind color */
+  --fx-surface-card: #000000;
+  --fx-surface-alt: #000000;
+  --fx-hover-fill: #1A1A1A;
+  --fx-badge-bg: #000000;
+  --fx-surface-inset: #000000;
+  --fx-surface-raised: #000000;
+  --fx-surface-input: #000000;
+  --fx-border: #FFFFFF;
+  --fx-border-subtle: #FFFFFF;
+  --fx-border-strong: #FFFFFF;
+  --fx-border-hover: #FFD335;
+  --fx-text-heading: #FFFFFF;
+  --fx-text-heading-display: #FFFFFF;
+  --fx-text-base: #FFFFFF;
+  --fx-text-bright: #FFFFFF;
+  --fx-text-body: #FFFFFF;
+  --fx-text-muted: #FFFFFF;
+  --fx-text-faint: #FFFFFF;
+  --fx-text-soft: #FFD335;
+  --fx-text-mist: #FFFFFF;
+  --fx-accent: #FFFFFF;
+  --fx-accent-ink: #000000;
+  --fx-teal: #3FF23F;
+  --fx-teal-bg: transparent;
+  --fx-gold: #FFD335;
+  --fx-gold-border: #FFD335;
+  --fx-gold-bg: transparent;
+  --fx-line: #FFFFFF;
+  --fx-success: #3FF23F;
+  --fx-success-border: #3FF23F;
+  --fx-success-bg: transparent;
+  --fx-featured: #FFD335;
+  --fx-error: #FF9999;
+  --fx-error-border: #FF9999;
+  --fx-error-bg: transparent;
+  --fx-warning: #FFD335;
+  --fx-warning-border: #FFD335;
+  --fx-warning-bg: transparent;
+  --fx-info: #8CD2FF;
+  --fx-info-border: #8CD2FF;
+  --fx-info-bg: transparent;
+  --fx-toast-bg: #000000;
+  --fx-toast-border: #FFFFFF;
+  --fx-toast-shadow: none; /* @kind shadow */
+  --fx-nav-bg: #000000; /* @kind color */
+  --fx-nav-blur: none; /* @kind other */
+}
+
+/* ---------- Colorblind-safe (Okabe–Ito semantics on the dark shell; brand hues unchanged —
+   periwinkle/gold/steel already avoid red–green confusion; only STATE colors are remapped) ---------- */
+[data-fx-theme="colorblind"] {
+  --fx-success: #56B4E9;                       /* sky blue = positive */
+  --fx-success-border: #2C5A78;
+  --fx-success-bg: rgba(86, 180, 233, 0.08);
+  --fx-error: #D55E00;                         /* vermillion = error/destructive (distinct from warning yellow) */
+  --fx-error-border: #8A4210;
+  --fx-error-bg: rgba(213, 94, 0, 0.10);
+  --fx-warning: #F0E442;                       /* yellow = caution */
+  --fx-warning-border: #6E6A20;
+  --fx-warning-bg: rgba(240, 228, 66, 0.07);
+  --fx-info: #AEC6EE;                          /* brand periwinkle = informational (neutral, CVD-safe) */
+  --fx-info-border: #46608C;
+  --fx-info-bg: rgba(174, 198, 238, 0.08);
+  --fx-teal: #56B4E9;                          /* site teal reads gray to tritanopes; shift to sky blue */
+  --fx-teal-bg: rgba(86, 180, 233, 0.12);
+}

@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { FormButton, FormInput, FormTextarea } from '@/theme/components/form';
-import { Typography } from '@/theme/components/typography';
+import { FormInput, FormTextarea } from '@/theme/components/form';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 
 interface FormData {
@@ -25,7 +24,6 @@ type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export const ContactForm: React.FC = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const { theme } = useAppTheme();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -176,13 +174,16 @@ export const ContactForm: React.FC = () => {
   };
 
   const errorStyle: React.CSSProperties = {
-    color: theme.semanticColors.errorText || theme.palette.red,
+    color: 'var(--fx-error)',
     fontSize: '0.875rem',
-    marginTop: theme.spacing.xs,
+    marginTop: 4,
   };
 
   return (
-    <form onSubmit={handleSubmit} className='space-y-6'>
+    <form
+      onSubmit={handleSubmit}
+      style={{ display: 'flex', flexDirection: 'column', gap: 24 }}
+    >
       {/* Honeypot field - hidden from users */}
       <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden='true'>
         <input
@@ -272,7 +273,7 @@ export const ContactForm: React.FC = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginTop: theme.spacing.xs,
+            marginTop: 4,
           }}
         >
           {errors.message && (
@@ -284,7 +285,7 @@ export const ContactForm: React.FC = () => {
             id='message-counter'
             style={{
               fontSize: '0.75rem',
-              color: theme.palette.neutralTertiary,
+              color: 'var(--fx-text-muted)',
               marginLeft: 'auto',
             }}
           >
@@ -294,16 +295,15 @@ export const ContactForm: React.FC = () => {
       </div>
 
       {/* Submit Button */}
-      <FormButton
+      <FxButton
         type='submit'
         variant='primary'
-        size='medium'
-        fullWidth
+        size='md'
         disabled={status === 'submitting'}
-        text={status === 'submitting' ? 'Sending...' : 'Submit'}
-        aria-busy={status === 'submitting'}
-        style={{ fontSize: '1.25rem' }}
-      />
+        style={{ width: '100%', fontSize: '1.25rem' }}
+      >
+        {status === 'submitting' ? 'Sending...' : 'Submit'}
+      </FxButton>
 
       {/* Success Message */}
       {status === 'success' && (
@@ -311,17 +311,16 @@ export const ContactForm: React.FC = () => {
           role='alert'
           aria-live='polite'
           style={{
-            padding: theme.spacing.m,
-            backgroundColor:
-              theme.semanticColors.successBackground || '#E0F2F1',
-            color: theme.semanticColors.successText || theme.palette.green,
-            borderRadius: theme.borderRadius.s,
+            padding: 16,
+            backgroundColor: 'var(--fx-success-bg)',
+            color: 'var(--fx-success)',
+            borderRadius: 4,
             textAlign: 'center',
           }}
         >
-          <Typography variant='p' style={{ margin: 0 }}>
+          <p style={{ margin: 0 }}>
             Thank you for your message! We&apos;ll get back to you soon.
-          </Typography>
+          </p>
         </div>
       )}
 
@@ -331,16 +330,16 @@ export const ContactForm: React.FC = () => {
           role='alert'
           aria-live='polite'
           style={{
-            padding: theme.spacing.m,
-            backgroundColor: theme.semanticColors.errorBackground || '#FFEBEE',
-            color: theme.semanticColors.errorText || theme.palette.red,
-            borderRadius: theme.borderRadius.s,
+            padding: 16,
+            backgroundColor: 'var(--fx-error-bg)',
+            color: 'var(--fx-error)',
+            borderRadius: 4,
             textAlign: 'center',
           }}
         >
-          <Typography variant='p' style={{ margin: 0 }}>
+          <p style={{ margin: 0 }}>
             {errors.submit}
-          </Typography>
+          </p>
         </div>
       )}
     </form>
