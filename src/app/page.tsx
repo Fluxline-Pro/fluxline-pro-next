@@ -10,6 +10,17 @@ import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
 import FxStatCard from '@/theme/components/dsm/FxStatCard';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
+import FxCard from '@/theme/components/dsm/FxCard';
+import {
+  SERVICE_CATEGORIES,
+  FLUXLINE_SECONDARY_TAGLINE,
+} from '@/app/services/constants';
+
+const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
+  { key: 'body-practice', label: 'Body & Practice' },
+  { key: 'brand-digital', label: 'Brand & Digital Presence' },
+  { key: 'depth-strategy', label: 'Depth Work & Strategy' },
+];
 
 export default function Home() {
   const { themeMode } = useAppTheme();
@@ -150,14 +161,392 @@ export default function Home() {
         </FxContainer>
       </section>
 
-      <FxContainer style={{ paddingBottom: 88 }}>
-        <FxCTABand
-          title="Ready to structure the shift?"
-          body="Tell us where you are and where you're going. We'll map the right first step together."
-          primaryLabel="Book a Consultation"
-          primaryHref="/contact"
-        />
-      </FxContainer>
+      <section
+        id="services"
+        style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
+      >
+        <FxContainer>
+          <FxRailLayout
+            rail={
+              <div
+                style={{
+                  background: 'var(--fx-surface-inset)',
+                  border: '1px solid var(--fx-border)',
+                  borderRadius: 14,
+                  overflow: 'hidden',
+                }}
+              >
+                <img
+                  src="/images/home/HomePageCoverLandscape2.jpg"
+                  alt="Fluxline services"
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    aspectRatio: '3/4',
+                    objectFit: 'cover',
+                  }}
+                />
+                <div
+                  style={{
+                    padding: '16px 20px',
+                    borderTop: '1px solid var(--fx-border)',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 17,
+                      color: 'var(--fx-text-bright)',
+                    }}
+                  >
+                    Our Services
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: 'var(--fx-text-soft)',
+                      marginTop: 3,
+                    }}
+                  >
+                    From intention to infrastructure.
+                  </div>
+                </div>
+              </div>
+            }
+          >
+            <div>
+              <h2
+                style={{
+                  fontSize: 34,
+                  fontWeight: 700,
+                  color: 'var(--fx-text-heading)',
+                  margin: '0 0 10px',
+                  letterSpacing: '-.01em',
+                }}
+              >
+                Choose What Kind Of Support You Need
+              </h2>
+              <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
+                Every service is a doorway to transformation. Six modular
+                offerings across three domains — each links to its full
+                detail page.
+              </p>
+            </div>
+
+            {HOME_SERVICE_GROUPS.map((group) => (
+              <div key={group.key}>
+                <div
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 600,
+                    letterSpacing: '.12em',
+                    textTransform: 'uppercase',
+                    color: 'var(--fx-teal)',
+                    marginBottom: 12,
+                  }}
+                >
+                  {group.label}
+                </div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                    gap: 14,
+                  }}
+                >
+                  {SERVICE_CATEGORIES.filter((s) => s.category === group.key).map(
+                    (service) => (
+                      <FxCard
+                        key={service.id}
+                        variant="raised"
+                        interactive
+                        href={service.path}
+                        style={{ padding: 22 }}
+                      >
+                        <div
+                          style={{
+                            fontWeight: 700,
+                            fontSize: 16,
+                            color: 'var(--fx-text-heading)',
+                            marginBottom: 6,
+                          }}
+                        >
+                          {service.title}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: 13.5,
+                            lineHeight: 1.55,
+                            color: 'var(--fx-text-muted)',
+                            marginBottom: 12,
+                          }}
+                        >
+                          {service.description}
+                        </div>
+                        <span
+                          style={{
+                            fontSize: 12.5,
+                            fontWeight: 700,
+                            letterSpacing: '.08em',
+                            color: 'var(--fx-teal)',
+                          }}
+                        >
+                          LEARN MORE ›
+                        </span>
+                      </FxCard>
+                    )
+                  )}
+                </div>
+              </div>
+            ))}
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 18,
+                background: 'var(--fx-surface-inset)',
+                border: '1px solid var(--fx-border)',
+                borderRadius: 12,
+                padding: '18px 24px',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 15.5,
+                    color: 'var(--fx-text-bright)',
+                  }}
+                >
+                  Not sure where to start?
+                </div>
+                <div
+                  style={{
+                    fontSize: 13.5,
+                    color: 'var(--fx-text-muted)',
+                    marginTop: 2,
+                  }}
+                >
+                  {FLUXLINE_SECONDARY_TAGLINE}
+                </div>
+              </div>
+              <a
+                href="/services"
+                style={{
+                  color: 'var(--fx-text-soft)',
+                  fontSize: 13.5,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                All services →
+              </a>
+            </div>
+          </FxRailLayout>
+        </FxContainer>
+      </section>
+
+      <section id="content" style={{ padding: '88px 0' }}>
+        <FxContainer>
+          <div style={{ maxWidth: 680, marginBottom: 34 }}>
+            <h2
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 10px',
+                letterSpacing: '-.01em',
+              }}
+            >
+              Content Hub &amp; The Resonant Identity
+            </h2>
+            <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
+              Insights, client work, and the ongoing conversation around the
+              Resonance Core Framework™.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 16,
+              alignItems: 'stretch',
+            }}
+          >
+            <FxCard variant="raised" interactive href="/content" style={{ padding: 26 }}>
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-teal)',
+                  marginBottom: 10,
+                }}
+              >
+                Content Hub
+              </div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: 'var(--fx-text-heading)',
+                  marginBottom: 8,
+                }}
+              >
+                Blog, Podcast &amp; Portfolio
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  marginBottom: 14,
+                }}
+              >
+                Thought leadership on digital transformation, human-centered
+                design, and the work we&apos;ve shipped.
+              </div>
+              <span
+                style={{
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  letterSpacing: '.08em',
+                  color: 'var(--fx-teal)',
+                }}
+              >
+                EXPLORE THE HUB ›
+              </span>
+            </FxCard>
+
+            <FxCard
+              variant="raised"
+              interactive
+              href="/services/scrolls"
+              style={{ padding: 26 }}
+            >
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-teal)',
+                  marginBottom: 10,
+                }}
+              >
+                Scrolls
+              </div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: 'var(--fx-text-heading)',
+                  marginBottom: 8,
+                }}
+              >
+                Reflections &amp; Practice Notes
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  marginBottom: 14,
+                }}
+              >
+                Shorter writings on identity, embodiment, and building with
+                intention.
+              </div>
+              <span
+                style={{
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  letterSpacing: '.08em',
+                  color: 'var(--fx-teal)',
+                }}
+              >
+                READ THE SCROLLS ›
+              </span>
+            </FxCard>
+
+            <FxCard variant="band" style={{ padding: 26, display: 'flex', flexDirection: 'column' }}>
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-gold)',
+                  marginBottom: 10,
+                }}
+              >
+                The Resonant Identity
+              </div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: 'var(--fx-text-bright)',
+                  marginBottom: 8,
+                }}
+              >
+                Podcast &amp; Community
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  marginBottom: 18,
+                }}
+              >
+                Identity architecture, self-improvement, and practical
+                frameworks for navigating transitions with clarity.
+              </div>
+              <div style={{ marginTop: 'auto' }}>
+                <a
+                  href="/podcasts/theresonantid"
+                  style={{
+                    display: 'block',
+                    textAlign: 'center',
+                    background: 'var(--fx-accent)',
+                    color: 'var(--fx-accent-ink)',
+                    borderRadius: 8,
+                    fontWeight: 600,
+                    fontSize: 14.5,
+                    padding: '12px 20px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Episodes, Challenges &amp; Demos
+                </a>
+              </div>
+            </FxCard>
+          </div>
+        </FxContainer>
+      </section>
+
+      <section
+        id="contact"
+        style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
+      >
+        <FxContainer>
+          <FxCTABand
+            title="Ready to structure the shift?"
+            body="Tell us where you are and where you're going. We'll map the right first step together — development, design, coaching, or strategy."
+            primaryLabel="Book a Consultation"
+            primaryHref="/contact"
+            secondaryLabel="Full Contact Form →"
+            secondaryHref="/contact"
+          />
+        </FxContainer>
+      </section>
     </>
   );
 }

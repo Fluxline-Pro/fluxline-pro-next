@@ -27,10 +27,10 @@ export default function FxNav({
   const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
 
   const navLinks = [
-    { label: 'About & Ethos', href: '#about' },
-    { label: 'Services', href: '/services' },
-    { label: 'Content', href: '/blog' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'About', href: '#about' },
+    { label: 'Services', href: '#services' },
+    { label: 'Content & Podcast', href: '#content' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   const linkStyle = (key: string): React.CSSProperties => ({
