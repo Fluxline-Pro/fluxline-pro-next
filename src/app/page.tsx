@@ -11,6 +11,7 @@ import FxStatCard from '@/theme/components/dsm/FxStatCard';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import FxCard from '@/theme/components/dsm/FxCard';
+import FxReveal from '@/theme/components/dsm/FxReveal';
 import {
   SERVICE_CATEGORIES,
   FLUXLINE_SECONDARY_TAGLINE,
@@ -58,7 +59,8 @@ export default function Home() {
         <FxContainer>
           <FxRailLayout
             rail={
-              <div
+              <FxReveal
+                variant="left"
                 style={{
                   background: 'var(--fx-surface-inset)',
                   border: '1px solid var(--fx-border)',
@@ -104,10 +106,10 @@ export default function Home() {
                     Modular by design. Resonant by nature.
                   </div>
                 </div>
-              </div>
+              </FxReveal>
             }
           >
-            <div>
+            <FxReveal>
               <h2
                 style={{
                   fontSize: 34,
@@ -136,9 +138,10 @@ export default function Home() {
                 </strong>
                 .
               </p>
-            </div>
+            </FxReveal>
 
-            <div
+            <FxReveal
+              delay={100}
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
@@ -149,14 +152,16 @@ export default function Home() {
               <FxStatCard value="20+" label="Years Experience" />
               <FxStatCard value="6+" label="Product Offerings" />
               <FxStatCard value="10+" label="Industries Served" />
-            </div>
+            </FxReveal>
 
-            <FxCallout
-              tone="gold"
-              title="We're Not Done Yet—But We're Already Extraordinary."
-            >
-              <em>Modular by design. Resonant by nature.</em>
-            </FxCallout>
+            <FxReveal delay={200}>
+              <FxCallout
+                tone="gold"
+                title="We're Not Done Yet—But We're Already Extraordinary."
+              >
+                <em>Modular by design. Resonant by nature.</em>
+              </FxCallout>
+            </FxReveal>
           </FxRailLayout>
         </FxContainer>
       </section>
@@ -168,7 +173,8 @@ export default function Home() {
         <FxContainer>
           <FxRailLayout
             rail={
-              <div
+              <FxReveal
+                variant="left"
                 style={{
                   background: 'var(--fx-surface-inset)',
                   border: '1px solid var(--fx-border)',
@@ -211,10 +217,10 @@ export default function Home() {
                     From intention to infrastructure.
                   </div>
                 </div>
-              </div>
+              </FxReveal>
             }
           >
-            <div>
+            <FxReveal>
               <h2
                 style={{
                   fontSize: 34,
@@ -231,10 +237,10 @@ export default function Home() {
                 offerings across three domains — each links to its full
                 detail page.
               </p>
-            </div>
+            </FxReveal>
 
-            {HOME_SERVICE_GROUPS.map((group) => (
-              <div key={group.key}>
+            {HOME_SERVICE_GROUPS.map((group, i) => (
+              <FxReveal key={group.key} delay={(i + 1) * 100}>
                 <div
                   style={{
                     fontSize: 13,
@@ -297,10 +303,11 @@ export default function Home() {
                     )
                   )}
                 </div>
-              </div>
+              </FxReveal>
             ))}
 
-            <div
+            <FxReveal
+              delay={(HOME_SERVICE_GROUPS.length + 1) * 100}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -345,14 +352,14 @@ export default function Home() {
               >
                 All services →
               </a>
-            </div>
+            </FxReveal>
           </FxRailLayout>
         </FxContainer>
       </section>
 
       <section id="content" style={{ padding: '88px 0' }}>
         <FxContainer>
-          <div style={{ maxWidth: 680, marginBottom: 34 }}>
+          <FxReveal style={{ maxWidth: 680, marginBottom: 34 }}>
             <h2
               style={{
                 fontSize: 34,
@@ -368,7 +375,7 @@ export default function Home() {
               Insights, client work, and the ongoing conversation around the
               Resonance Core Framework™.
             </p>
-          </div>
+          </FxReveal>
 
           <div
             style={{
@@ -378,7 +385,8 @@ export default function Home() {
               alignItems: 'stretch',
             }}
           >
-            <FxCard variant="raised" interactive href="/content" style={{ padding: 26 }}>
+            <FxReveal delay={100} style={{ height: '100%' }}>
+            <FxCard variant="raised" interactive href="/content" style={{ padding: 26, height: '100%' }}>
               <div
                 style={{
                   fontSize: 12,
@@ -423,12 +431,14 @@ export default function Home() {
                 EXPLORE THE HUB ›
               </span>
             </FxCard>
+            </FxReveal>
 
+            <FxReveal delay={200} style={{ height: '100%' }}>
             <FxCard
               variant="raised"
               interactive
               href="/services/scrolls"
-              style={{ padding: 26 }}
+              style={{ padding: 26, height: '100%' }}
             >
               <div
                 style={{
@@ -474,8 +484,10 @@ export default function Home() {
                 READ THE SCROLLS ›
               </span>
             </FxCard>
+            </FxReveal>
 
-            <FxCard variant="band" style={{ padding: 26, display: 'flex', flexDirection: 'column' }}>
+            <FxReveal delay={300} style={{ height: '100%' }}>
+            <FxCard variant="band" style={{ padding: 26, height: '100%', display: 'flex', flexDirection: 'column' }}>
               <div
                 style={{
                   fontSize: 12,
@@ -528,6 +540,7 @@ export default function Home() {
                 </a>
               </div>
             </FxCard>
+            </FxReveal>
           </div>
         </FxContainer>
       </section>
@@ -537,14 +550,16 @@ export default function Home() {
         style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
         <FxContainer>
-          <FxCTABand
-            title="Ready to structure the shift?"
-            body="Tell us where you are and where you're going. We'll map the right first step together — development, design, coaching, or strategy."
-            primaryLabel="Book a Consultation"
-            primaryHref="/contact"
-            secondaryLabel="Full Contact Form →"
-            secondaryHref="/contact"
-          />
+          <FxReveal>
+            <FxCTABand
+              title="Ready to structure the shift?"
+              body="Tell us where you are and where you're going. We'll map the right first step together — development, design, coaching, or strategy."
+              primaryLabel="Book a Consultation"
+              primaryHref="/contact"
+              secondaryLabel="Full Contact Form →"
+              secondaryHref="/contact"
+            />
+          </FxReveal>
         </FxContainer>
       </section>
     </>
