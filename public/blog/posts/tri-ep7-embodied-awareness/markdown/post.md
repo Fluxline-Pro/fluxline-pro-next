@@ -13,7 +13,7 @@ tags:
   ]
 imageUrl: '/images/TheResonantIdentity_Logo.png'
 imageAlt: 'Episode 7 — Embodied Awareness | The Resonant Identity'
-featured: false
+featured: true
 seoTitle: 'Episode 7 — Embodied Awareness | The Resonant Identity'
 seoDescription: 'A companion article to Episode 7 of The Resonant Identity podcast. Explore the core value of Embodied Awareness and how it integrates somatic cues, emotional intelligence, narrative awareness, and identity alignment.'
 seoKeywords:
