@@ -21,6 +21,7 @@ export default function ContactPage() {
   return (
     <FxContainer style={{ padding: '118px 32px 60px' }}>
       <FxRailLayout
+        parallax
         rail={
           <div>
             <div

@@ -56,6 +56,7 @@ export default function Home() {
       <section id='about' className='fx-snap-section' style={{ padding: '88px 0' }}>
         <FxContainer>
           <FxRailLayout
+            parallax
             rail={
               <FxReveal
                 variant='left'
@@ -243,6 +244,7 @@ export default function Home() {
       >
         <FxContainer>
           <FxRailLayout
+            parallax
             rail={
               <FxReveal
                 variant='left'
