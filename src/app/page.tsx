@@ -199,14 +199,10 @@ export default function Home() {
                 }}
               >
                 {COMPANY_VALUES.map((val) => (
-                  <div
+                  <FxCard
                     key={val.id}
-                    style={{
-                      background: 'var(--fx-surface-card)',
-                      border: '1px solid var(--fx-border)',
-                      borderRadius: 12,
-                      padding: '20px 18px',
-                    }}
+                    interactive
+                    style={{ padding: '20px 18px' }}
                   >
                     <div
                       style={{
@@ -227,7 +223,7 @@ export default function Home() {
                     >
                       {val.description}
                     </div>
-                  </div>
+                  </FxCard>
                 ))}
               </div>
             </FxReveal>
@@ -375,52 +371,51 @@ export default function Home() {
               </FxReveal>
             ))}
 
-            <FxReveal
-              delay={(HOME_SERVICE_GROUPS.length + 1) * 100}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: 18,
-                background: 'var(--fx-surface-inset)',
-                border: '1px solid var(--fx-border)',
-                borderRadius: 12,
-                padding: '18px 24px',
-                flexWrap: 'wrap',
-              }}
-            >
-              <div>
-                <div
-                  style={{
-                    fontWeight: 700,
-                    fontSize: 15.5,
-                    color: 'var(--fx-text-bright)',
-                  }}
-                >
-                  Not sure where to start?
-                </div>
-                <div
-                  style={{
-                    fontSize: 13.5,
-                    color: 'var(--fx-text-muted)',
-                    marginTop: 2,
-                  }}
-                >
-                  {FLUXLINE_SECONDARY_TAGLINE}
-                </div>
-              </div>
-              <a
+            <FxReveal delay={(HOME_SERVICE_GROUPS.length + 1) * 100}>
+              <FxCard
+                variant='inset'
+                interactive
                 href='/services'
                 style={{
-                  color: 'var(--fx-text-soft)',
-                  fontSize: 13.5,
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 18,
+                  padding: '18px 24px',
+                  flexWrap: 'wrap',
                 }}
               >
-                All services →
-              </a>
+                <div>
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 15.5,
+                      color: 'var(--fx-text-bright)',
+                    }}
+                  >
+                    Not sure where to start?
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13.5,
+                      color: 'var(--fx-text-muted)',
+                      marginTop: 2,
+                    }}
+                  >
+                    {FLUXLINE_SECONDARY_TAGLINE}
+                  </div>
+                </div>
+                <span
+                  style={{
+                    color: 'var(--fx-text-soft)',
+                    fontSize: 13.5,
+                    fontWeight: 600,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  All services →
+                </span>
+              </FxCard>
             </FxReveal>
           </FxRailLayout>
         </FxContainer>
@@ -563,6 +558,7 @@ export default function Home() {
             <FxReveal delay={300} style={{ height: '100%' }}>
               <FxCard
                 variant='band'
+                interactive
                 style={{
                   padding: 26,
                   height: '100%',

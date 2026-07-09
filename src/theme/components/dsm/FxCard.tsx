@@ -41,11 +41,12 @@ export default function FxCard({
     textDecoration: 'none',
     color: 'inherit',
     display: 'block',
-    transition: 'border-color var(--fx-color-duration), transform var(--fx-color-duration)',
+    transition: 'border-color var(--fx-color-duration), transform var(--fx-color-duration), box-shadow var(--fx-color-duration)',
   };
 
   if (interactive && hovered) {
     base.transform = 'var(--fx-hover-lift)';
+    base.boxShadow = '0 8px 24px rgba(0,0,0,0.18)';
   }
 
   const merged = { ...base, ...style };
