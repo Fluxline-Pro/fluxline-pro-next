@@ -20,12 +20,20 @@
   from { opacity: 0; transform: translateY(26px); }
   to   { opacity: 1; transform: none; }
 }
+@keyframes fxLeft {
+  from { opacity: 0; transform: translateX(-46px); }
+  to   { opacity: 1; transform: none; }
+}
 @keyframes fxPulse {
   0%, 100% { opacity: 0.25; }
   50%      { opacity: 0.85; }
 }
 .fx-rv { opacity: 0; will-change: transform, opacity; }
 .fx-rv.in { animation: fxUp var(--fx-reveal-duration) var(--fx-ease) both; }
+.fx-rv-left { opacity: 0; will-change: transform, opacity; }
+.fx-rv-left.in { animation: fxLeft 1.5s var(--fx-ease) both; }
 @media (prefers-reduced-motion: reduce) {
-  .fx-rv, .fx-rv.in { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .fx-rv, .fx-rv.in, .fx-rv-left, .fx-rv-left.in {
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
 }
