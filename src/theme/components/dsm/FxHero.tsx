@@ -10,6 +10,8 @@ interface FxHeroProps {
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   backgroundImage?: string;
+  tagline?: string;
+  location?: string;
   style?: React.CSSProperties;
 }
 
@@ -20,6 +22,8 @@ export default function FxHero({
   primaryCta,
   secondaryCta,
   backgroundImage,
+  tagline,
+  location,
   style,
 }: FxHeroProps) {
   return (
@@ -56,11 +60,12 @@ export default function FxHero({
         }}
       />
       <div
+        className="fx-c fx-hero-pad"
         style={{
           position: 'relative',
-          maxWidth: 'var(--fx-container)',
+          maxWidth: 1220,
           margin: '0 auto',
-          padding: '90px 32px 80px',
+          padding: '140px 32px 70px',
         }}
       >
         <div
@@ -120,6 +125,39 @@ export default function FxHero({
           )}
         </div>
       </div>
+
+      {(tagline || location) && (
+        <div
+          style={{
+            position: 'relative',
+            borderTop: '1px solid #1E2635',
+            background: 'rgba(7,9,13,.6)',
+          }}
+        >
+          <div
+            className="fx-c"
+            style={{
+              maxWidth: 1220,
+              margin: '0 auto',
+              padding: '14px 32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 16,
+              flexWrap: 'wrap',
+            }}
+          >
+            {tagline && (
+              <span style={{ fontSize: 13.5, fontWeight: 600, color: '#98A2B3' }}>
+                {tagline}
+              </span>
+            )}
+            {location && (
+              <span style={{ fontSize: 13, color: '#7E8A99' }}>{location}</span>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

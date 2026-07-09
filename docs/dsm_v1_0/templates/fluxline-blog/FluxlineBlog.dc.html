@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Fluxline Blog" description="Content hub: filter chips, TRI featured gold card, article card grid" -->
+<helmet>
+<script src="./ds-base.js"></script>
+<style>body{margin:0;font-family:var(--fx-font);background:var(--fx-bg-page);color:var(--fx-text-base)}</style>
+</helmet>
+
+<div style="position: sticky; top: 0; z-index: 100; background: var(--fx-nav-bg); backdrop-filter: var(--fx-nav-blur); border-bottom: 1px solid var(--fx-border-subtle)">
+  <div style="max-width: var(--fx-container); margin: 0 auto; display: flex; align-items: center; gap: 20px; padding: 14px 32px">
+    <a href="#" style="border: 1px solid var(--fx-border); border-radius: 8px; padding: 8px 14px; color: var(--fx-accent); font-size: 13px; font-weight: 600; text-decoration: none; transition: border-color 0.15s" style-hover="border-color: var(--fx-border-hover)">← Back</a>
+    <span style="font-size: 13.5px; color: var(--fx-text-faint)">Content <span style="color: var(--fx-text-soft)">/</span> <span style="color: var(--fx-text-body)">Blog</span></span>
+    <nav style="display: flex; gap: 26px; margin-left: auto; align-items: center">
+      <a href="#" style="color: var(--fx-text-muted); text-decoration: none; font-size: 14.5px; font-weight: 500; white-space: nowrap; transition: color 0.15s" style-hover="color: var(--fx-text-bright)">Services</a>
+      <a href="#" style="background: var(--fx-accent); color: var(--fx-accent-ink); border-radius: 8px; white-space: nowrap; font-weight: 600; font-size: 14px; padding: 9px 18px; text-decoration: none; transition: filter 0.15s" style-hover="filter: brightness(1.08)">Book a Consultation</a>
+    </nav>
+  </div>
+</div>
+
+<section style="max-width: var(--fx-container); margin: 0 auto; padding: 64px 32px 88px">
+  <div style="max-width: 760px; margin-bottom: 36px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fx-teal); margin-bottom: 10px">Content</div>
+    <h1 style="font-size: 38px; font-weight: 800; color: var(--fx-text-heading); margin: 0 0 10px; letter-spacing: -0.01em">Writing &amp; Listening</h1>
+    <p style="font-size: 19px; font-weight: 600; color: var(--fx-teal); margin: 0">Essays, frameworks, and conversations on congruence.</p>
+  </div>
+
+  <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px">
+    <span style="background: var(--fx-accent); color: var(--fx-accent-ink); border-radius: 999px; padding: 8px 16px; font-size: 13px; font-weight: 600; cursor: pointer">All</span>
+    <span style="border: 1px solid var(--fx-border); border-radius: 999px; padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--fx-text-muted); cursor: pointer; transition: border-color 0.15s" style-hover="border-color: var(--fx-border-hover)">Systems</span>
+    <span style="border: 1px solid var(--fx-border); border-radius: 999px; padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--fx-text-muted); cursor: pointer; transition: border-color 0.15s" style-hover="border-color: var(--fx-border-hover)">Brand</span>
+    <span style="border: 1px solid var(--fx-border); border-radius: 999px; padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--fx-text-muted); cursor: pointer; transition: border-color 0.15s" style-hover="border-color: var(--fx-border-hover)">Embodiment</span>
+    <span style="border: 1px solid var(--fx-border); border-radius: 999px; padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--fx-text-muted); cursor: pointer; transition: border-color 0.15s" style-hover="border-color: var(--fx-border-hover)">Podcast</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px">
+    <a href="#" style="grid-column: span 2; display: block; text-decoration: none; background: var(--fx-gradient-feature); border: 1px solid var(--fx-border-strong); border-radius: 16px; padding: 32px; position: relative; transition: border-color 0.18s, transform 0.18s" style-hover="border-color: var(--fx-border-hover); transform: translateY(-3px)">
+      <span style="background: rgba(232,185,91,0.14); color: var(--fx-gold); border-radius: 999px; padding: 5px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Featured · Listen</span>
+      <div style="font-weight: 800; font-size: 24px; color: var(--fx-text-bright); margin: 16px 0 8px; letter-spacing: -0.01em">The Resonant Identity — Ep. 24: Congruence in Practice</div>
+      <div style="font-size: 14.5px; color: var(--fx-text-muted); line-height: 1.65; max-width: 56ch">What happens when the way you work finally matches the way you think? A conversation on alignment as a daily practice.</div>
+      <div style="display: flex; gap: 16px; align-items: center; margin-top: 18px">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--fx-teal)">LISTEN NOW ›</span>
+        <span style="font-family: var(--fx-font-mono); font-size: 12px; color: var(--fx-text-faint)">41:06 · JUL 2026</span>
+      </div>
+    </a>
+    <div style="background: var(--fx-surface-inset); border: 1px solid var(--fx-border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.18s, transform 0.18s" style-hover="border-color: var(--fx-border-hover); transform: translateY(-3px)">
+      <img src="../../assets/tri/TheResonantIdentitySquareText.png" alt="The Resonant Identity" style="display: block; width: 100%; flex: 1; object-fit: cover; background: #000; min-height: 0"></img>
+      <div style="padding: 14px 18px; border-top: 1px solid var(--fx-border)">
+        <div style="font-size: 13px; color: var(--fx-text-soft)">Podcast + newsletter</div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--fx-teal); margin-top: 4px">SUBSCRIBE ›</div>
+      </div>
+    </div>
+
+    <a href="#" style="display: block; text-decoration: none; background: var(--fx-surface-card); border: 1px solid var(--fx-border); border-radius: 14px; padding: 24px; transition: border-color 0.18s, transform 0.18s" style-hover="border-color: var(--fx-border-hover); transform: translateY(-3px)">
+      <span style="background: var(--fx-teal-bg); color: var(--fx-teal); border-radius: 999px; padding: 5px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Systems</span>
+      <div style="font-weight: 700; font-size: 17px; color: var(--fx-text-heading); margin: 14px 0 6px">Why Your Tools Keep Fighting You</div>
+      <div style="font-size: 13.5px; color: var(--fx-text-muted); line-height: 1.6">Misaligned systems create friction you can't optimize away.</div>
+      <div style="font-size: 12.5px; color: var(--fx-text-faint); margin-top: 14px">Jun 2026 · 7 min read</div>
+    </a>
+    <a href="#" style="display: block; text-decoration: none; background: var(--fx-surface-card); border: 1px solid var(--fx-border); border-radius: 14px; padding: 24px; transition: border-color 0.18s, transform 0.18s" style-hover="border-color: var(--fx-border-hover); transform: translateY(-3px)">
+      <span style="background: var(--fx-teal-bg); color: var(--fx-teal); border-radius: 999px; padding: 5px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Brand</span>
+      <div style="font-weight: 700; font-size: 17px; color: var(--fx-text-heading); margin: 14px 0 6px">A Logo Is Not an Identity</div>
+      <div style="font-size: 13.5px; color: var(--fx-text-muted); line-height: 1.6">The mark is the smallest part of the system that carries it.</div>
+      <div style="font-size: 12.5px; color: var(--fx-text-faint); margin-top: 14px">Jun 2026 · 5 min read</div>
+    </a>
+    <a href="#" style="display: block; text-decoration: none; background: var(--fx-surface-card); border: 1px solid var(--fx-border); border-radius: 14px; padding: 24px; transition: border-color 0.18s, transform 0.18s" style-hover="border-color: var(--fx-border-hover); transform: translateY(-3px)">
+      <span style="background: var(--fx-teal-bg); color: var(--fx-teal); border-radius: 999px; padding: 5px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">Embodiment</span>
+      <div style="font-weight: 700; font-size: 17px; color: var(--fx-text-heading); margin: 14px 0 6px">Strong Bodies, Clear Brands</div>
+      <div style="font-size: 13.5px; color: var(--fx-text-muted); line-height: 1.6">The same principles govern a training block and a brand system.</div>
+      <div style="font-size: 12.5px; color: var(--fx-text-faint); margin-top: 14px">May 2026 · 9 min read</div>
+    </a>
+  </div>
+</section>
+
+<footer style="border-top: 1px solid var(--fx-border-subtle); background: var(--fx-bg-deep)">
+  <div style="max-width: var(--fx-container); margin: 0 auto; padding: 26px 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+    <span style="font-size: 13px; color: var(--fx-text-faint)">© 2026 Fluxline Resonance Group, LLC · Salt Lake City, Utah</span>
+    <a href="#" style="font-size: 13px; color: var(--fx-text-faint); text-decoration: none">← Back home</a>
+  </div>
+</footer>
+
+</x-dc>
+</body>
+</html>

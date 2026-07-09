@@ -338,6 +338,27 @@ body.reduced-transparency {
   }
 }
 
+html[data-fx-reduce-transparency] [data-fx-glass] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: #07090D !important;
+}
+
+html[data-fx-reduce-transparency] [data-fx-glass-hero] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: #0C1017 !important;
+}
+
+html[data-fx-reduce-motion] *,
+html[data-fx-reduce-motion] *::before,
+html[data-fx-reduce-motion] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
 /* =============================================
    REDUCED MOTION SUPPORT
    ============================================= */
@@ -364,5 +385,39 @@ body.reduced-transparency {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* =============================================
+   DSM RESPONSIVE UTILITY CLASSES
+   Tablet: max-width 1023px
+   Mobile: max-width 767px
+   ============================================= */
+
+@media (max-width: 1023px) {
+  .fx-c { max-width: 720px !important; }
+  .fx-rail { grid-template-columns: 1fr !important; gap: 36px !important; }
+  .fx-sticky { position: static !important; }
+  .fx-railcard { max-width: 420px; }
+  .fx-g4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .fx-g3 { grid-template-columns: repeat(2, 1fr) !important; }
+  .fx-nav-llc { display: none !important; }
+  .fx-nav-gap { gap: 14px !important; }
+  .fx-navrow { gap: 16px !important; }
+  .fx-navlink { font-size: 13px !important; }
+}
+
+@media (max-width: 767px) {
+  .fx-c { max-width: none !important; padding-left: 5vw !important; padding-right: 5vw !important; }
+  .fx-footlinks { flex-direction: column !important; gap: 12px !important; align-items: flex-start !important; }
+  .fx-footlinks span[aria-hidden] { display: none !important; }
+  .fx-sec { padding-top: 56px !important; padding-bottom: 56px !important; }
+  .fx-hero-pad { padding-top: 120px !important; padding-bottom: 64px !important; }
+  .fx-herocard { padding: 28px 22px !important; }
+  .fx-band { padding: 40px 22px !important; }
+  .fx-g2, .fx-g3, .fx-feat { grid-template-columns: 1fr !important; }
+  .fx-navlink, .fx-crumb { display: none !important; }
+  .fx-h1 { font-size: 31px !important; }
+  .fx-h2 { font-size: 27px !important; }
+  .fx-stack { flex-direction: column !important; align-items: flex-start !important; }
 }
 

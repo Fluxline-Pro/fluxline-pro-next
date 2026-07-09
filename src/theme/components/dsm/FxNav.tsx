@@ -5,11 +5,16 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import FxButton from './FxButton';
 
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
 interface FxNavProps {
   variant?: 'home' | 'subpage';
   backLabel?: string;
   backHref?: string;
-  breadcrumb?: string[];
+  breadcrumb?: (string | BreadcrumbItem)[];
   ctaLabel?: string;
   ctaHref?: string;
 }
@@ -27,59 +32,69 @@ export default function FxNav({
   const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
 
   const navLinks = [
-    { label: 'About & Ethos', href: '#about' },
+    { label: 'About', href: '#about' },
     { label: 'Services', href: '/services' },
-    { label: 'Content', href: '/blog' },
+    { label: 'Content & Podcast', href: '/blog' },
     { label: 'Contact', href: '/contact' },
   ];
 
   const linkStyle = (key: string): React.CSSProperties => ({
-    color: hoveredLink === key ? 'var(--fx-text-bright)' : 'var(--fx-text-muted)',
+    color: hoveredLink === key ? '#EAF0F9' : '#8FA8CA',
     textDecoration: 'none',
     fontSize: 14.5,
     fontWeight: 500,
-    transition: 'color var(--fx-color-duration)',
+    transition: 'color .15s',
   });
 
   const pillHovered = hoveredLink === '__back';
   const backPillStyle: React.CSSProperties = {
-    border: `1px solid ${pillHovered ? 'var(--fx-border-hover)' : 'var(--fx-border)'}`,
-    borderRadius: 'var(--fx-radius-pill)',
-    padding: '6px 13px',
-    fontSize: 12.5,
-    color: pillHovered ? 'var(--fx-text-bright)' : 'var(--fx-text-muted)',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 8,
+    border: `1px solid ${pillHovered ? '#5E81A8' : '#232C3D'}`,
+    borderRadius: 8,
+    padding: '8px 14px',
+    fontSize: 13.5,
+    fontWeight: 600,
+    color: pillHovered ? '#EAF0F9' : '#B8CDF5',
     textDecoration: 'none',
-    transition: 'color var(--fx-color-duration), border-color var(--fx-color-duration)',
+    transition: 'border-color .15s, color .15s',
   };
 
   return (
     <header
+      data-fx-glass=""
       style={{
         position: 'sticky',
         top: 0,
-        zIndex: 100,
-        background: 'var(--fx-nav-bg)',
-        backdropFilter: 'var(--fx-nav-blur)',
-        borderBottom: '1px solid var(--fx-border-subtle)',
+        zIndex: 1000,
+        background: 'rgba(7,9,13,.82)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid #1E2635',
       }}
     >
       <div
+        className="fx-c fx-nav-gap"
         style={{
-          maxWidth: 'var(--fx-container)',
+          maxWidth: 1220,
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
-          gap: 24,
+          gap: 20,
           padding: '14px 32px',
         }}
       >
         {resolvedVariant === 'home' ? (
           <>
-            <span style={{ fontWeight: 700, fontSize: 17, color: 'var(--fx-text-bright)' }}>
-              Fluxline Resonance Group
-              <span style={{ color: 'var(--fx-text-soft)', fontWeight: 500 }}>, LLC</span>
-            </span>
+            <Link href="/" style={{ display: 'flex', alignItems: 'baseline', gap: 10, textDecoration: 'none' }}>
+              <span style={{ fontWeight: 700, fontSize: 17, color: '#EAF0F9' }}>
+                Fluxline Resonance Group
+                <span className="fx-nav-llc" style={{ color: '#8FA8CA', fontWeight: 500 }}>, LLC</span>
+              </span>
+            </Link>
             <nav
+              className="fx-navrow"
               style={{
                 display: 'flex',
                 gap: 26,
@@ -91,6 +106,7 @@ export default function FxNav({
                 <Link
                   key={link.href}
                   href={link.href}
+                  className="fx-navlink"
                   style={linkStyle(link.href)}
                   onMouseEnter={() => setHoveredLink(link.href)}
                   onMouseLeave={() => setHoveredLink(null)}
@@ -115,28 +131,46 @@ export default function FxNav({
             </Link>
             {breadcrumb && breadcrumb.length > 0 && (
               <div
+                className="fx-crumb"
                 style={{
                   display: 'flex',
                   gap: 8,
                   alignItems: 'center',
-                  fontSize: 13,
-                  color: 'var(--fx-text-faint)',
+                  fontSize: 13.5,
+                  color: '#7E8A99',
+                  minWidth: 0,
                 }}
               >
-                {breadcrumb.map((item, i) => (
-                  <React.Fragment key={i}>
-                    {i > 0 && <span>{'›'}</span>}
-                    <span
-                      style={
-                        i === breadcrumb.length - 1
-                          ? { color: 'var(--fx-text-muted)' }
-                          : undefined
-                      }
-                    >
-                      {item}
-                    </span>
-                  </React.Fragment>
-                ))}
+                {breadcrumb.map((item, i) => {
+                  const label = typeof item === 'string' ? item : item.label;
+                  const href = typeof item === 'string' ? undefined : item.href;
+                  const isLast = i === breadcrumb.length - 1;
+                  return (
+                    <React.Fragment key={i}>
+                      {i > 0 && <span>{'›'}</span>}
+                      {isLast ? (
+                        <span style={{ color: '#EAF0F9', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                          {label}
+                        </span>
+                      ) : href ? (
+                        <Link
+                          href={href}
+                          style={{
+                            color: hoveredLink === `crumb-${i}` ? '#EAF0F9' : '#8FA8CA',
+                            textDecoration: 'none',
+                            transition: 'color .15s',
+                          }}
+                          onMouseEnter={() => setHoveredLink(`crumb-${i}`)}
+                          onMouseLeave={() => setHoveredLink(null)}
+                        >
+                          {label}
+                        </Link>
+                      ) : (
+                        <span style={{ color: '#8FA8CA' }}>{label}</span>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </div>
             )}
             <div style={{ marginLeft: 'auto' }}>

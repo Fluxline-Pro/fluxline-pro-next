@@ -1,0 +1,20 @@
+:root {
+  /* ===== Feedback states (dark default) =====
+     success = teal (established site convention); warning = brand gold;
+     error = soft rose (accessibility-tuned for dark); info = periwinkle. */
+  --fx-error: #F08A93;
+  --fx-error-border: #6B3540;
+  --fx-error-bg: rgba(240, 138, 147, 0.08);
+  --fx-warning: #E8B95B;
+  --fx-warning-border: #6B5528;
+  --fx-warning-bg: rgba(232, 185, 91, 0.08);
+  --fx-info: #AEC6EE;
+  --fx-info-border: #33506F;
+  --fx-info-bg: rgba(174, 198, 238, 0.08);
+  /* --fx-success / -border / -bg live in colors.css (teal). */
+
+  /* ===== Toast chrome ===== */
+  --fx-toast-bg: #141A25;
+  --fx-toast-border: #33506F;
+  --fx-toast-shadow: 0 8px 28px rgba(0, 0, 0, 0.45); /* the ONE sanctioned shadow — floating layers only */
+}
