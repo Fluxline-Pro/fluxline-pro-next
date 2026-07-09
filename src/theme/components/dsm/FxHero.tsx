@@ -39,7 +39,7 @@ export default function FxHero({
       {backgroundImage && (
         <img
           src={backgroundImage}
-          alt=""
+          alt=''
           aria-hidden
           style={{
             position: 'absolute',
@@ -56,11 +56,12 @@ export default function FxHero({
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(160deg,rgba(5,7,11,.6),rgba(14,21,35,.25))',
+          background:
+            'linear-gradient(160deg,rgba(5,7,11,.6),rgba(14,21,35,.25))',
         }}
       />
       <div
-        className="fx-c fx-hero-pad"
+        className='fx-c fx-hero-pad'
         style={{
           position: 'relative',
           maxWidth: 1220,
@@ -104,17 +105,22 @@ export default function FxHero({
           <div
             style={{
               height: 2,
-              background: 'linear-gradient(90deg,var(--fx-line),var(--fx-accent),transparent)',
+              background:
+                'linear-gradient(90deg,var(--fx-line),var(--fx-accent),transparent)',
               marginBottom: 26,
             }}
           />
           {body && (
-            <div style={{ fontSize: 17.5, lineHeight: 1.65, margin: '0 0 30px' }}>{body}</div>
+            <div
+              style={{ fontSize: 17.5, lineHeight: 1.65, margin: '0 0 30px' }}
+            >
+              {body}
+            </div>
           )}
           {(primaryCta || secondaryCta) && (
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
               {secondaryCta && (
-                <FxButton variant="outline" href={secondaryCta.href}>
+                <FxButton variant='outline' href={secondaryCta.href}>
                   {secondaryCta.label}
                 </FxButton>
               )}
@@ -130,12 +136,12 @@ export default function FxHero({
         <div
           style={{
             position: 'relative',
-            borderTop: '1px solid #1E2635',
-            background: 'rgba(7,9,13,.6)',
+            borderTop: '1px solid var(--fx-border-subtle)',
+            background: 'var(--fx-surface-inset)',
           }}
         >
           <div
-            className="fx-c"
+            className='fx-c'
             style={{
               maxWidth: 1220,
               margin: '0 auto',
@@ -148,12 +154,20 @@ export default function FxHero({
             }}
           >
             {tagline && (
-              <span style={{ fontSize: 13.5, fontWeight: 600, color: '#98A2B3' }}>
+              <span
+                style={{
+                  fontSize: 13.5,
+                  fontWeight: 600,
+                  color: 'var(--fx-text-soft)',
+                }}
+              >
                 {tagline}
               </span>
             )}
             {location && (
-              <span style={{ fontSize: 13, color: '#7E8A99' }}>{location}</span>
+              <span style={{ fontSize: 13, color: 'var(--fx-text-faint)' }}>
+                {location}
+              </span>
             )}
           </div>
         </div>

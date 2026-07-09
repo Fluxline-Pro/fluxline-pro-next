@@ -39,7 +39,8 @@ export default function FxNav({
   ];
 
   const linkStyle = (key: string): React.CSSProperties => ({
-    color: hoveredLink === key ? '#EAF0F9' : '#8FA8CA',
+    color:
+      hoveredLink === key ? 'var(--fx-text-heading)' : 'var(--fx-text-soft)',
     textDecoration: 'none',
     fontSize: 14.5,
     fontWeight: 500,
@@ -51,31 +52,31 @@ export default function FxNav({
     display: 'inline-flex',
     alignItems: 'center',
     gap: 8,
-    border: `1px solid ${pillHovered ? '#5E81A8' : '#232C3D'}`,
+    border: `1px solid ${pillHovered ? 'var(--fx-text-soft)' : 'var(--fx-border)'}`,
     borderRadius: 8,
     padding: '8px 14px',
     fontSize: 13.5,
     fontWeight: 600,
-    color: pillHovered ? '#EAF0F9' : '#B8CDF5',
+    color: pillHovered ? 'var(--fx-text-heading)' : 'var(--fx-text-soft)',
     textDecoration: 'none',
     transition: 'border-color .15s, color .15s',
   };
 
   return (
     <header
-      data-fx-glass=""
+      data-fx-glass=''
       style={{
         position: 'sticky',
         top: 0,
         zIndex: 1000,
-        background: 'rgba(7,9,13,.82)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid #1E2635',
+        background: 'var(--fx-nav-bg)',
+        backdropFilter: 'var(--fx-nav-blur)',
+        WebkitBackdropFilter: 'var(--fx-nav-blur)',
+        borderBottom: '1px solid var(--fx-border-subtle)',
       }}
     >
       <div
-        className="fx-c fx-nav-gap"
+        className='fx-c fx-nav-gap'
         style={{
           maxWidth: 1220,
           margin: '0 auto',
@@ -87,14 +88,33 @@ export default function FxNav({
       >
         {resolvedVariant === 'home' ? (
           <>
-            <Link href="/" style={{ display: 'flex', alignItems: 'baseline', gap: 10, textDecoration: 'none' }}>
-              <span style={{ fontWeight: 700, fontSize: 17, color: '#EAF0F9' }}>
+            <Link
+              href='/'
+              style={{
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: 10,
+                textDecoration: 'none',
+              }}
+            >
+              <span
+                style={{
+                  fontWeight: 700,
+                  fontSize: 17,
+                  color: 'var(--fx-text-heading)',
+                }}
+              >
                 Fluxline Resonance Group
-                <span className="fx-nav-llc" style={{ color: '#8FA8CA', fontWeight: 500 }}>, LLC</span>
+                <span
+                  className='fx-nav-llc'
+                  style={{ color: 'var(--fx-text-soft)', fontWeight: 500 }}
+                >
+                  , LLC
+                </span>
               </span>
             </Link>
             <nav
-              className="fx-navrow"
+              className='fx-navrow'
               style={{
                 display: 'flex',
                 gap: 26,
@@ -106,7 +126,7 @@ export default function FxNav({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="fx-navlink"
+                  className='fx-navlink'
                   style={linkStyle(link.href)}
                   onMouseEnter={() => setHoveredLink(link.href)}
                   onMouseLeave={() => setHoveredLink(null)}
@@ -114,7 +134,7 @@ export default function FxNav({
                   {link.label}
                 </Link>
               ))}
-              <FxButton size="sm" href={ctaHref}>
+              <FxButton size='sm' href={ctaHref}>
                 {ctaLabel}
               </FxButton>
             </nav>
@@ -131,7 +151,7 @@ export default function FxNav({
             </Link>
             {breadcrumb && breadcrumb.length > 0 && (
               <div
-                className="fx-crumb"
+                className='fx-crumb'
                 style={{
                   display: 'flex',
                   gap: 8,
@@ -149,14 +169,23 @@ export default function FxNav({
                     <React.Fragment key={i}>
                       {i > 0 && <span>{'›'}</span>}
                       {isLast ? (
-                        <span style={{ color: '#EAF0F9', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                        <span
+                          style={{
+                            color: '#EAF0F9',
+                            fontWeight: 600,
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
                           {label}
                         </span>
                       ) : href ? (
                         <Link
                           href={href}
                           style={{
-                            color: hoveredLink === `crumb-${i}` ? '#EAF0F9' : '#8FA8CA',
+                            color:
+                              hoveredLink === `crumb-${i}`
+                                ? '#EAF0F9'
+                                : '#8FA8CA',
                             textDecoration: 'none',
                             transition: 'color .15s',
                           }}
@@ -174,7 +203,7 @@ export default function FxNav({
               </div>
             )}
             <div style={{ marginLeft: 'auto' }}>
-              <FxButton size="sm" href={ctaHref}>
+              <FxButton size='sm' href={ctaHref}>
                 {ctaLabel}
               </FxButton>
             </div>

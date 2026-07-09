@@ -17,7 +17,8 @@ export default function NotFound() {
   return (
     <div
       style={{
-        background: 'linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%)',
+        background:
+          'linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%)',
         color: '#D5DAE3',
         minHeight: '100vh',
         display: 'flex',
@@ -27,8 +28,8 @@ export default function NotFound() {
       }}
     >
       <svg
-        viewBox="0 0 1400 900"
-        preserveAspectRatio="xMidYMid slice"
+        viewBox='0 0 1400 900'
+        preserveAspectRatio='xMidYMid slice'
         style={{
           position: 'absolute',
           inset: 0,
@@ -36,27 +37,35 @@ export default function NotFound() {
           height: '100%',
           opacity: 0.4,
         }}
-        aria-hidden="true"
+        aria-hidden='true'
       >
-        <g stroke="#5E81A8" strokeWidth="1" opacity=".3">
-          <path d="M-40 700 L310 520 L520 720 L780 580 L1060 740 L1290 540 L1460 640" fill="none" />
-          <path d="M180 -40 L420 180 L700 70 L960 240 L1240 100 L1440 220" fill="none" />
-          <path d="M310 520 L420 180 M780 580 L700 70" fill="none" opacity=".5" strokeDasharray="6 8" />
-          <path d="M1060 740 L1240 100" fill="none" opacity=".35" strokeDasharray="3 10" />
+        <g stroke='#5E81A8' strokeWidth='1' opacity='.3'>
+          <path
+            d='M-40 700 L310 520 L520 720 L780 580 L1060 740 L1290 540 L1460 640'
+            fill='none'
+          />
+          <path
+            d='M180 -40 L420 180 L700 70 L960 240 L1240 100 L1440 220'
+            fill='none'
+          />
+          <path
+            d='M310 520 L420 180 M780 580 L700 70'
+            fill='none'
+            opacity='.5'
+            strokeDasharray='6 8'
+          />
+          <path
+            d='M1060 740 L1240 100'
+            fill='none'
+            opacity='.35'
+            strokeDasharray='3 10'
+          />
         </g>
-        <g fill="#9FB6D4">
-          <circle cx="310" cy="520" r="3.5">
-            <animate attributeName="opacity" values=".2;.85;.2" dur="4s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="700" cy="70" r="3">
-            <animate attributeName="opacity" values=".2;.85;.2" dur="4s" begin="1.4s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="1240" cy="100" r="3.5">
-            <animate attributeName="opacity" values=".2;.85;.2" dur="4s" begin="0.7s" repeatCount="indefinite" />
-          </circle>
-          <circle cx="1060" cy="740" r="2.5">
-            <animate attributeName="opacity" values=".2;.85;.2" dur="4s" begin="2.2s" repeatCount="indefinite" />
-          </circle>
+        <g fill='#9FB6D4'>
+          <circle cx='310' cy='520' r='3.5' opacity='0.5' />
+          <circle cx='700' cy='70' r='3' opacity='0.5' />
+          <circle cx='1240' cy='100' r='3.5' opacity='0.5' />
+          <circle cx='1060' cy='740' r='2.5' opacity='0.5' />
         </g>
       </svg>
 
@@ -77,7 +86,7 @@ export default function NotFound() {
               fontSize: 13,
               letterSpacing: '.3em',
               textTransform: 'uppercase',
-              color: '#8FA8CA',
+              color: 'var(--fx-text-soft)',
               marginBottom: 14,
             }}
           >
@@ -94,7 +103,7 @@ export default function NotFound() {
               lineHeight: 1,
             }}
           >
-            4<span style={{ color: '#5E81A8' }}>0</span>4
+            4<span style={{ color: 'var(--fx-text-soft)' }}>0</span>4
           </h1>
 
           <div
@@ -102,7 +111,8 @@ export default function NotFound() {
               height: 2,
               width: 220,
               margin: '0 auto 26px',
-              background: 'linear-gradient(90deg,transparent,#5E81A8,#B8CDF5,#5E81A8,transparent)',
+              background:
+                'linear-gradient(90deg,transparent,#5E81A8,#B8CDF5,#5E81A8,transparent)',
             }}
           />
 
@@ -110,7 +120,7 @@ export default function NotFound() {
             style={{
               fontSize: 19,
               fontWeight: 600,
-              color: '#4FD1C5',
+              color: 'var(--fx-teal)',
               margin: '0 0 10px',
             }}
           >
@@ -121,13 +131,14 @@ export default function NotFound() {
             style={{
               fontSize: 15.5,
               lineHeight: 1.7,
-              color: '#98A2B3',
+              color: 'var(--fx-text-soft)',
               margin: '0 auto 36px',
               maxWidth: '48ch',
             }}
           >
-            The path you followed doesn&apos;t exist here &mdash; it may have moved, or the link may be
-            mistyped. Every obstacle becomes the path: here&apos;s where to go instead.
+            The path you followed doesn&apos;t exist here &mdash; it may have
+            moved, or the link may be mistyped. Every obstacle becomes the path:
+            here&apos;s where to go instead.
           </p>
 
           <div
@@ -147,8 +158,8 @@ export default function NotFound() {
                 onMouseLeave={() => setHovered(null)}
                 style={{
                   display: 'block',
-                  background: '#11161F',
-                  border: `1px solid ${hovered === i ? '#5E81A8' : '#232C3D'}`,
+                  background: 'var(--fx-surface-card)',
+                  border: `1px solid ${hovered === i ? 'var(--fx-text-soft)' : 'var(--fx-border)'}`,
                   borderRadius: 12,
                   padding: '16px 18px',
                   textDecoration: 'none',
@@ -156,15 +167,30 @@ export default function NotFound() {
                   transform: hovered === i ? 'translateY(-2px)' : 'none',
                 }}
               >
-                <div style={{ fontWeight: 700, fontSize: 14, color: '#AEC6EE', marginBottom: 3 }}>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 14,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 3,
+                  }}
+                >
                   {card.title}
                 </div>
-                <div style={{ fontSize: 12, color: '#98A2B3', lineHeight: 1.5 }}>{card.desc}</div>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: 'var(--fx-text-soft)',
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {card.desc}
+                </div>
               </Link>
             ))}
           </div>
 
-          <FxButton size="lg" href="/">
+          <FxButton size='lg' href='/'>
             &larr; Take Me Home
           </FxButton>
         </div>

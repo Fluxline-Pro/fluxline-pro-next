@@ -9,11 +9,15 @@ interface FxFooterProps {
   style?: React.CSSProperties;
 }
 
-export default function FxFooter({ preferencesOnClick, backLink, style }: FxFooterProps) {
+export default function FxFooter({
+  preferencesOnClick,
+  backLink,
+  style,
+}: FxFooterProps) {
   const [hovered, setHovered] = React.useState<string | null>(null);
 
   const linkStyle = (key: string): React.CSSProperties => ({
-    color: hovered === key ? '#EAF0F9' : '#7E8A99',
+    color: hovered === key ? 'var(--fx-text-heading)' : 'var(--fx-text-faint)',
     fontSize: 13,
     textDecoration: 'none',
     transition: 'color .15s',
@@ -22,13 +26,13 @@ export default function FxFooter({ preferencesOnClick, backLink, style }: FxFoot
   return (
     <footer
       style={{
-        borderTop: '1px solid #1E2635',
-        background: '#07090D',
+        borderTop: '1px solid var(--fx-border-subtle)',
+        background: 'var(--fx-surface-alt)',
         ...style,
       }}
     >
       <div
-        className="fx-c"
+        className='fx-c'
         style={{
           maxWidth: 1220,
           margin: '0 auto',
@@ -40,16 +44,22 @@ export default function FxFooter({ preferencesOnClick, backLink, style }: FxFoot
           flexWrap: 'wrap',
         }}
       >
-        <span style={{ fontSize: 13, color: '#7E8A99' }}>
-          &copy; 2026 Fluxline Resonance Group, LLC &middot; Salt Lake City, Utah
+        <span style={{ fontSize: 13, color: 'var(--fx-text-faint)' }}>
+          &copy; 2026 Fluxline Resonance Group, LLC &middot; Salt Lake City,
+          Utah
         </span>
         <div
-          className="fx-footlinks"
-          style={{ display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'center' }}
+          className='fx-footlinks'
+          style={{
+            display: 'flex',
+            gap: 20,
+            flexWrap: 'wrap',
+            alignItems: 'center',
+          }}
         >
           {preferencesOnClick && (
             <button
-              type="button"
+              type='button'
               onClick={preferencesOnClick}
               onMouseEnter={() => setHovered('prefs')}
               onMouseLeave={() => setHovered(null)}
@@ -67,27 +77,42 @@ export default function FxFooter({ preferencesOnClick, backLink, style }: FxFoot
           )}
           {preferencesOnClick && (
             <>
-              <span aria-hidden="true" style={{ color: '#7E8A99', fontSize: 13 }}>&middot;</span>
+              <span
+                aria-hidden='true'
+                style={{ color: 'var(--fx-text-faint)', fontSize: 13 }}
+              >
+                &middot;
+              </span>
               <Link
-                href="/legal"
+                href='/legal'
                 style={linkStyle('legal')}
                 onMouseEnter={() => setHovered('legal')}
                 onMouseLeave={() => setHovered(null)}
               >
                 Legal &amp; Governance
               </Link>
-              <span aria-hidden="true" style={{ color: '#7E8A99', fontSize: 13 }}>&middot;</span>
+              <span
+                aria-hidden='true'
+                style={{ color: 'var(--fx-text-faint)', fontSize: 13 }}
+              >
+                &middot;
+              </span>
               <Link
-                href="/press-release"
+                href='/press-release'
                 style={linkStyle('press')}
                 onMouseEnter={() => setHovered('press')}
                 onMouseLeave={() => setHovered(null)}
               >
                 Press Releases
               </Link>
-              <span aria-hidden="true" style={{ color: '#7E8A99', fontSize: 13 }}>&middot;</span>
+              <span
+                aria-hidden='true'
+                style={{ color: 'var(--fx-text-faint)', fontSize: 13 }}
+              >
+                &middot;
+              </span>
               <a
-                href="https://fluxline.pro"
+                href='https://fluxline.pro'
                 style={linkStyle('site')}
                 onMouseEnter={() => setHovered('site')}
                 onMouseLeave={() => setHovered(null)}
@@ -107,7 +132,9 @@ export default function FxFooter({ preferencesOnClick, backLink, style }: FxFoot
             </Link>
           )}
           {!preferencesOnClick && !backLink && (
-            <span style={{ fontSize: 13, color: '#7E8A99' }}>Structure the Shift</span>
+            <span style={{ fontSize: 13, color: '#7E8A99' }}>
+              Structure the Shift
+            </span>
           )}
         </div>
       </div>
