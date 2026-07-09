@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { FormButton, FormInput, FormTextarea } from '@/theme/components/form';
-import { Typography } from '@/theme/components/typography';
+import { FormInput, FormTextarea } from '@/theme/components/form';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 
 interface FormData {
@@ -25,7 +24,6 @@ type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export const ContactForm: React.FC = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const { theme } = useAppTheme();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -176,13 +174,16 @@ export const ContactForm: React.FC = () => {
   };
 
   const errorStyle: React.CSSProperties = {
-    color: theme.semanticColors.errorText || theme.palette.red,
+    color: 'var(--fx-error)',
     fontSize: '0.875rem',
-    marginTop: theme.spacing.xs,
+    marginTop: 4,
   };
 
   return (
-    <form onSubmit={handleSubmit} className='space-y-6'>
+    <form
+      onSubmit={handleSubmit}
+      style={{ display: 'flex', flexDirection: 'column', gap: 24 }}
+    >
       {/* Honeypot field - hidden from users */}
       <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden='true'>
         <input
@@ -195,52 +196,53 @@ export const ContactForm: React.FC = () => {
         />
       </div>
 
-      {/* Name Field */}
-      <div>
-        <FormInput
-          label='Name'
-          id='name'
-          name='name'
-          type='text'
-          value={formData.name}
-          onChange={(value) => updateField('name', value)}
-          placeholder='Your first and last name'
-          required
-          requiredIndicator
-          aria-required='true'
-          aria-invalid={errors.name ? 'true' : undefined}
-          aria-describedby={errors.name ? 'name-error' : undefined}
-          aria-label='Name'
-        />
-        {errors.name && (
-          <div id='name-error' role='alert' style={errorStyle}>
-            {errors.name}
-          </div>
-        )}
-      </div>
+      {/* Name + Email on same row */}
+      <div className="fx-g2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+        <div>
+          <FormInput
+            label='Name'
+            id='name'
+            name='name'
+            type='text'
+            value={formData.name}
+            onChange={(value) => updateField('name', value)}
+            placeholder='Your name'
+            required
+            requiredIndicator
+            aria-required='true'
+            aria-invalid={errors.name ? 'true' : undefined}
+            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-label='Name'
+          />
+          {errors.name && (
+            <div id='name-error' role='alert' style={errorStyle}>
+              {errors.name}
+            </div>
+          )}
+        </div>
 
-      {/* Email Field */}
-      <div>
-        <FormInput
-          label='E-mail'
-          id='email'
-          name='email'
-          type='email'
-          value={formData.email}
-          onChange={(value) => updateField('email', value)}
-          placeholder='E-mail address'
-          required
-          requiredIndicator
-          aria-required='true'
-          aria-invalid={errors.email ? 'true' : undefined}
-          aria-describedby={errors.email ? 'email-error' : undefined}
-          aria-label='E-mail'
-        />
-        {errors.email && (
-          <div id='email-error' role='alert' style={errorStyle}>
-            {errors.email}
-          </div>
-        )}
+        <div>
+          <FormInput
+            label='E-mail'
+            id='email'
+            name='email'
+            type='email'
+            value={formData.email}
+            onChange={(value) => updateField('email', value)}
+            placeholder='your@email.com'
+            required
+            requiredIndicator
+            aria-required='true'
+            aria-invalid={errors.email ? 'true' : undefined}
+            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-label='E-mail'
+          />
+          {errors.email && (
+            <div id='email-error' role='alert' style={errorStyle}>
+              {errors.email}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Message Field */}
@@ -272,7 +274,7 @@ export const ContactForm: React.FC = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginTop: theme.spacing.xs,
+            marginTop: 4,
           }}
         >
           {errors.message && (
@@ -284,7 +286,7 @@ export const ContactForm: React.FC = () => {
             id='message-counter'
             style={{
               fontSize: '0.75rem',
-              color: theme.palette.neutralTertiary,
+              color: 'var(--fx-text-muted)',
               marginLeft: 'auto',
             }}
           >
@@ -293,17 +295,18 @@ export const ContactForm: React.FC = () => {
         </div>
       </div>
 
-      {/* Submit Button */}
-      <FormButton
-        type='submit'
-        variant='primary'
-        size='medium'
-        fullWidth
-        disabled={status === 'submitting'}
-        text={status === 'submitting' ? 'Sending...' : 'Submit'}
-        aria-busy={status === 'submitting'}
-        style={{ fontSize: '1.25rem' }}
-      />
+      {/* Submit Button + Hint */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <FxButton
+          type='submit'
+          variant='primary'
+          size='md'
+          disabled={status === 'submitting'}
+        >
+          {status === 'submitting' ? 'Sending...' : 'Submit'}
+        </FxButton>
+        <span style={{ fontSize: 12.5, color: '#7E8A99' }}>All fields are required.</span>
+      </div>
 
       {/* Success Message */}
       {status === 'success' && (
@@ -311,17 +314,16 @@ export const ContactForm: React.FC = () => {
           role='alert'
           aria-live='polite'
           style={{
-            padding: theme.spacing.m,
-            backgroundColor:
-              theme.semanticColors.successBackground || '#E0F2F1',
-            color: theme.semanticColors.successText || theme.palette.green,
-            borderRadius: theme.borderRadius.s,
+            padding: 16,
+            backgroundColor: 'var(--fx-success-bg)',
+            color: 'var(--fx-success)',
+            borderRadius: 4,
             textAlign: 'center',
           }}
         >
-          <Typography variant='p' style={{ margin: 0 }}>
+          <p style={{ margin: 0 }}>
             Thank you for your message! We&apos;ll get back to you soon.
-          </Typography>
+          </p>
         </div>
       )}
 
@@ -331,16 +333,16 @@ export const ContactForm: React.FC = () => {
           role='alert'
           aria-live='polite'
           style={{
-            padding: theme.spacing.m,
-            backgroundColor: theme.semanticColors.errorBackground || '#FFEBEE',
-            color: theme.semanticColors.errorText || theme.palette.red,
-            borderRadius: theme.borderRadius.s,
+            padding: 16,
+            backgroundColor: 'var(--fx-error-bg)',
+            color: 'var(--fx-error)',
+            borderRadius: 4,
             textAlign: 'center',
           }}
         >
-          <Typography variant='p' style={{ margin: 0 }}>
+          <p style={{ margin: 0 }}>
             {errors.submit}
-          </Typography>
+          </p>
         </div>
       )}
     </form>

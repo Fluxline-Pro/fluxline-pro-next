@@ -72,30 +72,41 @@ export default async function ScrollDetailPage({
   };
 
   return (
-    <div className='flex flex-col gap-8 px-4 py-8 md:px-8 md:py-12 max-w-4xl mx-auto'>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 32,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 32,
+        paddingBottom: 32,
+        maxWidth: 896,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      }}
+    >
       {/* Breadcrumbs */}
       <FadeUp>
         <nav
-          className='flex items-center gap-2 text-sm'
+          style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14 }}
           aria-label='Breadcrumb'
         >
           <Link
             href='/services'
-            className='hover:underline'
-            style={{ color: 'var(--themePrimary)' }}
+            style={{ color: 'var(--fx-accent)', textDecoration: 'none' }}
           >
             Services
           </Link>
-          <span style={{ color: 'var(--neutralSecondary)' }}>/</span>
+          <span style={{ color: 'var(--fx-text-muted)' }}>/</span>
           <Link
             href='/services/scrolls'
-            className='hover:underline'
-            style={{ color: 'var(--themePrimary)' }}
+            style={{ color: 'var(--fx-accent)', textDecoration: 'none' }}
           >
             Scrolls
           </Link>
-          <span style={{ color: 'var(--neutralSecondary)' }}>/</span>
-          <span style={{ color: 'var(--neutralSecondary)' }}>
+          <span style={{ color: 'var(--fx-text-muted)' }}>/</span>
+          <span style={{ color: 'var(--fx-text-muted)' }}>
             {scroll.title}
           </span>
         </nav>
@@ -103,26 +114,41 @@ export default async function ScrollDetailPage({
 
       {/* Header */}
       <FadeUp delay={0.1}>
-        <header className='flex flex-col gap-4'>
-          <div className='flex items-center gap-3'>
+        <header
+          style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <span
-              className='text-sm font-semibold px-3 py-1 rounded-full'
               style={{
-                backgroundColor: 'var(--themeLighter)',
-                color: 'var(--themePrimary)',
+                fontSize: 14,
+                fontWeight: 600,
+                paddingLeft: 12,
+                paddingRight: 12,
+                paddingTop: 4,
+                paddingBottom: 4,
+                borderRadius: 999,
+                backgroundColor: 'color-mix(in srgb, var(--fx-accent) 15%, transparent)',
+                color: 'var(--fx-accent)',
               }}
             >
               {categoryLabels[scroll.category] || scroll.category}
             </span>
             <span
-              className='text-sm'
-              style={{ color: 'var(--neutralSecondary)' }}
+              style={{ fontSize: 14, color: 'var(--fx-text-muted)' }}
             >
               {scroll.fileSize}
             </span>
           </div>
-          <h1 className='text-4xl font-bold md:text-5xl'>{scroll.title}</h1>
-          <p className='text-lg' style={{ color: 'var(--neutralSecondary)' }}>
+          <h1
+            style={{
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontWeight: 700,
+              color: 'var(--fx-text-heading)',
+            }}
+          >
+            {scroll.title}
+          </h1>
+          <p style={{ fontSize: 18, color: 'var(--fx-text-body)' }}>
             {scroll.description}
           </p>
         </header>
@@ -131,8 +157,13 @@ export default async function ScrollDetailPage({
       {/* Metadata */}
       <FadeUp delay={0.2}>
         <div
-          className='flex flex-wrap gap-6 text-sm'
-          style={{ color: 'var(--neutralSecondary)' }}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 24,
+            fontSize: 14,
+            color: 'var(--fx-text-muted)',
+          }}
         >
           <div>
             <strong>Published:</strong> {formatDate(scroll.publishedDate)}
@@ -146,14 +177,19 @@ export default async function ScrollDetailPage({
       {/* Tags */}
       {scroll.tags.length > 0 && (
         <FadeUp delay={0.3}>
-          <div className='flex flex-wrap gap-2'>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {scroll.tags.map((tag) => (
               <span
                 key={tag}
-                className='text-sm px-3 py-1 rounded'
                 style={{
-                  backgroundColor: 'var(--neutralLighter)',
-                  color: 'var(--neutralPrimary)',
+                  fontSize: 14,
+                  paddingLeft: 12,
+                  paddingRight: 12,
+                  paddingTop: 4,
+                  paddingBottom: 4,
+                  borderRadius: 8,
+                  backgroundColor: 'var(--fx-surface-inset)',
+                  color: 'var(--fx-text-heading)',
                 }}
               >
                 #{tag}
@@ -166,11 +202,25 @@ export default async function ScrollDetailPage({
       {/* Download Section */}
       <FadeUp delay={0.4}>
         <div
-          className='p-6 rounded-lg border'
-          style={{ borderColor: 'var(--neutralLight)' }}
+          style={{
+            padding: 24,
+            borderRadius: 12,
+            border: '1px solid var(--fx-border)',
+          }}
         >
-          <h2 className='text-xl font-bold mb-4'>Download This Scroll</h2>
-          <p className='mb-6' style={{ color: 'var(--neutralSecondary)' }}>
+          <h2
+            style={{
+              fontSize: 20,
+              fontWeight: 700,
+              marginBottom: 16,
+              color: 'var(--fx-text-heading)',
+            }}
+          >
+            Download This Scroll
+          </h2>
+          <p
+            style={{ marginBottom: 24, color: 'var(--fx-text-body)' }}
+          >
             Access the complete strategic insights document in PDF format. Each
             scroll provides in-depth guidance and frameworks for transformation.
           </p>
@@ -178,10 +228,19 @@ export default async function ScrollDetailPage({
             href={scroll.pdfUrl}
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-colors'
             style={{
-              backgroundColor: 'var(--themePrimary)',
-              color: 'var(--white)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              paddingLeft: 24,
+              paddingRight: 24,
+              paddingTop: 12,
+              paddingBottom: 12,
+              borderRadius: 12,
+              fontWeight: 600,
+              textDecoration: 'none',
+              transition: 'filter 0.2s',
+              backgroundColor: 'var(--fx-accent)',
+              color: 'var(--fx-accent-ink)',
             }}
           >
             Download PDF ({scroll.fileSize})
@@ -191,25 +250,52 @@ export default async function ScrollDetailPage({
 
       {/* Related Scrolls */}
       <FadeUp delay={0.5}>
-        <section className='mt-8'>
-          <h2 className='text-2xl font-bold mb-6'>Explore More Scrolls</h2>
-          <div className='flex flex-wrap gap-4'>
+        <section style={{ marginTop: 32 }}>
+          <h2
+            style={{
+              fontSize: 24,
+              fontWeight: 700,
+              marginBottom: 24,
+              color: 'var(--fx-text-heading)',
+            }}
+          >
+            Explore More Scrolls
+          </h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
             <Link
               href='/services/scrolls'
-              className='inline-flex items-center px-6 py-3 rounded-lg font-semibold border transition-colors'
               style={{
-                borderColor: 'var(--neutralLight)',
-                color: 'var(--themePrimary)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                paddingLeft: 24,
+                paddingRight: 24,
+                paddingTop: 12,
+                paddingBottom: 12,
+                borderRadius: 12,
+                fontWeight: 600,
+                border: '1px solid var(--fx-border)',
+                textDecoration: 'none',
+                transition: 'filter 0.2s',
+                color: 'var(--fx-accent)',
               }}
             >
               View All Scrolls
             </Link>
             <Link
               href='/services'
-              className='inline-flex items-center px-6 py-3 rounded-lg font-semibold border transition-colors'
               style={{
-                borderColor: 'var(--neutralLight)',
-                color: 'var(--themePrimary)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                paddingLeft: 24,
+                paddingRight: 24,
+                paddingTop: 12,
+                paddingBottom: 12,
+                borderRadius: 12,
+                fontWeight: 600,
+                border: '1px solid var(--fx-border)',
+                textDecoration: 'none',
+                transition: 'filter 0.2s',
+                color: 'var(--fx-accent)',
               }}
             >
               Explore Services

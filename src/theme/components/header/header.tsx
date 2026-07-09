@@ -466,7 +466,7 @@ export const Header: React.FC<HeaderProps> = ({ className }) => {
                     : themeMode === 'light'
                       ? theme.gradients?.light?.menu ||
                         'linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%)'
-                      : themeMode === 'grayscale'
+                      : themeMode === 'grayscale-light'
                         ? 'linear-gradient(135deg, #F0F0F0 0%, #FAFAFA 50%, #F5F5F5 100%)'
                         : theme.gradients?.components?.modal?.light ||
                           theme.palette.white,

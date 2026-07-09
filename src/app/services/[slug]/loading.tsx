@@ -11,53 +11,150 @@ import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 export default function ServiceDetailLoading() {
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className="space-y-12 animate-pulse">
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 48,
+          animation: 'pulse 2s infinite',
+        }}
+      >
         {/* Breadcrumb Skeleton */}
-        <div className="h-4 w-32 bg-gray-300 dark:bg-gray-700 rounded" />
+        <div
+          style={{
+            height: 16,
+            width: 128,
+            background: 'var(--fx-surface-inset)',
+            borderRadius: 8,
+          }}
+        />
 
         {/* Hero Skeleton */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-4">
-            <div className="h-16 w-16 bg-gray-300 dark:bg-gray-700 rounded" />
-            <div className="h-12 w-3/4 bg-gray-300 dark:bg-gray-700 rounded" />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div
+              style={{
+                height: 64,
+                width: 64,
+                background: 'var(--fx-surface-inset)',
+                borderRadius: 8,
+              }}
+            />
+            <div
+              style={{
+                height: 48,
+                width: '75%',
+                background: 'var(--fx-surface-inset)',
+                borderRadius: 8,
+              }}
+            />
           </div>
-          <div className="h-6 w-full bg-gray-300 dark:bg-gray-700 rounded" />
-          <div className="h-6 w-5/6 bg-gray-300 dark:bg-gray-700 rounded" />
+          <div
+            style={{
+              height: 24,
+              width: '100%',
+              background: 'var(--fx-surface-inset)',
+              borderRadius: 8,
+            }}
+          />
+          <div
+            style={{
+              height: 24,
+              width: '83%',
+              background: 'var(--fx-surface-inset)',
+              borderRadius: 8,
+            }}
+          />
         </div>
 
         {/* Content Skeleton */}
-        <div className="space-y-4 p-8 border border-gray-300 dark:border-gray-700 rounded-lg">
-          <div className="h-4 w-full bg-gray-300 dark:bg-gray-700 rounded" />
-          <div className="h-4 w-full bg-gray-300 dark:bg-gray-700 rounded" />
-          <div className="h-4 w-5/6 bg-gray-300 dark:bg-gray-700 rounded" />
-          <div className="h-4 w-full bg-gray-300 dark:bg-gray-700 rounded" />
-          <div className="h-4 w-4/6 bg-gray-300 dark:bg-gray-700 rounded" />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            padding: 32,
+            border: '1px solid var(--fx-border)',
+            borderRadius: 12,
+          }}
+        >
+          {[100, 100, 83, 100, 66].map((w, i) => (
+            <div
+              key={i}
+              style={{
+                height: 16,
+                width: `${w}%`,
+                background: 'var(--fx-surface-inset)',
+                borderRadius: 8,
+              }}
+            />
+          ))}
         </div>
 
         {/* Features Skeleton */}
-        <div className="space-y-4">
-          <div className="h-8 w-48 bg-gray-300 dark:bg-gray-700 rounded" />
-          <div className="grid gap-4 md:grid-cols-2">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div
+            style={{
+              height: 32,
+              width: 192,
+              background: 'var(--fx-surface-inset)',
+              borderRadius: 8,
+            }}
+          />
+          <div
+            style={{
+              display: 'grid',
+              gap: 16,
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            }}
+          >
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                className="h-20 bg-gray-300 dark:bg-gray-700 rounded"
+                style={{
+                  height: 80,
+                  background: 'var(--fx-surface-inset)',
+                  borderRadius: 8,
+                }}
               />
             ))}
           </div>
         </div>
 
         {/* CTA Skeleton */}
-        <div className="h-48 bg-gray-300 dark:bg-gray-700 rounded-lg" />
+        <div
+          style={{
+            height: 192,
+            background: 'var(--fx-surface-inset)',
+            borderRadius: 12,
+          }}
+        />
 
         {/* Related Services Skeleton */}
-        <div className="space-y-4">
-          <div className="h-8 w-48 bg-gray-300 dark:bg-gray-700 rounded" />
-          <div className="grid gap-4 md:grid-cols-3">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div
+            style={{
+              height: 32,
+              width: 192,
+              background: 'var(--fx-surface-inset)',
+              borderRadius: 8,
+            }}
+          />
+          <div
+            style={{
+              display: 'grid',
+              gap: 16,
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            }}
+          >
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="h-48 bg-gray-300 dark:bg-gray-700 rounded"
+                style={{
+                  height: 192,
+                  background: 'var(--fx-surface-inset)',
+                  borderRadius: 8,
+                }}
               />
             ))}
           </div>

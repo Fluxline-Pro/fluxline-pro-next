@@ -2,10 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Typography } from '@/theme/components/typography';
 import { FluentIcon } from '@/theme/components/fluent-icon';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { ScrollItem } from '@/app/services/scrolls/types';
 
@@ -20,7 +18,6 @@ interface ServiceScrollSectionProps {
 export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
   scroll,
 }) => {
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
   const isMobile = isMounted ? isMobileHook : false;
@@ -35,27 +32,28 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
   };
 
   return (
-    <section className='space-y-6'>
-      <Typography
-        variant='h2'
+    <section
+      style={{ display: 'flex', flexDirection: 'column', gap: 24 }}
+    >
+      <h2
         style={{
-          color: theme.palette.themePrimary,
+          color: 'var(--fx-accent)',
           fontSize: '2rem',
-          fontWeight: theme.typography.fontWeights.bold,
+          fontWeight: 700,
         }}
       >
         Strategic Insights
-      </Typography>
+      </h2>
 
       <div
         style={{
-          border: `1px solid ${theme.palette.neutralTertiary}`,
-          borderRadius: theme.borderRadius.container.medium,
-          backgroundColor: theme.palette.neutralLight,
-          padding: isMobile ? theme.spacing.l : theme.spacing.xl,
+          border: '1px solid var(--fx-border)',
+          borderRadius: 12,
+          backgroundColor: 'var(--fx-surface-inset)',
+          padding: isMobile ? 24 : 32,
           display: 'flex',
           flexDirection: 'column',
-          gap: theme.spacing.m,
+          gap: 16,
         }}
       >
         {/* Header with Icon */}
@@ -63,37 +61,35 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
           style={{
             display: 'flex',
             alignItems: 'flex-start',
-            gap: theme.spacing.m,
+            gap: 16,
           }}
         >
           <FluentIcon
             iconName='Documentation'
             size='xLarge'
-            color={theme.palette.themePrimary}
+            color='var(--fx-accent)'
             style={{ flexShrink: 0 }}
           />
           <div style={{ flex: 1 }}>
-            <Typography
-              variant='h3'
+            <h3
               style={{
-                color: theme.palette.themePrimary,
+                color: 'var(--fx-accent)',
                 fontSize: isMobile ? '1.25rem' : '1.5rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-                marginBottom: theme.spacing.s1,
+                fontWeight: 600,
+                marginBottom: 8,
               }}
             >
               {scroll.title}
-            </Typography>
-            <Typography
-              variant='p'
+            </h3>
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-body)',
                 fontSize: isMobile ? '0.875rem' : '1rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
+                lineHeight: 1.7,
               }}
             >
               {scroll.description}
-            </Typography>
+            </p>
           </div>
         </div>
 
@@ -111,11 +107,11 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
                 key={tag}
                 style={{
                   padding: '0.25rem 0.75rem',
-                  borderRadius: theme.borderRadius.container.small,
-                  backgroundColor: theme.palette.themeLighterAlt,
-                  color: theme.palette.themePrimary,
+                  borderRadius: 8,
+                  backgroundColor: 'color-mix(in srgb, var(--fx-accent) 10%, transparent)',
+                  color: 'var(--fx-accent)',
                   fontSize: '0.75rem',
-                  fontWeight: theme.typography.fontWeights.semiBold,
+                  fontWeight: 600,
                   textTransform: 'uppercase',
                 }}
               >
@@ -130,8 +126,8 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: theme.spacing.s1,
-            color: theme.palette.neutralTertiary,
+            gap: 8,
+            color: 'var(--fx-text-muted)',
             fontSize: '0.875rem',
           }}
         >
@@ -144,26 +140,21 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
           style={{
             display: 'flex',
             flexDirection: isMobile ? 'column' : 'row',
-            gap: theme.spacing.m,
-            marginTop: theme.spacing.s1,
+            gap: 16,
+            marginTop: 8,
           }}
         >
-          <FormButton
-            text='Download White Paper'
+          <FxButton
             variant='primary'
-            size='large'
-            icon='Download'
-            iconPosition='right'
-            onClick={handleDownload}
-          />
-          <Link href={`/services/scrolls/${scroll.id}`}>
-            <FormButton
-              text='Learn More'
-              variant='secondary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-            />
+            size='lg'
+            onClick={handleDownload as unknown as React.MouseEventHandler<HTMLButtonElement>}
+          >
+            Download White Paper
+          </FxButton>
+          <Link href={`/services/scrolls/${scroll.id}`} style={{ textDecoration: 'none' }}>
+            <FxButton variant='outline' size='lg'>
+              Learn More
+            </FxButton>
           </Link>
         </div>
       </div>

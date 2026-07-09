@@ -6,10 +6,8 @@ import {
   ContentListingPage,
   FilterConfig,
 } from '@/components/ContentListingPage';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Callout } from '@/theme/components/callout';
-import { FormButton } from '@/theme/components/form/FormButton';
+import FxCallout from '@/theme/components/dsm/FxCallout';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { TRIPost } from '@/app/podcasts/types';
 import {
   TAG_GROUPS,
@@ -33,7 +31,6 @@ interface TRILibraryClientProps {
  * URL: /podcasts/theresonantid/library
  */
 export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
-  const { theme } = useAppTheme();
   const router = useRouter();
 
   const {
@@ -48,7 +45,6 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
   const [selectedTopics, setSelectedTopics] = React.useState<string[]>([]);
 
   // Dynamically extract available content types and topics from posts
-  // Content types come from taxonomy, topics come from post tags
   const { availableContentTypes, availableTopics } = React.useMemo(() => {
     const allTagsInPosts = new Set<string>();
     initialPosts.forEach((post) => {
@@ -61,12 +57,10 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
     );
 
     // Extract topics from posts (any tag that isn't a content type)
-    // Use Map to canonicalize casing: key = normalized, value = first casing seen
     const topicsMap = new Map<string, string>();
     initialPosts.forEach((post) => {
-      const topics = extractTopics(post.tags); // Returns normalized topics
+      const topics = extractTopics(post.tags);
       topics.forEach((normalizedTopic) => {
-        // Only store the first casing variant we encounter
         if (!topicsMap.has(normalizedTopic)) {
           const originalTag = post.tags.find(
             (t) => normalizeTag(t) === normalizedTopic
@@ -89,7 +83,6 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
   const filteredPosts = React.useMemo(() => {
     let filtered = initialPosts;
 
-    // Filter by content types if any selected
     if (selectedContentTypes.length > 0) {
       filtered = filtered.filter((post) => {
         const normalizedPostTags = post.tags.map(normalizeTag);
@@ -99,7 +92,6 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
       });
     }
 
-    // Filter by topics if any selected
     if (selectedTopics.length > 0) {
       filtered = filtered.filter((post) => {
         const normalizedPostTags = post.tags.map(normalizeTag);
@@ -114,7 +106,6 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
 
   const cards = React.useMemo(() => {
     return filteredPosts.map((post) => {
-      // Get the actual content type tag from the post
       const contentTypeTag = getContentTypeTag(post.tags);
 
       return {
@@ -123,8 +114,8 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
         description: post.excerpt,
         imageUrl: post.imageUrl,
         imageAlt: post.imageAlt || post.title,
-        imageText: contentTypeTag || 'Article', // Use actual tag or default
-        date: new Date(post.publishedDate), // Parse ISO string back to Date for sorting
+        imageText: contentTypeTag || 'Article',
+        date: new Date(post.publishedDate),
       };
     });
   }, [filteredPosts]);
@@ -151,15 +142,15 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
     <div
       style={{
         display: 'flex',
-        gap: theme.spacing.s2,
+        gap: 4,
         flexWrap: 'wrap',
-        paddingBottom: theme.spacing.m,
+        paddingBottom: 12,
       }}
       role='group'
       aria-label='Filter by tag'
     >
-      <div className='flex-column gap-2 sm:flex-row'>
-        <div className='mb-4 flex-row gap-2'>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ marginBottom: 16, display: 'flex', flexDirection: 'row', gap: 8 }}>
           <SectionHeader title='All Articles' />
           <TagChip
             label='All Content'
@@ -170,7 +161,6 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
               setSelectedContentTypes([]);
               setSelectedTopics([]);
             }}
-            theme={theme}
           />
           {(selectedContentTypes.length > 0 || selectedTopics.length > 0) && (
             <button
@@ -184,20 +174,19 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
                 justifyContent: 'center',
                 whiteSpace: 'nowrap',
                 cursor: 'pointer',
-                border: `1px solid ${theme.palette.themePrimary}`,
+                border: '1px solid var(--fx-accent)',
                 borderRadius: '999px',
-                padding: `${theme.spacing.s2} ${theme.spacing.m}`,
+                padding: '4px 12px',
                 backgroundColor: 'transparent',
                 transition: 'all 0.15s ease',
                 outline: 'none',
-                marginTop: theme.spacing.l,
+                marginTop: 20,
               }}
               aria-label='Clear all tag selections'
             >
-              <Typography
-                variant='caption'
+              <span
                 style={{
-                  color: theme.palette.themePrimary,
+                  color: 'var(--fx-accent)',
                   fontSize: '0.8125rem',
                   fontWeight: 600,
                   transition: 'color 0.15s ease',
@@ -206,7 +195,7 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
                 }}
               >
                 Clear Tags
-              </Typography>
+              </span>
             </button>
           )}
         </div>
@@ -225,7 +214,6 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
                   setSelectedContentTypes([...selectedContentTypes, tag]);
                 }
               }}
-              theme={theme}
             />
           ))}
           {availableTopics.map((tag) => (
@@ -240,7 +228,6 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
                   setSelectedTopics([...selectedTopics, tag]);
                 }
               }}
-              theme={theme}
             />
           ))}
         </div>
@@ -251,39 +238,34 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
   const resultsMessage = (() => {
     const count = filteredPosts.length;
     const article = count === 1 ? 'article' : 'articles';
-    const filters: string[] = [];
+    const filterParts: string[] = [];
 
     if (selectedContentTypes.length > 0) {
-      filters.push(`type: ${selectedContentTypes.join(', ')}`);
+      filterParts.push(`type: ${selectedContentTypes.join(', ')}`);
     }
     if (selectedTopics.length > 0) {
-      filters.push(`topic: ${selectedTopics.join(', ')}`);
+      filterParts.push(`topic: ${selectedTopics.join(', ')}`);
     }
 
-    const filterText = filters.length > 0 ? ` (${filters.join(' | ')})` : '';
+    const filterText = filterParts.length > 0 ? ` (${filterParts.join(' | ')})` : '';
     return `Showing ${count} ${article}${filterText}`;
   })();
 
   const episodeCallout =
     !episodesLoading && latestEpisode ? (
-      <div className='pt-8'>
-        <Callout
-          variant='accent'
-          title='Listen to the Most Recent Episode'
-          subtitle={latestEpisode.episode_title || 'Start listening now'}
-          action={
-            <FormButton
-              variant='secondary'
-              size='large'
-              icon='Play'
-              iconPosition='left'
+      <div style={{ paddingTop: 32 }}>
+        <FxCallout tone='gold' title='Listen to the Most Recent Episode'>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <span>{latestEpisode.episode_title || 'Start listening now'}</span>
+            <FxButton
+              variant='outline'
+              size='lg'
               onClick={() => setSelectedEpisode(latestEpisode)}
-              aria-label='Play most recent episode'
             >
               Listen Now
-            </FormButton>
-          }
-        />
+            </FxButton>
+          </div>
+        </FxCallout>
       </div>
     ) : null;
 
@@ -292,7 +274,7 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
       <ContentListingPage
         title='TRI Library'
         iconName='Library'
-        description='All articles, challenges, and interactive demos from The Resonant Identity Podcast — a living extension of The Resonance Core Framework™. Use the tag filters to explore content by type or topic.'
+        description='All articles, challenges, and interactive demos from The Resonant Identity Podcast -- a living extension of The Resonance Core Framework. Use the tag filters to explore content by type or topic.'
         basePath='/podcasts/theresonantid/library'
         cards={cards}
         filters={filters}
@@ -324,18 +306,15 @@ export function TRILibraryClient({ initialPosts }: TRILibraryClientProps) {
   );
 }
 
-// ─── TagChip helper ───────────────────────────────────────────────────────────
+// ---- TagChip helper ----
 
 interface TagChipProps {
-  className?: string;
   label: string;
   isActive: boolean;
   onClick: () => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  theme: any;
 }
 
-function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
+function TagChip({ label, isActive, onClick }: TagChipProps) {
   const [hovered, setHovered] = React.useState(false);
 
   return (
@@ -348,36 +327,35 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: theme.spacing.xxs,
-        marginRight: theme.spacing.s2,
+        marginBottom: 2,
+        marginRight: 4,
         whiteSpace: 'nowrap',
         cursor: 'pointer',
         border: `1px solid ${
           isActive
-            ? theme.palette.themePrimary
+            ? 'var(--fx-accent)'
             : hovered
-              ? theme.palette.themeSecondary
-              : theme.palette.neutralQuaternary
+              ? 'var(--fx-gold)'
+              : 'var(--fx-border)'
         }`,
         borderRadius: '999px',
-        padding: `${theme.spacing.s1} ${theme.spacing.m}`,
+        padding: '8px 12px',
         backgroundColor: isActive
-          ? theme.palette.themePrimary
+          ? 'var(--fx-accent)'
           : hovered
-            ? theme.palette.neutralLighterAlt
+            ? 'var(--fx-surface-card)'
             : 'transparent',
         transition: 'all 0.15s ease',
         outline: 'none',
       }}
     >
-      <Typography
-        variant='label'
+      <span
         style={{
           color: isActive
-            ? theme.palette.white
+            ? '#fff'
             : hovered
-              ? theme.palette.themePrimary
-              : theme.palette.neutralSecondary,
+              ? 'var(--fx-accent)'
+              : 'var(--fx-text-body)',
           fontSize: '0.8125rem',
           fontWeight: isActive ? 600 : 400,
           transition: 'color 0.15s ease',
@@ -386,7 +364,7 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
         }}
       >
         {label}
-      </Typography>
+      </span>
     </button>
   );
 }

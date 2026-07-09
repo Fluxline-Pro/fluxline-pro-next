@@ -1,46 +1,42 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import ThemeProvider from '../theme/contexts/ThemeProvider';
 import { ThemeOverrideProvider } from '../theme/contexts/ThemeOverrideContext';
-import { FontScaleProvider } from '../theme/providers';
 import { ReCaptchaProvider } from '../components/ReCaptchaProvider';
 import { AccessGate } from '../components/AccessGate';
-import { Header } from '../theme/components/header';
 import { SkipToContent } from '../theme/components/skip-to-content';
-import { GlobalFooter } from '../theme/components/layout/global-footer';
 import { IosDetector } from '../components/IosDetector';
-import { NewsletterPopup } from '../components/NewsletterPopup';
+import FxNav from '../theme/components/dsm/FxNav';
+import FxFooter from '../theme/components/dsm/FxFooter';
+import FxPreferencesDrawer from '../theme/components/dsm/FxPreferencesDrawer';
 
 interface ProvidersProps {
   children: React.ReactNode;
 }
 
-/**
- * Client-side Providers Wrapper
- *
- * Centralizes all client-side providers in a single 'use client' component.
- * This prevents issues with context initialization during static prerendering.
- */
 export function Providers({ children }: ProvidersProps) {
+  const [prefsOpen, setPrefsOpen] = useState(false);
+
   return (
     <>
       <IosDetector />
-      <FontScaleProvider>
-        <ThemeProvider>
-          <ThemeOverrideProvider>
-            <ReCaptchaProvider>
-              <AccessGate>
-                <SkipToContent />
-                <Header />
-                {children}
-                <NewsletterPopup />
-                <GlobalFooter />
-              </AccessGate>
-            </ReCaptchaProvider>
-          </ThemeOverrideProvider>
-        </ThemeProvider>
-      </FontScaleProvider>
+      <ThemeProvider>
+        <ThemeOverrideProvider>
+          <ReCaptchaProvider>
+            <AccessGate>
+              <SkipToContent />
+              <FxNav />
+              {children}
+              <FxFooter preferencesOnClick={() => setPrefsOpen(true)} />
+              <FxPreferencesDrawer
+                open={prefsOpen}
+                onClose={() => setPrefsOpen(false)}
+              />
+            </AccessGate>
+          </ReCaptchaProvider>
+        </ThemeOverrideProvider>
+      </ThemeProvider>
     </>
   );
 }

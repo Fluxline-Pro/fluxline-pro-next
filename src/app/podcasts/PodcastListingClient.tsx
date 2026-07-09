@@ -4,22 +4,18 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
-import {
-  UnifiedPageWrapper,
-  UnifiedPageWrapperProps,
-} from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxCallout from '@/theme/components/dsm/FxCallout';
+import FxButton from '@/theme/components/dsm/FxButton';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
-import { Hero } from '@/theme/components/hero/Hero';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { FormButton, FormDateInput, FormSelect } from '@/theme/components/form';
+import { FormDateInput, FormSelect } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { PodcastEpisode, PODCAST_PLATFORMS, TRIPost } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 import { SortOrder } from '@/components/ContentListingPage';
-import { Callout } from '@/theme/components/callout/Callout';
 import SpreakerLogo from '@/assets/svgs/SpreakerLogo';
 import SpotifyLogo from '@/assets/svgs/SpotifyLogo';
 import ApplePodcastsLogo from '@/assets/svgs/ApplePodcastsLogo';
@@ -35,9 +31,8 @@ import { SectionHeader } from './theresonantid/TRI/SectionHeader';
  * PodcastListingClient Props
  */
 interface PodcastListingClientProps {
-  imageConfig?: UnifiedPageWrapperProps['imageConfig'];
   /**
-   * Blog posts with category "Resonant Identity" — loaded server-side and
+   * Blog posts with category "Resonant Identity" -- loaded server-side and
    * serialised so they can be passed safely to this client component.
    */
   triPosts?: TRIPost[];
@@ -61,13 +56,12 @@ function PlatformIconLink({
   useBrandColors,
   brandColor,
 }: PlatformIconLinkProps) {
-  const { theme } = useAppTheme();
   const [hovered, setHovered] = React.useState(false);
 
   const hasBrandColor = Boolean(brandColor) && useBrandColors;
   const iconColor = hasBrandColor
     ? '#FFFFFF'
-    : brandColor || theme.palette.themePrimary;
+    : brandColor || 'var(--fx-accent)';
 
   return (
     <Link
@@ -87,13 +81,13 @@ function PlatformIconLink({
         borderRadius: '50%',
         backgroundColor: hasBrandColor
           ? brandColor
-          : theme.palette.neutralLighter,
+          : 'var(--fx-surface-card)',
         transition: 'all 0.2s ease',
         border: hasBrandColor
           ? 'none'
-          : `2px solid ${theme.palette.neutralLight}`,
+          : '2px solid var(--fx-border)',
         transform: hovered ? 'scale(1.1)' : 'scale(1)',
-        boxShadow: hovered ? theme.effects.elevation8 : 'none',
+        boxShadow: hovered ? '0 4px 12px rgba(0,0,0,0.15)' : 'none',
       }}
     >
       <Icon color={iconColor} style={{ width: '28px', height: '28px' }} />
@@ -112,7 +106,6 @@ function PodcastCard({
   episode: PodcastEpisode;
   onClick: () => void;
 }) {
-  const { theme } = useAppTheme();
   const [hovered, setHovered] = React.useState(false);
 
   const publishDate = episode.publish_date
@@ -140,15 +133,15 @@ function PodcastCard({
       onMouseLeave={() => setHovered(false)}
       style={{
         cursor: 'pointer',
-        borderRadius: theme.effects.roundedCorner6,
+        borderRadius: 6,
         overflow: 'hidden',
-        border: `1px solid ${hovered ? theme.palette.themePrimary : theme.palette.neutralLight}`,
+        border: `1px solid ${hovered ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
         transition: 'all 0.2s ease',
         transform: hovered ? 'translateY(-4px)' : 'none',
         boxShadow: hovered
-          ? theme.effects.elevation16
-          : theme.effects.elevation4,
-        backgroundColor: theme.palette.neutralLighterAlt,
+          ? '0 8px 24px rgba(0,0,0,0.12)'
+          : '0 2px 6px rgba(0,0,0,0.06)',
+        backgroundColor: 'var(--fx-surface-card)',
         display: 'flex',
         flexDirection: 'column',
         minHeight: '220px',
@@ -167,57 +160,58 @@ function PodcastCard({
         <div
           style={{
             height: '120px',
-            backgroundColor: theme.palette.neutralLight,
+            backgroundColor: 'var(--fx-border)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <FluentIcon
-            iconName='Microphone'
-            size='xLarge'
-            color={
-              hovered
-                ? theme.palette.themePrimary
-                : theme.palette.neutralSecondary
-            }
-          />
+          <span
+            style={{
+              fontSize: 32,
+              color: hovered
+                ? 'var(--fx-accent)'
+                : 'var(--fx-text-body)',
+            }}
+            aria-hidden='true'
+          >
+            &#x1F3A4;
+          </span>
         </div>
       )}
 
       {/* Card body */}
       <div
         style={{
-          padding: theme.spacing.m,
+          padding: 12,
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
-          gap: theme.spacing.s2,
+          gap: 4,
         }}
       >
         {/* Podcast name badge */}
-        <Typography
-          variant='p'
+        <p
           style={{
             fontSize: '0.7rem',
             fontWeight: 700,
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
+            margin: 0,
           }}
         >
           {episode.podcast_name}
           {episode.episode_number !== undefined &&
             ` · Ep. ${episode.episode_number}`}
-        </Typography>
+        </p>
 
         {/* Title */}
-        <Typography
-          variant='h3'
+        <h3
           style={{
             color: hovered
-              ? theme.palette.themePrimary
-              : theme.palette.neutralPrimary,
+              ? 'var(--fx-accent)'
+              : 'var(--fx-text-heading)',
             fontSize: '1.25rem',
             fontWeight: 600,
             transition: 'color 0.2s ease',
@@ -226,39 +220,43 @@ function PodcastCard({
             WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
-            marginBottom: theme.spacing.m,
+            marginBottom: 12,
+            marginTop: 0,
           }}
         >
           {episode.episode_title}
-        </Typography>
+        </h3>
 
         {/* Description */}
         {episode.description && (
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-body)',
               fontSize: '0.875rem',
               lineHeight: 1.5,
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
+              margin: 0,
             }}
           >
             {episode.description}
-          </Typography>
+          </p>
         )}
 
         {/* Date */}
         {publishDate && (
-          <Typography
-            variant='p'
-            style={{ color: theme.palette.neutralTertiary, fontSize: '0.8rem' }}
+          <p
+            style={{
+              color: 'var(--fx-text-muted)',
+              fontSize: '0.8rem',
+              margin: 0,
+            }}
           >
             {publishDate}
             {episode.duration ? ` · ${episode.duration}` : ''}
-          </Typography>
+          </p>
         )}
       </div>
     </div>
@@ -268,34 +266,24 @@ function PodcastCard({
 /**
  * SpreakerEmbed Component
  * Renders the Spreaker embedded player for the "The Resonant Identity" show.
- * The Spreaker widget script (loaded via layout.tsx) replaces this anchor tag with
- * an interactive iframe player on the client. The anchor text provides a fallback
- * link if the widget script is unavailable or the show cannot be loaded.
  */
 function SpreakerEmbed() {
-  const { theme } = useAppTheme();
-
   return (
-    <div style={{ marginBottom: theme.spacing.xl }}>
-      <Typography
-        variant='h3'
+    <div style={{ marginBottom: 32 }}>
+      <h3
         style={{
-          color: theme.palette.neutralPrimary,
-          marginTop: theme.spacing.m,
-          marginBottom: theme.spacing.m,
+          color: 'var(--fx-text-heading)',
+          marginTop: 12,
+          marginBottom: 12,
           fontSize: '1.25rem',
           fontWeight: 600,
         }}
       >
         The Resonant Identity
-      </Typography>
-      {/* Spreaker player anchor — replaced by widget.js with an embedded player iframe.
-          If the script fails to load or the show is unavailable, the anchor remains as a
-          plain hyperlink ("This podcast is currently unavailable" is surfaced by Spreaker
-          within the player; the link here serves as a direct fallback). */}
+      </h3>
       <div
         style={{
-          borderRadius: theme.effects.roundedCorner6,
+          borderRadius: 6,
           overflow: 'hidden',
           width: '100%',
         }}
@@ -333,7 +321,6 @@ function PodcastDetailModal({
   episode: PodcastEpisode;
   onDismiss: () => void;
 }) {
-  const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
 
   const publishDate = episode.publish_date
@@ -356,71 +343,71 @@ function PodcastDetailModal({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: theme.spacing.m,
+          gap: 12,
         }}
       >
         {/* Episode header */}
-        <Typography
-          variant='p'
+        <p
           style={{
             fontSize: '0.75rem',
             fontWeight: 700,
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
+            margin: 0,
           }}
         >
           {episode.podcast_name}
           {episode.episode_number !== undefined &&
             ` · Episode ${episode.episode_number}`}
-        </Typography>
+        </p>
 
-        <Typography
-          variant='h2'
+        <h2
           style={{
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             fontSize: '1.5rem',
             fontWeight: 700,
+            margin: 0,
           }}
         >
           {episode.episode_title}
-        </Typography>
+        </h2>
 
         {/* Meta */}
         <div
-          style={{ display: 'flex', gap: theme.spacing.m, flexWrap: 'wrap' }}
+          style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}
         >
           {publishDate && (
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-body)',
                 fontSize: '0.875rem',
+                margin: 0,
               }}
             >
               {publishDate}
-            </Typography>
+            </p>
           )}
           {episode.duration && (
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-body)',
                 fontSize: '0.875rem',
+                margin: 0,
               }}
             >
               · {episode.duration}
-            </Typography>
+            </p>
           )}
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-body)',
               fontSize: '0.875rem',
+              margin: 0,
             }}
           >
             · By {episode.author_name}
-          </Typography>
+          </p>
         </div>
 
         {/* Audio player */}
@@ -432,8 +419,8 @@ function PodcastDetailModal({
               controls
               style={{
                 width: '100%',
-                borderRadius: theme.effects.roundedCorner4,
-                accentColor: theme.palette.themePrimary,
+                borderRadius: 4,
+                accentColor: 'var(--fx-accent)',
               }}
             >
               <source src={episode.audio_url} type='audio/mpeg' />
@@ -444,25 +431,31 @@ function PodcastDetailModal({
 
         {/* Description */}
         {episode.description && (
-          <Typography
-            variant='p'
-            style={{ color: theme.palette.neutralPrimary, lineHeight: 1.7 }}
+          <p
+            style={{
+              color: 'var(--fx-text-heading)',
+              lineHeight: 'var(--fx-body-leading)',
+              margin: 0,
+            }}
           >
             {episode.description}
-          </Typography>
+          </p>
         )}
 
         {/* Subscribe links */}
-        <Typography
-          variant='p'
-          style={{ color: theme.palette.neutralSecondary, fontSize: '0.85rem' }}
+        <p
+          style={{
+            color: 'var(--fx-text-body)',
+            fontSize: '0.85rem',
+            margin: 0,
+          }}
         >
           Subscribe:{' '}
           <a
             href={PODCAST_PLATFORMS.spreaker}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ color: theme.palette.themePrimary }}
+            style={{ color: 'var(--fx-accent)' }}
           >
             Spreaker
           </a>
@@ -471,7 +464,7 @@ function PodcastDetailModal({
             href={PODCAST_PLATFORMS.spotify}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ color: theme.palette.themePrimary }}
+            style={{ color: 'var(--fx-accent)' }}
           >
             Spotify
           </a>
@@ -480,7 +473,7 @@ function PodcastDetailModal({
             href={PODCAST_PLATFORMS.applePodcasts}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ color: theme.palette.themePrimary }}
+            style={{ color: 'var(--fx-accent)' }}
           >
             Apple Podcasts
           </a>
@@ -489,7 +482,7 @@ function PodcastDetailModal({
             href={PODCAST_PLATFORMS.iHeartRadio}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ color: theme.palette.themePrimary }}
+            style={{ color: 'var(--fx-accent)' }}
           >
             iHeartRadio
           </a>
@@ -498,7 +491,7 @@ function PodcastDetailModal({
             href={PODCAST_PLATFORMS.amazonMusic}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ color: theme.palette.themePrimary }}
+            style={{ color: 'var(--fx-accent)' }}
           >
             Amazon Music
           </a>
@@ -507,7 +500,7 @@ function PodcastDetailModal({
             href={PODCAST_PLATFORMS.deezer}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ color: theme.palette.themePrimary }}
+            style={{ color: 'var(--fx-accent)' }}
           >
             Deezer
           </a>
@@ -516,7 +509,7 @@ function PodcastDetailModal({
             href={PODCAST_PLATFORMS.podchaser}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ color: theme.palette.themePrimary }}
+            style={{ color: 'var(--fx-accent)' }}
           >
             Podchaser
           </a>
@@ -525,11 +518,11 @@ function PodcastDetailModal({
             href={rssEndpoint}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ color: theme.palette.themePrimary }}
+            style={{ color: 'var(--fx-accent)' }}
           >
             RSS Feed
           </a>
-        </Typography>
+        </p>
       </div>
     </Modal>
   );
@@ -540,11 +533,9 @@ function PodcastDetailModal({
  * Main client component for the /podcasts page
  */
 export function PodcastListingClient({
-  imageConfig,
   triPosts = [],
 }: PodcastListingClientProps = {}) {
   const router = useRouter();
-  const { theme } = useAppTheme();
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
@@ -658,7 +649,6 @@ export function PodcastListingClient({
   };
 
   // Derive TRI content sections from the pre-loaded Resonant Identity posts
-  // Uses taxonomy mapping to detect content types
   const triCompanionArticles = triPosts.filter((p) =>
     p.tags.some(
       (tag) => normalizeTag(tag) === normalizeTag('Episode Companion')
@@ -673,7 +663,9 @@ export function PodcastListingClient({
     p.tags.some((tag) => normalizeTag(tag) === normalizeTag('Interactive Demo'))
   );
 
-  // For this initial launch, we'll surface the Spreaker embed for "The Resonant Identity" show and hide the episode listing and filters until we have more episodes and search functionality built out. Once we have a larger catalog of episodes, we can prominently feature the listing with the embed as a highlighted player within the page.
+  // Brand colors: always use brand colors in DSM (no accessible mode distinction needed)
+  const useBrandColors = true;
+
   const podcastFilters = (
     <>
       {/* Sort Order */}
@@ -686,7 +678,7 @@ export function PodcastListingClient({
         />
       </div>
 
-      {/* Date Range – desktop only (hidden on mobile and tablet) */}
+      {/* Date Range -- desktop only */}
       {!(isMobile || isTablet) && (
         <>
           <div style={{ minWidth: '150px', flex: '1 1 150px' }}>
@@ -715,16 +707,13 @@ export function PodcastListingClient({
         <div
           style={{ display: 'flex', alignItems: 'flex-end', flex: '0 0 auto' }}
         >
-          <FormButton
-            variant='secondary'
-            size='small'
-            icon='ClearFilter'
-            iconPosition='left'
+          <FxButton
+            variant='outline'
+            size='sm'
             onClick={handleClearAll}
-            aria-label='Clear all filters'
           >
             Clear Filters
-          </FormButton>
+          </FxButton>
         </div>
       )}
     </>
@@ -736,334 +725,278 @@ export function PodcastListingClient({
       ? ` ${processedEpisodes.length} matching date range`
       : '';
 
-  // Brand colors only in light/dark mode; accessible modes use default secondary styling
-  const useBrandColors =
-    theme.themeMode === 'light' || theme.themeMode === 'dark';
-
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid' imageConfig={imageConfig}>
+    <FxContainer style={{ padding: '64px 32px 88px' }}>
+      {/* Page Header */}
+      <FxSectionHeading
+        kicker='Podcast'
+        title='The Resonant Identity'
+        subhead='A living extension of The Resonance Core Framework where identity becomes practice and is formed through coherence.'
+        lede='The Resonant Identity is a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
+        as='h1'
+      />
+
+      {/* Platform Icons */}
       <div
         style={{
-          padding: isMobile ? theme.spacing.m : theme.spacing.xl,
-          width: '100%',
+          marginTop: 20,
+          display: 'flex',
+          gap: 12,
+          alignItems: 'center',
+          flexWrap: 'wrap',
         }}
       >
-        {/* Page Header */}
-        <Hero
-          title='The Resonant Identity'
-          iconName='Microphone'
-          description='The Resonant Identity is a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention. It is a living extension of The Resonance Core Framework where identity becomes practice and is formed through coherence.'
-          backArrow={true}
-          backArrowPath='/podcasts'
-          // filters={podcastFilters} - will add later once more episodes are available and search is built out
-        >
-          <div className='flex flex-row justify-between items-center gap-2 flex-wrap'>
-            <div
-              style={{
-                marginTop: theme.spacing.m,
-                display: 'flex',
-                gap: theme.spacing.m,
-                alignItems: 'center',
-                flexWrap: 'wrap',
-              }}
-            >
-              {/* Platform Subscription Icons */}
-              <PlatformIconLink
-                href={PODCAST_PLATFORMS.spreaker}
-                label='Listen on Spreaker'
-                Icon={SpreakerLogo}
-                brandColor='#EE722E'
-                useBrandColors={useBrandColors}
-              />
-              <PlatformIconLink
-                href={PODCAST_PLATFORMS.spotify}
-                label='Listen on Spotify'
-                Icon={SpotifyLogo}
-                brandColor='#1DB954'
-                useBrandColors={useBrandColors}
-              />
-              <PlatformIconLink
-                href={PODCAST_PLATFORMS.applePodcasts}
-                label='Listen on Apple Podcasts'
-                Icon={ApplePodcastsLogo}
-                brandColor='#B150E2'
-                useBrandColors={useBrandColors}
-              />
-              <PlatformIconLink
-                href={PODCAST_PLATFORMS.iHeartRadio}
-                label='Listen on iHeartRadio'
-                Icon={IHeartRadioLogo}
-                brandColor='#C6002B'
-                useBrandColors={useBrandColors}
-              />
-              <PlatformIconLink
-                href={PODCAST_PLATFORMS.amazonMusic}
-                label='Listen on Amazon Music'
-                Icon={AmazonMusicLogo}
-                brandColor='#00A8E1'
-                useBrandColors={useBrandColors}
-              />
-              <PlatformIconLink
-                href={PODCAST_PLATFORMS.deezer}
-                label='Listen on Deezer'
-                Icon={DeezerLogo}
-                brandColor='#A238FF'
-                useBrandColors={useBrandColors}
-              />
-              <PlatformIconLink
-                href={PODCAST_PLATFORMS.podchaser}
-                label='Listen on Podchaser'
-                Icon={PodchaserLogo}
-                brandColor='#2EBFA5'
-                useBrandColors={useBrandColors}
-              />
-              <PlatformIconLink
-                href={rssEndpoint}
-                label='Subscribe via RSS Feed'
-                Icon={RSSLogo}
-                useBrandColors={useBrandColors}
-              />
-            </div>
-          </div>
-          {/* Featured Episode CTA */}
-          {!loading && !error && processedEpisodes.length > 0 && (
-            <div className='pt-8'>
-              <Callout
-                variant='accent'
-                title='Listen to the Most Recent Episode'
-                subtitle={
-                  processedEpisodes[0]?.episode_title || 'Start listening now'
-                }
-                action={
-                  <FormButton
-                    variant='secondary'
-                    size='large'
-                    icon='Play'
-                    iconPosition='left'
-                    onClick={() => setSelectedEpisode(processedEpisodes[0])}
-                    aria-label='Play most recent episode'
-                  >
-                    Listen Now
-                  </FormButton>
-                }
-              />
-            </div>
-          )}
-        </Hero>
-
-        {/* Callout to learn more about The Resonant Identity */}
-        <div className='pt-16 pb-4'>
-          <Callout
-            variant='neutral'
-            title='About The Resonant Identity Podcast'
-            subtitle='Learn more about the philosophy, community, and mission behind The Resonant Identity (TRI).'
-            action={
-              <FormButton
-                variant='primary'
-                size='large'
-                icon='ChevronRight'
-                iconPosition='right'
-                onClick={() => router.push('/podcasts/theresonantid/about')}
-                aria-label='About The Resonant Identity Podcast'
-              >
-                About The Resonant Identity
-              </FormButton>
-            }
-          />
-        </div>
-
-        {/* Loading state */}
-        {loading && (
-          <div
-            className='pt-8 pb-8'
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '300px',
-            }}
-          >
-            <Typography
-              variant='p'
-              style={{ color: theme.palette.neutralSecondary }}
-            >
-              Loading episodes…
-            </Typography>
-          </div>
-        )}
-
-        {/* Error state */}
-        {!loading && error && (
-          <div
-            className='pt-8 pb-8'
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '300px',
-              flexDirection: 'column',
-              gap: theme.spacing.m,
-            }}
-          >
-            <FluentIcon
-              iconName='ErrorBadge'
-              size='xLarge'
-              color={theme.palette.neutralSecondary}
-            />
-            <Typography
-              variant='p'
-              style={{ color: theme.palette.neutralSecondary }}
-            >
-              {error}
-            </Typography>
-          </div>
-        )}
-
-        {/* Empty state */}
-        {!loading && !error && processedEpisodes.length === 0 && (
-          <div
-            className='pt-8 pb-8'
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '300px',
-              flexDirection: 'column',
-              gap: theme.spacing.m,
-            }}
-          >
-            <FluentIcon
-              iconName='Microphone'
-              size='xLarge'
-              color={theme.palette.neutralSecondary}
-            />
-            <Typography
-              variant='p'
-              style={{ color: theme.palette.neutralSecondary }}
-            >
-              {episodes.length > 0
-                ? 'No episodes match your filters.'
-                : 'No episodes available yet.'}
-            </Typography>
-          </div>
-        )}
-
-        {/* Episode Grid */}
-        {!loading && !error && processedEpisodes.length > 0 && (
-          <div
-            className='pb-8 mt-8'
-            style={{ borderTop: `1px solid ${theme.palette.neutralPrimary}` }}
-          >
-            <SectionHeader
-              title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
-              style={{ marginBottom: theme.spacing.l1 }}
-            />
-            <AnimatePresence mode='wait'>
-              <div
-                key='podcast-episodes'
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-                  gap: theme.spacing.l1,
-                }}
-              >
-                {processedEpisodes.map((episode, index) => (
-                  <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
-                    <PodcastCard
-                      episode={episode}
-                      onClick={() => setSelectedEpisode(episode)}
-                    />
-                  </FadeIn>
-                ))}
-              </div>
-            </AnimatePresence>
-          </div>
-        )}
+        <PlatformIconLink
+          href={PODCAST_PLATFORMS.spreaker}
+          label='Listen on Spreaker'
+          Icon={SpreakerLogo}
+          brandColor='#EE722E'
+          useBrandColors={useBrandColors}
+        />
+        <PlatformIconLink
+          href={PODCAST_PLATFORMS.spotify}
+          label='Listen on Spotify'
+          Icon={SpotifyLogo}
+          brandColor='#1DB954'
+          useBrandColors={useBrandColors}
+        />
+        <PlatformIconLink
+          href={PODCAST_PLATFORMS.applePodcasts}
+          label='Listen on Apple Podcasts'
+          Icon={ApplePodcastsLogo}
+          brandColor='#B150E2'
+          useBrandColors={useBrandColors}
+        />
+        <PlatformIconLink
+          href={PODCAST_PLATFORMS.iHeartRadio}
+          label='Listen on iHeartRadio'
+          Icon={IHeartRadioLogo}
+          brandColor='#C6002B'
+          useBrandColors={useBrandColors}
+        />
+        <PlatformIconLink
+          href={PODCAST_PLATFORMS.amazonMusic}
+          label='Listen on Amazon Music'
+          Icon={AmazonMusicLogo}
+          brandColor='#00A8E1'
+          useBrandColors={useBrandColors}
+        />
+        <PlatformIconLink
+          href={PODCAST_PLATFORMS.deezer}
+          label='Listen on Deezer'
+          Icon={DeezerLogo}
+          brandColor='#A238FF'
+          useBrandColors={useBrandColors}
+        />
+        <PlatformIconLink
+          href={PODCAST_PLATFORMS.podchaser}
+          label='Listen on Podchaser'
+          Icon={PodchaserLogo}
+          brandColor='#2EBFA5'
+          useBrandColors={useBrandColors}
+        />
+        <PlatformIconLink
+          href={rssEndpoint}
+          label='Subscribe via RSS Feed'
+          Icon={RSSLogo}
+          useBrandColors={useBrandColors}
+        />
       </div>
 
-      {/* ─── TRI Content Sections ─── */}
-      {/* These sections auto-populate from blog posts categorised as "Resonant Identity" */}
+      {/* Featured Episode CTA */}
+      {!loading && !error && processedEpisodes.length > 0 && (
+        <div style={{ paddingTop: 32 }}>
+          <FxCallout tone='gold' title='Listen to the Most Recent Episode'>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <span>{processedEpisodes[0]?.episode_title || 'Start listening now'}</span>
+              <FxButton
+                variant='outline'
+                size='lg'
+                onClick={() => setSelectedEpisode(processedEpisodes[0])}
+              >
+                Listen Now
+              </FxButton>
+            </div>
+          </FxCallout>
+        </div>
+      )}
+
+      {/* Callout to learn more about The Resonant Identity */}
+      <div style={{ paddingTop: 64, paddingBottom: 16 }}>
+        <FxCTABand
+          title='About The Resonant Identity Podcast'
+          body='Learn more about the philosophy, community, and mission behind The Resonant Identity (TRI).'
+          primaryLabel='About The Resonant Identity'
+          primaryHref='/podcasts/theresonantid/about'
+        />
+      </div>
+
+      {/* Loading state */}
+      {loading && (
+        <div
+          style={{
+            paddingTop: 32,
+            paddingBottom: 32,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '300px',
+          }}
+        >
+          <p style={{ color: 'var(--fx-text-body)' }}>
+            Loading episodes...
+          </p>
+        </div>
+      )}
+
+      {/* Error state */}
+      {!loading && error && (
+        <div
+          style={{
+            paddingTop: 32,
+            paddingBottom: 32,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '300px',
+            flexDirection: 'column',
+            gap: 12,
+          }}
+        >
+          <p style={{ color: 'var(--fx-text-body)' }}>
+            {error}
+          </p>
+        </div>
+      )}
+
+      {/* Empty state */}
+      {!loading && !error && processedEpisodes.length === 0 && (
+        <div
+          style={{
+            paddingTop: 32,
+            paddingBottom: 32,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '300px',
+            flexDirection: 'column',
+            gap: 12,
+          }}
+        >
+          <p style={{ color: 'var(--fx-text-body)' }}>
+            {episodes.length > 0
+              ? 'No episodes match your filters.'
+              : 'No episodes available yet.'}
+          </p>
+        </div>
+      )}
+
+      {/* Episode Grid */}
+      {!loading && !error && processedEpisodes.length > 0 && (
+        <div
+          style={{
+            paddingBottom: 32,
+            marginTop: 32,
+            borderTop: '1px solid var(--fx-text-heading)',
+          }}
+        >
+          <SectionHeader
+            title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
+            style={{ marginBottom: 20 }}
+          />
+          <AnimatePresence mode='wait'>
+            <div
+              key='podcast-episodes'
+              style={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
+                gap: 20,
+              }}
+            >
+              {processedEpisodes.map((episode, index) => (
+                <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
+                  <PodcastCard
+                    episode={episode}
+                    onClick={() => setSelectedEpisode(episode)}
+                  />
+                </FadeIn>
+              ))}
+            </div>
+          </AnimatePresence>
+        </div>
+      )}
+
+      {/* TRI Content Sections */}
       {(triCompanionArticles.length > 0 ||
         triChallenges.length > 0 ||
         triDemos.length > 0) && (
         <div
           style={{
-            padding: isMobile ? theme.spacing.m : theme.spacing.l1,
+            padding: isMobile ? 12 : 20,
             width: '100%',
-            borderTop: `1px solid ${theme.palette.neutralPrimary}`,
+            borderTop: '1px solid var(--fx-text-heading)',
           }}
         >
           <SectionHeader
             title='Explore TRI Resources'
-            iconName='Library'
             subtitle='Dive deeper into the Resonant Identity philosophy with companion articles, identity challenges, and interactive demos that complement the podcast episodes.'
             style={{
-              marginTop: theme.spacing.m,
-              marginBottom: theme.spacing.l,
-              paddingLeft: isMobile ? theme.spacing.s : theme.spacing.l,
-              paddingRight: isMobile ? theme.spacing.s : theme.spacing.l,
+              marginTop: 12,
+              marginBottom: 20,
+              paddingLeft: isMobile ? 4 : 20,
+              paddingRight: isMobile ? 4 : 20,
             }}
           />
           <div
             style={{
-              marginBottom: theme.spacing.xxxxl,
-              paddingLeft: isMobile ? theme.spacing.s : theme.spacing.l,
-              paddingRight: isMobile ? theme.spacing.s : theme.spacing.l,
+              marginBottom: 64,
+              paddingLeft: isMobile ? 4 : 20,
+              paddingRight: isMobile ? 4 : 20,
             }}
           >
-            <FormButton
+            <FxButton
               variant='primary'
-              icon='Library'
-              iconPosition='left'
-              fullWidth={isMobile}
               onClick={() => router.push('/podcasts/theresonantid/library')}
-              aria-label='Explore The Full Library'
             >
               Explore The Full Library
-            </FormButton>
+            </FxButton>
           </div>
-          <div className='space-y-8'>
-            {/* ─── A. 7-Day Challenges ─── */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            {/* A. 7-Day Challenges */}
             {triChallenges.length > 0 && (
               <TRISection
-                iconName='CalendarDay'
                 title='7-Day Challenges'
                 description='Structured 7-day challenges that help you build your personal resonance baseline through daily identity-focused exercises.'
                 posts={triChallenges.slice(0, 3)}
                 viewAllLabel='View All Challenges'
                 viewAllHref='/podcasts/theresonantid/challenges'
                 isMobile={isMobile}
-                theme={theme}
                 router={router}
               />
             )}
 
-            {/* ─── B. Interactive Demos ─── */}
+            {/* B. Interactive Demos */}
             {triDemos.length > 0 && (
               <TRISection
-                iconName='LightningBolt'
                 title='Interactive Demos'
                 description='Hands-on tools and self-assessments that let you directly experience The Resonance Core Framework concepts in action.'
                 posts={triDemos.slice(0, 3)}
                 viewAllLabel='Explore All Demos'
                 viewAllHref='/podcasts/theresonantid/demos'
                 isMobile={isMobile}
-                theme={theme}
                 router={router}
               />
             )}
 
-            {/* ─── C. Companion Articles ─── */}
+            {/* C. Companion Articles */}
             {triCompanionArticles.length > 0 && (
               <TRISection
-                iconName='TextDocumentShared'
                 title='Companion Articles'
-                description='Deep-dive articles paired with TRI episodes — designed to help you apply the frameworks from each episode to your own identity work.'
+                description='Deep-dive articles paired with TRI episodes -- designed to help you apply the frameworks from each episode to your own identity work.'
                 posts={triCompanionArticles.slice(0, 3)}
                 viewAllLabel='View All Articles'
                 viewAllHref='/podcasts/theresonantid/articles'
                 isMobile={isMobile}
-                theme={theme}
                 router={router}
               />
             )}
@@ -1081,51 +1014,52 @@ export function PodcastListingClient({
           onDismiss={() => setSelectedEpisode(null)}
         />
       )}
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }
 
-// ─── TRI Section Helper ───────────────────────────────────────────────────────
+// ---- TRI Section Helper ----
 
 interface TRISectionProps {
-  iconName: string;
   title: string;
   description: string;
   posts: TRIPost[];
   viewAllLabel: string;
   viewAllHref: string;
   isMobile: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  theme: any;
   router: ReturnType<typeof useRouter>;
 }
 
 /**
  * TRISection
  * Renders a lightweight content section for one TRI content type
- * (Companion Articles, 7-Day Challenges, or Interactive Demos).
  */
 function TRISection({
-  iconName,
   title,
   description,
   posts,
   viewAllLabel,
   viewAllHref,
   isMobile,
-  theme,
   router,
 }: TRISectionProps) {
   const gridColumns = isMobile ? 1 : Math.min(posts.length, 3);
 
   return (
     <section
-      className={`space-y-8 rounded-lg pt-8 pb-8 mb-6 ${isMobile ? 'pl-4 pr-6' : 'pl-8 pr-8'}`}
       style={{
-        backgroundColor: theme.palette.neutralQuaternaryAlt,
-        borderTop: `1px solid ${theme.palette.neutralPrimary}`,
-        marginTop: theme.spacing.m,
-        marginBottom: theme.spacing.xxxl,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 32,
+        borderRadius: 8,
+        paddingTop: 32,
+        paddingBottom: 32,
+        marginBottom: 24,
+        paddingLeft: isMobile ? 16 : 32,
+        paddingRight: isMobile ? 24 : 32,
+        backgroundColor: 'var(--fx-surface-card)',
+        borderTop: '1px solid var(--fx-text-heading)',
+        marginTop: 12,
       }}
     >
       {/* Section header */}
@@ -1133,34 +1067,27 @@ function TRISection({
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: theme.spacing.s1,
-          marginBottom: theme.spacing.m,
+          gap: 8,
+          marginBottom: 12,
         }}
       >
-        <FluentIcon
-          iconName={iconName}
-          size='large'
-          color={theme.palette.themePrimary}
-          style={{ marginRight: theme.spacing.s }}
-        />
-        <Typography
-          variant='h3'
+        <h3
           style={{
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             fontSize: '1.75rem',
-            fontWeight: theme.typography.fontWeights.semiBold,
-            textTransform: 'unset',
-            marginBottom: `${theme.spacing.s1}`,
+            fontWeight: 600,
+            textTransform: 'none',
+            marginBottom: 8,
+            marginTop: 0,
           }}
         >
           {title}
-        </Typography>
+        </h3>
       </div>
 
-      <Typography
-        variant='p'
+      <p
         style={{
-          color: theme.palette.neutralSecondary,
+          color: 'var(--fx-text-body)',
           fontSize: '0.9375rem',
           lineHeight: 1.6,
           marginTop: 0,
@@ -1168,51 +1095,45 @@ function TRISection({
         }}
       >
         {description}
-      </Typography>
+      </p>
 
       {/* Post cards */}
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-          gap: theme.spacing.l1,
+          gap: 20,
         }}
       >
         {posts.map((post) => (
-          <TRIPostCard key={post.slug} post={post} theme={theme} />
+          <TRIPostCard key={post.slug} post={post} />
         ))}
       </div>
 
       {/* View All button */}
-      <FormButton
-        variant='secondary'
-        size='medium'
-        icon='ChevronRight'
-        iconPosition='right'
+      <FxButton
+        variant='outline'
+        size='md'
         onClick={() => router.push(viewAllHref)}
-        aria-label={viewAllLabel}
       >
         {viewAllLabel}
-      </FormButton>
+      </FxButton>
     </section>
   );
 }
 
-// ─── TRI Post Card ────────────────────────────────────────────────────────────
+// ---- TRI Post Card ----
 
 interface TRIPostCardProps {
   post: TRIPost;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  theme: any;
 }
 
 /**
  * TRIPostCard
  * A lightweight card linking to a Resonant Identity blog post.
  */
-function TRIPostCard({ post, theme }: TRIPostCardProps) {
+function TRIPostCard({ post }: TRIPostCardProps) {
   const [hovered, setHovered] = React.useState(false);
-  // Encode the slug to prevent any path-injection issues
   const safeHref = `/blog/${encodeURIComponent(post.slug)}`;
 
   return (
@@ -1223,17 +1144,17 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: theme.spacing.s2,
-        padding: theme.spacing.m,
-        borderRadius: theme.borderRadius.container.medium,
-        border: `1px solid ${hovered ? theme.palette.themeSecondary : theme.palette.themePrimary}`,
+        gap: 4,
+        padding: 12,
+        borderRadius: 8,
+        border: `1px solid ${hovered ? 'var(--fx-gold)' : 'var(--fx-accent)'}`,
         backgroundColor: hovered
-          ? theme.palette.neutralLighterAlt
-          : theme.palette.neutralLighter,
+          ? 'var(--fx-surface-card)'
+          : 'var(--fx-border)',
         transition: 'all 0.2s ease',
         textDecoration: 'none',
         transform: hovered ? 'translateY(-2px)' : 'none',
-        boxShadow: hovered ? theme.effects.elevation4 : 'none',
+        boxShadow: hovered ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
       }}
       aria-label={`Read: ${post.title}`}
     >
@@ -1241,8 +1162,8 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
       <div
         style={{
           display: 'flex',
-          gap: theme.spacing.s,
-          marginBottom: theme.spacing.s,
+          gap: 4,
+          marginBottom: 4,
           flexWrap: 'wrap',
         }}
       >
@@ -1252,9 +1173,9 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
             style={{
               fontSize: '0.7rem',
               fontWeight: 600,
-              color: theme.palette.themeSecondary,
-              backgroundColor: theme.palette.neutralLighter,
-              padding: `2px ${theme.spacing.s} 2px 0`,
+              color: 'var(--fx-gold)',
+              backgroundColor: 'var(--fx-border)',
+              padding: '2px 4px 2px 0',
               borderRadius: '999px',
               textTransform: 'uppercase',
               letterSpacing: '0.4px',
@@ -1266,27 +1187,25 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
       </div>
 
       {/* Title */}
-      <Typography
-        variant='h3'
+      <h3
         style={{
           color: hovered
-            ? theme.palette.themeSecondary
-            : theme.palette.themePrimary,
+            ? 'var(--fx-gold)'
+            : 'var(--fx-accent)',
           fontSize: '1.25rem',
-          fontWeight: theme.typography.fontWeights.semiBold,
+          fontWeight: 600,
           transition: 'color 0.2s ease',
-          textTransform: 'unset',
-          margin: `0 0 ${theme.spacing.s1} 0`,
+          textTransform: 'none',
+          margin: '0 0 8px 0',
         }}
       >
         {post.title}
-      </Typography>
+      </h3>
 
       {/* Excerpt */}
-      <Typography
-        variant='p'
+      <p
         style={{
-          color: theme.palette.neutralSecondary,
+          color: 'var(--fx-text-body)',
           fontSize: '0.875rem',
           lineHeight: 1.5,
           display: '-webkit-box',
@@ -1297,7 +1216,7 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
         }}
       >
         {post.excerpt}
-      </Typography>
+      </p>
 
       {/* Read more indicator */}
       <div
@@ -1306,29 +1225,19 @@ function TRIPostCard({ post, theme }: TRIPostCardProps) {
           alignItems: 'center',
           gap: '4px',
           marginTop: 'auto',
-          paddingTop: theme.spacing.s2,
+          paddingTop: 4,
         }}
       >
-        <Typography
-          variant='label'
+        <span
           style={{
-            color: theme.palette.themeSecondary,
+            color: 'var(--fx-gold)',
             fontSize: '0.875rem',
-            margin: `${theme.spacing.s1} 0`,
+            margin: '8px 0',
             fontWeight: 600,
           }}
         >
           Read article
-        </Typography>
-        <FluentIcon
-          iconName='ChevronRight'
-          size='small'
-          color={theme.palette.themeSecondary}
-          style={{
-            transition: 'transform 0.2s ease',
-            transform: hovered ? 'translateX(4px)' : 'none',
-          }}
-        />
+        </span>
       </div>
     </Link>
   );

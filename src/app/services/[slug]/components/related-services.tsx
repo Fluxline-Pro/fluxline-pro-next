@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
 import { InteractiveCard } from '@/components/InteractiveCard';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { SERVICE_CATEGORIES } from '../../constants';
 
 /**
@@ -13,8 +11,6 @@ import { SERVICE_CATEGORIES } from '../../constants';
 export const RelatedServices: React.FC<{ currentServiceId: string }> = ({
   currentServiceId,
 }) => {
-  const { theme } = useAppTheme();
-
   // Get 3 related services (excluding current)
   const relatedServices = SERVICE_CATEGORIES.filter(
     (s) => s.id !== currentServiceId
@@ -23,19 +19,25 @@ export const RelatedServices: React.FC<{ currentServiceId: string }> = ({
   if (relatedServices.length === 0) return null;
 
   return (
-    <div className='space-y-6'>
-      <Typography
-        variant='h2'
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <h2
         style={{
-          color: theme.palette.themePrimary,
+          color: 'var(--fx-accent)',
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-          fontWeight: theme.typography.fontWeights.semiBold,
+          fontWeight: 600,
         }}
       >
         Related Services
-      </Typography>
+      </h2>
 
-      <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'>
+      <div
+        style={{
+          display: 'grid',
+          gap: 24,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          paddingTop: 8,
+        }}
+      >
         {relatedServices.map((service) => (
           <InteractiveCard
             key={service.id}

@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Fluxline.pro uses Inter (variable, preloaded on the live site) with system fallbacks. */
+  --fx-font: 'inter-variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  /* Monospace: code, data readouts, timestamps, "ritual text" accents. */
+  --fx-font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --fx-mono-size: 13.5px;
+  --fx-mono-leading: 1.6;
+
+  /* ===== Display / headings ===== */
+  --fx-display-size: clamp(48px, 5vw, 64px);  /* hero wordmark ONLY */
+  --fx-display-404: clamp(80px, 14vw, 150px); /* @kind font */ /* 404 numeral */
+  --fx-display-weight: 800;
+  --fx-display-tracking: 0.06em;              /* display is TRACKED OUT, not tight */
+
+  --fx-h1-size: 38px;
+  --fx-h1-weight: 800;
+  --fx-h2-size: 34px;
+  --fx-h2-weight: 700;
+  --fx-h3-size: 23px;
+  --fx-h3-weight: 700;
+  --fx-heading-tracking: -0.01em;
+  --fx-band-h2-size: 36px;        /* CTA-band h2 (band headings run 34–36) */
+
+  /* ===== Long-form article headings (Blog Post) ===== */
+  --fx-article-h1: clamp(30px, 4.5vw, 40px); /* @kind font */
+  --fx-article-h2: 25px;
+  --fx-article-h3: 18.5px;
+
+  /* ===== Subhead (teal statement line under headings) ===== */
+  --fx-subhead-size: 19px;
+  --fx-subhead-weight: 600;
+
+  /* ===== Body ===== */
+  --fx-body-size: 16px;
+  --fx-body-leading: 1.7;
+  --fx-body-sm-size: 13.5px;
+  --fx-body-sm-leading: 1.6;
+
+  /* ===== Labels ===== */
+  --fx-kicker-size: 12px;         /* uppercase section kickers, teal */
+  --fx-kicker-tracking: 0.12em;
+  --fx-eyebrow-size: 15px;        /* hero "WELCOME TO" eyebrow */
+  --fx-eyebrow-tracking: 0.28em;  /* hero eyebrow tracking */
+  --fx-meta-size: 12.5px;         /* dates, counts, fine print */
+  --fx-cta-link-size: 12.5px;     /* "LEARN MORE ›" links, teal, 700, 0.08em */
+  --fx-cta-link-tracking: 0.08em;
+
+  /* ===== Fluid / container-based sizing (16px rem base; cqi = container inline size) =====
+     Give the wrapping element `container-type: inline-size` and size text with these.
+     Browser-viewport media queries are reserved for device class only (see layout.css). */
+  --fx-fluid-display: clamp(2.5em, 5cqi, 3.5em); /* @kind font */
+  --fx-fluid-h2: clamp(1.75em, 4cqi, 2.5em); /* @kind font */
+  --fx-fluid-body: clamp(1em, 3cqi, 1.25em); /* @kind font */
+  --fx-fluid-caption: clamp(0.75em, 2cqi, 1em); /* @kind font */
+  --fx-fluid-mono: clamp(0.875em, 2.5cqi, 1.125em); /* @kind font */
+}

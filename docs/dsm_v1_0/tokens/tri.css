@@ -1,0 +1,18 @@
+:root {
+  /* ===== The Resonant Identity (TRI) — podcast + newsletter sub-brand =====
+     Teal-on-black identity; borrows Fluxline structure (radii, spacing, motion).
+     In Fluxline UI, TRI content is marked with the GOLD featured treatment;
+     inside TRI's own surfaces, these tokens take over. */
+  --tri-teal: #00B4BE;            /* core resonance color — glyph waves, "RESONANT" */
+  --tri-teal-deep: #006E78;       /* wave shadows, gradient base */
+  --tri-teal-glow: #00C8D2;       /* gradient top highlight */
+  --tri-teal-shadow: #005A64;     /* gradient bottom shadow */
+  --tri-black: #000000;           /* grounding field for banners and avatars */
+  --tri-white: #FFFFFF;           /* "THE" / "IDENTITY" text */
+  --tri-gray: #282828;            /* glyph outline, dimensional contrast */
+  --tri-teal-bg: rgba(0, 180, 190, 0.10);
+  --tri-gradient-wave: linear-gradient(180deg, #00C8D2 0%, #005A64 100%); /* @kind color */
+
+  /* Print (CMYK): teal 75/0/15/0 · deep teal 90/30/40/20 · black 0/0/0/100 ·
+     white 0/0/0/0 · gray 0/0/0/85 · glow 70/0/10/0 · shadow 95/40/50/30 */
+}

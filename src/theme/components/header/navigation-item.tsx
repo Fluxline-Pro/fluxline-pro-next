@@ -94,9 +94,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
           size={iconSize}
           color={
             isActive || isHovered
-              ? themeMode === 'tritanopia' ||
-                themeMode === 'deuteranopia' ||
-                themeMode === 'protanopia'
+              ? themeMode === 'colorblind'
                 ? theme.palette.white
                 : theme.palette.themePrimary
               : theme.palette.neutralSecondary
@@ -109,9 +107,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
           textTransform: 'capitalize',
           color:
             isActive || isHovered
-              ? themeMode === 'tritanopia' ||
-                themeMode === 'deuteranopia' ||
-                themeMode === 'protanopia'
+              ? themeMode === 'colorblind'
                 ? theme.palette.white
                 : theme.palette.themePrimary
               : theme.palette.neutralPrimary,
@@ -131,9 +127,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
           size='small'
           color={
             isActive || isHovered
-              ? themeMode === 'tritanopia' ||
-                themeMode === 'deuteranopia' ||
-                themeMode === 'protanopia'
+              ? themeMode === 'colorblind'
                 ? theme.palette.white
                 : theme.palette.themePrimary
               : theme.palette.neutralSecondary

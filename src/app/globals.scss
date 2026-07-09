@@ -136,15 +136,26 @@ body::after {
 }
 
 /* =============================================
-   TAILWIND CSS THEME INTEGRATION
+   UTILITY CLASSES (legacy compatibility)
    ============================================= */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-inter: var(--font-inter);
-  --font-mono: var(--font-mono);
+.space-y-4 > * + * {
+  margin-top: 16px;
+}
+.space-y-5 > * + * {
+  margin-top: 20px;
+}
+.space-y-6 > * + * {
+  margin-top: 24px;
+}
+.space-y-8 > * + * {
+  margin-top: 32px;
+}
+.space-y-12 > * + * {
+  margin-top: 48px;
+}
+.space-y-16 > * + * {
+  margin-top: 64px;
 }
 
 // Apply background to html element for full viewport coverage
@@ -339,6 +350,27 @@ body.reduced-transparency {
   }
 }
 
+html[data-fx-transparency='reduce'] [data-fx-glass] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: #07090d !important;
+}
+
+html[data-fx-transparency='reduce'] [data-fx-glass-hero] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: #0c1017 !important;
+}
+
+html[data-fx-motion='reduce'] *,
+html[data-fx-motion='reduce'] *::before,
+html[data-fx-motion='reduce'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
 /* =============================================
    REDUCED MOTION SUPPORT
    ============================================= */
@@ -368,24 +400,90 @@ body.reduced-transparency {
 }
 
 /* =============================================
-   VIEWPORT GRID STYLES (Home Page)
+   DSM RESPONSIVE UTILITY CLASSES
+   Tablet: max-width 1023px
+   Mobile: max-width 767px
    ============================================= */
 
-.viewport-grid {
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-
-  &.isHomePage {
-    /* Background handled by BackgroundLayer component */
-    background: transparent;
+@media (max-width: 1023px) {
+  .fx-c {
+    max-width: 720px !important;
+  }
+  .fx-rail {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+  .fx-sticky {
+    position: static !important;
+  }
+  .fx-railcard {
+    max-width: 420px;
+  }
+  .fx-g4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .fx-g3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .fx-nav-llc {
+    display: none !important;
+  }
+  .fx-nav-gap {
+    gap: 14px !important;
+  }
+  .fx-navrow {
+    gap: 16px !important;
+  }
+  .fx-navlink {
+    font-size: 13px !important;
   }
 }
 
-/* Allow scrolling in portrait mode for non-home pages */
-html.allow-scroll,
-body.allow-scroll {
-  overflow-y: auto !important;
-  height: auto !important;
+@media (max-width: 767px) {
+  .fx-c {
+    max-width: none !important;
+    padding-left: 5vw !important;
+    padding-right: 5vw !important;
+  }
+  .fx-footlinks {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
+  }
+  .fx-footlinks span[aria-hidden] {
+    display: none !important;
+  }
+  .fx-sec {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+  .fx-hero-pad {
+    padding-top: 120px !important;
+    padding-bottom: 64px !important;
+  }
+  .fx-herocard {
+    padding: 28px 22px !important;
+  }
+  .fx-band {
+    padding: 40px 22px !important;
+  }
+  .fx-g2,
+  .fx-g3,
+  .fx-feat {
+    grid-template-columns: 1fr !important;
+  }
+  .fx-navlink,
+  .fx-crumb {
+    display: none !important;
+  }
+  .fx-h1 {
+    font-size: 31px !important;
+  }
+  .fx-h2 {
+    font-size: 27px !important;
+  }
+  .fx-stack {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
 }

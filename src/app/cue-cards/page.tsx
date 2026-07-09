@@ -7,124 +7,114 @@
  */
 
 import React from 'react';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Hero } from '@/theme/components/hero/Hero';
-import { Callout } from '@/theme/components/callout/Callout';
-import { FormButton } from '@/theme/components/form/FormButton';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxCallout from '@/theme/components/dsm/FxCallout';
+import FxButton from '@/theme/components/dsm/FxButton';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
-import { Typography } from '@/theme/components/typography';
 import { CueCardsGrid } from './components/CueCardsGrid';
 import { getAllCueCards, getFeaturedCueCards } from './cueCardsData';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export default function CueCardsPage() {
   const allCards = getAllCueCards();
   const featuredCards = getFeaturedCueCards();
-  const { theme } = useAppTheme();
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-16'>
+    <FxContainer style={{ padding: '64px 32px 88px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 64 }}>
         {/* Hero Section */}
-        <Hero
-          title='The Archetypes'
-          iconName='Lightbulb'
-          description='Explore the mythic curriculum through these cue cards. Each archetype represents a pathway of transformation—a mantra to anchor your energy, an action to embody, and an emotional frame to guide your journey.'
-        >
-          <Callout
-            variant='accent'
-            title='Portals to Transformation'
-            subtitle='Modular wisdom for your evolution—each card a stepping stone on the path.'
+        <div>
+          <FxSectionHeading
+            title="The Archetypes"
+            subhead="Explore the mythic curriculum through these cue cards. Each archetype represents a pathway of transformation—a mantra to anchor your energy, an action to embody, and an emotional frame to guide your journey."
+            as="h1"
           />
-        </Hero>
+          <div style={{ marginTop: 32 }}>
+            <FxCallout tone="gold" title="Portals to Transformation">
+              <p
+                style={{
+                  color: 'var(--fx-text-body)',
+                  fontSize: 'var(--fx-body-size)',
+                  lineHeight: 1.7,
+                  margin: 0,
+                }}
+              >
+                Modular wisdom for your evolution—each card a stepping stone on the path.
+              </p>
+            </FxCallout>
+          </div>
+        </div>
 
         {/* Featured Archetypes Section */}
         {featuredCards.length > 0 && (
-          <section className='space-y-8'>
-            <Typography
-              variant='h2'
+          <section style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            <h2
               style={{
-                color: theme.palette.themePrimary,
-                fontSize: '2rem',
-                fontWeight: theme.typography.fontWeights.bold,
+                color: 'var(--fx-accent)',
+                fontSize: 'var(--fx-h2-size)',
+                fontWeight: 700,
+                margin: 0,
               }}
             >
               Featured Archetypes
-            </Typography>
-            <Typography
-              variant='p'
+            </h2>
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-body)',
                 fontSize: '1.125rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
-                marginBottom: theme.spacing.l,
+                lineHeight: 1.7,
+                marginBottom: 20,
+                marginTop: 0,
               }}
             >
               Begin your exploration with these foundational archetypes—each one
               a doorway into deeper work.
-            </Typography>
+            </p>
             <CueCardsGrid cards={featuredCards} />
           </section>
         )}
 
         {/* All Archetypes Section */}
-        <section className='space-y-8'>
-          <Typography
-            variant='h2'
+        <section style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <h2
             style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
+              color: 'var(--fx-accent)',
+              fontSize: 'var(--fx-h2-size)',
+              fontWeight: 700,
+              margin: 0,
             }}
           >
             Complete Archive
-          </Typography>
-          <Typography
-            variant='p'
+          </h2>
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-body)',
               fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-              marginBottom: theme.spacing.l,
+              lineHeight: 1.7,
+              marginBottom: 20,
+              marginTop: 0,
             }}
           >
             The full collection of archetypes—find the one that speaks to your
             current phase.
-          </Typography>
+          </p>
           <CueCardsGrid cards={allCards} />
         </section>
 
         {/* Call to Action */}
-        <Callout
-          variant='subtle'
-          title='Ready to Embody Your Archetype?'
-          action={
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <FormButton
-                text='Explore Our Services'
-                variant='primary'
-                size='large'
-                icon='ChevronRight'
-                iconPosition='right'
-                onClick={() => (window.location.href = '/services')}
-              />
-              <BookingsButton isHero />
-            </div>
-          }
-        >
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.125rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-            }}
-          >
-            Each archetype is a map, not a territory. Let Fluxline guide you in
-            translating these mythic frames into practical transformation.
-          </Typography>
-        </Callout>
+        <section>
+          <FxCTABand
+            title="Ready to Embody Your Archetype?"
+            body="Each archetype is a map, not a territory. Let Fluxline guide you in translating these mythic frames into practical transformation."
+            primaryLabel="Explore Our Services"
+            primaryHref="/services"
+          />
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
+            <BookingsButton isHero />
+          </div>
+        </section>
       </div>
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }

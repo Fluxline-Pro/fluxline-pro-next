@@ -8,26 +8,15 @@
 import React from 'react';
 import { ScrollItem } from '../types';
 import { categoryLabels } from '../scrollsData';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { ScrollDetailModal } from './ScrollDetailModal';
 
 interface ScrollCardProps {
   scroll: ScrollItem;
   variant?: 'compact' | 'detailed';
-  className?: string;
 }
 
-export function ScrollCard({
-  scroll,
-  variant = 'compact',
-  className = '',
-}: ScrollCardProps) {
-  const { theme } = useAppTheme();
+export function ScrollCard({ scroll, variant = 'compact' }: ScrollCardProps) {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
 
   const handleDownload = (e: React.MouseEvent) => {
     // Prevent card click when clicking download
@@ -45,62 +34,78 @@ export function ScrollCard({
     <>
       <div
         onClick={handleCardClick}
-        className={`flex flex-col gap-4 p-6 rounded-lg border transition-all hover:shadow-lg cursor-pointer ${className}`}
         style={{
-          borderColor: theme.palette.neutralLight,
-          backgroundColor:
-            theme.themeMode === 'high-contrast'
-              ? theme.semanticColors.bodyBackground
-              : isDark
-                ? theme.palette.neutralLighter
-                : theme.palette.white,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 16,
+          padding: 24,
+          borderRadius: 12,
+          border: '1px solid var(--fx-border)',
+          backgroundColor: 'var(--fx-surface-card)',
+          cursor: 'pointer',
+          transition: 'box-shadow 0.2s, transform 0.2s',
         }}
       >
         {/* Category Badge */}
-        <div className='flex items-center gap-2'>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <span
-            className='text-xs font-semibold px-3 py-1 rounded-full'
             style={{
-              backgroundColor: theme.palette.themeLighter,
-              color: theme.palette.themePrimary,
+              fontSize: 12,
+              fontWeight: 600,
+              paddingLeft: 12,
+              paddingRight: 12,
+              paddingTop: 4,
+              paddingBottom: 4,
+              borderRadius: 999,
+              backgroundColor: 'color-mix(in srgb, var(--fx-accent) 15%, transparent)',
+              color: 'var(--fx-accent)',
             }}
           >
             {categoryLabels[scroll.category] || scroll.category}
           </span>
-          <span
-            className='text-xs'
-            style={{ color: theme.palette.neutralTertiary }}
-          >
+          <span style={{ fontSize: 12, color: 'var(--fx-text-muted)' }}>
             {scroll.fileSize}
           </span>
         </div>
 
         {/* Title */}
         <h3
-          className='text-xl font-bold leading-tight'
-          style={{ color: theme.palette.neutralPrimary }}
+          style={{
+            fontSize: 20,
+            fontWeight: 700,
+            lineHeight: 1.25,
+            color: 'var(--fx-text-heading)',
+          }}
         >
           {scroll.title}
         </h3>
 
         {/* Description */}
         <p
-          className='text-sm flex-grow'
-          style={{ color: theme.palette.neutralSecondary }}
+          style={{
+            fontSize: 14,
+            flexGrow: 1,
+            color: 'var(--fx-text-body)',
+          }}
         >
           {scroll.description}
         </p>
 
         {/* Tags */}
         {variant === 'detailed' && scroll.tags.length > 0 && (
-          <div className='flex flex-wrap gap-2'>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {scroll.tags.map((tag) => (
               <span
                 key={tag}
-                className='text-xs px-2 py-1 rounded'
                 style={{
-                  backgroundColor: theme.palette.neutralLighter,
-                  color: theme.palette.neutralPrimary,
+                  fontSize: 12,
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  paddingTop: 4,
+                  paddingBottom: 4,
+                  borderRadius: 8,
+                  backgroundColor: 'var(--fx-surface-inset)',
+                  color: 'var(--fx-text-heading)',
                 }}
               >
                 {tag}
@@ -110,15 +115,22 @@ export function ScrollCard({
         )}
 
         {/* Actions */}
-        <div className='flex gap-3 pt-4'>
+        <div style={{ display: 'flex', gap: 12, paddingTop: 16 }}>
           <button
             onClick={handleDownload}
-            className='flex-1 px-4 py-2 rounded-lg font-semibold transition-colors'
             style={{
-              backgroundColor: isDark
-                ? theme.palette.themeSecondary
-                : theme.palette.themePrimary,
-              color: theme.palette.white,
+              flex: 1,
+              paddingLeft: 16,
+              paddingRight: 16,
+              paddingTop: 8,
+              paddingBottom: 8,
+              borderRadius: 12,
+              fontWeight: 600,
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'filter 0.2s',
+              backgroundColor: 'var(--fx-accent)',
+              color: 'var(--fx-accent-ink)',
             }}
             aria-label={`Download ${scroll.title}`}
           >

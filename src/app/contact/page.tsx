@@ -1,43 +1,16 @@
 'use client';
 
-/**
- * Contact Page - Let's Connect
- * Contact form and information for reaching out to Fluxline
- */
-
 import React from 'react';
 import Image from 'next/image';
-import {
-  UnifiedPageWrapper,
-  // InteractiveCard,
-  NewsletterCTA,
-} from '@/components';
-import { Typography } from '@/theme/components/typography';
-import { Hero } from '@/theme/components/hero';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { getIconForPath } from '@/utils/navigation-icons';
+import Link from 'next/link';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { ContactForm } from './components/ContactForm';
-import { Callout } from '@/theme/components/callout/Callout';
-import { BookingsButton } from '@/theme/components/button/bookings-button';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
-import { SocialLinks } from '@/app/about/components/SocialLinks';
-import { FLUXLINE_SOCIAL_LINKS } from '@/app/about/constants';
 import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.png';
+import ContactImage from '@/assets/images/ContactMe2400x1600.jpg';
 
 export default function ContactPage() {
-  const { theme } = useAppTheme();
-  const [isMounted, setIsMounted] = React.useState(false);
-  const isMobileHook = useIsMobile();
-  // const isDesktopHook = useIsDesktop();
-  const isMobile = isMounted ? isMobileHook : false;
-  // const isDesktop = isMounted ? isDesktopHook : false;
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Email built from char codes at render time — avoids a plain-text address
-  // in the static bundle while working correctly as a React href prop.
   const triEmailHref = `mailto:${String.fromCharCode(
     109, 97, 105, 108
   )}@${String.fromCharCode(
@@ -46,253 +19,321 @@ export default function ContactPage() {
   )}.${String.fromCharCode(99, 111, 109)}`;
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className={isMobile ? 'space-y-8' : 'space-y-16'}>
-        {/* Hero Section */}
-        <Hero
-          title='Start a Conversation'
-          iconName={getIconForPath('/contact')}
-          description="The best place to start is a free consultation — a short call where we explore your goals together and map out what's possible. Book one in just a few steps."
-        >
-          {/* Social Links */}
-          <div
-            style={{
-              marginTop: theme.spacing.m,
-              marginBottom: theme.spacing.l,
-            }}
-          >
-            <SocialLinks
-              socialLinks={FLUXLINE_SOCIAL_LINKS}
-              name='Terence Waters'
-              size='medium'
-            />
-          </div>
-
-          <Callout
-            variant='accent'
-            title='Book a Free Consultation'
-            subtitle="Walk us through your vision and we'll design the systems, strategies, and practices that move it forward. No commitment required."
-            action={<BookingsButton isHero />}
-          />
-        </Hero>
-
-        {/* Business Cards / CTA Section */}
-        {/* commenting out this section to make the page less messy because it doesn't belong here */}
-        {/* <section className='space-y-8'>
-          <Typography
-            variant='h2'
-            style={{
-              color: theme.palette.themePrimary,
-              fontSize: '2rem',
-              fontWeight: theme.typography.fontWeights.bold,
-              lineHeight: isMobile ? '1.6' : '2',
-              marginBottom: isMobile ? '1rem' : undefined,
-            }}
-          >
-            Let&apos;s Build Something Extraordinary
-          </Typography>
-
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'> */}
-            {/* Design Services Card */}
-            {/* <InteractiveCard
-              id='design-services'
-              title='Design & Branding'
-              description='From logo design to complete brand identities, I create visual systems that resonate with your audience and stand the test of time.'
-              icon='Design'
-              iconPosition='center'
-            /> */}
-
-            {/* Development Services Card */}
-            {/* <InteractiveCard
-              id='development-services'
-              title='Web Development'
-              description='Building modern, scalable web applications with cutting-edge technologies. From concept to deployment, I deliver solutions that drive results.'
-              icon='Code'
-              iconPosition='center'
-            /> */}
-
-            {/* Consulting Services Card */}
-            {/* <InteractiveCard
-              id='consulting-services'
-              title='Strategic Consulting'
-              description="Expert guidance on digital transformation, technology strategy, and business innovation. Let's align your vision with actionable solutions."
-              icon='Lightbulb'
-              iconPosition='center'
-            /> */}
-
-            {/* Tutoring Services Card */}
-            {/* {!isDesktop && (
-              <InteractiveCard
-                id='tutoring-services'
-                title='Training & Mentorship'
-                description='One-on-one tutoring and mentorship in design, development, and creative technologies. Empowering the next generation of creators.'
-                icon='Education'
-                iconPosition='center'
-              />
-            )}
-          </div>
-        </section> */}
-
-        <section
-          className='space-y-5'
-          style={{
-            padding: isMobile ? theme.spacing.l : theme.spacing.xl,
-            borderRadius: theme.borderRadius.container.card,
-            background: theme.isInverted
-              ? theme.semanticColors.bodyBackground
-              : theme.palette.white,
-            border: `1px solid ${theme.palette.neutralQuaternary}`,
-            boxShadow: theme.shadows.card,
-          }}
-        >
-          <div
-            className={
-              isMobile
-                ? 'flex flex-col items-start gap-4'
-                : 'flex items-center gap-5'
-            }
-          >
-            <Image
-              src={TheResonantIdentityLogo}
-              alt='The Resonant Identity logo'
-              width={isMobile ? 88 : 112}
-              height={isMobile ? 88 : 112}
+    <FxContainer style={{ padding: '118px 32px 60px' }}>
+      <FxRailLayout
+        rail={
+          <div>
+            <div
               style={{
-                width: isMobile ? '88px' : '112px',
-                height: 'auto',
-                filter: theme.isInverted
-                  ? 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.35))'
-                  : undefined,
+                background: '#0D1117',
+                border: '1px solid #232C3D',
+                borderRadius: 14,
+                overflow: 'hidden',
               }}
-              priority={false}
-            />
-            <div className='space-y-2'>
-              <Typography
-                variant='h3'
+            >
+              <img
+                src={ContactImage.src}
+                alt="Let's connect"
                 style={{
-                  color: theme.palette.themePrimary,
-                  fontWeight: theme.typography.fontWeights.bold,
+                  display: 'block',
+                  width: '100%',
+                  aspectRatio: '4/3',
+                  objectFit: 'cover',
+                  background: '#05070B',
                 }}
-              >
-                The Resonant Identity
-              </Typography>
-              <Typography
-                variant='bodySmall'
-                style={{
-                  color: theme.palette.neutralTertiary,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                Listener Contact
-              </Typography>
+              />
+              <div style={{ padding: '16px 20px', borderTop: '1px solid #232C3D' }}>
+                <div style={{ fontWeight: 700, fontSize: 17, color: '#EAF0F9' }}>
+                  Let&apos;s Connect
+                </div>
+                <div style={{ fontSize: 13, color: '#8FA8CA', marginTop: 3 }}>
+                  Salt Lake City, Utah
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: 14,
+                    marginTop: 14,
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <a
+                    href="mailto:support@fluxline.pro"
+                    style={{
+                      color: '#8FA8CA',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Email
+                  </a>
+                  <a
+                    href="https://www.facebook.com/fluxline"
+                    style={{
+                      color: '#8FA8CA',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Facebook
+                  </a>
+                  <a
+                    href="https://instagram.com/fluxlineco"
+                    style={{
+                      color: '#8FA8CA',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Instagram
+                  </a>
+                  <a
+                    href="https://github.com/fluxline-pro"
+                    style={{
+                      color: '#8FA8CA',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
             </div>
+            <Link
+              href="/#contact"
+              style={{
+                display: 'inline-block',
+                marginTop: 14,
+                color: '#8FA8CA',
+                fontSize: 13.5,
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
+            >
+              ← Back to Fluxline
+            </Link>
           </div>
-          <Typography
-            variant='p'
+        }
+      >
+        {/* Heading */}
+        <div>
+          <h1
             style={{
-              color: theme.palette.neutralSecondary,
+              fontSize: 38,
+              fontWeight: 800,
+              color: '#AEC6EE',
+              margin: '0 0 10px',
+              letterSpacing: '-.01em',
+            }}
+          >
+            Start a Conversation
+          </h1>
+          <p
+            style={{
+              fontSize: 16,
+              lineHeight: 1.7,
+              color: '#C2CEDA',
+              margin: 0,
               maxWidth: '60ch',
             }}
           >
-            If you&apos;ve been listening to The Resonant Identity and want to
-            continue the conversation, reach out directly. Share your question,
-            idea, or collaboration concept and we&apos;ll take it from there.
-          </Typography>
-          <a
-            href={triEmailHref}
-            className='inline-flex w-fit items-center rounded-md px-4 py-3 transition-colors'
-            style={{
-              background: 'transparent',
-              textDecoration: 'none',
-              border: `1px solid ${theme.palette.themePrimary}`,
-              boxShadow: theme.shadows.button,
-              marginRight: theme.spacing.m,
-            }}
-          >
-            <Typography
-              variant='label'
-              aria-label='Email The Resonant Identity (opens email client)'
-              style={{
-                color: theme.isInverted
-                  ? theme.palette.white
-                  : theme.palette.black,
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              Email The Resonant Identity
-            </Typography>
-          </a>
-          <a
-            href='https://facebook.com/theresonantid'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='inline-flex w-fit items-center rounded-md px-4 py-3 transition-colors'
-            style={{
-              background: theme.palette.themePrimary,
-              textDecoration: 'none',
-              boxShadow: theme.shadows.button,
-            }}
-          >
-            <Typography
-              variant='label'
-              aria-label='Visit The Resonant Identity Facebook page (opens in new window)'
-              style={{
-                color: theme.isInverted
-                  ? theme.palette.black
-                  : theme.palette.white,
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              Join the Conversation on Facebook
-            </Typography>
-          </a>
-        </section>
+            The best place to start is a free consultation — a short call where we explore your
+            goals together and map out what&apos;s possible. Or just write us a note below.
+          </p>
+        </div>
 
-        {/* Newsletter CTA */}
-        <NewsletterCTA />
-
-        {/* Divider */}
-        <hr
+        {/* Consultation CTA card */}
+        <div
           style={{
-            border: 'none',
-            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            margin: `${theme.spacing.xxl} 0`,
+            background: 'linear-gradient(150deg,#101826,#0C1220)',
+            border: '1px solid #33506F',
+            borderRadius: 16,
+            padding: '28px 32px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 24,
+            flexWrap: 'wrap',
           }}
-        />
+        >
+          <div style={{ flex: 1, minWidth: 260 }}>
+            <div style={{ fontWeight: 700, fontSize: 19, color: '#EAF0F9', marginBottom: 6 }}>
+              Book a Free Consultation
+            </div>
+            <div style={{ fontSize: 14, lineHeight: 1.6, color: '#9FB6D4' }}>
+              Walk us through your vision and we&apos;ll design the systems, strategies, and
+              practices that move it forward. No commitment required.
+            </div>
+          </div>
+          <FxButton size="lg" href="/contact">
+            Book a Consultation
+          </FxButton>
+        </div>
 
-        {/* Contact Form — secondary option */}
-        <section className='space-y-6'>
-          <Typography
-            variant='h3'
-            style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '1.25rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-            }}
-          >
+        {/* Form card */}
+        <div
+          id="note"
+          style={{
+            scrollMarginTop: 96,
+            background: '#11161F',
+            border: '1px solid #232C3D',
+            borderRadius: 16,
+            padding: '28px 32px',
+          }}
+        >
+          <div style={{ fontWeight: 700, fontSize: 19, color: '#AEC6EE', marginBottom: 4 }}>
             Prefer to write? Send us a note.
-          </Typography>
-          <Typography
-            variant='p'
-            style={{
-              color: theme.palette.neutralTertiary,
-              fontSize: '0.9rem',
-              maxWidth: '480px',
-            }}
-          >
-            If you would rather drop us a message directly, feel free to use the
-            form below. We read every note and will respond as soon as we can.
-          </Typography>
+          </div>
+          <div style={{ fontSize: 14, color: '#98A2B3', marginBottom: 22 }}>
+            We read every note and respond as soon as we can.
+          </div>
+          <ContactForm />
+        </div>
+
+        {/* TRI row */}
+        <div
+          className="fx-g2"
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}
+        >
           <div
             style={{
-              maxWidth: '600px',
+              background: '#11161F',
+              border: '1px solid #232C3D',
+              borderRadius: 14,
+              padding: '22px 24px',
             }}
           >
-            <ContactForm />
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+                marginBottom: 10,
+              }}
+            >
+              <Image
+                src={TheResonantIdentityLogo}
+                alt="The Resonant Identity"
+                width={40}
+                height={40}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 9,
+                  objectFit: 'cover',
+                  background: '#05070B',
+                }}
+              />
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 15, color: '#EAF0F9' }}>
+                  The Resonant Identity
+                </div>
+                <div style={{ fontSize: 12, color: '#E8B95B', fontWeight: 600 }}>
+                  Listener contact
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                fontSize: 13.5,
+                lineHeight: 1.6,
+                color: '#98A2B3',
+                marginBottom: 14,
+              }}
+            >
+              Listening to TRI and want to continue the conversation? Reach out directly.
+            </div>
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              <a
+                href={triEmailHref}
+                style={{
+                  color: '#B8CDF5',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                }}
+              >
+                Email TRI →
+              </a>
+              <a
+                href="https://facebook.com/theresonantid"
+                style={{
+                  color: '#B8CDF5',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                }}
+              >
+                Facebook group →
+              </a>
+            </div>
           </div>
-        </section>
-      </div>
-    </UnifiedPageWrapper>
+
+          <div
+            style={{
+              background: '#11161F',
+              border: '1px solid #232C3D',
+              borderRadius: 14,
+              padding: '22px 24px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div style={{ fontWeight: 700, fontSize: 15, color: '#EAF0F9', marginBottom: 6 }}>
+              TRI Newsletter
+            </div>
+            <div
+              style={{
+                fontSize: 13.5,
+                lineHeight: 1.6,
+                color: '#98A2B3',
+                marginBottom: 14,
+              }}
+            >
+              Insights on Fluxline and the Resonance Core Framework™. No spam, ever.
+            </div>
+            <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  background: '#0A0D13',
+                  border: '1px solid #232C3D',
+                  borderRadius: 8,
+                  padding: '10px 12px',
+                  fontSize: 13.5,
+                  color: '#EAF0F9',
+                  outline: 'none',
+                  fontFamily: 'inherit',
+                }}
+              />
+              <button
+                type="button"
+                style={{
+                  background: '#B8CDF5',
+                  color: '#0A0D13',
+                  borderRadius: 8,
+                  fontWeight: 600,
+                  fontSize: 13,
+                  padding: '10px 16px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  fontFamily: 'inherit',
+                }}
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </FxRailLayout>
+    </FxContainer>
   );
 }
