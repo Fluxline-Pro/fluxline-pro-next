@@ -4,11 +4,8 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { CaseStudy } from '../types';
-import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
 
 interface CaseStudyDetailClientProps {
   caseStudy: CaseStudy;
@@ -22,7 +19,6 @@ export default function CaseStudyDetailClient({
   caseStudy,
 }: CaseStudyDetailClientProps) {
   const router = useRouter();
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const orientationHook = useDeviceOrientation();
   const orientation = isMounted ? orientationHook : 'landscape';
@@ -38,9 +34,9 @@ export default function CaseStudyDetailClient({
   const metricsSection = (
     <div
       style={{
-        padding: theme.spacing.l,
-        backgroundColor: theme.palette.neutralLighterAlt,
-        borderRadius: theme.effects.roundedCorner6,
+        padding: 20,
+        backgroundColor: 'var(--fx-surface-card)',
+        borderRadius: 8,
       }}
     >
       <div
@@ -49,7 +45,7 @@ export default function CaseStudyDetailClient({
           gridTemplateColumns: isMobile
             ? '1fr'
             : 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: theme.spacing.l,
+          gap: 20,
           alignItems: 'center',
         }}
       >
@@ -58,39 +54,42 @@ export default function CaseStudyDetailClient({
             key={metric.label}
             style={{
               textAlign: 'center',
-              padding: theme.spacing.m,
+              padding: 12,
             }}
           >
-            <Typography
-              variant='h1'
+            <h1
               style={{
-                color: theme.palette.themePrimary,
+                color: 'var(--fx-accent)',
                 fontSize: '3rem',
                 fontWeight: 700,
-                marginBottom: theme.spacing.s2,
+                marginBottom: 4,
+                fontFamily: 'var(--fx-font)',
               }}
             >
               {metric.value}
-            </Typography>
-            <Typography
-              variant='h4'
+            </h1>
+            <h4
               style={{
-                color: theme.palette.neutralPrimary,
-                marginBottom: theme.spacing.s2,
+                color: 'var(--fx-text-heading)',
+                marginBottom: 4,
+                fontSize: 16,
+                fontWeight: 600,
+                fontFamily: 'var(--fx-font)',
               }}
             >
               {metric.label}
-            </Typography>
+            </h4>
             {metric.description && (
-              <Typography
-                variant='p'
+              <p
                 style={{
-                  color: theme.palette.neutralSecondary,
-                  fontSize: theme.fonts.small.fontSize,
+                  color: 'var(--fx-text-body)',
+                  fontSize: 14,
+                  fontFamily: 'var(--fx-font)',
+                  margin: 0,
                 }}
               >
                 {metric.description}
-              </Typography>
+              </p>
             )}
           </div>
         ))}
@@ -102,35 +101,36 @@ export default function CaseStudyDetailClient({
   const testimonialSection = caseStudy.testimonial ? (
     <div
       style={{
-        padding: theme.spacing.xl,
-        backgroundColor: theme.palette.themeLighterAlt,
-        borderLeft: `4px solid ${theme.palette.themePrimary}`,
-        borderRadius: theme.effects.roundedCorner4,
+        padding: 32,
+        backgroundColor: 'var(--fx-surface-card)',
+        borderLeft: '4px solid var(--fx-accent)',
+        borderRadius: 4,
       }}
     >
-      <Typography
-        variant='p'
+      <p
         style={{
-          color: theme.palette.neutralPrimary,
+          color: 'var(--fx-text-heading)',
           fontSize: '1.25rem',
           fontStyle: 'italic',
           lineHeight: 1.7,
-          marginBottom: theme.spacing.m,
+          marginBottom: 12,
+          fontFamily: 'var(--fx-font)',
         }}
       >
         {`"${caseStudy.testimonial.quote}"`}
-      </Typography>
-      <Typography
-        variant='p'
+      </p>
+      <p
         style={{
-          color: theme.palette.neutralSecondary,
-          fontSize: theme.fonts.medium.fontSize,
+          color: 'var(--fx-text-body)',
+          fontSize: 16,
+          fontFamily: 'var(--fx-font)',
+          margin: 0,
         }}
       >
         <strong>{caseStudy.testimonial.author}</strong>
         <br />
         {caseStudy.testimonial.role}
-      </Typography>
+      </p>
     </div>
   ) : null;
 

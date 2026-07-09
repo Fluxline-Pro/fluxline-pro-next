@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { getApiEndpoint } from '@/lib/getApiUrl';
-import { Typography } from '@/theme/components/typography/';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { Hero } from '@/theme/components/hero';
-import { FluentIcon } from '@/theme/components/fluent-icon';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 interface OrderDetails {
@@ -26,7 +24,6 @@ interface OrderDetails {
  * @returns true if valid, false otherwise
  */
 function isValidStripeSessionId(sessionId: string): boolean {
-  // Stripe checkout session IDs start with "cs_" and contain alphanumeric + underscore chars
   const stripeSessionPattern = /^cs_[a-zA-Z0-9_]+$/;
   return stripeSessionPattern.test(sessionId);
 }
@@ -36,7 +33,6 @@ function isValidStripeSessionId(sessionId: string): boolean {
  * Informs the customer that their personalized PDF will arrive by email.
  */
 export function PurchaseSuccessClient() {
-  const { theme } = useAppTheme();
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const isMobileHook = useIsMobile();
@@ -56,14 +52,12 @@ export function PurchaseSuccessClient() {
       return;
     }
 
-    // Validate session ID format before making API call
     if (!isValidStripeSessionId(sessionId)) {
       console.warn('Invalid Stripe session ID format:', sessionId);
       setOrderLoading(false);
       return;
     }
 
-    // Fetch order details from backend
     const fetchOrder = async () => {
       try {
         const apiUrl = getApiEndpoint(`/api/get-order?session_id=${sessionId}`);
@@ -97,198 +91,187 @@ export function PurchaseSuccessClient() {
   };
 
   return (
-    <main
+    <FxContainer
+      as='main'
       style={{
-        padding: isMobile
-          ? theme.spacing.m
-          : `${theme.spacing.xl} ${theme.spacing.xl} ${theme.spacing.l}`,
-        maxWidth: '1200px',
-        margin: '0 auto',
+        padding: isMobile ? '32px 12px' : '64px 32px 88px',
         minHeight: isMobile ? 'auto' : 'calc(100vh - 150px)',
         display: isMobile ? 'block' : 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingTop: isMobile ? theme.spacing.xl : '75px',
+        paddingTop: isMobile ? 32 : 75,
       }}
     >
-      <Hero
+      <FxSectionHeading
         title='Purchase Successful!'
-        subtitle='Your personalized PDF is on its way'
-        description='Thank you for your purchase. Your watermarked PDF is being prepared and will be emailed to you within the next few minutes.'
-        iconName='CheckMark'
-        showBorder={true}
-        showShadow={false}
+        subhead='Your personalized PDF is on its way'
+        lede='Thank you for your purchase. Your watermarked PDF is being prepared and will be emailed to you within the next few minutes.'
+        as='h1'
       />
 
       {/* Order Details Section */}
       {orderDetails && !orderLoading && (
         <div
           style={{
-            marginTop: theme.spacing.l,
-            padding: theme.spacing.m,
-            backgroundColor: theme.palette.neutralLighter,
-            borderRadius: theme.effects.roundedCorner6,
-            border: `2px solid ${theme.palette.themePrimary}`,
+            marginTop: 20,
+            padding: 12,
+            backgroundColor: 'var(--fx-surface-card)',
+            borderRadius: 8,
+            border: '2px solid var(--fx-accent)',
           }}
         >
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: theme.spacing.m,
-              marginBottom: theme.spacing.m,
+              gap: 12,
+              marginBottom: 12,
             }}
           >
-            <FluentIcon
-              iconName='BoxCheckmarkSolid'
-              size='large'
-              color={theme.palette.themePrimary}
-            />
-            <Typography
-              variant='h4'
-              style={{ color: theme.palette.themePrimary, margin: 0 }}
+            <h4
+              style={{
+                color: 'var(--fx-accent)',
+                margin: 0,
+                fontSize: 16,
+                fontWeight: 600,
+                fontFamily: 'var(--fx-font)',
+              }}
             >
               Order Details
-            </Typography>
+            </h4>
           </div>
 
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: isMobile ? '1fr' : 'auto 1fr',
-              gap: theme.spacing.s,
-              rowGap: theme.spacing.s,
+              gap: 4,
+              rowGap: 4,
             }}
           >
-            <Typography
-              variant='body'
+            <span
               style={{
-                color: theme.palette.neutralSecondary,
-                fontWeight: theme.typography.fontWeights.semiBold,
+                color: 'var(--fx-text-body)',
+                fontWeight: 600,
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
               }}
             >
               Order ID:
-            </Typography>
-            <Typography
-              variant='body'
+            </span>
+            <span
               style={{
-                color: theme.palette.neutralPrimary,
+                color: 'var(--fx-text-heading)',
                 fontFamily: 'monospace',
+                fontSize: 'var(--fx-body-size)',
               }}
             >
               {orderDetails.orderId}
-            </Typography>
+            </span>
 
-            <Typography
-              variant='body'
+            <span
               style={{
-                color: theme.palette.neutralSecondary,
-                fontWeight: theme.typography.fontWeights.semiBold,
+                color: 'var(--fx-text-body)',
+                fontWeight: 600,
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
               }}
             >
               Product:
-            </Typography>
-            <Typography
-              variant='body'
-              style={{ color: theme.palette.neutralPrimary }}
+            </span>
+            <span
+              style={{
+                color: 'var(--fx-text-heading)',
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
+              }}
             >
               {getProductName(orderDetails.productType)}
-            </Typography>
+            </span>
 
-            <Typography
-              variant='body'
+            <span
               style={{
-                color: theme.palette.neutralSecondary,
-                fontWeight: theme.typography.fontWeights.semiBold,
+                color: 'var(--fx-text-body)',
+                fontWeight: 600,
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
               }}
             >
               Customer:
-            </Typography>
-            <Typography
-              variant='body'
-              style={{ color: theme.palette.neutralPrimary }}
+            </span>
+            <span
+              style={{
+                color: 'var(--fx-text-heading)',
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
+              }}
             >
               {orderDetails.customerName}
-            </Typography>
+            </span>
 
-            <Typography
-              variant='body'
+            <span
               style={{
-                color: theme.palette.neutralSecondary,
-                fontWeight: theme.typography.fontWeights.semiBold,
+                color: 'var(--fx-text-body)',
+                fontWeight: 600,
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
               }}
             >
               Email:
-            </Typography>
-            <Typography
-              variant='body'
-              style={{ color: theme.palette.neutralPrimary }}
+            </span>
+            <span
+              style={{
+                color: 'var(--fx-text-heading)',
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
+              }}
             >
               {orderDetails.customerEmail}
-            </Typography>
+            </span>
 
-            <Typography
-              variant='body'
+            <span
               style={{
-                color: theme.palette.neutralSecondary,
-                fontWeight: theme.typography.fontWeights.semiBold,
+                color: 'var(--fx-text-body)',
+                fontWeight: 600,
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
               }}
             >
               Status:
-            </Typography>
-            <div
+            </span>
+            <span
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: theme.spacing.s,
+                color:
+                  orderDetails.status === 'completed'
+                    ? 'var(--fx-success, #107c10)'
+                    : orderDetails.status === 'processing'
+                      ? 'var(--fx-accent)'
+                      : 'var(--fx-error, #a4262c)',
+                fontWeight: 600,
+                textTransform: 'capitalize',
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
               }}
             >
-              <FluentIcon
-                iconName={
-                  orderDetails.status === 'completed'
-                    ? 'CompletedSolid'
-                    : orderDetails.status === 'processing'
-                      ? 'ProgressRingDots'
-                      : 'ErrorBadge'
-                }
-                size='small'
-                color={
-                  orderDetails.status === 'completed'
-                    ? theme.semanticColors.successIcon || theme.palette.green
-                    : orderDetails.status === 'processing'
-                      ? theme.palette.themePrimary
-                      : theme.semanticColors.errorIcon
-                }
-              />
-              <Typography
-                variant='body'
-                style={{
-                  color:
-                    orderDetails.status === 'completed'
-                      ? theme.semanticColors.successIcon || theme.palette.green
-                      : orderDetails.status === 'processing'
-                        ? theme.palette.themePrimary
-                        : theme.semanticColors.errorIcon,
-                  fontWeight: theme.typography.fontWeights.semiBold,
-                  textTransform: 'capitalize',
-                }}
-              >
-                {orderDetails.status}
-              </Typography>
-            </div>
+              {orderDetails.status}
+            </span>
 
-            <Typography
-              variant='body'
+            <span
               style={{
-                color: theme.palette.neutralSecondary,
-                fontWeight: theme.typography.fontWeights.semiBold,
+                color: 'var(--fx-text-body)',
+                fontWeight: 600,
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
               }}
             >
               Date:
-            </Typography>
-            <Typography
-              variant='body'
-              style={{ color: theme.palette.neutralPrimary }}
+            </span>
+            <span
+              style={{
+                color: 'var(--fx-text-heading)',
+                fontSize: 'var(--fx-body-size)',
+                fontFamily: 'var(--fx-font)',
+              }}
             >
               {new Date(orderDetails.timestamp).toLocaleString('en-US', {
                 year: 'numeric',
@@ -298,7 +281,7 @@ export function PurchaseSuccessClient() {
                 minute: '2-digit',
                 hour12: true,
               })}
-            </Typography>
+            </span>
           </div>
         </div>
       )}
@@ -306,111 +289,81 @@ export function PurchaseSuccessClient() {
       {/* Next Steps Section */}
       <div
         style={{
-          marginTop: theme.spacing.l,
+          marginTop: 20,
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-          gap: theme.spacing.m,
+          gap: 12,
         }}
       >
         {/* What to Expect */}
         <div
           style={{
-            padding: theme.spacing.m,
-            backgroundColor: theme.palette.neutralLighter,
-            borderRadius: theme.effects.roundedCorner6,
-            border: `1px solid ${theme.palette.neutralTertiary}`,
+            padding: 12,
+            backgroundColor: 'var(--fx-surface-card)',
+            borderRadius: 8,
+            border: '1px solid var(--fx-text-muted)',
           }}
         >
-          <div
+          <h4
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: theme.spacing.s,
-              marginBottom: theme.spacing.s,
+              color: 'var(--fx-accent)',
+              margin: '0 0 4px',
+              fontSize: 16,
+              fontWeight: 600,
+              fontFamily: 'var(--fx-font)',
             }}
           >
-            <FluentIcon
-              iconName='Mail'
-              size='large'
-              color={theme.palette.themePrimary}
-            />
-            <Typography
-              variant='h4'
-              style={{ color: theme.palette.themePrimary, margin: 0 }}
-            >
-              What to Expect
-            </Typography>
-          </div>
+            What to Expect
+          </h4>
           <ul
             style={{
-              listStyle: 'none',
-              padding: 0,
+              listStyle: 'disc',
+              paddingLeft: 20,
               margin: 0,
               display: 'flex',
               flexDirection: 'column',
-              gap: theme.spacing.s,
+              gap: 4,
             }}
           >
-            <li
-              style={{
-                display: 'flex',
-                gap: theme.spacing.s,
-                alignItems: 'flex-start',
-              }}
-            >
-              <FluentIcon
-                iconName='CircleFill'
-                size='small'
-                color={theme.palette.themePrimary}
-                style={{ marginTop: '0.25rem', flexShrink: 0 }}
-              />
-              <Typography
-                variant='body'
-                style={{ color: theme.palette.neutralPrimary, margin: 0 }}
+            <li>
+              <p
+                style={{
+                  color: 'var(--fx-text-heading)',
+                  margin: 0,
+                  fontSize: 'var(--fx-body-size)',
+                  lineHeight: 'var(--fx-body-leading)',
+                  fontFamily: 'var(--fx-font)',
+                }}
               >
                 Check your email inbox within the next 5-10 minutes
-              </Typography>
+              </p>
             </li>
-            <li
-              style={{
-                display: 'flex',
-                gap: theme.spacing.s,
-                alignItems: 'flex-start',
-              }}
-            >
-              <FluentIcon
-                iconName='CircleFill'
-                size='small'
-                color={theme.palette.themePrimary}
-                style={{ marginTop: '0.25rem', flexShrink: 0 }}
-              />
-              <Typography
-                variant='body'
-                style={{ color: theme.palette.neutralPrimary, margin: 0 }}
+            <li>
+              <p
+                style={{
+                  color: 'var(--fx-text-heading)',
+                  margin: 0,
+                  fontSize: 'var(--fx-body-size)',
+                  lineHeight: 'var(--fx-body-leading)',
+                  fontFamily: 'var(--fx-font)',
+                }}
               >
                 Your PDF has been watermarked with your name and email for
                 security
-              </Typography>
+              </p>
             </li>
-            <li
-              style={{
-                display: 'flex',
-                gap: theme.spacing.s,
-                alignItems: 'flex-start',
-              }}
-            >
-              <FluentIcon
-                iconName='CircleFill'
-                size='small'
-                color={theme.palette.themePrimary}
-                style={{ marginTop: '0.25rem', flexShrink: 0 }}
-              />
-              <Typography
-                variant='body'
-                style={{ color: theme.palette.neutralPrimary, margin: 0 }}
+            <li>
+              <p
+                style={{
+                  color: 'var(--fx-text-heading)',
+                  margin: 0,
+                  fontSize: 'var(--fx-body-size)',
+                  lineHeight: 'var(--fx-body-leading)',
+                  fontFamily: 'var(--fx-font)',
+                }}
               >
                 If you don&apos;t see it, check your spam or junk folder
-              </Typography>
+              </p>
             </li>
           </ul>
         </div>
@@ -418,82 +371,74 @@ export function PurchaseSuccessClient() {
         {/* Important: 7-Day Window */}
         <div
           style={{
-            padding: theme.spacing.m,
-            backgroundColor: theme.palette.redDark || theme.palette.yellowLight,
-            borderRadius: theme.effects.roundedCorner6,
-            border: `3px solid ${theme.palette.redDark || theme.palette.yellow}`,
+            padding: 12,
+            backgroundColor: 'var(--fx-surface-card)',
+            borderRadius: 8,
+            border: '3px solid var(--fx-warning, #fce100)',
           }}
         >
-          <div
+          <h4
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: theme.spacing.s,
-              marginBottom: theme.spacing.s,
+              color: 'var(--fx-warning, var(--fx-accent))',
+              margin: '0 0 4px',
+              fontSize: 16,
+              fontWeight: 600,
+              fontFamily: 'var(--fx-font)',
             }}
           >
-            <FluentIcon
-              iconName='Clock'
-              size='large'
-              color={theme.semanticColors.warningIcon || theme.palette.yellow}
-            />
-            <Typography
-              variant='h4'
-              style={{
-                color:
-                  theme.semanticColors.warningIcon ||
-                  theme.palette.themePrimary,
-                margin: 0,
-              }}
-            >
-              Important: Download Window
-            </Typography>
-          </div>
-          <Typography
-            variant='body'
+            Important: Download Window
+          </h4>
+          <p
             style={{
-              color: theme.palette.neutralPrimary,
-              marginBottom: theme.spacing.s,
-              fontWeight: theme.typography.fontWeights.semiBold,
+              color: 'var(--fx-text-heading)',
+              marginBottom: 4,
+              fontWeight: 600,
+              fontSize: 'var(--fx-body-size)',
+              fontFamily: 'var(--fx-font)',
             }}
           >
             Your download link is valid for 7 days only.
-          </Typography>
-          <Typography
-            variant='bodySmall'
+          </p>
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
-              marginBottom: theme.spacing.s,
+              color: 'var(--fx-text-body)',
+              marginBottom: 4,
+              fontSize: 14,
+              fontFamily: 'var(--fx-font)',
             }}
           >
             After 7 days, the secure download link in your email will expire for
             security reasons. Make sure to download your PDF within this
             timeframe.
-          </Typography>
+          </p>
           <div
             style={{
-              padding: theme.spacing.s,
-              backgroundColor: theme.palette.neutralLighter,
-              borderRadius: theme.effects.roundedCorner4,
-              border: `1px solid ${theme.palette.neutralTertiary}`,
+              padding: 4,
+              backgroundColor: 'var(--fx-surface-card)',
+              borderRadius: 4,
+              border: '1px solid var(--fx-text-muted)',
             }}
           >
-            <Typography
-              variant='bodySmall'
-              style={{ color: theme.palette.neutralSecondary, margin: 0 }}
+            <p
+              style={{
+                color: 'var(--fx-text-body)',
+                margin: 0,
+                fontSize: 14,
+                fontFamily: 'var(--fx-font)',
+              }}
             >
               <strong>Need help?</strong> Contact us at{' '}
               <a
                 href='mailto:support@fluxline.pro'
                 style={{
-                  color: theme.palette.themePrimary,
+                  color: 'var(--fx-accent)',
                   textDecoration: 'none',
-                  fontWeight: theme.typography.fontWeights.semiBold,
+                  fontWeight: 600,
                 }}
               >
                 support@fluxline.pro
               </a>
-            </Typography>
+            </p>
           </div>
         </div>
       </div>
@@ -501,34 +446,34 @@ export function PurchaseSuccessClient() {
       {/* Action Buttons */}
       <div
         style={{
-          marginTop: theme.spacing.l,
+          marginTop: 20,
           display: 'flex',
-          gap: theme.spacing.m,
+          gap: 12,
           flexWrap: 'wrap',
         }}
       >
-        <FormButton
+        <FxButton
           variant='primary'
-          text='Back to Books'
-          icon='BookAnswers'
-          size='large'
+          size='lg'
           onClick={() => router.push('/books')}
-        />
-        <FormButton
-          variant='secondary'
-          text='Explore Services'
-          icon='Rocket'
-          size='large'
-          onClick={() => router.push('/services')}
-        />
-        <FormButton
+        >
+          Back to Books
+        </FxButton>
+        <FxButton
           variant='outline'
-          text='Contact Support'
-          icon='Mail'
-          size='large'
+          size='lg'
+          onClick={() => router.push('/services')}
+        >
+          Explore Services
+        </FxButton>
+        <FxButton
+          variant='outline'
+          size='lg'
           onClick={() => router.push('/contact')}
-        />
+        >
+          Contact Support
+        </FxButton>
       </div>
-    </main>
+    </FxContainer>
   );
 }

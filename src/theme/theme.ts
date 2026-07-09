@@ -1227,7 +1227,7 @@ export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
         },
       },
     },
-    themeMode: 'protanopia' as ThemeMode,
+    themeMode: 'colorblind' as ThemeMode,
   }
 );
 
@@ -1329,7 +1329,7 @@ export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
         },
       },
     },
-    themeMode: 'deuteranopia' as ThemeMode,
+    themeMode: 'colorblind' as ThemeMode,
   }
 );
 
@@ -1431,7 +1431,7 @@ export const tritanopiaTheme: IExtendedTheme = createExtendedTheme(
         },
       },
     },
-    themeMode: 'tritanopia' as ThemeMode,
+    themeMode: 'colorblind' as ThemeMode,
   }
 );
 
@@ -1521,7 +1521,7 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
         },
       },
     },
-    themeMode: 'grayscale' as ThemeMode,
+    themeMode: 'grayscale-light' as ThemeMode,
   }
 );
 
@@ -1745,11 +1745,25 @@ export type ThemeMode =
   | 'light'
   | 'dark'
   | 'high-contrast'
-  | 'protanopia'
-  | 'deuteranopia'
-  | 'tritanopia'
-  | 'grayscale'
+  | 'colorblind'
+  | 'grayscale-light'
   | 'grayscale-dark';
+
+/** @deprecated Old theme modes kept for migration from persisted preferences */
+type LegacyThemeMode = 'protanopia' | 'deuteranopia' | 'tritanopia' | 'grayscale';
+
+const LEGACY_MODE_MAP: Record<LegacyThemeMode, ThemeMode> = {
+  protanopia: 'colorblind',
+  deuteranopia: 'colorblind',
+  tritanopia: 'colorblind',
+  grayscale: 'grayscale-light',
+};
+
+export const migrateLegacyThemeMode = (mode: string): ThemeMode => {
+  if (mode in LEGACY_MODE_MAP) return LEGACY_MODE_MAP[mode as LegacyThemeMode];
+  if (mode in themeMap) return mode as ThemeMode;
+  return 'dark';
+};
 
 export type ReadingDirection = 'ltr' | 'rtl';
 export type LayoutPreference = 'right-handed' | 'left-handed';
@@ -1769,16 +1783,14 @@ export type ThemeContextType = {
   toggleLayoutPreference: () => void;
 };
 
-// Theme mapping
+// Theme mapping — DSM v1.0 six modes
 export const themeMap: Record<ThemeMode, IExtendedTheme> = {
-  light: lightTheme,
   dark: darkTheme,
-  'high-contrast': highContrastTheme,
-  protanopia: protanopiaTheme,
-  deuteranopia: deuteranopiaTheme,
-  tritanopia: tritanopiaTheme,
-  grayscale: grayscaleTheme,
+  light: lightTheme,
   'grayscale-dark': grayscaleDarkTheme,
+  'grayscale-light': grayscaleTheme,
+  'high-contrast': highContrastTheme,
+  colorblind: protanopiaTheme,
 };
 
 // Theme persistence key
@@ -1815,8 +1827,8 @@ export const applyThemeToDocument = (themeMode: ThemeMode) => {
   const root = document.documentElement;
   const theme = themeMap[themeMode];
 
-  // Set the data-theme attribute for CSS selector matching
-  root.setAttribute('data-theme', themeMode);
+  // Set the data-fx-theme attribute for DSM CSS selector matching
+  root.setAttribute('data-fx-theme', themeMode);
 
   // Add transition properties to root element
   root.style.setProperty(

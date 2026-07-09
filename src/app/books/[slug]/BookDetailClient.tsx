@@ -3,16 +3,14 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { isProduction } from '@/lib/environment';
 import { Book } from '../types';
-import { InteractiveCard } from '@/components/InteractiveCard';
+import FxCard from '@/theme/components/dsm/FxCard';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
-import { Typography } from '@/theme/components/typography/';
 import { FadeUp, FadeIn } from '@/animations/fade-animations';
-import { FormButton } from '@/theme/components/form/FormButton';
 
 interface BookDetailClientProps {
   book: Book;
@@ -25,8 +23,6 @@ interface FormatSelectionCardProps {
   id: SelectedFormat;
   title: string;
   description: string;
-  icon: string;
-  tooltip: string;
   isSelected: boolean;
   onClick: () => void;
 }
@@ -39,22 +35,47 @@ function FormatSelectionCard({
   id,
   title,
   description,
-  icon,
-  tooltip,
   isSelected,
   onClick,
 }: FormatSelectionCardProps) {
   return (
-    <InteractiveCard
-      id={id}
-      title={title}
-      description={description}
-      icon={icon}
-      iconPosition='center'
-      onClick={onClick}
-      tooltip={tooltip}
-      isSelected={isSelected}
-    />
+    <FxCard
+      interactive
+      style={{
+        cursor: 'pointer',
+        border: isSelected
+          ? '2px solid var(--fx-accent)'
+          : '2px solid var(--fx-border)',
+        padding: 20,
+        textAlign: 'center',
+        transition: 'border-color 0.2s ease, transform 0.2s ease',
+      }}
+    >
+      <div onClick={onClick} style={{ cursor: 'pointer' }}>
+        <h4
+          style={{
+            color: 'var(--fx-accent)',
+            margin: '0 0 8px',
+            fontSize: 16,
+            fontWeight: 600,
+            fontFamily: 'var(--fx-font)',
+          }}
+        >
+          {title}
+        </h4>
+        <p
+          style={{
+            color: 'var(--fx-text-body)',
+            margin: 0,
+            fontSize: 'var(--fx-body-size)',
+            lineHeight: 'var(--fx-body-leading)',
+            fontFamily: 'var(--fx-font)',
+          }}
+        >
+          {description}
+        </p>
+      </div>
+    </FxCard>
   );
 }
 
@@ -69,7 +90,6 @@ function BuyPdfButton({
   productType: PdfProductType;
   label: string;
 }) {
-  const { theme } = useAppTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
@@ -109,24 +129,26 @@ function BuyPdfButton({
   if (!isOpen) {
     return (
       <>
-        <FormButton
+        <FxButton
           variant='primary'
-          text={isProdEnvironment ? 'Checkout Disabled' : label}
-          fullWidth
           onClick={() => !isProdEnvironment && setIsOpen(true)}
           disabled={isProdEnvironment}
-        />
+          style={{ width: '100%' }}
+        >
+          {isProdEnvironment ? 'Checkout Disabled' : label}
+        </FxButton>
         {isProdEnvironment && (
-          <Typography
-            variant='bodySmall'
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
-              marginTop: theme.spacing.s,
+              color: 'var(--fx-text-body)',
+              marginTop: 4,
               textAlign: 'center',
+              fontSize: 14,
+              fontFamily: 'var(--fx-font)',
             }}
           >
             Purchases are disabled for now. Please check back later.
-          </Typography>
+          </p>
         )}
       </>
     );
@@ -135,21 +157,25 @@ function BuyPdfButton({
   return (
     <div
       style={{
-        border: `1px solid ${theme.palette.neutralTertiary}`,
-        borderRadius: theme.effects.roundedCorner4,
-        padding: theme.spacing.m,
-        backgroundColor: theme.palette.neutralLighterAlt,
+        border: '1px solid var(--fx-text-muted)',
+        borderRadius: 4,
+        padding: 12,
+        backgroundColor: 'var(--fx-surface-card)',
         display: 'flex',
         flexDirection: 'column',
-        gap: theme.spacing.s,
+        gap: 4,
       }}
     >
-      <Typography
-        variant='bodySmall'
-        style={{ color: theme.palette.neutralPrimary }}
+      <p
+        style={{
+          color: 'var(--fx-text-heading)',
+          fontSize: 14,
+          margin: 0,
+          fontFamily: 'var(--fx-font)',
+        }}
       >
         Enter your full name for your personalized PDF:
-      </Typography>
+      </p>
       <input
         type='text'
         placeholder='Your full name'
@@ -159,60 +185,62 @@ function BuyPdfButton({
         maxLength={100}
         style={{
           width: '100%',
-          padding: theme.spacing.m,
+          padding: 12,
           fontSize: '1rem',
-          fontFamily: theme.typography.fontFamilies.base,
-          backgroundColor: theme.palette.neutralLighter,
-          color: theme.palette.neutralPrimary,
-          border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
-          borderRadius: theme.borderRadius.s,
+          fontFamily: 'var(--fx-font)',
+          backgroundColor: 'var(--fx-surface-card)',
+          color: 'var(--fx-text-heading)',
+          border: '1px solid var(--fx-border)',
+          borderRadius: 4,
           outline: 'none',
           transition: 'border-color 0.2s ease',
         }}
-        onFocus={(e) =>
-          (e.target.style.borderColor = theme.palette.themePrimary)
-        }
-        onBlur={(e) =>
-          (e.target.style.borderColor = theme.palette.neutralQuaternaryAlt)
-        }
         aria-label='Your full name'
       />
       {error && (
-        <Typography
-          variant='bodySmall'
-          style={{ color: theme.semanticColors.errorText }}
+        <p
+          style={{
+            color: 'var(--fx-error, #a4262c)',
+            fontSize: 14,
+            margin: 0,
+            fontFamily: 'var(--fx-font)',
+          }}
         >
           {error}
-        </Typography>
+        </p>
       )}
       {isProdEnvironment && (
-        <Typography
-          variant='bodySmall'
+        <p
           style={{
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-body)',
             textAlign: 'center',
+            fontSize: 14,
+            margin: 0,
+            fontFamily: 'var(--fx-font)',
           }}
         >
           Purchases are disabled in production.
-        </Typography>
+        </p>
       )}
-      <div style={{ display: 'flex', gap: theme.spacing.s }}>
-        <FormButton
+      <div style={{ display: 'flex', gap: 4 }}>
+        <FxButton
           variant='primary'
-          text={loading ? 'Redirecting…' : 'Proceed to Checkout'}
           disabled={loading || isProdEnvironment}
           onClick={handleCheckout}
-        />
-        <FormButton
-          variant='tertiary'
-          text='Cancel'
+        >
+          {loading ? 'Redirecting...' : 'Proceed to Checkout'}
+        </FxButton>
+        <FxButton
+          variant='quiet'
           disabled={loading}
           onClick={() => {
             setIsOpen(false);
             setName('');
             setError(null);
           }}
-        />
+        >
+          Cancel
+        </FxButton>
       </div>
     </div>
   );
@@ -224,7 +252,6 @@ function BuyPdfButton({
  * Uses progressive disclosure - stages stack vertically
  */
 function PurchaseOptionsSection({ book }: { book: Book }) {
-  const { theme } = useAppTheme();
   const [selectedFormat, setSelectedFormat] = useState<SelectedFormat | null>(
     null
   );
@@ -237,35 +264,38 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
     <div
       id='purchase'
       style={{
-        padding: theme.spacing.xl,
-        backgroundColor: theme.palette.neutralLighterAlt,
-        borderRadius: theme.effects.roundedCorner6,
+        padding: 32,
+        backgroundColor: 'var(--fx-surface-card)',
+        borderRadius: 8,
         display: 'flex',
         flexDirection: 'column',
-        gap: theme.spacing.xl,
+        gap: 32,
       }}
     >
       {/* Stage 1: Format Selection - Always Visible */}
       <div>
-        <Typography
-          variant='h3'
-          className='mb-4'
+        <h3
           style={{
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
+            fontSize: 'var(--fx-h3-size)',
+            marginBottom: 16,
+            fontFamily: 'var(--fx-font)',
           }}
         >
           Step 1: Choose Your Format
-        </Typography>
+        </h3>
         <div
-          className='grid md:grid-cols-3 gap-6'
-          style={{ marginTop: theme.spacing.l }}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: 24,
+            marginTop: 20,
+          }}
         >
           <FormatSelectionCard
             id='hardcopy'
             title='Hardcover'
             description='Premium hardcover or softcover editions available through Amazon'
-            icon='BookmarkReport'
-            tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
             isSelected={selectedFormat === 'hardcopy'}
             onClick={() => handleFormatSelect('hardcopy')}
           />
@@ -273,8 +303,6 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
             id='softcopy'
             title='Softcover'
             description='Softcover paperback edition available through Amazon'
-            icon='BookAnswers'
-            tooltip="The Resonance Core Framework™ is a full-color, illustration-rich, premium book designed as both a reading experience and a transformational tool. This isn't a standard black-and-white paperback — it's a visually guided framework, a workbook, and a personal development system in one. The pricing reflects the production quality, depth of content, and the value of a tool built to support real, lasting change."
             isSelected={selectedFormat === 'softcopy'}
             onClick={() => handleFormatSelect('softcopy')}
           />
@@ -282,8 +310,6 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
             id='digital'
             title='Digital / eBook'
             description='Instant access to PDF or eBook formats from multiple retailers'
-            icon='Tablet'
-            tooltip='Full-color, illustration-rich edition available from Fluxline.pro and Apple Books. Kindle and Nook versions are $14.99 but only include black-and-white text without the premium visual experience.'
             isSelected={selectedFormat === 'digital'}
             onClick={() => handleFormatSelect('digital')}
           />
@@ -299,101 +325,107 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
             duration={0.2}
             delay={0.1}
             style={{
-              borderTop: `2px solid ${theme.palette.themePrimary}`,
-              paddingTop: theme.spacing.xl,
+              borderTop: '2px solid var(--fx-accent)',
+              paddingTop: 32,
             }}
           >
-            <Typography
-              variant='h3'
-              className='mb-6'
+            <h3
               style={{
-                color: theme.palette.themePrimary,
-                marginBottom: theme.spacing.s,
+                color: 'var(--fx-accent)',
+                fontSize: 'var(--fx-h3-size)',
+                marginBottom: 4,
+                fontFamily: 'var(--fx-font)',
               }}
             >
               Step 2: Select Your Purchase Option
-            </Typography>
+            </h3>
 
             {/* Hard Copy Options */}
             {selectedFormat === 'hardcopy' && (
               <div>
-                <Typography
-                  variant='h4'
-                  className='mb-4'
+                <h4
                   style={{
-                    color: theme.palette.themePrimary,
-                    marginBottom: theme.spacing.l,
+                    color: 'var(--fx-accent)',
+                    marginBottom: 20,
+                    fontSize: 16,
+                    fontWeight: 600,
+                    fontFamily: 'var(--fx-font)',
                   }}
                 >
                   Hardcover Editions
-                </Typography>
-                <div className='grid md:grid-cols-2 gap-6'>
+                </h4>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: 24,
+                  }}
+                >
                   {book.retailers
                     .filter((r) => r.formats.includes('hardcover'))
-                    .map((retailer, index) => {
-                      const price = book.prices.find(
-                        (p) =>
-                          p.format === 'hardcover' &&
-                          p.retailer === retailer.name
-                      );
-                      return (
-                        <FadeIn
-                          key={retailer.name}
-                          delay={index * 0.1}
-                          duration={0.3}
+                    .map((retailer, index) => (
+                      <FadeIn
+                        key={retailer.name}
+                        delay={index * 0.1}
+                        duration={0.3}
+                      >
+                        <a
+                          href={retailer.url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          style={{ textDecoration: 'none' }}
                         >
-                          <a
-                            href={retailer.url}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            style={{ textDecoration: 'none' }}
+                          <div
+                            style={{
+                              padding: 24,
+                              borderRadius: 8,
+                              backgroundColor: 'var(--fx-surface-card)',
+                              border: '2px solid var(--fx-text-muted)',
+                              cursor: 'pointer',
+                              transition: 'border-color 0.2s ease, transform 0.2s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.borderColor = 'var(--fx-accent)';
+                              e.currentTarget.style.transform = 'translateY(-4px)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.borderColor = 'var(--fx-text-muted)';
+                              e.currentTarget.style.transform = 'translateY(0)';
+                            }}
                           >
-                            <div
-                              className='p-6 rounded-lg transition-all'
+                            <h4
                               style={{
-                                backgroundColor: theme.palette.neutralLighter,
-                                border: `2px solid ${theme.palette.neutralTertiary}`,
-                                cursor: 'pointer',
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.borderColor =
-                                  theme.palette.themePrimary;
-                                e.currentTarget.style.transform =
-                                  'translateY(-4px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.borderColor =
-                                  theme.palette.neutralTertiary;
-                                e.currentTarget.style.transform =
-                                  'translateY(0)';
+                                color: 'var(--fx-accent)',
+                                marginBottom: 8,
+                                fontSize: 16,
+                                fontWeight: 600,
+                                fontFamily: 'var(--fx-font)',
                               }}
                             >
-                              <Typography
-                                variant='h4'
-                                className='mb-2'
-                                style={{ color: theme.palette.themePrimary }}
-                              >
-                                {retailer.name} - Hardcover
-                              </Typography>
-                              <Typography
-                                variant='body'
-                                className='mb-4'
-                                style={{ color: theme.palette.neutralPrimary }}
-                              >
-                                {/* {price ? `$${price.price}` : 'View Price'} */}
-                                $XX.XX (pricing disclosed at launch)
-                              </Typography>
-                              <Typography
-                                variant='span'
-                                style={{ color: theme.palette.themePrimary }}
-                              >
-                                Purchase on {retailer.name} →
-                              </Typography>
-                            </div>
-                          </a>
-                        </FadeIn>
-                      );
-                    })}
+                              {retailer.name} - Hardcover
+                            </h4>
+                            <p
+                              style={{
+                                color: 'var(--fx-text-heading)',
+                                marginBottom: 16,
+                                fontSize: 'var(--fx-body-size)',
+                                fontFamily: 'var(--fx-font)',
+                              }}
+                            >
+                              $XX.XX (pricing disclosed at launch)
+                            </p>
+                            <span
+                              style={{
+                                color: 'var(--fx-accent)',
+                                fontFamily: 'var(--fx-font)',
+                              }}
+                            >
+                              Purchase on {retailer.name} →
+                            </span>
+                          </div>
+                        </a>
+                      </FadeIn>
+                    ))}
                 </div>
               </div>
             )}
@@ -401,83 +433,89 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
             {/* Soft Copy Options */}
             {selectedFormat === 'softcopy' && (
               <div>
-                <Typography
-                  variant='h4'
-                  className='mb-4'
+                <h4
                   style={{
-                    color: theme.palette.themePrimary,
-                    marginBottom: theme.spacing.l,
+                    color: 'var(--fx-accent)',
+                    marginBottom: 20,
+                    fontSize: 16,
+                    fontWeight: 600,
+                    fontFamily: 'var(--fx-font)',
                   }}
                 >
                   Softcover Editions
-                </Typography>
-                <div className='grid md:grid-cols-2 gap-6'>
+                </h4>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: 24,
+                  }}
+                >
                   {book.retailers
                     .filter((r) => r.formats.includes('softcover'))
-                    .map((retailer, index) => {
-                      const price = book.prices.find(
-                        (p) =>
-                          p.format === 'softcover' &&
-                          p.retailer === retailer.name
-                      );
-                      return (
-                        <FadeIn
-                          key={retailer.name}
-                          delay={index * 0.1}
-                          duration={0.2}
+                    .map((retailer, index) => (
+                      <FadeIn
+                        key={retailer.name}
+                        delay={index * 0.1}
+                        duration={0.2}
+                      >
+                        <a
+                          href={retailer.url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          style={{ textDecoration: 'none' }}
                         >
-                          <a
-                            href={retailer.url}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            style={{ textDecoration: 'none' }}
+                          <div
+                            style={{
+                              padding: 24,
+                              borderRadius: 8,
+                              backgroundColor: 'var(--fx-surface-card)',
+                              border: '2px solid var(--fx-text-muted)',
+                              cursor: 'pointer',
+                              transition: 'border-color 0.2s ease, transform 0.2s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.borderColor = 'var(--fx-accent)';
+                              e.currentTarget.style.transform = 'translateY(-4px)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.borderColor = 'var(--fx-text-muted)';
+                              e.currentTarget.style.transform = 'translateY(0)';
+                            }}
                           >
-                            <div
-                              className='p-6 rounded-lg transition-all'
+                            <h4
                               style={{
-                                backgroundColor: theme.palette.neutralLighter,
-                                border: `2px solid ${theme.palette.neutralTertiary}`,
-                                cursor: 'pointer',
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.borderColor =
-                                  theme.palette.themePrimary;
-                                e.currentTarget.style.transform =
-                                  'translateY(-4px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.borderColor =
-                                  theme.palette.neutralTertiary;
-                                e.currentTarget.style.transform =
-                                  'translateY(0)';
+                                color: 'var(--fx-accent)',
+                                marginBottom: 8,
+                                fontSize: 16,
+                                fontWeight: 600,
+                                fontFamily: 'var(--fx-font)',
                               }}
                             >
-                              <Typography
-                                variant='h4'
-                                className='mb-2'
-                                style={{ color: theme.palette.themePrimary }}
-                              >
-                                {retailer.name} - Softcover
-                              </Typography>
-                              <Typography
-                                variant='body'
-                                className='mb-4'
-                                style={{ color: theme.palette.neutralPrimary }}
-                              >
-                                {/* {price ? `$${price.price}` : 'View Price'} */}
-                                $XX.XX (pricing disclosed at launch)
-                              </Typography>
-                              <Typography
-                                variant='span'
-                                style={{ color: theme.palette.themePrimary }}
-                              >
-                                Purchase on {retailer.name} →
-                              </Typography>
-                            </div>
-                          </a>
-                        </FadeIn>
-                      );
-                    })}
+                              {retailer.name} - Softcover
+                            </h4>
+                            <p
+                              style={{
+                                color: 'var(--fx-text-heading)',
+                                marginBottom: 16,
+                                fontSize: 'var(--fx-body-size)',
+                                fontFamily: 'var(--fx-font)',
+                              }}
+                            >
+                              $XX.XX (pricing disclosed at launch)
+                            </p>
+                            <span
+                              style={{
+                                color: 'var(--fx-accent)',
+                                fontFamily: 'var(--fx-font)',
+                              }}
+                            >
+                              Purchase on {retailer.name} →
+                            </span>
+                          </div>
+                        </a>
+                      </FadeIn>
+                    ))}
                 </div>
               </div>
             )}
@@ -485,92 +523,101 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
             {/* Digital / eBook Options */}
             {selectedFormat === 'digital' && (
               <div>
-                <Typography
-                  variant='h4'
-                  className='mb-4'
+                <h4
                   style={{
-                    color: theme.palette.themePrimary,
+                    color: 'var(--fx-accent)',
                     textTransform: 'none',
-                    marginBottom: theme.spacing.l,
+                    marginBottom: 20,
+                    fontSize: 16,
+                    fontWeight: 600,
+                    fontFamily: 'var(--fx-font)',
                   }}
                 >
                   Digital & eBook Options
-                </Typography>
+                </h4>
 
                 {/* Direct Purchase from Fluxline.pro */}
                 {book.directPurchaseAvailable && (
-                  <div className='mb-8'>
-                    <div className='grid md:grid-cols-3 gap-6'>
+                  <div style={{ marginBottom: 32 }}>
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                        gap: 24,
+                      }}
+                    >
                       {/* eBook + Workbook Bundle */}
                       {book.includesWorkbook && (
                         <FadeIn delay={0.1} duration={0.2}>
                           <div
-                            className='p-6 rounded-lg relative'
                             style={{
-                              backgroundColor: theme.palette.themeLighter,
-                              border: `4px solid ${theme.palette.themePrimary}`,
+                              padding: 24,
+                              borderRadius: 8,
+                              position: 'relative',
+                              backgroundColor: 'var(--fx-surface-card)',
+                              border: '4px solid var(--fx-accent)',
                             }}
                           >
                             <div
-                              className='absolute top-0 right-0 px-4 py-1 text-xs font-bold'
                               style={{
-                                backgroundColor: theme.palette.themePrimary,
-                                color: theme.palette.black,
-                                borderBottomLeftRadius: '8px',
+                                position: 'absolute',
+                                top: 0,
+                                right: 0,
+                                padding: '4px 16px',
+                                fontSize: 12,
+                                fontWeight: 700,
+                                backgroundColor: 'var(--fx-accent)',
+                                color: 'var(--fx-accent-ink)',
+                                borderBottomLeftRadius: 8,
                               }}
                             >
                               BEST VALUE
                             </div>
-                            <Typography
-                              variant='h5'
-                              className='mb-2'
-                              style={{ textTransform: 'none' }}
+                            <h5
+                              style={{
+                                marginBottom: 8,
+                                textTransform: 'none',
+                                fontSize: 15,
+                                fontWeight: 600,
+                                fontFamily: 'var(--fx-font)',
+                                color: 'var(--fx-text-heading)',
+                              }}
                             >
                               eBook + Workbook Bundle
-                            </Typography>
-                            <Typography
-                              variant='body'
-                              className='mb-1'
+                            </h5>
+                            <p
                               style={{
-                                color: theme.palette.themePrimary,
-                                fontSize: '24px',
+                                color: 'var(--fx-accent)',
+                                fontSize: 24,
                                 fontWeight: 'bold',
+                                marginBottom: 4,
+                                fontFamily: 'var(--fx-font)',
                               }}
                             >
-                              {/* ${book.bundlePrice} */}
                               $XX.XX (pricing disclosed at launch)
-                            </Typography>
-                            <Typography
-                              variant='bodySmall'
-                              className='mb-4'
+                            </p>
+                            <p
                               style={{
-                                color: theme.palette.neutralSecondary,
+                                color: 'var(--fx-text-body)',
                                 fontWeight: 'bold',
+                                marginBottom: 16,
+                                fontSize: 14,
+                                fontFamily: 'var(--fx-font)',
                               }}
                             >
-                              {/* {(() => {
-                                const originalPrice =
-                                  (book.directPurchasePrice || 0) +
-                                  (book.workbookPrice || 0);
-                                const savings =
-                                  originalPrice - (book.bundlePrice || 0);
-                                return (
-                                  <>
-                                    <s>${originalPrice.toFixed(2)}</s> Save $
-                                    {savings.toFixed(2)}
-                                  </>
-                                );
-                              })()}} */}
                               Best value - pricing disclosed at launch
-                            </Typography>
-                            <Typography
-                              variant='bodySmall'
-                              className='mb-4'
-                              style={{ color: theme.palette.neutralSecondary }}
+                            </p>
+                            <p
+                              style={{
+                                color: 'var(--fx-text-body)',
+                                marginBottom: 16,
+                                fontSize: 14,
+                                fontFamily: 'var(--fx-font)',
+                              }}
                             >
                               Both PDFs with instant download. Watermarked with
                               your information.
-                            </Typography>
+                            </p>
                             <BuyPdfButton
                               productType='bundle'
                               label='Buy Bundle PDF'
@@ -581,39 +628,47 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                       {/* eBook Only */}
                       <FadeIn delay={0.1} duration={0.2}>
                         <div
-                          className='p-6 rounded-lg'
                           style={{
-                            backgroundColor: theme.palette.neutralLighter,
-                            border: `2px solid ${theme.palette.neutralTertiary}`,
+                            padding: 24,
+                            borderRadius: 8,
+                            backgroundColor: 'var(--fx-surface-card)',
+                            border: '2px solid var(--fx-text-muted)',
                           }}
                         >
-                          <Typography
-                            variant='h5'
-                            className='mb-2'
-                            style={{ textTransform: 'none' }}
-                          >
-                            eBook Only (PDF)
-                          </Typography>
-                          <Typography
-                            variant='body'
-                            className='mb-4'
+                          <h5
                             style={{
-                              color: theme.palette.themePrimary,
-                              fontSize: '24px',
-                              fontWeight: 'bold',
+                              marginBottom: 8,
+                              textTransform: 'none',
+                              fontSize: 15,
+                              fontWeight: 600,
+                              fontFamily: 'var(--fx-font)',
+                              color: 'var(--fx-text-heading)',
                             }}
                           >
-                            {/* ${book.directPurchasePrice} */}
+                            eBook Only (PDF)
+                          </h5>
+                          <p
+                            style={{
+                              color: 'var(--fx-accent)',
+                              fontSize: 24,
+                              fontWeight: 'bold',
+                              marginBottom: 16,
+                              fontFamily: 'var(--fx-font)',
+                            }}
+                          >
                             $XX.XX (pricing disclosed at launch)
-                          </Typography>
-                          <Typography
-                            variant='bodySmall'
-                            className='mb-4'
-                            style={{ color: theme.palette.neutralSecondary }}
+                          </p>
+                          <p
+                            style={{
+                              color: 'var(--fx-text-body)',
+                              marginBottom: 16,
+                              fontSize: 14,
+                              fontFamily: 'var(--fx-font)',
+                            }}
                           >
                             Instant download. Watermarked PDF with your
                             information.
-                          </Typography>
+                          </p>
                           <BuyPdfButton
                             productType='book'
                             label='Buy eBook PDF'
@@ -625,34 +680,45 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                       {book.includesWorkbook && (
                         <FadeIn delay={0.1} duration={0.2}>
                           <div
-                            className='p-6 rounded-lg'
                             style={{
-                              backgroundColor: theme.palette.neutralLighter,
-                              border: `2px solid ${theme.palette.neutralTertiary}`,
+                              padding: 24,
+                              borderRadius: 8,
+                              backgroundColor: 'var(--fx-surface-card)',
+                              border: '2px solid var(--fx-text-muted)',
                             }}
                           >
-                            <Typography variant='h5' className='mb-2'>
-                              Workbook Only (PDF)
-                            </Typography>
-                            <Typography
-                              variant='body'
-                              className='mb-4'
+                            <h5
                               style={{
-                                color: theme.palette.themePrimary,
-                                fontSize: '24px',
-                                fontWeight: 'bold',
+                                marginBottom: 8,
+                                fontSize: 15,
+                                fontWeight: 600,
+                                fontFamily: 'var(--fx-font)',
+                                color: 'var(--fx-text-heading)',
                               }}
                             >
-                              {/* ${book.workbookPrice} */}
+                              Workbook Only (PDF)
+                            </h5>
+                            <p
+                              style={{
+                                color: 'var(--fx-accent)',
+                                fontSize: 24,
+                                fontWeight: 'bold',
+                                marginBottom: 16,
+                                fontFamily: 'var(--fx-font)',
+                              }}
+                            >
                               $XX.XX (pricing disclosed at launch)
-                            </Typography>
-                            <Typography
-                              variant='bodySmall'
-                              className='mb-4'
-                              style={{ color: theme.palette.neutralSecondary }}
+                            </p>
+                            <p
+                              style={{
+                                color: 'var(--fx-text-body)',
+                                marginBottom: 16,
+                                fontSize: 14,
+                                fontFamily: 'var(--fx-font)',
+                              }}
                             >
                               Companion workbook with exercises and templates.
-                            </Typography>
+                            </p>
                             <BuyPdfButton
                               productType='workbook'
                               label='Buy Workbook PDF'
@@ -666,17 +732,24 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
 
                 {/* External Retailers */}
                 <div>
-                  <Typography
-                    variant='h5'
-                    className='mb-4'
+                  <h5
                     style={{
-                      color: theme.palette.themePrimary,
-                      marginBottom: theme.spacing.l,
+                      color: 'var(--fx-accent)',
+                      marginBottom: 20,
+                      fontSize: 15,
+                      fontWeight: 600,
+                      fontFamily: 'var(--fx-font)',
                     }}
                   >
                     Or Purchase from These Other Retailers:
-                  </Typography>
-                  <div className='grid md:grid-cols-3 gap-6'>
+                  </h5>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                      gap: 24,
+                    }}
+                  >
                     {book.retailers
                       .filter((r) => r.formats.includes('ebook'))
                       .map((retailer, index) => (
@@ -692,49 +765,57 @@ function PurchaseOptionsSection({ book }: { book: Book }) {
                             style={{ textDecoration: 'none' }}
                           >
                             <div
-                              className='p-6 rounded-lg text-center transition-all'
                               style={{
-                                backgroundColor: theme.palette.neutralLighter,
-                                border: `2px solid ${theme.palette.neutralTertiary}`,
+                                padding: 24,
+                                borderRadius: 8,
+                                textAlign: 'center',
+                                backgroundColor: 'var(--fx-surface-card)',
+                                border: '2px solid var(--fx-text-muted)',
                                 cursor: 'pointer',
+                                transition: 'border-color 0.2s ease, transform 0.2s ease',
                               }}
                               onMouseEnter={(e) => {
-                                e.currentTarget.style.borderColor =
-                                  theme.palette.themePrimary;
-                                e.currentTarget.style.transform =
-                                  'translateY(-4px)';
+                                e.currentTarget.style.borderColor = 'var(--fx-accent)';
+                                e.currentTarget.style.transform = 'translateY(-4px)';
                               }}
                               onMouseLeave={(e) => {
-                                e.currentTarget.style.borderColor =
-                                  theme.palette.neutralTertiary;
-                                e.currentTarget.style.transform =
-                                  'translateY(0)';
+                                e.currentTarget.style.borderColor = 'var(--fx-text-muted)';
+                                e.currentTarget.style.transform = 'translateY(0)';
                               }}
                             >
-                              <Typography
-                                variant='h5'
-                                className='mb-2'
-                                style={{ color: theme.palette.themePrimary }}
+                              <h5
+                                style={{
+                                  color: 'var(--fx-accent)',
+                                  marginBottom: 8,
+                                  fontSize: 15,
+                                  fontWeight: 600,
+                                  fontFamily: 'var(--fx-font)',
+                                }}
                               >
                                 {retailer.name}
-                              </Typography>
-                              <Typography
-                                variant='body'
-                                className='mb-4'
-                                style={{ color: theme.palette.neutralPrimary }}
+                              </h5>
+                              <p
+                                style={{
+                                  color: 'var(--fx-text-heading)',
+                                  marginBottom: 16,
+                                  fontSize: 'var(--fx-body-size)',
+                                  fontFamily: 'var(--fx-font)',
+                                }}
                               >
                                 {retailer.name === 'Amazon' && 'Kindle Edition'}
                                 {retailer.name === 'Barnes & Noble' &&
                                   'Nook Edition'}
                                 {retailer.name === 'Apple Books' &&
                                   'iBooks Edition'}
-                              </Typography>
-                              <Typography
-                                variant='span'
-                                style={{ color: theme.palette.themePrimary }}
+                              </p>
+                              <span
+                                style={{
+                                  color: 'var(--fx-accent)',
+                                  fontFamily: 'var(--fx-font)',
+                                }}
                               >
                                 View on {retailer.name} →
-                              </Typography>
+                              </span>
                             </div>
                           </a>
                         </FadeIn>

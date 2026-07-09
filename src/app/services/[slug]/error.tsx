@@ -7,8 +7,7 @@
 
 import React from 'react';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import FxButton from '@/theme/components/dsm/FxButton';
 import Link from 'next/link';
 
 interface ServiceDetailErrorProps {
@@ -20,111 +19,74 @@ export default function ServiceDetailError({
   error,
   reset,
 }: ServiceDetailErrorProps) {
-  const { theme } = useAppTheme();
-
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
-        className="flex flex-col items-center justify-center space-y-6"
-        style={{ minHeight: '50vh' }}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 24,
+          minHeight: '50vh',
+        }}
       >
-        <Typography
-          variant="h1"
+        <h1
           style={{
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             fontSize: 'clamp(2rem, 5vw, 3rem)',
-            fontWeight: theme.typography.fontWeights.bold,
+            fontWeight: 700,
             textAlign: 'center',
           }}
         >
           Something went wrong
-        </Typography>
+        </h1>
 
-        <Typography
-          variant="p"
+        <p
           style={{
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-body)',
             fontSize: '1.125rem',
             textAlign: 'center',
-            maxWidth: '600px',
+            maxWidth: 600,
           }}
         >
           We encountered an error while loading this service page. Please try
           again or return to the services overview.
-        </Typography>
+        </p>
 
         {process.env.NODE_ENV === 'development' && (
           <div
             style={{
               padding: '1rem',
-              borderRadius: theme.borderRadius.container.small,
-              backgroundColor: theme.palette.neutralLighter,
-              border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-              maxWidth: '600px',
+              borderRadius: 8,
+              backgroundColor: 'var(--fx-surface-inset)',
+              border: '1px solid var(--fx-border)',
+              maxWidth: 600,
               overflow: 'auto',
             }}
           >
-            <Typography
-              variant="p"
+            <p
               style={{
-                color: theme.palette.neutralPrimary,
+                color: 'var(--fx-text-heading)',
                 fontSize: '0.875rem',
                 fontFamily: 'monospace',
+                margin: 0,
               }}
             >
               {error.message}
-            </Typography>
+            </p>
           </div>
         )}
 
-        <div className="flex gap-4">
-          <button
-            onClick={reset}
-            style={{
-              padding: '0.75rem 2rem',
-              borderRadius: theme.borderRadius.container.small,
-              backgroundColor: theme.palette.themePrimary,
-              color: theme.palette.white,
-              border: 'none',
-              fontSize: '1rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                theme.palette.themeSecondary;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = theme.palette.themePrimary;
-            }}
-          >
+        <div style={{ display: 'flex', gap: 16 }}>
+          <FxButton variant='primary' onClick={reset}>
             Try Again
-          </button>
+          </FxButton>
 
-          <Link
-            href="/services"
-            style={{
-              padding: '0.75rem 2rem',
-              borderRadius: theme.borderRadius.container.small,
-              backgroundColor: 'transparent',
-              color: theme.palette.themePrimary,
-              border: `1px solid ${theme.palette.themePrimary}`,
-              textDecoration: 'none',
-              fontSize: '1rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-              transition: 'all 0.2s ease',
-              display: 'inline-block',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                theme.palette.themeLighterAlt;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }}
-          >
-            Back to Services
+          <Link href="/services" style={{ textDecoration: 'none' }}>
+            <FxButton variant='outline'>
+              Back to Services
+            </FxButton>
           </Link>
         </div>
       </div>

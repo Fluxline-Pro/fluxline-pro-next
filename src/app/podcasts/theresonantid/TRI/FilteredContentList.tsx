@@ -2,8 +2,6 @@
 
 import { InteractiveCard } from '@/components/InteractiveCard';
 import { FadeUp } from '@/animations/fade-animations';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Typography } from '@/theme/components/typography/typography';
 import type { TRIPost } from '../../types';
 
 export interface FilteredContentListProps {
@@ -21,23 +19,20 @@ export function FilteredContentList({
   basePath = '/blog',
   limit = 6,
 }: FilteredContentListProps) {
-  const { theme } = useAppTheme();
-
   const visiblePosts = posts.slice(0, limit);
 
   if (visiblePosts.length === 0) {
     return (
-      <Typography variant='h4' data-testid='tri-filtered-content-empty'>
+      <h4 data-testid='tri-filtered-content-empty'>
         No content matched the current filters.
-      </Typography>
+      </h4>
     );
   }
 
   return (
     <div
-      className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'
       data-testid='tri-filtered-content-list'
-      style={{ gap: theme.spacing.l }}
+      style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}
     >
       {visiblePosts.map((post, index) => (
         <FadeUp key={post.slug} delay={index * 0.1}>

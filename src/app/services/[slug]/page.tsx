@@ -8,13 +8,11 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { notFound } from 'next/navigation';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Hero } from '@/theme/components/hero/Hero';
-import { Callout } from '@/theme/components/callout/Callout';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { InteractiveCard } from '@/components/InteractiveCard';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxCallout from '@/theme/components/dsm/FxCallout';
+import FxCard from '@/theme/components/dsm/FxCard';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import {
   ProgramTiersTable,
   ProgramComparisonModal,
@@ -32,13 +30,11 @@ import { BookingsButton } from '@/theme/components/button/bookings-button';
  */
 export default function ServiceDetailPage() {
   const params = useParams();
-  const { theme } = useAppTheme();
   const slug = params.slug as string;
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
 
   // Find the service by slug
   const service = SERVICE_CATEGORIES.find((s) => {
-    // Extract slug from path (e.g., /services/consulting -> consulting)
     const serviceSlug = s.path.split('/').pop();
     return serviceSlug === slug;
   });
@@ -104,10 +100,8 @@ export default function ServiceDetailPage() {
   };
 
   const features = getFeatures(service.id);
-  // Check if this service has pricing data
   const pricingData = SERVICE_PRICING[service.id];
 
-  // Define service-specific subtitles for pricing tables
   const pricingSubtitles: Record<string, string> = {
     'personal-training':
       'Choose your path based on your archetype assessment and personal goals.',
@@ -121,7 +115,6 @@ export default function ServiceDetailPage() {
     pricingSubtitles[service.id] ||
     'Choose the program that best fits your needs and objectives.';
 
-  // Define service-specific disclaimers for pricing tables
   const pricingDisclaimers: Record<string, string> = {
     design:
       'Additional services can be added for an extra fee. Rush delivery fees apply for expedited timelines.',
@@ -131,40 +124,39 @@ export default function ServiceDetailPage() {
 
   const pricingDisclaimer = pricingDisclaimers[service.id];
 
-  // Get related scroll/white paper
   const scrollId = SERVICE_SCROLL_MAPPING[service.id];
   const relatedScroll = scrollId ? getScrollById(scrollId) : undefined;
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-12'>
-        {/* Hero Section with Icon, Title, Description, and Summary */}
-        <Hero
-          title={service.title}
-          iconName={service.icon}
-          subtitle={service.description}
-          backArrow={true}
-        >
+    <FxContainer style={{ padding: '64px 32px 88px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
+        {/* Hero Section */}
+        <div>
+          <FxSectionHeading
+            title={service.title}
+            subhead={service.description}
+            as="h1"
+          />
           <div
             style={{
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-body)',
               fontSize: '1.125rem',
-              lineHeight: '1.7',
+              lineHeight: 1.7,
+              marginTop: 16,
             }}
             dangerouslySetInnerHTML={{ __html: service.summary }}
           />
-        </Hero>
+        </div>
 
         {/* Related Scroll/White Paper Section */}
         {relatedScroll && (
           <>
             <ServiceScrollSection scroll={relatedScroll} />
-            {/* Divider */}
             <hr
               style={{
                 border: 'none',
                 height: '1px',
-                backgroundColor: theme.palette.neutralQuaternary,
+                backgroundColor: 'var(--fx-border)',
               }}
             />
           </>
@@ -173,28 +165,39 @@ export default function ServiceDetailPage() {
         {/* Features Section */}
         {features.length > 0 && (
           <>
-            <section className='space-y-6'>
-              <Typography
-                variant='h2'
+            <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <h2
                 style={{
-                  color: theme.palette.themePrimary,
-                  fontSize: '2rem',
-                  fontWeight: theme.typography.fontWeights.bold,
+                  color: 'var(--fx-accent)',
+                  fontSize: 'var(--fx-h2-size)',
+                  fontWeight: 700,
+                  margin: 0,
                 }}
               >
                 What We Offer
-              </Typography>
+              </h2>
 
-              <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3 pt-2'>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                  gap: 16,
+                  paddingTop: 8,
+                }}
+              >
                 {features.map((feature, index) => (
-                  <InteractiveCard
-                    key={index}
-                    id={`feature-${service.id}-${index}`}
-                    title=''
-                    description={feature}
-                    icon='CheckMark'
-                    iconPosition='left'
-                  />
+                  <FxCard key={index} variant="standard">
+                    <p
+                      style={{
+                        color: 'var(--fx-text-body)',
+                        fontSize: 'var(--fx-body-size)',
+                        lineHeight: 1.7,
+                        margin: 0,
+                      }}
+                    >
+                      {feature}
+                    </p>
+                  </FxCard>
                 ))}
               </div>
             </section>
@@ -202,7 +205,7 @@ export default function ServiceDetailPage() {
               style={{
                 border: 'none',
                 height: '1px',
-                backgroundColor: theme.palette.neutralQuaternary,
+                backgroundColor: 'var(--fx-border)',
               }}
             />
           </>
@@ -223,32 +226,32 @@ export default function ServiceDetailPage() {
               {pricingDisclaimer && (
                 <div
                   style={{
-                    marginTop: theme.spacing.l,
-                    padding: theme.spacing.m,
-                    backgroundColor: theme.palette.neutralLighterAlt,
-                    borderLeft: `4px solid ${theme.palette.themePrimary}`,
-                    borderRadius: theme.borderRadius.container.small,
+                    marginTop: 20,
+                    padding: 12,
+                    backgroundColor: 'var(--fx-surface-card)',
+                    borderLeft: '4px solid var(--fx-accent)',
+                    borderRadius: 4,
                   }}
                 >
-                  <Typography
-                    variant='p'
+                  <p
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-body)',
                       fontSize: '0.9375rem',
                       fontStyle: 'italic',
-                      lineHeight: theme.typography.lineHeights.relaxed,
+                      lineHeight: 1.7,
+                      margin: 0,
                     }}
                   >
                     <strong
                       style={{
-                        color: theme.palette.themePrimary,
-                        fontWeight: theme.typography.fontWeights.semiBold,
+                        color: 'var(--fx-accent)',
+                        fontWeight: 600,
                       }}
                     >
                       Note:
                     </strong>{' '}
                     {pricingDisclaimer}
-                  </Typography>
+                  </p>
                 </div>
               )}
             </section>
@@ -257,19 +260,20 @@ export default function ServiceDetailPage() {
               style={{
                 border: 'none',
                 height: '1px',
-                backgroundColor: theme.palette.neutralQuaternary,
+                backgroundColor: 'var(--fx-border)',
               }}
             />
           </>
         )}
 
         {/* CTA Section */}
-        <Callout
-          variant='accent'
-          title='Ready to Begin?'
-          subtitle='Book a 20–30 minute consultation to explore your personal identity and aligning your decisions with it.'
-          action={<BookingsButton isHero />}
+        <FxCTABand
+          title="Ready to Begin?"
+          body="Book a 20-30 minute consultation to explore your personal identity and aligning your decisions with it."
+          primaryLabel="Book a Consultation"
+          primaryHref="/bookings"
         />
+
         {/* Related Services */}
         <RelatedServices currentServiceId={service.id} />
       </div>
@@ -282,6 +286,6 @@ export default function ServiceDetailPage() {
           pricingData={pricingData}
         />
       )}
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }

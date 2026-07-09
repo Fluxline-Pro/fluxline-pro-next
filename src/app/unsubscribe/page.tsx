@@ -3,33 +3,24 @@
 /**
  * Unsubscribe Page
  * Allows users to remove their email from The Resonant Identity newsletter.
- * Centered card layout with FormInput and FormButton.
+ * Centered card layout with FormInput and FxButton.
  */
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { UnifiedPageWrapper } from '@/components';
-import { Typography } from '@/theme/components/typography';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { FormInput } from '@/theme/components/form/FormInput';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 
 type PageState = 'idle' | 'loading' | 'success' | 'error';
 
 export default function UnsubscribePage() {
-  const { theme } = useAppTheme();
   const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [pageState, setPageState] = useState<PageState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
 
   const handleUnsubscribe = async () => {
     if (!email.trim()) {
@@ -71,7 +62,7 @@ export default function UnsubscribePage() {
   };
 
   return (
-    <UnifiedPageWrapper isUnsubscribe layoutType='responsive-grid'>
+    <FxContainer style={{ padding: '64px 32px 88px' }}>
       {/* Full-height centred container */}
       <div
         style={{
@@ -79,115 +70,106 @@ export default function UnsubscribePage() {
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '60vh',
-          padding: `${theme.spacing.xxl} ${theme.spacing.l}`,
+          padding: '44px 20px',
         }}
       >
         {/* Card */}
         <div
           style={{
-            backgroundColor: isDark
-              ? 'rgba(255,255,255,0.04)'
-              : 'rgba(0,0,0,0.03)',
-            border: `1px solid ${theme.palette.neutralQuaternary}`,
-            borderRadius: theme.borderRadius.container.large,
-            boxShadow: theme.effects.elevation8,
-            padding: theme.spacing.xxl,
+            backgroundColor: 'var(--fx-surface-card)',
+            border: '1px solid var(--fx-border)',
+            borderRadius: 12,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+            padding: 44,
             width: '100%',
             maxWidth: '480px',
             display: 'flex',
             flexDirection: 'column',
-            gap: theme.spacing.l,
+            gap: 20,
           }}
         >
           {pageState === 'success' ? (
-            /* ── Confirmation view ── */
+            /* Confirmation view */
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: theme.spacing.l,
+                gap: 20,
                 textAlign: 'center',
               }}
             >
-              <FluentIcon
-                iconName='CheckMark'
-                size='xLarge'
-                color={theme.semanticColors.successIcon || theme.palette.green}
-              />
-              <Typography
-                variant='h3'
+              <span
                 style={{
-                  color: theme.palette.themePrimary,
-                  fontWeight: theme.typography.fontWeights.bold,
+                  fontSize: 48,
+                  color: 'var(--fx-success, #107c10)',
+                }}
+                aria-hidden='true'
+              >
+                &#10003;
+              </span>
+              <h3
+                style={{
+                  fontSize: 'var(--fx-h3-size)',
+                  color: 'var(--fx-accent)',
+                  fontWeight: 700,
                   margin: 0,
                   lineHeight: 1.1,
+                  fontFamily: 'var(--fx-font)',
                 }}
               >
                 You&apos;ve been unsubscribed
-              </Typography>
-              <Typography
-                variant='p'
+              </h3>
+              <p
                 style={{
-                  color: theme.palette.neutralSecondary,
+                  color: 'var(--fx-text-body)',
                   margin: 0,
-                  lineHeight: theme.typography.lineHeights.relaxed,
+                  lineHeight: 1.7,
                   textAlign: 'left',
+                  fontSize: 'var(--fx-body-size)',
+                  fontFamily: 'var(--fx-font)',
                 }}
               >
                 Your email has been removed from the{' '}
                 <strong>The Resonant Identity</strong> newsletter. We&apos;re
                 sorry to see you go!
-              </Typography>
-              <FormButton
-                text='Go to Home Page'
+              </p>
+              <FxButton
                 variant='primary'
-                size='large'
-                icon='Home'
-                iconPosition='left'
+                size='lg'
                 onClick={() => router.push('/')}
-              />
+              >
+                Go to Home Page
+              </FxButton>
             </div>
           ) : (
-            /* ── Unsubscribe form ── */
+            /* Unsubscribe form */
             <>
-              {/* Icon + title */}
-              <div
+              {/* Title */}
+              <h3
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: theme.spacing.s1,
+                  fontSize: 'var(--fx-h3-size)',
+                  color: 'var(--fx-accent)',
+                  fontWeight: 700,
+                  margin: 0,
+                  fontFamily: 'var(--fx-font)',
                 }}
               >
-                <FluentIcon
-                  iconName='MailAlert'
-                  size='large'
-                  color={theme.palette.themePrimary}
-                  style={{ marginRight: '0.25rem' }}
-                />
-                <Typography
-                  variant='h3'
-                  style={{
-                    color: theme.palette.themePrimary,
-                    fontWeight: theme.typography.fontWeights.bold,
-                    margin: 0,
-                  }}
-                >
-                  Unsubscribe
-                </Typography>
-              </div>
+                Unsubscribe
+              </h3>
 
-              <Typography
-                variant='p'
+              <p
                 style={{
-                  color: theme.palette.neutralSecondary,
+                  color: 'var(--fx-text-body)',
                   margin: 0,
-                  lineHeight: theme.typography.lineHeights.relaxed,
+                  lineHeight: 1.7,
+                  fontSize: 'var(--fx-body-size)',
+                  fontFamily: 'var(--fx-font)',
                 }}
               >
                 Enter your email address below to remove yourself from the{' '}
                 <strong>The Resonant Identity</strong> newsletter.
-              </Typography>
+              </p>
 
               <FormInput
                 type='email'
@@ -202,7 +184,7 @@ export default function UnsubscribePage() {
               {errorMessage && (
                 <p
                   style={{
-                    color: theme.semanticColors.errorText || theme.palette.red,
+                    color: 'var(--fx-error, #a4262c)',
                     fontSize: '0.875rem',
                     margin: 0,
                   }}
@@ -212,22 +194,19 @@ export default function UnsubscribePage() {
                 </p>
               )}
 
-              <FormButton
-                text={
-                  pageState === 'loading' ? 'Unsubscribing…' : 'Unsubscribe'
-                }
+              <FxButton
                 variant='primary'
-                size='large'
-                fullWidth
-                icon='Cancel'
-                iconPosition='left'
+                size='lg'
                 onClick={handleUnsubscribe}
                 disabled={pageState === 'loading'}
-              />
+                style={{ width: '100%' }}
+              >
+                {pageState === 'loading' ? 'Unsubscribing...' : 'Unsubscribe'}
+              </FxButton>
             </>
           )}
         </div>
       </div>
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }

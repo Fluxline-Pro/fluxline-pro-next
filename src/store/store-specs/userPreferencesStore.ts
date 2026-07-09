@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { ThemeMode } from '../../theme/theme';
+import { ThemeMode, migrateLegacyThemeMode } from '../../theme/theme';
 
 export interface UserPreferences {
   backgroundImage: string;
@@ -37,14 +37,14 @@ export interface UserPreferencesState {
 // Default preferences - Fluxline Pro defaults to dark mode
 const defaultPreferences: UserPreferences = {
   backgroundImage: 'one',
-  fontScale: 0.9,
-  minFontScale: 0.8,
-  maxFontScale: 1.5,
+  fontScale: 100,
+  minFontScale: 85,
+  maxFontScale: 130,
   fontScaleManuallySet: false,
   reducedMotion: false,
   reducedTransparency: false,
   highContrast: false,
-  themeMode: 'dark', // Fluxline Pro default: dark mode for focused aesthetic
+  themeMode: 'dark',
   isOnboarded: true,
   layoutPreference: 'right-handed',
   readingDirection: 'ltr',
@@ -112,8 +112,26 @@ export const useUserPreferencesStore = create<UserPreferencesState>()(
       },
     }),
     {
-      name: 'fluxline-user-preferences',
-      skipHydration: typeof window === 'undefined', // Skip hydration on server
+      name: 'fluxline.preferences',
+      skipHydration: typeof window === 'undefined',
+      version: 1,
+      migrate: (persisted: unknown, version: number) => {
+        const state = persisted as UserPreferencesState;
+        if (version === 0 || !version) {
+          const prefs = state?.preferences ?? defaultPreferences;
+          return {
+            ...state,
+            preferences: {
+              ...prefs,
+              themeMode: migrateLegacyThemeMode(prefs.themeMode),
+              fontScale: prefs.fontScale < 10 ? Math.round(prefs.fontScale * 100) : prefs.fontScale,
+              minFontScale: 85,
+              maxFontScale: 130,
+            },
+          };
+        }
+        return state;
+      },
     }
   )
 );

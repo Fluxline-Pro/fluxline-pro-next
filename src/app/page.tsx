@@ -1,274 +1,34 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import { ViewportGrid } from '@/theme/components/layout/ViewportGrid';
-import { BackgroundLayer } from '@/theme/components/layout/background-layer';
-import { HomeFooter } from '@/theme/components/layout/home-footer';
-import { HomeCtaBanner } from '@/theme/components/layout/home-cta-banner';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { FadeUp } from '@/animations/fade-animations';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useThemeOverride } from '@/theme/contexts/ThemeOverrideContext';
-import {
-  useDeviceOrientation,
-  useIsMobile,
-  useIsDesktop,
-} from '@/theme/hooks/useMediaQuery';
-import { useHeaderHeight } from '@/theme/hooks/useHeaderHeight';
-import { useFooterHeight } from '@/theme/hooks/useFooterHeight';
+import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import type { ThemeMode } from '@/theme/theme';
-import { BookingsButton } from '@/theme';
+import FxHero from '@/theme/components/dsm/FxHero';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
+import FxStatCard from '@/theme/components/dsm/FxStatCard';
+import FxCallout from '@/theme/components/dsm/FxCallout';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
+import FxCard from '@/theme/components/dsm/FxCard';
+import FxReveal from '@/theme/components/dsm/FxReveal';
+import {
+  SERVICE_CATEGORIES,
+  FLUXLINE_SECONDARY_TAGLINE,
+} from '@/app/services/constants';
 
-const MOBILE_BACKGROUND_IMAGE_PATH =
-  '/images/home/HomePageMobileGeometricBackground.jpg';
+const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
+  { key: 'body-practice', label: 'Body & Practice' },
+  { key: 'brand-digital', label: 'Brand & Digital Presence' },
+  { key: 'depth-strategy', label: 'Depth Work & Strategy' },
+];
 
-/**
- * Home Page Content Component
- * Translucent card with animated text and dual CTA buttons.
- * Conforms to the 3×9 responsive grid: card on left, background on right.
- */
-const HomeContent: React.FC<{
-  isMobile: boolean;
-  shouldStartAnimations: boolean;
-}> = ({ isMobile, shouldStartAnimations }) => {
-  const router = useRouter();
-  const { theme, themeMode } = useAppTheme();
-  const [isMounted, setIsMounted] = React.useState(false);
-  const orientationHook = useDeviceOrientation();
-  const orientation = isMounted ? orientationHook : 'landscape';
-  const [animateDivider, setAnimateDivider] = React.useState(false);
-  const [animateHeader, setAnimateHeader] = React.useState(false);
-  const [animateBlurb, setAnimateBlurb] = React.useState(false);
-  const [animateButtons, setAnimateButtons] = React.useState(false);
-  const isDesktopHook = useIsDesktop();
-  const isDesktop = isMounted ? isDesktopHook : false;
-  const headerHeight = useHeaderHeight();
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  React.useEffect(() => {
-    if (!shouldStartAnimations) return;
-
-    setTimeout(() => setAnimateHeader(true), 300);
-    setTimeout(() => setAnimateDivider(true), 800);
-    setTimeout(() => {
-      setAnimateBlurb(true);
-      setAnimateButtons(true);
-    }, 1400);
-  }, [shouldStartAnimations]);
-
-  const isMobileLandscape = orientation === 'mobile-landscape';
-
-  // ── Card wrapper ──────────────────────────────────────────────────────
-  const cardStyle: React.CSSProperties = {
-    background: 'rgba(0, 0, 0, 0.5)',
-    backdropFilter: 'blur(14px)',
-    WebkitBackdropFilter: 'blur(14px)',
-    border: `1px solid rgba(175, 202, 252, 0.18)`,
-    borderRadius: isMobile ? '8px' : '12px',
-    padding: isMobileLandscape
-      ? '1rem 1.25rem'
-      : isMobile
-        ? '1.5rem'
-        : '2.5rem 2.75rem',
-    width: '100%',
-    boxSizing: 'border-box' as const,
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: isMobileLandscape ? '0.25rem' : '0.5rem',
-    maxWidth: '600px',
-  };
-
-  // ── Typography styles ─────────────────────────────────────────────────
-  const accentColor =
-    themeMode === 'grayscale'
-      ? theme.palette.neutralTertiary
-      : theme.palette.themePrimary;
-
-  const welcomeStyle: React.CSSProperties = {
-    color: accentColor,
-    fontSize: isMobileLandscape
-      ? 'clamp(0.85rem, 2.5vw, 1.1rem)'
-      : 'clamp(1rem, 2.5vw, 1.4rem)',
-    fontWeight: theme.typography.fontWeights.light,
-    textTransform: 'capitalize' as const,
-    letterSpacing: '0.08em',
-    marginBottom: isMobileLandscape ? '-0.1rem' : '-0.25rem',
-    opacity: 0,
-    animation: animateHeader
-      ? 'fl-slideInRight 0.4s ease-in-out forwards'
-      : 'none',
-  };
-
-  const mainTitleStyle: React.CSSProperties = {
-    color: theme.palette.white,
-    fontSize: isMobileLandscape
-      ? 'clamp(2rem, 7vw, 3rem)'
-      : 'clamp(2.75rem, 8vw, 5rem)',
-    fontWeight: theme.typography.fontWeights.bold,
-    textTransform: 'uppercase' as const,
-    letterSpacing: '0.04em',
-    lineHeight: 1.1,
-    marginBottom: isMobileLandscape ? '0.25rem' : theme.spacing.s,
-    opacity: 0,
-    animation: animateHeader
-      ? 'fl-slideInRight 0.4s ease-in-out 0.2s forwards'
-      : 'none',
-  };
-
-  const dividerStyle: React.CSSProperties = {
-    width: '95%',
-    height: isMobile ? '1px' : '2px',
-    backgroundColor: accentColor,
-    border: 'none',
-    margin: isMobileLandscape ? '0.25rem 0' : `${theme.spacing.s} 0`,
-    transform: 'scaleX(0)',
-    transformOrigin: 'left',
-    animation: animateDivider
-      ? 'fl-drawLine 0.4s ease-in-out forwards'
-      : 'none',
-    boxShadow: `0 0 6px ${accentColor}40`,
-  };
-
-  const blurbStyle: React.CSSProperties = {
-    color: theme.palette.white,
-    fontSize: isMobileLandscape
-      ? 'clamp(0.85rem, 2vw, 1.1rem)'
-      : 'clamp(1rem, 2vw, 1.3rem)',
-    lineHeight: theme.typography.lineHeights.relaxed,
-    fontWeight: theme.typography.fontWeights.light,
-    opacity: 0,
-    animation: animateBlurb ? 'fl-fadeIn 0.8s ease-in-out forwards' : 'none',
-    animationDelay: animateBlurb ? '0.2s' : '0s',
-    marginTop: isMobileLandscape ? '0.25rem' : theme.spacing.s,
-    marginBottom: isMobileLandscape ? '0.5rem' : theme.spacing.m,
-  };
-
-  const buttonRowStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection:
-      isMobile && !isMobileLandscape ? ('column' as const) : ('row' as const),
-    gap: '0.75rem',
-    flexWrap: 'wrap' as const,
-    marginTop: isMobile ? undefined : theme.spacing.m,
-    opacity: 0,
-    animation: animateButtons
-      ? 'fl-slideInUp 0.4s ease-in-out 0.6s forwards'
-      : 'none',
-  };
-
-  const buttonBaseStyle: React.CSSProperties = {
-    minWidth: isMobile ? '100%' : '240px',
-    height: isMobile ? '48px' : '60px',
-    fontSize: isMobileLandscape
-      ? 'clamp(0.85rem, 2vw, 1rem)'
-      : 'clamp(1.125rem, 1.5vw, 1.25rem)',
-    fontWeight: theme.typography.fontWeights.semiBold,
-  };
-
-  return (
-    <div style={{ marginBottom: isDesktop ? `-${headerHeight}px` : undefined }}>
-      <style>{`
-        @keyframes fl-fadeIn {
-          from { opacity: 0; }
-          to   { opacity: 1; }
-        }
-        @keyframes fl-slideInRight {
-          from { opacity: 0; transform: translateX(-20px); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fl-drawLine {
-          from { transform: scaleX(0); }
-          to   { transform: scaleX(1); }
-        }
-        @keyframes fl-slideInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-
-      <div style={cardStyle}>
-        {/* Welcome line */}
-        <Typography variant='h2' style={welcomeStyle}>
-          welcome to
-        </Typography>
-
-        {/* Brand name */}
-        <Typography variant='h1' style={mainTitleStyle}>
-          fluxline
-        </Typography>
-
-        {/* Animated divider */}
-        <hr style={dividerStyle} />
-
-        {/* Tagline / blurb */}
-        <Typography variant='p' style={blurbStyle}>
-          We build <strong>congruence.</strong>
-          <br />
-          <strong>Strong</strong> bodies. <strong>Clear</strong> brands.{' '}
-          <strong>Resilient</strong> systems.
-          <br />
-          Whether you need <strong>development</strong>, <strong>design</strong>
-          , <strong>coaching</strong>, or <strong>strategy</strong>, we
-          integrate technical precision with emotional intelligence so your
-          inner and outer work finally match.
-        </Typography>
-
-        {/* CTA buttons */}
-        <div style={buttonRowStyle}>
-          <FormButton
-            variant='secondary'
-            size='medium'
-            style={buttonBaseStyle}
-            onClick={() => router.push('/about')}
-          >
-            About Us
-          </FormButton>
-
-          <BookingsButton isHomePage style={buttonBaseStyle} />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-/**
- * Home Page
- * Landing page with hero section card, animated text, and dual CTA buttons.
- * Background: gradient + geometric CSS animations (desktop/tablet) or portrait
- * photo (mobile). Content card is always on the LEFT using the 3×9 grid.
- */
 export default function Home() {
-  const { theme, themeMode, layoutPreference } = useAppTheme();
+  const { themeMode } = useAppTheme();
   const { setOverrideThemeMode } = useThemeOverride();
-  const [isMounted, setIsMounted] = React.useState(false);
-  const isMobileHook = useIsMobile();
-  const orientationHook = useDeviceOrientation();
-  const isMobile = isMounted ? isMobileHook : false;
-  const orientation = isMounted ? orientationHook : 'landscape';
-  const headerHeight = useHeaderHeight();
-  const footerHeight = useFooterHeight();
-  const shouldUseMobileLayout = isMobile || orientation === 'tablet-portrait';
-  const [backgroundLoaded, setBackgroundLoaded] = React.useState(false);
-  const [shouldStartAnimations, setShouldStartAnimations] =
-    React.useState(false);
 
   React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Force dark mode for home page unless user has accessibility preference
-  React.useEffect(() => {
-    const accessibilityModes: ThemeMode[] = [
-      'high-contrast',
-      'protanopia',
-      'deuteranopia',
-      'tritanopia',
-    ];
+    const accessibilityModes: ThemeMode[] = ['high-contrast', 'colorblind'];
     const shouldOverride = !accessibilityModes.includes(themeMode);
     if (shouldOverride) setOverrideThemeMode('dark');
     return () => {
@@ -276,122 +36,532 @@ export default function Home() {
     };
   }, [setOverrideThemeMode, themeMode]);
 
-  // Add home-page class to body for transparent background
-  React.useEffect(() => {
-    document.body.classList.add('home-page');
-    return () => document.body.classList.remove('home-page');
-  }, []);
-
-  // For mobile orientations, preload the portrait image before starting animations.
-  // For desktop the CSS gradient is instant, so we mark loaded immediately.
-  React.useEffect(() => {
-    const isMobileOrientation =
-      orientation === 'portrait' ||
-      orientation === 'mobile-landscape' ||
-      orientation === 'tablet-portrait';
-
-    if (!isMobileOrientation) {
-      // Gradient background – no image to wait for
-      setBackgroundLoaded(true);
-      setTimeout(() => setShouldStartAnimations(true), 100);
-      return;
-    }
-
-    const img = new Image();
-    img.onload = () => {
-      setBackgroundLoaded(true);
-      setTimeout(() => setShouldStartAnimations(true), 200);
-    };
-    img.onerror = () => {
-      setBackgroundLoaded(true);
-      setShouldStartAnimations(true);
-    };
-    img.src = MOBILE_BACKGROUND_IMAGE_PATH;
-    return () => {
-      img.onload = null;
-      img.onerror = null;
-    };
-  }, [orientation]);
-
-  const mobileContentStyle: React.CSSProperties | undefined =
-    shouldUseMobileLayout
-      ? orientation === 'tablet-portrait'
-        ? {
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxSizing: 'border-box' as const,
-          }
-        : {
-            width: '100%',
-            minHeight: `calc(100dvh - ${headerHeight})`,
-            display: 'flex',
-            alignItems: 'flex-end',
-            justifyContent: 'center',
-            // pushes the card down to the bottom of the page on mobile
-            paddingTop: isMobile
-              ? 0
-              : `calc(${headerHeight} + ${theme.spacing.s})`,
-            paddingBottom: isMobile
-              ? 0
-              : `calc(${footerHeight} + ${theme.spacing.l})`,
-            boxSizing: 'border-box' as const,
-          }
-      : undefined;
-
-  const contentNode = (
-    <FadeUp
-      key={`home-content-${backgroundLoaded}`}
-      delay={backgroundLoaded ? 0.1 : 0}
-      duration={0.5}
-      style={mobileContentStyle}
-    >
-      <HomeContent
-        isMobile={shouldUseMobileLayout}
-        shouldStartAnimations={shouldStartAnimations}
-      />
-    </FadeUp>
-  );
-
   return (
     <>
-      <BackgroundLayer
-        isHomePage={true}
-        backgroundImage='one'
-        orientation={orientation}
-        themeMode={themeMode}
-        theme={theme}
-        layoutPreference={layoutPreference}
-        backgroundLoaded={backgroundLoaded}
+      <FxHero
+        eyebrow="Welcome To"
+        title="FLUXLINE"
+        body={
+          <>
+            We build{' '}
+            <strong style={{ color: 'var(--fx-text-bright)' }}>congruence</strong>.{' '}
+            <strong style={{ color: 'var(--fx-text-bright)' }}>Strong</strong> bodies.{' '}
+            <strong style={{ color: 'var(--fx-text-bright)' }}>Clear</strong> brands.{' '}
+            <strong style={{ color: 'var(--fx-text-bright)' }}>Resilient</strong> systems.
+          </>
+        }
+        secondaryCta={{ label: 'Explore Fluxline ↓', href: '#about' }}
+        primaryCta={{ label: 'Book a Consultation', href: '/contact' }}
+        backgroundImage="/images/home/HomePageMobileGeometricBackground.jpg"
       />
-      <div
-        style={{
-          position: 'relative',
-          minHeight: '100vh',
-          backgroundColor: '#010101',
-        }}
+
+      <section id="about" style={{ padding: '88px 0' }}>
+        <FxContainer>
+          <FxRailLayout
+            rail={
+              <FxReveal
+                variant="left"
+                style={{
+                  background: 'var(--fx-surface-inset)',
+                  border: '1px solid var(--fx-border)',
+                  borderRadius: 14,
+                  overflow: 'hidden',
+                }}
+              >
+                <img
+                  src="/images/home/FluxlineLogo.png"
+                  alt="Fluxline — Structure the Shift"
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    aspectRatio: '1/1',
+                    objectFit: 'contain',
+                    background: '#000',
+                    padding: 24,
+                    boxSizing: 'border-box',
+                  }}
+                />
+                <div
+                  style={{
+                    padding: '16px 20px',
+                    borderTop: '1px solid var(--fx-border)',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 17,
+                      color: 'var(--fx-text-bright)',
+                    }}
+                  >
+                    About &amp; Ethos
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: 'var(--fx-text-soft)',
+                      marginTop: 3,
+                    }}
+                  >
+                    Modular by design. Resonant by nature.
+                  </div>
+                </div>
+              </FxReveal>
+            }
+          >
+            <FxReveal>
+              <h2
+                style={{
+                  fontSize: 34,
+                  fontWeight: 700,
+                  color: 'var(--fx-text-heading)',
+                  margin: '0 0 10px',
+                  letterSpacing: '-.01em',
+                }}
+              >
+                About Fluxline
+              </h2>
+              <p
+                style={{
+                  fontSize: 19,
+                  fontWeight: 600,
+                  color: 'var(--fx-teal)',
+                  margin: '0 0 16px',
+                }}
+              >
+                Systems that work, brands that connect, and practices that last.
+              </p>
+              <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
+                Fluxline is built on the belief that{' '}
+                <strong style={{ color: 'var(--fx-text-bright)' }}>
+                  congruence creates momentum
+                </strong>
+                .
+              </p>
+            </FxReveal>
+
+            <FxReveal
+              delay={100}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                gap: 14,
+              }}
+            >
+              <FxStatCard value="50+" label="Projects Delivered" />
+              <FxStatCard value="20+" label="Years Experience" />
+              <FxStatCard value="6+" label="Product Offerings" />
+              <FxStatCard value="10+" label="Industries Served" />
+            </FxReveal>
+
+            <FxReveal delay={200}>
+              <FxCallout
+                tone="gold"
+                title="We're Not Done Yet—But We're Already Extraordinary."
+              >
+                <em>Modular by design. Resonant by nature.</em>
+              </FxCallout>
+            </FxReveal>
+          </FxRailLayout>
+        </FxContainer>
+      </section>
+
+      <section
+        id="services"
+        style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
-        <ViewportGrid
-          leftChildren={contentNode}
-          isHomePage={true}
-          respectLayoutPreference={true}
-          backgroundImage='one'
-        />
-        <div
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 100,
-          }}
-        >
-          <HomeCtaBanner />
-          <HomeFooter />
-        </div>
-      </div>
+        <FxContainer>
+          <FxRailLayout
+            rail={
+              <FxReveal
+                variant="left"
+                style={{
+                  background: 'var(--fx-surface-inset)',
+                  border: '1px solid var(--fx-border)',
+                  borderRadius: 14,
+                  overflow: 'hidden',
+                }}
+              >
+                <img
+                  src="/images/home/HomePageCoverLandscape2.jpg"
+                  alt="Fluxline services"
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    aspectRatio: '3/4',
+                    objectFit: 'cover',
+                  }}
+                />
+                <div
+                  style={{
+                    padding: '16px 20px',
+                    borderTop: '1px solid var(--fx-border)',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 17,
+                      color: 'var(--fx-text-bright)',
+                    }}
+                  >
+                    Our Services
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: 'var(--fx-text-soft)',
+                      marginTop: 3,
+                    }}
+                  >
+                    From intention to infrastructure.
+                  </div>
+                </div>
+              </FxReveal>
+            }
+          >
+            <FxReveal>
+              <h2
+                style={{
+                  fontSize: 34,
+                  fontWeight: 700,
+                  color: 'var(--fx-text-heading)',
+                  margin: '0 0 10px',
+                  letterSpacing: '-.01em',
+                }}
+              >
+                Choose What Kind Of Support You Need
+              </h2>
+              <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
+                Every service is a doorway to transformation. Six modular
+                offerings across three domains — each links to its full
+                detail page.
+              </p>
+            </FxReveal>
+
+            {HOME_SERVICE_GROUPS.map((group, i) => (
+              <FxReveal key={group.key} delay={(i + 1) * 100}>
+                <div
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 600,
+                    letterSpacing: '.12em',
+                    textTransform: 'uppercase',
+                    color: 'var(--fx-teal)',
+                    marginBottom: 12,
+                  }}
+                >
+                  {group.label}
+                </div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                    gap: 14,
+                  }}
+                >
+                  {SERVICE_CATEGORIES.filter((s) => s.category === group.key).map(
+                    (service) => (
+                      <FxCard
+                        key={service.id}
+                        variant="raised"
+                        interactive
+                        href={service.path}
+                        style={{ padding: 22 }}
+                      >
+                        <div
+                          style={{
+                            fontWeight: 700,
+                            fontSize: 16,
+                            color: 'var(--fx-text-heading)',
+                            marginBottom: 6,
+                          }}
+                        >
+                          {service.title}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: 13.5,
+                            lineHeight: 1.55,
+                            color: 'var(--fx-text-muted)',
+                            marginBottom: 12,
+                          }}
+                        >
+                          {service.description}
+                        </div>
+                        <span
+                          style={{
+                            fontSize: 12.5,
+                            fontWeight: 700,
+                            letterSpacing: '.08em',
+                            color: 'var(--fx-teal)',
+                          }}
+                        >
+                          LEARN MORE ›
+                        </span>
+                      </FxCard>
+                    )
+                  )}
+                </div>
+              </FxReveal>
+            ))}
+
+            <FxReveal
+              delay={(HOME_SERVICE_GROUPS.length + 1) * 100}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 18,
+                background: 'var(--fx-surface-inset)',
+                border: '1px solid var(--fx-border)',
+                borderRadius: 12,
+                padding: '18px 24px',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 15.5,
+                    color: 'var(--fx-text-bright)',
+                  }}
+                >
+                  Not sure where to start?
+                </div>
+                <div
+                  style={{
+                    fontSize: 13.5,
+                    color: 'var(--fx-text-muted)',
+                    marginTop: 2,
+                  }}
+                >
+                  {FLUXLINE_SECONDARY_TAGLINE}
+                </div>
+              </div>
+              <a
+                href="/services"
+                style={{
+                  color: 'var(--fx-text-soft)',
+                  fontSize: 13.5,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                All services →
+              </a>
+            </FxReveal>
+          </FxRailLayout>
+        </FxContainer>
+      </section>
+
+      <section id="content" style={{ padding: '88px 0' }}>
+        <FxContainer>
+          <FxReveal style={{ maxWidth: 680, marginBottom: 34 }}>
+            <h2
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 10px',
+                letterSpacing: '-.01em',
+              }}
+            >
+              Content Hub &amp; The Resonant Identity
+            </h2>
+            <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
+              Insights, client work, and the ongoing conversation around the
+              Resonance Core Framework™.
+            </p>
+          </FxReveal>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 16,
+              alignItems: 'stretch',
+            }}
+          >
+            <FxReveal delay={100} style={{ height: '100%' }}>
+            <FxCard variant="raised" interactive href="/content" style={{ padding: 26, height: '100%' }}>
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-teal)',
+                  marginBottom: 10,
+                }}
+              >
+                Content Hub
+              </div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: 'var(--fx-text-heading)',
+                  marginBottom: 8,
+                }}
+              >
+                Blog, Podcast &amp; Portfolio
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  marginBottom: 14,
+                }}
+              >
+                Thought leadership on digital transformation, human-centered
+                design, and the work we&apos;ve shipped.
+              </div>
+              <span
+                style={{
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  letterSpacing: '.08em',
+                  color: 'var(--fx-teal)',
+                }}
+              >
+                EXPLORE THE HUB ›
+              </span>
+            </FxCard>
+            </FxReveal>
+
+            <FxReveal delay={200} style={{ height: '100%' }}>
+            <FxCard
+              variant="raised"
+              interactive
+              href="/services/scrolls"
+              style={{ padding: 26, height: '100%' }}
+            >
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-teal)',
+                  marginBottom: 10,
+                }}
+              >
+                Scrolls
+              </div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: 'var(--fx-text-heading)',
+                  marginBottom: 8,
+                }}
+              >
+                Reflections &amp; Practice Notes
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  marginBottom: 14,
+                }}
+              >
+                Shorter writings on identity, embodiment, and building with
+                intention.
+              </div>
+              <span
+                style={{
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  letterSpacing: '.08em',
+                  color: 'var(--fx-teal)',
+                }}
+              >
+                READ THE SCROLLS ›
+              </span>
+            </FxCard>
+            </FxReveal>
+
+            <FxReveal delay={300} style={{ height: '100%' }}>
+            <FxCard variant="band" style={{ padding: 26, height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-gold)',
+                  marginBottom: 10,
+                }}
+              >
+                The Resonant Identity
+              </div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: 'var(--fx-text-bright)',
+                  marginBottom: 8,
+                }}
+              >
+                Podcast &amp; Community
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  marginBottom: 18,
+                }}
+              >
+                Identity architecture, self-improvement, and practical
+                frameworks for navigating transitions with clarity.
+              </div>
+              <div style={{ marginTop: 'auto' }}>
+                <a
+                  href="/podcasts/theresonantid"
+                  style={{
+                    display: 'block',
+                    textAlign: 'center',
+                    background: 'var(--fx-accent)',
+                    color: 'var(--fx-accent-ink)',
+                    borderRadius: 8,
+                    fontWeight: 600,
+                    fontSize: 14.5,
+                    padding: '12px 20px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Episodes, Challenges &amp; Demos
+                </a>
+              </div>
+            </FxCard>
+            </FxReveal>
+          </div>
+        </FxContainer>
+      </section>
+
+      <section
+        id="contact"
+        style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
+      >
+        <FxContainer>
+          <FxReveal>
+            <FxCTABand
+              title="Ready to structure the shift?"
+              body="Tell us where you are and where you're going. We'll map the right first step together — development, design, coaching, or strategy."
+              primaryLabel="Book a Consultation"
+              primaryHref="/contact"
+              secondaryLabel="Full Contact Form →"
+              secondaryHref="/contact"
+            />
+          </FxReveal>
+        </FxContainer>
+      </section>
     </>
   );
 }

@@ -9,13 +9,12 @@ import {
   vscDarkPlus,
   vs,
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { UnifiedPageWrapper } from './UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form';
-import { Callout } from '@/theme/components/callout';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
+import FxButton from '@/theme/components/dsm/FxButton';
+import FxChip from '@/theme/components/dsm/FxChip';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { useIsMobile, useIsDesktop } from '@/theme/hooks/useMediaQuery';
-import { IconButton } from '@fluentui/react';
 import {
   SocialLinks,
   type SocialLinksData,
@@ -24,68 +23,43 @@ import { ImageCarouselModal, type CarouselImage } from './ImageCarouselModal';
 import { Modal } from './Modal';
 import { GeneratedWithAIBadge } from './GeneratedWithAIBadge';
 
-/**
- * Unified configuration interface for content detail pages
- * Supports blog posts, portfolio projects, press releases, and case studies
- */
 export interface UnifiedContentDetailConfig {
-  // Core content
   title: string;
-  content: string; // Markdown or HTML
+  content: string;
   contentType: 'markdown' | 'html';
-
-  // Metadata
   excerpt?: string;
   metadata?: Array<{
     label: string;
     value: string | React.ReactNode;
   }>;
-
-  // Author info (for blog posts, press releases, etc.)
   authorInfo?: {
     name: string;
     publishDate?: string;
     lastUpdated?: string;
     socialLinks?: SocialLinksData;
   };
-
-  // Navigation
   backLink: {
     url: string;
     label: string;
   };
-
-  // Badges (tags, categories, technologies, etc.)
   badges?: Array<{
     label: string;
     variant: 'primary' | 'secondary' | 'tertiary';
     onClick?: () => void;
   }>;
-
-  // Optional image for left pane (blog posts, portfolio)
   imageConfig?: {
     source: string;
     alt: string;
     title?: string;
     showTitle?: boolean;
-    // Gallery support - array of images for carousel
-    // If not provided, single image will be clickable for fullscreen view
     gallery?: CarouselImage[];
   };
-
-  // Additional sections (for case studies, portfolio projects)
   sections?: Array<{
     title: string;
     content: string | React.ReactNode;
   }>;
-
-  // Show gallery as a dedicated section (uses imageConfig.gallery)
   showGallerySection?: boolean;
-
-  // Control where sections are rendered (default: 'after')
   sectionsPosition?: 'before' | 'after';
-
-  // Call to action
   cta?: {
     title: string;
     description: string;
@@ -95,18 +69,12 @@ export interface UnifiedContentDetailConfig {
       variant: 'primary' | 'secondary';
     }>;
   };
-
-  // External links (for portfolio projects)
   externalLinks?: Array<{
     label: string;
     url: string;
     variant: 'github' | 'live' | 'custom';
   }>;
-
-  // AI-generated content badge
   generatedWithAI?: boolean;
-
-  // Optional custom modal content — replaces the image carousel when the left image is clicked
   customModalContent?: React.ReactNode;
 }
 
@@ -114,16 +82,9 @@ interface UnifiedContentDetailProps {
   config: UnifiedContentDetailConfig;
 }
 
-/**
- * Unified Content Detail Component
- * Single component for rendering blog posts, portfolio projects, press releases, and case studies
- * Uses BlogPostDetailClient's proven JSX styling
- */
 export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
-  const { theme, themeMode } = useAppTheme();
-  const isMobile = useIsMobile();
-  const isDesktop = useIsDesktop();
+  const { themeMode } = useAppTheme();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
   const isMounted = useSyncExternalStore(
@@ -132,84 +93,91 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
     () => false
   );
 
+  const isDark =
+    themeMode === 'dark' ||
+    themeMode === 'high-contrast' ||
+    themeMode === 'grayscale-dark';
+
   const handleImageClick = React.useCallback(() => {
     if (config.imageConfig) {
-      // Support both gallery and single image click-to-enlarge
       setCarouselInitialIndex(0);
       setIsCarouselOpen(true);
     }
   }, [config.imageConfig]);
 
-  const handleCarouselClose = React.useCallback(() => {
-    setIsCarouselOpen(false);
-  }, []);
-
   const handleBack = React.useCallback(() => {
     router.push(config.backLink.url);
   }, [router, config.backLink.url]);
 
-  // Markdown components with blog-style hierarchy
+  const imageGallery = React.useMemo(() => {
+    if (!config.imageConfig) return undefined;
+    if (config.imageConfig.gallery) return config.imageConfig.gallery;
+    return [
+      {
+        url: config.imageConfig.source,
+        alt: config.imageConfig.alt,
+        caption: config.imageConfig.title,
+      },
+    ];
+  }, [config.imageConfig]);
+
   const markdownComponents: Partial<any> = {
     h1: ({ children }: { children?: React.ReactNode }) => (
-      <Typography
-        variant='h1'
+      <h1
         style={{
-          fontWeight: 700,
-          marginTop: theme.spacing.l2,
-          marginBottom: theme.spacing.l1,
-          color: theme.palette.themePrimary,
-          fontSize: '2rem',
+          fontSize: 'var(--fx-article-h1)',
+          fontWeight: 800,
+          color: 'var(--fx-text-heading)',
+          letterSpacing: 'var(--fx-heading-tracking)',
+          margin: '2em 0 0.75em',
         }}
       >
         {children}
-      </Typography>
+      </h1>
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <Typography
-        variant='h2'
+      <h2
         style={{
-          fontWeight: 600,
-          marginTop: theme.spacing.l2,
-          marginBottom: theme.spacing.m,
-          color: theme.palette.themePrimary,
-          fontSize: '1.5rem',
+          fontSize: 'var(--fx-article-h2)',
+          fontWeight: 700,
+          color: 'var(--fx-text-heading)',
+          letterSpacing: 'var(--fx-heading-tracking)',
+          margin: '1.75em 0 0.5em',
         }}
       >
         {children}
-      </Typography>
+      </h2>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
-      <Typography
-        variant='h3'
+      <h3
         style={{
-          fontWeight: 600,
-          marginTop: theme.spacing.l1,
-          marginBottom: theme.spacing.m,
-          color: theme.palette.themePrimary,
-          fontSize: '1.25rem',
+          fontSize: 'var(--fx-article-h3)',
+          fontWeight: 700,
+          color: 'var(--fx-text-heading)',
+          margin: '1.5em 0 0.5em',
         }}
       >
         {children}
-      </Typography>
+      </h3>
     ),
     p: ({ children }: { children?: React.ReactNode }) => (
-      <Typography
-        variant='p'
+      <p
         style={{
-          marginBottom: theme.spacing.m,
-          lineHeight: 1.7,
+          fontSize: 'var(--fx-body-size)',
+          lineHeight: 'var(--fx-body-leading)',
+          color: 'var(--fx-text-body)',
+          margin: '0 0 1em',
         }}
       >
         {children}
-      </Typography>
+      </p>
     ),
     ul: ({ children }: { children?: React.ReactNode }) => (
       <ul
         style={{
-          marginBottom: theme.spacing.m,
-          paddingLeft: theme.spacing.l1,
+          margin: '0 0 1em',
+          paddingLeft: 24,
           listStyleType: 'disc',
-          listStylePosition: 'outside',
         }}
       >
         {children}
@@ -218,10 +186,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
     ol: ({ children }: { children?: React.ReactNode }) => (
       <ol
         style={{
-          marginBottom: theme.spacing.m,
-          paddingLeft: theme.spacing.l1,
+          margin: '0 0 1em',
+          paddingLeft: 24,
           listStyleType: 'decimal',
-          listStylePosition: 'outside',
         }}
       >
         {children}
@@ -230,11 +197,13 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
     li: ({ children }: { children?: React.ReactNode }) => (
       <li
         style={{
-          marginBottom: theme.spacing.s1,
-          display: 'list-item',
+          marginBottom: 4,
+          fontSize: 'var(--fx-body-size)',
+          lineHeight: 'var(--fx-body-leading)',
+          color: 'var(--fx-text-body)',
         }}
       >
-        <Typography variant='p'>{children}</Typography>
+        {children}
       </li>
     ),
     code: ({
@@ -248,17 +217,16 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       const match = /language-(\w+)/.exec(className || '');
       const language = match ? match[1] : 'text';
 
-      // Inline code - simple styled span
       if (isInline) {
         return (
           <code
             style={{
-              backgroundColor: theme.palette.neutralLighter,
-              color: theme.palette.themePrimary,
-              padding: `2px ${theme.spacing.s1}`,
-              borderRadius: theme.effects.roundedCorner2,
+              background: 'var(--fx-surface-inset)',
+              color: 'var(--fx-teal)',
+              padding: '2px 6px',
+              borderRadius: 4,
               fontSize: '0.9em',
-              fontFamily: 'monospace',
+              fontFamily: 'var(--fx-font-mono)',
             }}
           >
             {children}
@@ -266,35 +234,23 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         );
       }
 
-      // Code block - use syntax highlighter
       const codeString = String(children).replace(/\n$/, '');
-      // Determine if current theme is dark-based
-      const isDark =
-        themeMode === 'dark' ||
-        themeMode === 'high-contrast' ||
-        themeMode === 'grayscale-dark';
-
       return (
         <SyntaxHighlighter
           language={language}
           style={isDark ? vscDarkPlus : vs}
           customStyle={{
             margin: 0,
-            padding: theme.spacing.m,
-            borderRadius: theme.effects.roundedCorner4,
-            fontSize: theme.fonts.medium.fontSize,
-            fontFamily:
-              '"Courier Prime", "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", Consolas, "Courier New", monospace',
+            padding: 16,
+            borderRadius: 8,
+            fontSize: 'var(--fx-mono-size)',
+            fontFamily: 'var(--fx-font-mono)',
             backgroundColor: isDark
-              ? theme.palette.neutralLight
-              : theme.palette.neutralLighter,
-            ...(isDesktop && { maxWidth: '900px' }),
+              ? 'var(--fx-surface-inset)'
+              : 'var(--fx-surface-card)',
           }}
           codeTagProps={{
-            style: {
-              fontFamily:
-                '"Courier Prime", "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", Consolas, "Courier New", monospace',
-            },
+            style: { fontFamily: 'var(--fx-font-mono)' },
           }}
           wrapLongLines={false}
         >
@@ -303,25 +259,18 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       );
     },
     pre: ({ children }: { children?: React.ReactNode }) => (
-      <div
-        style={{
-          marginBottom: theme.spacing.m,
-        }}
-      >
-        {children}
-      </div>
+      <div style={{ margin: '0 0 1em', overflowX: 'auto' }}>{children}</div>
     ),
     blockquote: ({ children }: { children?: React.ReactNode }) => (
       <blockquote
         style={{
-          borderLeft: `4px solid ${theme.palette.themePrimary}`,
-          paddingLeft: theme.spacing.l1,
-          marginLeft: 0,
-          marginBottom: theme.spacing.m,
+          borderLeft: '3px solid var(--fx-gold)',
+          background: 'var(--fx-gold-bg)',
+          padding: '16px 20px',
+          margin: '0 0 1em',
+          borderRadius: '0 8px 8px 0',
           fontStyle: 'italic',
-          fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-          color: theme.palette.neutralSecondary,
-          maxWidth: '600px',
+          color: 'var(--fx-text-body)',
         }}
       >
         {children}
@@ -336,52 +285,40 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       <a
         href={href}
         style={{
-          color: theme.palette.themePrimary,
+          color: 'var(--fx-teal)',
           textDecoration: 'none',
+          transition: 'color var(--fx-color-duration)',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.textDecoration = 'underline';
+          e.currentTarget.style.color = 'var(--fx-text-bright)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.textDecoration = 'none';
+          e.currentTarget.style.color = 'var(--fx-teal)';
         }}
       >
         {children}
       </a>
     ),
-    img: ({
-      src,
-      alt,
-    }: React.ImgHTMLAttributes<HTMLImageElement> & {
-      src?: string;
-      alt?: string;
-    }) => (
+    img: ({ src, alt }: { src?: string; alt?: string }) => (
       <img
         src={src}
         alt={alt || ''}
         style={{
           maxWidth: '100%',
-          maxHeight: '400px',
-          width: 'auto',
           height: 'auto',
-          marginBottom: theme.spacing.m,
-          borderRadius: theme.effects.roundedCorner4,
+          margin: '0 0 1em',
+          borderRadius: 8,
           objectFit: 'contain',
         }}
       />
     ),
     table: ({ children }: { children?: React.ReactNode }) => (
-      <div
-        style={{
-          overflowX: 'auto',
-          marginBottom: theme.spacing.m,
-        }}
-      >
+      <div style={{ overflowX: 'auto', margin: '0 0 1em' }}>
         <table
           style={{
             width: '100%',
             borderCollapse: 'collapse',
-            border: `1px solid ${theme.palette.neutralLight}`,
+            border: '1px solid var(--fx-border)',
           }}
         >
           {children}
@@ -389,580 +326,375 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       </div>
     ),
     thead: ({ children }: { children?: React.ReactNode }) => (
-      <thead
-        style={{
-          backgroundColor: theme.palette.neutralLighter,
-        }}
-      >
-        {children}
-      </thead>
+      <thead style={{ background: 'var(--fx-surface-inset)' }}>{children}</thead>
     ),
     tbody: ({ children }: { children?: React.ReactNode }) => (
       <tbody>{children}</tbody>
     ),
     tr: ({ children }: { children?: React.ReactNode }) => (
-      <tr
+      <tr style={{ borderBottom: '1px solid var(--fx-border)' }}>{children}</tr>
+    ),
+    th: ({ children }: { children?: React.ReactNode }) => (
+      <th
         style={{
-          borderBottom: `1px solid ${theme.palette.neutralLight}`,
+          padding: '8px 12px',
+          textAlign: 'left',
+          fontWeight: 700,
+          color: 'var(--fx-text-heading)',
+          borderRight: '1px solid var(--fx-border)',
         }}
       >
         {children}
-      </tr>
+      </th>
     ),
-    th: ({ children }: { children?: React.ReactNode }) => {
-      const isDark =
-        themeMode === 'dark' ||
-        themeMode === 'high-contrast' ||
-        themeMode === 'grayscale-dark';
-
-      return (
-        <th
-          style={{
-            padding: theme.spacing.s2,
-            paddingLeft: theme.spacing.m,
-            textAlign: 'left',
-            fontWeight: 600,
-            color: theme.palette.themePrimary,
-            borderRight: `1px solid ${theme.palette.neutralLight}`,
-            backgroundColor: isDark
-              ? theme.palette.neutralQuaternaryAlt
-              : theme.palette.neutralLight,
-          }}
-        >
-          {children}
-        </th>
-      );
-    },
-    td: ({ children }: { children?: React.ReactNode }) => {
-      const isDark =
-        themeMode === 'dark' ||
-        themeMode === 'high-contrast' ||
-        themeMode === 'grayscale-dark';
-
-      return (
-        <td
-          style={{
-            padding: theme.spacing.s2,
-            paddingLeft: theme.spacing.m,
-            borderRight: `1px solid ${theme.palette.neutralLight}`,
-            backgroundColor: isDark
-              ? theme.palette.neutralLighter
-              : theme.palette.white,
-          }}
-        >
-          {children}
-        </td>
-      );
-    },
+    td: ({ children }: { children?: React.ReactNode }) => (
+      <td
+        style={{
+          padding: '8px 12px',
+          borderRight: '1px solid var(--fx-border)',
+          color: 'var(--fx-text-body)',
+        }}
+      >
+        {children}
+      </td>
+    ),
   };
 
-  // Prepare image config with carousel functionality
-  // Create gallery array from single image if no gallery exists
-  const imageGallery = React.useMemo(() => {
-    if (!config.imageConfig) return undefined;
-
-    // Use existing gallery or create single-item gallery
-    if (config.imageConfig.gallery) {
-      return config.imageConfig.gallery;
-    }
-
-    // Create single-item gallery from main image
-    return [
-      {
-        url: config.imageConfig.source,
-        alt: config.imageConfig.alt,
-        caption: config.imageConfig.title,
-      },
-    ];
-  }, [config.imageConfig]);
-
-  const imageConfigWithCarousel = config.imageConfig
-    ? {
-        ...config.imageConfig,
-        onClick: handleImageClick,
-        enableHoverEffect: true,
-      }
-    : undefined;
-
-  return (
-    <>
-      <UnifiedPageWrapper
-        layoutType='responsive-grid'
-        imageConfig={imageConfigWithCarousel}
-      >
-        {/* Back Button */}
-        <div style={{ marginBottom: theme.spacing.l1 }}></div>
-
-        {/* Article Header */}
-        <article
-          style={isMobile ? { padding: `0 ${theme.spacing.m}` } : undefined}
+  const railContent = config.imageConfig ? (
+    <div
+      style={{
+        background: 'var(--fx-surface-inset)',
+        border: '1px solid var(--fx-border)',
+        borderRadius: 14,
+        overflow: 'hidden',
+        cursor: config.imageConfig.gallery ? 'pointer' : undefined,
+      }}
+      onClick={config.imageConfig.gallery ? handleImageClick : undefined}
+    >
+      <img
+        src={config.imageConfig.source}
+        alt={config.imageConfig.alt}
+        style={{
+          display: 'block',
+          width: '100%',
+          aspectRatio: '1/1',
+          objectFit: 'cover',
+          background: '#000',
+        }}
+      />
+      {config.imageConfig.showTitle !== false && config.imageConfig.title && (
+        <div
+          style={{
+            padding: '14px 18px',
+            borderTop: '1px solid var(--fx-border)',
+          }}
         >
-          <header style={{ marginBottom: theme.spacing.l2 }}>
+          <div
+            style={{
+              fontWeight: 700,
+              fontSize: 15,
+              color: 'var(--fx-text-bright)',
+            }}
+          >
+            {config.imageConfig.title}
+          </div>
+        </div>
+      )}
+    </div>
+  ) : null;
+
+  const renderSections = (position: 'before' | 'after') => {
+    if (!config.sections || config.sectionsPosition !== position) return null;
+    return config.sections.map((section, index) => (
+      <div key={index} style={{ marginTop: position === 'after' ? 32 : 0, marginBottom: position === 'before' ? 32 : 0 }}>
+        <h2
+          style={{
+            fontSize: 'var(--fx-article-h2)',
+            fontWeight: 700,
+            color: 'var(--fx-text-heading)',
+            margin: '0 0 12px',
+          }}
+        >
+          {section.title}
+        </h2>
+        {typeof section.content === 'string' ? (
+          <p
+            style={{
+              fontSize: 'var(--fx-body-size)',
+              lineHeight: 'var(--fx-body-leading)',
+              color: 'var(--fx-text-body)',
+            }}
+          >
+            {section.content}
+          </p>
+        ) : (
+          section.content
+        )}
+      </div>
+    ));
+  };
+
+  const gallerySection =
+    config.showGallerySection &&
+    config.sectionsPosition === 'before' &&
+    config.imageConfig?.gallery ? (
+      <div style={{ marginBottom: 32 }}>
+        <h2
+          style={{
+            fontSize: 'var(--fx-article-h2)',
+            fontWeight: 700,
+            color: 'var(--fx-text-heading)',
+            margin: '0 0 16px',
+          }}
+        >
+          Project Gallery
+        </h2>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 16,
+          }}
+        >
+          {config.imageConfig.gallery.map((image, index) => (
             <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'baseline',
-                justifyContent: 'left',
-                marginBottom: theme.spacing.l2,
+              key={index}
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                setCarouselInitialIndex(index);
+                setIsCarouselOpen(true);
               }}
             >
-              <div
+              <img
+                src={image.url}
+                alt={image.alt}
                 style={{
-                  paddingLeft: theme.spacing.s1,
-                  marginRight: theme.spacing.l,
+                  width: '100%',
+                  height: 200,
+                  objectFit: 'cover',
+                  borderRadius: 8,
                 }}
-              >
-                {isMounted ? (
-                  <IconButton
-                    iconProps={{ iconName: 'Back' }}
-                    title={config.backLink.label}
-                    ariaLabel={config.backLink.label}
-                    onClick={handleBack}
-                    styles={{
-                      root: {
-                        color: theme.palette.themePrimary,
-                        backgroundColor: 'transparent',
-                      },
-                      rootHovered: {
-                        color: theme.palette.themeDark,
-                        backgroundColor: 'transparent',
-                        transform: 'translateX(-4px)',
-                        transition: 'transform 0.2s ease-in-out',
-                      },
-                      rootPressed: {
-                        backgroundColor: 'transparent',
-                      },
-                      icon: {
-                        fontSize: '2rem',
-                        fontWeight: 'bold',
-                      },
-                    }}
-                  />
-                ) : (
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      width: '2rem',
-                      height: '2rem',
-                    }}
-                  />
-                )}
-              </div>
-              <Typography
-                variant='h1'
-                style={{
-                  fontWeight: 700,
-                  color: theme.palette.themePrimary,
-                  marginBottom: theme.spacing.m,
-                  fontSize: '2.5rem',
-                }}
-              >
-                {config.title}
-              </Typography>
-            </div>
-
-            {/* Author Info */}
-            {config.authorInfo && (
-              <div
-                style={{
-                  marginBottom: theme.spacing.l1,
-                  paddingBottom: theme.spacing.m,
-                }}
-              >
-                <Typography
-                  variant='p'
+              />
+              {image.caption && (
+                <p
                   style={{
-                    fontSize: '1.25rem',
-                    fontWeight: 600,
-                    color: theme.palette.neutralPrimary,
-                    marginBottom: theme.spacing.s,
+                    fontSize: 13,
+                    color: 'var(--fx-text-faint)',
+                    fontStyle: 'italic',
+                    marginTop: 4,
                   }}
                 >
-                  {config.authorInfo.name}
-                </Typography>
-
-                {config.authorInfo.socialLinks && (
-                  <div
-                    style={{
-                      marginTop: theme.spacing.s2,
-                      marginBottom: theme.spacing.s2,
-                    }}
-                  >
-                    <SocialLinks
-                      socialLinks={config.authorInfo.socialLinks}
-                      name={config.authorInfo.name}
-                      size='small'
-                    />
-                  </div>
-                )}
-
-                <Typography
-                  variant='p'
-                  style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '0.95rem',
-                    marginTop: theme.spacing.s1,
-                  }}
-                >
-                  Published: {config.authorInfo.publishDate}
-                  {config.authorInfo.lastUpdated && (
-                    <>
-                      {' • '}
-                      Last Updated: {config.authorInfo.lastUpdated}
-                    </>
-                  )}
-                </Typography>
-              </div>
-            )}
-
-            {/* Metadata (for other content types) */}
-            {!config.authorInfo &&
-              config.metadata &&
-              config.metadata.length > 0 && (
-                <div
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: theme.spacing.m,
-                    alignItems: 'center',
-                    marginBottom: theme.spacing.l1,
-                    color: theme.palette.neutralSecondary,
-                  }}
-                >
-                  {config.metadata.map((meta, index) => (
-                    <React.Fragment key={index}>
-                      {index > 0 && <span>•</span>}
-                      <Typography variant='p'>
-                        {meta.label ? `${meta.label}: ` : ''}
-                        {meta.value}
-                      </Typography>
-                    </React.Fragment>
-                  ))}
-                </div>
+                  {image.caption}
+                </p>
               )}
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : null;
 
-            {/* Badges */}
-            {config.badges && config.badges.length > 0 && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: theme.spacing.s1,
-                  marginBottom: theme.spacing.m,
-                }}
-              >
-                {config.badges.map((badge, index) => (
-                  <FormButton
-                    key={index}
-                    variant={
-                      badge.variant === 'primary' ? 'primary' : 'tertiary'
-                    }
-                    onClick={badge.onClick}
-                    size='small'
-                  >
-                    {badge.label}
-                  </FormButton>
-                ))}
-              </div>
-            )}
+  const articleContent = (
+    <article>
+      <header style={{ marginBottom: 32 }}>
+        <h1
+          style={{
+            fontSize: 'var(--fx-h1-size)',
+            fontWeight: 800,
+            color: 'var(--fx-text-heading)',
+            letterSpacing: 'var(--fx-heading-tracking)',
+            margin: '0 0 16px',
+          }}
+        >
+          {config.title}
+        </h1>
 
-            {/* Generated with AI Badge */}
-            {config.generatedWithAI && (
-              <div style={{ marginBottom: theme.spacing.m }}>
-                <GeneratedWithAIBadge />
-              </div>
-            )}
-          </header>
-
-          {/* Excerpt */}
-          {config.excerpt && (
-            <Typography
-              variant='p'
+        {config.authorInfo && (
+          <div style={{ marginBottom: 20 }}>
+            <div
               style={{
-                fontStyle: 'italic',
-                color: theme.palette.neutralSecondary,
-                marginBottom: theme.spacing.l2,
-                paddingLeft: theme.spacing.l1,
-                borderLeft: `4px solid ${theme.palette.themePrimary}`,
-                fontSize: '1.125rem',
+                fontSize: 17,
+                fontWeight: 600,
+                color: 'var(--fx-text-bright)',
               }}
             >
-              {config.excerpt}
-            </Typography>
-          )}
+              {config.authorInfo.name}
+            </div>
+            {config.authorInfo.socialLinks && (
+              <div style={{ marginTop: 6, marginBottom: 6 }}>
+                <SocialLinks
+                  socialLinks={config.authorInfo.socialLinks}
+                  name={config.authorInfo.name}
+                  size="small"
+                />
+              </div>
+            )}
+            <div
+              style={{
+                fontSize: 'var(--fx-meta-size)',
+                color: 'var(--fx-text-faint)',
+                marginTop: 4,
+              }}
+            >
+              Published: {config.authorInfo.publishDate}
+              {config.authorInfo.lastUpdated && (
+                <> &middot; Last Updated: {config.authorInfo.lastUpdated}</>
+              )}
+            </div>
+          </div>
+        )}
 
-          {/* External Links (for portfolio projects) */}
-          {config.externalLinks && config.externalLinks.length > 0 && (
+        {!config.authorInfo &&
+          config.metadata &&
+          config.metadata.length > 0 && (
             <div
               style={{
                 display: 'flex',
-                gap: theme.spacing.m,
-                marginBottom: theme.spacing.l2,
                 flexWrap: 'wrap',
+                gap: 12,
+                alignItems: 'center',
+                marginBottom: 16,
+                fontSize: 'var(--fx-meta-size)',
+                color: 'var(--fx-text-faint)',
               }}
             >
-              {config.externalLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  style={{
-                    padding: `${theme.spacing.s1} ${theme.spacing.l}`,
-                    backgroundColor:
-                      link.variant === 'live'
-                        ? theme.palette.themePrimary
-                        : theme.palette.neutralLighter,
-                    color:
-                      link.variant === 'live'
-                        ? theme.palette.white
-                        : theme.palette.neutralPrimary,
-                    textDecoration: 'none',
-                    borderRadius: theme.effects.roundedCorner4,
-                    fontSize: theme.fonts.medium.fontSize,
-                    fontWeight: 600,
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (link.variant === 'live') {
-                      e.currentTarget.style.backgroundColor =
-                        theme.palette.themeDark;
-                    } else {
-                      e.currentTarget.style.backgroundColor =
-                        theme.palette.neutralLight;
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (link.variant === 'live') {
-                      e.currentTarget.style.backgroundColor =
-                        theme.palette.themePrimary;
-                    } else {
-                      e.currentTarget.style.backgroundColor =
-                        theme.palette.neutralLighter;
-                    }
-                  }}
-                >
-                  {link.label}
-                </a>
+              {config.metadata.map((meta, index) => (
+                <React.Fragment key={index}>
+                  {index > 0 && <span>&middot;</span>}
+                  <span>
+                    {meta.label ? `${meta.label}: ` : ''}
+                    {meta.value}
+                  </span>
+                </React.Fragment>
               ))}
             </div>
           )}
 
-          {/* Gallery Section - Before Content */}
-          {config.showGallerySection &&
-            config.sectionsPosition === 'before' &&
-            config.imageConfig?.gallery && (
-              <div style={{ marginBottom: theme.spacing.xl }}>
-                <Typography
-                  variant='h2'
-                  style={{
-                    fontWeight: 600,
-                    marginBottom: theme.spacing.m,
-                    color: theme.palette.themePrimary,
-                    fontSize: '1.5rem',
-                  }}
-                >
-                  Project Gallery
-                </Typography>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: theme.spacing.l,
-                    maxWidth: '1100px',
-                  }}
-                >
-                  {config.imageConfig.gallery.map((image, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        cursor: 'pointer',
-                        transition: 'transform 0.2s ease',
-                      }}
-                      onClick={() => {
-                        setCarouselInitialIndex(index);
-                        setIsCarouselOpen(true);
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'scale(1.02)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                      }}
-                    >
-                      <img
-                        src={image.url}
-                        alt={image.alt}
-                        style={{
-                          width: '100%',
-                          height: '250px',
-                          objectFit: 'cover',
-                          borderRadius: theme.effects.roundedCorner4,
-                          marginBottom: image.caption ? theme.spacing.s1 : 0,
-                        }}
-                      />
-                      {image.caption && (
-                        <Typography
-                          variant='p'
-                          style={{
-                            color: theme.palette.neutralSecondary,
-                            fontSize: theme.fonts.small.fontSize,
-                            fontStyle: 'italic',
-                          }}
-                        >
-                          {image.caption}
-                        </Typography>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-          {/* Additional Sections - Before Content */}
-          {config.sections &&
-            config.sectionsPosition === 'before' &&
-            config.sections.map((section, index) => (
-              <div key={index} style={{ marginBottom: theme.spacing.xl }}>
-                <Typography
-                  variant='h2'
-                  style={{
-                    fontWeight: 600,
-                    marginBottom: theme.spacing.m,
-                    color: theme.palette.themePrimary,
-                    fontSize: '1.5rem',
-                  }}
-                >
-                  {section.title}
-                </Typography>
-                {typeof section.content === 'string' ? (
-                  <Typography
-                    variant='p'
-                    style={{
-                      color: theme.palette.neutralSecondary,
-                      fontSize: '1.125rem',
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {section.content}
-                  </Typography>
-                ) : (
-                  section.content
-                )}
-              </div>
-            ))}
-
-          {/* Main Content */}
+        {config.badges && config.badges.length > 0 && (
           <div
             style={{
-              color: theme.palette.neutralPrimary,
-              lineHeight: 1.7,
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 8,
+              marginBottom: 16,
             }}
-            className='unified-content-detail'
           >
-            {/* H1 headings are removed in _theme.scss to avoid duplication with title */}
-            {config.contentType === 'markdown' ? (
-              <ReactMarkdown
-                components={markdownComponents}
-                remarkPlugins={[remarkGfm]}
+            {config.badges.map((badge, index) => (
+              <FxChip
+                key={index}
+                kind="badge"
+                tone={badge.variant === 'primary' ? 'teal' : undefined}
+                onClick={badge.onClick}
               >
-                {config.content}
-              </ReactMarkdown>
-            ) : (
-              <div dangerouslySetInnerHTML={{ __html: config.content }} />
-            )}
-          </div>
-
-          {/* Additional Sections */}
-          {config.sections &&
-            (!config.sectionsPosition || config.sectionsPosition === 'after') &&
-            config.sections.map((section, index) => (
-              <div key={index} style={{ marginTop: theme.spacing.xl }}>
-                <Typography
-                  variant='h2'
-                  style={{
-                    fontWeight: 600,
-                    marginBottom: theme.spacing.m,
-                    color: theme.palette.themePrimary,
-                    fontSize: '1.5rem',
-                  }}
-                >
-                  {section.title}
-                </Typography>
-                {typeof section.content === 'string' ? (
-                  <Typography
-                    variant='p'
-                    style={{
-                      color: theme.palette.neutralSecondary,
-                      fontSize: '1.125rem',
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {section.content}
-                  </Typography>
-                ) : (
-                  section.content
-                )}
-              </div>
+                {badge.label}
+              </FxChip>
             ))}
-        </article>
+          </div>
+        )}
 
-        {/* Call to Action */}
+        {config.generatedWithAI && (
+          <div style={{ marginBottom: 16 }}>
+            <GeneratedWithAIBadge />
+          </div>
+        )}
+      </header>
+
+      {config.excerpt && (
+        <blockquote
+          style={{
+            borderLeft: '3px solid var(--fx-teal)',
+            padding: '12px 20px',
+            margin: '0 0 24px',
+            fontStyle: 'italic',
+            fontSize: 17,
+            color: 'var(--fx-text-muted)',
+            lineHeight: 1.6,
+          }}
+        >
+          {config.excerpt}
+        </blockquote>
+      )}
+
+      {config.externalLinks && config.externalLinks.length > 0 && (
+        <div
+          style={{
+            display: 'flex',
+            gap: 12,
+            marginBottom: 24,
+            flexWrap: 'wrap',
+          }}
+        >
+          {config.externalLinks.map((link, index) => (
+            <FxButton
+              key={index}
+              variant={link.variant === 'live' ? 'primary' : 'outline'}
+              size="sm"
+              href={link.url}
+            >
+              {link.label}
+            </FxButton>
+          ))}
+        </div>
+      )}
+
+      {gallerySection}
+      {renderSections('before')}
+
+      <div style={{ color: 'var(--fx-text-body)', lineHeight: 1.7 }}>
+        {config.contentType === 'markdown' ? (
+          <ReactMarkdown
+            components={markdownComponents}
+            remarkPlugins={[remarkGfm]}
+          >
+            {config.content}
+          </ReactMarkdown>
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: config.content }} />
+        )}
+      </div>
+
+      {renderSections('after')}
+    </article>
+  );
+
+  return (
+    <>
+      <FxContainer as="section" style={{ padding: '48px 32px 88px' }}>
+        {railContent ? (
+          <FxRailLayout rail={railContent}>{articleContent}</FxRailLayout>
+        ) : (
+          <div style={{ maxWidth: 800 }}>{articleContent}</div>
+        )}
+
         {config.cta && (
-          <div style={{ marginTop: theme.spacing.xxl }}>
-            <Callout
-              variant='subtle'
+          <div style={{ marginTop: 48 }}>
+            <FxCTABand
               title={config.cta.title}
-              subtitle={config.cta.description}
-              action={
-                <div
-                  style={{
-                    display: 'flex',
-                    gap: theme.spacing.m,
-                    justifyContent: 'flex-start',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  {config.cta.buttons.map((button, index) => (
-                    <FormButton
-                      key={index}
-                      variant={
-                        button.variant === 'primary' ? 'primary' : 'secondary'
-                      }
-                      onClick={button.onClick}
-                      size='large'
-                    >
-                      {button.label}
-                    </FormButton>
-                  ))}
-                </div>
-              }
+              body={config.cta.description}
+              primaryLabel={config.cta.buttons[0]?.label}
+              primaryHref="/contact"
             />
           </div>
         )}
 
-        {/* Footer Navigation */}
         <div
           style={{
-            marginTop: theme.spacing.l2,
-            paddingTop: theme.spacing.l1,
-            borderTop: `1px solid ${theme.palette.neutralLight}`,
+            marginTop: 32,
+            paddingTop: 20,
+            borderTop: '1px solid var(--fx-border-subtle)',
           }}
         >
-          <FormButton variant='secondary' onClick={handleBack} size='large'>
+          <FxButton variant="outline" onClick={handleBack}>
             ← {config.backLink.label}
-          </FormButton>
+          </FxButton>
         </div>
-      </UnifiedPageWrapper>
+      </FxContainer>
 
-      {/* Image Modal — custom component or standard carousel */}
       {config.customModalContent ? (
         <Modal
           isOpen={isCarouselOpen}
-          onDismiss={handleCarouselClose}
-          ariaLabel='Interactive Demo'
-          maxWidth='640px'
+          onDismiss={() => setIsCarouselOpen(false)}
+          ariaLabel="Interactive Demo"
+          maxWidth="640px"
         >
           {config.customModalContent}
         </Modal>
@@ -970,7 +702,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         imageGallery && (
           <ImageCarouselModal
             isOpen={isCarouselOpen}
-            onDismiss={handleCarouselClose}
+            onDismiss={() => setIsCarouselOpen(false)}
             images={imageGallery}
             initialIndex={carouselInitialIndex}
           />

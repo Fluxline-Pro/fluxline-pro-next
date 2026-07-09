@@ -5,7 +5,6 @@ import {
   ContentListingPage,
   FilterConfig,
 } from '@/components/ContentListingPage';
-import { getIconForPath } from '@/utils/navigation-icons';
 import { CaseStudy } from './types';
 import FluxlineLogoDarkMode from '@/assets/images/FluxlineLogoDarkMode.png';
 
@@ -20,10 +19,9 @@ interface CaseStudiesListingClientProps {
 export default function CaseStudiesListingClient({
   caseStudies: allCaseStudies,
 }: CaseStudiesListingClientProps) {
-  // Filter state
-  const [selectedIndustries, setSelectedIndustries] = React.useState<string[]>(
-    []
-  );
+  const [selectedIndustry, setSelectedIndustry] = React.useState<
+    string | undefined
+  >();
 
   // Get all unique industries
   const allIndustries = React.useMemo(() => {
@@ -31,15 +29,11 @@ export default function CaseStudiesListingClient({
     return Array.from(industries).sort();
   }, [allCaseStudies]);
 
-  // Filter case studies based on selected industries
+  // Filter case studies based on selected industry
   const caseStudies = React.useMemo(() => {
-    if (selectedIndustries.length === 0) {
-      return allCaseStudies;
-    }
-    return allCaseStudies.filter((study) =>
-      selectedIndustries.includes(study.industry)
-    );
-  }, [allCaseStudies, selectedIndustries]);
+    if (!selectedIndustry) return allCaseStudies;
+    return allCaseStudies.filter((study) => study.industry === selectedIndustry);
+  }, [allCaseStudies, selectedIndustry]);
 
   // Transform case studies to card format
   const cards = React.useMemo(() => {
@@ -51,42 +45,39 @@ export default function CaseStudiesListingClient({
       imageAlt: study.imageAlt || study.title,
       imageText: `${study.client} • ${study.industry}`,
       date: study.publishedDate,
+      category: study.industry,
     }));
   }, [caseStudies]);
 
   // Configure filters
   const filters: FilterConfig[] = [
     {
-      type: 'multi',
+      type: 'single',
       label: 'Industry',
-      placeholder: 'All Industries',
-      options: allIndustries.map((industry) => ({
-        key: industry,
-        text: industry,
-      })),
-      selectedKeys: selectedIndustries,
-      onChange: setSelectedIndustries,
+      options: [
+        { key: '', text: 'All' },
+        ...allIndustries.map((industry) => ({
+          key: industry,
+          text: industry,
+        })),
+      ],
+      value: selectedIndustry,
+      onChange: setSelectedIndustry,
     },
   ];
 
-  // Build results message
-  const resultsMessage = `Showing ${caseStudies.length} ${caseStudies.length === 1 ? 'case study' : 'case studies'}${selectedIndustries.length > 0 ? ` in: ${selectedIndustries.join(', ')}` : ''}`;
-
-  const hasActiveFilters = selectedIndustries.length > 0;
-
   return (
     <ContentListingPage
-      title='Case Studies'
-      iconName={getIconForPath('/case-studies') || 'ReadingMode'}
-      description='Explore our client success stories and discover how strategic transformation drives measurable results. From digital transformation to wellness platforms, see how we partner with organizations to achieve their most ambitious goals.'
-      basePath='/case-studies'
+      title="Impact in Practice"
+      kicker="Case Studies"
+      subhead="Strategies and results across industries."
+      description="Explore our client success stories and discover how strategic transformation drives measurable results."
+      basePath="/case-studies"
       cards={cards}
       filters={filters}
-      resultsMessage={resultsMessage}
-      emptyStateTitle='No case studies found'
-      emptyStateMessage='Check back soon for client success stories.'
-      hasActiveFilters={hasActiveFilters}
-      onClearFilters={() => setSelectedIndustries([])}
+      emptyStateTitle="No case studies found"
+      emptyStateMessage="Check back soon for client success stories."
+      onClearFilters={() => setSelectedIndustry(undefined)}
       ctaSection={{
         title: 'Ready to Transform Your Business?',
         description:

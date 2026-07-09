@@ -9,11 +9,8 @@ import {
 } from '@/components/ContentListingPage';
 import { FadeUp } from '@/animations/fade-animations';
 import { Callout } from '@/theme/components/callout';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
-import { IExtendedTheme } from '@/theme';
 import { ContentSection } from './ContentSection';
 import { SectionHeader } from './SectionHeader';
 import { Divider } from './Divider';
@@ -84,7 +81,6 @@ export function TRIContentFilteredView({
   allFilterOptionLabel = 'All Tags',
   excludedTags = [],
 }: TRIContentFilteredViewProps) {
-  const { theme } = useAppTheme();
   const router = useRouter();
   const searchParams = useSearchParams();
   const isMobileHook = useIsMobile();
@@ -188,14 +184,14 @@ export function TRIContentFilteredView({
       <Divider />
       <SectionHeader
         title={allItemsSectionTitle}
-        style={{ marginTop: theme.spacing.l }}
+        style={{ marginTop: 24 }}
       />
       <div
         style={{
           display: 'flex',
-          gap: theme.spacing.s2,
+          gap: 8,
           flexWrap: 'wrap',
-          paddingBottom: theme.spacing.m,
+          paddingBottom: 16,
         }}
         role='group'
         aria-label={`Filter ${itemLabelPlural.toLowerCase()} by tag`}
@@ -204,7 +200,6 @@ export function TRIContentFilteredView({
           label={allItemsLabel}
           isActive={!selectedTag}
           onClick={() => setSelectedTag(undefined)}
-          theme={theme}
         />
         {availableTags.map((tag) => (
           <TagChip
@@ -214,7 +209,6 @@ export function TRIContentFilteredView({
             onClick={() =>
               setSelectedTag(selectedTag === tag ? undefined : tag)
             }
-            theme={theme}
           />
         ))}
       </div>
@@ -230,13 +224,13 @@ export function TRIContentFilteredView({
   const featuredSection = featuredPost ? (
     <FadeUp>
       <ContentSection
-        backgroundColor={theme.palette.neutralLighter}
+        backgroundColor='var(--fx-surface-card)'
         padding
         borderRadius
         isMobile={isMobile}
         style={{
-          marginTop: theme.spacing.xxxxl,
-          marginBottom: theme.spacing.l,
+          marginTop: 80,
+          marginBottom: 24,
           maxWidth: '800px',
         }}
       >
@@ -244,59 +238,55 @@ export function TRIContentFilteredView({
           title={featuredSectionTitle}
           isWithinCta
           isMobile={isMobile}
-          style={{ marginBottom: theme.spacing.m, marginTop: theme.spacing.s1 }}
+          style={{ marginBottom: 16, marginTop: 12 }}
         />
         <Callout
           variant='neutral'
           title={featuredPost.title}
           subtitle={featuredPost.excerpt}
           action={
-            <FormButton
+            <FxButton
               variant='primary'
-              icon={featuredButtonIcon}
-              iconPosition='left'
               onClick={() => router.push(`${basePath}/${featuredPost.slug}`)}
               aria-label={`${featuredButtonAriaLabelPrefix}: ${featuredPost.title}`}
             >
               {featuredButtonLabel}
-            </FormButton>
+            </FxButton>
           }
         >
-          <Typography
-            variant='caption'
+          <span
             style={{
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-body)',
               display: 'block',
-              marginTop: theme.spacing.s2,
+              marginTop: 8,
               textAlign: 'left',
+              fontSize: '0.8rem',
             }}
           >
             {format(new Date(featuredPost.publishedDate), 'MMMM d, yyyy')}
             <br />
             {featuredTags.length > 0 ? featuredTags.join(' · ') : ''}
-          </Typography>
+          </span>
         </Callout>
       </ContentSection>
     </FadeUp>
   ) : null;
 
   const heroCta = latestPost ? (
-    <div className='pt-8'>
+    <div style={{ paddingTop: 32 }}>
       <Callout
         variant='accent'
         title={heroCtaTitle}
         subtitle={latestPost.title}
         action={
-          <FormButton
-            variant='secondary'
-            size='large'
-            icon={heroCtaButtonIcon}
-            iconPosition='left'
+          <FxButton
+            variant='outline'
+            size='lg'
             onClick={() => router.push(`${basePath}/${latestPost.slug}`)}
             aria-label={`${heroCtaAriaLabelPrefix}: ${latestPost.title}`}
           >
             {heroCtaButtonLabel}
-          </FormButton>
+          </FxButton>
         }
       />
     </div>
@@ -334,10 +324,9 @@ interface TagChipProps {
   label: string;
   isActive: boolean;
   onClick: () => void;
-  theme: IExtendedTheme;
 }
 
-function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
+function TagChip({ label, isActive, onClick }: TagChipProps) {
   const [hovered, setHovered] = React.useState(false);
 
   return (
@@ -350,36 +339,35 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: theme.spacing.xxs,
-        marginRight: theme.spacing.s2,
+        marginBottom: 2,
+        marginRight: 8,
         whiteSpace: 'nowrap',
         cursor: 'pointer',
         border: `1px solid ${
           isActive
-            ? theme.palette.themePrimary
+            ? 'var(--fx-accent)'
             : hovered
-              ? theme.palette.themeSecondary
-              : theme.palette.neutralQuaternary
+              ? 'var(--fx-accent)'
+              : 'var(--fx-border)'
         }`,
         borderRadius: '999px',
-        padding: `${theme.spacing.s1} ${theme.spacing.m}`,
+        padding: '12px 16px',
         backgroundColor: isActive
-          ? theme.palette.themePrimary
+          ? 'var(--fx-accent)'
           : hovered
-            ? theme.palette.neutralLighterAlt
+            ? 'var(--fx-surface-card)'
             : 'transparent',
         transition: 'all 0.15s ease',
         outline: 'none',
       }}
     >
-      <Typography
-        variant='caption'
+      <span
         style={{
           color: isActive
-            ? theme.palette.white
+            ? '#fff'
             : hovered
-              ? theme.palette.themePrimary
-              : theme.palette.neutralSecondary,
+              ? 'var(--fx-accent)'
+              : 'var(--fx-text-body)',
           fontSize: '0.825rem',
           fontWeight: isActive ? 600 : 400,
           transition: 'color 0.15s ease',
@@ -388,7 +376,7 @@ function TagChip({ label, isActive, onClick, theme }: TagChipProps) {
         }}
       >
         {label}
-      </Typography>
+      </span>
     </button>
   );
 }

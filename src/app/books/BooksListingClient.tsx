@@ -3,7 +3,6 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { ContentListingPage } from '@/components/ContentListingPage';
-import { getIconForPath } from '@/utils/navigation-icons';
 import { Book } from './types';
 
 interface BooksListingClientProps {
@@ -13,7 +12,6 @@ interface BooksListingClientProps {
 /**
  * Books Listing Client Wrapper
  * Transforms book data for the unified ContentListingPage
- * No filters shown per requirements: "DO NOT show the main page with the filters"
  */
 export default function BooksListingClient({ books }: BooksListingClientProps) {
   // Transform books to card format
@@ -28,22 +26,17 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
     }));
   }, [books]);
 
-  // Build results message
-  const resultsMessage = `${books.length} ${books.length === 1 ? 'book' : 'books'} available`;
-
   return (
     <ContentListingPage
-      title='Books'
-      iconName={getIconForPath('/books') || 'BookAnswers'}
-      description='Explore our collection of transformative books and resources. Purchase directly from Fluxline.pro or through major retailers.'
-      basePath='/books'
+      title="Reading List"
+      kicker="Library"
+      subhead="Books that shaped the work."
+      description="Explore our collection of transformative books and resources."
+      basePath="/books"
       cards={cards}
-      filters={[]} // No filters per requirements
-      resultsMessage={resultsMessage}
-      emptyStateTitle='No Books Available Yet'
-      backArrow
-      backArrowPath='/content'
-      emptyStateMessage='Check back soon for our upcoming publications.'
+      filters={[]}
+      emptyStateTitle="No Books Available Yet"
+      emptyStateMessage="Check back soon for our upcoming publications."
       ctaSection={{
         title: 'Stay Updated on New Releases',
         description:

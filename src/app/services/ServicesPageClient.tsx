@@ -6,244 +6,177 @@
  */
 
 import React from 'react';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { InteractiveCard } from '@/components';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Hero } from '@/theme/components/hero/Hero';
-import { getIconForPath } from '@/utils/navigation-icons';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
+import FxCard from '@/theme/components/dsm/FxCard';
+import FxButton from '@/theme/components/dsm/FxButton';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
+import FxCallout from '@/theme/components/dsm/FxCallout';
 import {
   SERVICE_CATEGORIES,
   SERVICES_SUMMARY,
   FLUXLINE_SECONDARY_TAGLINE,
 } from './constants';
-import { Callout } from '@/theme/components/callout/Callout';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { BookingsButton } from '@/theme/components/button/bookings-button';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
+
+const CATEGORY_SECTIONS: {
+  key: string;
+  title: string;
+  description: string;
+}[] = [
+  {
+    key: 'body-practice',
+    title: 'Body & Practice',
+    description:
+      'Physical training and transformational frameworks rooted in identity work and embodiment.',
+  },
+  {
+    key: 'brand-digital',
+    title: 'Brand & Digital Presence',
+    description:
+      'Web development and brand design to build your digital foundation.',
+  },
+  {
+    key: 'depth-strategy',
+    title: 'Depth Work & Strategy',
+    description:
+      'Strategic consulting and transformational frameworks for clarity and growth.',
+  },
+];
 
 export default function ServicesPageClient() {
-  const { theme } = useAppTheme();
-  const [isMounted, setIsMounted] = React.useState(false);
-  const isMobileHook = useIsMobile();
-  const isMobile = isMounted ? isMobileHook : false;
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className={isMobile ? 'space-y-8' : 'space-y-12'}>
-        {/* Page Header */}
-        <Hero
-          title='Our Services'
-          iconName={getIconForPath('/services')}
-          subtitle={FLUXLINE_SECONDARY_TAGLINE}
-          description={SERVICES_SUMMARY}
-        />
+    <FxContainer style={{ padding: '64px 32px 88px' }}>
+      {/* Page Header */}
+      <FxSectionHeading
+        kicker="Services"
+        title="Our Services"
+        subhead={FLUXLINE_SECONDARY_TAGLINE}
+      />
 
-        {/* Divider */}
-        <hr
-          style={{
-            border: 'none',
-            height: '1px',
-            backgroundColor: theme.palette.neutralQuaternary,
-            margin: '2rem 0',
-          }}
-        />
+      {/* Summary */}
+      <p
+        style={{
+          fontSize: 'var(--fx-body-size)',
+          color: 'var(--fx-text-body)',
+          lineHeight: 'var(--fx-body-leading)',
+          maxWidth: '72ch',
+          marginTop: 24,
+          marginBottom: 'var(--fx-section-gap)',
+        }}
+      >
+        {SERVICES_SUMMARY}
+      </p>
 
-        {/* Services Grid */}
-        <div className='space-y-8'>
-          <div>
-            <Typography
-              variant='h2'
+      {/* Service Category Sections */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--fx-section-gap)' }}>
+        {CATEGORY_SECTIONS.map((cat) => (
+          <section key={cat.key}>
+            <h3
               style={{
-                color: theme.palette.themePrimary,
-                fontSize: '2rem',
-                fontWeight: theme.typography.fontWeights.bold,
+                fontSize: 'var(--fx-h3-size)',
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 8px',
+                fontFamily: 'var(--fx-font)',
               }}
             >
-              Choose what kind of support you need
-            </Typography>
-            <Typography
-              variant='p'
+              {cat.title}
+            </h3>
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1.125rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
+                fontSize: 'var(--fx-body-size)',
+                color: 'var(--fx-text-muted)',
+                lineHeight: 'var(--fx-body-leading)',
+                marginBottom: 'var(--fx-block-gap)',
               }}
             >
-              Every service is your doorway to transformation. From idea to
-              embodiment. From intention to infrastructure.
-            </Typography>
-          </div>
-
-          {/* Body & Practice */}
-          <section className='space-y-4'>
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '1.5rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              Body & Practice
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1rem',
-                marginBottom: theme.spacing.m,
-              }}
-            >
-              Physical training and transformational frameworks rooted in
-              identity work and embodiment.
-            </Typography>
+              {cat.description}
+            </p>
             <div
-              className='grid gap-6 pt-1'
               style={{
-                gridTemplateColumns:
-                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: 20,
               }}
             >
-              {SERVICE_CATEGORIES.filter(
-                (s) => s.category === 'body-practice'
-              ).map((service) => (
-                <InteractiveCard
-                  key={service.id}
-                  id={service.id}
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  href={service.path}
-                  iconPosition='center'
-                  showLearnMore={true}
-                />
-              ))}
+              {SERVICE_CATEGORIES.filter((s) => s.category === cat.key).map(
+                (service) => (
+                  <FxCard
+                    key={service.id}
+                    interactive
+                    href={service.path}
+                    style={{ padding: 24 }}
+                  >
+                    <h4
+                      style={{
+                        fontSize: 'var(--fx-h3-size)',
+                        fontWeight: 700,
+                        color: 'var(--fx-text-heading)',
+                        marginBottom: 8,
+                      }}
+                    >
+                      {service.title}
+                    </h4>
+                    <p
+                      style={{
+                        fontSize: 'var(--fx-body-size)',
+                        color: 'var(--fx-text-body)',
+                        lineHeight: 'var(--fx-body-leading)',
+                        marginBottom: 16,
+                      }}
+                    >
+                      {service.description}
+                    </p>
+                    <span
+                      style={{
+                        fontSize: 'var(--fx-cta-link-size)',
+                        color: 'var(--fx-accent)',
+                        fontWeight: 700,
+                        letterSpacing: 'var(--fx-cta-link-tracking)',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      Learn More ›
+                    </span>
+                  </FxCard>
+                )
+              )}
             </div>
           </section>
+        ))}
+      </div>
 
-          {/* Brand & Digital Presence */}
-          <section className='space-y-4'>
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '1.5rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              Brand & Digital Presence
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1rem',
-                marginBottom: theme.spacing.m,
-              }}
-            >
-              Web development and brand design to build your digital foundation.
-            </Typography>
-            <div
-              className='grid gap-6 pt-1'
-              style={{
-                gridTemplateColumns:
-                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
-              }}
-            >
-              {SERVICE_CATEGORIES.filter(
-                (s) => s.category === 'brand-digital'
-              ).map((service) => (
-                <InteractiveCard
-                  key={service.id}
-                  id={service.id}
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  href={service.path}
-                  iconPosition='center'
-                  showLearnMore={true}
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* Depth Work & Strategy */}
-          <section className='space-y-4'>
-            <Typography
-              variant='h3'
-              style={{
-                color: theme.palette.themePrimary,
-                fontSize: '1.5rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
-              }}
-            >
-              Depth Work & Strategy
-            </Typography>
-            <Typography
-              variant='p'
-              style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: '1rem',
-                marginBottom: theme.spacing.m,
-              }}
-            >
-              Strategic consulting and transformational frameworks for clarity
-              and growth.
-            </Typography>
-            <div
-              className='grid gap-6 pt-1'
-              style={{
-                gridTemplateColumns:
-                  'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
-              }}
-            >
-              {SERVICE_CATEGORIES.filter(
-                (s) =>
-                  s.category === 'depth-strategy'
-              ).map((service) => (
-                <InteractiveCard
-                  key={service.id}
-                  id={service.id}
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  href={service.path}
-                  iconPosition='center'
-                  showLearnMore={true}
-                />
-              ))}
-            </div>
-          </section>
-        </div>
-
-        <Callout
-          variant='accent'
-          title='Not sure where to start?'
-          subtitle="Share your needs in a free consultation. We'll map the right first step together."
-          action={<BookingsButton isHero />}
-        />
-
-        <Callout
-          variant='neutral'
-          title='Legal & Governance'
-          subtitle='Review our terms, policies, and stewardship commitments that govern our professional relationship.'
-          action={
-            <FormButton
-              text='View Legal Documents'
-              variant='secondary'
-              size='large'
-              icon='ChevronRight'
-              iconPosition='right'
-              onClick={() => (window.location.href = '/legal')}
-            />
-          }
+      {/* CTA Band */}
+      <div style={{ marginTop: 'var(--fx-section-gap)' }}>
+        <FxCTABand
+          title="Not sure where to start?"
+          body="Share your needs in a free consultation."
+          primaryLabel="Book a Consultation"
+          primaryHref="/contact"
         />
       </div>
-    </UnifiedPageWrapper>
+
+      {/* Legal & Governance Callout */}
+      <div style={{ marginTop: 'var(--fx-block-gap)' }}>
+        <FxCallout tone="info" title="Legal & Governance">
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 12,
+              alignItems: 'flex-start',
+            }}
+          >
+            <span>
+              Review our terms, policies, and stewardship commitments that
+              govern our professional relationship.
+            </span>
+            <FxButton variant="outline" href="/legal">
+              View Legal Documents
+            </FxButton>
+          </div>
+        </FxCallout>
+      </div>
+    </FxContainer>
   );
 }
