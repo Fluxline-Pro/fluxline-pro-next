@@ -489,6 +489,23 @@ html[data-fx-motion='reduce'] *::after {
 }
 
 /* =============================================
+   SCROLL SNAP (home page sections)
+   ============================================= */
+
+.fx-snap-container {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 64px;
+}
+
+.fx-snap-section {
+  scroll-snap-align: start;
+}
+
+html[data-fx-motion="reduce"] .fx-snap-container {
+  scroll-snap-type: none;
+}
+
+/* =============================================
    PAGE TRANSITION
    ============================================= */
 

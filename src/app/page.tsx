@@ -22,6 +22,11 @@ const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
 ];
 
 export default function Home() {
+  React.useEffect(() => {
+    document.documentElement.classList.add('fx-snap-container');
+    return () => document.documentElement.classList.remove('fx-snap-container');
+  }, []);
+
   return (
     <>
       <FxHero
@@ -48,7 +53,7 @@ export default function Home() {
         backgroundImage='/images/home/HomePageMobileGeometricBackground.jpg'
       />
 
-      <section id='about' style={{ padding: '88px 0' }}>
+      <section id='about' className='fx-snap-section' style={{ padding: '88px 0' }}>
         <FxContainer>
           <FxRailLayout
             rail={
@@ -233,6 +238,7 @@ export default function Home() {
 
       <section
         id='services'
+        className='fx-snap-section'
         style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
         <FxContainer>
@@ -421,7 +427,7 @@ export default function Home() {
         </FxContainer>
       </section>
 
-      <section id='content' style={{ padding: '88px 0' }}>
+      <section id='content' className='fx-snap-section' style={{ padding: '88px 0' }}>
         <FxContainer>
           <FxReveal style={{ maxWidth: 680, marginBottom: 34 }}>
             <h2
@@ -625,6 +631,7 @@ export default function Home() {
 
       <section
         id='contact'
+        className='fx-snap-section'
         style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
         <FxContainer>
