@@ -196,52 +196,53 @@ export const ContactForm: React.FC = () => {
         />
       </div>
 
-      {/* Name Field */}
-      <div>
-        <FormInput
-          label='Name'
-          id='name'
-          name='name'
-          type='text'
-          value={formData.name}
-          onChange={(value) => updateField('name', value)}
-          placeholder='Your first and last name'
-          required
-          requiredIndicator
-          aria-required='true'
-          aria-invalid={errors.name ? 'true' : undefined}
-          aria-describedby={errors.name ? 'name-error' : undefined}
-          aria-label='Name'
-        />
-        {errors.name && (
-          <div id='name-error' role='alert' style={errorStyle}>
-            {errors.name}
-          </div>
-        )}
-      </div>
+      {/* Name + Email on same row */}
+      <div className="fx-g2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+        <div>
+          <FormInput
+            label='Name'
+            id='name'
+            name='name'
+            type='text'
+            value={formData.name}
+            onChange={(value) => updateField('name', value)}
+            placeholder='Your name'
+            required
+            requiredIndicator
+            aria-required='true'
+            aria-invalid={errors.name ? 'true' : undefined}
+            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-label='Name'
+          />
+          {errors.name && (
+            <div id='name-error' role='alert' style={errorStyle}>
+              {errors.name}
+            </div>
+          )}
+        </div>
 
-      {/* Email Field */}
-      <div>
-        <FormInput
-          label='E-mail'
-          id='email'
-          name='email'
-          type='email'
-          value={formData.email}
-          onChange={(value) => updateField('email', value)}
-          placeholder='E-mail address'
-          required
-          requiredIndicator
-          aria-required='true'
-          aria-invalid={errors.email ? 'true' : undefined}
-          aria-describedby={errors.email ? 'email-error' : undefined}
-          aria-label='E-mail'
-        />
-        {errors.email && (
-          <div id='email-error' role='alert' style={errorStyle}>
-            {errors.email}
-          </div>
-        )}
+        <div>
+          <FormInput
+            label='E-mail'
+            id='email'
+            name='email'
+            type='email'
+            value={formData.email}
+            onChange={(value) => updateField('email', value)}
+            placeholder='your@email.com'
+            required
+            requiredIndicator
+            aria-required='true'
+            aria-invalid={errors.email ? 'true' : undefined}
+            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-label='E-mail'
+          />
+          {errors.email && (
+            <div id='email-error' role='alert' style={errorStyle}>
+              {errors.email}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Message Field */}
@@ -294,16 +295,18 @@ export const ContactForm: React.FC = () => {
         </div>
       </div>
 
-      {/* Submit Button */}
-      <FxButton
-        type='submit'
-        variant='primary'
-        size='md'
-        disabled={status === 'submitting'}
-        style={{ width: '100%', fontSize: '1.25rem' }}
-      >
-        {status === 'submitting' ? 'Sending...' : 'Submit'}
-      </FxButton>
+      {/* Submit Button + Hint */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <FxButton
+          type='submit'
+          variant='primary'
+          size='md'
+          disabled={status === 'submitting'}
+        >
+          {status === 'submitting' ? 'Sending...' : 'Submit'}
+        </FxButton>
+        <span style={{ fontSize: 12.5, color: '#7E8A99' }}>All fields are required.</span>
+      </div>
 
       {/* Success Message */}
       {status === 'success' && (

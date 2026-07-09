@@ -39,28 +39,35 @@ export default function Home() {
   return (
     <>
       <FxHero
-        eyebrow="Welcome To"
-        title="FLUXLINE"
+        eyebrow='Welcome To'
+        title='FLUXLINE'
         body={
           <>
             We build{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>congruence</strong>.{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>Strong</strong> bodies.{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>Clear</strong> brands.{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>Resilient</strong> systems.
+            <strong style={{ color: 'var(--fx-text-bright)' }}>
+              congruence
+            </strong>
+            . <strong style={{ color: 'var(--fx-text-bright)' }}>Strong</strong>{' '}
+            bodies.{' '}
+            <strong style={{ color: 'var(--fx-text-bright)' }}>Clear</strong>{' '}
+            brands.{' '}
+            <strong style={{ color: 'var(--fx-text-bright)' }}>
+              Resilient
+            </strong>{' '}
+            systems.
           </>
         }
         secondaryCta={{ label: 'Explore Fluxline ↓', href: '#about' }}
         primaryCta={{ label: 'Book a Consultation', href: '/contact' }}
-        backgroundImage="/images/home/HomePageMobileGeometricBackground.jpg"
+        backgroundImage='/images/home/HomePageMobileGeometricBackground.jpg'
       />
 
-      <section id="about" style={{ padding: '88px 0' }}>
+      <section id='about' style={{ padding: '88px 0' }}>
         <FxContainer>
           <FxRailLayout
             rail={
               <FxReveal
-                variant="left"
+                variant='left'
                 style={{
                   background: 'var(--fx-surface-inset)',
                   border: '1px solid var(--fx-border)',
@@ -69,8 +76,8 @@ export default function Home() {
                 }}
               >
                 <img
-                  src="/images/home/FluxlineLogo.png"
-                  alt="Fluxline — Structure the Shift"
+                  src='/images/home/FluxlineLogo.png'
+                  alt='Fluxline — Structure the Shift'
                   style={{
                     display: 'block',
                     width: '100%',
@@ -148,15 +155,15 @@ export default function Home() {
                 gap: 14,
               }}
             >
-              <FxStatCard value="50+" label="Projects Delivered" />
-              <FxStatCard value="20+" label="Years Experience" />
-              <FxStatCard value="6+" label="Product Offerings" />
-              <FxStatCard value="10+" label="Industries Served" />
+              <FxStatCard value='50+' label='Projects Delivered' />
+              <FxStatCard value='20+' label='Years Experience' />
+              <FxStatCard value='6+' label='Product Offerings' />
+              <FxStatCard value='10+' label='Industries Served' />
             </FxReveal>
 
             <FxReveal delay={200}>
               <FxCallout
-                tone="gold"
+                tone='gold'
                 title="We're Not Done Yet—But We're Already Extraordinary."
               >
                 <em>Modular by design. Resonant by nature.</em>
@@ -167,14 +174,14 @@ export default function Home() {
       </section>
 
       <section
-        id="services"
+        id='services'
         style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
         <FxContainer>
           <FxRailLayout
             rail={
               <FxReveal
-                variant="left"
+                variant='left'
                 style={{
                   background: 'var(--fx-surface-inset)',
                   border: '1px solid var(--fx-border)',
@@ -183,8 +190,8 @@ export default function Home() {
                 }}
               >
                 <img
-                  src="/images/home/HomePageCoverLandscape2.jpg"
-                  alt="Fluxline services"
+                  src='/images/home/HomePageCoverLandscape2.jpg'
+                  alt='Fluxline services'
                   style={{
                     display: 'block',
                     width: '100%',
@@ -234,8 +241,8 @@ export default function Home() {
               </h2>
               <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
                 Every service is a doorway to transformation. Six modular
-                offerings across three domains — each links to its full
-                detail page.
+                offerings across three domains — each links to its full detail
+                page.
               </p>
             </FxReveal>
 
@@ -260,48 +267,48 @@ export default function Home() {
                     gap: 14,
                   }}
                 >
-                  {SERVICE_CATEGORIES.filter((s) => s.category === group.key).map(
-                    (service) => (
-                      <FxCard
-                        key={service.id}
-                        variant="raised"
-                        interactive
-                        href={service.path}
-                        style={{ padding: 22 }}
+                  {SERVICE_CATEGORIES.filter(
+                    (s) => s.category === group.key
+                  ).map((service) => (
+                    <FxCard
+                      key={service.id}
+                      variant='raised'
+                      interactive
+                      href={service.path}
+                      style={{ padding: 22 }}
+                    >
+                      <div
+                        style={{
+                          fontWeight: 700,
+                          fontSize: 16,
+                          color: 'var(--fx-text-heading)',
+                          marginBottom: 6,
+                        }}
                       >
-                        <div
-                          style={{
-                            fontWeight: 700,
-                            fontSize: 16,
-                            color: 'var(--fx-text-heading)',
-                            marginBottom: 6,
-                          }}
-                        >
-                          {service.title}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: 13.5,
-                            lineHeight: 1.55,
-                            color: 'var(--fx-text-muted)',
-                            marginBottom: 12,
-                          }}
-                        >
-                          {service.description}
-                        </div>
-                        <span
-                          style={{
-                            fontSize: 12.5,
-                            fontWeight: 700,
-                            letterSpacing: '.08em',
-                            color: 'var(--fx-teal)',
-                          }}
-                        >
-                          LEARN MORE ›
-                        </span>
-                      </FxCard>
-                    )
-                  )}
+                        {service.title}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: 13.5,
+                          lineHeight: 1.55,
+                          color: 'var(--fx-text-muted)',
+                          marginBottom: 12,
+                        }}
+                      >
+                        {service.description}
+                      </div>
+                      <span
+                        style={{
+                          fontSize: 12.5,
+                          fontWeight: 700,
+                          letterSpacing: '.08em',
+                          color: 'var(--fx-teal)',
+                        }}
+                      >
+                        LEARN MORE ›
+                      </span>
+                    </FxCard>
+                  ))}
                 </div>
               </FxReveal>
             ))}
@@ -341,7 +348,7 @@ export default function Home() {
                 </div>
               </div>
               <a
-                href="/services"
+                href='/services'
                 style={{
                   color: 'var(--fx-text-soft)',
                   fontSize: 13.5,
@@ -357,7 +364,7 @@ export default function Home() {
         </FxContainer>
       </section>
 
-      <section id="content" style={{ padding: '88px 0' }}>
+      <section id='content' style={{ padding: '88px 0' }}>
         <FxContainer>
           <FxReveal style={{ maxWidth: 680, marginBottom: 34 }}>
             <h2
@@ -386,178 +393,191 @@ export default function Home() {
             }}
           >
             <FxReveal delay={100} style={{ height: '100%' }}>
-            <FxCard variant="raised" interactive href="/content" style={{ padding: 26, height: '100%' }}>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  letterSpacing: '.12em',
-                  textTransform: 'uppercase',
-                  color: 'var(--fx-teal)',
-                  marginBottom: 10,
-                }}
+              <FxCard
+                variant='raised'
+                interactive
+                href='/content'
+                style={{ padding: 26, height: '100%' }}
               >
-                Content Hub
-              </div>
-              <div
-                style={{
-                  fontWeight: 700,
-                  fontSize: 18,
-                  color: 'var(--fx-text-heading)',
-                  marginBottom: 8,
-                }}
-              >
-                Blog, Podcast &amp; Portfolio
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  lineHeight: 1.6,
-                  color: 'var(--fx-text-muted)',
-                  marginBottom: 14,
-                }}
-              >
-                Thought leadership on digital transformation, human-centered
-                design, and the work we&apos;ve shipped.
-              </div>
-              <span
-                style={{
-                  fontSize: 12.5,
-                  fontWeight: 700,
-                  letterSpacing: '.08em',
-                  color: 'var(--fx-teal)',
-                }}
-              >
-                EXPLORE THE HUB ›
-              </span>
-            </FxCard>
+                <div
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 600,
+                    letterSpacing: '.12em',
+                    textTransform: 'uppercase',
+                    color: 'var(--fx-teal)',
+                    marginBottom: 10,
+                  }}
+                >
+                  Content Hub
+                </div>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 18,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 8,
+                  }}
+                >
+                  Blog, Podcast &amp; Portfolio
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    color: 'var(--fx-text-muted)',
+                    marginBottom: 14,
+                  }}
+                >
+                  Thought leadership on digital transformation, human-centered
+                  design, and the work we&apos;ve shipped.
+                </div>
+                <span
+                  style={{
+                    fontSize: 12.5,
+                    fontWeight: 700,
+                    letterSpacing: '.08em',
+                    color: 'var(--fx-teal)',
+                  }}
+                >
+                  EXPLORE THE HUB ›
+                </span>
+              </FxCard>
             </FxReveal>
 
             <FxReveal delay={200} style={{ height: '100%' }}>
-            <FxCard
-              variant="raised"
-              interactive
-              href="/services/scrolls"
-              style={{ padding: 26, height: '100%' }}
-            >
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  letterSpacing: '.12em',
-                  textTransform: 'uppercase',
-                  color: 'var(--fx-teal)',
-                  marginBottom: 10,
-                }}
+              <FxCard
+                variant='raised'
+                interactive
+                href='/services/scrolls'
+                style={{ padding: 26, height: '100%' }}
               >
-                Scrolls
-              </div>
-              <div
-                style={{
-                  fontWeight: 700,
-                  fontSize: 18,
-                  color: 'var(--fx-text-heading)',
-                  marginBottom: 8,
-                }}
-              >
-                Reflections &amp; Practice Notes
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  lineHeight: 1.6,
-                  color: 'var(--fx-text-muted)',
-                  marginBottom: 14,
-                }}
-              >
-                Shorter writings on identity, embodiment, and building with
-                intention.
-              </div>
-              <span
-                style={{
-                  fontSize: 12.5,
-                  fontWeight: 700,
-                  letterSpacing: '.08em',
-                  color: 'var(--fx-teal)',
-                }}
-              >
-                READ THE SCROLLS ›
-              </span>
-            </FxCard>
+                <div
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 600,
+                    letterSpacing: '.12em',
+                    textTransform: 'uppercase',
+                    color: 'var(--fx-teal)',
+                    marginBottom: 10,
+                  }}
+                >
+                  Scrolls
+                </div>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 18,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 8,
+                  }}
+                >
+                  Reflections &amp; Practice Notes
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    color: 'var(--fx-text-muted)',
+                    marginBottom: 14,
+                  }}
+                >
+                  Shorter writings on identity, embodiment, and building with
+                  intention.
+                </div>
+                <span
+                  style={{
+                    fontSize: 12.5,
+                    fontWeight: 700,
+                    letterSpacing: '.08em',
+                    color: 'var(--fx-teal)',
+                  }}
+                >
+                  READ THE SCROLLS ›
+                </span>
+              </FxCard>
             </FxReveal>
 
             <FxReveal delay={300} style={{ height: '100%' }}>
-            <FxCard variant="band" style={{ padding: 26, height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <div
+              <FxCard
+                variant='band'
                 style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  letterSpacing: '.12em',
-                  textTransform: 'uppercase',
-                  color: 'var(--fx-gold)',
-                  marginBottom: 10,
+                  padding: 26,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
-                The Resonant Identity
-              </div>
-              <div
-                style={{
-                  fontWeight: 700,
-                  fontSize: 18,
-                  color: 'var(--fx-text-bright)',
-                  marginBottom: 8,
-                }}
-              >
-                Podcast &amp; Community
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  lineHeight: 1.6,
-                  color: 'var(--fx-text-muted)',
-                  marginBottom: 18,
-                }}
-              >
-                Identity architecture, self-improvement, and practical
-                frameworks for navigating transitions with clarity.
-              </div>
-              <div style={{ marginTop: 'auto' }}>
-                <a
-                  href="/podcasts/theresonantid"
+                <div
                   style={{
-                    display: 'block',
-                    textAlign: 'center',
-                    background: 'var(--fx-accent)',
-                    color: 'var(--fx-accent-ink)',
-                    borderRadius: 8,
+                    fontSize: 12,
                     fontWeight: 600,
-                    fontSize: 14.5,
-                    padding: '12px 20px',
-                    textDecoration: 'none',
+                    letterSpacing: '.12em',
+                    textTransform: 'uppercase',
+                    color: 'var(--fx-gold)',
+                    marginBottom: 10,
                   }}
                 >
-                  Episodes, Challenges &amp; Demos
-                </a>
-              </div>
-            </FxCard>
+                  The Resonant Identity
+                </div>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 18,
+                    color: 'var(--fx-text-bright)',
+                    marginBottom: 8,
+                  }}
+                >
+                  Podcast &amp; Community
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    color: 'var(--fx-text-muted)',
+                    marginBottom: 18,
+                  }}
+                >
+                  Identity architecture, self-improvement, and practical
+                  frameworks for navigating transitions with clarity.
+                </div>
+                <div style={{ marginTop: 'auto' }}>
+                  <a
+                    href='/podcasts/theresonantid'
+                    style={{
+                      display: 'block',
+                      textAlign: 'center',
+                      background: 'var(--fx-accent)',
+                      color: 'var(--fx-accent-ink)',
+                      borderRadius: 8,
+                      fontWeight: 600,
+                      fontSize: 14.5,
+                      padding: '12px 20px',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Episodes, Challenges &amp; Demos
+                  </a>
+                </div>
+              </FxCard>
             </FxReveal>
           </div>
         </FxContainer>
       </section>
 
       <section
-        id="contact"
+        id='contact'
         style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
         <FxContainer>
           <FxReveal>
             <FxCTABand
-              title="Ready to structure the shift?"
+              title='Ready to structure the shift?'
               body="Tell us where you are and where you're going. We'll map the right first step together — development, design, coaching, or strategy."
-              primaryLabel="Book a Consultation"
-              primaryHref="/contact"
-              secondaryLabel="Full Contact Form →"
-              secondaryHref="/contact"
+              primaryLabel='Book a Consultation'
+              primaryHref='/contact'
+              secondaryLabel='Full Contact Form →'
+              secondaryHref='/contact'
             />
           </FxReveal>
         </FxContainer>

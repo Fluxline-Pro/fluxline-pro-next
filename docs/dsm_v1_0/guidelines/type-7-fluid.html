@@ -1,0 +1,9 @@
+<!-- @dsCard group="3 · Type" viewport="700x190" subtitle="em + clamp(cqi) — text scales with its container, not the viewport" name="Fluid Sizing" -->
+<!DOCTYPE html><html><head><link rel="stylesheet" href="../styles.css"><style>body{margin:0;font-family:var(--fx-font);background:var(--fx-bg-page);padding:16px;display:flex;gap:12px}
+.box{container-type:inline-size;background:var(--fx-surface-card);border:1px solid var(--fx-border);border-radius:10px;padding:14px 16px;overflow:hidden}
+.h{font-size:var(--fx-fluid-h2);font-weight:800;color:var(--fx-text-heading);letter-spacing:-.01em;line-height:1.1;margin:0 0 4px}
+.b{font-size:var(--fx-fluid-caption);color:var(--fx-text-muted);line-height:1.5;margin:0}
+.tag{font-family:var(--fx-font-mono);font-size:10px;color:var(--fx-teal);display:block;margin-bottom:8px}</style></head><body>
+<div class="box" style="flex:2"><span class="tag">wide container → clamp max</span><p class="h">Resonance</p><p class="b">--fx-fluid-h2: clamp(1.75em, 4cqi, 2.5em)</p></div>
+<div class="box" style="flex:1"><span class="tag">narrow → scales down</span><p class="h">Resonance</p><p class="b">Same tokens, smaller container.</p></div>
+</body></html>

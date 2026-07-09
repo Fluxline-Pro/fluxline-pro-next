@@ -1,0 +1,54 @@
+:root {
+  /* ===== Backgrounds ===== */
+  --fx-bg-page: #0A0D13;          /* default page background */
+  --fx-bg-deep: #07090D;          /* nav bars, footers */
+  --fx-bg-hero-1: #05070B;        /* hero gradient start */
+  --fx-bg-hero-2: #0B1019;        /* hero gradient mid */
+  --fx-bg-hero-3: #0E1523;        /* hero gradient end */
+  --fx-gradient-hero: linear-gradient(160deg, var(--fx-bg-hero-1) 0%, var(--fx-bg-hero-2) 55%, var(--fx-bg-hero-3) 100%);
+  --fx-gradient-band: linear-gradient(150deg, #101826, #0C1220); /* @kind color */
+  --fx-gradient-feature: linear-gradient(160deg, #101F35, #11161F); /* @kind color */
+
+  /* ===== Surfaces ===== */
+  --fx-surface-card: #11161F;     /* standard card */
+  --fx-surface-alt: #0C1017;      /* alternate section background (e.g. Services band) */
+  --fx-hover-fill: #141B28;       /* hover background for outline buttons */
+  --fx-badge-bg: #1B2230;         /* neutral badge / tag fill */
+  --fx-surface-inset: #0D1117;    /* nested / inset panels, quiet rows */
+  --fx-surface-raised: #141A25;   /* interactive link-cards */
+  --fx-surface-input: #0A0D13;    /* form fields */
+
+  /* ===== Borders ===== */
+  --fx-border: #232C3D;           /* default card / control border */
+  --fx-border-subtle: #1E2635;    /* hairlines, section dividers */
+  --fx-border-strong: #33506F;    /* emphasized cards, feature bands */
+  --fx-border-hover: #5E81A8;     /* hover state for any bordered element */
+
+  /* ===== Text ===== */
+  --fx-white: #FFFFFF;            /* base white */
+  --fx-text-heading-display: var(--fx-white); /* display + major (page/band) headings */
+  --fx-text-heading: #AEC6EE;     /* SECONDARY accent: section + card headings (periwinkle blue) */
+  --fx-text-base: #D5DAE3;        /* root page text color, set on every page wrapper */
+  --fx-text-bright: #EAF0F9;      /* high-emphasis text, card titles, strong */
+  --fx-text-body: #C2CEDA;        /* body copy */
+  --fx-text-muted: #98A2B3;       /* secondary copy, card descriptions */
+  --fx-text-faint: #7E8A99;       /* metadata, timestamps, footers */
+  --fx-text-soft: #8FA8CA;        /* quiet links, breadcrumbs, labels */
+  --fx-text-mist: #9FB6D4;        /* body copy on gradient bands */
+
+  /* ===== Accents ===== */
+  --fx-accent: #B8CDF5;           /* primary action fill (light periwinkle) */
+  --fx-accent-ink: #0A0D13;       /* text on primary action */
+  --fx-teal: #4FD1C5;             /* kickers, subheads, LEARN MORE links, success */
+  --fx-teal-bg: rgba(79, 209, 197, 0.12);
+  --fx-gold: #E8B95B;             /* featured / special callouts (TRI, milestones) */
+  --fx-gold-border: #E0A83C;
+  --fx-gold-bg: rgba(224, 168, 60, 0.06);
+  --fx-line: #5E81A8;             /* constellation lines, outline buttons, dividers */
+
+  /* ===== Semantic aliases ===== */
+  --fx-success: var(--fx-teal);
+  --fx-success-border: #2E5844;
+  --fx-success-bg: rgba(79, 209, 197, 0.06);
+  --fx-featured: var(--fx-gold);
+}
