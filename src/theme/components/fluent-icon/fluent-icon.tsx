@@ -1,19 +1,6 @@
 'use client';
 
-/**
- * FluentIcon Component
- * Wrapper for Fluent UI icons with theme integration
- */
-
-import React, { useState, useEffect } from 'react';
-import { Icon, initializeIcons } from '@fluentui/react';
-import { IStyle } from '@fluentui/merge-styles';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-
-// Initialize Fluent UI icons on component load
-if (typeof window !== 'undefined') {
-  initializeIcons();
-}
+import React from 'react';
 
 export interface FluentIconProps {
   iconName:
@@ -26,7 +13,7 @@ export interface FluentIconProps {
   size?: 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
   color?: string;
   className?: string;
-  style?: IStyle;
+  style?: React.CSSProperties;
   variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
   isDarkMode?: boolean;
 }
@@ -39,44 +26,17 @@ const sizeMap = {
   xLarge: '48px',
 };
 
+/** @deprecated Use unicode characters or emoji directly instead of FluentIcon. */
 export const FluentIcon: React.FC<FluentIconProps> = ({
   iconName,
   size = 'medium',
   color,
   className,
   style,
-  variant,
   isDarkMode,
 }) => {
-  const { theme } = useAppTheme();
-  const [isMounted, setIsMounted] = useState(false);
+  const iconColor = color || 'var(--fx-text-body)';
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const getVariantColor = () => {
-    switch (variant) {
-      case 'primary':
-        return theme.palette.themePrimary;
-      case 'secondary':
-        return theme.palette.themeSecondary;
-      case 'success':
-        return theme.palette.green;
-      case 'warning':
-        return theme.palette.yellow;
-      case 'error':
-        return theme.palette.red;
-      case 'info':
-        return theme.palette.blue;
-      default:
-        return theme.palette.white;
-    }
-  };
-
-  const iconColor = color || getVariantColor();
-
-  // Use inline styles to avoid hydration mismatch from mergeStyles
   const combinedStyle: React.CSSProperties = {
     width: sizeMap[size],
     height: sizeMap[size],
@@ -85,65 +45,23 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    ...(typeof style === 'object' && style
-      ? (style as React.CSSProperties)
-      : {}),
+    ...(typeof style === 'object' && style ? style : {}),
   };
 
-  // Prevent hydration mismatch by only rendering after mount
-  if (!isMounted) {
-    return (
-      <span style={{ display: 'contents' }}>
-        <span style={combinedStyle} className={className} />
-      </span>
-    );
-  }
-
-  // If iconName is a custom SVG component
   if (typeof iconName === 'function') {
     const CustomIcon = iconName;
     return (
       <CustomIcon
         isDarkMode={isDarkMode}
         className={className}
-        style={{
-          width: sizeMap[size],
-          height: sizeMap[size],
-          color: iconColor,
-          ...combinedStyle,
-        }}
+        style={combinedStyle}
       />
     );
   }
 
-  // If iconName is a string (Fluent UI icon name)
   return (
-    <span style={{ display: 'contents' }}>
-      <Icon
-        iconName={iconName as string}
-        className={className}
-        styles={{
-          root: {
-            color: `${iconColor} !important`,
-            width: sizeMap[size],
-            height: sizeMap[size],
-            fontSize: sizeMap[size],
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            '& i': {
-              color: `${iconColor} !important`,
-            },
-            '&::before': {
-              color: `${iconColor} !important`,
-            },
-            '& *': {
-              color: `${iconColor} !important`,
-            },
-          },
-        }}
-        style={combinedStyle}
-      />
+    <span className={className} style={combinedStyle} aria-hidden='true'>
+      {iconName}
     </span>
   );
 };

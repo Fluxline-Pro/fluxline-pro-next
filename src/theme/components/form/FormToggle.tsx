@@ -1,9 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface FormToggleProps {
   label: string;
@@ -24,7 +21,6 @@ export interface FormToggleProps {
  * - Optional icon and description
  * - Accessible with ARIA attributes and role
  * - Animated toggle with proper contrast
- * - Responsive font scaling
  */
 export const FormToggle: React.FC<FormToggleProps> = ({
   label,
@@ -35,8 +31,6 @@ export const FormToggle: React.FC<FormToggleProps> = ({
   disabled = false,
   'aria-label': ariaLabel,
 }) => {
-  const { theme, fontScale } = useAppTheme();
-
   return (
     <div
       style={{
@@ -44,42 +38,49 @@ export const FormToggle: React.FC<FormToggleProps> = ({
         alignItems: 'flex-start',
         gap: '1rem',
         padding: '1rem',
-        borderRadius: theme.borderRadius.container.small,
-        backgroundColor: theme.palette.neutralLighterAlt,
-        border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+        borderRadius: 'var(--fx-radius-control)',
+        backgroundColor: 'var(--fx-surface-card)',
+        border: '1px solid var(--fx-border)',
         opacity: disabled ? 0.6 : 1,
       }}
     >
       {icon && (
-        <FluentIcon
-          iconName={icon}
-          size='medium'
-          color={theme.palette.themePrimary}
-        />
+        <span
+          style={{
+            color: 'var(--fx-accent)',
+            fontSize: '1.25rem',
+            lineHeight: 1,
+            flexShrink: 0,
+          }}
+          aria-hidden='true'
+        >
+          {icon}
+        </span>
       )}
       <div style={{ flex: 1 }}>
-        <Typography
-          variant='p'
+        <p
           style={{
-            color: theme.palette.neutralPrimary,
-            fontSize: `${1 * fontScale}rem`,
-            fontWeight: theme.typography.fontWeights.semiBold,
+            color: 'var(--fx-text-heading)',
+            fontSize: '1rem',
+            fontWeight: 600,
             marginBottom: description ? '0.25rem' : 0,
+            margin: 0,
+            marginBlockEnd: description ? '0.25rem' : 0,
           }}
         >
           {label}
-        </Typography>
+        </p>
         {description && (
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: `${0.875 * fontScale}rem`,
-              lineHeight: theme.typography.lineHeights.normal,
+              color: 'var(--fx-text-muted)',
+              fontSize: '0.875rem',
+              lineHeight: 1.7,
+              margin: 0,
             }}
           >
             {description}
-          </Typography>
+          </p>
         )}
       </div>
       <button
@@ -90,8 +91,8 @@ export const FormToggle: React.FC<FormToggleProps> = ({
           height: '28px',
           borderRadius: '14px',
           backgroundColor: checked
-            ? theme.palette.themePrimary
-            : theme.palette.neutralQuaternary,
+            ? 'var(--fx-accent)'
+            : 'var(--fx-border)',
           border: 'none',
           cursor: disabled ? 'not-allowed' : 'pointer',
           position: 'relative',
@@ -107,12 +108,12 @@ export const FormToggle: React.FC<FormToggleProps> = ({
             width: '24px',
             height: '24px',
             borderRadius: '50%',
-            backgroundColor: theme.palette.white,
+            backgroundColor: 'var(--fx-text-bright)',
             position: 'absolute',
             top: '2px',
             left: checked ? '22px' : '2px',
             transition: 'left 0.2s ease',
-            boxShadow: theme.shadows.s,
+            boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
           }}
         />
       </button>

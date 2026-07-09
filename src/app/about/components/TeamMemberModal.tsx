@@ -8,12 +8,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { Modal } from '@/components/Modal';
-import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { TeamMember } from './TeamMemberCard';
 import { SocialLinks } from './SocialLinks';
 import { useColorVisionFilter } from '@/theme';
+
 interface TeamMemberModalProps {
   isOpen: boolean;
   onDismiss: () => void;
@@ -25,11 +23,6 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
   onDismiss,
   member,
 }) => {
-  const { theme } = useAppTheme();
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
   const { filter } = useColorVisionFilter();
 
   return (
@@ -46,8 +39,8 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          gap: theme.spacing.l,
-          marginBottom: theme.spacing.l,
+          gap: '20px',
+          marginBottom: '20px',
           flexWrap: 'wrap',
         }}
       >
@@ -58,9 +51,9 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
             flexShrink: 0,
             width: '200px',
             height: '200px',
-            borderRadius: theme.borderRadius.container.medium,
+            borderRadius: 'var(--fx-radius-card)',
             overflow: 'hidden',
-            backgroundColor: theme.palette.neutralLighter,
+            backgroundColor: 'var(--fx-surface-card)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -80,42 +73,46 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
               sizes='200px'
             />
           ) : (
-            <FluentIcon
-              iconName='ContactCard'
-              size='xLarge'
-              color={theme.palette.neutralTertiary}
-            />
+            <span
+              style={{
+                fontSize: '3rem',
+                color: 'var(--fx-text-faint)',
+              }}
+              aria-hidden="true"
+            >&#128100;</span>
           )}
         </div>
 
         {/* Info */}
         <div style={{ flex: 1, minWidth: '300px' }}>
-          <Typography
-            variant='h3'
+          <h3
             style={{
-              color: theme.palette.neutralPrimary,
-              marginBottom: theme.spacing.s1,
+              fontSize: 'var(--fx-h3-size)',
+              fontWeight: 700,
+              color: 'var(--fx-text-heading)',
+              marginBottom: '8px',
+              marginTop: 0,
             }}
           >
             {member.name}
-          </Typography>
+          </h3>
 
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.themeSecondary,
-              fontWeight: theme.typography.fontWeights.semiBold,
+              color: 'var(--fx-accent)',
+              fontWeight: 600,
               fontSize: '1.125rem',
               fontStyle: 'italic',
-              marginBottom: theme.spacing.m,
+              marginBottom: '16px',
+              marginTop: 0,
             }}
           >
             {member.role}
-          </Typography>
+          </p>
 
           {/* Social Links */}
           {member.socialLinks && (
-            <div style={{ marginTop: theme.spacing.m }}>
+            <div style={{ marginTop: '16px' }}>
               <SocialLinks
                 socialLinks={member.socialLinks}
                 name={member.name}
@@ -129,32 +126,33 @@ export const TeamMemberModal: React.FC<TeamMemberModalProps> = ({
       {/* Bio section */}
       <div
         style={{
-          padding: theme.spacing.m,
-          backgroundColor: isDark
-            ? theme.palette.neutralLighterAlt
-            : theme.palette.neutralQuaternaryAlt,
-          borderLeft: `4px solid ${theme.palette.themePrimary}`,
-          borderRadius: theme.borderRadius.container.small,
+          padding: '16px',
+          backgroundColor: 'var(--fx-surface-card)',
+          borderLeft: '4px solid var(--fx-accent)',
+          borderRadius: '4px',
         }}
       >
-        <Typography
-          variant='h4'
+        <h4
           style={{
-            color: theme.palette.themePrimary,
-            marginBottom: theme.spacing.s2,
+            fontSize: 'var(--fx-h4-size, 1.125rem)',
+            fontWeight: 700,
+            color: 'var(--fx-accent)',
+            marginBottom: '4px',
+            marginTop: 0,
           }}
         >
           About
-        </Typography>
-        <Typography
-          variant='p'
+        </h4>
+        <p
           style={{
-            color: theme.palette.neutralPrimary,
-            lineHeight: theme.typography.lineHeights.relaxed,
+            color: 'var(--fx-text-heading)',
+            lineHeight: 1.7,
+            fontSize: 'var(--fx-body-size)',
+            margin: 0,
           }}
         >
           {member.bio}
-        </Typography>
+        </p>
       </div>
     </Modal>
   );

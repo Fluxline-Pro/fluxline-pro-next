@@ -1,8 +1,6 @@
 'use client';
 
-import React from 'react';
-import { mergeStyleSets } from '@fluentui/react';
-import { useAppTheme } from '../../hooks/useAppTheme';
+import React, { useState } from 'react';
 import styles from './card.module.scss';
 
 export interface CardProps {
@@ -14,9 +12,31 @@ export interface CardProps {
   hoverable?: boolean;
 }
 
+const SHADOW = {
+  s: '0 1px 3px rgba(0,0,0,0.12)',
+  m: '0 3px 6px rgba(0,0,0,0.15)',
+  l: '0 6px 12px rgba(0,0,0,0.2)',
+  xl: '0 12px 24px rgba(0,0,0,0.25)',
+} as const;
+
+const PADDING_MAP = {
+  none: 0,
+  small: 8,
+  medium: 16,
+  large: 20,
+} as const;
+
+function getShadow(elevation: 1 | 2 | 3): string {
+  return elevation === 1 ? SHADOW.s : elevation === 2 ? SHADOW.m : SHADOW.l;
+}
+
+function getHoverShadow(elevation: 1 | 2 | 3): string {
+  return elevation === 1 ? SHADOW.m : elevation === 2 ? SHADOW.l : SHADOW.xl;
+}
+
 /**
- * Card component with theme integration
- * 
+ * Card component with DSM token integration
+ *
  * @param props - Component props
  * @returns Card component
  */
@@ -29,33 +49,30 @@ export const Card: React.FC<CardProps> = ({
   hoverable = false,
   ...props
 }) => {
-  const { theme } = useAppTheme();
+  const [isHovered, setIsHovered] = useState(false);
+  const isInteractive = !!(onClick || hoverable);
 
-  const classNames = mergeStyleSets({
-    root: [
-      styles.card,
-      {
-        backgroundColor: theme.palette.neutralLighter,
-        borderRadius: theme.borderRadius.m,
-        boxShadow: theme.shadows[elevation === 1 ? 's' : elevation === 2 ? 'm' : 'l'],
-        padding: 
-          padding === 'none' ? 0 :
-          padding === 'small' ? theme.spacing.s :
-          padding === 'large' ? theme.spacing.l :
-          theme.spacing.m,
-        cursor: onClick || hoverable ? 'pointer' : 'default',
-        transition: theme.animations.transitions.card,
-        ':hover': hoverable || onClick ? {
-          boxShadow: theme.shadows[elevation === 1 ? 'm' : elevation === 2 ? 'l' : 'xl'],
-          transform: 'translateY(-2px)',
-        } : undefined,
-      },
-      className,
-    ],
-  });
+  const style: React.CSSProperties = {
+    backgroundColor: 'var(--fx-surface-card)',
+    borderRadius: 'var(--fx-radius-card)',
+    boxShadow: isHovered && isInteractive ? getHoverShadow(elevation) : getShadow(elevation),
+    padding: PADDING_MAP[padding],
+    cursor: isInteractive ? 'pointer' : 'default',
+    transition: 'all 0.2s ease',
+    transform: isHovered && isInteractive ? 'translateY(-2px)' : undefined,
+  };
+
+  const rootClass = [styles.card, className].filter(Boolean).join(' ');
 
   return (
-    <div className={classNames.root} onClick={onClick} {...props}>
+    <div
+      className={rootClass}
+      style={style}
+      onClick={onClick}
+      onMouseEnter={isInteractive ? () => setIsHovered(true) : undefined}
+      onMouseLeave={isInteractive ? () => setIsHovered(false) : undefined}
+      {...props}
+    >
       {children}
     </div>
   );

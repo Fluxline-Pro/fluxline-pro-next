@@ -1,10 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Typography } from '@/theme/components/typography';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import { FormButton } from '@/theme/components/form/FormButton';
 import Link from 'next/link';
 
@@ -104,7 +101,6 @@ export const Hero: React.FC<HeroProps> = ({
   backArrowPath = '/services',
   filters,
 }) => {
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
   const isTabletHook = useIsTablet();
@@ -123,9 +119,9 @@ export const Hero: React.FC<HeroProps> = ({
   const getFirstSentence = (text: string): string => {
     const periodIndex = text.indexOf('.');
     if (periodIndex === -1) {
-      return text; // No period found, return full text
+      return text;
     }
-    return text.substring(0, periodIndex + 1); // Include the period
+    return text.substring(0, periodIndex + 1);
   };
 
   /**
@@ -141,23 +137,22 @@ export const Hero: React.FC<HeroProps> = ({
       className={`${className}`}
       style={{
         border: showBorder
-          ? `1px solid ${theme.palette.neutralTertiary}`
+          ? '1px solid var(--fx-text-faint)'
           : 'none',
-        backgroundColor:
-          theme.themeMode === 'high-contrast'
-            ? theme.semanticColors.bodyBackground
-            : theme.palette.neutralLight,
+        backgroundColor: 'var(--fx-surface-card)',
         padding: isMobile
-          ? `${theme.spacing.l}`
+          ? '24px'
           : isTablet
-            ? `${theme.spacing.xl} ${theme.spacing.xxl}`
-            : `${theme.spacing.xxl} ${theme.spacing.xxxl}`,
+            ? '32px 48px'
+            : '48px 64px',
         borderRadius: 'clamp(0.75rem, 1.5cqi, 0.75rem)',
-        boxShadow: showShadow ? theme.shadows.hero : 'none',
-        marginTop: !isMobile && !isTablet ? theme.spacing.xl : undefined,
+        boxShadow: showShadow
+          ? '0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08)'
+          : 'none',
+        marginTop: !isMobile && !isTablet ? '32px' : undefined,
         display: 'flex',
         flexDirection: 'column',
-        gap: isMobile ? theme.spacing.m : theme.spacing.xs,
+        gap: isMobile ? '12px' : '4px',
         ...style,
       }}
     >
@@ -166,86 +161,83 @@ export const Hero: React.FC<HeroProps> = ({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-start',
-          gap: isMobile ? '0.25rem' : theme.spacing.xs,
+          gap: isMobile ? '0.25rem' : '4px',
           flexWrap: isMobile ? 'nowrap' : 'wrap',
           overflow: 'hidden',
-          paddingLeft: backArrow ? '0.5rem' : undefined, // for the back arrow icon
+          paddingLeft: backArrow ? '0.5rem' : undefined,
         }}
       >
         {backArrow && (
           <Link href={backArrowPath} style={{ textDecoration: 'none' }}>
-            <div
+            <span
               style={{
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 32,
+                height: 32,
+                fontSize: 24,
+                color: 'var(--fx-accent)',
                 transition: 'transform 0.2s ease',
                 cursor: 'pointer',
-                background: 'transparent',
+                flexShrink: 0,
+                marginTop: isMobile ? '0.25rem' : 0,
+                marginRight: '0.5rem',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform =
                   'translateX(-4px) scale(1.05)';
-                e.currentTarget.style.background = 'transparent';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateX(0) scale(1)';
-                e.currentTarget.style.background = 'transparent';
               }}
+              aria-hidden='true'
             >
-              <FluentIcon
-                iconName='Back'
-                size='large'
-                color={theme.palette.themePrimary}
-                style={{
-                  flexShrink: 0,
-                  marginTop: isMobile ? '0.25rem' : 0,
-                  marginRight: '0.5rem',
-                  background: 'transparent',
-                }}
-              />
-            </div>
+              ←
+            </span>
           </Link>
         )}
         {iconName && (
-          <FluentIcon
-            iconName={iconName}
-            size={isMobile ? 'large' : 'xLarge'}
-            color={theme.palette.themePrimary}
+          <span
             style={{
+              fontSize: isMobile ? 32 : 48,
+              color: 'var(--fx-accent)',
               flexShrink: 0,
               marginTop: isMobile ? '0.25rem' : 0,
               marginRight: '1rem',
             }}
-          />
+            aria-hidden='true'
+          >
+            {iconName}
+          </span>
         )}
-        <Typography
-          variant='h1'
+        <h1
           style={{
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             fontSize: 'clamp(2rem, 5vw, 3rem)',
-            fontWeight: theme.typography.fontWeights.bold,
+            fontWeight: 700,
             lineHeight: 'clamp(1.2, 2vw, 1.3)',
             margin: '0.25rem 0 0',
             flex: 1,
           }}
         >
           {title}
-        </Typography>
+        </h1>
       </div>
 
       {subtitle && (
-        <Typography
-          variant='h2'
+        <h2
           style={{
-            color: theme.palette.themeSecondary,
+            color: 'var(--fx-text-muted)',
             fontSize: isMobile ? '1.125rem' : 'clamp(1.25rem, 3vw, 1.75rem)',
-            fontWeight: theme.typography.fontWeights.semiBold,
+            fontWeight: 600,
             lineHeight: isMobile ? '1.4' : '1.5',
             textTransform: 'none',
             margin: 0,
           }}
         >
           {subtitle}
-        </Typography>
+        </h2>
       )}
 
       {(effectiveDate || lastUpdated) && (
@@ -258,51 +250,46 @@ export const Hero: React.FC<HeroProps> = ({
           }}
         >
           {effectiveDate && (
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-muted)',
                 fontSize: '0.875rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
+                fontWeight: 600,
                 margin: 0,
               }}
             >
               Effective Date: {effectiveDate}
-            </Typography>
+            </p>
           )}
           {lastUpdated && (
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-muted)',
                 fontSize: '0.875rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
+                fontWeight: 600,
                 margin: 0,
               }}
             >
               Last Updated: {lastUpdated}
-            </Typography>
+            </p>
           )}
         </div>
       )}
 
       {description && (
         <div style={{ margin: !isMobile ? '1rem 0' : '0' }}>
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-muted)',
               fontSize: isMobile ? '1rem' : '1.125rem',
-              lineHeight: isMobile
-                ? '1.6'
-                : theme.typography.lineHeights.relaxed,
+              lineHeight: isMobile ? '1.6' : '1.7',
               margin: 0,
             }}
           >
             {isMobile && !isExpanded
               ? getFirstSentence(description)
               : description}
-          </Typography>
+          </p>
           {isMobile && hasMoreContent(description) && (
             <FormButton
               variant='secondary'
@@ -328,8 +315,8 @@ export const Hero: React.FC<HeroProps> = ({
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            gap: isMobile ? theme.spacing.s1 : theme.spacing.m,
-            marginTop: isMobile ? theme.spacing.m : theme.spacing.l,
+            gap: isMobile ? '8px' : '12px',
+            marginTop: isMobile ? '12px' : '24px',
             alignItems: 'flex-end',
           }}
         >
@@ -342,7 +329,7 @@ export const Hero: React.FC<HeroProps> = ({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: isMobile ? theme.spacing.s1 : theme.spacing.m,
+            gap: isMobile ? '8px' : '12px',
           }}
         >
           {children}

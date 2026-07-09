@@ -7,7 +7,7 @@ import {
   useIsTablet,
   useIsLargeDesktop,
 } from '../../hooks/useMediaQuery';
-import { useAppTheme } from '../../hooks/useAppTheme';
+
 
 export interface UnifiedCardContainerProps {
   children: React.ReactNode;
@@ -31,7 +31,6 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
   const isMobile = isMounted ? isMobileHook : false;
   const isTablet = isMounted ? isTabletHook : false;
   const isLargeDesktop = isMounted ? isLargeDesktopHook : false;
-  const { theme } = useAppTheme();
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -104,7 +103,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
           height: config.height,
           maxWidth: '100%',
           padding: 0,
-          transition: theme.animations.transitions.card,
+          transition: 'all 0.2s ease',
         }}
       >
         {children}
@@ -126,7 +125,7 @@ export const UnifiedCardContainer: React.FC<UnifiedCardContainerProps> = ({
         maxWidth: '100%',
         overflow: 'hidden',
         padding: isMobile ? '0.5rem 0' : '1rem',
-        transition: theme.animations.transitions.card,
+        transition: 'all 0.2s ease',
       }}
     >
       {children}

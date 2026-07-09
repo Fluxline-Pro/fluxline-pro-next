@@ -1,14 +1,6 @@
 'use client';
 
 import React from 'react';
-import {
-  Modal as FluentModal,
-  IModalProps,
-  IModalStyles,
-} from '@fluentui/react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { ClientOnly } from '@/theme/components/client-only';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import styles from './modal.module.scss';
 
 export interface ModalProps {
@@ -34,9 +26,9 @@ export interface ModalProps {
    */
   showCloseButton?: boolean;
   /**
-   * Additional Fluent UI modal props
+   * Additional modal configuration options
    */
-  modalProps?: Partial<IModalProps>;
+  modalProps?: Record<string, unknown>;
   /**
    * Additional CSS class name
    */
@@ -44,11 +36,8 @@ export interface ModalProps {
 }
 
 /**
- * Modal component with ClientOnly wrapper for hydration safety
- * Client Component - uses Fluent UI Modal with portal rendering
- *
- * ⚠️ This component is wrapped with ClientOnly to prevent hydration issues
- * due to Fluent UI's dynamic ID generation.
+ * Modal component using plain HTML overlay
+ * Client Component - renders a div-based modal with backdrop
  *
  * @example
  * ```tsx
@@ -70,36 +59,63 @@ export const Modal: React.FC<ModalProps> = ({
   title,
   children,
   showCloseButton = true,
-  modalProps,
   className = '',
 }) => {
-  const { theme } = useAppTheme();
+  // Close on Escape key
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onDismiss();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onDismiss]);
 
-  const modalStyles: Partial<IModalStyles> = {
-    main: {
-      backgroundColor: theme.palette.white,
-      borderRadius: '8px',
-      padding: 0,
-      minWidth: '400px',
-      maxWidth: '90vw',
-    },
-  };
+  // Prevent body scroll when open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
-    <ClientOnly
-      fallback={
-        <div className={styles.fallback}>
-          {/* Optional: Add a loading state */}
-        </div>
-      }
+    <div
+      className={styles.overlay}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onDismiss();
+      }}
+      role="dialog"
+      aria-modal="true"
+      aria-label={title || 'Modal dialog'}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backdropFilter: 'blur(2px)',
+      }}
     >
-      <FluentModal
-        isOpen={isOpen}
-        onDismiss={onDismiss}
-        isBlocking={false}
-        containerClassName={`${styles.container} ${className}`}
-        styles={modalStyles}
-        {...modalProps}
+      <div
+        className={`${styles.container} ${className}`}
+        style={{
+          backgroundColor: 'var(--fx-surface-card)',
+          borderRadius: '8px',
+          padding: 0,
+          minWidth: '400px',
+          maxWidth: '90vw',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+          animation: 'fx-modal-in 0.2s ease-out',
+        }}
       >
         <div className={styles.header}>
           {title && <h2 className={styles.title}>{title}</h2>}
@@ -119,6 +135,9 @@ export const Modal: React.FC<ModalProps> = ({
                 backgroundColor: 'rgba(0, 0, 0, 0.1)',
                 transition: 'background-color 0.2s ease, transform 0.2s ease',
                 transform: 'scale(1)',
+                fontSize: '1.25rem',
+                lineHeight: 1,
+                color: 'var(--fx-text-muted)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
@@ -130,17 +149,14 @@ export const Modal: React.FC<ModalProps> = ({
               }}
               aria-label='Close modal'
             >
-              <FluentIcon
-                iconName='Cancel'
-                size='large'
-                color={theme.semanticColors.errorIcon}
-              />
+              &#x2715;
             </button>
           )}
         </div>
         <div className={styles.body}>{children}</div>
-      </FluentModal>
-    </ClientOnly>
+      </div>
+      <style>{`@keyframes fx-modal-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }`}</style>
+    </div>
   );
 };
 

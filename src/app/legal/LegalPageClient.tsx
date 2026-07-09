@@ -2,12 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { UnifiedPageWrapper } from '../../components/UnifiedPageWrapper';
-import { Typography } from '../../theme/components/typography';
-import { Hero } from '@/theme/components/hero/Hero';
-import { useAppTheme } from '../../theme/hooks/useAppTheme';
-import { spacing } from '../../theme/theme';
-import { useHoverEffects } from '../../hooks/useHoverEffects';
+import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxCard from '@/theme/components/dsm/FxCard';
 
 interface LegalDocument {
   title: string;
@@ -62,105 +58,123 @@ const LEGAL_DOCUMENTS: LegalDocument[] = [
  * for the Fluxline Resonance Group
  */
 export default function LegalPageClient() {
-  const { theme } = useAppTheme();
-  const cardHoverEffects = useHoverEffects({ type: 'card' });
-
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid'>
-      <div className='space-y-16'>
+    <FxContainer>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
         {/* Hero Section */}
-        <Hero
-          title='Legal & Reference'
-          iconName='shield'
-          description='Access important legal documents and reference materials for the Fluxline Resonance Group. These documents outline our policies, terms, and core definitions.  '
-        />
+        <div
+          style={{
+            border: '1px solid var(--fx-border)',
+            backgroundColor: 'var(--fx-surface-card)',
+            padding: 'clamp(1.5rem, 4vw, 3rem)',
+            borderRadius: 'var(--fx-radius-card)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5rem',
+          }}
+        >
+          <h1
+            style={{
+              color: 'var(--fx-accent)',
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontWeight: 700,
+              lineHeight: 1.2,
+              margin: 0,
+              fontFamily: 'var(--fx-font)',
+            }}
+          >
+            Legal &amp; Reference
+          </h1>
+          <p
+            style={{
+              color: 'var(--fx-text-muted)',
+              fontSize: '1.125rem',
+              lineHeight: 1.6,
+              margin: '1rem 0 0',
+            }}
+          >
+            Access important legal documents and reference materials for the
+            Fluxline Resonance Group. These documents outline our policies,
+            terms, and core definitions.
+          </p>
+        </div>
 
         {/* Document Grid */}
-        <section className='space-y-8'>
+        <section>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(325px, 1fr))',
-              gap: spacing.l,
+              gap: '1.5rem',
             }}
           >
             {LEGAL_DOCUMENTS.map((doc) => (
-              <Link
+              <FxCard
                 key={doc.title}
+                variant="standard"
+                interactive
                 href={doc.href}
+                padding="1.5rem"
                 style={{
-                  textDecoration: 'none',
-                  color: 'inherit',
+                  height: '180px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
                 }}
               >
-                <div
-                  style={{
-                    backgroundColor: theme.palette.neutralLighterAlt,
-                    border: `1px solid ${theme.palette.neutralQuaternary}`,
-                    borderRadius: '8px',
-                    padding: spacing.l,
-                    height: '180px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    transition: 'all 0.2s ease',
-                    cursor: 'pointer',
-                  }}
-                  {...cardHoverEffects}
-                >
-                  <div>
-                    <Typography
-                      variant='h3'
-                      style={{
-                        fontSize: '1.25rem',
-                        fontWeight: 600,
-                        color: theme.semanticColors.bodyText,
-                        marginBottom: spacing.s2,
-                      }}
-                    >
-                      {doc.title}
-                    </Typography>
-                    <Typography
-                      variant='p'
-                      style={{
-                        fontSize: '0.875rem',
-                        color: theme.palette.neutralSecondary,
-                        lineHeight: '1.5',
-                      }}
-                    >
-                      {doc.description}
-                    </Typography>
-                  </div>
-
-                  {/* Special indicator for PDF document */}
-                  {doc.title === 'Articles Of Conversion' && (
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: spacing.s1,
-                        color: theme.palette.themePrimary,
-                        fontSize: '0.875rem',
-                        fontWeight: 500,
-                      }}
-                    >
-                      <svg
-                        width='16'
-                        height='16'
-                        fill='currentColor'
-                        viewBox='0 0 24 24'
-                      >
-                        <path d='M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z' />
-                      </svg>
-                      VIEW PDF
-                    </div>
-                  )}
+                <div>
+                  <h3
+                    style={{
+                      fontSize: '1.25rem',
+                      fontWeight: 600,
+                      color: 'var(--fx-text-body)',
+                      marginBottom: '0.125rem',
+                      margin: 0,
+                      marginBlockEnd: '0.125rem',
+                    }}
+                  >
+                    {doc.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: '0.875rem',
+                      color: 'var(--fx-text-muted)',
+                      lineHeight: '1.5',
+                      margin: 0,
+                    }}
+                  >
+                    {doc.description}
+                  </p>
                 </div>
-              </Link>
+
+                {/* Special indicator for PDF document */}
+                {doc.title === 'Articles Of Conversion' && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.25rem',
+                      color: 'var(--fx-accent)',
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                    }}
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                    </svg>
+                    VIEW PDF
+                  </div>
+                )}
+              </FxCard>
             ))}
           </div>
         </section>
       </div>
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }

@@ -7,7 +7,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import { TeamMemberModal } from './TeamMemberModal';
 import { SocialLinks } from './SocialLinks';
 import { useColorVisionFilter } from '@/theme';
@@ -96,11 +95,13 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
               sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
             />
           ) : (
-            <FluentIcon
-              iconName='ContactCard'
-              size='xLarge'
-              color='var(--fx-text-muted)'
-            />
+            <span
+              style={{
+                fontSize: '3rem',
+                color: 'var(--fx-text-muted)',
+              }}
+              aria-hidden="true"
+            >&#128100;</span>
           )}
         </div>
 

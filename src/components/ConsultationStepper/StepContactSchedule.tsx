@@ -6,9 +6,7 @@
  */
 
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form/FormButton';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { FormInput } from '@/theme/components/form/FormInput';
 import { FormSelect } from '@/theme/components/form/FormSelect';
 import { REFERRAL_OPTIONS } from './constants';
@@ -39,7 +37,6 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
   onSchedule,
   status,
 }) => {
-  const { theme } = useAppTheme();
   const [errors, setErrors] = React.useState<
     Partial<Record<keyof StepThreeData, string>>
   >({});
@@ -84,26 +81,27 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
 
   return (
     <div>
-      <Typography
-        variant='h3'
+      <h3
         style={{
-          color: theme.palette.themePrimary,
-          marginBottom: theme.spacing.xs,
+          color: 'var(--fx-accent)',
+          marginBottom: '4px',
+          fontSize: 'var(--fx-h3-size)',
+          fontWeight: 'var(--fx-h3-weight)',
+          letterSpacing: 'var(--fx-heading-tracking)',
         }}
       >
         Step 3 — Contact &amp; Schedule
-      </Typography>
-      <Typography
-        variant='p'
+      </h3>
+      <p
         style={{
-          color: theme.palette.neutralSecondary,
-          marginBottom: theme.spacing.l,
-          fontSize: theme.typography.fonts.bodySmall.fontSize,
+          color: 'var(--fx-text-muted)',
+          marginBottom: '20px',
+          fontSize: 'var(--fx-body-sm-size)',
         }}
       >
         Enter your details below. After clicking &ldquo;Schedule a time&rdquo;
         you&apos;ll be taken to our booking calendar to pick a slot.
-      </Typography>
+      </p>
 
       <div className='flex flex-col gap-4'>
         {/* Name */}
@@ -159,23 +157,23 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
         {/* Meeting length */}
         <fieldset
           style={{
-            border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
-            borderRadius: theme.effects.roundedCorner6,
-            padding: theme.spacing.m,
+            border: '1px solid var(--fx-border)',
+            borderRadius: 'var(--fx-radius-card-sm)',
+            padding: '16px',
           }}
         >
           <legend
             style={{
-              fontWeight: theme.typography.fontWeights.semiBold,
-              color: theme.palette.neutralPrimary,
-              padding: `0 ${theme.spacing.xs}`,
-              fontSize: theme.typography.fonts.body.fontSize,
+              fontWeight: 600,
+              color: 'var(--fx-text-heading)',
+              padding: '0 4px',
+              fontSize: 'var(--fx-body-size)',
             }}
           >
             Preferred Meeting Length{' '}
             <span
               aria-hidden='true'
-              style={{ color: theme.semanticColors.errorIcon }}
+              style={{ color: 'var(--fx-error)' }}
             >
               *
             </span>
@@ -187,9 +185,9 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: theme.spacing.m,
+                  gap: '16px',
                   cursor: 'pointer',
-                  padding: `${theme.spacing.xs} 0`,
+                  padding: '4px 0',
                 }}
               >
                 <input
@@ -199,35 +197,19 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
                   checked={data.preferredMeetingLength === value}
                   onChange={() => update('preferredMeetingLength', value)}
                   style={{
-                    accentColor: theme.palette.themePrimary,
+                    accentColor: 'var(--fx-accent)',
                     width: '18px',
                     height: '18px',
                     cursor: 'pointer',
                   }}
                 />
                 <span>
-                  <Typography
-                    variant='p'
-                    style={{
-                      fontWeight: theme.typography.fontWeights.semiBold,
-                      color: theme.palette.neutralPrimary,
-                      margin: 0,
-                      display: 'inline',
-                    }}
-                  >
+                  <span style={{ fontWeight: 600, color: 'var(--fx-text-heading)' }}>
                     {label}
-                  </Typography>{' '}
-                  <Typography
-                    variant='p'
-                    style={{
-                      color: theme.palette.neutralSecondary,
-                      fontSize: theme.typography.fonts.bodySmall.fontSize,
-                      margin: 0,
-                      display: 'inline',
-                    }}
-                  >
+                  </span>{' '}
+                  <span style={{ color: 'var(--fx-text-muted)', fontSize: 'var(--fx-body-sm-size)' }}>
                     — {description}
-                  </Typography>
+                  </span>
                 </span>
               </label>
             ))}
@@ -267,7 +249,7 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
             style={{
               display: 'flex',
               alignItems: 'flex-start',
-              gap: theme.spacing.m,
+              gap: '16px',
               cursor: 'pointer',
             }}
           >
@@ -279,18 +261,17 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
               required
               style={{
                 marginTop: '3px',
-                accentColor: theme.palette.themePrimary,
+                accentColor: 'var(--fx-accent)',
                 width: '18px',
                 height: '18px',
                 cursor: 'pointer',
                 flexShrink: 0,
               }}
             />
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralPrimary,
-                fontSize: theme.typography.fonts.bodySmall.fontSize,
+                color: 'var(--fx-text-heading)',
+                fontSize: 'var(--fx-body-sm-size)',
                 margin: 0,
               }}
             >
@@ -300,7 +281,7 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
                 href='/legal/privacy-policy'
                 target='_blank'
                 rel='noopener noreferrer'
-                style={{ color: theme.palette.themePrimary }}
+                style={{ color: 'var(--fx-accent)' }}
                 aria-label='Privacy Policy (opens in new window)'
               >
                 Privacy Policy
@@ -309,11 +290,11 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
               for more info on how we use your data.{' '}
               <span
                 aria-hidden='true'
-                style={{ color: theme.semanticColors.errorIcon }}
+                style={{ color: 'var(--fx-error)' }}
               >
                 *
               </span>
-            </Typography>
+            </p>
           </label>
           {errors.consent && <ErrorMsg>{errors.consent}</ErrorMsg>}
         </div>
@@ -323,61 +304,50 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
         <div
           role='alert'
           style={{
-            marginTop: theme.spacing.m,
-            padding: theme.spacing.m,
-            backgroundColor: theme.semanticColors.errorBackground,
-            color: theme.semanticColors.errorText,
-            borderRadius: theme.effects.roundedCorner6,
+            marginTop: '16px',
+            padding: '16px',
+            backgroundColor: 'var(--fx-error-bg)',
+            color: 'var(--fx-error)',
+            borderRadius: 'var(--fx-radius-card-sm)',
           }}
         >
-          <Typography variant='p' style={{ margin: 0 }}>
+          <p style={{ margin: 0 }}>
             Something went wrong. Please try again or{' '}
             <a
               href='/contact'
-              style={{ color: theme.semanticColors.errorText, fontWeight: 600 }}
+              style={{ color: 'var(--fx-error)', fontWeight: 600 }}
             >
               contact us directly
             </a>
             .
-          </Typography>
+          </p>
         </div>
       )}
 
       <div className='flex justify-between mt-6'>
-        <FormButton
-          variant='secondary'
-          text='← Back'
-          onClick={onBack}
-          size='medium'
-          disabled={isLoading}
-        />
-        <FormButton
-          variant='primary'
-          text={isLoading ? 'Opening calendar…' : 'Schedule a time →'}
-          onClick={handleSchedule}
-          size='medium'
-          disabled={isLoading}
-          aria-busy={isLoading}
-        />
+        <FxButton variant="outline" size="md" onClick={onBack} disabled={isLoading}>
+          &larr; Back
+        </FxButton>
+        <FxButton variant="primary" size="md" onClick={handleSchedule} disabled={isLoading}>
+          {isLoading ? 'Opening calendar…' : 'Schedule a time →'}
+        </FxButton>
       </div>
     </div>
   );
 };
 
 function ErrorMsg({ children }: { children: React.ReactNode }) {
-  const { theme } = useAppTheme();
   return (
     <div role='alert'>
-      <Typography
-        variant='p'
+      <p
         style={{
-          color: theme.semanticColors.errorText,
-          fontSize: theme.typography.fonts.bodySmall.fontSize,
+          color: 'var(--fx-error)',
+          fontSize: 'var(--fx-body-sm-size)',
           marginTop: '4px',
         }}
       >
         {children}
-      </Typography>
+      </p>
     </div>
   );
 }

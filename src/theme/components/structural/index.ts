@@ -3,7 +3,7 @@
  * These components provide UI elements like loading states, modals, etc.
  */
 
-export { LoadingSpinner } from './loading-spinner';
+export { LoadingSpinner, SpinnerSize } from './loading-spinner';
 export type { LoadingSpinnerProps } from './loading-spinner';
 
 export { ProgressBar } from './progress-bar';

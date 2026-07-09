@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
-import { useAppTheme } from '../theme/hooks/useAppTheme';
 
 /**
  * Custom hook for reusable hover effects
- * Provides consistent hover styling across components
+ * Provides consistent hover styling across components using DSM CSS custom properties
  */
 
 export interface HoverEffectsConfig {
@@ -28,8 +27,6 @@ interface HoverColors {
 }
 
 export const useHoverEffects = (config: HoverEffectsConfig) => {
-  const { theme } = useAppTheme();
-
   const {
     type,
     hoverBgColor,
@@ -42,36 +39,36 @@ export const useHoverEffects = (config: HoverEffectsConfig) => {
     transformValue = 'translateY(-2px)',
   } = config;
 
-  // Default configurations based on type
+  // Default configurations based on type, using DSM CSS custom properties
   let hoverColors: HoverColors;
 
   if (type === 'card') {
     hoverColors = {
-      hoverBg: hoverBgColor || theme.palette.neutralLighter,
-      defaultBg: defaultBgColor || theme.palette.neutralLighterAlt,
-      hoverBorder: hoverBorderColor || theme.palette.themePrimary,
-      defaultBorder: defaultBorderColor || theme.palette.neutralQuaternary,
-      hoverText: hoverTextColor || theme.palette.neutralPrimary,
-      defaultText: defaultTextColor || theme.palette.neutralPrimary,
+      hoverBg: hoverBgColor || 'var(--fx-hover-fill)',
+      defaultBg: defaultBgColor || 'var(--fx-surface-card)',
+      hoverBorder: hoverBorderColor || 'var(--fx-accent)',
+      defaultBorder: defaultBorderColor || 'var(--fx-border)',
+      hoverText: hoverTextColor || 'var(--fx-text-heading)',
+      defaultText: defaultTextColor || 'var(--fx-text-heading)',
     };
   } else if (type === 'link') {
     hoverColors = {
-      hoverBg: hoverBgColor || theme.palette.neutralLighterAlt,
+      hoverBg: hoverBgColor || 'var(--fx-surface-card)',
       defaultBg: defaultBgColor || 'transparent',
       hoverBorder: hoverBorderColor || 'transparent',
       defaultBorder: defaultBorderColor || 'transparent',
-      hoverText: hoverTextColor || theme.palette.themePrimary,
-      defaultText: defaultTextColor || theme.palette.themePrimary,
+      hoverText: hoverTextColor || 'var(--fx-accent)',
+      defaultText: defaultTextColor || 'var(--fx-accent)',
     };
   } else {
     // button type
     hoverColors = {
-      hoverBg: hoverBgColor || theme.palette.themePrimary,
-      defaultBg: defaultBgColor || theme.palette.themeSecondary,
-      hoverBorder: hoverBorderColor || theme.palette.themePrimary,
-      defaultBorder: defaultBorderColor || theme.palette.themeSecondary,
-      hoverText: hoverTextColor || theme.palette.white,
-      defaultText: defaultTextColor || theme.palette.themePrimary,
+      hoverBg: hoverBgColor || 'var(--fx-accent)',
+      defaultBg: defaultBgColor || 'var(--fx-surface-card)',
+      hoverBorder: hoverBorderColor || 'var(--fx-accent)',
+      defaultBorder: defaultBorderColor || 'var(--fx-border)',
+      hoverText: hoverTextColor || 'var(--fx-accent-ink)',
+      defaultText: defaultTextColor || 'var(--fx-accent)',
     };
   }
 

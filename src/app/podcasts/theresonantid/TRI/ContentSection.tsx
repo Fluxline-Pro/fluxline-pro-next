@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface ContentSectionProps {
   children: React.ReactNode;
@@ -28,17 +27,15 @@ export function ContentSection({
   isWithinCta = false,
   isMobile = false,
 }: ContentSectionProps) {
-  const { theme } = useAppTheme();
-
   return (
     <section
       className={className}
       style={{
-        marginBottom: isWithinCta ? 0 : theme.spacing.xxl,
+        marginBottom: isWithinCta ? 0 : 48,
         ...(backgroundColor && { backgroundColor }),
-        ...(padding && { padding: isMobile ? theme.spacing.l : theme.spacing.xl }),
+        ...(padding && { padding: isMobile ? 20 : 32 }),
         ...(borderRadius && {
-          borderRadius: theme.borderRadius.container.medium,
+          borderRadius: 'var(--fx-radius-card)',
         }),
         ...style,
       }}

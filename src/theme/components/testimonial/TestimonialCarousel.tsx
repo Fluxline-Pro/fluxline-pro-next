@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { Icon } from '@fluentui/react/lib/Icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 
 interface TestimonialCarouselProps {
@@ -23,7 +21,6 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = useState(false);
   const orientationHook = useDeviceOrientation();
   const orientation = isMounted ? orientationHook : 'landscape';
@@ -92,13 +89,13 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
     top: '50%',
     transform: 'translateY(-50%)',
     zIndex: 2,
-    background: theme.palette.white,
+    background: 'var(--fx-text-bright)',
     borderRadius: '50%',
     width: '48px',
     height: '48px',
-    border: `2px solid ${theme.palette.neutralLight}`,
+    border: '2px solid var(--fx-border)',
     cursor: 'pointer',
-    boxShadow: theme.effects.elevation8,
+    boxShadow: '0 3px 6px rgba(0,0,0,0.15)',
     transition: 'all 0.2s ease',
     display: 'flex',
     alignItems: 'center',
@@ -115,23 +112,24 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
           aria-label='Scroll left'
           style={{ ...buttonStyles, left: '8px' }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = theme.palette.neutralLighter;
+            e.currentTarget.style.background = 'var(--fx-surface-card)';
             e.currentTarget.style.transform = 'translateY(-50%) scale(1.05)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = theme.palette.white;
+            e.currentTarget.style.background = 'var(--fx-text-bright)';
             e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
           }}
         >
-          <Icon
-            iconName='ChevronLeft'
-            styles={{
-              root: {
-                fontSize: '20px',
-                color: theme.palette.themePrimary,
-              },
+          <span
+            style={{
+              fontSize: '20px',
+              color: 'var(--fx-accent)',
+              lineHeight: 1,
             }}
-          />
+            aria-hidden='true'
+          >
+            &#x25C0;
+          </span>
         </button>
       )}
 
@@ -140,7 +138,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
         ref={scrollRef}
         style={{
           display: 'flex',
-          gap: theme.spacing.m,
+          gap: '16px',
           overflowX: 'auto',
           scrollSnapType: 'x mandatory',
           WebkitOverflowScrolling: 'touch',
@@ -203,7 +201,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
                   outline: 'none',
                 }}
                 onFocus={(e) => {
-                  e.currentTarget.style.outline = `2px solid ${theme.palette.themePrimary}`;
+                  e.currentTarget.style.outline = '2px solid var(--fx-accent)';
                   e.currentTarget.style.outlineOffset = '2px';
                 }}
                 onBlur={(e) => {
@@ -237,23 +235,24 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
           aria-label='Scroll right'
           style={{ ...buttonStyles, right: '8px' }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = theme.palette.neutralLighter;
+            e.currentTarget.style.background = 'var(--fx-surface-card)';
             e.currentTarget.style.transform = 'translateY(-50%) scale(1.05)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = theme.palette.white;
+            e.currentTarget.style.background = 'var(--fx-text-bright)';
             e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
           }}
         >
-          <Icon
-            iconName='ChevronRight'
-            styles={{
-              root: {
-                fontSize: '20px',
-                color: theme.palette.themePrimary,
-              },
+          <span
+            style={{
+              fontSize: '20px',
+              color: 'var(--fx-accent)',
+              lineHeight: 1,
             }}
-          />
+            aria-hidden='true'
+          >
+            &#x25B6;
+          </span>
         </button>
       )}
 

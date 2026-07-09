@@ -14,7 +14,7 @@ import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
 import FxButton from '@/theme/components/dsm/FxButton';
 import FxChip from '@/theme/components/dsm/FxChip';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+
 import {
   SocialLinks,
   type SocialLinksData,
@@ -84,7 +84,6 @@ interface UnifiedContentDetailProps {
 
 export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
-  const { themeMode } = useAppTheme();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
   const isMounted = useSyncExternalStore(
@@ -93,10 +92,20 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
     () => false
   );
 
-  const isDark =
-    themeMode === 'dark' ||
-    themeMode === 'high-contrast' ||
-    themeMode === 'grayscale-dark';
+  const isDark = useSyncExternalStore(
+    (cb) => {
+      const mql = window.matchMedia('(prefers-color-scheme: dark)');
+      mql.addEventListener('change', cb);
+      return () => mql.removeEventListener('change', cb);
+    },
+    () => {
+      const root = document.documentElement;
+      const explicit = root.getAttribute('data-theme');
+      if (explicit) return explicit === 'dark' || explicit === 'high-contrast' || explicit === 'grayscale-dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    },
+    () => true
+  );
 
   const handleImageClick = React.useCallback(() => {
     if (config.imageConfig) {

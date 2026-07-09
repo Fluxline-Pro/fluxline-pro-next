@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import type { ServiceCategory } from '../../constants';
 
 /**
@@ -94,11 +93,16 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
               border: '1px solid var(--fx-border)',
             }}
           >
-            <FluentIcon
-              iconName='CheckMark'
-              size='medium'
-              color='var(--fx-accent)'
-            />
+            <span
+              style={{
+                color: 'var(--fx-accent)',
+                fontSize: '1.25rem',
+                lineHeight: 1,
+                flexShrink: 0,
+              }}
+            >
+              &#10003;
+            </span>
             <p
               style={{
                 color: 'var(--fx-text-body)',

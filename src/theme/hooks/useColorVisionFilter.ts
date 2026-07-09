@@ -1,7 +1,8 @@
 'use client';
 
 import { ThemeMode } from '../theme';
-import { useAppTheme } from './useAppTheme';
+import { useUserPreferencesStore } from '../../store/store-specs/userPreferencesStore';
+import { useThemeOverride } from '../contexts/ThemeOverrideContext';
 
 interface ColorVisionFilter {
   filter: string;
@@ -50,20 +51,30 @@ export function getImageFilterCss(mode: ImageFilterMode): string {
   }
 }
 
+/** Theme modes that are considered "dark" / inverted. */
+const DARK_MODES: ReadonlySet<ThemeMode> = new Set([
+  'dark',
+  'high-contrast',
+  'grayscale-dark',
+]);
+
 export const useColorVisionFilter = (
   skipDarkModeFilter?: boolean
 ): ColorVisionFilter => {
-  const { themeMode, theme } = useAppTheme();
+  const { preferences } = useUserPreferencesStore();
+  const { overrideThemeMode } = useThemeOverride();
+  const themeMode: ThemeMode = overrideThemeMode ?? preferences.themeMode;
+  const isDark = DARK_MODES.has(themeMode);
 
   const getFilter = (mode: ThemeMode): string => {
     const darkModeBrightness =
-      theme.themeMode === 'dark'
+      mode === 'dark'
         ? 'brightness(90%)'
-        : theme.themeMode === 'grayscale-dark'
+        : mode === 'grayscale-dark'
           ? 'brightness(100%)'
           : 'brightness(105%)';
     const darkModeContrast =
-      theme.themeMode === 'grayscale-dark'
+      mode === 'grayscale-dark'
         ? 'contrast(105%)'
         : 'contrast(100%)';
 
@@ -78,10 +89,10 @@ export const useColorVisionFilter = (
         return `sepia(48%) hue-rotate(22deg) saturate(38%) brightness(105%) contrast(92%) ${darkModeBrightness}`;
       default:
         // Skip dark mode filter if explicitly requested (e.g., for Fluxline dark logo)
-        if (skipDarkModeFilter && theme.isInverted) {
+        if (skipDarkModeFilter && isDark) {
           return 'none';
         }
-        return theme.isInverted ? 'brightness(85%)' : 'none';
+        return isDark ? 'brightness(85%)' : 'none';
     }
   };
 

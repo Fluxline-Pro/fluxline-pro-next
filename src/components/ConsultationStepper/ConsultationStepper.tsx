@@ -11,8 +11,6 @@
 
 import React, { useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Typography } from '@/theme/components/typography';
 import { Modal } from '@/components/Modal';
 import { FadeIn } from '@/animations/fade-animations';
 import { useConsultationStorage } from './useConsultationStorage';
@@ -22,8 +20,7 @@ import { StepContactSchedule } from './StepContactSchedule';
 import { TIDYCAL_LINKS } from './constants';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { LeadPayload, MeetingLength, StepperStep, SubmitStatus } from './types';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { StepTidyCal } from './StepTidyCal';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
@@ -60,13 +57,12 @@ function StepIndicator({
   currentStep: StepperStep;
   onStepClick: (step: StepperStep) => void;
 }) {
-  const { theme } = useAppTheme();
   const steps: StepperStep[] = [1, 2, 3];
 
   return (
     <nav
       aria-label='Consultation steps'
-      style={{ marginBottom: theme.spacing.xl }}
+      style={{ marginBottom: '32px' }}
     >
       <ol
         style={{
@@ -117,19 +113,19 @@ function StepIndicator({
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontWeight: theme.typography.fontWeights.semiBold,
+                      fontWeight: 600,
                       fontSize: '0.875rem',
                       backgroundColor: isCompleted
-                        ? theme.palette.themePrimary
+                        ? 'var(--fx-accent)'
                         : isCurrent
-                          ? theme.palette.themePrimary
-                          : theme.palette.neutralQuaternaryAlt,
+                          ? 'var(--fx-accent)'
+                          : 'var(--fx-border)',
                       color:
                         isCompleted || isCurrent
-                          ? theme.palette.white
-                          : theme.palette.neutralSecondary,
+                          ? 'var(--fx-text-bright)'
+                          : 'var(--fx-text-muted)',
                       border: isCurrent
-                        ? `3px solid ${theme.palette.themeDark}`
+                        ? '3px solid var(--fx-accent)'
                         : 'none',
                       transition: 'all 0.2s ease',
                     }}
@@ -140,10 +136,10 @@ function StepIndicator({
                     style={{
                       fontSize: '0.7rem',
                       color: isCurrent
-                        ? theme.palette.themePrimary
-                        : theme.palette.neutralSecondary,
+                        ? 'var(--fx-accent)'
+                        : 'var(--fx-text-muted)',
                       fontWeight: isCurrent
-                        ? theme.typography.fontWeights.semiBold
+                        ? 600
                         : undefined,
                       whiteSpace: 'nowrap',
                     }}
@@ -164,8 +160,8 @@ function StepIndicator({
                       marginRight: '8px',
                       backgroundColor:
                         step < currentStep
-                          ? theme.palette.themePrimary
-                          : theme.palette.neutralQuaternaryAlt,
+                          ? 'var(--fx-accent)'
+                          : 'var(--fx-border)',
                       transition: 'background-color 0.3s ease',
                     }}
                   />
@@ -180,55 +176,31 @@ function StepIndicator({
 }
 
 function SuccessView({ onClose }: { onClose: () => void }) {
-  const { theme } = useAppTheme();
   return (
     <div
       style={{
         textAlign: 'center',
-        padding: `${theme.spacing.xl} ${theme.spacing.m}`,
+        padding: '32px 16px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: theme.spacing.m,
+        gap: '16px',
       }}
       role='status'
       aria-live='polite'
     >
-      <div style={{ fontSize: '4rem' }} aria-hidden='true'>
-        <FluentIcon
-          iconName='CheckMark'
-          size='large'
-          color={theme.palette.themePrimary}
-        />
-      </div>
-      <Typography
-        variant='h3'
-        style={{ color: theme.palette.themePrimary, marginBottom: 0 }}
-      >
+      <span style={{ fontSize: '3rem', color: 'var(--fx-accent)' }} aria-hidden="true">&#10003;</span>
+      <h3 style={{ color: 'var(--fx-accent)', marginBottom: 0, fontSize: 'var(--fx-h3-size)', fontWeight: 'var(--fx-h3-weight)' }}>
         You&apos;re all set!
-      </Typography>
-      <Typography
-        variant='p'
-        style={{ color: theme.palette.neutralSecondary, maxWidth: '400px' }}
-      >
+      </h3>
+      <p style={{ color: 'var(--fx-text-muted)', maxWidth: '400px', fontSize: 'var(--fx-body-size)', lineHeight: 'var(--fx-body-leading)', margin: 0 }}>
         Your consultation has been scheduled. Check your inbox for a
         confirmation email with all the details.
-      </Typography>
+      </p>
 
-      <FormButton
-        type='button'
-        onClick={onClose}
-        style={{
-          marginTop: theme.spacing.m,
-          background: 'none',
-          border: 'none',
-          color: theme.palette.neutralSecondary,
-          cursor: 'pointer',
-          fontSize: theme.typography.fonts.bodySmall.fontSize,
-        }}
-      >
+      <FxButton variant="quiet" onClick={onClose} style={{ marginTop: '16px', fontSize: 'var(--fx-body-sm-size)' }}>
         Close
-      </FormButton>
+      </FxButton>
     </div>
   );
 }
@@ -264,7 +236,6 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
   isOpen,
   onDismiss,
 }) => {
-  const { theme } = useAppTheme();
   const [currentStep, setCurrentStep] = React.useState<StepperStep>(1);
   const [status, setStatus] = React.useState<SubmitStatus>('idle');
   const [isMounted, setIsMounted] = React.useState(false);
@@ -386,8 +357,8 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
     >
       <div
         style={{
-          padding: isMobile ? theme.spacing.s1 : theme.spacing.xl,
-          paddingTop: theme.spacing.l,
+          padding: isMobile ? '8px' : '32px',
+          paddingTop: '20px',
         }}
       >
         {/* Draft restore toast */}
@@ -396,39 +367,37 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
             role='status'
             aria-live='polite'
             style={{
-              marginBottom: theme.spacing.m,
-              padding: `${theme.spacing.s2} ${theme.spacing.m}`,
-              backgroundColor: theme.palette.neutralLighterAlt,
-              border: `1px solid ${theme.palette.neutralQuaternary}`,
-              borderLeft: `3px solid ${theme.palette.themePrimary}`,
-              borderRadius: theme.effects.roundedCorner4,
-              boxShadow: theme.shadows.card,
+              marginBottom: '16px',
+              padding: '8px 16px',
+              backgroundColor: 'var(--fx-surface-card)',
+              border: '1px solid var(--fx-border)',
+              borderLeft: '3px solid var(--fx-accent)',
+              borderRadius: 'var(--fx-radius-control)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: theme.spacing.s2,
+              gap: '8px',
             }}
           >
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.themePrimary,
-                fontSize: theme.typography.fonts.bodySmall.fontSize,
-                fontWeight: theme.typography.fontWeights.semiBold,
+                color: 'var(--fx-accent)',
+                fontSize: 'var(--fx-body-sm-size)',
+                fontWeight: 600,
                 margin: 0,
               }}
             >
               Your previous answers have been restored.
-            </Typography>
+            </p>
             <button
               type='button'
               onClick={clearDraft}
               style={{
                 background: 'none',
                 border: 'none',
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-muted)',
                 cursor: 'pointer',
-                fontSize: theme.typography.fonts.bodySmall.fontSize,
+                fontSize: 'var(--fx-body-sm-size)',
                 flexShrink: 0,
                 padding: '0 4px',
                 textDecoration: 'underline',

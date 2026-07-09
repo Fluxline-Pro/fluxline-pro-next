@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import type { ServiceCategory } from '../../constants';
 
 /**
@@ -13,22 +12,15 @@ export const ServiceDetailHero: React.FC<{ service: ServiceCategory }> = ({
 }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <FluentIcon
-          iconName={service.icon}
-          size='xLarge'
-          color='var(--fx-accent)'
-        />
-        <h1
-          style={{
-            color: 'var(--fx-accent)',
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-            fontWeight: 700,
-          }}
-        >
-          {service.title}
-        </h1>
-      </div>
+      <h1
+        style={{
+          color: 'var(--fx-accent)',
+          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+          fontWeight: 700,
+        }}
+      >
+        {service.title}
+      </h1>
 
       <p
         style={{
