@@ -305,7 +305,7 @@ export const ContactForm: React.FC = () => {
         >
           {status === 'submitting' ? 'Sending...' : 'Submit'}
         </FxButton>
-        <span style={{ fontSize: 12.5, color: '#7E8A99' }}>All fields are required.</span>
+        <span style={{ fontSize: 12.5, color: 'var(--fx-text-faint)' }}>All fields are required.</span>
       </div>
 
       {/* Success Message */}

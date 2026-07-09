@@ -1,9 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useThemeOverride } from '@/theme/contexts/ThemeOverrideContext';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import type { ThemeMode } from '@/theme/theme';
 import FxHero from '@/theme/components/dsm/FxHero';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
@@ -16,6 +13,7 @@ import {
   SERVICE_CATEGORIES,
   FLUXLINE_SECONDARY_TAGLINE,
 } from '@/app/services/constants';
+import { COMPANY_VALUES } from '@/app/about/constants';
 
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
   { key: 'body-practice', label: 'Body & Practice' },
@@ -24,18 +22,6 @@ const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
 ];
 
 export default function Home() {
-  const { themeMode } = useAppTheme();
-  const { setOverrideThemeMode } = useThemeOverride();
-
-  React.useEffect(() => {
-    const accessibilityModes: ThemeMode[] = ['high-contrast', 'colorblind'];
-    const shouldOverride = !accessibilityModes.includes(themeMode);
-    if (shouldOverride) setOverrideThemeMode('dark');
-    return () => {
-      if (shouldOverride) setOverrideThemeMode(null);
-    };
-  }, [setOverrideThemeMode, themeMode]);
-
   return (
     <>
       <FxHero
@@ -168,6 +154,82 @@ export default function Home() {
               >
                 <em>Modular by design. Resonant by nature.</em>
               </FxCallout>
+            </FxReveal>
+
+            <FxReveal delay={300}>
+              <div
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-teal)',
+                  marginBottom: 14,
+                }}
+              >
+                The Resonance Core Framework
+              </div>
+              <h3
+                style={{
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: 'var(--fx-text-heading)',
+                  margin: '0 0 8px',
+                }}
+              >
+                Our Core Values
+              </h3>
+              <p
+                style={{
+                  fontSize: 15,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  margin: '0 0 20px',
+                }}
+              >
+                Six principles that guide every engagement, every system, every
+                interaction.
+              </p>
+              <div
+                className='fx-g3'
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: 14,
+                }}
+              >
+                {COMPANY_VALUES.map((val) => (
+                  <div
+                    key={val.id}
+                    style={{
+                      background: 'var(--fx-surface-card)',
+                      border: '1px solid var(--fx-border)',
+                      borderRadius: 12,
+                      padding: '20px 18px',
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontWeight: 700,
+                        fontSize: 15,
+                        color: 'var(--fx-text-heading)',
+                        marginBottom: 6,
+                      }}
+                    >
+                      {val.title}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13.5,
+                        lineHeight: 1.55,
+                        color: 'var(--fx-text-muted)',
+                      }}
+                    >
+                      {val.description}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </FxReveal>
           </FxRailLayout>
         </FxContainer>

@@ -353,13 +353,13 @@ body.reduced-transparency {
 html[data-fx-transparency='reduce'] [data-fx-glass] {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  background: #07090d !important;
+  background: var(--fx-bg-deep) !important;
 }
 
 html[data-fx-transparency='reduce'] [data-fx-glass-hero] {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  background: #0c1017 !important;
+  background: var(--fx-surface-alt) !important;
 }
 
 html[data-fx-motion='reduce'] *,
@@ -486,4 +486,34 @@ html[data-fx-motion='reduce'] *::after {
     flex-direction: column !important;
     align-items: flex-start !important;
   }
+}
+
+/* =============================================
+   PAGE TRANSITION
+   ============================================= */
+
+@keyframes fx-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fx-page-transition {
+  animation: fx-fade-in 0.3s ease-out both;
+}
+
+/* =============================================
+   ACCESSIBILITY IMAGE FILTERS
+   ============================================= */
+
+[data-fx-theme="grayscale-dark"] img,
+[data-fx-theme="grayscale-light"] img {
+  filter: grayscale(100%) !important;
+}
+
+[data-fx-theme="high-contrast"] img {
+  filter: contrast(1.3) brightness(1.1) !important;
+}
+
+[data-fx-theme="colorblind"] img {
+  filter: saturate(0.7) hue-rotate(-10deg) !important;
 }
