@@ -19,16 +19,51 @@ interface FxNavProps {
   ctaHref?: string;
 }
 
+const BACK_ROUTES: Record<string, { label: string; href: string }> = {
+  '/services': { label: '← Back to Home', href: '/' },
+  '/blog': { label: '← Back to Home', href: '/' },
+  '/contact': { label: '← Back to Home', href: '/' },
+  '/about': { label: '← Back to Home', href: '/' },
+  '/portfolio': { label: '← Back to Home', href: '/' },
+  '/books': { label: '← Back to Home', href: '/' },
+  '/videos': { label: '← Back to Home', href: '/' },
+  '/case-studies': { label: '← Back to Home', href: '/' },
+  '/press-release': { label: '← Back to Home', href: '/' },
+  '/github': { label: '← Back to Home', href: '/' },
+  '/legal': { label: '← Back to Home', href: '/' },
+  '/cue-cards': { label: '← Back to Home', href: '/' },
+  '/fluxline-ethos': { label: '← Back to Home', href: '/' },
+  '/unsubscribe': { label: '← Back to Home', href: '/' },
+};
+
+function resolveBack(pathname: string): { label: string; href: string } {
+  if (BACK_ROUTES[pathname]) return BACK_ROUTES[pathname];
+
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length >= 2) {
+    const parentPath = '/' + segments.slice(0, -1).join('/');
+    const parentName = segments[segments.length - 2]
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+    return { label: `← Back to ${parentName}`, href: parentPath };
+  }
+
+  return { label: '← Back to Home', href: '/' };
+}
+
 export default function FxNav({
   variant,
-  backLabel = '← Back',
-  backHref = '/',
+  backLabel,
+  backHref,
   breadcrumb,
   ctaLabel = 'Book a Consultation',
   ctaHref = '/contact',
 }: FxNavProps) {
   const pathname = usePathname();
   const resolvedVariant = variant ?? (pathname === '/' ? 'home' : 'subpage');
+  const resolvedBack = resolveBack(pathname);
+  const finalBackLabel = backLabel ?? resolvedBack.label;
+  const finalBackHref = backHref ?? resolvedBack.href;
   const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
 
   const navLinks = [
@@ -142,12 +177,12 @@ export default function FxNav({
         ) : (
           <>
             <Link
-              href={backHref!}
+              href={finalBackHref}
               style={backPillStyle}
               onMouseEnter={() => setHoveredLink('__back')}
               onMouseLeave={() => setHoveredLink(null)}
             >
-              {backLabel}
+              {finalBackLabel}
             </Link>
             {breadcrumb && breadcrumb.length > 0 && (
               <div
