@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 export interface FormDateInputProps {
   label: string;
@@ -27,6 +28,7 @@ export const FormDateInput: React.FC<FormDateInputProps> = ({
   fullWidth = true,
   'aria-label': ariaLabel,
 }) => {
+  const { themeMode } = useAppTheme();
   return (
     <div style={{ width: fullWidth ? '100%' : 'auto' }}>
       <p
@@ -64,7 +66,10 @@ export const FormDateInput: React.FC<FormDateInputProps> = ({
           opacity: disabled ? 0.6 : 1,
           transition: 'border-color 0.2s ease',
           outline: 'none',
-          colorScheme: 'dark',
+          colorScheme:
+            themeMode === 'dark' || themeMode === 'high-contrast'
+              ? 'dark'
+              : 'light',
         }}
         onFocus={(e) => {
           e.currentTarget.style.borderColor = 'var(--fx-accent)';

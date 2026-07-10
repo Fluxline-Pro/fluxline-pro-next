@@ -89,7 +89,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
     top: '50%',
     transform: 'translateY(-50%)',
     zIndex: 2,
-    background: 'var(--fx-text-bright)',
+    background: 'var(--fx-surface-card)',
     borderRadius: '50%',
     width: '48px',
     height: '48px',
@@ -116,7 +116,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
             e.currentTarget.style.transform = 'translateY(-50%) scale(1.05)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'var(--fx-text-bright)';
+            e.currentTarget.style.background = 'var(--fx-surface-card)';
             e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
           }}
         >
@@ -239,7 +239,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
             e.currentTarget.style.transform = 'translateY(-50%) scale(1.05)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'var(--fx-text-bright)';
+            e.currentTarget.style.background = 'var(--fx-surface-card)';
             e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
           }}
         >

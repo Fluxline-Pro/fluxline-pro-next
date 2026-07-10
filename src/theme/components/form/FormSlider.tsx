@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { getIconGlyph } from '../../utils/iconMap';
 
 export interface FormSliderProps {
   label: string;
@@ -77,7 +78,7 @@ export const FormSlider: React.FC<FormSliderProps> = ({
           }}
           aria-hidden='true'
         >
-          {icon}
+          {getIconGlyph(icon)}
         </span>
       )}
       <div style={{ flex: 1 }}>

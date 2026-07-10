@@ -19,13 +19,13 @@ function FxPageTransition({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (prevPathname.current !== pathname) {
-      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       prevPathname.current = pathname;
     }
   }, [pathname]);
 
   return (
-    <div key={pathname} ref={wrapperRef} className="fx-page-transition">
+    <div key={pathname} ref={wrapperRef} className='fx-page-transition'>
       {children}
     </div>
   );

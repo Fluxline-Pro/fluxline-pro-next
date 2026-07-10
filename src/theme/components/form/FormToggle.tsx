@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { getIconGlyph } from '../../utils/iconMap';
 
 export interface FormToggleProps {
   label: string;
@@ -54,7 +55,7 @@ export const FormToggle: React.FC<FormToggleProps> = ({
           }}
           aria-hidden='true'
         >
-          {icon}
+          {getIconGlyph(icon)}
         </span>
       )}
       <div style={{ flex: 1 }}>
@@ -90,9 +91,7 @@ export const FormToggle: React.FC<FormToggleProps> = ({
           width: '48px',
           height: '28px',
           borderRadius: '14px',
-          backgroundColor: checked
-            ? 'var(--fx-accent)'
-            : 'var(--fx-border)',
+          backgroundColor: checked ? 'var(--fx-accent)' : 'var(--fx-border)',
           border: 'none',
           cursor: disabled ? 'not-allowed' : 'pointer',
           position: 'relative',

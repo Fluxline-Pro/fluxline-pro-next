@@ -26,7 +26,8 @@ export interface ModalProps {
    */
   showCloseButton?: boolean;
   /**
-   * Additional modal configuration options
+   * Additional modal configuration options (currently unused)
+   * Reserved for future extensibility
    */
   modalProps?: Record<string, unknown>;
   /**
@@ -38,6 +39,7 @@ export interface ModalProps {
 /**
  * Modal component using plain HTML overlay
  * Client Component - renders a div-based modal with backdrop
+ * Includes focus management (focus trap, focus restoration) for accessibility
  *
  * @example
  * ```tsx
@@ -61,6 +63,9 @@ export const Modal: React.FC<ModalProps> = ({
   showCloseButton = true,
   className = '',
 }) => {
+  const modalRef = React.useRef<HTMLDivElement>(null);
+  const previouslyFocusedElement = React.useRef<HTMLElement | null>(null);
+
   // Close on Escape key
   React.useEffect(() => {
     if (!isOpen) return;
@@ -83,6 +88,56 @@ export const Modal: React.FC<ModalProps> = ({
     };
   }, [isOpen]);
 
+  // Focus management (trap focus within modal, restore on close)
+  React.useEffect(() => {
+    if (!isOpen) {
+      // Restore focus to the element that triggered the modal
+      if (previouslyFocusedElement.current) {
+        previouslyFocusedElement.current.focus();
+        previouslyFocusedElement.current = null;
+      }
+      return;
+    }
+
+    // Store the currently focused element
+    previouslyFocusedElement.current = document.activeElement as HTMLElement;
+
+    // Focus the modal container on open
+    if (modalRef.current) {
+      modalRef.current.focus();
+    }
+
+    // Trap focus within the modal on Tab key
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab' || !modalRef.current) return;
+
+      // Get all focusable elements within the modal
+      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement as HTMLElement;
+
+      // If Shift+Tab on first element, focus last element
+      if (e.shiftKey && activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      }
+      // If Tab on last element, focus first element
+      else if (!e.shiftKey && activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleTabKey);
+    return () => document.removeEventListener('keydown', handleTabKey);
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -91,8 +146,8 @@ export const Modal: React.FC<ModalProps> = ({
       onClick={(e) => {
         if (e.target === e.currentTarget) onDismiss();
       }}
-      role="dialog"
-      aria-modal="true"
+      role='dialog'
+      aria-modal='true'
       aria-label={title || 'Modal dialog'}
       style={{
         position: 'fixed',
@@ -106,7 +161,9 @@ export const Modal: React.FC<ModalProps> = ({
       }}
     >
       <div
+        ref={modalRef}
         className={`${styles.container} ${className}`}
+        tabIndex={-1}
         style={{
           backgroundColor: 'var(--fx-surface-card)',
           borderRadius: '8px',
@@ -115,6 +172,7 @@ export const Modal: React.FC<ModalProps> = ({
           maxWidth: '90vw',
           boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
           animation: 'fx-modal-in 0.2s ease-out',
+          outline: 'none',
         }}
       >
         <div className={styles.header}>

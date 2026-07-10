@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { getIconGlyph } from '../../utils/iconMap';
 
 export interface FluentIconProps {
   iconName:
@@ -61,7 +62,7 @@ export const FluentIcon: React.FC<FluentIconProps> = ({
 
   return (
     <span className={className} style={combinedStyle} aria-hidden='true'>
-      {iconName}
+      {getIconGlyph(iconName)}
     </span>
   );
 };
