@@ -1,9 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useThemeOverride } from '@/theme/contexts/ThemeOverrideContext';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import type { ThemeMode } from '@/theme/theme';
 import FxHero from '@/theme/components/dsm/FxHero';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
@@ -16,6 +13,7 @@ import {
   SERVICE_CATEGORIES,
   FLUXLINE_SECONDARY_TAGLINE,
 } from '@/app/services/constants';
+import { COMPANY_VALUES } from '@/app/about/constants';
 
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
   { key: 'body-practice', label: 'Body & Practice' },
@@ -24,17 +22,10 @@ const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
 ];
 
 export default function Home() {
-  const { themeMode } = useAppTheme();
-  const { setOverrideThemeMode } = useThemeOverride();
-
   React.useEffect(() => {
-    const accessibilityModes: ThemeMode[] = ['high-contrast', 'colorblind'];
-    const shouldOverride = !accessibilityModes.includes(themeMode);
-    if (shouldOverride) setOverrideThemeMode('dark');
-    return () => {
-      if (shouldOverride) setOverrideThemeMode(null);
-    };
-  }, [setOverrideThemeMode, themeMode]);
+    document.documentElement.classList.add('fx-snap-container');
+    return () => document.documentElement.classList.remove('fx-snap-container');
+  }, []);
 
   return (
     <>
@@ -62,9 +53,10 @@ export default function Home() {
         backgroundImage='/images/home/HomePageMobileGeometricBackground.jpg'
       />
 
-      <section id='about' style={{ padding: '88px 0' }}>
+      <section id='about' className='fx-snap-section' style={{ padding: '88px 0' }}>
         <FxContainer>
           <FxRailLayout
+            parallax
             rail={
               <FxReveal
                 variant='left'
@@ -169,16 +161,90 @@ export default function Home() {
                 <em>Modular by design. Resonant by nature.</em>
               </FxCallout>
             </FxReveal>
+
+            <FxReveal delay={300}>
+              <div
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-teal)',
+                  marginBottom: 14,
+                }}
+              >
+                The Resonance Core Framework
+              </div>
+              <h3
+                style={{
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: 'var(--fx-text-heading)',
+                  margin: '0 0 8px',
+                }}
+              >
+                Our Core Values
+              </h3>
+              <p
+                style={{
+                  fontSize: 15,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  margin: '0 0 20px',
+                }}
+              >
+                Six principles that guide every engagement, every system, every
+                interaction.
+              </p>
+              <div
+                className='fx-g3'
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: 14,
+                }}
+              >
+                {COMPANY_VALUES.map((val) => (
+                  <FxCard
+                    key={val.id}
+                    interactive
+                    style={{ padding: '20px 18px' }}
+                  >
+                    <div
+                      style={{
+                        fontWeight: 700,
+                        fontSize: 15,
+                        color: 'var(--fx-text-heading)',
+                        marginBottom: 6,
+                      }}
+                    >
+                      {val.title}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13.5,
+                        lineHeight: 1.55,
+                        color: 'var(--fx-text-muted)',
+                      }}
+                    >
+                      {val.description}
+                    </div>
+                  </FxCard>
+                ))}
+              </div>
+            </FxReveal>
           </FxRailLayout>
         </FxContainer>
       </section>
 
       <section
         id='services'
+        className='fx-snap-section'
         style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
         <FxContainer>
           <FxRailLayout
+            parallax
             rail={
               <FxReveal
                 variant='left'
@@ -313,58 +379,57 @@ export default function Home() {
               </FxReveal>
             ))}
 
-            <FxReveal
-              delay={(HOME_SERVICE_GROUPS.length + 1) * 100}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: 18,
-                background: 'var(--fx-surface-inset)',
-                border: '1px solid var(--fx-border)',
-                borderRadius: 12,
-                padding: '18px 24px',
-                flexWrap: 'wrap',
-              }}
-            >
-              <div>
-                <div
-                  style={{
-                    fontWeight: 700,
-                    fontSize: 15.5,
-                    color: 'var(--fx-text-bright)',
-                  }}
-                >
-                  Not sure where to start?
-                </div>
-                <div
-                  style={{
-                    fontSize: 13.5,
-                    color: 'var(--fx-text-muted)',
-                    marginTop: 2,
-                  }}
-                >
-                  {FLUXLINE_SECONDARY_TAGLINE}
-                </div>
-              </div>
-              <a
+            <FxReveal delay={(HOME_SERVICE_GROUPS.length + 1) * 100}>
+              <FxCard
+                variant='inset'
+                interactive
                 href='/services'
                 style={{
-                  color: 'var(--fx-text-soft)',
-                  fontSize: 13.5,
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 18,
+                  padding: '18px 24px',
+                  flexWrap: 'wrap',
                 }}
               >
-                All services →
-              </a>
+                <div>
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 15.5,
+                      color: 'var(--fx-text-bright)',
+                    }}
+                  >
+                    Not sure where to start?
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13.5,
+                      color: 'var(--fx-text-muted)',
+                      marginTop: 2,
+                    }}
+                  >
+                    {FLUXLINE_SECONDARY_TAGLINE}
+                  </div>
+                </div>
+                <span
+                  style={{
+                    color: 'var(--fx-text-soft)',
+                    fontSize: 13.5,
+                    fontWeight: 600,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  All services →
+                </span>
+              </FxCard>
             </FxReveal>
           </FxRailLayout>
         </FxContainer>
       </section>
 
-      <section id='content' style={{ padding: '88px 0' }}>
+      <section id='content' className='fx-snap-section' style={{ padding: '88px 0' }}>
         <FxContainer>
           <FxReveal style={{ maxWidth: 680, marginBottom: 34 }}>
             <h2
@@ -501,6 +566,7 @@ export default function Home() {
             <FxReveal delay={300} style={{ height: '100%' }}>
               <FxCard
                 variant='band'
+                interactive
                 style={{
                   padding: 26,
                   height: '100%',
@@ -567,6 +633,7 @@ export default function Home() {
 
       <section
         id='contact'
+        className='fx-snap-section'
         style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
         <FxContainer>

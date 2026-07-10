@@ -1,6 +1,4 @@
 import React from 'react';
-import { mergeStyles } from '@fluentui/react';
-import { useAppTheme } from '../../theme/hooks/useAppTheme';
 
 interface IHeartRadioLogoProps {
   className?: string;
@@ -13,21 +11,12 @@ export const IHeartRadioLogo: React.FC<IHeartRadioLogoProps> = ({
   style,
   color,
 }) => {
-  const { theme } = useAppTheme();
-  const fillColor = color || theme.palette.themePrimary;
-
-  const rootClass = mergeStyles(
-    {
-      width: '24px',
-      height: '24px',
-    },
-    className
-  );
+  const fillColor = color || 'var(--fx-accent)';
 
   return (
     <svg
-      className={rootClass}
-      style={style}
+      className={className}
+      style={{ width: '24px', height: '24px', ...style }}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
       fill='none'

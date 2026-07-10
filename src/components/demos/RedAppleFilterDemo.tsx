@@ -11,8 +11,6 @@
  */
 
 import React, { useState } from 'react';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import {
   getImageFilterCss,
@@ -85,15 +83,9 @@ const APPLE_IMAGE_PATH =
  * CSS filter chains that simulate different vision conditions.
  */
 export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
-  const { theme } = useAppTheme();
   const [activeMode, setActiveMode] = useState<ImageFilterMode>('normal');
   const isMobileHook = useIsMobile();
   const isMobile = isMobileHook;
-
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
 
   const activeFilter = FILTER_OPTIONS.find((f) => f.mode === activeMode)!;
   const cssFilter = getImageFilterCss(activeMode);
@@ -101,11 +93,11 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
   // ── Derived styles ──────────────────────────────────────────────────────────
 
   const containerStyle: React.CSSProperties = {
-    borderRadius: theme.borderRadius.container.large,
-    border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+    borderRadius: 'var(--fx-radius-card-lg)',
+    border: '1px solid var(--fx-border)',
     overflow: 'hidden',
-    backgroundColor: theme.palette.neutralLighterAlt,
-    boxShadow: theme.shadows.l,
+    backgroundColor: 'var(--fx-surface-card)',
+    boxShadow: 'var(--fx-toast-shadow)',
   };
 
   const imageWrapStyle: React.CSSProperties = {
@@ -116,9 +108,7 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: isDark
-      ? 'rgba(20,20,20,0.8)' // hardcoded to add opacity
-      : theme.palette.white,
+    backgroundColor: 'var(--fx-bg-deep)',
     overflow: 'hidden',
   };
 
@@ -134,18 +124,16 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
   const filterBandStyle: React.CSSProperties = {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: theme.spacing.xs,
-    padding: `${theme.spacing.s} ${theme.spacing.m}`,
-    borderTop: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-    backgroundColor: isDark
-      ? theme.palette.neutralLighter
-      : theme.palette.neutralLighterAlt,
+    gap: '4px',
+    padding: '8px 16px',
+    borderTop: '1px solid var(--fx-border)',
+    backgroundColor: 'var(--fx-surface-card)',
     justifyContent: 'center',
   };
 
   const descriptionAreaStyle: React.CSSProperties = {
-    padding: `${theme.spacing.s} ${theme.spacing.m} ${theme.spacing.m}`,
-    borderTop: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+    padding: '8px 16px 16px',
+    borderTop: '1px solid var(--fx-border)',
     minHeight: '4.5rem',
   };
 
@@ -157,18 +145,21 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
       aria-label='Red Apple Perception Filter Demo'
     >
       {isModal && (
-        <Typography
-          variant='h3'
+        <h3
           style={{
-            padding: theme.spacing.m,
-            color: theme.palette.themePrimary,
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.m,
-            marginLeft: theme.spacing.s,
+            padding: '16px',
+            color: 'var(--fx-accent)',
+            marginTop: '16px',
+            marginBottom: '16px',
+            marginLeft: '8px',
+            fontSize: 'var(--fx-h3-size)',
+            fontWeight: 'var(--fx-h3-weight)' as unknown as number,
+            fontFamily: 'var(--fx-font)',
+            letterSpacing: 'var(--fx-heading-tracking)',
           }}
         >
           Red Apple Perception Demo
-        </Typography>
+        </h3>
       )}
       {/* ── Image panel ──────────────────────────────────────────────────────── */}
       <div style={imageWrapStyle}>
@@ -185,12 +176,12 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
         <div
           style={{
             position: 'absolute',
-            top: theme.spacing.s,
-            right: theme.spacing.s,
-            backgroundColor: theme.palette.themePrimary,
-            color: isDark ? theme.palette.black : theme.palette.white,
-            padding: `${theme.spacing.xxs} ${theme.spacing.s}`,
-            borderRadius: theme.borderRadius.container.small,
+            top: '8px',
+            right: '8px',
+            backgroundColor: 'var(--fx-accent)',
+            color: 'var(--fx-accent-ink)',
+            padding: '2px 8px',
+            borderRadius: 'var(--fx-radius-control)',
             fontSize: '0.75rem',
             fontWeight: 600,
             letterSpacing: '0.04em',
@@ -222,19 +213,17 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.35rem',
-                padding: `${theme.spacing.xs} ${theme.spacing.s}`,
-                borderRadius: theme.borderRadius.container.small,
+                padding: '4px 8px',
+                borderRadius: 'var(--fx-radius-control)',
                 border: isActive
-                  ? `2px solid ${theme.palette.themePrimary}`
-                  : `1px solid ${theme.palette.neutralTertiaryAlt}`,
+                  ? '2px solid var(--fx-accent)'
+                  : '1px solid var(--fx-border)',
                 backgroundColor: isActive
-                  ? isDark
-                    ? theme.palette.neutralLighter
-                    : theme.palette.themeLight
+                  ? 'var(--fx-hover-fill)'
                   : 'transparent',
                 color: isActive
-                  ? theme.palette.themePrimary
-                  : theme.palette.neutralSecondary,
+                  ? 'var(--fx-accent)'
+                  : 'var(--fx-text-muted)',
                 fontWeight: isActive ? 600 : 400,
                 fontSize: '0.85rem',
                 cursor: 'pointer',
@@ -253,24 +242,24 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
 
       {/* ── Description ──────────────────────────────────────────────────────── */}
       <div style={descriptionAreaStyle}>
-        <Typography
-          variant='bodySmall'
+        <p
           style={{
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-muted)',
             fontSize: '0.9rem',
-            lineHeight: theme.typography.lineHeights.relaxed,
+            lineHeight: 1.7,
             margin: 0,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
             justifyContent: 'center',
+            fontFamily: 'var(--fx-font)',
           }}
         >
-          <strong style={{ color: theme.palette.themePrimary }}>
+          <strong style={{ color: 'var(--fx-accent)' }}>
             {activeFilter.icon} {activeFilter.label}:
           </strong>{' '}
           {activeFilter.description}
-        </Typography>
+        </p>
       </div>
     </div>
   );

@@ -21,12 +21,13 @@ export default function ContactPage() {
   return (
     <FxContainer style={{ padding: '118px 32px 60px' }}>
       <FxRailLayout
+        parallax
         rail={
           <div>
             <div
               style={{
-                background: '#0D1117',
-                border: '1px solid #232C3D',
+                background: 'var(--fx-surface-card)',
+                border: '1px solid var(--fx-border)',
                 borderRadius: 14,
                 overflow: 'hidden',
               }}
@@ -39,14 +40,14 @@ export default function ContactPage() {
                   width: '100%',
                   aspectRatio: '4/3',
                   objectFit: 'cover',
-                  background: '#05070B',
+                  background: 'var(--fx-bg-deep)',
                 }}
               />
-              <div style={{ padding: '16px 20px', borderTop: '1px solid #232C3D' }}>
-                <div style={{ fontWeight: 700, fontSize: 17, color: '#EAF0F9' }}>
+              <div style={{ padding: '16px 20px', borderTop: '1px solid var(--fx-border)' }}>
+                <div style={{ fontWeight: 700, fontSize: 17, color: 'var(--fx-text-bright)' }}>
                   Let&apos;s Connect
                 </div>
-                <div style={{ fontSize: 13, color: '#8FA8CA', marginTop: 3 }}>
+                <div style={{ fontSize: 13, color: 'var(--fx-text-soft)', marginTop: 3 }}>
                   Salt Lake City, Utah
                 </div>
                 <div
@@ -57,50 +58,25 @@ export default function ContactPage() {
                     flexWrap: 'wrap',
                   }}
                 >
-                  <a
-                    href="mailto:support@fluxline.pro"
-                    style={{
-                      color: '#8FA8CA',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                    }}
-                  >
-                    Email
-                  </a>
-                  <a
-                    href="https://www.facebook.com/fluxline"
-                    style={{
-                      color: '#8FA8CA',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                    }}
-                  >
-                    Facebook
-                  </a>
-                  <a
-                    href="https://instagram.com/fluxlineco"
-                    style={{
-                      color: '#8FA8CA',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                    }}
-                  >
-                    Instagram
-                  </a>
-                  <a
-                    href="https://github.com/fluxline-pro"
-                    style={{
-                      color: '#8FA8CA',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                    }}
-                  >
-                    GitHub
-                  </a>
+                  {[
+                    { label: 'Email', href: 'mailto:support@fluxline.pro' },
+                    { label: 'Facebook', href: 'https://www.facebook.com/fluxline' },
+                    { label: 'Instagram', href: 'https://instagram.com/fluxlineco' },
+                    { label: 'GitHub', href: 'https://github.com/fluxline-pro' },
+                  ].map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      style={{
+                        color: 'var(--fx-text-soft)',
+                        fontSize: 13,
+                        fontWeight: 600,
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
@@ -109,7 +85,7 @@ export default function ContactPage() {
               style={{
                 display: 'inline-block',
                 marginTop: 14,
-                color: '#8FA8CA',
+                color: 'var(--fx-text-soft)',
                 fontSize: 13.5,
                 fontWeight: 600,
                 textDecoration: 'none',
@@ -126,7 +102,7 @@ export default function ContactPage() {
             style={{
               fontSize: 38,
               fontWeight: 800,
-              color: '#AEC6EE',
+              color: 'var(--fx-text-heading)',
               margin: '0 0 10px',
               letterSpacing: '-.01em',
             }}
@@ -137,7 +113,7 @@ export default function ContactPage() {
             style={{
               fontSize: 16,
               lineHeight: 1.7,
-              color: '#C2CEDA',
+              color: 'var(--fx-text-body)',
               margin: 0,
               maxWidth: '60ch',
             }}
@@ -150,8 +126,8 @@ export default function ContactPage() {
         {/* Consultation CTA card */}
         <div
           style={{
-            background: 'linear-gradient(150deg,#101826,#0C1220)',
-            border: '1px solid #33506F',
+            background: 'var(--fx-gradient-feature)',
+            border: '1px solid var(--fx-border-strong)',
             borderRadius: 16,
             padding: '28px 32px',
             display: 'flex',
@@ -161,10 +137,10 @@ export default function ContactPage() {
           }}
         >
           <div style={{ flex: 1, minWidth: 260 }}>
-            <div style={{ fontWeight: 700, fontSize: 19, color: '#EAF0F9', marginBottom: 6 }}>
+            <div style={{ fontWeight: 700, fontSize: 19, color: 'var(--fx-text-bright)', marginBottom: 6 }}>
               Book a Free Consultation
             </div>
-            <div style={{ fontSize: 14, lineHeight: 1.6, color: '#9FB6D4' }}>
+            <div style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--fx-text-muted)' }}>
               Walk us through your vision and we&apos;ll design the systems, strategies, and
               practices that move it forward. No commitment required.
             </div>
@@ -179,16 +155,16 @@ export default function ContactPage() {
           id="note"
           style={{
             scrollMarginTop: 96,
-            background: '#11161F',
-            border: '1px solid #232C3D',
+            background: 'var(--fx-surface-card)',
+            border: '1px solid var(--fx-border)',
             borderRadius: 16,
             padding: '28px 32px',
           }}
         >
-          <div style={{ fontWeight: 700, fontSize: 19, color: '#AEC6EE', marginBottom: 4 }}>
+          <div style={{ fontWeight: 700, fontSize: 19, color: 'var(--fx-text-heading)', marginBottom: 4 }}>
             Prefer to write? Send us a note.
           </div>
-          <div style={{ fontSize: 14, color: '#98A2B3', marginBottom: 22 }}>
+          <div style={{ fontSize: 14, color: 'var(--fx-text-muted)', marginBottom: 22 }}>
             We read every note and respond as soon as we can.
           </div>
           <ContactForm />
@@ -201,8 +177,8 @@ export default function ContactPage() {
         >
           <div
             style={{
-              background: '#11161F',
-              border: '1px solid #232C3D',
+              background: 'var(--fx-surface-card)',
+              border: '1px solid var(--fx-border)',
               borderRadius: 14,
               padding: '22px 24px',
             }}
@@ -225,14 +201,14 @@ export default function ContactPage() {
                   height: 40,
                   borderRadius: 9,
                   objectFit: 'cover',
-                  background: '#05070B',
+                  background: 'var(--fx-bg-deep)',
                 }}
               />
               <div>
-                <div style={{ fontWeight: 700, fontSize: 15, color: '#EAF0F9' }}>
+                <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--fx-text-bright)' }}>
                   The Resonant Identity
                 </div>
-                <div style={{ fontSize: 12, color: '#E8B95B', fontWeight: 600 }}>
+                <div style={{ fontSize: 12, color: 'var(--fx-gold)', fontWeight: 600 }}>
                   Listener contact
                 </div>
               </div>
@@ -241,7 +217,7 @@ export default function ContactPage() {
               style={{
                 fontSize: 13.5,
                 lineHeight: 1.6,
-                color: '#98A2B3',
+                color: 'var(--fx-text-muted)',
                 marginBottom: 14,
               }}
             >
@@ -251,7 +227,7 @@ export default function ContactPage() {
               <a
                 href={triEmailHref}
                 style={{
-                  color: '#B8CDF5',
+                  color: 'var(--fx-accent)',
                   fontSize: 13,
                   fontWeight: 600,
                   textDecoration: 'none',
@@ -262,7 +238,7 @@ export default function ContactPage() {
               <a
                 href="https://facebook.com/theresonantid"
                 style={{
-                  color: '#B8CDF5',
+                  color: 'var(--fx-accent)',
                   fontSize: 13,
                   fontWeight: 600,
                   textDecoration: 'none',
@@ -275,22 +251,22 @@ export default function ContactPage() {
 
           <div
             style={{
-              background: '#11161F',
-              border: '1px solid #232C3D',
+              background: 'var(--fx-surface-card)',
+              border: '1px solid var(--fx-border)',
               borderRadius: 14,
               padding: '22px 24px',
               display: 'flex',
               flexDirection: 'column',
             }}
           >
-            <div style={{ fontWeight: 700, fontSize: 15, color: '#EAF0F9', marginBottom: 6 }}>
+            <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--fx-text-bright)', marginBottom: 6 }}>
               TRI Newsletter
             </div>
             <div
               style={{
                 fontSize: 13.5,
                 lineHeight: 1.6,
-                color: '#98A2B3',
+                color: 'var(--fx-text-muted)',
                 marginBottom: 14,
               }}
             >
@@ -303,12 +279,12 @@ export default function ContactPage() {
                 style={{
                   flex: 1,
                   minWidth: 0,
-                  background: '#0A0D13',
-                  border: '1px solid #232C3D',
+                  background: 'var(--fx-surface-input)',
+                  border: '1px solid var(--fx-border)',
                   borderRadius: 8,
                   padding: '10px 12px',
                   fontSize: 13.5,
-                  color: '#EAF0F9',
+                  color: 'var(--fx-text-bright)',
                   outline: 'none',
                   fontFamily: 'inherit',
                 }}
@@ -316,8 +292,8 @@ export default function ContactPage() {
               <button
                 type="button"
                 style={{
-                  background: '#B8CDF5',
-                  color: '#0A0D13',
+                  background: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-ink)',
                   borderRadius: 8,
                   fontWeight: 600,
                   fontSize: 13,

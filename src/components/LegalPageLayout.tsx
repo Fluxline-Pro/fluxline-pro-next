@@ -3,11 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { UnifiedMarkdownRenderer } from '../utils/markdownRenderer';
-import { Typography } from '../theme/components/typography';
-import { useAppTheme } from '../theme/hooks/useAppTheme';
-import { typography, spacing } from '../theme/theme';
 import { ProtectedEmail } from './ProtectedEmail';
-import { useHoverEffects } from '../hooks/useHoverEffects';
 
 interface LegalPageLayoutProps {
   title: string;
@@ -29,12 +25,6 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
   subtitle,
   content,
 }) => {
-  const { theme } = useAppTheme();
-  const linkHoverEffects = useHoverEffects({
-    type: 'link',
-    enableTransform: false,
-  });
-
   const currentYear = new Date().getFullYear();
 
   return (
@@ -43,8 +33,8 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
         width: '100%',
         maxWidth: '900px',
         margin: '0 auto',
-        padding: spacing.xl,
-        color: theme.semanticColors.bodyText,
+        padding: '2rem',
+        color: 'var(--fx-text-body)',
       }}
     >
       {/* Back Navigation and Page Title */}
@@ -52,74 +42,73 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: spacing.m,
-          marginBottom: subtitle ? spacing.s : spacing.l,
+          gap: '1rem',
+          marginBottom: subtitle ? '0.75rem' : '1.5rem',
         }}
       >
         <Link
-          href='/legal'
+          href="/legal"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            padding: spacing.s1,
+            padding: '0.25rem',
             borderRadius: '8px',
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             textDecoration: 'none',
             transition: 'all 0.2s ease',
             flexShrink: 0,
           }}
-          {...linkHoverEffects}
         >
           <svg
-            width='24'
-            height='24'
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-            xmlns='http://www.w3.org/2000/svg'
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
+              strokeLinecap="round"
+              strokeLinejoin="round"
               strokeWidth={2}
-              d='M15 19l-7-7 7-7'
+              d="M15 19l-7-7 7-7"
             />
           </svg>
         </Link>
-        <Typography
-          variant='h1'
+        <h1
           style={{
-            ...typography.fonts.h2,
-            color: theme.semanticColors.bodyText,
+            color: 'var(--fx-text-body)',
             fontSize: '2rem',
             fontWeight: 600,
             margin: 0,
+            fontFamily: 'var(--fx-font)',
           }}
         >
           {title}
-        </Typography>
+        </h1>
       </div>
 
       {/* Subtitle (if provided) */}
       {subtitle && (
-        <Typography
-          variant='h3'
+        <h3
           style={{
-            ...typography.fonts.h3,
-            color: theme.palette.neutralSecondary,
-            marginBottom: spacing.l,
+            color: 'var(--fx-text-muted)',
+            fontSize: '1.25rem',
+            fontWeight: 500,
+            marginBottom: '1.5rem',
+            fontFamily: 'var(--fx-font)',
           }}
         >
           {subtitle}
-        </Typography>
+        </h3>
       )}
 
       {/* Main Content */}
       <div
-        className='legal-content'
+        className="legal-content"
         style={{
-          marginTop: spacing.xl,
-          marginBottom: spacing.xxl,
+          marginTop: '2rem',
+          marginBottom: '2.5rem',
         }}
       >
         <UnifiedMarkdownRenderer content={content} />
@@ -139,42 +128,41 @@ export const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({
       {/* Copyright Footer */}
       <footer
         style={{
-          marginTop: spacing.xxxl,
-          paddingTop: spacing.l,
-          borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+          marginTop: '3rem',
+          paddingTop: '1.5rem',
+          borderTop: '1px solid var(--fx-border)',
         }}
       >
-        <Typography
-          variant='p'
+        <p
           style={{
-            ...typography.fonts.bodySmall,
-            color: theme.palette.neutralTertiary,
+            fontSize: '0.875rem',
+            color: 'var(--fx-text-faint)',
             textAlign: 'center',
+            margin: 0,
           }}
         >
-          © {currentYear} Fluxline Resonance Group, LLC. All rights reserved.
-        </Typography>
-        <Typography
-          variant='p'
+          &copy; {currentYear} Fluxline Resonance Group, LLC. All rights reserved.
+        </p>
+        <p
           style={{
-            ...typography.fonts.bodySmall,
-            color: theme.palette.neutralTertiary,
+            fontSize: '0.875rem',
+            color: 'var(--fx-text-faint)',
             textAlign: 'center',
-            marginTop: spacing.s,
+            marginTop: '0.75rem',
           }}
         >
           Questions? Contact us at{' '}
           <ProtectedEmail
-            username='support'
-            domain='fluxline.pro'
+            username="support"
+            domain="fluxline.pro"
             style={{
-              color: theme.semanticColors.link,
+              color: 'var(--fx-accent)',
               textDecoration: 'underline',
             }}
           >
             support [at] fluxline.pro
           </ProtectedEmail>
-        </Typography>
+        </p>
       </footer>
     </div>
   );

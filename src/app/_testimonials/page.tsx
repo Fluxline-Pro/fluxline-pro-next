@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { motion } from 'framer-motion';
 import {
@@ -32,7 +30,6 @@ import Image from 'next/image';
  * - Accessibility support
  */
 export default function TestimonialsPage() {
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const orientationHook = useDeviceOrientation();
   const orientation = isMounted ? orientationHook : 'landscape';
@@ -78,6 +75,8 @@ export default function TestimonialsPage() {
     }
   }, [orientation]);
 
+  const isMobile = orientation === 'portrait' || orientation === 'mobile-landscape';
+
   // Animation variants
   const fadeUpVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -92,10 +91,7 @@ export default function TestimonialsPage() {
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
-          padding:
-            orientation === 'portrait' || orientation === 'mobile-landscape'
-              ? theme.spacing.m
-              : theme.spacing.l,
+          padding: isMobile ? '16px' : '20px',
           width: '100%',
         }}
       >
@@ -105,7 +101,7 @@ export default function TestimonialsPage() {
           animate='visible'
           variants={fadeUpVariants}
           style={{
-            marginBottom: theme.spacing.l,
+            marginBottom: '20px',
           }}
         >
           <Link
@@ -113,18 +109,17 @@ export default function TestimonialsPage() {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: theme.spacing.s1,
-              padding: theme.spacing.s1,
+              gap: '8px',
+              padding: '8px',
               borderRadius: '8px',
-              color: theme.palette.themePrimary,
+              color: 'var(--fx-accent)',
               textDecoration: 'none',
-              fontSize: theme.typography.fontSizes.clamp3,
-              fontWeight: theme.typography.fontWeights.medium,
+              fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+              fontWeight: 500,
               transition: 'all 0.2s ease',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                theme.palette.neutralLighterAlt;
+              e.currentTarget.style.backgroundColor = 'var(--fx-surface-card)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';
@@ -157,31 +152,31 @@ export default function TestimonialsPage() {
           transition={{ delay: 0.1 }}
           style={{
             textAlign: 'center',
-            marginBottom: theme.spacing.xxl,
+            marginBottom: '48px',
           }}
         >
-          <Typography
-            variant='h1'
+          <h1
             style={{
-              color: theme.palette.themePrimary,
-              marginBottom: theme.spacing.m,
-              fontSize: theme.typography.fontSizes.clamp8,
+              fontSize: 'var(--fx-h1-size)',
+              fontWeight: 700,
+              color: 'var(--fx-accent)',
+              marginBottom: '16px',
+              marginTop: 0,
             }}
           >
             What Our Clients Say
-          </Typography>
-          <Typography
-            variant='p'
+          </h1>
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-muted)',
               maxWidth: '800px',
               margin: '0 auto',
-              fontSize: theme.typography.fontSizes.clamp4,
+              fontSize: 'clamp(1rem, 1.5vw, 1.125rem)',
             }}
           >
             Hear from the businesses and individuals we&apos;ve helped transform
             through strategic consulting, training, and development services.
-          </Typography>
+          </p>
         </motion.div>
 
         {/* Featured Testimonials Carousel */}
@@ -191,18 +186,19 @@ export default function TestimonialsPage() {
             animate='visible'
             variants={fadeUpVariants}
             transition={{ delay: 0.2 }}
-            style={{ marginBottom: theme.spacing.xxl }}
+            style={{ marginBottom: '48px' }}
           >
-            <Typography
-              variant='h2'
+            <h2
               style={{
-                color: theme.palette.neutralPrimary,
-                marginBottom: theme.spacing.l,
-                fontSize: theme.typography.fontSizes.clamp6,
+                fontSize: 'var(--fx-h2-size)',
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                marginBottom: '20px',
+                marginTop: 0,
               }}
             >
               Featured Testimonials
-            </Typography>
+            </h2>
             <TestimonialCarousel
               onItemClick={(index) =>
                 handleCardClick(featuredTestimonials[index])
@@ -225,26 +221,24 @@ export default function TestimonialsPage() {
           animate='visible'
           variants={fadeUpVariants}
           transition={{ delay: 0.4 }}
-          style={{ marginBottom: theme.spacing.xxl }}
+          style={{ marginBottom: '48px' }}
         >
-          <Typography
-            variant='h2'
+          <h2
             style={{
-              color: theme.palette.neutralPrimary,
-              marginBottom: theme.spacing.l,
-              fontSize: theme.typography.fontSizes.clamp6,
+              fontSize: 'var(--fx-h2-size)',
+              fontWeight: 700,
+              color: 'var(--fx-text-heading)',
+              marginBottom: '20px',
+              marginTop: 0,
             }}
           >
             All Testimonials
-          </Typography>
+          </h2>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-              gap:
-                orientation === 'portrait' || orientation === 'mobile-landscape'
-                  ? theme.spacing.m
-                  : theme.spacing.l,
+              gap: isMobile ? '16px' : '20px',
             }}
           >
             {regularTestimonials.map((testimonial, index) => (
@@ -281,16 +275,17 @@ export default function TestimonialsPage() {
           variants={fadeUpVariants}
           transition={{ delay: 0.6 }}
         >
-          <Typography
-            variant='h2'
+          <h2
             style={{
-              color: theme.palette.neutralPrimary,
-              marginBottom: theme.spacing.l,
-              fontSize: theme.typography.fontSizes.clamp6,
+              fontSize: 'var(--fx-h2-size)',
+              fontWeight: 700,
+              color: 'var(--fx-text-heading)',
+              marginBottom: '20px',
+              marginTop: 0,
             }}
           >
             Browse Testimonials
-          </Typography>
+          </h2>
           <TestimonialCarousel
             onItemClick={(index) => handleCardClick(allTestimonials[index])}
           >
@@ -298,21 +293,21 @@ export default function TestimonialsPage() {
               <div
                 key={testimonial.id}
                 style={{
-                  padding: theme.spacing.m,
-                  backgroundColor: theme.palette.neutralLighterAlt,
+                  padding: '16px',
+                  backgroundColor: 'var(--fx-surface-card)',
                   borderRadius: '8px',
-                  boxShadow: theme.effects.elevation4,
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
                   minHeight: '200px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: theme.spacing.s2,
+                  gap: '4px',
                 }}
               >
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: theme.spacing.s2,
+                    gap: '4px',
                   }}
                 >
                   <Image
@@ -323,41 +318,42 @@ export default function TestimonialsPage() {
                     style={{
                       borderRadius: '50%',
                       objectFit: 'cover',
-                      border: `2px solid ${theme.palette.themePrimary}`,
+                      border: '2px solid var(--fx-accent)',
                     }}
                   />
                   <div>
-                    <Typography
-                      variant='h4'
+                    <h4
                       style={{
-                        color: theme.palette.neutralPrimary,
-                        fontSize: theme.typography.fontSizes.clamp4,
+                        fontSize: 'clamp(1rem, 1.5vw, 1.125rem)',
+                        fontWeight: 700,
+                        color: 'var(--fx-text-heading)',
+                        margin: 0,
                       }}
                     >
                       {testimonial.name}
-                    </Typography>
-                    <Typography
-                      variant='p'
+                    </h4>
+                    <p
                       style={{
-                        color: theme.palette.neutralSecondary,
-                        fontSize: theme.typography.fontSizes.clamp2,
+                        color: 'var(--fx-text-muted)',
+                        fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                        margin: 0,
                       }}
                     >
                       {testimonial.jobTitle}
-                    </Typography>
+                    </p>
                   </div>
                 </div>
-                <Typography
-                  variant='p'
+                <p
                   style={{
-                    color: theme.palette.neutralPrimary,
+                    color: 'var(--fx-text-heading)',
                     fontStyle: 'italic',
-                    fontSize: theme.typography.fontSizes.clamp3,
+                    fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
                     flex: 1,
+                    margin: 0,
                   }}
                 >
                   &ldquo;{testimonial.quote.substring(0, 120)}...&rdquo;
-                </Typography>
+                </p>
               </div>
             ))}
           </TestimonialCarousel>

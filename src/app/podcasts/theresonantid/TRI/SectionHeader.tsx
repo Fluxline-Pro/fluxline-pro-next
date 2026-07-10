@@ -2,7 +2,6 @@
 
 import React from 'react';
 import FxButton from '@/theme/components/dsm/FxButton';
-import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
 
 export interface SectionHeaderProps {
   title: string;
@@ -59,14 +58,7 @@ export function SectionHeader({
             gap: 12,
           }}
         >
-          {iconName && (
-            <FluentIcon
-              iconName={iconName}
-              size='large'
-              color='var(--fx-accent)'
-              style={{ marginRight: 16 }}
-            />
-          )}
+          {/* Icon slot removed — previously used FluentIcon */}
           <h3
             style={{
               ...style,

@@ -1,6 +1,6 @@
 'use client';
 
-import { InteractiveCard } from '@/components/InteractiveCard';
+import FxCard from '@/theme/components/dsm/FxCard';
 import { FadeUp } from '@/animations/fade-animations';
 import type { TRIPost } from '../../types';
 
@@ -11,7 +11,7 @@ export interface FilteredContentListProps {
 }
 
 /**
- * Client component that renders filtered TRI content using InteractiveCard.
+ * Client component that renders filtered TRI content using FxCard.
  * Receives posts from parent Server Component.
  */
 export function FilteredContentList({
@@ -36,14 +36,45 @@ export function FilteredContentList({
     >
       {visiblePosts.map((post, index) => (
         <FadeUp key={post.slug} delay={index * 0.1}>
-          <InteractiveCard
-            id={post.slug}
-            title={post.title}
-            description={post.excerpt}
+          <FxCard
+            interactive
             href={`${basePath}/${post.slug}`}
-            iconPosition='left'
-            showLearnMore
-          />
+            style={{ padding: '28px 28px 24px' }}
+          >
+            <h4
+              style={{
+                fontSize: 'var(--fx-h4-size)',
+                fontWeight: 600,
+                color: 'var(--fx-text-heading)',
+                marginBottom: 8,
+              }}
+            >
+              {post.title}
+            </h4>
+            <p
+              style={{
+                color: 'var(--fx-text-muted)',
+                fontSize: '0.95rem',
+                lineHeight: 1.4,
+                margin: 0,
+              }}
+            >
+              {post.excerpt}
+            </p>
+            <span
+              style={{
+                display: 'inline-block',
+                marginTop: 12,
+                color: 'var(--fx-accent)',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+              }}
+            >
+              Learn More ›
+            </span>
+          </FxCard>
         </FadeUp>
       ))}
     </div>

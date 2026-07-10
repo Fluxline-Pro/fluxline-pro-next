@@ -4,13 +4,12 @@
  * ImageCarouselModal Component
  * Fullscreen modal for viewing image galleries with navigation
  * Includes left/right arrows, image captions, and keyboard navigation
+ *
+ * Styled with DSM CSS custom properties (var(--fx-*) tokens).
  */
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Modal } from './Modal';
-import { Icon } from '@fluentui/react';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useColorVisionFilter } from '@/theme/hooks/useColorVisionFilter';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
@@ -43,7 +42,6 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [lastOpenState, setLastOpenState] = useState(isOpen);
   const [isImageLoading, setIsImageLoading] = useState(true);
-  const { theme } = useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
   const { filter: colorVisionFilter } = useColorVisionFilter();
 
@@ -118,11 +116,9 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
     handlePrevious();
   };
 
-  const navigationButtonStyles = {
-    background: theme.isInverted
-      ? theme.palette.neutralLighter
-      : theme.palette.white,
-    border: `2px solid ${theme.palette.neutralLight}`,
+  const navigationButtonStyles: React.CSSProperties = {
+    background: 'var(--fx-surface-card)',
+    border: '2px solid var(--fx-border)',
     borderRadius: '50%',
     width: '56px',
     height: '56px',
@@ -131,8 +127,12 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all 0.2s ease',
-    boxShadow: theme.effects.elevation8,
+    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
     zIndex: 10,
+    fontSize: '24px',
+    color: 'var(--fx-accent)',
+    lineHeight: 1,
+    padding: 0,
   };
 
   return (
@@ -144,9 +144,7 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
       maxHeight='95vh'
       showCloseButton={true}
       style={{
-        backgroundColor: theme.isInverted
-          ? theme.palette.neutralDark
-          : theme.palette.white,
+        backgroundColor: 'var(--fx-surface-card)',
         padding: 0,
         display: 'flex',
         flexDirection: 'column',
@@ -173,7 +171,7 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: theme.spacing.l2,
+            padding: '28px',
           }}
         >
           {/* Previous button */}
@@ -185,26 +183,18 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
               style={{
                 ...navigationButtonStyles,
                 position: 'absolute',
-                left: theme.spacing.l1,
+                left: '20px',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = theme.palette.neutralLighter;
+                e.currentTarget.style.background = 'var(--fx-hover-fill)';
                 e.currentTarget.style.transform = 'scale(1.05)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = theme.palette.white;
+                e.currentTarget.style.background = 'var(--fx-surface-card)';
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             >
-              <Icon
-                iconName='ChevronLeft'
-                styles={{
-                  root: {
-                    fontSize: '24px',
-                    color: theme.palette.themePrimary,
-                  },
-                }}
-              />
+              {'‹'}
             </button>
           )}
 
@@ -266,7 +256,7 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
                     width: 'auto',
                     height: 'auto',
                     objectFit: 'contain',
-                    borderRadius: theme.effects.roundedCorner4,
+                    borderRadius: '4px',
                     opacity: isImageLoading ? 0 : 1,
                     transition: 'opacity 0.2s ease-in-out',
                     filter: colorVisionFilter,
@@ -287,26 +277,18 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
               style={{
                 ...navigationButtonStyles,
                 position: 'absolute',
-                right: theme.spacing.l1,
+                right: '20px',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = theme.palette.neutralLighter;
+                e.currentTarget.style.background = 'var(--fx-hover-fill)';
                 e.currentTarget.style.transform = 'scale(1.05)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = theme.palette.white;
+                e.currentTarget.style.background = 'var(--fx-surface-card)';
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             >
-              <Icon
-                iconName='ChevronRight'
-                styles={{
-                  root: {
-                    fontSize: '24px',
-                    color: theme.palette.themePrimary,
-                  },
-                }}
-              />
+              {'›'}
             </button>
           )}
         </div>
@@ -315,38 +297,38 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
         <div
           style={{
             width: '100%',
-            padding: `${theme.spacing.l1} ${theme.spacing.l2}`,
-            backgroundColor: theme.palette.neutralQuaternaryAlt,
-            borderTop: `1px solid ${theme.palette.neutralTertiary}`,
+            padding: '20px 28px',
+            backgroundColor: 'var(--fx-surface-alt)',
+            borderTop: '1px solid var(--fx-border)',
             textAlign: 'center',
           }}
         >
           {/* Image counter */}
           {showNavigation && (
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
-                fontSize: theme.fonts.small.fontSize,
-                marginBottom: currentImage.caption ? theme.spacing.s1 : 0,
+                color: 'var(--fx-text-muted)',
+                fontSize: '12px',
+                margin: 0,
+                marginBottom: currentImage.caption ? '8px' : 0,
               }}
             >
               {currentIndex + 1} / {images.length}
-            </Typography>
+            </p>
           )}
 
           {/* Caption */}
           {currentImage.caption && (
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralPrimary,
-                fontSize: theme.fonts.medium.fontSize,
+                color: 'var(--fx-text-heading)',
+                fontSize: '14px',
                 fontStyle: 'italic',
+                margin: 0,
               }}
             >
               {currentImage.caption}
-            </Typography>
+            </p>
           )}
         </div>
       </div>

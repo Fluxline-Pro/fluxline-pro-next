@@ -3,7 +3,6 @@
 import React from 'react';
 import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form/FormButton';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import type { ProgramTier } from '@/app/services/types';
 
@@ -24,16 +23,11 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
   showComparisonButton = true,
   subtitle = 'Choose your path based on your archetype assessment and personal goals.',
 }) => {
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
   const isTabletHook = useIsTablet();
   const isMobile = isMounted ? isMobileHook : false;
   const isTablet = isMounted ? isTabletHook : false;
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -44,9 +38,9 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
       <Typography
         variant='h2'
         style={{
-          color: theme.palette.themePrimary,
+          color: 'var(--fx-accent)',
           fontSize: '2rem',
-          fontWeight: theme.typography.fontWeights.bold,
+          fontWeight: 700,
           textAlign: 'center',
         }}
       >
@@ -56,11 +50,11 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
       <Typography
         variant='p'
         style={{
-          color: theme.palette.neutralSecondary,
+          color: 'var(--fx-text-muted)',
           fontSize: '1.125rem',
           fontStyle: 'italic',
           textAlign: 'center',
-          marginBottom: theme.spacing.l,
+          marginBottom: '20px',
         }}
       >
         {subtitle}
@@ -70,9 +64,9 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
       <div
         style={{
           overflowX: isMobile || isTablet ? 'auto' : 'visible',
-          border: `1px solid ${theme.palette.neutralTertiary}`,
-          borderRadius: theme.borderRadius.container.medium,
-          backgroundColor: theme.palette.neutralLight,
+          border: '1px solid var(--fx-text-faint)',
+          borderRadius: 'var(--fx-radius-card)',
+          backgroundColor: 'var(--fx-border)',
           overflow: 'hidden',
         }}
       >
@@ -86,19 +80,17 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
           <thead>
             <tr
               style={{
-                backgroundColor: isDark
-                  ? theme.palette.themeDarkAlt
-                  : theme.palette.themePrimary,
+                backgroundColor: 'var(--fx-accent)',
               }}
             >
               <th
                 style={{
                   padding: isMobile ? '0.75rem' : '1rem 1.5rem',
                   textAlign: 'left',
-                  color: theme.palette.white,
+                  color: 'var(--fx-text-bright)',
                   fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: theme.typography.fontWeights.semiBold,
-                  borderRight: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+                  fontWeight: 600,
+                  borderRight: '1px solid var(--fx-border)',
                 }}
               >
                 Program Tier
@@ -107,10 +99,10 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
                 style={{
                   padding: isMobile ? '0.75rem' : '1rem 1.5rem',
                   textAlign: 'left',
-                  color: theme.palette.white,
+                  color: 'var(--fx-text-bright)',
                   fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: theme.typography.fontWeights.semiBold,
-                  borderRight: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+                  fontWeight: 600,
+                  borderRight: '1px solid var(--fx-border)',
                 }}
               >
                 Ideal For
@@ -119,9 +111,9 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
                 style={{
                   padding: isMobile ? '0.75rem' : '1rem 1.5rem',
                   textAlign: 'left',
-                  color: theme.palette.white,
+                  color: 'var(--fx-text-bright)',
                   fontSize: isMobile ? '0.875rem' : '1rem',
-                  fontWeight: theme.typography.fontWeights.semiBold,
+                  fontWeight: 600,
                 }}
               >
                 Monthly Rate
@@ -135,22 +127,22 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
                 style={{
                   borderBottom:
                     index < tiers.length - 1
-                      ? `1px solid ${theme.palette.neutralQuaternary}`
+                      ? '1px solid var(--fx-border)'
                       : 'none',
                 }}
               >
                 <td
                   style={{
                     padding: isMobile ? '0.75rem' : '1rem 1.5rem',
-                    borderRight: `1px solid ${theme.palette.neutralQuaternary}`,
+                    borderRight: '1px solid var(--fx-border)',
                   }}
                 >
                   <Typography
                     variant='p'
                     style={{
-                      color: theme.palette.themePrimary,
+                      color: 'var(--fx-accent)',
                       fontSize: isMobile ? '0.875rem' : '1rem',
-                      fontWeight: theme.typography.fontWeights.semiBold,
+                      fontWeight: 600,
                     }}
                   >
                     {tier.name}
@@ -159,15 +151,15 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
                 <td
                   style={{
                     padding: isMobile ? '0.75rem' : '1rem 1.5rem',
-                    borderRight: `1px solid ${theme.palette.neutralQuaternary}`,
+                    borderRight: '1px solid var(--fx-border)',
                   }}
                 >
                   <Typography
                     variant='p'
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-muted)',
                       fontSize: isMobile ? '0.8125rem' : '0.9375rem',
-                      lineHeight: theme.typography.lineHeights.relaxed,
+                      lineHeight: 1.6,
                     }}
                   >
                     {tier.idealFor}
@@ -177,9 +169,9 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
                   <Typography
                     variant='p'
                     style={{
-                      color: theme.palette.themePrimary,
+                      color: 'var(--fx-accent)',
                       fontSize: isMobile ? '0.875rem' : '1rem',
-                      fontWeight: theme.typography.fontWeights.semiBold,
+                      fontWeight: 600,
                     }}
                   >
                     {tier.monthlyRate}
@@ -188,7 +180,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
                     <Typography
                       variant='p'
                       style={{
-                        color: theme.palette.neutralTertiary,
+                        color: 'var(--fx-text-faint)',
                         fontSize: isMobile ? '0.75rem' : '0.8125rem',
                         fontStyle: 'italic',
                         display: 'block',
@@ -211,7 +203,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
           style={{
             display: 'flex',
             justifyContent: 'center',
-            marginTop: theme.spacing.l,
+            marginTop: '20px',
           }}
         >
           <FormButton

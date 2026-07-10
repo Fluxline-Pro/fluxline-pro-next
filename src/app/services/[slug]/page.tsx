@@ -10,7 +10,6 @@ import { useParams } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
-import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxCard from '@/theme/components/dsm/FxCard';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import {
@@ -23,7 +22,6 @@ import { SERVICE_SCROLL_MAPPING } from '../scroll-mapping';
 import { getScrollById } from '../scrolls/scrollsData';
 import { RelatedServices } from './components/related-services';
 import { ServiceScrollSection } from './components/service-scroll-section';
-import { BookingsButton } from '@/theme/components/button/bookings-button';
 
 /**
  * Service Detail Page Component
@@ -142,7 +140,7 @@ export default function ServiceDetailPage() {
               color: 'var(--fx-text-body)',
               fontSize: '1.125rem',
               lineHeight: 1.7,
-              marginTop: 16,
+              marginTop: 4,
             }}
             dangerouslySetInnerHTML={{ __html: service.summary }}
           />

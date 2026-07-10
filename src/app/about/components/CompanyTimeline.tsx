@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 
 export interface TimelineEvent {
   id: string;
@@ -69,11 +68,16 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
             }}
           >
             {event.icon ? (
-              <FluentIcon
-                iconName={event.icon}
-                size='small'
-                color='var(--fx-accent-ink)'
-              />
+              <span
+                style={{
+                  color: 'var(--fx-accent-ink)',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                }}
+                aria-hidden="true"
+              >
+                {index + 1}
+              </span>
             ) : (
               <p
                 style={{

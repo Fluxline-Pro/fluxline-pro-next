@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Typography } from '../typography';
 
 export interface CalloutProps {
@@ -59,91 +58,70 @@ export const Callout: React.FC<CalloutProps> = ({
   icon,
   className,
 }) => {
-  const { theme } = useAppTheme();
-
   // Variant-specific styling
-  const getVariantStyles = React.useMemo(() => {
-    const baseStyles = {
-      padding: `${theme.spacing.l} ${theme.spacing.xl}`,
-      borderRadius: theme.borderRadius.container.medium,
+  const getVariantStyles = React.useMemo((): React.CSSProperties => {
+    const baseStyles: React.CSSProperties = {
+      padding: '24px 32px',
+      borderRadius: 'var(--fx-radius-md, 8px)',
     };
 
     switch (variant) {
       case 'accent':
-        // Strong mythic gold presence - for quotes and key highlights
         return {
           ...baseStyles,
-          border: `1px solid ${theme.palette.neutralQuaternary}`,
-          backgroundColor:
-            theme.themeMode === 'high-contrast'
-              ? theme.semanticColors.bodyBackground
-              : theme.palette.neutralLighterAlt,
-          borderTop: `4px solid ${theme.semanticColors.messageText}`,
-          boxShadow: `0 0 0 1px ${theme.palette.neutralQuaternary}`,
+          border: '1px solid var(--fx-border)',
+          backgroundColor: 'var(--fx-surface-card)',
+          borderTop: '4px solid var(--fx-accent-gold, var(--fx-accent))',
+          boxShadow: '0 0 0 1px var(--fx-border)',
         };
 
       case 'subtle':
-        // Balanced appearance - softer accent, primary color focus
         return {
           ...baseStyles,
-          border: `1px solid ${theme.palette.neutralQuaternary}`,
-          backgroundColor:
-            theme.themeMode === 'high-contrast'
-              ? theme.semanticColors.bodyBackground
-              : theme.palette.neutralLighterAlt,
-          borderTop: `3px solid ${theme.palette.themePrimary}`,
-          boxShadow: theme.shadows.card,
+          border: '1px solid var(--fx-border)',
+          backgroundColor: 'var(--fx-surface-card)',
+          borderTop: '3px solid var(--fx-accent)',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)',
         };
 
       case 'neutral':
-        // Minimal accent - theme-primary only
         return {
           ...baseStyles,
-          border: `1px solid ${theme.palette.neutralQuaternary}`,
-          backgroundColor:
-            theme.themeMode === 'high-contrast'
-              ? theme.semanticColors.bodyBackground
-              : theme.palette.neutralLighterAlt,
-          borderTop: `2px solid ${theme.palette.neutralTertiary}`,
-          boxShadow: theme.shadows.card,
+          border: '1px solid var(--fx-border)',
+          backgroundColor: 'var(--fx-surface-card)',
+          borderTop: '2px solid var(--fx-text-faint)',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)',
         };
 
       default:
         return baseStyles;
     }
-  }, [variant, theme]);
+  }, [variant]);
 
-  const getTitleColor = React.useMemo(() => {
+  const getTitleColor = React.useMemo((): string => {
     switch (variant) {
       case 'accent':
-        // Mythic gold - adjusted for readability based on theme mode
-        // Light modes: Use darker gold for better contrast and readability
-        // Dark mode: Use bright gold (messageText) for impact
-        return theme.semanticColors.messageText; // Bright gold #F5C85C
+        return 'var(--fx-accent-gold, var(--fx-accent))';
       case 'subtle':
-        return theme.palette.themePrimary; // Primary blue
+        return 'var(--fx-accent)';
       case 'neutral':
-        return theme.palette.neutralPrimary; // Default text
+        return 'var(--fx-text-heading)';
       default:
-        return theme.palette.neutralPrimary;
+        return 'var(--fx-text-heading)';
     }
-  }, [variant, theme]);
-
-  const getSubtitleColor = React.useMemo(() => {
-    return theme.palette.neutralSecondary;
-  }, [theme]);
+  }, [variant]);
 
   return (
     <div className={className} style={getVariantStyles}>
       {/* Icon (optional) */}
-      {icon && <div style={{ marginBottom: theme.spacing.m }}>{icon}</div>}
+      {icon && <div style={{ marginBottom: '12px' }}>{icon}</div>}
 
       {/* Title */}
       <Typography
         variant='h3'
         style={{
           color: getTitleColor,
-          marginBottom: subtitle || children ? theme.spacing.s1 : 0,
+          marginBottom: subtitle || children ? '8px' : 0,
           fontSize: '1.5rem',
         }}
       >
@@ -155,9 +133,9 @@ export const Callout: React.FC<CalloutProps> = ({
         <Typography
           variant='p'
           style={{
-            color: getSubtitleColor,
+            color: 'var(--fx-text-muted)',
             fontStyle: variant === 'accent' ? 'italic' : 'normal',
-            marginBottom: children ? theme.spacing.m : 0,
+            marginBottom: children ? '12px' : 0,
           }}
         >
           {subtitle}
@@ -166,13 +144,13 @@ export const Callout: React.FC<CalloutProps> = ({
 
       {/* Body content (optional) */}
       {children && (
-        <div style={{ marginBottom: action ? theme.spacing.m : 0 }}>
+        <div style={{ marginBottom: action ? '12px' : 0 }}>
           {children}
         </div>
       )}
 
       {/* Action element (optional) */}
-      {action && <div style={{ marginTop: theme.spacing.m }}>{action}</div>}
+      {action && <div style={{ marginTop: '12px' }}>{action}</div>}
     </div>
   );
 };
