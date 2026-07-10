@@ -40,6 +40,20 @@ function resolveBack(pathname: string): { label: string; href: string } {
   if (BACK_ROUTES[pathname]) return BACK_ROUTES[pathname];
 
   const segments = pathname.split('/').filter(Boolean);
+
+  // Special handling for tag/category/technology pages
+  // Routes like /blog/tag/[tag], /portfolio/tag/[tag], etc. should go back to the section root
+  if (segments.length >= 3) {
+    const filterType = segments[1]; // 'tag', 'category', 'technology'
+    if (['tag', 'category', 'technology'].includes(filterType)) {
+      const sectionRoot = '/' + segments[0];
+      const sectionName = segments[0]
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+      return { label: `← Back to ${sectionName}`, href: sectionRoot };
+    }
+  }
+
   if (segments.length >= 2) {
     const parentPath = '/' + segments.slice(0, -1).join('/');
     const parentName = segments[segments.length - 2]
@@ -230,7 +244,9 @@ export default function FxNav({
                           {label}
                         </Link>
                       ) : (
-                        <span style={{ color: 'var(--fx-text-soft)' }}>{label}</span>
+                        <span style={{ color: 'var(--fx-text-soft)' }}>
+                          {label}
+                        </span>
                       )}
                     </React.Fragment>
                   );
