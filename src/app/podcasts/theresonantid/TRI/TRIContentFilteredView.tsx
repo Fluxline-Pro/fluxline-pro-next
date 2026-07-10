@@ -8,7 +8,7 @@ import {
   FilterConfig,
 } from '@/components/ContentListingPage';
 import { FadeUp } from '@/animations/fade-animations';
-import { Callout } from '@/theme/components/callout';
+import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxButton from '@/theme/components/dsm/FxButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { ContentSection } from './ContentSection';
@@ -240,45 +240,44 @@ export function TRIContentFilteredView({
           isMobile={isMobile}
           style={{ marginBottom: 16, marginTop: 12 }}
         />
-        <Callout
-          variant='neutral'
-          title={featuredPost.title}
-          subtitle={featuredPost.excerpt}
-          action={
-            <FxButton
-              variant='primary'
-              onClick={() => router.push(`${basePath}/${featuredPost.slug}`)}
-              aria-label={`${featuredButtonAriaLabelPrefix}: ${featuredPost.title}`}
+        <FxCallout tone='info' title={featuredPost.title}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <span style={{ color: 'var(--fx-text-muted)', fontStyle: 'normal' }}>
+              {featuredPost.excerpt}
+            </span>
+            <span
+              style={{
+                color: 'var(--fx-text-body)',
+                display: 'block',
+                marginTop: 8,
+                textAlign: 'left',
+                fontSize: '0.8rem',
+              }}
             >
-              {featuredButtonLabel}
-            </FxButton>
-          }
-        >
-          <span
-            style={{
-              color: 'var(--fx-text-body)',
-              display: 'block',
-              marginTop: 8,
-              textAlign: 'left',
-              fontSize: '0.8rem',
-            }}
-          >
-            {format(new Date(featuredPost.publishedDate), 'MMMM d, yyyy')}
-            <br />
-            {featuredTags.length > 0 ? featuredTags.join(' · ') : ''}
-          </span>
-        </Callout>
+              {format(new Date(featuredPost.publishedDate), 'MMMM d, yyyy')}
+              <br />
+              {featuredTags.length > 0 ? featuredTags.join(' · ') : ''}
+            </span>
+            <div style={{ marginTop: 12 }}>
+              <FxButton
+                variant='primary'
+                onClick={() => router.push(`${basePath}/${featuredPost.slug}`)}
+                aria-label={`${featuredButtonAriaLabelPrefix}: ${featuredPost.title}`}
+              >
+                {featuredButtonLabel}
+              </FxButton>
+            </div>
+          </div>
+        </FxCallout>
       </ContentSection>
     </FadeUp>
   ) : null;
 
   const heroCta = latestPost ? (
     <div style={{ paddingTop: 32 }}>
-      <Callout
-        variant='accent'
-        title={heroCtaTitle}
-        subtitle={latestPost.title}
-        action={
+      <FxCallout tone='gold' title={heroCtaTitle}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <span style={{ fontStyle: 'italic' }}>{latestPost.title}</span>
           <FxButton
             variant='outline'
             size='lg'
@@ -287,8 +286,8 @@ export function TRIContentFilteredView({
           >
             {heroCtaButtonLabel}
           </FxButton>
-        }
-      />
+        </div>
+      </FxCallout>
     </div>
   ) : null;
 

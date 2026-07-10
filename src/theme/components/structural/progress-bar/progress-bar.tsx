@@ -1,9 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ProgressIndicator, IProgressIndicatorStyles } from '@fluentui/react';
-
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface ProgressBarProps {
   /**
@@ -43,7 +40,7 @@ export interface ProgressBarProps {
 
 /**
  * Progress bar component with auto-increment or manual control
- * Client Component - uses Fluent UI ProgressIndicator
+ * Client Component - plain HTML/CSS progress bar
  *
  * @example
  * ```tsx
@@ -64,35 +61,6 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   className = '',
 }) => {
   const [progress, setProgress] = useState(0);
-  const { theme } = useAppTheme();
-
-  const customStyles: Partial<IProgressIndicatorStyles> = {
-    root: {
-      width: 'auto',
-      fontFamily: theme.typography.fonts.medium.fontFamily,
-      fontSize: theme.typography.fonts.medium.fontSize,
-      padding: `${theme.spacing.m} ${theme.spacing.xl}`,
-      backgroundColor: 'transparent',
-      color: theme.palette.neutralPrimary,
-    },
-    progressBar: {
-      background: theme.palette.themePrimary,
-      height: 6,
-      borderRadius: 3,
-    },
-    itemProgress: {
-      borderRadius: 3,
-    },
-  };
-
-  const divStyles: React.CSSProperties = {
-    ...(autoCenter && {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-    }),
-  };
 
   useEffect(() => {
     if (percentComplete !== undefined) {
@@ -103,22 +71,74 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     const interval = setInterval(() => {
       setProgress((prev) => {
         const next = prev + intervalIncrement;
-        return next >= 1 ? 1 : next; // Clamp to 1 (100%) when reaching maximum
+        return next >= 1 ? 1 : next;
       });
     }, intervalDelay);
 
     return () => clearInterval(interval);
   }, [percentComplete, intervalDelay, intervalIncrement]);
 
+  const divStyles: React.CSSProperties = {
+    ...(autoCenter && {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+    }),
+  };
+
   return (
     <div style={divStyles}>
-      <ProgressIndicator
+      <div
         className={className}
-        label={label}
-        description={description}
-        percentComplete={progress}
-        styles={customStyles}
-      />
+        style={{
+          width: 'auto',
+          fontFamily: 'var(--fx-font-body)',
+          fontSize: 'var(--fx-body-size)',
+          padding: '12px 32px',
+          backgroundColor: 'transparent',
+          color: 'var(--fx-text-heading)',
+        }}
+      >
+        {label && (
+          <div style={{ marginBottom: '8px', fontWeight: 600 }}>{label}</div>
+        )}
+        <div
+          role="progressbar"
+          aria-valuenow={Math.round(progress * 100)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={label}
+          style={{
+            width: '100%',
+            height: 6,
+            borderRadius: 3,
+            backgroundColor: 'var(--fx-border)',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            style={{
+              width: `${progress * 100}%`,
+              height: '100%',
+              borderRadius: 3,
+              backgroundColor: 'var(--fx-accent)',
+              transition: 'width 0.1s linear',
+            }}
+          />
+        </div>
+        {description && (
+          <div
+            style={{
+              marginTop: '4px',
+              fontSize: 'var(--fx-body-sm-size)',
+              color: 'var(--fx-text-muted)',
+            }}
+          >
+            {description}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

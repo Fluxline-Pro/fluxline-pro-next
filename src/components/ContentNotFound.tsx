@@ -1,11 +1,18 @@
 'use client';
 
+/**
+ * ContentNotFound Component
+ * Reusable not-found page for all content types.
+ * Provides consistent styling and user experience across Blog, Portfolio,
+ * Press Release, and Case Studies.
+ *
+ * Migrated to DSM CSS custom properties (var(--fx-*) tokens).
+ */
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from './UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import FxButton from '@/theme/components/dsm/FxButton';
 
 interface ContentNotFoundProps {
   /**
@@ -27,18 +34,12 @@ interface ContentNotFoundProps {
   };
 }
 
-/**
- * ContentNotFound Component
- * Reusable not-found page for all content types
- * Provides consistent styling and user experience across Blog, Portfolio, Press Release, and Case Studies
- */
 export function ContentNotFound({
   title,
   message,
   backButton,
 }: ContentNotFoundProps) {
   const router = useRouter();
-  const { theme } = useAppTheme();
   const [menuOpened, setMenuOpened] = React.useState(false);
 
   const handleOpenMenu = () => {
@@ -61,89 +62,93 @@ export function ContentNotFound({
       }}
     >
       <div
-        className='flex flex-col items-center justify-center space-y-6'
         style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 24,
           minHeight: '50vh',
-          padding: theme.spacing.xl,
+          padding: 32,
         }}
       >
-        <Typography
-          variant='h1'
+        <h1
           style={{
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             fontSize: 'clamp(3rem, 8vw, 6rem)',
-            fontWeight: theme.typography.fontWeights.bold,
+            fontWeight: 700,
+            fontFamily: 'var(--fx-font)',
+            margin: 0,
           }}
         >
           404
-        </Typography>
+        </h1>
 
-        <Typography
-          variant='h2'
+        <h2
           style={{
-            color: theme.palette.neutralPrimary,
+            color: 'var(--fx-text-heading)',
             fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-            fontWeight: theme.typography.fontWeights.semiBold,
+            fontWeight: 600,
+            fontFamily: 'var(--fx-font)',
             textAlign: 'center',
+            margin: 0,
           }}
         >
           {title}
-        </Typography>
+        </h2>
 
-        <Typography
-          variant='p'
+        <p
           style={{
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-muted)',
             fontSize: '1.125rem',
+            fontFamily: 'var(--fx-font)',
             textAlign: 'center',
             maxWidth: '600px',
+            margin: 0,
           }}
         >
           {message}
-        </Typography>
+        </p>
 
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: theme.spacing.m,
-            marginTop: theme.spacing.l,
+            gap: 16,
+            marginTop: 20,
             alignItems: 'center',
           }}
         >
-          <FormButton
+          <FxButton
             variant='primary'
-            size='large'
-            icon='GlobalNavButton'
-            iconPosition='left'
+            size='lg'
             onClick={handleOpenMenu}
             disabled={menuOpened}
-            style={{
-              minWidth: '200px',
-            }}
+            style={{ minWidth: '200px' }}
           >
             {menuOpened ? 'Menu Opening...' : 'Open the Menu'}
-          </FormButton>
+          </FxButton>
 
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralTertiary,
+              color: 'var(--fx-text-faint)',
               fontSize: '0.875rem',
+              fontFamily: 'var(--fx-font)',
               textAlign: 'center',
+              margin: 0,
             }}
           >
             or use the menu button in the top navigation
-          </Typography>
+          </p>
 
-          <div style={{ marginTop: theme.spacing.s2 }}>
-            <FormButton
-              variant='secondary'
-              size='medium'
+          <div style={{ marginTop: 8 }}>
+            <FxButton
+              variant='outline'
+              size='md'
               onClick={() => router.push(backButton.url)}
             >
               {backButton.label}
-            </FormButton>
+            </FxButton>
           </div>
         </div>
       </div>

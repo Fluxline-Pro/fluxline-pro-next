@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { getIconGlyph } from '../../utils/iconMap';
 
 export interface FormSliderProps {
   label: string;
@@ -28,7 +26,6 @@ export interface FormSliderProps {
  * - Optional icon and description
  * - Custom value formatting
  * - Accessible with ARIA attributes
- * - Responsive font scaling
  * - Smooth transitions and hover effects
  */
 export const FormSlider: React.FC<FormSliderProps> = ({
@@ -44,8 +41,6 @@ export const FormSlider: React.FC<FormSliderProps> = ({
   disabled = false,
   'aria-label': ariaLabel,
 }) => {
-  const { theme, fontScale } = useAppTheme();
-
   // Calculate percentage for gradient
   const percentage = ((value - min) / (max - min)) * 100;
 
@@ -57,7 +52,7 @@ export const FormSlider: React.FC<FormSliderProps> = ({
     cursor: disabled ? 'not-allowed' : 'pointer',
     WebkitAppearance: 'none',
     appearance: 'none',
-    background: `linear-gradient(to right, ${theme.palette.themePrimary} 0%, ${theme.palette.themePrimary} ${percentage}%, ${theme.palette.neutralQuaternary} ${percentage}%, ${theme.palette.neutralQuaternary} 100%)`,
+    background: `linear-gradient(to right, var(--fx-accent) 0%, var(--fx-accent) ${percentage}%, var(--fx-border) ${percentage}%, var(--fx-border) 100%)`,
     opacity: disabled ? 0.6 : 1,
   };
 
@@ -68,17 +63,23 @@ export const FormSlider: React.FC<FormSliderProps> = ({
         alignItems: 'flex-start',
         gap: '1rem',
         padding: '1rem',
-        borderRadius: theme.borderRadius.container.small,
-        backgroundColor: theme.palette.neutralLighterAlt,
-        border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+        borderRadius: 'var(--fx-radius-control)',
+        backgroundColor: 'var(--fx-surface-card)',
+        border: '1px solid var(--fx-border)',
       }}
     >
       {icon && (
-        <FluentIcon
-          iconName={icon}
-          size='medium'
-          color={theme.palette.themePrimary}
-        />
+        <span
+          style={{
+            color: 'var(--fx-accent)',
+            fontSize: '1.25rem',
+            lineHeight: 1,
+            flexShrink: 0,
+          }}
+          aria-hidden='true'
+        >
+          {getIconGlyph(icon)}
+        </span>
       )}
       <div style={{ flex: 1 }}>
         <div
@@ -89,39 +90,39 @@ export const FormSlider: React.FC<FormSliderProps> = ({
             marginBottom: description ? '0.25rem' : '0.5rem',
           }}
         >
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralPrimary,
-              fontSize: `${1 * fontScale}rem`,
-              fontWeight: theme.typography.fontWeights.semiBold,
+              color: 'var(--fx-text-heading)',
+              fontSize: '1rem',
+              fontWeight: 600,
+              margin: 0,
             }}
           >
             {label}
-          </Typography>
-          <Typography
-            variant='p'
+          </p>
+          <span
             style={{
-              color: theme.palette.themePrimary,
-              fontSize: `${0.875 * fontScale}rem`,
-              fontWeight: theme.typography.fontWeights.semiBold,
+              color: 'var(--fx-accent)',
+              fontSize: '0.875rem',
+              fontWeight: 600,
             }}
           >
             {formatValue ? formatValue(value) : value}
-          </Typography>
+          </span>
         </div>
         {description && (
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: `${0.875 * fontScale}rem`,
-              lineHeight: theme.typography.lineHeights.normal,
+              color: 'var(--fx-text-muted)',
+              fontSize: '0.875rem',
+              lineHeight: 1.7,
               marginBottom: '0.5rem',
+              margin: 0,
+              marginBlockEnd: '0.5rem',
             }}
           >
             {description}
-          </Typography>
+          </p>
         )}
         <input
           type='range'

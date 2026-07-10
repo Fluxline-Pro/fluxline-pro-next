@@ -1,11 +1,19 @@
 'use client';
 
 import React from 'react';
-import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 import { motion } from 'framer-motion';
 
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import styles from './loading-spinner.module.scss';
+
+/**
+ * Spinner size values matching the legacy SpinnerSize enum for API compatibility.
+ */
+export enum SpinnerSize {
+  xSmall = 0,
+  small = 1,
+  medium = 2,
+  large = 3,
+}
 
 export interface LoadingSpinnerProps {
   /**
@@ -29,9 +37,17 @@ export interface LoadingSpinnerProps {
   className?: string;
 }
 
+/** Map SpinnerSize enum to pixel dimensions */
+const sizeMap: Record<SpinnerSize, number> = {
+  [SpinnerSize.xSmall]: 16,
+  [SpinnerSize.small]: 24,
+  [SpinnerSize.medium]: 32,
+  [SpinnerSize.large]: 48,
+};
+
 /**
  * Loading spinner component with animation
- * Client Component - uses Fluent UI Spinner with motion
+ * Client Component - CSS-based spinner with motion wrapper
  *
  * @example
  * ```tsx
@@ -44,19 +60,8 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   showLabel = false,
   className = '',
 }) => {
-  const { theme } = useAppTheme();
-
-  const spinnerStyles = {
-    color: theme.palette.themeSecondary,
-    fontSize: '4rem',
-  };
-
-  const labelStyles = {
-    marginTop: theme.spacing.m,
-    color: theme.palette.neutralPrimary,
-    fontSize: theme.typography.fonts.medium.fontSize,
-    fontFamily: theme.typography.fonts.medium.fontFamily,
-  };
+  const dimension = sizeMap[size] || 48;
+  const borderWidth = Math.max(2, Math.round(dimension / 10));
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -65,14 +70,31 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-        <Spinner size={size} style={spinnerStyles} />
+        <div
+          role="status"
+          aria-label={label}
+          style={{
+            width: dimension,
+            height: dimension,
+            border: `${borderWidth}px solid var(--fx-border)`,
+            borderTopColor: 'var(--fx-accent)',
+            borderRadius: '50%',
+            animation: 'fx-spin 0.8s linear infinite',
+          }}
+        />
+        <style>{`@keyframes fx-spin { to { transform: rotate(360deg); } }`}</style>
       </motion.div>
       {showLabel && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.1, ease: 'easeOut' }}
-          style={labelStyles}
+          style={{
+            marginTop: '12px',
+            color: 'var(--fx-text-heading)',
+            fontSize: 'var(--fx-body-size)',
+            fontFamily: 'var(--fx-font-body)',
+          }}
         >
           {label}
         </motion.div>

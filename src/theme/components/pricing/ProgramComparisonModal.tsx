@@ -3,9 +3,7 @@
 import React from 'react';
 import { Modal } from '@/components/Modal';
 import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import { FormButton } from '@/theme/components/form/FormButton';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { ServicePricingData } from '@/app/services/types';
 
@@ -24,14 +22,9 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
   onClose,
   pricingData,
 }) => {
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
   const isMobile = isMounted ? isMobileHook : false;
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
 
   const { tiers, features, comparison } = pricingData;
 
@@ -57,17 +50,12 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
               gap: '0.5rem',
             }}
           >
-            <FluentIcon
-              iconName='ComplianceAudit'
-              size='large'
-              color={theme.palette.themePrimary}
-            />
             <Typography
               variant='h2'
               style={{
-                color: theme.palette.themePrimary,
+                color: 'var(--fx-accent)',
                 fontSize: isMobile ? '1.5rem' : '2rem',
-                fontWeight: theme.typography.fontWeights.bold,
+                fontWeight: 700,
               }}
             >
               What&apos;s Included - Program Comparison
@@ -79,8 +67,8 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
         <div
           style={{
             overflowX: 'auto',
-            border: `1px solid ${theme.palette.neutralTertiary}`,
-            borderRadius: theme.borderRadius.container.medium,
+            border: '1px solid var(--fx-text-faint)',
+            borderRadius: 'var(--fx-radius-card)',
             overflow: 'hidden',
           }}
         >
@@ -94,23 +82,19 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
             <thead>
               <tr
                 style={{
-                  backgroundColor: isDark
-                    ? theme.palette.themeDarkAlt
-                    : theme.palette.themePrimary,
+                  backgroundColor: 'var(--fx-accent)',
                 }}
               >
                 <th
                   style={{
                     padding: isMobile ? '0.75rem' : '1rem',
                     textAlign: 'center',
-                    color: theme.palette.white,
+                    color: 'var(--fx-text-bright)',
                     fontSize: isMobile ? '0.875rem' : '1rem',
-                    fontWeight: theme.typography.fontWeights.semiBold,
+                    fontWeight: 600,
                     position: 'sticky',
                     left: 0,
-                    backgroundColor: isDark
-                      ? theme.palette.themeDarkAlt
-                      : theme.palette.themePrimary,
+                    backgroundColor: 'var(--fx-accent)',
                     zIndex: 1,
                     minWidth: isMobile ? '150px' : '200px',
                   }}
@@ -122,10 +106,10 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                     key={tier.id}
                     style={{
                       padding: isMobile ? '0.75rem' : '1rem',
-                      color: theme.palette.white,
+                      color: 'var(--fx-text-bright)',
                       textAlign: 'center',
                       fontSize: isMobile ? '0.875rem' : '1rem',
-                      fontWeight: theme.typography.fontWeights.semiBold,
+                      fontWeight: 600,
                       minWidth: isMobile ? '100px' : '140px',
                     }}
                   >
@@ -138,16 +122,17 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
               {features.map((feature, index) => {
                 const featureKey = featureToKey(feature.name);
                 const featureComparison = comparison[featureKey];
+                const rowBg =
+                  index % 2 === 0
+                    ? 'var(--fx-surface-card)'
+                    : 'var(--fx-border)';
 
                 return (
                   <tr
                     key={featureKey}
                     style={{
-                      backgroundColor:
-                        index % 2 === 0
-                          ? theme.palette.neutralLighterAlt
-                          : theme.palette.neutralLight,
-                      borderBottom: `1px solid ${theme.palette.neutralQuaternary}`,
+                      backgroundColor: rowBg,
+                      borderBottom: '1px solid var(--fx-border)',
                     }}
                   >
                     <td
@@ -155,20 +140,17 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                         padding: isMobile ? '0.75rem' : '1rem',
                         position: 'sticky',
                         left: 0,
-                        backgroundColor:
-                          index % 2 === 0
-                            ? theme.palette.neutralLighterAlt
-                            : theme.palette.neutralLight,
+                        backgroundColor: rowBg,
                         zIndex: 1,
-                        borderRight: `1px solid ${theme.palette.neutralQuaternary}`,
+                        borderRight: '1px solid var(--fx-border)',
                       }}
                     >
                       <Typography
                         variant='p'
                         style={{
-                          color: theme.palette.neutralPrimary,
+                          color: 'var(--fx-text)',
                           fontSize: isMobile ? '0.875rem' : '1rem',
-                          fontWeight: theme.typography.fontWeights.regular,
+                          fontWeight: 400,
                           textAlign: 'center',
                           display: 'block',
                         }}
@@ -210,21 +192,24 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                                 gap: '0.25rem',
                               }}
                             >
-                              <FluentIcon
-                                iconName={isAddOn ? 'Cancel' : 'WarningSolid'}
-                                size='medium'
-                                color={
-                                  isAddOn
-                                    ? theme.palette.red
-                                    : theme.palette.yellow
-                                }
-                              />
+                              <span
+                                style={{
+                                  fontSize: '1.25rem',
+                                  color: isAddOn
+                                    ? 'var(--fx-status-error)'
+                                    : 'var(--fx-status-warning)',
+                                  lineHeight: 1,
+                                }}
+                                aria-hidden='true'
+                              >
+                                {isAddOn ? '✕' : '⚠'}
+                              </span>
                               {!isMobile && (
                                 <Typography
                                   variant='p'
                                   style={{
                                     fontSize: '0.875rem',
-                                    color: theme.palette.neutralSecondary,
+                                    color: 'var(--fx-text-muted)',
                                     textAlign: 'center',
                                     lineHeight: 1.2,
                                   }}
@@ -241,15 +226,18 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                                 justifyContent: 'center',
                               }}
                             >
-                              <FluentIcon
-                                iconName={hasFeature ? 'CheckMark' : 'Cancel'}
-                                size='medium'
-                                color={
-                                  hasFeature
-                                    ? theme.palette.green
-                                    : theme.palette.red
-                                }
-                              />
+                              <span
+                                style={{
+                                  fontSize: '1.25rem',
+                                  color: hasFeature
+                                    ? 'var(--fx-status-success)'
+                                    : 'var(--fx-status-error)',
+                                  lineHeight: 1,
+                                }}
+                                aria-hidden='true'
+                              >
+                                {hasFeature ? '✓' : '✕'}
+                              </span>
                             </div>
                           )}
                         </td>
@@ -267,7 +255,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
           style={{
             display: 'flex',
             justifyContent: 'center',
-            marginTop: theme.spacing.l,
+            marginTop: '20px',
           }}
         >
           <FormButton

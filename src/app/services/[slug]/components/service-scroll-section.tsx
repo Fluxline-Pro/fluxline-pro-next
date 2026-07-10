@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import FxButton from '@/theme/components/dsm/FxButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import type { ScrollItem } from '@/app/services/scrolls/types';
@@ -56,7 +55,7 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
           gap: 16,
         }}
       >
-        {/* Header with Icon */}
+        {/* Header */}
         <div
           style={{
             display: 'flex',
@@ -64,12 +63,16 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
             gap: 16,
           }}
         >
-          <FluentIcon
-            iconName='Documentation'
-            size='xLarge'
-            color='var(--fx-accent)'
-            style={{ flexShrink: 0 }}
-          />
+          <span
+            style={{
+              color: 'var(--fx-accent)',
+              fontSize: '1.75rem',
+              lineHeight: 1,
+              flexShrink: 0,
+            }}
+          >
+            &#128220;
+          </span>
           <div style={{ flex: 1 }}>
             <h3
               style={{
@@ -131,7 +134,7 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
             fontSize: '0.875rem',
           }}
         >
-          <FluentIcon iconName='PDF' size='small' />
+          <span>PDF</span>
           <span>{scroll.fileSize}</span>
         </div>
 

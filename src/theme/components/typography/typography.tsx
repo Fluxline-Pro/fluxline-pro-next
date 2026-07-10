@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface TypographyProps {
   children: React.ReactNode;
@@ -30,8 +29,8 @@ export interface TypographyProps {
 /**
  * Typography Component
  *
- * DSM-compliant typography component that automatically applies theme typography styles.
- * User-provided styles override theme defaults for maximum flexibility.
+ * DSM-compliant typography component using CSS custom properties.
+ * User-provided styles override defaults for maximum flexibility.
  */
 export const Typography: React.FC<TypographyProps> = ({
   variant,
@@ -40,61 +39,112 @@ export const Typography: React.FC<TypographyProps> = ({
   style,
   className,
 }) => {
-  const { theme } = useAppTheme();
-
-  // Get theme typography styles for the variant
+  // Map variant to DSM font size vars and weights
   const getThemeStyles = React.useCallback((): React.CSSProperties => {
-    const variantMap: Record<string, string> = {
-      h1: 'h1',
-      h2: 'h2',
-      h3: 'h3',
-      h4: 'h4',
-      h5: 'h5',
-      h6: 'h6',
+    const variantStyles: Record<string, React.CSSProperties> = {
+      h1: {
+        fontFamily: 'var(--fx-font-heading)',
+        fontSize: 'var(--fx-h1-size)',
+        fontWeight: 800,
+        lineHeight: 1.2,
+      },
+      h2: {
+        fontFamily: 'var(--fx-font-heading)',
+        fontSize: 'var(--fx-h2-size)',
+        fontWeight: 700,
+        lineHeight: 1.25,
+      },
+      h3: {
+        fontFamily: 'var(--fx-font-heading)',
+        fontSize: 'var(--fx-h3-size)',
+        fontWeight: 700,
+        lineHeight: 1.3,
+      },
+      h4: {
+        fontFamily: 'var(--fx-font-heading)',
+        fontSize: 'var(--fx-subhead-size)',
+        fontWeight: 600,
+        lineHeight: 1.35,
+      },
+      h5: {
+        fontFamily: 'var(--fx-font-heading)',
+        fontSize: '13px',
+        fontWeight: 700,
+        lineHeight: 1.4,
+      },
+      h6: {
+        fontFamily: 'var(--fx-font-heading)',
+        fontSize: '13px',
+        fontWeight: 600,
+        lineHeight: 1.4,
+      },
+      body: {
+        fontFamily: 'var(--fx-font-body)',
+        fontSize: 'var(--fx-body-size)',
+        fontWeight: 400,
+        lineHeight: 1.6,
+      },
+      bodySmall: {
+        fontFamily: 'var(--fx-font-body)',
+        fontSize: 'var(--fx-body-sm-size)',
+        fontWeight: 400,
+        lineHeight: 1.5,
+      },
+      homeH3: {
+        fontFamily: 'var(--fx-font-heading)',
+        fontSize: 'var(--fx-h3-size)',
+        fontWeight: 700,
+        lineHeight: 1.3,
+      },
+      paragraph: {
+        fontFamily: 'var(--fx-font-body)',
+        fontSize: 'var(--fx-body-size)',
+        fontWeight: 400,
+        lineHeight: 1.6,
+      },
+      label: {
+        fontFamily: 'var(--fx-font-body)',
+        fontSize: '13px',
+        fontWeight: 600,
+        lineHeight: 1.4,
+      },
+      caption: {
+        fontFamily: 'var(--fx-font-body)',
+        fontSize: 'var(--fx-body-sm-size)',
+        fontWeight: 400,
+        lineHeight: 1.5,
+      },
+      quote: {
+        fontFamily: 'var(--fx-font-body)',
+        fontSize: 'var(--fx-body-size)',
+        fontWeight: 400,
+        fontStyle: 'italic',
+        lineHeight: 1.6,
+      },
+      pre: {
+        fontFamily: 'var(--fx-font-mono, monospace)',
+        fontSize: 'var(--fx-body-sm-size)',
+        fontWeight: 400,
+        lineHeight: 1.5,
+      },
+      code: {
+        fontFamily: 'var(--fx-font-mono, monospace)',
+        fontSize: 'var(--fx-body-sm-size)',
+        fontWeight: 400,
+        lineHeight: 1.5,
+      },
+    };
+
+    // Map variant aliases
+    const aliasMap: Record<string, string> = {
       p: 'body',
-      body: 'body',
-      bodySmall: 'bodySmall',
-      homeH3: 'homeH3',
-      paragraph: 'paragraph',
       span: 'body',
-      label: 'label',
-      caption: 'bodySmall',
-      quote: 'quote',
       blockquote: 'quote',
-      pre: 'pre',
-      code: 'code',
     };
 
-    const themeKey = variantMap[variant];
-    const themeTypography = themeKey
-      ? theme.typography.fonts[themeKey as keyof typeof theme.typography.fonts]
-      : null;
-
-    if (!themeTypography) {
-      return {};
-    }
-
-    // Build styles object with only properties that exist in the theme
-    const styles: React.CSSProperties = {
-      fontFamily: themeTypography.fontFamily,
-      fontSize: themeTypography.fontSize,
-      fontWeight: themeTypography.fontWeight,
-      lineHeight: themeTypography.lineHeight,
-    };
-
-    // Add optional properties only if they exist
-    if ('letterSpacing' in themeTypography && themeTypography.letterSpacing) {
-      styles.letterSpacing = themeTypography.letterSpacing;
-    }
-    if ('textShadow' in themeTypography && themeTypography.textShadow) {
-      styles.textShadow = themeTypography.textShadow;
-    }
-    if ('textTransform' in themeTypography && themeTypography.textTransform) {
-      styles.textTransform = themeTypography.textTransform;
-    }
-
-    return styles;
-  }, [variant, theme]);
+    const resolvedVariant = aliasMap[variant] || variant;
+    return variantStyles[resolvedVariant] || {};
+  }, [variant]);
 
   // Merge theme styles, textAlign prop, and user-provided styles (user styles take precedence)
   const mergedStyles: React.CSSProperties = React.useMemo(() => {
@@ -104,7 +154,7 @@ export const Typography: React.FC<TypographyProps> = ({
 
     // Remove any undefined, null, or empty string values from user styles
     const cleanedUserStyles = Object.fromEntries(
-      Object.entries(userStyles).filter(([key, value]) => {
+      Object.entries(userStyles).filter(([, value]) => {
         return value !== undefined && value !== null && value !== '';
       })
     );

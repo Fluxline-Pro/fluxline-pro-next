@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { mergeStyleSets } from '@fluentui/react';
-import { useAppTheme } from '../../hooks/useAppTheme';
 import { Card } from '../card/card';
 import Link from 'next/link';
 import { Modal } from '@/components/Modal';
@@ -69,7 +67,6 @@ export const CueCard: React.FC<CueCardProps> = ({
   onClick,
   variant = 'default',
 }) => {
-  const { theme } = useAppTheme();
   const { icon, title, mantra, action, overlay, link, linkText, tags } = data;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -81,149 +78,148 @@ export const CueCard: React.FC<CueCardProps> = ({
     }
   };
 
-  const classNames = mergeStyleSets({
-    root: [
-      {
-        width: '100%',
-        maxWidth:
-          variant === 'compact'
-            ? '320px'
-            : variant === 'inline'
-              ? '280px'
-              : '400px',
-      },
-      className,
-    ],
+  const styles: Record<string, React.CSSProperties> = {
+    root: {
+      width: '100%',
+      maxWidth:
+        variant === 'compact'
+          ? '320px'
+          : variant === 'inline'
+            ? '280px'
+            : '400px',
+    },
     cardContent: {
       display: 'flex',
       flexDirection: 'column',
-      gap: theme.spacing.m,
+      gap: '16px',
     },
     iconContainer: {
       fontSize: variant === 'compact' ? '2rem' : '2.5rem',
-      marginBottom: theme.spacing.xs,
+      marginBottom: '4px',
     },
     title: {
-      ...theme.typography.fonts.xxLarge,
-      color: theme.palette.themePrimary,
+      fontSize: '1.75rem',
+      fontWeight: 700,
+      color: 'var(--fx-accent)',
       margin: 0,
       lineHeight: 1.2,
     },
     divider: {
       width: '100%',
       height: '1px',
-      backgroundColor: theme.palette.neutralLight,
-      margin: `${theme.spacing.xs} 0`,
+      backgroundColor: 'var(--fx-border)',
+      margin: '4px 0',
     },
     label: {
-      ...theme.typography.fonts.glyphTag,
-      color: theme.palette.neutralSecondary,
-      marginBottom: theme.spacing.xs,
+      fontSize: '0.6875rem',
+      fontWeight: 600,
+      textTransform: 'uppercase' as const,
+      letterSpacing: '0.08em',
+      color: 'var(--fx-text-muted)',
+      marginBottom: '4px',
     },
     mantra: {
-      ...theme.typography.fonts.quote,
+      fontSize: '1.125rem',
       fontStyle: 'italic',
-      color: theme.palette.neutralPrimary,
+      color: 'var(--fx-text-heading)',
       margin: 0,
     },
     action: {
-      ...theme.typography.fonts.mediumPlus,
-      fontWeight: theme.typography.fontWeights.semiBold,
-      color: theme.palette.neutralPrimary,
+      fontSize: '1rem',
+      fontWeight: 600,
+      color: 'var(--fx-text-heading)',
       margin: 0,
     },
     overlay: {
-      ...theme.typography.fonts.emotionalCue,
-      color: theme.palette.neutralSecondary,
+      fontSize: '0.9375rem',
+      fontStyle: 'italic',
+      color: 'var(--fx-text-muted)',
       margin: 0,
     },
     footer: {
-      marginTop: theme.spacing.s,
+      marginTop: '8px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       flexWrap: 'wrap' as const,
-      gap: theme.spacing.s,
+      gap: '8px',
     },
     link: {
-      ...theme.typography.fonts.medium,
-      marginTop: theme.spacing.s,
-      color: theme.palette.themePrimary,
+      fontSize: '0.875rem',
+      marginTop: '8px',
+      color: 'var(--fx-accent)',
       textDecoration: 'underline',
       cursor: 'pointer',
       transition: 'color 0.2s ease',
-      ':hover': {
-        color: theme.palette.themeDark,
-      },
     },
     tags: {
       display: 'flex',
       flexWrap: 'wrap' as const,
-      gap: theme.spacing.xs,
+      gap: '4px',
     },
     tag: {
-      ...theme.typography.fonts.caption,
-      backgroundColor: theme.palette.neutralLight,
-      color: theme.palette.neutralSecondary,
-      padding: `2px ${theme.spacing.xs}`,
-      borderRadius: theme.borderRadius.s,
+      fontSize: '0.75rem',
+      backgroundColor: 'var(--fx-border)',
+      color: 'var(--fx-text-muted)',
+      padding: '2px 4px',
+      borderRadius: '4px',
     },
-  });
+  };
 
   const cardPadding = variant === 'compact' ? 'small' : 'medium';
 
   return (
     <>
-      <div className={classNames.root}>
+      <div style={styles.root} className={className}>
         <Card
           elevation={2}
           padding={cardPadding}
           hoverable
           onClick={handleCardClick}
         >
-          <div className={classNames.cardContent}>
+          <div style={styles.cardContent}>
             <div className='flex items-center'>
               {/* Icon / Symbol */}
               {icon && (
-                <div className={classNames.iconContainer} aria-hidden='true'>
+                <div style={styles.iconContainer} aria-hidden='true'>
                   {icon}
                 </div>
               )}
 
               {/* Title / Archetype */}
-              <h2 className={classNames.title}>{title}</h2>
+              <h2 style={styles.title}>{title}</h2>
             </div>
-            <div className={classNames.divider} />
+            <div style={styles.divider} />
 
             {/* Mantra / Invocation */}
             <div>
-              <p className={classNames.label}>Mantra</p>
-              <p className={classNames.mantra}>&ldquo;{mantra}&rdquo;</p>
+              <p style={styles.label}>Mantra</p>
+              <p style={styles.mantra}>&ldquo;{mantra}&rdquo;</p>
             </div>
 
-            <div className={classNames.divider} />
+            <div style={styles.divider} />
 
             {/* Action Prompt */}
             <div>
-              <p className={classNames.label}>Action</p>
-              <p className={classNames.action}>{action}</p>
+              <p style={styles.label}>Action</p>
+              <p style={styles.action}>{action}</p>
             </div>
 
-            <div className={classNames.divider} />
+            <div style={styles.divider} />
 
             {/* Emotional Overlay / Description */}
             <div>
-              <p className={classNames.label}>Overlay</p>
-              <p className={classNames.overlay}>&ldquo;{overlay}&rdquo;</p>
+              <p style={styles.label}>Overlay</p>
+              <p style={styles.overlay}>&ldquo;{overlay}&rdquo;</p>
             </div>
 
             {/* Optional Footer */}
             {(link || (tags && tags.length > 0)) && (
-              <div className={classNames.footer}>
+              <div style={styles.footer}>
                 {tags && tags.length > 0 && (
-                  <div className={classNames.tags}>
+                  <div style={styles.tags}>
                     {tags.map((tag) => (
-                      <span key={tag} className={classNames.tag}>
+                      <span key={tag} style={styles.tag}>
                         {tag}
                       </span>
                     ))}
@@ -233,7 +229,7 @@ export const CueCard: React.FC<CueCardProps> = ({
             )}
 
             {link && (
-              <Link href={link} className={classNames.link}>
+              <Link href={link} style={styles.link}>
                 {linkText || 'Learn More'}
               </Link>
             )}
@@ -255,7 +251,7 @@ export const CueCard: React.FC<CueCardProps> = ({
               <div
                 style={{
                   fontSize: '4rem',
-                  marginBottom: theme.spacing.l,
+                  marginBottom: '20px',
                 }}
                 aria-hidden='true'
               >
@@ -264,10 +260,11 @@ export const CueCard: React.FC<CueCardProps> = ({
             )}
             <h1
               style={{
-                ...theme.typography.fonts.xxLarge,
-                color: theme.palette.themePrimary,
+                fontSize: '1.75rem',
+                fontWeight: 700,
+                color: 'var(--fx-accent)',
                 margin: 0,
-                marginBottom: theme.spacing.m,
+                marginBottom: '16px',
               }}
             >
               {title}
@@ -280,21 +277,25 @@ export const CueCard: React.FC<CueCardProps> = ({
             <section>
               <h2
                 style={{
-                  ...theme.typography.fonts.glyphTag,
-                  color: theme.palette.themePrimary,
-                  marginBottom: theme.spacing.m,
+                  fontSize: '0.6875rem',
+                  fontWeight: 600,
+                  textTransform: 'uppercase' as const,
+                  letterSpacing: '0.08em',
+                  color: 'var(--fx-accent)',
+                  marginBottom: '16px',
                 }}
               >
                 Mantra
               </h2>
               <blockquote
                 style={{
-                  ...theme.typography.fonts.xLarge,
+                  fontSize: '1.5rem',
+                  fontWeight: 600,
                   fontStyle: 'italic',
-                  color: theme.palette.neutralPrimary,
+                  color: 'var(--fx-text-heading)',
                   margin: 0,
-                  padding: `${theme.spacing.m} ${theme.spacing.l}`,
-                  borderLeft: `4px solid ${theme.palette.themePrimary}`,
+                  padding: '16px 20px',
+                  borderLeft: '4px solid var(--fx-accent)',
                 }}
               >
                 &ldquo;{mantra}&rdquo;
@@ -304,7 +305,7 @@ export const CueCard: React.FC<CueCardProps> = ({
             <hr
               style={{
                 border: 'none',
-                borderTop: `2px solid ${theme.palette.neutralLight}`,
+                borderTop: '2px solid var(--fx-border)',
                 margin: 0,
               }}
             />
@@ -313,18 +314,21 @@ export const CueCard: React.FC<CueCardProps> = ({
             <section>
               <h2
                 style={{
-                  ...theme.typography.fonts.glyphTag,
-                  color: theme.palette.themePrimary,
-                  marginBottom: theme.spacing.m,
+                  fontSize: '0.6875rem',
+                  fontWeight: 600,
+                  textTransform: 'uppercase' as const,
+                  letterSpacing: '0.08em',
+                  color: 'var(--fx-accent)',
+                  marginBottom: '16px',
                 }}
               >
                 Action
               </h2>
               <p
                 style={{
-                  ...theme.typography.fonts.large,
-                  fontWeight: theme.typography.fontWeights.semiBold,
-                  color: theme.palette.neutralPrimary,
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                  color: 'var(--fx-text-heading)',
                   margin: 0,
                 }}
               >
@@ -335,7 +339,7 @@ export const CueCard: React.FC<CueCardProps> = ({
             <hr
               style={{
                 border: 'none',
-                borderTop: `2px solid ${theme.palette.neutralLight}`,
+                borderTop: '2px solid var(--fx-border)',
                 margin: 0,
               }}
             />
@@ -344,17 +348,21 @@ export const CueCard: React.FC<CueCardProps> = ({
             <section>
               <h2
                 style={{
-                  ...theme.typography.fonts.glyphTag,
-                  color: theme.palette.themePrimary,
-                  marginBottom: theme.spacing.m,
+                  fontSize: '0.6875rem',
+                  fontWeight: 600,
+                  textTransform: 'uppercase' as const,
+                  letterSpacing: '0.08em',
+                  color: 'var(--fx-accent)',
+                  marginBottom: '16px',
                 }}
               >
                 Overlay
               </h2>
               <p
                 style={{
-                  ...theme.typography.fonts.emotionalCue,
-                  color: theme.palette.neutralSecondary,
+                  fontSize: '0.9375rem',
+                  fontStyle: 'italic',
+                  color: 'var(--fx-text-muted)',
                   margin: 0,
                   lineHeight: 1.6,
                 }}
@@ -369,7 +377,7 @@ export const CueCard: React.FC<CueCardProps> = ({
                 <hr
                   style={{
                     border: 'none',
-                    borderTop: `2px solid ${theme.palette.neutralLight}`,
+                    borderTop: '2px solid var(--fx-border)',
                     margin: 0,
                   }}
                 />
@@ -379,18 +387,18 @@ export const CueCard: React.FC<CueCardProps> = ({
                       style={{
                         display: 'flex',
                         flexWrap: 'wrap',
-                        gap: theme.spacing.s,
+                        gap: '8px',
                       }}
                     >
                       {tags.map((tag) => (
                         <span
                           key={tag}
                           style={{
-                            ...theme.typography.fonts.medium,
-                            backgroundColor: theme.palette.neutralLight,
-                            color: theme.palette.neutralSecondary,
-                            padding: `${theme.spacing.xs} ${theme.spacing.s}`,
-                            borderRadius: theme.borderRadius.m,
+                            fontSize: '0.875rem',
+                            backgroundColor: 'var(--fx-border)',
+                            color: 'var(--fx-text-muted)',
+                            padding: '4px 8px',
+                            borderRadius: '8px',
                           }}
                         >
                           {tag}
@@ -402,10 +410,10 @@ export const CueCard: React.FC<CueCardProps> = ({
                     <Link
                       href={link}
                       style={{
-                        ...theme.typography.fonts.large,
-                        color: theme.palette.themePrimary,
+                        fontSize: '1.25rem',
+                        fontWeight: 600,
+                        color: 'var(--fx-accent)',
                         textDecoration: 'underline',
-                        fontWeight: theme.typography.fontWeights.semiBold,
                       }}
                       onClick={() => setIsModalOpen(false)}
                     >

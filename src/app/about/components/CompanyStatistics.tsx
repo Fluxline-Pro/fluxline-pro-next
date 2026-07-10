@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 
 export interface Statistic {
   id: string;
@@ -52,11 +51,16 @@ const StatCard: React.FC<StatCardProps> = ({ stat }) => {
         opacity: isHovered ? 1 : 0.9,
       }}
     >
-      <FluentIcon
-        iconName={stat.icon}
-        size='xLarge'
-        color='var(--fx-accent)'
-      />
+      <span
+        style={{
+          fontSize: '2.5rem',
+          color: 'var(--fx-accent)',
+          lineHeight: 1,
+        }}
+        aria-hidden="true"
+      >
+        {stat.icon}
+      </span>
 
       <h2
         style={{

@@ -1,57 +1,41 @@
 'use client';
 
-import { useAppTheme } from './useAppTheme';
+/**
+ * useThemeColor – DSM-native version
+ *
+ * All colour resolution now happens via CSS custom properties that
+ * automatically adapt to the active data-fx-theme.  The functions
+ * return DSM token references (var(--fx-…)) so callers can use them
+ * in inline styles or CSS-in-JS without needing the Fluent theme object.
+ */
 
 export const useThemeColor = () => {
-  const { theme } = useAppTheme();
-
   const getThemedColor = (
     colorType: 'primary' | 'secondary' | 'tertiary' = 'primary'
-  ) => {
-    if (
-      theme.themeMode === 'high-contrast' ||
-      theme.themeMode === 'grayscale-light' ||
-      theme.themeMode === 'grayscale-dark'
-    ) {
-      return theme.palette.themePrimary;
-    }
-
+  ): string => {
     switch (colorType) {
       case 'primary':
-        return theme.isInverted
-          ? theme.palette.themeDark
-          : theme.palette.themePrimary;
+        return 'var(--fx-accent)';
       case 'secondary':
-        return theme.palette.themeSecondary;
+        return 'var(--fx-text-muted)';
       case 'tertiary':
-        return theme.palette.themeTertiary;
+        return 'var(--fx-text-faint)';
       default:
-        return theme.isInverted
-          ? theme.palette.themeDark
-          : theme.palette.themePrimary;
+        return 'var(--fx-accent)';
     }
   };
 
-  const getThemedBackgroundColor = () => {
-    if (theme.themeMode === 'high-contrast') {
-      return theme.palette.themePrimary;
-    } else if (theme.themeMode === 'grayscale-light') {
-      return theme.palette.neutralPrimary;
-    }
-    return theme.isInverted
-      ? theme.palette.themeDark
-      : theme.palette.themePrimary;
+  const getThemedBackgroundColor = (): string => {
+    return 'var(--fx-accent)';
   };
 
-  const getThemedTextColor = () => {
-    // For text and icons, we'll keep using themePrimary for better visibility
-    return theme.palette.themePrimary;
+  const getThemedTextColor = (): string => {
+    return 'var(--fx-accent)';
   };
 
   return {
     getThemedColor,
     getThemedBackgroundColor,
     getThemedTextColor,
-    theme, // Expose theme for other theme-related properties
   };
 };

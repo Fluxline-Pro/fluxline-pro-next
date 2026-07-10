@@ -157,7 +157,7 @@ export default function FxNav({
                   gap: 8,
                   alignItems: 'center',
                   fontSize: 13.5,
-                  color: '#7E8A99',
+                  color: 'var(--fx-text-faint)',
                   minWidth: 0,
                 }}
               >
@@ -171,7 +171,7 @@ export default function FxNav({
                       {isLast ? (
                         <span
                           style={{
-                            color: '#EAF0F9',
+                            color: 'var(--fx-text-bright)',
                             fontWeight: 600,
                             whiteSpace: 'nowrap',
                           }}
@@ -184,8 +184,8 @@ export default function FxNav({
                           style={{
                             color:
                               hoveredLink === `crumb-${i}`
-                                ? '#EAF0F9'
-                                : '#8FA8CA',
+                                ? 'var(--fx-text-bright)'
+                                : 'var(--fx-text-soft)',
                             textDecoration: 'none',
                             transition: 'color .15s',
                           }}
@@ -195,7 +195,7 @@ export default function FxNav({
                           {label}
                         </Link>
                       ) : (
-                        <span style={{ color: '#8FA8CA' }}>{label}</span>
+                        <span style={{ color: 'var(--fx-text-soft)' }}>{label}</span>
                       )}
                     </React.Fragment>
                   );

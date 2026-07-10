@@ -14,7 +14,7 @@ import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
 import FxButton from '@/theme/components/dsm/FxButton';
 import FxChip from '@/theme/components/dsm/FxChip';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+
 import {
   SocialLinks,
   type SocialLinksData,
@@ -84,7 +84,6 @@ interface UnifiedContentDetailProps {
 
 export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const router = useRouter();
-  const { themeMode } = useAppTheme();
   const [isCarouselOpen, setIsCarouselOpen] = useState(false);
   const [carouselInitialIndex, setCarouselInitialIndex] = useState(0);
   const isMounted = useSyncExternalStore(
@@ -93,10 +92,34 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
     () => false
   );
 
-  const isDark =
-    themeMode === 'dark' ||
-    themeMode === 'high-contrast' ||
-    themeMode === 'grayscale-dark';
+  const isDark = useSyncExternalStore(
+    (cb) => {
+      const root = document.documentElement;
+      const observer = new MutationObserver(cb);
+      observer.observe(root, {
+        attributes: true,
+        attributeFilter: ['data-fx-theme'],
+      });
+      const mql = window.matchMedia('(prefers-color-scheme: dark)');
+      mql.addEventListener('change', cb);
+      return () => {
+        observer.disconnect();
+        mql.removeEventListener('change', cb);
+      };
+    },
+    () => {
+      const root = document.documentElement;
+      const explicit = root.getAttribute('data-fx-theme');
+      if (explicit)
+        return (
+          explicit === 'dark' ||
+          explicit === 'high-contrast' ||
+          explicit === 'grayscale-dark'
+        );
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    },
+    () => true
+  );
 
   const handleImageClick = React.useCallback(() => {
     if (config.imageConfig) {
@@ -326,7 +349,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       </div>
     ),
     thead: ({ children }: { children?: React.ReactNode }) => (
-      <thead style={{ background: 'var(--fx-surface-inset)' }}>{children}</thead>
+      <thead style={{ background: 'var(--fx-surface-inset)' }}>
+        {children}
+      </thead>
     ),
     tbody: ({ children }: { children?: React.ReactNode }) => (
       <tbody>{children}</tbody>
@@ -406,7 +431,13 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
   const renderSections = (position: 'before' | 'after') => {
     if (!config.sections || config.sectionsPosition !== position) return null;
     return config.sections.map((section, index) => (
-      <div key={index} style={{ marginTop: position === 'after' ? 32 : 0, marginBottom: position === 'before' ? 32 : 0 }}>
+      <div
+        key={index}
+        style={{
+          marginTop: position === 'after' ? 32 : 0,
+          marginBottom: position === 'before' ? 32 : 0,
+        }}
+      >
         <h2
           style={{
             fontSize: 'var(--fx-article-h2)',
@@ -524,7 +555,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
                 <SocialLinks
                   socialLinks={config.authorInfo.socialLinks}
                   name={config.authorInfo.name}
-                  size="small"
+                  size='small'
                 />
               </div>
             )}
@@ -581,7 +612,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             {config.badges.map((badge, index) => (
               <FxChip
                 key={index}
-                kind="badge"
+                kind='badge'
                 tone={badge.variant === 'primary' ? 'teal' : undefined}
                 onClick={badge.onClick}
               >
@@ -627,7 +658,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             <FxButton
               key={index}
               variant={link.variant === 'live' ? 'primary' : 'outline'}
-              size="sm"
+              size='sm'
               href={link.url}
             >
               {link.label}
@@ -658,7 +689,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
 
   return (
     <>
-      <FxContainer as="section" style={{ padding: '48px 32px 88px' }}>
+      <FxContainer as='section' style={{ padding: '48px 32px 88px' }}>
         {railContent ? (
           <FxRailLayout rail={railContent}>{articleContent}</FxRailLayout>
         ) : (
@@ -671,7 +702,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
               title={config.cta.title}
               body={config.cta.description}
               primaryLabel={config.cta.buttons[0]?.label}
-              primaryHref="/contact"
+              primaryHref='/contact'
             />
           </div>
         )}
@@ -683,7 +714,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
             borderTop: '1px solid var(--fx-border-subtle)',
           }}
         >
-          <FxButton variant="outline" onClick={handleBack}>
+          <FxButton variant='outline' onClick={handleBack}>
             ← {config.backLink.label}
           </FxButton>
         </div>
@@ -693,8 +724,8 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         <Modal
           isOpen={isCarouselOpen}
           onDismiss={() => setIsCarouselOpen(false)}
-          ariaLabel="Interactive Demo"
-          maxWidth="640px"
+          ariaLabel='Interactive Demo'
+          maxWidth='640px'
         >
           {config.customModalContent}
         </Modal>

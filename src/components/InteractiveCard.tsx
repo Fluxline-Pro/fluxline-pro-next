@@ -4,15 +4,14 @@
  * InteractiveCard Component
  * A reusable card component with hover effects
  * Used for value cards, service cards, and other clickable/interactive content
+ *
+ * Migrated from Fluent UI to DSM CSS custom properties.
  */
 
 import React, { useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface InteractiveCardProps {
   /** Unique identifier */
@@ -48,13 +47,12 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
   tooltip,
   isSelected = false,
 }) => {
-  const { theme } = useAppTheme();
   const [isHovered, setIsHovered] = React.useState(false);
   const [showTooltip, setShowTooltip] = React.useState(false);
   const [tooltipPosition, setTooltipPosition] = React.useState({
     top: 0,
     left: 0,
-    arrowOffset: 0, // How far from left edge the arrow should be
+    arrowOffset: 0,
   });
   const infoIconRef = React.useRef<HTMLDivElement>(null);
   const isMounted = useSyncExternalStore(
@@ -71,24 +69,16 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
       const viewportWidth = window.innerWidth;
       const padding = 16;
 
-      // Icon center position (absolute, includes scroll)
       const iconCenterX = rect.left + window.scrollX + rect.width / 2;
-
-      // Ideal tooltip left edge (centered under icon)
       let tooltipLeft = iconCenterX - tooltipWidth / 2;
-
-      // Arrow offset from tooltip's left edge (starts at center)
       let arrowOffset = tooltipWidth / 2;
 
-      // Adjust if tooltip would go off screen
       if (tooltipLeft < padding) {
-        // Tooltip too far left, move it right
-        arrowOffset = iconCenterX - padding; // Arrow moves left relative to tooltip
+        arrowOffset = iconCenterX - padding;
         tooltipLeft = padding;
       } else if (tooltipLeft + tooltipWidth > viewportWidth - padding) {
-        // Tooltip too far right, move it left
         const adjustedLeft = viewportWidth - tooltipWidth - padding;
-        arrowOffset = iconCenterX - adjustedLeft; // Arrow position relative to new left edge
+        arrowOffset = iconCenterX - adjustedLeft;
         tooltipLeft = adjustedLeft;
       }
 
@@ -100,11 +90,6 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
     }
   }, []);
 
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
-
   const isInteractive = Boolean(href || onClick);
   const isCentered = iconPosition === 'center';
   const hasTitle = Boolean(title);
@@ -115,33 +100,28 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
     justifyContent: 'center',
     alignItems: isCentered ? 'center' : 'stretch',
     padding: isCentered ? '2rem 1.5rem' : '1.25rem',
-    borderRadius: theme.borderRadius.container.medium,
+    borderRadius: 'var(--fx-radius-card)',
     border: isSelected
-      ? `2px solid ${theme.palette.themePrimary}`
+      ? '2px solid var(--fx-accent)'
       : `1px solid ${
           isHovered
-            ? theme.palette.themePrimary
-            : theme.palette.neutralTertiaryAlt
+            ? 'var(--fx-border-hover)'
+            : 'var(--fx-border)'
         }`,
-    backgroundColor:
-      theme.themeMode === 'high-contrast'
-        ? theme.semanticColors.bodyBackground
-        : isHovered || isSelected
-          ? isDark
-            ? theme.palette.neutralLighter
-            : theme.palette.neutralLighterAlt
-          : theme.palette.neutralLighterAlt,
+    backgroundColor: isHovered || isSelected
+      ? 'var(--fx-surface-raised)'
+      : 'var(--fx-surface-card)',
     transition: 'all 0.3s ease',
     transform: isSelected
       ? 'translateY(0)'
       : isHovered
-        ? 'translateY(-4px)'
+        ? 'var(--fx-hover-lift)'
         : 'translateY(0)',
     boxShadow: isSelected
-      ? theme.shadows.xl
+      ? '0 20px 40px rgba(0,0,0,0.25)'
       : isHovered
-        ? theme.shadows.l
-        : theme.shadows.card,
+        ? '0 12px 28px rgba(0,0,0,0.18)'
+        : '0 2px 8px rgba(0,0,0,0.08)',
     opacity: isHovered ? 1 : 0.9,
     cursor: isInteractive ? 'pointer' : 'default',
     textDecoration: 'none',
@@ -152,15 +132,20 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
   const renderContent = () => (
     <>
       {isCentered ? (
-        // Center layout: icon on top, title and description centered
         <>
           {icon && (
-            <FluentIcon
-              iconName={icon}
-              size='xLarge'
-              color={theme.palette.themePrimary}
-              style={{ marginBottom: '1rem', fontSize: '3rem' }}
-            />
+            <span
+              style={{
+                marginBottom: '1rem',
+                fontSize: '3rem',
+                color: 'var(--fx-accent)',
+                lineHeight: 1,
+              }}
+              role="img"
+              aria-hidden="true"
+            >
+              {icon}
+            </span>
           )}
           <div
             style={{
@@ -174,18 +159,19 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
           >
             {hasTitle && (
               <>
-                <Typography
-                  variant='h3'
+                <h3
                   style={{
-                    color: theme.palette.themePrimary,
+                    color: 'var(--fx-accent)',
                     fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
-                    fontWeight: theme.typography.fontWeights.semiBold,
+                    fontWeight: 600,
+                    fontFamily: 'var(--fx-font)',
                     textAlign: 'center',
                     textTransform: 'none',
+                    margin: 0,
                   }}
                 >
                   {title}
-                </Typography>
+                </h3>
                 {tooltip && (
                   <>
                     <div
@@ -197,12 +183,16 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
                       }}
                       onMouseLeave={() => setShowTooltip(false)}
                     >
-                      <FluentIcon
-                        iconName='Info'
-                        size='small'
-                        color={theme.palette.themePrimary}
-                        style={{ cursor: 'help' }}
-                      />
+                      <span
+                        style={{
+                          color: 'var(--fx-accent)',
+                          cursor: 'help',
+                          fontSize: '0.875rem',
+                        }}
+                        aria-label="More information"
+                      >
+                        &#x2139;&#xFE0E;
+                      </span>
                     </div>
                     {isMounted &&
                       createPortal(
@@ -217,35 +207,29 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
                                 position: 'absolute',
                                 top: tooltipPosition.top,
                                 left: tooltipPosition.left,
-                                padding: theme.spacing.m,
-                                backgroundColor: isDark
-                                  ? theme.palette.neutralLighter
-                                  : theme.palette.white,
-                                color: isDark
-                                  ? theme.palette.white
-                                  : theme.palette.neutralPrimary,
-                                borderRadius:
-                                  theme.borderRadius.container.medium,
-                                boxShadow: theme.shadows.tooltip,
+                                padding: '16px',
+                                backgroundColor: 'var(--fx-surface-raised)',
+                                color: 'var(--fx-text-heading)',
+                                borderRadius: 'var(--fx-radius-card)',
+                                boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
                                 width: '90vw',
                                 maxWidth: '400px',
                                 zIndex: 50,
-                                border: `2px solid ${theme.palette.themePrimary}`,
+                                border: '2px solid var(--fx-accent)',
                                 pointerEvents: 'none',
                               }}
                             >
-                              <Typography
-                                variant='bodySmall'
+                              <p
                                 style={{
-                                  color: isDark
-                                    ? theme.palette.white
-                                    : theme.palette.neutralPrimary,
-                                  lineHeight:
-                                    theme.typography.lineHeights.relaxed,
+                                  color: 'var(--fx-text-heading)',
+                                  fontSize: 'var(--fx-body-sm-size)',
+                                  fontFamily: 'var(--fx-font)',
+                                  lineHeight: 'var(--fx-body-leading)',
+                                  margin: 0,
                                 }}
                               >
                                 {tooltip}
-                              </Typography>
+                              </p>
                               <div
                                 style={{
                                   position: 'absolute',
@@ -256,7 +240,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
                                   height: 0,
                                   borderLeft: '8px solid transparent',
                                   borderRight: '8px solid transparent',
-                                  borderBottom: `8px solid ${theme.palette.themePrimary}`,
+                                  borderBottom: '8px solid var(--fx-accent)',
                                 }}
                               />
                             </motion.div>
@@ -269,20 +253,20 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
               </>
             )}
           </div>
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
-              fontSize: '0.875rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
+              color: 'var(--fx-text-muted)',
+              fontSize: 'var(--fx-body-sm-size)',
+              fontFamily: 'var(--fx-font)',
+              lineHeight: 'var(--fx-body-leading)',
               textAlign: 'center',
+              margin: 0,
             }}
           >
             {description}
-          </Typography>
+          </p>
         </>
       ) : (
-        // Left layout: icon and text in a row (for features/offers)
         <>
           <div
             style={{
@@ -292,49 +276,59 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
             }}
           >
             {icon && (
-              <FluentIcon
-                iconName={icon}
-                size='medium'
-                color={theme.palette.themeTertiary}
-                style={{ flexShrink: 0, marginTop: hasTitle ? 0 : '0.125rem' }}
-              />
+              <span
+                style={{
+                  flexShrink: 0,
+                  marginTop: hasTitle ? 0 : '0.125rem',
+                  fontSize: '1.25rem',
+                  color: 'var(--fx-text-faint)',
+                  lineHeight: 1,
+                }}
+                role="img"
+                aria-hidden="true"
+              >
+                {icon}
+              </span>
             )}
             {hasTitle ? (
               <div style={{ flex: 1 }}>
-                <Typography
-                  variant='h3'
+                <h3
                   style={{
-                    color: theme.palette.themePrimary,
+                    color: 'var(--fx-accent)',
                     fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
-                    fontWeight: theme.typography.fontWeights.semiBold,
+                    fontWeight: 600,
+                    fontFamily: 'var(--fx-font)',
+                    marginTop: 0,
                     marginBottom: '0.5rem',
                   }}
                 >
                   {title}
-                </Typography>
-                <Typography
-                  variant='p'
+                </h3>
+                <p
                   style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: '1rem',
-                    lineHeight: theme.typography.lineHeights.relaxed,
+                    color: 'var(--fx-text-muted)',
+                    fontSize: 'var(--fx-body-size)',
+                    fontFamily: 'var(--fx-font)',
+                    lineHeight: 'var(--fx-body-leading)',
+                    margin: 0,
                   }}
                 >
                   {description}
-                </Typography>
+                </p>
               </div>
             ) : (
-              <Typography
-                variant='p'
+              <p
                 style={{
-                  color: theme.palette.neutralSecondary,
-                  fontSize: '1rem',
-                  lineHeight: theme.typography.lineHeights.relaxed,
+                  color: 'var(--fx-text-muted)',
+                  fontSize: 'var(--fx-body-size)',
+                  fontFamily: 'var(--fx-font)',
+                  lineHeight: 'var(--fx-body-leading)',
                   flex: 1,
+                  margin: 0,
                 }}
               >
                 {description}
-              </Typography>
+              </p>
             )}
           </div>
         </>
@@ -349,26 +343,33 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
             gap: '0.5rem',
           }}
         >
-          <Typography
-            variant='h6'
+          <span
             style={{
-              color: theme.palette.themeSecondary,
+              color: 'var(--fx-accent)',
+              fontSize: 'var(--fx-cta-link-size)',
+              fontFamily: 'var(--fx-font)',
+              fontWeight: 700,
+              letterSpacing: 'var(--fx-cta-link-tracking)',
+              textTransform: 'uppercase',
               opacity: isHovered ? 1 : 0.7,
               transition: 'opacity 0.2s ease',
             }}
           >
             Learn more
-          </Typography>
-          <FluentIcon
-            iconName='ChevronRight'
-            size='small'
-            color={theme.palette.themeSecondary}
+          </span>
+          <span
             style={{
+              color: 'var(--fx-accent)',
+              fontSize: 'var(--fx-cta-link-size)',
               opacity: isHovered ? 1 : 0.7,
               transition: 'all 0.2s ease',
               transform: isHovered ? 'translateX(4px)' : 'translateX(0)',
+              display: 'inline-block',
             }}
-          />
+            aria-hidden="true"
+          >
+            &#x203A;
+          </span>
         </div>
       )}
     </>
@@ -395,7 +396,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({
       {...(onClick && {
         role: 'button',
         tabIndex: 0,
-        onKeyDown: (e) => {
+        onKeyDown: (e: React.KeyboardEvent) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             onClick();

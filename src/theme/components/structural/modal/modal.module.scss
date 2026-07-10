@@ -1,5 +1,9 @@
+.overlay {
+  // Overlay styles handled inline
+}
+
 .container {
-  // Container styles applied to modal overlay
+  // Container styles applied to modal panel
 }
 
 .fallback {
@@ -12,23 +16,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
-  border-bottom: 1px solid var(--neutralLight);
-
-  :global(.dark-mode) & {
-    border-bottom-color: var(--neutralQuaternary);
-  }
+  border-bottom: 1px solid var(--fx-border);
 }
 
 .title {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--neutralPrimary);
+  color: var(--fx-text-heading);
   flex: 1;
-
-  :global(.dark-mode) & {
-    color: var(--white);
-  }
 }
 
 .closeButton {

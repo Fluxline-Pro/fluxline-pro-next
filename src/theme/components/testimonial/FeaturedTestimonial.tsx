@@ -2,12 +2,9 @@
 
 import React from 'react';
 import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { Testimonial } from '@/lib/testimonials/types';
 import Image from 'next/image';
-import { Icon } from '@fluentui/react/lib/Icon';
-import { PrimaryButton } from '@fluentui/react/lib/Button';
 
 interface FeaturedTestimonialProps {
   testimonial: Testimonial;
@@ -23,7 +20,6 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
   testimonial,
   onViewFull,
 }) => {
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const orientationHook = useDeviceOrientation();
   const orientation = isMounted ? orientationHook : 'landscape';
@@ -41,12 +37,12 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: isMobile ? theme.spacing.s2 : theme.spacing.m,
-        padding: isMobile ? theme.spacing.m : theme.spacing.xl,
-        backgroundColor: theme.palette.neutralLighterAlt,
+        gap: isMobile ? '12px' : '16px',
+        padding: isMobile ? '16px' : '32px',
+        backgroundColor: 'var(--fx-surface-card)',
         borderRadius: '8px',
-        border: `2px solid ${theme.palette.themePrimary}`,
-        boxShadow: theme.effects.elevation8,
+        border: '2px solid var(--fx-accent)',
+        boxShadow: '0 3px 6px rgba(0,0,0,0.15)',
         position: 'relative',
         minHeight: isMobile ? '350px' : '400px',
         width: '100%',
@@ -61,7 +57,7 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
           left: 0,
           width: '100%',
           height: '4px',
-          background: `linear-gradient(to right, ${theme.palette.themePrimary}, ${theme.palette.themeSecondary})`,
+          background: 'linear-gradient(to right, var(--fx-accent), var(--fx-accent-hover))',
           borderTopLeftRadius: '8px',
           borderTopRightRadius: '8px',
         }}
@@ -77,7 +73,7 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
           style={{
             borderRadius: '50%',
             objectFit: 'cover',
-            border: `4px solid ${theme.palette.themePrimary}`,
+            border: '4px solid var(--fx-accent)',
           }}
         />
         {/* Featured badge */}
@@ -86,8 +82,8 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
             position: 'absolute',
             bottom: '0',
             right: '0',
-            backgroundColor: theme.palette.themeSecondary,
-            color: theme.palette.white,
+            backgroundColor: 'var(--fx-accent-hover)',
+            color: 'var(--fx-text-bright)',
             borderRadius: '50%',
             width: isMobile ? '32px' : '40px',
             height: isMobile ? '32px' : '40px',
@@ -96,7 +92,7 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
             justifyContent: 'center',
             fontSize: isMobile ? '16px' : '20px',
             fontWeight: 'bold',
-            boxShadow: theme.effects.elevation4,
+            boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
           }}
           aria-label='Featured'
         >
@@ -107,11 +103,11 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
       {/* Quote */}
       <div
         style={{
-          padding: isMobile ? theme.spacing.s2 : theme.spacing.m,
-          backgroundColor: theme.palette.white,
-          borderLeft: `4px solid ${theme.palette.themePrimary}`,
+          padding: isMobile ? '12px' : '16px',
+          backgroundColor: 'var(--fx-text-bright)',
+          borderLeft: '4px solid var(--fx-accent)',
           borderRadius: '4px',
-          boxShadow: theme.effects.elevation4,
+          boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
           width: '100%',
           flex: 1,
           display: 'flex',
@@ -122,10 +118,10 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
           variant='p'
           style={{
             fontStyle: 'italic',
-            color: theme.palette.neutralPrimary,
+            color: 'var(--fx-text-heading)',
             fontSize: isMobile
-              ? theme.typography.fontSizes.clamp3
-              : theme.typography.fontSizes.clamp4,
+              ? 'clamp(0.875rem, 1.8vw, 1rem)'
+              : 'clamp(1rem, 2vw, 1.25rem)',
             lineHeight: 1.6,
             textAlign: 'center',
           }}
@@ -139,7 +135,7 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: theme.spacing.s1,
+          gap: '6px',
           alignItems: 'center',
           width: '100%',
         }}
@@ -147,11 +143,11 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
         <Typography
           variant='h3'
           style={{
-            color: theme.palette.neutralPrimary,
+            color: 'var(--fx-text-heading)',
             fontWeight: 700,
             fontSize: isMobile
-              ? theme.typography.fontSizes.clamp4
-              : theme.typography.fontSizes.clamp5,
+              ? 'clamp(1rem, 2vw, 1.25rem)'
+              : 'clamp(1.25rem, 2.5vw, 1.5rem)',
           }}
         >
           {testimonial.name}
@@ -159,11 +155,11 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
         <Typography
           variant='p'
           style={{
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-muted)',
             fontWeight: 600,
             fontSize: isMobile
-              ? theme.typography.fontSizes.clamp2
-              : theme.typography.fontSizes.clamp3,
+              ? 'clamp(0.75rem, 1.5vw, 0.875rem)'
+              : 'clamp(0.875rem, 1.8vw, 1rem)',
           }}
         >
           {testimonial.jobTitle}
@@ -171,10 +167,10 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
         <Typography
           variant='p'
           style={{
-            color: theme.palette.neutralTertiary,
+            color: 'var(--fx-text-faint)',
             fontSize: isMobile
-              ? theme.typography.fontSizes.clamp2
-              : theme.typography.fontSizes.clamp3,
+              ? 'clamp(0.75rem, 1.5vw, 0.875rem)'
+              : 'clamp(0.875rem, 1.8vw, 1rem)',
           }}
         >
           {testimonial.company}
@@ -185,44 +181,53 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: theme.spacing.s1,
-            marginTop: theme.spacing.s1,
+            gap: '6px',
+            marginTop: '6px',
           }}
         >
           {Array.from({ length: 5 }).map((_, index) => (
-            <Icon
+            <span
               key={index}
-              iconName='FavoriteStarFill'
-              styles={{
-                root: {
-                  fontSize: isMobile ? '16px' : '20px',
-                  color:
-                    index < testimonial.rating
-                      ? theme.palette.themePrimary
-                      : theme.palette.neutralLight,
-                },
+              style={{
+                fontSize: isMobile ? '16px' : '20px',
+                color:
+                  index < testimonial.rating
+                    ? 'var(--fx-accent)'
+                    : 'var(--fx-border)',
+                lineHeight: 1,
               }}
-            />
+              aria-hidden='true'
+            >
+              {index < testimonial.rating ? '★' : '☆'}
+            </span>
           ))}
         </div>
       </div>
 
       {/* CTA Button */}
       {onViewFull && (
-        <PrimaryButton
-          text={isMobile ? 'View Full' : 'View Full Testimonial'}
+        <button
           onClick={onViewFull}
-          iconProps={{ iconName: 'ChevronRight' }}
-          styles={{
-            root: {
-              marginTop: theme.spacing.s2,
-              borderRadius: '4px',
-              fontSize: isMobile
-                ? theme.typography.fontSizes.clamp2
-                : theme.typography.fontSizes.clamp3,
-            },
+          style={{
+            marginTop: '12px',
+            borderRadius: '4px',
+            fontSize: isMobile
+              ? 'clamp(0.75rem, 1.5vw, 0.875rem)'
+              : 'clamp(0.875rem, 1.8vw, 1rem)',
+            background: 'var(--fx-accent)',
+            color: 'var(--fx-text-bright)',
+            border: 'none',
+            padding: '8px 16px',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontWeight: 600,
           }}
-        />
+        >
+          {isMobile ? 'View Full' : 'View Full Testimonial'}
+          <span aria-hidden='true'>&rsaquo;</span>
+        </button>
       )}
     </div>
   );

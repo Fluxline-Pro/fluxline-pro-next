@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import type { ServiceCategory } from '../../constants';
 
 /**
@@ -12,22 +10,20 @@ import type { ServiceCategory } from '../../constants';
 export const ServiceDetailContent: React.FC<{ service: ServiceCategory }> = ({
   service,
 }) => {
-  const { theme } = useAppTheme();
-
   return (
     <div
       style={{
         padding: '2rem',
-        borderRadius: theme.borderRadius.container.medium,
-        border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+        borderRadius: 'var(--fx-radius-card)',
+        border: '1px solid var(--fx-border)',
         backgroundColor: 'transparent',
       }}
     >
       <div
         style={{
-          color: theme.palette.neutralPrimary,
+          color: 'var(--fx-text-heading)',
           fontSize: '1.125rem',
-          lineHeight: theme.typography.lineHeights.relaxed,
+          lineHeight: 1.65,
         }}
         dangerouslySetInnerHTML={{ __html: service.summary }}
       />

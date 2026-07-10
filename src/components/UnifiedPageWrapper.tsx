@@ -5,12 +5,8 @@ import { usePathname, useParams } from 'next/navigation';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SpinnerSize } from '@fluentui/react/lib/Spinner';
-
-import { Typography } from '../theme/components/typography';
 import { UnifiedMarkdownRenderer } from '../utils/markdownRenderer';
 import { ProtectedEmail } from './ProtectedEmail';
-import { LoadingSpinner } from '../theme/components/structural/loading-spinner';
 
 import { useContentFilterStore } from '../store/store';
 import { useAppTheme } from '../theme/hooks/useAppTheme';
@@ -25,10 +21,8 @@ import { useContentScrollable } from '@/theme/hooks/useContentScrollable';
 import { useColorVisionFilter } from '@/theme/hooks/useColorVisionFilter';
 import { useHoverEffects } from '../hooks/useHoverEffects';
 import { useHeaderHeight } from '../theme/hooks/useHeaderHeight';
-import { IExtendedTheme, ThemeMode } from '../theme/theme';
+import { ThemeMode } from '../theme/theme';
 import { FadeUp } from '@/animations/fade-animations';
-
-import { typography, spacing } from '../theme/theme';
 
 // Import images directly
 import FluxlineLogoDarkMode from '../assets/images/FluxlineLogoDarkMode.png';
@@ -283,6 +277,20 @@ export interface UnifiedPageWrapperProps {
 const PAGE_IMAGE_BLUR_PLACEHOLDER =
   'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';
 
+/** DSM CSS spinner -- replaces the old Fluent UI LoadingSpinner */
+const DsmSpinner: React.FC<{ size?: number }> = ({ size = 36 }) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      border: '3px solid var(--fx-border)',
+      borderTopColor: 'var(--fx-accent)',
+      borderRadius: '50%',
+      animation: 'dsmSpin 0.8s linear infinite',
+    }}
+  />
+);
+
 interface ImagePanelProps {
   src: string;
   alt: string;
@@ -308,7 +316,6 @@ interface ImagePanelProps {
   filter: string;
   fadeInVariants: Variants;
   shouldReduceMotion: boolean;
-  theme: IExtendedTheme;
   /** Set true to add loading='eager' to the Next.js Image */
   loadingEager?: boolean;
   /** When provided, renders a gradient title overlay at the image bottom */
@@ -344,7 +351,6 @@ const ImagePanel: React.FC<ImagePanelProps> = ({
   filter,
   fadeInVariants,
   shouldReduceMotion,
-  theme,
   loadingEager,
   titleOverlay,
 }) => {
@@ -363,10 +369,10 @@ const ImagePanel: React.FC<ImagePanelProps> = ({
         maxWidth: containerMaxWidth,
         ...(containerMaxHeight ? { maxHeight: containerMaxHeight } : {}),
         height: 'auto',
-        borderRadius: theme.borderRadius.m,
+        borderRadius: '0.5rem',
         overflow: 'hidden',
-        backgroundColor: theme.palette.neutralLighter,
-        boxShadow: theme.shadows?.l || '0 4px 12px rgba(0,0,0,0.15)',
+        backgroundColor: 'var(--fx-surface-card)',
+        boxShadow: '4px 4px 12px rgba(0,0,0,0.18)',
         pointerEvents: 'auto',
         cursor: onClick ? 'pointer' : 'default',
         transform: isHovered ? `scale(${hoverScale})` : 'scale(1)',
@@ -384,7 +390,7 @@ const ImagePanel: React.FC<ImagePanelProps> = ({
             zIndex: 10,
           }}
         >
-          <LoadingSpinner size={SpinnerSize.large} />
+          <DsmSpinner size={36} />
         </div>
       )}
 
@@ -454,7 +460,7 @@ const ImagePanel: React.FC<ImagePanelProps> = ({
             bottom: 0,
             left: 0,
             right: 0,
-            padding: theme.spacing.l,
+            padding: '24px',
             background: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent)`,
             color: '#FFFFFF',
           }}
@@ -463,8 +469,8 @@ const ImagePanel: React.FC<ImagePanelProps> = ({
             style={{
               margin: 0,
               fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-              fontWeight: theme.fonts.xLarge.fontWeight as number,
-              fontFamily: `${theme.fonts.xLarge.fontFamily} !important`,
+              fontWeight: 700,
+              fontFamily: 'var(--fx-font)',
               lineHeight: 1.2,
               color: '#FFFFFF', // hard-coded so text is always white regardless of themeMode
             }}
@@ -631,9 +637,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
             width: '100%',
             maxWidth: '900px',
             margin: '0 auto',
-            padding: spacing.xl,
-            paddingTop: `calc(${headerHeight} + ${spacing.xl})`,
-            color: theme.semanticColors.bodyText,
+            padding: '32px',
+            paddingTop: `calc(${headerHeight} + 32px)`,
+            color: 'var(--fx-text-body)',
           }}
         >
           {/* Back Navigation and Page Title */}
@@ -642,8 +648,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: spacing.m,
-                marginBottom: legalPageConfig.subtitle ? spacing.s : spacing.l,
+                gap: '16px',
+                marginBottom: legalPageConfig.subtitle ? '12px' : '24px',
               }}
             >
               <Link
@@ -651,9 +657,9 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  padding: spacing.s1,
+                  padding: '4px',
                   borderRadius: '8px',
-                  color: theme.palette.themePrimary,
+                  color: 'var(--fx-accent)',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
                   flexShrink: 0,
@@ -676,41 +682,45 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   />
                 </svg>
               </Link>
-              <Typography
-                variant='h1'
+              <h1
                 style={{
-                  ...typography.fonts.h2,
-                  color: theme.semanticColors.bodyText,
-                  fontSize: '2rem',
+                  fontFamily: 'var(--fx-font)',
+                  fontSize: 'var(--fx-h2-size)',
                   fontWeight: 600,
+                  letterSpacing: 'var(--fx-heading-tracking)',
+                  lineHeight: 1.3,
+                  color: 'var(--fx-text-body)',
                   margin: 0,
                 }}
               >
                 {legalPageConfig.title}
-              </Typography>
+              </h1>
             </div>
           )}
 
           {/* Subtitle (if provided) */}
           {legalPageConfig?.subtitle && (
-            <Typography
-              variant='h3'
+            <h3
               style={{
-                ...typography.fonts.h3,
-                color: theme.palette.neutralSecondary,
-                marginBottom: spacing.l,
+                fontFamily: 'var(--fx-font)',
+                fontSize: 'var(--fx-h3-size)',
+                fontWeight: 700,
+                letterSpacing: 'var(--fx-heading-tracking)',
+                lineHeight: 1.3,
+                color: 'var(--fx-text-muted)',
+                marginBottom: '24px',
               }}
             >
               {legalPageConfig.subtitle}
-            </Typography>
+            </h3>
           )}
 
           {/* Main Content */}
           <div
             className='legal-content'
             style={{
-              marginTop: spacing.xl,
-              marginBottom: spacing.xxl,
+              marginTop: '32px',
+              marginBottom: '40px',
             }}
           >
             {legalPageConfig?.content ? (
@@ -735,29 +745,34 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
           {showCopyright && (
             <footer
               style={{
-                marginTop: spacing.xxxl,
-                paddingTop: spacing.l,
-                borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+                marginTop: '48px',
+                paddingTop: '24px',
+                borderTop: '1px solid var(--fx-border)',
               }}
             >
-              <Typography
-                variant='p'
+              <p
                 style={{
-                  ...typography.fonts.bodySmall,
-                  color: theme.palette.neutralTertiary,
+                  fontFamily: 'var(--fx-font)',
+                  fontSize: 'var(--fx-body-sm-size)',
+                  fontWeight: 500,
+                  lineHeight: 'var(--fx-body-sm-leading)',
+                  color: 'var(--fx-text-faint)',
                   textAlign: 'center',
+                  margin: 0,
                 }}
               >
-                © {currentYear} Fluxline Resonance Group, LLC. All rights
+                &copy; {currentYear} Fluxline Resonance Group, LLC. All rights
                 reserved.
-              </Typography>
-              <Typography
-                variant='p'
+              </p>
+              <p
                 style={{
-                  ...typography.fonts.bodySmall,
-                  color: theme.palette.neutralTertiary,
+                  fontFamily: 'var(--fx-font)',
+                  fontSize: 'var(--fx-body-sm-size)',
+                  fontWeight: 500,
+                  lineHeight: 'var(--fx-body-sm-leading)',
+                  color: 'var(--fx-text-faint)',
                   textAlign: 'center',
-                  marginTop: spacing.s,
+                  marginTop: '12px',
                 }}
               >
                 Questions? Contact us at{' '}
@@ -765,13 +780,13 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   username='support'
                   domain='fluxline.pro'
                   style={{
-                    color: theme.semanticColors.link,
+                    color: 'var(--fx-accent)',
                     textDecoration: 'underline',
                   }}
                 >
                   support [at] fluxline.pro
                 </ProtectedEmail>
-              </Typography>
+              </p>
             </footer>
           )}
         </div>
@@ -829,10 +844,10 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         paddingLeft:
           layoutPreference === 'left-handed'
             ? containerStyle.padding
-            : `calc(${fixedPanelWidth} + ${theme.spacing.l})`,
+            : `calc(${fixedPanelWidth} + 24px)`,
         paddingRight:
           layoutPreference === 'left-handed'
-            ? `calc(${fixedPanelWidth} + ${theme.spacing.l})`
+            ? `calc(${fixedPanelWidth} + 24px)`
             : containerStyle.padding,
         alignItems:
           !isMobile && isContentScrollable
@@ -868,8 +883,8 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
         justifyContent: 'center',
         width: '100%',
         height: 'auto',
-        padding: theme.spacing.m,
-        paddingTop: theme.spacing.m, // Container already offsets by headerHeight; image only needs its own spacing
+        padding: '16px',
+        paddingTop: '16px', // Container already offsets by headerHeight; image only needs its own spacing
       }
     : {
         ...imageStyle,
@@ -881,6 +896,15 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
 
   return (
     <>
+      {/* Keyframes for DSM spinner */}
+      <style jsx global>{`
+        @keyframes dsmSpin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
+
       {shouldUseStackedLayout ? (
         // Stacked Layout: Image and content in same container (Mobile & Tablet Portrait)
         <div style={adjustedContainerStyle}>
@@ -897,7 +921,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               containerMaxHeight={isMobile ? '275px' : undefined}
               hoverScale={1.25}
               clickIconSize={48}
-              clickIconSpacing={theme.spacing.m}
+              clickIconSpacing='16px'
               imageLoaded={imageLoaded}
               onImageLoad={() => setImageLoaded(true)}
               isHovered={isImageHovered}
@@ -911,7 +935,6 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               filter={filter}
               fadeInVariants={fadeInVariants}
               shouldReduceMotion={shouldReduceMotion}
-              theme={theme}
             />
           </div>
 
@@ -948,7 +971,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               containerMaxWidth='400px'
               hoverScale={1.15}
               clickIconSize={56}
-              clickIconSpacing={theme.spacing.l}
+              clickIconSpacing='24px'
               imageLoaded={imageLoaded}
               onImageLoad={() => setImageLoaded(true)}
               isHovered={isImageHovered}
@@ -962,7 +985,6 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
               filter={filter}
               fadeInVariants={fadeInVariants}
               shouldReduceMotion={shouldReduceMotion}
-              theme={theme}
               loadingEager
               titleOverlay={
                 shouldShowTitle && imageTextToDisplay

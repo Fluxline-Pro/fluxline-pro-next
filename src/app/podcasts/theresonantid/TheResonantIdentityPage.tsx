@@ -13,9 +13,8 @@ import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import { Callout } from '@/theme/components/callout';
 import FxButton from '@/theme/components/dsm/FxButton';
+import FxCard from '@/theme/components/dsm/FxCard';
 import { Hero } from '@/theme/components/hero';
-import { InteractiveCard } from '@/components/InteractiveCard';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { InstagramIcon } from '@/assets/svgs/InstagramLogo';
 import { FacebookIcon } from '@/assets/svgs/FacebookLogo';
@@ -41,21 +40,18 @@ const HOW_IT_WORKS = [
     title: 'Micro-Lessons',
     description:
       'Short, actionable teachings designed to shift identity through resonance rather than force.',
-    icon: 'LightningBolt',
   },
   {
     id: 'seven-day-setup',
     title: '7-Day Setup',
     description:
       'A guided onboarding sequence that helps you establish your personal resonance baseline.',
-    icon: 'CalendarDay',
   },
   {
     id: 'ongoing-practice',
     title: 'Ongoing Practice',
     description:
       'Weekly prompts, reflections, and identity-building exercises that keep you aligned.',
-    icon: 'Refresh',
   },
 ];
 
@@ -262,11 +258,18 @@ export function TheResonantIdentityPage() {
                 label='The Resonant Identity Podcast'
                 external={false}
               >
-                <FluentIcon
-                  iconName='Microphone'
-                  size='medium'
-                  color='var(--fx-accent)'
-                />
+                <span
+                  style={{
+                    fontSize: '20px',
+                    color: 'var(--fx-accent)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  aria-hidden='true'
+                >
+                  🎙
+                </span>
               </SocialIconLink>
             </div>
           </Hero>
@@ -300,12 +303,6 @@ export function TheResonantIdentityPage() {
                 marginBottom: 16,
               }}
             >
-              <FluentIcon
-                iconName='ContactInfo'
-                size='large'
-                color='var(--fx-accent)'
-                style={{ marginRight: '0.5rem' }}
-              />
               <SectionHeading>What is The Resonant Identity?</SectionHeading>
             </div>
 
@@ -351,14 +348,33 @@ export function TheResonantIdentityPage() {
               style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}
             >
               {HOW_IT_WORKS.map((card) => (
-                <InteractiveCard
+                <FxCard
                   key={card.id}
-                  id={card.id}
-                  title={card.title}
-                  description={card.description}
-                  icon={card.icon}
-                  iconPosition='center'
-                />
+                  style={{ padding: '28px 28px 24px' }}
+                >
+                  <h4
+                    style={{
+                      fontSize: 'var(--fx-h4-size)',
+                      fontWeight: 600,
+                      color: 'var(--fx-text-heading)',
+                      marginBottom: 8,
+                      textAlign: 'center',
+                    }}
+                  >
+                    {card.title}
+                  </h4>
+                  <p
+                    style={{
+                      color: 'var(--fx-text-muted)',
+                      fontSize: '0.95rem',
+                      lineHeight: 1.4,
+                      margin: 0,
+                      textAlign: 'center',
+                    }}
+                  >
+                    {card.description}
+                  </p>
+                </FxCard>
               ))}
             </div>
           </section>
@@ -608,11 +624,15 @@ export function TheResonantIdentityPage() {
                   label='The Resonant Identity Podcast on Spreaker'
                 >
                   <div style={iconButtonStyle}>
-                    <FluentIcon
-                      iconName='Microphone'
-                      size='medium'
-                      color='var(--fx-accent)'
-                    />
+                    <span
+                      style={{
+                        fontSize: '20px',
+                        color: 'var(--fx-accent)',
+                      }}
+                      aria-hidden='true'
+                    >
+                      🎙
+                    </span>
                   </div>
                   <span
                     style={{
@@ -739,11 +759,6 @@ export function TheResonantIdentityPage() {
               gap: 12,
             }}
           >
-            <FluentIcon
-              iconName='Contact'
-              size='small'
-              color='var(--fx-text-muted)'
-            />
             <span
               style={{
                 color: 'var(--fx-text-muted)',

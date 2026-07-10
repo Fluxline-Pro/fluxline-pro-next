@@ -6,10 +6,7 @@
  */
 
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { FluentIcon } from '@/theme/components/fluent-icon';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { SERVICE_OPTIONS } from './constants';
 import { ServiceKey, StepOneData } from './types';
 
@@ -24,7 +21,6 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
   onChange,
   onNext,
 }) => {
-  const { theme } = useAppTheme();
   const [error, setError] = React.useState('');
 
   const toggle = (key: ServiceKey) => {
@@ -56,24 +52,25 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
       <h3
         id='step1-heading'
         style={{
-          ...theme.typography.fonts.h3,
-          color: theme.palette.themePrimary,
-          marginBottom: theme.spacing.xs,
+          fontSize: 'var(--fx-h3-size)',
+          fontWeight: 'var(--fx-h3-weight)',
+          letterSpacing: 'var(--fx-heading-tracking)',
+          color: 'var(--fx-accent)',
+          marginBottom: '4px',
         }}
       >
         Step 1 — What are you interested in?
       </h3>
-      <Typography
-        variant='p'
+      <p
         style={{
-          color: theme.palette.neutralSecondary,
-          marginBottom: theme.spacing.l,
-          fontSize: theme.typography.fonts.bodySmall.fontSize,
+          color: 'var(--fx-text-muted)',
+          marginBottom: '20px',
+          fontSize: 'var(--fx-body-sm-size)',
         }}
       >
         Select one or more services. If you&apos;re unsure, choose &ldquo;I
         don&apos;t know&rdquo; and we&apos;ll help on the call.
-      </Typography>
+      </p>
 
       <div className='flex flex-col gap-3'>
         {SERVICE_OPTIONS.map((option) => {
@@ -84,13 +81,13 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
               style={{
                 display: 'flex',
                 alignItems: 'flex-start',
-                gap: theme.spacing.m,
-                padding: theme.spacing.m,
-                borderRadius: theme.effects.roundedCorner6,
-                border: `2px solid ${isSelected ? theme.palette.themePrimary : theme.palette.neutralQuaternaryAlt}`,
+                gap: '16px',
+                padding: '16px',
+                borderRadius: 'var(--fx-radius-card-sm)',
+                border: `2px solid ${isSelected ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
                 backgroundColor: isSelected
-                  ? theme.palette.themeLighterAlt
-                  : theme.palette.neutralLighterAlt,
+                  ? 'var(--fx-surface-raised)'
+                  : 'var(--fx-surface-card)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
               }}
@@ -102,47 +99,35 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
                 aria-label={option.label}
                 style={{
                   marginTop: '3px',
-                  accentColor: theme.palette.themePrimary,
+                  accentColor: 'var(--fx-accent)',
                   width: '18px',
                   height: '18px',
                   cursor: 'pointer',
                   flexShrink: 0,
                 }}
               />
-              <FluentIcon
-                iconName={option.icon}
-                size='medium'
-                color={
-                  isSelected
-                    ? theme.palette.themePrimary
-                    : theme.palette.neutralSecondary
-                }
-                aria-hidden
-              />
               <div>
-                <Typography
-                  variant='p'
+                <p
                   style={{
-                    fontWeight: theme.typography.fontWeights.semiBold,
+                    fontWeight: 600,
                     color: isSelected
-                      ? theme.palette.themePrimary
-                      : theme.palette.neutralPrimary,
+                      ? 'var(--fx-accent)'
+                      : 'var(--fx-text-heading)',
                     margin: 0,
                     marginBottom: '2px',
                   }}
                 >
                   {option.label}
-                </Typography>
-                <Typography
-                  variant='p'
+                </p>
+                <p
                   style={{
-                    color: theme.palette.neutralSecondary,
-                    fontSize: theme.typography.fonts.bodySmall.fontSize,
+                    color: 'var(--fx-text-muted)',
+                    fontSize: 'var(--fx-body-sm-size)',
                     margin: 0,
                   }}
                 >
                   {option.description}
-                </Typography>
+                </p>
               </div>
             </label>
           );
@@ -153,9 +138,9 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
         <div
           role='alert'
           style={{
-            marginTop: theme.spacing.m,
-            color: theme.semanticColors.errorText,
-            fontSize: theme.typography.fonts.bodySmall.fontSize,
+            marginTop: '16px',
+            color: 'var(--fx-error)',
+            fontSize: 'var(--fx-body-sm-size)',
           }}
         >
           {error}
@@ -163,12 +148,9 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
       )}
 
       <div className='flex justify-end mt-6'>
-        <FormButton
-          variant='primary'
-          text='Next: Tell us about your needs →'
-          onClick={handleNext}
-          size='medium'
-        />
+        <FxButton variant="primary" size="md" onClick={handleNext}>
+          Next: Tell us about your needs &rarr;
+        </FxButton>
       </div>
     </div>
   );

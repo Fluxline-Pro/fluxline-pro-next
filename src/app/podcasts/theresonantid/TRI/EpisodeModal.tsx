@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import type { PodcastEpisode } from '@/app/podcasts/types';
 
 interface EpisodeModalProps {
@@ -18,8 +16,6 @@ interface EpisodeModalProps {
  * without duplicating markup.
  */
 export function EpisodeModal({ episode, onDismiss }: EpisodeModalProps) {
-  const { theme } = useAppTheme();
-
   return (
     <div
       style={{
@@ -33,15 +29,15 @@ export function EpisodeModal({ episode, onDismiss }: EpisodeModalProps) {
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        padding: theme.spacing.m,
+        padding: 16,
       }}
       onClick={onDismiss}
     >
       <div
         style={{
-          backgroundColor: theme.palette.white,
-          borderRadius: theme.borderRadius.container.medium,
-          padding: theme.spacing.xl,
+          backgroundColor: 'var(--fx-text-bright)',
+          borderRadius: 'var(--fx-radius-card)',
+          padding: 32,
           maxWidth: '600px',
           width: '100%',
           maxHeight: '90vh',
@@ -54,15 +50,18 @@ export function EpisodeModal({ episode, onDismiss }: EpisodeModalProps) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'start',
-            marginBottom: theme.spacing.l,
+            marginBottom: 20,
           }}
         >
-          <Typography
-            variant='h3'
-            style={{ color: theme.palette.neutralPrimary }}
+          <h3
+            style={{
+              fontSize: 'var(--fx-h3-size)',
+              fontWeight: 700,
+              color: 'var(--fx-text-heading)',
+            }}
           >
             {episode.episode_title}
-          </Typography>
+          </h3>
           <button
             onClick={onDismiss}
             style={{
@@ -70,7 +69,7 @@ export function EpisodeModal({ episode, onDismiss }: EpisodeModalProps) {
               border: 'none',
               fontSize: '24px',
               cursor: 'pointer',
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-muted)',
               padding: '0 8px',
             }}
             aria-label='Close modal'
@@ -79,19 +78,18 @@ export function EpisodeModal({ episode, onDismiss }: EpisodeModalProps) {
           </button>
         </div>
 
-        <Typography
-          variant='p'
+        <p
           style={{
-            color: theme.palette.neutralSecondary,
-            marginBottom: theme.spacing.l,
+            color: 'var(--fx-text-muted)',
+            marginBottom: 20,
           }}
         >
           {episode.description}
-        </Typography>
+        </p>
 
         <audio
           controls
-          style={{ width: '100%', marginTop: theme.spacing.m }}
+          style={{ width: '100%', marginTop: 16 }}
           src={episode.audio_url}
         >
           Your browser does not support the audio element.

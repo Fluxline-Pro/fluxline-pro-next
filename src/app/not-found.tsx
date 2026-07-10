@@ -17,9 +17,8 @@ export default function NotFound() {
   return (
     <div
       style={{
-        background:
-          'linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%)',
-        color: '#D5DAE3',
+        background: 'var(--fx-gradient-hero, linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%))',
+        color: 'var(--fx-text-body)',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
@@ -98,7 +97,7 @@ export default function NotFound() {
               fontSize: 'clamp(80px, 14vw, 150px)',
               fontWeight: 800,
               letterSpacing: '.04em',
-              color: '#FFFFFF',
+              color: 'var(--fx-text-heading-display)',
               margin: '0 0 6px',
               lineHeight: 1,
             }}
@@ -112,7 +111,7 @@ export default function NotFound() {
               width: 220,
               margin: '0 auto 26px',
               background:
-                'linear-gradient(90deg,transparent,#5E81A8,#B8CDF5,#5E81A8,transparent)',
+                'linear-gradient(90deg,transparent,var(--fx-line),var(--fx-accent),var(--fx-line),transparent)',
             }}
           />
 

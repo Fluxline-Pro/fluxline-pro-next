@@ -132,7 +132,7 @@ export default function FxFooter({
             </Link>
           )}
           {!preferencesOnClick && !backLink && (
-            <span style={{ fontSize: 13, color: '#7E8A99' }}>
+            <span style={{ fontSize: 13, color: 'var(--fx-text-faint)' }}>
               Structure the Shift
             </span>
           )}
