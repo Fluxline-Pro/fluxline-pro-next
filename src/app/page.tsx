@@ -14,6 +14,7 @@ import {
   FLUXLINE_SECONDARY_TAGLINE,
 } from '@/app/services/constants';
 import { COMPANY_VALUES } from '@/app/about/constants';
+import Link from 'next/link';
 
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
   { key: 'body-practice', label: 'Body & Practice' },
@@ -138,14 +139,24 @@ export default function Home() {
                   margin: '0 0 16px',
                 }}
               >
-                Systems that work, brands that connect, and practices that last.
+                Systems that work, brands that connect, and practices that
+                inspire.
               </p>
               <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
                 Fluxline is built on the belief that{' '}
                 <strong style={{ color: 'var(--fx-text-bright)' }}>
                   congruence creates momentum
                 </strong>
-                .
+                . When we align our clients' intentions, actions, and
+                structures, we create systems that work, brands that connect,
+                and practices <strong>that endure and inspire</strong>.{' '}
+              </p>
+
+              <p>
+                Identity and structure <strong>are inseparable</strong>. As
+                such, we help our clients build with clarity and purpose,
+                integrating somatic awareness, strategic clarity, and technical
+                precision.
               </p>
             </FxReveal>
 
@@ -203,8 +214,14 @@ export default function Home() {
                   margin: '0 0 20px',
                 }}
               >
-                Six principles that guide every engagement, every system, every
-                interaction.
+                These principles guide every engagement, system, and interaction
+                we have with our clients. They are the{' '}
+                <strong>
+                  <em>foundation of</em>
+                </strong>{' '}
+                our work and the lens through which we view every project,
+                ensuring that we deliver not just results, but{' '}
+                <strong>meaningful and lasting impact</strong>.
               </p>
               <div
                 className='fx-g3'
@@ -266,7 +283,7 @@ export default function Home() {
                   cursor: 'pointer',
                 }}
               >
-                <a
+                <Link
                   href='/services'
                   style={{
                     display: 'block',
@@ -285,7 +302,7 @@ export default function Home() {
                       maxHeight: 'clamp(300px, 60vw, 500px)',
                     }}
                   />
-                </a>
+                </Link>
                 <div
                   style={{
                     padding: '16px 20px',
