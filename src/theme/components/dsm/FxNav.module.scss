@@ -28,16 +28,6 @@
   }
 }
 
-.ctaButtonContainer {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-
-  @media (max-width: 1023px) {
-    margin-left: 12px;
-  }
-}
-
 .hamburgerButton {
   display: flex;
   margin-left: auto;
@@ -87,4 +77,8 @@
   &:hover {
     color: var(--fx-text-heading);
   }
+}
+
+.mobileMenuButtonWrapper {
+  padding: 12px 32px;
 }

@@ -213,13 +213,10 @@ export default function FxNav({
                   {link.label}
                 </Link>
               ))}
-            </nav>
-            {/* CTA Button (Always Visible) */}
-            <div className={styles.ctaButtonContainer}>
               <FxButton size='sm' href={ctaHref}>
                 {ctaLabel}
               </FxButton>
-            </div>
+            </nav>
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -259,6 +256,15 @@ export default function FxNav({
                       {link.label}
                     </Link>
                   ))}
+                  <div className={styles.mobileMenuButtonWrapper}>
+                    <FxButton
+                      size='sm'
+                      href={ctaHref}
+                      style={{ width: '100%' }}
+                    >
+                      {ctaLabel}
+                    </FxButton>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -293,12 +299,6 @@ export default function FxNav({
                 </Link>
               ))}
             </nav>
-            {/* CTA Button (Always Visible - Subpage) */}
-            <div className={styles.ctaButtonContainer}>
-              <FxButton size='sm' href={ctaHref}>
-                {ctaLabel}
-              </FxButton>
-            </div>
             {/* Mobile Hamburger (Subpage) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -338,6 +338,15 @@ export default function FxNav({
                       {link.label}
                     </Link>
                   ))}
+                  <div className={styles.mobileMenuButtonWrapper}>
+                    <FxButton
+                      size='sm'
+                      href={ctaHref}
+                      style={{ width: '100%' }}
+                    >
+                      {ctaLabel}
+                    </FxButton>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
