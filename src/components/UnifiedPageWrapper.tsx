@@ -178,26 +178,6 @@ const PAGE_CONFIGS: Record<
     image: PodcastsImage.src,
     imageText: 'Podcasts',
   },
-  '/podcasts/theresonantid': {
-    image: TheResonantIdentityLogo.src,
-    imageText: '',
-  },
-  '/podcasts/theresonantid/about': {
-    image: TheResonantIdentityLogo.src,
-    imageText: '',
-  },
-  '/podcasts/theresonantid/library': {
-    image: TheResonantIdentityLogo.src,
-    imageText: '',
-  },
-  '/podcasts/theresonantid/challenges': {
-    image: TheResonantIdentityLogo.src,
-    imageText: '',
-  },
-  '/podcasts/theresonantid/articles': {
-    image: TheResonantIdentityLogo.src,
-    imageText: '',
-  },
   // Testimonials page hidden until client testimonials are available
   // '/testimonials': {
   //   image: FluxlineTestimonials.src,

@@ -623,7 +623,7 @@ export default function Home() {
                 </div>
                 <div style={{ marginTop: 'auto' }}>
                   <a
-                    href='/podcasts/theresonantid'
+                    href='/podcasts'
                     style={{
                       display: 'block',
                       textAlign: 'center',

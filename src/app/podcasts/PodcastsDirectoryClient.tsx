@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxButton from '@/theme/components/dsm/FxButton';
 
@@ -11,8 +10,6 @@ import FxButton from '@/theme/components/dsm/FxButton';
  * Links externally to TheResonantIdentity.com
  */
 export function PodcastsDirectoryClient() {
-  const router = useRouter();
-
   return (
     <>
       {/* Hero Section */}
@@ -89,12 +86,6 @@ export function PodcastsDirectoryClient() {
               for navigating transitions with clarity and intention.
             </div>
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-              <FxButton
-                variant='outline'
-                onClick={() => router.push('/podcasts/theresonantid')}
-              >
-                Listen to Episodes
-              </FxButton>
               <a
                 href='https://theresonantidentity.com'
                 target='_blank'
@@ -161,9 +152,6 @@ export function PodcastsDirectoryClient() {
               architecture, personal transformation, and practical strategies
               for building resilient systems.
             </p>
-            <FxButton onClick={() => router.push('/podcasts/theresonantid')}>
-              Explore All Episodes
-            </FxButton>
           </section>
 
           {/* Podcast Platforms */}

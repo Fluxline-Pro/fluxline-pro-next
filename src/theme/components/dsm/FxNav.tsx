@@ -83,7 +83,7 @@ export default function FxNav({
   const navLinks = [
     { label: 'About', href: '#about' },
     { label: 'Services', href: '/services' },
-    { label: 'Content & Podcast', href: '/blog' },
+    { label: 'Our Content', href: '/content' },
     { label: 'Contact', href: '/contact' },
   ];
 

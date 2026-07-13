@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { PodcastsDirectoryClient } from './PodcastsDirectoryClient';
+import { PodcastPageWrapper } from './PodcastPageWrapper';
+import { PodcastListingClient } from './PodcastListingClient';
 
 export const metadata: Metadata = {
   title: 'Podcasts',
@@ -40,9 +42,16 @@ export const metadata: Metadata = {
 };
 
 /**
- * Podcasts Directory Page - Server Component
- * Shows all available podcasts as cards
+ * Podcasts Page - Server Component
+ * Shows The Resonant Identity podcast directory and episodes
  */
 export default function PodcastsPage() {
-  return <PodcastsDirectoryClient />;
+  return (
+    <>
+      <PodcastsDirectoryClient />
+      <PodcastPageWrapper>
+        <PodcastListingClient />
+      </PodcastPageWrapper>
+    </>
+  );
 }
