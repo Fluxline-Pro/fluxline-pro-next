@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import FxButton from './FxButton';
+import styles from './FxNav.module.scss';
 
 interface BreadcrumbItem {
   label: string;
@@ -79,6 +80,7 @@ export default function FxNav({
   const finalBackLabel = backLabel ?? resolvedBack.label;
   const finalBackHref = backHref ?? resolvedBack.href;
   const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const navLinks = [
     { label: 'About', href: '#about' },
@@ -124,17 +126,7 @@ export default function FxNav({
         borderBottom: '1px solid var(--fx-border-subtle)',
       }}
     >
-      <div
-        className='fx-c fx-nav-gap'
-        style={{
-          maxWidth: 1220,
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 20,
-          padding: '14px 32px',
-        }}
-      >
+      <div className={`fx-c fx-nav-gap ${styles.navContainer}`}>
         {resolvedVariant === 'home' ? (
           <>
             <Link
@@ -162,13 +154,11 @@ export default function FxNav({
                 </span>
               </span>
             </Link>
+            {/* Desktop Navigation */}
             <nav
-              className='fx-navrow'
+              className={`fx-navrow ${styles.navRow}`}
               style={{
-                display: 'flex',
                 gap: 26,
-                marginLeft: 'auto',
-                alignItems: 'center',
               }}
             >
               {navLinks.map((link) => (
@@ -187,6 +177,45 @@ export default function FxNav({
                 {ctaLabel}
               </FxButton>
             </nav>
+            {/* Mobile Hamburger Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={styles.hamburgerButton}
+              aria-label='Toggle menu'
+            >
+              <svg
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+              >
+                <line x1='3' y1='6' x2='21' y2='6' strokeLinecap='round' />
+                <line x1='3' y1='12' x2='21' y2='12' strokeLinecap='round' />
+                <line x1='3' y1='18' x2='21' y2='18' strokeLinecap='round' />
+              </svg>
+            </button>
+            {/* Mobile Menu Dropdown */}
+            {mobileMenuOpen && (
+              <div className={styles.mobileMenuDropdown}>
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={styles.mobileMenuLink}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className={styles.mobileMenuButtonWrapper}>
+                  <FxButton size='sm' href={ctaHref} style={{ width: '100%' }}>
+                    {ctaLabel}
+                  </FxButton>
+                </div>
+              </div>
+            )}
           </>
         ) : (
           <>

@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * Not Found Page for Scroll Detail
  */
@@ -9,19 +7,6 @@ import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
 import FxButton from '@/theme/components/dsm/FxButton';
 
 export default function ScrollNotFound() {
-  const [menuOpened, setMenuOpened] = React.useState(false);
-
-  const handleOpenMenu = () => {
-    // Trigger the header's menu button click
-    const menuButton = document.querySelector(
-      '[aria-label="Open navigation menu"]'
-    ) as HTMLButtonElement;
-    if (menuButton) {
-      menuButton.click();
-      setMenuOpened(true);
-    }
-  };
-
   return (
     <UnifiedPageWrapper
       layoutType='responsive-grid'
@@ -85,11 +70,10 @@ export default function ScrollNotFound() {
           <FxButton
             variant='primary'
             size='lg'
-            onClick={handleOpenMenu}
-            disabled={menuOpened}
+            href='/services/scrolls'
             style={{ minWidth: 200 }}
           >
-            {menuOpened ? 'Menu Opening...' : 'Open the Menu'}
+            Back to Scrolls
           </FxButton>
 
           <p

@@ -76,6 +76,7 @@ export default function Home() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     aspectRatio: '1/1',
+                    maxHeight: 'clamp(250px, 50vw, 100%)',
                   }}
                 >
                   <img
@@ -272,6 +273,7 @@ export default function Home() {
                     width: '100%',
                     aspectRatio: '3/4',
                     objectFit: 'cover',
+                    maxHeight: '500px',
                   }}
                 />
                 <div
