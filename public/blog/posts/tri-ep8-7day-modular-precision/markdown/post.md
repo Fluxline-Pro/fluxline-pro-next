@@ -1,6 +1,6 @@
 ---
 title: 'Episode 8 — 7-Day Challenge: Modular Precision and Your Value-Virtue System'
-excerpt: 'A rigorous 7-day identity challenge from The Resonant Identity podcast inspired by Stephen Covey\'s principle-centered work. Generate, refine, and integrate your value and virtue system through Modular Precision.'
+excerpt: "A rigorous 7-day identity challenge from The Resonant Identity podcast inspired by Stephen Covey's principle-centered work. Generate, refine, and integrate your value and virtue system through Modular Precision."
 author: 'The Resonant Identity'
 publishedDate: '2026-07-13'
 category: 'Resonant Identity'
@@ -66,7 +66,7 @@ Do not rush.
 Do not skip steps.  
 Do this as you feel comfortable and present.
 
-> For Identity work requires _precision and patience_.
+> Identity work requires _precision and patience_.
 
 ---
 
