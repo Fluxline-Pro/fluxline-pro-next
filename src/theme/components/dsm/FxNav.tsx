@@ -134,11 +134,20 @@ export default function FxNav({
               href='/'
               style={{
                 display: 'flex',
-                alignItems: 'baseline',
+                alignItems: 'center',
                 gap: 10,
                 textDecoration: 'none',
               }}
             >
+              <img
+                src='/favicon.ico'
+                alt='Fluxline'
+                style={{
+                  width: 20,
+                  height: 20,
+                  flexShrink: 0,
+                }}
+              />
               <span
                 style={{
                   fontWeight: 700,
