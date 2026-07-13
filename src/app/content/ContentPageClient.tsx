@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxCard from '@/theme/components/dsm/FxCard';
@@ -40,10 +41,10 @@ export default function ContentPageClient() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: 18,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(275px, 1fr))',
+            gap: 16,
             alignItems: 'stretch',
-            marginBottom: 22,
+            marginBottom: 24,
           }}
         >
           {/* Blog */}
@@ -104,7 +105,7 @@ export default function ContentPageClient() {
               </div>
             </div>
             <div style={{ padding: '18px 26px 24px', marginTop: 'auto' }}>
-              <a
+              <Link
                 href='/blog'
                 style={{
                   display: 'block',
@@ -119,18 +120,20 @@ export default function ContentPageClient() {
                 }}
               >
                 Read the Blog
-              </a>
+              </Link>
             </div>
           </FxCard>
 
           {/* TRI Podcast */}
           <FxCard
             variant='band'
+            interactive
             style={{
               display: 'flex',
               flexDirection: 'column',
               padding: 0,
               overflow: 'hidden',
+              border: '1px solid var(--fx-gold)',
             }}
           >
             <div style={{ padding: '26px 26px 0' }}>
@@ -190,52 +193,8 @@ export default function ContentPageClient() {
                 frameworks for navigating transitions with clarity.
               </div>
             </div>
-            <div
-              style={{
-                margin: '0 26px',
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 7,
-              }}
-            >
-              {[
-                {
-                  label: 'Spotify',
-                  href: 'https://open.spotify.com/show/0kmCO10TwluoHUYdD3v4Qe',
-                },
-                {
-                  label: 'Apple',
-                  href: 'https://podcasts.apple.com/us/podcast/the-resonant-identity/id1891152754',
-                },
-                {
-                  label: 'iHeart',
-                  href: 'https://iheart.com/podcast/329383182',
-                },
-                {
-                  label: 'Amazon',
-                  href: 'https://music.amazon.com/podcasts/b4d2ead1-4aaa-4189-b4bd-bd41141030a7',
-                },
-                { label: 'RSS', href: '/api/podcasts/rss' },
-              ].map((platform) => (
-                <a
-                  key={platform.label}
-                  href={platform.href}
-                  style={{
-                    border: '1px solid var(--fx-border-strong)',
-                    borderRadius: 999,
-                    padding: '6px 13px',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    color: 'var(--fx-text-soft)',
-                    textDecoration: 'none',
-                  }}
-                >
-                  {platform.label}
-                </a>
-              ))}
-            </div>
             <div style={{ padding: '18px 26px 24px', marginTop: 'auto' }}>
-              <a
+              <Link
                 href='/podcasts'
                 style={{
                   display: 'block',
@@ -249,8 +208,8 @@ export default function ContentPageClient() {
                   textDecoration: 'none',
                 }}
               >
-                Episodes, Challenges &amp; Demos
-              </a>
+                Listen to the Podcast
+              </Link>
             </div>
           </FxCard>
 
@@ -302,7 +261,7 @@ export default function ContentPageClient() {
               </div>
             </div>
             <div style={{ padding: '18px 26px 24px', marginTop: 'auto' }}>
-              <a
+              <Link
                 href='/portfolio'
                 style={{
                   display: 'block',
@@ -317,7 +276,7 @@ export default function ContentPageClient() {
                 }}
               >
                 View the Portfolio
-              </a>
+              </Link>
             </div>
           </FxCard>
         </div>
@@ -376,7 +335,7 @@ export default function ContentPageClient() {
                   </span>
                 </span>
               ) : (
-                <a
+                <Link
                   href={link.href}
                   style={{
                     color: 'var(--fx-text-soft)',
@@ -386,7 +345,7 @@ export default function ContentPageClient() {
                   }}
                 >
                   {link.label}
-                </a>
+                </Link>
               )}
             </React.Fragment>
           ))}
@@ -425,7 +384,7 @@ export default function ContentPageClient() {
               Identity newsletter. No spam, ever.
             </div>
           </div>
-          <a
+          <Link
             href='/contact'
             style={{
               background: 'var(--fx-accent)',
@@ -439,7 +398,7 @@ export default function ContentPageClient() {
             }}
           >
             Get in Touch
-          </a>
+          </Link>
         </FxCard>
       </div>
     </FxContainer>

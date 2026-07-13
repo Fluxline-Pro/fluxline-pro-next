@@ -111,12 +111,19 @@ export default function FxNav({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Services', href: '/services' },
-    { label: 'Our Content', href: '/content' },
-    { label: 'Contact', href: '/contact' },
-  ];
+  const navLinks =
+    resolvedVariant === 'home'
+      ? [
+          { label: 'About', href: '#about' },
+          { label: 'Services', href: '/services' },
+          { label: 'Our Content', href: '/content' },
+          { label: 'Contact', href: '/contact' },
+        ]
+      : [
+          { label: 'Services', href: '/services' },
+          { label: 'Our Content', href: '/content' },
+          { label: 'Contact', href: '/contact' },
+        ];
 
   const linkStyle = (key: string): React.CSSProperties => ({
     color:

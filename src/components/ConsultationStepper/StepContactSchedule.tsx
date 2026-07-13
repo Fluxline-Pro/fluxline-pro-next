@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 import FxButton from '@/theme/components/dsm/FxButton';
 import { FormInput } from '@/theme/components/form/FormInput';
 import { FormSelect } from '@/theme/components/form/FormSelect';
@@ -277,7 +278,7 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
             >
               I consent for Fluxline Resonance Group to contact me and store my
               information for the sole purpose of this consultation. See our{' '}
-              <a
+              <Link
                 href='/legal/privacy-policy'
                 target='_blank'
                 rel='noopener noreferrer'
@@ -286,7 +287,7 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
               >
                 Privacy Policy
                 <span className='sr-only'> (opens in new window)</span>
-              </a>{' '}
+              </Link>{' '}
               for more info on how we use your data.{' '}
               <span
                 aria-hidden='true'
