@@ -35,17 +35,14 @@ export default function Home() {
         body={
           <>
             We build{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>
-              congruence
-            </strong>
-            . <strong style={{ color: 'var(--fx-text-bright)' }}>Strong</strong>{' '}
-            bodies.{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>Clear</strong>{' '}
-            brands.{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>
-              Resilient
-            </strong>{' '}
-            systems.
+            <strong style={{ color: 'var(--fx-accent)' }}>congruence</strong>.
+            Strong bodies. Clear brands. Resilient systems.
+            <br />
+            <br />
+            Fluxline partners with individuals and businesses to create
+            alignment across body, brand, and business. We specialize in
+            structural transformation — the kind that lasts because it's built
+            on clarity, intention, and practice.
           </>
         }
         secondaryCta={{ label: 'Explore Fluxline ↓', href: '#about' }}
@@ -53,7 +50,11 @@ export default function Home() {
         backgroundImage='/images/home/HomePageMobileGeometricBackground.jpg'
       />
 
-      <section id='about' className='fx-snap-section' style={{ padding: '88px 0' }}>
+      <section
+        id='about'
+        className='fx-snap-section'
+        style={{ padding: '88px 0' }}
+      >
         <FxContainer>
           <FxRailLayout
             parallax
@@ -67,19 +68,27 @@ export default function Home() {
                   overflow: 'hidden',
                 }}
               >
-                <img
-                  src='/images/home/FluxlineLogo.png'
-                  alt='Fluxline — Structure the Shift'
+                <div
                   style={{
-                    display: 'block',
-                    width: '100%',
-                    aspectRatio: '1/1',
-                    objectFit: 'contain',
                     background: '#000',
                     padding: 24,
-                    boxSizing: 'border-box',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    aspectRatio: '1/1',
                   }}
-                />
+                >
+                  <img
+                    src='/images/home/FluxlineLogo.png'
+                    alt='Fluxline — Structure the Shift'
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                    }}
+                  />
+                </div>
                 <div
                   style={{
                     padding: '16px 20px',
@@ -391,6 +400,7 @@ export default function Home() {
                   gap: 18,
                   padding: '18px 24px',
                   flexWrap: 'wrap',
+                  cursor: 'pointer',
                 }}
               >
                 <div>
@@ -429,7 +439,11 @@ export default function Home() {
         </FxContainer>
       </section>
 
-      <section id='content' className='fx-snap-section' style={{ padding: '88px 0' }}>
+      <section
+        id='content'
+        className='fx-snap-section'
+        style={{ padding: '88px 0' }}
+      >
         <FxContainer>
           <FxReveal style={{ maxWidth: 680, marginBottom: 34 }}>
             <h2
