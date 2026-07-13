@@ -76,7 +76,7 @@ export default function Home() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     aspectRatio: '1/1',
-                    maxHeight: 'clamp(250px, 50vw, 100%)',
+                    maxHeight: 'clamp(200px, 40vw, 100%)',
                   }}
                 >
                   <img
@@ -263,19 +263,29 @@ export default function Home() {
                   border: '1px solid var(--fx-border)',
                   borderRadius: 14,
                   overflow: 'hidden',
+                  cursor: 'pointer',
                 }}
               >
-                <img
-                  src='/images/home/HomePageCoverLandscape2.jpg'
-                  alt='Fluxline services'
+                <a
+                  href='/services'
                   style={{
                     display: 'block',
-                    width: '100%',
-                    aspectRatio: '3/4',
-                    objectFit: 'cover',
-                    maxHeight: '500px',
+                    textDecoration: 'none',
+                    color: 'inherit',
                   }}
-                />
+                >
+                  <img
+                    src='/images/home/HomePageCoverLandscape2.jpg'
+                    alt='Fluxline services'
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      aspectRatio: '3/4',
+                      objectFit: 'cover',
+                      maxHeight: 'clamp(300px, 60vw, 500px)',
+                    }}
+                  />
+                </a>
                 <div
                   style={{
                     padding: '16px 20px',

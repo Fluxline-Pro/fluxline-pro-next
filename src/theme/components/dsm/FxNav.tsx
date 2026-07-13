@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import FxButton from './FxButton';
 import styles from './FxNav.module.scss';
 
@@ -197,25 +198,37 @@ export default function FxNav({
               </svg>
             </button>
             {/* Mobile Menu Dropdown */}
-            {mobileMenuOpen && (
-              <div className={styles.mobileMenuDropdown}>
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={styles.mobileMenuLink}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className={styles.mobileMenuButtonWrapper}>
-                  <FxButton size='sm' href={ctaHref} style={{ width: '100%' }}>
-                    {ctaLabel}
-                  </FxButton>
-                </div>
-              </div>
-            )}
+            <AnimatePresence>
+              {mobileMenuOpen && (
+                <motion.div
+                  className={styles.mobileMenuDropdown}
+                  initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
+                  animate={{ opacity: 1, scaleY: 1, transformOrigin: 'top' }}
+                  exit={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
+                  transition={{ duration: 0.2, ease: 'easeInOut' }}
+                >
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={styles.mobileMenuLink}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <div className={styles.mobileMenuButtonWrapper}>
+                    <FxButton
+                      size='sm'
+                      href={ctaHref}
+                      style={{ width: '100%' }}
+                    >
+                      {ctaLabel}
+                    </FxButton>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </>
         ) : (
           <>
