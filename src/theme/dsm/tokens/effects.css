@@ -1,0 +1,39 @@
+:root {
+  /* ===== Motion ===== */
+  --fx-ease: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --fx-reveal-duration: 1.2s; /* @kind other */
+  --fx-hover-duration: 0.18s; /* @kind other */
+  --fx-color-duration: 0.15s; /* @kind other */
+
+  /* ===== Hover recipe (cards & link-cards) =====
+     border-color: var(--fx-border-hover); transform: translateY(-3px);   */
+  --fx-hover-lift: translateY(-3px); /* @kind other */
+  --fx-hover-lift-sm: translateY(-2px); /* @kind other */
+
+  /* ===== Nav chrome ===== */
+  --fx-nav-bg: rgba(7, 9, 13, 0.82); /* @kind color */
+  --fx-nav-blur: blur(12px); /* @kind other */
+}
+
+/* Scroll-reveal keyframes — add .fx-rv to elements, toggle .in via IntersectionObserver */
+@keyframes fxUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fxLeft {
+  from { opacity: 0; transform: translateX(-46px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fxPulse {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.85; }
+}
+.fx-rv { opacity: 0; will-change: transform, opacity; }
+.fx-rv.in { animation: fxUp var(--fx-reveal-duration) var(--fx-ease) both; }
+.fx-rv-left { opacity: 0; will-change: transform, opacity; }
+.fx-rv-left.in { animation: fxLeft 1.5s var(--fx-ease) both; }
+@media (prefers-reduced-motion: reduce) {
+  .fx-rv, .fx-rv.in, .fx-rv-left, .fx-rv-left.in {
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
+}

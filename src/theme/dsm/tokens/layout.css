@@ -1,0 +1,35 @@
+:root {
+  /* ===== Rem base =====
+     html { font-size: 16px } — 1rem = 16px everywhere. Components size text in
+     em/clamp(cqi) so they scale with their CONTAINER, not the viewport. */
+
+  /* ===== Breakpoints (browser viewport — device class ONLY: mobile / tablet / desktop) ===== */
+  --fx-bp-sm: 576px; /* @kind other */
+  --fx-bp-md: 768px; /* @kind other */
+  --fx-bp-lg: 1024px; /* @kind other */
+  --fx-bp-xl: 1366px; /* @kind other */
+  --fx-bp-xxl: 1920px; /* @kind other */
+  /* Note: custom properties can't be used inside @media conditions — these document
+     the canonical values. Write @media (min-width: 768px) etc. literally. */
+
+  /* ===== Container widths per device class ===== */
+  --fx-container-mobile: 90%;    /* @kind spacing */
+  --fx-container-tablet: 720px;  /* @kind spacing */
+  /* desktop = --fx-container (1220px, spacing.css) */
+
+  /* ===== 12-column grid ===== */
+  --fx-grid-columns: 12;         /* @kind other */
+  --fx-grid-base: 8px;           /* modular base unit */
+  --fx-grid-gutter: 16px;
+
+  /* ===== Spacing scale (8px modular; rem-mapped at 16px base) ===== */
+  --fx-space-xxs: 4px;    /* 0.25rem */
+  --fx-space-xs: 8px;     /* 0.5rem */
+  --fx-space-s: 12px;     /* 0.75rem */
+  --fx-space-m: 16px;     /* 1rem */
+  --fx-space-l: 24px;     /* 1.5rem */
+  --fx-space-xl: 32px;    /* 2rem */
+  --fx-space-xxl: 40px;   /* 2.5rem */
+  --fx-space-xxxl: 48px;  /* 3rem */
+  --fx-space-xxxxl: 64px; /* 4rem */
+}

@@ -1,0 +1,212 @@
+<!-- @dsCard group="7 · Fluxline Web" viewport="900x760" subtitle="Accessibility drawer — the control surface for the mode + motion + transparency tokens" name="Preferences Drawer" -->
+<!-- @startingPoint section="Fluxline Web" subtitle="Accessibility preferences drawer wired to the live theme/motion/transparency tokens" viewport="900x760" -->
+<!DOCTYPE html>
+<html lang="en" data-fx-theme="dark">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  html { font-size: 16px; }
+  body {
+    margin: 0; font-family: var(--fx-font); color: var(--fx-text-base);
+    background:
+      radial-gradient(120% 80% at 100% 0%, rgba(174,198,238,0.06), transparent 60%),
+      var(--fx-bg-page);
+    min-height: 100vh; display: flex; justify-content: flex-end;
+    transition: background var(--fx-color-duration, .25s) var(--fx-ease);
+  }
+  /* faux page behind the drawer so the mode change is visible on real content */
+  .backdrop {
+    position: fixed; inset: 0; padding: 40px 48px; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 18px; pointer-events: none;
+  }
+  .b-nav { display: flex; align-items: center; gap: 14px; }
+  .b-brand { font-weight: 700; font-size: 16px; color: var(--fx-text-bright); }
+  .b-chip { border: 1px solid var(--fx-border); border-radius: 999px; padding: 6px 13px; font-size: 12.5px; color: var(--fx-text-muted); }
+  .b-card { background: var(--fx-surface-card); border: 1px solid var(--fx-border); border-radius: 14px; padding: 22px 24px; max-width: 420px; }
+  .b-h { font-size: 26px; font-weight: 800; color: var(--fx-text-heading-display); letter-spacing: -0.01em; margin: 0 0 8px; }
+  .b-p { font-size: 15px; line-height: 1.65; color: var(--fx-text-body); margin: 0; }
+  .b-btn { margin-top: 16px; display: inline-block; background: var(--fx-accent); color: var(--fx-accent-ink); font-weight: 600; font-size: 14px; line-height: 1.1; padding: 11px 18px 12px; border-radius: 8px; }
+
+  /* ── the drawer ── */
+  .drawer {
+    position: relative; z-index: 2; width: 380px; min-height: 100vh; box-sizing: border-box;
+    background: var(--fx-bg-deep); border-left: 1px solid var(--fx-border);
+    padding: 34px 30px 26px; display: flex; flex-direction: column;
+    box-shadow: -24px 0 60px rgba(0,0,0,0.35);
+  }
+  .d-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .d-title { font-size: 30px; font-weight: 800; color: var(--fx-text-heading-display); letter-spacing: -0.02em; margin: 0; }
+  .d-sub { font-size: 14px; color: var(--fx-text-muted); margin: 8px 0 0; line-height: 1.5; }
+  .d-x { background: none; border: none; color: var(--fx-error); font-size: 22px; line-height: 1; cursor: pointer; padding: 4px; border-radius: 6px; transition: background var(--fx-hover-duration) var(--fx-ease); }
+  .d-x:hover { background: var(--fx-hover-fill); }
+  .d-rule { height: 1px; background: var(--fx-border-subtle); margin: 22px 0; }
+  .d-group { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fx-text-soft); margin: 0 0 12px; }
+  .d-stack { display: flex; flex-direction: column; gap: 12px; }
+  .row {
+    background: var(--fx-surface-card); border: 1px solid var(--fx-border); border-radius: 12px;
+    padding: 16px 18px; transition: border-color var(--fx-hover-duration) var(--fx-ease);
+  }
+  .row:hover { border-color: var(--fx-border-hover); }
+  .row-top { display: flex; align-items: flex-start; gap: 13px; }
+  .row-ico { flex: none; width: 26px; height: 26px; color: var(--fx-accent); margin-top: 1px; }
+  .row-ico svg { width: 100%; height: 100%; }
+  .row-body { flex: 1; min-width: 0; }
+  .row-title { font-size: 15.5px; font-weight: 700; color: var(--fx-text-bright); display: flex; align-items: center; justify-content: space-between; gap: 10px; white-space: nowrap; }
+  .row-desc { font-size: 13px; color: var(--fx-text-muted); line-height: 1.5; margin-top: 4px; }
+  .row-val { font-size: 14px; font-weight: 700; color: var(--fx-teal); font-variant-numeric: tabular-nums; }
+
+  select.fx {
+    width: 100%; box-sizing: border-box; margin-top: 12px; appearance: none;
+    background: var(--fx-surface-input); border: 1px solid var(--fx-border); border-radius: 8px;
+    padding: 11px 38px 11px 14px; font-size: 14.5px; font-family: var(--fx-font);
+    color: var(--fx-text-bright); cursor: pointer; outline: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--fx-text-soft) 50%), linear-gradient(135deg, var(--fx-text-soft) 50%, transparent 50%);
+    background-position: right 17px center, right 12px center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+    transition: border-color var(--fx-hover-duration) var(--fx-ease);
+  }
+  select.fx:focus { border-color: var(--fx-border-hover); }
+
+  input[type=range].fx { -webkit-appearance: none; appearance: none; width: 100%; margin-top: 14px; height: 4px; border-radius: 4px; background: var(--fx-border); outline: none; }
+  input[type=range].fx::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--fx-accent); cursor: pointer; border: 3px solid var(--fx-bg-deep); box-shadow: 0 0 0 1px var(--fx-accent); }
+  input[type=range].fx::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--fx-accent); cursor: pointer; border: 3px solid var(--fx-bg-deep); }
+
+  .sw { flex: none; width: 40px; height: 23px; border-radius: 999px; border: none; padding: 0; cursor: pointer; position: relative; background: var(--fx-border); transition: background var(--fx-color-duration) var(--fx-ease); }
+  .sw[aria-checked="true"] { background: var(--fx-accent); }
+  .sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 19px; height: 19px; border-radius: 50%; background: var(--fx-text-soft); transition: left var(--fx-hover-duration) var(--fx-ease), background var(--fx-color-duration); }
+  .sw[aria-checked="true"]::after { left: 19px; background: var(--fx-accent-ink); }
+
+  .d-foot { margin-top: auto; padding-top: 22px; }
+  .reset { width: 100%; box-sizing: border-box; background: none; border: 1px solid var(--fx-line); color: var(--fx-error); font-weight: 700; font-size: 14px; padding: 12px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background var(--fx-hover-duration) var(--fx-ease); }
+  .reset:hover { background: var(--fx-hover-fill); }
+
+  /* Reduce transparency: kill the blur/translucency the rule allows */
+  html[data-fx-transparency="reduce"] .b-chip { backdrop-filter: none; }
+  html[data-fx-motion="reduce"] * { transition-duration: 0.001s !important; animation-duration: 0.001s !important; }
+</style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <div class="b-nav"><span class="b-brand">Fluxline Resonance Group</span><span class="b-chip">Structure the Shift</span></div>
+    <div class="b-card">
+      <h1 class="b-h">Preview content</h1>
+      <p class="b-p">This panel drives the live tokens. Change the theme or nudge the font size and watch the page behind it respond — the drawer is the same mode system your specimen cards document.</p>
+      <span class="b-btn">Book a Consultation</span>
+    </div>
+  </div>
+
+  <aside class="drawer" role="dialog" aria-label="Preferences">
+    <div class="d-head">
+      <div>
+        <h2 class="d-title">Preferences</h2>
+        <p class="d-sub">Customize your experience to match your needs.</p>
+      </div>
+      <button class="d-x" aria-label="Close">✕</button>
+    </div>
+
+    <div class="d-rule"></div>
+
+    <p class="d-group">Appearance</p>
+    <div class="d-stack">
+      <div class="row">
+        <div class="row-top">
+          <span class="row-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".8" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".8" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".8" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".8" fill="currentColor"/><path d="M12 2C6.5 2 2 6 2 11c0 4.5 3.5 8 8 8 1.4 0 2-.8 2-1.7 0-.5-.3-.9-.6-1.2-.3-.4-.6-.7-.6-1.2 0-.9.7-1.6 1.6-1.6H14c3.3 0 6-2.7 6-6 0-3.9-3.6-7-8-7Z"/></svg></span>
+          <div class="row-body">
+            <div class="row-title">Theme</div>
+            <div class="row-desc">Six accessible modes — all documented in this system.</div>
+          </div>
+        </div>
+        <select class="fx" id="theme">
+          <option value="dark">Dark Mode (default)</option>
+          <option value="light">Light Mode</option>
+          <option value="grayscale-dark">Grayscale — Dark</option>
+          <option value="grayscale-light">Grayscale — Light</option>
+          <option value="high-contrast">High Contrast</option>
+          <option value="colorblind">Colorblind-Safe</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="row-top">
+          <span class="row-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 19 5-13 5 13M4.7 15h6.6"/><path d="M14 19l3.5-9 3.5 9M15 16h5"/></svg></span>
+          <div class="row-body">
+            <div class="row-title"><span>Font Size</span><span class="row-val" id="fsval">100%</span></div>
+            <div class="row-desc">Scales every rem &amp; clamp token from the 16px root.</div>
+          </div>
+        </div>
+        <input class="fx" type="range" id="fontsize" min="85" max="130" step="5" value="100">
+      </div>
+    </div>
+
+    <p class="d-group" style="margin-top:26px">Accessibility</p>
+    <div class="d-stack">
+      <div class="row">
+        <div class="row-top">
+          <span class="row-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor" stroke="none"/></svg></span>
+          <div class="row-body">
+            <div class="row-title"><span>Reduced Motion</span><button class="sw" id="motion" role="switch" aria-checked="false"></button></div>
+            <div class="row-desc">Minimize animations and transitions.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="row-top">
+          <span class="row-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v7H4zM13 13h7v7h-7z"/><path d="M13 4h7v7h-7zM4 13h7v7H4z" opacity=".45"/></svg></span>
+          <div class="row-body">
+            <div class="row-title"><span>Reduce Transparency</span><button class="sw" id="transp" role="switch" aria-checked="false"></button></div>
+            <div class="row-desc">Solid fills instead of nav &amp; hero blur.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-foot">
+      <button class="reset" id="reset"><span style="font-size:15px">↺</span> Reset to Defaults</button>
+    </div>
+  </aside>
+
+<script>
+  // Persisted the same way the app's Zustand store is (single JSON key).
+  var STORE_KEY = 'fluxline.preferences';
+  var DEFAULTS = { theme: 'dark', fontSize: 100, reducedMotion: false, reduceTransparency: false };
+  var root = document.documentElement;
+  var theme = document.getElementById('theme');
+  var fs = document.getElementById('fontsize');
+  var fsval = document.getElementById('fsval');
+  var motion = document.getElementById('motion');
+  var transp = document.getElementById('transp');
+
+  function load(){
+    try { return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(STORE_KEY) || '{}')); }
+    catch (e) { return Object.assign({}, DEFAULTS); }
+  }
+  function save(p){ try { localStorage.setItem(STORE_KEY, JSON.stringify(p)); } catch (e) {} }
+
+  function apply(p){
+    root.setAttribute('data-fx-theme', p.theme);
+    root.style.fontSize = (p.fontSize / 100 * 16) + 'px';
+    p.reducedMotion ? root.setAttribute('data-fx-motion', 'reduce') : root.removeAttribute('data-fx-motion');
+    p.reduceTransparency ? root.setAttribute('data-fx-transparency', 'reduce') : root.removeAttribute('data-fx-transparency');
+    theme.value = p.theme;
+    fs.value = p.fontSize; fsval.textContent = p.fontSize + '%';
+    motion.setAttribute('aria-checked', p.reducedMotion);
+    transp.setAttribute('aria-checked', p.reduceTransparency);
+  }
+
+  var prefs = load();
+  apply(prefs);
+
+  theme.addEventListener('change', function(){ prefs.theme = theme.value; apply(prefs); save(prefs); });
+  fs.addEventListener('input', function(){ prefs.fontSize = +fs.value; apply(prefs); save(prefs); });
+  function toggle(el, key){
+    el.addEventListener('click', function(){ prefs[key] = el.getAttribute('aria-checked') !== 'true'; apply(prefs); save(prefs); });
+  }
+  toggle(motion, 'reducedMotion');
+  toggle(transp, 'reduceTransparency');
+  document.getElementById('reset').addEventListener('click', function(){
+    prefs = Object.assign({}, DEFAULTS); apply(prefs); save(prefs);
+  });
+</script>
+</body>
+</html>

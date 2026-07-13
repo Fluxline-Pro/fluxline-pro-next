@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Typography } from '@/theme/components/typography';
 
 interface StepTidyCalProps {
   /** Fully-formed TidyCal URL with prefill query params */
@@ -25,8 +23,6 @@ export function StepTidyCal({
   onComplete,
   onBack,
 }: StepTidyCalProps) {
-  const { theme } = useAppTheme();
-
   // Detect booking completion via postMessage from the TidyCal iframe
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
@@ -47,19 +43,18 @@ export function StepTidyCal({
 
   return (
     <div
-      style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing.m }}
+      style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
     >
       <div>
-        <Typography variant='h4' style={{ marginBottom: theme.spacing.s1 }}>
+        <h4 style={{ marginBottom: '8px', fontSize: 'var(--fx-subhead-size)', fontWeight: 'var(--fx-subhead-weight)', color: 'var(--fx-text-heading)' }}>
           Pick a time
-        </Typography>
-        <Typography
-          variant='p'
-          style={{ color: theme.palette.neutralSecondary, margin: 0 }}
+        </h4>
+        <p
+          style={{ color: 'var(--fx-text-muted)', margin: 0, fontSize: 'var(--fx-body-size)', lineHeight: 'var(--fx-body-leading)' }}
         >
           Choose a date and time below. Your contact details have been
           pre-filled.
-        </Typography>
+        </p>
       </div>
 
       <iframe
@@ -67,8 +62,8 @@ export function StepTidyCal({
         style={{
           width: '100%',
           height: '600px',
-          border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
-          borderRadius: theme.effects.roundedCorner4,
+          border: '1px solid var(--fx-border)',
+          borderRadius: 'var(--fx-radius-control)',
         }}
         title='Schedule your consultation'
       />
@@ -86,9 +81,9 @@ export function StepTidyCal({
           style={{
             background: 'none',
             border: 'none',
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-muted)',
             cursor: 'pointer',
-            fontSize: theme.typography.fonts.bodySmall.fontSize,
+            fontSize: 'var(--fx-body-sm-size)',
           }}
         >
           ← Back
@@ -99,9 +94,9 @@ export function StepTidyCal({
           style={{
             background: 'none',
             border: 'none',
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-muted)',
             cursor: 'pointer',
-            fontSize: theme.typography.fonts.bodySmall.fontSize,
+            fontSize: 'var(--fx-body-sm-size)',
             textDecoration: 'underline',
           }}
         >

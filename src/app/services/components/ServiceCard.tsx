@@ -7,9 +7,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import type { ServiceCategory } from '../constants';
 
 interface ServiceCardProps {
@@ -17,7 +14,6 @@ interface ServiceCardProps {
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
-  const { theme } = useAppTheme();
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -29,13 +25,15 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
         display: 'flex',
         flexDirection: 'column',
         padding: '1.5rem',
-        borderRadius: theme.borderRadius.container.medium,
-        border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+        borderRadius: 'var(--fx-radius-card)',
+        border: '1px solid var(--fx-border)',
         backgroundColor: 'transparent',
         textDecoration: 'none',
         transition: 'all 0.3s ease',
         transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: isHovered ? theme.shadows.m : 'none',
+        boxShadow: isHovered
+          ? '0 4px 16px rgba(0, 0, 0, 0.12)'
+          : 'none',
         opacity: isHovered ? 1 : 0.9,
       }}
     >
@@ -47,33 +45,26 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           marginBottom: '1rem',
         }}
       >
-        <FluentIcon
-          iconName={service.icon}
-          size="large"
-          color={theme.palette.themePrimary}
-        />
-        <Typography
-          variant="h3"
+        <h3
           style={{
-            color: theme.palette.themePrimary,
+            color: 'var(--fx-accent)',
             fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
-            fontWeight: theme.typography.fontWeights.semiBold,
+            fontWeight: 600,
           }}
         >
           {service.title}
-        </Typography>
+        </h3>
       </div>
 
-      <Typography
-        variant="p"
+      <p
         style={{
-          color: theme.palette.neutralSecondary,
+          color: 'var(--fx-text-muted)',
           fontSize: '1rem',
-          lineHeight: theme.typography.lineHeights.relaxed,
+          lineHeight: 1.65,
         }}
       >
         {service.description}
-      </Typography>
+      </p>
 
       <div
         style={{
@@ -83,28 +74,28 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           gap: '0.5rem',
         }}
       >
-        <Typography
-          variant="p"
+        <span
           style={{
-            color: theme.palette.themeTertiary,
+            color: 'var(--fx-text-soft)',
             fontSize: '0.875rem',
-            fontWeight: theme.typography.fontWeights.medium,
+            fontWeight: 500,
             opacity: isHovered ? 1 : 0.7,
             transition: 'opacity 0.2s ease',
           }}
         >
           Learn more
-        </Typography>
-        <FluentIcon
-          iconName="ChevronRight"
-          size="small"
-          color={theme.palette.themeTertiary}
+        </span>
+        <span
           style={{
+            color: 'var(--fx-text-soft)',
             opacity: isHovered ? 1 : 0.7,
             transition: 'all 0.2s ease',
             transform: isHovered ? 'translateX(4px)' : 'translateX(0)',
+            display: 'inline-block',
           }}
-        />
+        >
+          &#8250;
+        </span>
       </div>
     </Link>
   );

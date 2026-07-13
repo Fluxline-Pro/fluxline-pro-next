@@ -1,118 +1,199 @@
 'use client';
 
-/**
- * Root 404 Not Found Page
- * Global fallback for pages that don't exist
- */
-
 import React from 'react';
-import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import ConsultingImage from '@/assets/images/ConsultingPortrait.jpg';
+import Link from 'next/link';
+import { FxButton } from '@/theme/components/dsm';
+
+const navCards = [
+  { title: 'Home', desc: 'Start at the top.', href: '/' },
+  { title: 'Services', desc: 'Six modular offerings.', href: '/services' },
+  { title: 'Content Hub', desc: 'Blog, podcast, portfolio.', href: '/blog' },
+  { title: 'Contact', desc: 'Tell us what you needed.', href: '/contact' },
+];
 
 export default function NotFound() {
-  const { theme } = useAppTheme();
-
-  const handleOpenMenu = () => {
-    // Trigger the header's menu button click
-    const menuButton = document.querySelector(
-      '[aria-label="Open menu"]'
-    ) as HTMLButtonElement;
-    if (menuButton) {
-      menuButton.click();
-    }
-  };
+  const [hovered, setHovered] = React.useState<number | null>(null);
 
   return (
-    <UnifiedPageWrapper
-      layoutType='responsive-grid'
-      forceImageConfig={{
-        image: ConsultingImage.src,
-        imageText: '404 - Page Not Found',
+    <div
+      style={{
+        background: 'var(--fx-gradient-hero, linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%))',
+        color: 'var(--fx-text-body)',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <div
-        className='flex flex-col items-center justify-center space-y-8'
-        style={{ minHeight: '60vh', padding: theme.spacing.xl }}
+      <svg
+        viewBox='0 0 1400 900'
+        preserveAspectRatio='xMidYMid slice'
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          opacity: 0.4,
+        }}
+        aria-hidden='true'
       >
-        <Typography
-          variant='h1'
-          style={{
-            color: theme.palette.themePrimary,
-            fontSize: 'clamp(3rem, 10vw, 6rem)',
-            fontWeight: theme.typography.fontWeights.bold,
-            textAlign: 'center',
-            lineHeight: 1,
-            textTransform: 'none',
-          }}
-        >
-          Uh oh!
-        </Typography>
+        <g stroke='#5E81A8' strokeWidth='1' opacity='.3'>
+          <path
+            d='M-40 700 L310 520 L520 720 L780 580 L1060 740 L1290 540 L1460 640'
+            fill='none'
+          />
+          <path
+            d='M180 -40 L420 180 L700 70 L960 240 L1240 100 L1440 220'
+            fill='none'
+          />
+          <path
+            d='M310 520 L420 180 M780 580 L700 70'
+            fill='none'
+            opacity='.5'
+            strokeDasharray='6 8'
+          />
+          <path
+            d='M1060 740 L1240 100'
+            fill='none'
+            opacity='.35'
+            strokeDasharray='3 10'
+          />
+        </g>
+        <g fill='#9FB6D4'>
+          <circle cx='310' cy='520' r='3.5' opacity='0.5' />
+          <circle cx='700' cy='70' r='3' opacity='0.5' />
+          <circle cx='1240' cy='100' r='3.5' opacity='0.5' />
+          <circle cx='1060' cy='740' r='2.5' opacity='0.5' />
+        </g>
+      </svg>
 
-        <Typography
-          variant='h2'
-          style={{
-            color: theme.palette.neutralPrimary,
-            fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
-            fontWeight: theme.typography.fontWeights.semiBold,
-            textAlign: 'center',
-            marginTop: theme.spacing.m,
-            textTransform: 'none',
-          }}
-        >
-          Sorry, this page was not found
-        </Typography>
-
-        <Typography
-          variant='p'
-          style={{
-            color: theme.palette.neutralSecondary,
-            fontSize: '1.125rem',
-            textAlign: 'center',
-            maxWidth: '600px',
-            lineHeight: 1.6,
-          }}
-        >
-          The page you&apos;re looking for doesn&apos;t exist or has been moved.
-          Use the menu to explore our services, content, and offerings.
-        </Typography>
-
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: theme.spacing.m,
-            marginTop: theme.spacing.l,
-            alignItems: 'center',
-          }}
-        >
-          <FormButton
-            variant='primary'
-            size='large'
-            icon='GlobalNavButton'
-            iconPosition='left'
-            onClick={handleOpenMenu}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '60px 32px',
+        }}
+      >
+        <div style={{ maxWidth: 720, width: '100%', textAlign: 'center' }}>
+          <div
             style={{
-              minWidth: '200px',
+              fontSize: 13,
+              letterSpacing: '.3em',
+              textTransform: 'uppercase',
+              color: 'var(--fx-text-soft)',
+              marginBottom: 14,
             }}
           >
-            Open the Menu
-          </FormButton>
+            Error 404 &middot; Signal Lost
+          </div>
 
-          <Typography
-            variant='p'
+          <h1
             style={{
-              color: theme.palette.neutralTertiary,
-              fontSize: '0.875rem',
-              textAlign: 'center',
+              fontSize: 'clamp(80px, 14vw, 150px)',
+              fontWeight: 800,
+              letterSpacing: '.04em',
+              color: 'var(--fx-text-heading-display)',
+              margin: '0 0 6px',
+              lineHeight: 1,
             }}
           >
-            or use the menu button in the top navigation to explore
-          </Typography>
+            4<span style={{ color: 'var(--fx-text-soft)' }}>0</span>4
+          </h1>
+
+          <div
+            style={{
+              height: 2,
+              width: 220,
+              margin: '0 auto 26px',
+              background:
+                'linear-gradient(90deg,transparent,var(--fx-line),var(--fx-accent),var(--fx-line),transparent)',
+            }}
+          />
+
+          <p
+            style={{
+              fontSize: 19,
+              fontWeight: 600,
+              color: 'var(--fx-teal)',
+              margin: '0 0 10px',
+            }}
+          >
+            This page is out of resonance.
+          </p>
+
+          <p
+            style={{
+              fontSize: 15.5,
+              lineHeight: 1.7,
+              color: 'var(--fx-text-soft)',
+              margin: '0 auto 36px',
+              maxWidth: '48ch',
+            }}
+          >
+            The path you followed doesn&apos;t exist here &mdash; it may have
+            moved, or the link may be mistyped. Every obstacle becomes the path:
+            here&apos;s where to go instead.
+          </p>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: 12,
+              textAlign: 'left',
+              marginBottom: 30,
+            }}
+          >
+            {navCards.map((card, i) => (
+              <Link
+                key={card.href}
+                href={card.href}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  display: 'block',
+                  background: 'var(--fx-surface-card)',
+                  border: `1px solid ${hovered === i ? 'var(--fx-text-soft)' : 'var(--fx-border)'}`,
+                  borderRadius: 12,
+                  padding: '16px 18px',
+                  textDecoration: 'none',
+                  transition: 'border-color .18s, transform .18s',
+                  transform: hovered === i ? 'translateY(-2px)' : 'none',
+                }}
+              >
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 14,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 3,
+                  }}
+                >
+                  {card.title}
+                </div>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: 'var(--fx-text-soft)',
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {card.desc}
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <FxButton size='lg' href='/'>
+            &larr; Take Me Home
+          </FxButton>
         </div>
       </div>
-    </UnifiedPageWrapper>
+    </div>
   );
 }

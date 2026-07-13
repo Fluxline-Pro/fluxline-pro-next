@@ -3,10 +3,7 @@
 import React, { useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import DOMPurify from 'dompurify';
-import { Typography } from '../theme/components/typography';
-import { useAppTheme } from '../theme/hooks/useAppTheme';
-import { typography } from '../theme/theme';
-import { useColorVisionFilter } from '@/theme';
+import { useColorVisionFilter } from '@/theme/hooks/useColorVisionFilter';
 
 /**
  * Content types supported by the markdown renderer
@@ -81,12 +78,11 @@ const convertNotionUrls = (content: string): string => {
  * - Uses ReactMarkdown for Markdown/MDX
  * - Sanitizes and renders HTML securely
  * - Converts Notion URLs to relative site URLs
- * - Applies Fluxline Pro theme typography
+ * - Applies Fluxline Pro DSM typography tokens
  */
 export const UnifiedMarkdownRenderer: React.FC<
   UnifiedMarkdownRendererProps
 > = ({ content, contentType, className }) => {
-  const { theme } = useAppTheme();
   const { filter } = useColorVisionFilter();
 
   // Auto-detect content type if not provided
@@ -107,20 +103,20 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLHeadingElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='h1'
+        <h1
           {...props}
           className='markdown-h1'
           style={{
             fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-            fontWeight: typography.fontWeights.semiBold,
-            color: theme.semanticColors.bodyText,
-            marginTop: theme.spacing.xl,
-            marginBottom: theme.spacing.m,
+            fontWeight: 600,
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
+            marginTop: '32px',
+            marginBottom: '16px',
           }}
         >
           {children}
-        </Typography>
+        </h1>
       ),
       h2: ({
         children,
@@ -128,19 +124,19 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLHeadingElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='h2'
+        <h2
           {...props}
           style={{
             fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
-            fontWeight: typography.fontWeights.semiBold,
-            color: theme.semanticColors.bodyText,
-            marginTop: theme.spacing.l,
-            marginBottom: theme.spacing.m,
+            fontWeight: 600,
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
+            marginTop: '20px',
+            marginBottom: '16px',
           }}
         >
           {children}
-        </Typography>
+        </h2>
       ),
       h3: ({
         children,
@@ -148,18 +144,20 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLHeadingElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='h3'
+        <h3
           {...props}
           style={{
-            ...typography.fonts.h3,
-            color: theme.semanticColors.bodyText,
-            marginTop: theme.spacing.l,
-            marginBottom: theme.spacing.s,
+            fontSize: 'var(--fx-h3-size)',
+            fontWeight: 'var(--fx-h3-weight)' as unknown as number,
+            fontFamily: 'var(--fx-font)',
+            letterSpacing: 'var(--fx-heading-tracking)',
+            color: 'var(--fx-text-body)',
+            marginTop: '20px',
+            marginBottom: '8px',
           }}
         >
           {children}
-        </Typography>
+        </h3>
       ),
       h4: ({
         children,
@@ -167,18 +165,19 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLHeadingElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='h4'
+        <h4
           {...props}
           style={{
-            ...typography.fonts.h4,
-            color: theme.semanticColors.bodyText,
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.s,
+            fontSize: '1.125rem',
+            fontWeight: 600,
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
+            marginTop: '16px',
+            marginBottom: '8px',
           }}
         >
           {children}
-        </Typography>
+        </h4>
       ),
       h5: ({
         children,
@@ -186,18 +185,19 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLHeadingElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='h5'
+        <h5
           {...props}
           style={{
-            ...typography.fonts.h5,
-            color: theme.semanticColors.bodyText,
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.xs,
+            fontSize: '1rem',
+            fontWeight: 600,
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
+            marginTop: '16px',
+            marginBottom: '4px',
           }}
         >
           {children}
-        </Typography>
+        </h5>
       ),
       h6: ({
         children,
@@ -205,18 +205,19 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLHeadingElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='h6'
+        <h6
           {...props}
           style={{
-            ...typography.fonts.h6,
-            color: theme.semanticColors.bodyText,
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.xs,
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
+            marginTop: '16px',
+            marginBottom: '4px',
           }}
         >
           {children}
-        </Typography>
+        </h6>
       ),
       p: ({
         children,
@@ -224,18 +225,18 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLParagraphElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='p'
+        <p
           {...props}
           style={{
-            ...typography.fonts.body,
-            color: theme.semanticColors.bodyText,
-            marginBottom: theme.spacing.m,
-            lineHeight: typography.lineHeights.normal,
+            fontSize: 'var(--fx-body-size)',
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
+            marginBottom: '16px',
+            lineHeight: 'var(--fx-body-leading)',
           }}
         >
           {children}
-        </Typography>
+        </p>
       ),
       blockquote: ({
         children,
@@ -243,22 +244,22 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLQuoteElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='blockquote'
+        <blockquote
           {...props}
           style={{
-            ...typography.fonts.quote,
-            color: theme.semanticColors.bodyText,
-            borderLeft: `4px solid ${theme.palette.accent}`,
-            paddingLeft: theme.spacing.m,
+            fontSize: 'var(--fx-body-size)',
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
+            borderLeft: '4px solid var(--fx-accent)',
+            paddingLeft: '16px',
             marginLeft: 0,
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.m,
+            marginTop: '16px',
+            marginBottom: '16px',
             fontStyle: 'italic',
           }}
         >
           {children}
-        </Typography>
+        </blockquote>
       ),
       code: ({
         children,
@@ -266,20 +267,19 @@ export const UnifiedMarkdownRenderer: React.FC<
       }: React.HTMLAttributes<HTMLElement> & {
         children?: React.ReactNode;
       }) => (
-        <Typography
-          variant='code'
+        <code
           {...props}
           style={{
-            ...typography.fonts.code,
-            backgroundColor: theme.palette.neutralQuaternaryAlt,
-            color: theme.palette.themePrimary,
+            backgroundColor: 'var(--fx-badge-bg)',
+            color: 'var(--fx-accent)',
             padding: '0.2em 0.4em',
-            borderRadius: theme.borderRadius.s,
-            fontFamily: typography.fontFamilies.mono,
+            borderRadius: 'var(--fx-radius-control)',
+            fontFamily: 'var(--fx-font-mono)',
+            fontSize: 'var(--fx-mono-size)',
           }}
         >
           {children}
-        </Typography>
+        </code>
       ),
       pre: ({
         children,
@@ -290,16 +290,17 @@ export const UnifiedMarkdownRenderer: React.FC<
         <pre
           {...props}
           style={{
-            ...typography.fonts.pre,
-            backgroundColor: theme.palette.neutralQuaternaryAlt,
-            color: theme.semanticColors.bodyText,
-            padding: theme.spacing.m,
-            borderRadius: theme.borderRadius.m,
+            backgroundColor: 'var(--fx-badge-bg)',
+            color: 'var(--fx-text-body)',
+            padding: '16px',
+            borderRadius: 'var(--fx-radius-card-sm)',
             overflow: 'auto',
             overflowX: 'auto',
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.m,
-            fontFamily: typography.fontFamilies.mono,
+            marginTop: '16px',
+            marginBottom: '16px',
+            fontFamily: 'var(--fx-font-mono)',
+            fontSize: 'var(--fx-mono-size)',
+            lineHeight: 'var(--fx-mono-leading)',
             maxWidth: '100%',
             width: '100%',
             minWidth: 0,
@@ -318,12 +319,12 @@ export const UnifiedMarkdownRenderer: React.FC<
         <ul
           {...props}
           style={{
-            color: theme.semanticColors.bodyText,
-            marginLeft: theme.spacing.l,
-            marginBottom: theme.spacing.m,
-            lineHeight: typography.lineHeights.normal,
+            color: 'var(--fx-text-body)',
+            marginLeft: '20px',
+            marginBottom: '16px',
+            lineHeight: 'var(--fx-body-leading)',
             listStyleType: 'disc',
-            paddingLeft: theme.spacing.m,
+            paddingLeft: '16px',
           }}
         >
           {children}
@@ -338,12 +339,12 @@ export const UnifiedMarkdownRenderer: React.FC<
         <ol
           {...props}
           style={{
-            color: theme.semanticColors.bodyText,
-            marginLeft: theme.spacing.l,
-            marginBottom: theme.spacing.m,
-            lineHeight: typography.lineHeights.normal,
+            color: 'var(--fx-text-body)',
+            marginLeft: '20px',
+            marginBottom: '16px',
+            lineHeight: 'var(--fx-body-leading)',
             listStyleType: 'decimal',
-            paddingLeft: theme.spacing.m,
+            paddingLeft: '16px',
           }}
         >
           {children}
@@ -358,9 +359,10 @@ export const UnifiedMarkdownRenderer: React.FC<
         <li
           {...props}
           style={{
-            ...typography.fonts.body,
-            color: theme.semanticColors.bodyText,
-            marginBottom: theme.spacing.xs,
+            fontSize: 'var(--fx-body-size)',
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
+            marginBottom: '4px',
           }}
         >
           {children}
@@ -377,15 +379,15 @@ export const UnifiedMarkdownRenderer: React.FC<
           href={href}
           {...props}
           style={{
-            color: theme.semanticColors.link,
+            color: 'var(--fx-accent)',
             textDecoration: 'underline',
-            transition: theme.animations.transitions.button,
+            transition: 'color 0.15s ease',
           }}
           onMouseOver={(e) => {
-            e.currentTarget.style.color = theme.semanticColors.linkHovered;
+            e.currentTarget.style.color = 'var(--fx-text-heading)';
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.color = theme.semanticColors.link;
+            e.currentTarget.style.color = 'var(--fx-accent)';
           }}
         >
           {children}
@@ -396,9 +398,9 @@ export const UnifiedMarkdownRenderer: React.FC<
           {...props}
           style={{
             border: 'none',
-            borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-            marginTop: theme.spacing.xl,
-            marginBottom: theme.spacing.xl,
+            borderTop: '1px solid var(--fx-border)',
+            marginTop: '32px',
+            marginBottom: '32px',
           }}
         />
       ),
@@ -418,15 +420,15 @@ export const UnifiedMarkdownRenderer: React.FC<
             maxWidth: '100%',
             height: 'auto',
             display: 'block',
-            marginTop: theme.spacing.m,
-            marginBottom: theme.spacing.m,
-            borderRadius: theme.borderRadius.m,
+            marginTop: '16px',
+            marginBottom: '16px',
+            borderRadius: 'var(--fx-radius-card-sm)',
             filter: filter,
           }}
         />
       ),
     }),
-    [theme, filter]
+    [filter]
   );
 
   // Render based on detected content type
@@ -479,8 +481,10 @@ export const UnifiedMarkdownRenderer: React.FC<
         <div
           className={className}
           style={{
-            color: theme.semanticColors.bodyText,
-            ...typography.fonts.body,
+            color: 'var(--fx-text-body)',
+            fontSize: 'var(--fx-body-size)',
+            fontFamily: 'var(--fx-font)',
+            lineHeight: 'var(--fx-body-leading)',
           }}
           dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
         />
@@ -489,18 +493,18 @@ export const UnifiedMarkdownRenderer: React.FC<
     case 'text':
     default:
       return (
-        <Typography
-          variant='p'
+        <p
           className={className}
           style={{
-            ...typography.fonts.body,
-            color: theme.semanticColors.bodyText,
+            fontSize: 'var(--fx-body-size)',
+            fontFamily: 'var(--fx-font)',
+            color: 'var(--fx-text-body)',
             whiteSpace: 'pre-wrap',
-            lineHeight: typography.lineHeights.normal,
+            lineHeight: 'var(--fx-body-leading)',
           }}
         >
           {processedContent}
-        </Typography>
+        </p>
       );
   }
 };

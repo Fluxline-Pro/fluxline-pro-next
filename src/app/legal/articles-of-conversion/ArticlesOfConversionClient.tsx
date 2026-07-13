@@ -1,15 +1,11 @@
 'use client';
 
 import React from 'react';
-import { UnifiedPageWrapper } from '../../../components/UnifiedPageWrapper';
-import { Hero } from '@/theme/components/hero/Hero';
-import { Typography } from '../../../theme/components/typography';
-import { useAppTheme } from '../../../theme/hooks/useAppTheme';
-import { typography, spacing } from '../../../theme/theme';
+import Link from 'next/link';
+import FxContainer from '@/theme/components/dsm/FxContainer';
 import { FadeUp } from '@/animations/fade-animations';
 
 export default function ArticlesOfConversionClient() {
-  const { theme } = useAppTheme();
   const currentYear = new Date().getFullYear();
 
   // In a real implementation, you would have the actual PDF file
@@ -17,67 +13,89 @@ export default function ArticlesOfConversionClient() {
   const pdfUrl = '/assets/legal/articles-of-conversion.pdf';
 
   return (
-    <UnifiedPageWrapper layoutType='responsive-grid' showImageTitle={false}>
+    <FxContainer>
       <FadeUp duration={0.5} delay={0}>
         <div
           style={{
-            padding: theme.spacing.xl,
+            padding: '2rem',
             maxWidth: '900px',
             margin: '0 auto',
             width: '100%',
           }}
         >
           {/* Hero Section */}
-          <Hero
-            title='Articles of Conversion'
-            description='Legal Entity Conversion Documentation'
-            backArrow={true}
-            backArrowPath='/legal'
-          />
+          <div style={{
+            border: '1px solid var(--fx-border)',
+            backgroundColor: 'var(--fx-surface-card)',
+            padding: 'clamp(1.5rem, 4vw, 3rem)',
+            borderRadius: 'var(--fx-radius-card)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5rem',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Link href="/legal" style={{ color: 'var(--fx-accent)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </Link>
+              <h1 style={{
+                color: 'var(--fx-accent)',
+                fontSize: 'clamp(2rem, 5vw, 3rem)',
+                fontWeight: 700,
+                lineHeight: 1.2,
+                margin: 0,
+                fontFamily: 'var(--fx-font)',
+              }}>Articles of Conversion</h1>
+            </div>
+            <p style={{ color: 'var(--fx-text-muted)', fontSize: '1.125rem', lineHeight: 1.6, margin: '1rem 0 0' }}>Legal Entity Conversion Documentation</p>
+          </div>
 
           {/* Description */}
-          <Typography
-            variant='p'
+          <p
             style={{
-              ...typography.fonts.body,
-              color: theme.semanticColors.bodyText,
-              marginBottom: spacing.l,
-              marginTop: spacing.xl,
+              fontFamily: 'var(--fx-font)',
+              fontSize: 'var(--fx-body-size)',
+              lineHeight: 'var(--fx-body-leading)',
+              color: 'var(--fx-text-body)',
+              marginBottom: '1.5rem',
+              marginTop: '2rem',
             }}
           >
             The Articles of Conversion document the legal transformation of
             Fluxline Resonance Group business entity structure. This official
             filing records the conversion process and regulatory compliance.
-          </Typography>
+          </p>
 
           {/* PDF Viewer Container */}
           <div
             style={{
-              marginTop: spacing.xl,
-              marginBottom: spacing.xl,
-              border: `1px solid ${theme.palette.neutralQuaternary}`,
-              borderRadius: theme.borderRadius.m,
-              padding: spacing.l,
-              backgroundColor: theme.palette.neutralQuaternaryAlt,
+              marginTop: '2rem',
+              marginBottom: '2rem',
+              border: '1px solid var(--fx-border)',
+              borderRadius: 'var(--fx-radius-card)',
+              padding: '1.5rem',
+              backgroundColor: 'var(--fx-surface-inset)',
               textAlign: 'center',
             }}
           >
-            <Typography
-              variant='h4'
+            <h4
               style={{
-                ...typography.fonts.h4,
-                color: theme.semanticColors.bodyText,
-                marginBottom: spacing.m,
+                fontFamily: 'var(--fx-font)',
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                color: 'var(--fx-text-body)',
+                marginBottom: '1rem',
               }}
             >
               PDF Document
-            </Typography>
+            </h4>
 
             {/* PDF Embed or Download Link */}
             <div
               style={{
-                marginTop: spacing.m,
-                marginBottom: spacing.m,
+                marginTop: '1rem',
+                marginBottom: '1rem',
               }}
             >
               {/* For browsers that support PDF embedding */}
@@ -87,39 +105,40 @@ export default function ArticlesOfConversionClient() {
                 width='100%'
                 style={{
                   minHeight: '600px',
-                  border: `1px solid ${theme.palette.neutralTertiary}`,
-                  borderRadius: theme.borderRadius.s,
+                  border: '1px solid var(--fx-text-faint)',
+                  borderRadius: '4px',
                 }}
               >
                 {/* Fallback for browsers that don't support PDF embedding */}
                 <div
                   style={{
-                    padding: spacing.xl,
+                    padding: '2rem',
                     textAlign: 'center',
                   }}
                 >
-                  <Typography
-                    variant='p'
+                  <p
                     style={{
-                      ...typography.fonts.body,
-                      color: theme.semanticColors.bodyText,
-                      marginBottom: spacing.m,
+                      fontFamily: 'var(--fx-font)',
+                      fontSize: 'var(--fx-body-size)',
+                      lineHeight: 'var(--fx-body-leading)',
+                      color: 'var(--fx-text-body)',
+                      marginBottom: '1rem',
                     }}
                   >
                     Your browser does not support embedded PDF viewing.
-                  </Typography>
+                  </p>
                   <a
                     href={pdfUrl}
                     download='Fluxline-Articles-of-Conversion.pdf'
                     style={{
                       display: 'inline-block',
-                      padding: `${spacing.s} ${spacing.l}`,
-                      backgroundColor: theme.palette.themePrimary,
-                      color: theme.palette.white,
-                      borderRadius: theme.borderRadius.m,
+                      padding: '0.75rem 1.5rem',
+                      backgroundColor: 'var(--fx-accent)',
+                      color: 'var(--fx-text-bright)',
+                      borderRadius: 'var(--fx-radius-card)',
                       textDecoration: 'none',
-                      fontWeight: typography.fontWeights.semiBold,
-                      transition: theme.animations.transitions.button,
+                      fontWeight: 600,
+                      transition: 'all 0.2s ease',
                     }}
                   >
                     Download PDF
@@ -134,14 +153,14 @@ export default function ArticlesOfConversionClient() {
               download='Fluxline-Articles-of-Conversion.pdf'
               style={{
                 display: 'inline-block',
-                marginTop: spacing.m,
-                padding: `${spacing.s} ${spacing.l}`,
-                backgroundColor: theme.palette.themePrimary,
-                color: theme.palette.white,
-                borderRadius: theme.borderRadius.m,
+                marginTop: '1rem',
+                padding: '0.75rem 1.5rem',
+                backgroundColor: 'var(--fx-accent)',
+                color: 'var(--fx-text-bright)',
+                borderRadius: 'var(--fx-radius-card)',
                 textDecoration: 'none',
-                fontWeight: typography.fontWeights.semiBold,
-                transition: theme.animations.transitions.button,
+                fontWeight: 600,
+                transition: 'all 0.2s ease',
               }}
             >
               Download PDF
@@ -151,21 +170,21 @@ export default function ArticlesOfConversionClient() {
           {/* Copyright Footer */}
           <div
             style={{
-              marginTop: theme.spacing.xxxl,
-              paddingTop: theme.spacing.l,
-              borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+              marginTop: '3rem',
+              paddingTop: '1.5rem',
+              borderTop: '1px solid var(--fx-border)',
               textAlign: 'center',
-              color: theme.palette.neutralTertiary,
-              fontSize: theme.fonts.small.fontSize,
+              color: 'var(--fx-text-faint)',
+              fontSize: '0.875rem',
             }}
           >
             <p>
-              © {currentYear} Fluxline Resonance Group, LLC. All rights
+              &copy; {currentYear} Fluxline Resonance Group, LLC. All rights
               reserved.
             </p>
           </div>
         </div>
       </FadeUp>
-    </UnifiedPageWrapper>
+    </FxContainer>
   );
 }

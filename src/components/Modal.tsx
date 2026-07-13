@@ -4,14 +4,14 @@
  * Modal Component
  * Reusable full-screen modal with overlay
  * Supports custom content and styling with smooth animations
+ *
+ * Styled with DSM CSS custom properties (var(--fx-*) tokens).
  */
 
 import React, { useEffect, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useReducedMotion } from '@/theme/hooks/useReducedMotion';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 
 export interface ModalProps {
   /** Whether the modal is open */
@@ -42,12 +42,7 @@ export const Modal: React.FC<ModalProps> = ({
   showCloseButton = true,
   style,
 }) => {
-  const { theme } = useAppTheme();
   const { shouldReduceMotion } = useReducedMotion();
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
 
   // useSyncExternalStore returns false on server and true on client —
   // the React-recommended way to detect the client without an effect.
@@ -161,12 +156,10 @@ export const Modal: React.FC<ModalProps> = ({
               maxWidth,
               maxHeight,
               width: '100%',
-              backgroundColor: isDark
-                ? theme.palette.themeDark
-                : theme.palette.neutralQuaternary,
-              border: `1px solid ${theme.palette.neutralTertiary}`,
-              borderRadius: theme.borderRadius.container.medium,
-              boxShadow: theme.shadows.hero || theme.effects.elevation16,
+              backgroundColor: 'var(--fx-surface-card)',
+              border: '1px solid var(--fx-border)',
+              borderRadius: 'var(--fx-radius-card)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.45)',
               overflow: 'auto',
               ...style,
             }}
@@ -183,12 +176,19 @@ export const Modal: React.FC<ModalProps> = ({
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  padding: '1.5rem',
+                  padding: '0.75rem',
                   borderRadius: '50%',
                   backgroundColor: 'rgba(0, 0, 0, 0.1)',
                   transition: 'background-color 0.2s ease, transform 0.2s ease',
                   transform: 'scale(1)',
                   zIndex: 10,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  lineHeight: 1,
+                  fontSize: '20px',
+                  fontWeight: 700,
+                  color: 'var(--fx-text-bright)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
@@ -200,16 +200,12 @@ export const Modal: React.FC<ModalProps> = ({
                 }}
                 aria-label='Close modal'
               >
-                <FluentIcon
-                  iconName='Cancel'
-                  size='large'
-                  color={theme.semanticColors.errorIcon}
-                />
+                {'✕'}
               </button>
             )}
 
             {/* Content */}
-            <div style={{ padding: theme.spacing.xl }}>{children}</div>
+            <div style={{ padding: '32px' }}>{children}</div>
           </motion.div>
         </motion.div>
       )}

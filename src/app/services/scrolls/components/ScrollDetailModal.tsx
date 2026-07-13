@@ -8,11 +8,8 @@
 import React from 'react';
 import { ScrollItem } from '../types';
 import { categoryLabels } from '../scrollsData';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Modal } from '@/components/Modal';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form/FormButton';
-import { FluentIcon } from '@/theme/components/fluent-icon';
+import FxButton from '@/theme/components/dsm/FxButton';
 
 interface ScrollDetailModalProps {
   scroll: ScrollItem;
@@ -25,12 +22,6 @@ export function ScrollDetailModal({
   isOpen,
   onClose,
 }: ScrollDetailModalProps) {
-  const { theme } = useAppTheme();
-  const isDark =
-    theme.themeMode === 'dark' ||
-    theme.themeMode === 'high-contrast' ||
-    theme.themeMode === 'grayscale-dark';
-
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
@@ -57,10 +48,8 @@ export function ScrollDetailModal({
     >
       <div
         style={{
-          padding: theme.spacing.xl,
-          backgroundColor: isDark
-            ? theme.palette.neutralLighter
-            : theme.palette.white,
+          padding: 32,
+          backgroundColor: 'var(--fx-surface-card)',
         }}
       >
         {/* Header with close button */}
@@ -69,7 +58,7 @@ export function ScrollDetailModal({
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            marginBottom: theme.spacing.l,
+            marginBottom: 20,
           }}
         >
           <div style={{ flex: 1 }}>
@@ -78,18 +67,18 @@ export function ScrollDetailModal({
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: theme.spacing.s1,
-                marginBottom: theme.spacing.m,
+                gap: 8,
+                marginBottom: 16,
               }}
             >
               <span
                 style={{
                   fontSize: '0.875rem',
-                  fontWeight: theme.typography.fontWeights.semiBold,
-                  padding: `${theme.spacing.s} ${theme.spacing.m}`,
+                  fontWeight: 600,
+                  padding: '4px 16px',
                   borderRadius: '999px',
-                  backgroundColor: theme.palette.themeLighter,
-                  color: theme.palette.themePrimary,
+                  backgroundColor: 'color-mix(in srgb, var(--fx-accent) 15%, transparent)',
+                  color: 'var(--fx-accent)',
                 }}
               >
                 {categoryLabels[scroll.category] || scroll.category}
@@ -97,7 +86,7 @@ export function ScrollDetailModal({
               <span
                 style={{
                   fontSize: '0.875rem',
-                  color: theme.palette.neutralTertiary,
+                  color: 'var(--fx-text-faint)',
                 }}
               >
                 {scroll.fileSize}
@@ -105,30 +94,28 @@ export function ScrollDetailModal({
             </div>
 
             {/* Title */}
-            <Typography
-              variant='h1'
+            <h1
               style={{
-                color: theme.palette.neutralPrimary,
+                color: 'var(--fx-text-heading)',
                 fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
-                fontWeight: theme.typography.fontWeights.bold,
-                marginBottom: theme.spacing.m,
+                fontWeight: 700,
+                marginBottom: 16,
               }}
             >
               {scroll.title}
-            </Typography>
+            </h1>
 
             {/* Description */}
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-muted)',
                 fontSize: '1.125rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
-                marginBottom: theme.spacing.s1,
+                lineHeight: 1.65,
+                marginBottom: 8,
               }}
             >
               {scroll.description}
-            </Typography>
+            </p>
           </div>
 
           {/* Close button */}
@@ -143,25 +130,24 @@ export function ScrollDetailModal({
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '50%',
-              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              backgroundColor: 'color-mix(in srgb, var(--fx-text-body) 10%, transparent)',
               transition: 'background-color 0.2s ease, transform 0.2s ease',
               transform: 'scale(1)',
+              color: 'var(--fx-text-body)',
+              fontSize: '1.25rem',
+              lineHeight: 1,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+              e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--fx-text-body) 20%, transparent)';
               e.currentTarget.style.transform = 'scale(1.15)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+              e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--fx-text-body) 10%, transparent)';
               e.currentTarget.style.transform = 'scale(1)';
             }}
             aria-label='Close modal'
           >
-            <FluentIcon
-              iconName='Cancel'
-              size='large'
-              color={theme.semanticColors.errorIcon}
-            />
+            &#10005;
           </button>
         </div>
 
@@ -170,9 +156,9 @@ export function ScrollDetailModal({
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: theme.spacing.l,
+            gap: 20,
             fontSize: '0.875rem',
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-muted)',
           }}
         >
           <div>
@@ -189,7 +175,7 @@ export function ScrollDetailModal({
             style={{
               display: 'flex',
               flexWrap: 'wrap',
-              gap: theme.spacing.s,
+              gap: 8,
             }}
           >
             {scroll.tags.map((tag) => (
@@ -197,10 +183,10 @@ export function ScrollDetailModal({
                 key={tag}
                 style={{
                   fontSize: '0.875rem',
-                  padding: `${theme.spacing.s} ${theme.spacing.m} ${theme.spacing.s} 0`,
-                  borderRadius: theme.borderRadius.s,
-                  backgroundColor: theme.palette.themeLighterAlt,
-                  color: theme.palette.neutralPrimary,
+                  padding: '4px 16px 4px 0',
+                  borderRadius: 4,
+                  backgroundColor: 'color-mix(in srgb, var(--fx-accent) 5%, transparent)',
+                  color: 'var(--fx-text-heading)',
                 }}
               >
                 #{tag}
@@ -214,80 +200,77 @@ export function ScrollDetailModal({
           style={{
             border: 'none',
             height: '1px',
-            backgroundColor: theme.palette.neutralQuaternary,
-            marginBottom: theme.spacing.xl,
+            backgroundColor: 'var(--fx-border)',
+            marginBottom: 32,
           }}
         />
 
         {/* Download Section */}
         <div
           style={{
-            padding: theme.spacing.l,
-            borderRadius: theme.borderRadius.m,
-            border: `1px solid ${theme.palette.neutralLight}`,
-            backgroundColor: isDark
-              ? theme.palette.neutralLight
-              : theme.palette.neutralLighterAlt,
-            marginBottom: theme.spacing.xl,
+            padding: 20,
+            borderRadius: 'var(--fx-radius-card)',
+            border: '1px solid var(--fx-border)',
+            backgroundColor: 'var(--fx-surface-card)',
+            marginBottom: 32,
           }}
         >
-          <Typography
-            variant='h3'
+          <h3
             style={{
-              color: theme.palette.themePrimary,
+              color: 'var(--fx-accent)',
               fontSize: '1.5rem',
-              fontWeight: theme.typography.fontWeights.semiBold,
-              marginBottom: theme.spacing.m,
+              fontWeight: 600,
+              marginBottom: 16,
             }}
           >
             Download This Scroll
-          </Typography>
-          <Typography
-            variant='p'
+          </h3>
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
+              color: 'var(--fx-text-muted)',
               fontSize: '1rem',
-              lineHeight: theme.typography.lineHeights.relaxed,
-              marginBottom: theme.spacing.l,
+              lineHeight: 1.65,
+              marginBottom: 20,
             }}
           >
             Access the complete strategic insights document in PDF format. Each
             scroll provides in-depth guidance and frameworks for transformation.
-          </Typography>
-          <FormButton
-            text={`Download PDF (${scroll.fileSize})`}
+          </p>
+          <FxButton
             variant='primary'
-            size='large'
-            icon='Download'
-            iconPosition='left'
+            size='lg'
             onClick={handleDownload}
-          />
+          >
+            Download PDF ({scroll.fileSize})
+          </FxButton>
         </div>
 
         {/* Footer Actions */}
         <div
           style={{
             display: 'flex',
-            gap: theme.spacing.m,
+            gap: 16,
             flexWrap: 'wrap',
           }}
         >
-          <FormButton
-            text='View All Scrolls'
+          <FxButton
             variant='outline'
-            size='medium'
+            size='md'
             onClick={() => {
               window.location.href = '/services/scrolls';
             }}
-          />
-          <FormButton
-            text='Explore Services'
+          >
+            View All Scrolls
+          </FxButton>
+          <FxButton
             variant='outline'
-            size='medium'
+            size='md'
             onClick={() => {
               window.location.href = '/services';
             }}
-          />
+          >
+            Explore Services
+          </FxButton>
         </div>
       </div>
     </Modal>

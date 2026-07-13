@@ -2,10 +2,8 @@
 
 import React from 'react';
 import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { Testimonial } from '@/lib/testimonials/types';
 import Image from 'next/image';
-import { Icon } from '@fluentui/react';
 import { Modal } from '@/components/Modal';
 
 interface TestimonialModalProps {
@@ -24,8 +22,6 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
   onDismiss,
   testimonial,
 }) => {
-  const { theme } = useAppTheme();
-
   return (
     <Modal
       isOpen={isOpen}
@@ -39,8 +35,8 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            gap: theme.spacing.m,
-            marginBottom: theme.spacing.l,
+            gap: '16px',
+            marginBottom: '20px',
             flexWrap: 'wrap',
           }}
         >
@@ -53,7 +49,7 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
               style={{
                 borderRadius: '50%',
                 objectFit: 'cover',
-                border: `3px solid ${theme.palette.themePrimary}`,
+                border: '3px solid var(--fx-accent)',
               }}
             />
           </div>
@@ -61,9 +57,9 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
             <Typography
               variant='h2'
               style={{
-                color: theme.palette.neutralPrimary,
-                marginBottom: theme.spacing.s1,
-                fontSize: theme.typography.fontSizes.clamp6,
+                color: 'var(--fx-text-heading)',
+                marginBottom: '6px',
+                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
               }}
             >
               {testimonial.name}
@@ -71,9 +67,9 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
             <Typography
               variant='p'
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-muted)',
                 fontWeight: 600,
-                marginBottom: theme.spacing.s1,
+                marginBottom: '6px',
               }}
             >
               {testimonial.jobTitle}
@@ -81,8 +77,8 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
             <Typography
               variant='p'
               style={{
-                color: theme.palette.neutralTertiary,
-                marginBottom: theme.spacing.s1,
+                color: 'var(--fx-text-faint)',
+                marginBottom: '6px',
               }}
             >
               {testimonial.company}
@@ -91,9 +87,9 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
               <Typography
                 variant='p'
                 style={{
-                  color: theme.palette.themePrimary,
-                  fontSize: theme.typography.fontSizes.clamp2,
-                  marginTop: theme.spacing.s1,
+                  color: 'var(--fx-accent)',
+                  fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                  marginTop: '6px',
                 }}
               >
                 Services: {testimonial.services.join(', ')}
@@ -105,19 +101,19 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
         {/* Quote section */}
         <div
           style={{
-            padding: theme.spacing.m,
-            backgroundColor: theme.palette.neutralLighterAlt,
-            borderLeft: `4px solid ${theme.palette.themePrimary}`,
+            padding: '16px',
+            backgroundColor: 'var(--fx-surface-card)',
+            borderLeft: '4px solid var(--fx-accent)',
             borderRadius: '4px',
-            marginBottom: theme.spacing.l,
+            marginBottom: '20px',
           }}
         >
           <Typography
             variant='p'
             style={{
               fontStyle: 'italic',
-              color: theme.palette.neutralPrimary,
-              fontSize: theme.typography.fontSizes.clamp4,
+              color: 'var(--fx-text-heading)',
+              fontSize: 'clamp(1rem, 2vw, 1.25rem)',
               lineHeight: 1.6,
             }}
           >
@@ -129,9 +125,9 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
         <Typography
           variant='p'
           style={{
-            color: theme.palette.neutralPrimary,
+            color: 'var(--fx-text-heading)',
             lineHeight: 1.8,
-            marginBottom: theme.spacing.l,
+            marginBottom: '20px',
           }}
         >
           {testimonial.fullText}
@@ -142,29 +138,30 @@ export const TestimonialModal: React.FC<TestimonialModalProps> = ({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: theme.spacing.s1,
+            gap: '6px',
           }}
         >
           {Array.from({ length: 5 }).map((_, index) => (
-            <Icon
+            <span
               key={index}
-              iconName='FavoriteStarFill'
-              styles={{
-                root: {
-                  fontSize: '24px',
-                  color:
-                    index < testimonial.rating
-                      ? theme.palette.themePrimary
-                      : theme.palette.neutralLight,
-                },
+              style={{
+                fontSize: '24px',
+                color:
+                  index < testimonial.rating
+                    ? 'var(--fx-accent)'
+                    : 'var(--fx-border)',
+                lineHeight: 1,
               }}
-            />
+              aria-hidden='true'
+            >
+              {index < testimonial.rating ? '★' : '☆'}
+            </span>
           ))}
           <Typography
             variant='p'
             style={{
-              color: theme.palette.neutralSecondary,
-              marginLeft: theme.spacing.s1,
+              color: 'var(--fx-text-muted)',
+              marginLeft: '6px',
             }}
           >
             {testimonial.rating}/5

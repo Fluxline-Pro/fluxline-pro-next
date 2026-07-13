@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 interface SkipToContentProps {
   targetId?: string;
@@ -21,8 +20,6 @@ export const SkipToContent: React.FC<SkipToContentProps> = ({
   targetId = 'main-content',
   label = 'Skip to main content',
 }) => {
-  const { theme } = useAppTheme();
-
   return (
     <a
       href={`#${targetId}`}
@@ -31,13 +28,13 @@ export const SkipToContent: React.FC<SkipToContentProps> = ({
         left: '-9999px',
         zIndex: 999,
         padding: '1rem 1.5rem',
-        backgroundColor: theme.palette.themePrimary,
-        color: theme.palette.white,
+        backgroundColor: 'var(--fx-accent)',
+        color: 'var(--fx-text-bright)',
         textDecoration: 'none',
-        borderRadius: theme.borderRadius.container.small,
+        borderRadius: 'var(--fx-radius-sm, 4px)',
         fontSize: '1rem',
-        fontWeight: theme.typography.fontWeights.semiBold,
-        boxShadow: theme.shadows.xl,
+        fontWeight: 600,
+        boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)',
         transition: 'all 0.2s ease',
       }}
       onFocus={(e) => {

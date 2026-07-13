@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 interface DividerProps {
   top?: boolean; // If true, adds extra top margin for spacing when used at the top of a section
@@ -7,17 +6,15 @@ interface DividerProps {
 }
 
 export const Divider: React.FC<DividerProps> = ({ top, bottom }) => {
-  const { theme } = useAppTheme();
-
   return (
     <div
       style={{
-        borderTop: `1px solid ${theme.palette.neutralPrimary}`,
-        marginTop: top ? theme.spacing.xxxl : theme.spacing.m,
-        marginBottom: bottom ? theme.spacing.xxxl : theme.spacing.m,
+        borderTop: '1px solid var(--fx-text-heading)',
+        marginTop: top ? 64 : 16,
+        marginBottom: bottom ? 64 : 16,
       }}
     />
   );
-}
+};
 
 export default Divider;

@@ -8,7 +8,6 @@ export * from './theme';
 
 // Theme contexts and providers
 export * from './contexts';
-export * from './providers';
 
 // Theme hooks
 export * from './hooks';

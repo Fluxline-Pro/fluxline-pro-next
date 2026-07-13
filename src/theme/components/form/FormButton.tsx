@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface FormButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?:
@@ -51,30 +49,29 @@ export const FormButton: React.FC<FormButtonProps> = ({
   onClick,
   ...rest
 }) => {
-  const { theme, fontScale } = useAppTheme();
   const [isHovered, setIsHovered] = React.useState(false);
 
   // Size configurations
   const sizeConfig = {
     small: {
-      padding: `${0.5 * fontScale}rem ${1 * fontScale}rem`,
-      fontSize: `${0.875 * fontScale}rem`,
+      padding: '0.5rem 1rem',
+      fontSize: '0.875rem',
     },
     medium: {
-      padding: `${0.75 * fontScale}rem ${1.5 * fontScale}rem`,
-      fontSize: `${1 * fontScale}rem`,
+      padding: '0.75rem 1.5rem',
+      fontSize: '1rem',
     },
     large: {
-      padding: `${1 * fontScale}rem ${2 * fontScale}rem`,
-      fontSize: `${1.125 * fontScale}rem`,
+      padding: '1rem 2rem',
+      fontSize: '1.125rem',
     },
   };
 
   // Variant configurations
   const getVariantStyles = () => {
     const baseStyles = {
-      borderRadius: theme.borderRadius.container.button,
-      fontWeight: theme.typography.fontWeights.semiBold,
+      borderRadius: 'var(--fx-radius-control)',
+      fontWeight: 600,
       cursor: disabled ? 'not-allowed' : 'pointer',
       transition: 'all 0.2s ease',
       border: 'none',
@@ -88,18 +85,9 @@ export const FormButton: React.FC<FormButtonProps> = ({
           ...baseStyles,
           backgroundColor:
             isHovered && !disabled
-              ? theme.themeMode === 'dark' ||
-                theme.themeMode === 'high-contrast' ||
-                theme.themeMode === 'grayscale-dark'
-                ? theme.palette.themeLight
-                : theme.palette.themeDark
-              : theme.palette.themePrimary,
-          color:
-            theme.themeMode === 'dark' ||
-            theme.themeMode === 'high-contrast' ||
-            theme.themeMode === 'grayscale-dark'
-              ? theme.palette.black
-              : theme.palette.white,
+              ? 'var(--fx-text-bright)'
+              : 'var(--fx-accent)',
+          color: 'var(--fx-accent-ink)',
         };
 
       case 'secondary':
@@ -107,10 +95,10 @@ export const FormButton: React.FC<FormButtonProps> = ({
           ...baseStyles,
           backgroundColor:
             isHovered && !disabled
-              ? theme.palette.themeLighterAlt
+              ? 'var(--fx-hover-fill)'
               : 'transparent',
-          color: theme.palette.themePrimary,
-          border: `2px solid ${theme.palette.themePrimary}`,
+          color: 'var(--fx-accent)',
+          border: '2px solid var(--fx-accent)',
         };
 
       case 'tertiary':
@@ -118,26 +106,22 @@ export const FormButton: React.FC<FormButtonProps> = ({
           ...baseStyles,
           backgroundColor:
             isHovered && !disabled
-              ? theme.palette.neutralLighter
-              : theme.palette.neutralLight,
-          color: theme.palette.neutralPrimary,
-          border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+              ? 'var(--fx-surface-card)'
+              : 'var(--fx-surface-input)',
+          color: 'var(--fx-text-heading)',
+          border: '1px solid var(--fx-border)',
         };
 
       case 'outline':
         return {
           ...baseStyles,
           backgroundColor:
-            isHovered && !disabled ? theme.palette.themePrimary : 'transparent',
+            isHovered && !disabled ? 'var(--fx-accent)' : 'transparent',
           color:
             isHovered && !disabled
-              ? theme.themeMode === 'dark' ||
-                theme.themeMode === 'high-contrast' ||
-                theme.themeMode === 'grayscale-dark'
-                ? theme.palette.black
-                : theme.palette.white
-              : theme.palette.themePrimary,
-          border: `2px solid ${theme.palette.themePrimary}`,
+              ? 'var(--fx-accent-ink)'
+              : 'var(--fx-accent)',
+          border: '2px solid var(--fx-accent)',
         };
 
       case 'danger':
@@ -145,10 +129,10 @@ export const FormButton: React.FC<FormButtonProps> = ({
           ...baseStyles,
           backgroundColor:
             isHovered && !disabled
-              ? theme.semanticColors.errorBackground
+              ? 'var(--fx-error-bg)'
               : 'transparent',
-          color: theme.semanticColors.errorIcon,
-          border: `1px solid ${theme.semanticColors.errorIcon}`,
+          color: 'var(--fx-error)',
+          border: '1px solid var(--fx-error)',
         };
 
       case 'default':
@@ -156,10 +140,10 @@ export const FormButton: React.FC<FormButtonProps> = ({
           ...baseStyles,
           backgroundColor:
             isHovered && !disabled
-              ? theme.palette.neutralQuaternaryAlt
-              : theme.palette.neutralLighter,
-          color: theme.palette.neutralPrimary,
-          border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
+              ? 'var(--fx-border)'
+              : 'var(--fx-surface-card)',
+          color: 'var(--fx-text-heading)',
+          border: '1px solid var(--fx-border)',
         };
 
       default:
@@ -174,24 +158,9 @@ export const FormButton: React.FC<FormButtonProps> = ({
     alignItems: 'center',
     justifyContent: 'center',
     gap: '0.5rem',
-    fontFamily: theme.typography.fonts.body.fontFamily,
+    fontFamily: 'var(--fx-font)',
     ...style,
   };
-
-  const iconColor =
-    variant === 'danger'
-      ? theme.semanticColors.errorIcon
-      : variant === 'primary'
-        ? theme.themeMode === 'dark' ||
-          theme.themeMode === 'high-contrast' ||
-          theme.themeMode === 'grayscale-dark'
-          ? theme.palette.black
-          : theme.palette.white
-        : variant === 'secondary' || variant === 'outline'
-          ? isHovered && !disabled
-            ? theme.palette.themePrimary
-            : theme.palette.neutralPrimary
-          : theme.palette.neutralPrimary;
 
   const content = text || children;
 
@@ -201,6 +170,18 @@ export const FormButton: React.FC<FormButtonProps> = ({
     }
     onClick?.(e);
   };
+
+  const iconElement = icon ? (
+    <span
+      style={{
+        fontSize: size === 'small' ? '0.875rem' : '1rem',
+        lineHeight: 1,
+      }}
+      aria-hidden='true'
+    >
+      {icon}
+    </span>
+  ) : null;
 
   return (
     <button
@@ -212,13 +193,9 @@ export const FormButton: React.FC<FormButtonProps> = ({
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
-      {icon && iconPosition === 'left' && (
-        <FluentIcon iconName={icon} size='small' color={iconColor} />
-      )}
+      {icon && iconPosition === 'left' && iconElement}
       {content}
-      {icon && iconPosition === 'right' && (
-        <FluentIcon iconName={icon} size='small' color={iconColor} />
-      )}
+      {icon && iconPosition === 'right' && iconElement}
     </button>
   );
 };

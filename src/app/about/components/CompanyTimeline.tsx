@@ -6,9 +6,6 @@
  */
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface TimelineEvent {
   id: string;
@@ -23,10 +20,15 @@ interface CompanyTimelineProps {
 }
 
 export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
-  const { theme } = useAppTheme();
-
   return (
-    <div className='space-y-6' style={{ maxWidth: '600px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 24,
+        maxWidth: 600,
+      }}
+    >
       {events.map((event, index) => (
         <div
           key={event.id}
@@ -46,7 +48,7 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
                 top: '48px',
                 bottom: '-24px',
                 width: '2px',
-                backgroundColor: theme.palette.themeTertiary,
+                backgroundColor: 'var(--fx-border)',
               }}
             />
           )}
@@ -58,7 +60,7 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
               width: '40px',
               height: '40px',
               borderRadius: '50%',
-              backgroundColor: theme.palette.themePrimary,
+              backgroundColor: 'var(--fx-accent)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -66,26 +68,27 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
             }}
           >
             {event.icon ? (
-              <FluentIcon
-                iconName={event.icon}
-                size='small'
-                color={
-                  theme.themeMode === 'dark'
-                    ? theme.palette.black
-                    : theme.palette.white
-                }
-              />
-            ) : (
-              <Typography
-                variant='p'
+              <span
                 style={{
-                  color: theme.palette.white,
+                  color: 'var(--fx-accent-ink)',
                   fontSize: '0.875rem',
-                  fontWeight: theme.typography.fontWeights.bold,
+                  fontWeight: 700,
+                }}
+                aria-hidden="true"
+              >
+                {index + 1}
+              </span>
+            ) : (
+              <p
+                style={{
+                  color: 'var(--fx-accent-ink)',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  margin: 0,
                 }}
               >
                 {index + 1}
-              </Typography>
+              </p>
             )}
           </div>
 
@@ -96,40 +99,40 @@ export const CompanyTimeline: React.FC<CompanyTimelineProps> = ({ events }) => {
               padding: '0.5rem 0',
             }}
           >
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.themeSecondary,
+                color: 'var(--fx-accent)',
                 fontSize: '1rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
+                fontWeight: 600,
                 marginBottom: '0.25rem',
+                marginTop: 0,
               }}
             >
               {event.year}
-            </Typography>
+            </p>
 
-            <Typography
-              variant='h3'
+            <h3
               style={{
-                color: theme.palette.themePrimary,
+                color: 'var(--fx-accent)',
                 fontSize: '1.25rem',
-                fontWeight: theme.typography.fontWeights.semiBold,
+                fontWeight: 600,
                 marginBottom: '0.5rem',
+                marginTop: 0,
               }}
             >
               {event.title}
-            </Typography>
+            </h3>
 
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-body)',
                 fontSize: '1rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
+                lineHeight: 1.7,
+                margin: 0,
               }}
             >
               {event.description}
-            </Typography>
+            </p>
           </div>
         </div>
       ))}

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
 export interface TRILayoutProps {
@@ -19,7 +18,6 @@ export function TRILayout({
   children,
   tabletPortraitLayout = 'side-by-side',
 }: TRILayoutProps) {
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
   const isMobile = isMounted ? isMobileHook : false;
@@ -29,7 +27,7 @@ export function TRILayout({
   }, []);
 
   return (
-    <div style={{ padding: isMobile ? theme.spacing.m : undefined }}>
+    <div style={{ padding: isMobile ? 16 : undefined }}>
       <UnifiedPageWrapper
         layoutType='responsive-grid'
         tabletPortraitLayout={tabletPortraitLayout}

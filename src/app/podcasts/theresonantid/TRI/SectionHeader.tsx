@@ -1,10 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { FluentIcon } from '@/theme/components/fluent-icon/fluent-icon';
+import FxButton from '@/theme/components/dsm/FxButton';
 
 export interface SectionHeaderProps {
   title: string;
@@ -37,8 +34,6 @@ export function SectionHeader({
   className,
   style,
 }: SectionHeaderProps) {
-  const { theme } = useAppTheme();
-
   return (
     <div
       className={className}
@@ -46,65 +41,60 @@ export function SectionHeader({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
-        marginBottom: theme.spacing.m,
-        marginTop: theme.spacing.xl,
+        marginBottom: 16,
+        marginTop: 32,
         flexWrap: 'wrap',
-        gap: theme.spacing.m,
+        gap: 16,
         ...style,
       }}
     >
       <div>
         <div
-          className='flex flex-row items-center justify-start'
-          style={{ gap: theme.spacing.s1 }}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            gap: 12,
+          }}
         >
-          {iconName && (
-            <FluentIcon
-              iconName={iconName}
-              size='large'
-              color={theme.palette.themePrimary}
-              style={{ marginRight: theme.spacing.m }}
-            />
-          )}
-          <Typography
-            variant='h3'
+          {/* Icon slot removed — previously used FluentIcon */}
+          <h3
             style={{
               ...style,
-              color: theme.palette.themePrimary,
+              color: 'var(--fx-accent)',
               margin: iconName
                 ? '0'
                 : isWithinCta
                   ? isMobile
-                    ? `${theme.spacing.m} 0`
+                    ? '16px 0'
                     : 0
                   : isMobile
-                    ? `${theme.spacing.xxl} 0 ${theme.spacing.m} 0`
-                    : `${theme.spacing.xl} 0 0`,
+                    ? '48px 0 16px 0'
+                    : '32px 0 0',
             }}
           >
             {title}
-          </Typography>
+          </h3>
         </div>
         {subtitle && (
-          <Typography
-            variant='p'
+          <p
             style={{
-              color: theme.palette.neutralSecondary,
-              marginTop: theme.spacing.m,
+              color: 'var(--fx-text-body)',
+              marginTop: 16,
             }}
           >
             {subtitle}
-          </Typography>
+          </p>
         )}
       </div>
       {cta && (
-        <FormButton
-          text={cta.label}
-          variant={cta.variant || 'primary'}
-          icon={cta.icon}
-          iconPosition={cta.iconPosition || 'left'}
+        <FxButton
+          variant={cta.variant === 'secondary' ? 'outline' : (cta.variant || 'primary')}
           onClick={cta.onClick}
-        />
+        >
+          {cta.label}
+        </FxButton>
       )}
     </div>
   );

@@ -1,0 +1,24 @@
+:root {
+  /* ===== Layout ===== */
+  --fx-container: 1220px;         /* max content width */
+  --fx-container-pad: 32px;       /* horizontal page padding */
+  --fx-article: 760px;            /* long-form reading column */
+  --fx-section-pad: 88px;         /* vertical rhythm between major sections */
+  --fx-rail-width: 320px;         /* sticky left image rail */
+  --fx-rail-gap: 56px;            /* gap between rail and content */
+  --fx-nav-height: 76px;          /* fixed nav clearance (use as scroll-margin-top) */
+
+  /* ===== Component spacing ===== */
+  --fx-card-pad: 24px;            /* 22–26px band; 24 default */
+  --fx-card-pad-lg: 32px;
+  --fx-grid-gap: 16px;            /* card grids: 12–18px band; 16 default */
+  --fx-stack-gap: 36px;           /* vertical gap between content blocks */
+
+  /* ===== Radii ===== */
+  --fx-radius-control: 8px;       /* buttons, inputs */
+  --fx-radius-card-sm: 12px;      /* compact cards, callouts */
+  --fx-radius-card: 14px;         /* standard cards */
+  --fx-radius-card-lg: 16px;      /* feature cards, bands */
+  --fx-radius-band: 20px;         /* full-width CTA bands */
+  --fx-radius-pill: 999px;        /* chips, badges, platform pills */
+}

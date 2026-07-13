@@ -11,13 +11,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { UnifiedPageWrapper } from '@/components/UnifiedPageWrapper';
-import { Typography } from '@/theme/components/typography';
 import { Callout } from '@/theme/components/callout';
-import { FormButton } from '@/theme/components/form/FormButton';
+import FxButton from '@/theme/components/dsm/FxButton';
+import FxCard from '@/theme/components/dsm/FxCard';
 import { Hero } from '@/theme/components/hero';
-import { InteractiveCard } from '@/components/InteractiveCard';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { InstagramIcon } from '@/assets/svgs/InstagramLogo';
 import { FacebookIcon } from '@/assets/svgs/FacebookLogo';
@@ -43,21 +40,18 @@ const HOW_IT_WORKS = [
     title: 'Micro-Lessons',
     description:
       'Short, actionable teachings designed to shift identity through resonance rather than force.',
-    icon: 'LightningBolt',
   },
   {
     id: 'seven-day-setup',
     title: '7-Day Setup',
     description:
       'A guided onboarding sequence that helps you establish your personal resonance baseline.',
-    icon: 'CalendarDay',
   },
   {
     id: 'ongoing-practice',
     title: 'Ongoing Practice',
     description:
       'Weekly prompts, reflections, and identity-building exercises that keep you aligned.',
-    icon: 'Refresh',
   },
 ];
 
@@ -74,7 +68,6 @@ function EcosystemLink({
   label: string;
   children: React.ReactNode;
 }) {
-  const { theme } = useAppTheme();
   const [hovered, setHovered] = React.useState(false);
 
   return (
@@ -89,12 +82,12 @@ function EcosystemLink({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: theme.spacing.s2,
-        padding: `${theme.spacing.m} ${theme.spacing.s1}`,
-        borderRadius: theme.borderRadius.container.medium,
-        border: `1px solid ${hovered ? theme.palette.themePrimary : theme.palette.neutralQuaternaryAlt}`,
+        gap: 8,
+        padding: '16px 12px',
+        borderRadius: 12,
+        border: `1px solid ${hovered ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
         backgroundColor: hovered
-          ? theme.palette.neutralLighterAlt
+          ? 'var(--fx-surface-card)'
           : 'transparent',
         transition: 'all 0.2s ease',
         textDecoration: 'none',
@@ -118,7 +111,6 @@ function SocialIconLink({
   external?: boolean;
   children: React.ReactNode;
 }) {
-  const { theme } = useAppTheme();
   const [hovered, setHovered] = React.useState(false);
 
   return (
@@ -137,9 +129,9 @@ function SocialIconLink({
         height: '48px',
         borderRadius: '50%',
         backgroundColor: hovered
-          ? theme.palette.neutralLighterAlt
-          : theme.palette.neutralLighter,
-        border: `1px solid ${hovered ? theme.palette.themePrimary : 'transparent'}`,
+          ? 'var(--fx-surface-card)'
+          : 'var(--fx-surface-card)',
+        border: `1px solid ${hovered ? 'var(--fx-accent)' : 'transparent'}`,
         transition: 'all 0.2s ease',
       }}
     >
@@ -150,13 +142,12 @@ function SocialIconLink({
 
 // Shared section divider — defined outside render to satisfy react-hooks/static-components
 function Divider() {
-  const { theme } = useAppTheme();
   return (
     <hr
       style={{
         border: 'none',
-        borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
-        margin: `${theme.spacing.xxl} 0`,
+        borderTop: '1px solid var(--fx-border)',
+        margin: '48px 0',
       }}
     />
   );
@@ -164,19 +155,18 @@ function Divider() {
 
 // Shared section heading — defined outside render
 function SectionHeading({ children }: { children: React.ReactNode }) {
-  const { theme } = useAppTheme();
   return (
-    <Typography
-      variant='h2'
+    <h2
       style={{
-        color: theme.palette.themePrimary,
+        color: 'var(--fx-accent)',
         fontSize: '2rem',
-        fontWeight: theme.typography.fontWeights.bold,
+        fontWeight: 700,
         textTransform: 'unset',
+        margin: 0,
       }}
     >
       {children}
-    </Typography>
+    </h2>
   );
 }
 
@@ -185,7 +175,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
  * Full client-side landing page component for /podcasts/theresonantid.
  */
 export function TheResonantIdentityPage() {
-  const { theme } = useAppTheme();
   const router = useRouter();
   const isMobileHook = useIsMobile();
   const [isMounted, setIsMounted] = React.useState(false);
@@ -202,18 +191,18 @@ export function TheResonantIdentityPage() {
     width: '48px',
     height: '48px',
     borderRadius: '50%',
-    backgroundColor: theme.palette.neutralLighter,
+    backgroundColor: 'var(--fx-surface-card)',
   };
 
   return (
     <UnifiedPageWrapper layoutType='responsive-grid'>
       <div
         style={{
-          padding: isMobile ? theme.spacing.m : theme.spacing.xl,
+          padding: isMobile ? 16 : 32,
           width: '100%',
         }}
       >
-        <div className='space-y-8 lg:space-y-16'>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
           {/* ─── 1. Hero Section ─── */}
           <Hero
             title='The Resonant Identity'
@@ -222,22 +211,21 @@ export function TheResonantIdentityPage() {
             backArrowPath='/podcasts/theresonantid'
           >
             {/* Social icons displayed beneath the hero subtitle */}
-            <Typography
-              variant='h5'
+            <h5
               style={{
-                color: theme.palette.neutralSecondary,
-                marginTop: theme.spacing.l,
+                color: 'var(--fx-text-body)',
+                marginTop: 24,
                 textTransform: 'unset',
               }}
             >
               Social Media:
-            </Typography>
+            </h5>
             <div
               style={{
                 display: 'flex',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
-                gap: theme.spacing.m,
+                gap: 16,
                 flexWrap: 'wrap',
               }}
             >
@@ -270,63 +258,61 @@ export function TheResonantIdentityPage() {
                 label='The Resonant Identity Podcast'
                 external={false}
               >
-                <FluentIcon
-                  iconName='Microphone'
-                  size='medium'
-                  color={theme.palette.themePrimary}
-                />
+                <span
+                  style={{
+                    fontSize: '20px',
+                    color: 'var(--fx-accent)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  aria-hidden='true'
+                >
+                  🎙
+                </span>
               </SocialIconLink>
             </div>
           </Hero>
 
           {/* Featured Podcast CTA */}
-          <div className='pb-4'>
+          <div style={{ paddingBottom: 16 }}>
             <Callout
               variant='subtle'
               title='Listen to the Podcast'
               subtitle='Explore episodes blending identity architecture, self-improvement, and practical frameworks.'
               action={
-                <FormButton
-                  variant='secondary'
-                  size='large'
-                  icon='Microphone'
-                  iconPosition='left'
+                <FxButton
+                  variant='outline'
+                  size='lg'
                   onClick={() => router.push(TRI_LINKS.podcast)}
                   aria-label='Listen to The Resonant Identity Podcast'
                 >
                   Browse Episodes
-                </FormButton>
+                </FxButton>
               }
             />
           </div>
 
           {/* ─── 2. What TRI Is ─── */}
-          <section className='space-y-6'>
+          <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: theme.spacing.s1,
-                marginBottom: theme.spacing.m,
+                gap: 12,
+                marginBottom: 16,
               }}
             >
-              <FluentIcon
-                iconName='ContactInfo'
-                size='large'
-                color={theme.palette.themePrimary}
-                style={{ marginRight: '0.5rem' }}
-              />
               <SectionHeading>What is The Resonant Identity?</SectionHeading>
             </div>
 
             <div>
-              <Typography
-                variant='p'
+              <p
                 style={{
-                  color: theme.palette.neutralSecondary,
+                  color: 'var(--fx-text-body)',
                   fontSize: '1.125rem',
-                  lineHeight: theme.typography.lineHeights.relaxed,
-                  paddingBottom: theme.spacing.m,
+                  lineHeight: 1.7,
+                  paddingBottom: 16,
                 }}
               >
                 The Resonant Identity (TRI) is a space for identity
@@ -334,13 +320,12 @@ export function TheResonantIdentityPage() {
                 The Resonance Core Framework into a living, accessible rhythm —
                 helping you build an identity that feels aligned, coherent, and
                 grounded in who you&apos;re becoming.
-              </Typography>
-              <Typography
-                variant='p'
+              </p>
+              <p
                 style={{
-                  color: theme.palette.neutralSecondary,
+                  color: 'var(--fx-text-body)',
                   fontSize: '1.125rem',
-                  lineHeight: theme.typography.lineHeights.relaxed,
+                  lineHeight: 1.7,
                   marginBottom: 0,
                 }}
               >
@@ -349,28 +334,47 @@ export function TheResonantIdentityPage() {
                 resonance — learning to listen to the subtle cues of what feels
                 right, and building an identity that reflects that resonance in
                 daily life.
-              </Typography>
+              </p>
             </div>
           </section>
 
           <Divider />
 
           {/* ─── 3. How It Works ─── */}
-          <section className='space-y-8'>
+          <section style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
             <SectionHeading>How It Works</SectionHeading>
 
             <div
-              className={`grid gap-6 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-3'}`}
+              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}
             >
               {HOW_IT_WORKS.map((card) => (
-                <InteractiveCard
+                <FxCard
                   key={card.id}
-                  id={card.id}
-                  title={card.title}
-                  description={card.description}
-                  icon={card.icon}
-                  iconPosition='center'
-                />
+                  style={{ padding: '28px 28px 24px' }}
+                >
+                  <h4
+                    style={{
+                      fontSize: 'var(--fx-h4-size)',
+                      fontWeight: 600,
+                      color: 'var(--fx-text-heading)',
+                      marginBottom: 8,
+                      textAlign: 'center',
+                    }}
+                  >
+                    {card.title}
+                  </h4>
+                  <p
+                    style={{
+                      color: 'var(--fx-text-muted)',
+                      fontSize: '0.95rem',
+                      lineHeight: 1.4,
+                      margin: 0,
+                      textAlign: 'center',
+                    }}
+                  >
+                    {card.description}
+                  </p>
+                </FxCard>
               ))}
             </div>
           </section>
@@ -378,14 +382,17 @@ export function TheResonantIdentityPage() {
           <Divider />
 
           {/* ─── 4. The Resonance Core Framework™ Connection ─── */}
-          <section className='space-y-6'>
+          <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             <SectionHeading>
               The Resonance Core Framework™ Connection
             </SectionHeading>
 
             <div
-              className={`flex gap-8 ${isMobile ? 'flex-col' : 'flex-row items-center'}`}
               style={{
+                display: 'flex',
+                gap: 32,
+                flexDirection: isMobile ? 'column' : 'row',
+                alignItems: isMobile ? undefined : 'center',
                 width: '100%',
                 maxWidth: '100%',
               }}
@@ -399,7 +406,7 @@ export function TheResonantIdentityPage() {
                     width={280}
                     height={373}
                     style={{
-                      borderRadius: theme.borderRadius.container.medium,
+                      borderRadius: 12,
                       objectFit: 'cover',
                     }}
                   />
@@ -410,21 +417,20 @@ export function TheResonantIdentityPage() {
               <div
                 style={{
                   flex: 1,
-                  borderRadius: theme.borderRadius.container.medium,
-                  backgroundColor: theme.palette.neutralLighterAlt,
-                  padding: `${theme.spacing.xl} ${theme.spacing.l}`,
+                  borderRadius: 12,
+                  backgroundColor: 'var(--fx-surface-card)',
+                  padding: '32px 24px',
                 }}
               >
                 <Callout
                   variant='accent'
                   title='Built on The Resonance Core Framework™'
                 >
-                  <Typography
-                    variant='p'
+                  <p
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-body)',
                       fontSize: '1.125rem',
-                      lineHeight: theme.typography.lineHeights.relaxed,
+                      lineHeight: 1.7,
                     }}
                   >
                     The Resonant Identity is built on the foundations of the
@@ -432,7 +438,7 @@ export function TheResonantIdentityPage() {
                     rooted in coherence, clarity, and intentional
                     self-construction. TRI is the practical, community-based
                     expression of that framework.
-                  </Typography>
+                  </p>
                 </Callout>
               </div>
             </div>
@@ -441,43 +447,43 @@ export function TheResonantIdentityPage() {
           <Divider />
 
           {/* ─── 5. Community Layer ─── */}
-          <section className='space-y-6'>
+          <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             <SectionHeading>Community Layer</SectionHeading>
 
             <div
-              className={`grid gap-6 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-3'}`}
               style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: 24,
                 width: '100%',
                 maxWidth: '100%',
                 alignItems: 'center',
               }}
             >
               {/* Left: description - spans 2 columns */}
-              <div className={isMobile ? '' : 'md:col-span-2'}>
-                <Typography
-                  variant='p'
+              <div style={{ gridColumn: isMobile ? undefined : 'span 2' }}>
+                <p
                   style={{
-                    color: theme.palette.neutralSecondary,
+                    color: 'var(--fx-text-body)',
                     fontSize: '1.125rem',
-                    lineHeight: theme.typography.lineHeights.relaxed,
+                    lineHeight: 1.7,
                   }}
                 >
                   The Facebook Group is the collaborative heart of TRI.
                   It&apos;s where members share reflections, integrate the
                   micro-lessons, and support each other through identity shifts.
-                </Typography>
-                <Typography
-                  variant='p'
+                </p>
+                <p
                   style={{
-                    color: theme.palette.neutralSecondary,
+                    color: 'var(--fx-text-body)',
                     fontSize: '1.125rem',
-                    lineHeight: theme.typography.lineHeights.relaxed,
-                    marginTop: theme.spacing.m,
+                    lineHeight: 1.7,
+                    marginTop: 16,
                   }}
                 >
                   It&apos;s a space for resonance and congruence — a place to
                   practice becoming.
-                </Typography>
+                </p>
               </div>
 
               {/* Right: CTA - spans 1 column */}
@@ -487,16 +493,19 @@ export function TheResonantIdentityPage() {
                   justifyContent: 'flex-start',
                 }}
               >
-                <FormButton
-                  variant='primary'
-                  size='large'
-                  icon='Group'
-                  iconPosition='left'
+                <a
                   href={TRI_LINKS.facebookGroup}
                   target='_blank'
+                  rel='noopener noreferrer'
+                  style={{ textDecoration: 'none' }}
                 >
-                  Join the Community
-                </FormButton>
+                  <FxButton
+                    variant='primary'
+                    size='lg'
+                  >
+                    Join the Community
+                  </FxButton>
+                </a>
               </div>
             </div>
           </section>
@@ -505,46 +514,48 @@ export function TheResonantIdentityPage() {
 
           {/* ─── 6 & 7. Ecosystem Links + Call to Action Grid ─── */}
           <div
-            className={`grid gap-16 ${isMobile ? 'grid-cols-1' : 'md:grid-cols-2'}`}
             style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: 64,
               width: '100%',
               maxWidth: '100%',
               alignItems: 'center',
             }}
           >
             {/* ─── 6. Call to Action ─── Not active yet -TW */}
-            {/* <section className='space-y-6'>
+            {/* <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <Callout
                 variant='accent'
                 title='Begin Your 7-Day Setup'
                 subtitle='Start building an identity that resonates.'
                 action={
-                  <FormButton
-                    variant='primary'
-                    size='large'
-                    icon='ChevronRight'
-                    iconPosition='right'
+                  <a
                     href={TRI_LINKS.sevenDaySetup}
                     target='_blank'
+                    rel='noopener noreferrer'
+                    style={{ textDecoration: 'none' }}
                   >
-                    Begin Your 7-Day Setup
-                  </FormButton>
+                    <FxButton variant='primary' size='lg'>
+                      Begin Your 7-Day Setup
+                    </FxButton>
+                  </a>
                 }
               />
             </section> */}
 
             {/* ─── 7. Social Media Links ─── */}
-            <section className='space-y-6'>
+            <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <SectionHeading>Find us on Social Media!</SectionHeading>
 
               {/* Horizontally scrollable row on mobile */}
               <div
                 style={{
                   display: 'flex',
-                  gap: theme.spacing.m,
+                  gap: 16,
                   flexWrap: isMobile ? 'nowrap' : 'wrap',
                   overflowX: isMobile ? 'auto' : 'visible',
-                  paddingBottom: isMobile ? theme.spacing.s1 : 0,
+                  paddingBottom: isMobile ? 12 : 0,
                 }}
               >
                 {/* Instagram */}
@@ -555,28 +566,26 @@ export function TheResonantIdentityPage() {
                   <div style={iconButtonStyle}>
                     <InstagramIcon style={{ width: '24px', height: '24px' }} />
                   </div>
-                  <Typography
-                    variant='caption'
+                  <span
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-body)',
                       fontSize: '0.75rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     Instagram
-                  </Typography>
-                  <Typography
-                    variant='caption'
+                  </span>
+                  <span
                     style={{
-                      color: theme.palette.neutralTertiary,
+                      color: 'var(--fx-text-muted)',
                       fontSize: '0.7rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     @theresonantid
-                  </Typography>
+                  </span>
                 </EcosystemLink>
 
                 {/* X / Twitter */}
@@ -587,28 +596,26 @@ export function TheResonantIdentityPage() {
                   <div style={iconButtonStyle}>
                     <TwitterLogo style={{ width: '24px', height: '24px' }} />
                   </div>
-                  <Typography
-                    variant='caption'
+                  <span
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-body)',
                       fontSize: '0.75rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     X
-                  </Typography>
-                  <Typography
-                    variant='caption'
+                  </span>
+                  <span
                     style={{
-                      color: theme.palette.neutralTertiary,
+                      color: 'var(--fx-text-muted)',
                       fontSize: '0.7rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     @theresonantid
-                  </Typography>
+                  </span>
                 </EcosystemLink>
 
                 {/* Podcast
@@ -617,34 +624,36 @@ export function TheResonantIdentityPage() {
                   label='The Resonant Identity Podcast on Spreaker'
                 >
                   <div style={iconButtonStyle}>
-                    <FluentIcon
-                      iconName='Microphone'
-                      size='medium'
-                      color={theme.palette.themePrimary}
-                    />
+                    <span
+                      style={{
+                        fontSize: '20px',
+                        color: 'var(--fx-accent)',
+                      }}
+                      aria-hidden='true'
+                    >
+                      🎙
+                    </span>
                   </div>
-                  <Typography
-                    variant='caption'
+                  <span
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-body)',
                       fontSize: '0.75rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     Podcast
-                  </Typography>
-                  <Typography
-                    variant='caption'
+                  </span>
+                  <span
                     style={{
-                      color: theme.palette.neutralTertiary,
+                      color: 'var(--fx-text-muted)',
                       fontSize: '0.7rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     The Resonant Identity
-                  </Typography>
+                  </span>
                 </EcosystemLink> */}
 
                 {/* TikTok */}
@@ -655,28 +664,26 @@ export function TheResonantIdentityPage() {
                   <div style={iconButtonStyle}>
                     <TiktokLogo style={{ width: '24px', height: '24px' }} />
                   </div>
-                  <Typography
-                    variant='caption'
+                  <span
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-body)',
                       fontSize: '0.75rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     TikTok
-                  </Typography>
-                  <Typography
-                    variant='caption'
+                  </span>
+                  <span
                     style={{
-                      color: theme.palette.neutralTertiary,
+                      color: 'var(--fx-text-muted)',
                       fontSize: '0.7rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     @theresonantid
-                  </Typography>
+                  </span>
                 </EcosystemLink>
 
                 {/* Facebook Group */}
@@ -687,28 +694,26 @@ export function TheResonantIdentityPage() {
                   <div style={iconButtonStyle}>
                     <FacebookIcon style={{ width: '24px', height: '24px' }} />
                   </div>
-                  <Typography
-                    variant='caption'
+                  <span
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-body)',
                       fontSize: '0.75rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     Facebook Group
-                  </Typography>
-                  <Typography
-                    variant='caption'
+                  </span>
+                  <span
                     style={{
-                      color: theme.palette.neutralTertiary,
+                      color: 'var(--fx-text-muted)',
                       fontSize: '0.7rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     TRI Community
-                  </Typography>
+                  </span>
                 </EcosystemLink>
 
                 {/* Facebook Page */}
@@ -719,28 +724,26 @@ export function TheResonantIdentityPage() {
                   <div style={iconButtonStyle}>
                     <FacebookIcon style={{ width: '24px', height: '24px' }} />
                   </div>
-                  <Typography
-                    variant='caption'
+                  <span
                     style={{
-                      color: theme.palette.neutralSecondary,
+                      color: 'var(--fx-text-body)',
                       fontSize: '0.75rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     Facebook Page
-                  </Typography>
-                  <Typography
-                    variant='caption'
+                  </span>
+                  <span
                     style={{
-                      color: theme.palette.neutralTertiary,
+                      color: 'var(--fx-text-muted)',
                       fontSize: '0.7rem',
                       textAlign: 'center',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     The Resonant Identity
-                  </Typography>
+                  </span>
                 </EcosystemLink>
               </div>
             </section>
@@ -749,27 +752,21 @@ export function TheResonantIdentityPage() {
           {/* ─── Author Attribution ─── */}
           <div
             style={{
-              paddingTop: theme.spacing.l,
-              borderTop: `1px solid ${theme.palette.neutralQuaternary}`,
+              paddingTop: 24,
+              borderTop: '1px solid var(--fx-border)',
               display: 'flex',
               alignItems: 'center',
-              gap: theme.spacing.s1,
+              gap: 12,
             }}
           >
-            <FluentIcon
-              iconName='Contact'
-              size='small'
-              color={theme.palette.neutralTertiary}
-            />
-            <Typography
-              variant='caption'
+            <span
               style={{
-                color: theme.palette.neutralTertiary,
+                color: 'var(--fx-text-muted)',
                 fontSize: '0.8rem',
               }}
             >
               Written by Terence Waters
-            </Typography>
+            </span>
           </div>
         </div>
       </div>

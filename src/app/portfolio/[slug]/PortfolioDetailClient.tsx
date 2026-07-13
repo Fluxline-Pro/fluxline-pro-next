@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { ContentNotFound } from '@/components/ContentNotFound';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { PortfolioProject } from '../types';
 
 interface PortfolioDetailClientProps {
@@ -20,7 +19,6 @@ export default function PortfolioDetailClient({
   project,
 }: PortfolioDetailClientProps) {
   const router = useRouter();
-  const { theme } = useAppTheme();
 
   if (!project) {
     return (

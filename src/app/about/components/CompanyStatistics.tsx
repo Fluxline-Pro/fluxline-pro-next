@@ -6,9 +6,6 @@
  */
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface Statistic {
   id: string;
@@ -27,7 +24,6 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ stat }) => {
-  const { theme } = useAppTheme();
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -40,65 +36,66 @@ const StatCard: React.FC<StatCardProps> = ({ stat }) => {
         alignItems: 'center',
         textAlign: 'center',
         padding: '2rem 1.5rem',
-        borderRadius: theme.borderRadius.container.medium,
+        borderRadius: 12,
         border: `1px solid ${
           isHovered
-            ? theme.palette.themePrimary
-            : theme.palette.neutralTertiaryAlt
+            ? 'var(--fx-accent)'
+            : 'var(--fx-border)'
         }`,
         backgroundColor: isHovered
-          ? theme.themeMode === 'dark' ||
-            theme.themeMode === 'high-contrast' ||
-            theme.themeMode === 'grayscale-dark'
-            ? theme.palette.neutralLighter
-            : theme.palette.neutralLighterAlt
+          ? 'var(--fx-surface-card)'
           : 'transparent',
         transition: 'all 0.3s ease',
         transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: isHovered ? theme.shadows.m : 'none',
+        boxShadow: isHovered ? '0 4px 12px rgba(0,0,0,0.1)' : 'none',
         opacity: isHovered ? 1 : 0.9,
       }}
     >
-      <FluentIcon
-        iconName={stat.icon}
-        size='xLarge'
-        color={theme.palette.themePrimary}
-      />
-
-      <Typography
-        variant='h2'
+      <span
         style={{
-          color: theme.palette.themePrimary,
+          fontSize: '2.5rem',
+          color: 'var(--fx-accent)',
+          lineHeight: 1,
+        }}
+        aria-hidden="true"
+      >
+        {stat.icon}
+      </span>
+
+      <h2
+        style={{
+          color: 'var(--fx-accent)',
           fontSize: 'clamp(2rem, 4vw, 3rem)',
-          fontWeight: theme.typography.fontWeights.bold,
+          fontWeight: 700,
+          margin: 0,
         }}
       >
         {stat.value}
-      </Typography>
+      </h2>
 
-      <Typography
-        variant='h3'
+      <h3
         style={{
-          color: theme.palette.neutralPrimary,
+          color: 'var(--fx-text-heading)',
           fontSize: '1rem',
-          fontWeight: theme.typography.fontWeights.semiBold,
+          fontWeight: 600,
           marginBottom: stat.description ? '0.5rem' : 0,
+          marginTop: 0,
         }}
       >
         {stat.label}
-      </Typography>
+      </h3>
 
       {stat.description && (
-        <Typography
-          variant='p'
+        <p
           style={{
-            color: theme.palette.neutralSecondary,
+            color: 'var(--fx-text-body)',
             fontSize: '0.875rem',
-            lineHeight: theme.typography.lineHeights.normal,
+            lineHeight: 1.5,
+            margin: 0,
           }}
         >
           {stat.description}
-        </Typography>
+        </p>
       )}
     </div>
   );
@@ -108,7 +105,14 @@ export const CompanyStatistics: React.FC<CompanyStatisticsProps> = ({
   statistics,
 }) => {
   return (
-    <div className='grid gap-6 pt-1 grid-cols-2 lg:grid-cols-4'>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gap: 24,
+        paddingTop: 4,
+      }}
+    >
       {statistics.map((stat) => (
         <StatCard key={stat.id} stat={stat} />
       ))}

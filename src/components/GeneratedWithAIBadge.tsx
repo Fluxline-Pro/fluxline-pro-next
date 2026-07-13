@@ -8,14 +8,11 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 import { GeneratedWithAISvg } from '@/assets/svgs/GeneratedWithAISvg';
-import { FluentIcon } from '@/theme/components/fluent-icon';
 import { Modal } from '@/components/Modal';
 import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
 import { content as responsibleAIContent } from '@/assets/legal/responsible-ai-usage';
-import { Typography } from '@/theme/components/typography';
 
 const TOOLTIP_TEXT =
   'This content was created with AI assistance and reviewed by our team.\nClick the icon to read our Responsible AI Usage guidelines.';
@@ -34,7 +31,6 @@ const RESPONSIBLE_AI_LABEL = 'Read our Responsible AI Usage policy';
 export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
   isHero = false,
 }) => {
-  const { theme } = useAppTheme();
   const isMobile = useIsMobile();
   const showBelow = isMobile || isHero;
   const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null);
@@ -85,12 +81,11 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
               alignItems: 'center',
               gap: '8px',
               padding: '8px 18px',
-              backgroundColor: theme.palette.neutralLighterAlt,
+              backgroundColor: 'var(--fx-surface-card)',
               borderRadius: '999px',
-              color: theme.palette.themePrimary,
+              color: 'var(--fx-accent)',
               fontSize: '0.875rem',
-              fontFamily:
-                (theme.fonts.medium.fontFamily as string) || 'inherit',
+              fontFamily: 'var(--fx-font)',
               fontWeight: 600,
               letterSpacing: '0.01em',
               userSelect: 'none',
@@ -123,17 +118,22 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
           height: '38px',
           borderRadius: '999px',
           cursor: 'pointer',
-          color: theme.palette.themePrimary,
-          backgroundColor: theme.palette.neutralLighterAlt,
-          border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
-          boxShadow: theme.effects.elevation4,
+          color: 'var(--fx-accent)',
+          backgroundColor: 'var(--fx-surface-card)',
+          border: '1px solid var(--fx-border)',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
         }}
       >
-        <FluentIcon
-          iconName='OpenInNewTab'
-          size='small'
-          color={theme.palette.themePrimary}
-        />
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='16'
+          height='16'
+          viewBox='0 0 20 20'
+          fill='currentColor'
+          aria-hidden='true'
+        >
+          <path d='M6 4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v9a1 1 0 1 1-2 0V6.414l-9.293 9.293a1 1 0 0 1-1.414-1.414L13.586 5H7a1 1 0 0 1-1-1z' />
+        </svg>
       </button>
 
       <Modal
@@ -142,15 +142,18 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
         ariaLabel='Responsible AI Usage Policy'
         maxWidth='860px'
       >
-        <Typography
-          variant='h3'
+        <h3
           style={{
-            color: theme.palette.themePrimary,
-            marginBottom: theme.spacing.l,
+            color: 'var(--fx-accent)',
+            marginBottom: '20px',
+            fontSize: 'var(--fx-h3-size)',
+            fontWeight: 'var(--fx-h3-weight)' as unknown as number,
+            fontFamily: 'var(--fx-font)',
+            letterSpacing: 'var(--fx-heading-tracking)',
           }}
         >
           Responsible AI Usage
-        </Typography>
+        </h3>
         <UnifiedMarkdownRenderer content={responsibleAIContent} />
       </Modal>
 
@@ -183,9 +186,9 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
                   borderRadius: '6px',
                   boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                   pointerEvents: 'none',
-                  backgroundColor: theme.palette.neutralLighter,
-                  color: theme.palette.neutralPrimary,
-                  border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+                  backgroundColor: 'var(--fx-surface-card)',
+                  color: 'var(--fx-text-heading)',
+                  border: '1px solid var(--fx-border)',
                   fontSize: '0.875rem',
                   lineHeight: '1.5',
                   whiteSpace: 'pre-line',

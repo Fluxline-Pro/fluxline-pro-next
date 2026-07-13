@@ -55,9 +55,10 @@
  * @author Fluxline Pro Design System
  */
 
-import { createTheme, ITheme, ISpacing } from '@fluentui/react';
-
-export interface IExtendedTheme extends ITheme {
+export interface IExtendedTheme {
+  palette: Record<string, string>;
+  semanticColors: Record<string, string>;
+  isInverted: boolean;
   spacing: IExtendedSpacing;
   animations: typeof animations;
   borderRadius: typeof borderRadius;
@@ -70,12 +71,16 @@ export interface IExtendedTheme extends ITheme {
   themeMode: ThemeMode;
 }
 
-export interface IExtendedSpacing extends ISpacing {
+export interface IExtendedSpacing {
+  s2: string;
+  s1: string;
+  m: string;
+  l1: string;
+  l2: string;
   none: string;
   xxs: string;
   xs: string;
   s: string;
-  m: string;
   l: string;
   xl: string;
   xxl: string;
@@ -862,17 +867,14 @@ export const getTypographyStyle = (
   };
 };
 
-// Helper function to merge FluentUI theme with our extended properties
 const createExtendedTheme = (
-  fluentTheme: ReturnType<typeof createTheme>,
-  extendedProps: Omit<IExtendedTheme, keyof ReturnType<typeof createTheme>>
-): IExtendedTheme => {
-  return {
-    ...fluentTheme,
-    ...extendedProps,
-    spacing: spacing as IExtendedSpacing,
-  };
-};
+  base: { palette: Record<string, string>; semanticColors: Record<string, string>; isInverted: boolean },
+  extendedProps: Omit<IExtendedTheme, 'palette' | 'semanticColors' | 'isInverted'>
+): IExtendedTheme => ({
+  ...base,
+  ...extendedProps,
+  spacing: spacing as IExtendedSpacing,
+});
 
 // Base Theme with shared properties
 const baseExtendedProps = {
@@ -902,7 +904,7 @@ const baseExtendedProps = {
  * - Neutral: Calibrated grays for hierarchy, silence, and sacred whitespace
  */
 export const lightTheme: IExtendedTheme = createExtendedTheme(
-  createTheme({
+  {
     palette: {
       // Fluxline Pro Light Primary Palette – Mythic clarity
       themePrimary: '#274770', // Deep slate blue – anchors brand
@@ -951,7 +953,7 @@ export const lightTheme: IExtendedTheme = createExtendedTheme(
       linkHovered: '#1F1F1F', // Resonance Core
     },
     isInverted: false,
-  }),
+  },
   {
     ...baseExtendedProps,
     themeMode: 'light' as ThemeMode,
@@ -972,7 +974,7 @@ export const lightTheme: IExtendedTheme = createExtendedTheme(
  * - Neutral: Calibrated grays for hierarchy, silence, and sacred contrast
  */
 export const darkTheme: IExtendedTheme = createExtendedTheme(
-  createTheme({
+  {
     palette: {
       // Fluxline Pro Dark Primary Palette – Resonance Core
       themePrimary: '#AFCAFC', // Slate blue – sovereign structure
@@ -1022,7 +1024,7 @@ export const darkTheme: IExtendedTheme = createExtendedTheme(
       linkHovered: '#5A7CA0',
     },
     isInverted: true,
-  }),
+  },
   {
     ...baseExtendedProps,
     themeMode: 'dark' as ThemeMode,
@@ -1044,7 +1046,7 @@ export const darkTheme: IExtendedTheme = createExtendedTheme(
  * - Neutral: Simplified grayscale for hierarchy and accessibility
  */
 export const highContrastTheme: IExtendedTheme = createExtendedTheme(
-  createTheme({
+  {
     palette: {
       themePrimary: '#3399FF',
       themeSecondary: '#FFFFFF',
@@ -1083,7 +1085,7 @@ export const highContrastTheme: IExtendedTheme = createExtendedTheme(
       linkHovered: '#66B3FF',
     },
     isInverted: true,
-  }),
+  },
   {
     ...baseExtendedProps,
     themeMode: 'high-contrast' as ThemeMode,
@@ -1143,7 +1145,7 @@ export const highContrastTheme: IExtendedTheme = createExtendedTheme(
  */
 // Protanopia Theme
 export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
-  createTheme({
+  {
     palette: {
       themePrimary: '#0078D4',
       themeSecondary: '#2B88D8',
@@ -1183,7 +1185,7 @@ export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
       linkHovered: '#004578',
     },
     isInverted: false,
-  }),
+  },
   {
     ...baseExtendedProps,
     gradients: {
@@ -1227,7 +1229,7 @@ export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
         },
       },
     },
-    themeMode: 'protanopia' as ThemeMode,
+    themeMode: 'colorblind' as ThemeMode,
   }
 );
 
@@ -1246,7 +1248,7 @@ export const protanopiaTheme: IExtendedTheme = createExtendedTheme(
  */
 // Deuteranopia Theme
 export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
-  createTheme({
+  {
     palette: {
       themePrimary: '#0063B1',
       themeSecondary: '#4894FE',
@@ -1285,7 +1287,7 @@ export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
       linkHovered: '#004578',
     },
     isInverted: false,
-  }),
+  },
   {
     ...baseExtendedProps,
     gradients: {
@@ -1329,7 +1331,7 @@ export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
         },
       },
     },
-    themeMode: 'deuteranopia' as ThemeMode,
+    themeMode: 'colorblind' as ThemeMode,
   }
 );
 
@@ -1348,7 +1350,7 @@ export const deuteranopiaTheme: IExtendedTheme = createExtendedTheme(
  */
 // Tritanopia Theme
 export const tritanopiaTheme: IExtendedTheme = createExtendedTheme(
-  createTheme({
+  {
     palette: {
       themePrimary: '#D13438',
       themeSecondary: '#FF8C00',
@@ -1387,7 +1389,7 @@ export const tritanopiaTheme: IExtendedTheme = createExtendedTheme(
       linkHovered: '#A4262C',
     },
     isInverted: false,
-  }),
+  },
   {
     ...baseExtendedProps,
     gradients: {
@@ -1431,13 +1433,13 @@ export const tritanopiaTheme: IExtendedTheme = createExtendedTheme(
         },
       },
     },
-    themeMode: 'tritanopia' as ThemeMode,
+    themeMode: 'colorblind' as ThemeMode,
   }
 );
 
 // Grayscale Light Theme
 export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
-  createTheme({
+  {
     palette: {
       themePrimary: '#404040', // Primary interactive elements
       themeSecondary: '#666666', // Secondary interactive elements
@@ -1477,7 +1479,7 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
       linkHovered: '#1A1A1A',
     },
     isInverted: false,
-  }),
+  },
   {
     ...baseExtendedProps,
     gradients: {
@@ -1521,7 +1523,7 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
         },
       },
     },
-    themeMode: 'grayscale' as ThemeMode,
+    themeMode: 'grayscale-light' as ThemeMode,
   }
 );
 
@@ -1541,7 +1543,7 @@ export const grayscaleTheme: IExtendedTheme = createExtendedTheme(
  */
 // Grayscale Dark Theme
 export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
-  createTheme({
+  {
     palette: {
       themePrimary: '#bfbfbf', // Lighter gray for primary interactive elements
       themeSecondary: '#a6a6a6', // Lighter gray for secondary
@@ -1580,7 +1582,7 @@ export const grayscaleDarkTheme: IExtendedTheme = createExtendedTheme(
       linkHovered: '#f0f0f0',
     },
     isInverted: true,
-  }),
+  },
   {
     ...baseExtendedProps,
     themeMode: 'grayscale-dark' as ThemeMode,
@@ -1745,11 +1747,25 @@ export type ThemeMode =
   | 'light'
   | 'dark'
   | 'high-contrast'
-  | 'protanopia'
-  | 'deuteranopia'
-  | 'tritanopia'
-  | 'grayscale'
+  | 'colorblind'
+  | 'grayscale-light'
   | 'grayscale-dark';
+
+/** @deprecated Old theme modes kept for migration from persisted preferences */
+type LegacyThemeMode = 'protanopia' | 'deuteranopia' | 'tritanopia' | 'grayscale';
+
+const LEGACY_MODE_MAP: Record<LegacyThemeMode, ThemeMode> = {
+  protanopia: 'colorblind',
+  deuteranopia: 'colorblind',
+  tritanopia: 'colorblind',
+  grayscale: 'grayscale-light',
+};
+
+export const migrateLegacyThemeMode = (mode: string): ThemeMode => {
+  if (mode in LEGACY_MODE_MAP) return LEGACY_MODE_MAP[mode as LegacyThemeMode];
+  if (mode in themeMap) return mode as ThemeMode;
+  return 'dark';
+};
 
 export type ReadingDirection = 'ltr' | 'rtl';
 export type LayoutPreference = 'right-handed' | 'left-handed';
@@ -1769,16 +1785,14 @@ export type ThemeContextType = {
   toggleLayoutPreference: () => void;
 };
 
-// Theme mapping
+// Theme mapping — DSM v1.0 six modes
 export const themeMap: Record<ThemeMode, IExtendedTheme> = {
-  light: lightTheme,
   dark: darkTheme,
-  'high-contrast': highContrastTheme,
-  protanopia: protanopiaTheme,
-  deuteranopia: deuteranopiaTheme,
-  tritanopia: tritanopiaTheme,
-  grayscale: grayscaleTheme,
+  light: lightTheme,
   'grayscale-dark': grayscaleDarkTheme,
+  'grayscale-light': grayscaleTheme,
+  'high-contrast': highContrastTheme,
+  colorblind: protanopiaTheme,
 };
 
 // Theme persistence key
@@ -1815,8 +1829,8 @@ export const applyThemeToDocument = (themeMode: ThemeMode) => {
   const root = document.documentElement;
   const theme = themeMap[themeMode];
 
-  // Set the data-theme attribute for CSS selector matching
-  root.setAttribute('data-theme', themeMode);
+  // Set the data-fx-theme attribute for DSM CSS selector matching
+  root.setAttribute('data-fx-theme', themeMode);
 
   // Add transition properties to root element
   root.style.setProperty(

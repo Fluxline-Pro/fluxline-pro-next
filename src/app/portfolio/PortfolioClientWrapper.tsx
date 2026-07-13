@@ -5,7 +5,6 @@ import {
   ContentListingPage,
   FilterConfig,
 } from '@/components/ContentListingPage';
-import { getIconForPath } from '@/utils/navigation-icons';
 import { PortfolioProject } from './types';
 
 interface PortfolioClientWrapperProps {
@@ -20,33 +19,19 @@ interface PortfolioClientWrapperProps {
  */
 export function PortfolioClientWrapper({
   projects,
-  allTags,
   allTechnologies,
 }: PortfolioClientWrapperProps) {
-  // Filter state
-  const [selectedTags, setSelectedTags] = React.useState<string[]>([]);
-  const [selectedTechnologies, setSelectedTechnologies] = React.useState<
-    string[]
-  >([]);
+  const [selectedTechnology, setSelectedTechnology] = React.useState<
+    string | undefined
+  >();
 
-  // Filter projects based on selected filters
+  // Filter projects based on selected technology
   const filteredProjects = React.useMemo(() => {
-    let filtered = projects;
-
-    if (selectedTags.length > 0) {
-      filtered = filtered.filter((project) =>
-        project.tags.some((tag) => selectedTags.includes(tag))
-      );
-    }
-
-    if (selectedTechnologies.length > 0) {
-      filtered = filtered.filter((project) =>
-        project.technologies.some((tech) => selectedTechnologies.includes(tech))
-      );
-    }
-
-    return filtered;
-  }, [projects, selectedTags, selectedTechnologies]);
+    if (!selectedTechnology) return projects;
+    return projects.filter((project) =>
+      project.technologies.some((tech) => tech === selectedTechnology)
+    );
+  }, [projects, selectedTechnology]);
 
   // Transform portfolio projects to card format
   const cards = React.useMemo(() => {
@@ -58,55 +43,38 @@ export function PortfolioClientWrapper({
       imageAlt: project.featuredImage.alt,
       imageText: `${project.role}${project.client ? ` • ${project.client}` : ''}`,
       date: project.publishedDate,
+      category: project.technologies[0],
     }));
   }, [filteredProjects]);
 
   // Configure filters
   const filters: FilterConfig[] = [
     {
-      type: 'multi',
-      label: 'Tags',
-      placeholder: 'All Tags',
-      options: allTags.map((tag) => ({ key: tag, text: tag })),
-      selectedKeys: selectedTags,
-      onChange: setSelectedTags,
-    },
-    {
-      type: 'multi',
-      label: 'Technologies',
-      placeholder: 'All Technologies',
-      options: allTechnologies.map((tech) => ({ key: tech, text: tech })),
-      selectedKeys: selectedTechnologies,
-      onChange: setSelectedTechnologies,
+      type: 'single',
+      label: 'Technology',
+      options: [
+        { key: '', text: 'All' },
+        ...allTechnologies
+          .filter((tech) => tech && typeof tech === 'string')
+          .map((tech) => ({ key: tech, text: tech })),
+      ],
+      value: selectedTechnology,
+      onChange: setSelectedTechnology,
     },
   ];
 
-  // Build results message
-  const resultsMessage = `Showing ${filteredProjects.length} ${filteredProjects.length === 1 ? 'project' : 'projects'}${selectedTags.length > 0 ? ` with tags: ${selectedTags.join(', ')}` : ''}${selectedTechnologies.length > 0 ? ` using: ${selectedTechnologies.join(', ')}` : ''}`;
-
-  const hasActiveFilters =
-    selectedTags.length > 0 || selectedTechnologies.length > 0;
-
   return (
     <ContentListingPage
-      title='Portfolio'
-      iconName={getIconForPath('/portfolio') || 'FolderQuery'}
-      description='Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more. Each project demonstrates our commitment to excellence and innovation.'
-      basePath='/portfolio'
+      title="Work & Projects"
+      kicker="Portfolio"
+      subhead="Real systems built for real organizations."
+      description="Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more."
+      basePath="/portfolio"
       cards={cards}
       filters={filters}
-      resultsMessage={resultsMessage}
-      emptyStateTitle='No projects found'
-      emptyStateMessage={
-        hasActiveFilters
-          ? 'Try adjusting your filters to see more projects.'
-          : 'Check back soon for new projects.'
-      }
-      hasActiveFilters={hasActiveFilters}
-      onClearFilters={() => {
-        setSelectedTags([]);
-        setSelectedTechnologies([]);
-      }}
+      emptyStateTitle="No projects found"
+      emptyStateMessage="Try adjusting your filters to see more projects."
+      onClearFilters={() => setSelectedTechnology(undefined)}
       ctaSection={{
         title: "Let's Build Something Amazing Together",
         description:
@@ -124,8 +92,6 @@ export function PortfolioClientWrapper({
           },
         ],
       }}
-      backArrow={true}
-      backArrowPath='/content'
     />
   );
 }

@@ -1,9 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 
 export interface FormSelectOption {
   key: string;
@@ -35,7 +32,6 @@ export interface FormSelectProps {
  * - Optional icon and description
  * - Support for both single and multi-select
  * - Accessible with ARIA labels
- * - Theme-typography-aligned sizing
  */
 export const FormSelect: React.FC<FormSelectProps> = ({
   label,
@@ -52,13 +48,8 @@ export const FormSelect: React.FC<FormSelectProps> = ({
   onMultiChange,
   'aria-label': ariaLabel,
 }) => {
-  const { theme } = useAppTheme();
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
-
-  const labelFontSize = theme.typography.fonts.label.fontSize;
-  const descriptionFontSize = theme.typography.fonts.bodySmall.fontSize;
-  const controlFontSize = theme.typography.fonts.body.fontSize;
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -107,41 +98,43 @@ export const FormSelect: React.FC<FormSelectProps> = ({
           alignItems: 'flex-start',
           gap: '1rem',
           padding: '1rem',
-          borderRadius: theme.borderRadius.container.small,
-          backgroundColor: theme.palette.neutralLighterAlt,
-          border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+          borderRadius: 'var(--fx-radius-control)',
+          backgroundColor: 'var(--fx-surface-card)',
+          border: '1px solid var(--fx-border)',
         }
       : {};
 
   const selectContent = (
     <div style={{ flex: 1, width: fullWidth ? '100%' : 'auto' }}>
       {label && (
-        <Typography
-          variant='p'
+        <p
           style={{
-            color: theme.palette.neutralPrimary,
-            fontSize: labelFontSize,
-            fontWeight: theme.typography.fontWeights.semiBold,
+            color: 'var(--fx-text-heading)',
+            fontSize: 'var(--fx-body-sm-size)',
+            fontWeight: 600,
             marginBottom: description ? '0.25rem' : '0.5rem',
             display: 'block',
+            margin: 0,
+            marginBlockEnd: description ? '0.25rem' : '0.5rem',
           }}
         >
           {label}
-        </Typography>
+        </p>
       )}
       {description && (
-        <Typography
-          variant='p'
+        <p
           style={{
-            color: theme.palette.neutralSecondary,
-            fontSize: descriptionFontSize,
-            lineHeight: theme.typography.lineHeights.normal,
+            color: 'var(--fx-text-muted)',
+            fontSize: 'var(--fx-body-sm-size)',
+            lineHeight: 1.7,
             marginBottom: '0.5rem',
             display: 'block',
+            margin: 0,
+            marginBlockEnd: '0.5rem',
           }}
         >
           {description}
-        </Typography>
+        </p>
       )}
 
       {multiSelect ? (
@@ -157,16 +150,16 @@ export const FormSelect: React.FC<FormSelectProps> = ({
             style={{
               width: '100%',
               padding: '0.5rem 2rem 0.5rem 0.75rem',
-              borderRadius: theme.borderRadius.container.small,
-              backgroundColor: theme.palette.neutralLight,
-              border: `1px solid ${isOpen ? theme.palette.themePrimary : theme.palette.neutralTertiaryAlt}`,
+              borderRadius: 'var(--fx-radius-control)',
+              backgroundColor: 'var(--fx-surface-input)',
+              border: `1px solid ${isOpen ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
               color:
                 selectedKeys.length === 0
-                  ? theme.palette.neutralSecondary
-                  : theme.palette.neutralPrimary,
-              fontSize: controlFontSize,
+                  ? 'var(--fx-text-muted)'
+                  : 'var(--fx-text-heading)',
+              fontSize: 'var(--fx-body-size)',
               cursor: disabled ? 'not-allowed' : 'pointer',
-              fontFamily: theme.typography.fonts.body.fontFamily,
+              fontFamily: 'var(--fx-font)',
               opacity: disabled ? 0.6 : 1,
               transition: 'border-color 0.2s ease',
               outline: 'none',
@@ -177,12 +170,11 @@ export const FormSelect: React.FC<FormSelectProps> = ({
               position: 'relative',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = theme.palette.themePrimary;
+              e.currentTarget.style.borderColor = 'var(--fx-accent)';
             }}
             onBlur={(e) => {
               if (!isOpen)
-                e.currentTarget.style.borderColor =
-                  theme.palette.neutralTertiaryAlt;
+                e.currentTarget.style.borderColor = 'var(--fx-border)';
             }}
           >
             <span>{getMultiSelectDisplayText()}</span>
@@ -214,10 +206,10 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                 right: 0,
                 maxHeight: '200px',
                 overflowY: 'auto',
-                border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-                borderRadius: theme.borderRadius.container.small,
-                backgroundColor: theme.palette.neutralLight,
-                boxShadow: theme.effects.elevation8,
+                border: '1px solid var(--fx-border)',
+                borderRadius: 'var(--fx-radius-control)',
+                backgroundColor: 'var(--fx-surface-input)',
+                boxShadow: 'var(--fx-toast-shadow)',
                 zIndex: 500,
               }}
             >
@@ -229,12 +221,12 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                     alignItems: 'center',
                     padding: '0.5rem 0.75rem',
                     cursor: disabled ? 'not-allowed' : 'pointer',
-                    borderBottom: `1px solid ${theme.palette.neutralLighter}`,
+                    borderBottom: '1px solid var(--fx-surface-card)',
                   }}
                   onMouseEnter={(e) => {
                     if (!disabled) {
                       e.currentTarget.style.backgroundColor =
-                        theme.palette.neutralLighter;
+                        'var(--fx-surface-card)';
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -253,15 +245,14 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                       cursor: disabled ? 'not-allowed' : 'pointer',
                     }}
                   />
-                  <Typography
-                    variant='p'
+                  <span
                     style={{
-                      color: theme.palette.neutralPrimary,
-                      fontSize: controlFontSize,
+                      color: 'var(--fx-text-heading)',
+                      fontSize: 'var(--fx-body-size)',
                     }}
                   >
                     {option.text}
-                  </Typography>
+                  </span>
                 </label>
               ))}
             </div>
@@ -280,16 +271,16 @@ export const FormSelect: React.FC<FormSelectProps> = ({
             style={{
               width: '100%',
               padding: '0.5rem 2rem 0.5rem 0.75rem',
-              borderRadius: theme.borderRadius.container.small,
-              backgroundColor: theme.palette.neutralLight,
-              border: `1px solid ${isOpen ? theme.palette.themePrimary : theme.palette.neutralTertiaryAlt}`,
+              borderRadius: 'var(--fx-radius-control)',
+              backgroundColor: 'var(--fx-surface-input)',
+              border: `1px solid ${isOpen ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
               color:
                 !value || value === ''
-                  ? theme.palette.neutralSecondary
-                  : theme.palette.neutralPrimary,
-              fontSize: controlFontSize,
+                  ? 'var(--fx-text-muted)'
+                  : 'var(--fx-text-heading)',
+              fontSize: 'var(--fx-body-size)',
               cursor: disabled ? 'not-allowed' : 'pointer',
-              fontFamily: theme.typography.fonts.body.fontFamily,
+              fontFamily: 'var(--fx-font)',
               opacity: disabled ? 0.6 : 1,
               transition: 'border-color 0.2s ease',
               outline: 'none',
@@ -301,12 +292,11 @@ export const FormSelect: React.FC<FormSelectProps> = ({
               position: 'relative',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = theme.palette.themePrimary;
+              e.currentTarget.style.borderColor = 'var(--fx-accent)';
             }}
             onBlur={(e) => {
               if (!isOpen)
-                e.currentTarget.style.borderColor =
-                  theme.palette.neutralTertiaryAlt;
+                e.currentTarget.style.borderColor = 'var(--fx-border)';
             }}
           >
             {value
@@ -341,10 +331,10 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                 right: 0,
                 maxHeight: '200px',
                 overflowY: 'auto',
-                border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-                borderRadius: theme.borderRadius.container.small,
-                backgroundColor: theme.palette.neutralLight,
-                boxShadow: theme.effects.elevation8,
+                border: '1px solid var(--fx-border)',
+                borderRadius: 'var(--fx-radius-control)',
+                backgroundColor: 'var(--fx-surface-input)',
+                boxShadow: 'var(--fx-toast-shadow)',
                 zIndex: 500,
               }}
             >
@@ -365,23 +355,23 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                     textAlign: 'left',
                     background:
                       !value || value === ''
-                        ? theme.palette.neutralLighter
+                        ? 'var(--fx-surface-card)'
                         : 'transparent',
                     border: 'none',
-                    borderBottom: `1px solid ${theme.palette.neutralLighter}`,
-                    color: theme.palette.neutralSecondary,
-                    fontSize: controlFontSize,
-                    fontFamily: theme.typography.fonts.body.fontFamily,
+                    borderBottom: '1px solid var(--fx-surface-card)',
+                    color: 'var(--fx-text-muted)',
+                    fontSize: 'var(--fx-body-size)',
+                    fontFamily: 'var(--fx-font)',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor =
-                      theme.palette.neutralLighter;
+                      'var(--fx-surface-card)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor =
                       !value || value === ''
-                        ? theme.palette.neutralLighter
+                        ? 'var(--fx-surface-card)'
                         : 'transparent';
                   }}
                 >
@@ -405,27 +395,25 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                     textAlign: 'left',
                     background:
                       value === option.key
-                        ? theme.palette.neutralLighter
+                        ? 'var(--fx-surface-card)'
                         : 'transparent',
                     border: 'none',
-                    borderBottom: `1px solid ${theme.palette.neutralLighter}`,
-                    color: theme.palette.neutralPrimary,
-                    fontSize: controlFontSize,
-                    fontFamily: theme.typography.fonts.body.fontFamily,
+                    borderBottom: '1px solid var(--fx-surface-card)',
+                    color: 'var(--fx-text-heading)',
+                    fontSize: 'var(--fx-body-size)',
+                    fontFamily: 'var(--fx-font)',
                     cursor: 'pointer',
                     fontWeight:
-                      value === option.key
-                        ? theme.typography.fontWeights.semiBold
-                        : theme.typography.fontWeights.regular,
+                      value === option.key ? 600 : 400,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor =
-                      theme.palette.neutralLighter;
+                      'var(--fx-surface-card)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor =
                       value === option.key
-                        ? theme.palette.neutralLighter
+                        ? 'var(--fx-surface-card)'
                         : 'transparent';
                   }}
                 >
@@ -444,11 +432,17 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     return (
       <div style={containerStyles}>
         {icon && (
-          <FluentIcon
-            iconName={icon}
-            size='medium'
-            color={theme.palette.themePrimary}
-          />
+          <span
+            style={{
+              color: 'var(--fx-accent)',
+              fontSize: '1.25rem',
+              lineHeight: 1,
+              flexShrink: 0,
+            }}
+            aria-hidden='true'
+          >
+            {icon}
+          </span>
         )}
         {selectContent}
       </div>

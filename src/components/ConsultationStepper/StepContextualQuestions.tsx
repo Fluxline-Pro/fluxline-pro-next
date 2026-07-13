@@ -6,12 +6,10 @@
  */
 
 import React from 'react';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
-import { Typography } from '@/theme/components/typography';
-import { FormButton } from '@/theme/components/form/FormButton';
 import { FormInput } from '@/theme/components/form/FormInput';
 import { FormTextarea } from '@/theme/components/form/FormTextarea';
 import { FormSelect } from '@/theme/components/form/FormSelect';
+import FxButton from '@/theme/components/dsm/FxButton';
 import { getQuestionSet } from './constants';
 import { ServiceKey, StepOneData, StepTwoData, Question } from './types';
 
@@ -41,7 +39,6 @@ function FileUploadField({
   file: File | null | undefined;
   onChange: (file: File | null) => void;
 }) {
-  const { theme } = useAppTheme();
   const [error, setError] = React.useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,50 +54,35 @@ function FileUploadField({
 
   return (
     <div>
-      <Typography
-        variant='p'
+      <p
         style={{
-          fontWeight: theme.typography.fontWeights.semiBold,
-          color: theme.palette.neutralPrimary,
+          fontWeight: 600,
+          color: 'var(--fx-text-heading)',
           marginBottom: '0.5rem',
           display: 'block',
         }}
       >
         {question.label}
-      </Typography>
+      </p>
       <input
         type='file'
         accept={question.accept}
         onChange={handleChange}
         aria-label={question.label}
         style={{
-          fontSize: theme.typography.fonts.bodySmall.fontSize,
-          color: theme.palette.neutralPrimary,
+          fontSize: 'var(--fx-body-sm-size)',
+          color: 'var(--fx-text-heading)',
         }}
       />
       {file && (
-        <Typography
-          variant='p'
-          style={{
-            color: theme.palette.neutralSecondary,
-            fontSize: theme.typography.fonts.bodySmall.fontSize,
-            marginTop: '4px',
-          }}
-        >
+        <p style={{ color: 'var(--fx-text-muted)', fontSize: 'var(--fx-body-sm-size)', marginTop: '4px' }}>
           Selected: {file.name}
-        </Typography>
+        </p>
       )}
       {error && (
-        <Typography
-          variant='p'
-          style={{
-            color: theme.semanticColors.errorText,
-            fontSize: theme.typography.fonts.bodySmall.fontSize,
-            marginTop: '4px',
-          }}
-        >
+        <p style={{ color: 'var(--fx-error)', fontSize: 'var(--fx-body-sm-size)', marginTop: '4px' }}>
           {error}
-        </Typography>
+        </p>
       )}
     </div>
   );
@@ -113,7 +95,6 @@ export const StepContextualQuestions: React.FC<StepContextualQuestionsProps> = (
   onNext,
   onBack,
 }) => {
-  const { theme } = useAppTheme();
   const [errors, setErrors] = React.useState<Record<string, string>>({});
 
   const services = step1.services.filter((s): s is ServiceKey => s !== 'help_me_choose');
@@ -212,37 +193,42 @@ export const StepContextualQuestions: React.FC<StepContextualQuestionsProps> = (
 
   return (
     <div>
-      <Typography
-        variant='h3'
-        style={{ color: theme.palette.themePrimary, marginBottom: theme.spacing.xs }}
+      <h3
+        style={{
+          color: 'var(--fx-accent)',
+          marginBottom: '4px',
+          fontSize: 'var(--fx-h3-size)',
+          fontWeight: 'var(--fx-h3-weight)',
+          letterSpacing: 'var(--fx-heading-tracking)',
+        }}
       >
         Step 2 — Tell us a little about your needs
-      </Typography>
-      <Typography
-        variant='p'
+      </h3>
+      <p
         style={{
-          color: theme.palette.neutralSecondary,
-          marginBottom: theme.spacing.l,
-          fontSize: theme.typography.fonts.bodySmall.fontSize,
+          color: 'var(--fx-text-muted)',
+          marginBottom: '20px',
+          fontSize: 'var(--fx-body-sm-size)',
         }}
       >
         {isHelpMeChoose
           ? "No worries — we'll explore what fits best on the call. Just complete your contact details in the next step."
           : 'Answer as many as you can. These help us make the most of our time together.'}
-      </Typography>
+      </p>
 
       {!isHelpMeChoose && (
         <>
           {(services.length > 1 || step1.services.includes('help_me_choose') === false) && (
-            <Typography
-              variant='h4'
+            <h4
               style={{
-                color: theme.palette.neutralPrimary,
-                marginBottom: theme.spacing.m,
+                color: 'var(--fx-text-heading)',
+                marginBottom: '16px',
+                fontSize: 'var(--fx-subhead-size)',
+                fontWeight: 'var(--fx-subhead-weight)',
               }}
             >
               {sectionTitle}
-            </Typography>
+            </h4>
           )}
 
           <div className='flex flex-col gap-4'>
@@ -251,16 +237,9 @@ export const StepContextualQuestions: React.FC<StepContextualQuestionsProps> = (
                 {renderQuestion(q)}
                 {errors[q.id] && (
                   <div role='alert'>
-                    <Typography
-                      variant='p'
-                      style={{
-                        color: theme.semanticColors.errorText,
-                        fontSize: theme.typography.fonts.bodySmall.fontSize,
-                        marginTop: '4px',
-                      }}
-                    >
+                    <p style={{ color: 'var(--fx-error)', fontSize: 'var(--fx-body-sm-size)', marginTop: '4px' }}>
                       {errors[q.id]}
-                    </Typography>
+                    </p>
                   </div>
                 )}
               </div>
@@ -270,18 +249,12 @@ export const StepContextualQuestions: React.FC<StepContextualQuestionsProps> = (
       )}
 
       <div className='flex justify-between mt-6'>
-        <FormButton
-          variant='secondary'
-          text='← Back'
-          onClick={onBack}
-          size='medium'
-        />
-        <FormButton
-          variant='primary'
-          text='Next: Contact & Schedule →'
-          onClick={handleNext}
-          size='medium'
-        />
+        <FxButton variant="outline" size="md" onClick={onBack}>
+          &larr; Back
+        </FxButton>
+        <FxButton variant="primary" size="md" onClick={handleNext}>
+          Next: Contact &amp; Schedule &rarr;
+        </FxButton>
       </div>
     </div>
   );

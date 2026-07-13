@@ -3,9 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { SpinnerSize } from '@fluentui/react/lib/Spinner';
 import { Card } from '../card/card';
-import { useAppTheme } from '../../hooks/useAppTheme';
 import { useColorVisionFilter } from '../../hooks/useColorVisionFilter';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import {
@@ -14,7 +12,6 @@ import {
   useIsMobile,
 } from '../../hooks/useMediaQuery';
 import { LoadingSpinner } from '../structural/loading-spinner';
-import { Typography } from '../typography';
 
 export type CardViewType = 'grid' | 'small' | 'large' | 'image';
 
@@ -83,7 +80,6 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   skipDarkModeFilter = false,
   onImageDimensionsChange,
 }) => {
-  const { theme } = useAppTheme();
   const { filter } = useColorVisionFilter(skipDarkModeFilter);
   const { shouldReduceMotion } = useReducedMotion();
   const isTabletHook = useIsTablet();
@@ -99,7 +95,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
   const shouldClampDescription = isTablet || orientation === 'square';
 
   // Common overlay gradient for image text
-  const overlayGradient = `linear-gradient(to top, ${theme.palette.black}CC, transparent)`;
+  const overlayGradient = 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)';
   const publicationLabel = publicationDateText
     ? `Published ${publicationDateText}`
     : undefined;
@@ -219,7 +215,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   zIndex: 10,
                 }}
               >
-                <LoadingSpinner size={SpinnerSize.large} />
+                <LoadingSpinner size={3} />
               </div>
             )}
 
@@ -258,20 +254,19 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  padding: theme.spacing.m,
+                  padding: '16px',
                   background: overlayGradient,
-                  color: theme.palette.white,
+                  color: 'var(--fx-text-bright)',
                 }}
               >
-                <Typography
-                  variant='h4'
+                <h4
                   style={{
                     margin: 0,
                     color: '#FFF',
                   }}
                 >
                   {imageText}
-                </Typography>
+                </h4>
               </div>
             )}
           </Card>
@@ -323,7 +318,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     zIndex: 10,
                   }}
                 >
-                  <LoadingSpinner size={SpinnerSize.medium} />
+                  <LoadingSpinner size={2} />
                 </div>
               )}
 
@@ -349,23 +344,17 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  padding: theme.spacing.m,
-                  background:
-                    theme.themeMode === 'dark' ||
-                    theme.themeMode === 'high-contrast' ||
-                    theme.themeMode === 'grayscale-dark'
-                      ? `linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35))`
-                      : overlayGradient,
-                  color: theme.palette.white,
+                  padding: '16px',
+                  background: overlayGradient,
+                  color: 'var(--fx-text-bright)',
                 }}
               >
-                <Typography
-                  variant='h4'
+                <h4
                   style={{
-                    margin: `0 0 ${theme.spacing.xs} 0`,
+                    margin: '0 0 4px 0',
                     lineHeight: 1.2,
                     color: '#FFFFFF',
-                    textShadow: theme.shadows.m,
+                    textShadow: '0 3px 6px rgba(0,0,0,0.15)',
                     WebkitLineClamp: 3,
                     lineClamp: 3,
                     display: '-webkit-box',
@@ -374,10 +363,9 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                   }}
                 >
                   {title}
-                </Typography>
+                </h4>
                 {publicationDateText && (
-                  <Typography
-                    variant='label'
+                  <span
                     style={{
                       margin: 0,
                       opacity: 0.9,
@@ -385,7 +373,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     }}
                   >
                     {publicationLabel}
-                  </Typography>
+                  </span>
                 )}
               </div>
             </div>
@@ -395,44 +383,42 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                padding: theme.spacing.m,
+                padding: '16px',
                 minHeight: '200px',
                 height: '100%',
               }}
             >
               <div>
-                <Typography
-                  variant='h4'
+                <h4
                   style={{
                     margin: 0,
-                    color: theme.palette.neutralPrimary,
+                    color: 'var(--fx-text-heading)',
                     lineHeight: 1.3,
                   }}
                 >
                   {title}
-                </Typography>
+                </h4>
                 {/* {description && (
-                  <Typography
-                    variant='label'
+                  <span
                     style={{
-                      margin: `${theme.spacing.s} 0 0 0`,
-                      color: theme.palette.neutralSecondary,
+                      margin: '8px 0 0 0',
+                      color: 'var(--fx-text-muted)',
                       lineHeight: 1.5,
                     }}
                   >
                     {description}
-                  </Typography>
+                  </span>
                 )} */}
               </div>
               {/* {imageText && (
-                <Typography variant='label'
+                <span
                   style={{
                     margin: 0,
-                    color: theme.palette.neutralSecondary,
+                    color: 'var(--fx-text-muted)',
                   }}
                 >
                   {imageText}
-                </Typography>
+                </span>
               )} */}
             </div>
           )}
@@ -506,7 +492,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                         zIndex: 10,
                       }}
                     >
-                      <LoadingSpinner size={SpinnerSize.medium} />
+                      <LoadingSpinner size={2} />
                     </div>
                   )}
 
@@ -528,7 +514,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               )}
               <div
                 style={{
-                  padding: isMobile ? theme.spacing.s : theme.spacing.m,
+                  padding: isMobile ? '8px' : '16px',
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
@@ -538,13 +524,12 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 }}
               >
                 <div style={{ flex: '1 1 auto', overflow: 'hidden' }}>
-                  <Typography
-                    variant='h4'
+                  <h4
                     style={{
                       margin: 0,
-                      color: theme.palette.neutralPrimary,
+                      color: 'var(--fx-text-heading)',
                       lineHeight: 1.3,
-                      marginBottom: isMobile ? 0 : theme.spacing.xs,
+                      marginBottom: isMobile ? 0 : '4px',
                       display: '-webkit-box',
                       WebkitBoxOrient: 'vertical',
                       WebkitLineClamp: 2,
@@ -553,14 +538,13 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     }}
                   >
                     {title}
-                  </Typography>
+                  </h4>
                   {/* Hide description on mobile for more compact small-tile cards */}
                   {!isMobile && description && (
-                    <Typography
-                      variant='p'
+                    <p
                       style={{
-                        margin: `${theme.spacing.xs} 0 0 0`,
-                        color: theme.palette.neutralSecondary,
+                        margin: '4px 0 0 0',
+                        color: 'var(--fx-text-muted)',
                         lineHeight: 1.4,
                         display: '-webkit-box',
                         WebkitBoxOrient: 'vertical',
@@ -570,38 +554,36 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                       }}
                     >
                       {description}
-                    </Typography>
+                    </p>
                   )}
                 </div>
                 <div
-                  style={{ marginTop: 'auto', paddingTop: theme.spacing.xxs }}
+                  style={{ marginTop: 'auto', paddingTop: '2px' }}
                 >
                   {imageText && (
-                    <Typography
-                      variant='label'
+                    <span
                       style={{
                         margin: 0,
-                        color: theme.palette.themePrimary,
+                        color: 'var(--fx-accent)',
                         fontWeight: 600,
                         display: 'block',
                         fontSize: '0.75rem',
                       }}
                     >
                       {imageText}
-                    </Typography>
+                    </span>
                   )}
                   {publicationDateText && (
-                    <Typography
-                      variant='label'
+                    <span
                       style={{
-                        margin: `${theme.spacing.xxs} 0 0 0`,
-                        color: theme.palette.neutralSecondary,
+                        margin: '2px 0 0 0',
+                        color: 'var(--fx-text-muted)',
                         display: 'block',
                         fontSize: '0.875rem',
                       }}
                     >
                       {publicationLabel}
-                    </Typography>
+                    </span>
                   )}
                 </div>
               </div>
@@ -674,7 +656,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                         zIndex: 10,
                       }}
                     >
-                      <LoadingSpinner size={SpinnerSize.large} />
+                      <LoadingSpinner size={3} />
                     </div>
                   )}
 
@@ -696,7 +678,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
               )}
               <div
                 style={{
-                  padding: theme.spacing.l,
+                  padding: '20px',
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
@@ -705,34 +687,31 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                 }}
               >
                 <div>
-                  <Typography
-                    variant='h4'
+                  <h4
                     style={{
-                      margin: `0 0 ${theme.spacing.s2} 0`,
-                      color: theme.palette.neutralPrimary,
+                      margin: '0 0 12px 0',
+                      color: 'var(--fx-text-heading)',
                       lineHeight: 1.3,
                     }}
                   >
                     {title}
-                  </Typography>
+                  </h4>
                   {publicationLabel && (
-                    <Typography
-                      variant='h6'
+                    <h6
                       style={{
-                        margin: `${theme.spacing.s1} 0`,
-                        color: theme.palette.themePrimary,
+                        margin: '6px 0',
+                        color: 'var(--fx-accent)',
                         lineHeight: 1.4,
                       }}
                     >
                       {publicationLabel}
-                    </Typography>
+                    </h6>
                   )}
                   {!isMobile && description && (
-                    <Typography
-                      variant='p'
+                    <p
                       style={{
-                        margin: `${theme.spacing.xs} 0 0 0`,
-                        color: theme.palette.neutralSecondary,
+                        margin: '4px 0 0 0',
+                        color: 'var(--fx-text-muted)',
                         lineHeight: 1.5,
                         display: '-webkit-box',
                         WebkitBoxOrient: 'vertical',
@@ -741,19 +720,18 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                       }}
                     >
                       {description}
-                    </Typography>
+                    </p>
                   )}
                 </div>
                 {imageText && (
-                  <Typography
-                    variant='label'
+                  <span
                     style={{
-                      margin: `${theme.spacing.m} 0 0 0`,
-                      color: theme.palette.neutralSecondary,
+                      margin: '16px 0 0 0',
+                      color: 'var(--fx-text-muted)',
                     }}
                   >
                     {imageText}
-                  </Typography>
+                  </span>
                 )}
               </div>
             </div>
@@ -805,36 +783,34 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
           }}
         >
           {title && (
-            <Typography
-              variant='h5'
+            <h5
               style={{
-                margin: `0 0 ${theme.spacing.s} 0`,
-                color: theme.palette.neutralPrimary,
+                margin: '0 0 8px 0',
+                color: 'var(--fx-text-heading)',
               }}
             >
               {title}
-            </Typography>
+            </h5>
           )}
           {!isMobile && description && (
-            <Typography
-              variant='label'
+            <span
               style={{
                 margin: 0,
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-text-muted)',
               }}
             >
               {description}
-            </Typography>
+            </span>
           )}
           {imageUrl && (
             <div
               style={{
-                marginTop: theme.spacing.m,
+                marginTop: '16px',
                 position: 'relative',
                 width: '100%',
                 paddingBottom: '56.25%', // 16:9 aspect ratio
                 overflow: 'hidden',
-                borderRadius: theme.effects.roundedCorner4,
+                borderRadius: '4px',
               }}
             >
               <Image

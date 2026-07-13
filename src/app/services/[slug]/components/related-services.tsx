@@ -1,52 +1,81 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { InteractiveCard } from '@/components/InteractiveCard';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import FxCard from '@/theme/components/dsm/FxCard';
 import { SERVICE_CATEGORIES } from '../../constants';
 
-/**
- * RelatedServices Component
- * Shows related services
- */
 export const RelatedServices: React.FC<{ currentServiceId: string }> = ({
   currentServiceId,
 }) => {
-  const { theme } = useAppTheme();
-
-  // Get 3 related services (excluding current)
   const relatedServices = SERVICE_CATEGORIES.filter(
-    (s) => s.id !== currentServiceId
+    (s) => s.id !== currentServiceId && s.id !== 'education-training'
   ).slice(0, 3);
 
   if (relatedServices.length === 0) return null;
 
   return (
-    <div className='space-y-6'>
-      <Typography
-        variant='h2'
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div
         style={{
-          color: theme.palette.themePrimary,
-          fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-          fontWeight: theme.typography.fontWeights.semiBold,
+          fontSize: 11,
+          fontWeight: 700,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: 'var(--fx-accent)',
+          marginBottom: 0,
         }}
       >
         Related Services
-      </Typography>
+      </div>
 
-      <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 pt-2'>
+      <div
+        className="fx-g3"
+        style={{
+          display: 'grid',
+          gap: 20,
+          gridTemplateColumns: 'repeat(3, 1fr)',
+        }}
+      >
         {relatedServices.map((service) => (
-          <InteractiveCard
+          <FxCard
             key={service.id}
-            id={service.id}
-            title={service.title}
-            description={service.description}
-            icon={service.icon}
+            interactive
             href={service.path}
-            iconPosition='center'
-            showLearnMore={true}
-          />
+            style={{ padding: '24px 24px 20px' }}
+          >
+            <h4
+              style={{
+                fontSize: 'var(--fx-h3-size)',
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                marginBottom: 8,
+                fontFamily: 'var(--fx-font)',
+              }}
+            >
+              {service.title}
+            </h4>
+            <p
+              style={{
+                fontSize: 'var(--fx-body-size)',
+                color: 'var(--fx-text-body)',
+                lineHeight: 'var(--fx-body-leading)',
+                marginBottom: 16,
+              }}
+            >
+              {service.description}
+            </p>
+            <span
+              style={{
+                fontSize: 'var(--fx-cta-link-size)',
+                color: 'var(--fx-accent)',
+                fontWeight: 700,
+                letterSpacing: 'var(--fx-cta-link-tracking)',
+                textTransform: 'uppercase',
+              }}
+            >
+              Learn More ›
+            </span>
+          </FxCard>
         ))}
       </div>
     </div>

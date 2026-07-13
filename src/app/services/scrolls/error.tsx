@@ -19,18 +19,55 @@ export default function ScrollsError({
   }, [error]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6 px-4 py-16 md:py-24">
-      <div className="text-center max-w-lg">
-        <h2 className="text-3xl font-bold mb-4">Something went wrong!</h2>
-        <p className="text-lg mb-6">
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 24,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 64,
+        paddingBottom: 64,
+      }}
+    >
+      <div style={{ textAlign: 'center', maxWidth: 512 }}>
+        <h2
+          style={{
+            fontSize: 30,
+            fontWeight: 700,
+            marginBottom: 16,
+            color: 'var(--fx-text-heading)',
+          }}
+        >
+          Something went wrong!
+        </h2>
+        <p
+          style={{
+            fontSize: 18,
+            marginBottom: 24,
+            color: 'var(--fx-text-body)',
+          }}
+        >
           We encountered an error loading the scrolls. Please try again.
         </p>
         <button
           onClick={reset}
-          className="inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-colors"
           style={{
-            backgroundColor: 'var(--themePrimary)',
-            color: 'var(--white)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            paddingLeft: 24,
+            paddingRight: 24,
+            paddingTop: 12,
+            paddingBottom: 12,
+            borderRadius: 12,
+            fontWeight: 600,
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'filter 0.2s',
+            backgroundColor: 'var(--fx-accent)',
+            color: 'var(--fx-accent-ink)',
           }}
         >
           Try Again

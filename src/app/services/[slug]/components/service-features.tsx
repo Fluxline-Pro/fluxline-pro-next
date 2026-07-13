@@ -1,9 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { FluentIcon } from '@/theme/components/fluent-icon';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import type { ServiceCategory } from '../../constants';
 
 /**
@@ -13,8 +10,6 @@ import type { ServiceCategory } from '../../constants';
 export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
   service,
 }) => {
-  const { theme } = useAppTheme();
-
   // Define features based on service type
   const getFeatures = (serviceId: string): string[] => {
     const featuresMap: Record<string, string[]> = {
@@ -68,19 +63,24 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
   if (features.length === 0) return null;
 
   return (
-    <div className='space-y-4'>
-      <Typography
-        variant='h2'
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <h2
         style={{
-          color: theme.palette.themePrimary,
+          color: 'var(--fx-accent)',
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-          fontWeight: theme.typography.fontWeights.semiBold,
+          fontWeight: 600,
         }}
       >
         What We Offer
-      </Typography>
+      </h2>
 
-      <div className='grid gap-4 md:grid-cols-2'>
+      <div
+        style={{
+          display: 'grid',
+          gap: 16,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        }}
+      >
         {features.map((feature, index) => (
           <div
             key={index}
@@ -88,26 +88,31 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
               display: 'flex',
               gap: '1rem',
               padding: '1rem',
-              borderRadius: theme.borderRadius.container.small,
+              borderRadius: 8,
               backgroundColor: 'transparent',
-              border: `1px solid ${theme.palette.neutralQuaternaryAlt}`,
+              border: '1px solid var(--fx-border)',
             }}
           >
-            <FluentIcon
-              iconName='CheckMark'
-              size='medium'
-              color={theme.palette.themeTertiary}
-            />
-            <Typography
-              variant='p'
+            <span
               style={{
-                color: theme.palette.neutralSecondary,
+                color: 'var(--fx-accent)',
+                fontSize: '1.25rem',
+                lineHeight: 1,
+                flexShrink: 0,
+              }}
+            >
+              &#10003;
+            </span>
+            <p
+              style={{
+                color: 'var(--fx-text-body)',
                 fontSize: '1rem',
-                lineHeight: theme.typography.lineHeights.relaxed,
+                lineHeight: 1.7,
+                margin: 0,
               }}
             >
               {feature}
-            </Typography>
+            </p>
           </div>
         ))}
       </div>

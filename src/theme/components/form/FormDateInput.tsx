@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography } from '@/theme/components/typography';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 export interface FormDateInputProps {
   label: string;
@@ -29,25 +28,22 @@ export const FormDateInput: React.FC<FormDateInputProps> = ({
   fullWidth = true,
   'aria-label': ariaLabel,
 }) => {
-  const { theme, themeMode } = useAppTheme();
-
-  const labelFontSize = theme.typography.fonts.label.fontSize;
-  const controlFontSize = theme.typography.fonts.body.fontSize;
-
+  const { themeMode } = useAppTheme();
   return (
     <div style={{ width: fullWidth ? '100%' : 'auto' }}>
-      <Typography
-        variant='p'
+      <p
         style={{
-          color: theme.palette.neutralPrimary,
-          fontSize: labelFontSize,
-          fontWeight: theme.typography.fontWeights.semiBold,
+          color: 'var(--fx-text-heading)',
+          fontSize: 'var(--fx-body-sm-size)',
+          fontWeight: 600,
           marginBottom: '0.5rem',
           display: 'block',
+          margin: 0,
+          marginBlockEnd: '0.5rem',
         }}
       >
         {label}
-      </Typography>
+      </p>
 
       <input
         type='date'
@@ -60,12 +56,12 @@ export const FormDateInput: React.FC<FormDateInputProps> = ({
         style={{
           width: '100%',
           padding: '0.5rem',
-          borderRadius: theme.borderRadius.container.small,
-          backgroundColor: theme.palette.neutralLight,
-          border: `1px solid ${theme.palette.neutralTertiaryAlt}`,
-          color: theme.palette.neutralPrimary,
-          fontSize: controlFontSize,
-          fontFamily: theme.typography.fonts.body.fontFamily,
+          borderRadius: 'var(--fx-radius-control)',
+          backgroundColor: 'var(--fx-surface-input)',
+          border: '1px solid var(--fx-border)',
+          color: 'var(--fx-text-heading)',
+          fontSize: 'var(--fx-body-size)',
+          fontFamily: 'var(--fx-font)',
           cursor: disabled ? 'not-allowed' : 'pointer',
           opacity: disabled ? 0.6 : 1,
           transition: 'border-color 0.2s ease',
@@ -76,10 +72,10 @@ export const FormDateInput: React.FC<FormDateInputProps> = ({
               : 'light',
         }}
         onFocus={(e) => {
-          e.currentTarget.style.borderColor = theme.palette.themePrimary;
+          e.currentTarget.style.borderColor = 'var(--fx-accent)';
         }}
         onBlur={(e) => {
-          e.currentTarget.style.borderColor = theme.palette.neutralTertiaryAlt;
+          e.currentTarget.style.borderColor = 'var(--fx-border)';
         }}
       />
     </div>

@@ -3,13 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Typography } from '@/theme/components/typography';
 import { FormButton } from '@/theme/components/form';
-import { useAppTheme } from '@/theme/hooks/useAppTheme';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
 import { useHoverEffects } from '@/hooks/useHoverEffects';
 import { getFeaturedCaseStudies } from '../caseStudiesData';
-import { Icon } from '@fluentui/react';
 
 /**
  * Featured Case Studies Component
@@ -18,27 +15,26 @@ import { Icon } from '@fluentui/react';
  * Features:
  * - Showcases 2-3 featured case studies
  * - Responsive grid layout
- * - Theme-aware styling
+ * - Theme-aware styling via DSM tokens
  * - Click to navigate to detail view
  * - Used on home page and services page
  */
 export default function FeaturedCaseStudies() {
   const router = useRouter();
-  const { theme } = useAppTheme();
   const [isMounted, setIsMounted] = React.useState(false);
   const orientationHook = useDeviceOrientation();
   const orientation = isMounted ? orientationHook : 'landscape';
   const cardHoverEffects = useHoverEffects({
     type: 'card',
-    hoverBorderColor: theme.palette.themePrimary,
-    defaultBorderColor: theme.palette.neutralLight,
+    hoverBorderColor: 'var(--fx-accent)',
+    defaultBorderColor: 'var(--fx-border)',
   });
   const buttonHoverEffects = useHoverEffects({
     type: 'button',
-    hoverBgColor: theme.palette.themePrimary,
+    hoverBgColor: 'var(--fx-accent)',
     defaultBgColor: 'transparent',
-    hoverTextColor: theme.palette.white,
-    defaultTextColor: theme.palette.themePrimary,
+    hoverTextColor: 'var(--fx-text-bright)',
+    defaultTextColor: 'var(--fx-accent)',
     enableTransform: false,
   });
 
@@ -57,38 +53,42 @@ export default function FeaturedCaseStudies() {
   return (
     <div
       style={{
-        padding: isMobile ? theme.spacing.m : theme.spacing.xl,
+        padding: isMobile ? '16px' : '32px',
         width: '100%',
       }}
     >
       {/* Section Header */}
       <div
         style={{
-          marginBottom: theme.spacing.xl,
+          marginBottom: '32px',
           textAlign: 'center',
         }}
       >
-        <Typography
-          variant='h2'
+        <h2
           style={{
-            color: theme.palette.themePrimary,
-            marginBottom: theme.spacing.m,
+            fontSize: 'var(--fx-h2-size)',
+            fontWeight: 700,
+            color: 'var(--fx-accent)',
+            marginBottom: '16px',
+            marginTop: 0,
           }}
         >
           Featured Success Stories
-        </Typography>
-        <Typography
-          variant='p'
+        </h2>
+        <p
           style={{
-            color: theme.palette.neutralSecondary,
+            fontSize: 'var(--fx-body-size)',
+            color: 'var(--fx-text-muted)',
             maxWidth: '800px',
             marginLeft: 'auto',
             marginRight: 'auto',
+            marginTop: 0,
+            marginBottom: 0,
           }}
         >
           Discover how we&apos;ve helped organizations achieve transformative
           results through strategic partnerships and innovative solutions.
-        </Typography>
+        </p>
       </div>
 
       {/* Featured Cards Grid */}
@@ -98,8 +98,8 @@ export default function FeaturedCaseStudies() {
           gridTemplateColumns: isMobile
             ? '1fr'
             : 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: theme.spacing.l,
-          marginBottom: theme.spacing.xl,
+          gap: '20px',
+          marginBottom: '32px',
         }}
       >
         {featuredStudies.map((study) => (
@@ -109,64 +109,67 @@ export default function FeaturedCaseStudies() {
             style={{
               display: 'block',
               textDecoration: 'none',
-              backgroundColor: theme.palette.neutralLighterAlt,
-              borderRadius: theme.effects.roundedCorner6,
-              padding: theme.spacing.l,
+              backgroundColor: 'var(--fx-surface-card)',
+              borderRadius: '6px',
+              padding: '20px',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              border: `1px solid ${theme.palette.neutralLight}`,
+              border: '1px solid var(--fx-border)',
             }}
             {...cardHoverEffects}
           >
             {/* Card Header */}
             <div
               style={{
-                marginBottom: theme.spacing.m,
+                marginBottom: '16px',
               }}
             >
-              <Typography
-                variant='h3'
+              <h3
                 style={{
-                  color: theme.palette.themePrimary,
-                  marginBottom: theme.spacing.s1,
+                  fontSize: 'var(--fx-h3-size)',
+                  fontWeight: 700,
+                  color: 'var(--fx-accent)',
+                  marginBottom: '8px',
+                  marginTop: 0,
                 }}
               >
                 {study.title}
-              </Typography>
-              <Typography
-                variant='p'
+              </h3>
+              <p
                 style={{
-                  color: theme.palette.neutralSecondary,
-                  fontSize: theme.fonts.small.fontSize,
+                  color: 'var(--fx-text-muted)',
+                  fontSize: '0.875rem',
+                  margin: 0,
                 }}
               >
                 {study.client} • {study.industry}
-              </Typography>
+              </p>
             </div>
 
             {/* Description */}
-            <Typography
-              variant='p'
+            <p
               style={{
-                color: theme.palette.neutralSecondary,
-                marginBottom: theme.spacing.m,
-                lineHeight: theme.typography.lineHeights.relaxed,
+                color: 'var(--fx-text-muted)',
+                fontSize: 'var(--fx-body-size)',
+                marginBottom: '16px',
+                marginTop: 0,
+                lineHeight: 1.7,
               }}
             >
               {study.description}
-            </Typography>
+            </p>
 
             {/* Key Metrics Preview */}
             {study.metrics.length > 0 && (
               <div
                 style={{
                   display: 'flex',
-                  gap: theme.spacing.m,
+                  gap: '16px',
                   flexWrap: 'wrap',
-                  marginBottom: theme.spacing.m,
-                  padding: theme.spacing.m,
-                  backgroundColor: theme.palette.neutralLighter,
-                  borderRadius: theme.effects.roundedCorner4,
+                  marginBottom: '16px',
+                  padding: '16px',
+                  backgroundColor: 'var(--fx-surface-card)',
+                  borderRadius: '4px',
                 }}
               >
                 {study.metrics.slice(0, 2).map((metric) => (
@@ -177,26 +180,26 @@ export default function FeaturedCaseStudies() {
                       minWidth: '120px',
                     }}
                   >
-                    <Typography
-                      variant='h2'
+                    <h2
                       style={{
-                        color: theme.palette.themePrimary,
                         fontSize: '1.75rem',
-                        fontWeight: theme.typography.fontWeights.bold,
-                        marginBottom: theme.spacing.s2,
+                        fontWeight: 700,
+                        color: 'var(--fx-accent)',
+                        marginBottom: '4px',
+                        marginTop: 0,
                       }}
                     >
                       {metric.value}
-                    </Typography>
-                    <Typography
-                      variant='p'
+                    </h2>
+                    <p
                       style={{
-                        color: theme.palette.neutralPrimary,
-                        fontSize: theme.fonts.small.fontSize,
+                        color: 'var(--fx-text-heading)',
+                        fontSize: '0.875rem',
+                        margin: 0,
                       }}
                     >
                       {metric.label}
-                    </Typography>
+                    </p>
                   </div>
                 ))}
               </div>
@@ -206,21 +209,21 @@ export default function FeaturedCaseStudies() {
             <div
               style={{
                 display: 'flex',
-                gap: theme.spacing.s2,
+                gap: '4px',
                 flexWrap: 'wrap',
-                marginBottom: theme.spacing.m,
+                marginBottom: '16px',
               }}
             >
               {study.services.slice(0, 3).map((service) => (
                 <span
                   key={service}
                   style={{
-                    padding: `${theme.spacing.s2} ${theme.spacing.s1}`,
-                    backgroundColor: theme.palette.themeLighterAlt,
-                    color: theme.palette.themePrimary,
-                    borderRadius: theme.effects.roundedCorner4,
-                    fontSize: theme.fonts.tiny.fontSize,
-                    fontWeight: theme.typography.fontWeights.semiBold,
+                    padding: '4px 8px',
+                    backgroundColor: 'var(--fx-surface-card)',
+                    color: 'var(--fx-accent)',
+                    borderRadius: '4px',
+                    fontSize: '0.6875rem',
+                    fontWeight: 600,
                     textTransform: 'capitalize',
                   }}
                 >
@@ -234,14 +237,26 @@ export default function FeaturedCaseStudies() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: theme.spacing.s2,
-                color: theme.palette.themePrimary,
-                fontSize: theme.fonts.medium.fontSize,
-                fontWeight: theme.typography.fontWeights.semiBold,
+                gap: '4px',
+                color: 'var(--fx-accent)',
+                fontSize: '0.875rem',
+                fontWeight: 600,
               }}
             >
               <span>Read Case Study</span>
-              <Icon iconName='ChevronRight' />
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
             </div>
           </Link>
         ))}
