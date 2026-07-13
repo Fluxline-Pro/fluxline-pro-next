@@ -82,6 +82,34 @@ export default function FxNav({
   const finalBackHref = backHref ?? resolvedBack.href;
   const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [isNavHidden, setIsNavHidden] = React.useState(false);
+  const lastScrollY = React.useRef(0);
+
+  // Scroll hide/show effect
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDelta = Math.abs(currentScrollY - lastScrollY.current);
+
+      // Hide nav when scrolling down and not near the top
+      if (
+        currentScrollY > 100 &&
+        currentScrollY > lastScrollY.current &&
+        scrollDelta > 5
+      ) {
+        setIsNavHidden(true);
+      }
+      // Show nav when scrolling up or near the top
+      else if (currentScrollY < lastScrollY.current || currentScrollY < 100) {
+        setIsNavHidden(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { label: 'About', href: '#about' },
@@ -125,6 +153,8 @@ export default function FxNav({
         backdropFilter: 'var(--fx-nav-blur)',
         WebkitBackdropFilter: 'var(--fx-nav-blur)',
         borderBottom: '1px solid var(--fx-border-subtle)',
+        transform: isNavHidden ? 'translateY(-100%)' : 'translateY(0)',
+        transition: 'transform 0.3s ease-in-out',
       }}
     >
       <div className={`fx-c fx-nav-gap ${styles.navContainer}`}>
@@ -249,66 +279,77 @@ export default function FxNav({
             >
               {finalBackLabel}
             </Link>
-            {breadcrumb && breadcrumb.length > 0 && (
-              <div
-                className='fx-crumb'
-                style={{
-                  display: 'flex',
-                  gap: 8,
-                  alignItems: 'center',
-                  fontSize: 13.5,
-                  color: 'var(--fx-text-faint)',
-                  minWidth: 0,
-                }}
+            {/* Desktop Navigation Links (Subpage) */}
+            <nav
+              className={`fx-navrow ${styles.navRow}`}
+              style={{
+                gap: 26,
+              }}
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className='fx-navlink'
+                  style={linkStyle(link.href)}
+                  onMouseEnter={() => setHoveredLink(link.href)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+            {/* Mobile Hamburger (Subpage) */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={styles.hamburgerButton}
+              aria-label='Toggle menu'
+            >
+              <svg
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
               >
-                {breadcrumb.map((item, i) => {
-                  const label = typeof item === 'string' ? item : item.label;
-                  const href = typeof item === 'string' ? undefined : item.href;
-                  const isLast = i === breadcrumb.length - 1;
-                  return (
-                    <React.Fragment key={i}>
-                      {i > 0 && <span>{'›'}</span>}
-                      {isLast ? (
-                        <span
-                          style={{
-                            color: 'var(--fx-text-bright)',
-                            fontWeight: 600,
-                            whiteSpace: 'nowrap',
-                          }}
-                        >
-                          {label}
-                        </span>
-                      ) : href ? (
-                        <Link
-                          href={href}
-                          style={{
-                            color:
-                              hoveredLink === `crumb-${i}`
-                                ? 'var(--fx-text-bright)'
-                                : 'var(--fx-text-soft)',
-                            textDecoration: 'none',
-                            transition: 'color .15s',
-                          }}
-                          onMouseEnter={() => setHoveredLink(`crumb-${i}`)}
-                          onMouseLeave={() => setHoveredLink(null)}
-                        >
-                          {label}
-                        </Link>
-                      ) : (
-                        <span style={{ color: 'var(--fx-text-soft)' }}>
-                          {label}
-                        </span>
-                      )}
-                    </React.Fragment>
-                  );
-                })}
-              </div>
-            )}
-            <div style={{ marginLeft: 'auto' }}>
-              <FxButton size='sm' href={ctaHref}>
-                {ctaLabel}
-              </FxButton>
-            </div>
+                <line x1='3' y1='6' x2='21' y2='6' strokeLinecap='round' />
+                <line x1='3' y1='12' x2='21' y2='12' strokeLinecap='round' />
+                <line x1='3' y1='18' x2='21' y2='18' strokeLinecap='round' />
+              </svg>
+            </button>
+            {/* Mobile Menu Dropdown (Subpage) */}
+            <AnimatePresence>
+              {mobileMenuOpen && (
+                <motion.div
+                  className={styles.mobileMenuDropdown}
+                  initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
+                  animate={{ opacity: 1, scaleY: 1, transformOrigin: 'top' }}
+                  exit={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
+                  transition={{ duration: 0.2, ease: 'easeInOut' }}
+                >
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={styles.mobileMenuLink}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <div className={styles.mobileMenuButtonWrapper}>
+                    <FxButton
+                      size='sm'
+                      href={ctaHref}
+                      style={{ width: '100%' }}
+                    >
+                      {ctaLabel}
+                    </FxButton>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </>
         )}
       </div>
