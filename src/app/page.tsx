@@ -17,9 +17,8 @@ import { COMPANY_VALUES } from '@/app/about/constants';
 import Link from 'next/link';
 
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
-  { key: 'body-practice', label: 'Body & Practice' },
   { key: 'brand-digital', label: 'Brand & Digital Presence' },
-  { key: 'depth-strategy', label: 'Depth Work & Strategy' },
+  { key: 'body-practice', label: 'Body & Practice' },
 ];
 
 export default function Home() {
@@ -350,8 +349,111 @@ export default function Home() {
               </p>
             </FxReveal>
 
+            {/* Featured: Consulting */}
+            <FxReveal delay={100}>
+              <div
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-gold)',
+                  marginBottom: 14,
+                }}
+              >
+                Featured Service
+              </div>
+              <FxCard
+                variant='feature'
+                interactive
+                href={
+                  SERVICE_CATEGORIES.find((s) => s.id === 'consulting')?.path
+                }
+                style={{
+                  padding: '36px 40px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    background:
+                      'linear-gradient(90deg, var(--fx-gold), var(--fx-accent))',
+                  }}
+                />
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 32,
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <div style={{ flex: 1, minWidth: 280 }}>
+                    <h3
+                      style={{
+                        fontSize: 'var(--fx-h2-size)',
+                        fontWeight: 800,
+                        color: 'var(--fx-text-heading)',
+                        margin: '0 0 10px',
+                        fontFamily: 'var(--fx-font)',
+                      }}
+                    >
+                      {
+                        SERVICE_CATEGORIES.find((s) => s.id === 'consulting')
+                          ?.title
+                      }
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: 'var(--fx-body-size)',
+                        color: 'var(--fx-text-body)',
+                        lineHeight: 'var(--fx-body-leading)',
+                        margin: '0 0 8px',
+                        maxWidth: '56ch',
+                      }}
+                    >
+                      {
+                        SERVICE_CATEGORIES.find((s) => s.id === 'consulting')
+                          ?.description
+                      }
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: 'var(--fx-text-muted)',
+                        lineHeight: 1.65,
+                        margin: '0 0 20px',
+                        maxWidth: '56ch',
+                      }}
+                    >
+                      Strategic systems design, operational optimization, and
+                      values-aligned business consulting for founders and
+                      growing teams.
+                    </p>
+                    <span
+                      style={{
+                        fontSize: 'var(--fx-cta-link-size)',
+                        color: 'var(--fx-gold)',
+                        fontWeight: 700,
+                        letterSpacing: 'var(--fx-cta-link-tracking)',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      Explore Consulting ›
+                    </span>
+                  </div>
+                </div>
+              </FxCard>
+            </FxReveal>
+
             {HOME_SERVICE_GROUPS.map((group, i) => (
-              <FxReveal key={group.key} delay={(i + 1) * 100}>
+              <FxReveal key={group.key} delay={(i + 2) * 100}>
                 <div
                   style={{
                     fontSize: 13,
@@ -417,7 +519,7 @@ export default function Home() {
               </FxReveal>
             ))}
 
-            <FxReveal delay={(HOME_SERVICE_GROUPS.length + 1) * 100}>
+            <FxReveal delay={(HOME_SERVICE_GROUPS.length + 2) * 100}>
               <FxCard
                 variant='inset'
                 interactive

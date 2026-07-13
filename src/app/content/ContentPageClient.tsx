@@ -335,8 +335,10 @@ export default function ContentPageClient() {
                   </span>
                 </span>
               ) : (
-                <Link
+                <a
                   href={link.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
                   style={{
                     color: 'var(--fx-text-soft)',
                     fontSize: 13.5,
@@ -345,7 +347,7 @@ export default function ContentPageClient() {
                   }}
                 >
                   {link.label}
-                </Link>
+                </a>
               )}
             </React.Fragment>
           ))}
