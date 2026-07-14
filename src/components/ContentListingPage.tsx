@@ -150,91 +150,103 @@ export function ContentListingPage({
   };
 
   return (
-    <FxContainer as="section" style={{ padding: '64px 32px 88px' }}>
-      <FxSectionHeading
-        kicker={kicker || title}
-        title={title}
-        subhead={subhead || description}
-        as="h1"
-        style={{ marginBottom: 36 }}
-      />
-
-      {chipOptions.length > 0 && (
-        <FxFilterChips
-          options={chipOptions}
-          value={activeChip}
-          onChange={handleChipChange}
-          style={{ marginBottom: 32 }}
+    <FxContainer
+      as='section'
+      style={{
+        padding: '64px 32px 88px',
+        minHeight: 'calc(100vh - 200px)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width: '100%',
+      }}
+    >
+      <div style={{ width: '100%' }}>
+        <FxSectionHeading
+          kicker={kicker || title}
+          title={title}
+          subhead={subhead || description}
+          as='h1'
+          style={{ marginBottom: 36 }}
         />
-      )}
 
-      {customSection && (
-        <div style={{ marginBottom: 32 }}>{customSection}</div>
-      )}
+        {chipOptions.length > 0 && (
+          <FxFilterChips
+            options={chipOptions}
+            value={activeChip}
+            onChange={handleChipChange}
+            style={{ marginBottom: 32 }}
+          />
+        )}
 
-      {sortedCards.length > 0 ? (
-        <FxContentGrid>
-          {featuredCard && (
-            <FxFeaturedCard
-              title={featuredCard.title}
-              excerpt={featuredCard.excerpt}
-              category={featuredCard.category}
-              date={featuredCard.date}
-              image={featuredCard.image}
-              href={`${basePath}/${featuredCard.id}`}
-            />
-          )}
-          {sideCard}
-          {sortedCards.map((card) => (
-            <FxArticleCard
-              key={card.id}
-              title={card.title}
-              excerpt={card.description}
-              category={card.category || card.imageText}
-              date={formatDate(card.date)}
-              image={card.imageUrl}
-              href={`${basePath}/${card.id}`}
-            />
-          ))}
-        </FxContentGrid>
-      ) : (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: 300,
-            flexDirection: 'column',
-            gap: 12,
-          }}
-        >
-          <h3
+        {customSection && (
+          <div style={{ marginBottom: 32 }}>{customSection}</div>
+        )}
+
+        {sortedCards.length > 0 ? (
+          <FxContentGrid>
+            {featuredCard && (
+              <FxFeaturedCard
+                title={featuredCard.title}
+                excerpt={featuredCard.excerpt}
+                category={featuredCard.category}
+                date={featuredCard.date}
+                image={featuredCard.image}
+                href={`${basePath}/${featuredCard.id}`}
+              />
+            )}
+            {sideCard}
+            {sortedCards.map((card) => (
+              <FxArticleCard
+                key={card.id}
+                title={card.title}
+                excerpt={card.description}
+                category={card.category || card.imageText}
+                date={formatDate(card.date)}
+                image={card.imageUrl}
+                href={`${basePath}/${card.id}`}
+              />
+            ))}
+          </FxContentGrid>
+        ) : (
+          <div
             style={{
-              fontSize: 23,
-              fontWeight: 700,
-              color: 'var(--fx-text-heading)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: 300,
+              flexDirection: 'column',
+              gap: 12,
             }}
           >
-            {emptyStateTitle}
-          </h3>
-          <p style={{ fontSize: 16, color: 'var(--fx-text-muted)' }}>
-            {emptyStateMessage}
-          </p>
-        </div>
-      )}
+            <h3
+              style={{
+                fontSize: 23,
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+              }}
+            >
+              {emptyStateTitle}
+            </h3>
+            <p style={{ fontSize: 16, color: 'var(--fx-text-muted)' }}>
+              {emptyStateMessage}
+            </p>
+          </div>
+        )}
 
-      {ctaSection && (
-        <div style={{ marginTop: 64 }}>
-          <FxCTABand
-            title={ctaSection.title}
-            body={ctaSection.description}
-            primaryLabel={ctaSection.buttons[0]?.label}
-            primaryHref={ctaSection.buttons[0]?.path}
-            secondaryLabel={ctaSection.buttons[1]?.label}
-            secondaryHref={ctaSection.buttons[1]?.path}
-          />
-        </div>
-      )}
+        {ctaSection && (
+          <div style={{ marginTop: 64 }}>
+            <FxCTABand
+              title={ctaSection.title}
+              body={ctaSection.description}
+              primaryLabel={ctaSection.buttons[0]?.label}
+              primaryHref={ctaSection.buttons[0]?.path}
+              secondaryLabel={ctaSection.buttons[1]?.label}
+              secondaryHref={ctaSection.buttons[1]?.path}
+            />
+          </div>
+        )}
+      </div>
     </FxContainer>
   );
 }

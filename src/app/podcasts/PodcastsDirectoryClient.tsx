@@ -1,186 +1,394 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import FxContainer from '@/theme/components/dsm/FxContainer';
-import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxButton from '@/theme/components/dsm/FxButton';
-import { useIsMobile } from '@/theme/hooks/useMediaQuery';
-import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.png';
-import Image from 'next/image';
 
 /**
  * PodcastsDirectoryClient
- * Directory/index page showing all available podcasts
- * Currently displays The Resonant Identity as a large tile card
+ * Podcast hub page - focuses on The Resonant Identity episodes
+ * Links externally to TheResonantIdentity.com
  */
 export function PodcastsDirectoryClient() {
-  const router = useRouter();
-  const [isMounted, setIsMounted] = React.useState(false);
-  const isMobileHook = useIsMobile();
-  const isMobile = isMounted ? isMobileHook : false;
-  const [hovered, setHovered] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   return (
-    <FxContainer style={{ padding: '64px 32px 88px' }}>
-      {/* Page Header */}
-      <FxSectionHeading
-        kicker='Content'
-        title='Podcasts'
-        lede='Long-form audio exploring identity, technology, and transformation.'
-        as='h1'
-      />
-
-      {/* Section header */}
-      <h3
+    <>
+      {/* Hero Section */}
+      <section
         style={{
-          color: 'var(--fx-accent)',
-          textAlign: 'left',
-          marginTop: 44,
-          marginBottom: 20,
-          fontSize: 'var(--fx-h3-size)',
-          fontWeight: 700,
+          position: 'relative',
+          overflow: 'hidden',
+          background: 'var(--fx-gradient-hero)',
+          borderBottom: '1px solid var(--fx-border-subtle)',
+          padding: '120px 32px 80px',
         }}
       >
-        Current Show
-      </h3>
-
-      {/* Podcasts Grid - Currently one podcast */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile
-            ? '1fr'
-            : 'repeat(auto-fill, minmax(400px, 1fr))',
-          gap: 20,
-          maxWidth: '1200px',
-        }}
-      >
-        {/* The Resonant Identity Card */}
         <div
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          aria-hidden
           style={{
-            borderRadius: 6,
-            overflow: 'hidden',
-            border: '2px solid var(--fx-accent)',
-            transition: 'all 0.2s ease',
-            transform: hovered ? 'translateY(-4px)' : 'none',
-            boxShadow: hovered
-              ? '0 8px 24px rgba(0,0,0,0.12)'
-              : '0 2px 6px rgba(0,0,0,0.06)',
-            backgroundColor: 'var(--fx-surface-card)',
-            display: 'flex',
-            flexDirection: 'column',
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(160deg,rgba(5,7,11,.6),rgba(14,21,35,.25))',
+          }}
+        />
+        <div
+          style={{
+            position: 'relative',
+            maxWidth: 1220,
+            margin: '0 auto',
           }}
         >
-          {/* Image */}
           <div
             style={{
-              height: '300px',
-              overflow: 'hidden',
-              backgroundColor: 'var(--fx-border)',
-              position: 'relative',
+              maxWidth: 640,
+              background: 'rgba(5,7,11,.72)',
+              border: '1px solid var(--fx-border)',
+              borderRadius: 16,
+              padding: '44px 46px',
+              backdropFilter: 'blur(4px)',
             }}
           >
-            {/* Featured badge */}
             <div
               style={{
-                position: 'absolute',
-                top: 12,
-                right: 12,
-                padding: '4px 8px',
-                backgroundColor: 'var(--fx-gold)',
-                color: '#000',
-                borderRadius: 4,
-                fontSize: '1.1rem',
-                fontWeight: 600,
-                zIndex: 1,
+                fontSize: 'var(--fx-eyebrow-size)',
+                letterSpacing: 'var(--fx-eyebrow-tracking)',
                 textTransform: 'uppercase',
-              }}
-            >
-              Featured
-            </div>
-            <Image
-              src={TheResonantIdentityLogo}
-              alt='The Resonant Identity Logo'
-              fill
-              style={{ objectFit: 'contain', padding: 20 }}
-              priority
-            />
-          </div>
-
-          {/* Card Body */}
-          <div
-            style={{
-              padding: 20,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 12,
-              flex: 1,
-            }}
-          >
-            {/* Title */}
-            <h2
-              style={{
-                color: hovered
-                  ? 'var(--fx-accent)'
-                  : 'var(--fx-text-heading)',
-                fontSize: '1.5rem',
-                fontWeight: 600,
-                transition: 'color 0.2s ease',
-                margin: 0,
+                color: 'var(--fx-text-soft)',
+                marginBottom: 14,
               }}
             >
               The Resonant Identity
-            </h2>
-
-            {/* Description */}
-            <p
+            </div>
+            <h1
               style={{
-                color: 'var(--fx-text-body)',
-                fontSize: 'var(--fx-body-size)',
-                lineHeight: 1.6,
-                flex: 1,
-                margin: 0,
+                fontSize: 'var(--fx-display-size)',
+                fontWeight: 800,
+                letterSpacing: 'var(--fx-display-tracking)',
+                color: 'var(--fx-text-heading-display)',
+                margin: '0 0 22px',
+                lineHeight: 1,
               }}
             >
-              A podcast blending identity architecture, self-improvement, and
-              practical frameworks for navigating transitions with clarity and
-              intention.
-            </p>
-
-            {/* Action Buttons */}
+              PODCAST
+            </h1>
             <div
               style={{
-                display: 'flex',
-                gap: 12,
-                flexWrap: 'wrap',
-                marginTop: 12,
+                height: 2,
+                background:
+                  'linear-gradient(90deg,var(--fx-line),var(--fx-accent),transparent)',
+                marginBottom: 26,
               }}
+            />
+            <div
+              style={{ fontSize: 17.5, lineHeight: 1.65, margin: '0 0 30px' }}
             >
-              <FxButton
-                variant='primary'
-                size='lg'
-                onClick={() => router.push('/podcasts/theresonantid')}
+              Identity architecture, self-improvement, and practical frameworks
+              for navigating transitions with clarity and intention.
+            </div>
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              <a
+                href='https://theresonantidentity.com'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 8,
+                  whiteSpace: 'nowrap',
+                  borderRadius: 'var(--fx-radius-control)',
+                  fontFamily: 'var(--fx-font)',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  fontSize: 15.5,
+                  padding: '14px 30px',
+                  background: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-ink)',
+                  border: 'none',
+                  transition:
+                    'filter var(--fx-color-duration), background var(--fx-color-duration), color var(--fx-color-duration), border-color var(--fx-color-duration)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.filter = 'brightness(1.08)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.filter = 'none';
+                }}
               >
-                View Episodes
-              </FxButton>
-              <FxButton
-                variant='outline'
-                size='lg'
-                onClick={() => router.push('/podcasts/theresonantid/about')}
-              >
-                About The Resonant Identity
-              </FxButton>
+                Visit TheResonantIdentity.com →
+              </a>
             </div>
           </div>
         </div>
-      </div>
-    </FxContainer>
+      </section>
+
+      {/* Main Content */}
+      <FxContainer style={{ padding: '88px 32px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 60 }}>
+          {/* Listen to Latest Episode */}
+          <section>
+            <h2
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 20px',
+                letterSpacing: '-.01em',
+              }}
+            >
+              Latest Episode
+            </h2>
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'var(--fx-text-body)',
+                margin: '0 0 24px',
+              }}
+            >
+              Listen to the most recent episode and explore the full archive on
+              The Resonant Identity podcast. Episodes dive into identity
+              architecture, personal transformation, and practical strategies
+              for building resilient systems.
+            </p>
+          </section>
+
+          {/* Podcast Platforms */}
+          <section>
+            <h2
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 20px',
+                letterSpacing: '-.01em',
+              }}
+            >
+              Listen Everywhere
+            </h2>
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'var(--fx-text-body)',
+                margin: '0 0 24px',
+              }}
+            >
+              The Resonant Identity is available on all major podcast platforms.
+              Subscribe to get new episodes delivered automatically.
+            </p>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: 16,
+              }}
+            >
+              <a
+                href='https://open.spotify.com/show/theresonantidentity'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{
+                  background: 'var(--fx-surface-card)',
+                  border: '1px solid var(--fx-border)',
+                  borderRadius: 'var(--fx-radius-card)',
+                  padding: '20px',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  display: 'block',
+                  transition:
+                    'border-color var(--fx-color-duration), transform var(--fx-color-duration), box-shadow var(--fx-color-duration)',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--fx-border-hover)';
+                  e.currentTarget.style.transform = 'var(--fx-hover-lift)';
+                  e.currentTarget.style.boxShadow =
+                    '0 8px 24px rgba(0,0,0,0.18)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--fx-border)';
+                  e.currentTarget.style.transform = 'none';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 16,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 8,
+                  }}
+                >
+                  Spotify
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    color: 'var(--fx-text-muted)',
+                  }}
+                >
+                  Listen on Spotify →
+                </div>
+              </a>
+              <a
+                href='https://podcasts.apple.com/podcast/theresonantidentity'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{
+                  background: 'var(--fx-surface-card)',
+                  border: '1px solid var(--fx-border)',
+                  borderRadius: 'var(--fx-radius-card)',
+                  padding: '20px',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  display: 'block',
+                  transition:
+                    'border-color var(--fx-color-duration), transform var(--fx-color-duration), box-shadow var(--fx-color-duration)',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--fx-border-hover)';
+                  e.currentTarget.style.transform = 'var(--fx-hover-lift)';
+                  e.currentTarget.style.boxShadow =
+                    '0 8px 24px rgba(0,0,0,0.18)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--fx-border)';
+                  e.currentTarget.style.transform = 'none';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 16,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 8,
+                  }}
+                >
+                  Apple Podcasts
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    color: 'var(--fx-text-muted)',
+                  }}
+                >
+                  Listen on Apple Podcasts →
+                </div>
+              </a>
+              <a
+                href='https://theresonantidentity.com/rss'
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{
+                  background: 'var(--fx-surface-card)',
+                  border: '1px solid var(--fx-border)',
+                  borderRadius: 'var(--fx-radius-card)',
+                  padding: '20px',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  display: 'block',
+                  transition:
+                    'border-color var(--fx-color-duration), transform var(--fx-color-duration), box-shadow var(--fx-color-duration)',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--fx-border-hover)';
+                  e.currentTarget.style.transform = 'var(--fx-hover-lift)';
+                  e.currentTarget.style.boxShadow =
+                    '0 8px 24px rgba(0,0,0,0.18)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--fx-border)';
+                  e.currentTarget.style.transform = 'none';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 16,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 8,
+                  }}
+                >
+                  RSS Feed
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    color: 'var(--fx-text-muted)',
+                  }}
+                >
+                  Subscribe via RSS →
+                </div>
+              </a>
+            </div>
+          </section>
+
+          {/* More from The Resonant Identity */}
+          <section>
+            <h2
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 20px',
+                letterSpacing: '-.01em',
+              }}
+            >
+              Explore TRI
+            </h2>
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'var(--fx-text-body)',
+                margin: '0 0 24px',
+              }}
+            >
+              The Resonant Identity has evolved into a dedicated platform with
+              expanded content, community, and resources. Visit the main website
+              to explore the full ecosystem.
+            </p>
+            <a
+              href='https://theresonantidentity.com'
+              target='_blank'
+              rel='noopener noreferrer'
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                whiteSpace: 'nowrap',
+                borderRadius: 'var(--fx-radius-control)',
+                fontFamily: 'var(--fx-font)',
+                fontWeight: 600,
+                textDecoration: 'none',
+                cursor: 'pointer',
+                fontSize: 15.5,
+                padding: '14px 30px',
+                background: 'var(--fx-accent)',
+                color: 'var(--fx-accent-ink)',
+                border: 'none',
+                transition:
+                  'filter var(--fx-color-duration), background var(--fx-color-duration), color var(--fx-color-duration), border-color var(--fx-color-duration)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.filter = 'brightness(1.08)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.filter = 'none';
+              }}
+            >
+              Go to TheResonantIdentity.com →
+            </a>
+          </section>
+        </div>
+      </FxContainer>
+    </>
   );
 }

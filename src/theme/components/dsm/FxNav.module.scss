@@ -1,0 +1,84 @@
+/**
+ * FxNav Component Styles
+ * Mobile-responsive navigation with hamburger menu
+ */
+
+.navContainer {
+  max-width: 1220px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 32px;
+  margin: 0 auto;
+
+  @media (max-width: 1023px) {
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+}
+
+.navRow {
+  display: flex;
+  gap: 26px;
+  margin-left: auto;
+  align-items: center;
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+}
+
+.hamburgerButton {
+  display: flex;
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--fx-text-soft);
+  transition: color 0.15s;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+
+  &:hover {
+    color: var(--fx-text-heading);
+  }
+}
+
+.mobileMenuDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--fx-nav-bg);
+  backdrop-filter: var(--fx-nav-blur);
+  -webkit-backdrop-filter: var(--fx-nav-blur);
+  border-bottom: 1px solid var(--fx-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 12px 0;
+  z-index: 999;
+}
+
+.mobileMenuLink {
+  padding: 12px 32px;
+  text-decoration: none;
+  color: var(--fx-text-soft);
+  font-size: 14.5px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--fx-border);
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--fx-text-heading);
+  }
+}
+
+.mobileMenuButtonWrapper {
+  padding: 12px 32px;
+}

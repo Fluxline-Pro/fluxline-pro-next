@@ -14,11 +14,11 @@ import {
   FLUXLINE_SECONDARY_TAGLINE,
 } from '@/app/services/constants';
 import { COMPANY_VALUES } from '@/app/about/constants';
+import Link from 'next/link';
 
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
-  { key: 'body-practice', label: 'Body & Practice' },
   { key: 'brand-digital', label: 'Brand & Digital Presence' },
-  { key: 'depth-strategy', label: 'Depth Work & Strategy' },
+  { key: 'body-practice', label: 'Body & Practice' },
 ];
 
 export default function Home() {
@@ -35,17 +35,14 @@ export default function Home() {
         body={
           <>
             We build{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>
-              congruence
-            </strong>
-            . <strong style={{ color: 'var(--fx-text-bright)' }}>Strong</strong>{' '}
-            bodies.{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>Clear</strong>{' '}
-            brands.{' '}
-            <strong style={{ color: 'var(--fx-text-bright)' }}>
-              Resilient
-            </strong>{' '}
-            systems.
+            <strong style={{ color: 'var(--fx-accent)' }}>congruence</strong>.
+            Strong bodies. Clear brands. Resilient systems.
+            <br />
+            <br />
+            Fluxline partners with individuals and businesses to create
+            alignment across body, brand, and business. We specialize in
+            structural transformation — the kind that lasts because it's built
+            on clarity, intention, and practice.
           </>
         }
         secondaryCta={{ label: 'Explore Fluxline ↓', href: '#about' }}
@@ -53,7 +50,11 @@ export default function Home() {
         backgroundImage='/images/home/HomePageMobileGeometricBackground.jpg'
       />
 
-      <section id='about' className='fx-snap-section' style={{ padding: '88px 0' }}>
+      <section
+        id='about'
+        className='fx-snap-section'
+        style={{ padding: '88px 0' }}
+      >
         <FxContainer>
           <FxRailLayout
             parallax
@@ -67,19 +68,28 @@ export default function Home() {
                   overflow: 'hidden',
                 }}
               >
-                <img
-                  src='/images/home/FluxlineLogo.png'
-                  alt='Fluxline — Structure the Shift'
+                <div
                   style={{
-                    display: 'block',
-                    width: '100%',
-                    aspectRatio: '1/1',
-                    objectFit: 'contain',
                     background: '#000',
                     padding: 24,
-                    boxSizing: 'border-box',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    aspectRatio: '1/1',
+                    maxHeight: 'clamp(200px, 40vw, 100%)',
                   }}
-                />
+                >
+                  <img
+                    src='/images/home/FluxlineLogo.png'
+                    alt='Fluxline — Structure the Shift'
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                    }}
+                  />
+                </div>
                 <div
                   style={{
                     padding: '16px 20px',
@@ -128,14 +138,24 @@ export default function Home() {
                   margin: '0 0 16px',
                 }}
               >
-                Systems that work, brands that connect, and practices that last.
+                Systems that work, brands that connect, and practices that
+                inspire.
               </p>
               <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
                 Fluxline is built on the belief that{' '}
                 <strong style={{ color: 'var(--fx-text-bright)' }}>
                   congruence creates momentum
                 </strong>
-                .
+                . When we align our clients' intentions, actions, and
+                structures, we create systems that work, brands that connect,
+                and practices <strong>that endure and inspire</strong>.{' '}
+              </p>
+
+              <p>
+                Identity and structure <strong>are inseparable</strong>. As
+                such, we help our clients build with clarity and purpose,
+                integrating somatic awareness, strategic clarity, and technical
+                precision.
               </p>
             </FxReveal>
 
@@ -143,7 +163,7 @@ export default function Home() {
               delay={100}
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
                 gap: 14,
               }}
             >
@@ -193,8 +213,14 @@ export default function Home() {
                   margin: '0 0 20px',
                 }}
               >
-                Six principles that guide every engagement, every system, every
-                interaction.
+                These principles guide every engagement, system, and interaction
+                we have with our clients. They are the{' '}
+                <strong>
+                  <em>foundation of</em>
+                </strong>{' '}
+                our work and the lens through which we view every project,
+                ensuring that we deliver not just results, but{' '}
+                <strong>meaningful and lasting impact</strong>.
               </p>
               <div
                 className='fx-g3'
@@ -253,18 +279,29 @@ export default function Home() {
                   border: '1px solid var(--fx-border)',
                   borderRadius: 14,
                   overflow: 'hidden',
+                  cursor: 'pointer',
                 }}
               >
-                <img
-                  src='/images/home/HomePageCoverLandscape2.jpg'
-                  alt='Fluxline services'
+                <Link
+                  href='/services'
                   style={{
                     display: 'block',
-                    width: '100%',
-                    aspectRatio: '3/4',
-                    objectFit: 'cover',
+                    textDecoration: 'none',
+                    color: 'inherit',
                   }}
-                />
+                >
+                  <img
+                    src='/images/home/HomePageCoverLandscape2.jpg'
+                    alt='Fluxline services'
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      aspectRatio: '3/4',
+                      objectFit: 'cover',
+                      maxHeight: 'clamp(300px, 60vw, 500px)',
+                    }}
+                  />
+                </Link>
                 <div
                   style={{
                     padding: '16px 20px',
@@ -312,8 +349,111 @@ export default function Home() {
               </p>
             </FxReveal>
 
+            {/* Featured: Consulting */}
+            <FxReveal delay={100}>
+              <div
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-gold)',
+                  marginBottom: 14,
+                }}
+              >
+                Featured Service
+              </div>
+              <FxCard
+                variant='feature'
+                interactive
+                href={
+                  SERVICE_CATEGORIES.find((s) => s.id === 'consulting')?.path
+                }
+                style={{
+                  padding: '36px 40px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    background:
+                      'linear-gradient(90deg, var(--fx-gold), var(--fx-accent))',
+                  }}
+                />
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 32,
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <div style={{ flex: 1, minWidth: 280 }}>
+                    <h3
+                      style={{
+                        fontSize: 'var(--fx-h2-size)',
+                        fontWeight: 800,
+                        color: 'var(--fx-text-heading)',
+                        margin: '0 0 10px',
+                        fontFamily: 'var(--fx-font)',
+                      }}
+                    >
+                      {
+                        SERVICE_CATEGORIES.find((s) => s.id === 'consulting')
+                          ?.title
+                      }
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: 'var(--fx-body-size)',
+                        color: 'var(--fx-text-body)',
+                        lineHeight: 'var(--fx-body-leading)',
+                        margin: '0 0 8px',
+                        maxWidth: '56ch',
+                      }}
+                    >
+                      {
+                        SERVICE_CATEGORIES.find((s) => s.id === 'consulting')
+                          ?.description
+                      }
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 14,
+                        color: 'var(--fx-text-muted)',
+                        lineHeight: 1.65,
+                        margin: '0 0 20px',
+                        maxWidth: '56ch',
+                      }}
+                    >
+                      Strategic systems design, operational optimization, and
+                      values-aligned business consulting for founders and
+                      growing teams.
+                    </p>
+                    <span
+                      style={{
+                        fontSize: 'var(--fx-cta-link-size)',
+                        color: 'var(--fx-gold)',
+                        fontWeight: 700,
+                        letterSpacing: 'var(--fx-cta-link-tracking)',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      Explore Consulting ›
+                    </span>
+                  </div>
+                </div>
+              </FxCard>
+            </FxReveal>
+
             {HOME_SERVICE_GROUPS.map((group, i) => (
-              <FxReveal key={group.key} delay={(i + 1) * 100}>
+              <FxReveal key={group.key} delay={(i + 2) * 100}>
                 <div
                   style={{
                     fontSize: 13,
@@ -379,7 +519,7 @@ export default function Home() {
               </FxReveal>
             ))}
 
-            <FxReveal delay={(HOME_SERVICE_GROUPS.length + 1) * 100}>
+            <FxReveal delay={(HOME_SERVICE_GROUPS.length + 2) * 100}>
               <FxCard
                 variant='inset'
                 interactive
@@ -391,6 +531,7 @@ export default function Home() {
                   gap: 18,
                   padding: '18px 24px',
                   flexWrap: 'wrap',
+                  cursor: 'pointer',
                 }}
               >
                 <div>
@@ -429,7 +570,11 @@ export default function Home() {
         </FxContainer>
       </section>
 
-      <section id='content' className='fx-snap-section' style={{ padding: '88px 0' }}>
+      <section
+        id='content'
+        className='fx-snap-section'
+        style={{ padding: '88px 0' }}
+      >
         <FxContainer>
           <FxReveal style={{ maxWidth: 680, marginBottom: 34 }}>
             <h2
@@ -609,7 +754,7 @@ export default function Home() {
                 </div>
                 <div style={{ marginTop: 'auto' }}>
                   <a
-                    href='/podcasts/theresonantid'
+                    href='/podcasts'
                     style={{
                       display: 'block',
                       textAlign: 'center',

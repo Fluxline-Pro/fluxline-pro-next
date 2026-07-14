@@ -17,6 +17,11 @@ export interface TRIPost {
   publishedDate: string; // ISO date string
 }
 
+//*** STRONG NOTE: All TRIPosts blogs and content are now deprecated and moved to
+// TheResonantIdentity.com. Blog posts should NOT Be created with this in mind.
+// These data structures are only here for backwards compatibility and will be
+// removed in a future iteration of technical debt cleanup. -TW 07/13/2026 */
+
 /**
  * Challenge post — extends TRIPost with the `featured` flag from blog frontmatter.
  * Used by ChallengesFilteredView and the /blog/resonant-identity/challenges page.
