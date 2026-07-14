@@ -54,7 +54,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: 'design',
     title: 'Brand & Experience Design',
-    description: 'Visual identity and user experience design.',
+    description: 'Visual identity expressed through simplified human-centered design and experience.',
     summary: DESIGN_SUMMARY,
     icon: 'Design',
     path: '/services/design',
@@ -85,7 +85,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: 'development',
     title: 'Web Development & Digital Architecture',
-    description: 'Custom applications and scalable platforms.',
+    description: 'Custom web applications scaled with maximum precision and modularity.',
     summary: DEVELOPMENT_SUMMARY,
     icon: 'Code',
     path: '/services/development',
@@ -116,7 +116,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: 'personal-training',
     title: 'Personal Training & Wellness',
-    description: 'Embodied identity work through physical transformation.',
+    description: 'Embodied identity work through physical and emotional transformation.',
     summary: PERSONAL_TRAINING_SUMMARY,
     icon: 'Health',
     path: '/services/personal-training',
@@ -147,7 +147,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: 'resonance-core',
     title: 'Resonance Core Framework™',
-    description: 'Identity work, narrative work, and embodiment work.',
+    description: 'Identity coherence, narrative reframing, and embodiment integration.',
     summary: RESONANCE_CORE_SUMMARY,
     icon: 'HeartFill',
     path: '/services/resonance-core',

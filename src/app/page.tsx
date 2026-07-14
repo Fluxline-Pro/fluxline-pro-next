@@ -717,6 +717,7 @@ export default function Home() {
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
+                  border: '1px solid var(--fx-gold-border)',
                 }}
               >
                 <div
@@ -767,7 +768,7 @@ export default function Home() {
                       textDecoration: 'none',
                     }}
                   >
-                    Explore The Resonant Identity
+                    Explore The Resonant Identity Podcast
                   </Link>
                 </div>
               </FxCard>
