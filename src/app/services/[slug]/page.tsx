@@ -23,6 +23,7 @@ import { getScrollById } from '../scrolls/scrollsData';
 import { RelatedServices } from './components/related-services';
 import { ServiceScrollSection } from './components/service-scroll-section';
 import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
+import FxReveal from '@/theme/components/dsm/FxReveal';
 import DesignImage from '@/assets/images/Portfolio1280x1815.jpg';
 import DevelopmentImage from '@/assets/images/GitHubPortrait.jpg';
 import PersonalTrainingImage from '@/assets/images/PersonalTrainingPortrait.jpg';
@@ -146,6 +147,7 @@ export default function ServiceDetailPage() {
   const serviceImage = SERVICE_IMAGES[service.id] ?? ServicesFallbackImage;
 
   const rail = (
+    <FxReveal variant="left">
     <div
       style={{
         background: 'var(--fx-surface-inset)',
@@ -200,6 +202,7 @@ export default function ServiceDetailPage() {
         </div>
       </div>
     </div>
+    </FxReveal>
   );
 
   return (
@@ -207,27 +210,31 @@ export default function ServiceDetailPage() {
       <FxRailLayout rail={rail}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
         {/* Hero Section */}
-        <div>
-          <FxSectionHeading
-            title={service.title}
-            subhead={service.description}
-            as="h1"
-          />
-          <div
-            style={{
-              color: 'var(--fx-text-body)',
-              fontSize: '1.125rem',
-              lineHeight: 1.7,
-              marginTop: 4,
-            }}
-            dangerouslySetInnerHTML={{ __html: service.summary }}
-          />
-        </div>
+        <FxReveal>
+          <div>
+            <FxSectionHeading
+              title={service.title}
+              subhead={service.description}
+              as="h1"
+            />
+            <div
+              style={{
+                color: 'var(--fx-text-body)',
+                fontSize: '1.125rem',
+                lineHeight: 1.7,
+                marginTop: 4,
+              }}
+              dangerouslySetInnerHTML={{ __html: service.summary }}
+            />
+          </div>
+        </FxReveal>
 
         {/* Related Scroll/White Paper Section */}
         {relatedScroll && (
           <>
-            <ServiceScrollSection scroll={relatedScroll} />
+            <FxReveal>
+              <ServiceScrollSection scroll={relatedScroll} />
+            </FxReveal>
             <hr
               style={{
                 border: 'none',
@@ -241,6 +248,7 @@ export default function ServiceDetailPage() {
         {/* Features Section */}
         {features.length > 0 && (
           <>
+            <FxReveal>
             <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <h2
                 style={{
@@ -277,6 +285,7 @@ export default function ServiceDetailPage() {
                 ))}
               </div>
             </section>
+            </FxReveal>
             <hr
               style={{
                 border: 'none',
@@ -290,6 +299,7 @@ export default function ServiceDetailPage() {
         {/* Pricing Table (if available) */}
         {pricingData && (
           <>
+            <FxReveal>
             <section>
               <ProgramTiersTable
                 tiers={pricingData.tiers}
@@ -331,6 +341,7 @@ export default function ServiceDetailPage() {
                 </div>
               )}
             </section>
+            </FxReveal>
 
             <hr
               style={{
@@ -343,15 +354,19 @@ export default function ServiceDetailPage() {
         )}
 
         {/* CTA Section */}
-        <FxCTABand
-          title="Ready to Begin?"
-          body="Book a 20-30 minute consultation to explore your personal identity and aligning your decisions with it."
-          primaryLabel="Book a Consultation"
-          primaryHref="/bookings"
-        />
+        <FxReveal>
+          <FxCTABand
+            title="Ready to Begin?"
+            body="Book a 20-30 minute consultation to explore your personal identity and aligning your decisions with it."
+            primaryLabel="Book a Consultation"
+            primaryHref="/bookings"
+          />
+        </FxReveal>
 
         {/* Related Services */}
-        <RelatedServices currentServiceId={service.id} />
+        <FxReveal>
+          <RelatedServices currentServiceId={service.id} />
+        </FxReveal>
       </div>
       </FxRailLayout>
 
