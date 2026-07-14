@@ -176,7 +176,7 @@ export default function Home() {
             <FxReveal delay={200}>
               <FxCallout
                 tone='gold'
-                title="We're Not Done Yet—But We're Already Extraordinary."
+                title="We're not done yet, but we're already extraordinary."
               >
                 <em>Modular by design. Resonant by nature.</em>
               </FxCallout>

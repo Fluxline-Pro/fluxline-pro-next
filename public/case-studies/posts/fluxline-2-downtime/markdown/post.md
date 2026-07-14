@@ -106,4 +106,4 @@ For Fluxline, every outage is more than a technical issue—it’s a **threshold
 
 ---
 
-_This case study documents Fluxline's ongoing journey. We're not done yet—but we're already extraordinary._
+_This case study documents Fluxline's ongoing journey. We're not done yet, but we're already extraordinary._

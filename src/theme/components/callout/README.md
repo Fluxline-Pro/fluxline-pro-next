@@ -10,7 +10,7 @@ Use for important quotes, mission statements, or key brand messaging that deserv
 ```tsx
 <Callout
   variant='accent'
-  title="We're not done yet—but we're already extraordinary."
+  title="We're not done yet, but we're already extraordinary."
   subtitle='Modular by design. Resonant by nature.'
 />
 ```

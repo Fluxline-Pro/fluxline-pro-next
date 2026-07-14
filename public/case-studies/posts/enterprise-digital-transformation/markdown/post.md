@@ -528,4 +528,4 @@ At its core, Fluxline's journey has been about prioritizing meaningful connectio
 
 If that resonates with you, **let's build together**.
 
-_This case study documents Fluxline's ongoing journey. We're not done yet—but we're already extraordinary._
+_This case study documents Fluxline's ongoing journey. We're not done yet, but we're already extraordinary._

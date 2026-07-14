@@ -112,7 +112,7 @@ Works seamlessly with:
     Whether you're an individual seeking personal growth...
   </Typography>
   <Callout variant='accent' title='Our Mission'>
-    We're not done yet—but we're already extraordinary.
+    We're not done yet, but we're already extraordinary.
   </Callout>
 </Hero>
 ```
