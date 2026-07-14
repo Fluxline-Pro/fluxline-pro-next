@@ -20,7 +20,7 @@ export function PodcastPageWrapper({ children }: PodcastPageWrapperProps) {
   const router = useRouter();
 
   const handleImageClick = () => {
-    router.push('/podcasts/theresonantid/about');
+    router.push('/podcasts');
   };
 
   const imageConfig: UnifiedPageWrapperProps['imageConfig'] = {

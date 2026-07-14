@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import './FxFooter.css';
 
 interface FxFooterProps {
   preferencesOnClick?: () => void;
@@ -32,7 +33,7 @@ export default function FxFooter({
       }}
     >
       <div
-        className='fx-c'
+        className='fx-c footerContainer'
         style={{
           maxWidth: 1220,
           margin: '0 auto',

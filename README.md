@@ -55,8 +55,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app.
 - 📄 **Scrolls/White Papers** - Downloadable strategic insights with metadata
 - 📹 **Video Section** - YouTube channel integration with automatic video fetching
 - 🎙️ **Podcast Section** - Azure-backed podcast episodes with RSS feed generation
-- 🎯 **The Resonant Identity (TRI)** - Tag-based content taxonomy for podcast-related blog posts (demos, challenges, companion articles)
-- 🏢 **Services** - Dynamic service pages with detailed information
+- **Services** - Dynamic service pages with detailed information
 
 ### Development Tools
 
