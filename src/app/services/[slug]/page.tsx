@@ -22,6 +22,24 @@ import { SERVICE_SCROLL_MAPPING } from '../scroll-mapping';
 import { getScrollById } from '../scrolls/scrollsData';
 import { RelatedServices } from './components/related-services';
 import { ServiceScrollSection } from './components/service-scroll-section';
+import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
+import DesignImage from '@/assets/images/Portfolio1280x1815.jpg';
+import DevelopmentImage from '@/assets/images/GitHubPortrait.jpg';
+import PersonalTrainingImage from '@/assets/images/PersonalTrainingPortrait.jpg';
+import ResonanceCoreImage from '@/assets/images/LifeCoachingResonanceCore.jpg';
+import EducationImage from '@/assets/images/EducationTrainingPortrait.jpg';
+import ConsultingImage from '@/assets/images/ConsultingPortrait.jpg';
+import ServicesFallbackImage from '@/assets/images/OurServices1197x1600.jpg';
+
+/** Left-rail image per service, keyed by service id. */
+const SERVICE_IMAGES: Record<string, { src: string }> = {
+  design: DesignImage,
+  development: DevelopmentImage,
+  'personal-training': PersonalTrainingImage,
+  'resonance-core': ResonanceCoreImage,
+  'education-training': EducationImage,
+  consulting: ConsultingImage,
+};
 
 /**
  * Service Detail Page Component
@@ -125,8 +143,68 @@ export default function ServiceDetailPage() {
   const scrollId = SERVICE_SCROLL_MAPPING[service.id];
   const relatedScroll = scrollId ? getScrollById(scrollId) : undefined;
 
+  const serviceImage = SERVICE_IMAGES[service.id] ?? ServicesFallbackImage;
+
+  const rail = (
+    <div
+      style={{
+        background: 'var(--fx-surface-inset)',
+        border: '1px solid var(--fx-border)',
+        borderRadius: 14,
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          height: 'clamp(240px, 50vw, 460px)',
+          overflow: 'hidden',
+          background: 'var(--fx-bg-deep)',
+        }}
+      >
+        <img
+          src={serviceImage.src}
+          alt={service.title}
+          style={{
+            display: 'block',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center top',
+          }}
+        />
+      </div>
+      <div
+        style={{
+          padding: '16px 20px',
+          borderTop: '1px solid var(--fx-border)',
+        }}
+      >
+        <div
+          style={{
+            fontWeight: 700,
+            fontSize: 17,
+            color: 'var(--fx-text-bright)',
+          }}
+        >
+          {service.title}
+        </div>
+        <div
+          style={{
+            fontSize: 13,
+            color: 'var(--fx-text-soft)',
+            marginTop: 3,
+          }}
+        >
+          {service.description}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <FxContainer style={{ padding: '64px 32px 88px' }}>
+      <FxRailLayout rail={rail}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
         {/* Hero Section */}
         <div>
@@ -275,6 +353,7 @@ export default function ServiceDetailPage() {
         {/* Related Services */}
         <RelatedServices currentServiceId={service.id} />
       </div>
+      </FxRailLayout>
 
       {/* Program Comparison Modal */}
       {pricingData && (
