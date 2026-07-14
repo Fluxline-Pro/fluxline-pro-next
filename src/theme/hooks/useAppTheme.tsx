@@ -25,6 +25,23 @@ export const useAppTheme = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-fx-theme', themeMode);
+
+    // Keep the Safari status/toolbar colour (theme-color meta) in sync with the
+    // selected theme's page background so the top/bottom bars are never white.
+    const pageBg = getComputedStyle(document.documentElement)
+      .getPropertyValue('--fx-bg-page')
+      .trim();
+    if (pageBg) {
+      let meta = document.querySelector<HTMLMetaElement>(
+        'meta[name="theme-color"]'
+      );
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.name = 'theme-color';
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', pageBg);
+    }
   }, [themeMode]);
 
   useEffect(() => {
@@ -42,7 +59,14 @@ export const useAppTheme = () => {
   }, [reducedTransparency]);
 
   useEffect(() => {
+    // Root font-size scales any rem/em typography...
     document.documentElement.style.fontSize = `${fontScale}%`;
+    // ...and --fx-font-scale multiplies the px-based DSM type tokens so the
+    // slider actually changes text size across the site.
+    document.documentElement.style.setProperty(
+      '--fx-font-scale',
+      String(fontScale / 100)
+    );
   }, [fontScale]);
 
   return {

@@ -96,7 +96,7 @@ html::after {
   left: 0;
   right: 0;
   z-index: -1; /* Behind content but above default background */
-  background-color: var(--background-solid);
+  background-color: var(--fx-bg-page);
 }
 
 /* Fill top safe area (notch/status bar) */
@@ -127,7 +127,7 @@ body::after {
   top: 0;
   bottom: 0;
   z-index: -1; /* Behind content but above default background */
-  background-color: var(--background-solid);
+  background-color: var(--fx-bg-page);
 }
 
 /* Fill left safe area (notch on sides in landscape) */
@@ -168,10 +168,10 @@ body::after {
 // Apply background to html element for full viewport coverage
 // iOS Safari has issues with background-attachment: fixed, so we conditionally apply it
 html {
-  background-color: var(
-    --background-solid
-  ); // Solid color fallback (gradient can't be used with background-color)
-  background: var(--background); // Radial gradient override (if set in theme)
+  // Theme-aware page background (DSM token, updated via data-fx-theme on <html>),
+  // so overscroll and iOS safe areas are never left white on Safari.
+  background-color: var(--fx-bg-page);
+  background-image: var(--background, none);
   background-repeat: no-repeat;
   background-position: center;
 
@@ -193,6 +193,8 @@ body {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  // Theme-aware base so the overscroll (rubber-band) area is never white on iOS Safari.
+  background-color: var(--fx-bg-page);
   color: var(--foreground);
   font-family:
     'inter-variable',
