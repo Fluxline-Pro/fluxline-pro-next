@@ -115,10 +115,19 @@ export default function FxRailLayout({
           ...style,
         }}
       >
-        <div style={{ position: 'sticky', top: stickyTop, ...railStyle }}>
+        <div
+          style={{ position: 'sticky', top: stickyTop, minWidth: 0, ...railStyle }}
+        >
           {rail}
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 32,
+            minWidth: 0,
+          }}
+        >
           {children}
         </div>
       </div>
