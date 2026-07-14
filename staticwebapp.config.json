@@ -62,6 +62,10 @@
       }
     },
     {
+      "route": "/podcasts/theresonantid/*",
+      "rewrite": "/podcasts/theresonantid/index.html"
+    },
+    {
       "route": "/*",
       "allowedRoles": ["anonymous"]
     }
