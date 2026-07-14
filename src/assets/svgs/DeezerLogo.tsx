@@ -21,14 +21,11 @@ export const DeezerLogo: React.FC<DeezerLogoProps> = ({
       viewBox='0 0 24 24'
       fill='none'
     >
-      {/* Deezer logo - horizontal bars */}
-      <rect x='3' y='4' width='8' height='2.5' rx='0.5' fill={fillColor} />
-      <rect x='3' y='8' width='8' height='2.5' rx='0.5' fill={fillColor} />
-      <rect x='3' y='12' width='8' height='2.5' rx='0.5' fill={fillColor} />
-      <rect x='3' y='16' width='8' height='2.5' rx='0.5' fill={fillColor} />
-      <rect x='13' y='8' width='8' height='2.5' rx='0.5' fill={fillColor} />
-      <rect x='13' y='12' width='8' height='2.5' rx='0.5' fill={fillColor} />
-      <rect x='13' y='16' width='8' height='2.5' rx='0.5' fill={fillColor} />
+      {/* Deezer equalizer mark */}
+      <path
+        d='M18.81 4.16v3.03H24V4.16h-5.19zM6.27 8.38v3.027h5.189V8.38h-5.19zm12.54 0v3.027H24V8.38h-5.19zM6.27 12.594v3.027h5.189v-3.027h-5.19zm6.271 0v3.027h5.19v-3.027h-5.19zm6.27 0v3.027H24v-3.027h-5.19zM0 16.81v3.029h5.19v-3.03H0zm6.27 0v3.029h5.189v-3.03h-5.19zm6.271 0v3.029h5.19v-3.03h-5.19zm6.27 0v3.029H24v-3.03h-5.19Z'
+        fill={fillColor}
+      />
     </svg>
   );
 };

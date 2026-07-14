@@ -21,25 +21,21 @@ export const AmazonMusicLogo: React.FC<AmazonMusicLogoProps> = ({
       viewBox='0 0 24 24'
       fill='none'
     >
-      {/* Amazon Music logo - musical note with smile */}
+      {/* Amazon Music - eighth note above the Amazon smile */}
       <path
-        d='M9 3v11c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3c.35 0 .69.06 1 .17V3h2z'
+        d='M16 4.1l-6.6 1.5v7.53a2.9 2.9 0 1 0 1.7 2.64V8.03l4.9-1.11V4.1z'
         fill={fillColor}
       />
       <path
-        d='M16 3v11c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3c.35 0 .69.06 1 .17V6h2v8h2V3h-2z'
-        fill={fillColor}
-      />
-      <path
-        d='M3 19c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z'
-        fill={fillColor}
-      />
-      <path
-        d='M20 20c-1.5 1.5-3.5 2-5.5 2s-4-.5-5.5-2'
+        d='M5.4 18.9c1.98 1.42 4.2 2.13 6.6 2.13 2.4 0 4.62-.71 6.6-2.13'
         stroke={fillColor}
-        strokeWidth='1.5'
+        strokeWidth='1.7'
         strokeLinecap='round'
         fill='none'
+      />
+      <path
+        d='M18.85 16.7l.55 2.25-2.25-.55z'
+        fill={fillColor}
       />
     </svg>
   );

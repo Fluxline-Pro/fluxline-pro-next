@@ -6,9 +6,7 @@ import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
-import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxButton from '@/theme/components/dsm/FxButton';
-import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { FormDateInput, FormSelect } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
@@ -24,6 +22,9 @@ import AmazonMusicLogo from '@/assets/svgs/AmazonMusicLogo';
 import DeezerLogo from '@/assets/svgs/DeezerLogo';
 import PodchaserLogo from '@/assets/svgs/PodchaserLogo';
 import RSSLogo from '@/assets/svgs/RSSLogo';
+import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.png';
+
+const TRI_WEBSITE_URL = 'https://theresonantidentity.com';
 
 /**
  * PodcastListingClient Props
@@ -512,7 +513,10 @@ function PodcastDetailModal({
 
 /**
  * PodcastListingClient Component
- * Main client component for the /podcasts page
+ * Main client component for the /podcasts page.
+ * Owns the full page: hero (with platform links + newest-episode CTA),
+ * the combined "About The Resonant Identity" section, "Listen Everywhere",
+ * the episode grid, and the TRI newsletter sign-up.
  */
 export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
   const router = useRouter();
@@ -686,234 +690,713 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
       ? ` ${processedEpisodes.length} matching date range`
       : '';
 
-  return (
-    <FxContainer style={{ padding: '64px 32px 88px' }}>
-      {/* Featured Episode CTA - moved to top */}
-      {!loading && !error && processedEpisodes.length > 0 && (
-        <div
-          style={{
-            marginBottom: 64,
-            paddingBottom: 32,
-            borderBottom: '1px solid var(--fx-border-subtle)',
-          }}
-        >
-          <FxCallout tone='gold' title='Listen to the Most Recent Episode'>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <span>
-                {processedEpisodes[0]?.episode_title || 'Start listening now'}
-              </span>
-              <FxButton
-                variant='outline'
-                size='lg'
-                onClick={() => setSelectedEpisode(processedEpisodes[0])}
-              >
-                Listen Now
-              </FxButton>
-            </div>
-          </FxCallout>
-        </div>
-      )}
+  const hasEpisodes = !loading && !error && processedEpisodes.length > 0;
+  const newestEpisode = hasEpisodes ? processedEpisodes[0] : undefined;
+  const heroStacked = isMobile;
 
-      {/* Page Header */}
-      <FxSectionHeading
-        kicker='Podcast'
-        title='The Resonant Identity'
-        subhead='A living extension of The Resonance Core Framework where identity becomes practice and is formed through coherence.'
-        lede='The Resonant Identity is a podcast blending identity architecture, self-improvement, and practical frameworks for navigating transitions with clarity and intention.'
-        as='h1'
+  // Shared style for the solid accent CTA anchors (external links)
+  const accentAnchorStyle: React.CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    whiteSpace: 'nowrap',
+    borderRadius: 'var(--fx-radius-control)',
+    fontFamily: 'var(--fx-font)',
+    fontWeight: 600,
+    textDecoration: 'none',
+    cursor: 'pointer',
+    fontSize: 15.5,
+    padding: '14px 30px',
+    background: 'var(--fx-accent)',
+    color: 'var(--fx-accent-ink)',
+    border: 'none',
+    transition:
+      'filter var(--fx-color-duration), background var(--fx-color-duration), color var(--fx-color-duration), border-color var(--fx-color-duration)',
+  };
+
+  const heroCardStyle: React.CSSProperties = {
+    background: 'rgba(5,7,11,.72)',
+    border: '1px solid var(--fx-border)',
+    borderRadius: 16,
+    padding: '44px 46px',
+    backdropFilter: 'blur(4px)',
+  };
+
+  const eyebrowStyle: React.CSSProperties = {
+    fontSize: 'var(--fx-eyebrow-size)',
+    letterSpacing: 'var(--fx-eyebrow-tracking)',
+    textTransform: 'uppercase',
+    color: 'var(--fx-text-soft)',
+    marginBottom: 14,
+  };
+
+  const newestEpisodeDate = newestEpisode?.publish_date
+    ? new Date(newestEpisode.publish_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : undefined;
+
+  const platformLinks = (
+    <div
+      style={{
+        marginTop: 24,
+        display: 'flex',
+        gap: 12,
+        alignItems: 'center',
+        flexWrap: 'wrap',
+      }}
+    >
+      <PlatformIconLink
+        href={PODCAST_PLATFORMS.spreaker}
+        label='Listen on Spreaker'
+        Icon={SpreakerLogo}
+        brandColor='#EE722E'
+        useBrandColors={useBrandColors}
       />
+      <PlatformIconLink
+        href={PODCAST_PLATFORMS.spotify}
+        label='Listen on Spotify'
+        Icon={SpotifyLogo}
+        brandColor='#1DB954'
+        useBrandColors={useBrandColors}
+      />
+      <PlatformIconLink
+        href={PODCAST_PLATFORMS.applePodcasts}
+        label='Listen on Apple Podcasts'
+        Icon={ApplePodcastsLogo}
+        brandColor='#B150E2'
+        useBrandColors={useBrandColors}
+      />
+      <PlatformIconLink
+        href={PODCAST_PLATFORMS.iHeartRadio}
+        label='Listen on iHeartRadio'
+        Icon={IHeartRadioLogo}
+        brandColor='#C6002B'
+        useBrandColors={useBrandColors}
+      />
+      <PlatformIconLink
+        href={PODCAST_PLATFORMS.amazonMusic}
+        label='Listen on Amazon Music'
+        Icon={AmazonMusicLogo}
+        brandColor='#00A8E1'
+        useBrandColors={useBrandColors}
+      />
+      <PlatformIconLink
+        href={PODCAST_PLATFORMS.deezer}
+        label='Listen on Deezer'
+        Icon={DeezerLogo}
+        brandColor='#A238FF'
+        useBrandColors={useBrandColors}
+      />
+      <PlatformIconLink
+        href={PODCAST_PLATFORMS.podchaser}
+        label='Listen on Podchaser'
+        Icon={PodchaserLogo}
+        brandColor='#2EBFA5'
+        useBrandColors={useBrandColors}
+      />
+      <PlatformIconLink
+        href={rssEndpoint}
+        label='Subscribe via RSS Feed'
+        Icon={RSSLogo}
+        useBrandColors={useBrandColors}
+      />
+    </div>
+  );
 
-      {/* Platform Icons */}
-      <div
+  // Named platform cards for the "Listen Everywhere" section
+  const listenEverywhereCards: Array<{
+    name: string;
+    action: string;
+    href: string;
+    brandColor: string;
+    Icon: React.ComponentType<{ color?: string; style?: React.CSSProperties }>;
+  }> = [
+    {
+      name: 'Spotify',
+      action: 'Listen on Spotify →',
+      href: PODCAST_PLATFORMS.spotify,
+      brandColor: '#1DB954',
+      Icon: SpotifyLogo,
+    },
+    {
+      name: 'Apple Podcasts',
+      action: 'Listen on Apple Podcasts →',
+      href: PODCAST_PLATFORMS.applePodcasts,
+      brandColor: '#B150E2',
+      Icon: ApplePodcastsLogo,
+    },
+    {
+      name: 'Spreaker',
+      action: 'Listen on Spreaker →',
+      href: PODCAST_PLATFORMS.spreaker,
+      brandColor: '#EE722E',
+      Icon: SpreakerLogo,
+    },
+    {
+      name: 'iHeartRadio',
+      action: 'Listen on iHeartRadio →',
+      href: PODCAST_PLATFORMS.iHeartRadio,
+      brandColor: '#C6002B',
+      Icon: IHeartRadioLogo,
+    },
+    {
+      name: 'Amazon Music',
+      action: 'Listen on Amazon Music →',
+      href: PODCAST_PLATFORMS.amazonMusic,
+      brandColor: '#00A8E1',
+      Icon: AmazonMusicLogo,
+    },
+    {
+      name: 'RSS Feed',
+      action: 'Subscribe via RSS →',
+      href: rssEndpoint,
+      brandColor: '#EE802F',
+      Icon: RSSLogo,
+    },
+  ];
+
+  return (
+    <>
+      {/* ===== Hero ===== */}
+      <section
         style={{
-          marginTop: 20,
-          display: 'flex',
-          gap: 12,
-          alignItems: 'center',
-          flexWrap: 'wrap',
+          position: 'relative',
+          overflow: 'hidden',
+          background: 'url("/images/TheResonantIdentityAudiogram.png") center/cover no-repeat',
+          borderBottom: '1px solid var(--fx-border-subtle)',
+          padding: '120px 32px 80px',
         }}
       >
-        <PlatformIconLink
-          href={PODCAST_PLATFORMS.spreaker}
-          label='Listen on Spreaker'
-          Icon={SpreakerLogo}
-          brandColor='#EE722E'
-          useBrandColors={useBrandColors}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(160deg,rgba(5,7,11,.6),rgba(14,21,35,.25))',
+          }}
         />
-        <PlatformIconLink
-          href={PODCAST_PLATFORMS.spotify}
-          label='Listen on Spotify'
-          Icon={SpotifyLogo}
-          brandColor='#1DB954'
-          useBrandColors={useBrandColors}
-        />
-        <PlatformIconLink
-          href={PODCAST_PLATFORMS.applePodcasts}
-          label='Listen on Apple Podcasts'
-          Icon={ApplePodcastsLogo}
-          brandColor='#B150E2'
-          useBrandColors={useBrandColors}
-        />
-        <PlatformIconLink
-          href={PODCAST_PLATFORMS.iHeartRadio}
-          label='Listen on iHeartRadio'
-          Icon={IHeartRadioLogo}
-          brandColor='#C6002B'
-          useBrandColors={useBrandColors}
-        />
-        <PlatformIconLink
-          href={PODCAST_PLATFORMS.amazonMusic}
-          label='Listen on Amazon Music'
-          Icon={AmazonMusicLogo}
-          brandColor='#00A8E1'
-          useBrandColors={useBrandColors}
-        />
-        <PlatformIconLink
-          href={PODCAST_PLATFORMS.deezer}
-          label='Listen on Deezer'
-          Icon={DeezerLogo}
-          brandColor='#A238FF'
-          useBrandColors={useBrandColors}
-        />
-        <PlatformIconLink
-          href={PODCAST_PLATFORMS.podchaser}
-          label='Listen on Podchaser'
-          Icon={PodchaserLogo}
-          brandColor='#2EBFA5'
-          useBrandColors={useBrandColors}
-        />
-        <PlatformIconLink
-          href={rssEndpoint}
-          label='Subscribe via RSS Feed'
-          Icon={RSSLogo}
-          useBrandColors={useBrandColors}
-        />
-      </div>
-
-      {/* Featured Episode CTA */}
-      {!loading && !error && processedEpisodes.length > 0 && (
-        <div style={{ paddingTop: 32, display: 'none' }}>
-          <FxCallout tone='gold' title='Listen to the Most Recent Episode'>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <span>
-                {processedEpisodes[0]?.episode_title || 'Start listening now'}
-              </span>
-              <FxButton
-                variant='outline'
-                size='lg'
-                onClick={() => setSelectedEpisode(processedEpisodes[0])}
+        <div
+          style={{
+            position: 'relative',
+            maxWidth: 1220,
+            margin: '0 auto',
+          }}
+        >
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: heroStacked ? '1fr' : '1.5fr 1fr',
+              gap: 20,
+              alignItems: 'stretch',
+            }}
+          >
+            {/* Left: primary hero card */}
+            <div style={heroCardStyle}>
+              <div style={eyebrowStyle}>The Resonant Identity</div>
+              <h1
+                style={{
+                  fontSize: 'var(--fx-display-size)',
+                  fontWeight: 800,
+                  letterSpacing: 'var(--fx-display-tracking)',
+                  color: 'var(--fx-text-heading-display)',
+                  margin: '0 0 22px',
+                  lineHeight: 1,
+                }}
               >
-                Listen Now
-              </FxButton>
+                PODCAST
+              </h1>
+              <div
+                style={{
+                  height: 2,
+                  background:
+                    'linear-gradient(90deg,var(--fx-line),var(--fx-accent),transparent)',
+                  marginBottom: 26,
+                }}
+              />
+              <div
+                style={{ fontSize: 17.5, lineHeight: 1.65, margin: '0 0 28px' }}
+              >
+                Identity architecture, self-improvement, and practical
+                frameworks for navigating transitions with clarity and
+                intention.
+              </div>
+              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <a
+                  href={TRI_WEBSITE_URL}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={accentAnchorStyle}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.filter = 'brightness(1.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.filter = 'none';
+                  }}
+                >
+                  Visit TheResonantIdentity.com →
+                </a>
+              </div>
+              {/* Colored platform buttons (moved into the hero) */}
+              {platformLinks}
             </div>
-          </FxCallout>
-        </div>
-      )}
 
-      {/* Callout to learn more about The Resonant Identity */}
-      <div style={{ paddingTop: 64, paddingBottom: 16, display: 'none' }}>
-        <FxCTABand
-          title='About The Resonant Identity Podcast'
-          body='Learn more about the philosophy, community, and mission behind The Resonant Identity (TRI).'
-          primaryLabel='About The Resonant Identity'
-          primaryHref='/podcasts'
-        />
-      </div>
-
-      {/* Loading state */}
-      {loading && (
-        <div
-          style={{
-            paddingTop: 32,
-            paddingBottom: 32,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: '300px',
-          }}
-        >
-          <p style={{ color: 'var(--fx-text-body)' }}>Loading episodes...</p>
-        </div>
-      )}
-
-      {/* Error state */}
-      {!loading && error && (
-        <div
-          style={{
-            paddingTop: 32,
-            paddingBottom: 32,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: '300px',
-            flexDirection: 'column',
-            gap: 12,
-          }}
-        >
-          <p style={{ color: 'var(--fx-text-body)' }}>{error}</p>
-        </div>
-      )}
-
-      {/* Empty state */}
-      {!loading && !error && processedEpisodes.length === 0 && (
-        <div
-          style={{
-            paddingTop: 32,
-            paddingBottom: 32,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: '300px',
-            flexDirection: 'column',
-            gap: 12,
-          }}
-        >
-          <p style={{ color: 'var(--fx-text-body)' }}>
-            {episodes.length > 0
-              ? 'No episodes match your filters.'
-              : 'No episodes available yet.'}
-          </p>
-        </div>
-      )}
-
-      {/* Episode Grid */}
-      {!loading && !error && processedEpisodes.length > 0 && (
-        <div
-          style={{
-            paddingBottom: 32,
-            marginTop: 80,
-            paddingTop: 48,
-            borderTop: '1px solid var(--fx-text-heading)',
-          }}
-        >
-          <FxSectionHeading
-            title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
-            style={{ marginBottom: 20 }}
-          />
-          <AnimatePresence mode='wait'>
+            {/* Right: newest-episode card */}
             <div
-              key='podcast-episodes'
               style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-                gap: 20,
+                ...heroCardStyle,
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                gap: 14,
               }}
             >
-              {processedEpisodes.map((episode, index) => (
-                <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
-                  <PodcastCard
-                    episode={episode}
-                    onClick={() => setSelectedEpisode(episode)}
-                  />
-                </FadeIn>
+              {/* Blurred TRI avatar backdrop */}
+              <img
+                src={TheResonantIdentityLogo.src}
+                alt=''
+                aria-hidden='true'
+                style={{
+                  position: 'absolute',
+                  right: '-14%',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '80%',
+                  maxWidth: 360,
+                  aspectRatio: '1 / 1',
+                  objectFit: 'contain',
+                  filter: 'blur(16px)',
+                  opacity: 0.3,
+                  pointerEvents: 'none',
+                  userSelect: 'none',
+                  zIndex: 0,
+                }}
+              />
+              <div
+                style={{
+                  position: 'relative',
+                  zIndex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 14,
+                }}
+              >
+                <div style={{ ...eyebrowStyle, marginBottom: 0 }}>
+                  Newest Episode
+                </div>
+              {newestEpisode ? (
+                <>
+                  <div
+                    style={{
+                      fontSize: 22,
+                      fontWeight: 700,
+                      color: 'var(--fx-text-heading-display)',
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {newestEpisode.episode_title}
+                  </div>
+                  {newestEpisodeDate && (
+                    <div
+                      style={{
+                        fontSize: 14,
+                        color: 'var(--fx-text-muted)',
+                      }}
+                    >
+                      {newestEpisodeDate}
+                      {newestEpisode.duration
+                        ? ` · ${newestEpisode.duration}`
+                        : ''}
+                    </div>
+                  )}
+                  <FxButton
+                    size='lg'
+                    onClick={() => setSelectedEpisode(newestEpisode)}
+                    style={{ alignSelf: 'flex-start', marginTop: 8 }}
+                  >
+                    Listen to the Newest Episode
+                  </FxButton>
+                </>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      fontSize: 20,
+                      fontWeight: 700,
+                      color: 'var(--fx-text-heading-display)',
+                      lineHeight: 1.35,
+                    }}
+                  >
+                    Catch the latest episode of The Resonant Identity.
+                  </div>
+                  <a
+                    href={PODCAST_PLATFORMS.spreaker}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    style={{
+                      ...accentAnchorStyle,
+                      alignSelf: 'flex-start',
+                      marginTop: 8,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.filter = 'brightness(1.08)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.filter = 'none';
+                    }}
+                  >
+                    Listen to the Newest Episode →
+                  </a>
+                </>
+              )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Main content ===== */}
+      <FxContainer style={{ padding: '72px 32px 88px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 64 }}>
+          {/* Combined: About / Explore The Resonant Identity */}
+          <section>
+            <div style={eyebrowStyle}>The Resonant Identity</div>
+            <h2
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 12px',
+                letterSpacing: '-.01em',
+              }}
+            >
+              About The Resonant Identity
+            </h2>
+            <p
+              style={{
+                fontSize: 18,
+                lineHeight: 1.6,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 18px',
+                maxWidth: '72ch',
+              }}
+            >
+              A living extension of The Resonance Core Framework where identity
+              becomes practice and is formed through coherence.
+            </p>
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'var(--fx-text-body)',
+                margin: '0 0 24px',
+                maxWidth: '72ch',
+              }}
+            >
+              The Resonant Identity is a podcast blending identity architecture,
+              self-improvement, and practical frameworks for navigating
+              transitions with clarity and intention. It has evolved into a
+              dedicated platform with expanded content, community, and
+              resources — visit the main website to explore the full ecosystem,
+              philosophy, and mission behind TRI.
+            </p>
+            <a
+              href={TRI_WEBSITE_URL}
+              target='_blank'
+              rel='noopener noreferrer'
+              style={accentAnchorStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.filter = 'brightness(1.08)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.filter = 'none';
+              }}
+            >
+              Go to TheResonantIdentity.com →
+            </a>
+          </section>
+
+          {/* Listen Everywhere */}
+          <section>
+            <h2
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 20px',
+                letterSpacing: '-.01em',
+              }}
+            >
+              Listen Everywhere
+            </h2>
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'var(--fx-text-body)',
+                margin: '0 0 24px',
+                maxWidth: '72ch',
+              }}
+            >
+              The Resonant Identity is available on all major podcast platforms.
+              Subscribe to get new episodes delivered automatically.
+            </p>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                gap: 16,
+              }}
+            >
+              {listenEverywhereCards.map((card) => (
+                <a
+                  key={card.name}
+                  href={card.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={{
+                    background: `linear-gradient(160deg, ${card.brandColor}26, ${card.brandColor}0d)`,
+                    border: `1px solid ${card.brandColor}`,
+                    borderRadius: 'var(--fx-radius-card)',
+                    padding: '20px',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    display: 'block',
+                    transition:
+                      'background var(--fx-color-duration), border-color var(--fx-color-duration), transform var(--fx-color-duration), box-shadow var(--fx-color-duration)',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = `linear-gradient(160deg, ${card.brandColor}4d, ${card.brandColor}1a)`;
+                    e.currentTarget.style.transform = 'var(--fx-hover-lift)';
+                    e.currentTarget.style.boxShadow = `0 8px 24px ${card.brandColor}40`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = `linear-gradient(160deg, ${card.brandColor}26, ${card.brandColor}0d)`;
+                    e.currentTarget.style.transform = 'none';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: '50%',
+                      background: card.brandColor,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: 14,
+                    }}
+                  >
+                    <card.Icon
+                      color='#FFFFFF'
+                      style={{ width: 26, height: 26 }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 16,
+                      color: 'var(--fx-text-heading)',
+                      marginBottom: 8,
+                    }}
+                  >
+                    {card.name}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 14,
+                      color: 'var(--fx-text-muted)',
+                    }}
+                  >
+                    {card.action}
+                  </div>
+                </a>
               ))}
             </div>
-          </AnimatePresence>
-        </div>
-      )}
+          </section>
 
-      {/* Spreaker Embedded Player */}
-      {/* <SpreakerEmbed /> */}
+          {/* Loading state */}
+          {loading && (
+            <div
+              style={{
+                paddingTop: 32,
+                paddingBottom: 32,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '300px',
+              }}
+            >
+              <p style={{ color: 'var(--fx-text-body)' }}>Loading episodes...</p>
+            </div>
+          )}
+
+          {/* Error state */}
+          {!loading && error && (
+            <div
+              style={{
+                paddingTop: 32,
+                paddingBottom: 32,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '300px',
+                flexDirection: 'column',
+                gap: 12,
+              }}
+            >
+              <p style={{ color: 'var(--fx-text-body)' }}>{error}</p>
+            </div>
+          )}
+
+          {/* Empty state */}
+          {!loading && !error && processedEpisodes.length === 0 && (
+            <div
+              style={{
+                paddingTop: 32,
+                paddingBottom: 32,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '300px',
+                flexDirection: 'column',
+                gap: 12,
+              }}
+            >
+              <p style={{ color: 'var(--fx-text-body)' }}>
+                {episodes.length > 0
+                  ? 'No episodes match your filters.'
+                  : 'No episodes available yet.'}
+              </p>
+            </div>
+          )}
+
+          {/* All Episodes grid */}
+          {hasEpisodes && (
+            <div
+              style={{
+                paddingTop: 48,
+                paddingBottom: 32,
+                borderTop: '1px solid var(--fx-text-heading)',
+              }}
+            >
+              <FxSectionHeading
+                title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
+                style={{ marginBottom: 20 }}
+              />
+              <AnimatePresence mode='wait'>
+                <div
+                  key='podcast-episodes'
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
+                    gap: 20,
+                  }}
+                >
+                  {processedEpisodes.map((episode, index) => (
+                    <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
+                      <PodcastCard
+                        episode={episode}
+                        onClick={() => setSelectedEpisode(episode)}
+                      />
+                    </FadeIn>
+                  ))}
+                </div>
+              </AnimatePresence>
+            </div>
+          )}
+
+          {/* TRI Newsletter sign-up CTA */}
+          <section
+            style={{
+              background: 'var(--fx-gradient-feature)',
+              border: '1px solid var(--fx-border-strong)',
+              borderRadius: 16,
+              padding: '32px 36px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 28,
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ flex: 1, minWidth: 280 }}>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 20,
+                  color: 'var(--fx-text-bright)',
+                  marginBottom: 8,
+                }}
+              >
+                The Resonant Identity Newsletter
+              </div>
+              <div
+                style={{
+                  fontSize: 14.5,
+                  lineHeight: 1.6,
+                  color: 'var(--fx-text-muted)',
+                  maxWidth: '60ch',
+                }}
+              >
+                New episodes and insights on identity architecture and the
+                Resonance Core Framework™, delivered to your inbox. No spam,
+                ever.
+              </div>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                gap: 8,
+                flex: '1 1 320px',
+                minWidth: 260,
+              }}
+            >
+              <input
+                type='email'
+                placeholder='your@email.com'
+                aria-label='Email address for The Resonant Identity newsletter'
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  background: 'var(--fx-surface-input)',
+                  border: '1px solid var(--fx-border)',
+                  borderRadius: 8,
+                  padding: '12px 14px',
+                  fontSize: 14,
+                  color: 'var(--fx-text-bright)',
+                  outline: 'none',
+                  fontFamily: 'inherit',
+                }}
+              />
+              <button
+                type='button'
+                style={{
+                  background: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-ink)',
+                  borderRadius: 8,
+                  fontWeight: 600,
+                  fontSize: 14,
+                  padding: '12px 22px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  fontFamily: 'inherit',
+                }}
+              >
+                Subscribe
+              </button>
+            </div>
+          </section>
+        </div>
+      </FxContainer>
 
       {/* Episode Detail Modal */}
       {selectedEpisode && (
@@ -922,6 +1405,6 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
           onDismiss={() => setSelectedEpisode(null)}
         />
       )}
-    </FxContainer>
+    </>
   );
 }

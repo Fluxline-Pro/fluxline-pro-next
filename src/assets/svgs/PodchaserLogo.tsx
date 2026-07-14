@@ -21,23 +21,14 @@ export const PodchaserLogo: React.FC<PodchaserLogoProps> = ({
       viewBox='0 0 24 24'
       fill='none'
     >
-      {/* Podchaser logo - play button with search magnifier */}
-      <circle
-        cx='12'
-        cy='12'
-        r='9'
-        stroke={fillColor}
-        strokeWidth='2'
-        fill='none'
-      />
-      <path d='M10 8l6 4-6 4V8z' fill={fillColor} />
-      <circle cx='18' cy='18' r='2.5' fill={fillColor} />
+      {/* Podchaser - "P" monogram with a play mark in the bowl */}
       <path
-        d='M19.5 19.5L22 22'
-        stroke={fillColor}
-        strokeWidth='2'
-        strokeLinecap='round'
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M6 3.4h6.4a5.5 5.5 0 0 1 0 11H9.3v6.2H6V3.4zm3.3 2.95v5.1h3a2.55 2.55 0 0 0 0-5.1h-3z'
+        fill={fillColor}
       />
+      <path d='M10.35 7.55l3 1.35-3 1.35V7.55z' fill={fillColor} />
     </svg>
   );
 };

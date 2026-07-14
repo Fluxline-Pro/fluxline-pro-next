@@ -753,7 +753,7 @@ export default function Home() {
                   frameworks for navigating transitions with clarity.
                 </div>
                 <div style={{ marginTop: 'auto' }}>
-                  <a
+                  <Link
                     href='/podcasts'
                     style={{
                       display: 'block',
@@ -767,8 +767,8 @@ export default function Home() {
                       textDecoration: 'none',
                     }}
                   >
-                    Episodes, Challenges &amp; Demos
-                  </a>
+                    Explore The Resonant Identity
+                  </Link>
                 </div>
               </FxCard>
             </FxReveal>

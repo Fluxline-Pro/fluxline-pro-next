@@ -21,12 +21,11 @@ export const SpreakerLogo: React.FC<SpreakerLogoProps> = ({
       viewBox='0 0 24 24'
       fill='none'
     >
-      {/* Spreaker microphone/waveform icon */}
-      <circle cx='12' cy='12' r='2' fill={fillColor} />
-      <rect x='4' y='14' width='2' height='6' rx='1' fill={fillColor} />
-      <rect x='8' y='10' width='2' height='10' rx='1' fill={fillColor} />
-      <rect x='14' y='10' width='2' height='10' rx='1' fill={fillColor} />
-      <rect x='18' y='14' width='2' height='6' rx='1' fill={fillColor} />
+      {/* Spreaker mark */}
+      <path
+        d='M14.615 0l-5.64 6.54L.529 4.718l8.68 7.372-8.537 7.463 8.411-1.984L14.843 24l.71-8.601 7.918-3.483-7.963-3.33L14.621 0h-.006z'
+        fill={fillColor}
+      />
     </svg>
   );
 };
