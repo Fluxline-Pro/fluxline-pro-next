@@ -1137,6 +1137,16 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
             </a>
           </section>
 
+          {/* Episodes section — dark gradient panel to set it apart */}
+          <section
+            style={{
+              background:
+                'linear-gradient(160deg, var(--fx-surface-alt), var(--fx-bg-deep))',
+              border: '1px solid var(--fx-border-subtle)',
+              borderRadius: 16,
+              padding: '20px 32px 40px',
+            }}
+          >
           {/* Loading state */}
           {loading && (
             <div
@@ -1197,9 +1207,8 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
           {hasEpisodes && (
             <div
               style={{
-                paddingTop: 48,
-                paddingBottom: 32,
-                borderTop: '1px solid var(--fx-text-heading)',
+                paddingTop: 8,
+                paddingBottom: 8,
               }}
             >
               <FxSectionHeading
@@ -1227,6 +1236,7 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
               </AnimatePresence>
             </div>
           )}
+          </section>
 
           {/* Listen Everywhere */}
           <section>
