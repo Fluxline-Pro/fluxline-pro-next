@@ -22,7 +22,10 @@ export default function FxContainer({
   };
 
   return (
-    <Tag className={className} style={{ ...base, ...style } as any}>
+    <Tag
+      className={className}
+      style={{ ...base, ...style } as React.CSSProperties}
+    >
       {children}
     </Tag>
   );

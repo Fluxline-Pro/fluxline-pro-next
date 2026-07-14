@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxCard from '@/theme/components/dsm/FxCard';
 
@@ -111,10 +110,10 @@ export default function LegalPageClient() {
             {LEGAL_DOCUMENTS.map((doc) => (
               <FxCard
                 key={doc.title}
-                variant="standard"
+                variant='standard'
                 interactive
                 href={doc.href}
-                padding="1.5rem"
+                padding='1.5rem'
                 style={{
                   height: '180px',
                   display: 'flex',
@@ -160,12 +159,12 @@ export default function LegalPageClient() {
                     }}
                   >
                     <svg
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
+                      width='16'
+                      height='16'
+                      fill='currentColor'
+                      viewBox='0 0 24 24'
                     >
-                      <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                      <path d='M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z' />
                     </svg>
                     VIEW PDF
                   </div>
