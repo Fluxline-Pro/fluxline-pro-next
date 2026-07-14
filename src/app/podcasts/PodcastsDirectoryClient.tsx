@@ -126,34 +126,6 @@ export function PodcastsDirectoryClient() {
       {/* Main Content */}
       <FxContainer style={{ padding: '88px 32px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 60 }}>
-          {/* Listen to Latest Episode */}
-          <section>
-            <h2
-              style={{
-                fontSize: 34,
-                fontWeight: 700,
-                color: 'var(--fx-text-heading)',
-                margin: '0 0 20px',
-                letterSpacing: '-.01em',
-              }}
-            >
-              Latest Episode
-            </h2>
-            <p
-              style={{
-                fontSize: 16,
-                lineHeight: 1.7,
-                color: 'var(--fx-text-body)',
-                margin: '0 0 24px',
-              }}
-            >
-              Listen to the most recent episode and explore the full archive on
-              The Resonant Identity podcast. Episodes dive into identity
-              architecture, personal transformation, and practical strategies
-              for building resilient systems.
-            </p>
-          </section>
-
           {/* Podcast Platforms */}
           <section>
             <h2
@@ -329,7 +301,7 @@ export function PodcastsDirectoryClient() {
             </div>
           </section>
 
-          {/* More from The Resonant Identity */}
+          {/* More from The Resonant Identity - Combined */}
           <section>
             <h2
               style={{
@@ -340,7 +312,7 @@ export function PodcastsDirectoryClient() {
                 letterSpacing: '-.01em',
               }}
             >
-              Explore TRI
+              Explore The Resonant Identity
             </h2>
             <p
               style={{
@@ -350,9 +322,12 @@ export function PodcastsDirectoryClient() {
                 margin: '0 0 24px',
               }}
             >
-              The Resonant Identity has evolved into a dedicated platform with
-              expanded content, community, and resources. Visit the main website
-              to explore the full ecosystem.
+              Learn more about the philosophy, community, and mission behind The
+              Resonant Identity (TRI). The Resonant Identity has evolved into a
+              dedicated platform with expanded content, community, and
+              resources. Visit the main website to explore the full ecosystem of
+              identity architecture, personal transformation, and practical
+              frameworks for navigating transitions with clarity and intention.
             </p>
             <a
               href='https://theresonantidentity.com'

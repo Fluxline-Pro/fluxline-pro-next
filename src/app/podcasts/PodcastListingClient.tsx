@@ -688,6 +688,32 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
 
   return (
     <FxContainer style={{ padding: '64px 32px 88px' }}>
+      {/* Featured Episode CTA - moved to top */}
+      {!loading && !error && processedEpisodes.length > 0 && (
+        <div
+          style={{
+            marginBottom: 64,
+            paddingBottom: 32,
+            borderBottom: '1px solid var(--fx-border-subtle)',
+          }}
+        >
+          <FxCallout tone='gold' title='Listen to the Most Recent Episode'>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <span>
+                {processedEpisodes[0]?.episode_title || 'Start listening now'}
+              </span>
+              <FxButton
+                variant='outline'
+                size='lg'
+                onClick={() => setSelectedEpisode(processedEpisodes[0])}
+              >
+                Listen Now
+              </FxButton>
+            </div>
+          </FxCallout>
+        </div>
+      )}
+
       {/* Page Header */}
       <FxSectionHeading
         kicker='Podcast'
@@ -766,7 +792,7 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
 
       {/* Featured Episode CTA */}
       {!loading && !error && processedEpisodes.length > 0 && (
-        <div style={{ paddingTop: 32 }}>
+        <div style={{ paddingTop: 32, display: 'none' }}>
           <FxCallout tone='gold' title='Listen to the Most Recent Episode'>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <span>
@@ -785,7 +811,7 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
       )}
 
       {/* Callout to learn more about The Resonant Identity */}
-      <div style={{ paddingTop: 64, paddingBottom: 16 }}>
+      <div style={{ paddingTop: 64, paddingBottom: 16, display: 'none' }}>
         <FxCTABand
           title='About The Resonant Identity Podcast'
           body='Learn more about the philosophy, community, and mission behind The Resonant Identity (TRI).'
@@ -855,7 +881,8 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
         <div
           style={{
             paddingBottom: 32,
-            marginTop: 32,
+            marginTop: 80,
+            paddingTop: 48,
             borderTop: '1px solid var(--fx-text-heading)',
           }}
         >
