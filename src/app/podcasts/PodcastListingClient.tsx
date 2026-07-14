@@ -1137,6 +1137,97 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
             </a>
           </section>
 
+          {/* Loading state */}
+          {loading && (
+            <div
+              style={{
+                paddingTop: 32,
+                paddingBottom: 32,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '300px',
+              }}
+            >
+              <p style={{ color: 'var(--fx-text-body)' }}>Loading episodes...</p>
+            </div>
+          )}
+
+          {/* Error state */}
+          {!loading && error && (
+            <div
+              style={{
+                paddingTop: 32,
+                paddingBottom: 32,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '300px',
+                flexDirection: 'column',
+                gap: 12,
+              }}
+            >
+              <p style={{ color: 'var(--fx-text-body)' }}>{error}</p>
+            </div>
+          )}
+
+          {/* Empty state */}
+          {!loading && !error && processedEpisodes.length === 0 && (
+            <div
+              style={{
+                paddingTop: 32,
+                paddingBottom: 32,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '300px',
+                flexDirection: 'column',
+                gap: 12,
+              }}
+            >
+              <p style={{ color: 'var(--fx-text-body)' }}>
+                {episodes.length > 0
+                  ? 'No episodes match your filters.'
+                  : 'No episodes available yet.'}
+              </p>
+            </div>
+          )}
+
+          {/* All Episodes grid */}
+          {hasEpisodes && (
+            <div
+              style={{
+                paddingTop: 48,
+                paddingBottom: 32,
+                borderTop: '1px solid var(--fx-text-heading)',
+              }}
+            >
+              <FxSectionHeading
+                title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
+                style={{ marginBottom: 20 }}
+              />
+              <AnimatePresence mode='wait'>
+                <div
+                  key='podcast-episodes'
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
+                    gap: 20,
+                  }}
+                >
+                  {processedEpisodes.map((episode, index) => (
+                    <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
+                      <PodcastCard
+                        episode={episode}
+                        onClick={() => setSelectedEpisode(episode)}
+                      />
+                    </FadeIn>
+                  ))}
+                </div>
+              </AnimatePresence>
+            </div>
+          )}
+
           {/* Listen Everywhere */}
           <section>
             <h2
@@ -1237,97 +1328,6 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
               ))}
             </div>
           </section>
-
-          {/* Loading state */}
-          {loading && (
-            <div
-              style={{
-                paddingTop: 32,
-                paddingBottom: 32,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '300px',
-              }}
-            >
-              <p style={{ color: 'var(--fx-text-body)' }}>Loading episodes...</p>
-            </div>
-          )}
-
-          {/* Error state */}
-          {!loading && error && (
-            <div
-              style={{
-                paddingTop: 32,
-                paddingBottom: 32,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '300px',
-                flexDirection: 'column',
-                gap: 12,
-              }}
-            >
-              <p style={{ color: 'var(--fx-text-body)' }}>{error}</p>
-            </div>
-          )}
-
-          {/* Empty state */}
-          {!loading && !error && processedEpisodes.length === 0 && (
-            <div
-              style={{
-                paddingTop: 32,
-                paddingBottom: 32,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '300px',
-                flexDirection: 'column',
-                gap: 12,
-              }}
-            >
-              <p style={{ color: 'var(--fx-text-body)' }}>
-                {episodes.length > 0
-                  ? 'No episodes match your filters.'
-                  : 'No episodes available yet.'}
-              </p>
-            </div>
-          )}
-
-          {/* All Episodes grid */}
-          {hasEpisodes && (
-            <div
-              style={{
-                paddingTop: 48,
-                paddingBottom: 32,
-                borderTop: '1px solid var(--fx-text-heading)',
-              }}
-            >
-              <FxSectionHeading
-                title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
-                style={{ marginBottom: 20 }}
-              />
-              <AnimatePresence mode='wait'>
-                <div
-                  key='podcast-episodes'
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-                    gap: 20,
-                  }}
-                >
-                  {processedEpisodes.map((episode, index) => (
-                    <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
-                      <PodcastCard
-                        episode={episode}
-                        onClick={() => setSelectedEpisode(episode)}
-                      />
-                    </FadeIn>
-                  ))}
-                </div>
-              </AnimatePresence>
-            </div>
-          )}
 
           {/* TRI Newsletter sign-up CTA */}
           <section
