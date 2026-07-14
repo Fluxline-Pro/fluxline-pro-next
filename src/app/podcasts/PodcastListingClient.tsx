@@ -209,7 +209,7 @@ function PodcastCard({
             marginTop: 0,
           }}
         >
-          {episode.episode_title}
+          {decodeHtmlEntities(episode.episode_title)}
         </h3>
 
         {/* Description */}
@@ -226,7 +226,7 @@ function PodcastCard({
               margin: 0,
             }}
           >
-            {episode.description}
+            {decodeHtmlEntities(episode.description)}
           </p>
         )}
 
@@ -299,6 +299,17 @@ function SpreakerEmbed() {
  * PodcastDetailModal Component
  * Shows full episode detail with audio player
  */
+/**
+ * Decode HTML entities (e.g. &amp; -> &, &#39; -> ') in RSS-provided text.
+ * Runs client-side; returns the input unchanged during SSR.
+ */
+function decodeHtmlEntities(input: string): string {
+  if (typeof document === 'undefined') return input;
+  const el = document.createElement('textarea');
+  el.innerHTML = input;
+  return el.value;
+}
+
 function PodcastDetailModal({
   episode,
   onDismiss,
@@ -320,7 +331,7 @@ function PodcastDetailModal({
     <Modal
       isOpen={true}
       onDismiss={onDismiss}
-      ariaLabel={episode.episode_title}
+      ariaLabel={decodeHtmlEntities(episode.episode_title)}
       maxWidth='700px'
       maxHeight='90vh'
     >
@@ -355,7 +366,7 @@ function PodcastDetailModal({
             margin: 0,
           }}
         >
-          {episode.episode_title}
+          {decodeHtmlEntities(episode.episode_title)}
         </h2>
 
         {/* Meta */}
@@ -412,16 +423,20 @@ function PodcastDetailModal({
           </div>
         )}
 
-        {/* Description */}
+        {/* Description — RSS text is unformatted, so clamp to 5 lines */}
         {episode.description && (
           <p
             style={{
               color: 'var(--fx-text-heading)',
               lineHeight: 'var(--fx-body-leading)',
               margin: 0,
+              display: '-webkit-box',
+              WebkitLineClamp: 5,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
             }}
           >
-            {episode.description}
+            {decodeHtmlEntities(episode.description)}
           </p>
         )}
 
