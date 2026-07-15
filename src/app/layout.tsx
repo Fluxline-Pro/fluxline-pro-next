@@ -99,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' data-fx-theme='dark'>
+    <html lang='en' data-fx-theme='dark' suppressHydrationWarning>
       <head>
         <script
           async
