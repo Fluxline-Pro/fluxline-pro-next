@@ -13,7 +13,7 @@ import {
   SERVICE_CATEGORIES,
   FLUXLINE_SECONDARY_TAGLINE,
 } from '@/app/services/constants';
-import { COMPANY_VALUES } from '@/app/about/constants';
+import { COMPANY_VALUES } from '@/lib/siteContent';
 import Link from 'next/link';
 
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [

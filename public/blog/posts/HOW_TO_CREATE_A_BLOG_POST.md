@@ -201,7 +201,7 @@ _Italic text_
 
 ```markdown
 [Link text](https://example.com)
-[Internal link](/about)
+[Internal link](/#about)
 ```
 
 #### Images
@@ -539,12 +539,12 @@ generatedWithAI: true                   # Optional - if AI-assisted
 
 **You must include ONE of these tags** in your `tags` array:
 
-| Tag                    | Category                     | Appears In                           | Example Content                         |
-| ---------------------- | ---------------------------- | ------------------------------------ | --------------------------------------- |
-| `"Interactive Demo"`   | Hands-on demonstrations      | `/podcasts/theresonantid/demos`      | Breathing exercises, grounding practice |
-| `"Episode Companion"`  | Companion articles           | `/podcasts/theresonantid/articles`   | Extended episode notes, deep dives      |
-| `"Foundations"`        | Foundational content         | `/podcasts/theresonantid/articles`   | Core framework, fundamental principles  |
-| `"Identity Challenge"` | 7-day challenges per episode | `/podcasts/theresonantid/challenges` | Weekly identity activation challenges   |
+| Tag                    | Category                     | Appears In                                | Example Content                         |
+| ---------------------- | ---------------------------- | ----------------------------------------- | --------------------------------------- |
+| `"Interactive Demo"`   | Hands-on demonstrations      | Fluxline blog detail + external TRI usage | Breathing exercises, grounding practice |
+| `"Episode Companion"`  | Companion articles           | Fluxline blog detail + external TRI usage | Extended episode notes, deep dives      |
+| `"Foundations"`        | Foundational content         | Fluxline blog detail + external TRI usage | Core framework, fundamental principles  |
+| `"Identity Challenge"` | 7-day challenges per episode | Fluxline blog detail + external TRI usage | Weekly identity activation challenges   |
 
 **Important:** Use the exact tag name with proper spacing and capitalization.
 
@@ -570,16 +570,11 @@ TRI blog posts should use the `tri-` prefix for clarity:
 
 ### Where TRI Content Appears
 
-TRI blog posts automatically appear in multiple locations:
+TRI blog posts now surface in these locations:
 
 1. **Standard blog listing** (`/blog`) - Alongside all other blog posts
-2. **TRI main page** (`/podcasts/theresonantid`) - In the TRISection component
-3. **TRI library** (`/podcasts/theresonantid/library`) - Full library view
-4. **Filtered views:**
-   - `/podcasts/theresonantid/demos` - "Interactive Demo" tagged posts
-   - `/podcasts/theresonantid/articles` - "Episode Companion" tagged posts
-   - `/podcasts/theresonantid/challenges` - "Identity Challenge" tagged posts
-5. **Individual post page** (`/blog/tri-your-post-slug`) - Full blog post detail
+2. **Individual post page** (`/blog/tri-your-post-slug`) - Full blog post detail
+3. **External TRI publishing** (`https://theresonantidentity.com`) - Dedicated destination for The Resonant Identity ecosystem
 
 ### Complete TRI Example
 
@@ -672,7 +667,7 @@ When your nervous system is regulated, you have access to clearer perception and
 ## Related Resources
 
 - [Try the Sensory Grounding (3-2-1) Demo](/blog/tri-sensory-grounding-3-2-1)
-- [Listen to The Resonant Identity podcast](/podcasts/theresonantid)
+- [Visit The Resonant Identity](https://theresonantidentity.com)
 - [Join The Resonant Identity Community on Facebook](https://www.facebook.com/groups/theresonantid)
 
 ---

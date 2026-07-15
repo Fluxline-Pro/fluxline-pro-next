@@ -105,7 +105,7 @@ export default function TestimonialsPage() {
           }}
         >
           <Link
-            href='/about'
+            href='/#about'
             style={{
               display: 'inline-flex',
               alignItems: 'center',

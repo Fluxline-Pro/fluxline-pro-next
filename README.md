@@ -105,11 +105,9 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app.
 fluxline-pro-next/
 ├── src/
 │   ├── app/                      # Next.js App Router pages
-│   │   ├── about/                # About page with team profiles
 │   │   ├── blog/                 # File-based blog system
 │   │   ├── case-studies/         # Case study pages
 │   │   ├── contact/              # Contact page
-│   │   ├── fluxline-ethos/       # Company philosophy page
 │   │   ├── press-release/        # Press release system
 │   │   ├── services/             # Service pages
 │   │   │   └── scrolls/          # Strategic insights/white papers

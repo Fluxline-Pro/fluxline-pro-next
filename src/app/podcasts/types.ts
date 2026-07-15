@@ -32,7 +32,7 @@ export interface ChallengePost extends TRIPost {
 
 /**
  * Companion article post — extends TRIPost with optional featured flag.
- * Used by ArticlesFilteredView and the /podcasts/theresonantid/articles page.
+ * Used by legacy TRI content views while older posts are still mirrored locally.
  */
 export interface ArticlePost extends TRIPost {
   featured?: boolean;

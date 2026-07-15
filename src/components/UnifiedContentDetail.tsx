@@ -18,7 +18,7 @@ import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import {
   SocialLinks,
   type SocialLinksData,
-} from '@/app/about/components/SocialLinks';
+} from '@/components/SocialLinks';
 import { ImageCarouselModal, type CarouselImage } from './ImageCarouselModal';
 import { Modal } from './Modal';
 import { GeneratedWithAIBadge } from './GeneratedWithAIBadge';

@@ -122,7 +122,6 @@ Rather than a single global schema injected into `_document.tsx`, PR #193 distri
 | `/blog/[slug]`       | `Article`                    | `headline`, `author`, `datePublished`, `dateModified`, `image`, `keywords`, `isPartOf` (Blog)       |
 | `/portfolio/[slug]`  | `PortfolioArticle`           | `headline`, `proficiencyLevel`, `dependencies`                                                      |
 | `/case-studies/[id]` | `Article`                    | `headline`, `author`, `datePublished`, `image`, `about`, `isPartOf` (CollectionPage)                |
-| `/about`             | `AboutPage` + `Organization` | `founder`, `foundingDate`, `numberOfEmployees`                                                      |
 | `/services`          | `ItemList` (of `Service`)    | `name`, `numberOfItems`, `itemListElement`                                                          |
 | `/services/[slug]`   | `Service` + `FAQPage`        | `name`, `description`, `provider`, `serviceType`, FAQ questions/answers                             |
 
@@ -429,7 +428,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${SITE_URL}/about`,
+      url: `${SITE_URL}/contact`,
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
       priority: 0.9,

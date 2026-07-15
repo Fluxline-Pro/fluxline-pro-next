@@ -14,13 +14,6 @@ export const navItems: NavItem[] = [
     description: 'Return to homepage',
   },
   {
-    label: 'about',
-    path: '/about',
-    view: 'about',
-    iconName: 'TextDocumentShared',
-    description: 'Learn about Fluxline',
-  },
-  {
     label: 'services',
     path: '/services',
     view: 'services',
