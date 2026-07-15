@@ -101,7 +101,7 @@ export default function ContentPageClient() {
                 }}
               >
                 Insights on technology, design, wellness, and business
-                transformation — including every TRI companion guide.
+                transformation across the Fluxline platform.
               </div>
             </div>
             <div style={{ padding: '18px 26px 24px', marginTop: 'auto' }}>
@@ -124,7 +124,7 @@ export default function ContentPageClient() {
             </div>
           </FxCard>
 
-          {/* TRI Podcast */}
+          {/* Podcast */}
           <FxCard
             variant='band'
             interactive
@@ -179,7 +179,7 @@ export default function ContentPageClient() {
                   marginBottom: 8,
                 }}
               >
-                The Resonant Identity
+                Podcast
               </div>
               <div
                 style={{

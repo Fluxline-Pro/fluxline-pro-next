@@ -116,15 +116,14 @@ JSON-LD won decisively: it lives in a `<script type="application/ld+json">` bloc
 
 Rather than a single global schema injected into `_document.tsx`, PR #193 distributes schema types to the routes where they are semantically appropriate. Each route owns its own schema identity:
 
-| Route                | Schema Type                  | Key Properties                                                                                      |
-| -------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------- |
-| `/` (homepage)       | `Organization` + `WebSite`   | `name`, `url`, `logo`, `sameAs`, `hasOfferCatalog` (OfferCatalog), `potentialAction` (SearchAction) |
-| `/blog/[slug]`       | `Article`                    | `headline`, `author`, `datePublished`, `dateModified`, `image`, `keywords`, `isPartOf` (Blog)       |
-| `/portfolio/[slug]`  | `PortfolioArticle`           | `headline`, `proficiencyLevel`, `dependencies`                                                      |
-| `/case-studies/[id]` | `Article`                    | `headline`, `author`, `datePublished`, `image`, `about`, `isPartOf` (CollectionPage)                |
-| `/about`             | `AboutPage` + `Organization` | `founder`, `foundingDate`, `numberOfEmployees`                                                      |
-| `/services`          | `ItemList` (of `Service`)    | `name`, `numberOfItems`, `itemListElement`                                                          |
-| `/services/[slug]`   | `Service` + `FAQPage`        | `name`, `description`, `provider`, `serviceType`, FAQ questions/answers                             |
+| Route                | Schema Type                | Key Properties                                                                                      |
+| -------------------- | -------------------------- | --------------------------------------------------------------------------------------------------- |
+| `/` (homepage)       | `Organization` + `WebSite` | `name`, `url`, `logo`, `sameAs`, `hasOfferCatalog` (OfferCatalog), `potentialAction` (SearchAction) |
+| `/blog/[slug]`       | `Article`                  | `headline`, `author`, `datePublished`, `dateModified`, `image`, `keywords`, `isPartOf` (Blog)       |
+| `/portfolio/[slug]`  | `PortfolioArticle`         | `headline`, `proficiencyLevel`, `dependencies`                                                      |
+| `/case-studies/[id]` | `Article`                  | `headline`, `author`, `datePublished`, `image`, `about`, `isPartOf` (CollectionPage)                |
+| `/services`          | `ItemList` (of `Service`)  | `name`, `numberOfItems`, `itemListElement`                                                          |
+| `/services/[slug]`   | `Service` + `FAQPage`      | `name`, `description`, `provider`, `serviceType`, FAQ questions/answers                             |
 
 This approach means that when an AI retrieval system ingests a Fluxline blog post, it receives not just prose but a machine-verified declaration: _this is an `Article`, written by a named `Person`, published on this `datePublished`, under this `Organization` publisher_ — context that would otherwise require the LLM to infer and potentially hallucinate.
 
@@ -429,7 +428,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${SITE_URL}/about`,
+      url: `${SITE_URL}/contact`,
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
       priority: 0.9,

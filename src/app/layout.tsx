@@ -101,7 +101,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' data-fx-theme='dark'>
+    <html lang='en' data-fx-theme='dark' suppressHydrationWarning>
       <head>
         {/* Google Consent Mode v2 — must run before any GA / Ads scripts.
             All consent categories default to 'denied' until the user

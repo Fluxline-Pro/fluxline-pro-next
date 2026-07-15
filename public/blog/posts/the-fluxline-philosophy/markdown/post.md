@@ -180,7 +180,7 @@ Whether you're scaling a business, redefining your brand, or architecting person
 
 → [Book a consultation](https://outlook.office.com/book/Bookings@terencewaters.com/)  
 → [Explore our services](/services)  
-→ [Read more about our journey](/about)
+→ [Read more about our journey](/#about)
 
 ## Related Resources
 

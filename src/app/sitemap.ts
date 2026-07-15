@@ -14,7 +14,7 @@ import { isProduction } from '@/lib/environment';
  *
  * Priority guide:
  *   1.0 — Homepage + Service pages (core business offering)
- *   0.9 — About, Fluxline Ethos, Contact (identity + conversion)
+ *   0.9 — Contact (conversion)
  *   0.8 — Blog posts, Portfolio projects, Case studies (authority content)
  *   0.7 — Content hub, Press releases, Scrolls (resource content)
  *   0.6 — Videos, Podcasts, Books (media content within Content Hub)
@@ -60,18 +60,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
       priority: 1.0,
-    },
-    {
-      url: `${SITE_URL}/about`,
-      lastModified: BUILD_DATE,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/fluxline-ethos`,
-      lastModified: BUILD_DATE,
-      changeFrequency: 'monthly',
-      priority: 0.9,
     },
     {
       url: `${SITE_URL}/contact`,

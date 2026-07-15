@@ -27,7 +27,6 @@ import { FadeUp } from '@/animations/fade-animations';
 // Import images directly
 import FluxlineLogoDarkMode from '../assets/images/FluxlineLogoDarkMode.png';
 import FluxlineLogoLightMode from '../assets/images/FluxlineLogoLightMode.png';
-import FluxlineEthos from '../assets/images/FluxlineEthos.png';
 // import FluxlineTestimonials from '../assets/images/FluxlineTestimonials.png';
 import OurServicesImage from '../assets/images/OurServices1197x1600.jpg';
 import PodcastsImage from '../assets/images/Podcasts.jpg';
@@ -43,7 +42,6 @@ import ContactImage from '../assets/images/ContactMe2400x1600.jpg';
 // import BooksImage from '../assets/images/EducationTrainingPortrait.jpg';
 import ContentImage from '../assets/images/ContentHub.jpg';
 import PortfolioImage from '../assets/images/Portfolio1280x1815.jpg';
-import TheResonantIdentityLogo from '../assets/images/TheResonantIdentity_Logo.png';
 
 // Dark mode themes: dark, high-contrast, grayscale-dark
 const darkModeThemes: ThemeMode[] = ['dark', 'high-contrast', 'grayscale-dark'];
@@ -65,10 +63,6 @@ const PAGE_CONFIGS: Record<
   string,
   { image: string | 'FLUXLINE_LOGO'; imageText: string }
 > = {
-  '/about': {
-    image: 'FLUXLINE_LOGO',
-    imageText: 'About Fluxline',
-  },
   '/services': {
     image: OurServicesImage.src,
     imageText: 'Services',
@@ -136,10 +130,6 @@ const PAGE_CONFIGS: Record<
   '/services/design': {
     image: DesignImage.src,
     imageText: 'Brand & Experience Design',
-  },
-  '/fluxline-ethos': {
-    image: FluxlineEthos.src,
-    imageText: 'Fluxline Ethos',
   },
   '/case-studies': {
     image: 'FLUXLINE_LOGO',
@@ -529,7 +519,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
     if (showImageTitle !== undefined) {
       return showImageTitle;
     }
-    if (pathname.startsWith('/services') && pathname !== '/about') {
+    if (pathname.startsWith('/services')) {
       return false;
     }
     return true;

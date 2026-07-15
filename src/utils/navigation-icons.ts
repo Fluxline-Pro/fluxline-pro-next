@@ -21,7 +21,7 @@ const allNavItems = flattenNavItems(navItems);
 
 /**
  * Get the icon name for a given path from the navigation configuration
- * @param path - The route path to look up (e.g., '/services', '/about')
+ * @param path - The route path to look up (e.g., '/services', '/contact')
  * @returns The Fluent UI icon name, or undefined if not found
  */
 export const getIconForPath = (path: string): string | undefined => {

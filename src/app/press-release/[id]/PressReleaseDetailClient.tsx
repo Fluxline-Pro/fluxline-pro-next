@@ -6,7 +6,7 @@ import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDeta
 import { ContentNotFound } from '@/components/ContentNotFound';
 import { format } from 'date-fns';
 import type { PressRelease } from '../types';
-import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
+import { TERENCE_SOCIAL_LINKS } from '@/lib/siteContent';
 
 interface PressReleaseDetailClientProps {
   pressRelease: PressRelease | null;

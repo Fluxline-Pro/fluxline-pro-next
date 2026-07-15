@@ -6,7 +6,8 @@ import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { format } from 'date-fns';
 import type { BlogPost } from '../types';
-import { TERENCE_SOCIAL_LINKS } from '@/app/about/constants';
+import { TERENCE_SOCIAL_LINKS } from '@/lib/siteContent';
+import { slugify } from '@/utils/slug';
 
 interface BlogPostDetailClientProps {
   post: BlogPost;
@@ -20,11 +21,11 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
   const router = useRouter();
 
   const handleTagClick = (tag: string) => {
-    router.push(`/blog/tag/${encodeURIComponent(tag)}`);
+    router.push(`/blog/tag/${slugify(tag)}`);
   };
 
   const handleCategoryClick = () => {
-    router.push(`/blog/category/${encodeURIComponent(post.category)}`);
+    router.push(`/blog/category/${slugify(post.category)}`);
   };
 
   const config: UnifiedContentDetailConfig = {
