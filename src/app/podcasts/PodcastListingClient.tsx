@@ -1030,7 +1030,7 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
                       lineHeight: 1.3,
                     }}
                   >
-                    {newestEpisode.episode_title}
+                    {decodeHtmlEntities(newestEpisode.episode_title)}
                   </div>
                   {newestEpisodeDate && (
                     <div
