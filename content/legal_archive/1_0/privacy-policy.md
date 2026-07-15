@@ -1,12 +1,11 @@
 # Privacy Policy
 
-**Version:** 1.1  
-**Effective Date:** July 15, 2026  
-**Last Updated:** July 15, 2026
+**Effective Date:** October 12, 2025  
+**Last Updated:** October 12, 2025
 
 ## Introduction
 
-Fluxline Resonance Group, LLC ("Fluxline", "FLUXLINE", "Fluxline Resonance Group", "we," "us," or "our") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit or use our websites and services, including [Fluxline.pro](https://www.fluxline.pro), [TerenceWaters.com](https://www.terencewaters.com) and [TheResonantIdentity.com](https://www.theresonantidentity.com).
+Fluxline Resonance Group, LLC ("Fluxline", "FLUXLINE", "Fluxline Resonance Group", "we," "us," or "our") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
 
 ## 1. Information We Collect
 
@@ -26,7 +25,7 @@ When you access our Services, we may automatically collect:
 
 - **Device Information:** IP address, browser type, operating system
 - **Usage Data:** Pages viewed, time spent on pages, navigation paths
-- **Cookies and Tracking Technologies:** Session cookies, analytics cookies, and advertising/measurement cookies used for navigation, site functionality, and site improvement
+- **Cookies and Tracking Technologies:** Session cookies, analytics cookies
 - **Location Data:** General location based on IP address (if applicable)
 
 ### 1.3 Information from Third Parties
@@ -51,25 +50,17 @@ We use your information for the following purposes:
 ### 2.2 Business Operations
 
 - Improving and optimizing our Services
-- Conducting research and analytics (including Google site analytics)
+- Conducting research and analytics
 - Developing new features and services
 - Managing our business relationships
 
-### 2.3 Website Analytics, Ad Serving, and Navigation
-
-- Measuring website performance and user navigation to improve site structure, usability, and content
-- Using analytics and ad-serving technologies (including Google Analytics and related ad measurement services) to understand traffic and campaign effectiveness
-- Maintaining and updating our websites based on aggregate usage and navigation patterns
-
-As such, we do _not_ sell, rent, or trade your personal information to data brokers, advertisers, or other third parties. Ever.
-
-### 2.4 Marketing and Communications
+### 2.3 Marketing and Communications
 
 - Sending newsletters, promotional materials, and service updates (with your consent)
 - Personalizing your experience
 - Conducting surveys and gathering feedback
 
-### 2.5 Legal and Security
+### 2.4 Legal and Security
 
 - Complying with legal obligations
 - Protecting against fraud, abuse, and security threats
@@ -87,7 +78,7 @@ For users in the European Economic Area (EEA), we process your personal data bas
 
 ## 4. How We Share Your Information
 
-_We do not sell your personal information._ We do not rent, trade, or otherwise disclose personal information to third parties for their independent marketing or commercial resale. We may share your information only as described below:
+We do not sell your personal information. We may share your information with:
 
 ### 4.1 Service Providers
 
@@ -96,7 +87,7 @@ Third-party vendors who perform services on our behalf:
 - Payment processors
 - Email service providers
 - Cloud hosting providers
-- Analytics and ad-serving providers acting on our behalf (for example, Google Analytics and related advertising/measurement tools)
+- Analytics providers
 
 ### 4.2 Business Transfers
 
@@ -108,7 +99,7 @@ When required by law, regulation, legal process, or governmental request.
 
 ### 4.4 Protection of Rights
 
-To enforce our [Terms of Use](/legal/terms), protect our rights and property, or ensure the safety of our users.
+To enforce our Terms of Use, protect our rights and property, or ensure the safety of our users.
 
 ### 4.5 With Your Consent
 
@@ -164,20 +155,20 @@ Depending on your location, you may have the following rights:
 
 - Lodge a complaint with a supervisory authority
 
-To exercise these rights, please contact us at [support@fluxline.pro](mailto:support@fluxline.pro).
+To exercise these rights, please contact us at [privacy@fluxline.pro](mailto:privacy@fluxline.pro).
 
 ## 8. Cookies and Tracking Technologies
 
 ### 8.1 Types of Cookies We Use
 
 - **Essential Cookies:** Required for the website to function properly
-- **Analytics Cookies:** Help us understand how visitors use our sites (including Google Analytics)
+- **Analytics Cookies:** Help us understand how visitors use our site
 - **Functional Cookies:** Remember your preferences and settings
-- **Advertising and Measurement Cookies:** Support ad serving, campaign measurement, and traffic attribution (with consent where required)
+- **Marketing Cookies:** Track advertising effectiveness (with consent)
 
 ### 8.2 Managing Cookies
 
-You can control cookies through your browser settings and, where available, our cookie controls. Note that disabling certain cookies may affect functionality, navigation, and analytics needed for website updates.
+You can control cookies through your browser settings. Note that disabling certain cookies may affect functionality.
 
 ## 9. Third-Party Services
 
@@ -192,13 +183,7 @@ We use analytics services such as:
 
 These services may collect information about your use of our Services.
 
-### 9.2 Advertising and Ad-Serving Services
-
-We may use ad-serving and ad-measurement technologies to understand campaign performance, attribution, and navigation behavior across our websites. These technologies are used for site operations, optimization, and reporting.
-
-We do **not** sell personal information through these services.
-
-### 9.3 Social Media
+### 9.2 Social Media
 
 We may integrate social media features that collect your IP address and page activity. These features are governed by the privacy policies of the respective social media companies.
 
@@ -224,13 +209,13 @@ Request deletion of your personal information.
 
 ### 12.3 Right to Opt-Out
 
-Opt out of the sale of personal information (we do not sell, rent, or trade personal information).
+Opt out of the sale of personal information (we do not sell personal information).
 
 ### 12.4 Right to Non-Discrimination
 
 You will not receive discriminatory treatment for exercising your privacy rights.
 
-To exercise these rights, contact us at [support@fluxline.pro](mailto:support@fluxline.pro) or call us at the number provided on our website.
+To exercise these rights, contact us at [privacy@fluxline.pro](mailto:privacy@fluxline.pro) or call us at the number provided on our website.
 
 ## 13. Changes to This Privacy Policy
 
@@ -248,9 +233,8 @@ If you have questions or concerns about this Privacy Policy or our data practice
 
 **Fluxline Resonance Group, LLC**  
 Privacy Officer  
-Email: [support@fluxline.pro](mailto:support@fluxline.pro)  
-Website: [https://www.fluxline.pro/contact](https://www.fluxline.pro/contact)  
-Additional Website: [https://www.theresonantidentity.com](https://www.theresonantidentity.com)
+Email: [privacy@fluxline.pro](mailto:privacy@fluxline.pro)  
+Website: [https://www.fluxline.pro/contact](https://www.fluxline.pro/contact)
 
 ## 15. Responsible AI Usage
 
@@ -264,7 +248,6 @@ We are committed to ensuring this Privacy Policy is accessible to all users. If 
 
 ---
 
-**Version:** 1.1  
-**Last Updated:** July 15, 2026
+**Last Updated:** October 12, 2025
 
 By using Fluxline, you acknowledge that you have read and understood this Privacy Policy.
