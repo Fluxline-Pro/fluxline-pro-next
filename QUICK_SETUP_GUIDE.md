@@ -2,6 +2,13 @@
 
 This is a condensed setup guide for configuring token-based access control after the code has been merged and deployed.
 
+> **⚠️ This is presentation-layer gating, not security.** The gate hides UI; it does not
+> protect content. On a static export, every gated page is pre-rendered and fetchable by
+> URL without a token, and any asset under `/public` (including `/scrolls/pdfs/*`) is
+> served publicly. Use it to keep casual visitors and crawlers out of DEV/TEST — never as
+> the only thing standing between the public and confidential or paid material. See the
+> threat model in [TOKEN_ACCESS_README.md](TOKEN_ACCESS_README.md#security-considerations).
+
 ## Prerequisites
 
 - Code merged and deployed to DEV, TEST, and PROD environments
