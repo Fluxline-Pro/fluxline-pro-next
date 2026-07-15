@@ -27,11 +27,12 @@ Fluxline Resonance Group, LLC is proud to announce the official launch of **TheR
 
 Over the past several months, _The Resonant Identity_ has evolved from a podcast into a full identity system — a modular, resonant framework for understanding who you are beneath the noise. With ten episodes published and nearly **900 direct visits in a single week**, TRI demonstrated a level of traction and independence that made its next step unmistakably clear: it needed its own platform.
 
-> “Identity is modular. Identity is resonant. And The Resonant Identity needed a home that reflected that truth,”  
-> said founder **Terence Waters**.  
-> “TheResonantIdentity.com is where identity becomes architecture — where values, virtues, resonance, and precision come together in a system people can actually use.”
+> “Identity is modular. Identity is resonant. And The Resonant Identity needed a home that reflected that Truth.”  
+> -**Terence Waters**.
 
 ## A Dedicated Platform for Resonant Identity Work
+
+TheResonantIdentity.com is where identity becomes architecture — where values, virtues, resonance, and precision come together in a system people can actually use.
 
 TheResonantIdentity.com launches with:
 
