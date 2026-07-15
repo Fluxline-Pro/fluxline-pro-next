@@ -13,6 +13,7 @@ import { GitHubLogo } from '@/assets/svgs/GitHubLogo';
 import { TwitterLogo } from '@/assets/svgs/TwitterLogo';
 import { TiktokLogo } from '@/assets/svgs/TiktokLogo';
 import { BlueSkyLogo } from '@/assets/svgs/BlueSkyLogo';
+import { YouTubeLogo } from '@/assets/svgs/YouTubeLogo';
 
 export interface SocialLinksData {
   linkedin?: string;
@@ -160,6 +161,25 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           aria-label={`${name} on TikTok`}
         >
           <TiktokLogo
+            style={{
+              width: svgIconSize,
+              height: svgIconSize,
+            }}
+          />
+        </Link>
+      )}
+
+      {socialLinks.youtube && (
+        <Link
+          href={socialLinks.youtube}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={buttonStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label={`${name} on YouTube`}
+        >
+          <YouTubeLogo
             style={{
               width: svgIconSize,
               height: svgIconSize,
