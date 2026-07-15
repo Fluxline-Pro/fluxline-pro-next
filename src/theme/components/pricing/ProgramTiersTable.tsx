@@ -33,6 +33,8 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
     setIsMounted(true);
   }, []);
 
+  const cellPad = isMobile ? '0.6rem 0.7rem' : '0.7rem 1.15rem';
+
   return (
     <div className='space-y-6'>
       <Typography
@@ -63,11 +65,12 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
       {/* Pricing Table */}
       <div
         style={{
-          overflowX: isMobile || isTablet ? 'auto' : 'visible',
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          WebkitOverflowScrolling: 'touch',
           border: '1px solid var(--fx-text-faint)',
           borderRadius: 'var(--fx-radius-card)',
           backgroundColor: 'var(--fx-border)',
-          overflow: 'hidden',
         }}
       >
         <table
@@ -80,12 +83,12 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
           <thead>
             <tr
               style={{
-                backgroundColor: 'var(--fx-accent)',
+                backgroundColor: 'var(--fx-surface-alt)',
               }}
             >
               <th
                 style={{
-                  padding: isMobile ? '0.75rem' : '1rem 1.5rem',
+                  padding: cellPad,
                   textAlign: 'left',
                   color: 'var(--fx-text-bright)',
                   fontSize: isMobile ? '0.875rem' : '1rem',
@@ -97,7 +100,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
               </th>
               <th
                 style={{
-                  padding: isMobile ? '0.75rem' : '1rem 1.5rem',
+                  padding: cellPad,
                   textAlign: 'left',
                   color: 'var(--fx-text-bright)',
                   fontSize: isMobile ? '0.875rem' : '1rem',
@@ -109,7 +112,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
               </th>
               <th
                 style={{
-                  padding: isMobile ? '0.75rem' : '1rem 1.5rem',
+                  padding: cellPad,
                   textAlign: 'left',
                   color: 'var(--fx-text-bright)',
                   fontSize: isMobile ? '0.875rem' : '1rem',
@@ -133,7 +136,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
               >
                 <td
                   style={{
-                    padding: isMobile ? '0.75rem' : '1rem 1.5rem',
+                    padding: cellPad,
                     borderRight: '1px solid var(--fx-border)',
                   }}
                 >
@@ -150,7 +153,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
                 </td>
                 <td
                   style={{
-                    padding: isMobile ? '0.75rem' : '1rem 1.5rem',
+                    padding: cellPad,
                     borderRight: '1px solid var(--fx-border)',
                   }}
                 >

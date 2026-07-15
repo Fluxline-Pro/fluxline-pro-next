@@ -32,6 +32,8 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
     setIsMounted(true);
   }, []);
 
+  const cellPad = isMobile ? '0.5rem' : '0.7rem';
+
   // Convert feature names to keys for comparison lookup
   const featureToKey = (featureName: string): string => {
     return featureName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -67,9 +69,10 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
         <div
           style={{
             overflowX: 'auto',
+            overflowY: 'hidden',
+            WebkitOverflowScrolling: 'touch',
             border: '1px solid var(--fx-text-faint)',
             borderRadius: 'var(--fx-radius-card)',
-            overflow: 'hidden',
           }}
         >
           <table
@@ -82,19 +85,19 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
             <thead>
               <tr
                 style={{
-                  backgroundColor: 'var(--fx-accent)',
+                  backgroundColor: 'var(--fx-surface-alt)',
                 }}
               >
                 <th
                   style={{
-                    padding: isMobile ? '0.75rem' : '1rem',
+                    padding: cellPad,
                     textAlign: 'center',
                     color: 'var(--fx-text-bright)',
                     fontSize: isMobile ? '0.875rem' : '1rem',
                     fontWeight: 600,
                     position: 'sticky',
                     left: 0,
-                    backgroundColor: 'var(--fx-accent)',
+                    backgroundColor: 'var(--fx-surface-alt)',
                     zIndex: 1,
                     minWidth: isMobile ? '150px' : '200px',
                   }}
@@ -105,7 +108,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                   <th
                     key={tier.id}
                     style={{
-                      padding: isMobile ? '0.75rem' : '1rem',
+                      padding: cellPad,
                       color: 'var(--fx-text-bright)',
                       textAlign: 'center',
                       fontSize: isMobile ? '0.875rem' : '1rem',
@@ -137,7 +140,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                   >
                     <td
                       style={{
-                        padding: isMobile ? '0.75rem' : '1rem',
+                        padding: cellPad,
                         position: 'sticky',
                         left: 0,
                         backgroundColor: rowBg,
@@ -175,7 +178,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                         <td
                           key={tier.id}
                           style={{
-                            padding: isMobile ? '0.75rem' : '1rem',
+                            padding: cellPad,
                             textAlign: 'center',
                           }}
                           title={
