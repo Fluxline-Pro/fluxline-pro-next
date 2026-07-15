@@ -10,6 +10,11 @@ import FxButton from '@/theme/components/dsm/FxButton';
 import { useIsMobile, useIsTablet } from '@/theme/hooks/useMediaQuery';
 import { FormDateInput, FormSelect } from '@/theme/components/form';
 import { Modal } from '@/components/Modal';
+import { usePodcastPlayer } from '@/contexts/PodcastPlayerContext';
+import {
+  PlayPauseButton,
+  PodcastScrubber,
+} from '@/components/podcast/PodcastPlayerControls';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 import { PodcastEpisode, PODCAST_PLATFORMS } from './types';
 import { FadeIn } from '@/animations/fade-animations';
@@ -318,6 +323,16 @@ function PodcastDetailModal({
   onDismiss: () => void;
 }) {
   const rssEndpoint = getApiEndpoint('/api/podcasts/rss');
+  const { load, setModalOpen } = usePodcastPlayer();
+
+  // Hand the episode to the shared player and suppress the mini-player while
+  // this modal is showing the same controls. On unmount the mini-player takes
+  // over, mid-episode, without a reload.
+  React.useEffect(() => {
+    load(episode);
+    setModalOpen(true);
+    return () => setModalOpen(false);
+  }, [episode, load, setModalOpen]);
 
   const publishDate = episode.publish_date
     ? new Date(episode.publish_date).toLocaleDateString('en-US', {
@@ -404,22 +419,22 @@ function PodcastDetailModal({
           </p>
         </div>
 
-        {/* Audio player */}
+        {/* Audio player — drives the shared <audio> element so playback carries
+            over to the mini-player when this modal closes. */}
         {episode.audio_url && (
           <div
-            style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              padding: '12px 14px',
+              background: 'var(--fx-surface-alt)',
+              border: '1px solid var(--fx-border)',
+              borderRadius: 'var(--fx-radius-card)',
+            }}
           >
-            <audio
-              controls
-              style={{
-                width: '100%',
-                borderRadius: 4,
-                accentColor: 'var(--fx-accent)',
-              }}
-            >
-              <source src={episode.audio_url} type='audio/mpeg' />
-              Your browser does not support the audio element.
-            </audio>
+            <PlayPauseButton size={48} />
+            <PodcastScrubber />
           </div>
         )}
 
