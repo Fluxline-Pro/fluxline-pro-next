@@ -236,7 +236,7 @@ export default function ContactPage() {
                 Email TRI →
               </a>
               <a
-                href="https://facebook.com/theresonantid"
+                href="https://www.facebook.com/groups/theresonantidentity"
                 style={{
                   color: 'var(--fx-accent)',
                   fontSize: 13,

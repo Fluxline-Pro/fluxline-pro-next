@@ -29,11 +29,12 @@ export const TERENCE_SOCIAL_LINKS: SocialLinksData = {
  * Used on blog posts and content where author is "The Resonant Identity"
  */
 export const TRI_SOCIAL_LINKS: SocialLinksData = {
-  instagram: 'https://www.instagram.com/theresonantid',
+  youtube: 'https://www.youtube.com/@theresonantidentity',
+  instagram: 'https://www.instagram.com/theresonantidentity',
   twitter: 'https://x.com/theresonantid',
   bluesky: 'https://bsky.app/profile/theresonantid.bsky.social',
   tiktok: 'https://www.tiktok.com/@theresonantid',
-  facebook: 'https://www.facebook.com/theresonantid',
+  facebook: 'https://www.facebook.com/theresonantidentity',
   email: 'mail@theresonantidentity.com',
 };
 
