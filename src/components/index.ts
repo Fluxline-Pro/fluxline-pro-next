@@ -29,5 +29,7 @@ export type {
   LeadPayload,
   ServiceKey,
 } from './ConsultationStepper';
+export { default as GoogleAnalytics } from './GoogleAnalytics';
+export { default as ConsentBanner } from './ConsentBanner';
 
 
