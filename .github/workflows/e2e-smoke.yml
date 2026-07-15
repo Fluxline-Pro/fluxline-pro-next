@@ -1,0 +1,55 @@
+name: E2E Smoke Tests
+
+# Runs the smoke suite against the built static export before anything deploys.
+#
+# These tests exist because the PR #111 tag-routing regression was only visible
+# against built static output — it passed `yarn dev`, passed unit tests, and
+# built successfully while emitting broken folder names. The suite is
+# deliberately small and fast; it covers the regression class that has actually
+# hit this site, not general coverage.
+
+on:
+  push:
+    branches:
+      - develop
+      - test
+      - master
+  pull_request:
+    branches:
+      - develop
+      - test
+      - master
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    name: Smoke test built output
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Build static export
+        run: yarn build
+
+      - name: Run smoke tests
+        run: yarn test:e2e
+
+      - name: Upload report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
