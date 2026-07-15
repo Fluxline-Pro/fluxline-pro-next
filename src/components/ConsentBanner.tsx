@@ -27,21 +27,17 @@ export default function ConsentBanner() {
 
   // Only show after hydration and only when consent is still pending
   useEffect(() => {
-    if (consent.status === 'pending') {
-      setVisible(true);
-    }
+    setVisible(consent.status === 'pending');
   }, [consent.status]);
 
   if (!visible) return null;
 
   const handleAcceptAll = () => {
     acceptAll();
-    setVisible(false);
   };
 
   const handleRejectAll = () => {
     rejectAll();
-    setVisible(false);
   };
 
   const handleSaveCustom = () => {
@@ -51,7 +47,6 @@ export default function ConsentBanner() {
       adUserData: adsOn,
       adPersonalization: adsOn,
     });
-    setVisible(false);
   };
 
   const cardStyle: React.CSSProperties = {
@@ -121,8 +116,7 @@ export default function ConsentBanner() {
           >
             We use cookies and similar technologies to provide core
             functionality, measure site performance, and—with your
-            consent—deliver relevant ads and personalised content.
-            {' '}
+            consent—deliver relevant ads and personalised content.{' '}
             <Link
               href='/legal/privacy-policy'
               style={{ color: 'var(--fx-accent)', textDecoration: 'underline' }}

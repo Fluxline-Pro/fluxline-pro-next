@@ -24,16 +24,6 @@ import FxButton from '@/theme/components/dsm/FxButton';
 import { StepTidyCal } from './StepTidyCal';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
 
-declare global {
-  interface Window {
-    gtag?: (
-      cmd: string,
-      event: string,
-      params?: Record<string, unknown>
-    ) => void;
-  }
-}
-
 /** Maximum character length for TidyCal prefill notes parameter */
 const TIDYCAL_MAX_NOTES_LENGTH = 500;
 
@@ -60,10 +50,7 @@ function StepIndicator({
   const steps: StepperStep[] = [1, 2, 3];
 
   return (
-    <nav
-      aria-label='Consultation steps'
-      style={{ marginBottom: '32px' }}
-    >
+    <nav aria-label='Consultation steps' style={{ marginBottom: '32px' }}>
       <ol
         style={{
           display: 'flex',
@@ -124,9 +111,7 @@ function StepIndicator({
                         isCompleted || isCurrent
                           ? 'var(--fx-text-bright)'
                           : 'var(--fx-text-muted)',
-                      border: isCurrent
-                        ? '3px solid var(--fx-accent)'
-                        : 'none',
+                      border: isCurrent ? '3px solid var(--fx-accent)' : 'none',
                       transition: 'all 0.2s ease',
                     }}
                   >
@@ -138,9 +123,7 @@ function StepIndicator({
                       color: isCurrent
                         ? 'var(--fx-accent)'
                         : 'var(--fx-text-muted)',
-                      fontWeight: isCurrent
-                        ? 600
-                        : undefined,
+                      fontWeight: isCurrent ? 600 : undefined,
                       whiteSpace: 'nowrap',
                     }}
                   >
@@ -189,16 +172,40 @@ function SuccessView({ onClose }: { onClose: () => void }) {
       role='status'
       aria-live='polite'
     >
-      <span style={{ fontSize: '3rem', color: 'var(--fx-accent)' }} aria-hidden="true">&#10003;</span>
-      <h3 style={{ color: 'var(--fx-accent)', marginBottom: 0, fontSize: 'var(--fx-h3-size)', fontWeight: 'var(--fx-h3-weight)' }}>
+      <span
+        style={{ fontSize: '3rem', color: 'var(--fx-accent)' }}
+        aria-hidden='true'
+      >
+        &#10003;
+      </span>
+      <h3
+        style={{
+          color: 'var(--fx-accent)',
+          marginBottom: 0,
+          fontSize: 'var(--fx-h3-size)',
+          fontWeight: 'var(--fx-h3-weight)',
+        }}
+      >
         You&apos;re all set!
       </h3>
-      <p style={{ color: 'var(--fx-text-muted)', maxWidth: '400px', fontSize: 'var(--fx-body-size)', lineHeight: 'var(--fx-body-leading)', margin: 0 }}>
+      <p
+        style={{
+          color: 'var(--fx-text-muted)',
+          maxWidth: '400px',
+          fontSize: 'var(--fx-body-size)',
+          lineHeight: 'var(--fx-body-leading)',
+          margin: 0,
+        }}
+      >
         Your consultation has been scheduled. Check your inbox for a
         confirmation email with all the details.
       </p>
 
-      <FxButton variant="quiet" onClick={onClose} style={{ marginTop: '16px', fontSize: 'var(--fx-body-sm-size)' }}>
+      <FxButton
+        variant='quiet'
+        onClick={onClose}
+        style={{ marginTop: '16px', fontSize: 'var(--fx-body-sm-size)' }}
+      >
         Close
       </FxButton>
     </div>
