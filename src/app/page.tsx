@@ -13,7 +13,7 @@ import {
   SERVICE_CATEGORIES,
   FLUXLINE_SECONDARY_TAGLINE,
 } from '@/app/services/constants';
-import { COMPANY_VALUES } from '@/app/about/constants';
+import { COMPANY_VALUES } from '@/lib/siteContent';
 import Link from 'next/link';
 
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
@@ -586,7 +586,7 @@ export default function Home() {
                 letterSpacing: '-.01em',
               }}
             >
-              Content Hub &amp; The Resonant Identity
+              Content Hub
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
               Insights, client work, and the ongoing conversation around the
@@ -730,7 +730,7 @@ export default function Home() {
                     marginBottom: 10,
                   }}
                 >
-                  The Resonant Identity
+                  Podcast
                 </div>
                 <div
                   style={{
@@ -768,7 +768,7 @@ export default function Home() {
                       textDecoration: 'none',
                     }}
                   >
-                    Explore The Resonant Identity Podcast
+                    Explore the Podcast
                   </Link>
                 </div>
               </FxCard>

@@ -24,7 +24,7 @@ interface BlogFrontmatter {
   title: string;
   excerpt?: string; // Falls back to description
   description?: string;
-  author?: string; // Falls back to 'The Resonant Identity'
+  author?: string; // Falls back to 'Fluxline Resonance Group'
   publishedDate?: string; // Falls back to date or current date
   date?: string;
   lastUpdated?: string;
@@ -50,7 +50,7 @@ interface BlogFrontmatter {
 
 /**
  * Resolve the markdown file path for a blog post slug
- * All blog posts (including TRI content) follow the standard structure:
+ * All blog posts follow the standard structure:
  * /public/blog/posts/[slug]/markdown/post.md
  */
 function resolveBlogMarkdownPath(slug: string): {
@@ -74,9 +74,13 @@ function resolveBlogMarkdownPath(slug: string): {
   return null;
 }
 
+function blogPostHasMarkdown(slug: string): boolean {
+  return resolveBlogMarkdownPath(slug) !== null;
+}
+
 /**
- * Get all blog post slugs from the file system
- * All blog posts (including TRI content) follow the standard directory structure
+ * Get all blog post slugs from the file system.
+ * All blog posts follow the standard directory structure.
  */
 export function getAllBlogPostSlugs(): string[] {
   try {
@@ -90,7 +94,7 @@ export function getAllBlogPostSlugs(): string[] {
 
     return fs.readdirSync(BLOG_POSTS_DIRECTORY).filter((item) => {
       const itemPath = path.join(BLOG_POSTS_DIRECTORY, item);
-      return fs.statSync(itemPath).isDirectory();
+      return fs.statSync(itemPath).isDirectory() && blogPostHasMarkdown(item);
     });
   } catch (error) {
     console.error('Error reading blog post slugs:', error);
@@ -147,7 +151,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
       title: frontmatter.title,
       excerpt: frontmatter.excerpt ?? frontmatter.description ?? '',
       content: content,
-      author: frontmatter.author ?? 'The Resonant Identity',
+      author: frontmatter.author ?? 'Fluxline Resonance Group',
       publishedDate,
       lastUpdated:
         lastUpdated && !isNaN(lastUpdated.getTime()) ? lastUpdated : undefined,

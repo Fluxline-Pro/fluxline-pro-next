@@ -4,7 +4,13 @@ This document describes the token-based access control system implemented for th
 
 ## Overview
 
-The implementation provides environment-specific access control to lock down non-production deployments (currently TEST) while keeping PROD publicly accessible. It uses a simple token-based authentication system that:
+> **⚠️ Scope:** This is **presentation-layer gating, not security.** It keeps casual visitors
+> and crawlers out of non-production deployments. It does **not** protect content — every
+> gated page is pre-rendered into the static export and is fetchable by URL without a token.
+> Read [Security Considerations](#security-considerations) before putting anything
+> confidential or commercially valuable behind it.
+
+The implementation provides environment-specific access control to discourage casual access to non-production deployments (currently TEST) while keeping PROD publicly accessible. It uses a simple token-based authentication system that:
 
 - ✅ Runs entirely on Azure Static Web Apps (no additional infrastructure needed)
 - ✅ Uses Azure Functions for server-side token validation
@@ -348,6 +354,36 @@ Validates an access token.
 
 ## Security Considerations
 
+### Threat model: this is presentation-layer gating, not security
+
+**`AccessGate` hides UI. It does not protect content.**
+
+This site is a Next.js static export (`output: 'export'`). Every page — including every
+"gated" one — is pre-rendered to HTML at build time and deployed into `out/`, where Azure
+Static Web Apps serves it to anyone who requests the URL. `AccessGate` is a `'use client'`
+component: it runs *after* the browser has already downloaded the page. Anyone can:
+
+- Request the page HTML directly and read it, without ever executing the gate
+- Read the embedded JSON payload Next.js ships for client hydration
+- Fetch any asset under `/public` by its URL (e.g. `/scrolls/pdfs/<name>.pdf`), which is
+  served with `"allowedRoles": ["anonymous"]` and a one-year public cache
+- Set the `fluxline_access_token` localStorage key by hand to dismiss the gate
+
+Validating the token in an Azure Function makes the **token check** server-side. It does not
+make the **content** protected, because the content was never behind that check.
+
+**This is appropriate for:** keeping unfinished DEV/TEST work out of the way of casual
+visitors and search crawlers, courtesy walls, and lead capture.
+
+**This is NOT appropriate for:** anything with real confidentiality or commercial value —
+paid scrolls, white papers, client deliverables, unreleased pricing, or personal data.
+Do not place such assets in `/public` or in a publicly readable blob container and assume
+`AccessGate` protects them. It does not.
+
+**To genuinely protect an asset:** serve it through an Azure Function that validates the
+token server-side and streams the blob from a private container. The asset must never be
+part of the static export.
+
 ### Current Implementation
 
 - ✅ Tokens validated server-side (Azure Functions)
@@ -358,7 +394,8 @@ Validates an access token.
 
 ### Limitations
 
-- ⚠️ Tokens stored in localStorage (client-side)
+- 🚨 **Gated content is publicly fetchable by URL** — the gate hides UI only (see threat model above)
+- ⚠️ Tokens stored in localStorage (client-side, and trivially settable by hand)
 - ⚠️ No rate limiting (could add with Azure API Management)
 - ⚠️ No token expiration (tokens are permanent until changed)
 - ⚠️ No user accounts (single token per environment)
@@ -367,11 +404,14 @@ Validates an access token.
 
 For higher security requirements:
 
-1. **Add token expiration** - Implement time-based token rotation
-2. **Add rate limiting** - Use Azure API Management or custom middleware
-3. **Use Azure AD** - Integrate with Azure Active Directory for user-based auth
-4. **Add IP allowlisting** - Combine with Azure Front Door or Application Gateway
-5. **Implement audit logging** - Track token usage and validation attempts
+1. **Serve protected assets from a Function** - Validate server-side and stream from a
+   private blob container; keep the asset out of `/public` and out of the static export.
+   This is the only item on this list that changes the threat model above.
+2. **Add token expiration** - Implement time-based token rotation
+3. **Add rate limiting** - Use Azure API Management or custom middleware
+4. **Use Azure AD** - Integrate with Azure Active Directory for user-based auth
+5. **Add IP allowlisting** - Combine with Azure Front Door or Application Gateway
+6. **Implement audit logging** - Track token usage and validation attempts
 
 ## Maintenance
 

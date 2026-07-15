@@ -155,7 +155,7 @@ Use the right HTML elements for the job:
   <nav aria-label="Main navigation">
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="/about">About</a></li>
+      <li><a href="/#about">About</a></li>
     </ul>
   </nav>
 </header>
@@ -351,7 +351,7 @@ const Navigation = () => {
     // Next.js automatically manages focus
   };
 
-  return <button onClick={() => handleNavigation('/about')}>About</button>;
+  return <button onClick={() => handleNavigation('/#about')}>About</button>;
 };
 
 // Image optimization with alt text

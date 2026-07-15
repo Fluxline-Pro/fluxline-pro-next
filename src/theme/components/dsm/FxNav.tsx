@@ -25,7 +25,6 @@ const BACK_ROUTES: Record<string, { label: string; href: string }> = {
   '/services': { label: '← Back to Home', href: '/' },
   '/blog': { label: '← Back to Home', href: '/' },
   '/contact': { label: '← Back to Home', href: '/' },
-  '/about': { label: '← Back to Home', href: '/' },
   '/portfolio': { label: '← Back to Home', href: '/' },
   '/books': { label: '← Back to Home', href: '/' },
   '/videos': { label: '← Back to Home', href: '/' },
@@ -34,7 +33,6 @@ const BACK_ROUTES: Record<string, { label: string; href: string }> = {
   '/github': { label: '← Back to Home', href: '/' },
   '/legal': { label: '← Back to Home', href: '/' },
   '/cue-cards': { label: '← Back to Home', href: '/' },
-  '/fluxline-ethos': { label: '← Back to Home', href: '/' },
   '/unsubscribe': { label: '← Back to Home', href: '/' },
 };
 

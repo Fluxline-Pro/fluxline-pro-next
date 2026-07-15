@@ -75,7 +75,8 @@ export default function TestimonialsPage() {
     }
   }, [orientation]);
 
-  const isMobile = orientation === 'portrait' || orientation === 'mobile-landscape';
+  const isMobile =
+    orientation === 'portrait' || orientation === 'mobile-landscape';
 
   // Animation variants
   const fadeUpVariants = {
@@ -105,7 +106,7 @@ export default function TestimonialsPage() {
           }}
         >
           <Link
-            href='/about'
+            href='/#about'
             style={{
               display: 'inline-flex',
               alignItems: 'center',
