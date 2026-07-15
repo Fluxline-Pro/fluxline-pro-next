@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { getAllBlogPosts, getAllTags } from '../../lib/blogLoader';
+import { getBlogPostsByTag, getAllTags } from '../../lib/blogLoader';
 import { BlogTagClient } from './BlogTagClient';
 import { notFound } from 'next/navigation';
-import { findMatchingTag, tagsMatch } from '@/utils/tag-utils';
+import { slugify, resolveSlug } from '@/utils/slug';
 
 // Disable dynamic params - we only serve pre-generated static pages
 export const dynamicParams = false;
@@ -18,10 +18,10 @@ export async function generateStaticParams() {
     return [];
   }
 
-  // Return unencoded tags - filesystem will have real spaces,
-  // browser and Azure will handle URL encoding automatically
+  // Route params are URL-safe slugs, so generated folder names are byte-identical
+  // whether the incoming request is percent-encoded or not.
   return tags.map((tag) => ({
-    tag: tag,
+    tag: slugify(tag),
   }));
 }
 
@@ -31,27 +31,29 @@ export async function generateMetadata({
 }: {
   params: Promise<{ tag: string }>;
 }): Promise<Metadata> {
-  const { tag } = await params;
-  const decodedTag = decodeURIComponent(tag);
+  const { tag: tagSlug } = await params;
+  const tag = resolveSlug(tagSlug, getAllTags());
+
+  if (!tag) return {};
 
   return {
-    title: `Tag: ${decodedTag}`,
-    description: `Browse blog posts tagged with "${decodedTag}". Explore articles about ${decodedTag} and related topics.`,
-    keywords: `${decodedTag}, blog, articles, technology, development, design`,
+    title: `Tag: ${tag}`,
+    description: `Browse blog posts tagged with "${tag}". Explore articles about ${tag} and related topics.`,
+    keywords: `${tag}, blog, articles, technology, development, design`,
     openGraph: {
-      title: `Tag: ${decodedTag} - Fluxline Blog`,
-      description: `Browse blog posts tagged with "${decodedTag}".`,
-      url: `https://www.fluxline.pro/blog/tag/${encodeURIComponent(tag)}`,
+      title: `Tag: ${tag} - Fluxline Blog`,
+      description: `Browse blog posts tagged with "${tag}".`,
+      url: `https://www.fluxline.pro/blog/tag/${tagSlug}`,
       siteName: 'Fluxline',
       type: 'website',
     },
     twitter: {
       card: 'summary',
-      title: `Tag: ${decodedTag} - Fluxline Blog`,
-      description: `Browse blog posts tagged with "${decodedTag}".`,
+      title: `Tag: ${tag} - Fluxline Blog`,
+      description: `Browse blog posts tagged with "${tag}".`,
     },
     alternates: {
-      canonical: `/blog/tag/${encodeURIComponent(tag)}`,
+      canonical: `/blog/tag/${tagSlug}`,
     },
     robots: {
       index: true,
@@ -66,33 +68,23 @@ interface BlogTagPageProps {
 
 /**
  * Blog Tag Filter Page - Server Component
- * Handles static generation and passes data to client component
- * Uses fuzzy tag matching to handle spaces and case variations
+ * Resolves the URL slug back to its display name, then filters posts by that name.
  */
 export default async function BlogTagPage({ params }: BlogTagPageProps) {
-  const { tag } = await params;
-  const decodedTag = decodeURIComponent(tag);
+  const { tag: tagSlug } = await params;
 
-  // Get all posts and filter by tag (with fuzzy matching)
-  const allPosts = getAllBlogPosts();
-  const allTags = getAllTags();
+  // Resolve the slug to the canonical display name from content frontmatter
+  const tag = resolveSlug(tagSlug, getAllTags());
 
-  // Find the canonical tag that matches (handles "Personal Growth" vs "PersonalGrowth")
-  const matchedTag = findMatchingTag(decodedTag, allTags);
-
-  if (!matchedTag) {
+  if (!tag) {
     notFound();
   }
 
-  // Filter posts using fuzzy tag matching
-  const posts = allPosts.filter((post) =>
-    post.tags.some((postTag) => tagsMatch(postTag, decodedTag))
-  );
+  const posts = getBlogPostsByTag(tag);
 
   if (posts.length === 0) {
     notFound();
   }
 
-  // Use the canonical matched tag for display
-  return <BlogTagClient tag={matchedTag} posts={posts} />;
+  return <BlogTagClient tag={tag} posts={posts} />;
 }

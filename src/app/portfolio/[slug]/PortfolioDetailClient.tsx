@@ -6,6 +6,7 @@ import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { ContentNotFound } from '@/components/ContentNotFound';
 import { PortfolioProject } from '../types';
+import { slugify } from '@/utils/slug';
 
 interface PortfolioDetailClientProps {
   project: PortfolioProject;
@@ -34,11 +35,11 @@ export default function PortfolioDetailClient({
   }
 
   const handleTagClick = (tag: string) => {
-    router.push(`/portfolio/tag/${encodeURIComponent(tag)}`);
+    router.push(`/portfolio/tag/${slugify(tag)}`);
   };
 
   const handleTechnologyClick = (technology: string) => {
-    router.push(`/portfolio/technology/${encodeURIComponent(technology)}`);
+    router.push(`/portfolio/technology/${slugify(technology)}`);
   };
 
   const config: UnifiedContentDetailConfig = {
