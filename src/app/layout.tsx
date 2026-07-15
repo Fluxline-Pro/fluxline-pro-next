@@ -10,6 +10,8 @@ import { Providers } from './providers';
 import './dsm-globals.css'; // ← DSM design tokens (colors, typography, spacing, etc.)
 import './globals.scss'; // ← Global reset, typography, and utility styles
 
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';
+
 // Environment-aware robots: only allow indexing in production
 const _isProd = isProduction();
 
@@ -101,6 +103,26 @@ export default function RootLayout({
   return (
     <html lang='en' data-fx-theme='dark' suppressHydrationWarning>
       <head>
+        {/* Google Consent Mode v2 — must run before any GA / Ads scripts.
+            All consent categories default to 'denied' until the user
+            accepts via the ConsentBanner. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                wait_for_update: 500
+              });
+              gtag('set', 'ads_data_redaction', true);
+              gtag('set', 'url_passthrough', true);
+            `,
+          }}
+        />
         <script
           async
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7691902367885014'
@@ -323,7 +345,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <Providers>{children}</Providers>
+        <Providers gaMeasurementId={GA_MEASUREMENT_ID}>{children}</Providers>
       </body>
     </html>
   );

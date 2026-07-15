@@ -7,3 +7,4 @@ export * from './store-specs/userPreferencesStore';
 export * from './store-specs/contentFilterStore';
 export * from './store-specs/pressReleaseStore';
 export * from './store-specs/newsletterStore';
+export * from './store-specs/consentStore';

@@ -11,6 +11,8 @@ import { IosDetector } from '../components/IosDetector';
 import FxNav from '../theme/components/dsm/FxNav';
 import FxFooter from '../theme/components/dsm/FxFooter';
 import FxPreferencesDrawer from '../theme/components/dsm/FxPreferencesDrawer';
+import GoogleAnalytics from '../components/GoogleAnalytics';
+import ConsentBanner from '../components/ConsentBanner';
 
 function FxPageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -33,9 +35,10 @@ function FxPageTransition({ children }: { children: React.ReactNode }) {
 
 interface ProvidersProps {
   children: React.ReactNode;
+  gaMeasurementId?: string;
 }
 
-export function Providers({ children }: ProvidersProps) {
+export function Providers({ children, gaMeasurementId = '' }: ProvidersProps) {
   const [prefsOpen, setPrefsOpen] = useState(false);
 
   return (
@@ -53,6 +56,10 @@ export function Providers({ children }: ProvidersProps) {
                 open={prefsOpen}
                 onClose={() => setPrefsOpen(false)}
               />
+              <ConsentBanner />
+              {gaMeasurementId && (
+                <GoogleAnalytics measurementId={gaMeasurementId} />
+              )}
             </AccessGate>
           </ReCaptchaProvider>
         </ThemeOverrideProvider>
