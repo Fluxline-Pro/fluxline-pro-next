@@ -115,14 +115,26 @@ export default function ConsentBanner() {
             }}
           >
             We use cookies and similar technologies to provide core
-            functionality, measure site performance, and—with your
-            consent—deliver relevant ads and personalised content.{' '}
+            functionality, measure site performance, and deliver personalized
+            content with your consent. You can manage your preferences below.
+            Please also see our{' '}
             <Link
               href='/legal/privacy-policy'
               style={{ color: 'var(--fx-accent)', textDecoration: 'underline' }}
             >
               Privacy Policy
-            </Link>
+            </Link>{' '}
+            as governed by{' '}
+            <a
+              href='https://fluxline.pro'
+              target='_blank'
+              rel='noopener noreferrer'
+              style={{ color: 'var(--fx-accent)', textDecoration: 'underline' }}
+            >
+              Fluxline.pro
+            </a>{' '}
+            for more information on how we handle your data. We do not sell your
+            personal information to third parties.
           </p>
         </div>
 
