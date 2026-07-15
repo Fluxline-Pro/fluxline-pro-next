@@ -15,10 +15,7 @@ import FxButton from '@/theme/components/dsm/FxButton';
 import FxChip from '@/theme/components/dsm/FxChip';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
 
-import {
-  SocialLinks,
-  type SocialLinksData,
-} from '@/components/SocialLinks';
+import { SocialLinks, type SocialLinksData } from '@/components/SocialLinks';
 import { ImageCarouselModal, type CarouselImage } from './ImageCarouselModal';
 import { Modal } from './Modal';
 import { GeneratedWithAIBadge } from './GeneratedWithAIBadge';

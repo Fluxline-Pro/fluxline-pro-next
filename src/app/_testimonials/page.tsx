@@ -75,7 +75,8 @@ export default function TestimonialsPage() {
     }
   }, [orientation]);
 
-  const isMobile = orientation === 'portrait' || orientation === 'mobile-landscape';
+  const isMobile =
+    orientation === 'portrait' || orientation === 'mobile-landscape';
 
   // Animation variants
   const fadeUpVariants = {
