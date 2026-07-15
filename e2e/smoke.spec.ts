@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
  * bitten by.
  *
  * PR #111 shipped a tag-routing bug that was invisible in `yarn dev` and only
- * appeared against built static output on Azure. These five tests run against
+ * appeared against built static output on Azure. These six tests run against
  * `out/` for exactly that reason — they are the cheapest thing that would have
  * caught it before deploy.
  *

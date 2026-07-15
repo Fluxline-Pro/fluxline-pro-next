@@ -33,9 +33,9 @@ export default defineConfig({
   ],
 
   webServer: {
-    // `serve` mirrors Azure's static hosting closely enough for routing smoke
-    // tests: it serves out/ from disk with no Next.js runtime involved.
-    command: 'npx --yes serve out -p 3100 -L',
+    // Use the repo-pinned `serve` version so E2E routing checks stay
+    // reproducible in CI.
+    command: 'yarn serve:static',
     url: 'http://localhost:3100',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
