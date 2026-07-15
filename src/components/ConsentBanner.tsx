@@ -124,17 +124,7 @@ export default function ConsentBanner() {
             >
               Privacy Policy
             </Link>{' '}
-            as governed by{' '}
-            <a
-              href='https://fluxline.pro'
-              target='_blank'
-              rel='noopener noreferrer'
-              style={{ color: 'var(--fx-accent)', textDecoration: 'underline' }}
-            >
-              Fluxline.pro
-            </a>{' '}
-            for more information on how we handle your data. We do not sell your
-            personal information to third parties.
+            for more information on how we handle your data.
           </p>
         </div>
 
