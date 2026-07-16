@@ -13,6 +13,8 @@ import FxFooter from '../theme/components/dsm/FxFooter';
 import FxPreferencesDrawer from '../theme/components/dsm/FxPreferencesDrawer';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 import ConsentBanner from '../components/ConsentBanner';
+import { PodcastPlayerProvider } from '../contexts/PodcastPlayerContext';
+import { PodcastMiniPlayer } from '../components/podcast/PodcastMiniPlayer';
 
 function FxPageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -48,18 +50,23 @@ export function Providers({ children, gaMeasurementId = '' }: ProvidersProps) {
         <ThemeOverrideProvider>
           <ReCaptchaProvider>
             <AccessGate>
-              <SkipToContent />
-              <FxNav />
-              <FxPageTransition>{children}</FxPageTransition>
-              <FxFooter preferencesOnClick={() => setPrefsOpen(true)} />
-              <FxPreferencesDrawer
-                open={prefsOpen}
-                onClose={() => setPrefsOpen(false)}
-              />
-              <ConsentBanner />
-              {gaMeasurementId && (
-                <GoogleAnalytics measurementId={gaMeasurementId} />
-              )}
+              {/* Wraps the page transition so the podcast <audio> element and
+                  mini-player survive client-side navigation. */}
+              <PodcastPlayerProvider>
+                <SkipToContent />
+                <FxNav />
+                <FxPageTransition>{children}</FxPageTransition>
+                <FxFooter preferencesOnClick={() => setPrefsOpen(true)} />
+                <FxPreferencesDrawer
+                  open={prefsOpen}
+                  onClose={() => setPrefsOpen(false)}
+                />
+                <PodcastMiniPlayer />
+                <ConsentBanner />
+                {gaMeasurementId && (
+                  <GoogleAnalytics measurementId={gaMeasurementId} />
+                )}
+              </PodcastPlayerProvider>
             </AccessGate>
           </ReCaptchaProvider>
         </ThemeOverrideProvider>
