@@ -93,157 +93,172 @@ export default function ConsentBanner() {
           overflowY: 'auto',
         }}
       >
-        {/* Header */}
-        <div style={{ marginBottom: 16 }}>
-          <h2
-            style={{
-              fontSize: 'clamp(18px, 2.5vw, 22px)',
-              fontWeight: 800,
-              color: 'var(--fx-text-heading-display)',
-              letterSpacing: '-0.02em',
-              margin: '0 0 6px',
-            }}
-          >
-            Your Privacy &amp; Cookie Preferences
-          </h2>
-          <p
-            style={{
-              fontSize: 14,
-              color: 'var(--fx-text-muted)',
-              margin: 0,
-              lineHeight: 1.6,
-            }}
-          >
-            We use cookies and similar technologies to provide core
-            functionality, measure site performance, and deliver personalized
-            content with your consent. You can manage your preferences below.
-            Please also see our{' '}
-            <Link
-              href='/legal/privacy-policy'
-              style={{ color: 'var(--fx-accent)', textDecoration: 'underline' }}
-            >
-              Privacy Policy
-            </Link>{' '}
-            for more information on how we handle your data.
-          </p>
-        </div>
-
-        {/* Granular controls (shown when "Manage Preferences" is expanded) */}
-        {showDetails && (
-          <div style={{ marginBottom: 18 }}>
-            {/* Essential — always on */}
-            <div style={{ ...cardStyle, opacity: 0.7 }}>
-              <div>
-                <p
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: 'var(--fx-text-heading)',
-                    margin: '0 0 2px',
-                  }}
-                >
-                  Essential Cookies
-                </p>
-                <p
-                  style={{
-                    fontSize: 12.5,
-                    color: 'var(--fx-text-muted)',
-                    margin: 0,
-                  }}
-                >
-                  Required for the site to function. Cannot be disabled.
-                </p>
-              </div>
-              <FxSwitch checked disabled onChange={() => {}} />
-            </div>
-
-            {/* Analytics */}
-            <div style={cardStyle}>
-              <div style={{ flex: 1 }}>
-                <p
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: 'var(--fx-text-heading)',
-                    margin: '0 0 2px',
-                  }}
-                >
-                  Analytics Cookies
-                </p>
-                <p
-                  style={{
-                    fontSize: 12.5,
-                    color: 'var(--fx-text-muted)',
-                    margin: 0,
-                  }}
-                >
-                  Help us understand how visitors use the site (Google
-                  Analytics). No personally identifiable data is shared.
-                </p>
-              </div>
-              <FxSwitch checked={analyticsOn} onChange={setAnalyticsOn} />
-            </div>
-
-            {/* Ads / Personalisation */}
-            <div style={{ ...cardStyle, marginBottom: 0 }}>
-              <div style={{ flex: 1 }}>
-                <p
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: 'var(--fx-text-heading)',
-                    margin: '0 0 2px',
-                  }}
-                >
-                  Advertising &amp; Personalisation
-                </p>
-                <p
-                  style={{
-                    fontSize: 12.5,
-                    color: 'var(--fx-text-muted)',
-                    margin: 0,
-                  }}
-                >
-                  Allows Google Ads to show relevant ads and measure ad
-                  performance. We use Google AdSense (pub-7691902367885014).
-                </p>
-              </div>
-              <FxSwitch checked={adsOn} onChange={setAdsOn} />
-            </div>
-          </div>
-        )}
-
-        {/* Action buttons */}
         <div
           style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 10,
-            alignItems: 'center',
+            width: '100%',
+            maxWidth: 1400,
+            margin: '0 auto',
+            padding: '0 clamp(6px, 1.2vw, 18px)',
           }}
         >
-          <FxButton variant='primary' size='sm' onClick={handleAcceptAll}>
-            Accept All
-          </FxButton>
-
-          <FxButton variant='outline' size='sm' onClick={handleRejectAll}>
-            Reject All
-          </FxButton>
-
-          {showDetails ? (
-            <FxButton variant='outline' size='sm' onClick={handleSaveCustom}>
-              Save Preferences
-            </FxButton>
-          ) : (
-            <FxButton
-              variant='quiet'
-              size='sm'
-              onClick={() => setShowDetails(true)}
-              style={{ color: 'var(--fx-text-soft)' }}
+          {/* Header */}
+          <div style={{ marginBottom: 16 }}>
+            <h2
+              style={{
+                fontSize: 'clamp(18px, 2.5vw, 22px)',
+                fontWeight: 800,
+                color: 'var(--fx-text-heading-display)',
+                letterSpacing: '-0.02em',
+                margin: '0 0 6px',
+              }}
             >
-              Manage Preferences
-            </FxButton>
+              Your Privacy &amp; Cookie Preferences
+            </h2>
+            <p
+              style={{
+                fontSize: 14,
+                color: 'var(--fx-text-muted)',
+                margin: 0,
+                lineHeight: 1.6,
+                maxWidth: 600,
+              }}
+            >
+              We use cookies and similar technologies to provide core
+              functionality, measure site performance, and deliver personalized
+              content with your consent. You can manage your preferences below.
+              Please also see our{' '}
+              <Link
+                href='/legal/privacy-policy'
+                style={{
+                  color: 'var(--fx-accent)',
+                  textDecoration: 'underline',
+                }}
+              >
+                Privacy Policy
+              </Link>{' '}
+              for more information on how we handle your data.
+            </p>
+          </div>
+
+          {/* Granular controls (shown when "Manage Preferences" is expanded) */}
+          {showDetails && (
+            <div style={{ marginBottom: 18 }}>
+              {/* Essential — always on */}
+              <div style={{ ...cardStyle, opacity: 0.7 }}>
+                <div>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: 'var(--fx-text-heading)',
+                      margin: '0 0 2px',
+                    }}
+                  >
+                    Essential Cookies
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 12.5,
+                      color: 'var(--fx-text-muted)',
+                      margin: 0,
+                    }}
+                  >
+                    Required for the site to function. Cannot be disabled.
+                  </p>
+                </div>
+                <FxSwitch checked disabled onChange={() => {}} />
+              </div>
+
+              {/* Analytics */}
+              <div style={cardStyle}>
+                <div style={{ flex: 1 }}>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: 'var(--fx-text-heading)',
+                      margin: '0 0 2px',
+                    }}
+                  >
+                    Analytics Cookies
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 12.5,
+                      color: 'var(--fx-text-muted)',
+                      margin: 0,
+                    }}
+                  >
+                    Help us understand how visitors use the site (Google
+                    Analytics). No personally identifiable data is shared.
+                  </p>
+                </div>
+                <FxSwitch checked={analyticsOn} onChange={setAnalyticsOn} />
+              </div>
+
+              {/* Ads / Personalisation */}
+              <div style={{ ...cardStyle, marginBottom: 0 }}>
+                <div style={{ flex: 1 }}>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: 'var(--fx-text-heading)',
+                      margin: '0 0 2px',
+                    }}
+                  >
+                    Advertising &amp; Personalisation
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 12.5,
+                      color: 'var(--fx-text-muted)',
+                      margin: 0,
+                    }}
+                  >
+                    Allows Google Ads to show relevant ads and measure ad
+                    performance. We use Google AdSense to serve these ads.
+                  </p>
+                </div>
+                <FxSwitch checked={adsOn} onChange={setAdsOn} />
+              </div>
+            </div>
           )}
+
+          {/* Action buttons */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+              gap: 10,
+              alignItems: 'center',
+            }}
+          >
+            <FxButton variant='primary' size='sm' onClick={handleAcceptAll}>
+              Accept All
+            </FxButton>
+
+            <FxButton variant='outline' size='sm' onClick={handleRejectAll}>
+              Reject All
+            </FxButton>
+
+            {showDetails ? (
+              <FxButton variant='outline' size='sm' onClick={handleSaveCustom}>
+                Save Preferences
+              </FxButton>
+            ) : (
+              <FxButton
+                variant='quiet'
+                size='sm'
+                onClick={() => setShowDetails(true)}
+                style={{ color: 'var(--fx-text-soft)' }}
+              >
+                Manage Preferences
+              </FxButton>
+            )}
+          </div>
         </div>
       </div>
     </>
