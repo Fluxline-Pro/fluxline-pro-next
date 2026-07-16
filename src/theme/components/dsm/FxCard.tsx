@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 interface FxCardProps {
   variant?: 'standard' | 'inset' | 'raised' | 'feature' | 'band';
@@ -31,17 +32,22 @@ export default function FxCard({
 }: FxCardProps) {
   const [hovered, setHovered] = React.useState(false);
 
+  const isInternalHref =
+    typeof href === 'string' && (href.startsWith('/') || href.startsWith('#'));
+
   const isStrong = variant === 'feature' || variant === 'band';
 
   const base: React.CSSProperties = {
     background: backgrounds[variant],
     border: `1px solid ${isStrong ? 'var(--fx-border-strong)' : hovered && interactive ? 'var(--fx-border-hover)' : 'var(--fx-border)'}`,
-    borderRadius: variant === 'band' ? 'var(--fx-radius-band)' : 'var(--fx-radius-card)',
+    borderRadius:
+      variant === 'band' ? 'var(--fx-radius-band)' : 'var(--fx-radius-card)',
     padding: padding ?? 'var(--fx-card-pad)',
     textDecoration: 'none',
     color: 'inherit',
     display: 'block',
-    transition: 'border-color var(--fx-color-duration), transform var(--fx-color-duration), box-shadow var(--fx-color-duration)',
+    transition:
+      'border-color var(--fx-color-duration), transform var(--fx-color-duration), box-shadow var(--fx-color-duration)',
   };
 
   if (interactive && hovered) {
@@ -59,6 +65,14 @@ export default function FxCard({
     : {};
 
   if (href) {
+    if (isInternalHref) {
+      return (
+        <Link href={href} className={className} style={merged} {...handlers}>
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <a href={href} className={className} style={merged} {...handlers}>
         {children}

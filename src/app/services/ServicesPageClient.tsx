@@ -4,9 +4,7 @@ import React from 'react';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxCard from '@/theme/components/dsm/FxCard';
-import FxButton from '@/theme/components/dsm/FxButton';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
-import FxCallout from '@/theme/components/dsm/FxCallout';
 import {
   SERVICE_CATEGORIES,
   SERVICES_SUMMARY,
