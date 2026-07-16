@@ -10,6 +10,7 @@ export interface YouTubeVideo {
   description: string;
   thumbnailUrl: string;
   publishedAt: string;
+  channelHandle?: string;
   duration?: string;
   viewCount?: string;
   type: 'video' | 'live' | 'playlist';

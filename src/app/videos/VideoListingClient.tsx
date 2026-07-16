@@ -10,6 +10,13 @@ import { getApiEndpoint } from '@/lib/getApiUrl';
 import { YouTubeVideo, VideoType, VIDEO_TABS, formatDuration } from './types';
 import { FadeIn } from '@/animations/fade-animations';
 
+function getChannelLabel(channelHandle?: string): string {
+  if (!channelHandle) return 'YouTube';
+  if (channelHandle === 'TheResonantIdentity') return 'TRI';
+  if (channelHandle.toLowerCase() === 'fluxlinepro') return 'Fluxline';
+  return channelHandle;
+}
+
 /**
  * VideoCard Component
  * Displays a YouTube video as a clickable large-tile card
@@ -23,6 +30,7 @@ function VideoCard({
 }) {
   const [hovered, setHovered] = React.useState(false);
   const duration = formatDuration(video.duration);
+  const channelLabel = getChannelLabel(video.channelHandle);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -33,7 +41,7 @@ function VideoCard({
 
   return (
     <div
-      role="button"
+      role='button'
       tabIndex={0}
       onClick={onClick}
       onKeyDown={handleKeyDown}
@@ -140,7 +148,7 @@ function VideoCard({
             textTransform: 'uppercase',
           }}
         >
-          YouTube
+          {channelLabel}
         </div>
       </div>
 
@@ -148,9 +156,7 @@ function VideoCard({
       <div style={{ padding: 12 }}>
         <h3
           style={{
-            color: hovered
-              ? 'var(--fx-accent)'
-              : 'var(--fx-text-heading)',
+            color: hovered ? 'var(--fx-accent)' : 'var(--fx-text-heading)',
             fontSize: '1rem',
             fontWeight: 600,
             marginBottom: 4,
@@ -202,8 +208,8 @@ function VideoModal({
       isOpen={true}
       onDismiss={onDismiss}
       ariaLabel={video.title}
-      maxWidth="900px"
-      maxHeight="95vh"
+      maxWidth='900px'
+      maxHeight='95vh'
     >
       <div
         style={{
@@ -217,8 +223,8 @@ function VideoModal({
           <iframe
             src={embedUrl}
             title={video.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            frameBorder='0'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
             allowFullScreen
             style={{
               position: 'absolute',
@@ -273,7 +279,7 @@ function VideoModal({
 
         {/* View on YouTube button */}
         <div>
-          <FxButton variant="primary" href={watchUrl}>
+          <FxButton variant='primary' href={watchUrl}>
             View on YouTube
           </FxButton>
         </div>
@@ -333,9 +339,9 @@ export function VideoListingClient() {
       >
         {/* Page Header */}
         <FxSectionHeading
-          title="Videos"
-          subhead="Watch videos from the @TerenceWaters YouTube channel — tutorials, live streams, playlists, and more."
-          as="h1"
+          title='Videos'
+          subhead='Watch videos from the @TheResonantIdentity, @TerenceRWaters, and @fluxlinepro YouTube channels — tutorials, live streams, playlists, and more.'
+          as='h1'
         />
 
         {/* Tab Navigation */}
@@ -363,9 +369,7 @@ export function VideoListingClient() {
                   borderBottom: `3px solid ${isActive ? 'var(--fx-accent)' : 'transparent'}`,
                   backgroundColor: 'transparent',
                   cursor: 'pointer',
-                  color: isActive
-                    ? 'var(--fx-accent)'
-                    : 'var(--fx-text-body)',
+                  color: isActive ? 'var(--fx-accent)' : 'var(--fx-text-body)',
                   fontWeight: isActive ? 600 : 400,
                   fontSize: '1rem',
                   transition: 'all 0.2s ease',
@@ -406,9 +410,7 @@ export function VideoListingClient() {
               gap: 12,
             }}
           >
-            <p style={{ color: 'var(--fx-text-body)', margin: 0 }}>
-              {error}
-            </p>
+            <p style={{ color: 'var(--fx-text-body)', margin: 0 }}>{error}</p>
           </div>
         )}
 
@@ -432,7 +434,7 @@ export function VideoListingClient() {
 
         {/* Video Grid */}
         {!loading && !error && videos.length > 0 && (
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode='wait'>
             <div
               key={activeTab}
               style={{

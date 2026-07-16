@@ -2,7 +2,7 @@
 
 /**
  * YouTube API Proxy - Azure Function
- * Fetches videos, live streams, and playlists from the @TerenceWaters YouTube channel
+ * Fetches videos, live streams, and playlists from multiple YouTube channels
  *
  * Query params:
  *   - type: 'videos' | 'live' | 'playlists' (default: 'videos')
@@ -12,7 +12,13 @@
  */
 
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
-const CHANNEL_HANDLE = 'TerenceWaters';
+const CHANNEL_HANDLES = [
+  'TheResonantIdentity',
+  'TerenceRWaters',
+  'fluxlinepro',
+];
+const MAX_RESULTS_PER_CHANNEL = 12;
+const MAX_RESULTS_COMBINED = 24;
 
 const CORS_HEADERS = {
   'Content-Type': 'application/json',
@@ -22,20 +28,26 @@ const CORS_HEADERS = {
   'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
 };
 
-async function getChannelId(apiKey) {
-  const url = `${YOUTUBE_API_BASE}/channels?part=id&forHandle=${CHANNEL_HANDLE}&key=${apiKey}`;
+async function getChannelId(apiKey, handle) {
+  const url = `${YOUTUBE_API_BASE}/channels?part=id&forHandle=${handle}&key=${apiKey}`;
   const res = await fetch(url);
   if (!res.ok) return null;
   const data = await res.json();
   return data.items?.[0]?.id ?? null;
 }
 
-async function fetchVideos(apiKey, channelId, type, pageToken) {
+async function fetchVideosForChannel(
+  apiKey,
+  channelId,
+  channelHandle,
+  type,
+  pageToken
+) {
   if (type === 'playlists') {
     const params = new URLSearchParams({
       part: 'snippet',
       channelId,
-      maxResults: '24',
+      maxResults: String(MAX_RESULTS_PER_CHANNEL),
       key: apiKey,
       ...(pageToken ? { pageToken } : {}),
     });
@@ -51,6 +63,7 @@ async function fetchVideos(apiKey, channelId, type, pageToken) {
         item.snippet.thumbnails?.default?.url ||
         '',
       publishedAt: item.snippet.publishedAt,
+      channelHandle,
       type: 'playlist',
     }));
     return {
@@ -64,7 +77,7 @@ async function fetchVideos(apiKey, channelId, type, pageToken) {
   const params = new URLSearchParams({
     part: 'snippet',
     channelId,
-    maxResults: '24',
+    maxResults: String(MAX_RESULTS_PER_CHANNEL),
     order: 'date',
     type: 'video',
     eventType,
@@ -106,6 +119,7 @@ async function fetchVideos(apiKey, channelId, type, pageToken) {
           item.snippet.thumbnails?.default?.url ||
           '',
         publishedAt: item.snippet.publishedAt,
+        channelHandle,
         duration: detail?.contentDetails?.duration,
         viewCount: detail?.statistics?.viewCount,
         type: type === 'live' ? 'live' : 'video',
@@ -117,6 +131,53 @@ async function fetchVideos(apiKey, channelId, type, pageToken) {
     videos,
     nextPageToken: searchData.nextPageToken,
     totalResults: searchData.pageInfo?.totalResults,
+  };
+}
+
+function mergeAndSortVideos(results) {
+  const deduped = new Map();
+
+  for (const result of results) {
+    for (const video of result.videos || []) {
+      if (!video?.id) continue;
+      if (!deduped.has(video.id)) {
+        deduped.set(video.id, video);
+      }
+    }
+  }
+
+  return Array.from(deduped.values())
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    )
+    .slice(0, MAX_RESULTS_COMBINED);
+}
+
+async function fetchVideosAcrossChannels(apiKey, channels, type, pageToken) {
+  const perChannelResults = await Promise.all(
+    channels.map((channel) =>
+      fetchVideosForChannel(
+        apiKey,
+        channel.channelId,
+        channel.handle,
+        type,
+        channels.length === 1 ? pageToken : undefined
+      )
+    )
+  );
+
+  const videos = mergeAndSortVideos(perChannelResults);
+  const totalResults = perChannelResults.reduce(
+    (total, result) => total + (result.totalResults || 0),
+    0
+  );
+
+  return {
+    videos,
+    nextPageToken:
+      channels.length === 1 ? perChannelResults[0]?.nextPageToken : undefined,
+    totalResults,
   };
 }
 
@@ -132,7 +193,10 @@ module.exports = async function (context, req) {
     context.res = {
       status: 503,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ videos: [], error: 'YouTube API key not configured' }),
+      body: JSON.stringify({
+        videos: [],
+        error: 'YouTube API key not configured',
+      }),
     };
     return;
   }
@@ -141,17 +205,33 @@ module.exports = async function (context, req) {
   const pageToken = req.query.pageToken || undefined;
 
   try {
-    const channelId = await getChannelId(apiKey);
-    if (!channelId) {
+    const resolvedChannels = await Promise.all(
+      CHANNEL_HANDLES.map(async (handle) => {
+        const channelId = await getChannelId(apiKey, handle);
+        return channelId ? { handle, channelId } : null;
+      })
+    );
+
+    const channels = resolvedChannels.filter(Boolean);
+
+    if (!channels.length) {
       context.res = {
         status: 404,
         headers: CORS_HEADERS,
-        body: JSON.stringify({ videos: [], error: 'Channel not found' }),
+        body: JSON.stringify({
+          videos: [],
+          error: 'No configured channels found',
+        }),
       };
       return;
     }
 
-    const result = await fetchVideos(apiKey, channelId, type, pageToken);
+    const result = await fetchVideosAcrossChannels(
+      apiKey,
+      channels,
+      type,
+      pageToken
+    );
     context.res = {
       status: 200,
       headers: CORS_HEADERS,
@@ -162,7 +242,10 @@ module.exports = async function (context, req) {
     context.res = {
       status: 500,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ videos: [], error: 'Failed to fetch YouTube data' }),
+      body: JSON.stringify({
+        videos: [],
+        error: 'Failed to fetch YouTube data',
+      }),
     };
   }
 };

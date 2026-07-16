@@ -12,7 +12,7 @@ This directory contains Azure Functions that power backend functionality for the
 
 ### YouTube Integration (`/api/youtube`)
 
-- Proxies YouTube Data API v3 to fetch videos from @aplusinflux channel
+- Proxies YouTube Data API v3 to fetch videos from @TheResonantIdentity, @TerenceRWaters, and @fluxlinepro channels
 - Supports Videos, Live Streams, and Playlists tabs
 - See [YouTube Setup](#youtube-api-setup) below for configuration
 
@@ -98,8 +98,8 @@ Add the API key to your Azure Static Web App:
 ### How It Works
 
 1. Frontend calls `/api/youtube?type=videos` (or `live`, `playlists`)
-2. Azure Function fetches channel ID for @aplusinflux handle
-3. Queries YouTube API for channel content
+2. Azure Function resolves channel IDs for @TheResonantIdentity, @TerenceRWaters, and @fluxlinepro
+3. Queries YouTube API for both channels and merges results by publish date
 4. Returns sanitized JSON to frontend
 5. Caches results for 1 hour to reduce API calls
 
@@ -238,6 +238,7 @@ Fetch videos from YouTube channel.
       "description": "Video description",
       "thumbnailUrl": "https://...",
       "publishedAt": "2026-02-21T00:00:00Z",
+      "channelHandle": "TheResonantIdentity",
       "duration": "PT10M30S",
       "viewCount": "1234",
       "type": "video"
