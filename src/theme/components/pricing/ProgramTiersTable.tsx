@@ -11,6 +11,7 @@ interface ProgramTiersTableProps {
   onViewComparison?: () => void;
   showComparisonButton?: boolean;
   subtitle?: string;
+  firstColumnWidth?: string;
 }
 
 /**
@@ -22,6 +23,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
   onViewComparison,
   showComparisonButton = true,
   subtitle = 'Choose your path based on your archetype assessment and personal goals.',
+  firstColumnWidth,
 }) => {
   const [isMounted, setIsMounted] = React.useState(false);
   const isMobileHook = useIsMobile();
@@ -89,6 +91,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
               <th
                 style={{
                   padding: cellPad,
+                  width: firstColumnWidth,
                   textAlign: 'left',
                   color: 'var(--fx-text-bright)',
                   fontSize: isMobile ? '0.875rem' : '1rem',
@@ -137,6 +140,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
                 <td
                   style={{
                     padding: cellPad,
+                    width: firstColumnWidth,
                     borderRight: '1px solid var(--fx-border)',
                   }}
                 >

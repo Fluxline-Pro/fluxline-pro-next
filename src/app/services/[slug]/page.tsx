@@ -147,227 +147,233 @@ export default function ServiceDetailPage() {
   const serviceImage = SERVICE_IMAGES[service.id] ?? ServicesFallbackImage;
 
   const rail = (
-    <FxReveal variant="left">
-    <div
-      style={{
-        background: 'var(--fx-surface-inset)',
-        border: '1px solid var(--fx-border)',
-        borderRadius: 14,
-        overflow: 'hidden',
-      }}
-    >
+    <FxReveal variant='left'>
       <div
         style={{
-          width: '100%',
-          height: 'clamp(240px, 50vw, 460px)',
+          background: 'var(--fx-surface-inset)',
+          border: '1px solid var(--fx-border)',
+          borderRadius: 14,
           overflow: 'hidden',
-          background: 'var(--fx-bg-deep)',
         }}
       >
-        <img
-          src={serviceImage.src}
-          alt={service.title}
+        <div
           style={{
-            display: 'block',
             width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center top',
-          }}
-        />
-      </div>
-      <div
-        style={{
-          padding: '16px 20px',
-          borderTop: '1px solid var(--fx-border)',
-        }}
-      >
-        <div
-          style={{
-            fontWeight: 700,
-            fontSize: 17,
-            color: 'var(--fx-text-bright)',
+            height: 'clamp(240px, 50vw, 460px)',
+            overflow: 'hidden',
+            background: 'var(--fx-bg-deep)',
           }}
         >
-          {service.title}
+          <img
+            src={serviceImage.src}
+            alt={service.title}
+            style={{
+              display: 'block',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center top',
+            }}
+          />
         </div>
         <div
           style={{
-            fontSize: 13,
-            color: 'var(--fx-text-soft)',
-            marginTop: 3,
+            padding: '16px 20px',
+            borderTop: '1px solid var(--fx-border)',
           }}
         >
-          {service.description}
+          <div
+            style={{
+              fontWeight: 700,
+              fontSize: 17,
+              color: 'var(--fx-text-bright)',
+            }}
+          >
+            {service.title}
+          </div>
+          <div
+            style={{
+              fontSize: 13,
+              color: 'var(--fx-text-soft)',
+              marginTop: 3,
+            }}
+          >
+            {service.description}
+          </div>
         </div>
       </div>
-    </div>
     </FxReveal>
   );
 
   return (
     <FxContainer style={{ padding: '64px 32px 88px' }}>
       <FxRailLayout rail={rail}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
-        {/* Hero Section */}
-        <FxReveal>
-          <div>
-            <FxSectionHeading
-              title={service.title}
-              subhead={service.description}
-              as="h1"
-            />
-            <div
-              style={{
-                color: 'var(--fx-text-body)',
-                fontSize: '1.125rem',
-                lineHeight: 1.7,
-                marginTop: 4,
-              }}
-              dangerouslySetInnerHTML={{ __html: service.summary }}
-            />
-          </div>
-        </FxReveal>
-
-        {/* Related Scroll/White Paper Section */}
-        {relatedScroll && (
-          <>
-            <FxReveal>
-              <ServiceScrollSection scroll={relatedScroll} />
-            </FxReveal>
-            <hr
-              style={{
-                border: 'none',
-                height: '1px',
-                backgroundColor: 'var(--fx-border)',
-              }}
-            />
-          </>
-        )}
-
-        {/* Features Section */}
-        {features.length > 0 && (
-          <>
-            <FxReveal>
-            <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <h2
-                style={{
-                  color: 'var(--fx-accent)',
-                  fontSize: 'var(--fx-h2-size)',
-                  fontWeight: 700,
-                  margin: 0,
-                }}
-              >
-                What We Offer
-              </h2>
-
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
+          {/* Hero Section */}
+          <FxReveal>
+            <div>
+              <FxSectionHeading
+                title={service.title}
+                subhead={service.description}
+                as='h1'
+              />
               <div
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                  gap: 16,
-                  paddingTop: 8,
+                  color: 'var(--fx-text-body)',
+                  fontSize: '1.125rem',
+                  lineHeight: 1.7,
+                  marginTop: 4,
                 }}
-              >
-                {features.map((feature, index) => (
-                  <FxCard key={index} variant="standard">
-                    <p
-                      style={{
-                        color: 'var(--fx-text-body)',
-                        fontSize: 'var(--fx-body-size)',
-                        lineHeight: 1.7,
-                        margin: 0,
-                      }}
-                    >
-                      {feature}
-                    </p>
-                  </FxCard>
-                ))}
-              </div>
-            </section>
-            </FxReveal>
-            <hr
-              style={{
-                border: 'none',
-                height: '1px',
-                backgroundColor: 'var(--fx-border)',
-              }}
-            />
-          </>
-        )}
-
-        {/* Pricing Table (if available) */}
-        {pricingData && (
-          <>
-            <FxReveal>
-            <section>
-              <ProgramTiersTable
-                tiers={pricingData.tiers}
-                onViewComparison={() => setIsComparisonModalOpen(true)}
-                showComparisonButton={true}
-                subtitle={pricingSubtitle}
+                dangerouslySetInnerHTML={{ __html: service.summary }}
               />
+            </div>
+          </FxReveal>
 
-              {/* Pricing Disclaimer */}
-              {pricingDisclaimer && (
-                <div
-                  style={{
-                    marginTop: 20,
-                    padding: 12,
-                    backgroundColor: 'var(--fx-surface-card)',
-                    borderLeft: '4px solid var(--fx-accent)',
-                    borderRadius: 4,
-                  }}
+          {/* Related Scroll/White Paper Section */}
+          {relatedScroll && (
+            <>
+              <FxReveal>
+                <ServiceScrollSection scroll={relatedScroll} />
+              </FxReveal>
+              <hr
+                style={{
+                  border: 'none',
+                  height: '1px',
+                  backgroundColor: 'var(--fx-border)',
+                }}
+              />
+            </>
+          )}
+
+          {/* Features Section */}
+          {features.length > 0 && (
+            <>
+              <FxReveal>
+                <section
+                  style={{ display: 'flex', flexDirection: 'column', gap: 24 }}
                 >
-                  <p
+                  <h2
                     style={{
-                      color: 'var(--fx-text-body)',
-                      fontSize: '0.9375rem',
-                      fontStyle: 'italic',
-                      lineHeight: 1.7,
+                      color: 'var(--fx-accent)',
+                      fontSize: 'var(--fx-h2-size)',
+                      fontWeight: 700,
                       margin: 0,
                     }}
                   >
-                    <strong
+                    What We Offer
+                  </h2>
+
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns:
+                        'repeat(auto-fill, minmax(280px, 1fr))',
+                      gap: 16,
+                      paddingTop: 8,
+                    }}
+                  >
+                    {features.map((feature, index) => (
+                      <FxCard key={index} variant='standard'>
+                        <p
+                          style={{
+                            color: 'var(--fx-text-body)',
+                            fontSize: 'var(--fx-body-size)',
+                            lineHeight: 1.7,
+                            margin: 0,
+                          }}
+                        >
+                          {feature}
+                        </p>
+                      </FxCard>
+                    ))}
+                  </div>
+                </section>
+              </FxReveal>
+              <hr
+                style={{
+                  border: 'none',
+                  height: '1px',
+                  backgroundColor: 'var(--fx-border)',
+                }}
+              />
+            </>
+          )}
+
+          {/* Pricing Table (if available) */}
+          {pricingData && (
+            <>
+              <FxReveal>
+                <section>
+                  <ProgramTiersTable
+                    tiers={pricingData.tiers}
+                    onViewComparison={() => setIsComparisonModalOpen(true)}
+                    showComparisonButton={true}
+                    subtitle={pricingSubtitle}
+                    firstColumnWidth={
+                      service.id === 'personal-training' ? '26%' : undefined
+                    }
+                  />
+
+                  {/* Pricing Disclaimer */}
+                  {pricingDisclaimer && (
+                    <div
                       style={{
-                        color: 'var(--fx-accent)',
-                        fontWeight: 600,
+                        marginTop: 20,
+                        padding: 12,
+                        backgroundColor: 'var(--fx-surface-card)',
+                        borderLeft: '4px solid var(--fx-accent)',
+                        borderRadius: 4,
                       }}
                     >
-                      Note:
-                    </strong>{' '}
-                    {pricingDisclaimer}
-                  </p>
-                </div>
-              )}
-            </section>
-            </FxReveal>
+                      <p
+                        style={{
+                          color: 'var(--fx-text-body)',
+                          fontSize: '0.9375rem',
+                          fontStyle: 'italic',
+                          lineHeight: 1.7,
+                          margin: 0,
+                        }}
+                      >
+                        <strong
+                          style={{
+                            color: 'var(--fx-accent)',
+                            fontWeight: 600,
+                          }}
+                        >
+                          Note:
+                        </strong>{' '}
+                        {pricingDisclaimer}
+                      </p>
+                    </div>
+                  )}
+                </section>
+              </FxReveal>
 
-            <hr
-              style={{
-                border: 'none',
-                height: '1px',
-                backgroundColor: 'var(--fx-border)',
-              }}
+              <hr
+                style={{
+                  border: 'none',
+                  height: '1px',
+                  backgroundColor: 'var(--fx-border)',
+                }}
+              />
+            </>
+          )}
+
+          {/* CTA Section */}
+          <FxReveal>
+            <FxCTABand
+              title='Ready to Begin?'
+              body='Book a 20-30 minute consultation to explore your personal identity and aligning your decisions with it.'
+              primaryLabel='Book a Consultation'
+              primaryHref='/bookings'
             />
-          </>
-        )}
+          </FxReveal>
 
-        {/* CTA Section */}
-        <FxReveal>
-          <FxCTABand
-            title="Ready to Begin?"
-            body="Book a 20-30 minute consultation to explore your personal identity and aligning your decisions with it."
-            primaryLabel="Book a Consultation"
-            primaryHref="/bookings"
-          />
-        </FxReveal>
-
-        {/* Related Services */}
-        <FxReveal>
-          <RelatedServices currentServiceId={service.id} />
-        </FxReveal>
-      </div>
+          {/* Related Services */}
+          <FxReveal>
+            <RelatedServices currentServiceId={service.id} />
+          </FxReveal>
+        </div>
       </FxRailLayout>
 
       {/* Program Comparison Modal */}
