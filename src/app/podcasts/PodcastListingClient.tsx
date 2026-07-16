@@ -254,53 +254,6 @@ function PodcastCard({
 }
 
 /**
- * SpreakerEmbed Component
- * Renders the Spreaker embedded player for the "The Resonant Identity" show.
- */
-function SpreakerEmbed() {
-  return (
-    <div style={{ marginBottom: 32 }}>
-      <h3
-        style={{
-          color: 'var(--fx-text-heading)',
-          marginTop: 12,
-          marginBottom: 12,
-          fontSize: '1.25rem',
-          fontWeight: 600,
-        }}
-      >
-        The Resonant Identity
-      </h3>
-      <div
-        style={{
-          borderRadius: 6,
-          overflow: 'hidden',
-          width: '100%',
-        }}
-      >
-        <a
-          className='spreaker-player'
-          href={PODCAST_PLATFORMS.spreaker}
-          data-resource='show_id=6933506'
-          data-width='100%'
-          data-height='350px'
-          data-theme='dark'
-          data-playlist='show'
-          data-playlist-continuous='true'
-          data-hide-logo='false'
-          data-hide-likes='false'
-          data-hide-comments='false'
-          data-hide-sharing='false'
-          data-hide-download='true'
-        >
-          Listen to &quot;The Resonant Identity&quot; on Spreaker.
-        </a>
-      </div>
-    </div>
-  );
-}
-
-/**
  * PodcastDetailModal Component
  * Shows full episode detail with audio player
  */
