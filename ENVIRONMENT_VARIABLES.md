@@ -71,6 +71,23 @@ SITE_URL=http://localhost:3000
 | `STRIPE_*`             | Stripe payment credentials | `/api/create-checkout-session`, `/api/stripe-webhook` |
 | `AZURE_*`              | Azure storage credentials  | `/api/podcasts-episodes`, `/api/podcasts-rss`         |
 
+#### Fluxline ecosystem integration (`/api/entitlements`)
+
+These variables are required only for the new `/api/entitlements` integration
+endpoint (Entra token validation + shared-table reads). See
+[INTEGRATION-ARCHITECTURE.md](INTEGRATION-ARCHITECTURE.md) for the full
+picture.
+
+| Variable                            | Purpose                                                                                                                                                                    | Required                                    |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `ENTRA_TENANT_ID`                   | Entra tenant GUID used to validate Bearer tokens                                                                                                                            | Yes (for `/api/entitlements`)                |
+| `ENTRA_API_AUDIENCE`                | Expected token `aud`; comma-separated list allowed. Default `api://fluxline-identity`                                                                                       | No (default)                                 |
+| `ENTRA_ISSUER`                      | Overrides the expected `iss` (needed for Entra External ID / CIAM, e.g. `https://<tenant>.ciamlogin.com/<tenantId>/v2.0`)                                                    | CIAM only                                    |
+| `ENTRA_JWKS_URI`                    | Overrides the signing-key endpoint (CIAM: `https://<tenant>.ciamlogin.com/<tenantId>/discovery/v2.0/keys`)                                                                   | CIAM only                                    |
+| `SHARED_STORAGE_CONNECTION_STRING`  | Connection string for the SHARED Fluxline user-data storage account (Entitlements/Events tables — a different account from this site's own `AZURE_STORAGE_CONNECTION_STRING`) | Yes (for `/api/entitlements`)                |
+| `ENTITLEMENTS_TABLE`                | Entitlements table-name override (default `Entitlements`)                                                                                                                   | No (default)                                 |
+| `EVENTS_TABLE`                      | Events table-name override (default `Events`)                                                                                                                               | No (default)                                 |
+
 ## Setup Instructions
 
 ### 1. Frontend Development (Next.js)

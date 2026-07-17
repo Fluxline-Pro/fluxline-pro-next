@@ -41,6 +41,13 @@
     "LEAD_RATE_LIMIT_MAX_REQUESTS": "10",
     "LEAD_STORE_RAW_PAYLOAD": "false",
     "LEAD_QUEUE_NAME": "leadsqueuefluxlinedev",
-    "TIDYCAL_WEBHOOK_SECRET": "<your-tidycal-webhook-hmac-secret>"
+    "TIDYCAL_WEBHOOK_SECRET": "<your-tidycal-webhook-hmac-secret>",
+    "ENTRA_TENANT_ID": "<entra-tenant-guid-for-api-entitlements>",
+    "ENTRA_API_AUDIENCE": "api://fluxline-identity",
+    "ENTRA_ISSUER": "<optional-ciam-issuer-override>",
+    "ENTRA_JWKS_URI": "<optional-ciam-jwks-override>",
+    "SHARED_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=<shared-user-data-account>;AccountKey=<key>;EndpointSuffix=core.windows.net",
+    "ENTITLEMENTS_TABLE": "Entitlements",
+    "EVENTS_TABLE": "Events"
   }
 }
