@@ -8,12 +8,11 @@ import '@testing-library/jest-dom';
 import { ScrollsGrid } from './ScrollsGrid';
 import { ScrollItem } from '../types';
 
-// Mock Next.js Link component
-jest.mock('next/link', () => {
-  return ({ children, href }: { children: React.ReactNode; href: string }) => {
-    return <a href={href}>{children}</a>;
-  };
-});
+/** Find a rendered div whose inline display style matches. */
+const findByDisplay = (container: HTMLElement, display: string) =>
+  Array.from(container.querySelectorAll('div')).find(
+    (el) => el.style.display === display
+  );
 
 // Mock scroll data for testing
 const mockScrolls: ScrollItem[] = [
@@ -76,29 +75,29 @@ describe('ScrollsGrid', () => {
 
   it('applies grid layout by default', () => {
     const { container } = render(<ScrollsGrid scrolls={mockScrolls} />);
-    const gridElement = container.querySelector('.grid');
-    expect(gridElement).toBeInTheDocument();
+    const gridElement = findByDisplay(container, 'grid');
+    expect(gridElement).toBeDefined();
+    expect(gridElement).toHaveStyle({
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    });
   });
 
   it('applies list layout when specified', () => {
     const { container } = render(
       <ScrollsGrid scrolls={mockScrolls} layout='list' />
     );
-    const listElement = container.querySelector('.flex-col');
-    expect(listElement).toBeInTheDocument();
-  });
-
-  it('applies custom className', () => {
-    const { container } = render(
-      <ScrollsGrid scrolls={mockScrolls} className='custom-grid-class' />
-    );
-    expect(container.querySelector('.custom-grid-class')).toBeInTheDocument();
+    expect(findByDisplay(container, 'grid')).toBeUndefined();
+    const listElement = findByDisplay(container, 'flex');
+    expect(listElement).toBeDefined();
+    expect(listElement).toHaveStyle({ flexDirection: 'column' });
   });
 
   it('renders correct number of scroll cards', () => {
     render(<ScrollsGrid scrolls={mockScrolls} />);
-    const cards = screen.getAllByRole('link');
-    expect(cards).toHaveLength(2);
+    const downloadButtons = screen.getAllByRole('button', {
+      name: /download/i,
+    });
+    expect(downloadButtons).toHaveLength(2);
   });
 
   it('passes scroll data correctly to ScrollCard components', () => {
