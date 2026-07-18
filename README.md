@@ -32,6 +32,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app.
 - [Project Structure](#-project-structure)
 - [Development](#-development)
 - [Documentation](#-documentation)
+- [Fluxline Ecosystem Integration](#-fluxline-ecosystem-integration)
 - [Deployment](#-deployment)
 - [Contributing](#-contributing)
 
@@ -340,6 +341,73 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 - **[public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md](public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md)** - Case study creation guide
 - **[api/HOW_TO_ADD_PODCAST_EPISODE.md](api/HOW_TO_ADD_PODCAST_EPISODE.md)** - Podcast episode upload guide
 - **[VIDEO_UPLOAD_INSTRUCTIONS.md](VIDEO_UPLOAD_INSTRUCTIONS.md)** - YouTube video instructions
+
+## 🔗 Fluxline Ecosystem Integration
+
+Fluxline.pro is one of four apps sharing a single identity + data backbone.
+The canonical design doc is
+[INTEGRATION-ARCHITECTURE.md](INTEGRATION-ARCHITECTURE.md) (the same copy
+ships in all four repos).
+
+### The Four Apps
+
+| App                | Host                   | Role                                                |
+| ------------------ | ---------------------- | --------------------------------------------------- |
+| **Fluxline.pro**   | `fluxline.pro`         | Public site, marketing, identity surface (this repo)|
+| **CMS**            | `cms.fluxline.pro`     | Courses, lessons, guides, dashboard, achievements   |
+| **Storefront**     | `store.fluxline.pro`   | Catalog, checkout, entitlements (only Stripe owner) |
+| **Account**        | `account.fluxline.pro` | Identity hub: profile, settings, progress           |
+
+### Shared Entra Sign-in (Header Avatar)
+
+All four apps use **one shared Entra External ID app registration** via
+`@azure/msal-browser`, giving true SSO across subdomains. On this site:
+
+- The MSAL auth stack lives in `src/lib/auth/` (`AuthProvider`, `useAuth`,
+  `msalConfig`, `authStatus`), mounted in `src/app/providers.tsx`.
+- The header (`src/theme/components/dsm/FxNav.tsx` +
+  `FxUserMenu.tsx`) shows a **Sign in** control when signed out and an
+  **initials avatar** with a My Account / Sign out menu when signed in.
+- The MSAL redirect lands on `/auth/callback/`
+  (`src/app/auth/callback/page.tsx`, static-export compatible).
+- Cross-subdomain state uses the non-secret `fluxline_auth_status` cookie on
+  `.fluxline.pro` (plus same-origin localStorage): a sign-in on
+  account.fluxline.pro is reflected here instantly, and MSAL `ssoSilent`
+  upgrades the hint to a real session. The cookie is a UI hint only — never a
+  token, never a security boundary.
+- **`oid` is the universal user key** across the ecosystem; anything
+  privileged calls a Function that validates the real Entra Bearer token.
+
+### `/api/entitlements`
+
+`GET /api/entitlements` (classic-model Azure Function) validates the caller's
+Entra token (RS256 via tenant JWKS, issuer + audience checks) and reads the
+SHARED Entitlements/Events tables to answer "what does this user own". See
+`api/entitlements/` and `api/lib/`.
+
+### Environment Variables (Integration)
+
+Frontend (build-time, `.env.example`):
+
+| Variable                     | Required | Purpose                                            |
+| ---------------------------- | -------- | -------------------------------------------------- |
+| `NEXT_PUBLIC_MSAL_CLIENT_ID` | Yes      | Shared Entra app registration (client) ID          |
+| `NEXT_PUBLIC_MSAL_AUTHORITY` | Yes      | Entra authority URL (CIAM authority for Ext. ID)   |
+| `NEXT_PUBLIC_ACCOUNT_URL`    | No       | Account portal URL (default `https://account.fluxline.pro`) |
+
+Backend (Functions, `api/local.settings.sample.json`):
+
+| Variable                            | Required               | Purpose                                       |
+| ----------------------------------- | ---------------------- | --------------------------------------------- |
+| `ENTRA_TENANT_ID`                   | Yes (entitlements)     | Tenant GUID for token validation              |
+| `ENTRA_API_AUDIENCE`                | No (default)           | Expected `aud` (default `api://fluxline-identity`) |
+| `ENTRA_ISSUER` / `ENTRA_JWKS_URI`   | CIAM only              | Issuer / JWKS overrides for Entra External ID |
+| `SHARED_STORAGE_CONNECTION_STRING`  | Yes (entitlements)     | SHARED user-data storage account              |
+| `ENTITLEMENTS_TABLE` / `EVENTS_TABLE` | No (defaults)        | Table-name overrides                          |
+| `EVENT_SOURCE`                      | No (default `www`)     | Source tag for Events rows written here       |
+
+The full variable reference (all scopes) is in
+[ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md).
 
 ## 🚢 Deployment
 

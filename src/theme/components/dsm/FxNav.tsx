@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import FxButton from './FxButton';
+import FxUserMenu from './FxUserMenu';
 import styles from './FxNav.module.scss';
 
 interface BreadcrumbItem {
@@ -222,25 +223,28 @@ export default function FxNav({
                 {ctaLabel}
               </FxButton>
             </nav>
-            {/* Mobile Hamburger Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={styles.hamburgerButton}
-              aria-label='Toggle menu'
-            >
-              <svg
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
+            {/* Right-side actions: user avatar + mobile hamburger */}
+            <div className={styles.navActions}>
+              <FxUserMenu />
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={styles.hamburgerButton}
+                aria-label='Toggle menu'
               >
-                <line x1='3' y1='6' x2='21' y2='6' strokeLinecap='round' />
-                <line x1='3' y1='12' x2='21' y2='12' strokeLinecap='round' />
-                <line x1='3' y1='18' x2='21' y2='18' strokeLinecap='round' />
-              </svg>
-            </button>
+                <svg
+                  width='24'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                >
+                  <line x1='3' y1='6' x2='21' y2='6' strokeLinecap='round' />
+                  <line x1='3' y1='12' x2='21' y2='12' strokeLinecap='round' />
+                  <line x1='3' y1='18' x2='21' y2='18' strokeLinecap='round' />
+                </svg>
+              </button>
+            </div>
             {/* Mobile Menu Dropdown */}
             <AnimatePresence>
               {mobileMenuOpen && (
@@ -304,25 +308,28 @@ export default function FxNav({
                 </Link>
               ))}
             </nav>
-            {/* Mobile Hamburger (Subpage) */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={styles.hamburgerButton}
-              aria-label='Toggle menu'
-            >
-              <svg
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
+            {/* Right-side actions: user avatar + mobile hamburger (Subpage) */}
+            <div className={styles.navActions}>
+              <FxUserMenu />
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={styles.hamburgerButton}
+                aria-label='Toggle menu'
               >
-                <line x1='3' y1='6' x2='21' y2='6' strokeLinecap='round' />
-                <line x1='3' y1='12' x2='21' y2='12' strokeLinecap='round' />
-                <line x1='3' y1='18' x2='21' y2='18' strokeLinecap='round' />
-              </svg>
-            </button>
+                <svg
+                  width='24'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                >
+                  <line x1='3' y1='6' x2='21' y2='6' strokeLinecap='round' />
+                  <line x1='3' y1='12' x2='21' y2='12' strokeLinecap='round' />
+                  <line x1='3' y1='18' x2='21' y2='18' strokeLinecap='round' />
+                </svg>
+              </button>
+            </div>
             {/* Mobile Menu Dropdown (Subpage) */}
             <AnimatePresence>
               {mobileMenuOpen && (

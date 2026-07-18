@@ -10,6 +10,7 @@ export { default as FxSwitch } from './FxSwitch';
 export { default as FxContainer } from './FxContainer';
 export { default as FxRailLayout } from './FxRailLayout';
 export { default as FxNav } from './FxNav';
+export { default as FxUserMenu } from './FxUserMenu';
 export { default as FxFooter } from './FxFooter';
 export { default as FxHero } from './FxHero';
 export { default as FxPreferencesDrawer } from './FxPreferencesDrawer';
