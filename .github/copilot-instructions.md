@@ -229,6 +229,48 @@ path segments, so it has no folder-name problem. Do not change TRI filtering log
 - Supports: Dark/light modes, high-contrast, colorblind modes
 - Hook: `useAppTheme()` for theme access and toggle
 
+### Fluxline Ecosystem Integration (Identity + Shared Data)
+
+Fluxline.pro is one of four apps (www / cms / store / account subdomains of
+fluxline.pro) sharing one Entra External ID app registration and one shared
+Azure Table Storage account per environment. Canonical spec:
+`INTEGRATION-ARCHITECTURE.md` (same copy in all four repos). Conventions:
+
+- **MSAL auth stack location**: `src/lib/auth/` — `msalConfig.ts` (shared
+  registration; login scopes `openid profile email`; API scope
+  `api://fluxline-identity/.default`; sessionStorage cache), `msalInstance.ts`
+  (singleton), `AuthContext.tsx` (`AuthProvider`), `useAuth.ts`,
+  `authStatus.ts`, `initials.ts`. `AuthProvider` is mounted in
+  `src/app/providers.tsx` and must keep rendering children immediately
+  (never blank the static site while MSAL initializes).
+- **Header avatar**: `src/theme/components/dsm/FxUserMenu.tsx`, rendered
+  inside `FxNav.tsx`. Signed-out → "Sign in" control; signed-in → initials
+  avatar with My Account (`NEXT_PUBLIC_ACCOUNT_URL`, default
+  `https://account.fluxline.pro`) and Sign out.
+- **MSAL redirect route**: `/auth/callback/` → `src/app/auth/callback/page.tsx`
+  (client page, static-export compatible). Registered redirect URIs use the
+  trailing slash.
+- **Cross-subdomain hint**: the non-secret `fluxline_auth_status`
+  cookie (Domain=`.fluxline.pro`) + same-origin localStorage, handled ONLY by
+  `src/lib/auth/authStatus.ts`. It is a UI hint — never store tokens in it,
+  and never clear it just because this origin lacks an MSAL session (that
+  would wipe a sign-in performed on a sibling subdomain).
+- **oid identity rule**: the Entra `oid` claim is the universal user key
+  across all apps and shared tables. Never key user data on `sub` (pairwise)
+  or email. Backends validate Bearer tokens (RS256 via tenant JWKS, issuer +
+  audience) before trusting any identity.
+- **Shared backend libs**: `api/lib/` — `validateToken.js` (Entra token
+  validation), `entitlementsStore.js`, `events.js`, `tableClient.js`,
+  `contracts.js`, `corsHeaders.js`. New Functions that touch shared tables
+  must reuse these, not reimplement them.
+- **Integration env vars**: frontend `NEXT_PUBLIC_MSAL_CLIENT_ID`,
+  `NEXT_PUBLIC_MSAL_AUTHORITY`, `NEXT_PUBLIC_ACCOUNT_URL`; backend
+  `ENTRA_TENANT_ID`, `ENTRA_API_AUDIENCE`, `ENTRA_ISSUER`, `ENTRA_JWKS_URI`,
+  `SHARED_STORAGE_CONNECTION_STRING`, `ENTITLEMENTS_TABLE`, `EVENTS_TABLE`,
+  `EVENT_SOURCE`. Every new env var must be added to
+  `ENVIRONMENT_VARIABLES.md` plus `.env.example` (frontend) or
+  `api/local.settings.sample.json` (backend).
+
 ## Common Commands
 
 ```bash

@@ -9,17 +9,20 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jest-environment-jsdom',
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/app/(.*)$': '<rootDir>/app/$1',
   },
   // e2e/ is Playwright's (`yarn test:e2e`), not Jest's — the two runners must
-  // not pick up each other's specs.
+  // not pick up each other's specs. api/ has its own standalone jest setup
+  // (node environment, run via `yarn test:api`) — keep those CommonJS Azure
+  // Functions tests out of the jsdom/next-jest run.
   testPathIgnorePatterns: [
     '<rootDir>/.next/',
     '<rootDir>/node_modules/',
     '<rootDir>/e2e/',
+    '<rootDir>/api/',
   ],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',

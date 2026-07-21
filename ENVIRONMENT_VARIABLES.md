@@ -32,12 +32,17 @@ This project separates environment variables into three distinct scopes:
 **Scope:** Published to browser via `NEXT_PUBLIC_*` prefix  
 **Security:** ⚠️ **PUBLIC** - Never put secrets here
 
-| Variable                         | Purpose                 | Example                 |
-| -------------------------------- | ----------------------- | ----------------------- |
-| `NEXT_PUBLIC_ENVIRONMENT`        | Environment identifier  | `prod`, `test`, `dev`   |
-| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | reCAPTCHA v3 public key | `6LeIx...`              |
-| `NEXT_PUBLIC_API_BASE_URL`       | Backend API endpoint    | `http://localhost:7071` |
-| `SITE_URL`                       | Canonical site URL      | `https://fluxline.pro`  |
+| Variable                         | Purpose                                                                                  | Example                                          |
+| -------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `NEXT_PUBLIC_ENVIRONMENT`        | Environment identifier                                                                   | `prod`, `test`, `dev`                            |
+| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | reCAPTCHA v3 public key                                                                  | `6LeIx...`                                       |
+| `NEXT_PUBLIC_API_BASE_URL`       | Backend API endpoint                                                                     | `http://localhost:7071`                          |
+| `NEXT_PUBLIC_MSAL_CLIENT_ID`     | SHARED Fluxline Entra app registration (client) ID — header sign-in/avatar               | `00000000-0000-...`                              |
+| `NEXT_PUBLIC_MSAL_AUTHORITY`     | Entra authority URL for the shared tenant (CIAM authority for External ID)               | `https://login.microsoftonline.com/<tenant-id>`  |
+| `NEXT_PUBLIC_ACCOUNT_URL`        | Account portal URL for the avatar menu's "My Account" link (optional, has default)       | `https://account.fluxline.pro`                   |
+| `SITE_URL`                       | Canonical site URL                                                                       | `https://fluxline.pro`                           |
+| `GITHUB_TOKEN`                   | Optional build-time GitHub API token for the `/github` page (server-only, never public)  | `ghp_...`                                        |
+| `GITHUB_API_TOKEN`               | Fallback alias for `GITHUB_TOKEN`                                                        | `ghp_...`                                        |
 
 ### Local Development Variables (`.env.local.example`)
 
@@ -70,6 +75,30 @@ SITE_URL=http://localhost:3000
 | `YOUTUBE_API_KEY`      | YouTube Data API           | `/api/youtube`                                        |
 | `STRIPE_*`             | Stripe payment credentials | `/api/create-checkout-session`, `/api/stripe-webhook` |
 | `AZURE_*`              | Azure storage credentials  | `/api/podcasts-episodes`, `/api/podcasts-rss`         |
+| `CORS_ALLOWED_ORIGINS` | Comma-separated extra CORS origins (defaults cover fluxline.pro + localhost) | `api/lib/corsHeaders.js` (all CORS-enabled Functions) |
+| `EVENT_SOURCE`         | Source tag written to shared Events table (default `www`) | `api/lib/events.js`                    |
+| `PING_RATE_LIMIT_*`    | `WINDOW_MS` / `MAX_REQUESTS` rate limits for warmup pings (defaults: 900000 / 10) | `/api/ping-warmup`              |
+| `LEAD_*`               | Lead-capture allowed origins, rate limits, queue name | `/api/lead`, `/api/tidycal-webhook`                   |
+| `TIDYCAL_WEBHOOK_SECRET` | TidyCal webhook HMAC secret | `/api/tidycal-webhook`                                                              |
+| `ENTRAID_SP_*` / `SHAREPOINT_*` / `LEADS_LIST_ID` | Graph service principal + SharePoint list config | `/api/newsletter-subscribe`, `/api/newsletter-unsubscribe`, `/api/lead` |
+| `ENTRA_*` / `SHARED_STORAGE_CONNECTION_STRING` / `ENTITLEMENTS_TABLE` / `EVENTS_TABLE` | Fluxline ecosystem integration (see below) | `/api/entitlements`, `api/lib/*` |
+
+#### Fluxline ecosystem integration (`/api/entitlements`)
+
+These variables are required only for the new `/api/entitlements` integration
+endpoint (Entra token validation + shared-table reads). See
+[INTEGRATION-ARCHITECTURE.md](INTEGRATION-ARCHITECTURE.md) for the full
+picture.
+
+| Variable                            | Purpose                                                                                                                                                                    | Required                                    |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `ENTRA_TENANT_ID`                   | Entra tenant GUID used to validate Bearer tokens                                                                                                                            | Yes (for `/api/entitlements`)                |
+| `ENTRA_API_AUDIENCE`                | Expected token `aud`; comma-separated list allowed. Default `api://fluxline-identity`                                                                                       | No (default)                                 |
+| `ENTRA_ISSUER`                      | Overrides the expected `iss` (needed for Entra External ID / CIAM, e.g. `https://<tenant>.ciamlogin.com/<tenantId>/v2.0`)                                                    | CIAM only                                    |
+| `ENTRA_JWKS_URI`                    | Overrides the signing-key endpoint (CIAM: `https://<tenant>.ciamlogin.com/<tenantId>/discovery/v2.0/keys`)                                                                   | CIAM only                                    |
+| `SHARED_STORAGE_CONNECTION_STRING`  | Connection string for the SHARED Fluxline user-data storage account (Entitlements/Events tables — a different account from this site's own `AZURE_STORAGE_CONNECTION_STRING`) | Yes (for `/api/entitlements`)                |
+| `ENTITLEMENTS_TABLE`                | Entitlements table-name override (default `Entitlements`)                                                                                                                   | No (default)                                 |
+| `EVENTS_TABLE`                      | Events table-name override (default `Events`)                                                                                                                               | No (default)                                 |
 
 ## Setup Instructions
 

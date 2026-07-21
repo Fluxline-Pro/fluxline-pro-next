@@ -9,26 +9,6 @@ import '@testing-library/jest-dom';
 import { ScrollCard } from './ScrollCard';
 import { ScrollItem } from '../types';
 
-// Mock Next.js Link component
-jest.mock('next/link', () => {
-  return ({
-    children,
-    href,
-    className,
-    ...props
-  }: {
-    children: React.ReactNode;
-    href: string;
-    className?: string;
-  }) => {
-    return (
-      <a href={href} className={className} {...props}>
-        {children}
-      </a>
-    );
-  };
-});
-
 // Mock scroll data for testing
 const mockScroll: ScrollItem = {
   id: 'test-scroll',
@@ -88,11 +68,13 @@ describe('ScrollCard', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders details button', () => {
+  it('opens the detail modal when the card is clicked', async () => {
+    const user = userEvent.setup();
     render(<ScrollCard scroll={mockScroll} />);
-    expect(
-      screen.getByRole('button', { name: /details/i })
-    ).toBeInTheDocument();
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    await user.click(screen.getByText('Test Scroll Title'));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
   it('opens PDF in new window when download button is clicked', async () => {
@@ -121,15 +103,12 @@ describe('ScrollCard', () => {
     expect(screen.queryByText('testing')).not.toBeInTheDocument();
   });
 
-  it('applies custom className', () => {
-    render(<ScrollCard scroll={mockScroll} className='custom-class' />);
-    const link = screen.getByRole('link');
-    expect(link).toHaveClass('custom-class');
-  });
-
-  it('links to correct detail page', () => {
+  it('does not open the detail modal when the download button is clicked', async () => {
+    const user = userEvent.setup();
     render(<ScrollCard scroll={mockScroll} />);
-    const link = screen.getByRole('link');
-    expect(link).toHaveAttribute('href', '/services/scrolls/test-scroll');
+
+    await user.click(screen.getByRole('button', { name: /download/i }));
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 });

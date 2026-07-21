@@ -10,6 +10,7 @@ const makeRepo = (partial: Partial<GitHubRepo>): GitHubRepo => ({
   stargazers_count: 0,
   updated_at: '2024-01-01T00:00:00Z',
   topics: [],
+  owner: { login: 'org', type: 'Organization' },
   ...partial,
 });
 
