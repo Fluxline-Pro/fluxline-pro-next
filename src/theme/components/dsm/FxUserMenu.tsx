@@ -128,14 +128,19 @@ export default function FxUserMenu() {
         aria-label={
           user?.name ? `Account menu for ${user.name}` : 'Account menu'
         }
-        aria-haspopup='menu'
+        aria-haspopup='true'
         aria-expanded={menuOpen}
         aria-controls={menuOpen ? menuId : undefined}
       >
         {initials}
       </button>
       {menuOpen && (
-        <div id={menuId} role='menu' className={styles.userMenuPopup}>
+        <div
+          id={menuId}
+          role='group'
+          aria-label='Account'
+          className={styles.userMenuPopup}
+        >
           {(user?.name || user?.email) && (
             <div className={styles.userMenuIdentity} role='presentation'>
               {user?.name && (
@@ -148,7 +153,6 @@ export default function FxUserMenu() {
           )}
           <a
             href={ACCOUNT_URL}
-            role='menuitem'
             ref={firstItemRef}
             className={styles.userMenuItem}
             onClick={() => setMenuOpen(false)}
@@ -157,7 +161,6 @@ export default function FxUserMenu() {
           </a>
           <button
             type='button'
-            role='menuitem'
             className={styles.userMenuItem}
             onClick={() => {
               setMenuOpen(false);

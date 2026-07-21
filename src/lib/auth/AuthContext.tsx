@@ -46,10 +46,21 @@ export const AuthContext = createContext<AuthContextValue>({
   getAccessToken: async () => null,
 });
 
+/**
+ * The ecosystem's universal identity key is the Entra `oid` claim — every
+ * per-user record across the storefront, account, and CMS backends is
+ * partitioned by it, and `api/lib/validateToken.js` resolves the caller the
+ * same way (`oid` first, `sub` as fallback). MSAL's `localAccountId` is only
+ * incidentally the oid on a workforce tenant, so read the claim directly and
+ * keep `localAccountId` as a last-resort fallback for a claim-less account.
+ */
 function extractUser(account: AccountInfo): AuthUser {
   const claims = account.idTokenClaims as Record<string, unknown> | undefined;
   return {
-    userId: account.localAccountId,
+    userId:
+      (claims?.oid as string) ||
+      (claims?.sub as string) ||
+      account.localAccountId,
     name: account.name || account.username,
     email: (claims?.email as string) || account.username,
   };
