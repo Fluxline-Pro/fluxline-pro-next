@@ -142,6 +142,13 @@ describe('entitlements', () => {
       expect(hasLocalAccess(rows, { itemId: 'book-1' })).toBe(false);
     });
 
+    // Fail closed: a corrupt expiry must not over-grant, even in the UI hint.
+    it('denies on an unparseable expiry', () => {
+      const rows = [entitlement({ expiresAt: 'not-a-date' })];
+
+      expect(hasLocalAccess(rows, { itemId: 'book-1' })).toBe(false);
+    });
+
     it('denies when the user owns nothing', () => {
       expect(hasLocalAccess([], { itemId: 'book-1' })).toBe(false);
     });

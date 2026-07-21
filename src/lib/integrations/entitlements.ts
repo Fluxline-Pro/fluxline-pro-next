@@ -33,9 +33,13 @@ export async function listEntitlements(
 }
 
 function isExpired(entitlement: Entitlement, now: Date): boolean {
-  return (
-    Boolean(entitlement.expiresAt) && new Date(entitlement.expiresAt!) < now
-  );
+  if (!entitlement.expiresAt) return false;
+  const expiresAt = new Date(entitlement.expiresAt);
+  // Fail CLOSED, mirroring api/lib/entitlementsStore.js: a malformed expiry
+  // must read as expired, never keep an entitlement live. (This is only a UI
+  // hint; the CMS gate is authoritative — but the hint should not over-grant.)
+  if (Number.isNaN(expiresAt.getTime())) return true;
+  return expiresAt < now;
 }
 
 /** Active, unexpired entitlements. */

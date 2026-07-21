@@ -4,14 +4,18 @@ const jwksRsa = require('jwks-rsa');
 /**
  * Validates an Entra ID access token (Bearer) on incoming requests.
  *
- * Works with BOTH tenant types — set the env vars to match yours:
- *   - Workforce Entra ID:       login.microsoftonline.com/<tenant>
- *   - Entra External ID (CIAM): <tenant>.ciamlogin.com/<tenant>
+ * Defaults to WORKFORCE Entra ID (login.microsoftonline.com). The Fluxline
+ * ecosystem runs on Entra External ID (CIAM), so a real deployment MUST set
+ * ENTRA_ISSUER and ENTRA_JWKS_URI to the tenant's ciamlogin.com endpoints —
+ * without them, CIAM tokens fail validation against the workforce defaults:
+ *   ENTRA_ISSUER    = https://<tenant>.ciamlogin.com/<tenantId>/v2.0
+ *   ENTRA_JWKS_URI  = https://<tenant>.ciamlogin.com/<tenantId>/discovery/v2.0/keys
  *
  * Configuration (api local.settings.json / SWA App Settings):
- *   ENTRA_TENANT_ID     required — tenant GUID (or subdomain for CIAM)
- *   ENTRA_ISSUER        optional — overrides the expected `iss`
- *   ENTRA_JWKS_URI      optional — overrides the signing-key endpoint
+ *   ENTRA_TENANT_ID     required — tenant GUID (used to build the workforce
+ *                       default URLs; for CIAM set ENTRA_ISSUER/ENTRA_JWKS_URI)
+ *   ENTRA_ISSUER        optional — overrides the expected `iss` (required for CIAM)
+ *   ENTRA_JWKS_URI      optional — overrides the signing-key endpoint (required for CIAM)
  *   ENTRA_API_AUDIENCE  optional — expected `aud`; accepts a comma-separated
  *                       list (App ID URI and/or client id). Defaults to
  *                       `api://fluxline-identity`.

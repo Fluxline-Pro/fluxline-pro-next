@@ -38,7 +38,13 @@ function toContract(entity) {
 }
 
 function isExpired(entitlement, now = new Date()) {
-  return Boolean(entitlement.expiresAt) && new Date(entitlement.expiresAt) < now;
+  if (!entitlement.expiresAt) return false;
+  const expiresAt = new Date(entitlement.expiresAt);
+  // Fail CLOSED: a malformed expiry must read as expired, never grant access.
+  // `new Date('garbage') < now` is false, so without this a corrupt ExpiresAt
+  // would silently keep an entitlement live.
+  if (Number.isNaN(expiresAt.getTime())) return true;
+  return expiresAt < now;
 }
 
 /**
