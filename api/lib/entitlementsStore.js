@@ -1,4 +1,4 @@
-const { getTableClient } = require('./tableClient');
+const { getSharedTable } = require('./tableClient');
 
 /**
  * Read-side access to the shared Entitlements table.
@@ -10,8 +10,8 @@ const { getTableClient } = require('./tableClient');
  * overridable via ENTITLEMENTS_TABLE for local/test isolation.
  */
 
-function getEntitlementsTable() {
-  return getTableClient(process.env.ENTITLEMENTS_TABLE || 'Entitlements');
+function getEntitlementsTable(context) {
+  return getSharedTable('entitlements', context);
 }
 
 function toContract(entity) {
@@ -48,8 +48,8 @@ function isExpired(entitlement, now = new Date()) {
  * @returns {Promise<Array<object>>} Entitlement[] — empty array when the user
  *   has no rows (a 404 from a missing table is surfaced as an error).
  */
-async function listEntitlements(userId) {
-  const table = getEntitlementsTable();
+async function listEntitlements(userId, context) {
+  const table = getEntitlementsTable(context);
   const escaped = userId.replace(/'/g, "''");
   const iterator = table.listEntities({
     queryOptions: { filter: `PartitionKey eq '${escaped}'` },
@@ -73,8 +73,8 @@ async function listEntitlements(userId) {
  * @param {{kind?: string, slug?: string, sanityDocumentId?: string, itemId?: string}} ref
  * @returns {Promise<{allowed: boolean, reason: 'subscription'|'entitlement'|'none', entitlement: object|null}>}
  */
-async function checkContentAccess(userId, ref) {
-  const entitlements = await listEntitlements(userId);
+async function checkContentAccess(userId, ref, context) {
+  const entitlements = await listEntitlements(userId, context);
   const active = entitlements.filter((e) => e.status === 'active' && !isExpired(e));
 
   const plan = active.find((e) => e.productType === 'plan');

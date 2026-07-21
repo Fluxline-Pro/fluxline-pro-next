@@ -1,5 +1,5 @@
 const { randomUUID } = require('crypto');
-const { getTableClient } = require('./tableClient');
+const { getSharedTable } = require('./tableClient');
 
 /**
  * Operational event log (Azure Table Storage — the "events & state" layer).
@@ -13,10 +13,16 @@ const { getTableClient } = require('./tableClient');
  * fail the business operation that produced it (grant, progress save, etc.).
  */
 
-const EVENT_SOURCE = process.env.EVENT_SOURCE || 'www';
+/** This app's `source` tag — the only line that differs between repos. */
+const DEFAULT_EVENT_SOURCE = 'www';
 
-function getEventsTable() {
-  return getTableClient(process.env.EVENTS_TABLE || 'Events');
+/** Read per call, not at module load: app settings can land after require. */
+function eventSource() {
+  return process.env.EVENT_SOURCE || DEFAULT_EVENT_SOURCE;
+}
+
+function getEventsTable(context) {
+  return getSharedTable('events', context);
 }
 
 /** Reverse-chronological sort key (max ticks minus now), zero-padded. */
@@ -35,15 +41,15 @@ function reverseTicks(date) {
  * @param {string} [params.source] defaults to EVENT_SOURCE env / 'www'
  * @param {object} [context] Azure Functions context, for logging failures
  */
-async function recordEvent({ userId, type, data = {}, source = EVENT_SOURCE }, context) {
+async function recordEvent({ userId, type, data = {}, source }, context) {
   try {
     const now = new Date();
-    const table = getEventsTable();
+    const table = getEventsTable(context);
     await table.createEntity({
       partitionKey: userId,
       rowKey: `${reverseTicks(now)}-${randomUUID()}`,
       Type: type,
-      Source: source,
+      Source: source || eventSource(),
       Data: JSON.stringify(data),
       CreatedAt: now.toISOString(),
     });
@@ -61,8 +67,8 @@ async function recordEvent({ userId, type, data = {}, source = EVENT_SOURCE }, c
  * @param {number} [limit=50]
  * @returns {Promise<Array<{type: string, source: string, data: object, createdAt: string}>>}
  */
-async function listEvents(userId, limit = 50) {
-  const table = getEventsTable();
+async function listEvents(userId, limit = 50, context) {
+  const table = getEventsTable(context);
   const escaped = userId.replace(/'/g, "''");
   const iterator = table.listEntities({
     queryOptions: { filter: `PartitionKey eq '${escaped}'` },
