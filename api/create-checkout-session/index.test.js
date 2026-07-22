@@ -1,8 +1,10 @@
 'use strict';
 
 /**
- * Unit tests for the create-checkout-session Azure Function
- * Tests validation logic and response structure without real Stripe calls
+ * Unit tests for the decommissioned create-checkout-session Azure Function.
+ *
+ * Purchase moved to store.fluxline.pro; this endpoint now answers 410 Gone for
+ * every request except the CORS preflight. See index.js for the rationale.
  */
 
 const handler = require('./index');
@@ -20,7 +22,7 @@ function makeContext() {
   };
 }
 
-describe('create-checkout-session', () => {
+describe('create-checkout-session (decommissioned)', () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
@@ -37,58 +39,40 @@ describe('create-checkout-session', () => {
     expect(context.res.status).toBe(204);
   });
 
-  it('returns 503 when STRIPE_SECRET_KEY is not set', async () => {
-    delete process.env.STRIPE_SECRET_KEY;
-    const context = makeContext();
-    await handler(context, { method: 'POST', body: { productType: 'book', customerName: 'Jane Doe' }, headers: {} });
-    expect(context.res.status).toBe(503);
-    expect(JSON.parse(context.res.body)).toHaveProperty('error');
-  });
-
-  it('returns 400 when body is missing', async () => {
-    process.env.STRIPE_SECRET_KEY = 'sk_test_fake';
-    const context = makeContext();
-    await handler(context, { method: 'POST', body: null, headers: {} });
-    expect(context.res.status).toBe(400);
-  });
-
-  it('returns 400 for invalid productType', async () => {
-    process.env.STRIPE_SECRET_KEY = 'sk_test_fake';
-    const context = makeContext();
-    await handler(context, {
-      method: 'POST',
-      body: { productType: 'invalid', customerName: 'Jane Doe' },
-      headers: {},
-    });
-    expect(context.res.status).toBe(400);
-    const body = JSON.parse(context.res.body);
-    expect(body.error).toMatch(/productType/i);
-  });
-
-  it('returns 400 when customerName is missing', async () => {
-    process.env.STRIPE_SECRET_KEY = 'sk_test_fake';
-    const context = makeContext();
-    await handler(context, {
-      method: 'POST',
-      body: { productType: 'book', customerName: '' },
-      headers: {},
-    });
-    expect(context.res.status).toBe(400);
-    const body = JSON.parse(context.res.body);
-    expect(body.error).toMatch(/customerName/i);
-  });
-
-  it('returns 503 when price ID env var is not configured', async () => {
-    process.env.STRIPE_SECRET_KEY = 'sk_test_fake';
-    delete process.env.STRIPE_PRICE_ID_BOOK;
+  it('returns 410 Gone for a POST, pointing at the storefront', async () => {
     const context = makeContext();
     await handler(context, {
       method: 'POST',
       body: { productType: 'book', customerName: 'Jane Doe' },
       headers: {},
     });
-    expect(context.res.status).toBe(503);
+
+    expect(context.res.status).toBe(410);
     const body = JSON.parse(context.res.body);
-    expect(body.error).toMatch(/pricing/i);
+    expect(body.error).toMatch(/retired/i);
+    expect(body.storefront).toBe('https://store.fluxline.pro');
+  });
+
+  it('returns 410 even when Stripe is fully configured, so no session is created', async () => {
+    process.env.STRIPE_SECRET_KEY = 'sk_test_fake';
+    process.env.STRIPE_PRICE_ID_BOOK = 'price_fake';
+
+    const context = makeContext();
+    await handler(context, {
+      method: 'POST',
+      body: { productType: 'book', customerName: 'Jane Doe' },
+      headers: {},
+    });
+
+    expect(context.res.status).toBe(410);
+  });
+
+  it('logs a warning naming the storefront when called', async () => {
+    const context = makeContext();
+    await handler(context, { method: 'POST', body: null, headers: {} });
+
+    const warned = context._logs.filter((entry) => entry[0] === 'warn');
+    expect(warned).toHaveLength(1);
+    expect(warned[0].join(' ')).toContain('store.fluxline.pro');
   });
 });

@@ -16,9 +16,11 @@ import {
 import { COMPANY_VALUES } from '@/lib/siteContent';
 import {
   RCF_BRIEF,
+  RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
+  RCF_TRADEMARK,
 } from '@/lib/resonanceCore';
 import Link from 'next/link';
 
@@ -614,8 +616,8 @@ export default function Home() {
                     }}
                   >
                     <img
-                      src='/images/RCF_Logo.jpeg'
-                      alt='The Resonance Core Framework™'
+                      src={RCF_LOGO_IMAGE}
+                      alt={RCF_TRADEMARK}
                       style={{
                         display: 'block',
                         width: '100%',
@@ -638,7 +640,7 @@ export default function Home() {
                       color: 'var(--fx-text-bright)',
                     }}
                   >
-                    The Resonance Core Framework™
+                    {RCF_TRADEMARK}
                   </div>
                   <div
                     style={{
@@ -675,7 +677,7 @@ export default function Home() {
                   letterSpacing: '-.01em',
                 }}
               >
-                The Resonance Core Framework™
+                {RCF_TRADEMARK}
               </h2>
               <p
                 style={{

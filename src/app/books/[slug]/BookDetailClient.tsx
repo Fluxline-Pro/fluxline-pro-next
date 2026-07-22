@@ -8,7 +8,7 @@ import FxButton from '@/theme/components/dsm/FxButton';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
-import { RCF_OFFERINGS, STOREFRONT_URL } from '../constants';
+import { RCF_BOOK_SLUG, RCF_OFFERINGS, STOREFRONT_URL } from '../constants';
 import { RCF_PREVIEW_PDF, RCF_RELEASE_WINDOW } from '@/lib/resonanceCore';
 
 interface BookDetailClientProps {
@@ -22,9 +22,14 @@ interface BookDetailClientProps {
  * print fulfillment, entitlements — is owned entirely by store.fluxline.pro, so
  * this site only announces and hands off. No prices are quoted here on purpose:
  * the storefront catalog is the authority on pricing.
+ *
+ * `/books/[slug]` is a generic route, but the RCF offerings (its workbook, its
+ * bundles, its lesson library) describe one title. Anything that isn't the RCF
+ * book gets the neutral hand-off instead of another book's product list.
  */
 function AvailabilitySection({ book }: { book: Book }) {
   const isReleased = book.status === 'available';
+  const isRcf = book.slug === RCF_BOOK_SLUG;
 
   return (
     <div
@@ -36,22 +41,35 @@ function AvailabilitySection({ book }: { book: Book }) {
     >
       <FxCallout
         tone='gold'
-        title={isReleased ? 'Available now' : `Coming ${RCF_RELEASE_WINDOW}`}
+        title={
+          isReleased
+            ? 'Available now'
+            : isRcf
+              ? `Coming ${RCF_RELEASE_WINDOW}`
+              : 'Coming soon'
+        }
       >
         {isReleased ? (
           <>
             Every edition is sold through the Fluxline store. Pricing, formats,
             and shipping are handled there.
           </>
-        ) : (
+        ) : isRcf ? (
           <>
             The book and its companion workbook are in final production. When
             they launch, every edition will be available from the Fluxline
             store — there is nothing to pre-order here.
           </>
+        ) : (
+          <>
+            This title is still in production. When it launches it will be
+            available from the Fluxline store — there is nothing to pre-order
+            here.
+          </>
         )}
       </FxCallout>
 
+      {isRcf && (
       <div>
         <div
           style={{
@@ -135,6 +153,7 @@ function AvailabilitySection({ book }: { book: Book }) {
           ))}
         </div>
       </div>
+      )}
 
       <div
         style={{
@@ -146,9 +165,11 @@ function AvailabilitySection({ book }: { book: Book }) {
         <FxButton variant='primary' href={STOREFRONT_URL}>
           Visit the Fluxline Store
         </FxButton>
-        <FxButton variant='outline' href={RCF_PREVIEW_PDF}>
-          Read the Introduction Preview
-        </FxButton>
+        {isRcf && (
+          <FxButton variant='outline' href={RCF_PREVIEW_PDF}>
+            Read the Introduction Preview
+          </FxButton>
+        )}
       </div>
     </div>
   );
@@ -160,6 +181,9 @@ function AvailabilitySection({ book }: { book: Book }) {
  */
 export default function BookDetailClient({ book }: BookDetailClientProps) {
   const router = useRouter();
+
+  // Only the RCF book has a published release window to advertise.
+  const isRcf = book.slug === RCF_BOOK_SLUG;
 
   // Prepare metadata
   const metadata = [
@@ -175,7 +199,9 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
       value:
         book.status === 'available'
           ? 'Available Now'
-          : `Coming ${RCF_RELEASE_WINDOW}`,
+          : isRcf
+            ? `Coming ${RCF_RELEASE_WINDOW}`
+            : 'Coming Soon',
     },
   ];
 
@@ -219,14 +245,21 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
     ],
     cta: {
       title: 'Ready to structure the shift?',
-      description:
-        'Explore the Resonance Core Framework™ as a guided engagement, or tell us where you are and we will map the right first step.',
+      description: isRcf
+        ? 'Explore the Resonance Core Framework™ as a guided engagement, or tell us where you are and we will map the right first step.'
+        : 'Tell us where you are and where you are going, and we will map the right first step together.',
       buttons: [
-        {
-          label: 'Resonance Core Services',
-          onClick: () => router.push('/services/resonance-core'),
-          variant: 'primary',
-        },
+        isRcf
+          ? {
+              label: 'Resonance Core Services',
+              onClick: () => router.push('/services/resonance-core'),
+              variant: 'primary' as const,
+            }
+          : {
+              label: 'Explore Our Services',
+              onClick: () => router.push('/services'),
+              variant: 'primary' as const,
+            },
         {
           label: 'Get in Touch',
           onClick: () => router.push('/contact'),

@@ -13,6 +13,16 @@
 /** Where purchase actually happens once the book ships. */
 export const STOREFRONT_URL = 'https://store.fluxline.pro';
 
+/**
+ * Slug of the RCF book.
+ *
+ * `RCF_OFFERINGS` below describes that title specifically — its workbook, its
+ * bundles, its lesson library. The `/books/[slug]` route is generic, so it
+ * checks against this before rendering any of it; every other book falls back
+ * to a neutral storefront hand-off.
+ */
+export const RCF_BOOK_SLUG = 'resonance-core-framework';
+
 /** Lede under the page heading. */
 export const RCF_LEDE =
   'The book and companion workbook that put The Resonance Core Framework™ in your hands. Both are in final production.';
