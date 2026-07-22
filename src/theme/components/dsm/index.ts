@@ -2,6 +2,7 @@ export { default as FxButton } from './FxButton';
 export { default as FxCard } from './FxCard';
 export { default as FxChip } from './FxChip';
 export { default as FxSectionHeading } from './FxSectionHeading';
+export { default as FxGroupLabel } from './FxGroupLabel';
 export { default as FxStatCard } from './FxStatCard';
 export { default as FxCallout } from './FxCallout';
 export { default as FxCTABand } from './FxCTABand';

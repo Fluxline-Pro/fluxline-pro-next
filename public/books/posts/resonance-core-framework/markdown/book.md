@@ -19,49 +19,18 @@ tags:
   - 'Self-Help'
   - 'Personal Development'
 featured: true
-status: 'pre-order'
+status: 'coming-soon'
 formats:
   - 'hardcover'
   - 'softcover'
   - 'ebook'
-prices:
-  - format: 'hardcover'
-    price: 54.99
-    currency: 'USD'
-    retailer: 'Amazon'
-    url: '#'
-  - format: 'softcover'
-    price: 39.99
-    currency: 'USD'
-    retailer: 'Amazon'
-    url: '#'
-  - format: 'ebook'
-    price: 24.99
-    currency: 'USD'
-    retailer: 'Fluxline.pro'
-    url: '#'
-retailers:
-  - name: 'Amazon'
-    url: '#'
-    formats: ['hardcover', 'softcover', 'ebook']
-    icon: 'ShoppingCart'
-  - name: 'Barnes & Noble'
-    url: '#'
-    formats: ['hardcover', 'softcover', 'ebook']
-    icon: 'BookAnswers'
-  - name: 'Apple Books'
-    url: '#'
-    formats: ['ebook']
-    icon: 'BookAnswers'
-  - name: 'Local Bookstores'
-    url: '#'
-    formats: ['hardcover', 'softcover']
-    icon: 'BookAnswers'
-directPurchaseAvailable: true
-directPurchasePrice: 24.99
+  - 'audiobook'
+# Pricing and retail links live in the storefront catalog (store.fluxline.pro).
+# This site announces the book; it never quotes a price or sells a copy.
+prices: []
+retailers: []
+directPurchaseAvailable: false
 includesWorkbook: true
-workbookPrice: 19.99
-bundlePrice: 39.99
 pageCount: 342
 language: 'English'
 dimensions: '6 x 9 inches'
@@ -83,7 +52,7 @@ The Resonance Core Framework is more than just a book—it's a complete system f
 ### What You'll Learn
 
 - **The Foundation**: Understand the core principles of resonance and how they apply to your life and work
-- **The Framework**: Master the five pillars of The Resonance Core Framework
+- **The Framework**: Master the DRIVE Model and the DRIVE Alignment Loop
 - **Practical Application**: Implement proven strategies with step-by-step guidance
 - **Real-World Examples**: Learn from case studies and success stories
 - **Workbook Exercises**: Apply concepts immediately with guided exercises
@@ -119,12 +88,13 @@ The Fluxline Resonance Group is a strategic consulting firm specializing in tran
    - The Science Behind Resonance
    - Why Traditional Approaches Fall Short
 
-2. **The Five Pillars**
-   - Pillar 1: Self-Awareness
-   - Pillar 2: Alignment
-   - Pillar 3: Action
-   - Pillar 4: Adaptation
-   - Pillar 5: Sustainability
+2. **The DRIVE Model**
+   - Spark: Sparking curiosity
+   - Coherence: Testing viability
+   - Activation: Initiating the DRIVE Alignment Loop
+   - Momentum: Compounding identity
+   - Endurance: Sustaining the DRIVE
+   - Expansion: Identity evolution
 
 3. **Implementing the Framework**
    - Personal Implementation
@@ -161,13 +131,20 @@ Our eBook editions include enhanced digital features:
 - **Multi-Device Access**: Read on any device
 - **Regular Updates**: Access to updated content and resources
 
-Purchase the PDF edition directly from Fluxline.pro and receive:
+## Where To Get It
 
-- **Discounted Pricing**: Save compared to retail editions
-- **Instant Access**: Download immediately after purchase
-- **Personalized Copy**: Each PDF is watermarked with your information
-- **Bundle Savings**: Purchase book + workbook together and save
+Every edition — hardcover, softcover, eBook, audiobook, the companion workbook,
+and the bundles — will be sold through the Fluxline store at
+[store.fluxline.pro](https://store.fluxline.pro). Pricing is announced there.
 
-## Reviews (Coming Soon)
+The Kindle edition will be sold and delivered through Amazon.
 
-**Available April 2026**
+## Read The Introduction Now
+
+The introduction preview is already published. It covers why self-help usually
+fails, the personal story behind the framework, the universal truths it rests
+on, and what the book and workbook will guide you through.
+
+**[Download the Introduction Preview PDF](/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf)**
+
+**Coming Spring 2026**
