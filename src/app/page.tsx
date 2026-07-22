@@ -14,6 +14,12 @@ import {
   FLUXLINE_SECONDARY_TAGLINE,
 } from '@/app/services/constants';
 import { COMPANY_VALUES } from '@/lib/siteContent';
+import {
+  RCF_BRIEF,
+  RCF_ONE_LINER,
+  RCF_PREVIEW_PDF,
+  RCF_RELEASE_WINDOW,
+} from '@/lib/resonanceCore';
 import Link from 'next/link';
 
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
@@ -193,7 +199,7 @@ export default function Home() {
                   marginBottom: 14,
                 }}
               >
-                The Resonance Core Framework
+                What Guides Us
               </div>
               <h3
                 style={{
@@ -571,9 +577,246 @@ export default function Home() {
       </section>
 
       <section
-        id='content'
+        id='resonance-core'
         className='fx-snap-section'
         style={{ padding: '88px 0' }}
+      >
+        <FxContainer>
+          <FxRailLayout
+            parallax
+            rail={
+              <FxReveal
+                variant='left'
+                style={{
+                  background: 'var(--fx-surface-inset)',
+                  border: '1px solid var(--fx-border)',
+                  borderRadius: 14,
+                  overflow: 'hidden',
+                }}
+              >
+                <Link
+                  href='/resonance-core'
+                  style={{
+                    display: 'block',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                  }}
+                >
+                  <div
+                    style={{
+                      background: '#000',
+                      padding: 24,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      aspectRatio: '1/1',
+                      maxHeight: 'clamp(200px, 40vw, 100%)',
+                    }}
+                  >
+                    <img
+                      src='/images/RCF_Logo.jpeg'
+                      alt='The Resonance Core Framework™'
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                      }}
+                    />
+                  </div>
+                </Link>
+                <div
+                  style={{
+                    padding: '16px 20px',
+                    borderTop: '1px solid var(--fx-border)',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 17,
+                      color: 'var(--fx-text-bright)',
+                    }}
+                  >
+                    The Resonance Core Framework™
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: 'var(--fx-text-soft)',
+                      marginTop: 3,
+                    }}
+                  >
+                    Resonance, not force.
+                  </div>
+                </div>
+              </FxReveal>
+            }
+          >
+            <FxReveal>
+              <div
+                style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-teal)',
+                  marginBottom: 14,
+                }}
+              >
+                The Framework
+              </div>
+              <h2
+                style={{
+                  fontSize: 34,
+                  fontWeight: 700,
+                  color: 'var(--fx-text-heading)',
+                  margin: '0 0 10px',
+                  letterSpacing: '-.01em',
+                }}
+              >
+                The Resonance Core Framework™
+              </h2>
+              <p
+                style={{
+                  fontSize: 19,
+                  fontWeight: 600,
+                  color: 'var(--fx-teal)',
+                  margin: '0 0 16px',
+                }}
+              >
+                {RCF_ONE_LINER}
+              </p>
+              {RCF_BRIEF.map((para, i) => (
+                <p
+                  key={para.slice(0, 24)}
+                  style={{
+                    fontSize: 16,
+                    lineHeight: 1.7,
+                    margin: i === 0 ? '0 0 14px' : 0,
+                  }}
+                >
+                  {para}
+                </p>
+              ))}
+            </FxReveal>
+
+            <FxReveal delay={100}>
+              <FxCard
+                variant='feature'
+                interactive
+                href='/resonance-core'
+                style={{ padding: 26 }}
+              >
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 18,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 8,
+                  }}
+                >
+                  The full explanation
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    color: 'var(--fx-text-muted)',
+                    marginBottom: 14,
+                  }}
+                >
+                  The premise, the DRIVE Model, what it&apos;s built on, and who
+                  it&apos;s for. Send anyone here who asks what the RCF actually
+                  is.
+                </div>
+                <span
+                  style={{
+                    fontSize: 12.5,
+                    fontWeight: 700,
+                    letterSpacing: '.08em',
+                    color: 'var(--fx-teal)',
+                  }}
+                >
+                  WHAT THE FRAMEWORK IS ›
+                </span>
+              </FxCard>
+            </FxReveal>
+
+            <FxReveal delay={200}>
+              <FxCard
+                variant='raised'
+                interactive
+                href='/books'
+                style={{ padding: 22 }}
+              >
+                <div
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: '.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--fx-gold)',
+                    marginBottom: 8,
+                  }}
+                >
+                  Coming {RCF_RELEASE_WINDOW}
+                </div>
+                <div
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 16,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 6,
+                  }}
+                >
+                  The book &amp; companion workbook
+                </div>
+                <div
+                  style={{
+                    fontSize: 13.5,
+                    lineHeight: 1.55,
+                    color: 'var(--fx-text-muted)',
+                    marginBottom: 12,
+                  }}
+                >
+                  The framework in print, digital, and audio — plus the workbook
+                  that turns it into daily practice.
+                </div>
+                <span
+                  style={{
+                    fontSize: 12.5,
+                    fontWeight: 700,
+                    letterSpacing: '.08em',
+                    color: 'var(--fx-gold)',
+                  }}
+                >
+                  SEE WHAT&apos;S COMING ›
+                </span>
+              </FxCard>
+            </FxReveal>
+
+            <FxReveal delay={300}>
+              <FxCallout tone='gold' title='Read the introduction now.'>
+                The introduction preview is already published — why self-help
+                usually fails, where the framework came from, and who it&apos;s
+                built for.{' '}
+                <Link
+                  href={RCF_PREVIEW_PDF}
+                  style={{ color: 'var(--fx-gold)', fontWeight: 600 }}
+                >
+                  Download the preview PDF →
+                </Link>
+              </FxCallout>
+            </FxReveal>
+          </FxRailLayout>
+        </FxContainer>
+      </section>
+
+      <section
+        id='content'
+        className='fx-snap-section'
+        style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
       >
         <FxContainer>
           <FxReveal style={{ maxWidth: 680, marginBottom: 34 }}>
@@ -780,7 +1023,7 @@ export default function Home() {
       <section
         id='contact'
         className='fx-snap-section'
-        style={{ padding: '88px 0', background: 'var(--fx-surface-alt)' }}
+        style={{ padding: '88px 0' }}
       >
         <FxContainer>
           <FxReveal>

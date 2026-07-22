@@ -4,44 +4,43 @@ import { getAllBooks } from './lib/bookLoader';
 import BooksListingClient from './BooksListingClient';
 
 export const metadata: Metadata = {
-  title: 'Books - Fluxline',
+  title: 'The Resonance Core Framework™ — Books | Fluxline',
   description:
-    'Explore our collection of books on transformation, business strategy, and personal development. Purchase directly or through major retailers.',
+    'The Resonance Core Framework™ explained: what it is, the DRIVE Model, who it is for, and what will be offered with the forthcoming book and companion workbook.',
   keywords:
-    'books, resonance core framework, transformation, business books, self-help, professional development',
+    'resonance core framework, RCF, DRIVE model, book, companion workbook, identity, alignment, personal transformation, Terence Waters, Fluxline',
   openGraph: {
-    title: 'Books - Fluxline',
+    title: 'The Resonance Core Framework™ — Coming Soon',
     description:
-      'Explore our collection of transformative books and resources.',
+      'A practical system for making change that holds — built on alignment rather than force. Read what the framework is and what ships with the book.',
     url: 'https://www.fluxline.pro/books',
     siteName: 'Fluxline',
     type: 'website',
     images: [
       {
-        url: '/images/FluxlineLogo.png',
+        url: '/images/RCF_Logo.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Fluxline Books',
+        alt: 'The Resonance Core Framework™',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Books - Fluxline',
+    title: 'The Resonance Core Framework™ — Coming Soon',
     description:
-      'Explore our collection of transformative books and resources.',
-    images: ['/images/FluxlineLogo.png'],
+      'A practical system for making change that holds — built on alignment rather than force.',
+    images: ['/images/RCF_Logo.jpeg'],
   },
   alternates: {
     canonical: '/books',
   },
-  // For now, we will noindex the books page until we have the book content and purchase options to show
-  // This is to prevent a thin content page from being indexed by search engines
-  // robots: {
-  //   index: true,
-  //   follow: true,
-  // },
-  robots: 'noindex, nofollow',
+  // The page now carries the full framework explainer rather than a thin
+  // pre-launch stub, so it is safe to index.
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 /**

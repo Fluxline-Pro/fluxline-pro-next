@@ -12,6 +12,14 @@ Welcome! This guide will walk you through adding a new book to the Fluxline Pro 
 
 That's it! Your book will automatically appear on the books page.
 
+> **Purchase is not handled here.** Selling — Stripe checkout, print fulfillment,
+> entitlements — is owned entirely by the storefront at
+> [store.fluxline.pro](https://store.fluxline.pro). This site announces books and
+> hands off. The `prices`, `retailers`, `directPurchase*`, `workbookPrice`, and
+> `bundlePrice` frontmatter fields documented below are no longer rendered by any
+> page; leave them empty (`prices: []`, `retailers: []`) and set pricing in the
+> storefront catalog instead.
+
 ---
 
 ## Step-by-Step Guide

@@ -28,6 +28,7 @@ const BACK_ROUTES: Record<string, { label: string; href: string }> = {
   '/contact': { label: '← Back to Home', href: '/' },
   '/portfolio': { label: '← Back to Home', href: '/' },
   '/books': { label: '← Back to Home', href: '/' },
+  '/resonance-core': { label: '← Back to Home', href: '/' },
   '/videos': { label: '← Back to Home', href: '/' },
   '/case-studies': { label: '← Back to Home', href: '/' },
   '/press-release': { label: '← Back to Home', href: '/' },
