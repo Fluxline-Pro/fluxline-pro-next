@@ -112,6 +112,13 @@ export default function ServiceDetailPage() {
         'Change management and transformation facilitation',
         'Leadership coaching and team dynamics',
       ],
+      'fractional-leadership': [
+        'Fractional CTO / architect — strategy, stack decisions, and technical direction',
+        'Fractional design lead — system vision, critique, and quality bar',
+        'Team mentorship and capability building',
+        'Stakeholder communication and roadmap facilitation',
+        'Audit and modernization of existing systems',
+      ],
     };
     return featuresMap[serviceId] || [];
   };
@@ -359,11 +366,30 @@ export default function ServiceDetailPage() {
             </>
           )}
 
+          {/*
+           * Fractional Leadership — Pricing & Scroll placeholders (coming soon)
+           * Uncomment these sections when pricing tiers and/or a related white paper
+           * are ready to publish for the fractional-leadership service.
+           *
+           * Pricing:
+           * Add 'fractional-leadership' key to SERVICE_PRICING in pricing-data.ts,
+           * then this block will render automatically via the {pricingData && ...} check above.
+           *
+           * Scroll / White Paper:
+           * Add a 'fractional-leadership' key to SERVICE_SCROLL_MAPPING in scroll-mapping.ts
+           * and create the corresponding scroll entry in scrollsData.ts,
+           * then the {relatedScroll && ...} block above will render automatically.
+           */}
+
           {/* CTA Section */}
           <FxReveal>
             <FxCTABand
               title='Ready to Begin?'
-              body='Book a 20-30 minute consultation to explore your personal identity and aligning your decisions with it.'
+              body={
+                service.id === 'fractional-leadership'
+                  ? 'Ready to bring senior leadership into your team without the full-time cost? Book a consultation to map out your immediate needs and where fractional direction can make the most impact.'
+                  : 'Book a 20-30 minute consultation to explore your personal identity and aligning your decisions with it.'
+              }
               primaryLabel='Book a Consultation'
               primaryHref='/bookings'
             />
