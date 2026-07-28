@@ -29,6 +29,9 @@ export const EDUCATION_TRAINING_SUMMARY =
 export const RESONANCE_CORE_SUMMARY =
   "<strong>A transformational system for decoding your cues, reframing your narratives, and authoring the identity you choose to live from.</strong> The Resonance Core Framework™ is a guided, structured process that helps you understand the patterns shaping your life — somatic, emotional, narrative, and identity based. Through archetypal mapping, reflective inquiry, and identity recalibration, you learn to align your inner world with the life, work, and relationships you're trying to build.<br /><br />This isn't generic coaching. This is <strong>identity work</strong>, <strong>narrative work</strong>, and <strong>embodiment work</strong> — woven into a single, coherent system.";
 
+export const FRACTIONAL_LEADERSHIP_SUMMARY =
+  "<strong>Embedded design and technology leadership for a season — senior direction without a full-time hire.</strong> You get the decision-making velocity of a CTO or design director, scoped to the work that actually needs it, without the overhead of a permanent executive.<br /><br />Whether you're navigating a critical growth phase, launching a new product, or rebuilding your technical or design foundation, Fluxline provides the senior perspective and hands-on direction to move fast with precision. Every engagement is scoped to your timeline, team, and the specific leadership gap you need to fill.";
+
 export type ServiceCategoryType =
   | 'body-practice'
   | 'brand-digital'
@@ -203,6 +206,38 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         question: 'Can Fluxline help with content ecosystem design and content strategy?',
         answer:
           "Yes. Content ecosystem design — structuring, tagging, publishing, and distributing content so it works as a coherent, searchable, AI-ingestible knowledge base — is one of Fluxline's core competencies.",
+      },
+    ],
+  },
+  {
+    id: 'fractional-leadership',
+    title: 'Fractional Leadership',
+    description:
+      'Embedded senior leadership for a season — CTO or design director direction without the full-time hire.',
+    summary: FRACTIONAL_LEADERSHIP_SUMMARY,
+    icon: 'Crown',
+    path: '/services/fractional-leadership',
+    category: 'depth-strategy',
+    faqs: [
+      {
+        question: 'What does Fractional Leadership mean at Fluxline?',
+        answer:
+          "Fractional Leadership means you get access to senior-level CTO or design director expertise on a part-time, engagement-based basis. Fluxline embeds into your team for a defined season — providing strategic direction, technical or design oversight, and hands-on leadership without the cost or commitment of a full-time executive hire.",
+      },
+      {
+        question: 'Who is Fractional Leadership designed for?',
+        answer:
+          'It is designed for small businesses, startups, and growing teams that need experienced leadership to navigate a critical phase — a product launch, a technical pivot, a design system overhaul, or a scaling challenge — but are not yet ready or able to hire a full-time executive.',
+      },
+      {
+        question: 'What is the difference between Fractional CTO and Fractional Design Lead?',
+        answer:
+          'A Fractional CTO focuses on technical strategy, stack decisions, architecture, and engineering direction. A Fractional Design Lead focuses on design system vision, quality standards, critique processes, and cross-functional design leadership. Fluxline can provide either or both depending on your team composition and current gaps.',
+      },
+      {
+        question: 'How long does a Fractional Leadership engagement typically last?',
+        answer:
+          'Engagements are scoped to your specific season of need. Typical arrangements range from one to six months, with options to extend. Every engagement is defined at the outset so expectations are aligned on scope, availability, and deliverables.',
       },
     ],
   },

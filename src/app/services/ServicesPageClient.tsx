@@ -35,6 +35,12 @@ const CATEGORY_SECTIONS: {
     description:
       'Physical training and transformational frameworks rooted in identity work and embodiment.',
   },
+  {
+    key: 'depth-strategy',
+    title: 'Strategy & Leadership',
+    description:
+      'Senior-level strategic direction and fractional leadership for founders and growing teams.',
+  },
 ];
 
 export default function ServicesPageClient() {

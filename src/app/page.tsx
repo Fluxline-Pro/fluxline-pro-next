@@ -27,6 +27,7 @@ import Link from 'next/link';
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
   { key: 'brand-digital', label: 'Brand & Digital Presence' },
   { key: 'body-practice', label: 'Body & Practice' },
+  { key: 'depth-strategy', label: 'Strategy & Leadership' },
 ];
 
 export default function Home() {
@@ -482,7 +483,10 @@ export default function Home() {
                   }}
                 >
                   {SERVICE_CATEGORIES.filter(
-                    (s) => s.category === group.key
+                    (s) =>
+                      s.category === group.key &&
+                      s.id !== 'consulting' &&
+                      s.id !== 'education-training'
                   ).map((service) => (
                     <FxCard
                       key={service.id}
