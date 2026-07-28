@@ -388,7 +388,7 @@ export default function ServiceDetailPage() {
               body={
                 service.id === 'fractional-leadership'
                   ? 'Ready to bring senior leadership into your team without the full-time cost? Book a consultation to map out your immediate needs and where fractional direction can make the most impact.'
-                  : 'Book a 20-30 minute consultation to explore your personal identity and aligning your decisions with it.'
+                  : 'Book a 20-30 minute consultation to explore your organization\'s goals and identity so we can unleash it amongst your leadership teams and staff.'
               }
               primaryLabel='Book a Consultation'
               primaryHref='/bookings'

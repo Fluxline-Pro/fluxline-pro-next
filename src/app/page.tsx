@@ -483,7 +483,10 @@ export default function Home() {
                   }}
                 >
                   {SERVICE_CATEGORIES.filter(
-                    (s) => s.category === group.key && s.id !== 'consulting'
+                    (s) =>
+                      s.category === group.key &&
+                      s.id !== 'consulting' &&
+                      s.id !== 'education-training'
                   ).map((service) => (
                     <FxCard
                       key={service.id}
