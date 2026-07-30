@@ -25,8 +25,14 @@ describe('RootLayout', () => {
     const adsenseScriptUrl =
       'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7691902367885014';
 
-    expect(html).toContain(adsenseScriptUrl);
-    expect(html).toContain('crossorigin="anonymous"');
-    expect(html.split(adsenseScriptUrl)).toHaveLength(2);
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const scripts = doc.querySelectorAll(`script[src="${adsenseScriptUrl}"]`);
+
+    expect(scripts.length).toBe(1);
+
+    const script = scripts[0] as HTMLScriptElement;
+    expect(doc.head.contains(script)).toBe(true);
+    expect(script.hasAttribute('async')).toBe(true);
+    expect(script.getAttribute('crossorigin')).toBe('anonymous');
   });
 });
