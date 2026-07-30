@@ -11,6 +11,7 @@ import FxChip from '@/theme/components/dsm/FxChip';
 import FxButton from '@/theme/components/dsm/FxButton';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxGroupLabel from '@/theme/components/dsm/FxGroupLabel';
+import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import { Book } from './types';
 import { RCF_LEDE, RCF_OFFERINGS, STOREFRONT_URL } from './constants';
 import {
@@ -87,7 +88,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       {/* Coming soon feature card                                          */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='gold' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel tone='gold'>Coming Soon</FxGroupLabel>
           <FxCard
             interactive
@@ -179,7 +180,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
               </div>
             </div>
           </FxCard>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
@@ -187,7 +188,11 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       {/* /resonance-core so the two pages don't say the same thing twice.  */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section id='framework' style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel
+          tone='alt'
+          id='framework'
+          style={{ marginBottom: SECTION_GAP }}
+        >
           <FxGroupLabel>The Framework</FxGroupLabel>
           <h2
             style={{
@@ -231,14 +236,18 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
               </FxButton>
             </div>
           </FxCard>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* What will be offered                                              */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section id='offerings' style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel
+          tone='inset'
+          id='offerings'
+          style={{ marginBottom: SECTION_GAP }}
+        >
           <FxGroupLabel tone='gold'>Coming Soon</FxGroupLabel>
           <h2
             style={{
@@ -338,14 +347,14 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
               <strong>Stay tuned!</strong>
             </em>
           </FxCallout>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* The Resonant Identity podcast                                     */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='feature' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel tone='gold'>An Extension Of The Framework</FxGroupLabel>
           <FxCard
             variant='band'
@@ -403,14 +412,14 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
               </div>
             </div>
           </FxCard>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* Working with the framework directly                               */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>Go Deeper</FxGroupLabel>
           <div
             className='fx-g2'
@@ -502,7 +511,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
               </span>
             </FxCard>
           </div>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
@@ -510,7 +519,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       {/* ---------------------------------------------------------------- */}
       {otherBooks.length > 0 && (
         <FxReveal>
-          <section style={{ marginBottom: SECTION_GAP }}>
+          <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
             <FxGroupLabel>More From The Library</FxGroupLabel>
             <div
               className='fx-g2'
@@ -562,7 +571,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                 </FxCard>
               ))}
             </div>
-          </section>
+          </FxSectionPanel>
         </FxReveal>
       )}
 

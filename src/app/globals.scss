@@ -497,6 +497,31 @@ html[data-fx-motion='reduce'] *::after {
     flex-direction: column !important;
     align-items: flex-start !important;
   }
+  /* Painted section panels tighten their inset on small screens so the content
+     column doesn't lose width to two sets of padding. */
+  .fx-secpanel:not(.fx-secpanel-plain) {
+    padding: var(--fx-space-xl) var(--fx-space-m) !important;
+  }
+}
+
+/* =============================================
+   SPLIT: media rail beside a card grid
+   Collapses to a single stacked column on tablet and below, so the diagram
+   sits above the cards rather than squeezing them.
+   ============================================= */
+
+.fx-media-split {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: var(--fx-space-xl);
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .fx-media-split {
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+  }
 }
 
 /* =============================================

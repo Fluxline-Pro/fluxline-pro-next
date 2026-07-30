@@ -9,6 +9,7 @@ export { default as FxCTABand } from './FxCTABand';
 export { default as FxSelect } from './FxSelect';
 export { default as FxSwitch } from './FxSwitch';
 export { default as FxContainer } from './FxContainer';
+export { default as FxSectionPanel } from './FxSectionPanel';
 export { default as FxRailLayout } from './FxRailLayout';
 export { default as FxNav } from './FxNav';
 export { default as FxUserMenu } from './FxUserMenu';

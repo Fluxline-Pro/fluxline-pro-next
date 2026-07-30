@@ -42,20 +42,20 @@ export const RCF_BRIEF: string[] = [
  */
 export const RCF_EXPLAINER: { heading: string; body: string }[] = [
   {
-    heading: 'The problem it was built to solve',
-    body: 'Most self-help tells you what to do, but not how to do it. The result is a cycle most of us know: inspiration, temporary motivation, confusion, inaction — then another book, another podcast, another fix. The change never sets, because it was never built on anything structural.',
+    heading: 'The problem it solves',
+    body: 'Most self-help tells you what to do, but not how. You get the familiar cycle: inspiration, motivation, confusion, inaction — then another book. The change never sets, because nothing structural was holding it up.',
   },
   {
-    heading: 'The premise',
-    body: 'People make their best decisions when they act in alignment with who they are. Not who they were told to be, and not who they think they should be — who they actually are, across identity, values, emotion, logic, and lived experience. Resonance is the felt sense of coherence between those layers. When it is present, decisions get easier and effort compounds. When it is absent, discipline alone has to carry the whole load, and eventually it drops it.',
+    heading: 'The idea it rests on',
+    body: 'You decide best when you act as who you actually are — not who you were told to be. Resonance is the felt coherence between your identity, values, emotion, logic, and experience. With it, effort compounds. Without it, discipline carries the whole load, and eventually drops it.',
   },
   {
-    heading: 'What the framework does',
-    body: 'The Resonance Core Framework™ turns that premise into something you can actually run. It gives you language for what you are experiencing, a repeatable method for testing decisions against your values, and scorecards for tracking alignment over time — so change becomes measurable instead of aspirational. It draws on universal human truths, psychological research, behavioral patterns, and systems thinking, and every part of it was tested in practice before it was written down.',
+    heading: 'What it does',
+    body: 'The framework turns this idea into something you can run. You get language for what you are experiencing, a repeatable way to test decisions against your values, and scorecards that track alignment over time. Change becomes measurable instead of aspirational.',
   },
   {
     heading: 'Where it came from',
-    body: 'The framework did not begin as a business initiative. It began as a necessity — built while leaving a six-figure job to found Fluxline, and refined daily through journaling, decision tracking, and pattern observation until the system held under real pressure. It is documented experience first and theory second.',
+    body: "Not a business initiative — a necessity. It was built while Fluxline's owner left a six-figure job to found Fluxline, then refined daily through journaling, decision tracking, and pattern observation until it held under real pressure. Documented experience first, theory second.",
   },
 ];
 

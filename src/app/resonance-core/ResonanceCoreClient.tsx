@@ -10,6 +10,8 @@ import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import FxChip from '@/theme/components/dsm/FxChip';
 import FxButton from '@/theme/components/dsm/FxButton';
 import FxReveal from '@/theme/components/dsm/FxReveal';
+import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
+import DriveModelDiagram from '@/assets/images/drive_model_framework.jpeg';
 import {
   DRIVE_STEPS,
   PODCAST_BLURB,
@@ -22,6 +24,7 @@ import {
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
 } from '@/lib/resonanceCore';
+import { StaggeredGrid } from '@/animations/staggered-container';
 
 const SECTION_GAP = 'var(--fx-space-xxxxl)';
 
@@ -106,12 +109,22 @@ export default function ResonanceCoreClient() {
       {/* What it is                                                        */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>What It Is</FxGroupLabel>
           <h2 style={sectionTitle}>Resonance, not force</h2>
-          <p style={sectionLede}>
-            The short version, for anyone who has been sent here to find out.
-          </p>
+          <FxCallout
+            tone='gold'
+            title='The premise, in one line.'
+            style={{
+              marginTop: 'var(--fx-space-xl)',
+              marginBottom: 'var(--fx-space-l)',
+            }}
+          >
+            <em>
+              People make their best decisions when they act in alignment with
+              who they are.
+            </em>
+          </FxCallout>
 
           <div
             className='fx-g2'
@@ -122,7 +135,11 @@ export default function ResonanceCoreClient() {
             }}
           >
             {RCF_EXPLAINER.map((block) => (
-              <FxCard key={block.heading} interactive style={{ padding: '28px 28px 24px' }}>
+              <FxCard
+                key={block.heading}
+                interactive
+                style={{ padding: '28px 28px 24px' }}
+              >
                 <h3
                   style={{
                     fontSize: 'var(--fx-h3-size)',
@@ -147,25 +164,14 @@ export default function ResonanceCoreClient() {
               </FxCard>
             ))}
           </div>
-
-          <FxCallout
-            tone='gold'
-            title='The premise, in one line.'
-            style={{ marginTop: 'var(--fx-space-l)' }}
-          >
-            <em>
-              People make their best decisions when they act in alignment with
-              who they are.
-            </em>
-          </FxCallout>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* The DRIVE Model                                                   */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='band' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>The DRIVE Model</FxGroupLabel>
           <h2 style={sectionTitle}>Six steps, one loop</h2>
           <p style={sectionLede}>
@@ -175,57 +181,81 @@ export default function ResonanceCoreClient() {
             against your values before it compounds.
           </p>
 
-          <div
-            className='fx-g3'
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: 'var(--fx-space-m)',
-            }}
-          >
-            {DRIVE_STEPS.map((step, i) => (
-              <FxCard key={step.step} interactive variant='raised' style={{ padding: 22 }}>
-                <div
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 700,
-                    letterSpacing: '.08em',
-                    color: 'var(--fx-teal)',
-                    marginBottom: 'var(--fx-space-xs)',
-                  }}
+          {/* Diagram rail on the left, step cards on the right; the split
+              collapses to a single stacked column at tablet and below. */}
+          <div className='fx-media-split'>
+            <img
+              src={DriveModelDiagram.src}
+              alt='The DRIVE Model — Spark, Coherence, Activation, Momentum, Endurance, and Expansion arranged as a continuous alignment loop.'
+              style={{
+                display: 'block',
+                width: '100%',
+                maxWidth: 320,
+                aspectRatio: '1 / 1',
+                objectFit: 'cover',
+                borderRadius: 'var(--fx-radius-card)',
+                border: '1px solid var(--fx-border)',
+              }}
+            />
+
+            <div
+              className='fx-g2'
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: 'var(--fx-space-m)',
+                width: '100%',
+              }}
+            >
+              {DRIVE_STEPS.map((step, i) => (
+                <FxCard
+                  key={step.step}
+                  interactive
+                  variant='raised'
+                  style={{ padding: 22 }}
                 >
-                  {String(i + 1).padStart(2, '0')} · {step.step.toUpperCase()}
-                </div>
-                <div
-                  style={{
-                    fontWeight: 700,
-                    fontSize: 16,
-                    color: 'var(--fx-text-heading)',
-                    marginBottom: 'var(--fx-space-xxs)',
-                  }}
-                >
-                  {step.title}
-                </div>
-                <div
-                  style={{
-                    fontSize: 13.5,
-                    lineHeight: 1.55,
-                    color: 'var(--fx-text-muted)',
-                  }}
-                >
-                  {step.body}
-                </div>
-              </FxCard>
-            ))}
+                  <div
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 700,
+                      letterSpacing: '.08em',
+                      color: 'var(--fx-teal)',
+                      marginBottom: 'var(--fx-space-xs)',
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')} · {step.step.toUpperCase()}
+                  </div>
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 16,
+                      color: 'var(--fx-text-heading)',
+                      marginBottom: 'var(--fx-space-xxs)',
+                    }}
+                  >
+                    {step.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13.5,
+                      lineHeight: 1.55,
+                      color: 'var(--fx-text-muted)',
+                    }}
+                  >
+                    {step.body}
+                  </div>
+                </FxCard>
+              ))}
+            </div>
           </div>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* What it's built on                                                */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>What It&apos;s Built On</FxGroupLabel>
           <h2 style={sectionTitle}>Tested before it was written down</h2>
           <p style={sectionLede}>
@@ -248,45 +278,47 @@ export default function ResonanceCoreClient() {
               </FxChip>
             ))}
           </div>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* Who it's for                                                      */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>Who It&apos;s For</FxGroupLabel>
           <h2 style={{ ...sectionTitle, marginBottom: 'var(--fx-space-l)' }}>
-            You&apos;ll recognise yourself here
+            You&apos;ll recognize yourself here
           </h2>
+          <p style={sectionLede}>
+            The framework is designed for individuals who are committed to
+            personal growth and alignment in their professional and personal
+            lives. If any of these sound like you, <br />
+            <strong>
+              <em>you're in the right place.</em>
+            </strong>
+          </p>
 
-          <FxCard variant='inset' style={{ padding: '28px 32px' }}>
-            <ul
-              style={{
-                margin: 0,
-                paddingLeft: '1.2em',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: 'var(--fx-space-s) var(--fx-space-xl)',
-                fontSize: 'var(--fx-body-size)',
-                lineHeight: 'var(--fx-body-leading)',
-                color: 'var(--fx-text-body)',
-              }}
-            >
-              {RCF_AUDIENCE.map((line) => (
-                <li key={line}>{line}</li>
-              ))}
-            </ul>
-          </FxCard>
-        </section>
+          <StaggeredGrid columns={3} gap='1rem' stagger={0.1}>
+            {RCF_AUDIENCE.map((line) => (
+              <FxCard
+                key={line}
+                interactive
+                variant='feature'
+                style={{ padding: '28px 32px' }}
+              >
+                {line}
+              </FxCard>
+            ))}
+          </StaggeredGrid>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* Read the introduction                                             */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='gold' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel tone='gold'>Start Here</FxGroupLabel>
           <FxCard
             variant='feature'
@@ -344,19 +376,22 @@ export default function ResonanceCoreClient() {
               <FxButton variant='primary' href={RCF_PREVIEW_PDF}>
                 Download the Preview PDF
               </FxButton>
-              <FxButton variant='outline' href='/blog/announcement-resonance-core-book'>
+              <FxButton
+                variant='outline'
+                href='/blog/announcement-resonance-core-book'
+              >
                 Read the Origin Story
               </FxButton>
             </div>
           </FxCard>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
       {/* Where the framework shows up                                      */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <section style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>Where It Shows Up</FxGroupLabel>
           <h2 style={sectionTitle}>Three ways in</h2>
           <p style={sectionLede}>
@@ -530,7 +565,7 @@ export default function ResonanceCoreClient() {
               </span>
             </FxCard>
           </div>
-        </section>
+        </FxSectionPanel>
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
