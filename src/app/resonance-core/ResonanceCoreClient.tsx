@@ -122,7 +122,7 @@ export default function ResonanceCoreClient() {
             }}
           >
             {RCF_EXPLAINER.map((block) => (
-              <FxCard key={block.heading} style={{ padding: '28px 28px 24px' }}>
+              <FxCard key={block.heading} interactive style={{ padding: '28px 28px 24px' }}>
                 <h3
                   style={{
                     fontSize: 'var(--fx-h3-size)',
@@ -184,7 +184,7 @@ export default function ResonanceCoreClient() {
             }}
           >
             {DRIVE_STEPS.map((step, i) => (
-              <FxCard key={step.step} variant='raised' style={{ padding: 22 }}>
+              <FxCard key={step.step} interactive variant='raised' style={{ padding: 22 }}>
                 <div
                   style={{
                     fontSize: 12,
@@ -290,6 +290,7 @@ export default function ResonanceCoreClient() {
           <FxGroupLabel tone='gold'>Start Here</FxGroupLabel>
           <FxCard
             variant='feature'
+            interactive
             style={{
               padding: '36px 40px',
               position: 'relative',
