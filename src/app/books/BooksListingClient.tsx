@@ -12,6 +12,7 @@ import FxButton from '@/theme/components/dsm/FxButton';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxGroupLabel from '@/theme/components/dsm/FxGroupLabel';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
+import ResonanceCoreBookCover from '@/assets/images/The-Resonance-Core-Book.jpg';
 import { Book } from './types';
 import { RCF_LEDE, RCF_OFFERINGS, STOREFRONT_URL } from './constants';
 import {
@@ -274,67 +275,120 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
             launch. Pricing is announced there, not here.
           </p>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 'var(--fx-space-xxl)',
-            }}
-          >
-            {RCF_OFFERINGS.map((group) => (
-              <div key={group.group}>
-                <FxGroupLabel>{group.group}</FxGroupLabel>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                    gap: 'var(--fx-space-m)',
-                  }}
-                >
-                  {group.items.map((item) => (
-                    <FxCard
-                      variant='standard'
-                      interactive
-                      key={item.name}
-                      style={{ padding: 22 }}
-                    >
-                      <div
-                        style={{
-                          fontWeight: 700,
-                          fontSize: 16,
-                          color: 'var(--fx-text-heading)',
-                          marginBottom: 'var(--fx-space-xs)',
-                        }}
+          {/* Cover rail on the left, edition cards on the right; the split
+              collapses to a single stacked column at tablet and below. */}
+          <div className='fx-media-split'>
+            <FxCard
+              variant='feature'
+              style={{
+                padding: 'var(--fx-space-m)',
+                position: 'relative',
+                overflow: 'hidden',
+                width: '100%',
+                maxWidth: 320,
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 3,
+                  background:
+                    'linear-gradient(90deg, var(--fx-gold), var(--fx-accent))',
+                }}
+              />
+              <img
+                src={ResonanceCoreBookCover.src}
+                alt={`${RCF_TRADEMARK} — book cover concept`}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  aspectRatio: '1 / 1',
+                  objectFit: 'cover',
+                  borderRadius: 'var(--fx-radius-card-sm)',
+                  border: '1px solid var(--fx-border)',
+                }}
+              />
+              <div
+                style={{
+                  fontSize: 12.5,
+                  lineHeight: 1.5,
+                  color: 'var(--fx-text-soft)',
+                  textAlign: 'center',
+                  marginTop: 'var(--fx-space-s)',
+                  fontStyle: 'italic',
+                }}
+              >
+                Cover concept — every edition below carries it.
+              </div>
+            </FxCard>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--fx-space-xxl)',
+                width: '100%',
+              }}
+            >
+              {RCF_OFFERINGS.map((group) => (
+                <div key={group.group}>
+                  <FxGroupLabel>{group.group}</FxGroupLabel>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns:
+                        'repeat(auto-fit, minmax(240px, 1fr))',
+                      gap: 'var(--fx-space-m)',
+                    }}
+                  >
+                    {group.items.map((item) => (
+                      <FxCard
+                        variant='standard'
+                        interactive
+                        key={item.name}
+                        style={{ padding: 22 }}
                       >
-                        {item.name}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 13.5,
-                          lineHeight: 1.55,
-                          color: 'var(--fx-text-muted)',
-                        }}
-                      >
-                        {item.body}
-                      </div>
-                      {item.note && (
                         <div
                           style={{
-                            fontSize: 12.5,
-                            lineHeight: 1.5,
-                            color: 'var(--fx-text-soft)',
-                            marginTop: 'var(--fx-space-xs)',
-                            fontStyle: 'italic',
+                            fontWeight: 700,
+                            fontSize: 16,
+                            color: 'var(--fx-text-heading)',
+                            marginBottom: 'var(--fx-space-xs)',
                           }}
                         >
-                          {item.note}
+                          {item.name}
                         </div>
-                      )}
-                    </FxCard>
-                  ))}
+                        <div
+                          style={{
+                            fontSize: 13.5,
+                            lineHeight: 1.55,
+                            color: 'var(--fx-text-muted)',
+                          }}
+                        >
+                          {item.body}
+                        </div>
+                        {item.note && (
+                          <div
+                            style={{
+                              fontSize: 12.5,
+                              lineHeight: 1.5,
+                              color: 'var(--fx-text-soft)',
+                              marginTop: 'var(--fx-space-xs)',
+                              fontStyle: 'italic',
+                            }}
+                          >
+                            {item.note}
+                          </div>
+                        )}
+                      </FxCard>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <FxCallout
