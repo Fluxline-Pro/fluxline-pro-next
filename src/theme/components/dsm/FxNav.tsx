@@ -5,7 +5,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import FxButton from './FxButton';
-import FxUserMenu from './FxUserMenu';
+// PROD-ONLY: header sign-in / avatar hidden while the login experience is in
+// testing. Restore this import together with the two <FxUserMenu /> call sites
+// below when auth is ready to go live.
+// import FxUserMenu from './FxUserMenu';
 import styles from './FxNav.module.scss';
 
 interface BreadcrumbItem {
@@ -226,7 +229,8 @@ export default function FxNav({
             </nav>
             {/* Right-side actions: user avatar + mobile hamburger */}
             <div className={styles.navActions}>
-              <FxUserMenu />
+              {/* PROD-ONLY: sign-in / avatar hidden while login is in testing. */}
+              {/* <FxUserMenu /> */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={styles.hamburgerButton}
@@ -311,7 +315,8 @@ export default function FxNav({
             </nav>
             {/* Right-side actions: user avatar + mobile hamburger (Subpage) */}
             <div className={styles.navActions}>
-              <FxUserMenu />
+              {/* PROD-ONLY: sign-in / avatar hidden while login is in testing. */}
+              {/* <FxUserMenu /> */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={styles.hamburgerButton}
