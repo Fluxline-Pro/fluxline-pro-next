@@ -283,7 +283,12 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   }}
                 >
                   {group.items.map((item) => (
-                    <FxCard interactive key={item.name} style={{ padding: 22 }}>
+                    <FxCard
+                      variant='standard'
+                      interactive
+                      key={item.name}
+                      style={{ padding: 22 }}
+                    >
                       <div
                         style={{
                           fontWeight: 700,
@@ -325,12 +330,12 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
 
           <FxCallout
             tone='info'
-            title='Purchase happens at the Fluxline store.'
+            title='Pre-orders are coming soon!'
             style={{ marginTop: 'var(--fx-space-l)' }}
           >
             Preorders will soon be available which will be announced here.{' '}
             <em>
-              <strong>Stay tuned! Stay tuned!</strong>
+              <strong>Stay tuned!</strong>
             </em>
           </FxCallout>
         </section>
@@ -417,6 +422,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
           >
             <FxCard
               interactive
+              variant='standard'
               href='/resonance-core'
               style={{ padding: '28px 28px 24px' }}
             >
@@ -457,6 +463,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
 
             <FxCard
               interactive
+              variant='inset'
               href='/blog/announcement-resonance-core-book'
               style={{ padding: '28px 28px 24px' }}
             >
