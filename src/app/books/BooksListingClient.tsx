@@ -90,6 +90,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
         <section style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel tone='gold'>Coming Soon</FxGroupLabel>
           <FxCard
+            interactive
             variant='feature'
             style={{
               padding: '36px 40px',
@@ -156,18 +157,6 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   self-help usually fails, where the framework came from, and
                   who it is built for.
                 </p>
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: 'var(--fx-text-muted)',
-                    lineHeight: 1.65,
-                    margin: '0 0 var(--fx-space-l)',
-                    maxWidth: '60ch',
-                  }}
-                >
-                  When it launches, every edition will be sold through the
-                  Fluxline store. There is nothing to pre-order here.
-                </p>
                 <div
                   style={{
                     display: 'flex',
@@ -179,7 +168,10 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                     Read the Introduction Preview
                   </FxButton>
                   {featured && (
-                    <FxButton variant='outline' href={`/books/${featured.slug}`}>
+                    <FxButton
+                      variant='outline'
+                      href={`/books/${featured.slug}`}
+                    >
                       Full Synopsis &amp; Contents
                     </FxButton>
                   )}
@@ -210,7 +202,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
             What the book is about
           </h2>
 
-          <FxCard variant='inset' style={{ padding: '32px 36px' }}>
+          <FxCard interactive variant='inset' style={{ padding: '32px 36px' }}>
             {RCF_BRIEF.map((para, i) => (
               <p
                 key={para.slice(0, 24)}
@@ -286,13 +278,12 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                 <div
                   style={{
                     display: 'grid',
-                    gridTemplateColumns:
-                      'repeat(auto-fit, minmax(260px, 1fr))',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
                     gap: 'var(--fx-space-m)',
                   }}
                 >
                   {group.items.map((item) => (
-                    <FxCard key={item.name} style={{ padding: 22 }}>
+                    <FxCard interactive key={item.name} style={{ padding: 22 }}>
                       <div
                         style={{
                           fontWeight: 700,
@@ -337,17 +328,10 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
             title='Purchase happens at the Fluxline store.'
             style={{ marginTop: 'var(--fx-space-l)' }}
           >
-            Nothing is for sale on this page. When the book is released,{' '}
-            <a
-              href={STOREFRONT_URL}
-              target='_blank'
-              rel='noopener noreferrer'
-              style={{ color: 'var(--fx-accent)' }}
-            >
-              store.fluxline.pro
-            </a>{' '}
-            will carry every edition, the workbook, the bundles, and the lesson
-            library.
+            Preorders will soon be available which will be announced here.{' '}
+            <em>
+              <strong>Stay tuned! Stay tuned!</strong>
+            </em>
           </FxCallout>
         </section>
       </FxReveal>
@@ -360,6 +344,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
           <FxGroupLabel tone='gold'>An Extension Of The Framework</FxGroupLabel>
           <FxCard
             variant='band'
+            interactive
             style={{
               padding: '32px 36px',
               border: '1px solid var(--fx-gold-border)',
@@ -484,7 +469,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   fontFamily: 'var(--fx-font)',
                 }}
               >
-                Read the origin story
+                Read the origin story →
               </h3>
               <p
                 style={{
@@ -506,7 +491,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   textTransform: 'uppercase',
                 }}
               >
-                Framework Announcement ›
+                Framework Announcement →
               </span>
             </FxCard>
           </div>
@@ -565,7 +550,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                       textTransform: 'uppercase',
                     }}
                   >
-                    Read More ›
+                    Read More →
                   </span>
                 </FxCard>
               ))}
