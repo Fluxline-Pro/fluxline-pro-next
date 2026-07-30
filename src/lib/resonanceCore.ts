@@ -15,12 +15,13 @@
 export const RCF_TRADEMARK = 'The Resonance Core Framework™';
 
 /** Public introduction preview, already published as a scroll PDF. */
-export const RCF_PREVIEW_PDF = '/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf';
+export const RCF_PREVIEW_PDF =
+  '/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf';
 
 export const RCF_LOGO_IMAGE = '/images/RCF_Logo.jpeg';
 export const RCF_BOOK_IMAGE = '/images/RCF_BookConcept.jpg';
 
-export const RCF_RELEASE_WINDOW = 'Spring 2026';
+export const RCF_RELEASE_WINDOW = 'Late Fall 2026';
 
 /** The one-sentence version, for the home page and card summaries. */
 export const RCF_ONE_LINER =
@@ -42,7 +43,7 @@ export const RCF_BRIEF: string[] = [
 export const RCF_EXPLAINER: { heading: string; body: string }[] = [
   {
     heading: 'The problem it was built to solve',
-    body: "Most self-help tells you what to do, but not how to do it. The result is a cycle most of us know: inspiration, temporary motivation, confusion, inaction — then another book, another podcast, another fix. The change never sets, because it was never built on anything structural.",
+    body: 'Most self-help tells you what to do, but not how to do it. The result is a cycle most of us know: inspiration, temporary motivation, confusion, inaction — then another book, another podcast, another fix. The change never sets, because it was never built on anything structural.',
   },
   {
     heading: 'The premise',

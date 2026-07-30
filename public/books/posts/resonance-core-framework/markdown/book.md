@@ -147,4 +147,4 @@ on, and what the book and workbook will guide you through.
 
 **[Download the Introduction Preview PDF](/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf)**
 
-**Coming Spring 2026**
+**Coming Late Fall 2026**
