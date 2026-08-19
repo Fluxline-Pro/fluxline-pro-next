@@ -18,7 +18,7 @@ technologies:
 publishedDate: '2026-08-19'
 projectDuration: 'Ongoing'
 featured: true
-imageUrl: '/case-studies/posts/rcf-infrastructure/images/rcf-infrastructure-cover.jpg'
+imageUrl: '/case-studies/posts/rcf-infrastructure/images/rcf-infrastructure-cover.png'
 imageAlt: 'Abstract architectural diagram representing Fluxline multi-modal creative and technical ecosystem with interconnected layers of signal, pipeline, and output'
 seoTitle: 'Architecting a Multi-Modal Creative and Technical Ecosystem — Fluxline Case Study'
 seoDescription: 'How Fluxline built a living systems-architecture identity unifying music, writing, visual content, and technical infrastructure under a single coherent creative logic — with the Resonant Execution Map as its signal-preservation framework.'
