@@ -18,7 +18,7 @@ technologies:
 publishedDate: '2026-08-19'
 projectDuration: 'Ongoing'
 featured: true
-imageUrl: '/case-studies/posts/rcf-infrastructure/images/rcf-infrastructure-cover.png'
+imageUrl: '/case-studies/posts/rcf-infrastructure/images/rcf-infrastructure-doc.png'
 imageAlt: 'Abstract architectural diagram representing Fluxline multi-modal creative and technical ecosystem with interconnected layers of signal, pipeline, and output'
 seoTitle: 'Architecting a Multi-Modal Creative and Technical Ecosystem — Fluxline Case Study'
 seoDescription: 'How Fluxline built a living systems-architecture identity unifying music, writing, visual content, and technical infrastructure under a single coherent creative logic — with the Resonant Execution Map as its signal-preservation framework.'
@@ -72,7 +72,7 @@ generatedWithAI: false
 
 ## The Architecture of Resonance: How Fluxline Became a Living System
 
-> *"I didn't build a brand. I built a nervous system."*
+> _"I didn't build a brand. I built a nervous system."_
 > — Terence Waters, Founder, Fluxline.pro
 
 Fluxline is not a studio. It is not an agency. It is not a platform, a content channel, or a creative collective. Those categories exist for things that can be described by their outputs. Fluxline is better described by its architecture — the set of relationships, principles, pipelines, and frameworks that give rise to output across every medium I work in. It is a systems-architecture identity: a coherent way of operating that produces music, written work, visual content, technical infrastructure, and strategic frameworks as natural byproducts of a single, unified creative logic.
@@ -87,7 +87,7 @@ This case study traces the architectural development of Fluxline.pro — a multi
 
 ## Section 01 — The Convergence Moment
 
-*Before Fluxline had a name, it had a signal.*
+_Before Fluxline had a name, it had a signal._
 
 There was a specific afternoon — I remember it with unusual clarity — when I was sitting in the middle of three open projects that had nothing to do with each other. Or so I believed. There was a music production session open in one window, a systems diagram I had been sketching for a content architecture project in another, and a half-written essay on AI integration and authorial voice in a third. I had been living with these threads for months, treating them as separate disciplines that happened to share a practitioner. And then, in a moment I can only describe as a collapse, they stopped being separate.
 
@@ -105,7 +105,7 @@ From that point forward, every creative and technical decision I made was filter
 
 ## Section 02 — Emotional Resonance as Infrastructure
 
-*Feeling is not the opposite of function — it is the foundation.*
+_Feeling is not the opposite of function — it is the foundation._
 
 The creative technology world has a persistent and damaging blind spot: the assumption that emotional experience is a product of craft, applied at the end of a technical process. You build the thing, then you make it feel good. You architect the system, then you add the human element. Resonance is treated as a finish coat — something you layer on top once the structural work is done. This assumption is not just aesthetically impoverished. It is architecturally incorrect.
 
@@ -123,7 +123,7 @@ This is not romanticism masquerading as methodology. It is a precise technical p
 
 ## Section 03 — The Creative Pipeline
 
-*From signal to artifact — the architecture of creative production.*
+_From signal to artifact — the architecture of creative production._
 
 The Fluxline creative pipeline is a five-stage system that moves from raw signal to published artifact. It is not a linear assembly line — each stage has feedback loops that can return the work upstream — but it has a clear directional logic that keeps production moving forward without losing coherence.
 
@@ -155,18 +155,18 @@ What keeps this pipeline generative rather than mechanical is a set of decision-
 
 ## Section 04 — The Technical Pipeline
 
-*The skeleton beneath the signal.*
+_The skeleton beneath the signal._
 
 The creative pipeline produces the work. The technical pipeline delivers it, stores it, versions it, and makes it available. But in Fluxline's architecture, the distinction between "creative" and "technical" is a convenience of description, not a reality of operation. Every technical decision I have made in building this infrastructure has been governed by the same question I ask of creative decisions: what does this system transmit?
 
 The technical architecture of Fluxline is organized into four layers, each of which maps directly to a creative function:
 
-| Technical Layer | Primary Function | Creative Equivalent |
-|---|---|---|
-| **Content Management System** | Schema-driven content storage, taxonomy, and editorial workflow | Memory and meaning architecture — the system that knows what everything is and how it relates |
-| **Deployment Infrastructure** | Build pipelines, hosting, CDN, version control, environment management | Publication and distribution — the act of making work available to its audience |
-| **Automation Layer** | Scheduled tasks, event-driven triggers, workflow orchestration via Copilot Tasks | Rhythm and cadence — the system that keeps the practice moving without requiring constant manual intervention |
-| **AI Orchestration** | API integrations, model routing, prompt management, output evaluation pipelines | Acceleration and amplification — extending the reach of the authorial voice without diluting it |
+| Technical Layer               | Primary Function                                                                 | Creative Equivalent                                                                                           |
+| ----------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Content Management System** | Schema-driven content storage, taxonomy, and editorial workflow                  | Memory and meaning architecture — the system that knows what everything is and how it relates                 |
+| **Deployment Infrastructure** | Build pipelines, hosting, CDN, version control, environment management           | Publication and distribution — the act of making work available to its audience                               |
+| **Automation Layer**          | Scheduled tasks, event-driven triggers, workflow orchestration via Copilot Tasks | Rhythm and cadence — the system that keeps the practice moving without requiring constant manual intervention |
+| **AI Orchestration**          | API integrations, model routing, prompt management, output evaluation pipelines  | Acceleration and amplification — extending the reach of the authorial voice without diluting it               |
 
 > **Key Insight — Systems That Feel:** Technical infrastructure carries emotional weight whether you intend it to or not. A CMS with poor taxonomy transmits chaos. A deployment pipeline with inconsistent versioning transmits unreliability. Building technical infrastructure with the same intentionality I bring to creative work is not over-engineering — it is the minimum viable integrity for a serious creative practice.
 
@@ -180,7 +180,7 @@ The philosophy I have come to call "systems that feel" is the governing principl
 
 ## Section 05 — Copilot Tasks as Production Engine
 
-*AI orchestration is not a productivity hack — it is a compositional act.*
+_AI orchestration is not a productivity hack — it is a compositional act._
 
 The way most practitioners use AI is as a tool: you pick it up when you need it, put it down when you are done, and evaluate the output as a discrete deliverable. This is a perfectly valid way to extract value from AI capabilities. It is not, however, the way Fluxline operates. The integration of Microsoft Copilot Tasks into the Fluxline production engine represents a qualitatively different relationship with AI — one in which the AI is not a tool but a production layer, with defined roles, consistent responsibilities, and scheduled participation in the creative process.
 
@@ -203,7 +203,7 @@ What makes this integration compositional rather than merely operational is the 
 
 ## Section 06 — The CMS Infrastructure Priority Shift
 
-*The content management system became the connective tissue of the entire operation.*
+_The content management system became the connective tissue of the entire operation._
 
 There was a period in the development of Fluxline when I was producing significant creative output but experiencing a growing sense of architectural debt. Content existed in multiple places. Published pieces were not connected to each other in any meaningful way. The taxonomy was implicit — I knew how things related, but the system did not. Searching for a specific piece of writing from six months ago was an act of memory, not retrieval. The creative work was strong. The infrastructure around it was, by any honest assessment, a mess.
 
@@ -217,19 +217,19 @@ Content modeling was the most intellectually demanding part of the CMS build. I 
 
 The taxonomy I designed reflects the Resonant Execution Map (described in the following section): content is tagged not just by format and topic but by its emotional signature, its production stage, and its relationship to specific Fluxline frameworks. This means the CMS is not just a filing system — it is a knowledge architecture that makes the relationships between pieces explicit and navigable. The connective tissue of the entire operation is no longer implicit in my memory. It is structural. It is in the system.
 
-| CMS Design Principle | Technical Implementation | Creative Function |
-|---|---|---|
-| Headless architecture | Content stored via API, decoupled from front-end rendering | Signal stored once, expressed in any format |
-| Schema-driven content modeling | Structured content types with defined fields and validation | Every piece knows what it is and where it belongs |
-| Resonance taxonomy | Custom tags: emotional signature, framework association, production stage | The system encodes meaning, not just metadata |
-| Editorial workflow integration | Draft → Review → Approved → Published states with Copilot Task triggers | The pipeline's decision-making rituals are embedded in the infrastructure |
-| Relational content linking | Explicit relationships between content items across types and formats | The body of work is navigable as a connected whole, not a collection of isolated pieces |
+| CMS Design Principle           | Technical Implementation                                                  | Creative Function                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Headless architecture          | Content stored via API, decoupled from front-end rendering                | Signal stored once, expressed in any format                                             |
+| Schema-driven content modeling | Structured content types with defined fields and validation               | Every piece knows what it is and where it belongs                                       |
+| Resonance taxonomy             | Custom tags: emotional signature, framework association, production stage | The system encodes meaning, not just metadata                                           |
+| Editorial workflow integration | Draft → Review → Approved → Published states with Copilot Task triggers   | The pipeline's decision-making rituals are embedded in the infrastructure               |
+| Relational content linking     | Explicit relationships between content items across types and formats     | The body of work is navigable as a connected whole, not a collection of isolated pieces |
 
 ---
 
 ## Section 07 — The Resonant Execution Map
 
-*A framework for turning vision into output without losing the signal.*
+_A framework for turning vision into output without losing the signal._
 
 Every multi-stage production process faces the same fundamental risk: signal loss. The original vision — the thing you were trying to make, the feeling you were trying to transmit — degrades as it moves through layers of execution. By the time a piece is published, it may bear only a superficial resemblance to the original intention. This is not a failure of craft. It is a structural problem. Without a system that explicitly preserves and evaluates the original signal at every stage, degradation is inevitable.
 
@@ -263,7 +263,7 @@ The Resonant Execution Map has become central to Fluxline's systems-architecture
 
 ## Section 08 — Relevance to Fluxline's Systems-Architecture Identity
 
-*Fluxline is the proof of concept for a new kind of creative infrastructure.*
+_Fluxline is the proof of concept for a new kind of creative infrastructure._
 
 Standing back from the architectural decisions documented in this case study, a pattern emerges that is larger than any of its individual components. The creative pipeline, the technical architecture, the Copilot Tasks integration, the CMS infrastructure, the Resonant Execution Map — these are not separate initiatives that happened to occur in the same practice. They are expressions of a single underlying philosophy, applied at different scales and in different registers.
 
