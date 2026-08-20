@@ -44,6 +44,15 @@ jobs:
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
           NEXT_PUBLIC_API_BASE_URL: ''
           SITE_URL: 'https://flx-next-test.fluxline.pro'
+          # Shared Entra SSO (header sign-in). Without these the site builds with
+          # an empty MSAL clientId and the "Sign in" control can't acquire a token.
+          NEXT_PUBLIC_MSAL_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_MSAL_CLIENT_ID }}
+          NEXT_PUBLIC_MSAL_AUTHORITY: ${{ secrets.NEXT_PUBLIC_MSAL_AUTHORITY }}
+          # Point the header links + integrations at the TEST siblings (these
+          # default to production URLs when unset).
+          NEXT_PUBLIC_ACCOUNT_URL: 'https://account-test.fluxline.pro'
+          NEXT_PUBLIC_CMS_URL: 'https://cms-test.fluxline.pro'
+          NEXT_PUBLIC_STORE_URL: 'https://test-store.fluxline.pro'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install API Dependencies
         run: cd api && npm install
