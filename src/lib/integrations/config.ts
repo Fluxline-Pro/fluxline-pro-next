@@ -63,6 +63,11 @@ export function getServiceApiBase(service: ServiceName): string {
   return origin.endsWith('/api') ? origin : `${origin}/api`;
 }
 
+/** Account Portal origin, no trailing slash. */
+export function getAccountPortalUrl(): string {
+  return configuredOrigin('account').replace(/\/$/, '');
+}
+
 /** Full URL for a path within a service's API. */
 export function getServiceEndpoint(service: ServiceName, path: string): string {
   const suffix = path.startsWith('/') ? path : `/${path}`;
