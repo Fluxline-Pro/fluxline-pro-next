@@ -28,21 +28,14 @@ function AvatarGlyph() {
 }
 
 /**
- * Header sign-in / user-avatar control for the shared Fluxline Entra sign-in.
+ * Header sign-in / user-avatar control.
  *
- * Signed out: compact "Sign in" control (avatar glyph + label at desktop,
- * glyph-only on tight mobile headers) that starts the MSAL redirect flow.
- *
- * Signed in: initials circle opening a small menu with "My Account"
- * (account.fluxline.pro) and "Sign out". Keyboard accessible; closes on
- * outside click and Escape.
- *
- * Before MSAL finishes initializing, the AuthProvider surfaces the
- * cross-subdomain `fluxline_auth_status` hint, so a user signed in on a
- * sibling subdomain never sees a signed-in → signed-out flash.
+ * Signed out: "Sign in" link navigating to the Fluxline Account Portal.
+ * Signed in: initials circle opening a menu with "My Account" and "Sign out".
+ * Keyboard accessible; closes on outside click and Escape.
  */
 export default function FxUserMenu() {
-  const { isAuthenticated, isLoading, user, login, logout } = useAuth();
+  const { isAuthenticated, isLoading, user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [hovered, setHovered] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -83,8 +76,7 @@ export default function FxUserMenu() {
     if (menuOpen) firstItemRef.current?.focus();
   }, [menuOpen]);
 
-  // Neutral placeholder while MSAL initializes and no cookie hint exists —
-  // avoids a "Sign in" ↔ avatar flash in either direction.
+  // Neutral placeholder while the cookie hint is read on first render.
   if (isLoading && !isAuthenticated) {
     return (
       <div className={styles.userMenu} aria-hidden='true'>
@@ -96,9 +88,8 @@ export default function FxUserMenu() {
   if (!isAuthenticated) {
     return (
       <div className={styles.userMenu}>
-        <button
-          type='button'
-          onClick={() => void login()}
+        <a
+          href={`${ACCOUNT_URL}/login`}
           className={styles.signInButton}
           aria-label='Sign in to your Fluxline account'
           onMouseEnter={() => setHovered(true)}
@@ -110,7 +101,7 @@ export default function FxUserMenu() {
         >
           <AvatarGlyph />
           <span className={styles.signInLabel}>Sign in</span>
-        </button>
+        </a>
       </div>
     );
   }
