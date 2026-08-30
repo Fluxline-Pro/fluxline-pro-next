@@ -13,6 +13,7 @@ import {
   clearAuthStatus,
   type AuthStatusPayload,
 } from './authStatus';
+import { getAccountPortalUrl } from '@/lib/integrations/config';
 
 export interface AuthUser {
   userId: string;
@@ -28,9 +29,6 @@ export interface AuthContextValue {
   logout: () => void;
   getAccessToken: () => Promise<string | null>;
 }
-
-const ACCOUNT_URL =
-  process.env.NEXT_PUBLIC_ACCOUNT_URL || 'https://account.fluxline.pro';
 
 export const AuthContext = createContext<AuthContextValue>({
   isAuthenticated: false,
@@ -90,13 +88,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = useCallback(() => {
-    window.location.href = `${ACCOUNT_URL}/login`;
+    window.location.href = `${getAccountPortalUrl()}/login`;
   }, []);
 
   const logout = useCallback(() => {
     clearAuthStatus();
     setStatusHint(null);
-    window.location.href = `${ACCOUNT_URL}/logout`;
+    window.location.href = `${getAccountPortalUrl()}/logout`;
   }, []);
 
   const getAccessToken = useCallback(async (): Promise<string | null> => {

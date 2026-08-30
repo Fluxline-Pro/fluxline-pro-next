@@ -2,10 +2,8 @@
 
 import React from 'react';
 import { useAuth, getInitials } from '@/lib/auth';
+import { getAccountPortalUrl } from '@/lib/integrations/config';
 import styles from './FxNav.module.scss';
-
-const ACCOUNT_URL =
-  process.env.NEXT_PUBLIC_ACCOUNT_URL || 'https://account.fluxline.pro';
 
 /** Neutral avatar-circle glyph (inline SVG — no icon fonts per DSM rules). */
 function AvatarGlyph() {
@@ -89,7 +87,7 @@ export default function FxUserMenu() {
     return (
       <div className={styles.userMenu}>
         <a
-          href={`${ACCOUNT_URL}/login`}
+          href={`${getAccountPortalUrl()}/login`}
           className={styles.signInButton}
           aria-label='Sign in to your Fluxline account'
           onMouseEnter={() => setHovered(true)}
@@ -143,7 +141,7 @@ export default function FxUserMenu() {
             </div>
           )}
           <a
-            href={ACCOUNT_URL}
+            href={getAccountPortalUrl()}
             ref={firstItemRef}
             className={styles.userMenuItem}
             onClick={() => setMenuOpen(false)}
