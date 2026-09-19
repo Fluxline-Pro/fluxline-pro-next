@@ -81,7 +81,8 @@ export default function FxUserMenu() {
   }, [menuOpen]);
 
   // Neutral placeholder while the cookie hint is read on first render.
-  if (isLoading && !isAuthenticated) {
+  // Keep production behavior aligned with the sign-in visibility gate.
+  if (isLoading && !isAuthenticated && showSignInButton) {
     return (
       <div className={styles.userMenu} aria-hidden='true'>
         <span className={styles.userAvatarPlaceholder} />
