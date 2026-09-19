@@ -50,10 +50,11 @@ describe('FxUserMenu', () => {
 
   it('renders the sign-in button when not in production', () => {
     render(<FxUserMenu />);
+    const accountPortalUrl = mockGetAccountPortalUrl();
 
     expect(
       screen.getByRole('link', { name: 'Sign in to your Fluxline account' })
-    ).toHaveAttribute('href', 'https://account.fluxline.pro/login');
+    ).toHaveAttribute('href', `${accountPortalUrl}/login`);
     expect(screen.getByText('Sign in')).toBeInTheDocument();
   });
 

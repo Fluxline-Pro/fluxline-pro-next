@@ -6,6 +6,8 @@ import { isProduction } from '@/lib/environment';
 import { getAccountPortalUrl } from '@/lib/integrations/config';
 import styles from './FxNav.module.scss';
 
+// Temporary release flag: keep production sign-in hidden until the
+// Fluxline.pro login experience is ready for public use.
 const SHOW_NAV_SIGN_IN_IN_PROD = false;
 
 /** Neutral avatar-circle glyph (inline SVG — no icon fonts per DSM rules). */
