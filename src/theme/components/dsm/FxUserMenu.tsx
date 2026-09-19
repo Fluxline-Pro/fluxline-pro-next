@@ -2,8 +2,11 @@
 
 import React from 'react';
 import { useAuth, getInitials } from '@/lib/auth';
+import { isProduction } from '@/lib/environment';
 import { getAccountPortalUrl } from '@/lib/integrations/config';
 import styles from './FxNav.module.scss';
+
+const SHOW_NAV_SIGN_IN_IN_PROD = false;
 
 /** Neutral avatar-circle glyph (inline SVG — no icon fonts per DSM rules). */
 function AvatarGlyph() {
@@ -39,6 +42,7 @@ export default function FxUserMenu() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const firstItemRef = React.useRef<HTMLAnchorElement>(null);
+  const showSignInButton = !isProduction() || SHOW_NAV_SIGN_IN_IN_PROD;
 
   // Close on outside click / Escape
   React.useEffect(() => {
@@ -84,6 +88,10 @@ export default function FxUserMenu() {
   }
 
   if (!isAuthenticated) {
+    if (!showSignInButton) {
+      return null;
+    }
+
     return (
       <div className={styles.userMenu}>
         <a
