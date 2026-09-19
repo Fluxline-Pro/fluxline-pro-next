@@ -2,10 +2,13 @@
 
 import React from 'react';
 import { useAuth, getInitials } from '@/lib/auth';
+import { isProduction } from '@/lib/environment';
+import { getAccountPortalUrl } from '@/lib/integrations/config';
 import styles from './FxNav.module.scss';
 
-const ACCOUNT_URL =
-  process.env.NEXT_PUBLIC_ACCOUNT_URL || 'https://account.fluxline.pro';
+// Temporary release flag: keep production sign-in hidden until the
+// Fluxline.pro login experience is ready for public use.
+const SHOW_NAV_SIGN_IN_IN_PROD = false;
 
 /** Neutral avatar-circle glyph (inline SVG — no icon fonts per DSM rules). */
 function AvatarGlyph() {
@@ -28,26 +31,20 @@ function AvatarGlyph() {
 }
 
 /**
- * Header sign-in / user-avatar control for the shared Fluxline Entra sign-in.
+ * Header sign-in / user-avatar control.
  *
- * Signed out: compact "Sign in" control (avatar glyph + label at desktop,
- * glyph-only on tight mobile headers) that starts the MSAL redirect flow.
- *
- * Signed in: initials circle opening a small menu with "My Account"
- * (account.fluxline.pro) and "Sign out". Keyboard accessible; closes on
- * outside click and Escape.
- *
- * Before MSAL finishes initializing, the AuthProvider surfaces the
- * cross-subdomain `fluxline_auth_status` hint, so a user signed in on a
- * sibling subdomain never sees a signed-in → signed-out flash.
+ * Signed out: "Sign in" link navigating to the Fluxline Account Portal.
+ * Signed in: initials circle opening a menu with "My Account" and "Sign out".
+ * Keyboard accessible; closes on outside click and Escape.
  */
 export default function FxUserMenu() {
-  const { isAuthenticated, isLoading, user, login, logout } = useAuth();
+  const { isAuthenticated, isLoading, user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [hovered, setHovered] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const firstItemRef = React.useRef<HTMLAnchorElement>(null);
+  const showSignInButton = !isProduction() || SHOW_NAV_SIGN_IN_IN_PROD;
 
   // Close on outside click / Escape
   React.useEffect(() => {
@@ -83,9 +80,9 @@ export default function FxUserMenu() {
     if (menuOpen) firstItemRef.current?.focus();
   }, [menuOpen]);
 
-  // Neutral placeholder while MSAL initializes and no cookie hint exists —
-  // avoids a "Sign in" ↔ avatar flash in either direction.
-  if (isLoading && !isAuthenticated) {
+  // Neutral placeholder while the cookie hint is read on first render.
+  // Keep production behavior aligned with the sign-in visibility gate.
+  if (isLoading && !isAuthenticated && showSignInButton) {
     return (
       <div className={styles.userMenu} aria-hidden='true'>
         <span className={styles.userAvatarPlaceholder} />
@@ -94,11 +91,14 @@ export default function FxUserMenu() {
   }
 
   if (!isAuthenticated) {
+    if (!showSignInButton) {
+      return null;
+    }
+
     return (
       <div className={styles.userMenu}>
-        <button
-          type='button'
-          onClick={() => void login()}
+        <a
+          href={`${getAccountPortalUrl()}/login`}
           className={styles.signInButton}
           aria-label='Sign in to your Fluxline account'
           onMouseEnter={() => setHovered(true)}
@@ -110,7 +110,7 @@ export default function FxUserMenu() {
         >
           <AvatarGlyph />
           <span className={styles.signInLabel}>Sign in</span>
-        </button>
+        </a>
       </div>
     );
   }
@@ -152,7 +152,7 @@ export default function FxUserMenu() {
             </div>
           )}
           <a
-            href={ACCOUNT_URL}
+            href={getAccountPortalUrl()}
             ref={firstItemRef}
             className={styles.userMenuItem}
             onClick={() => setMenuOpen(false)}
