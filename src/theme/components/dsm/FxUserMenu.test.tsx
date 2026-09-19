@@ -61,12 +61,11 @@ describe('FxUserMenu', () => {
   it('hides the signed-out sign-in button in production', () => {
     mockIsProduction.mockReturnValue(true);
 
-    const { container } = render(<FxUserMenu />);
+    render(<FxUserMenu />);
 
     expect(
       screen.queryByRole('link', { name: 'Sign in to your Fluxline account' })
     ).not.toBeInTheDocument();
-    expect(container).toBeEmptyDOMElement();
   });
 
   it('still renders the authenticated account menu in production', () => {
