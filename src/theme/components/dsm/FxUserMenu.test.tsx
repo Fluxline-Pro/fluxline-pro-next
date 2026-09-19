@@ -28,6 +28,7 @@ const mockGetAccountPortalUrl = jest.requireMock('@/lib/integrations/config')
   .getAccountPortalUrl as jest.MockedFunction<
   typeof import('@/lib/integrations/config').getAccountPortalUrl
 >;
+const ACCOUNT_PORTAL_URL = 'https://account.fluxline.pro';
 
 describe('FxUserMenu', () => {
   beforeEach(() => {
@@ -41,7 +42,7 @@ describe('FxUserMenu', () => {
     });
     mockGetInitials.mockReturnValue('TU');
     mockIsProduction.mockReturnValue(false);
-    mockGetAccountPortalUrl.mockReturnValue('https://account.fluxline.pro');
+    mockGetAccountPortalUrl.mockReturnValue(ACCOUNT_PORTAL_URL);
   });
 
   afterEach(() => {
@@ -50,11 +51,10 @@ describe('FxUserMenu', () => {
 
   it('renders the sign-in button when not in production', () => {
     render(<FxUserMenu />);
-    const accountPortalUrl = mockGetAccountPortalUrl();
 
     expect(
       screen.getByRole('link', { name: 'Sign in to your Fluxline account' })
-    ).toHaveAttribute('href', `${accountPortalUrl}/login`);
+    ).toHaveAttribute('href', `${ACCOUNT_PORTAL_URL}/login`);
     expect(screen.getByText('Sign in')).toBeInTheDocument();
   });
 
