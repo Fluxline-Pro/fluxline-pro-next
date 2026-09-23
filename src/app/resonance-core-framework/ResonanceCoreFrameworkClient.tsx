@@ -185,7 +185,11 @@ export default function ResonanceCoreFrameworkClient() {
 
       {/* 1. What the framework is */}
       <FxReveal>
-        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel
+          tone='alt'
+          id='three-rings'
+          style={{ marginBottom: SECTION_GAP }}
+        >
           <FxGroupLabel>Overview</FxGroupLabel>
           <h2 style={sectionTitle}>What the Framework Is</h2>
           <p style={{ ...sectionLede, color: 'var(--fx-text-body)' }}>
@@ -298,7 +302,11 @@ export default function ResonanceCoreFrameworkClient() {
       {/* The DRIVE Model                                                   */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <FxSectionPanel tone='band' style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel
+          tone='band'
+          id='drive-model'
+          style={{ marginBottom: SECTION_GAP }}
+        >
           <FxGroupLabel>The DRIVE Model</FxGroupLabel>
           <h2 style={sectionTitle}>Six steps, one loop</h2>
           <p style={sectionLede}>
@@ -468,7 +476,11 @@ export default function ResonanceCoreFrameworkClient() {
 
       {/* 4. How to work with the framework */}
       <FxReveal>
-        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel
+          tone='alt'
+          id='work-with-the-framework'
+          style={{ marginBottom: SECTION_GAP }}
+        >
           <FxGroupLabel>Ways In</FxGroupLabel>
           <h2 style={sectionTitle}>How to Work with the Framework</h2>
           <p style={sectionLede}>
@@ -608,7 +620,7 @@ export default function ResonanceCoreFrameworkClient() {
           >
             <li>
               <a href={TRI_FRAMEWORK_URL} style={textLink}>
-                Explore the educational framework overview →
+                Hear each concept on the podcast →
               </a>
             </li>
             <li>

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ResonanceCoreFrameworkClient from './ResonanceCoreFrameworkClient';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
-import { RCF_FAQ, RCF_FRAMEWORK_PATH } from '@/lib/resonanceCore';
+import { RCF_CONCEPTS, RCF_FAQ, RCF_FRAMEWORK_PATH } from '@/lib/resonanceCore';
 
 const PAGE_URL = `https://www.fluxline.pro${RCF_FRAMEWORK_PATH}`;
 const TITLE =
@@ -61,6 +61,21 @@ const jsonLd = {
           item: PAGE_URL,
         },
       ],
+    },
+    {
+      // This page is the canonical glossary for the RCF's named concepts.
+      '@type': 'DefinedTermSet',
+      '@id': `${PAGE_URL}#terms`,
+      name: 'The Resonance Core Framework™ — Core Concepts',
+      url: PAGE_URL,
+      hasDefinedTerm: RCF_CONCEPTS.map((c) => ({
+        '@type': 'DefinedTerm',
+        '@id': `${PAGE_URL}#${c.id}`,
+        name: c.name,
+        description: c.body,
+        url: `${PAGE_URL}#${c.id}`,
+        inDefinedTermSet: `${PAGE_URL}#terms`,
+      })),
     },
     {
       '@type': 'FAQPage',

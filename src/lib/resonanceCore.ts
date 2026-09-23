@@ -153,42 +153,79 @@ export const RCF_RINGS: { title: string; body: string }[] = [
   },
 ];
 
-/** Named concepts, defined briefly. `id` doubles as the page anchor. */
-export const RCF_CONCEPTS: { id: string; name: string; body: string }[] = [
+/**
+ * Named concepts — the canonical definitions. This page is the RCF's single
+ * source of truth: theresonantidentity.com/framework and
+ * terencewaters.com/resonance-core-framework show short summaries and link
+ * here (by these `id` anchors) for more. Don't rename an `id` without
+ * updating those links.
+ */
+export const RCF_CONCEPTS: {
+  id: string;
+  name: string;
+  /** One-line summary, reused by the other sites. */
+  summary: string;
+  body: string;
+}[] = [
   {
     id: 'behavioral-gravity',
     name: 'Behavioral Gravity',
-    body: "The unconscious pull toward behaviors, environments, and relationships that feel identity-consistent — even when they're no longer aligned with who you're becoming.",
+    summary:
+      "The unconscious pull toward what feels identity-consistent — even when it no longer fits who you're becoming.",
+    body: "The unconscious pull toward behaviors, environments, and relationships that feel identity-consistent — even when they're no longer aligned with who you're becoming. It's why old habits feel like home and new ones feel like effort. Naming the pull is the first step to choosing whether to follow it.",
   },
   {
     id: 'identity-coherence',
     name: 'Identity Coherence',
-    body: 'The state in which your inner values, outer expression, and behavioral patterns are in agreement. Not perfection — alignment.',
+    summary:
+      'When your values, expression, and behavior agree. Not perfection — alignment.',
+    body: 'The state in which your inner values, outer expression, and behavioral patterns are in agreement. Not perfection — alignment. When you are coherent, decisions get simpler, because who you are and how you live point the same way.',
   },
   {
     id: 'window-of-choice',
     name: 'Window of Choice',
-    body: 'The range of choices you can actually see and act on in any moment. It widens with presence and clarity and narrows under stress — which matters most at threshold moments, when you can respond from who you are now rather than react from who you used to be.',
+    summary:
+      'The range of choices you can see and act on — wide when present, narrow under stress.',
+    body: 'The range of choices you can actually see and act on in any moment. It widens with presence and clarity and narrows under stress — which matters most at threshold moments, when you can respond from who you are now rather than react from who you used to be. The work is keeping it wide through grounding, presence, and emotional intelligence.',
   },
   {
     id: 'drive-system',
     name: 'The DRIVE System',
-    body: 'The motivation architecture of the RCF: how identity-rooted goals become self-sustaining rather than dependent on willpower.',
+    summary:
+      'How identity-rooted goals become self-sustaining instead of running on willpower.',
+    body: 'The motivation architecture of the RCF: how identity-rooted goals become self-sustaining rather than dependent on willpower. Instead of pushing yourself toward a goal, DRIVE connects the goal to who you are, so small wins compound into momentum.',
+  },
+  {
+    id: 'identity-distortion-loop',
+    name: 'Identity Distortion Loop',
+    summary: 'The cycle that erodes coherence. In the book: The Judgment Loop.',
+    body: 'The cycle that erodes identity coherence: Dissonance Spike → Reactance → Confirmation Bias → Distorted Alignment → Identity Erosion. Each step feels reasonable in the moment, which is what makes the loop hard to see from the inside. In the book, this is called The Judgment Loop.',
+  },
+  {
+    id: 'identity-alignment-loop',
+    name: 'Identity Alignment Loop',
+    summary: 'The cycle that rebuilds coherence. In the book: The Data Loop.',
+    body: 'The counterpart to the Distortion Loop. Instead of reacting to a cue, you observe it, understand where it comes from, check whether it is valid, and then decide from a wider Window of Choice. Each honest, identity-rooted choice makes the next one easier. In the book, this is called The Data Loop.',
   },
   {
     id: 'creative-truth',
     name: 'Creative Truth',
-    body: 'Expressing your inner truth without requiring others to receive or confirm it — the highest form of Identity Coherence in outward expression.',
+    summary:
+      'Expressing your truth without needing others to receive or confirm it.',
+    body: "Expressing your inner truth without requiring others to receive or confirm it — the highest form of Identity Coherence in outward expression. It's speaking and creating from who you are, not from a need for approval.",
   },
   {
     id: 'dii-protocol',
     name: 'DII Protocol (Decision Integrity Index)',
-    body: 'A structured way to score how well a decision aligns with your identity, anchored to six core values and justified honestly rather than guessed.',
+    summary: 'A 1–5 way to score how well a decision aligns with who you are.',
+    body: 'A structured way to score how well a decision aligns with your identity. It starts simply: journal a key decision, score it from 1 to 5, and justify the score honestly. Scores are anchored to six core values — Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, and Strategic Innovation — and are personal markers, never grades.',
   },
   {
     id: 'decision-alignment-score',
     name: 'Decision Alignment Score (DAS)',
-    body: 'The composite result of the DII Protocol, drawing on three sub-scores — SSI (Self-State Integrity), EROI (Emotional Return on Investment), and the Shadow Index — for a single view of a decision’s alignment.',
+    summary:
+      'The DII’s composite view of a decision, from SSI, EROI, and the Shadow Index.',
+    body: 'The composite result of the DII Protocol, drawing on three sub-scores — SSI (Self-State Integrity), EROI (Emotional Return on Investment), and the Shadow Index — for a single view of a decision’s alignment. The book covers how each is scored.',
   },
 ];
 
