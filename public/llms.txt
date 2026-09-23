@@ -2,7 +2,7 @@
 
 > Fluxline Resonance Group, LLC (Salt Lake City, Utah) offers consulting, coaching, brand design, web architecture, and identity systems work through The Resonance Core Framework™ — helping founders, leaders, and creatives build congruence between who they are and what they build. Founded by Terence Waters.
 
-The Resonance Core Framework™ (RCF) is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline, it is delivered through coaching and consulting, explored on The Resonant Identity podcast, and published as a book in Fall 2026.
+The Resonance Core Framework™ (RCF) is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline, it is delivered through coaching and consulting, explored on The Resonant Identity podcast, and published as a book in Late Fall 2026.
 
 ## Core pages
 
@@ -20,5 +20,5 @@ Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, 
 ## Related
 
 - [The Resonant Identity Podcast](https://theresonantidentity.com/): The framework in conversation, weekly
-- [Framework overview](https://theresonantidentity.com/framework/): Educational overview of every RCF concept
+- [The framework on the podcast](https://theresonantidentity.com/framework/): Each RCF concept with the episodes that explore it
 - [Terence Waters](https://terencewaters.com/): Founder of Fluxline and author of The Resonance Core Framework™
