@@ -29,6 +29,7 @@ const BACK_ROUTES: Record<string, { label: string; href: string }> = {
   '/portfolio': { label: '← Back to Home', href: '/' },
   '/books': { label: '← Back to Home', href: '/' },
   '/resonance-core': { label: '← Back to Home', href: '/' },
+  '/resonance-core-framework': { label: '← Back to Home', href: '/' },
   '/videos': { label: '← Back to Home', href: '/' },
   '/case-studies': { label: '← Back to Home', href: '/' },
   '/press-release': { label: '← Back to Home', href: '/' },
@@ -116,11 +117,13 @@ export default function FxNav({
       ? [
           { label: 'About', href: '#about' },
           { label: 'Services', href: '/services' },
+          { label: 'The Framework', href: '/resonance-core-framework' },
           { label: 'Our Content', href: '/content' },
           { label: 'Contact', href: '/contact' },
         ]
       : [
           { label: 'Services', href: '/services' },
+          { label: 'The Framework', href: '/resonance-core-framework' },
           { label: 'Our Content', href: '/content' },
           { label: 'Contact', href: '/contact' },
         ];

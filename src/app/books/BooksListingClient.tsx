@@ -23,6 +23,7 @@ import {
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
+  TRI_SITE_URL,
 } from '@/lib/resonanceCore';
 
 interface BooksListingClientProps {
@@ -460,7 +461,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                 >
                   {PODCAST_BLURB}
                 </p>
-                <FxButton variant='primary' href='/podcasts'>
+                <FxButton variant='primary' href={TRI_SITE_URL}>
                   Listen to the Podcast
                 </FxButton>
               </div>

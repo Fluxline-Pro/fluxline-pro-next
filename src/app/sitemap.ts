@@ -123,6 +123,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      // Commercial framework page — coaching, consulting, and FAQ.
+      url: `${SITE_URL}/resonance-core-framework`,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'monthly',
+      priority: 1.0,
+    },
+    {
       url: `${SITE_URL}/services/scrolls`,
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',

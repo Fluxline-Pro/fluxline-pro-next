@@ -18,11 +18,13 @@ import {
   RCF_AUDIENCE,
   RCF_EXPLAINER,
   RCF_FOUNDATIONS,
+  RCF_FRAMEWORK_PATH,
   RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
+  TRI_SITE_URL,
 } from '@/lib/resonanceCore';
 import { StaggeredGrid } from '@/animations/staggered-container';
 
@@ -463,7 +465,7 @@ export default function ResonanceCoreClient() {
             <FxCard
               variant='raised'
               interactive
-              href='/podcasts'
+              href={TRI_SITE_URL}
               style={{ padding: '28px 28px 24px' }}
             >
               <div
@@ -577,8 +579,8 @@ export default function ResonanceCoreClient() {
           body="Tell us what you're working through and we'll map the right first step — whether that's the framework, a guided engagement, or something else entirely."
           primaryLabel='Book a Consultation'
           primaryHref='/contact'
-          secondaryLabel='Explore Our Services →'
-          secondaryHref='/services'
+          secondaryLabel='Work with the Framework →'
+          secondaryHref={RCF_FRAMEWORK_PATH}
         />
       </FxReveal>
     </FxContainer>

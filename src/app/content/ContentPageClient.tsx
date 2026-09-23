@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { TRI_SITE_URL } from '@/lib/resonanceCore';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxCard from '@/theme/components/dsm/FxCard';
@@ -194,8 +195,8 @@ export default function ContentPageClient() {
               </div>
             </div>
             <div style={{ padding: '18px 26px 24px', marginTop: 'auto' }}>
-              <Link
-                href='/podcasts'
+              <a
+                href={TRI_SITE_URL}
                 style={{
                   display: 'block',
                   textAlign: 'center',
@@ -209,7 +210,7 @@ export default function ContentPageClient() {
                 }}
               >
                 Listen to the Podcast
-              </Link>
+              </a>
             </div>
           </FxCard>
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Script from 'next/script';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import {
@@ -60,7 +59,7 @@ export default async function PortfolioDetailPage({
 
   return (
     <>
-      <Script
+      <script
         id={`portfolio-schema-${slug}`}
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(projectSchema) }}
