@@ -7,8 +7,7 @@ The Resonance Core Framework™ (RCF) is a structured identity system built on t
 ## Core pages
 
 - [Home](https://www.fluxline.pro/): Who Fluxline is, core values, and services
-- [The Resonance Core Framework™ — Coaching & Consulting](https://www.fluxline.pro/resonance-core-framework): What the framework is, its core concepts, the six core values, how to work with it, and FAQ
-- [The Framework Explained](https://www.fluxline.pro/resonance-core): The premise, the DRIVE Model, and who the framework is for
+- [The Resonance Core Framework™](https://www.fluxline.pro/resonance-core-framework): What the framework is, the premise, core concepts, the DRIVE Model, the six core values, who it's for, how to work with it, and FAQ
 - [Services](https://www.fluxline.pro/services): Consulting, coaching, brand design, web architecture, personal training, and RCF engagements
 - [Books](https://www.fluxline.pro/books): The Resonance Core Framework book and companion workbook
 - [RCF Preview (PDF)](https://www.fluxline.pro/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf): The book's introduction — why self-help often fails, where the framework came from, and who it's for
@@ -16,7 +15,7 @@ The Resonance Core Framework™ (RCF) is a structured identity system built on t
 
 ## Six core values (DII scoring anchors)
 
-Embodied Awareness, Modular Precision, Legacy Resonance, Somatic Discipline, Creative Truth, and Strategic Innovation. These are the scoring anchors of the framework's Decision Integrity Index (DII).
+Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, and Strategic Innovation. These are the scoring anchors of the framework's Decision Integrity Index (DII).
 
 ## Related
 

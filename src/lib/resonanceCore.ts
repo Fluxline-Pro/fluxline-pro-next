@@ -4,9 +4,10 @@
  * Shared by three surfaces that each say something different about the same
  * thing, so they stay consistent:
  *
- *   /resonance-core  the framework itself — what it is, how it works, who it's for
- *   /books           the book and workbook built on it (see src/app/books/constants)
- *   /                a brief home-page explainer that points at both
+ *   /resonance-core-framework  the framework itself — what it is, how it
+ *                              works, who it's for, how to work with it, FAQ
+ *   /books                     the book and workbook built on it
+ *   /                          a brief home-page explainer that points at both
  *
  * The paid engagement lives separately at /services/resonance-core. This module
  * describes the framework, not the service.
@@ -29,7 +30,7 @@ export const RCF_ONE_LINER =
 
 /**
  * The short explanation, for the home page. Two short paragraphs: the problem,
- * then the premise. Anything longer belongs on /resonance-core.
+ * then the premise. Anything longer belongs on /resonance-core-framework.
  */
 export const RCF_BRIEF: string[] = [
   'Most self-help tells you what to do, but not how to do it — so the cycle runs inspiration, motivation, confusion, inaction, and then another book. The change never sets, because it was never built on anything structural.',
@@ -117,7 +118,7 @@ export const RCF_AUDIENCE: string[] = [
 export const PODCAST_BLURB =
   'The Resonant Identity is the framework thinking out loud. Each episode works through identity architecture, self-improvement, and the practical business of navigating transitions with clarity — the same material the book systematises, explored in conversation rather than in structure. If you want to know how the framework sounds before you read how it works, start there.';
 
-/** The commercial framework page — engagement options, values, and FAQ. */
+/** The framework's page (the former /resonance-core explainer redirects here). */
 export const RCF_FRAMEWORK_PATH = '/resonance-core-framework';
 
 /** Sister sites in the RCF ecosystem. */
@@ -167,7 +168,7 @@ export const RCF_CONCEPTS: { id: string; name: string; body: string }[] = [
   {
     id: 'window-of-choice',
     name: 'Window of Choice',
-    body: 'The often-brief moment within a threshold event where you have genuine agency to respond from your current identity rather than react from a previous one.',
+    body: 'The range of choices you can actually see and act on in any moment. It widens with presence and clarity and narrows under stress — which matters most at threshold moments, when you can respond from who you are now rather than react from who you used to be.',
   },
   {
     id: 'drive-system',
@@ -187,7 +188,7 @@ export const RCF_CONCEPTS: { id: string; name: string; body: string }[] = [
   {
     id: 'decision-alignment-score',
     name: 'Decision Alignment Score (DAS)',
-    body: 'The composite result of the DII Protocol, drawing on three sub-scores — SSI, EROI (Emotional ROI), and the Shadow Index — for a single view of a decision’s alignment.',
+    body: 'The composite result of the DII Protocol, drawing on three sub-scores — SSI (Self-State Integrity), EROI (Emotional Return on Investment), and the Shadow Index — for a single view of a decision’s alignment.',
   },
 ];
 

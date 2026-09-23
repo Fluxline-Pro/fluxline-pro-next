@@ -680,7 +680,7 @@ export default function HomeClient() {
                 }}
               >
                 <Link
-                  href='/resonance-core'
+                  href='/resonance-core-framework'
                   style={{
                     display: 'block',
                     textDecoration: 'none',
@@ -790,7 +790,7 @@ export default function HomeClient() {
               <FxCard
                 variant='feature'
                 interactive
-                href='/resonance-core'
+                href='/resonance-core-framework'
                 style={{ padding: 26 }}
               >
                 <div

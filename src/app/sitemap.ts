@@ -116,14 +116,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      // The canonical explanation of the framework the whole practice rests on.
-      url: `${SITE_URL}/resonance-core`,
-      lastModified: BUILD_DATE,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      // Commercial framework page — coaching, consulting, and FAQ.
+      // The framework itself — what it is, how to work with it, and FAQ.
       url: `${SITE_URL}/resonance-core-framework`,
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',

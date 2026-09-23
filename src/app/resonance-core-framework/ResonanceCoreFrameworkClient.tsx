@@ -9,8 +9,16 @@ import FxCard from '@/theme/components/dsm/FxCard';
 import FxButton from '@/theme/components/dsm/FxButton';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
+import FxCallout from '@/theme/components/dsm/FxCallout';
+import FxChip from '@/theme/components/dsm/FxChip';
+import DriveModelDiagram from '@/assets/images/drive_model_framework.jpeg';
+import { StaggeredGrid } from '@/animations/staggered-container';
 import { COMPANY_VALUES } from '@/lib/siteContent';
 import {
+  DRIVE_STEPS,
+  RCF_AUDIENCE,
+  RCF_EXPLAINER,
+  RCF_FOUNDATIONS,
   RCF_CANONICAL_PARAGRAPH,
   RCF_CONCEPTS,
   RCF_FAQ,
@@ -110,12 +118,14 @@ const ENGAGEMENTS: {
 ];
 
 /**
- * /resonance-core-framework — the commercial home of the framework: what it
- * is, its named concepts, the six values behind the DII, how to work with it,
- * and plain-language answers to common questions.
+ * /resonance-core-framework — the single home of the framework on Fluxline:
+ * what it is and the premise behind it, its named concepts, the DRIVE Model,
+ * the six values behind the DII, what it's built on and who it's for, how to
+ * work with it, and plain-language answers to common questions.
  *
- * The deeper explainer (premise, DRIVE Model, origins) stays at
- * /resonance-core; this page is where someone ready to engage should land.
+ * This page absorbed the former /resonance-core explainer (301-redirected in
+ * staticwebapp.config.json) so the framework isn't described in two places.
+ * The book lives at /books; the paid engagement at /services/resonance-core.
  */
 export default function ResonanceCoreFrameworkClient() {
   return (
@@ -192,6 +202,68 @@ export default function ResonanceCoreFrameworkClient() {
         </FxSectionPanel>
       </FxReveal>
 
+      {/* ---------------------------------------------------------------- */}
+      {/* What it is                                                        */}
+      {/* ---------------------------------------------------------------- */}
+      <FxReveal>
+        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
+          <FxGroupLabel>The Premise</FxGroupLabel>
+          <h2 style={sectionTitle}>Resonance, not force</h2>
+          <FxCallout
+            tone='gold'
+            title='The premise, in one line.'
+            style={{
+              marginTop: 'var(--fx-space-xl)',
+              marginBottom: 'var(--fx-space-l)',
+            }}
+          >
+            <em>
+              People make their best decisions when they act in alignment with
+              who they are.
+            </em>
+          </FxCallout>
+
+          <div
+            className='fx-g2'
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: 'var(--fx-space-l)',
+            }}
+          >
+            {RCF_EXPLAINER.map((block) => (
+              <FxCard
+                key={block.heading}
+                interactive
+                style={{ padding: '28px 28px 24px' }}
+              >
+                <h3
+                  style={{
+                    fontSize: 'var(--fx-h3-size)',
+                    fontWeight: 700,
+                    color: 'var(--fx-text-heading)',
+                    margin: '0 0 var(--fx-space-xs)',
+                    fontFamily: 'var(--fx-font)',
+                  }}
+                >
+                  {block.heading}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 'var(--fx-body-size)',
+                    color: 'var(--fx-text-body)',
+                    lineHeight: 'var(--fx-body-leading)',
+                    margin: 0,
+                  }}
+                >
+                  {block.body}
+                </p>
+              </FxCard>
+            ))}
+          </div>
+        </FxSectionPanel>
+      </FxReveal>
+
       {/* 2. Core concepts */}
       <FxReveal>
         <FxSectionPanel
@@ -222,6 +294,90 @@ export default function ResonanceCoreFrameworkClient() {
         </FxSectionPanel>
       </FxReveal>
 
+      {/* ---------------------------------------------------------------- */}
+      {/* The DRIVE Model                                                   */}
+      {/* ---------------------------------------------------------------- */}
+      <FxReveal>
+        <FxSectionPanel tone='band' style={{ marginBottom: SECTION_GAP }}>
+          <FxGroupLabel>The DRIVE Model</FxGroupLabel>
+          <h2 style={sectionTitle}>Six steps, one loop</h2>
+          <p style={sectionLede}>
+            The DRIVE Model is how the framework moves an intention from a
+            flicker of interest into a durable part of your identity. Each step
+            feeds the DRIVE Alignment Loop, where every action gets re-tested
+            against your values before it compounds.
+          </p>
+
+          {/* Diagram rail on the left, step cards on the right; the split
+              collapses to a single stacked column at tablet and below. */}
+          <div className='fx-media-split'>
+            <img
+              src={DriveModelDiagram.src}
+              alt='The DRIVE Model — Spark, Coherence, Activation, Momentum, Endurance, and Expansion arranged as a continuous alignment loop.'
+              style={{
+                display: 'block',
+                width: '100%',
+                maxWidth: 320,
+                aspectRatio: '1 / 1',
+                objectFit: 'cover',
+                borderRadius: 'var(--fx-radius-card)',
+                border: '1px solid var(--fx-border)',
+              }}
+            />
+
+            <div
+              className='fx-g2'
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: 'var(--fx-space-m)',
+                width: '100%',
+              }}
+            >
+              {DRIVE_STEPS.map((step, i) => (
+                <FxCard
+                  key={step.step}
+                  interactive
+                  variant='raised'
+                  style={{ padding: 22 }}
+                >
+                  <div
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 700,
+                      letterSpacing: '.08em',
+                      color: 'var(--fx-teal)',
+                      marginBottom: 'var(--fx-space-xs)',
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')} · {step.step.toUpperCase()}
+                  </div>
+                  <div
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 16,
+                      color: 'var(--fx-text-heading)',
+                      marginBottom: 'var(--fx-space-xxs)',
+                    }}
+                  >
+                    {step.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13.5,
+                      lineHeight: 1.55,
+                      color: 'var(--fx-text-muted)',
+                    }}
+                  >
+                    {step.body}
+                  </div>
+                </FxCard>
+              ))}
+            </div>
+          </div>
+        </FxSectionPanel>
+      </FxReveal>
+
       {/* 3. The six core values */}
       <FxReveal>
         <FxSectionPanel
@@ -244,6 +400,69 @@ export default function ResonanceCoreFrameworkClient() {
               </FxCard>
             ))}
           </div>
+        </FxSectionPanel>
+      </FxReveal>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* What it's built on                                                */}
+      {/* ---------------------------------------------------------------- */}
+      <FxReveal>
+        <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
+          <FxGroupLabel>What It&apos;s Built On</FxGroupLabel>
+          <h2 style={sectionTitle}>Tested before it was written down</h2>
+          <p style={sectionLede}>
+            The framework draws on six sources, and every part of it was run in
+            practice — daily journaling, decision tracking, pattern observation,
+            and alignment scorecards — before it became a system anyone else was
+            asked to use.
+          </p>
+
+          <div
+            style={{
+              display: 'flex',
+              gap: 'var(--fx-space-xs)',
+              flexWrap: 'wrap',
+            }}
+          >
+            {RCF_FOUNDATIONS.map((item) => (
+              <FxChip key={item} kind='category'>
+                {item}
+              </FxChip>
+            ))}
+          </div>
+        </FxSectionPanel>
+      </FxReveal>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Who it's for                                                      */}
+      {/* ---------------------------------------------------------------- */}
+      <FxReveal>
+        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
+          <FxGroupLabel>Who It&apos;s For</FxGroupLabel>
+          <h2 style={{ ...sectionTitle, marginBottom: 'var(--fx-space-l)' }}>
+            You&apos;ll recognize yourself here
+          </h2>
+          <p style={sectionLede}>
+            The framework is designed for individuals who are committed to
+            personal growth and alignment in their professional and personal
+            lives. If any of these sound like you, <br />
+            <strong>
+              <em>you're in the right place.</em>
+            </strong>
+          </p>
+
+          <StaggeredGrid columns={3} gap='1rem' stagger={0.1}>
+            {RCF_AUDIENCE.map((line) => (
+              <FxCard
+                key={line}
+                interactive
+                variant='feature'
+                style={{ padding: '28px 32px' }}
+              >
+                {line}
+              </FxCard>
+            ))}
+          </StaggeredGrid>
         </FxSectionPanel>
       </FxReveal>
 
@@ -398,8 +617,11 @@ export default function ResonanceCoreFrameworkClient() {
               </a>
             </li>
             <li>
-              <Link href='/resonance-core' style={textLink}>
-                The premise &amp; the DRIVE Model →
+              <Link
+                href='/blog/announcement-resonance-core-book'
+                style={textLink}
+              >
+                Read the origin story →
               </Link>
             </li>
           </ul>
