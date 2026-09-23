@@ -1,5 +1,5 @@
 {
-  "issuer": "https://www.linkedin.com/oauth",
+  "issuer": "https://www.linkedin.com",
   "authorization_endpoint": "https://www.linkedin.com/oauth/v2/authorization",
   "token_endpoint": "https://www.linkedin.com/oauth/v2/accessToken",
   "userinfo_endpoint": "https://api.linkedin.com/v2/userinfo",
