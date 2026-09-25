@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { FxButton } from '@/theme/components/dsm';
+import { slugify } from '@/utils/slug';
 
 const TAXONOMY_PREFIXES = [
   '/blog/tag/',
@@ -11,18 +12,13 @@ const TAXONOMY_PREFIXES = [
   '/portfolio/technology/',
 ];
 
-function slugify(input: string): string {
-  return input
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
 function tryTaxonomyRedirect(): boolean {
-  const raw = decodeURIComponent(window.location.pathname).replace(/\/+$/, '');
+  let raw: string;
+  try {
+    raw = decodeURIComponent(window.location.pathname).replace(/\/+$/, '');
+  } catch {
+    return false;
+  }
   for (const prefix of TAXONOMY_PREFIXES) {
     if (!raw.startsWith(prefix) && !raw.toLowerCase().startsWith(prefix)) continue;
     const term = raw.slice(prefix.length);
@@ -45,13 +41,10 @@ const navCards = [
 
 export default function NotFound() {
   const [hovered, setHovered] = React.useState<number | null>(null);
-  const [redirecting, setRedirecting] = React.useState(true);
 
   React.useEffect(() => {
-    if (!tryTaxonomyRedirect()) setRedirecting(false);
+    tryTaxonomyRedirect();
   }, []);
-
-  if (redirecting) return null;
 
   return (
     <div
