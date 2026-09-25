@@ -44,13 +44,23 @@ const sectionTitle: React.CSSProperties = {
   letterSpacing: '-.01em',
 };
 
-const sectionLede: React.CSSProperties = {
-  fontSize: 'var(--fx-body-size)',
-  color: 'var(--fx-text-muted)',
-  lineHeight: 'var(--fx-body-leading)',
-  maxWidth: '68ch',
+const sectionSubtitleStyle: React.CSSProperties = {
   margin: '0 0 var(--fx-space-xl)',
 };
+
+const sectionSubtitleTextStyle: React.CSSProperties = {
+  display: 'block',
+  fontSize: 17,
+  lineHeight: 'var(--fx-body-leading)',
+};
+
+function SectionSubtitle({ children }: { children: React.ReactNode }) {
+  return (
+    <FxCallout tone='gold' style={sectionSubtitleStyle}>
+      <span style={sectionSubtitleTextStyle}>{children}</span>
+    </FxCallout>
+  );
+}
 
 const cardTitle: React.CSSProperties = {
   fontSize: 'var(--fx-h4-size, 18px)',
@@ -186,13 +196,23 @@ export default function ResonanceCoreFrameworkClient() {
       {/* 1. What the framework is */}
       <FxReveal>
         <FxSectionPanel
-          tone='alt'
+          tone='gold'
           id='three-rings'
           style={{ marginBottom: SECTION_GAP }}
         >
           <FxGroupLabel>Overview</FxGroupLabel>
-          <h2 style={sectionTitle}>What the Framework Is</h2>
-          <p style={{ ...sectionLede, color: 'var(--fx-text-body)' }}>
+          <h2 style={{ ...sectionTitle, color: 'var(--fx-gold)' }}>
+            What the Framework Is
+          </h2>
+          <p
+            style={{
+              color: 'var(--fx-gold)',
+              fontSize: 17,
+              lineHeight: 'var(--fx-body-leading)',
+              maxWidth: '68ch',
+              margin: '0 0 var(--fx-space-xl)',
+            }}
+          >
             {RCF_CANONICAL_PARAGRAPH}
           </p>
           <div style={gridStyle}>
@@ -221,10 +241,12 @@ export default function ResonanceCoreFrameworkClient() {
               marginBottom: 'var(--fx-space-l)',
             }}
           >
-            <em>
-              People make their best decisions when they act in alignment with
-              who they are.
-            </em>
+            <span style={sectionSubtitleTextStyle}>
+              <em>
+                People make their best decisions when they act in alignment with
+                who they are.
+              </em>
+            </span>
           </FxCallout>
 
           <div
@@ -268,39 +290,7 @@ export default function ResonanceCoreFrameworkClient() {
         </FxSectionPanel>
       </FxReveal>
 
-      {/* 2. Core concepts */}
-      <FxReveal>
-        <FxSectionPanel
-          tone='inset'
-          id='core-concepts'
-          style={{ marginBottom: SECTION_GAP }}
-        >
-          <FxGroupLabel>Language for what you feel</FxGroupLabel>
-          <h2 style={sectionTitle}>Core Concepts</h2>
-          <p style={sectionLede}>
-            Each concept gives a name to something you&apos;ve likely already
-            experienced — and a way to work with it.
-          </p>
-          <div style={gridStyle}>
-            {RCF_CONCEPTS.map((c) => (
-              <div
-                key={c.id}
-                id={c.id}
-                style={{ scrollMarginTop: 96, height: '100%' }}
-              >
-                <FxCard style={{ padding: 22, height: '100%' }}>
-                  <h3 style={cardTitle}>{c.name}</h3>
-                  <p style={cardBody}>{c.body}</p>
-                </FxCard>
-              </div>
-            ))}
-          </div>
-        </FxSectionPanel>
-      </FxReveal>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* The DRIVE Model                                                   */}
-      {/* ---------------------------------------------------------------- */}
+      {/* The DRIVE Model */}
       <FxReveal>
         <FxSectionPanel
           tone='band'
@@ -309,12 +299,12 @@ export default function ResonanceCoreFrameworkClient() {
         >
           <FxGroupLabel>The DRIVE Model</FxGroupLabel>
           <h2 style={sectionTitle}>Six steps, one loop</h2>
-          <p style={sectionLede}>
+          <SectionSubtitle>
             The DRIVE Model is how the framework moves an intention from a
             flicker of interest into a durable part of your identity. Each step
             feeds the DRIVE Alignment Loop, where every action gets re-tested
             against your values before it compounds.
-          </p>
+          </SectionSubtitle>
 
           {/* Diagram rail on the left, step cards on the right; the split
               collapses to a single stacked column at tablet and below. */}
@@ -386,6 +376,39 @@ export default function ResonanceCoreFrameworkClient() {
         </FxSectionPanel>
       </FxReveal>
 
+      {/* Core concepts */}
+      <FxReveal>
+        <FxSectionPanel
+          tone='inset'
+          id='core-concepts'
+          style={{ marginBottom: SECTION_GAP }}
+        >
+          <FxGroupLabel>Language for what you feel</FxGroupLabel>
+          <h2 style={sectionTitle}>Core Concepts</h2>
+          <SectionSubtitle>
+            Each concept gives a name to something you&apos;ve likely already
+            experienced — and a way to work with it.
+          </SectionSubtitle>
+          <div
+            className='fx-g3'
+            style={{ ...gridStyle, gridTemplateColumns: 'repeat(3, 1fr)' }}
+          >
+            {RCF_CONCEPTS.map((c) => (
+              <div
+                key={c.id}
+                id={c.id}
+                style={{ scrollMarginTop: 96, height: '100%' }}
+              >
+                <FxCard style={{ padding: 22, height: '100%' }}>
+                  <h3 style={cardTitle}>{c.name}</h3>
+                  <p style={cardBody}>{c.body}</p>
+                </FxCard>
+              </div>
+            ))}
+          </div>
+        </FxSectionPanel>
+      </FxReveal>
+
       {/* 3. The six core values */}
       <FxReveal>
         <FxSectionPanel
@@ -395,12 +418,15 @@ export default function ResonanceCoreFrameworkClient() {
         >
           <FxGroupLabel tone='gold'>Decision Integrity</FxGroupLabel>
           <h2 style={sectionTitle}>The Six Core Values</h2>
-          <p style={sectionLede}>
+          <SectionSubtitle>
             These six values are the scoring anchors of the framework&apos;s
             Decision Integrity Index (DII). When you score a decision,
             you&apos;re asking how well it honors each one.
-          </p>
-          <div style={gridStyle}>
+          </SectionSubtitle>
+          <div
+            className='fx-g3'
+            style={{ ...gridStyle, gridTemplateColumns: 'repeat(3, 1fr)' }}
+          >
             {COMPANY_VALUES.map((val) => (
               <FxCard key={val.id} variant='raised' style={{ padding: 22 }}>
                 <h3 style={cardTitle}>{val.title}</h3>
@@ -418,12 +444,12 @@ export default function ResonanceCoreFrameworkClient() {
         <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>What It&apos;s Built On</FxGroupLabel>
           <h2 style={sectionTitle}>Tested before it was written down</h2>
-          <p style={sectionLede}>
+          <SectionSubtitle>
             The framework draws on six sources, and every part of it was run in
             practice — daily journaling, decision tracking, pattern observation,
             and alignment scorecards — before it became a system anyone else was
             asked to use.
-          </p>
+          </SectionSubtitle>
 
           <div
             style={{
@@ -450,14 +476,14 @@ export default function ResonanceCoreFrameworkClient() {
           <h2 style={{ ...sectionTitle, marginBottom: 'var(--fx-space-l)' }}>
             You&apos;ll recognize yourself here
           </h2>
-          <p style={sectionLede}>
+          <SectionSubtitle>
             The framework is designed for individuals who are committed to
             personal growth and alignment in their professional and personal
             lives. If any of these sound like you, <br />
             <strong>
-              <em>you're in the right place.</em>
+              <em>you&apos;re in the right place.</em>
             </strong>
-          </p>
+          </SectionSubtitle>
 
           <StaggeredGrid columns={3} gap='1rem' stagger={0.1}>
             {RCF_AUDIENCE.map((line) => (
@@ -483,10 +509,10 @@ export default function ResonanceCoreFrameworkClient() {
         >
           <FxGroupLabel>Ways In</FxGroupLabel>
           <h2 style={sectionTitle}>How to Work with the Framework</h2>
-          <p style={sectionLede}>
+          <SectionSubtitle>
             Start wherever feels right. Every path uses the same framework — you
             choose how deep and how guided you want it to be.
-          </p>
+          </SectionSubtitle>
           <div style={gridStyle}>
             {ENGAGEMENTS.map((e) => (
               <FxCard
@@ -554,8 +580,8 @@ export default function ResonanceCoreFrameworkClient() {
           id='faq'
           style={{ marginBottom: SECTION_GAP }}
         >
-          <FxGroupLabel>Questions</FxGroupLabel>
           <h2 style={sectionTitle}>Frequently Asked Questions</h2>
+          <SectionSubtitle>Questions</SectionSubtitle>
           <div
             style={{
               display: 'grid',
@@ -585,11 +611,11 @@ export default function ResonanceCoreFrameworkClient() {
       <FxReveal>
         <FxSectionPanel tone='band'>
           <h2 style={sectionTitle}>Ready when you are</h2>
-          <p style={sectionLede}>
+          <SectionSubtitle>
             A free consultation is a relaxed conversation about where you are
             and where you&apos;d like to be. No pressure — just clarity on the
             right first step.
-          </p>
+          </SectionSubtitle>
           <div
             style={{
               display: 'flex',
