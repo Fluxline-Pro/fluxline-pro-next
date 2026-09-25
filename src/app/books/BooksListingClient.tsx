@@ -23,6 +23,7 @@ import {
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
+  TRI_SITE_URL,
 } from '@/lib/resonanceCore';
 
 interface BooksListingClientProps {
@@ -232,7 +233,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                 marginTop: 'var(--fx-space-l)',
               }}
             >
-              <FxButton variant='outline' href='/resonance-core'>
+              <FxButton variant='outline' href='/resonance-core-framework'>
                 What the Framework Is →
               </FxButton>
             </div>
@@ -460,7 +461,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                 >
                   {PODCAST_BLURB}
                 </p>
-                <FxButton variant='primary' href='/podcasts'>
+                <FxButton variant='primary' href={TRI_SITE_URL}>
                   Listen to the Podcast
                 </FxButton>
               </div>
@@ -486,7 +487,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
             <FxCard
               interactive
               variant='standard'
-              href='/resonance-core'
+              href='/resonance-core-framework'
               style={{ padding: '28px 28px 24px' }}
             >
               <h3
@@ -655,7 +656,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
         }}
       >
         {RCF_TRADEMARK} is the practice underneath everything Fluxline builds.{' '}
-        <Link href='/resonance-core' style={{ color: 'var(--fx-accent)' }}>
+        <Link href='/resonance-core-framework' style={{ color: 'var(--fx-accent)' }}>
           Read what the framework is →
         </Link>
       </p>

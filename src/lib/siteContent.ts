@@ -34,10 +34,10 @@ export const COMPANY_VALUES: CompanyValue[] = [
     icon: 'Design',
   },
   {
-    id: 'legacy-resonance',
-    title: 'Legacy Resonance',
+    id: 'resilient-alignment',
+    title: 'Resilient Alignment',
     description:
-      'Building not just for today, but for the lasting impact you want to create in the world.',
+      'Staying connected to who you are in real conditions — stress, limited energy, competing demands — not just ideal ones.',
     icon: 'Globe',
   },
   {

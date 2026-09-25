@@ -1,20 +1,22 @@
 import React from 'react';
-import Script from 'next/script';
 import type { Metadata } from 'next';
 import ServicesPageClient from './ServicesPageClient';
 import { SERVICE_CATEGORIES } from './constants';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
 
+const SERVICES_TITLE =
+  'Services | Fluxline Resonance Group — RCF Coaching, Brand Design, Web Architecture & Consulting';
+const SERVICES_DESCRIPTION =
+  'Consulting, coaching, brand design, web architecture, and Resonance Core Framework™ engagements — offered by Fluxline Resonance Group for founders, leaders, and creative organizations.';
+
 export const metadata: Metadata = {
-  title: 'Services',
-  description:
-    'Fluxline Resonance Group offers cloud architecture consulting, content ecosystem design, web development, brand identity engineering, personal training, coaching, and transformational frameworks. Modular by design, resonant by nature.',
+  title: { absolute: SERVICES_TITLE },
+  description: SERVICES_DESCRIPTION,
   keywords:
-    'services, cloud architecture consulting, content ecosystem design, web development, brand design, personal training, coaching, strategic planning, business transformation, digital services, systems design, UX design',
+    'services, Resonance Core Framework coaching, RCF coaching, identity alignment coaching, consulting, brand design, web architecture, cloud architecture consulting, content ecosystem design, web development, personal training, coaching, strategic planning, systems design, UX design',
   openGraph: {
-    title: 'Services - Fluxline Resonance Group',
-    description:
-      'Cloud architecture, content ecosystem design, web development, brand identity engineering, personal training, coaching, and strategic consulting.',
+    title: SERVICES_TITLE,
+    description: SERVICES_DESCRIPTION,
     url: 'https://www.fluxline.pro/services',
     siteName: 'Fluxline Resonance Group',
     type: 'website',
@@ -29,9 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Services - Fluxline Resonance Group',
-    description:
-      'Cloud architecture, content ecosystem design, web development, brand identity engineering, personal training, coaching, and strategic consulting.',
+    title: SERVICES_TITLE,
+    description: SERVICES_DESCRIPTION,
     images: ['/images/FluxlineLogo.png'],
     creator: '@fluxlineco',
   },
@@ -83,7 +84,7 @@ const serviceCatalogSchema = {
 export default function ServicesPage() {
   return (
     <>
-      <Script
+      <script
         id='services-catalog-schema'
         type='application/ld+json'
         dangerouslySetInnerHTML={{

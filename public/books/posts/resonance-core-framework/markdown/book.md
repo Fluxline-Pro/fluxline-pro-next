@@ -145,6 +145,6 @@ The introduction preview is already published. It covers why self-help usually
 fails, the personal story behind the framework, the universal truths it rests
 on, and what the book and workbook will guide you through.
 
-**[Download the Introduction Preview PDF](/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf)**
+**[Download the Introduction Preview PDF](/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf)**
 
 **Coming Late Fall 2026**

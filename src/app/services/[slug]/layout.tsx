@@ -5,7 +5,6 @@
 
 import React from 'react';
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { SERVICE_CATEGORIES } from '../constants';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
 
@@ -145,13 +144,13 @@ export default async function ServiceDetailLayout({
 
   return (
     <>
-      <Script
+      <script
         id={`service-schema-${slug}`}
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(serviceSchema) }}
       />
       {faqSchema && (
-        <Script
+        <script
           id={`faq-schema-${slug}`}
           type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqSchema) }}

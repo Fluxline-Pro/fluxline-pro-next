@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
 import { isProduction } from '@/lib/environment';
 
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
     'Fluxline, Fluxline Resonance Group, consulting, cloud architecture, content ecosystem design, web development, business strategy, design, technical services, professional services, personal training, coaching, LGBTQ+ inclusive, accessibility, diversity, equity, AI-driven solutions, digital transformation, systems design, UX design, brand identity',
   authors: [
     { name: 'Fluxline Resonance Group', url: 'https://www.fluxline.pro' },
-    { name: 'Terence Waters', url: 'https://www.terencewaters.com' },
+    { name: 'Terence Waters', url: 'https://terencewaters.com' },
   ],
   creator: 'Fluxline Resonance Group',
   publisher: 'Fluxline Resonance Group',
@@ -131,7 +130,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         {/* Organization structured data for SEO and AI ingest */}
-        <Script
+        <script
           id='organization-schema'
           type='application/ld+json'
           dangerouslySetInnerHTML={{
@@ -139,8 +138,12 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               '@id': 'https://www.fluxline.pro/#organization',
-              name: 'Fluxline Resonance Group',
-              alternateName: ['Fluxline', 'Fluxline Pro'],
+              name: 'Fluxline Resonance Group, LLC',
+              alternateName: [
+                'Fluxline Resonance Group',
+                'Fluxline',
+                'Fluxline Pro',
+              ],
               url: 'https://www.fluxline.pro',
               logo: {
                 '@type': 'ImageObject',
@@ -149,19 +152,24 @@ export default function RootLayout({
                 height: 512,
               },
               description:
-                'Fluxline Resonance Group is a systems-design and consulting practice combining cloud architecture, content ecosystem design, UX and taxonomy design, brand identity engineering, and strategic consulting. We integrate technical, creative, and conceptual systems into one coherent offering.',
+                'Systems-design and consulting practice offering coaching, web architecture, brand identity, and The Resonance Core Framework™ — a structured identity alignment system for founders and leaders.',
+              keywords:
+                'Resonance Core Framework, identity alignment coaching, Behavioral Gravity, Identity Coherence, somatic discipline, decision integrity, consulting',
               foundingDate: '2020',
               founder: {
                 '@type': 'Person',
-                '@id': 'https://www.terencewaters.com/#person',
+                '@id': 'https://terencewaters.com/#person',
                 name: 'Terence Waters',
-                url: 'https://www.terencewaters.com',
+                url: 'https://terencewaters.com',
                 sameAs: [
                   'https://www.linkedin.com/in/terencewaters',
                   'https://www.instagram.com/fluxlineco',
                 ],
               },
               sameAs: [
+                'https://theresonantidentity.com',
+                'https://terencewaters.com',
+                'https://www.youtube.com/@theresonantidentity',
                 'https://www.instagram.com/fluxlineco',
                 'https://www.linkedin.com/in/terencewaters',
               ],
@@ -175,6 +183,9 @@ export default function RootLayout({
                 name: 'Worldwide',
               },
               knowsAbout: [
+                'Resonance Core Framework',
+                'Identity Alignment',
+                'Decision Integrity',
                 'Cloud Architecture',
                 'Content Ecosystem Design',
                 'Systems Design',
@@ -238,8 +249,8 @@ export default function RootLayout({
                     '@type': 'Offer',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'Resonance Core Framework™',
-                      url: 'https://www.fluxline.pro/services/resonance-core',
+                      name: 'Resonance Core Framework™ Coaching & Consulting',
+                      url: 'https://www.fluxline.pro/resonance-core-framework',
                     },
                   },
                 ],
@@ -248,7 +259,7 @@ export default function RootLayout({
           }}
         />
         {/* Website structured data */}
-        <Script
+        <script
           id='website-schema'
           type='application/ld+json'
           dangerouslySetInnerHTML={{
@@ -276,16 +287,16 @@ export default function RootLayout({
           }}
         />
         {/* Founder / Person structured data — cross-links to TerenceWaters.com */}
-        <Script
+        <script
           id='person-schema'
           type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: safeJsonLdStringify({
               '@context': 'https://schema.org',
               '@type': 'Person',
-              '@id': 'https://www.terencewaters.com/#person',
+              '@id': 'https://terencewaters.com/#person',
               name: 'Terence Waters',
-              url: 'https://www.terencewaters.com',
+              url: 'https://terencewaters.com',
               jobTitle: 'Founder & Principal Consultant',
               worksFor: {
                 '@id': 'https://www.fluxline.pro/#organization',
@@ -308,7 +319,7 @@ export default function RootLayout({
           }}
         />
         {/* Professional Service structured data */}
-        <Script
+        <script
           id='professional-service-schema'
           type='application/ld+json'
           dangerouslySetInnerHTML={{

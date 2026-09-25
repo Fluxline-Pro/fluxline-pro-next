@@ -14,7 +14,6 @@
  */
 
 import React from 'react';
-import Script from 'next/script';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllCaseStudySlugs, getCaseStudyById } from '../lib/caseStudyLoader';
@@ -137,7 +136,7 @@ export default async function CaseStudyDetailPage({
 
   return (
     <>
-      <Script
+      <script
         id={`case-study-schema-${id}`}
         type='application/ld+json'
         dangerouslySetInnerHTML={{
