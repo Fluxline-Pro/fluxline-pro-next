@@ -4,6 +4,38 @@ import React from 'react';
 import Link from 'next/link';
 import { FxButton } from '@/theme/components/dsm';
 
+const TAXONOMY_PREFIXES = [
+  '/blog/tag/',
+  '/blog/category/',
+  '/portfolio/tag/',
+  '/portfolio/technology/',
+];
+
+function slugify(input: string): string {
+  return input
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function tryTaxonomyRedirect(): boolean {
+  const raw = decodeURIComponent(window.location.pathname).replace(/\/+$/, '');
+  for (const prefix of TAXONOMY_PREFIXES) {
+    if (!raw.startsWith(prefix) && !raw.toLowerCase().startsWith(prefix)) continue;
+    const term = raw.slice(prefix.length);
+    if (!term || term.includes('/')) continue;
+    const slug = slugify(term);
+    if (slug && slug !== term) {
+      window.location.replace(`${prefix}${slug}/`);
+      return true;
+    }
+  }
+  return false;
+}
+
 const navCards = [
   { title: 'Home', desc: 'Start at the top.', href: '/' },
   { title: 'Services', desc: 'Six modular offerings.', href: '/services' },
@@ -13,6 +45,13 @@ const navCards = [
 
 export default function NotFound() {
   const [hovered, setHovered] = React.useState<number | null>(null);
+  const [redirecting, setRedirecting] = React.useState(true);
+
+  React.useEffect(() => {
+    if (!tryTaxonomyRedirect()) setRedirecting(false);
+  }, []);
+
+  if (redirecting) return null;
 
   return (
     <div
