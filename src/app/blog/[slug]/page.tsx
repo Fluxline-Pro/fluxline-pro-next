@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import React from 'react';
-import Script from 'next/script';
 import { getBlogPostBySlug } from '../lib/blogLoader';
 import { BlogPostDetailClient } from './BlogPostDetailClient';
 import { notFound } from 'next/navigation';
@@ -118,8 +117,8 @@ export default async function BlogPostDetailPage({
       '@type': 'Person',
       name: post.author,
       ...(post.author === 'Terence Waters' && {
-        '@id': 'https://www.terencewaters.com/#person',
-        url: 'https://www.terencewaters.com',
+        '@id': 'https://terencewaters.com/#person',
+        url: 'https://terencewaters.com',
       }),
     },
     publisher: {
@@ -151,7 +150,7 @@ export default async function BlogPostDetailPage({
 
   return (
     <>
-      <Script
+      <script
         id={`article-schema-${slug}`}
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(articleSchema) }}

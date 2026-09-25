@@ -116,11 +116,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      // The canonical explanation of the framework the whole practice rests on.
-      url: `${SITE_URL}/resonance-core`,
+      // The framework itself — what it is, how to work with it, and FAQ.
+      url: `${SITE_URL}/resonance-core-framework`,
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: 1.0,
     },
     {
       url: `${SITE_URL}/services/scrolls`,

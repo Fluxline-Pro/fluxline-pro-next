@@ -32,6 +32,52 @@ export default function FxFooter({
         ...style,
       }}
     >
+      {/* Cross-site links to the other owned properties in the RCF
+          ecosystem. Plain same-tab anchors with rel="me" so search engines
+          connect the three sites to one identity. */}
+      <nav
+        aria-label='The RCF Ecosystem'
+        className='fx-c'
+        style={{
+          maxWidth: 1220,
+          margin: '0 auto',
+          padding: '22px 32px 0',
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '8px 20px',
+          flexWrap: 'wrap',
+        }}
+      >
+        <span
+          style={{
+            fontSize: 12,
+            fontWeight: 700,
+            letterSpacing: '.08em',
+            textTransform: 'uppercase',
+            color: 'var(--fx-text-soft)',
+          }}
+        >
+          The RCF Ecosystem
+        </span>
+        <a
+          href='https://theresonantidentity.com'
+          rel='me'
+          style={linkStyle('tri')}
+          onMouseEnter={() => setHovered('tri')}
+          onMouseLeave={() => setHovered(null)}
+        >
+          The Resonant Identity Podcast
+        </a>
+        <a
+          href='https://terencewaters.com'
+          rel='me'
+          style={linkStyle('tw')}
+          onMouseEnter={() => setHovered('tw')}
+          onMouseLeave={() => setHovered(null)}
+        >
+          Terence Waters — Author &amp; Architect
+        </a>
+      </nav>
       <div
         className='fx-c footerContainer'
         style={{
