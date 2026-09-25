@@ -17,7 +17,7 @@ technologies:
 publishedDate: "2026-09-22"
 projectDuration: "Single working session"
 featured: true
-imageUrl: "/case-studies/posts/rcf-publishing-pipeline-alignment/images/rcf-publishing-pipeline-workflow.png"
+imageUrl: "/case-studies/posts/rcf-publishing-pipeline-alignment/images/rcf-publishing-case-study-workflow.png"
 imageAlt: "RCF Book Production Pipeline — nine-phase workflow diagram showing gate conditions, deliverables, and source-of-truth hierarchy"
 slug: "rcf-publishing-pipeline-alignment"
 seoTitle: "Nine Phases, One Source of Truth: AI Book Production Pipeline Case Study — Fluxline"
