@@ -44,19 +44,19 @@ export const RCF_BRIEF: string[] = [
 export const RCF_EXPLAINER: { heading: string; body: string }[] = [
   {
     heading: 'The problem it solves',
-    body: 'Most self-help tells you what to do, but not how. You get the familiar cycle: inspiration, motivation, confusion, inaction — then another book. The change never sets, because nothing structural was holding it up.',
+    body: 'Most self-help tells you what to do, but not how. Without structure, inspiration fades and old patterns return.',
   },
   {
     heading: 'The idea it rests on',
-    body: 'You decide best when you act as who you actually are — not who you were told to be. Resonance is the felt coherence between your identity, values, emotion, logic, and experience. With it, effort compounds. Without it, discipline carries the whole load, and eventually drops it.',
+    body: 'Decisions work better when they fit who you are. Resonance is alignment between your identity, values, feelings, and actions.',
   },
   {
     heading: 'What it does',
-    body: 'The framework turns this idea into something you can run. You get language for what you are experiencing, a repeatable way to test decisions against your values, and scorecards that track alignment over time. Change becomes measurable instead of aspirational.',
+    body: 'The RCF gives you language for your patterns, a way to test decisions against your values, and tools to track alignment.',
   },
   {
     heading: 'Where it came from',
-    body: "Not a business initiative — a necessity. It was built while Fluxline's owner left a six-figure job to found Fluxline, then refined daily through journaling, decision tracking, and pattern observation until it held under real pressure. Documented experience first, theory second.",
+    body: 'Terence developed the framework while building Fluxline, refining it through journaling, decisions, and real-world challenges.',
   },
 ];
 
@@ -75,43 +75,43 @@ export const DRIVE_STEPS: { step: string; title: string; body: string }[] = [
   {
     step: 'Spark',
     title: 'Sparking curiosity',
-    body: 'Notice the pull before you rationalise it. The first signal of a real DRIVE is interest that arrives unprompted.',
+    body: 'Notice what draws your interest before you talk yourself out of it.',
   },
   {
     step: 'Coherence',
     title: 'Testing viability',
-    body: 'Run the spark against your values, capacity, and context. Coherence is where most goals quietly fail — and where the framework catches them.',
+    body: 'Check the idea against your values, capacity, and context.',
   },
   {
     step: 'Activation',
     title: 'Initiating the loop',
-    body: 'Commit to the smallest honest action and start the DRIVE Alignment Loop: act, observe, re-test against values, adjust.',
+    body: 'Choose one small action. Observe, check in, and adjust.',
   },
   {
     step: 'Momentum',
     title: 'Compounding identity',
-    body: 'Repeated aligned action stops being something you do and starts being someone you are. Momentum is identity accruing interest.',
+    body: 'Repeated aligned action becomes part of how you see yourself.',
   },
   {
     step: 'Endurance',
     title: 'Sustaining the DRIVE',
-    body: 'Build the structures that carry the DRIVE through low-energy seasons, so continuity does not depend on motivation.',
+    body: 'Build routines that support you when motivation dips.',
   },
   {
     step: 'Expansion',
     title: 'Identity evolution',
-    body: 'Integrate the DRIVE into the wider system of your life, and let it change what the next spark is even capable of being.',
+    body: 'Let what you learn shape the next thing you pursue.',
   },
 ];
 
 /** Who the framework is for — used as a plain list. */
 export const RCF_AUDIENCE: string[] = [
-  'You want to make meaningful change and it keeps not sticking',
-  'You feel stuck, or misaligned between who you are and how you show up',
-  'You sense real potential but lack direction to point it at',
-  'You want clarity in your decisions, not just more information',
-  'You want to understand your own patterns more deeply',
-  'You want a system you can actually apply, and keep applying',
+  'You want change that lasts',
+  'You feel out of step with who you are',
+  'You see your potential but need direction',
+  'You want clearer decisions, not more information',
+  'You want to understand your patterns',
+  'You want a system you can keep using',
 ];
 
 /** The Resonant Identity Podcast — an extension of the framework. */
@@ -141,15 +141,15 @@ export const RCF_CANONICAL_PARAGRAPH =
 export const RCF_RINGS: { title: string; body: string }[] = [
   {
     title: 'Inward — the inner signal',
-    body: 'The part of you that stays steady beneath roles, pressure, and performance. This is the identity you return to, not the one you perform.',
+    body: 'Who you are beneath roles, pressure, and performance.',
   },
   {
     title: 'Outward — expression',
-    body: 'How that identity shows up in relationships, work, and decisions — where alignment and dissonance become visible.',
+    body: 'How your identity shows up in relationships, work, and decisions.',
   },
   {
     title: 'Systemic — impact',
-    body: 'How your identity scales into the teams, systems, and environments you build, so your impact reflects who you are.',
+    body: 'How your identity shapes the teams and systems you build.',
   },
 ];
 
@@ -234,32 +234,32 @@ export const RCF_FAQ: { question: string; answer: string }[] = [
   {
     question: 'What is the Resonance Core Framework?',
     answer:
-      'The Resonance Core Framework™ (RCF) is a structured identity system created by Terence Waters. It helps you make change that holds by aligning your decisions with who you actually are, rather than relying on willpower alone.',
+      'The RCF is a structured identity system that helps you make lasting change by aligning decisions with who you are.',
   },
   {
     question:
       'How is the RCF different from other coaching or identity frameworks?',
     answer:
-      'Most approaches tell you what to do. The RCF gives you named tools for how — language for what you are experiencing, a repeatable way to test decisions against your values, and scorecards that make alignment measurable over time.',
+      'The RCF offers tools to understand your patterns, test decisions against your values, and track alignment over time.',
   },
   {
     question: 'What is Behavioral Gravity?',
     answer:
-      "Behavioral Gravity is the unconscious pull toward behaviors, environments, and relationships that feel identity-consistent — even when they're no longer aligned with who you're becoming. Naming it is the first step to choosing whether to follow it.",
+      'Behavioral Gravity is the pull toward familiar behaviors and environments, even when they no longer fit who you are becoming.',
   },
   {
     question: 'What is the DII Protocol?',
     answer:
-      'The DII Protocol (Decision Integrity Index) is the RCF’s method for scoring how aligned a decision is with your identity. Scores are anchored to six core values and roll up into a Decision Alignment Score (DAS). The full protocol is detailed in the forthcoming book.',
+      'The DII scores how well a decision aligns with your identity, using six core values and a Decision Alignment Score.',
   },
   {
     question: 'Is the RCF research-backed?',
     answer:
-      'The RCF is research-informed. It draws on psychological research, behavioral patterns, and systems thinking, and was refined through documented personal practice and real-world application.',
+      'Yes. It draws on psychological research, behavioral patterns, systems thinking, and real-world practice.',
   },
   {
     question: 'Who is the RCF designed for?',
     answer:
-      'Founders, leaders, and creatives — and anyone who wants meaningful change that sticks, feels misaligned between who they are and how they show up, or wants more clarity in their decisions.',
+      'It is for founders, leaders, creatives, and anyone seeking lasting change or clearer decisions.',
   },
 ];

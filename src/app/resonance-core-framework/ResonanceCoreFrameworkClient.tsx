@@ -19,7 +19,6 @@ import {
   RCF_AUDIENCE,
   RCF_EXPLAINER,
   RCF_FOUNDATIONS,
-  RCF_CANONICAL_PARAGRAPH,
   RCF_CONCEPTS,
   RCF_FAQ,
   RCF_LOGO_IMAGE,
@@ -48,16 +47,16 @@ const sectionSubtitleStyle: React.CSSProperties = {
   margin: '0 0 var(--fx-space-xl)',
 };
 
-const sectionSubtitleTextStyle: React.CSSProperties = {
-  display: 'block',
-  fontSize: 17,
-  lineHeight: 'var(--fx-body-leading)',
-};
-
-function SectionSubtitle({ children }: { children: React.ReactNode }) {
+function SectionSubtitle({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <FxCallout tone='gold' style={sectionSubtitleStyle}>
-      <span style={sectionSubtitleTextStyle}>{children}</span>
+    <FxCallout tone='gold' title={title} style={sectionSubtitleStyle}>
+      {children}
     </FxCallout>
   );
 }
@@ -100,28 +99,28 @@ const ENGAGEMENTS: {
   {
     label: '1:1',
     title: 'Coaching',
-    body: 'Work through the framework one-to-one with Terence — mapping your patterns, naming what pulls you off course, and building decisions you can trust.',
+    body: 'Work one-to-one with us to understand your patterns and make decisions that fit who you are.',
     href: '/services/resonance-core',
     cta: 'Resonance Core Coaching ›',
   },
   {
     label: 'Teams & founders',
     title: 'Consulting packages',
-    body: 'Bring the RCF into how you lead and build — values-aligned strategy, decision integrity, and systems that reflect who you are as an organization.',
+    body: 'Apply the RCF to your strategy, decisions, and the systems your organization builds.',
     href: '/services/consulting',
     cta: 'Explore Consulting ›',
   },
   {
     label: `Coming ${RCF_RELEASE_WINDOW}`,
     title: 'The book',
-    body: 'The complete framework in print, digital, and audio, with a companion workbook that turns it into daily practice.',
+    body: 'Explore the full framework, with a companion workbook for daily practice.',
     href: '/books',
     cta: "See What's Coming ›",
   },
   {
     label: 'Weekly',
     title: 'The Resonant Identity Podcast',
-    body: 'Hear the framework in conversation — each episode explores one or more RCF concepts in everyday life.',
+    body: 'Hear RCF concepts explored through everyday conversations.',
     href: TRI_SITE_URL,
     cta: 'Listen to the Podcast ›',
   },
@@ -213,7 +212,8 @@ export default function ResonanceCoreFrameworkClient() {
               margin: '0 0 var(--fx-space-xl)',
             }}
           >
-            {RCF_CANONICAL_PARAGRAPH}
+            A structured identity system for making change that lasts through
+            alignment across your inner life, actions, and wider impact.
           </p>
           <div style={gridStyle}>
             {RCF_RINGS.map((ring) => (
@@ -241,12 +241,10 @@ export default function ResonanceCoreFrameworkClient() {
               marginBottom: 'var(--fx-space-l)',
             }}
           >
-            <span style={sectionSubtitleTextStyle}>
-              <em>
-                People make their best decisions when they act in alignment with
-                who they are.
-              </em>
-            </span>
+            <em>
+              People make their best decisions when they act in alignment with
+              who they are.
+            </em>
           </FxCallout>
 
           <div
@@ -299,11 +297,9 @@ export default function ResonanceCoreFrameworkClient() {
         >
           <FxGroupLabel>The DRIVE Model</FxGroupLabel>
           <h2 style={sectionTitle}>Six steps, one loop</h2>
-          <SectionSubtitle>
-            The DRIVE Model is how the framework moves an intention from a
-            flicker of interest into a durable part of your identity. Each step
-            feeds the DRIVE Alignment Loop, where every action gets re-tested
-            against your values before it compounds.
+          <SectionSubtitle title='From spark to lasting change'>
+            Six steps turn an initial interest into aligned action and lasting
+            momentum.
           </SectionSubtitle>
 
           {/* Diagram rail on the left, step cards on the right; the split
@@ -385,9 +381,9 @@ export default function ResonanceCoreFrameworkClient() {
         >
           <FxGroupLabel>Language for what you feel</FxGroupLabel>
           <h2 style={sectionTitle}>Core Concepts</h2>
-          <SectionSubtitle>
-            Each concept gives a name to something you&apos;ve likely already
-            experienced — and a way to work with it.
+          <SectionSubtitle title='A language for patterns'>
+            These concepts help you name what is happening and choose how to
+            respond.
           </SectionSubtitle>
           <div
             className='fx-g3'
@@ -401,7 +397,7 @@ export default function ResonanceCoreFrameworkClient() {
               >
                 <FxCard style={{ padding: 22, height: '100%' }}>
                   <h3 style={cardTitle}>{c.name}</h3>
-                  <p style={cardBody}>{c.body}</p>
+                  <p style={cardBody}>{c.summary}</p>
                 </FxCard>
               </div>
             ))}
@@ -418,10 +414,9 @@ export default function ResonanceCoreFrameworkClient() {
         >
           <FxGroupLabel tone='gold'>Decision Integrity</FxGroupLabel>
           <h2 style={sectionTitle}>The Six Core Values</h2>
-          <SectionSubtitle>
-            These six values are the scoring anchors of the framework&apos;s
-            Decision Integrity Index (DII). When you score a decision,
-            you&apos;re asking how well it honors each one.
+          <SectionSubtitle title='Check decisions against your values'>
+            The DII uses six values to assess how well a decision fits who you
+            are.
           </SectionSubtitle>
           <div
             className='fx-g3'
@@ -444,11 +439,9 @@ export default function ResonanceCoreFrameworkClient() {
         <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>What It&apos;s Built On</FxGroupLabel>
           <h2 style={sectionTitle}>Tested before it was written down</h2>
-          <SectionSubtitle>
-            The framework draws on six sources, and every part of it was run in
-            practice — daily journaling, decision tracking, pattern observation,
-            and alignment scorecards — before it became a system anyone else was
-            asked to use.
+          <SectionSubtitle title='Built from research and practice'>
+            The framework brings together research, systems thinking, and
+            real-world experience.
           </SectionSubtitle>
 
           <div
@@ -476,13 +469,9 @@ export default function ResonanceCoreFrameworkClient() {
           <h2 style={{ ...sectionTitle, marginBottom: 'var(--fx-space-l)' }}>
             You&apos;ll recognize yourself here
           </h2>
-          <SectionSubtitle>
-            The framework is designed for individuals who are committed to
-            personal growth and alignment in their professional and personal
-            lives. If any of these sound like you, <br />
-            <strong>
-              <em>you&apos;re in the right place.</em>
-            </strong>
+          <SectionSubtitle title='For people ready to grow'>
+            For anyone seeking lasting change, clearer decisions, or better
+            alignment between who they are and how they live.
           </SectionSubtitle>
 
           <StaggeredGrid columns={3} gap='1rem' stagger={0.1}>
@@ -509,9 +498,9 @@ export default function ResonanceCoreFrameworkClient() {
         >
           <FxGroupLabel>Ways In</FxGroupLabel>
           <h2 style={sectionTitle}>How to Work with the Framework</h2>
-          <SectionSubtitle>
-            Start wherever feels right. Every path uses the same framework — you
-            choose how deep and how guided you want it to be.
+          <SectionSubtitle title='Choose your level of support'>
+            Explore the framework through coaching, consulting, the book, or
+            podcast.
           </SectionSubtitle>
           <div style={gridStyle}>
             {ENGAGEMENTS.map((e) => (
@@ -559,12 +548,8 @@ export default function ResonanceCoreFrameworkClient() {
           >
             <h3 style={cardTitle}>Read the introduction first</h3>
             <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-              The free RCF Preview is the book&apos;s introduction: why most
-              self-help doesn&apos;t stick, the idea the framework rests on —
-              that you decide best when you act as who you actually are — and
-              where it came from. It&apos;s a quick, honest look at Behavioral
-              Gravity, Identity Coherence, the Window of Choice, and the DRIVE
-              System before you commit to anything.
+              The free preview introduces the framework and its tools for
+              making change last.
             </p>
             <a href={RCF_PREVIEW_PDF} style={textLink}>
               Download the RCF Preview (PDF) →
@@ -580,8 +565,8 @@ export default function ResonanceCoreFrameworkClient() {
           id='faq'
           style={{ marginBottom: SECTION_GAP }}
         >
+          <FxGroupLabel>Questions</FxGroupLabel>
           <h2 style={sectionTitle}>Frequently Asked Questions</h2>
-          <SectionSubtitle>Questions</SectionSubtitle>
           <div
             style={{
               display: 'grid',
@@ -611,10 +596,9 @@ export default function ResonanceCoreFrameworkClient() {
       <FxReveal>
         <FxSectionPanel tone='band'>
           <h2 style={sectionTitle}>Ready when you are</h2>
-          <SectionSubtitle>
-            A free consultation is a relaxed conversation about where you are
-            and where you&apos;d like to be. No pressure — just clarity on the
-            right first step.
+          <SectionSubtitle title='Start with a conversation'>
+            Talk through where you are and find a useful next step, with no
+            pressure.
           </SectionSubtitle>
           <div
             style={{
