@@ -74,4 +74,18 @@ describe('validateToken', () => {
     const req = { headers: { authorization: 'Bearer good-token' } };
     await expect(validateToken(req)).rejects.toThrow(/oid\/sub/);
   });
+
+  it('expects the api://fluxline-account audience when ENTRA_API_AUDIENCE is unset', async () => {
+    delete process.env.ENTRA_API_AUDIENCE;
+    jwt.verify.mockImplementation((token, getKey, opts, cb) => cb(null, { oid: 'oid-1' }));
+    await validateToken({ headers: { authorization: 'Bearer good-token' } });
+    expect(jwt.verify.mock.calls[0][2].audience).toEqual(['api://fluxline-account']);
+  });
+
+  it('uses ENTRA_API_AUDIENCE when set, split on commas and trimmed', async () => {
+    process.env.ENTRA_API_AUDIENCE = ' api://fluxline-account , 0000-client-id ,';
+    jwt.verify.mockImplementation((token, getKey, opts, cb) => cb(null, { oid: 'oid-1' }));
+    await validateToken({ headers: { authorization: 'Bearer good-token' } });
+    expect(jwt.verify.mock.calls[0][2].audience).toEqual(['api://fluxline-account', '0000-client-id']);
+  });
 });

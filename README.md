@@ -400,7 +400,7 @@ Backend (Functions, `api/local.settings.sample.json`):
 | Variable                            | Required               | Purpose                                       |
 | ----------------------------------- | ---------------------- | --------------------------------------------- |
 | `ENTRA_TENANT_ID`                   | Yes (entitlements)     | Tenant GUID for token validation              |
-| `ENTRA_API_AUDIENCE`                | No (default)           | Expected `aud` (default `api://fluxline-identity`) |
+| `ENTRA_API_AUDIENCE`                | No (default)           | Expected `aud` (default `api://fluxline-account`) |
 | `ENTRA_ISSUER` / `ENTRA_JWKS_URI`   | CIAM only              | Issuer / JWKS overrides for Entra External ID |
 | `SHARED_STORAGE_CONNECTION_STRING`  | Yes (entitlements)     | SHARED user-data storage account              |
 | `ENTITLEMENTS_TABLE` / `EVENTS_TABLE` | No (defaults)        | Table-name overrides                          |
