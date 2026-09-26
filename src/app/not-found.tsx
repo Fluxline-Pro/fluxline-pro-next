@@ -3,6 +3,34 @@
 import React from 'react';
 import Link from 'next/link';
 import { FxButton } from '@/theme/components/dsm';
+import { slugify } from '@/utils/slug';
+
+const TAXONOMY_PREFIXES = [
+  '/blog/tag/',
+  '/blog/category/',
+  '/portfolio/tag/',
+  '/portfolio/technology/',
+];
+
+function tryTaxonomyRedirect(): boolean {
+  let raw: string;
+  try {
+    raw = decodeURIComponent(window.location.pathname).replace(/\/+$/, '');
+  } catch {
+    return false;
+  }
+  for (const prefix of TAXONOMY_PREFIXES) {
+    if (!raw.startsWith(prefix) && !raw.toLowerCase().startsWith(prefix)) continue;
+    const term = raw.slice(prefix.length);
+    if (!term || term.includes('/')) continue;
+    const slug = slugify(term);
+    if (slug && slug !== term) {
+      window.location.replace(`${prefix}${slug}/`);
+      return true;
+    }
+  }
+  return false;
+}
 
 const navCards = [
   { title: 'Home', desc: 'Start at the top.', href: '/' },
@@ -13,6 +41,10 @@ const navCards = [
 
 export default function NotFound() {
   const [hovered, setHovered] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    tryTaxonomyRedirect();
+  }, []);
 
   return (
     <div

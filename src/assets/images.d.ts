@@ -1,15 +1,28 @@
+/**
+ * Module declarations for static image imports.
+ *
+ * Next.js provides `StaticImageData` via `next/image-types/global` (referenced
+ * in `next-env.d.ts`), so image imports are objects with `{ src, width, height }`
+ * rather than bare strings. These declarations align with that contract.
+ *
+ * If you add a new image format, mirror the declaration here.
+ */
+
 declare module '*.jpg' {
-  const content: string;
+  import type { StaticImageData } from 'next/image';
+  const content: StaticImageData;
   export default content;
 }
 
 declare module '*.jpeg' {
-  const content: string;
+  import type { StaticImageData } from 'next/image';
+  const content: StaticImageData;
   export default content;
 }
 
 declare module '*.png' {
-  const content: string;
+  import type { StaticImageData } from 'next/image';
+  const content: StaticImageData;
   export default content;
 }
 
@@ -19,27 +32,32 @@ declare module '*.svg' {
 }
 
 declare module '*.gif' {
-  const content: string;
+  import type { StaticImageData } from 'next/image';
+  const content: StaticImageData;
   export default content;
 }
 
 declare module '*.webp' {
-  const content: string;
+  import type { StaticImageData } from 'next/image';
+  const content: StaticImageData;
   export default content;
 }
 
 declare module '*.heic' {
-  const content: string;
+  import type { StaticImageData } from 'next/image';
+  const content: StaticImageData;
   export default content;
 }
 
 declare module '*.heif' {
-  const content: string;
+  import type { StaticImageData } from 'next/image';
+  const content: StaticImageData;
   export default content;
 }
 
 declare module '*.hevc' {
-  const content: string;
+  import type { StaticImageData } from 'next/image';
+  const content: StaticImageData;
   export default content;
 }
 
