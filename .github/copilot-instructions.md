@@ -238,7 +238,7 @@ Azure Table Storage account per environment. Canonical spec:
 
 - **MSAL auth stack location**: `src/lib/auth/` — `msalConfig.ts` (shared
   registration; login scopes `openid profile email`; API scope
-  `api://fluxline-identity/.default`; sessionStorage cache), `msalInstance.ts`
+  `api://fluxline-account/.default`; sessionStorage cache), `msalInstance.ts`
   (singleton), `AuthContext.tsx` (`AuthProvider`), `useAuth.ts`,
   `authStatus.ts`, `initials.ts`. `AuthProvider` is mounted in
   `src/app/providers.tsx` and must keep rendering children immediately

@@ -47,7 +47,7 @@
     "PING_RATE_LIMIT_WINDOW_MS": "900000",
     "PING_RATE_LIMIT_MAX_REQUESTS": "10",
     "ENTRA_TENANT_ID": "<entra-tenant-guid-for-api-entitlements>",
-    "ENTRA_API_AUDIENCE": "api://fluxline-identity",
+    "ENTRA_API_AUDIENCE": "api://fluxline-account",
     "ENTRA_ISSUER": "<optional-ciam-issuer-override>",
     "ENTRA_JWKS_URI": "<optional-ciam-jwks-override>",
     "SHARED_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=<shared-user-data-account>;AccountKey=<key>;EndpointSuffix=core.windows.net",

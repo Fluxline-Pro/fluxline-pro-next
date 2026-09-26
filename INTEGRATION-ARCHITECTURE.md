@@ -15,7 +15,7 @@
 | **Account** | account.fluxline.pro | Identity hub: profile, settings, progress, achievements, subscription | Azure Functions (classic model, `api/`) via SWA |
 | **Sanity** | (content lake) | Source of truth for editorial content: courses, lessons, guides, product copy | — |
 | **Azure Table Storage** | one shared storage account per env (TEST / PROD) | Relationships + operational state (see §3) | — |
-| **Entra External ID** | one tenant, one shared app registration | Sign-in (Microsoft / Google / LinkedIn) + API tokens | — |
+| **Entra External ID** | one tenant, one shared app registration | Sign-in (Microsoft / Google via redirect; email one-time code via native auth + `/api/native-auth` relay) + API tokens | — |
 
 Every cross-system call is an HTTPS call to a Functions/API endpoint with a
 Bearer token. No app reads another app's private storage except through the
@@ -25,18 +25,26 @@ documented shared tables (§3).
 
 - **One Entra External ID app registration** shared by all four apps → true
   SSO via the Entra session cookie.
-- The registration exposes the API scope **`api://fluxline-identity`**. All
+- The registration exposes the API scope **`api://fluxline-account`**. All
   frontends acquire access tokens with scope
-  `api://fluxline-identity/.default`; `openid profile email` are login scopes
+  `api://fluxline-account/.default`; `openid profile email` are login scopes
   only and are NOT valid for API calls.
+- **Native apps get their own registration in the same tenant.** Gaedge
+  (iOS/Windows, MSAL.NET) uses a separate public-client registration with
+  mobile/desktop redirect URIs and requests the same shared API scope as the
+  web apps (`<ENTRA_API_AUDIENCE>/.default`), so its tokens are accepted by
+  every backend and `oid` is the same user key. A separate registration keeps
+  its sign-in logs and consent auditable on their own.
 - **`oid` is the universal user key.** It is stable across app registrations;
   `sub` is pairwise and must not be used as a storage key. Backends accept
   `oid` with `sub` as a last-resort fallback.
 - Every backend validates tokens the same way: RS256 signature via the tenant
   JWKS, issuer + audience checks. Shared env contract:
   - `ENTRA_TENANT_ID` (required)
-  - `ENTRA_API_AUDIENCE` (default `api://fluxline-identity`, comma-separated
-    list allowed)
+  - `ENTRA_API_AUDIENCE` = `api://fluxline-account` (comma-separated list
+    allowed). Set it explicitly in every environment; fluxline.pro and the
+    CMS fall back to it when unset, account and storefront refuse to start
+    validating without it
   - `ENTRA_ISSUER`, `ENTRA_JWKS_URI` (CIAM overrides, e.g.
     `https://<tenant>.ciamlogin.com/<tenantId>/v2.0` and
     `https://<tenant>.ciamlogin.com/<tenantId>/discovery/v2.0/keys`)
@@ -67,6 +75,7 @@ classic Functions apps, `STORAGE_ACCOUNT_NAME`/`KEY` in the storefront):
 | `Progress` | oid / `progress` | account | account, cms |
 | `Achievements` | oid / `achievements` | account | account, cms |
 | `UserIdentitySnapshot` | oid / `snapshot` | account | account |
+| `AppMemberships` | oid / appId (e.g. `gaedge`) | account | all apps (via account API) |
 | `Entitlements` | oid / itemId | **storefront** (Stripe fulfillment) | all apps |
 | `Orders` | oid / Stripe session id | **storefront** | storefront, account |
 | `Events` | oid / reverse-ticks+uuid | all apps (best-effort) | account (activity feed, debugging) |
@@ -103,6 +112,7 @@ Course · Lesson · Achievement · ProgressRecord · IntegrationEvent`.
 | `/api/purchases` | GET | **new** — order history from `Orders` |
 | `/api/subscription` | GET | existing single-plan summary |
 | `/api/auth-status`, `/api/auth-session`, `/api/identity-snapshot`, `/api/delete-account` | — | existing; delete emits `account.deleted` |
+| `/api/app-memberships`, `/api/app-memberships/{appId}` | GET, GET/PUT | **new** — which Fluxline apps a user has joined (Gaedge first). PUT joins idempotently and can set `onboardingComplete` (never reverts); emits `app.joined`, `app.onboarding_completed`. App ids are an allow-list in the contracts (`AppId`) |
 
 ### store.fluxline.pro/api — commerce (owns Stripe)
 | Endpoint | Methods | Notes |
@@ -181,7 +191,7 @@ paths.
 ## 8. Rollout plan
 
 1. **TEST env config:** set `ENTRA_*` + storage app settings on all four SWAs;
-   confirm the shared app registration exposes `api://fluxline-identity` and
+   confirm the shared app registration exposes `api://fluxline-account` and
    each SPA client is authorized for it.
 2. **Deploy account app** (fixed validateToken) → verify profile/settings/
    progress endpoints with a real token.

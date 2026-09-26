@@ -18,7 +18,7 @@ const jwksRsa = require('jwks-rsa');
  *   ENTRA_JWKS_URI      optional — overrides the signing-key endpoint (required for CIAM)
  *   ENTRA_API_AUDIENCE  optional — expected `aud`; accepts a comma-separated
  *                       list (App ID URI and/or client id). Defaults to
- *                       `api://fluxline-identity`.
+ *                       `api://fluxline-account`.
  *
  * The returned `userId` is the token's `oid` (the Entra object id). `oid` is
  * STABLE for the same user across every app registration in the tenant, so it
@@ -99,7 +99,7 @@ async function validateToken(req) {
 
   const issuer =
     process.env.ENTRA_ISSUER || `https://login.microsoftonline.com/${tenantId}/v2.0`;
-  const audience = (process.env.ENTRA_API_AUDIENCE || 'api://fluxline-identity')
+  const audience = (process.env.ENTRA_API_AUDIENCE || 'api://fluxline-account')
     .split(',')
     .map((a) => a.trim())
     .filter(Boolean);
