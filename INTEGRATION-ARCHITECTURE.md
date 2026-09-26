@@ -31,8 +31,8 @@ documented shared tables (§3).
   only and are NOT valid for API calls.
 - **Native apps get their own registration in the same tenant.** Gaedge
   (iOS/Windows, MSAL.NET) uses a separate public-client registration with
-  mobile/desktop redirect URIs and requests the same shared API scope as the
-  web apps (`<ENTRA_API_AUDIENCE>/.default`), so its tokens are accepted by
+  mobile/desktop redirect URIs and requests the same single API scope as the
+  web apps (`api://fluxline-account/.default`), so its tokens are accepted by
   every backend and `oid` is the same user key. A separate registration keeps
   its sign-in logs and consent auditable on their own.
 - **`oid` is the universal user key.** It is stable across app registrations;
