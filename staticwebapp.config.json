@@ -72,6 +72,12 @@
       }
     },
     {
+      "route": "/assets/legal/*",
+      "headers": {
+        "X-Frame-Options": "SAMEORIGIN"
+      }
+    },
+    {
       "route": "/*",
       "allowedRoles": ["anonymous"]
     }
