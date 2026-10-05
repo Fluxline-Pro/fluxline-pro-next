@@ -5,12 +5,21 @@ import Link from 'next/link';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import { FadeUp } from '@/animations/fade-animations';
 
+const legalDocuments = [
+  {
+    title: 'Articles of Conversion',
+    pdfUrl: '/assets/legal/articles-of-conversion.pdf',
+    fileName: 'Fluxline-Articles-of-Conversion.pdf',
+  },
+  {
+    title: 'Statement of Conversion',
+    pdfUrl: '/assets/legal/state-conversion.pdf',
+    fileName: 'Fluxline-Statement-of-Conversion.pdf',
+  },
+];
+
 export default function ArticlesOfConversionClient() {
   const currentYear = new Date().getFullYear();
-
-  // In a real implementation, you would have the actual PDF file
-  // For now, we'll provide a placeholder and download link
-  const pdfUrl = '/assets/legal/articles-of-conversion.pdf';
 
   return (
     <FxContainer>
@@ -91,80 +100,56 @@ export default function ArticlesOfConversionClient() {
               PDF Document
             </h4>
 
-            {/* PDF Embed or Download Link */}
-            <div
-              style={{
-                marginTop: '1rem',
-                marginBottom: '1rem',
-              }}
-            >
-              {/* For browsers that support PDF embedding */}
-              <object
-                data={pdfUrl}
-                type='application/pdf'
-                width='100%'
-                style={{
-                  minHeight: '600px',
-                  border: '1px solid var(--fx-text-faint)',
-                  borderRadius: '4px',
-                }}
+            {legalDocuments.map((document) => (
+              <section
+                key={document.pdfUrl}
+                aria-labelledby={`${document.pdfUrl}-title`}
+                style={{ marginTop: '1.5rem' }}
               >
-                {/* Fallback for browsers that don't support PDF embedding */}
-                <div
+                <h5
+                  id={`${document.pdfUrl}-title`}
                   style={{
-                    padding: '2rem',
-                    textAlign: 'center',
+                    fontFamily: 'var(--fx-font)',
+                    fontSize: '1.125rem',
+                    fontWeight: 600,
+                    color: 'var(--fx-text-body)',
                   }}
                 >
-                  <p
-                    style={{
-                      fontFamily: 'var(--fx-font)',
-                      fontSize: 'var(--fx-body-size)',
-                      lineHeight: 'var(--fx-body-leading)',
-                      color: 'var(--fx-text-body)',
-                      marginBottom: '1rem',
-                    }}
-                  >
-                    Your browser does not support embedded PDF viewing.
-                  </p>
-                  <a
-                    href={pdfUrl}
-                    download='Fluxline-Articles-of-Conversion.pdf'
-                    style={{
-                      display: 'inline-block',
-                      padding: '0.75rem 1.5rem',
-                      backgroundColor: 'var(--fx-accent)',
-                      color: 'var(--fx-text-bright)',
-                      borderRadius: 'var(--fx-radius-card)',
-                      textDecoration: 'none',
-                      fontWeight: 600,
-                      transition: 'all 0.2s ease',
-                    }}
-                  >
-                    Download PDF
-                  </a>
-                </div>
-              </object>
-            </div>
-
-            {/* Download Button */}
-            <a
-              href={pdfUrl}
-              download='Fluxline-Articles-of-Conversion.pdf'
-              style={{
-                display: 'inline-block',
-                marginTop: '1rem',
-                padding: '0.75rem 1.5rem',
-                backgroundColor: 'var(--fx-accent)',
-                color: 'var(--fx-text-bright)',
-                borderRadius: 'var(--fx-radius-card)',
-                textDecoration: 'none',
-                fontWeight: 600,
-                transition: 'all 0.2s ease',
-              }}
-            >
-              Download PDF
-            </a>
+                  {document.title}
+                </h5>
+                <object
+                  data={document.pdfUrl}
+                  type='application/pdf'
+                  title={`${document.title} PDF preview`}
+                  width='100%'
+                  style={{
+                    minHeight: '600px',
+                    border: '1px solid var(--fx-text-faint)',
+                    borderRadius: '4px',
+                  }}
+                >
+                  Your browser does not support embedded PDF viewing.
+                </object>
+                <a
+                  href={document.pdfUrl}
+                  download={document.fileName}
+                  aria-label={`Download ${document.title} PDF`}
+                  style={{
+                    display: 'inline-block',
+                    marginTop: '1rem',
+                    padding: '0.75rem 1.5rem',
+                    backgroundColor: 'var(--fx-accent)',
+                    color: 'var(--fx-text-bright)',
+                    borderRadius: 'var(--fx-radius-card)',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  Download PDF
+                </a>
+              </section>
+            ))}
           </div>
 
           {/* Copyright Footer */}
