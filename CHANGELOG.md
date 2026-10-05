@@ -31,6 +31,7 @@ This is the first production deploy since 2026-09-23. A duplicate route in `stat
 
 ### Operations
 
+- **PR preview cleanup:** PR preview environments are now reliably deleted. A per-PR `concurrency` group queues the close behind any in-flight upload instead of racing it. The `pull_request` trigger is unfiltered, so retargeting a PR away from `master`/`test` also removes its preview. The close step drops build inputs that did nothing. ([#294](https://github.com/Fluxline-Pro/fluxline-pro-next/pull/294))
 - Removed six stale PR preview environments (from PRs closed or merged as far back as December 2025) from the test and production Static Web Apps. They had used every Free-tier staging slot, which made PR deploy checks fail.
 
 ## [v3_0_1_PROD] - 2026-09-19
