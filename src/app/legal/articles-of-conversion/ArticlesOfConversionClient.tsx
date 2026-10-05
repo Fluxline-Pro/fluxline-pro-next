@@ -10,7 +10,8 @@ export default function ArticlesOfConversionClient() {
 
   // In a real implementation, you would have the actual PDF file
   // For now, we'll provide a placeholder and download link
-  const pdfUrl = '/assets/legal/articles-of-conversion.pdf';
+  const articlesPdfURL = '/assets/legal/articles-of-conversion.pdf';
+  const conversionPdfURL = '/assets/legal/state-conversion.pdf';
 
   return (
     <FxContainer>
@@ -100,7 +101,7 @@ export default function ArticlesOfConversionClient() {
             >
               {/* For browsers that support PDF embedding */}
               <object
-                data={pdfUrl}
+                data={articlesPdfURL}
                 type='application/pdf'
                 width='100%'
                 style={{
