@@ -35,6 +35,10 @@ jobs:
           yarn --version
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+      # Azure rejects a staticwebapp.config.json with duplicate routes and aborts the whole upload,
+      # which silently freezes the site on its last build. Fail here instead.
+      - name: Validate staticwebapp.config.json
+        run: yarn jest src/staticwebapp-config.test.ts --ci
       - name: Build Application
         run: yarn build
         env:
