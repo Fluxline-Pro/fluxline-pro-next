@@ -4,14 +4,34 @@ on:
   push:
     branches:
       - master
+  # No branch filter on pull_request: a PR retargeted away from master must still reach
+  # this workflow so its preview gets removed. The jobs below gate on the base branch.
   pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - master
+    types: [opened, synchronize, reopened, edited, closed]
+
+# One run at a time per PR. A new push cancels an in-flight preview build, but a close
+# queues behind it, so an upload can never land after the preview was deleted (PR #290).
+# Only events that can touch this SWA's preview share the PR group: activity on PRs into
+# master, and base changes onto or away from master. Everything else (title/body edits, PRs
+# into other branches, including ones retargeted away from master) gets a unique group so
+# its all-skipped run can't cancel or replace a queued close.
+concurrency:
+  group: >-
+    ${{ github.workflow }}-${{
+      (github.event_name == 'pull_request' &&
+        !((github.event.action != 'edited' && github.base_ref == 'master') ||
+          (github.event.action == 'edited' && github.event.changes.base &&
+            (github.base_ref == 'master' || github.event.changes.base.ref.from == 'master'))))
+      && github.run_id || github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.action != 'edited' }}
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: >-
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request' && github.base_ref == 'master' &&
+        (contains(fromJSON('["opened", "synchronize", "reopened"]'), github.event.action) ||
+          (github.event.action == 'edited' && github.event.changes.base)))
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     permissions:
@@ -35,6 +55,10 @@ jobs:
           yarn --version
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+      # Azure rejects a staticwebapp.config.json with duplicate routes and aborts the whole upload,
+      # which silently freezes the site on its last build. Fail here instead.
+      - name: Validate staticwebapp.config.json
+        run: yarn jest src/staticwebapp-config.test.ts --ci
       - name: Build Application
         run: yarn build
         env:
@@ -58,8 +82,13 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.SWA_API_TOKEN_PROD }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
 
+  # Deletes the PR's preview environment when the PR closes, or when it is retargeted
+  # away from master (otherwise the preview leaks and fills the 3-slot Free-tier quota).
   close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: >-
+      github.event_name == 'pull_request' &&
+      ((github.event.action == 'closed' && github.base_ref == 'master') ||
+        (github.event.action == 'edited' && github.event.changes.base.ref.from == 'master'))
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     permissions:
@@ -71,6 +100,3 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.SWA_API_TOKEN_PROD }}
           action: 'close'
           app_location: '/'
-          api_location: ''
-          output_location: '.next/standalone'
-          skip_app_build: false
