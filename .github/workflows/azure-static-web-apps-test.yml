@@ -11,9 +11,18 @@ on:
 
 # One run at a time per PR. A new push cancels an in-flight preview build, but a close
 # queues behind it, so an upload can never land after the preview was deleted (PR #290).
-# Plain title/body edits get their own group so they can't cancel a queued close.
+# Only events that can touch this SWA's preview share the PR group: activity on PRs into
+# test, and base changes onto or away from test. Everything else (title/body edits, PRs
+# into other branches, including ones retargeted away from test) gets a unique group so
+# its all-skipped run can't cancel or replace a queued close.
 concurrency:
-  group: ${{ github.workflow }}-${{ (github.event.action == 'edited' && !github.event.changes.base) && github.run_id || github.event.pull_request.number || github.ref }}
+  group: >-
+    ${{ github.workflow }}-${{
+      (github.event_name == 'pull_request' &&
+        !((github.event.action != 'edited' && github.base_ref == 'test') ||
+          (github.event.action == 'edited' && github.event.changes.base &&
+            (github.base_ref == 'test' || github.event.changes.base.ref.from == 'test'))))
+      && github.run_id || github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.action != 'edited' }}
 
 jobs:
