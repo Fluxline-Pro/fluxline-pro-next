@@ -28,9 +28,14 @@ function entitlement(overrides: Partial<Entitlement> = {}): Entitlement {
     category: 'book',
     fulfillment: 'digital',
     sourceItemId: null,
+    orderId: null,
     purchasedAt: null,
     expiresAt: null,
     contentRef: null,
+    map: false,
+    atlasUpgrade: false,
+    sourceProduct: null,
+    purchaseChannel: null,
     ...overrides,
   };
 }
