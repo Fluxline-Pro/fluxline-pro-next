@@ -1,5 +1,5 @@
 /**
- * Fluxline ecosystem — shared data contracts, browser-side view (v1).
+ * Fluxline ecosystem — shared data contracts, browser-side view (v2).
  *
  * TypeScript mirror of the zod schemas in `api/lib/contracts.js` (and the
  * storefront's `src/lib/contracts/index.ts`). Types only: the backends already
@@ -14,7 +14,7 @@
  * Identity key: every per-user record is partitioned by the Entra `oid`.
  */
 
-export const CONTRACTS_VERSION = 1;
+export const CONTRACTS_VERSION = 2;
 
 export type ContentKind =
   | 'course'
@@ -37,6 +37,8 @@ export type ContentSelector =
   | { sanityDocumentId: string }
   | { itemId: string };
 
+export type PurchaseChannel = 'storefront' | 'gaedge' | 'journfield' | 'grant';
+
 export interface Entitlement {
   itemId: string;
   status: 'active' | 'cancelled';
@@ -46,9 +48,14 @@ export interface Entitlement {
   category: string;
   fulfillment: string;
   sourceItemId: string | null;
+  orderId: string | null;
   purchasedAt: string | null;
   expiresAt: string | null;
   contentRef: ContentRef | null;
+  map: boolean;
+  atlasUpgrade: boolean;
+  sourceProduct: string | null;
+  purchaseChannel: PurchaseChannel | null;
 }
 
 export type FulfillmentStatus =
@@ -75,7 +82,7 @@ export interface Order {
 export interface CatalogItem {
   id: string;
   name: string;
-  category: 'book' | 'bundle' | 'lesson' | 'subscription';
+  category: 'book' | 'bundle' | 'lesson' | 'subscription' | 'ai-service';
   fulfillment: 'digital' | 'physical' | 'subscription' | 'external';
   bundleOf?: string[];
   contentRef?: ContentRef;
@@ -139,6 +146,50 @@ export interface UserSettings {
   reduceMotion: boolean;
   highContrast: boolean;
 }
+
+export interface BookPurchaseData {
+  productName: string;
+  bookType: string;
+  fulfillment: string;
+  ebookDownloadable: boolean;
+  contentRef: ContentRef | null;
+  purchasedAt: string | null;
+  orderId: string | null;
+}
+
+export interface BookPurchaseRelationship {
+  id: string;
+  userId: string;
+  kind: 'bookPurchase';
+  refId: string;
+  status: 'active' | 'cancelled';
+  data: BookPurchaseData;
+  updatedAt: string;
+}
+
+export type AppId = 'gaedge' | 'journfield' | 'rcf-ai-companion';
+
+export interface AppMembership {
+  appId: AppId;
+  joinedAt: string;
+  lastSeenAt: string;
+  onboardingComplete: boolean;
+  onboardingCompletedAt: string | null;
+}
+
+export type IntegrationEventType =
+  | 'entitlement.granted'
+  | 'entitlement.revoked'
+  | 'order.recorded'
+  | 'order.fulfillment_updated'
+  | 'checkout.session_created'
+  | 'progress.updated'
+  | 'achievement.unlocked'
+  | 'profile.created'
+  | 'account.deleted'
+  | 'book.purchase_synced'
+  | 'app.joined'
+  | 'app.onboarding_completed';
 
 /**
  * Narrows an unknown response to Entitlement[].
