@@ -167,7 +167,7 @@ export interface BookPurchaseRelationship {
   updatedAt: string;
 }
 
-export type AppId = 'gaedge' | 'journfield' | 'rcf-ai-companion';
+export type AppId = 'gaedge' | 'journfield' | 'rcf-ai-companion' | 'movn';
 
 export interface AppMembership {
   appId: AppId;
