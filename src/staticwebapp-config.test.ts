@@ -50,4 +50,15 @@ describe('staticwebapp.config.json', () => {
       expect([301, 302]).toContain(r.statusCode ?? 302);
     }
   });
+
+  it('redirects the retired Fractional Leadership service URL', () => {
+    expect(
+      config.routes.find(
+        (route) => normalize(route.route) === '/services/fractional-leadership'
+      )
+    ).toMatchObject({
+      redirect: '/services',
+      statusCode: 301,
+    });
+  });
 });

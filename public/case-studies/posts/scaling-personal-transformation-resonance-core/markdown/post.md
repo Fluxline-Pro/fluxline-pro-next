@@ -2,7 +2,7 @@
 title: 'Scaling Personal Transformation: Building a Differentiated Coaching Business'
 client: 'Fluxline Resonance Group, LLC'
 industry: 'Wellness & Personal Development'
-description: 'How integrating NASM-certified training with The Resonance Core Framework™ created a scalable coaching business with 85% client retention, premium pricing, and sustainable revenue growth.'
+description: 'How integrating NASM-certified training with The Resonance Core Framework™ created a scalable coaching business with premium pricing and sustainable revenue growth.'
 services: ['personal-training', 'resonance-core', 'coaching']
 technologies:
   [
@@ -17,7 +17,7 @@ publishedDate: '2025-12-08'
 projectDuration: '8 years (2017-2025)'
 featured: true
 seoTitle: 'Scaling Personal Transformation Coaching Business Case Study'
-seoDescription: 'Discover how NASM certification combined with Resonance Core Framework™ created an 85% retention coaching business with premium pricing and sustainable growth.'
+seoDescription: 'Discover how NASM certification combined with Resonance Core Framework™ supported a differentiated coaching business with premium pricing and sustainable growth.'
 seoKeywords:
   [
     'coaching business',
@@ -30,9 +30,6 @@ seoKeywords:
     'transformation coaching',
   ]
 metrics:
-  - label: 'Client Retention'
-    value: '85%'
-    description: 'Year-over-year (vs 20-40% industry avg)'
   - label: 'Pricing Premium'
     value: '2-3x'
     description: 'Above industry standard rates'
@@ -54,7 +51,7 @@ generatedWithAI: true
 
 ## Summary
 
-The wellness industry is saturated with commoditized personal training services racing to the bottom on pricing. Fluxline Resonance Group disrupted this model by integrating **NASM-certified training** with the proprietary **Resonance Core Framework™**—a methodology blending physical training, emotional intelligence, somatic practices, and archetypal mapping. The result: **85% client retention** (vs 20-40% industry average), **premium pricing 2-3x industry rates**, and a **sustainable 6-figure coaching business** built on authentic transformation. This case study reveals how personal journey becomes business asset, differentiation drives premium value, and holistic integration creates defensible competitive advantage.
+The wellness industry is saturated with commoditized personal training services racing to the bottom on pricing. Fluxline Resonance Group disrupted this model by integrating **NASM-certified training** with the proprietary **Resonance Core Framework™**—a methodology blending physical training, emotional intelligence, somatic practices, and archetypal mapping. The result: **premium pricing 2-3x industry rates** and a **sustainable 6-figure coaching business** built on authentic transformation. This case study reveals how personal journey becomes business asset, differentiation drives premium value, and holistic integration creates defensible competitive advantage.
 
 ## Challenge
 
@@ -67,7 +64,7 @@ The personal training industry faces fundamental structural challenges:
 - Oversaturated with low differentiation between providers
 - Commoditized service offerings (reps, sets, meal plans)
 - Race to the bottom on pricing ($30-50/session)
-- High client churn (60-80% within 6 months)
+- Client churn in the coaching industry
 - Transactional relationships, not transformational outcomes
 
 **Client Pain Points:**
@@ -137,7 +134,7 @@ The founder's 8-year transformation (120 lbs. → 185 lbs., emerging from recove
 - Competitive moat (difficult to replicate without lived experience)
 
 **Premium Positioning:**
-By offering holistic transformation rather than commoditized training, Fluxline commands **2-3x industry pricing** ($110-450/month vs. $30-50/session) while maintaining **85% retention** through superior client outcomes.
+By offering holistic transformation rather than commoditized training, Fluxline commands **2-3x industry pricing** ($110-450/month vs. $30-50/session).
 
 ---
 
@@ -177,7 +174,6 @@ By offering holistic transformation rather than commoditized training, Fluxline 
 
 - 10-15 clients at $225-450/month tiers
 - $3,000-6,750/month recurring revenue
-- 85%+ retention rates from initial cohort
 - Strong word-of-mouth referral engine
 
 ---
@@ -297,7 +293,6 @@ By offering holistic transformation rather than commoditized training, Fluxline 
 
 - $450/month per client
 - $5,400/year per client
-- Average client retention: 12+ months
 
 **Time Investment:**
 
@@ -320,10 +315,8 @@ By offering holistic transformation rather than commoditized training, Fluxline 
 - Conversion Rate: 40-50% (consultation to signed client)
 - Time to Close: 1-2 conversations
 
-**Client Retention & Lifetime Value:**
+**Lifetime Value:**
 
-- Retention Rate: 85% year-over-year (vs. 20-40% industry)
-- Average Client Duration: 12+ months
 - LTV (Lifetime Value): $5,400+ (Hybrid Hypertrophy tier)
 - LTV:CAC Ratio: 27:1 to 108:1 (highly efficient)
 
@@ -332,7 +325,6 @@ By offering holistic transformation rather than commoditized training, Fluxline 
 - MRR (Monthly Recurring Revenue): $6,000-9,000 (current)
 - ARPU (Average Revenue Per User): $300-450/month
 - MoM Growth: 10-15% (client acquisition phase)
-- Annual Churn: 15% (vs. 60-80% industry average)
 
 ---
 
@@ -363,12 +355,10 @@ By offering holistic transformation rather than commoditized training, Fluxline 
 
 ### Client Transformation
 
-**Retention & Satisfaction:**
+**Client Satisfaction:**
 
-- 85% year-over-year retention (vs. 20-40% industry)
 - 90+ Net Promoter Score (client satisfaction)
 - 60% of new clients from word-of-mouth referrals
-- 40% of clients return for additional services
 
 **Outcome Quality:**
 
@@ -460,7 +450,7 @@ Professional certification (NASM, ISSA, ACE) adds credibility grounding intuitiv
 Framework, methodology, or system creates defensible advantage. Trademark and document for future licensing, certification, or courses.
 
 **5. Focus on Retention Over Acquisition**
-Long-term client relationships (85% retention) generate higher LTV and lower CAC than constant churn (60-80% industry average).
+Long-term client relationships can generate higher LTV and lower CAC than constant churn.
 
 **6. Premium Positioning Attracts Ideal Clients**
 Charging 2-3x industry rates filters for committed clients and communicates transformation value, not commodity service.
@@ -548,7 +538,6 @@ Integrating **NASM-certified training** with the **Resonance Core Framework™**
 
 **Key Results:**
 
-- **85% client retention** vs. 20-40% industry average
 - **2-3x premium pricing** commanding $110-450/month tiers
 - **LTV:CAC ratio of 27:1 to 108:1** (highly efficient growth)
 - **70-80% net margins** enabling reinvestment and lifestyle
