@@ -240,7 +240,7 @@ This is coaching for those ready to reclaim their light.
 ## Related Resources
 
 - [Personal Training Transformation Journey Portfolio](/portfolio/personal-training-transformation-journey) — complete technical details with training protocols and business impact
-- [Resonance Core Coaching Business](/portfolio/resonance-core-coaching-business) — how this methodology evolved into a scalable business with 85% client retention
+- [Resonance Core Coaching Business](/portfolio/resonance-core-coaching-business) — how this methodology evolved into a scalable business
 - [Scaling Personal Transformation Case Study](/case-studies/scaling-personal-transformation-resonance-core) — business model behind transformation coaching
 - [What Makes Transformation Coaching Different?](/blog/scaling-transformation-resonance-core-business) — why traditional fitness programs don't work long-term
 
