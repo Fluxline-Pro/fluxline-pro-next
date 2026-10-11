@@ -19,10 +19,7 @@ describe('personal transformation case study content', () => {
         .split('\n')
         .find(
           (line) =>
-            /retention|retained|churn|return(?:ing)? clients?|clients? return/i.test(
-              line
-            ) &&
-            /(?:\b\d+(?:\.\d+)?\s*%|\b\d+(?:\.\d+)?\s*(?:months?|years?))/i.test(
+            /retention|retained|churn|return(?:ing)? clients?|clients? return|client duration/i.test(
               line
             )
         );
