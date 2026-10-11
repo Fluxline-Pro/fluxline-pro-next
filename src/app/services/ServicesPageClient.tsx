@@ -35,12 +35,6 @@ const CATEGORY_SECTIONS: {
     description:
       'Physical training and transformational frameworks rooted in identity work and embodiment.',
   },
-  {
-    key: 'depth-strategy',
-    title: 'Strategy & Leadership',
-    description:
-      'Senior-level strategic direction and fractional leadership for founders and growing teams.',
-  },
 ];
 
 export default function ServicesPageClient() {
@@ -66,7 +60,7 @@ export default function ServicesPageClient() {
         {SERVICES_SUMMARY}
       </p>
 
-      {/* Featured: Consulting */}
+      {/* Strategy & Leadership */}
       <section
         style={{ padding: '16px 0', marginBottom: 'var(--fx-section-gap)' }}
       >
@@ -80,7 +74,7 @@ export default function ServicesPageClient() {
             marginBottom: 14,
           }}
         >
-          Featured Service
+          Strategy & Leadership
         </div>
         <FxCard
           variant='feature'

@@ -207,7 +207,6 @@ Now applying this integrated approach with clients:
 - Physical transformations (strength, body composition)
 - Emotional breakthroughs during training
 - Sustainable lifestyle changes
-- High retention rates (85%+ year-over-year)
 - Strong word-of-mouth referrals
 
 ### Business Impact
@@ -222,7 +221,6 @@ Now applying this integrated approach with clients:
 
 **Business Metrics:**
 
-- 85% client retention (vs. 20-40% industry average)
 - 60% referral rate (word-of-mouth growth)
 - Premium pricing (2-3x industry rates)
 - High client satisfaction (NPS 90+)
@@ -377,7 +375,6 @@ Phase 5: Power
 - 8 years development
 - 120 lbs. → 185 lbs. transformation
 - NASM Certified Personal Trainer
-- 85% client retention rate
 - Proprietary Resonance Core Framework™
 
 ## Future Development
