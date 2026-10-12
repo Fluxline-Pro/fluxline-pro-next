@@ -33,7 +33,7 @@ export default function FxSelect({
   const selectStyle: React.CSSProperties = {
     width: '100%',
     appearance: 'none',
-    WebkitAppearance: 'none' as any,
+    WebkitAppearance: 'none',
     background: 'var(--fx-surface-input)',
     border: `1px solid ${focused ? 'var(--fx-border-hover)' : 'var(--fx-border)'}`,
     borderRadius: 'var(--fx-radius-control)',

@@ -1,7 +1,10 @@
 'use client';
 
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback, useSyncExternalStore } from 'react';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
+
+// Hydration flag without a setState-in-effect: false during SSR and the hydration render, true after.
+const subscribeNoop = () => () => {};
 
 interface TestimonialCarouselProps {
   children: React.ReactNode[];
@@ -21,7 +24,7 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const orientationHook = useDeviceOrientation();
   const orientation = isMounted ? orientationHook : 'landscape';
 
@@ -65,10 +68,6 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
       behavior: 'smooth',
     });
   };
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     checkScroll();

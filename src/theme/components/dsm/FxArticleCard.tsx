@@ -62,7 +62,7 @@ export default function FxArticleCard({
             color: 'var(--fx-text-body)',
             display: '-webkit-box',
             WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical' as any,
+            WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
             margin: 0,
           }}
