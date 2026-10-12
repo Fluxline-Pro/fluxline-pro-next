@@ -55,7 +55,9 @@ function useRailParallax(enabled: boolean) {
         window.innerWidth >= 768 &&
         document.documentElement.getAttribute('data-fx-motion') !== 'reduce';
       if (!isDesktop.current) {
-        setTransform({ y: 0, opacity: 1 });
+        // Reset on the next frame rather than synchronously inside the effect.
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => setTransform({ y: 0, opacity: 1 }));
       }
     };
 
@@ -65,7 +67,10 @@ function useRailParallax(enabled: boolean) {
     };
 
     checkDesktop();
-    update();
+    // First measurement on the next frame: the effect itself must not set state synchronously.
+    if (isDesktop.current) {
+      rafRef.current = requestAnimationFrame(update);
+    }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', checkDesktop);
 

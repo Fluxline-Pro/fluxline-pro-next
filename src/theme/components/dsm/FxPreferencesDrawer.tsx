@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useAppTheme } from '../../hooks/useAppTheme';
+import type { ThemeMode } from '../../theme';
 import { useUserPreferencesStore } from '../../../store/store-specs/userPreferencesStore';
 import FxSelect from './FxSelect';
 import FxSwitch from './FxSwitch';
@@ -137,7 +138,7 @@ export default function FxPreferencesDrawer({
             <FxSelect
               label="Theme"
               value={themeMode}
-              onChange={(e) => setThemeMode(e.target.value as any)}
+              onChange={(e) => setThemeMode(e.target.value as ThemeMode)}
               options={themeOptions}
             />
           </div>

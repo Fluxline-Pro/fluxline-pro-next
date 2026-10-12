@@ -5,7 +5,7 @@
  * Hook for persisting and restoring consultation form state in localStorage
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import {
   ConsultationFormData,
   StepOneData,
@@ -39,39 +39,51 @@ interface UseConsultationStorageResult {
   clearDraft: () => void;
 }
 
-export function useConsultationStorage(): UseConsultationStorageResult {
-  const [step1, setStep1State] = useState<StepOneData>(DEFAULT_STEP1);
-  const [step2, setStep2State] = useState<StepTwoData>(DEFAULT_STEP2);
-  const [step3, setStep3State] = useState<StepThreeData>(DEFAULT_STEP3);
-  const [hasDraft, setHasDraft] = useState(false);
-
-  // Load from localStorage on mount
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (!raw) return;
-      const parsed: ConsultationFormData & { savedAt?: string } = JSON.parse(raw);
-      const savedAt = parsed.savedAt ? new Date(parsed.savedAt).getTime() : 0;
-      if (Date.now() - savedAt > LOCAL_STORAGE_TTL_MS) {
-        localStorage.removeItem(LOCAL_STORAGE_KEY);
-        return;
-      }
-      if (parsed.step1) setStep1State(parsed.step1);
-      if (parsed.step2) setStep2State({ ...parsed.step2, fileUpload: null });
-      if (parsed.step3) setStep3State(parsed.step3);
-      const hasContent =
-        (parsed.step1?.services?.length ?? 0) > 0 ||
-        Object.keys(parsed.step2?.answers ?? {}).length > 0 ||
-        (parsed.step3?.fullName ?? '').length > 0;
-      setHasDraft(hasContent);
-    } catch (err) {
-      if (process.env.NODE_ENV === 'development') {
-        console.warn('[ConsultationStepper] Failed to restore draft from localStorage:', err);
-      }
-      // Clear corrupted data
-      try { localStorage.removeItem(LOCAL_STORAGE_KEY); } catch { /* ignore */ }
+/**
+ * Reads a still-valid draft from localStorage, or null. Expired or corrupted drafts are removed.
+ * Returns null on the server. Safe to call from a lazy useState initializer: the stepper only renders its
+ * body after mount (`isMounted` gate), so restoring here cannot cause a hydration mismatch.
+ */
+function readDraft(): (ConsultationFormData & { savedAt?: string }) | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed: ConsultationFormData & { savedAt?: string } = JSON.parse(raw);
+    const savedAt = parsed.savedAt ? new Date(parsed.savedAt).getTime() : 0;
+    if (Date.now() - savedAt > LOCAL_STORAGE_TTL_MS) {
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+      return null;
     }
-  }, []);
+    return parsed;
+  } catch (err) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('[ConsultationStepper] Failed to restore draft from localStorage:', err);
+    }
+    // Clear corrupted data
+    try { localStorage.removeItem(LOCAL_STORAGE_KEY); } catch { /* ignore */ }
+    return null;
+  }
+}
+
+function draftHasContent(draft: ConsultationFormData | null): boolean {
+  if (!draft) return false;
+  return (
+    (draft.step1?.services?.length ?? 0) > 0 ||
+    Object.keys(draft.step2?.answers ?? {}).length > 0 ||
+    (draft.step3?.fullName ?? '').length > 0
+  );
+}
+
+export function useConsultationStorage(): UseConsultationStorageResult {
+  // Restore once, lazily, instead of setting state from an effect after mount.
+  const [draft] = useState(() => readDraft());
+  const [step1, setStep1State] = useState<StepOneData>(() => draft?.step1 ?? DEFAULT_STEP1);
+  const [step2, setStep2State] = useState<StepTwoData>(() =>
+    draft?.step2 ? { ...draft.step2, fileUpload: null } : DEFAULT_STEP2
+  );
+  const [step3, setStep3State] = useState<StepThreeData>(() => draft?.step3 ?? DEFAULT_STEP3);
+  const [hasDraft, setHasDraft] = useState(() => draftHasContent(draft));
 
   const persist = useCallback(
     (s1: StepOneData, s2: StepTwoData, s3: StepThreeData) => {
