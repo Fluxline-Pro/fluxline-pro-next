@@ -73,7 +73,6 @@ SITE_URL=http://localhost:3000
 | `SMTP_*`               | Email delivery credentials | `/api/contact`                                        |
 | `CONTACT_EMAIL`        | Email destination          | `/api/contact`                                        |
 | `YOUTUBE_API_KEY`      | YouTube Data API           | `/api/youtube`                                        |
-| `STRIPE_*`             | Stripe payment credentials | `/api/create-checkout-session`, `/api/stripe-webhook` |
 | `AZURE_*`              | Azure storage credentials  | `/api/podcasts-episodes`, `/api/podcasts-rss`         |
 | `CORS_ALLOWED_ORIGINS` | Comma-separated extra CORS origins (defaults cover fluxline.pro + localhost) | `api/lib/corsHeaders.js` (all CORS-enabled Functions) |
 | `EVENT_SOURCE`         | Source tag written to shared Events table (default `www`) | `api/lib/events.js`                    |
