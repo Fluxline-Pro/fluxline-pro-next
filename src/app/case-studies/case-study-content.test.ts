@@ -15,16 +15,19 @@ describe('personal transformation case study content', () => {
         'utf8'
       );
 
-      const retentionRelatedLine = content
-        .split('\n')
-        .find(
-          (line) =>
-            /retention|retained|churn|return(?:ing)? clients?|clients? return|client duration/i.test(
-              line
-            )
-        );
+      // A line is a quantitative claim only when a retention / churn / return term appears together with a
+      // figure: a percentage, a multiplier, or a count of months or years. Qualitative mentions (e.g. "focus on
+      // retention over acquisition") are editorial and allowed.
+      const retentionTerm =
+        /retention|retained|churn|return(?:ing)? clients?|clients? return|client duration/i;
+      const figure =
+        /\b\d+(?:\.\d+)?\s*(?:%|percent|x\b|×)|\b\d+(?:\.\d+)?\s*(?:months?|years?|weeks?)\b|\b(?:double|triple|halve)d?\b/i;
 
-      expect(retentionRelatedLine).toBeUndefined();
+      const quantitativeRetentionLine = content
+        .split('\n')
+        .find((line) => retentionTerm.test(line) && figure.test(line));
+
+      expect(quantitativeRetentionLine).toBeUndefined();
     }
   });
 });

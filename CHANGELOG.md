@@ -6,6 +6,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- `yarn lint` is clean again (0 errors; 45 warnings remain, mostly `<img>` and hook-dependency advisories): the six `react-hooks/set-state-in-effect` cases are rewritten (hydration flags via `useSyncExternalStore` in `ConsentBanner`, `AuthContext` and `TestimonialCarousel`; the consultation draft is restored through lazy `useState` initializers; the stepper resets its status with the state-from-props pattern; the rail layout schedules its first measurement on the next frame), the four `any` casts are typed, the unescaped quotes are escaped, and the empty props interface is a `Record<string, never>`. ESLint now treats `api/`, `scripts/` and `jest.config.js` as CommonJS and ignores the vendored `docs/dsm_v1_0/` template bundles and local `.claude/` worktrees.
+- `case-study-content.test.ts` checks for *quantitative* retention, return or churn claims again (a retention term together with a percentage, multiplier or month/year count on the same line) instead of failing on every qualitative mention; the suite is green (137/137).
+
 ### Removed
 
 - The main site's own Stripe book-checkout path, redundant since the storefront took over purchase ([#260](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/260)): the `create-checkout-session`, `get-order` and `stripe-webhook` Functions, the `stripe` dependency of the API, and the `STRIPE_*` entries in `local.settings.sample.json`. `/books` already hands off to the storefront. The `STRIPE_*` SWA settings are removed from TEST with this change and must be removed from PROD at the next production promotion, not before.

@@ -2,7 +2,7 @@
 
 import React, { useState, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { type Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
@@ -141,7 +141,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
     ];
   }, [config.imageConfig]);
 
-  const markdownComponents: Partial<any> = {
+  const markdownComponents: Partial<Components> = {
     h1: ({ children }: { children?: React.ReactNode }) => (
       <h1
         style={{
@@ -319,7 +319,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         {children}
       </a>
     ),
-    img: ({ src, alt }: { src?: string; alt?: string }) => (
+    img: ({ src, alt }: React.ComponentProps<'img'>) => (
       <img
         src={src}
         alt={alt || ''}

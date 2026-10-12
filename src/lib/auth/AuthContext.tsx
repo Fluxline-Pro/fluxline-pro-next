@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useCallback,
   useMemo,
+  useSyncExternalStore,
 } from 'react';
 import {
   setAuthStatus,
@@ -14,6 +15,9 @@ import {
   type AuthStatusPayload,
 } from './authStatus';
 import { getAccountPortalUrl } from '@/lib/integrations/config';
+
+// Hydration flag without a setState-in-effect: false during SSR and the hydration render, true after.
+const subscribeNoop = () => () => {};
 
 export interface AuthUser {
   userId: string;
@@ -61,14 +65,13 @@ function userFromHint(hint: AuthStatusPayload): AuthUser | null {
  * server-side through the Account Portal or API gateway.
  */
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [statusHint, setStatusHint] = useState<AuthStatusPayload | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const hint = getAuthStatus();
-    setStatusHint(hint);
-    setIsLoading(false);
-  }, []);
+  // `undefined` = not read yet; `null` = read, signed out. The first read happens after hydration (below),
+  // so the server render and the hydration render both see "loading" and no mismatch can occur.
+  const [statusHint, setStatusHint] = useState<AuthStatusPayload | null | undefined>(undefined);
+  const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
+  const isLoading = !hydrated;
+  const initialHint = useMemo(() => (hydrated ? getAuthStatus() : null), [hydrated]);
+  const currentHint = statusHint === undefined ? initialHint : statusHint;
 
   // Re-check the cookie periodically so a login/logout on a sibling
   // subdomain is reflected without a full page reload.
@@ -102,7 +105,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const value = useMemo<AuthContextValue>(() => {
-    const hintUser = statusHint ? userFromHint(statusHint) : null;
+    const hintUser = currentHint ? userFromHint(currentHint) : null;
     return {
       isAuthenticated: !!hintUser,
       isLoading,
@@ -111,7 +114,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       logout,
       getAccessToken,
     };
-  }, [statusHint, isLoading, login, logout, getAccessToken]);
+  }, [currentHint, isLoading, login, logout, getAccessToken]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

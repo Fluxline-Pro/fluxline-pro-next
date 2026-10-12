@@ -57,7 +57,7 @@ export default function HomeClient() {
             <br />
             Fluxline partners with individuals and businesses to create
             alignment across body, brand, and business. We specialize in
-            structural transformation — the kind that lasts because it's built
+            structural transformation — the kind that lasts because it&apos;s built
             on clarity, intention, and practice.
           </>
         }
@@ -162,7 +162,7 @@ export default function HomeClient() {
                 <strong style={{ color: 'var(--fx-text-bright)' }}>
                   congruence creates momentum
                 </strong>
-                . When we align our clients' intentions, actions, and
+                . When we align our clients&apos; intentions, actions, and
                 structures, we create systems that work, brands that connect,
                 and practices <strong>that endure and inspire</strong>.{' '}
               </p>

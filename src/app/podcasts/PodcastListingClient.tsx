@@ -34,7 +34,7 @@ const TRI_WEBSITE_URL = 'https://theresonantidentity.com';
 /**
  * PodcastListingClient Props
  */
-interface PodcastListingClientProps {}
+type PodcastListingClientProps = Record<string, never>;
 
 interface PlatformIconLinkProps {
   href: string;
