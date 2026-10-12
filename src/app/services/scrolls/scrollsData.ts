@@ -114,6 +114,31 @@ export const SCROLLS_DATA: ScrollItem[] = [
     },
   },
   {
+    id: 'identity-in-motion-4-week-program',
+    title: 'Identity in Motion: A 4-Week Unblocking Program',
+    description:
+      'A $99 guided, four-week application of The Resonance Core Framework™ for recurring health goals. Map internal roles and blocks, define an identity that supports consistency, and build sustainable habits through embodied practice.',
+    category: 'coaching',
+    pdfUrl: '/scrolls/pdfs/Fluxline_RCF_4Week_Unblocking_Program_v4.pdf',
+    fileSize: '234 KB',
+    tags: ['coaching', 'identity', 'wellness', 'habits', 'resonance'],
+    publishedDate: new Date('2026-10-12'),
+    lastUpdated: new Date('2026-10-12'),
+    seoMetadata: {
+      title:
+        'Identity in Motion: 4-Week Unblocking Program - Fluxline Strategic Insights',
+      description:
+        'Explore the $99, four-week Resonance Core program for identifying internal blocks and building sustainable, identity-aligned health habits.',
+      keywords: [
+        'Identity in Motion',
+        'four-week program',
+        'Resonance Core Framework',
+        'identity-based habits',
+        'wellness',
+      ],
+    },
+  },
+  {
     id: 'education-mentoring',
     title: 'Coaching, Education & Leadership',
     description:
