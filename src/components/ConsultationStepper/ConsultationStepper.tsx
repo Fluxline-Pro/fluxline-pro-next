@@ -267,11 +267,18 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
     setIsMounted(true);
   }, []);
 
-  // Fire "stepper opened" event on open
+  // Reset the submit status when the stepper opens. Done as a "state from props" adjustment during render
+  // (React's recommended pattern) rather than a setState inside an effect.
+  const [wasOpen, setWasOpen] = React.useState(isOpen);
+  if (isOpen !== wasOpen) {
+    setWasOpen(isOpen);
+    if (isOpen) setStatus('idle');
+  }
+
+  // Fire "stepper opened" event on open (external system: analytics only)
   useEffect(() => {
     if (isOpen) {
       fireEvent('consultation_stepper_opened');
-      setStatus('idle');
     }
   }, [isOpen]);
 

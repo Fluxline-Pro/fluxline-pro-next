@@ -4,6 +4,22 @@ Notable changes to fluxline.pro (`fluxline-pro-next`). Releases are tagged on `m
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Fixed
+
+- `yarn lint` is clean again (0 errors; 45 warnings remain, mostly `<img>` and hook-dependency advisories): the six `react-hooks/set-state-in-effect` cases are rewritten (hydration flags via `useSyncExternalStore` in `ConsentBanner`, `AuthContext` and `TestimonialCarousel`; the consultation draft is restored through lazy `useState` initializers; the stepper resets its status with the state-from-props pattern; the rail layout schedules its first measurement on the next frame), the four `any` casts are typed, the unescaped quotes are escaped, and the empty props interface is a `Record<string, never>`. ESLint now treats `api/`, `scripts/` and `jest.config.js` as CommonJS and ignores the vendored `docs/dsm_v1_0/` template bundles and local `.claude/` worktrees.
+- `case-study-content.test.ts` checks for *quantitative* retention, return or churn claims again (a retention term together with a percentage, multiplier or month/year count on the same line) instead of failing on every qualitative mention; the suite is green (137/137).
+
+### Removed
+
+- The main site's own Stripe book-checkout path, redundant since the storefront took over purchase ([#260](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/260)): the `create-checkout-session`, `get-order` and `stripe-webhook` Functions, the `stripe` dependency of the API, and the `STRIPE_*` entries in `local.settings.sample.json`. `/books` already hands off to the storefront. The `STRIPE_*` SWA settings are removed from TEST with this change and must be removed from PROD at the next production promotion, not before.
+- Dead SWA settings `CMS_API_BASE_URL`, `LEAD_API_SECRET` and `ENTRA_ALLOWED_AUDIENCES` (no reader in `api/` or `src/`) are removed from TEST; PROD at the next promotion.
+
+### Security
+
+- Dependency audit ([#260](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/260)): `next` 16.3.8, `axios` ^1.20.0, `dompurify` ^3.4.16, plus `resolutions` pinning the vulnerable transitive packages (`minimatch`, `picomatch`, `ajv`, `ws`, `flatted`, `source-map-js`, `esbuild`, `compression`, `diff`, `sharp`). `yarn audit` on `develop` goes from 184 advisories (1 critical, 122 high) to 20, all in `braces` and `sprintf-js`, for which no patched release exists. API: `nodemailer` ^10.1.0 and `jest` ^30; the 19 remaining API advisories are jest-internal (`js-yaml` 3 via `argparse`) with no fix available. The Dependabot tab counts against `master`, which has not been promoted since v3_1_PROD; those clear when this reaches `master`.
+
 ## [v3_1_PROD] - 2026-10-05
 
 This is the first production deploy since 2026-09-23. A duplicate route in `staticwebapp.config.json` made Azure Static Web Apps reject every test and production deploy from 2026-09-26, so the work below (plus anything merged to `master` after the 2026-09-23 build) reaches the live site with this release.

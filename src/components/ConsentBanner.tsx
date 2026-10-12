@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import FxButton from '@/theme/components/dsm/FxButton';
 import FxSwitch from '@/theme/components/dsm/FxSwitch';
 import { useConsentStore } from '@/store';
+
+// Hydration flag without a setState-in-effect: false during SSR and the hydration render, true after.
+const subscribeNoop = () => () => {};
 
 /**
  * EEA / GDPR Consent Banner
@@ -17,18 +20,15 @@ import { useConsentStore } from '@/store';
  */
 export default function ConsentBanner() {
   const { consent, acceptAll, rejectAll, saveCustom } = useConsentStore();
-  const [visible, setVisible] = useState(false);
+  // Hidden during SSR and the hydration render; afterwards it follows the persisted consent state directly.
+  const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
+  const visible = hydrated && consent.status === 'pending';
   const [showDetails, setShowDetails] = useState(false);
 
   // Analytics toggle (custom mode)
   const [analyticsOn, setAnalyticsOn] = useState(false);
   // Ads toggles (custom mode)
   const [adsOn, setAdsOn] = useState(false);
-
-  // Only show after hydration and only when consent is still pending
-  useEffect(() => {
-    setVisible(consent.status === 'pending');
-  }, [consent.status]);
 
   if (!visible) return null;
 
