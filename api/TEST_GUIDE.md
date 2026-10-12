@@ -29,8 +29,7 @@ npm run test:unit
 
 **Available test files:**
 
-- `create-checkout-session/index.test.js` - Tests Stripe checkout session creation
-- `stripe-webhook/index.test.js` - Tests Stripe webhook handling
+- `contact/`, `lead/`, `entitlements/`, `auth/` and the other Function folders carry their own `index.test.js`. The former Stripe tests went with the main-site checkout path, which the storefront now owns (#260).
 
 **Benefits:**
 
