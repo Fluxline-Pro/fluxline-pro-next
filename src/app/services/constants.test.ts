@@ -38,7 +38,7 @@ describe('service catalog', () => {
     expect(resonanceCore?.summary).toContain('Identity in Motion');
     expect(resonanceCore?.summary).toContain('$99, four-week guided program');
     expect(resonanceCore?.summary).toContain(
-      'href="/scrolls/pdfs/Fluxline_RCF_4Week_Unblocking_Program_v3.pdf"'
+      'href="/scrolls/pdfs/Fluxline_RCF_4Week_Unblocking_Program_v4.pdf"'
     );
     expect(programScroll?.title).toBe(
       'Identity in Motion: A 4-Week Unblocking Program'

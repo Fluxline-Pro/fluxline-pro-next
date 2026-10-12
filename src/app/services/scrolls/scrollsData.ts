@@ -119,7 +119,7 @@ export const SCROLLS_DATA: ScrollItem[] = [
     description:
       'A $99 guided, four-week application of The Resonance Core Framework™ for recurring health goals. Map internal roles and blocks, define an identity that supports consistency, and build sustainable habits through embodied practice.',
     category: 'coaching',
-    pdfUrl: '/scrolls/pdfs/Fluxline_RCF_4Week_Unblocking_Program_v3.pdf',
+    pdfUrl: '/scrolls/pdfs/Fluxline_RCF_4Week_Unblocking_Program_v4.pdf',
     fileSize: '234 KB',
     tags: ['coaching', 'identity', 'wellness', 'habits', 'resonance'],
     publishedDate: new Date('2026-10-12'),
