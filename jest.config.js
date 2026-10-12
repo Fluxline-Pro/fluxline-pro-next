@@ -23,6 +23,8 @@ const customJestConfig = {
     '<rootDir>/node_modules/',
     '<rootDir>/e2e/',
     '<rootDir>/api/',
+    // Local Claude Code worktrees live under .claude/ and carry their own copies of every spec.
+    '<rootDir>/.claude/',
   ],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
