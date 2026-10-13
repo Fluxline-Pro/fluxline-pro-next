@@ -38,7 +38,7 @@ function AvatarGlyph() {
  * Keyboard accessible; closes on outside click and Escape.
  */
 export default function FxUserMenu() {
-  const { isAuthenticated, isLoading, user, logout } = useAuth();
+  const { isAuthenticated, isLoading, user, login, logout } = useAuth();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [hovered, setHovered] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -99,6 +99,12 @@ export default function FxUserMenu() {
       <div className={styles.userMenu}>
         <a
           href={`${getAccountPortalUrl()}/login`}
+          onClick={(e) => {
+            // login() adds returnTo=<current page> so the Account Portal brings the user back
+            // here; the plain href stays as the no-JS / middle-click fallback.
+            e.preventDefault();
+            login();
+          }}
           className={styles.signInButton}
           aria-label='Sign in to your Fluxline account'
           onMouseEnter={() => setHovered(true)}
