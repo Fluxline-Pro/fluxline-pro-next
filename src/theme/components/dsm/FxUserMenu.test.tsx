@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import FxUserMenu from './FxUserMenu';
 
@@ -54,27 +54,24 @@ describe('FxUserMenu', () => {
 
     expect(
       screen.getByRole('link', { name: 'Sign in to your Fluxline account' })
-    ).toHaveAttribute('href', `${ACCOUNT_PORTAL_URL}/login`);
+    ).toHaveAttribute(
+      'href',
+      `${ACCOUNT_PORTAL_URL}/login?returnTo=${encodeURIComponent(window.location.href)}`
+    );
     expect(screen.getByText('Sign in')).toBeInTheDocument();
   });
 
-  it('routes a click on Sign in through login() so returnTo is carried', () => {
-    const login = jest.fn();
-    mockUseAuth.mockReturnValue({
-      isAuthenticated: false,
-      isLoading: false,
-      user: null,
-      login,
-      logout: jest.fn(),
-      getAccessToken: jest.fn().mockResolvedValue(null),
-    });
+  it('carries the current page in the href so modified clicks and new tabs return here', () => {
+    window.history.pushState({}, '', '/services/coaching?ref=nav');
 
     render(<FxUserMenu />);
-    fireEvent.click(
-      screen.getByRole('link', { name: 'Sign in to your Fluxline account' })
-    );
 
-    expect(login).toHaveBeenCalledTimes(1);
+    expect(
+      screen.getByRole('link', { name: 'Sign in to your Fluxline account' })
+    ).toHaveAttribute(
+      'href',
+      `${ACCOUNT_PORTAL_URL}/login?returnTo=${encodeURIComponent('http://localhost/services/coaching?ref=nav')}`
+    );
   });
 
   it('hides the signed-out sign-in button in production', () => {
