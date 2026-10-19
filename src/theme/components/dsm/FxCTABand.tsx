@@ -12,6 +12,8 @@ interface FxCTABandProps {
   secondaryHref?: string;
   grid?: boolean;
   style?: React.CSSProperties;
+  /** Optional inline content (e.g. a sign-up form) shown above the buttons. */
+  children?: React.ReactNode;
 }
 
 export default function FxCTABand({
@@ -23,6 +25,7 @@ export default function FxCTABand({
   secondaryHref,
   grid = true,
   style,
+  children,
 }: FxCTABandProps) {
   return (
     <div
@@ -77,6 +80,10 @@ export default function FxCTABand({
           </p>
         )}
 
+        {children && (
+          <div style={{ maxWidth: 460, margin: '0 auto 24px' }}>{children}</div>
+        )}
+
         {(primaryLabel || secondaryLabel) && (
           <div
             style={{
@@ -87,12 +94,12 @@ export default function FxCTABand({
             }}
           >
             {primaryLabel && (
-              <FxButton size="lg" href={primaryHref}>
+              <FxButton size='lg' href={primaryHref}>
                 {primaryLabel}
               </FxButton>
             )}
             {secondaryLabel && (
-              <FxButton size="lg" variant="outline" href={secondaryHref}>
+              <FxButton size='lg' variant='outline' href={secondaryHref}>
                 {secondaryLabel}
               </FxButton>
             )}

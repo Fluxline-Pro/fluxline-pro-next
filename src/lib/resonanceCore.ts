@@ -126,7 +126,7 @@ export const PODCAST_BLURB =
 export const RCF_FRAMEWORK_PATH = '/resonance-core-framework';
 
 /** Where every "Be notified at launch" link goes (the TRI Newsletter signup). */
-export const RCF_NOTIFY_PATH = '/contact';
+export const RCF_NOTIFY_PATH = '/resonance-core-framework#notify';
 
 /** Sister sites in the RCF ecosystem. */
 export const TRI_SITE_URL = 'https://theresonantidentity.com';

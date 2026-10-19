@@ -14,6 +14,7 @@ import FxChip from '@/theme/components/dsm/FxChip';
 import DriveModelDiagram from '@/assets/images/drive_model_framework.jpeg';
 import { StaggeredGrid } from '@/animations/staggered-container';
 import { COMPANY_VALUES } from '@/lib/siteContent';
+import NewsletterSignup from '@/components/NewsletterSignup';
 import {
   DRIVE_STEPS,
   RCF_AUDIENCE,
@@ -551,13 +552,33 @@ export default function ResonanceCoreFrameworkClient() {
           >
             <h3 style={cardTitle}>Read the introduction first</h3>
             <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-              The free preview introduces the framework and its tools for
-              making change last.
+              The free preview introduces the framework and its tools for making
+              change last.
             </p>
             <a href={RCF_PREVIEW_PDF} style={textLink}>
               Download the RCF Preview (PDF) →
             </a>
           </FxCard>
+
+          <div
+            id='notify'
+            style={{
+              marginTop: 'var(--fx-space-m)',
+              scrollMarginTop: 'calc(var(--fx-nav-height) + 16px)',
+            }}
+          >
+            <FxCard variant='inset' style={{ padding: '22px 24px' }}>
+              <h3 style={cardTitle}>Be notified when the book lands</h3>
+              <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
+                The book is targeted for {RCF_RELEASE_WINDOW}. Join the TRI
+                Newsletter for launch updates. No spam, ever.
+              </p>
+              <NewsletterSignup
+                size='sm'
+                ariaLabel='Email address for book launch updates'
+              />
+            </FxCard>
+          </div>
         </FxSectionPanel>
       </FxReveal>
 

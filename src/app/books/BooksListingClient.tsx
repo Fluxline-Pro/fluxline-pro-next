@@ -14,13 +14,13 @@ import FxGroupLabel from '@/theme/components/dsm/FxGroupLabel';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import ResonanceCoreBookCover from '@/assets/images/The-Resonance-Core-Book.jpg';
 import { Book } from './types';
+import NewsletterSignup from '@/components/NewsletterSignup';
 import { RCF_LEDE, RCF_OFFERINGS, STOREFRONT_URL } from './constants';
 import {
   PODCAST_BLURB,
   RCF_BOOK_IMAGE,
   RCF_BRIEF,
   RCF_LOGO_IMAGE,
-  RCF_NOTIFY_PATH,
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
@@ -638,12 +638,12 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxReveal>
         <FxCTABand
           title='Want to know when it lands?'
-          body="Tell us where you are and what you're working through. We'll let you know the moment the book and workbook are available, and point you at the right first step in the meantime."
-          primaryLabel='Be notified at launch →'
-          primaryHref={RCF_NOTIFY_PATH}
+          body={`The book and workbook are targeted for ${RCF_RELEASE_WINDOW}. Join the TRI Newsletter and we'll let you know the moment they're available. Book launch updates included. No spam, ever.`}
           secondaryLabel='Explore Our Services →'
           secondaryHref='/services'
-        />
+        >
+          <NewsletterSignup ariaLabel='Email address for book launch updates' />
+        </FxCTABand>
       </FxReveal>
 
       {/* Small footer note tying the framework back to the wider practice. */}
