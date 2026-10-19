@@ -66,7 +66,7 @@ export const RCF_EXPLAINER: { heading: string; body: string }[] = [
 
 /** What the framework rests on — the inputs it was assembled from. */
 export const RCF_FOUNDATIONS: string[] = [
-  'Universal human truths',
+  "The RCF's Universal Truths, which shape Fluxline's ethos and mission",
   'Psychological research',
   'Behavioral patterns',
   'Systems thinking',
