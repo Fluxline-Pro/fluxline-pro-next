@@ -62,7 +62,7 @@ export default function HomeClient() {
           </>
         }
         secondaryCta={{ label: 'Explore Fluxline ↓', href: '#about' }}
-        primaryCta={{ label: 'Book a Consultation', href: '/contact' }}
+        primaryCta={{ label: 'Book a Free Consultation', href: '/contact' }}
         backgroundImage='/images/home/HomePageMobileGeometricBackground.jpg'
       />
 
@@ -452,7 +452,7 @@ export default function HomeClient() {
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   <FxButton variant='primary' href='/contact'>
-                    Book a Consultation
+                    Book a Free Consultation
                   </FxButton>
                   <FxButton variant='outline' href={RCF_FRAMEWORK_PATH}>
                     Explore the Framework →
@@ -1141,7 +1141,7 @@ export default function HomeClient() {
             <FxCTABand
               title='Ready to structure the shift?'
               body="Tell us where you are and where you're going. We'll map the right first step together — development, design, coaching, or strategy."
-              primaryLabel='Book a Consultation'
+              primaryLabel='Book a Free Consultation'
               primaryHref='/contact'
               secondaryLabel='Full Contact Form →'
               secondaryHref='/contact'

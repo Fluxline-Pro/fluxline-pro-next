@@ -72,7 +72,7 @@ export default function FxNav({
   backLabel,
   backHref,
   breadcrumb,
-  ctaLabel = 'Book a Consultation',
+  ctaLabel = 'Book a Free Consultation',
   ctaHref = '/contact',
 }: FxNavProps) {
   const pathname = usePathname();

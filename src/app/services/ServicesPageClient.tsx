@@ -174,7 +174,7 @@ export default function ServicesPageClient() {
         <FxCTABand
           title='Not sure where to start?'
           body="Share your needs in a free consultation below. Let's map out what's possible for you or your business together."
-          primaryLabel='Book a Consultation'
+          primaryLabel='Book a Free Consultation'
           primaryHref='/contact'
         />
       </div>

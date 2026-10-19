@@ -178,7 +178,7 @@ export default function ContactPage() {
             </div>
           </div>
           <FxButton size='lg' href='/contact'>
-            Book a Consultation
+            Book a Free Consultation
           </FxButton>
         </div>
 

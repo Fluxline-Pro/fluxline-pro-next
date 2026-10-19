@@ -364,7 +364,7 @@ export default function ServiceDetailPage() {
             <FxCTABand
               title='Ready to Begin?'
               body="Book a 20-30 minute consultation to explore your organization's goals and identity so we can unleash it amongst your leadership teams and staff."
-              primaryLabel='Book a Consultation'
+              primaryLabel='Book a Free Consultation'
               primaryHref='/bookings'
             />
           </FxReveal>
