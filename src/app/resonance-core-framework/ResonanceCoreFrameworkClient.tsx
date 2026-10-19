@@ -11,7 +11,7 @@ import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxChip from '@/theme/components/dsm/FxChip';
-import DriveModelDiagram from '@/assets/images/drive_model_framework.jpeg';
+import DriveModelDiagram from '@/assets/images/drive_model.jpg';
 import { StaggeredGrid } from '@/animations/staggered-container';
 import { COMPANY_VALUES } from '@/lib/siteContent';
 import NewsletterSignup from '@/components/NewsletterSignup';
