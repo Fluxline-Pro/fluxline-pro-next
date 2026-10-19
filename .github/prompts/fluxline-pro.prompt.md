@@ -46,7 +46,7 @@ Goal: a first-time visitor understands what Fluxline does, who it is for, and wh
 - Footer nav currently reads "The RCF Ecosystem" with two links. Keep the nav label (Hold) and make its items the **shared block** in core Section 7. Do not create a new component.
 - Footer author link "Terence Waters — Author & Architect" now points to `https://terencewaters.com/about/`. Keep the visible text.
 - "Explore the Podcast" (home) now points to `https://theresonantidentity.com/start-here/`.
-- Beside the book mention in the framework summary, add the link "Be notified at launch →" to `https://fluxline.pro/contact`. In `/books/`, the "Want to know when it lands?" section gets the same link.
+- Beside the book mention in the framework summary, add the link "Be notified at launch →" to `https://fluxline.pro/resonance-core-framework/#notify` (the RCF page's newsletter sign-up, owner 2026-10-19). In `/books/`, the "Want to know when it lands?" section gets the same link.
 - On `/contact`, add to the TRI Newsletter description: "Book launch updates included." Keep "No spam, ever."
 
 ## Hold (change nothing, list every occurrence in the PR)

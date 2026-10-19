@@ -15,15 +15,25 @@ Owner: Terence Waters, Fluxline Resonance Group, LLC. Audit date: 2026-10-11. Au
 ## 2. Decisions the owner has made (apply)
 
 1. **Marks.** Use ™ on The Resonance Core Framework™. Never ®. Put ™ on the first use on each page and in the page title, H1, Open Graph and Twitter text. After that use RCF. Do not sprinkle ™ on every mention. **Scope (owner, 2026-10-19):** ™ is for public-facing digital only (websites, social, posts). Every book edition (print, eBook, Kindle) uses ®, so don't flag ® in the book.
-2. **Book date.** Replace "Late Fall 2026" everywhere with **"targeted for Q1 2027"** (or "forthcoming"). Never name a month. Use "targeted" for any future date.
+2. **Book date.** Replace "Late Fall 2026" everywhere with **"targeted for Q1 2027"** (or "forthcoming"). Never name a month. Use "targeted" for any future date. **Preorders (owner, 2026-10-19):** preorders open in early November 2026. Naming that month is allowed for the preorder date only.
 3. **Experience.** The figure is **20+ years in design, development, architecture, and product management, and 3+ years in consulting.** The old 15+ figure is retired. Do not write "20+ years of consulting."
-4. **"Be notified at launch."** Every such link goes to `https://fluxline.pro/contact`.
+4. **"Be notified at launch."** Every such link goes to `https://fluxline.pro/resonance-core-framework/#notify` (the RCF page's newsletter sign-up), not /contact (owner, 2026-10-19).
 5. **Behavioral Gravity** means the pull a regulated, steady person has on the people around them (the book glossary meaning). It does **not** mean the pull of habits on you. Use the gloss in Section 4 verbatim.
 6. **Loops.** "Identity Distortion Loop" becomes **Judgment Loop**. "Identity Alignment Loop" becomes **Data Loop**. Remove any "(book name: …)" aside once renamed.
 7. **DRIVE.** Stages are Spark, Coherence, Activation, Momentum, Endurance, **Embodiment**. Never "Expansion." Expand DRIVE once per page at first use. Use **DRIVE Model** for the six-stage model, **DRIVE** or **DRIVEs** for the pattern itself. Retire "DRIVE System."
 8. **DAS.** Keep Decision Alignment Score (DAS). Where SSI, EROI or SI appear, expand them once at first use, or leave them out of the gloss.
 9. **Offerings.** There are **five**: The Resonance Core Framework™, Brand & Experience Design, Web Development & Digital Architecture, Business Strategy & Systems Alignment, Personal Training & Wellness. **Fractional Leadership is not an offering.** Remove it from cards, lists and copy. Leave its route file in place (see Hold).
 10. **Claims.** Remove "research-backed," "proven," "tested," "clinically," and similar. Replacements are given in the site prompts.
+
+**Further owner decisions (2026-10-19, already applied on the Fluxline branch):**
+
+- **Creative Truth** is a Core Value only. Do not list it as a framework concept.
+- The consultation CTA reads **"Book a Free Consultation"**.
+- The footer cross-sell label is **"Fluxline Ecosystem"**.
+- **Universal Truths** wording: "The RCF's Universal Truths, which shape Fluxline's ethos and mission."
+- **Services structure:** the RCF comes first as the **Foundation**, then Strategy & Leadership, Brand & Digital Presence, Body & Practice.
+- **Stats:** unsourced counts are softened, not inflated (no "50+ Projects Delivered" or "10+ Industries Served").
+- **Author title lines per site:** Fluxline: "Founder & CEO, author, systems architect, and identity coach". TerenceWaters.com: "author, architect, and solopreneur". TheResonantIdentity.com: "host, author, systems architect, and identity coach".
 
 ## 3. Locked terms: never rename, re-case, translate, or remove
 
