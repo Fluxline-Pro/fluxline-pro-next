@@ -31,7 +31,6 @@ import Link from 'next/link';
 const HOME_SERVICE_GROUPS: { key: string; label: string }[] = [
   { key: 'brand-digital', label: 'Brand & Digital Presence' },
   { key: 'body-practice', label: 'Body & Practice' },
-  { key: 'depth-strategy', label: 'Strategy & Leadership' },
 ];
 
 /**
@@ -387,7 +386,9 @@ export default function HomeClient() {
               </p>
             </FxReveal>
 
-            {/* Featured: Consulting */}
+            {/* The RCF is the foundation every engagement uses, so it leads
+                the list, in an expanded block (rather than a one-line card)
+                so visitors see what the framework contains before booking. */}
             <FxReveal delay={100}>
               <div
                 style={{
@@ -399,7 +400,77 @@ export default function HomeClient() {
                   marginBottom: 14,
                 }}
               >
-                Featured Service
+                Foundation
+              </div>
+              <FxCard variant='feature' style={{ padding: '30px 32px' }}>
+                <h3
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 800,
+                    color: 'var(--fx-text-heading)',
+                    margin: '0 0 10px',
+                  }}
+                >
+                  {RCF_TRADEMARK}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 15,
+                    lineHeight: 1.65,
+                    color: 'var(--fx-text-body)',
+                    margin: '0 0 10px',
+                    maxWidth: '64ch',
+                  }}
+                >
+                  A practical identity system for making change that holds —
+                  built on alignment rather than force. The RCF maps three
+                  dimensions of identity (inner signal, outward expression, and
+                  systemic impact) and provides named tools for navigating each:
+                  Behavioral Gravity, Identity Coherence, the Window of Choice,
+                  the DRIVE Model (Directional, Repeatable, Identity-Aligned
+                  Virtuous Expressions), Creative Truth, and the DII Protocol.
+                </p>
+                <p
+                  style={{
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    color: 'var(--fx-text-muted)',
+                    margin: '0 0 20px',
+                  }}
+                >
+                  Available through 1:1 coaching engagements and the forthcoming
+                  book (targeted for {RCF_RELEASE_WINDOW}).{' '}
+                  <Link
+                    href={RCF_NOTIFY_PATH}
+                    style={{ color: 'var(--fx-accent)', fontWeight: 600 }}
+                  >
+                    Be notified at launch →
+                  </Link>
+                </p>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  <FxButton variant='primary' href='/contact'>
+                    Book a Consultation
+                  </FxButton>
+                  <FxButton variant='outline' href={RCF_FRAMEWORK_PATH}>
+                    Explore the Framework →
+                  </FxButton>
+                </div>
+              </FxCard>
+            </FxReveal>
+
+            {/* Strategy & Leadership: Consulting */}
+            <FxReveal delay={200}>
+              <div
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'var(--fx-gold)',
+                  marginBottom: 14,
+                }}
+              >
+                Strategy & Leadership
               </div>
               <FxCard
                 variant='feature'
@@ -491,7 +562,7 @@ export default function HomeClient() {
             </FxReveal>
 
             {HOME_SERVICE_GROUPS.map((group, i) => (
-              <FxReveal key={group.key} delay={(i + 2) * 100}>
+              <FxReveal key={group.key} delay={(i + 3) * 100}>
                 <div
                   style={{
                     fontSize: 13,
@@ -560,65 +631,6 @@ export default function HomeClient() {
                 </div>
               </FxReveal>
             ))}
-
-            {/* The RCF gets an expanded block (rather than a one-line card)
-                so visitors see what the framework contains before booking. */}
-            <FxReveal delay={(HOME_SERVICE_GROUPS.length + 2) * 100}>
-              <FxCard variant='feature' style={{ padding: '30px 32px' }}>
-                <h3
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 800,
-                    color: 'var(--fx-text-heading)',
-                    margin: '0 0 10px',
-                  }}
-                >
-                  {RCF_TRADEMARK}
-                </h3>
-                <p
-                  style={{
-                    fontSize: 15,
-                    lineHeight: 1.65,
-                    color: 'var(--fx-text-body)',
-                    margin: '0 0 10px',
-                    maxWidth: '64ch',
-                  }}
-                >
-                  A practical identity system for making change that holds —
-                  built on alignment rather than force. The RCF maps three
-                  dimensions of identity (inner signal, outward expression, and
-                  systemic impact) and provides named tools for navigating each:
-                  Behavioral Gravity, Identity Coherence, the Window of Choice,
-                  the DRIVE Model (Directional, Repeatable, Identity-Aligned
-                  Virtuous Expressions), Creative Truth, and the DII Protocol.
-                </p>
-                <p
-                  style={{
-                    fontSize: 14,
-                    lineHeight: 1.6,
-                    color: 'var(--fx-text-muted)',
-                    margin: '0 0 20px',
-                  }}
-                >
-                  Available through 1:1 coaching engagements and the forthcoming
-                  book (targeted for {RCF_RELEASE_WINDOW}).{' '}
-                  <Link
-                    href={RCF_NOTIFY_PATH}
-                    style={{ color: 'var(--fx-accent)', fontWeight: 600 }}
-                  >
-                    Be notified at launch →
-                  </Link>
-                </p>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <FxButton variant='primary' href='/contact'>
-                    Book a Consultation
-                  </FxButton>
-                  <FxButton variant='outline' href={RCF_FRAMEWORK_PATH}>
-                    Explore the Framework →
-                  </FxButton>
-                </div>
-              </FxCard>
-            </FxReveal>
 
             <FxReveal delay={(HOME_SERVICE_GROUPS.length + 3) * 100}>
               <FxCard
