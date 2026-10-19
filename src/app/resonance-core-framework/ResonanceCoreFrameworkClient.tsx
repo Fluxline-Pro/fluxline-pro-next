@@ -131,7 +131,7 @@ const ENGAGEMENTS: {
 /**
  * /resonance-core-framework — the single home of the framework on Fluxline:
  * what it is and the premise behind it, its named concepts, the DRIVE Model,
- * the six values behind the DII, what it's built on and who it's for, how to
+ * the six values behind The DII, what it's built on and who it's for, how to
  * work with it, and plain-language answers to common questions.
  *
  * This page absorbed the former /resonance-core explainer (301-redirected in

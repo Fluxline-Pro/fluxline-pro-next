@@ -32,7 +32,7 @@ Goal: a first-time visitor understands what Fluxline does, who it is for, and wh
 - Expand DRIVE at first use. Replace "DRIVE System" with "DRIVE Model" where it names the six-stage model.
 - Behavioral Gravity: rewrite **both** places (Core Concepts and the FAQ "What is Behavioral Gravity?") to the **identical** approved gloss. Check the home page, `/books`, meta descriptions and `llms.txt` for any older gloss and align them.
 - DAS gloss: expand SSI, EROI and the Shadow Index (SI) once, or drop them from the gloss. Do not reproduce a formula.
-- Name the DII as "Decision Integrity Index (DII)" at first use, then DII.
+- Name it "The Decision Integrity Index (The DII)" at first use, then "The DII", always with a capitalized "The". "DII Protocol" is retired (owner, 2026-10-19). Compound labels such as "DII Score" stay as they are.
 
 **A5. Claims**
 - FAQ question "Is the RCF research-backed?" becomes "What is the RCF built from?" Answer: "It draws on psychology, systems thinking, and practice. It is a decision and identity framework, not therapy."
