@@ -188,7 +188,7 @@ export default function HomeClient() {
                 value='20+'
                 label='Years in Design, Development, Architecture & Product Management'
               />
-              <FxStatCard value='6+' label='Product Offerings' />
+              <FxStatCard value='5' label='Offerings' />
               <FxStatCard value='10+' label='Industries Served' />
             </FxReveal>
 
@@ -381,9 +381,8 @@ export default function HomeClient() {
                 Choose What Kind Of Support You Need
               </h2>
               <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0 }}>
-                Every service is a doorway to transformation. Six modular
-                offerings across three domains — each links to its full detail
-                page.
+                Every service is a doorway to transformation. Five modular
+                offerings. Each links to its full detail page.
               </p>
             </FxReveal>
 

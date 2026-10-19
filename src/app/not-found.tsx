@@ -34,7 +34,7 @@ function tryTaxonomyRedirect(): boolean {
 
 const navCards = [
   { title: 'Home', desc: 'Start at the top.', href: '/' },
-  { title: 'Services', desc: 'Six modular offerings.', href: '/services' },
+  { title: 'Services', desc: 'Five modular offerings.', href: '/services' },
   { title: 'Content Hub', desc: 'Blog, podcast, portfolio.', href: '/blog' },
   { title: 'Contact', desc: 'Tell us what you needed.', href: '/contact' },
 ];
