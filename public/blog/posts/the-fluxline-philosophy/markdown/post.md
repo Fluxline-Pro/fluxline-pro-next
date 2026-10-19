@@ -76,7 +76,7 @@ Once internal alignment is established, the next three principles govern how you
 
 **5. Collaboration & Synergy (Somatic Discipline)** — Transformation isn't purely cerebral—it requires embodiment, ritual, and consistent discipline. Working together creates greater value than operating alone. Effective collaboration requires showing up reliably, understanding others' perspectives, and aligning collective action with intention.
 
-**6. Sustainable Systems & Legacy (Strategic Innovation)** — Balance thoughtful experimentation with proven methodologies for sustainable growth. We innovate when it serves your mission and amplifies your impact—not for novelty's sake. This culminating principle focuses on building lasting structures that create ripples beyond immediate deliverables. It asks: _What systems will carry your work forward? How will your transformation impact others?_
+**6. Sustainable Systems & Legacy (Strategic Innovation)** — Balance thoughtful experimentation with disciplined, repeatable practice for sustainable growth. We innovate when it serves your mission and amplifies your impact—not for novelty's sake. This culminating principle focuses on building lasting structures that create ripples beyond immediate deliverables. It asks: _What systems will carry your work forward? How will your transformation impact others?_
 
 ### The DII Process: Discover, Integrate, Impact
 

@@ -59,8 +59,8 @@ gallery:
     alt: 'ENDURANCE: The Fifth Step of the DRIVE Model'
     caption: 'ENDURANCE: The Fifth Step of the DRIVE Model- Sustaining the DRIVE'
   - url: 'expansion_step.jpeg'
-    alt: 'EXPANSION: The Final Step of the DRIVE Model'
-    caption: 'EXPANSION: The Final Step of the DRIVE Model- Identity evolution by incorporating the DRIVE into your life'
+    alt: 'EMBODIMENT: The Final Step of the DRIVE Model'
+    caption: 'EMBODIMENT: The Final Step of the DRIVE Model- Identity evolution by incorporating the DRIVE into your life'
 ---
 
 Today marks an important milestone for Fluxline Resonance Group — and for me personally. After months of research, testing, refinement, and lived application, I'm excited to share the first public preview of **The Resonance Core Framework™**, a system designed to help people create meaningful, aligned, and sustainable change in their lives.
@@ -97,7 +97,7 @@ But who they actually are — in identity, values, emotion, logic, and lived exp
 
 The framework draws from:
 
-- Universal human truths
+- The RCF's Universal Truths
 - Psychological research
 - Behavioral patterns
 - Systems thinking

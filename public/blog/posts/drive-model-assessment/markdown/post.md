@@ -64,7 +64,7 @@ Here's how it works:
 3. **ACTIVATION → MICRO-ACTION** - The smallest step; resistance dissolves into flow
 4. **MOMENTUM → COMPOUNDING IDENTITY** - Daily actions become self-reinforcing
 5. **ENDURANCE → SUSTAINABLE FUEL** - Motivation becomes irrelevant; identity carries it forward
-6. **EXPANSION → IDENTITY EVOLUTION** - The system grows with you; new DRIVEs emerge
+6. **EMBODIMENT → IDENTITY EVOLUTION** - The DRIVE becomes lived identity; new DRIVEs emerge
 
 ### What Makes It Different?
 
