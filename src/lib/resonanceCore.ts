@@ -102,7 +102,7 @@ export const DRIVE_STEPS: { step: string; title: string; body: string }[] = [
     body: 'Build routines that support you when motivation dips.',
   },
   {
-    step: 'Expansion',
+    step: 'Embodiment',
     title: 'Identity evolution',
     body: 'Let what you learn shape the next thing you pursue.',
   },
@@ -201,15 +201,17 @@ export const RCF_CONCEPTS: {
   },
   {
     id: 'identity-distortion-loop',
-    name: 'Identity Distortion Loop',
-    summary: 'The cycle that erodes coherence. In the book: The Judgment Loop.',
-    body: 'The cycle that erodes identity coherence: Dissonance Spike → Reactance → Confirmation Bias → Distorted Alignment → Identity Erosion. Each step feels reasonable in the moment, which is what makes the loop hard to see from the inside. In the book, this is called The Judgment Loop.',
+    name: 'Judgment Loop',
+    summary:
+      'The cycle where judgments about yourself and others reinforce a distorted view of identity.',
+    body: 'The cycle where judgments about yourself and others reinforce a distorted view of identity. It runs Dissonance Spike → Reactance → Confirmation Bias → Distorted Alignment → Identity Erosion. Each step feels reasonable in the moment, which is what makes the loop hard to see from the inside.',
   },
   {
     id: 'identity-alignment-loop',
-    name: 'Identity Alignment Loop',
-    summary: 'The cycle that rebuilds coherence. In the book: The Data Loop.',
-    body: 'The counterpart to the Distortion Loop. Instead of reacting to a cue, you observe it, understand where it comes from, check whether it is valid, and then decide from a wider Window of Choice. Each honest, identity-rooted choice makes the next one easier. In the book, this is called The Data Loop.',
+    name: 'Data Loop',
+    summary:
+      'The practice of treating Cues as information: notice them, trace where they come from, test whether they are true, then decide.',
+    body: 'The counterpart to the Judgment Loop. The practice of treating Cues as information: notice them, trace where they come from, test whether they are true, then decide. Each honest, identity-rooted choice makes the next one easier.',
   },
   {
     id: 'creative-truth',

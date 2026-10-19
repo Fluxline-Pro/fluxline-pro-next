@@ -307,7 +307,7 @@ export default function ResonanceCoreFrameworkClient() {
           <div className='fx-media-split'>
             <img
               src={DriveModelDiagram.src}
-              alt='The DRIVE Model — Spark, Coherence, Activation, Momentum, Endurance, and Expansion arranged as a continuous alignment loop.'
+              alt='The DRIVE Model: Spark, Coherence, Activation, Momentum, Endurance, and Embodiment arranged as a continuous alignment loop.'
               style={{
                 display: 'block',
                 width: '100%',

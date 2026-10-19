@@ -94,7 +94,7 @@ The Fluxline Resonance Group is a strategic consulting firm specializing in tran
    - Activation: Initiating the DRIVE Alignment Loop
    - Momentum: Compounding identity
    - Endurance: Sustaining the DRIVE
-   - Expansion: Identity evolution
+   - Embodiment: Identity evolution
 
 3. **Implementing the Framework**
    - Personal Implementation
