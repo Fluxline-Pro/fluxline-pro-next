@@ -32,9 +32,10 @@ export default function FxFooter({
         ...style,
       }}
     >
-      {/* Cross-site links to the other owned properties in the RCF
-          ecosystem. Plain same-tab anchors with rel="me" so search engines
-          connect the three sites to one identity. */}
+      {/* The shared cross-sell block (Listen, Read, Work, author), in the
+          same order on all three sites. Cross-site links are plain same-tab
+          anchors with rel="me" so search engines connect the three sites to
+          one identity. The Work line names this site, so it is plain text. */}
       <nav
         aria-label='The RCF Ecosystem'
         className='fx-c'
@@ -60,16 +61,28 @@ export default function FxFooter({
           The RCF Ecosystem
         </span>
         <a
-          href='https://theresonantidentity.com'
+          href='https://theresonantidentity.com/start-here/'
           rel='me'
           style={linkStyle('tri')}
           onMouseEnter={() => setHovered('tri')}
           onMouseLeave={() => setHovered(null)}
         >
-          The Resonant Identity Podcast
+          Listen: The Resonant Identity Podcast. Where the Framework is spoken.
         </a>
+        <Link
+          href='/resonance-core-framework/'
+          style={linkStyle('rcf')}
+          onMouseEnter={() => setHovered('rcf')}
+          onMouseLeave={() => setHovered(null)}
+        >
+          Read: The Resonance Core Framework™. Where the Framework is mapped.
+        </Link>
+        <span style={linkStyle('work')}>
+          Work: Fluxline. Fluxline builds systems that work, brands that
+          connect, and practices that last.
+        </span>
         <a
-          href='https://terencewaters.com'
+          href='https://terencewaters.com/about/'
           rel='me'
           style={linkStyle('tw')}
           onMouseEnter={() => setHovered('tw')}
