@@ -27,6 +27,14 @@ describe('service catalog', () => {
     ).toEqual(['Business Strategy & Systems Alignment']);
   });
 
+  it('puts only the Resonance Core Framework in the Foundation group', () => {
+    expect(
+      visibleServices
+        .filter((service) => service.category === 'foundation')
+        .map((service) => service.title)
+    ).toEqual(['Resonance Core Framework™']);
+  });
+
   it('features the Identity in Motion white paper on the Resonance Core service', () => {
     const resonanceCore = SERVICE_CATEGORIES.find(
       (service) => service.id === 'resonance-core'

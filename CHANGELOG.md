@@ -6,8 +6,30 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Voice and congruence pass (copy and links only), following `.github/rcf-voice-core.md` and `.github/prompts/fluxline-pro.prompt.md`, both added in this change:
+  - The book date reads "targeted for Q1 2027" everywhere it said "Late Fall 2026": home, `/books`, the book detail page, `/resonance-core-framework`, `llms.txt` and the announcement post.
+  - Home stats: the experience label names its scope ("Years in Design, Development, Architecture & Product Management"), and the offering count is "5 Offerings". The services intro and the 404 page say five modular offerings.
+  - `/resonance-core-framework`: the loops are the Judgment Loop and the Data Loop, the sixth DRIVE stage is Embodiment (cards, image alt text, book contents), DRIVE is expanded at first use, "DRIVE System" is now "DRIVE Model", the DII is named "Decision Integrity Index (DII)", and the DAS gloss expands SSI, EROI and SI. Concept anchors (`#identity-distortion-loop`, `#identity-alignment-loop`, `#drive-system`, `#dii-protocol`) are unchanged so cross-site links keep working.
+  - Behavioral Gravity uses the approved gloss in Core Concepts, the FAQ and the JSON-LD.
+  - Claims: the FAQ "Is the RCF research-backed?" is now "What is the RCF built from?", the heading "Tested before it was written down" is "How it was developed", and Strategic Innovation reads "disciplined, repeatable practice" instead of "proven methodologies".
+  - The Resonance Core Framework™ carries ™ at first use on the home, podcasts and book detail pages.
+  - `/services` and the home services list open with the RCF in its own "Foundation" section (the method every engagement uses), followed by Strategy & Leadership, Brand & Digital Presence and Body & Practice. The RCF no longer sits under Body & Practice, and home no longer shows an empty Strategy & Leadership label above it.
+  - Creative Truth appears only as a Core Value; it is no longer listed as a framework concept or named in the canonical RCF paragraph.
+  - Home stats no longer show the unsourced "50+ Projects Delivered" and "10+ Industries Served": the tiles read "E2E / Projects, from concept to launch" and "Diverse / Industries served".
+  - Every consultation CTA, the nav button and the `/book` title say "Book a Free Consultation".
+  - "What It's Built On" names "The RCF's Universal Truths, which shape Fluxline's ethos and mission" instead of "Universal human truths".
+  - Book announcements also say preorders open in early November 2026 (new `RCF_PREORDER_WINDOW` constant): the home framework summary and book card, the `/books` subhead, badges, preorder callout and "Want to know when it lands?" band, the book detail callout and book page copy, the RCF page `#notify` card and `llms.txt`.
+  - Published posts use current RCF terms: the sixth DRIVE stage is Embodiment in the book announcement (gallery alt text and caption) and both DRIVE Model assessment posts (blog and case study), "Universal human truths" reads "The RCF's Universal Truths" in the book announcement, and "The Fluxline Philosophy" says "disciplined, repeatable practice" instead of "proven methodologies".
+- Blog and Portfolio are in the main navigation. The desktop link row now starts at 1,240px (the hamburger menu covers narrower widths) so seven links fit without labels wrapping mid-word.
+- The RCF page has a "Be notified when the book lands" sign-up (`/resonance-core-framework#notify`), and `/books` "Want to know when it lands?" embeds the same form. "Be notified at launch" links on fluxline.pro point to it instead of `/contact`.
+  - Footer: the cross-sell nav is labelled "Fluxline Ecosystem" (was "The RCF Ecosystem") and lists the shared Listen, Read and Work lines; the author link reads "By Terence Waters: Founder & CEO, author, systems architect, and identity coach." and goes to terencewaters.com/about/. "Explore the Podcast" goes to theresonantidentity.com/start-here/. The TRI Newsletter description adds "Book launch updates included."
+
 ### Fixed
 
+- The TRI Newsletter sign-up boxes on `/contact` and `/podcasts` never sent anything (the button had no handler and nothing called `/api/newsletter-subscribe`). A shared `NewsletterSignup` component now subscribes and shows the API's response.
+- Detail-page CTA bands linked every primary button to `/contact` and dropped the second button: "Explore More Articles" (blog posts), "Resonance Core Services" (books) and "View Our Services" (case studies) now go where they say, and both buttons render.
 - `yarn lint` is clean again (0 errors; 45 warnings remain, mostly `<img>` and hook-dependency advisories): the six `react-hooks/set-state-in-effect` cases are rewritten (hydration flags via `useSyncExternalStore` in `ConsentBanner`, `AuthContext` and `TestimonialCarousel`; the consultation draft is restored through lazy `useState` initializers; the stepper resets its status with the state-from-props pattern; the rail layout schedules its first measurement on the next frame), the four `any` casts are typed, the unescaped quotes are escaped, and the empty props interface is a `Record<string, never>`. ESLint now treats `api/`, `scripts/` and `jest.config.js` as CommonJS and ignores the vendored `docs/dsm_v1_0/` template bundles and local `.claude/` worktrees.
 - `case-study-content.test.ts` checks for *quantitative* retention, return or churn claims again (a retention term together with a percentage, multiplier or month/year count on the same line) instead of failing on every qualitative mention; the suite is green (137/137).
 

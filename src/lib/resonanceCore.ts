@@ -22,7 +22,17 @@ export const RCF_PREVIEW_PDF =
 export const RCF_LOGO_IMAGE = '/images/RCF_Logo.jpeg';
 export const RCF_BOOK_IMAGE = '/images/RCF_BookConcept.jpg';
 
-export const RCF_RELEASE_WINDOW = 'Late Fall 2026';
+/**
+ * The book's release window. Always pair it with "targeted" ("targeted for
+ * Q1 2027") and never name a month for the launch itself.
+ */
+export const RCF_RELEASE_WINDOW = 'Q1 2027';
+
+/**
+ * When preorders open (owner, 2026-10-19). Naming the month is allowed for
+ * the preorder date only.
+ */
+export const RCF_PREORDER_WINDOW = 'early November 2026';
 
 /** The one-sentence version, for the home page and card summaries. */
 export const RCF_ONE_LINER =
@@ -62,7 +72,7 @@ export const RCF_EXPLAINER: { heading: string; body: string }[] = [
 
 /** What the framework rests on — the inputs it was assembled from. */
 export const RCF_FOUNDATIONS: string[] = [
-  'Universal human truths',
+  "The RCF's Universal Truths, which shape Fluxline's ethos and mission",
   'Psychological research',
   'Behavioral patterns',
   'Systems thinking',
@@ -98,7 +108,7 @@ export const DRIVE_STEPS: { step: string; title: string; body: string }[] = [
     body: 'Build routines that support you when motivation dips.',
   },
   {
-    step: 'Expansion',
+    step: 'Embodiment',
     title: 'Identity evolution',
     body: 'Let what you learn shape the next thing you pursue.',
   },
@@ -121,8 +131,13 @@ export const PODCAST_BLURB =
 /** The framework's page (the former /resonance-core explainer redirects here). */
 export const RCF_FRAMEWORK_PATH = '/resonance-core-framework';
 
+/** Where every "Be notified at launch" link goes (the TRI Newsletter signup). */
+export const RCF_NOTIFY_PATH = '/resonance-core-framework#notify';
+
 /** Sister sites in the RCF ecosystem. */
 export const TRI_SITE_URL = 'https://theresonantidentity.com';
+/** The podcast's front door for new listeners. */
+export const TRI_START_HERE_URL = 'https://theresonantidentity.com/start-here/';
 export const TRI_FRAMEWORK_URL = 'https://theresonantidentity.com/framework/';
 export const TW_SITE_URL = 'https://terencewaters.com';
 export const TW_FRAMEWORK_URL =
@@ -135,7 +150,7 @@ export const TW_FRAMEWORK_URL =
  * authority for search engines and AI systems.
  */
 export const RCF_CANONICAL_PARAGRAPH =
-  'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity — inner signal, outward expression, and systemic impact — and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE System, Creative Truth, and the DII Protocol. Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
+  'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity (inner signal, outward expression, and systemic impact) and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE Model, and the DII Protocol. Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
 
 /** The three dimensions (rings) of identity the framework maps. */
 export const RCF_RINGS: { title: string; body: string }[] = [
@@ -171,8 +186,8 @@ export const RCF_CONCEPTS: {
     id: 'behavioral-gravity',
     name: 'Behavioral Gravity',
     summary:
-      "The unconscious pull toward what feels identity-consistent — even when it no longer fits who you're becoming.",
-    body: "The unconscious pull toward behaviors, environments, and relationships that feel identity-consistent — even when they're no longer aligned with who you're becoming. It's why old habits feel like home and new ones feel like effort. Naming the pull is the first step to choosing whether to follow it.",
+      'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
+    body: 'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
   },
   {
     id: 'identity-coherence',
@@ -190,42 +205,36 @@ export const RCF_CONCEPTS: {
   },
   {
     id: 'drive-system',
-    name: 'The DRIVE System',
+    name: 'The DRIVE Model',
     summary:
       'How identity-rooted goals become self-sustaining instead of running on willpower.',
     body: 'The motivation architecture of the RCF: how identity-rooted goals become self-sustaining rather than dependent on willpower. Instead of pushing yourself toward a goal, DRIVE connects the goal to who you are, so small wins compound into momentum.',
   },
   {
     id: 'identity-distortion-loop',
-    name: 'Identity Distortion Loop',
-    summary: 'The cycle that erodes coherence. In the book: The Judgment Loop.',
-    body: 'The cycle that erodes identity coherence: Dissonance Spike → Reactance → Confirmation Bias → Distorted Alignment → Identity Erosion. Each step feels reasonable in the moment, which is what makes the loop hard to see from the inside. In the book, this is called The Judgment Loop.',
+    name: 'Judgment Loop',
+    summary:
+      'The cycle where judgments about yourself and others reinforce a distorted view of identity.',
+    body: 'The cycle where judgments about yourself and others reinforce a distorted view of identity. It runs Dissonance Spike → Reactance → Confirmation Bias → Distorted Alignment → Identity Erosion. Each step feels reasonable in the moment, which is what makes the loop hard to see from the inside.',
   },
   {
     id: 'identity-alignment-loop',
-    name: 'Identity Alignment Loop',
-    summary: 'The cycle that rebuilds coherence. In the book: The Data Loop.',
-    body: 'The counterpart to the Distortion Loop. Instead of reacting to a cue, you observe it, understand where it comes from, check whether it is valid, and then decide from a wider Window of Choice. Each honest, identity-rooted choice makes the next one easier. In the book, this is called The Data Loop.',
-  },
-  {
-    id: 'creative-truth',
-    name: 'Creative Truth',
+    name: 'Data Loop',
     summary:
-      'Expressing your truth without needing others to receive or confirm it.',
-    body: "Expressing your inner truth without requiring others to receive or confirm it — the highest form of Identity Coherence in outward expression. It's speaking and creating from who you are, not from a need for approval.",
+      'The practice of treating Cues as information: notice them, trace where they come from, test whether they are true, then decide.',
+    body: 'The counterpart to the Judgment Loop. The practice of treating Cues as information: notice them, trace where they come from, test whether they are true, then decide. Each honest, identity-rooted choice makes the next one easier.',
   },
   {
     id: 'dii-protocol',
-    name: 'DII Protocol (Decision Integrity Index)',
+    name: 'Decision Integrity Index (DII)',
     summary: 'A 1–5 way to score how well a decision aligns with who you are.',
     body: 'A structured way to score how well a decision aligns with your identity. It starts simply: journal a key decision, score it from 1 to 5, and justify the score honestly. Scores are anchored to six core values — Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, and Strategic Innovation — and are personal markers, never grades.',
   },
   {
     id: 'decision-alignment-score',
     name: 'Decision Alignment Score (DAS)',
-    summary:
-      'The DII’s composite view of a decision, from SSI, EROI, and the Shadow Index.',
-    body: 'The composite result of the DII Protocol, drawing on three sub-scores — SSI (Self-State Integrity), EROI (Emotional Return on Investment), and the Shadow Index — for a single view of a decision’s alignment. The book covers how each is scored.',
+    summary: 'The score a single decision earns inside the DII.',
+    body: 'The score a single decision earns inside the DII. It draws on three sub-scores: Self-State Integrity (SSI), Emotional Return on Investment (EROI), and System Impact / Shadow Index (SI). The book covers how each is scored.',
   },
 ];
 
@@ -245,7 +254,7 @@ export const RCF_FAQ: { question: string; answer: string }[] = [
   {
     question: 'What is Behavioral Gravity?',
     answer:
-      'Behavioral Gravity is the pull toward familiar behaviors and environments, even when they no longer fit who you are becoming.',
+      'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
   },
   {
     question: 'What is the DII Protocol?',
@@ -253,9 +262,9 @@ export const RCF_FAQ: { question: string; answer: string }[] = [
       'The DII scores how well a decision aligns with your identity, using six core values and a Decision Alignment Score.',
   },
   {
-    question: 'Is the RCF research-backed?',
+    question: 'What is the RCF built from?',
     answer:
-      'Yes. It draws on psychological research, behavioral patterns, systems thinking, and real-world practice.',
+      'It draws on psychology, systems thinking, and practice. It is a decision and identity framework, not therapy.',
   },
   {
     question: 'Who is the RCF designed for?',

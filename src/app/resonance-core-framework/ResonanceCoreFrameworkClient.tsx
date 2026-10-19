@@ -14,6 +14,7 @@ import FxChip from '@/theme/components/dsm/FxChip';
 import DriveModelDiagram from '@/assets/images/drive_model_framework.jpeg';
 import { StaggeredGrid } from '@/animations/staggered-container';
 import { COMPANY_VALUES } from '@/lib/siteContent';
+import NewsletterSignup from '@/components/NewsletterSignup';
 import {
   DRIVE_STEPS,
   RCF_AUDIENCE,
@@ -24,6 +25,7 @@ import {
   RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
+  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_RINGS,
   RCF_TRADEMARK,
@@ -111,7 +113,7 @@ const ENGAGEMENTS: {
     cta: 'Explore Consulting ›',
   },
   {
-    label: `Coming ${RCF_RELEASE_WINDOW}`,
+    label: `Targeted for ${RCF_RELEASE_WINDOW}`,
     title: 'The book',
     body: 'Explore the full framework, with a companion workbook for daily practice.',
     href: '/books',
@@ -298,8 +300,11 @@ export default function ResonanceCoreFrameworkClient() {
           <FxGroupLabel>The DRIVE Model</FxGroupLabel>
           <h2 style={sectionTitle}>Six steps, one loop</h2>
           <SectionSubtitle title='From spark to lasting change'>
-            Six steps turn an initial interest into aligned action and lasting
-            momentum.
+            DRIVE stands for Directional, Repeatable, Identity-Aligned Virtuous
+            Expressions: repeatable actions that move you toward the person you
+            are becoming. The DRIVE Model is six stages (Spark, Coherence,
+            Activation, Momentum, Endurance, Embodiment) that carry a DRIVE from
+            first spark to lived identity.
           </SectionSubtitle>
 
           {/* Diagram rail on the left, step cards on the right; the split
@@ -307,7 +312,7 @@ export default function ResonanceCoreFrameworkClient() {
           <div className='fx-media-split'>
             <img
               src={DriveModelDiagram.src}
-              alt='The DRIVE Model — Spark, Coherence, Activation, Momentum, Endurance, and Expansion arranged as a continuous alignment loop.'
+              alt='The DRIVE Model: Spark, Coherence, Activation, Momentum, Endurance, and Embodiment arranged as a continuous alignment loop.'
               style={{
                 display: 'block',
                 width: '100%',
@@ -438,7 +443,7 @@ export default function ResonanceCoreFrameworkClient() {
       <FxReveal>
         <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>What It&apos;s Built On</FxGroupLabel>
-          <h2 style={sectionTitle}>Tested before it was written down</h2>
+          <h2 style={sectionTitle}>How it was developed</h2>
           <SectionSubtitle title='Built from research and practice'>
             The framework brings together research, systems thinking, and
             real-world experience.
@@ -548,13 +553,34 @@ export default function ResonanceCoreFrameworkClient() {
           >
             <h3 style={cardTitle}>Read the introduction first</h3>
             <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-              The free preview introduces the framework and its tools for
-              making change last.
+              The free preview introduces the framework and its tools for making
+              change last.
             </p>
             <a href={RCF_PREVIEW_PDF} style={textLink}>
               Download the RCF Preview (PDF) →
             </a>
           </FxCard>
+
+          <div
+            id='notify'
+            style={{
+              marginTop: 'var(--fx-space-m)',
+              scrollMarginTop: 'calc(var(--fx-nav-height) + 16px)',
+            }}
+          >
+            <FxCard variant='inset' style={{ padding: '22px 24px' }}>
+              <h3 style={cardTitle}>Be notified when the book lands</h3>
+              <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
+                The book is targeted for {RCF_RELEASE_WINDOW}, with preorders
+                opening in {RCF_PREORDER_WINDOW}. Join the TRI Newsletter for
+                launch updates. No spam, ever.
+              </p>
+              <NewsletterSignup
+                size='sm'
+                ariaLabel='Email address for book launch updates'
+              />
+            </FxCard>
+          </div>
         </FxSectionPanel>
       </FxReveal>
 

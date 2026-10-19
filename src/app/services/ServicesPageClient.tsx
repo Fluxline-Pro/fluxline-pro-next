@@ -16,7 +16,10 @@ const VISIBLE_SERVICES = SERVICE_CATEGORIES.filter(
 );
 
 const CONSULTING = VISIBLE_SERVICES.find((s) => s.id === 'consulting')!;
-const OTHER_SERVICES = VISIBLE_SERVICES.filter((s) => s.id !== 'consulting');
+const RESONANCE_CORE = VISIBLE_SERVICES.find((s) => s.id === 'resonance-core')!;
+const OTHER_SERVICES = VISIBLE_SERVICES.filter(
+  (s) => s.id !== 'consulting' && s.id !== 'resonance-core'
+);
 
 const CATEGORY_SECTIONS: {
   key: string;
@@ -27,13 +30,12 @@ const CATEGORY_SECTIONS: {
     key: 'brand-digital',
     title: 'Brand & Digital Presence',
     description:
-      'Web development and brand design to build your digital foundation.',
+      'Brand design and web development that give your work a clear, lasting presence online.',
   },
   {
     key: 'body-practice',
     title: 'Body & Practice',
-    description:
-      'Physical training and transformational frameworks rooted in identity work and embodiment.',
+    description: 'Physical training rooted in identity work and embodiment.',
   },
 ];
 
@@ -60,102 +62,19 @@ export default function ServicesPageClient() {
         {SERVICES_SUMMARY}
       </p>
 
-      {/* Strategy & Leadership */}
-      <section
-        style={{ padding: '16px 0', marginBottom: 'var(--fx-section-gap)' }}
-      >
-        <div
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'var(--fx-gold)',
-            marginBottom: 14,
-          }}
-        >
-          Strategy & Leadership
-        </div>
-        <FxCard
-          variant='feature'
-          interactive
-          href={CONSULTING.path}
-          style={{
-            padding: '36px 40px',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 3,
-              background:
-                'linear-gradient(90deg, var(--fx-gold), var(--fx-accent))',
-            }}
-          />
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: 32,
-              flexWrap: 'wrap',
-            }}
-          >
-            <div style={{ flex: 1, minWidth: 280 }}>
-              <h3
-                style={{
-                  fontSize: 'var(--fx-h2-size)',
-                  fontWeight: 800,
-                  color: 'var(--fx-text-heading)',
-                  margin: '0 0 10px',
-                  fontFamily: 'var(--fx-font)',
-                }}
-              >
-                {CONSULTING.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: 'var(--fx-body-size)',
-                  color: 'var(--fx-text-body)',
-                  lineHeight: 'var(--fx-body-leading)',
-                  margin: '0 0 8px',
-                  maxWidth: '56ch',
-                }}
-              >
-                {CONSULTING.description}
-              </p>
-              <p
-                style={{
-                  fontSize: 14,
-                  color: 'var(--fx-text-muted)',
-                  lineHeight: 1.65,
-                  margin: '0 0 20px',
-                  maxWidth: '56ch',
-                }}
-              >
-                Strategic systems design, operational optimization, and
-                values-aligned business consulting for founders and growing
-                teams.
-              </p>
-              <span
-                style={{
-                  fontSize: 'var(--fx-cta-link-size)',
-                  color: 'var(--fx-gold)',
-                  fontWeight: 700,
-                  letterSpacing: 'var(--fx-cta-link-tracking)',
-                  textTransform: 'uppercase',
-                }}
-              >
-                Explore Consulting ›
-              </span>
-            </div>
-          </div>
-        </FxCard>
-      </section>
+      <FeatureSection
+        label='Foundation'
+        service={RESONANCE_CORE}
+        blurb='The method every engagement uses. Delivered through one-to-one coaching, group workshops, and speaking.'
+        ctaLabel='Explore the Framework'
+      />
+
+      <FeatureSection
+        label='Strategy & Leadership'
+        service={CONSULTING}
+        blurb='Strategic systems design, operational optimization, and values-aligned business consulting for founders and growing teams.'
+        ctaLabel='Explore Consulting'
+      />
 
       {/* Service Category Sections */}
       <div
@@ -255,10 +174,123 @@ export default function ServicesPageClient() {
         <FxCTABand
           title='Not sure where to start?'
           body="Share your needs in a free consultation below. Let's map out what's possible for you or your business together."
-          primaryLabel='Book a Consultation'
+          primaryLabel='Book a Free Consultation'
           primaryHref='/contact'
         />
       </div>
     </FxContainer>
+  );
+}
+
+/**
+ * A full-width featured service with its group label above it. Used for the
+ * Foundation (the RCF, which every engagement builds on) and for Strategy &
+ * Leadership, each of which holds a single service.
+ */
+function FeatureSection({
+  label,
+  service,
+  blurb,
+  ctaLabel,
+}: {
+  label: string;
+  service: (typeof SERVICE_CATEGORIES)[number];
+  blurb: string;
+  ctaLabel: string;
+}) {
+  return (
+    <section
+      style={{ padding: '16px 0', marginBottom: 'var(--fx-section-gap)' }}
+    >
+      <div
+        style={{
+          fontSize: 11,
+          fontWeight: 700,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: 'var(--fx-gold)',
+          marginBottom: 14,
+        }}
+      >
+        {label}
+      </div>
+      <FxCard
+        variant='feature'
+        interactive
+        href={service.path}
+        style={{
+          padding: '36px 40px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 3,
+            background:
+              'linear-gradient(90deg, var(--fx-gold), var(--fx-accent))',
+          }}
+        />
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: 32,
+            flexWrap: 'wrap',
+          }}
+        >
+          <div style={{ flex: 1, minWidth: 280 }}>
+            <h3
+              style={{
+                fontSize: 'var(--fx-h2-size)',
+                fontWeight: 800,
+                color: 'var(--fx-text-heading)',
+                margin: '0 0 10px',
+                fontFamily: 'var(--fx-font)',
+              }}
+            >
+              {service.title}
+            </h3>
+            <p
+              style={{
+                fontSize: 'var(--fx-body-size)',
+                color: 'var(--fx-text-body)',
+                lineHeight: 'var(--fx-body-leading)',
+                margin: '0 0 8px',
+                maxWidth: '56ch',
+              }}
+            >
+              {service.description}
+            </p>
+            <p
+              style={{
+                fontSize: 14,
+                color: 'var(--fx-text-muted)',
+                lineHeight: 1.65,
+                margin: '0 0 20px',
+                maxWidth: '56ch',
+              }}
+            >
+              {blurb}
+            </p>
+            <span
+              style={{
+                fontSize: 'var(--fx-cta-link-size)',
+                color: 'var(--fx-gold)',
+                fontWeight: 700,
+                letterSpacing: 'var(--fx-cta-link-tracking)',
+                textTransform: 'uppercase',
+              }}
+            >
+              {ctaLabel} ›
+            </span>
+          </div>
+        </div>
+      </FxCard>
+    </section>
   );
 }

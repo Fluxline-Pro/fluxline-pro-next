@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { Book } from '../types';
 import FxCard from '@/theme/components/dsm/FxCard';
 import FxButton from '@/theme/components/dsm/FxButton';
@@ -9,7 +8,11 @@ import FxCallout from '@/theme/components/dsm/FxCallout';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { RCF_BOOK_SLUG, RCF_OFFERINGS, STOREFRONT_URL } from '../constants';
-import { RCF_PREVIEW_PDF, RCF_RELEASE_WINDOW } from '@/lib/resonanceCore';
+import {
+  RCF_PREORDER_WINDOW,
+  RCF_PREVIEW_PDF,
+  RCF_RELEASE_WINDOW,
+} from '@/lib/resonanceCore';
 
 interface BookDetailClientProps {
   book: Book;
@@ -45,7 +48,7 @@ function AvailabilitySection({ book }: { book: Book }) {
           isReleased
             ? 'Available now'
             : isRcf
-              ? `Coming ${RCF_RELEASE_WINDOW}`
+              ? `Targeted for ${RCF_RELEASE_WINDOW}`
               : 'Coming soon'
         }
       >
@@ -56,9 +59,10 @@ function AvailabilitySection({ book }: { book: Book }) {
           </>
         ) : isRcf ? (
           <>
-            The book and its companion workbook are in final production. When
-            they launch, every edition will be available from the Fluxline
-            store — there is nothing to pre-order here.
+            The book and its companion workbook are in final production,
+            targeted for {RCF_RELEASE_WINDOW}. Preorders open in{' '}
+            {RCF_PREORDER_WINDOW}. At launch, every edition will be available
+            from the Fluxline store.
           </>
         ) : (
           <>
@@ -180,7 +184,6 @@ function AvailabilitySection({ book }: { book: Book }) {
  * Uses UnifiedContentDetail with an availability hand-off to the storefront.
  */
 export default function BookDetailClient({ book }: BookDetailClientProps) {
-  const router = useRouter();
 
   // Only the RCF book has a published release window to advertise.
   const isRcf = book.slug === RCF_BOOK_SLUG;
@@ -200,7 +203,7 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
         book.status === 'available'
           ? 'Available Now'
           : isRcf
-            ? `Coming ${RCF_RELEASE_WINDOW}`
+            ? `Targeted for ${RCF_RELEASE_WINDOW}`
             : 'Coming Soon',
     },
   ];
@@ -252,17 +255,17 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
         isRcf
           ? {
               label: 'Resonance Core Services',
-              onClick: () => router.push('/services/resonance-core'),
+              href: '/services/resonance-core',
               variant: 'primary' as const,
             }
           : {
               label: 'Explore Our Services',
-              onClick: () => router.push('/services'),
+              href: '/services',
               variant: 'primary' as const,
             },
         {
           label: 'Get in Touch',
-          onClick: () => router.push('/contact'),
+          href: '/contact',
           variant: 'secondary',
         },
       ],
