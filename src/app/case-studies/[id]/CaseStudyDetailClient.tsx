@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { useDeviceOrientation } from '@/theme/hooks/useMediaQuery';
@@ -18,7 +17,6 @@ interface CaseStudyDetailClientProps {
 export default function CaseStudyDetailClient({
   caseStudy,
 }: CaseStudyDetailClientProps) {
-  const router = useRouter();
   const [isMounted, setIsMounted] = React.useState(false);
   const orientationHook = useDeviceOrientation();
   const orientation = isMounted ? orientationHook : 'landscape';
@@ -193,12 +191,12 @@ export default function CaseStudyDetailClient({
       buttons: [
         {
           label: 'View Our Services',
-          onClick: () => router.push('/services'),
+          href: '/services',
           variant: 'primary',
         },
         {
           label: 'Start Your Transformation',
-          onClick: () => router.push('/contact'),
+          href: '/contact',
           variant: 'secondary',
         },
       ],

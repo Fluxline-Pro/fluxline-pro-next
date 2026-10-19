@@ -70,12 +70,12 @@ export function BlogPostDetailClient({ post }: BlogPostDetailClientProps) {
       buttons: [
         {
           label: 'Explore More Articles',
-          onClick: () => router.push('/blog'),
+          href: '/blog',
           variant: 'primary' as const,
         },
         {
           label: 'Get in Touch',
-          onClick: () => router.push('/contact'),
+          href: '/contact',
           variant: 'secondary' as const,
         },
       ],

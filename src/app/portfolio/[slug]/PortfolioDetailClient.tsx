@@ -112,7 +112,7 @@ export default function PortfolioDetailClient({
       buttons: [
         {
           label: 'Get in Touch',
-          onClick: () => router.push('/contact'),
+          href: '/contact',
           variant: 'primary',
         },
       ],

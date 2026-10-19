@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { Book } from '../types';
 import FxCard from '@/theme/components/dsm/FxCard';
 import FxButton from '@/theme/components/dsm/FxButton';
@@ -180,7 +179,6 @@ function AvailabilitySection({ book }: { book: Book }) {
  * Uses UnifiedContentDetail with an availability hand-off to the storefront.
  */
 export default function BookDetailClient({ book }: BookDetailClientProps) {
-  const router = useRouter();
 
   // Only the RCF book has a published release window to advertise.
   const isRcf = book.slug === RCF_BOOK_SLUG;
@@ -252,17 +250,17 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
         isRcf
           ? {
               label: 'Resonance Core Services',
-              onClick: () => router.push('/services/resonance-core'),
+              href: '/services/resonance-core',
               variant: 'primary' as const,
             }
           : {
               label: 'Explore Our Services',
-              onClick: () => router.push('/services'),
+              href: '/services',
               variant: 'primary' as const,
             },
         {
           label: 'Get in Touch',
-          onClick: () => router.push('/contact'),
+          href: '/contact',
           variant: 'secondary',
         },
       ],
