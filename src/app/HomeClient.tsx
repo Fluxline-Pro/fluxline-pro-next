@@ -183,13 +183,16 @@ export default function HomeClient() {
                 gap: 14,
               }}
             >
-              <FxStatCard value='50+' label='Projects Delivered' />
+              <FxStatCard
+                value='End-to-end'
+                label='Projects, from concept to launch'
+              />
               <FxStatCard
                 value='20+'
                 label='Years in Design, Development, Architecture & Product Management'
               />
               <FxStatCard value='5' label='Offerings' />
-              <FxStatCard value='10+' label='Industries Served' />
+              <FxStatCard value='Cross-industry' label='Work across sectors' />
             </FxReveal>
 
             <FxReveal delay={200}>
