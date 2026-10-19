@@ -20,6 +20,7 @@ import {
   RCF_BOOK_IMAGE,
   RCF_BRIEF,
   RCF_LOGO_IMAGE,
+  RCF_NOTIFY_PATH,
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
@@ -638,8 +639,8 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
         <FxCTABand
           title='Want to know when it lands?'
           body="Tell us where you are and what you're working through. We'll let you know the moment the book and workbook are available, and point you at the right first step in the meantime."
-          primaryLabel='Get in Touch'
-          primaryHref='/contact'
+          primaryLabel='Be notified at launch →'
+          primaryHref={RCF_NOTIFY_PATH}
           secondaryLabel='Explore Our Services →'
           secondaryHref='/services'
         />

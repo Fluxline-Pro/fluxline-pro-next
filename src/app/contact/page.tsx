@@ -243,8 +243,8 @@ export default function ContactPage() {
               marginBottom: 14,
             }}
           >
-            Insights on Fluxline and the Resonance Core Framework™. No spam,
-            ever.
+            Insights on Fluxline and the Resonance Core Framework™. Book launch
+            updates included. No spam, ever.
           </div>
           <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
             <input

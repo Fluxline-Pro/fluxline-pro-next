@@ -22,8 +22,9 @@ import {
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
   RCF_FRAMEWORK_PATH,
+  RCF_NOTIFY_PATH,
   RCF_TRADEMARK,
-  TRI_SITE_URL,
+  TRI_START_HERE_URL,
 } from '@/lib/resonanceCore';
 import Link from 'next/link';
 
@@ -600,7 +601,13 @@ export default function HomeClient() {
                   }}
                 >
                   Available through 1:1 coaching engagements and the forthcoming
-                  book (targeted for {RCF_RELEASE_WINDOW}).
+                  book (targeted for {RCF_RELEASE_WINDOW}).{' '}
+                  <Link
+                    href={RCF_NOTIFY_PATH}
+                    style={{ color: 'var(--fx-accent)', fontWeight: 600 }}
+                  >
+                    Be notified at launch →
+                  </Link>
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   <FxButton variant='primary' href='/contact'>
@@ -1087,7 +1094,7 @@ export default function HomeClient() {
                 </div>
                 <div style={{ marginTop: 'auto' }}>
                   <a
-                    href={TRI_SITE_URL}
+                    href={TRI_START_HERE_URL}
                     style={{
                       display: 'block',
                       textAlign: 'center',

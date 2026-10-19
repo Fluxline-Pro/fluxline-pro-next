@@ -125,8 +125,13 @@ export const PODCAST_BLURB =
 /** The framework's page (the former /resonance-core explainer redirects here). */
 export const RCF_FRAMEWORK_PATH = '/resonance-core-framework';
 
+/** Where every "Be notified at launch" link goes (the TRI Newsletter signup). */
+export const RCF_NOTIFY_PATH = '/contact';
+
 /** Sister sites in the RCF ecosystem. */
 export const TRI_SITE_URL = 'https://theresonantidentity.com';
+/** The podcast's front door for new listeners. */
+export const TRI_START_HERE_URL = 'https://theresonantidentity.com/start-here/';
 export const TRI_FRAMEWORK_URL = 'https://theresonantidentity.com/framework/';
 export const TW_SITE_URL = 'https://terencewaters.com';
 export const TW_FRAMEWORK_URL =
