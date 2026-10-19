@@ -37,7 +37,7 @@ export default function FxFooter({
           anchors with rel="me" so search engines connect the three sites to
           one identity. The Work line names this site, so it is plain text. */}
       <nav
-        aria-label='The RCF Ecosystem'
+        aria-label='Fluxline Ecosystem'
         className='fx-c'
         style={{
           maxWidth: 1220,
@@ -58,7 +58,7 @@ export default function FxFooter({
             color: 'var(--fx-text-soft)',
           }}
         >
-          The RCF Ecosystem
+          Fluxline Ecosystem
         </span>
         <a
           href='https://theresonantidentity.com/start-here/'
@@ -88,7 +88,8 @@ export default function FxFooter({
           onMouseEnter={() => setHovered('tw')}
           onMouseLeave={() => setHovered(null)}
         >
-          Terence Waters — Author &amp; Architect
+          By Terence Waters: Founder &amp; CEO, author, systems architect, and
+          identity coach.
         </a>
       </nav>
       <div
