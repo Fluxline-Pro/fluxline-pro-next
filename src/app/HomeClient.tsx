@@ -184,7 +184,7 @@ export default function HomeClient() {
               }}
             >
               <FxStatCard
-                value='End-to-end'
+                value='E2E'
                 label='Projects, from concept to launch'
               />
               <FxStatCard
@@ -192,7 +192,7 @@ export default function HomeClient() {
                 label='Years in Design, Development, Architecture & Product Management'
               />
               <FxStatCard value='5' label='Offerings' />
-              <FxStatCard value='Cross-industry' label='Work across sectors' />
+              <FxStatCard value='Diverse' label='Industries served' />
             </FxReveal>
 
             <FxReveal delay={200}>
