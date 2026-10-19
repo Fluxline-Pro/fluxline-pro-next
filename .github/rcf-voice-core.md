@@ -27,7 +27,7 @@ Owner: Terence Waters, Fluxline Resonance Group, LLC. Audit date: 2026-10-11. Au
 
 **Further owner decisions (2026-10-19, already applied on the Fluxline branch):**
 
-- **Creative Truth** is a Core Value only. Do not list it as a framework concept.
+- **Creative Truth** is a Core Value, not a framework concept (owner, 2026-10-19). Do not list it among framework concepts or named tools; keep it in Core Values lists.
 - The consultation CTA reads **"Book a Free Consultation"**.
 - The footer cross-sell label is **"Fluxline Ecosystem"**.
 - **Universal Truths** wording: "The RCF's Universal Truths, which shape Fluxline's ethos and mission."
