@@ -298,8 +298,11 @@ export default function ResonanceCoreFrameworkClient() {
           <FxGroupLabel>The DRIVE Model</FxGroupLabel>
           <h2 style={sectionTitle}>Six steps, one loop</h2>
           <SectionSubtitle title='From spark to lasting change'>
-            Six steps turn an initial interest into aligned action and lasting
-            momentum.
+            DRIVE stands for Directional, Repeatable, Identity-Aligned Virtuous
+            Expressions: repeatable actions that move you toward the person you
+            are becoming. The DRIVE Model is six stages (Spark, Coherence,
+            Activation, Momentum, Endurance, Embodiment) that carry a DRIVE from
+            first spark to lived identity.
           </SectionSubtitle>
 
           {/* Diagram rail on the left, step cards on the right; the split

@@ -154,8 +154,9 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                     maxWidth: '60ch',
                   }}
                 >
-                  The complete framework, the DRIVE Model, and the companion
-                  workbook that turns it into daily practice. The introduction
+                  The complete framework, the DRIVE Model (Directional,
+                  Repeatable, Identity-Aligned Virtuous Expressions), and the
+                  companion workbook that turns it into daily practice. The introduction
                   preview is available to read right now — it covers why
                   self-help usually fails, where the framework came from, and
                   who it is built for.

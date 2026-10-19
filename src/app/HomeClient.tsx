@@ -588,7 +588,8 @@ export default function HomeClient() {
                   dimensions of identity (inner signal, outward expression, and
                   systemic impact) and provides named tools for navigating each:
                   Behavioral Gravity, Identity Coherence, the Window of Choice,
-                  the DRIVE System, Creative Truth, and the DII Protocol.
+                  the DRIVE Model (Directional, Repeatable, Identity-Aligned
+                  Virtuous Expressions), Creative Truth, and the DII Protocol.
                 </p>
                 <p
                   style={{
@@ -888,7 +889,7 @@ export default function HomeClient() {
                 The free RCF Preview is the book&apos;s introduction — why
                 self-help usually fails, where the framework came from, and who
                 it&apos;s built for — with a first look at Behavioral Gravity,
-                Identity Coherence, the Window of Choice, and the DRIVE System.{' '}
+                Identity Coherence, the Window of Choice, and the DRIVE Model.{' '}
                 <a
                   href={RCF_PREVIEW_PDF}
                   style={{ color: 'var(--fx-gold)', fontWeight: 600 }}

@@ -139,7 +139,7 @@ export const TW_FRAMEWORK_URL =
  * authority for search engines and AI systems.
  */
 export const RCF_CANONICAL_PARAGRAPH =
-  'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity — inner signal, outward expression, and systemic impact — and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE System, Creative Truth, and the DII Protocol. Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
+  'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity (inner signal, outward expression, and systemic impact) and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE Model, Creative Truth, and the DII Protocol. Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
 
 /** The three dimensions (rings) of identity the framework maps. */
 export const RCF_RINGS: { title: string; body: string }[] = [
@@ -194,7 +194,7 @@ export const RCF_CONCEPTS: {
   },
   {
     id: 'drive-system',
-    name: 'The DRIVE System',
+    name: 'The DRIVE Model',
     summary:
       'How identity-rooted goals become self-sustaining instead of running on willpower.',
     body: 'The motivation architecture of the RCF: how identity-rooted goals become self-sustaining rather than dependent on willpower. Instead of pushing yourself toward a goal, DRIVE connects the goal to who you are, so small wins compound into momentum.',

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   keywords:
-    'Resonance Core Framework, RCF coaching, identity alignment coaching, Resonance Core Framework consulting, Behavioral Gravity, Identity Coherence, Window of Choice, DRIVE System, Creative Truth, DII Protocol, Decision Integrity Index, Decision Alignment Score, Terence Waters, Fluxline Resonance Group',
+    'Resonance Core Framework, RCF coaching, identity alignment coaching, Resonance Core Framework consulting, Behavioral Gravity, Identity Coherence, Window of Choice, DRIVE Model, Creative Truth, DII Protocol, Decision Integrity Index, Decision Alignment Score, Terence Waters, Fluxline Resonance Group',
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
