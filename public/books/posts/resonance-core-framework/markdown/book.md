@@ -1,12 +1,12 @@
 ---
-title: 'The Resonance Core Framework'
+title: 'The Resonance Core Framework™'
 subtitle: 'A Comprehensive Guide to Personal and Professional Transformation'
 author: 'Terence Waters'
 publisher: 'Fluxline Resonance Group Publishing'
 publishedDate: '2026-02-15'
 isbn: '978-0-000000-00-0'
 description: 'The Resonance Core Framework is a groundbreaking approach to personal and professional transformation. This comprehensive guide provides the tools, strategies, and insights you need to align your life with your deepest values and create lasting change.'
-excerpt: 'Transform your life with The Resonance Core Framework - a proven methodology for aligning your personal and professional goals with your core values.'
+excerpt: 'Transform your life with The Resonance Core Framework - a methodology for aligning your personal and professional goals with your core values.'
 coverImageUrl: '/books/posts/resonance-core-framework/images/The-Resonance-Core-Book.jpg'
 coverImageAlt: 'The Resonance Core Framework book cover'
 category: 'Business & Self-Help'
@@ -34,8 +34,8 @@ includesWorkbook: true
 pageCount: 342
 language: 'English'
 dimensions: '6 x 9 inches'
-seoTitle: 'The Resonance Core Framework - Transform Your Life | Fluxline'
-seoDescription: 'Discover The Resonance Core Framework, a comprehensive guide to personal and professional transformation. Available in hardcover, softcover, and eBook formats.'
+seoTitle: 'The Resonance Core Framework™ - Transform Your Life | Fluxline'
+seoDescription: 'Discover The Resonance Core Framework™, a comprehensive guide to personal and professional transformation. Available in hardcover, softcover, and eBook formats.'
 seoKeywords:
   - 'resonance core framework'
   - 'personal transformation'
@@ -53,7 +53,7 @@ The Resonance Core Framework is more than just a book—it's a complete system f
 
 - **The Foundation**: Understand the core principles of resonance and how they apply to your life and work
 - **The Framework**: Master the DRIVE Model and the DRIVE Alignment Loop
-- **Practical Application**: Implement proven strategies with step-by-step guidance
+- **Practical Application**: Implement strategies with step-by-step guidance
 - **Real-World Examples**: Learn from case studies and success stories
 - **Workbook Exercises**: Apply concepts immediately with guided exercises
 
@@ -94,7 +94,7 @@ The Fluxline Resonance Group is a strategic consulting firm specializing in tran
    - Activation: Initiating the DRIVE Alignment Loop
    - Momentum: Compounding identity
    - Endurance: Sustaining the DRIVE
-   - Expansion: Identity evolution
+   - Embodiment: Identity evolution
 
 3. **Implementing the Framework**
    - Personal Implementation
@@ -147,4 +147,4 @@ on, and what the book and workbook will guide you through.
 
 **[Download the Introduction Preview PDF](/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf)**
 
-**Coming Late Fall 2026**
+**Targeted for Q1 2027. Preorders open in early November 2026.**

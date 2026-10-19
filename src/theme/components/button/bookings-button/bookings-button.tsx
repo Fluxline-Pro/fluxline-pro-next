@@ -112,7 +112,7 @@ export const BookingsButton: React.FC<BookingsButtonProps> = ({
         className={className}
         icon={!isHomePage ? 'calendar' : undefined}
       >
-        {isHomePage || isHeader ? 'Book a Consultation' : 'Start a Conversation'}
+        {isHomePage || isHeader ? 'Book a Free Consultation' : 'Start a Conversation'}
       </FormButton>
       <ConsultationStepper
         isOpen={stepperOpen}

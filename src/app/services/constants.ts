@@ -30,6 +30,7 @@ export const RESONANCE_CORE_SUMMARY =
   "<strong>A transformational system for decoding your cues, reframing your narratives, and authoring the identity you choose to live from.</strong> The Resonance Core Framework™ is a guided, structured process that helps you understand the patterns shaping your life — somatic, emotional, narrative, and identity based. Through archetypal mapping, reflective inquiry, and identity recalibration, you learn to align your inner world with the life, work, and relationships you're trying to build.<br /><br />This isn't generic coaching. This is <strong>identity work</strong>, <strong>narrative work</strong>, and <strong>embodiment work</strong> — woven into a single, coherent system.<br /><br /><strong>Identity in Motion</strong> is a $99, four-week guided program for people who keep getting stuck with their health goals. It uses the framework to map internal roles and blocks, define an identity that supports consistency, and build sustainable habits through embodied practice. <a href=\"/scrolls/pdfs/Fluxline_RCF_4Week_Unblocking_Program_v4.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Download the Identity in Motion white paper (PDF)</a>.";
 
 export type ServiceCategoryType =
+  | 'foundation'
   | 'body-practice'
   | 'brand-digital'
   | 'depth-strategy';
@@ -151,7 +152,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     summary: RESONANCE_CORE_SUMMARY,
     icon: 'HeartFill',
     path: '/services/resonance-core',
-    category: 'body-practice',
+    category: 'foundation',
     faqs: [
       {
         question: 'What is the Resonance Core Framework™?',

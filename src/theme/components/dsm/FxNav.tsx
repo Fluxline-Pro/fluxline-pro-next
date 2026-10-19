@@ -72,7 +72,7 @@ export default function FxNav({
   backLabel,
   backHref,
   breadcrumb,
-  ctaLabel = 'Book a Consultation',
+  ctaLabel = 'Book a Free Consultation',
   ctaHref = '/contact',
 }: FxNavProps) {
   const pathname = usePathname();
@@ -117,12 +117,16 @@ export default function FxNav({
           { label: 'About', href: '#about' },
           { label: 'Services', href: '/services' },
           { label: 'The Framework', href: '/resonance-core-framework' },
+          { label: 'Blog', href: '/blog' },
+          { label: 'Portfolio', href: '/portfolio' },
           { label: 'Our Content', href: '/content' },
           { label: 'Contact', href: '/contact' },
         ]
       : [
           { label: 'Services', href: '/services' },
           { label: 'The Framework', href: '/resonance-core-framework' },
+          { label: 'Blog', href: '/blog' },
+          { label: 'Portfolio', href: '/portfolio' },
           { label: 'Our Content', href: '/content' },
           { label: 'Contact', href: '/contact' },
         ];
@@ -131,6 +135,7 @@ export default function FxNav({
     color:
       hoveredLink === key ? 'var(--fx-text-heading)' : 'var(--fx-text-soft)',
     textDecoration: 'none',
+    whiteSpace: 'nowrap',
     fontSize: 14.5,
     fontWeight: 500,
     transition: 'color .15s',

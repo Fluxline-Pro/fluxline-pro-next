@@ -61,7 +61,7 @@ testimonial:
 
 # DRIVE Model Assessment — Nervous System Rewiring in Real Time
 
-This case study was a result of us validating our own in-house DRIVE Model for The Resonance Core Framework book we are writing for winter 2026. This combines our various topics of self-awareness and presence and applying it to creating what we call DRIVEs: Units of action that allow a person to embody their values and virtues into mini-applications in their everyday lives.
+This case study was a result of us validating our own in-house DRIVE Model for The Resonance Core Framework book, targeted for Q1 2027. This combines our various topics of self-awareness and presence and applying it to creating what we call DRIVEs: Units of action that allow a person to embody their values and virtues into mini-applications in their everyday lives.
 
 **This is not theory. This is lived data.**
 
@@ -103,11 +103,11 @@ Repeated micro-activations compound into new identity. The nervous system begins
 
 The action becomes automatic. Motivation is replaced by identity: "This is who I am."
 
-**6. EXPANSION → IDENTITY EVOLUTION** (The System Grows With You)  
+**6. EMBODIMENT → IDENTITY EVOLUTION** (The DRIVE Becomes Lived Identity)  
 **Inputs**: Reflection, Recalibration, New DRIVEs, Updated Guardrails  
 **Output**: Evolving Identity, Wider Window of Choice, Resonant Life
 
-The client expands into new DRIVEs, updated values, and broader identity. The cycle begins again, at a higher level.
+The DRIVE becomes lived identity. From there, the client grows into new DRIVEs, updated values, and broader identity. The cycle begins again, at a higher level.
 
 ### The Full Loop: Removing Willpower, Building Identity
 
@@ -118,7 +118,7 @@ The DRIVE Model works because it removes willpower from the equation. Instead of
 - **Propulsion**: Action becomes easier than resistance
 - **Feedback Refinement**: Signals reveal what to keep, adjust, or release
 - **Endurance Sustainability**: Identity carries the action forward
-- **Evolution Expansion**: The system grows with the client
+- **Embodiment**: The DRIVE becomes lived identity
 
 ### Why This Model Works for Nervous System Rewiring
 
@@ -318,7 +318,7 @@ Daily journaling and DRIVE scoring build competence, autonomy, and self-trust.
 **Stage 5: ENDURANCE → SUSTAINABLE FUEL** (Where Motivation Becomes Irrelevant)  
 Consistency, rituals, and environmental design create long-term endurance. Identity carries the action forward.
 
-**Stage 6: EXPANSION → IDENTITY EVOLUTION** (The System Grows With You)  
+**Stage 6: EMBODIMENT → IDENTITY EVOLUTION** (The DRIVE Becomes Lived Identity)  
 Reflection, recalibration, and new DRIVEs emerge. The cycle begins again, at a higher level.
 
 ### Why This Model Works:
@@ -336,7 +336,7 @@ Each cycle strengthens:
 - **Propulsion**: Action becomes easier than resistance
 - **Feedback Refinement**: Signals reveal what to keep or adjust
 - **Endurance Sustainability**: Identity carries the action
-- **Evolution Expansion**: The system grows with the client
+- **Embodiment**: The DRIVE becomes lived identity
 
 _See the gallery images above for the complete visual guide to the DRIVE Model cycle._
 

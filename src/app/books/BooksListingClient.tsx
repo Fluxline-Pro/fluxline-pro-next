@@ -14,6 +14,7 @@ import FxGroupLabel from '@/theme/components/dsm/FxGroupLabel';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import ResonanceCoreBookCover from '@/assets/images/The-Resonance-Core-Book.jpg';
 import { Book } from './types';
+import NewsletterSignup from '@/components/NewsletterSignup';
 import { RCF_LEDE, RCF_OFFERINGS, STOREFRONT_URL } from './constants';
 import {
   PODCAST_BLURB,
@@ -21,6 +22,7 @@ import {
   RCF_BRIEF,
   RCF_LOGO_IMAGE,
   RCF_PREVIEW_PDF,
+  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
   TRI_SITE_URL,
@@ -53,7 +55,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxSectionHeading
         kicker='Books'
         title={RCF_TRADEMARK}
-        subhead={`The book & companion workbook — coming ${RCF_RELEASE_WINDOW}.`}
+        subhead={`The book & companion workbook, targeted for ${RCF_RELEASE_WINDOW}. Preorders open in ${RCF_PREORDER_WINDOW}.`}
         as='h1'
       />
 
@@ -79,7 +81,10 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
         }}
       >
         <FxChip kind='badge' tone='gold'>
-          {RCF_RELEASE_WINDOW}
+          Targeted for {RCF_RELEASE_WINDOW}
+        </FxChip>
+        <FxChip kind='badge' tone='gold'>
+          Preorders open {RCF_PREORDER_WINDOW}
         </FxChip>
         <FxChip kind='tag'>Book</FxChip>
         <FxChip kind='tag'>Companion workbook</FxChip>
@@ -143,7 +148,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                     fontFamily: 'var(--fx-font)',
                   }}
                 >
-                  The book &amp; workbook arrive {RCF_RELEASE_WINDOW}
+                  The book and workbook are targeted for {RCF_RELEASE_WINDOW}
                 </h2>
                 <p
                   style={{
@@ -154,8 +159,9 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                     maxWidth: '60ch',
                   }}
                 >
-                  The complete framework, the DRIVE Model, and the companion
-                  workbook that turns it into daily practice. The introduction
+                  The complete framework, the DRIVE Model (Directional,
+                  Repeatable, Identity-Aligned Virtuous Expressions), and the
+                  companion workbook that turns it into daily practice. The introduction
                   preview is available to read right now — it covers why
                   self-help usually fails, where the framework came from, and
                   who it is built for.
@@ -394,13 +400,11 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
 
           <FxCallout
             tone='info'
-            title='Pre-orders are coming soon!'
+            title='Preorders open early November'
             style={{ marginTop: 'var(--fx-space-l)' }}
           >
-            Preorders will soon be available which will be announced here.{' '}
-            <em>
-              <strong>Stay tuned!</strong>
-            </em>
+            Preorders open in {RCF_PREORDER_WINDOW}. We will announce them
+            here and in the TRI Newsletter.
           </FxCallout>
         </FxSectionPanel>
       </FxReveal>
@@ -550,7 +554,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   margin: '0 0 var(--fx-space-l)',
                 }}
               >
-                Why the framework exists, how it was built and tested, and the
+                Why the framework exists, how it was built, and the
                 DRIVE Model walked through step by step.
               </p>
               <span
@@ -636,12 +640,12 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxReveal>
         <FxCTABand
           title='Want to know when it lands?'
-          body="Tell us where you are and what you're working through. We'll let you know the moment the book and workbook are available, and point you at the right first step in the meantime."
-          primaryLabel='Get in Touch'
-          primaryHref='/contact'
+          body={`The book and workbook are targeted for ${RCF_RELEASE_WINDOW}, with preorders opening in ${RCF_PREORDER_WINDOW}. Join the TRI Newsletter and we'll let you know the moment they're available. Book launch updates included. No spam, ever.`}
           secondaryLabel='Explore Our Services →'
           secondaryHref='/services'
-        />
+        >
+          <NewsletterSignup ariaLabel='Email address for book launch updates' />
+        </FxCTABand>
       </FxReveal>
 
       {/* Small footer note tying the framework back to the wider practice. */}

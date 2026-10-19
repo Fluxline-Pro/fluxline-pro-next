@@ -6,6 +6,7 @@ import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
 import FxButton from '@/theme/components/dsm/FxButton';
 import { ContactForm } from './components/ContactForm';
+import NewsletterSignup from '@/components/NewsletterSignup';
 import ContactImage from '@/assets/images/ContactMe2400x1600.jpg';
 
 export default function ContactPage() {
@@ -178,7 +179,7 @@ export default function ContactPage() {
             </div>
           </div>
           <FxButton size='lg' href='/contact'>
-            Book a Consultation
+            Book a Free Consultation
           </FxButton>
         </div>
 
@@ -243,43 +244,11 @@ export default function ContactPage() {
               marginBottom: 14,
             }}
           >
-            Insights on Fluxline and the Resonance Core Framework™. No spam,
-            ever.
+            Insights on Fluxline and the Resonance Core Framework™. Book launch
+            updates included. No spam, ever.
           </div>
-          <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
-            <input
-              type='email'
-              placeholder='your@email.com'
-              style={{
-                flex: 1,
-                minWidth: 0,
-                background: 'var(--fx-surface-input)',
-                border: '1px solid var(--fx-border)',
-                borderRadius: 8,
-                padding: '10px 12px',
-                fontSize: 13.5,
-                color: 'var(--fx-text-bright)',
-                outline: 'none',
-                fontFamily: 'inherit',
-              }}
-            />
-            <button
-              type='button'
-              style={{
-                background: 'var(--fx-accent)',
-                color: 'var(--fx-accent-ink)',
-                borderRadius: 8,
-                fontWeight: 600,
-                fontSize: 13,
-                padding: '10px 16px',
-                border: 'none',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                fontFamily: 'inherit',
-              }}
-            >
-              Subscribe
-            </button>
+          <div style={{ marginTop: 'auto' }}>
+            <NewsletterSignup size='sm' />
           </div>
         </div>
       </FxRailLayout>

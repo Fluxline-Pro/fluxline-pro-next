@@ -24,7 +24,7 @@ export default function BookPage() {
   return (
     <FxContainer style={{ padding: '64px 32px 88px' }}>
       <FxSectionHeading
-        title='Book a Consultation'
+        title='Book a Free Consultation'
         subhead='Tell us about your needs and schedule a Zoom call — all in three quick steps.'
         as='h1'
       />

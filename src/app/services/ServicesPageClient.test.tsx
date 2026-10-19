@@ -29,7 +29,7 @@ jest.mock('@/theme/components/dsm/FxCTABand', () => ({
 }));
 
 describe('ServicesPageClient', () => {
-  it('renders five services in their existing order under the three domains', () => {
+  it('renders the RCF as the foundation, then the four services in three groups', () => {
     const { container } = render(<ServicesPageClient />);
 
     expect(
@@ -37,12 +37,26 @@ describe('ServicesPageClient', () => {
         heading.textContent?.trim()
       )
     ).toEqual([
+      'Resonance Core Framework™',
       'Business Strategy & Systems Alignment',
       'Brand & Experience Design',
       'Web Development & Digital Architecture',
       'Personal Training & Wellness',
-      'Resonance Core Framework™',
     ]);
+
+    const foundationSection = screen.getByText('Foundation').closest('section');
+    expect(foundationSection).not.toBeNull();
+    expect(within(foundationSection as HTMLElement).getAllByRole('link')).toHaveLength(1);
+    expect(
+      within(foundationSection as HTMLElement).getByRole('link', {
+        name: /Resonance Core Framework™/,
+      })
+    ).toBeInTheDocument();
+
+    const bodySection = screen.getByText('Body & Practice').closest('section');
+    expect(
+      within(bodySection as HTMLElement).queryByText('Resonance Core Framework™')
+    ).toBeNull();
     expect(screen.getByText('Brand & Digital Presence')).toBeInTheDocument();
     expect(screen.getByText('Body & Practice')).toBeInTheDocument();
 
