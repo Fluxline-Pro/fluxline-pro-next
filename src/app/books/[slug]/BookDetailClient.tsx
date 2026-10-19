@@ -57,8 +57,8 @@ function AvailabilitySection({ book }: { book: Book }) {
         ) : isRcf ? (
           <>
             The book and its companion workbook are in final production. When
-            they launch, every edition will be available from the Fluxline
-            store — there is nothing to pre-order here.
+            they launch, every edition will be available from the Fluxline store
+            — there is nothing to pre-order here.
           </>
         ) : (
           <>
@@ -70,89 +70,93 @@ function AvailabilitySection({ book }: { book: Book }) {
       </FxCallout>
 
       {isRcf && (
-      <div>
-        <div
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'var(--fx-accent)',
-            marginBottom: 'var(--fx-space-s)',
-          }}
-        >
-          What will be offered
-        </div>
+        <div>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: 'var(--fx-accent)',
+              marginBottom: 'var(--fx-space-s)',
+            }}
+          >
+            What will be offered
+          </div>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--fx-space-l)',
-          }}
-        >
-          {RCF_OFFERINGS.map((group) => (
-            <div key={group.group}>
-              <div
-                style={{
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: 'var(--fx-text-heading)',
-                  marginBottom: 'var(--fx-space-xs)',
-                  fontFamily: 'var(--fx-font)',
-                }}
-              >
-                {group.group}
-              </div>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                  gap: 'var(--fx-space-m)',
-                }}
-              >
-                {group.items.map((item) => (
-                  <FxCard key={item.name} variant='raised' style={{ padding: 20 }}>
-                    <div
-                      style={{
-                        fontWeight: 700,
-                        fontSize: 15,
-                        color: 'var(--fx-text-heading)',
-                        marginBottom: 'var(--fx-space-xxs)',
-                        fontFamily: 'var(--fx-font)',
-                      }}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--fx-space-l)',
+            }}
+          >
+            {RCF_OFFERINGS.map((group) => (
+              <div key={group.group}>
+                <div
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: 'var(--fx-text-heading)',
+                    marginBottom: 'var(--fx-space-xs)',
+                    fontFamily: 'var(--fx-font)',
+                  }}
+                >
+                  {group.group}
+                </div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                    gap: 'var(--fx-space-m)',
+                  }}
+                >
+                  {group.items.map((item) => (
+                    <FxCard
+                      key={item.name}
+                      variant='raised'
+                      style={{ padding: 20 }}
                     >
-                      {item.name}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 13.5,
-                        lineHeight: 1.55,
-                        color: 'var(--fx-text-muted)',
-                      }}
-                    >
-                      {item.body}
-                    </div>
-                    {item.note && (
                       <div
                         style={{
-                          fontSize: 12.5,
-                          lineHeight: 1.5,
-                          color: 'var(--fx-text-soft)',
-                          marginTop: 'var(--fx-space-xs)',
-                          fontStyle: 'italic',
+                          fontWeight: 700,
+                          fontSize: 15,
+                          color: 'var(--fx-text-heading)',
+                          marginBottom: 'var(--fx-space-xxs)',
+                          fontFamily: 'var(--fx-font)',
                         }}
                       >
-                        {item.note}
+                        {item.name}
                       </div>
-                    )}
-                  </FxCard>
-                ))}
+                      <div
+                        style={{
+                          fontSize: 13.5,
+                          lineHeight: 1.55,
+                          color: 'var(--fx-text-muted)',
+                        }}
+                      >
+                        {item.body}
+                      </div>
+                      {item.note && (
+                        <div
+                          style={{
+                            fontSize: 12.5,
+                            lineHeight: 1.5,
+                            color: 'var(--fx-text-soft)',
+                            marginTop: 'var(--fx-space-xs)',
+                            fontStyle: 'italic',
+                          }}
+                        >
+                          {item.note}
+                        </div>
+                      )}
+                    </FxCard>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
       )}
 
       <div

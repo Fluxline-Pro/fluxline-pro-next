@@ -20,7 +20,8 @@ function tryTaxonomyRedirect(): boolean {
     return false;
   }
   for (const prefix of TAXONOMY_PREFIXES) {
-    if (!raw.startsWith(prefix) && !raw.toLowerCase().startsWith(prefix)) continue;
+    if (!raw.startsWith(prefix) && !raw.toLowerCase().startsWith(prefix))
+      continue;
     const term = raw.slice(prefix.length);
     if (!term || term.includes('/')) continue;
     const slug = slugify(term);
@@ -49,7 +50,8 @@ export default function NotFound() {
   return (
     <div
       style={{
-        background: 'var(--fx-gradient-hero, linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%))',
+        background:
+          'var(--fx-gradient-hero, linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%))',
         color: 'var(--fx-text-body)',
         minHeight: '100vh',
         display: 'flex',

@@ -9,7 +9,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 
 - `yarn lint` is clean again (0 errors; 45 warnings remain, mostly `<img>` and hook-dependency advisories): the six `react-hooks/set-state-in-effect` cases are rewritten (hydration flags via `useSyncExternalStore` in `ConsentBanner`, `AuthContext` and `TestimonialCarousel`; the consultation draft is restored through lazy `useState` initializers; the stepper resets its status with the state-from-props pattern; the rail layout schedules its first measurement on the next frame), the four `any` casts are typed, the unescaped quotes are escaped, and the empty props interface is a `Record<string, never>`. ESLint now treats `api/`, `scripts/` and `jest.config.js` as CommonJS and ignores the vendored `docs/dsm_v1_0/` template bundles and local `.claude/` worktrees.
-- `case-study-content.test.ts` checks for *quantitative* retention, return or churn claims again (a retention term together with a percentage, multiplier or month/year count on the same line) instead of failing on every qualitative mention; the suite is green (137/137).
+- `case-study-content.test.ts` checks for _quantitative_ retention, return or churn claims again (a retention term together with a percentage, multiplier or month/year count on the same line) instead of failing on every qualitative mention; the suite is green (137/137).
 
 ### Removed
 
@@ -28,7 +28,7 @@ This is the first production deploy since 2026-09-23. A duplicate route in `stat
 
 - `/resonance-core-framework` is now the single source of truth for the Resonance Core Framework®, with crawlable JSON-LD rendered in the static HTML and updated RCF copy for SEO and AI visibility. `/resonance-core` redirects there. ([#282](https://github.com/Fluxline-Pro/fluxline-pro-next/pull/282))
 - `/llms.txt`: a plain-text site summary for AI crawlers. It was already on `master` but had never been deployed. ([#289](https://github.com/Fluxline-Pro/fluxline-pro-next/pull/289))
-- Case study *Nine Phases, One Source of Truth*: the RCF publishing pipeline alignment. ([#281](https://github.com/Fluxline-Pro/fluxline-pro-next/pull/281))
+- Case study _Nine Phases, One Source of Truth_: the RCF publishing pipeline alignment. ([#281](https://github.com/Fluxline-Pro/fluxline-pro-next/pull/281))
 - Blog post on role separation and platform duties across the Fluxline CMS ecosystem. ([#279](https://github.com/Fluxline-Pro/fluxline-pro-next/pull/279))
 - A deploy guard: the test and production workflows run `src/staticwebapp-config.test.ts` before building. It fails on duplicate routes, unsupported redirect codes, or a missing legal-PDF header override. ([#289](https://github.com/Fluxline-Pro/fluxline-pro-next/pull/289), [#292](https://github.com/Fluxline-Pro/fluxline-pro-next/pull/292))
 

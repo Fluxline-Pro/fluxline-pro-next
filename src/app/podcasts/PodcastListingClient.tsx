@@ -849,7 +849,8 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
         style={{
           position: 'relative',
           overflow: 'hidden',
-          background: 'url("/images/TheResonantIdentityAudiogram.png") center/cover no-repeat',
+          background:
+            'url("/images/TheResonantIdentityAudiogram.png") center/cover no-repeat',
           borderBottom: '1px solid var(--fx-border-subtle)',
           padding: '120px 32px 80px',
         }}
@@ -973,71 +974,71 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
                 <div style={{ ...eyebrowStyle, marginBottom: 0 }}>
                   Newest Episode
                 </div>
-              {newestEpisode ? (
-                <>
-                  <div
-                    style={{
-                      fontSize: 22,
-                      fontWeight: 700,
-                      color: 'var(--fx-text-heading-display)',
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {decodeHtmlEntities(newestEpisode.episode_title)}
-                  </div>
-                  {newestEpisodeDate && (
+                {newestEpisode ? (
+                  <>
                     <div
                       style={{
-                        fontSize: 14,
-                        color: 'var(--fx-text-muted)',
+                        fontSize: 22,
+                        fontWeight: 700,
+                        color: 'var(--fx-text-heading-display)',
+                        lineHeight: 1.3,
                       }}
                     >
-                      {newestEpisodeDate}
-                      {newestEpisode.duration
-                        ? ` · ${newestEpisode.duration}`
-                        : ''}
+                      {decodeHtmlEntities(newestEpisode.episode_title)}
                     </div>
-                  )}
-                  <FxButton
-                    size='lg'
-                    onClick={() => setSelectedEpisode(newestEpisode)}
-                    style={{ alignSelf: 'flex-start', marginTop: 8 }}
-                  >
-                    Listen to the Newest Episode
-                  </FxButton>
-                </>
-              ) : (
-                <>
-                  <div
-                    style={{
-                      fontSize: 20,
-                      fontWeight: 700,
-                      color: 'var(--fx-text-heading-display)',
-                      lineHeight: 1.35,
-                    }}
-                  >
-                    Catch the latest episode of The Resonant Identity.
-                  </div>
-                  <a
-                    href={PODCAST_PLATFORMS.spreaker}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    style={{
-                      ...accentAnchorStyle,
-                      alignSelf: 'flex-start',
-                      marginTop: 8,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.filter = 'brightness(1.08)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.filter = 'none';
-                    }}
-                  >
-                    Listen to the Newest Episode →
-                  </a>
-                </>
-              )}
+                    {newestEpisodeDate && (
+                      <div
+                        style={{
+                          fontSize: 14,
+                          color: 'var(--fx-text-muted)',
+                        }}
+                      >
+                        {newestEpisodeDate}
+                        {newestEpisode.duration
+                          ? ` · ${newestEpisode.duration}`
+                          : ''}
+                      </div>
+                    )}
+                    <FxButton
+                      size='lg'
+                      onClick={() => setSelectedEpisode(newestEpisode)}
+                      style={{ alignSelf: 'flex-start', marginTop: 8 }}
+                    >
+                      Listen to the Newest Episode
+                    </FxButton>
+                  </>
+                ) : (
+                  <>
+                    <div
+                      style={{
+                        fontSize: 20,
+                        fontWeight: 700,
+                        color: 'var(--fx-text-heading-display)',
+                        lineHeight: 1.35,
+                      }}
+                    >
+                      Catch the latest episode of The Resonant Identity.
+                    </div>
+                    <a
+                      href={PODCAST_PLATFORMS.spreaker}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      style={{
+                        ...accentAnchorStyle,
+                        alignSelf: 'flex-start',
+                        marginTop: 8,
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter = 'brightness(1.08)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter = 'none';
+                      }}
+                    >
+                      Listen to the Newest Episode →
+                    </a>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -1085,8 +1086,8 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
               The Resonant Identity is a podcast blending identity architecture,
               self-improvement, and practical frameworks for navigating
               transitions with clarity and intention. It has evolved into a
-              dedicated platform with expanded content, community, and
-              resources — visit the main website to explore the full ecosystem,
+              dedicated platform with expanded content, community, and resources
+              — visit the main website to explore the full ecosystem,
               philosophy, and mission behind TRI.
             </p>
             <a
@@ -1115,95 +1116,101 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
               padding: '20px 32px 40px',
             }}
           >
-          {/* Loading state */}
-          {loading && (
-            <div
-              style={{
-                paddingTop: 32,
-                paddingBottom: 32,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '300px',
-              }}
-            >
-              <p style={{ color: 'var(--fx-text-body)' }}>Loading episodes...</p>
-            </div>
-          )}
+            {/* Loading state */}
+            {loading && (
+              <div
+                style={{
+                  paddingTop: 32,
+                  paddingBottom: 32,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  minHeight: '300px',
+                }}
+              >
+                <p style={{ color: 'var(--fx-text-body)' }}>
+                  Loading episodes...
+                </p>
+              </div>
+            )}
 
-          {/* Error state */}
-          {!loading && error && (
-            <div
-              style={{
-                paddingTop: 32,
-                paddingBottom: 32,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '300px',
-                flexDirection: 'column',
-                gap: 12,
-              }}
-            >
-              <p style={{ color: 'var(--fx-text-body)' }}>{error}</p>
-            </div>
-          )}
+            {/* Error state */}
+            {!loading && error && (
+              <div
+                style={{
+                  paddingTop: 32,
+                  paddingBottom: 32,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  minHeight: '300px',
+                  flexDirection: 'column',
+                  gap: 12,
+                }}
+              >
+                <p style={{ color: 'var(--fx-text-body)' }}>{error}</p>
+              </div>
+            )}
 
-          {/* Empty state */}
-          {!loading && !error && processedEpisodes.length === 0 && (
-            <div
-              style={{
-                paddingTop: 32,
-                paddingBottom: 32,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '300px',
-                flexDirection: 'column',
-                gap: 12,
-              }}
-            >
-              <p style={{ color: 'var(--fx-text-body)' }}>
-                {episodes.length > 0
-                  ? 'No episodes match your filters.'
-                  : 'No episodes available yet.'}
-              </p>
-            </div>
-          )}
+            {/* Empty state */}
+            {!loading && !error && processedEpisodes.length === 0 && (
+              <div
+                style={{
+                  paddingTop: 32,
+                  paddingBottom: 32,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  minHeight: '300px',
+                  flexDirection: 'column',
+                  gap: 12,
+                }}
+              >
+                <p style={{ color: 'var(--fx-text-body)' }}>
+                  {episodes.length > 0
+                    ? 'No episodes match your filters.'
+                    : 'No episodes available yet.'}
+                </p>
+              </div>
+            )}
 
-          {/* All Episodes grid */}
-          {hasEpisodes && (
-            <div
-              style={{
-                paddingTop: 8,
-                paddingBottom: 8,
-              }}
-            >
-              <FxSectionHeading
-                title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
-                style={{ marginBottom: 20 }}
-              />
-              <AnimatePresence mode='wait'>
-                <div
-                  key='podcast-episodes'
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-                    gap: 20,
-                  }}
-                >
-                  {processedEpisodes.map((episode, index) => (
-                    <FadeIn key={episode.id} delay={index * 0.05} duration={0.3}>
-                      <PodcastCard
-                        episode={episode}
-                        onClick={() => setSelectedEpisode(episode)}
-                      />
-                    </FadeIn>
-                  ))}
-                </div>
-              </AnimatePresence>
-            </div>
-          )}
+            {/* All Episodes grid */}
+            {hasEpisodes && (
+              <div
+                style={{
+                  paddingTop: 8,
+                  paddingBottom: 8,
+                }}
+              >
+                <FxSectionHeading
+                  title={`All Episodes: Showing ${processedEpisodes.length}${dateRangeResultsSuffix}`}
+                  style={{ marginBottom: 20 }}
+                />
+                <AnimatePresence mode='wait'>
+                  <div
+                    key='podcast-episodes'
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
+                      gap: 20,
+                    }}
+                  >
+                    {processedEpisodes.map((episode, index) => (
+                      <FadeIn
+                        key={episode.id}
+                        delay={index * 0.05}
+                        duration={0.3}
+                      >
+                        <PodcastCard
+                          episode={episode}
+                          onClick={() => setSelectedEpisode(episode)}
+                        />
+                      </FadeIn>
+                    ))}
+                  </div>
+                </AnimatePresence>
+              </div>
+            )}
           </section>
 
           {/* Listen Everywhere */}

@@ -157,10 +157,10 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                 >
                   The complete framework, the DRIVE Model (Directional,
                   Repeatable, Identity-Aligned Virtuous Expressions), and the
-                  companion workbook that turns it into daily practice. The introduction
-                  preview is available to read right now — it covers why
-                  self-help usually fails, where the framework came from, and
-                  who it is built for.
+                  companion workbook that turns it into daily practice. The
+                  introduction preview is available to read right now — it
+                  covers why self-help usually fails, where the framework came
+                  from, and who it is built for.
                 </p>
                 <div
                   style={{
@@ -552,8 +552,8 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   margin: '0 0 var(--fx-space-l)',
                 }}
               >
-                Why the framework exists, how it was built, and the
-                DRIVE Model walked through step by step.
+                Why the framework exists, how it was built, and the DRIVE Model
+                walked through step by step.
               </p>
               <span
                 style={{
@@ -658,7 +658,10 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
         }}
       >
         {RCF_TRADEMARK} is the practice underneath everything Fluxline builds.{' '}
-        <Link href='/resonance-core-framework' style={{ color: 'var(--fx-accent)' }}>
+        <Link
+          href='/resonance-core-framework'
+          style={{ color: 'var(--fx-accent)' }}
+        >
           Read what the framework is →
         </Link>
       </p>
