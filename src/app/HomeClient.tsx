@@ -57,8 +57,8 @@ export default function HomeClient() {
             <br />
             Fluxline partners with individuals and businesses to create
             alignment across body, brand, and business. We specialize in
-            structural transformation — the kind that lasts because it&apos;s
-            built on clarity, intention, and practice.
+            structural transformation — the kind that lasts because it&apos;s built
+            on clarity, intention, and practice.
           </>
         }
         secondaryCta={{ label: 'Explore Fluxline ↓', href: '#about' }}

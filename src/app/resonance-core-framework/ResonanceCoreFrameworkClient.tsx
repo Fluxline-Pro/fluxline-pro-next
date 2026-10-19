@@ -551,8 +551,8 @@ export default function ResonanceCoreFrameworkClient() {
           >
             <h3 style={cardTitle}>Read the introduction first</h3>
             <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-              The free preview introduces the framework and its tools for making
-              change last.
+              The free preview introduces the framework and its tools for
+              making change last.
             </p>
             <a href={RCF_PREVIEW_PDF} style={textLink}>
               Download the RCF Preview (PDF) →
