@@ -1,6 +1,10 @@
 /**
  * FxNav Component Styles
  * Mobile-responsive navigation with hamburger menu
+ *
+ * The full link row needs about 1,215px on the home page (seven links plus
+ * the logo and the consultation button), so the hamburger takes over below
+ * 1,240px rather than at the usual 1,024px tablet breakpoint.
  */
 
 .navContainer {
@@ -11,7 +15,7 @@
   padding: 14px 32px;
   margin: 0 auto;
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1239px) {
     margin: 0 auto;
     justify-content: space-between;
   }
@@ -23,7 +27,7 @@
   margin-left: auto;
   align-items: center;
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1239px) {
     display: none;
   }
 }
@@ -40,7 +44,7 @@
   color: var(--fx-text-soft);
   transition: color 0.15s;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1240px) {
     display: none;
   }
 
@@ -89,7 +93,7 @@
   align-items: center;
   gap: 14px;
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1239px) {
     margin-left: auto;
   }
 }
