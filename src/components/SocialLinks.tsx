@@ -9,6 +9,9 @@ import { TwitterLogo } from '@/assets/svgs/TwitterLogo';
 import { TiktokLogo } from '@/assets/svgs/TiktokLogo';
 import { BlueSkyLogo } from '@/assets/svgs/BlueSkyLogo';
 import { YouTubeLogo } from '@/assets/svgs/YouTubeLogo';
+import { ThreadsIcon } from '@/assets/svgs/ThreadsLogo';
+import { TwitchLogo } from '@/assets/svgs/TwitchLogo';
+import { RedditLogo } from '@/assets/svgs/RedditLogo';
 
 export interface SocialLinksData {
   linkedin?: string;
@@ -20,6 +23,8 @@ export interface SocialLinksData {
   bluesky?: string;
   youtube?: string;
   tiktok?: string;
+  twitch?: string;
+  reddit?: string;
   email?: string;
 }
 
@@ -65,6 +70,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
     <div
       style={{
         display: 'flex',
+        flexWrap: 'wrap',
         gap: '0.75rem',
       }}
     >
@@ -104,6 +110,25 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           />
         </Link>
       )}
+      {socialLinks.threads && (
+        <Link
+          href={socialLinks.threads}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={buttonStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label={`${name} on Threads`}
+        >
+          <ThreadsIcon
+            style={{
+              width: svgIconSize,
+              height: svgIconSize,
+            }}
+          />
+        </Link>
+      )}
+
       {socialLinks.twitter && (
         <Link
           href={socialLinks.twitter}
@@ -153,6 +178,44 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           aria-label={`${name} on TikTok`}
         >
           <TiktokLogo
+            style={{
+              width: svgIconSize,
+              height: svgIconSize,
+            }}
+          />
+        </Link>
+      )}
+
+      {socialLinks.twitch && (
+        <Link
+          href={socialLinks.twitch}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={buttonStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label={`${name} on Twitch`}
+        >
+          <TwitchLogo
+            style={{
+              width: svgIconSize,
+              height: svgIconSize,
+            }}
+          />
+        </Link>
+      )}
+
+      {socialLinks.reddit && (
+        <Link
+          href={socialLinks.reddit}
+          target='_blank'
+          rel='noopener noreferrer'
+          style={buttonStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          aria-label={`${name} on Reddit`}
+        >
+          <RedditLogo
             style={{
               width: svgIconSize,
               height: svgIconSize,
