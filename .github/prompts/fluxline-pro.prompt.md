@@ -38,12 +38,12 @@ Goal: a first-time visitor understands what Fluxline does, who it is for, and wh
 - FAQ question "Is the RCF research-backed?" becomes "What is the RCF built from?" Answer: "It draws on psychology, systems thinking, and practice. It is a decision and identity framework, not therapy."
 - H3 "Tested before it was written down" becomes "How it was developed". Do not edit its body; list the body under "Questions for the owner" if it makes a testing claim.
 - Strategic Innovation gloss (home and framework page): replace "proven methodologies" with "disciplined, repeatable practice". Full line: "Thoughtful experimentation balanced with disciplined, repeatable practice for sustainable growth."
-- Do **not** touch "Universal human truths" (Hold).
+- "Universal human truths" becomes "The RCF's Universal Truths, which shape Fluxline's ethos and mission" (owner, 2026-10-19).
 
 **A6. Marks.** ™ on first use per page, title, H1, OG and Twitter text. Fix body-text uses that read "Resonance Core Framework" without ™ at first use. No ® anywhere.
 
 **A7. Cross-sell and links**
-- Footer nav currently reads "The RCF Ecosystem" with two links. Keep the nav label (Hold) and make its items the **shared block** in core Section 7. Do not create a new component.
+- Footer nav currently reads "The RCF Ecosystem" with two links. Relabel it "Fluxline Ecosystem" (owner, 2026-10-19) and make its items the **shared block** in core Section 7. Do not create a new component.
 - Footer author link "Terence Waters — Author & Architect" now points to `https://terencewaters.com/about/`. Keep the visible text.
 - "Explore the Podcast" (home) now points to `https://theresonantidentity.com/start-here/`.
 - Beside the book mention in the framework summary, add the link "Be notified at launch →" to `https://fluxline.pro/resonance-core-framework/#notify` (the RCF page's newsletter sign-up, owner 2026-10-19). In `/books/`, the "Want to know when it lands?" section gets the same link.
@@ -51,16 +51,16 @@ Goal: a first-time visitor understands what Fluxline does, who it is for, and wh
 
 ## Hold (change nothing, list every occurrence in the PR)
 
-1. "50+ Projects Delivered," "10+ Industries Served" (unverified; keep, source or soften).
-2. Home hero graphic "4.72 Average Composite DII Score" (measured or illustrative?).
-3. RCF grouping: "Strategy & Leadership" on home vs "Body & Practice" on `/services/`.
+1. Resolved (owner, 2026-10-19): softened to "E2E / Projects, from concept to launch" and "Diverse / Industries served".
+2. Resolved (owner, 2026-10-19): "4.72 Average Composite DII Score" is a measured figure; keep it.
+3. Resolved (owner, 2026-10-19): the RCF opens `/services/` and the home services list in its own Foundation section, ahead of the three groups.
 4. Cropped logo caption in the hero graphic ("TRUCTURE THE SHIFT"). Visual bug; report only.
-5. Creative Truth listed as both a Core Concept and a Core Value with two definitions.
-6. "Book a Free Consultation" on the framework page vs "Book a Consultation" elsewhere.
-7. Footer label "The RCF Ecosystem" vs the locked "Fluxline Ecosystem."
+5. Resolved (owner, 2026-10-19): Creative Truth is a Core Value only.
+6. Resolved (owner, 2026-10-19): every consultation CTA says "Book a Free Consultation".
+7. Resolved (owner, 2026-10-19): the footer label is "Fluxline Ecosystem".
 8. Any "1 to 5" mention of the DII scale.
-9. "Universal human truths" (What It's Built On).
-10. The `/services/fractional-leadership/` route: redirect, keep or delete?
+9. Resolved (owner, 2026-10-19): "The RCF's Universal Truths, which shape Fluxline's ethos and mission".
+10. Resolved: the route is removed and 301-redirected.
 11. Glossary page mismatches with core Section 4 (e.g. it may still say "Expansion" or an older Behavioral Gravity meaning). Report only.
 
 ## Acceptance
