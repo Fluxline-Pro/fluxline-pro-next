@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Owner decisions (2026-10-19, round 4): the DRIVE Model wheel artwork now shows Embodiment as the sixth stage, and the step 6 and wheel images are renamed `embodiment_step.jpg` and `drive_model.jpg`. "DII" only ever means The Decision Integrity Index: "The Fluxline Philosophy" calls its three phases "Discover, Integrate, Impact" without the DII label, and the DRIVE case study no longer expands DII as "Desire-Integrity-Impact". The TEST deploy no longer builds PR preview environments; closing a PR still cleans up any leftover preview.
 - Owner decisions (2026-10-19, round 3): "DII Protocol" is retired and the index is "The Decision Integrity Index (The DII)" at first use, then "The DII" (home, `/resonance-core-framework` concepts, FAQ, JSON-LD and keywords, `llms.txt`, the enterprise dashboard portfolio post, playbook and prompt). Creative Truth is a Core Value only and appears in no list of framework concepts (playbook updated). The book announcement's sixth DRIVE step image (`expansion_step.jpeg`) is replaced with the new EMBODIMENT artwork (same path).
 - Voice and congruence pass (copy and links only), following `.github/rcf-voice-core.md` and `.github/prompts/fluxline-pro.prompt.md`, both added in this change:
   - The book date reads "targeted for Q1 2027" everywhere it said "Late Fall 2026": home, `/books`, the book detail page, `/resonance-core-framework`, `llms.txt` and the announcement post.
