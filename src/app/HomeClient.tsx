@@ -236,16 +236,15 @@ export default function HomeClient() {
                   margin: '0 0 12px',
                 }}
               >
-                These six values are the scoring anchors of The Resonance Core
-                Framework™&apos;s{' '}
+                These six values are the scoring anchors of{' '}
                 <Link
                   href={`${RCF_FRAMEWORK_PATH}#dii-protocol`}
                   style={{ color: 'var(--fx-accent)', fontWeight: 600 }}
                 >
-                  Decision Integrity Index
+                  The Decision Integrity Index (The DII)
                 </Link>
-                : a structured system for evaluating alignment between your
-                decisions and your identity.
+                , The Resonance Core Framework™&apos;s structured system for
+                evaluating alignment between your decisions and your identity.
               </p>
               <p
                 style={{
@@ -432,7 +431,7 @@ export default function HomeClient() {
                   systemic impact) and provides named tools for navigating each:
                   Behavioral Gravity, Identity Coherence, the Window of Choice,
                   the DRIVE Model (Directional, Repeatable, Identity-Aligned
-                  Virtuous Expressions), and the DII Protocol.
+                  Virtuous Expressions), and The DII.
                 </p>
                 <p
                   style={{

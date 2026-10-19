@@ -150,7 +150,7 @@ export const TW_FRAMEWORK_URL =
  * authority for search engines and AI systems.
  */
 export const RCF_CANONICAL_PARAGRAPH =
-  'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity (inner signal, outward expression, and systemic impact) and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE Model, and the DII Protocol. Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
+  'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity (inner signal, outward expression, and systemic impact) and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE Model, and The Decision Integrity Index (The DII). Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
 
 /** The three dimensions (rings) of identity the framework maps. */
 export const RCF_RINGS: { title: string; body: string }[] = [
@@ -226,15 +226,15 @@ export const RCF_CONCEPTS: {
   },
   {
     id: 'dii-protocol',
-    name: 'Decision Integrity Index (DII)',
+    name: 'The Decision Integrity Index (The DII)',
     summary: 'A 1–5 way to score how well a decision aligns with who you are.',
     body: 'A structured way to score how well a decision aligns with your identity. It starts simply: journal a key decision, score it from 1 to 5, and justify the score honestly. Scores are anchored to six core values — Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, and Strategic Innovation — and are personal markers, never grades.',
   },
   {
     id: 'decision-alignment-score',
     name: 'Decision Alignment Score (DAS)',
-    summary: 'The score a single decision earns inside the DII.',
-    body: 'The score a single decision earns inside the DII. It draws on three sub-scores: Self-State Integrity (SSI), Emotional Return on Investment (EROI), and System Impact / Shadow Index (SI). The book covers how each is scored.',
+    summary: 'The score a single decision earns inside The DII.',
+    body: 'The score a single decision earns inside The DII. It draws on three sub-scores: Self-State Integrity (SSI), Emotional Return on Investment (EROI), and System Impact / Shadow Index (SI). The book covers how each is scored.',
   },
 ];
 
@@ -257,7 +257,7 @@ export const RCF_FAQ: { question: string; answer: string }[] = [
       'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
   },
   {
-    question: 'What is the DII Protocol?',
+    question: 'What is The Decision Integrity Index (The DII)?',
     answer:
       'The DII scores how well a decision aligns with your identity, using six core values and a Decision Alignment Score.',
   },
