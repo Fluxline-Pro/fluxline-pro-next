@@ -111,7 +111,7 @@ const ENGAGEMENTS: {
     cta: 'Explore Consulting ›',
   },
   {
-    label: `Coming ${RCF_RELEASE_WINDOW}`,
+    label: `Targeted for ${RCF_RELEASE_WINDOW}`,
     title: 'The book',
     body: 'Explore the full framework, with a companion workbook for daily practice.',
     href: '/books',

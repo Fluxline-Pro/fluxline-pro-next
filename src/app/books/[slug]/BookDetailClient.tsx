@@ -45,7 +45,7 @@ function AvailabilitySection({ book }: { book: Book }) {
           isReleased
             ? 'Available now'
             : isRcf
-              ? `Coming ${RCF_RELEASE_WINDOW}`
+              ? `Targeted for ${RCF_RELEASE_WINDOW}`
               : 'Coming soon'
         }
       >
@@ -200,7 +200,7 @@ export default function BookDetailClient({ book }: BookDetailClientProps) {
         book.status === 'available'
           ? 'Available Now'
           : isRcf
-            ? `Coming ${RCF_RELEASE_WINDOW}`
+            ? `Targeted for ${RCF_RELEASE_WINDOW}`
             : 'Coming Soon',
     },
   ];

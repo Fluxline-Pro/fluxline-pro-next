@@ -53,7 +53,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxSectionHeading
         kicker='Books'
         title={RCF_TRADEMARK}
-        subhead={`The book & companion workbook — coming ${RCF_RELEASE_WINDOW}.`}
+        subhead={`The book & companion workbook, targeted for ${RCF_RELEASE_WINDOW}.`}
         as='h1'
       />
 
@@ -79,7 +79,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
         }}
       >
         <FxChip kind='badge' tone='gold'>
-          {RCF_RELEASE_WINDOW}
+          Targeted for {RCF_RELEASE_WINDOW}
         </FxChip>
         <FxChip kind='tag'>Book</FxChip>
         <FxChip kind='tag'>Companion workbook</FxChip>
@@ -143,7 +143,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                     fontFamily: 'var(--fx-font)',
                   }}
                 >
-                  The book &amp; workbook arrive {RCF_RELEASE_WINDOW}
+                  The book and workbook are targeted for {RCF_RELEASE_WINDOW}
                 </h2>
                 <p
                   style={{

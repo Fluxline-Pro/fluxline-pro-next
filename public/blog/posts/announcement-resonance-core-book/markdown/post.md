@@ -189,7 +189,7 @@ And I hope it gives you a glimpse of what's possible when you build your life fr
 
 Welcome to the beginning of The Resonance Core Framework™.
 
-The book will be available later in late Fall 2026.
+The book is targeted for Q1 2027.
 Please follow us below for updates!
 
 ---

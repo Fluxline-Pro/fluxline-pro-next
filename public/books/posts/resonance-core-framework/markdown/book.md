@@ -147,4 +147,4 @@ on, and what the book and workbook will guide you through.
 
 **[Download the Introduction Preview PDF](/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf)**
 
-**Coming Late Fall 2026**
+**Targeted for Q1 2027**

@@ -22,7 +22,11 @@ export const RCF_PREVIEW_PDF =
 export const RCF_LOGO_IMAGE = '/images/RCF_Logo.jpeg';
 export const RCF_BOOK_IMAGE = '/images/RCF_BookConcept.jpg';
 
-export const RCF_RELEASE_WINDOW = 'Late Fall 2026';
+/**
+ * The book's release window. Always pair it with "targeted" ("targeted for
+ * Q1 2027") and never name a month.
+ */
+export const RCF_RELEASE_WINDOW = 'Q1 2027';
 
 /** The one-sentence version, for the home page and card summaries. */
 export const RCF_ONE_LINER =

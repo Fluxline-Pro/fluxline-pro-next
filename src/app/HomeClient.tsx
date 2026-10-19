@@ -597,7 +597,7 @@ export default function HomeClient() {
                   }}
                 >
                   Available through 1:1 coaching engagements and the forthcoming
-                  book ({RCF_RELEASE_WINDOW}).
+                  book (targeted for {RCF_RELEASE_WINDOW}).
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   <FxButton variant='primary' href='/contact'>
@@ -845,7 +845,7 @@ export default function HomeClient() {
                     marginBottom: 8,
                   }}
                 >
-                  Coming {RCF_RELEASE_WINDOW}
+                  Targeted for {RCF_RELEASE_WINDOW}
                 </div>
                 <div
                   style={{
