@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Owner decisions (2026-10-19, round 3): "DII Protocol" is retired and the index is "The Decision Integrity Index (The DII)" at first use, then "The DII" (home, `/resonance-core-framework` concepts, FAQ, JSON-LD and keywords, `llms.txt`, the enterprise dashboard portfolio post, playbook and prompt). Creative Truth is a Core Value only and appears in no list of framework concepts (playbook updated). The book announcement's sixth DRIVE step image (`expansion_step.jpeg`) is replaced with the new EMBODIMENT artwork (same path).
 - Voice and congruence pass (copy and links only), following `.github/rcf-voice-core.md` and `.github/prompts/fluxline-pro.prompt.md`, both added in this change:
   - The book date reads "targeted for Q1 2027" everywhere it said "Late Fall 2026": home, `/books`, the book detail page, `/resonance-core-framework`, `llms.txt` and the announcement post.
   - Home stats: the experience label names its scope ("Years in Design, Development, Architecture & Product Management"), and the offering count is "5 Offerings". The services intro and the 404 page say five modular offerings.
