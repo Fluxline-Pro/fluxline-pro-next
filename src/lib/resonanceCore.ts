@@ -222,16 +222,15 @@ export const RCF_CONCEPTS: {
   },
   {
     id: 'dii-protocol',
-    name: 'DII Protocol (Decision Integrity Index)',
+    name: 'Decision Integrity Index (DII)',
     summary: 'A 1–5 way to score how well a decision aligns with who you are.',
     body: 'A structured way to score how well a decision aligns with your identity. It starts simply: journal a key decision, score it from 1 to 5, and justify the score honestly. Scores are anchored to six core values — Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, and Strategic Innovation — and are personal markers, never grades.',
   },
   {
     id: 'decision-alignment-score',
     name: 'Decision Alignment Score (DAS)',
-    summary:
-      'The DII’s composite view of a decision, from SSI, EROI, and the Shadow Index.',
-    body: 'The composite result of the DII Protocol, drawing on three sub-scores — SSI (Self-State Integrity), EROI (Emotional Return on Investment), and the Shadow Index — for a single view of a decision’s alignment. The book covers how each is scored.',
+    summary: 'The score a single decision earns inside the DII.',
+    body: 'The score a single decision earns inside the DII. It draws on three sub-scores: Self-State Integrity (SSI), Emotional Return on Investment (EROI), and System Impact / Shadow Index (SI). The book covers how each is scored.',
   },
 ];
 
