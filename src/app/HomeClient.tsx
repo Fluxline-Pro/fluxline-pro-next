@@ -428,7 +428,7 @@ export default function HomeClient() {
                   systemic impact) and provides named tools for navigating each:
                   Behavioral Gravity, Identity Coherence, the Window of Choice,
                   the DRIVE Model (Directional, Repeatable, Identity-Aligned
-                  Virtuous Expressions), Creative Truth, and the DII Protocol.
+                  Virtuous Expressions), and the DII Protocol.
                 </p>
                 <p
                   style={{

@@ -144,7 +144,7 @@ export const TW_FRAMEWORK_URL =
  * authority for search engines and AI systems.
  */
 export const RCF_CANONICAL_PARAGRAPH =
-  'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity (inner signal, outward expression, and systemic impact) and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE Model, Creative Truth, and the DII Protocol. Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
+  'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity (inner signal, outward expression, and systemic impact) and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE Model, and the DII Protocol. Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
 
 /** The three dimensions (rings) of identity the framework maps. */
 export const RCF_RINGS: { title: string; body: string }[] = [
@@ -217,13 +217,6 @@ export const RCF_CONCEPTS: {
     summary:
       'The practice of treating Cues as information: notice them, trace where they come from, test whether they are true, then decide.',
     body: 'The counterpart to the Judgment Loop. The practice of treating Cues as information: notice them, trace where they come from, test whether they are true, then decide. Each honest, identity-rooted choice makes the next one easier.',
-  },
-  {
-    id: 'creative-truth',
-    name: 'Creative Truth',
-    summary:
-      'Expressing your truth without needing others to receive or confirm it.',
-    body: "Expressing your inner truth without requiring others to receive or confirm it — the highest form of Identity Coherence in outward expression. It's speaking and creating from who you are, not from a need for approval.",
   },
   {
     id: 'dii-protocol',
