@@ -6,6 +6,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Voice and congruence pass (copy and links only), following `.github/rcf-voice-core.md` and `.github/prompts/fluxline-pro.prompt.md`, both added in this change:
+  - The book date reads "targeted for Q1 2027" everywhere it said "Late Fall 2026": home, `/books`, the book detail page, `/resonance-core-framework`, `llms.txt` and the announcement post.
+  - Home stats: the experience label names its scope ("Years in Design, Development, Architecture & Product Management"), and the offering count is "5 Offerings". The services intro and the 404 page say five modular offerings.
+  - `/resonance-core-framework`: the loops are the Judgment Loop and the Data Loop, the sixth DRIVE stage is Embodiment (cards, image alt text, book contents), DRIVE is expanded at first use, "DRIVE System" is now "DRIVE Model", the DII is named "Decision Integrity Index (DII)", and the DAS gloss expands SSI, EROI and SI. Concept anchors (`#identity-distortion-loop`, `#identity-alignment-loop`, `#drive-system`, `#dii-protocol`) are unchanged so cross-site links keep working.
+  - Behavioral Gravity uses the approved gloss in Core Concepts, the FAQ and the JSON-LD.
+  - Claims: the FAQ "Is the RCF research-backed?" is now "What is the RCF built from?", the heading "Tested before it was written down" is "How it was developed", and Strategic Innovation reads "disciplined, repeatable practice" instead of "proven methodologies".
+  - The Resonance Core Framework™ carries ™ at first use on the home, podcasts and book detail pages.
+  - Footer: "The RCF Ecosystem" lists the shared Listen, Read and Work lines, and the author link goes to terencewaters.com/about/. "Explore the Podcast" goes to theresonantidentity.com/start-here/. "Be notified at launch →" links to `/contact` from the home framework summary and from "Want to know when it lands?" on `/books`. The TRI Newsletter description adds "Book launch updates included."
+
 ### Fixed
 
 - `yarn lint` is clean again (0 errors; 45 warnings remain, mostly `<img>` and hook-dependency advisories): the six `react-hooks/set-state-in-effect` cases are rewritten (hydration flags via `useSyncExternalStore` in `ConsentBanner`, `AuthContext` and `TestimonialCarousel`; the consultation draft is restored through lazy `useState` initializers; the stepper resets its status with the state-from-props pattern; the rail layout schedules its first measurement on the next frame), the four `any` casts are typed, the unescaped quotes are escaped, and the empty props interface is a `Record<string, never>`. ESLint now treats `api/`, `scripts/` and `jest.config.js` as CommonJS and ignores the vendored `docs/dsm_v1_0/` template bundles and local `.claude/` worktrees.
