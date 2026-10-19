@@ -99,7 +99,7 @@ Repeated micro-activations compound into new identity. The nervous system begins
 
 **5. ENDURANCE → SUSTAINABLE FUEL** (Where Motivation Becomes Irrelevant)  
 **Inputs**: Consistency, Rituals, Environmental Design, Emotional Literacy  
-**Output**: Long-Term Endurance, Stable Execution, Resilient DII (Desire-Integrity-Impact)
+**Output**: Long-Term Endurance, Stable Execution, Resilient Decision Integrity, measured with The Decision Integrity Index (The DII)
 
 The action becomes automatic. Motivation is replaced by identity: "This is who I am."
 

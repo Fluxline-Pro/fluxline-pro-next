@@ -27,7 +27,7 @@ Owner: Terence Waters, Fluxline Resonance Group, LLC. Audit date: 2026-10-11. Au
 
 **Further owner decisions (2026-10-19, already applied on the Fluxline branch):**
 
-- **Creative Truth** is a Core Value, not a framework concept (owner, 2026-10-19). Do not list it among framework concepts or named tools; keep it in Core Values lists.
+- **Creative Truth** is a Core Value, not a framework concept (owner, 2026-10-19). Do not list it among framework concepts or named tools; keep it in Core Values lists. What it means (owner): standing up for your identity when you need to, or choosing not to. It brings clarity to why you made a decision, or to a situation, or it can stay unexpressed. Like assertion, but it does not require agreement or for anyone to change their point of view. A critical Core Value in The RCF; it is a value someone practises, so mentions of it as a lived practice in posts are correct.
 - The consultation CTA reads **"Book a Free Consultation"**.
 - The footer cross-sell label is **"Fluxline Ecosystem"**.
 - **Universal Truths** wording: "The RCF's Universal Truths, which shape Fluxline's ethos and mission."
@@ -41,7 +41,7 @@ Owner: Terence Waters, Fluxline Resonance Group, LLC. Audit date: 2026-10-11. Au
 - Six core values: Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, Strategic Innovation. (Identity Alignment is a construct. Legacy Resonance, Systemic Coherence and Embodied Integration are Meta-Values. Never mix the three.)
 - DRIVE (Directional, Repeatable, Identity-Aligned Virtuous Expressions).
 - Judgment Loop, Data Loop, Behavioral Gravity, Identity Coherence, Window of Choice, Distortion, Truth, the First Gate, Cues (a synonym for Signals), Guardrails.
-- The Decision Integrity Index (The DII), Self-State Integrity (SSI), Emotional Return on Investment (EROI), System Impact / Shadow Index (SI), Decision Alignment Score (DAS), Resonance Integrity Score (RIS), Threshold Integrity Score (TIS). Always 'The Decision Integrity Index' / 'The DII', capitalized 'The'; 'DII Protocol' is retired (owner, 2026-10-19).
+- The Decision Integrity Index (The DII), Self-State Integrity (SSI), Emotional Return on Investment (EROI), System Impact / Shadow Index (SI), Decision Alignment Score (DAS), Resonance Integrity Score (RIS), Threshold Integrity Score (TIS). Always 'The Decision Integrity Index' / 'The DII', capitalized 'The'; 'DII Protocol' is retired (owner, 2026-10-19). DII only ever stands for Decision Integrity Index; never expand it as anything else (e.g. not "Discover, Integrate, Impact" or "Desire-Integrity-Impact") (owner, 2026-10-19).
 - Fluxline, "Structure the Shift", "Modular by design. Resonant by nature.", "Resonance, not force."
 - Mission line approved for reuse: "Fluxline builds systems that work, brands that connect, and practices that last."
 - Fluxline Ecosystem: "a workflow of apps, services, and frameworks based off The Resonant Identity Podcast and The Resonance Core Framework™ to support human growth, transformation, and data-driven decision-making."
