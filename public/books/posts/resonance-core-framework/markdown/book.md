@@ -1,5 +1,5 @@
 ---
-title: 'The Resonance Core Framework'
+title: 'The Resonance Core Framework™'
 subtitle: 'A Comprehensive Guide to Personal and Professional Transformation'
 author: 'Terence Waters'
 publisher: 'Fluxline Resonance Group Publishing'
@@ -34,8 +34,8 @@ includesWorkbook: true
 pageCount: 342
 language: 'English'
 dimensions: '6 x 9 inches'
-seoTitle: 'The Resonance Core Framework - Transform Your Life | Fluxline'
-seoDescription: 'Discover The Resonance Core Framework, a comprehensive guide to personal and professional transformation. Available in hardcover, softcover, and eBook formats.'
+seoTitle: 'The Resonance Core Framework™ - Transform Your Life | Fluxline'
+seoDescription: 'Discover The Resonance Core Framework™, a comprehensive guide to personal and professional transformation. Available in hardcover, softcover, and eBook formats.'
 seoKeywords:
   - 'resonance core framework'
   - 'personal transformation'

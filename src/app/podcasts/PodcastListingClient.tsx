@@ -1070,7 +1070,7 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
                 maxWidth: '72ch',
               }}
             >
-              A living extension of The Resonance Core Framework where identity
+              A living extension of The Resonance Core Framework™ where identity
               becomes practice and is formed through coherence.
             </p>
             <p

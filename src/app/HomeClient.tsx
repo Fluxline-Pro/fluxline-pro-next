@@ -233,14 +233,14 @@ export default function HomeClient() {
                 }}
               >
                 These six values are the scoring anchors of The Resonance Core
-                Framework&apos;s{' '}
+                Framework™&apos;s{' '}
                 <Link
                   href={`${RCF_FRAMEWORK_PATH}#dii-protocol`}
                   style={{ color: 'var(--fx-accent)', fontWeight: 600 }}
                 >
                   Decision Integrity Index
-                </Link>{' '}
-                — a structured system for evaluating alignment between your
+                </Link>
+                : a structured system for evaluating alignment between your
                 decisions and your identity.
               </p>
               <p
