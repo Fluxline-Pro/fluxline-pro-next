@@ -37,7 +37,7 @@ gallery:
   - url: 'RCF_book_concept.jpg'
     alt: 'The Resonance Core Framework™ Book Concept'
     caption: 'The Resonance Core Framework™ Book Concept'
-  - url: 'drive_model_framework.jpeg'
+  - url: 'drive_model.jpg'
     alt: 'The DRIVE Model Framework: Aligning our identity with our goals'
     caption: 'The DRIVE Model Framework: Aligning our identity with our goals'
   - url: 'drive_alignment_loop.jpeg'
@@ -58,7 +58,7 @@ gallery:
   - url: 'endurance_step.jpeg'
     alt: 'ENDURANCE: The Fifth Step of the DRIVE Model'
     caption: 'ENDURANCE: The Fifth Step of the DRIVE Model- Sustaining the DRIVE'
-  - url: 'expansion_step.jpeg'
+  - url: 'embodiment_step.jpg'
     alt: 'EMBODIMENT: The Final Step of the DRIVE Model'
     caption: 'EMBODIMENT: The Final Step of the DRIVE Model- Identity evolution by incorporating the DRIVE into your life'
 ---

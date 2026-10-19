@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - test
-  # No branch filter on pull_request: a PR retargeted away from test must still reach
-  # this workflow so its preview gets removed. The jobs below gate on the base branch.
+  workflow_dispatch:
+  # No PR previews on TEST (owner, 2026-10-19): the build only runs on push or a manual
+  # run. Closed and retargeted PRs still reach this workflow so any preview created
+  # before previews were turned off gets removed. No branch filter, because a PR
+  # retargeted away from test must still reach it; the close job gates on the base.
   pull_request:
-    types: [opened, synchronize, reopened, edited, closed]
+    types: [edited, closed]
 
 # One run at a time per PR. A new push cancels an in-flight preview build, but a close
 # queues behind it, so an upload can never land after the preview was deleted (PR #290).
@@ -27,11 +30,7 @@ concurrency:
 
 jobs:
   build_and_deploy_job:
-    if: >-
-      github.event_name == 'push' ||
-      (github.event_name == 'pull_request' && github.base_ref == 'test' &&
-        (contains(fromJSON('["opened", "synchronize", "reopened"]'), github.event.action) ||
-          (github.event.action == 'edited' && github.event.changes.base)))
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     permissions:
