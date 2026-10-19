@@ -61,7 +61,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: 'strategic-innovation',
     title: 'Strategic Innovation',
     description:
-      'Thoughtful experimentation balanced with proven methodologies for sustainable growth.',
+      'Thoughtful experimentation balanced with disciplined, repeatable practice for sustainable growth.',
     icon: 'BranchFork2',
   },
 ];

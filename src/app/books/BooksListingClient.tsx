@@ -551,7 +551,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   margin: '0 0 var(--fx-space-l)',
                 }}
               >
-                Why the framework exists, how it was built and tested, and the
+                Why the framework exists, how it was built, and the
                 DRIVE Model walked through step by step.
               </p>
               <span

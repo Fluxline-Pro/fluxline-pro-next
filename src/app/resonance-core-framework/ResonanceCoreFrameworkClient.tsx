@@ -441,7 +441,7 @@ export default function ResonanceCoreFrameworkClient() {
       <FxReveal>
         <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>What It&apos;s Built On</FxGroupLabel>
-          <h2 style={sectionTitle}>Tested before it was written down</h2>
+          <h2 style={sectionTitle}>How it was developed</h2>
           <SectionSubtitle title='Built from research and practice'>
             The framework brings together research, systems thinking, and
             real-world experience.

@@ -258,9 +258,9 @@ export const RCF_FAQ: { question: string; answer: string }[] = [
       'The DII scores how well a decision aligns with your identity, using six core values and a Decision Alignment Score.',
   },
   {
-    question: 'Is the RCF research-backed?',
+    question: 'What is the RCF built from?',
     answer:
-      'Yes. It draws on psychological research, behavioral patterns, systems thinking, and real-world practice.',
+      'It draws on psychology, systems thinking, and practice. It is a decision and identity framework, not therapy.',
   },
   {
     question: 'Who is the RCF designed for?',

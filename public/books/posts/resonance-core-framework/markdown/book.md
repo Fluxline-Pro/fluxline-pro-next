@@ -6,7 +6,7 @@ publisher: 'Fluxline Resonance Group Publishing'
 publishedDate: '2026-02-15'
 isbn: '978-0-000000-00-0'
 description: 'The Resonance Core Framework is a groundbreaking approach to personal and professional transformation. This comprehensive guide provides the tools, strategies, and insights you need to align your life with your deepest values and create lasting change.'
-excerpt: 'Transform your life with The Resonance Core Framework - a proven methodology for aligning your personal and professional goals with your core values.'
+excerpt: 'Transform your life with The Resonance Core Framework - a methodology for aligning your personal and professional goals with your core values.'
 coverImageUrl: '/books/posts/resonance-core-framework/images/The-Resonance-Core-Book.jpg'
 coverImageAlt: 'The Resonance Core Framework book cover'
 category: 'Business & Self-Help'
@@ -53,7 +53,7 @@ The Resonance Core Framework is more than just a book—it's a complete system f
 
 - **The Foundation**: Understand the core principles of resonance and how they apply to your life and work
 - **The Framework**: Master the DRIVE Model and the DRIVE Alignment Loop
-- **Practical Application**: Implement proven strategies with step-by-step guidance
+- **Practical Application**: Implement strategies with step-by-step guidance
 - **Real-World Examples**: Learn from case studies and success stories
 - **Workbook Exercises**: Apply concepts immediately with guided exercises
 
