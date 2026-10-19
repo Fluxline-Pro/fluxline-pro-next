@@ -175,8 +175,8 @@ export const RCF_CONCEPTS: {
     id: 'behavioral-gravity',
     name: 'Behavioral Gravity',
     summary:
-      "The unconscious pull toward what feels identity-consistent — even when it no longer fits who you're becoming.",
-    body: "The unconscious pull toward behaviors, environments, and relationships that feel identity-consistent — even when they're no longer aligned with who you're becoming. It's why old habits feel like home and new ones feel like effort. Naming the pull is the first step to choosing whether to follow it.",
+      'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
+    body: 'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
   },
   {
     id: 'identity-coherence',
@@ -251,7 +251,7 @@ export const RCF_FAQ: { question: string; answer: string }[] = [
   {
     question: 'What is Behavioral Gravity?',
     answer:
-      'Behavioral Gravity is the pull toward familiar behaviors and environments, even when they no longer fit who you are becoming.',
+      'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
   },
   {
     question: 'What is the DII Protocol?',
