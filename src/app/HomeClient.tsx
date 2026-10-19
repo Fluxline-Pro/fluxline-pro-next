@@ -184,7 +184,10 @@ export default function HomeClient() {
               }}
             >
               <FxStatCard value='50+' label='Projects Delivered' />
-              <FxStatCard value='20+' label='Years Experience' />
+              <FxStatCard
+                value='20+'
+                label='Years in Design, Development, Architecture & Product Management'
+              />
               <FxStatCard value='6+' label='Product Offerings' />
               <FxStatCard value='10+' label='Industries Served' />
             </FxReveal>
