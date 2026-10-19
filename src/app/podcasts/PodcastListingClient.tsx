@@ -28,6 +28,7 @@ import DeezerLogo from '@/assets/svgs/DeezerLogo';
 import PodchaserLogo from '@/assets/svgs/PodchaserLogo';
 import RSSLogo from '@/assets/svgs/RSSLogo';
 import TheResonantIdentityLogo from '@/assets/images/TheResonantIdentity_Logo.png';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 const TRI_WEBSITE_URL = 'https://theresonantidentity.com';
 
@@ -1344,48 +1345,8 @@ export function PodcastListingClient(_props: PodcastListingClientProps = {}) {
                 ever.
               </div>
             </div>
-            <div
-              style={{
-                display: 'flex',
-                gap: 8,
-                flex: '1 1 320px',
-                minWidth: 260,
-              }}
-            >
-              <input
-                type='email'
-                placeholder='your@email.com'
-                aria-label='Email address for The Resonant Identity newsletter'
-                style={{
-                  flex: 1,
-                  minWidth: 0,
-                  background: 'var(--fx-surface-input)',
-                  border: '1px solid var(--fx-border)',
-                  borderRadius: 8,
-                  padding: '12px 14px',
-                  fontSize: 14,
-                  color: 'var(--fx-text-bright)',
-                  outline: 'none',
-                  fontFamily: 'inherit',
-                }}
-              />
-              <button
-                type='button'
-                style={{
-                  background: 'var(--fx-accent)',
-                  color: 'var(--fx-accent-ink)',
-                  borderRadius: 8,
-                  fontWeight: 600,
-                  fontSize: 14,
-                  padding: '12px 22px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  fontFamily: 'inherit',
-                }}
-              >
-                Subscribe
-              </button>
+            <div style={{ flex: '1 1 320px', minWidth: 260 }}>
+              <NewsletterSignup />
             </div>
           </section>
         </div>
