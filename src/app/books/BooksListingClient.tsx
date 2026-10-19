@@ -22,6 +22,7 @@ import {
   RCF_BRIEF,
   RCF_LOGO_IMAGE,
   RCF_PREVIEW_PDF,
+  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
   TRI_SITE_URL,
@@ -54,7 +55,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxSectionHeading
         kicker='Books'
         title={RCF_TRADEMARK}
-        subhead={`The book & companion workbook, targeted for ${RCF_RELEASE_WINDOW}.`}
+        subhead={`The book & companion workbook, targeted for ${RCF_RELEASE_WINDOW}. Preorders open in ${RCF_PREORDER_WINDOW}.`}
         as='h1'
       />
 
@@ -81,6 +82,9 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       >
         <FxChip kind='badge' tone='gold'>
           Targeted for {RCF_RELEASE_WINDOW}
+        </FxChip>
+        <FxChip kind='badge' tone='gold'>
+          Preorders open early November
         </FxChip>
         <FxChip kind='tag'>Book</FxChip>
         <FxChip kind='tag'>Companion workbook</FxChip>
@@ -396,13 +400,11 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
 
           <FxCallout
             tone='info'
-            title='Pre-orders are coming soon!'
+            title='Preorders open early November'
             style={{ marginTop: 'var(--fx-space-l)' }}
           >
-            Preorders will soon be available which will be announced here.{' '}
-            <em>
-              <strong>Stay tuned!</strong>
-            </em>
+            Preorders open in {RCF_PREORDER_WINDOW}. We will announce them
+            here and in the TRI Newsletter.
           </FxCallout>
         </FxSectionPanel>
       </FxReveal>
@@ -638,7 +640,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxReveal>
         <FxCTABand
           title='Want to know when it lands?'
-          body={`The book and workbook are targeted for ${RCF_RELEASE_WINDOW}. Join the TRI Newsletter and we'll let you know the moment they're available. Book launch updates included. No spam, ever.`}
+          body={`The book and workbook are targeted for ${RCF_RELEASE_WINDOW}, with preorders opening in ${RCF_PREORDER_WINDOW}. Join the TRI Newsletter and we'll let you know the moment they're available. Book launch updates included. No spam, ever.`}
           secondaryLabel='Explore Our Services →'
           secondaryHref='/services'
         >

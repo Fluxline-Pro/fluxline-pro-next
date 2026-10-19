@@ -24,9 +24,15 @@ export const RCF_BOOK_IMAGE = '/images/RCF_BookConcept.jpg';
 
 /**
  * The book's release window. Always pair it with "targeted" ("targeted for
- * Q1 2027") and never name a month.
+ * Q1 2027") and never name a month for the launch itself.
  */
 export const RCF_RELEASE_WINDOW = 'Q1 2027';
+
+/**
+ * When preorders open (owner, 2026-10-19). Naming the month is allowed for
+ * the preorder date only.
+ */
+export const RCF_PREORDER_WINDOW = 'early November 2026';
 
 /** The one-sentence version, for the home page and card summaries. */
 export const RCF_ONE_LINER =

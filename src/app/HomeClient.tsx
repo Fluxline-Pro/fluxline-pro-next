@@ -20,6 +20,7 @@ import {
   RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
+  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_FRAMEWORK_PATH,
   RCF_NOTIFY_PATH,
@@ -442,7 +443,8 @@ export default function HomeClient() {
                   }}
                 >
                   Available through 1:1 coaching engagements and the forthcoming
-                  book (targeted for {RCF_RELEASE_WINDOW}).{' '}
+                  book (targeted for {RCF_RELEASE_WINDOW}, with preorders
+                  opening in {RCF_PREORDER_WINDOW}).{' '}
                   <Link
                     href={RCF_NOTIFY_PATH}
                     style={{ color: 'var(--fx-accent)', fontWeight: 600 }}
@@ -891,7 +893,8 @@ export default function HomeClient() {
                   }}
                 >
                   The framework in print, digital, and audio — plus the workbook
-                  that turns it into daily practice.
+                  that turns it into daily practice. Preorders open in{' '}
+                  {RCF_PREORDER_WINDOW}.
                 </div>
                 <span
                   style={{
