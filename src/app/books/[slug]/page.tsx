@@ -37,7 +37,11 @@ export async function generateMetadata({
       type: 'book',
       authors: [book.author],
       isbn: book.isbn,
-      releaseDate: book.publishedDate.toISOString(),
+      // Only a released book has a real release date.
+      releaseDate:
+        book.status === 'available'
+          ? book.publishedDate.toISOString()
+          : undefined,
       tags: book.tags,
       images: book.coverImageUrl
         ? [

@@ -61,7 +61,7 @@ testimonial:
 
 # DRIVE Model Assessment — Nervous System Rewiring in Real Time
 
-This case study was a result of us validating our own in-house DRIVE Model for The Resonance Core Framework book we are writing for winter 2026. This combines our various topics of self-awareness and presence and applying it to creating what we call DRIVEs: Units of action that allow a person to embody their values and virtues into mini-applications in their everyday lives.
+This case study was a result of us validating our own in-house DRIVE Model for The Resonance Core Framework book, targeted for Q1 2027. This combines our various topics of self-awareness and presence and applying it to creating what we call DRIVEs: Units of action that allow a person to embody their values and virtues into mini-applications in their everyday lives.
 
 **This is not theory. This is lived data.**
 

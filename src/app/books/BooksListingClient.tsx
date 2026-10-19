@@ -84,7 +84,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
           Targeted for {RCF_RELEASE_WINDOW}
         </FxChip>
         <FxChip kind='badge' tone='gold'>
-          Preorders open early November
+          Preorders open {RCF_PREORDER_WINDOW}
         </FxChip>
         <FxChip kind='tag'>Book</FxChip>
         <FxChip kind='tag'>Companion workbook</FxChip>
