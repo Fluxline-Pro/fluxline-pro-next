@@ -2,7 +2,12 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ResonanceCoreFrameworkClient from './ResonanceCoreFrameworkClient';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
-import { RCF_CONCEPTS, RCF_FAQ, RCF_FRAMEWORK_PATH } from '@/lib/resonanceCore';
+import {
+  RCF_CONCEPTS,
+  RCF_FAQ,
+  RCF_FRAMEWORK_PATH,
+  rcfFaqAnswerText,
+} from '@/lib/resonanceCore';
 
 const PAGE_URL = `https://www.fluxline.pro${RCF_FRAMEWORK_PATH}`;
 const TITLE = 'The Resonance Core Framework™ | Fluxline Resonance Group';
@@ -81,7 +86,7 @@ const jsonLd = {
       mainEntity: RCF_FAQ.map((f) => ({
         '@type': 'Question',
         name: f.question,
-        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        acceptedAnswer: { '@type': 'Answer', text: rcfFaqAnswerText(f) },
       })),
     },
   ],
