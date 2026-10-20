@@ -8,6 +8,8 @@ interface FxRailLayoutProps {
   stickyTop?: number;
   parallax?: boolean;
   style?: React.CSSProperties;
+  /** Class for the rail column, e.g. to reorder or trim it on phones. */
+  railClassName?: string;
 }
 
 function useRailParallax(enabled: boolean) {
@@ -90,6 +92,7 @@ export default function FxRailLayout({
   stickyTop = 100,
   parallax = false,
   style,
+  railClassName,
 }: FxRailLayoutProps) {
   const { sectionRef, transform } = useRailParallax(parallax);
 
@@ -121,6 +124,7 @@ export default function FxRailLayout({
         }}
       >
         <div
+          className={railClassName}
           style={{ position: 'sticky', top: stickyTop, minWidth: 0, ...railStyle }}
         >
           {rail}

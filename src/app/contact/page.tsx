@@ -23,8 +23,11 @@ export default function ContactPage() {
 
   return (
     <FxContainer style={{ padding: '118px 32px 60px' }}>
+      {/* Phones: the portrait is hidden and the Let's Connect card moves below
+          the main column, so "Book a Free Consultation" comes first. */}
       <FxRailLayout
         parallax
+        railClassName='fx-contact-rail'
         rail={
           <div>
             <div
@@ -36,6 +39,7 @@ export default function ContactPage() {
               }}
             >
               <img
+                className='fx-contact-portrait'
                 src={ContactImage.src}
                 alt="Let's connect"
                 style={{
@@ -47,6 +51,7 @@ export default function ContactPage() {
                 }}
               />
               <div
+                className='fx-contact-rail-info'
                 style={{
                   padding: '16px 20px',
                   borderTop: '1px solid var(--fx-border)',

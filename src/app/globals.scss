@@ -558,6 +558,18 @@ html[data-fx-motion='reduce'] *::after {
   .fx-feature-callout-action {
     width: 100%;
   }
+
+  /* /contact: no portrait on phones, and the Let's Connect card follows the
+     main column so the consultation callout is the first thing you see. */
+  .fx-contact-rail {
+    order: 2;
+  }
+  .fx-contact-portrait {
+    display: none !important;
+  }
+  .fx-contact-rail-info {
+    border-top: none !important;
+  }
 }
 
 /* =============================================
