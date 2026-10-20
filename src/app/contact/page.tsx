@@ -5,11 +5,22 @@ import Link from 'next/link';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
 import FxButton from '@/theme/components/dsm/FxButton';
+import FxFeatureCallout from '@/theme/components/dsm/FxFeatureCallout';
+import { ConsultationStepper } from '@/components/ConsultationStepper';
 import { ContactForm } from './components/ContactForm';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import ContactImage from '@/assets/images/ContactMe2400x1600.jpg';
 
+/** The booking flow, in the words the /book page uses. */
+const CONSULTATION_STEPS = [
+  'Choose the service(s) you need, or select "Help me choose".',
+  'Answer a few short questions so we can make the most of our time.',
+  'Enter your contact details, pick a meeting length, and schedule your Zoom call.',
+];
+
 export default function ContactPage() {
+  const [stepperOpen, setStepperOpen] = React.useState(false);
+
   return (
     <FxContainer style={{ padding: '118px 32px 60px' }}>
       <FxRailLayout
@@ -142,73 +153,77 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {/* Consultation CTA card */}
-        <div
-          style={{
-            background: 'var(--fx-gradient-feature)',
-            border: '1px solid var(--fx-border-strong)',
-            borderRadius: 16,
-            padding: '28px 32px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 24,
-            flexWrap: 'wrap',
-          }}
-        >
-          <div style={{ flex: 1, minWidth: 260 }}>
-            <div
-              style={{
-                fontWeight: 700,
-                fontSize: 19,
-                color: 'var(--fx-text-bright)',
-                marginBottom: 6,
-              }}
-            >
-              Book a Free Consultation
-            </div>
-            <div
-              style={{
-                fontSize: 14,
-                lineHeight: 1.6,
-                color: 'var(--fx-text-muted)',
-              }}
-            >
+        {/* Consultation: the standout next step (same featured callout as
+            the RCF and Business Strategy sections on /services). The note
+            form below stays available but is deliberately secondary. */}
+        <FxFeatureCallout
+          id='consultation'
+          label='Start here'
+          title='Book a Free Consultation'
+          titleAs='h2'
+          description={
+            <>
               Walk us through your vision and we&apos;ll design the systems,
               strategies, and practices that move it forward. No commitment
               required.
-            </div>
-          </div>
-          <FxButton size='lg' href='/contact'>
+            </>
+          }
+          blurb='Tell us about your needs and schedule a Zoom call, all in three quick steps.'
+          style={{ padding: 0 }}
+        >
+          <ol
+            style={{
+              margin: '0 0 var(--fx-space-l)',
+              paddingLeft: 'var(--fx-space-l)',
+              listStyle: 'decimal',
+              display: 'grid',
+              gap: 'var(--fx-space-xs)',
+              fontSize: 'var(--fx-body-sm-size)',
+              lineHeight: 'var(--fx-body-sm-leading)',
+              color: 'var(--fx-text-body)',
+              maxWidth: '60ch',
+            }}
+          >
+            {CONSULTATION_STEPS.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+          <FxButton
+            variant='primary'
+            size='lg'
+            onClick={() => setStepperOpen(true)}
+            className='fx-feature-callout-action'
+          >
             Book a Free Consultation
           </FxButton>
-        </div>
+        </FxFeatureCallout>
 
-        {/* Form card */}
+        {/* Form card (secondary) */}
         <div
           id='note'
           style={{
             scrollMarginTop: 96,
-            background: 'var(--fx-surface-card)',
-            border: '1px solid var(--fx-border)',
-            borderRadius: 16,
-            padding: '28px 32px',
+            background: 'var(--fx-surface-inset)',
+            border: '1px solid var(--fx-border-subtle)',
+            borderRadius: 'var(--fx-radius-card)',
+            padding: 'var(--fx-space-l) var(--fx-space-xl)',
           }}
         >
           <div
             style={{
               fontWeight: 700,
-              fontSize: 19,
+              fontSize: 'var(--fx-body-size)',
               color: 'var(--fx-text-heading)',
-              marginBottom: 4,
+              marginBottom: 'var(--fx-space-xxs)',
             }}
           >
             Prefer to write? Send us a note.
           </div>
           <div
             style={{
-              fontSize: 14,
+              fontSize: 'var(--fx-body-sm-size)',
               color: 'var(--fx-text-muted)',
-              marginBottom: 22,
+              marginBottom: 'var(--fx-space-l)',
             }}
           >
             We read every note and respond as soon as we can.
@@ -252,6 +267,11 @@ export default function ContactPage() {
           </div>
         </div>
       </FxRailLayout>
+
+      <ConsultationStepper
+        isOpen={stepperOpen}
+        onDismiss={() => setStepperOpen(false)}
+      />
     </FxContainer>
   );
 }
