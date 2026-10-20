@@ -10,16 +10,13 @@ import FxButton from '@/theme/components/dsm/FxButton';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import FxCallout from '@/theme/components/dsm/FxCallout';
-import FxChip from '@/theme/components/dsm/FxChip';
 import DriveModelDiagram from '@/assets/images/drive_model.jpg';
-import { StaggeredGrid } from '@/animations/staggered-container';
 import { COMPANY_VALUES } from '@/lib/siteContent';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import {
   DRIVE_STEPS,
-  RCF_AUDIENCE,
+  RCF_ASSUMPTIONS,
   RCF_EXPLAINER,
-  RCF_FOUNDATIONS,
   RCF_CONCEPTS,
   RCF_FAQ,
   RCF_LOGO_IMAGE,
@@ -90,6 +87,81 @@ const textLink: React.CSSProperties = {
   textDecoration: 'none',
 };
 
+/**
+ * A heading with its supporting copy underneath: the question-and-answer
+ * treatment used on The Resonant Identity's FAQ (teal subheading with a short
+ * accent rule, muted body). Used for the FAQ and the reader assumptions so
+ * neither reads as a grid of clickable-looking cards or pills.
+ */
+function HeadedItem({
+  kicker,
+  heading,
+  children,
+}: {
+  kicker?: string;
+  heading: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      {kicker && (
+        <div
+          style={{
+            fontSize: 'var(--fx-kicker-size)',
+            fontWeight: 700,
+            letterSpacing: 'var(--fx-kicker-tracking)',
+            textTransform: 'uppercase',
+            color: 'var(--fx-text-muted)',
+            marginBottom: 'var(--fx-space-xxs)',
+          }}
+        >
+          {kicker}
+        </div>
+      )}
+      <h3
+        style={{
+          fontSize: 'var(--fx-article-h2)',
+          fontWeight: 700,
+          lineHeight: 1.35,
+          color: 'var(--fx-teal)',
+          fontFamily: 'var(--fx-font)',
+          margin: '0 0 var(--fx-space-m)',
+          paddingBottom: 'var(--fx-space-s)',
+          position: 'relative',
+        }}
+      >
+        {heading}
+        <span
+          aria-hidden='true'
+          style={{
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            width: 'clamp(6.875rem, 25vw, 12.5rem)',
+            maxWidth: '100%',
+            borderBottom: '3px solid var(--fx-teal)',
+          }}
+        />
+      </h3>
+      <div
+        style={{
+          fontSize: 'var(--fx-body-size)',
+          lineHeight: 'var(--fx-body-leading)',
+          color: 'var(--fx-text-body)',
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+const headedListStyle: React.CSSProperties = {
+  display: 'grid',
+  gap: 'var(--fx-space-xxl)',
+  maxWidth: '72ch',
+};
+
 /** The ways to work with the framework — coaching, consulting, book, podcast. */
 const ENGAGEMENTS: {
   label: string;
@@ -131,8 +203,9 @@ const ENGAGEMENTS: {
 /**
  * /resonance-core-framework — the single home of the framework on Fluxline:
  * what it is and the premise behind it, its named concepts, the DRIVE Model,
- * the six values behind The DII, what it's built on and who it's for, how to
- * work with it, and plain-language answers to common questions.
+ * the six values behind The DII, who it's for (the book Introduction's five
+ * reader assumptions), how to work with it, and plain-language answers to
+ * common questions, including how it was developed and what it's built on.
  *
  * This page absorbed the former /resonance-core explainer (301-redirected in
  * staticwebapp.config.json) so the framework isn't described in two places.
@@ -438,38 +511,14 @@ export default function ResonanceCoreFrameworkClient() {
       </FxReveal>
 
       {/* ---------------------------------------------------------------- */}
-      {/* What it's built on                                                */}
-      {/* ---------------------------------------------------------------- */}
-      <FxReveal>
-        <FxSectionPanel tone='inset' style={{ marginBottom: SECTION_GAP }}>
-          <FxGroupLabel>What It&apos;s Built On</FxGroupLabel>
-          <h2 style={sectionTitle}>How it was developed</h2>
-          <SectionSubtitle title='Built from research and practice'>
-            The framework brings together research, systems thinking, and
-            real-world experience.
-          </SectionSubtitle>
-
-          <div
-            style={{
-              display: 'flex',
-              gap: 'var(--fx-space-xs)',
-              flexWrap: 'wrap',
-            }}
-          >
-            {RCF_FOUNDATIONS.map((item) => (
-              <FxChip key={item} kind='category'>
-                {item}
-              </FxChip>
-            ))}
-          </div>
-        </FxSectionPanel>
-      </FxReveal>
-
-      {/* ---------------------------------------------------------------- */}
       {/* Who it's for                                                      */}
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
-        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
+        <FxSectionPanel
+          tone='inset'
+          id='who-its-for'
+          style={{ marginBottom: SECTION_GAP }}
+        >
           <FxGroupLabel>Who It&apos;s For</FxGroupLabel>
           <h2 style={{ ...sectionTitle, marginBottom: 'var(--fx-space-l)' }}>
             You&apos;ll recognize yourself here
@@ -479,18 +528,30 @@ export default function ResonanceCoreFrameworkClient() {
             alignment between who they are and how they live.
           </SectionSubtitle>
 
-          <StaggeredGrid columns={3} gap='1rem' stagger={0.1}>
-            {RCF_AUDIENCE.map((line) => (
-              <FxCard
-                key={line}
-                interactive
-                variant='feature'
-                style={{ padding: '28px 32px' }}
+          <p
+            style={{
+              fontSize: 'var(--fx-body-size)',
+              lineHeight: 'var(--fx-body-leading)',
+              color: 'var(--fx-text-body)',
+              maxWidth: '68ch',
+              margin: '0 0 var(--fx-space-xxl)',
+            }}
+          >
+            The book&apos;s Introduction makes five assumptions about its
+            reader. If they ring true, you&apos;re right at home.
+          </p>
+
+          <div style={headedListStyle}>
+            {RCF_ASSUMPTIONS.map((a, i) => (
+              <HeadedItem
+                key={a.heading}
+                kicker={`Assumption ${i + 1}`}
+                heading={a.heading}
               >
-                {line}
-              </FxCard>
+                <p style={{ margin: 0 }}>{a.body}</p>
+              </HeadedItem>
             ))}
-          </StaggeredGrid>
+          </div>
         </FxSectionPanel>
       </FxReveal>
 
@@ -593,26 +654,33 @@ export default function ResonanceCoreFrameworkClient() {
         >
           <FxGroupLabel>Questions</FxGroupLabel>
           <h2 style={sectionTitle}>Frequently Asked Questions</h2>
-          <div
-            style={{
-              display: 'grid',
-              gap: 'var(--fx-space-l)',
-              maxWidth: '72ch',
-            }}
-          >
+          <SectionSubtitle title='Built from research and practice'>
+            The framework brings together research, systems thinking, and
+            real-world experience. Here is what it is, how it was developed,
+            and who it&apos;s for.
+          </SectionSubtitle>
+          <div style={headedListStyle}>
             {RCF_FAQ.map((f) => (
-              <div key={f.question}>
-                <h3 style={cardTitle}>{f.question}</h3>
-                <p
-                  style={{
-                    ...cardBody,
-                    fontSize: 'var(--fx-body-size)',
-                    color: 'var(--fx-text-body)',
-                  }}
-                >
-                  {f.answer}
-                </p>
-              </div>
+              <HeadedItem key={f.question} heading={f.question}>
+                <p style={{ margin: 0 }}>{f.answer}</p>
+                {f.points && (
+                  <ul
+                    style={{
+                      margin: 'var(--fx-space-s) 0 0',
+                      paddingLeft: 'var(--fx-space-l)',
+                      display: 'grid',
+                      gridTemplateColumns:
+                        'repeat(auto-fill, minmax(min(100%, 16rem), 1fr))',
+                      gap: 'var(--fx-space-xxs) var(--fx-space-xl)',
+                      listStyle: 'disc',
+                    }}
+                  >
+                    {f.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                )}
+              </HeadedItem>
             ))}
           </div>
         </FxSectionPanel>

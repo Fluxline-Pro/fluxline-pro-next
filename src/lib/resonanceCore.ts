@@ -70,16 +70,6 @@ export const RCF_EXPLAINER: { heading: string; body: string }[] = [
   },
 ];
 
-/** What the framework rests on — the inputs it was assembled from. */
-export const RCF_FOUNDATIONS: string[] = [
-  "The RCF's Universal Truths, which shape Fluxline's ethos and mission",
-  'Psychological research',
-  'Behavioral patterns',
-  'Systems thinking',
-  'Personal experimentation',
-  'Real-world application',
-];
-
 /** The DRIVE Model — the operating sequence at the centre of the framework. */
 export const DRIVE_STEPS: { step: string; title: string; body: string }[] = [
   {
@@ -114,14 +104,36 @@ export const DRIVE_STEPS: { step: string; title: string; body: string }[] = [
   },
 ];
 
-/** Who the framework is for — used as a plain list. */
-export const RCF_AUDIENCE: string[] = [
-  'You want change that lasts',
-  'You feel out of step with who you are',
-  'You see your potential but need direction',
-  'You want clearer decisions, not more information',
-  'You want to understand your patterns',
-  'You want a system you can keep using',
+/**
+ * Who the framework is for: the five assumptions the book's Introduction makes
+ * about its reader ("What I am assuming about you when I write this book"),
+ * paraphrased for the web. Source: the RCF Preview PDF
+ * (public/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf).
+ */
+export const RCF_ASSUMPTIONS: { heading: string; body: string }[] = [
+  {
+    heading: 'You want to make a meaningful difference in the world.',
+    body: "You wake up knowing you're capable of more. You keep asking how to improve your situation, yourself, and the lives of the people around you. The framework asks you to answer those questions as you go.",
+  },
+  {
+    heading:
+      "You've felt the pull to change your life, even if you're not sure how.",
+    body: "Your career may not match your interests, your friendships may not reflect your growth, or your inner world may feel out of step with who you're becoming. Something feels off, but you can't name it yet. The RCF helps you see those misalignments clearly, understand why they happen, and shift your direction with intention.",
+  },
+  {
+    heading:
+      "You've accepted that change is inevitable, in yourself and everything around you.",
+    body: "Families grow, perspectives shift, and desires mature. You can't stop change, but you can choose how you adapt to it. The framework helps you notice when a shift is happening and carry it into everyday life as growth.",
+  },
+  {
+    heading:
+      "You've lived through trials and hurt that made change harder than it should be.",
+    body: "Past failures and losses can harden into a distorted sense of who you are. The RCF helps you name those patterns, see why they don't fit, and choose to let them go.",
+  },
+  {
+    heading: 'You understand that change only happens when you choose to act.',
+    body: 'Without action, nothing changes: the job that drains you, the patterns that keep you small, the relationships that stunt your growth. You play an active role in your life, and the framework asks you to take it through clarity, not force or pressure.',
+  },
 ];
 
 /** The Resonant Identity Podcast — an extension of the framework. */
@@ -238,8 +250,20 @@ export const RCF_CONCEPTS: {
   },
 ];
 
-/** Plain-language FAQ. Rendered as H3s and as FAQPage structured data. */
-export const RCF_FAQ: { question: string; answer: string }[] = [
+/** A question and answer, with an optional plain list under the answer. */
+export interface RcfFaqItem {
+  question: string;
+  answer: string;
+  points?: string[];
+}
+
+/**
+ * Plain-language FAQ, including how the framework was developed (formerly a
+ * separate "How it was developed" block). Rendered as H3s and as FAQPage
+ * structured data. The Universal Truths list is from the book's Introduction
+ * (RCF Preview PDF).
+ */
+export const RCF_FAQ: RcfFaqItem[] = [
   {
     question: 'What is the Resonance Core Framework?',
     answer:
@@ -252,6 +276,41 @@ export const RCF_FAQ: { question: string; answer: string }[] = [
       'The RCF offers tools to understand your patterns, test decisions against your values, and track alignment over time.',
   },
   {
+    question: 'How was the RCF developed?',
+    answer:
+      'Terence Waters developed the framework while building Fluxline, refining it through journaling, decisions, and real-world challenges. As he wrote, he applied each idea to his own decisions, habits, and work with clients.',
+  },
+  {
+    question: 'What is the RCF built from?',
+    answer:
+      'It draws on psychology, systems thinking, and practice. It is a decision and identity framework, not therapy. Its six foundations are:',
+    points: [
+      "The RCF's Universal Truths, which shape Fluxline's ethos and mission",
+      'Psychological research',
+      'Behavioral patterns',
+      'Systems thinking',
+      'Personal experimentation',
+      'Real-world application',
+    ],
+  },
+  {
+    question: "What are the RCF's Universal Truths?",
+    answer:
+      "Basic principles the framework is built around. They shape Fluxline's ethos and mission, and include:",
+    points: [
+      'Treat others as you wish to be treated',
+      'Choose with clarity and intention',
+      'Listen to emotion, logic, and intuition',
+      'Recognize bias and judgment',
+      'Trust in basic human goodness',
+      'Lean toward optimism',
+      'Notice what you attract',
+      "Understand life's natural opposites",
+      'Live by values and virtues',
+      'Stay mindful and aware',
+    ],
+  },
+  {
     question: 'What is Behavioral Gravity?',
     answer:
       'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
@@ -262,13 +321,14 @@ export const RCF_FAQ: { question: string; answer: string }[] = [
       'The DII scores how well a decision aligns with your identity, using six core values and a Decision Alignment Score.',
   },
   {
-    question: 'What is the RCF built from?',
-    answer:
-      'It draws on psychology, systems thinking, and practice. It is a decision and identity framework, not therapy.',
-  },
-  {
     question: 'Who is the RCF designed for?',
     answer:
       'It is for founders, leaders, creatives, and anyone seeking lasting change or clearer decisions.',
   },
 ];
+
+/** The FAQ answer as one plain string (answer plus any list), for JSON-LD. */
+export function rcfFaqAnswerText(item: RcfFaqItem): string {
+  if (!item.points?.length) return item.answer;
+  return `${item.answer} ${item.points.join('; ')}.`;
+}

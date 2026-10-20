@@ -20,4 +20,5 @@ export { default as FxFilterChips } from './FxFilterChips';
 export { default as FxContentGrid } from './FxContentGrid';
 export { default as FxArticleCard } from './FxArticleCard';
 export { default as FxFeaturedCard } from './FxFeaturedCard';
+export { default as FxFeatureCallout } from './FxFeatureCallout';
 export { default as FxReveal } from './FxReveal';
