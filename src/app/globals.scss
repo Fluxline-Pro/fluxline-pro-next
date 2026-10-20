@@ -525,6 +525,42 @@ html[data-fx-motion='reduce'] *::after {
 }
 
 /* =============================================
+   PRICING: table on tablet/desktop, stacked cards on phones
+   (ProgramTiersTable + ProgramComparisonModal). CSS-only swap so the static
+   render already matches the device; no hydration flash.
+   ============================================= */
+
+.fx-pricing-cards,
+.fx-compare-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .fx-pricing-table,
+  .fx-compare-table {
+    display: none !important;
+  }
+  .fx-pricing-cards {
+    display: grid !important;
+  }
+  .fx-compare-mobile {
+    display: block !important;
+  }
+  .fx-pricing-compare-btn {
+    width: 100%;
+    white-space: normal !important;
+  }
+
+  /* Featured callout (FxFeatureCallout): tighter inset, full-width action. */
+  .fx-feature-callout {
+    padding: var(--fx-space-xl) var(--fx-space-l) !important;
+  }
+  .fx-feature-callout-action {
+    width: 100%;
+  }
+}
+
+/* =============================================
    SCROLL SNAP (home page sections)
    ============================================= */
 
