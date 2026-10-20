@@ -29,7 +29,7 @@ const featureToKey = (featureName: string): string =>
 function getStatus(value: FeatureValue): FeatureStatus {
   if (typeof value === 'string') {
     if (value.toLowerCase().includes('available as add-on')) {
-      return { kind: 'addon', label: 'Available as add-on' };
+      return { kind: 'addon', label: 'Available as add-on', note: value };
     }
     return { kind: 'partial', label: 'Partly included', note: value };
   }
