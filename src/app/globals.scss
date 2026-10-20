@@ -546,8 +546,9 @@ html[data-fx-motion='reduce'] *::after {
   .fx-compare-mobile {
     display: block !important;
   }
+  /* !important: FormButton sets `width: auto` inline. */
   .fx-pricing-compare-btn {
-    width: 100%;
+    width: 100% !important;
     white-space: normal !important;
   }
 
