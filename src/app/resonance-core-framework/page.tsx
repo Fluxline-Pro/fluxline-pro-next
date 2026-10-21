@@ -2,7 +2,12 @@ import React from 'react';
 import type { Metadata } from 'next';
 import ResonanceCoreFrameworkClient from './ResonanceCoreFrameworkClient';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
-import { RCF_CONCEPTS, RCF_FAQ, RCF_FRAMEWORK_PATH } from '@/lib/resonanceCore';
+import {
+  RCF_CONCEPTS,
+  RCF_FAQ,
+  RCF_FRAMEWORK_PATH,
+  rcfFaqAnswerText,
+} from '@/lib/resonanceCore';
 
 const PAGE_URL = `https://www.fluxline.pro${RCF_FRAMEWORK_PATH}`;
 const TITLE = 'The Resonance Core Framework™ | Fluxline Resonance Group';
@@ -13,7 +18,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   keywords:
-    'Resonance Core Framework, RCF coaching, identity alignment coaching, Resonance Core Framework consulting, Behavioral Gravity, Identity Coherence, Window of Choice, DRIVE System, Creative Truth, DII Protocol, Decision Integrity Index, Decision Alignment Score, Terence Waters, Fluxline Resonance Group',
+    'Resonance Core Framework, RCF coaching, identity alignment coaching, Resonance Core Framework consulting, Behavioral Gravity, Identity Coherence, Window of Choice, DRIVE Model, The Decision Integrity Index, The DII, Decision Alignment Score, Terence Waters, Fluxline Resonance Group',
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -81,7 +86,7 @@ const jsonLd = {
       mainEntity: RCF_FAQ.map((f) => ({
         '@type': 'Question',
         name: f.question,
-        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        acceptedAnswer: { '@type': 'Answer', text: rcfFaqAnswerText(f) },
       })),
     },
   ],

@@ -8,13 +8,16 @@ export interface CompanyValue {
 }
 
 export const TERENCE_SOCIAL_LINKS: SocialLinksData = {
-  linkedin: 'https://linkedin.com/in/terencewaters',
-  instagram: 'https://instagram.com/aplusinflux',
+  linkedin: 'https://www.linkedin.com/in/terencewaters',
+  instagram: 'https://www.instagram.com/aplusinflux',
   facebook: 'https://www.facebook.com/fluxline',
-  threads: 'https://www.threads.net/@aplusinflux',
+  threads: 'https://www.threads.com/@aplusinflux',
   github: 'https://github.com/aplusandminus',
   twitter: 'https://twitter.com/aplusinflux',
+  youtube: 'https://www.youtube.com/@theresonantidentity',
   tiktok: 'https://www.tiktok.com/@aplusinflux',
+  twitch: 'https://www.twitch.tv/aplusinflux',
+  reddit: 'https://www.reddit.com/user/APlusInFLUX/',
   email: 'terence@fluxline.pro',
 };
 
@@ -58,7 +61,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: 'strategic-innovation',
     title: 'Strategic Innovation',
     description:
-      'Thoughtful experimentation balanced with proven methodologies for sustainable growth.',
+      'Thoughtful experimentation balanced with disciplined, repeatable practice for sustainable growth.',
     icon: 'BranchFork2',
   },
 ];

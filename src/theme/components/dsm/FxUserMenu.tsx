@@ -10,6 +10,9 @@ import styles from './FxNav.module.scss';
 // Fluxline.pro login experience is ready for public use.
 const SHOW_NAV_SIGN_IN_IN_PROD = false;
 
+// Hydration flag without a setState-in-effect: false during SSR and the hydration render, true after.
+const subscribeNoop = () => () => {};
+
 /** Neutral avatar-circle glyph (inline SVG — no icon fonts per DSM rules). */
 function AvatarGlyph() {
   return (
@@ -40,6 +43,13 @@ function AvatarGlyph() {
 export default function FxUserMenu() {
   const { isAuthenticated, isLoading, user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = React.useState(false);
+  // After hydration the Sign in href carries returnTo=<current page>, so every kind of
+  // activation (plain, Ctrl/Shift/middle click, open in new tab) brings the user back here.
+  // The server render uses the plain login URL so there is no hydration mismatch.
+  const hydrated = React.useSyncExternalStore(subscribeNoop, () => true, () => false);
+  const signInHref = hydrated
+    ? `${getAccountPortalUrl()}/login?returnTo=${encodeURIComponent(window.location.href)}`
+    : `${getAccountPortalUrl()}/login`;
   const [hovered, setHovered] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
@@ -98,7 +108,7 @@ export default function FxUserMenu() {
     return (
       <div className={styles.userMenu}>
         <a
-          href={`${getAccountPortalUrl()}/login`}
+          href={signInHref}
           className={styles.signInButton}
           aria-label='Sign in to your Fluxline account'
           onMouseEnter={() => setHovered(true)}

@@ -91,7 +91,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = useCallback(() => {
-    window.location.href = `${getAccountPortalUrl()}/login`;
+    // Carry the current page so the Account Portal brings the user back here after sign-in.
+    const returnTo = encodeURIComponent(window.location.href);
+    window.location.href = `${getAccountPortalUrl()}/login?returnTo=${returnTo}`;
   }, []);
 
   const logout = useCallback(() => {

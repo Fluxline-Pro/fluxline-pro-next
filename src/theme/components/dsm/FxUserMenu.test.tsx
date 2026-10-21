@@ -54,8 +54,24 @@ describe('FxUserMenu', () => {
 
     expect(
       screen.getByRole('link', { name: 'Sign in to your Fluxline account' })
-    ).toHaveAttribute('href', `${ACCOUNT_PORTAL_URL}/login`);
+    ).toHaveAttribute(
+      'href',
+      `${ACCOUNT_PORTAL_URL}/login?returnTo=${encodeURIComponent(window.location.href)}`
+    );
     expect(screen.getByText('Sign in')).toBeInTheDocument();
+  });
+
+  it('carries the current page in the href so modified clicks and new tabs return here', () => {
+    window.history.pushState({}, '', '/services/coaching?ref=nav');
+
+    render(<FxUserMenu />);
+
+    expect(
+      screen.getByRole('link', { name: 'Sign in to your Fluxline account' })
+    ).toHaveAttribute(
+      'href',
+      `${ACCOUNT_PORTAL_URL}/login?returnTo=${encodeURIComponent('http://localhost/services/coaching?ref=nav')}`
+    );
   });
 
   it('hides the signed-out sign-in button in production', () => {

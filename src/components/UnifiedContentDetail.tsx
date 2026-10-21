@@ -62,7 +62,7 @@ export interface UnifiedContentDetailConfig {
     description: string;
     buttons: Array<{
       label: string;
-      onClick: () => void;
+      href: string;
       variant: 'primary' | 'secondary';
     }>;
   };
@@ -699,7 +699,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
               title={config.cta.title}
               body={config.cta.description}
               primaryLabel={config.cta.buttons[0]?.label}
-              primaryHref='/contact'
+              primaryHref={config.cta.buttons[0]?.href}
+              secondaryLabel={config.cta.buttons[1]?.label}
+              secondaryHref={config.cta.buttons[1]?.href}
             />
           </div>
         )}

@@ -54,7 +54,7 @@ Fluxline envisions a world where individuals and businesses become self-authored
 
 ## Our Core Values: The Resonance Core Framework™
 
-At Fluxline, we're guided by six foundational principles organized into a deliberate architecture known as **The Resonance Core Framework™**. These values don't exist in isolation—they form an interconnected system designed around the **DII Process: Discover, Integrate, Impact**.
+At Fluxline, we're guided by six foundational principles organized into a deliberate architecture known as **The Resonance Core Framework™**. These values don't exist in isolation—they form an interconnected system designed around three phases: **Discover, Integrate, Impact**.
 
 The framework divides into two essential parts that work sequentially and interdependently:
 
@@ -76,9 +76,9 @@ Once internal alignment is established, the next three principles govern how you
 
 **5. Collaboration & Synergy (Somatic Discipline)** — Transformation isn't purely cerebral—it requires embodiment, ritual, and consistent discipline. Working together creates greater value than operating alone. Effective collaboration requires showing up reliably, understanding others' perspectives, and aligning collective action with intention.
 
-**6. Sustainable Systems & Legacy (Strategic Innovation)** — Balance thoughtful experimentation with proven methodologies for sustainable growth. We innovate when it serves your mission and amplifies your impact—not for novelty's sake. This culminating principle focuses on building lasting structures that create ripples beyond immediate deliverables. It asks: _What systems will carry your work forward? How will your transformation impact others?_
+**6. Sustainable Systems & Legacy (Strategic Innovation)** — Balance thoughtful experimentation with disciplined, repeatable practice for sustainable growth. We innovate when it serves your mission and amplifies your impact—not for novelty's sake. This culminating principle focuses on building lasting structures that create ripples beyond immediate deliverables. It asks: _What systems will carry your work forward? How will your transformation impact others?_
 
-### The DII Process: Discover, Integrate, Impact
+### Three Phases: Discover, Integrate, Impact
 
 These six principles flow through a three-phase methodology that structures transformation:
 

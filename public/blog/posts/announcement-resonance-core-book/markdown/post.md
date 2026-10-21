@@ -37,7 +37,7 @@ gallery:
   - url: 'RCF_book_concept.jpg'
     alt: 'The Resonance Core Framework™ Book Concept'
     caption: 'The Resonance Core Framework™ Book Concept'
-  - url: 'drive_model_framework.jpeg'
+  - url: 'drive_model.jpg'
     alt: 'The DRIVE Model Framework: Aligning our identity with our goals'
     caption: 'The DRIVE Model Framework: Aligning our identity with our goals'
   - url: 'drive_alignment_loop.jpeg'
@@ -58,9 +58,9 @@ gallery:
   - url: 'endurance_step.jpeg'
     alt: 'ENDURANCE: The Fifth Step of the DRIVE Model'
     caption: 'ENDURANCE: The Fifth Step of the DRIVE Model- Sustaining the DRIVE'
-  - url: 'expansion_step.jpeg'
-    alt: 'EXPANSION: The Final Step of the DRIVE Model'
-    caption: 'EXPANSION: The Final Step of the DRIVE Model- Identity evolution by incorporating the DRIVE into your life'
+  - url: 'embodiment_step.jpg'
+    alt: 'EMBODIMENT: The Final Step of the DRIVE Model'
+    caption: 'EMBODIMENT: The Final Step of the DRIVE Model- Identity evolution by incorporating the DRIVE into your life'
 ---
 
 Today marks an important milestone for Fluxline Resonance Group — and for me personally. After months of research, testing, refinement, and lived application, I'm excited to share the first public preview of **The Resonance Core Framework™**, a system designed to help people create meaningful, aligned, and sustainable change in their lives.
@@ -97,7 +97,7 @@ But who they actually are — in identity, values, emotion, logic, and lived exp
 
 The framework draws from:
 
-- Universal human truths
+- The RCF's Universal Truths
 - Psychological research
 - Behavioral patterns
 - Systems thinking
@@ -189,7 +189,7 @@ And I hope it gives you a glimpse of what's possible when you build your life fr
 
 Welcome to the beginning of The Resonance Core Framework™.
 
-The book will be available later in late Fall 2026.
+The book is targeted for Q1 2027.
 Please follow us below for updates!
 
 ---

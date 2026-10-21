@@ -53,7 +53,7 @@ I initiated a purposeful outreach — a small, aligned step in service of my wor
 
 Before diving into the lived experience, let me introduce the framework that made this breakthrough possible.
 
-The **DRIVE Model™** is a six-stage cyclical system I'm developing for **The Resonance Core Framework** book (releasing winter 2026). Unlike traditional habit formation or goal-setting, the DRIVE Model treats each action as a **nervous system rewiring opportunity**.
+The **DRIVE Model™** is a six-stage cyclical system I'm developing for **The Resonance Core Framework** book (targeted for Q1 2027). Unlike traditional habit formation or goal-setting, the DRIVE Model treats each action as a **nervous system rewiring opportunity**.
 
 Here's how it works:
 
@@ -64,7 +64,7 @@ Here's how it works:
 3. **ACTIVATION → MICRO-ACTION** - The smallest step; resistance dissolves into flow
 4. **MOMENTUM → COMPOUNDING IDENTITY** - Daily actions become self-reinforcing
 5. **ENDURANCE → SUSTAINABLE FUEL** - Motivation becomes irrelevant; identity carries it forward
-6. **EXPANSION → IDENTITY EVOLUTION** - The system grows with you; new DRIVEs emerge
+6. **EMBODIMENT → IDENTITY EVOLUTION** - The DRIVE becomes lived identity; new DRIVEs emerge
 
 ### What Makes It Different?
 
