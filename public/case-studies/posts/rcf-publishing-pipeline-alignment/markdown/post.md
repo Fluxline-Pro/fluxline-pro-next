@@ -74,7 +74,7 @@ A book that ships in six formats is not one project. It is twenty copies of the 
 
 The manuscript. The workbook. The slide deck. The reference guides. The narration script. The eBook HTML. The print layout. The Kindle file. The vector store. The marketing copy. Every one of them descended from the same chapter, and every one of them a chance for a definition to shift, a figure to get renumbered, a claim to appear that the book never actually made.
 
-The Resonance Core Framework pipeline was built to stop that drift. Over three iterations it grew from six prompt files to nine, absorbing marketing generation, a local RAG layer, and n8n automation along the way. Each phase, on its own, was good work.
+The pipeline behind _The Resonance Core Framework™_ (a practical system for making change that holds, built on alignment rather than force) was built to stop that drift. Over three iterations it grew from six prompt files to nine, absorbing marketing generation, a local RAG layer, and n8n automation along the way. Each phase, on its own, was good work.
 
 Together, they had quietly stopped being a system.
 
@@ -177,12 +177,12 @@ Each build checks itself before the author sees it: one column, complete text, p
 
 The first run built Chapter 3 and Exercise 1.3 on top of Chapter 2 and Exercise 1.2. The author's verdict was "about 95% of the way there." The remaining 5% became rules the same day: no widows or orphans, callouts and figures kept apart, consistent spacing, callouts as separate frames copied from the template. Three point releases (v1.2.1 to v1.2.3) shipped those rules, and each one tightened the next chapter's build.
 
-> _"The print files were the bottleneck. Building them by hand, chapter by chapter, would have taken months. Now the pipeline builds them while it builds the eBook, and I verify them. That is the difference between a book that is almost done and a book that ships."_
+> _"A bottleneck I was facing was the manual creation of the InDesign print files for my book. Now it creates the print files in IDML formats on its own while it creates the eBook versions, and I manually verify them. This is saving me literally months of time to get my book published."_
 > Terence Waters, Founder, Fluxline.pro
 
 The same principle from the original rebuild holds here. The generator does not decide. It reads the manuscript as the source of truth, it refuses what it cannot map, it reports what it could not settle, and it hands the author a file to approve rather than a file to fix. Human review is still enforced. It is just no longer spent on retyping styles.
 
-This is also what makes the next step possible: with print no longer the long pole, preorders for _The Resonance Core Framework™_ open in early November 2026, and the book is targeted for Q1 2027. [Be notified when preorders open.](https://fluxline.pro/resonance-core-framework/#notify)
+This is also what makes the next step possible: with print no longer the long pole, preorders for the RCF book open in early November 2026, and the book is targeted for Q1 2027. [Be notified when preorders open.](https://fluxline.pro/resonance-core-framework/#notify)
 
 ---
 

@@ -90,7 +90,7 @@ This case study documents how that coherence came to be. It is not a retrospecti
 
 ### Executive Summary
 
-This case study traces the architectural development of Fluxline.pro — a multi-modal creative and technical ecosystem built by Terence Waters. It documents the convergence moment that unified disparate creative practices into a single coherent identity, the philosophy of emotional resonance as structural infrastructure, the dual creative and technical pipelines that power production, the integration of Microsoft Copilot Tasks as an orchestration layer, the priority shift toward CMS infrastructure, and the development of the Resonant Execution Map — a proprietary framework for preserving creative intent across all production layers. Section 09, added in October 2026, follows the system into its largest project so far: producing *The Resonance Core Framework™* book.
+This case study traces the architectural development of Fluxline.pro — a multi-modal creative and technical ecosystem built by Terence Waters. It documents the convergence moment that unified disparate creative practices into a single coherent identity, the philosophy of emotional resonance as structural infrastructure, the dual creative and technical pipelines that power production, the integration of Microsoft Copilot Tasks as an orchestration layer, the priority shift toward CMS infrastructure, and the development of the Resonant Execution Map — a proprietary framework for preserving creative intent across all production layers. Section 09, added in October 2026, follows the system into its largest project so far: producing the book *The Resonance Core Framework™*, a practical system for making change that holds, built on alignment rather than force.
 
 ---
 
@@ -298,7 +298,7 @@ The system is alive. It is still being built.
 
 _Update, October 2026. The largest artifact the ecosystem has produced so far, and the bottleneck it removed._
 
-The principles above are easy to agree with in the abstract. The real test is a project large enough that a manual step stops being an inconvenience and becomes the critical path. For Fluxline, that project is *The Resonance Core Framework™*, a practical system for making change that holds, built on alignment rather than force. It is 31 chapters across four parts, a companion workbook, and an audiobook I am narrating myself.
+The principles above are easy to agree with in the abstract. The real test is a project large enough that a manual step stops being an inconvenience and becomes the critical path. For Fluxline, that project is the RCF book. It is 31 chapters across four parts, a companion workbook, and an audiobook I am narrating myself.
 
 The book runs through its own pipeline, the [RCF Book Pipeline](/case-studies/rcf-publishing-pipeline-alignment), which is public on GitHub. Each chapter moves through gates: the manuscript, editorial and governance checks, design, the eBook, print and Kindle builds, the audiobook, and a release checklist. Nothing moves forward until it passes.
 
@@ -319,6 +319,6 @@ It is also the clearest example of orchestration over automation in the whole ec
 
 > **Key Insight: Remove the Long Pole, Not the Human.** The value was not in removing me from print. It was in moving my attention from producing the layout to judging it. That one shift turned a step measured in months into one measured in review sessions, and it is what makes a preorder date possible.
 
-That date is now set: preorders for *The Resonance Core Framework™* open in early November 2026, and the book is targeted for Q1 2027. [Be notified when preorders open.](https://fluxline.pro/resonance-core-framework/#notify)
+That date is now set: preorders for the RCF book open in early November 2026, and the book is targeted for Q1 2027. [Be notified when preorders open.](https://fluxline.pro/resonance-core-framework/#notify)
 
 The system is still being built. Now it is building the book.
