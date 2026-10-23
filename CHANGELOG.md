@@ -12,6 +12,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- CI: the "Smoke test built output" job runs on `ubuntu-24.04` instead of `ubuntu-latest`. `ubuntu-latest` moved to Ubuntu 26.04, which Playwright 1.57.0 cannot install Chromium on.
 - Case study "Nine Phases, One Source of Truth" (`rcf-publishing-pipeline-alignment`): new "Update, October 2026: the bottleneck was print" section covering pipeline v1.1.3 (styled InDesign import) and v1.2 to v1.2.3 (eBook-first print build that generates the chapter and workbook exercise as 7×10 IDML files the author verifies). Description, SEO text, technologies, metrics, results and capabilities updated to match.
 - Case study "Architecting a Multi-Modal Creative and Technical Ecosystem" (`rcf-infrastructure`): new Section 09, "Field Test, The System Builds the Book", on the book pipeline removing the manual print-layout bottleneck and the preorder date it makes possible. Version 1.1; description, technologies, metrics, results and keywords updated.
 
