@@ -2,7 +2,7 @@
 title: 'Nine Phases, One Source of Truth: Rebuilding a Book Production Pipeline That Had Stopped Agreeing With Itself'
 client: 'Fluxline Resonance Group — internal IP'
 industry: 'Systems Design / AI Orchestration'
-description: 'A nine-stage AI publishing pipeline had grown into nine prompts that contradicted each other. We rebuilt it into a single system with explicit gates, one source of truth, and human approval where it matters — then released it publicly for other authors.'
+description: 'A nine-stage AI publishing pipeline had grown into nine prompts that contradicted each other. We rebuilt it into a single system with explicit gates, one source of truth, and human approval where it matters, then released it publicly for other authors. In October 2026 the pipeline took on the last manual bottleneck: it now builds the eBook first and generates the print book and workbook as InDesign IDML files the author verifies.'
 services:
   - consulting
   - development
@@ -13,15 +13,17 @@ technologies:
   - Local LLM & RAG
   - n8n Automation
   - EPUB & Kindle Production
+  - InDesign IDML Generation
+  - Python Build Tooling
   - Prompt Engineering
 publishedDate: '2026-09-22'
-projectDuration: 'Single working session'
+projectDuration: 'Alignment in a single working session; print automation added October 2026'
 featured: true
 imageUrl: '/case-studies/posts/rcf-publishing-pipeline-alignment/images/rcf-publishing-case-study-workflow.png'
 imageAlt: 'RCF Book Production Pipeline — nine-phase workflow diagram showing gate conditions, deliverables, and source-of-truth hierarchy'
 slug: 'rcf-publishing-pipeline-alignment'
 seoTitle: 'Nine Phases, One Source of Truth: AI Book Production Pipeline Case Study — Fluxline'
-seoDescription: 'How Fluxline rebuilt a nine-stage AI publishing pipeline from nine contradicting prompts into a single system with explicit gates, one source of truth, and enforced human approval — then released it publicly on GitHub.'
+seoDescription: 'How Fluxline rebuilt a nine-stage AI publishing pipeline into a single system with explicit gates, one source of truth, and enforced human approval, then automated the eBook and InDesign print builds for the book and workbook.'
 seoKeywords:
   - AI workflow architecture
   - publishing pipeline
@@ -31,13 +33,16 @@ seoKeywords:
   - n8n automation
   - EPUB production
   - Kindle publishing
+  - InDesign IDML automation
+  - print layout automation
+  - eBook-first print build
   - prompt engineering
   - open source
   - systems design
   - fluxline
 challenge: "A nine-stage AI publishing pipeline had grown from six prompt files to nine, absorbing marketing generation, a local RAG layer, and n8n automation along the way. Each phase was good work on its own — together, they had quietly stopped being a system. Three different addresses for the same folder. Two phases both numbered four. Triggers that nothing produced. A deleted phase whose QA gate remained. Four vocabularies for 'done.' The manuscript was 'locked, except where it wasn't' — and draft marketing copy had a path into the published book."
 solution: 'Rather than rewriting the prompts, we addressed the seams between them: one root and one naming rule for every path; a ranked source-of-truth hierarchy written into a single tie-breaker file; explicit entry and exit gates with named deliverables; signal files with designated authors and consumers; a single six-step status ladder with one phase permitted to award each level; and structural enforcement of human approval — proposals files the author must accept, status fields that compile steps actually read before including content.'
-results: 'Nine aligned phase prompts, each with its position, entry gate, exit gate, and deliverables stated at the top. A master pipeline overview acting as tie-breaker for paths, gates, folders, and deliverables. A full changelog documenting every correction and the dependencies it clarified. Placeholder tokenization for public adoption. Public release on GitHub under GPL-3.0. A code review on the pull request surfaced five legitimate findings; fixing the fifth uncovered a sixth — a hashtable key-ordering bug in the find-and-replace script that would have silently mangled every path token.'
+results: 'Nine aligned phase prompts, each with its position, entry gate, exit gate, and deliverables stated at the top. A master pipeline overview acting as tie-breaker for paths, gates, folders, and deliverables. A full changelog documenting every correction and the dependencies it clarified. Placeholder tokenization for public adoption. Public release on GitHub under GPL-3.0. A code review on the pull request surfaced five legitimate findings; fixing the fifth uncovered a sixth — a hashtable key-ordering bug in the find-and-replace script that would have silently mangled every path token. In October 2026 the pipeline removed its last manual bottleneck: the print layout. The eBook is now built first, then the chapter and its workbook exercise are generated as ready-to-open 7×10 InDesign IDML files on the author''s own finished templates, so the author''s work starts at verification instead of a blank page.'
 metrics:
   - label: 'Pipeline Phases Aligned'
     value: '9 of 9'
@@ -48,6 +53,9 @@ metrics:
   - label: 'Human Approval Model'
     value: 'Enforced'
     description: 'Structural enforcement via status fields and proposals files — not just intent'
+  - label: 'Print Layout'
+    value: 'Generated, then verified'
+    description: 'Chapter and workbook IDMLs built from the finished eBook; the author checks and finishes them in InDesign'
   - label: 'Public Release'
     value: 'GPL-3.0'
     description: 'Nine phase prompts, master overview, and placeholder guide on GitHub'
@@ -66,7 +74,7 @@ A book that ships in six formats is not one project. It is twenty copies of the 
 
 The manuscript. The workbook. The slide deck. The reference guides. The narration script. The eBook HTML. The print layout. The Kindle file. The vector store. The marketing copy. Every one of them descended from the same chapter, and every one of them a chance for a definition to shift, a figure to get renumbered, a claim to appear that the book never actually made.
 
-The Resonance Core Framework pipeline was built to stop that drift. Over three iterations it grew from six prompt files to nine, absorbing marketing generation, a local RAG layer, and n8n automation along the way. Each phase, on its own, was good work.
+The pipeline behind _The Resonance Core Framework™_ (a practical system for making change that holds, built on alignment rather than force) was built to stop that drift. Over three iterations it grew from six prompt files to nine, absorbing marketing generation, a local RAG layer, and n8n automation along the way. Each phase, on its own, was good work.
 
 Together, they had quietly stopped being a system.
 
@@ -150,12 +158,40 @@ Pipelines need what any other system needs — one source of truth, explicit con
 
 ---
 
-## Capabilities demonstrated
+## Update, October 2026: the bottleneck was print
 
-Multi-stage AI workflow architecture · Content governance and validation design · Source-of-truth hierarchy modeling · Local LLM and RAG ingestion design · Publishing production systems (EPUB, Kindle, print, audiobook) · Automation orchestration with n8n · Human-in-the-loop approval design · Technical documentation and open-source release
+Every format in the pipeline had a generator except one. The eBook, the Kindle files, the narration script, the knowledge base and the marketing drafts all started from the manuscript and arrived mostly built. The print book started from an empty InDesign document.
+
+For each chapter, the author placed the manuscript by hand, applied every paragraph style the template already defined, anchored each figure, rebuilt each callout, and then did it all again for the chapter's workbook exercise. Thirty-one chapters, plus a workbook, at that pace is not a step in a pipeline. It is a second project, and it was the one thing standing between a finished manuscript and a published book.
+
+So the pipeline absorbed it, in two releases.
+
+**v1.1.3: a styled import.** The first step generated an InDesign tagged-text import straight from the manuscript DOCX. Every style is checked against the template before anything is written, nothing unmapped is guessed, and a build manifest records the exact template, style map and manuscript the import came from. The author's work started at layout instead of at styling.
+
+**v1.2: eBook first, then print.** The second step went further. The chapter's eBook is built first, from the same manuscript, and reviewed. Then the print documents are generated as ready-to-open InDesign IDML files that replicate it:
+
+- **The chapter (7×10).** Built on the author's last finished chapter, so it inherits that chapter's masters, styles, swatches and opener. Figures are anchored and linked to their CMYK files with captions. Callouts come from the print template. Footnotes, references and running heads are in place, and the text reflows across as many pages as it needs.
+- **The workbook exercise (7×10).** Cloned piece by piece from the previous exercise: the opener, ruled lines, tables, grids, badges, callouts and closing, re-worded from the exercise manuscript word for word.
+
+Each build checks itself before the author sees it: one column, complete text, pull quotes word for word, print-resolution figures, the right callout styles, valid IDML. What is left for the author is the part that should stay human: opening the file, checking it, settling the finish, and exporting the print PDF.
+
+The first run built Chapter 3 and Exercise 1.3 on top of Chapter 2 and Exercise 1.2. The author's verdict was "about 95% of the way there." The remaining 5% became rules the same day: no widows or orphans, callouts and figures kept apart, consistent spacing, callouts as separate frames copied from the template. Three point releases (v1.2.1 to v1.2.3) shipped those rules, and each one tightened the next chapter's build.
+
+> _"A bottleneck I was facing was the manual creation of the InDesign print files for my book. Now it creates the print files in IDML formats on its own while it creates the eBook versions, and I manually verify them. This is saving me literally months of time to get my book published."_
+> Terence Waters, Founder, Fluxline.pro
+
+The same principle from the original rebuild holds here. The generator does not decide. It reads the manuscript as the source of truth, it refuses what it cannot map, it reports what it could not settle, and it hands the author a file to approve rather than a file to fix. Human review is still enforced. It is just no longer spent on retyping styles.
+
+This is also what makes the next step possible: with print no longer the long pole, preorders for the RCF book open in early November 2026, and the book is targeted for Q1 2027. [Be notified when preorders open.](https://fluxline.pro/resonance-core-framework/#notify)
 
 ---
 
-**The pipeline is public.** Nine phase prompts, a master overview, and a placeholder guide for adapting it to your own book: [github.com/Fluxline-Pro/fluxline-rcf-book-pipeline](https://github.com/Fluxline-Pro/fluxline-rcf-book-pipeline)
+## Capabilities demonstrated
+
+Multi-stage AI workflow architecture · Content governance and validation design · Source-of-truth hierarchy modeling · Local LLM and RAG ingestion design · Publishing production systems (EPUB, Kindle, print, audiobook) · InDesign IDML generation and eBook-first print builds · Automation orchestration with n8n · Human-in-the-loop approval design · Technical documentation and open-source release
+
+---
+
+**The pipeline is public.** The phase prompts (including the eBook-first print build), a master overview, and a placeholder guide for adapting it to your own book: [github.com/Fluxline-Pro/fluxline-rcf-book-pipeline](https://github.com/Fluxline-Pro/fluxline-rcf-book-pipeline)
 
 _Have a workflow that has stopped agreeing with itself? [Let's talk and improve it!](/contact)_
