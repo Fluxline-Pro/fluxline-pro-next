@@ -6,7 +6,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [v3_2_PROD] - 2026-10-26
+
+### Added
+
+- Blog post "Preorders for The Resonance Core Framework™ Open in Early November" (`/blog/rcf-preorders-early-november`): the preorder teaser, what is coming (book, workbook, author-narrated audiobook), why the date moved closer, and links to both RCF case studies and the `#notify` sign-up. No prices or edition SKUs until preorders open.
+- Blog post "What is Fluxline?" (`/blog/what-is-fluxline`): an About Us post explaining Fluxline in plain terms — identity alignment and the "identity blocker" concept, how The Resonance Core Framework™'s Core Values underpin the work, and the business and individual services offered, with links to the RCF page, The Resonant Identity podcast, and contact.
+
 ### Changed
+
+- CI: the "Smoke test built output" job runs on `ubuntu-24.04` instead of `ubuntu-latest`. `ubuntu-latest` moved to Ubuntu 26.04, which Playwright 1.57.0 cannot install Chromium on.
+- Case study "Nine Phases, One Source of Truth" (`rcf-publishing-pipeline-alignment`): new "Update, October 2026: the bottleneck was print" section covering pipeline v1.1.3 (styled InDesign import) and v1.2 to v1.2.3 (eBook-first print build that generates the chapter and workbook exercise as 7×10 IDML files the author verifies). Description, SEO text, technologies, metrics, results and capabilities updated to match.
+- Case study "Architecting a Multi-Modal Creative and Technical Ecosystem" (`rcf-infrastructure`): new Section 09, "Field Test, The System Builds the Book", on the book pipeline removing the manual print-layout bottleneck and the preorder date it makes possible. Version 1.1; description, technologies, metrics, results and keywords updated.
 
 - Site UI fixes (owner, 2026-10-19):
   - Home stats: the first tile reads "5+ / Projects completed" (was "E2E / Projects, from concept to launch") and the industries tile reads "Various" (was "Diverse").
@@ -101,6 +112,7 @@ The first production release of the Next.js rebuild of fluxline.pro, migrated fr
 
 See the [v3_0_PROD release](https://github.com/Fluxline-Pro/fluxline-pro-next/releases/tag/v3_0_PROD) for the full PR list.
 
+[v3_2_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_1_PROD...v3_2_PROD
 [v3_1_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_0_1_PROD...v3_1_PROD
 [v3_0_1_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_0_PROD...v3_0_1_PROD
 [v3_0_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/releases/tag/v3_0_PROD
