@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Contact form reCAPTCHA (owner, 2026-10-26): the keys now live in Google Cloud (Security → reCAPTCHA) after Google's move of classic reCAPTCHA keys into Google Cloud projects. New values are set for `RECAPTCHA_SITE_KEY` (GitHub Actions secret, read at build time as `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`) and `RECAPTCHA_SECRET_KEY` (Azure Static Web App settings, test and prod). This is configuration only, with no code change, and it takes effect on the next test and prod builds.
+
 ## [v3_2_PROD] - 2026-10-26
 
 ### Added
