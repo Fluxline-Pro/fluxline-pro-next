@@ -105,15 +105,15 @@ through greater alignment and Identity Coherence:
 - **Creative Truth:** Expressing what you stand for _with courage, clarity, and respect._
 - **Strategic Alignment:** Making strategic decisions that move your vision forward _without abandoning who you are._
 
-All rooted in [https://fluxline.pro/resonance-core-framework](The RCF's Meta-Values)
+All rooted in [The RCF's Meta-Values](https://fluxline.pro/resonance-core-framework)
 of **Legacy Resonance**, **Systemic Coherence**, and **Embodied Integration**.
 
 > Ready to get started?
-> [https://fluxline.pro/contact](Book a Conversation with us!)
+> [Book a Conversation with us!](https://fluxline.pro/contact)
 
 ## Everything Comes Back to Identity
 
-As I mention many times on my podcast, [https://theresonantidentity.com/start-here](The Resonant Identity),
+As I mention many times on my podcast, [The Resonant Identity](https://theresonantidentity.com/start-here),
 identity is something we all possess, but life has a way of pulling us away from understanding,
 choosing, and embodying _what that identity means._
 
@@ -182,12 +182,12 @@ _is at the heart of what we do at Fluxline._
 _**We Structure The Shift™.**_
 
 > If you've read this far, _we're likely already aligned._
-> [https://fluxline.pro/contact](Book a free, no-obligation consultation today) and let's have a conversation
+> [Book a free, no-obligation consultation today](https://fluxline.pro/contact) and let's have a conversation
 > about what you're trying to build, accomplish, or become.
 
 ### Supporting Links
 
-[https://fluxline.pro/resonance-core-framework](Learn More about The Resonance Core Framework™)
-[https://theresonantidentity.com/start-here](Begin Listening to _The Resonant Identity Podcast_)
-[https://terencewaters.com/about](Learn More About Fluxline's Cofounder, Terence Waters)
-[https://fluxline.pro/contact](Book a Free Consultation)
+- [Learn More about The Resonance Core Framework™](https://fluxline.pro/resonance-core-framework)
+- [Begin Listening to _The Resonant Identity Podcast_](https://theresonantidentity.com/start-here)
+- [Learn More About Fluxline's Cofounder, Terence Waters](https://terencewaters.com/about)
+- [Book a Free Consultation](https://fluxline.pro/contact)
