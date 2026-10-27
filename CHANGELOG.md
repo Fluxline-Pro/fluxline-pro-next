@@ -6,9 +6,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [v3_2_PROD] - 2026-10-26
+
 ### Added
 
 - Blog post "Preorders for The Resonance Core Framework™ Open in Early November" (`/blog/rcf-preorders-early-november`): the preorder teaser, what is coming (book, workbook, author-narrated audiobook), why the date moved closer, and links to both RCF case studies and the `#notify` sign-up. No prices or edition SKUs until preorders open.
+- Blog post "What is Fluxline?" (`/blog/what-is-fluxline`): an About Us post explaining Fluxline in plain terms — identity alignment and the "identity blocker" concept, how The Resonance Core Framework™'s Core Values underpin the work, and the business and individual services offered, with links to the RCF page, The Resonant Identity podcast, and contact.
 
 ### Changed
 
@@ -110,6 +113,7 @@ The first production release of the Next.js rebuild of fluxline.pro, migrated fr
 
 See the [v3_0_PROD release](https://github.com/Fluxline-Pro/fluxline-pro-next/releases/tag/v3_0_PROD) for the full PR list.
 
+[v3_2_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_1_PROD...v3_2_PROD
 [v3_1_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_0_1_PROD...v3_1_PROD
 [v3_0_1_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_0_PROD...v3_0_1_PROD
 [v3_0_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/releases/tag/v3_0_PROD
