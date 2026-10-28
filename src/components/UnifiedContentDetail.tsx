@@ -399,8 +399,9 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
         style={{
           display: 'block',
           width: '100%',
-          aspectRatio: '1/1',
-          objectFit: 'cover',
+          height: 'auto',
+          maxHeight: '33vh',
+          objectFit: 'contain',
           background: '#000',
         }}
       />
