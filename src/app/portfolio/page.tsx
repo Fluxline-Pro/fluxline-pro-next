@@ -26,15 +26,15 @@ export default function PortfolioPage() {
 }
 
 export const metadata = {
-  title: 'Portfolio',
+  title: 'Portfolio: Brand Identity & Web Development',
   description:
-    'Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more. See how we deliver high-quality, user-centered solutions.',
+    'Brand identity, web development, and digital architecture projects, from a healthcare patient portal and enterprise intranet to design systems and dashboards.',
   keywords:
     'portfolio, web development, mobile apps, enterprise software, case studies, project showcase, technology solutions',
   openGraph: {
-    title: 'Portfolio - Fluxline',
+    title: 'Portfolio: Brand Identity & Web Development | Fluxline.pro',
     description:
-      'Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more.',
+      'Brand identity, web development, and digital architecture projects, from a healthcare patient portal and enterprise intranet to design systems and dashboards.',
     url: 'https://www.fluxline.pro/portfolio',
     siteName: 'Fluxline',
     type: 'website',
@@ -49,9 +49,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portfolio - Fluxline',
+    title: 'Portfolio: Brand Identity & Web Development | Fluxline.pro',
     description:
-      'Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more.',
+      'Brand identity, web development, and digital architecture projects, from a healthcare patient portal and enterprise intranet to design systems and dashboards.',
     images: ['/images/FluxlineLogo.png'],
   },
   alternates: {

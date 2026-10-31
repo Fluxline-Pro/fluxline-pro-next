@@ -9,8 +9,8 @@ tags:
 imageUrl: '/blog/posts/digital-transformation-strategies-2025/images/digital-transformation.jpg'
 imageAlt: 'Digital Transformation Strategies'
 featured: false
-seoTitle: 'Digital Transformation Strategies for 2025 infographic | Fluxline Resonance Group'
-seoDescription: 'Key strategies and best practices for successful digital transformation initiatives in modern businesses.'
+seoTitle: 'Digital Transformation Strategies for 2025'
+seoDescription: 'Key strategies and best practices for digital transformation in modern businesses: what it really means and how to make it work practically and sustainably.'
 seoKeywords:
   [
     'digital transformation',

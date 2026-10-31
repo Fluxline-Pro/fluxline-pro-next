@@ -12,9 +12,7 @@ import {
   FLUXLINE_SECONDARY_TAGLINE,
 } from './constants';
 
-const VISIBLE_SERVICES = SERVICE_CATEGORIES.filter(
-  (s) => s.id !== 'education-training'
-);
+const VISIBLE_SERVICES = SERVICE_CATEGORIES;
 
 const CONSULTING = VISIBLE_SERVICES.find((s) => s.id === 'consulting')!;
 const RESONANCE_CORE = VISIBLE_SERVICES.find((s) => s.id === 'resonance-core')!;
@@ -48,6 +46,7 @@ export default function ServicesPageClient() {
         kicker='Services'
         title='What We Build, Train & Transform'
         subhead={FLUXLINE_SECONDARY_TAGLINE}
+        as='h1'
       />
 
       <p

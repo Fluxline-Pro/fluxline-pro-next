@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Long-form audio exploring identity, technology, and transformation. Discover The Resonant Identity podcast and more.',
   keywords:
-    'podcast, audio, The Resonant Identity, Fluxline, transformation, strategy, identity, authenticity, mental health, self-help, self-improvement, personal development',
+    'podcast, audio, The Resonant Identity, The Resonant Identity Podcast, identity podcast, personal development podcast, The Resonance Core Framework, Terence Waters, Fluxline, transformation, strategy, identity, authenticity, mental health, self-help, self-improvement, personal development',
   openGraph: {
     title: 'Podcasts - Fluxline',
     description:

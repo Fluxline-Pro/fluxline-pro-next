@@ -5,9 +5,7 @@ import { SERVICE_SCROLL_MAPPING } from './scroll-mapping';
 import { getScrollById } from './scrolls/scrollsData';
 
 describe('service catalog', () => {
-  const visibleServices = SERVICE_CATEGORIES.filter(
-    (service) => service.id !== 'education-training'
-  );
+  const visibleServices = SERVICE_CATEGORIES;
 
   it('contains the five current service offerings in their existing order', () => {
     expect(visibleServices.map((service) => service.title)).toEqual([

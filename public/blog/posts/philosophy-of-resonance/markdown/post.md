@@ -16,8 +16,8 @@ tags:
 imageUrl: '/blog/posts/philosophy-of-resonance/images/resonance-philosophy.jpg'
 imageAlt: 'The Philosophy of Resonance'
 featured: true
-seoTitle: 'The Philosophy of Resonance: Understanding Your Drive | Fluxline Pro'
-seoDescription: 'Discover the philosophy of resonance and how it drives personal transformation. Learn to identify what moves you and unlock your emotional architecture for lasting impact.'
+seoTitle: 'The Philosophy of Resonance and Your Drive'
+seoDescription: 'The philosophy of resonance and how it drives personal transformation. Learn to identify what moves you and understand your emotional architecture.'
 seoKeywords:
   [
     'resonance',

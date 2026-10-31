@@ -5,15 +5,15 @@ import { SERVICE_CATEGORIES } from './constants';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 const SERVICES_TITLE =
-  'Services | Fluxline Resonance Group — RCF Coaching, Brand Design, Web Architecture & Consulting';
+  'Consulting & Coaching Services | Fluxline Resonance Group';
 const SERVICES_DESCRIPTION =
-  'Consulting, coaching, brand design, web architecture, and Resonance Core Framework™ engagements — offered by Fluxline Resonance Group for founders, leaders, and creative organizations.';
+  'Five offerings for founders and leaders: Resonance Core Framework™ coaching, business strategy consulting, brand design, web development, and personal training.';
 
 export const metadata: Metadata = {
   title: { absolute: SERVICES_TITLE },
   description: SERVICES_DESCRIPTION,
   keywords:
-    'services, Resonance Core Framework coaching, RCF coaching, identity alignment coaching, consulting, brand design, web architecture, cloud architecture consulting, content ecosystem design, web development, personal training, coaching, strategic planning, systems design, UX design',
+    'services, Resonance Core Framework coaching, RCF coaching, identity alignment coaching, leadership coaching, consulting, business strategy and systems alignment, brand design, brand and experience design, web architecture, cloud architecture consulting, content ecosystem design, web development, personal training, wellness, coaching, strategic planning, systems design, UX design',
   openGraph: {
     title: SERVICES_TITLE,
     description: SERVICES_DESCRIPTION,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         url: '/images/FluxlineLogo.png',
         width: 1200,
         height: 630,
-        alt: 'Fluxline Services',
+        alt: 'Fluxline Resonance Group consulting and coaching services',
       },
     ],
   },
@@ -47,9 +47,7 @@ export const metadata: Metadata = {
 
 // Service catalog JSON-LD for AI ingest — lists all offerings so AI systems
 // can answer "What services does Fluxline provide?"
-const VISIBLE_SERVICES = SERVICE_CATEGORIES.filter(
-  (s) => s.id !== 'education-training'
-);
+const VISIBLE_SERVICES = SERVICE_CATEGORIES;
 
 const serviceCatalogSchema = {
   '@context': 'https://schema.org',

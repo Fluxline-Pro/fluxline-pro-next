@@ -18,8 +18,8 @@ tags:
 imageUrl: '/blog/posts/the-fluxline-philosophy/images/fluxline-philosophy-core-values-infographic.png'
 imageAlt: 'The Fluxline Philosophy and Core Values intertwined to form The Resonance Core Framework™'
 featured: true
-seoTitle: 'The Fluxline Philosophy: Structuring Transformation & Shift | Fluxline Pro'
-seoDescription: 'Discover the Fluxline philosophy—where emotional resonance meets strategic flexibility. Learn how we architect transformative systems across technology, design, and personal growth.'
+seoTitle: 'The Fluxline Philosophy of Transformation'
+seoDescription: 'Where emotional resonance meets strategic flexibility: the Fluxline philosophy and how we architect transformative systems in technology, design, and growth.'
 seoKeywords:
   [
     'Fluxline philosophy',

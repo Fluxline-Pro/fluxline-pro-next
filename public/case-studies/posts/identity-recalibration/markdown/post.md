@@ -27,8 +27,8 @@ gallery:
   - url: '/case-studies/posts/identity-recalibration/images/the-resonance-core-glyph.jpg'
     alt: 'The Resonance Core Framework glyph'
     caption: 'Symbolic representation of the framework architecture'
-seoTitle: 'Fluxline Framework QA: Identity Recalibration Under Stress'
-seoDescription: 'Live demonstration of the Fluxline Framework under emotional load - somatic discipline, identity architecture, and symbolic integration in real-time application.'
+seoTitle: 'Fluxline Framework QA: Identity Under Stress'
+seoDescription: 'A live demonstration of the Fluxline Framework under emotional load: somatic discipline, identity architecture, and symbolic integration applied in real time.'
 seoKeywords:
   - 'Fluxline Framework'
   - 'identity transformation'

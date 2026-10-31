@@ -9,8 +9,8 @@ tags: ['consulting', 'expansion', 'global']
 imageAlt: 'Business Expansion'
 glyphTag: '🜄'
 emotionalCue: 'Visibility'
-seoTitle: 'Fluxline Consulting Expansion Throughout North America'
-seoDescription: 'Fluxline expands consulting services nationally throughout North America with digital transformation, technology modernization, agile coaching, and accessibility audits.'
+seoTitle: 'Fluxline Consulting Expands to North America'
+seoDescription: 'Fluxline expands consulting across the United States and Canada: digital transformation, technology modernization, agile coaching, and accessibility audits.'
 seoKeywords:
   [
     'global expansion',

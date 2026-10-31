@@ -16,8 +16,8 @@ tags:
 imageUrl: '/blog/posts/when-the-system-tests-first/images/systems-testing-process.jpg'
 imageAlt: 'Visual representation of the systems testing process showing integration of emotional waves with framework principles'
 featured: true
-seoTitle: 'When Your Framework Tests You: Real-Time Identity Transformation'
-seoDescription: "A founder's raw account of applying the Fluxline Framework during an emotional crisis. Discover how systems thinking meets somatic discipline in real transformation."
+seoTitle: 'When Your Framework Tests You in Real Time'
+seoDescription: "A founder's raw account of applying the Fluxline Framework during an emotional crisis, where systems thinking meets somatic discipline in real transformation."
 seoKeywords:
   - 'Fluxline Framework'
   - 'identity transformation'

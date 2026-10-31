@@ -27,7 +27,7 @@ gallery:
   - url: '/case-studies/posts/drive-model-assessment/images/drive-model-assessment.jpg'
     alt: 'The Fueling the DRIVE Model - How Identity Generates Momentum'
     caption: 'Complete DRIVE Model flow: From Spark to Identity Evolution'
-seoTitle: 'DRIVE Model Case Study - Nervous System Rewiring Real Time Data'
+seoTitle: 'DRIVE Model Case Study: Nervous System Data'
 seoDescription: 'A lived case study documenting how the DRIVE Model maps nervous system rewiring through somatic, emotional, and narrative signals during aligned action.'
 seoKeywords:
   [

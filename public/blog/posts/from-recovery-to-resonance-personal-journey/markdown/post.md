@@ -16,7 +16,7 @@ tags:
   ]
 imageUrl: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
 imageAlt: 'Before and after transformation showing strength training journey'
-seoTitle: 'From Recovery to Resonance: 8-Year Personal Training Transformation'
+seoTitle: 'From Recovery to Resonance: An 8-Year Journey'
 seoDescription: 'A personal story of transformation from 120 lbs. to 185 lbs., integrating NASM-certified training with emotional intelligence and The Resonance Core Framework™.'
 seoKeywords:
   [

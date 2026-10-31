@@ -32,7 +32,6 @@ import OurServicesImage from '../assets/images/OurServices1197x1600.jpg';
 import PodcastsImage from '../assets/images/Podcasts.jpg';
 import ConsultingImage from '../assets/images/ConsultingPortrait.jpg';
 import GitHubImage from '../assets/images/GitHubPortrait.jpg';
-import EducationImage from '../assets/images/EducationTrainingPortrait.jpg';
 import PersonalTrainingImage from '../assets/images/PersonalTrainingPortrait.jpg';
 import PressReleaseImage from '../assets/images/FluxlinePressReleases.png';
 import ResonanceCoreImage from '../assets/images/LifeCoachingResonanceCore.jpg';
@@ -106,10 +105,6 @@ const PAGE_CONFIGS: Record<
   '/legal/articles-of-conversion': {
     image: 'FLUXLINE_LOGO',
     imageText: 'Articles of Conversion',
-  },
-  '/services/education': {
-    image: EducationImage.src,
-    imageText: 'Education & Training',
   },
   '/services/personal-training': {
     image: PersonalTrainingImage.src,

@@ -23,7 +23,7 @@ gallery:
     alt: 'The Fueling the DRIVE Model - How Identity Generates Momentum'
     caption: 'The complete 6-stage DRIVE Model cycle'
 featured: true
-seoTitle: 'DRIVE Model in Action: Nervous System Rewiring Real Time | Fluxline Pro'
+seoTitle: 'DRIVE Model in Action: Nervous System Rewiring'
 seoDescription: 'A lived blog reflection on using the DRIVE Model to track nervous system rewiring through somatic, emotional, and narrative signals during a micro-activation.'
 seoKeywords:
   [

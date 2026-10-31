@@ -36,7 +36,7 @@ gallery:
 publishedDate: '2025-12-08'
 projectDate: '2017-2025'
 featured: true
-seoTitle: 'Personal Training Transformation Journey - NASM & Resonance Core Framework'
+seoTitle: 'Personal Training Transformation Journey'
 seoDescription: '8-year transformation from 120 lbs. to 185 lbs., integrating NASM certification with Resonance Core Framework™ for holistic wellness coaching.'
 seoKeywords:
   [

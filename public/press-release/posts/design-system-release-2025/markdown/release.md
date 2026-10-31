@@ -9,7 +9,7 @@ tags: ['design-system', 'components', 'open-source']
 imageAlt: 'Design System Release'
 glyphTag: '🜂'
 emotionalCue: 'Breakthrough'
-seoTitle: 'Fluxline Design System 1.0 - React Component Library'
+seoTitle: 'Fluxline Design System 1.0: React Components'
 seoDescription: 'Fluxline releases Design System 1.0 with 50+ React components, Fluent UI integration, Tailwind CSS, responsive patterns, and Storybook documentation.'
 seoKeywords:
   [

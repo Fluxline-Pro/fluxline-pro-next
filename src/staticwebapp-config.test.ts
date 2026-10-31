@@ -61,4 +61,15 @@ describe('staticwebapp.config.json', () => {
       statusCode: 301,
     });
   });
+
+  it('redirects the retired Coaching, Education & Leadership service URL', () => {
+    expect(
+      config.routes.find(
+        (route) => normalize(route.route) === '/services/education'
+      )
+    ).toMatchObject({
+      redirect: '/services',
+      statusCode: 301,
+    });
+  });
 });

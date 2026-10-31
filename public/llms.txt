@@ -4,6 +4,8 @@
 
 The Resonance Core Framework™ (RCF) is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline, it is delivered through coaching and consulting, explored on The Resonant Identity podcast, and forthcoming as a book, targeted for Q1 2027, with preorders opening in early November 2026.
 
+Fluxline builds systems that work, brands that connect, and practices that last. It is for founders, leaders, creatives, small teams, and growing businesses who want clearer decisions and change that holds. The RCF is a decision and identity framework, not therapy. Structure the Shift. Modular by design. Resonant by nature.
+
 ## Core pages
 
 - [Home](https://www.fluxline.pro/): Who Fluxline is, core values, and services
@@ -13,12 +15,67 @@ The Resonance Core Framework™ (RCF) is a structured identity system built on t
 - [RCF Preview (PDF)](https://www.fluxline.pro/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf): The book's introduction — why self-help often fails, where the framework came from, and who it's for
 - [Contact](https://www.fluxline.pro/contact): Book a free consultation
 
+## Services
+
+- [Resonance Core Framework™ coaching and consulting](https://www.fluxline.pro/services/resonance-core): Identity coherence, narrative reframing, and embodiment integration
+- [Business Strategy & Systems Alignment](https://www.fluxline.pro/services/consulting): Strategic consulting, operational design, and content ecosystem design
+- [Brand & Experience Design](https://www.fluxline.pro/services/design): Visual identity expressed through simplified human-centered design and experience
+- [Web Development & Digital Architecture](https://www.fluxline.pro/services/development): Custom web applications scaled with maximum precision and modularity
+- [Personal Training & Wellness](https://www.fluxline.pro/services/personal-training): Embodied identity work through physical and emotional transformation
+
+## Key terms
+
+Definitions as used on the framework page. Each links to its anchor there.
+
+- [The Resonance Core Framework™ (RCF)](https://www.fluxline.pro/resonance-core-framework): A practical system for making change that holds, built on alignment rather than force.
+- [Resonance](https://www.fluxline.pro/resonance-core-framework): Alignment between your identity, values, feelings, and actions.
+- [Behavioral Gravity](https://www.fluxline.pro/resonance-core-framework#behavioral-gravity): The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.
+- [Identity Coherence](https://www.fluxline.pro/resonance-core-framework#identity-coherence): When your values, expression, and behavior agree. Not perfection, alignment.
+- [Window of Choice](https://www.fluxline.pro/resonance-core-framework#window-of-choice): The space between a trigger and your response where a conscious, identity-aligned choice becomes possible.
+- [DRIVE](https://www.fluxline.pro/resonance-core-framework#drive-model): Directional, Repeatable, Identity-Aligned Virtuous Expressions: repeatable actions that move you toward the person you are becoming.
+- [The DRIVE Model](https://www.fluxline.pro/resonance-core-framework#drive-system): Six stages (Spark, Coherence, Activation, Momentum, Endurance, Embodiment) that carry a DRIVE from first spark to lived identity.
+- [Judgment Loop](https://www.fluxline.pro/resonance-core-framework#identity-distortion-loop): The cycle where judgments about yourself and others reinforce a distorted view of identity.
+- [Data Loop](https://www.fluxline.pro/resonance-core-framework#identity-alignment-loop): The practice of treating Cues as information: notice them, trace where they come from, test whether they are true, then decide.
+- [The Decision Integrity Index (The DII)](https://www.fluxline.pro/resonance-core-framework#dii-protocol): The RCF's way of checking whether a decision lines up with your identity and values, anchored to six core values and a Decision Alignment Score.
+- [Decision Alignment Score (DAS)](https://www.fluxline.pro/resonance-core-framework#decision-alignment-score): The score a single decision earns inside The DII.
+- [Three dimensions of identity](https://www.fluxline.pro/resonance-core-framework#three-rings): Inward (the inner signal), Outward (expression), and Systemic (impact).
+
 ## Six core values (The Decision Integrity Index scoring anchors)
 
 Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, and Strategic Innovation. These are the scoring anchors of The Decision Integrity Index (The DII) in The Resonance Core Framework™.
 
+- Embodied Awareness: Integrating mind, body, and spirit for holistic transformation and authentic connection.
+- Modular Precision: Systems designed with clarity and flexibility, adaptable to your unique journey and evolution.
+- Resilient Alignment: Staying connected to who you are in real conditions (stress, limited energy, competing demands), not just ideal ones.
+- Somatic Discipline: Recognizing the wisdom of the body and integrating physical practices with strategic thinking.
+- Creative Truth: Authentic expression and honest communication guide every interaction and deliverable.
+- Strategic Innovation: Thoughtful experimentation balanced with disciplined, repeatable practice for sustainable growth.
+
+## Questions this site answers
+
+- [What is The Resonance Core Framework™?](https://www.fluxline.pro/resonance-core-framework#faq)
+- [How is the RCF different from other coaching or identity frameworks?](https://www.fluxline.pro/resonance-core-framework#faq)
+- [Who is the RCF designed for?](https://www.fluxline.pro/resonance-core-framework#faq)
+- [What is Behavioral Gravity?](https://www.fluxline.pro/resonance-core-framework#faq)
+- [What is The Decision Integrity Index (The DII)?](https://www.fluxline.pro/resonance-core-framework#faq)
+- [What are the RCF's Universal Truths?](https://www.fluxline.pro/resonance-core-framework#faq)
+- [When is the book coming out?](https://www.fluxline.pro/books): Targeted for Q1 2027, with preorders opening in early November 2026
+- [What services does Fluxline provide?](https://www.fluxline.pro/services)
+- [How do I work with Fluxline?](https://www.fluxline.pro/contact): Book a free consultation
+
+## Optional
+
+- [Blog](https://www.fluxline.pro/blog): Insights on technology, design, business transformation, and strategic thinking
+- [Case studies](https://www.fluxline.pro/case-studies): Client stories of strategic and business transformation
+- [Portfolio](https://www.fluxline.pro/portfolio): Projects spanning web applications, mobile apps, and enterprise software
+- [Podcasts](https://www.fluxline.pro/podcasts): Long-form audio exploring identity, technology, and transformation, including The Resonant Identity podcast
+- [Glossary](https://www.fluxline.pro/legal/glossary): Fluxline's mythic and technical terminology
+
 ## Related
 
 - [The Resonant Identity Podcast](https://theresonantidentity.com/): The framework in conversation, weekly
+- [Start here (podcast)](https://theresonantidentity.com/start-here/): Where new listeners begin
 - [The framework on the podcast](https://theresonantidentity.com/framework/): Each RCF concept with the episodes that explore it
 - [Terence Waters](https://terencewaters.com/): Founder of Fluxline and author of The Resonance Core Framework™
+- [About Terence Waters](https://terencewaters.com/about/): CEO, Founder, and Main Architect of Fluxline Resonance Group, and author of The Resonance Core Framework™
+- [The RCF on TerenceWaters.com](https://terencewaters.com/resonance-core-framework): The author's summary of the framework

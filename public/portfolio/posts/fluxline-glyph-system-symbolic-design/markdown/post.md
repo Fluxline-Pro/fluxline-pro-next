@@ -37,7 +37,7 @@ gallery:
 publishedDate: '2025-12-08'
 projectDate: '2024-2025'
 featured: true
-seoTitle: 'Fluxline Glyph System - Symbolic Design & Brand Identity Portfolio'
+seoTitle: 'Fluxline Glyph System: Symbolic Brand Design'
 seoDescription: "Portfolio showcase of Fluxline's proprietary glyph system: 12+ symbols translating transformation methodology into memorable brand identity."
 seoKeywords:
   - glyph design
