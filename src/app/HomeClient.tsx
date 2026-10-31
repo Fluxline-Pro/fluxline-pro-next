@@ -587,7 +587,6 @@ export default function HomeClient() {
                     (s) =>
                       s.category === group.key &&
                       s.id !== 'consulting' &&
-                      s.id !== 'education-training' &&
                       s.id !== 'resonance-core'
                   ).map((service) => (
                     <FxCard

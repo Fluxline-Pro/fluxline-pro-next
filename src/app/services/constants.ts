@@ -23,9 +23,6 @@ export const DESIGN_SUMMARY =
 export const PERSONAL_TRAINING_SUMMARY =
   "<strong>Physical training with emotional intelligence—build strength, reduce pain, and create a sustainable practice.</strong> At Fluxline, we specialize in personalized fitness coaching that adapts to your goals, body, and life. Whether you're returning to movement, working through chronic pain, or pushing your physical limits, we design your training path with care and precision. This is embodied identity work—training that aligns your physical practice with who you're becoming.<br /><br />Every program is tailored to your schedule, body type, and readiness. We work with all bodies, all backgrounds, and all starting points. Train in person in Salt Lake City and along Utah's Wasatch Front, or remotely from wherever you are.";
 
-export const EDUCATION_TRAINING_SUMMARY =
-  "<strong>Workshops and coaching to help you lead, teach, and communicate with more clarity and embodiment.</strong> Fluxline's Coaching, Education & Leadership offerings guide founders, creatives, and organizations through experiential learning and leadership development. Whether you're leading a team, launching a program, or developing your voice, we offer practical frameworks, live workshops, and personalized coaching to help you build with purpose.<br /><br />Every session is designed to strengthen your leadership presence, clarify your message, and help you show up with confidence in every interaction.";
-
 export const RESONANCE_CORE_SUMMARY =
   '<strong>A transformational system for decoding your cues, reframing your narratives, and authoring the identity you choose to live from.</strong> <a href="/resonance-core-framework/">The Resonance Core Framework™</a> is a guided, structured process that helps you understand the patterns shaping your life — somatic, emotional, narrative, and identity based. Through archetypal mapping, reflective inquiry, and identity recalibration, you learn to align your inner world with the life, work, and relationships you\'re trying to build.<br /><br />This isn\'t generic coaching. This is <strong>identity work</strong>, <strong>narrative work</strong>, and <strong>embodiment work</strong> — woven into a single, coherent system.<br /><br /><strong>Identity in Motion</strong> is a $99, four-week guided program for people who keep getting stuck with their health goals. It uses the framework to map internal roles and blocks, define an identity that supports consistency, and build sustainable habits through embodied practice. <a href="/scrolls/pdfs/Fluxline_RCF_4Week_Unblocking_Program_v4.pdf" target="_blank" rel="noopener noreferrer">Download the Identity in Motion white paper (PDF)</a>.';
 
@@ -246,41 +243,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
           'Can Fluxline help with content ecosystem design and content strategy?',
         answer:
           "Yes. Content ecosystem design — structuring, tagging, publishing, and distributing content so it works as a coherent, searchable, AI-ingestible knowledge base — is one of Fluxline's core competencies.",
-      },
-    ],
-  },
-  {
-    id: 'education-training',
-    title: 'Coaching, Education & Leadership',
-    description: 'Workshops, coaching, and strategic embodiment.',
-    summary: EDUCATION_TRAINING_SUMMARY,
-    icon: 'Education',
-    path: '/services/education',
-    category: 'depth-strategy',
-    faqs: [
-      {
-        question:
-          "What does Fluxline's coaching and education service include?",
-        answer:
-          'Our Coaching, Education & Leadership service includes experiential learning workshops, leadership development coaching, emotional intelligence training, custom curriculum design, team dynamics facilitation, and ongoing community support.',
-      },
-      {
-        question:
-          'Does Fluxline offer group workshops or only individual coaching?',
-        answer:
-          'We offer both. Individual coaching for founders and leaders, as well as group workshops for teams and organizations. Programs are custom-designed to fit your team size, goals, and industry context.',
-      },
-      {
-        question:
-          "What leadership outcomes can clients expect from Fluxline's coaching programs?",
-        answer:
-          'Clients develop stronger leadership presence, clearer communication, improved emotional regulation, greater confidence in decision-making, and the ability to inspire and align their teams around a shared vision.',
-      },
-      {
-        question:
-          'Can Fluxline design custom training curricula for organizations?',
-        answer:
-          'Yes. We design and deliver custom educational programs for organizations that need tailored learning experiences — from onboarding frameworks to leadership development tracks aligned with company culture and values.',
       },
     ],
   },

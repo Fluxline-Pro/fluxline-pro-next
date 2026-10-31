@@ -47,9 +47,7 @@ export const metadata: Metadata = {
 
 // Service catalog JSON-LD for AI ingest — lists all offerings so AI systems
 // can answer "What services does Fluxline provide?"
-const VISIBLE_SERVICES = SERVICE_CATEGORIES.filter(
-  (s) => s.id !== 'education-training'
-);
+const VISIBLE_SERVICES = SERVICE_CATEGORIES;
 
 const serviceCatalogSchema = {
   '@context': 'https://schema.org',
