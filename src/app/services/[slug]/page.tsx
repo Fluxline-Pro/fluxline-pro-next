@@ -166,7 +166,7 @@ export default function ServiceDetailPage() {
         >
           <img
             src={serviceImage.src}
-            alt={service.title}
+            alt={service.imageAlt ?? service.title}
             style={{
               display: 'block',
               width: '100%',

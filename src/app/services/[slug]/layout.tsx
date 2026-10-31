@@ -39,19 +39,23 @@ export async function generateMetadata({
     };
   }
 
-  // Remove HTML tags from summary for meta description
-  const plainTextSummary = service.summary
-    .replace(/<[^>]*>/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .substring(0, 160);
+  // Prefer the hand-written search description; otherwise fall back to the
+  // summary with its HTML stripped.
+  const description =
+    service.seoDescription ??
+    service.summary
+      .replace(/<[^>]*>/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .substring(0, 160);
+  const title = `${service.seoTitle ?? service.title} | Fluxline Resonance Group`;
 
   return {
-    title: `${service.title} | Fluxline Resonance Group`,
-    description: plainTextSummary,
+    title,
+    description,
     openGraph: {
-      title: `${service.title} | Fluxline Resonance Group`,
-      description: plainTextSummary,
+      title,
+      description,
       type: 'website',
       url: `https://www.fluxline.pro${service.path}`,
       siteName: 'Fluxline Resonance Group',
@@ -66,8 +70,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${service.title} | Fluxline Resonance Group`,
-      description: plainTextSummary,
+      title,
+      description,
       creator: '@fluxlinepro',
     },
     alternates: {

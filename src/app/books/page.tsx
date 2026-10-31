@@ -4,9 +4,9 @@ import { getAllBooks } from './lib/bookLoader';
 import BooksListingClient from './BooksListingClient';
 
 export const metadata: Metadata = {
-  title: 'The Resonance Core Framework™ — Books | Fluxline',
+  title: 'The Resonance Core Framework™ Book & Workbook',
   description:
-    'The Resonance Core Framework™ explained: what it is, the DRIVE Model, who it is for, and what will be offered with the forthcoming book and companion workbook.',
+    'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Preorders open in early November 2026. See what is inside.',
   keywords: [
     'The Resonance Core Framework book',
     'resonance core framework',
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     'Fluxline',
   ],
   openGraph: {
-    title: 'The Resonance Core Framework™ — Coming Soon',
+    title: 'The Resonance Core Framework™ Book & Workbook',
     description:
-      'A practical system for making change that holds — built on alignment rather than force. Read what the framework is and what ships with the book.',
+      'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Preorders open in early November 2026. See what is inside.',
     url: 'https://www.fluxline.pro/books',
     siteName: 'Fluxline',
     type: 'website',
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Resonance Core Framework™ — Coming Soon',
+    title: 'The Resonance Core Framework™ Book & Workbook',
     description:
-      'A practical system for making change that holds — built on alignment rather than force.',
+      'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Preorders open in early November 2026. See what is inside.',
     images: ['/images/RCF_Logo.jpeg'],
   },
   alternates: {

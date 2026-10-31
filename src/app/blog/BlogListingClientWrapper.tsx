@@ -58,8 +58,8 @@ export function BlogListingClientWrapper({
     <ContentListingPage
       title="Writing & Listening"
       kicker="Content"
-      subhead="Essays, frameworks, and conversations on congruence."
-      description="Essays, frameworks, and conversations on congruence."
+      subhead="Essays, frameworks, and conversations on congruence, from identity and personal growth to design and web development."
+      description="Essays, frameworks, and conversations on congruence, from identity and personal growth to design and web development."
       basePath="/blog"
       cards={cards}
       filters={filters}

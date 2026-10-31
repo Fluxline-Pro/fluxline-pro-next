@@ -5,9 +5,9 @@ import { SERVICE_CATEGORIES } from './constants';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
 
 const SERVICES_TITLE =
-  'Services | Fluxline Resonance Group — RCF Coaching, Brand Design, Web Architecture & Consulting';
+  'Consulting & Coaching Services | Fluxline Resonance Group';
 const SERVICES_DESCRIPTION =
-  'Consulting, coaching, brand design, web architecture, and Resonance Core Framework™ engagements — offered by Fluxline Resonance Group for founders, leaders, and creative organizations.';
+  'Five offerings for founders and leaders: Resonance Core Framework™ coaching, business strategy consulting, brand design, web development, and personal training.';
 
 export const metadata: Metadata = {
   title: { absolute: SERVICES_TITLE },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         url: '/images/FluxlineLogo.png',
         width: 1200,
         height: 630,
-        alt: 'Fluxline Services',
+        alt: 'Fluxline Resonance Group consulting and coaching services',
       },
     ],
   },

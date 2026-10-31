@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import HomeClient from './HomeClient';
 
-const TITLE =
-  'Fluxline Resonance Group | Consulting, Coaching & The Resonance Core Framework™';
+const TITLE = 'Coaching & Consulting for Founders | Fluxline Resonance Group';
 const DESCRIPTION =
-  'Fluxline Resonance Group offers consulting, coaching, and identity systems work through The Resonance Core Framework™ — helping founders, leaders, and creatives build congruence between who they are and what they build.';
+  'Fluxline Resonance Group offers coaching and consulting for founders and leaders: business strategy, brand identity, web development, and personal training.';
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

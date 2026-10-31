@@ -13,7 +13,7 @@ import { COMPANY_VALUES } from '@/lib/siteContent';
 const PAGE_URL = `https://www.fluxline.pro${RCF_FRAMEWORK_PATH}`;
 const TITLE = 'The Resonance Core Framework™ | Fluxline Resonance Group';
 const DESCRIPTION =
-  'The complete reference for The Resonance Core Framework™ by Terence Waters: every concept, the DRIVE Model, the six core values, and how to work with it.';
+  'The Resonance Core Framework™ by Terence Waters, a decision-making and identity framework for leaders: every concept, the DRIVE Model, and the six core values.';
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

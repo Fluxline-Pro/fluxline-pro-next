@@ -48,6 +48,7 @@ export default function ServicesPageClient() {
         kicker='Services'
         title='What We Build, Train & Transform'
         subhead={FLUXLINE_SECONDARY_TAGLINE}
+        as='h1'
       />
 
       <p
