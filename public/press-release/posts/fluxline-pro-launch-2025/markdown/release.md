@@ -31,7 +31,7 @@ Built on the latest technology stack including **Next.js 16** and **React 19**, 
 
 - **Server-side rendering** for optimal performance
 - **Responsive design** across all devices
-- **Advanced accessibility features** (WCAG 2.1 AA compliant)
+- **Advanced accessibility features**, built in from the start
 - **Seamless integration** with Azure cloud services
 - **Modern component-based** architecture
 
