@@ -41,7 +41,7 @@ export default function ContactPage() {
               <img
                 className='fx-contact-portrait'
                 src={ContactImage.src}
-                alt='Terence Waters, founder of Fluxline Resonance Group, seated in front of abstract paintings'
+                alt='Terence Waters, CEO, founder, and main architect of Fluxline Resonance Group, seated in front of abstract paintings'
                 style={{
                   display: 'block',
                   width: '100%',

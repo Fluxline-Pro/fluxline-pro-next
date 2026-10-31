@@ -317,8 +317,7 @@ export default function RootLayout({
               '@id': 'https://terencewaters.com/#person',
               name: 'Terence Waters',
               url: 'https://terencewaters.com',
-              jobTitle:
-                'Founder & CEO, author, systems architect, and identity coach',
+              jobTitle: 'CEO, Founder, and Main Architect',
               worksFor: {
                 '@id': 'https://www.fluxline.pro/#organization',
               },
