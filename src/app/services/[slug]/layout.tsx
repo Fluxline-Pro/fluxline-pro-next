@@ -114,7 +114,7 @@ export default async function ServiceDetailLayout({
     '@type': 'Service',
     '@id': `https://www.fluxline.pro${service.path}#service`,
     name: service.title,
-    description: plainTextSummary,
+    description: service.seoDescription ?? plainTextSummary,
     url: `https://www.fluxline.pro${service.path}`,
     provider: {
       '@type': 'Organization',
