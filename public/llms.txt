@@ -31,12 +31,12 @@ Definitions as used on the framework page. Each links to its anchor there.
 - [Resonance](https://www.fluxline.pro/resonance-core-framework): Alignment between your identity, values, feelings, and actions.
 - [Behavioral Gravity](https://www.fluxline.pro/resonance-core-framework#behavioral-gravity): The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.
 - [Identity Coherence](https://www.fluxline.pro/resonance-core-framework#identity-coherence): When your values, expression, and behavior agree. Not perfection, alignment.
-- [Window of Choice](https://www.fluxline.pro/resonance-core-framework#window-of-choice): The range of choices you can see and act on in any moment. It widens with presence and clarity and narrows under stress.
+- [Window of Choice](https://www.fluxline.pro/resonance-core-framework#window-of-choice): The space between a trigger and your response where a conscious, identity-aligned choice becomes possible.
 - [DRIVE](https://www.fluxline.pro/resonance-core-framework#drive-model): Directional, Repeatable, Identity-Aligned Virtuous Expressions: repeatable actions that move you toward the person you are becoming.
 - [The DRIVE Model](https://www.fluxline.pro/resonance-core-framework#drive-system): Six stages (Spark, Coherence, Activation, Momentum, Endurance, Embodiment) that carry a DRIVE from first spark to lived identity.
 - [Judgment Loop](https://www.fluxline.pro/resonance-core-framework#identity-distortion-loop): The cycle where judgments about yourself and others reinforce a distorted view of identity.
 - [Data Loop](https://www.fluxline.pro/resonance-core-framework#identity-alignment-loop): The practice of treating Cues as information: notice them, trace where they come from, test whether they are true, then decide.
-- [The Decision Integrity Index (The DII)](https://www.fluxline.pro/resonance-core-framework#dii-protocol): Scores how well a decision aligns with your identity, using six core values and a Decision Alignment Score.
+- [The Decision Integrity Index (The DII)](https://www.fluxline.pro/resonance-core-framework#dii-protocol): The RCF's way of checking whether a decision lines up with your identity and values, anchored to six core values and a Decision Alignment Score.
 - [Decision Alignment Score (DAS)](https://www.fluxline.pro/resonance-core-framework#decision-alignment-score): The score a single decision earns inside The DII.
 - [Three dimensions of identity](https://www.fluxline.pro/resonance-core-framework#three-rings): Inward (the inner signal), Outward (expression), and Systemic (impact).
 
