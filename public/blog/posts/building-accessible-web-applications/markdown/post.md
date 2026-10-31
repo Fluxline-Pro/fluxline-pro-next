@@ -411,7 +411,7 @@ By following WCAG 2.1 guidelines and testing thoroughly, you'll create applicati
 
 ## Related Resources
 
-- [Fluxline 2.0 Achieves WCAG 2.1 AA Certification](/press-release/accessibility-certification-2025) — How we achieved accessibility compliance
+- [Fluxline 2.0 Is Built with Accessibility in Mind](/press-release/accessibility-certification-2025): How we approached accessibility on the Fluxline 2.0 platform
 - [Fluxline 2.0 Platform Development](/case-studies/fluxline-2-platform-development) — Building accessibility into the platform
 - [Design Systems for Scalable Applications](/blog/design-systems-scalable-applications) — Accessible component architecture
 - [Fluxline Pro Website Portfolio](/portfolio/fluxline-pro-website) — Live example of WCAG 2.1 AA implementation

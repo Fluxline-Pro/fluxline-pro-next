@@ -1,40 +1,39 @@
 ---
-title: 'Fluxline 2.0 Achieves WCAG 2.1 AA Accessibility Certification'
+title: 'Fluxline 2.0 Is Built with Accessibility in Mind'
 subtitle: 'Commitment to Inclusive Digital Experiences'
-description: 'The Fluxline 2.0 platform has been certified as WCAG 2.1 AA compliant, demonstrating our commitment to creating inclusive digital experiences for all users, regardless of ability.'
+description: 'The Fluxline 2.0 platform was designed and built with accessibility in mind, so it works well for as many people as possible, whatever their abilities.'
 author: 'Fluxline Resonance Group'
 publishedDate: '2025-12-10'
-category: 'Achievement'
-tags: ['accessibility', 'certification', 'wcag']
-imageAlt: 'Accessibility Certification'
+category: 'Company News'
+tags: ['accessibility', 'inclusive design']
+imageAlt: 'Accessibility on the Fluxline 2.0 platform'
 glyphTag: '🜄'
 emotionalCue: 'Integration'
-seoTitle: 'Fluxline 2.0 WCAG 2.1 AA Accessibility'
-seoDescription: 'Fluxline 2.0 announces WCAG 2.1 AA accessibility, with keyboard navigation, screen reader support, color contrast, text scaling, and focus management.'
+seoTitle: 'Fluxline 2.0: Built with Accessibility in Mind'
+seoDescription: 'How Fluxline 2.0 was built with accessibility in mind: keyboard navigation, screen reader support, readable contrast, text scaling, and clear focus.'
 seoKeywords:
   [
     'accessibility',
-    'WCAG 2.1 AA',
     'inclusive design',
     'digital accessibility',
-    'certification',
+    'accessible web design',
   ]
 ---
 
-Fluxline Resonance Group announces that the **Fluxline 2.0 platform** has achieved **WCAG 2.1 AA accessibility certification**, reinforcing our commitment to creating inclusive digital experiences.
+Fluxline Resonance Group designed and built the **Fluxline 2.0 platform** with accessibility in mind from the start, as part of our commitment to inclusive digital experiences.
 
-## Comprehensive Accessibility Features
+## Accessibility Features
 
-The certification validates our implementation of:
+The platform includes:
 
-- **Keyboard navigation** throughout the platform
-- **Screen reader compatibility** for visually impaired users
-- **Color contrast ratios** meeting accessibility standards
+- **Keyboard navigation** throughout the site
+- **Screen reader support**, with semantic structure and ARIA labels
+- **Color contrast** chosen for readability
 - **Responsive text scaling** for better readability
-- **Focus management** and ARIA labels for improved navigation
+- **Focus management**, so it is always clear where you are on the page
 
 ## Our Commitment
 
-This achievement reflects our core belief that technology should be accessible to everyone. We will continue to prioritize accessibility in all our products and services, ensuring that digital experiences are available to users of all abilities.
+We believe technology should be accessible to everyone. We will keep improving accessibility across our products and services, and we welcome feedback when something doesn't work for you.
 
-Accessibility is not just a compliance requirement—it's a fundamental principle that guides our design and development processes. Every user deserves equal access to information and services, regardless of their physical or cognitive abilities.
+Accessibility is more than a checklist. It is a principle that guides how we design and build, because every user deserves equal access to information and services, whatever their physical or cognitive abilities.
