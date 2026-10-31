@@ -276,14 +276,6 @@ export default function RootLayout({
                     '@type': 'Offer',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'Coaching, Education & Leadership',
-                      url: 'https://www.fluxline.pro/services/education',
-                    },
-                  },
-                  {
-                    '@type': 'Offer',
-                    itemOffered: {
-                      '@type': 'Service',
                       name: 'Resonance Core Framework™ Coaching & Consulting',
                       url: 'https://www.fluxline.pro/resonance-core-framework',
                     },
@@ -311,15 +303,6 @@ export default function RootLayout({
               publisher: {
                 '@id': 'https://www.fluxline.pro/#organization',
               },
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: {
-                  '@type': 'EntryPoint',
-                  urlTemplate:
-                    'https://www.fluxline.pro/search?q={search_term_string}',
-                },
-                'query-input': 'required name=search_term_string',
-              },
             }),
           }}
         />
@@ -334,7 +317,8 @@ export default function RootLayout({
               '@id': 'https://terencewaters.com/#person',
               name: 'Terence Waters',
               url: 'https://terencewaters.com',
-              jobTitle: 'Founder & Principal Consultant',
+              jobTitle:
+                'Founder & CEO, author, systems architect, and identity coach',
               worksFor: {
                 '@id': 'https://www.fluxline.pro/#organization',
               },

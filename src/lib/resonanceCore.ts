@@ -212,7 +212,7 @@ export const RCF_CONCEPTS: {
     id: 'window-of-choice',
     name: 'Window of Choice',
     summary:
-      'The range of choices you can see and act on — wide when present, narrow under stress.',
+      'The space between a trigger and your response where a conscious, identity-aligned choice becomes possible.',
     body: 'The range of choices you can actually see and act on in any moment. It widens with presence and clarity and narrows under stress — which matters most at threshold moments, when you can respond from who you are now rather than react from who you used to be. The work is keeping it wide through grounding, presence, and emotional intelligence.',
   },
   {
