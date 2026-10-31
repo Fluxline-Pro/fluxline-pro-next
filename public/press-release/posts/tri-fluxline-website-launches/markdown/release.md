@@ -9,8 +9,8 @@ tags: ['identity', 'resonance', 'platform', 'launch', 'TRI']
 imageAlt: 'The Resonant Identity Launch'
 glyphTag: '🜁'
 emotionalCue: 'Emergence'
-seoTitle: 'Fluxline Launches TheResonantIdentity.com and Fluxline.pro v3.0'
-seoDescription: 'Fluxline Resonance Group launches TheResonantIdentity.com, a dedicated platform for The Resonant Identity, alongside Fluxline.pro v3.0 — a redesigned parent architecture for identity engineering and resonant personal development.'
+seoTitle: 'Fluxline Launches TheResonantIdentity.com'
+seoDescription: 'Fluxline Resonance Group launches TheResonantIdentity.com, the home of The Resonant Identity, alongside Fluxline.pro v3.0, its redesigned parent platform.'
 seoKeywords:
   [
     'identity architecture',

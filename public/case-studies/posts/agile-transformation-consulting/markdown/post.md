@@ -18,7 +18,7 @@ technologies:
 publishedDate: '2024-01-26'
 projectDuration: '9 months'
 featured: true
-seoTitle: 'Agile Transformation Case Study - Intermountain Health MyIntermountain'
+seoTitle: 'Agile Transformation Case Study: Intermountain'
 seoDescription: 'How Agile transformation and infrastructure development delivered a full-scale intranet for 65K+ healthcare professionals in 9 months.'
 seoKeywords:
   [

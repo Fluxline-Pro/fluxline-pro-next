@@ -9,8 +9,8 @@ tags: ['accessibility', 'certification', 'wcag']
 imageAlt: 'Accessibility Certification'
 glyphTag: '🜄'
 emotionalCue: 'Integration'
-seoTitle: 'Fluxline 2.0 WCAG 2.1 AA Accessibility Certification'
-seoDescription: 'Fluxline 2.0 achieves WCAG 2.1 AA accessibility certification, ensuring inclusive digital experiences with keyboard navigation, screen reader support, and proper color contrast.'
+seoTitle: 'Fluxline 2.0 WCAG 2.1 AA Accessibility'
+seoDescription: 'Fluxline 2.0 announces WCAG 2.1 AA accessibility, with keyboard navigation, screen reader support, color contrast, text scaling, and focus management.'
 seoKeywords:
   [
     'accessibility',

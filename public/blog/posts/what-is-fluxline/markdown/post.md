@@ -16,8 +16,8 @@ tags:
 imageUrl: '/images/home/HomePageCover4kPortrait.jpeg'
 imageAlt: 'What is Fluxline? Aligning identity with what you build, accomplish, and become'
 featured: true
-seoTitle: 'What is Fluxline? Identity-Aligned Business, Technology, and Personal Growth'
-seoDescription: 'What is Fluxline? Fluxline helps businesses and individuals align identity with action through brand identity, web and app development, training, and coaching built on The Resonance Core Framework™.'
+seoTitle: 'What Is Fluxline? Identity-Aligned Business'
+seoDescription: 'Fluxline helps businesses and people align identity with action through brand identity, web and app development, training, and coaching built on The RCF.'
 seoKeywords:
   - 'what is Fluxline'
   - 'Fluxline'

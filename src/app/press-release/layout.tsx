@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Press Release',
+  // A plain string title here would drop the root '%s | Fluxline.pro'
+  // template for every detail page below this layout.
+  title: { default: 'Press Release', template: '%s | Fluxline.pro' },
   description:
     'Public announcements, media features, and milestone broadcasts from Fluxline Resonance Group.',
   openGraph: {

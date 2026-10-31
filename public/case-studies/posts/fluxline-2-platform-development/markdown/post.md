@@ -21,8 +21,8 @@ imageAlt: 'Fluxline Pro 2.0 Design System Theming'
 publishedDate: '2025-12-15'
 projectDuration: '3 months'
 featured: true
-seoTitle: 'Fluxline 2.0 Platform Development Case Study - Brand Identity & Technical Evolution'
-seoDescription: 'How Fluxline transformed from personal site to enterprise platform using Next.js 16, achieving 94/100 Lighthouse scores and creating a scalable brand identity system.'
+seoTitle: 'Fluxline 2.0 Platform Development Case Study'
+seoDescription: 'How Fluxline grew from a personal site into an enterprise platform on Next.js 16, with 94/100 Lighthouse scores and a scalable brand identity system.'
 seoKeywords:
   [
     'platform development',

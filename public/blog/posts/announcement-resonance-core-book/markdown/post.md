@@ -16,8 +16,8 @@ tags:
 imageUrl: '/blog/posts/announcement-resonance-core-book/images/RCF_logo.jpeg'
 imageAlt: 'The Resonance Core Framework™ logo representing alignment and human transformation'
 featured: true
-seoTitle: 'Introducing The Resonance Core Framework™ | A New Approach to Aligned Change'
-seoDescription: 'Discover The Resonance Core Framework™—a practical, trackable system for creating meaningful change through alignment. Built on universal truths, psychological research, and lived experience.'
+seoTitle: 'Introducing The Resonance Core Framework™'
+seoDescription: 'Meet The Resonance Core Framework™, a practical, trackable system for change through alignment, built on universal truths, research, and lived experience.'
 seoKeywords:
   - 'Resonance Core Framework'
   - 'personal transformation'

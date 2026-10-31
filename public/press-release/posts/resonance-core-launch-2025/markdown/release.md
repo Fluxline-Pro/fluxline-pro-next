@@ -9,8 +9,8 @@ tags: ['coaching', 'wellness', 'leadership']
 imageAlt: 'Resonance Core Launch'
 glyphTag: '🜂'
 emotionalCue: 'Integration'
-seoTitle: 'The Resonance Core Framework Life Coaching Program for Business Leaders and Individuals'
-seoDescription: 'Fluxline launches The Resonance Core Framework™ life coaching for executives with emotional intelligence development, work-life integration, and leadership presence cultivation.'
+seoTitle: 'The Resonance Core Framework™ Life Coaching'
+seoDescription: 'Fluxline launches The Resonance Core Framework™ life coaching for business leaders: emotional intelligence, work-life integration, and leadership presence.'
 seoKeywords:
   [
     'life coaching',

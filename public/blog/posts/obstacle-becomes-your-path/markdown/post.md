@@ -17,7 +17,7 @@ tags:
 imageUrl: '/blog/posts/obstacle-becomes-your-path/images/obstacle-pathway.png'
 imageAlt: 'The Obstacle Becomes Your Path'
 featured: true
-seoTitle: 'The Obstacle Becomes Your Path: Learning Through Friction | Fluxline Pro'
+seoTitle: 'The Obstacle Becomes Your Path'
 seoDescription: 'Discover how obstacles transform into pathways for growth. Learn to turn barriers into catalysts through resilience, determination, and the power of friction.'
 seoKeywords:
   [

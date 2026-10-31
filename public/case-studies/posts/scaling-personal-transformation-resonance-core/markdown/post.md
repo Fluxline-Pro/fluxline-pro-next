@@ -16,8 +16,8 @@ technologies:
 publishedDate: '2025-12-08'
 projectDuration: '8 years (2017-2025)'
 featured: true
-seoTitle: 'Scaling Personal Transformation Coaching Business Case Study'
-seoDescription: 'Discover how NASM certification combined with Resonance Core Framework™ supported a differentiated coaching business with premium pricing and sustainable growth.'
+seoTitle: 'Scaling a Transformation Coaching Business'
+seoDescription: 'How NASM certification combined with The Resonance Core Framework™ supported a differentiated coaching business with premium pricing and sustainable growth.'
 seoKeywords:
   [
     'coaching business',

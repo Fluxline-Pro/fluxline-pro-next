@@ -20,8 +20,8 @@ projectDuration: '3 weeks'
 featured: true
 imageUrl: '/case-studies/posts/fluxline-ai-agentic-surfacing/images/ai-agentic-seo-illustration.jpg'
 imageAlt: 'AI-powered content surfacing architecture diagram showing three-layer schema, index, and retrieval system for structured data optimization'
-seoTitle: 'AI Content Optimization Case Study - Fluxline JSON-LD Infrastructure'
-seoDescription: 'How Fluxline engineered AI-readable structured data with JSON-LD, safe serialization, and environment-aware crawling to increase AI visibility across LLM-powered search platforms.'
+seoTitle: 'AI Content Optimization Case Study: JSON-LD'
+seoDescription: 'How Fluxline engineered AI-readable JSON-LD structured data, safe serialization, and environment-aware crawling to raise visibility in LLM-powered search.'
 seoKeywords:
   [
     'ai optimization',

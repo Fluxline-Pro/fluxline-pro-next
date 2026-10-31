@@ -9,8 +9,8 @@ tags: ['launch', 'platform', 'technology']
 imageAlt: 'Fluxline 2.0 Platform Launch'
 glyphTag: '🜂'
 emotionalCue: 'Ignition'
-seoTitle: 'Fluxline 2.0 Platform Launch - Next.js 16 Business Transformation'
-seoDescription: 'Fluxline Resonance Group launches Fluxline 2.0, a cutting-edge business transformation platform built with Next.js 16, React 19, featuring advanced accessibility and theming.'
+seoTitle: 'Fluxline 2.0 Platform Launches on Next.js 16'
+seoDescription: 'Fluxline Resonance Group launches Fluxline 2.0, a business transformation platform built with Next.js 16 and React 19, with advanced accessibility and theming.'
 seoKeywords:
   [
     'Fluxline 2.0',

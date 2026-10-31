@@ -24,8 +24,8 @@ tags:
 imageUrl: '/blog/posts/sleep-cycles/images/sleep-cycles-infographic.jpg'
 imageAlt: 'Visual representation of sleep cycles showing light sleep, deep sleep, and REM stages throughout the night'
 featured: true
-seoTitle: 'Why Sleep Cycles Matter More Than You Think | Recovery & Performance Guide'
-seoDescription: "Sleep isn't just rest—it's regulation. Learn how sleep cycles, circadian rhythm, and rhythmic sleep patterns impact training, recovery, focus, and sustainable transformation."
+seoTitle: 'Why Sleep Cycles Matter More Than You Think'
+seoDescription: "Sleep isn't just rest, it's regulation. Learn how sleep cycles and circadian rhythm shape training, recovery, focus, and sustainable transformation."
 seoKeywords:
   [
     'sleep cycles',

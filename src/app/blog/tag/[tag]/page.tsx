@@ -37,7 +37,7 @@ export async function generateMetadata({
   if (!tag) return {};
 
   return {
-    title: `Tag: ${tag}`,
+    title: `Blog posts tagged ${tag}`,
     description: `Browse blog posts tagged with "${tag}". Explore articles about ${tag} and related topics.`,
     keywords: `${tag}, blog, articles, technology, development, design`,
     openGraph: {

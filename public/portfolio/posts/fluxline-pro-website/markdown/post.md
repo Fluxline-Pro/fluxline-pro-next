@@ -37,7 +37,7 @@ publishedDate: '2025-12-15'
 projectDate: '2024-2025'
 featured: true
 liveUrl: 'https://fluxline.pro'
-seoTitle: 'Fluxline Pro - Modern Next.js Business Platform'
+seoTitle: 'Fluxline Pro: A Next.js Business Platform'
 seoDescription: 'Enterprise-grade web platform built with Next.js 16, featuring advanced theming, content management, and responsive design'
 seoKeywords:
   [

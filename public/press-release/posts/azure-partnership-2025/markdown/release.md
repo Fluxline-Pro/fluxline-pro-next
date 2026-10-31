@@ -9,7 +9,7 @@ tags: ['partnership', 'azure', 'cloud', 'enterprise']
 imageAlt: 'Azure Partnership'
 glyphTag: '🜄'
 emotionalCue: 'Integration'
-seoTitle: 'Fluxline and Microsoft Azure Strategic Partnership'
+seoTitle: 'Fluxline and Microsoft Azure Partnership'
 seoDescription: 'Fluxline announces partnership with Microsoft Azure for enterprise cloud infrastructure, enhanced security, scalability, and Azure CDN performance optimization.'
 seoKeywords:
   [
