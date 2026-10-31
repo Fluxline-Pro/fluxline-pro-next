@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: { absolute: SERVICES_TITLE },
   description: SERVICES_DESCRIPTION,
   keywords:
-    'services, Resonance Core Framework coaching, RCF coaching, identity alignment coaching, consulting, brand design, web architecture, cloud architecture consulting, content ecosystem design, web development, personal training, coaching, strategic planning, systems design, UX design',
+    'services, Resonance Core Framework coaching, RCF coaching, identity alignment coaching, leadership coaching, consulting, business strategy and systems alignment, brand design, brand and experience design, web architecture, cloud architecture consulting, content ecosystem design, web development, personal training, wellness, coaching, strategic planning, systems design, UX design',
   openGraph: {
     title: SERVICES_TITLE,
     description: SERVICES_DESCRIPTION,

@@ -9,6 +9,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - Contact form reCAPTCHA (owner, 2026-10-26): the keys now live in Google Cloud (Security → reCAPTCHA) after Google's move of classic reCAPTCHA keys into Google Cloud projects. New values are set for `RECAPTCHA_SITE_KEY` (GitHub Actions secret, read at build time as `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`) and `RECAPTCHA_SECRET_KEY` (Azure Static Web App settings, test and prod). This is configuration only, with no code change, and it takes effect on the next test and prod builds.
+- SEO and AI-crawler terms: production `robots.txt` now names the major search and AI crawlers (OpenAI, Anthropic, Perplexity, Google, Bing, Apple, Amazon, Meta, DuckDuckGo, Mistral, Common Crawl) in one allow group that repeats the `/api/` disallow (dev/test still block everything; new `robots.test.ts`). `llms.txt` gains a site summary, Services, Key terms (the framework page's own definitions), the six core values, Questions this site answers, and cross-links to TerenceWaters.com and TheResonantIdentity.com. Metadata keywords on the root layout, home, framework, services, books, and podcasts pages add the RCF terms and real search phrases. Organization, Person, and WebSite JSON-LD gain `knowsAbout` / `keywords`, and the framework page adds a "The Six Core Values" `DefinedTermSet`.
 
 ## [v3_2_PROD] - 2026-10-26
 

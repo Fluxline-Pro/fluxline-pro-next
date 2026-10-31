@@ -7,8 +7,23 @@ export const metadata: Metadata = {
   title: 'The Resonance Core Framework™ — Books | Fluxline',
   description:
     'The Resonance Core Framework™ explained: what it is, the DRIVE Model, who it is for, and what will be offered with the forthcoming book and companion workbook.',
-  keywords:
-    'resonance core framework, RCF, DRIVE model, book, companion workbook, identity, alignment, personal transformation, Terence Waters, Fluxline',
+  keywords: [
+    'The Resonance Core Framework book',
+    'resonance core framework',
+    'RCF',
+    'DRIVE model',
+    'The Decision Integrity Index',
+    'Behavioral Gravity',
+    'book',
+    'companion workbook',
+    'identity',
+    'alignment',
+    'personal transformation',
+    'self-improvement book',
+    'Terence Waters',
+    'Terence Waters book',
+    'Fluxline',
+  ],
   openGraph: {
     title: 'The Resonance Core Framework™ — Coming Soon',
     description:

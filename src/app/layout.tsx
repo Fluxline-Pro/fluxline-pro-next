@@ -22,8 +22,34 @@ export const metadata: Metadata = {
   },
   description:
     'Fluxline Resonance Group — systems-design and consulting practice specializing in cloud architecture, content ecosystem design, UX, brand identity, and strategic consulting. Modular by design, resonant by nature.',
-  keywords:
-    'Fluxline, Fluxline Resonance Group, consulting, cloud architecture, content ecosystem design, web development, business strategy, design, technical services, professional services, personal training, coaching, LGBTQ+ inclusive, accessibility, diversity, equity, AI-driven solutions, digital transformation, systems design, UX design, brand identity',
+  keywords: [
+    'Fluxline',
+    'Fluxline Resonance Group',
+    'Terence Waters',
+    'The Resonance Core Framework',
+    'Resonance Core Framework coaching',
+    'identity alignment coaching',
+    'leadership coaching',
+    'The Decision Integrity Index',
+    'DRIVE Model',
+    'consulting',
+    'business strategy',
+    'cloud architecture',
+    'content ecosystem design',
+    'web development',
+    'systems design',
+    'UX design',
+    'brand identity',
+    'personal training',
+    'coaching',
+    'professional services',
+    'digital transformation',
+    'AI-driven solutions',
+    'LGBTQ+ inclusive',
+    'accessibility',
+    'diversity',
+    'equity',
+  ],
   authors: [
     { name: 'Fluxline Resonance Group', url: 'https://www.fluxline.pro' },
     { name: 'Terence Waters', url: 'https://terencewaters.com' },
@@ -154,7 +180,7 @@ export default function RootLayout({
               description:
                 'Systems-design and consulting practice offering coaching, web architecture, brand identity, and The Resonance Core Framework™ — a structured identity alignment system for founders and leaders.',
               keywords:
-                'Resonance Core Framework, identity alignment coaching, Behavioral Gravity, Identity Coherence, somatic discipline, decision integrity, consulting',
+                'The Resonance Core Framework, Resonance Core Framework, identity alignment coaching, leadership coaching, Behavioral Gravity, Identity Coherence, Window of Choice, DRIVE Model, The Decision Integrity Index, somatic discipline, decision integrity, consulting, brand design, web architecture, content ecosystem design',
               foundingDate: '2020',
               founder: {
                 '@type': 'Person',
@@ -185,7 +211,16 @@ export default function RootLayout({
               knowsAbout: [
                 'Resonance Core Framework',
                 'Identity Alignment',
+                'Identity Coherence',
+                'Behavioral Gravity',
+                'Window of Choice',
+                'DRIVE Model',
+                'Judgment Loop',
+                'Data Loop',
+                'The Decision Integrity Index',
                 'Decision Integrity',
+                'Identity Alignment Coaching',
+                'Leadership Coaching',
                 'Cloud Architecture',
                 'Content Ecosystem Design',
                 'Systems Design',
@@ -271,6 +306,8 @@ export default function RootLayout({
               url: 'https://www.fluxline.pro',
               description:
                 'Modular consulting, design, web development, and emotional stewardship for visionary clients.',
+              keywords:
+                'Fluxline Resonance Group, The Resonance Core Framework, identity alignment coaching, leadership coaching, The Decision Integrity Index, DRIVE Model, Behavioral Gravity, consulting, brand design, web development, content ecosystem design, personal training',
               publisher: {
                 '@id': 'https://www.fluxline.pro/#organization',
               },
@@ -306,6 +343,13 @@ export default function RootLayout({
                 'https://www.instagram.com/fluxlineco',
               ],
               knowsAbout: [
+                'The Resonance Core Framework™',
+                'Identity Coherence',
+                'Behavioral Gravity',
+                'DRIVE Model',
+                'The Decision Integrity Index',
+                'Identity Alignment Coaching',
+                'Leadership Coaching',
                 'Cloud Architecture',
                 'Content Ecosystem Design',
                 'Systems Design',
