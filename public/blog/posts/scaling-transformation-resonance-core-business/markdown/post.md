@@ -16,8 +16,8 @@ tags:
   ]
 imageUrl: '/blog/posts/scaling-transformation-resonance-core-business/images/the-resonance-core-glyph.jpg'
 imageAlt: 'The Resonance Core Framework glyph symbolizing integrated transformation'
-seoTitle: 'What Makes Transformation Coaching Different? The Resonance Core Approach'
-seoDescription: 'Discover how combining physical training with emotional intelligence creates deeper transformation that actually lasts.'
+seoTitle: 'What Makes Transformation Coaching Different?'
+seoDescription: 'How combining physical training with emotional intelligence creates deeper transformation that actually lasts, and why most fitness programs fall short.'
 seoKeywords:
   [
     'transformation coaching',

@@ -22,8 +22,8 @@ featured: true
 imageUrl: '/case-studies/posts/rcf-publishing-pipeline-alignment/images/rcf-publishing-case-study-workflow.png'
 imageAlt: 'RCF Book Production Pipeline — nine-phase workflow diagram showing gate conditions, deliverables, and source-of-truth hierarchy'
 slug: 'rcf-publishing-pipeline-alignment'
-seoTitle: 'Nine Phases, One Source of Truth: AI Book Production Pipeline Case Study — Fluxline'
-seoDescription: 'How Fluxline rebuilt a nine-stage AI publishing pipeline into a single system with explicit gates, one source of truth, and enforced human approval, then automated the eBook and InDesign print builds for the book and workbook.'
+seoTitle: 'AI Book Production Pipeline Case Study'
+seoDescription: 'How Fluxline rebuilt a nine-stage AI publishing pipeline with explicit gates, one source of truth, and human approval, then automated eBook and print builds.'
 seoKeywords:
   - AI workflow architecture
   - publishing pipeline

@@ -20,8 +20,8 @@ tags:
 imageUrl: '/blog/posts/eclipse-architecture-of-resonance/images/total-eclipse-resonance.jpg'
 imageAlt: 'A total solar eclipse symbolizing alignment, resonance, and human-centered systemic architecture'
 featured: true
-seoTitle: 'The Eclipse and the Architecture of Resonance | Fluxline Resonance Group'
-seoDescription: 'Explore how a total solar eclipse illustrates the principles of Human-Centered Systemic Architecture. Discover why alignment, relationships, and resonance create more sustainable and impactful systems.'
+seoTitle: 'The Eclipse and the Architecture of Resonance'
+seoDescription: 'How a total solar eclipse illustrates Human-Centered Systemic Architecture, and why alignment, relationships, and resonance create more sustainable systems.'
 seoKeywords:
   [
     'human-centered systemic architecture',

@@ -13,7 +13,7 @@ tags:
 featured: false
 imageUrl: '/blog/posts/understanding-roles-separation-duties-fluxline-cms-ecosystem/images/separation-of-duties-infographic.jpg'
 imageAlt: 'Understanding Roles and Separation of Duties with the Fluxline.pro CMS Ecosystem'
-seoTitle: 'Understanding Roles and Separation of Duties in the Fluxline.pro Ecosystem'
+seoTitle: 'Roles and Separation of Duties: Fluxline CMS'
 seoDescription: 'A look at the distinct roles that make the Fluxline.pro CMS ecosystem coherent, scalable, maintainable, predictable, and resilient.'
 seoKeywords:
   - 'Fluxline'

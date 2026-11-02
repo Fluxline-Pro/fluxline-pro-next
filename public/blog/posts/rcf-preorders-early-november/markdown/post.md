@@ -15,8 +15,8 @@ tags:
 imageUrl: '/blog/posts/rcf-preorders-early-november/images/The-Resonance-Core-Book.jpg'
 imageAlt: 'The Resonance Core Framework™ book by Terence Waters'
 featured: true
-seoTitle: 'Preorders for The Resonance Core Framework™ Open in Early November 2026'
-seoDescription: 'Preorders for The Resonance Core Framework™ by Terence Waters open in early November 2026. The book is targeted for Q1 2027. Here is what changed in the production pipeline to make that date possible.'
+seoTitle: 'The Resonance Core Framework™ Preorders Open'
+seoDescription: 'Preorders for The Resonance Core Framework™ open in early November 2026, and the book is targeted for Q1 2027. See what changed in the production pipeline.'
 seoKeywords:
   - 'Resonance Core Framework'
   - 'RCF preorder'
