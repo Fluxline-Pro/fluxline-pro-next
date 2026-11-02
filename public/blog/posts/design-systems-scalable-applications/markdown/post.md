@@ -8,8 +8,8 @@ tags: ['Design Systems', 'UI/UX', 'Component Libraries', 'Development']
 imageUrl: '/blog/posts/design-systems-scalable-applications/images/fluxline-20-dsm.jpg'
 imageAlt: 'Design Systems for Scalable Applications'
 featured: false
-seoTitle: 'Design Systems for Scalable Applications | Fluxline Pro'
-seoDescription: 'Explore how design systems enable consistency, efficiency, and scalability in modern application development.'
+seoTitle: 'Design Systems for Scalable Applications'
+seoDescription: 'Explore how design systems enable consistency, efficiency, and scalability in modern application development, from design tokens to shared components.'
 seoKeywords:
   [
     'design systems',

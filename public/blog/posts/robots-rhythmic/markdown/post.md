@@ -40,7 +40,7 @@ gallery:
     alt: 'When you train like a human, you grow like one'
     caption: 'When you train like a human — not a robot — you grow like one.'
 featured: true
-seoTitle: "We're Not Robots — We're Rhythmic: Sustainable Fitness | Fluxline Pro"
+seoTitle: "Sustainable Fitness: We're Rhythmic, Not Robots"
 seoDescription: 'Discover why sustainable fitness is about rhythm, not rigidity. Learn how consistency beats perfection and auto-regulation unlocks your training potential.'
 seoKeywords:
   [

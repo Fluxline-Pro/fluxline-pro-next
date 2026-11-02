@@ -330,7 +330,7 @@ export default function HomeClient() {
                 >
                   <img
                     src='/images/home/HomePageCoverLandscape2.jpg'
-                    alt='Fluxline services'
+                    alt='Fluxline services: coaching, business strategy, brand design, web development, and personal training'
                     style={{
                       display: 'block',
                       width: '100%',
@@ -587,7 +587,6 @@ export default function HomeClient() {
                     (s) =>
                       s.category === group.key &&
                       s.id !== 'consulting' &&
-                      s.id !== 'education-training' &&
                       s.id !== 'resonance-core'
                   ).map((service) => (
                     <FxCard

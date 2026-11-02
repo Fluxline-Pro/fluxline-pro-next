@@ -41,7 +41,7 @@ export default function ContactPage() {
               <img
                 className='fx-contact-portrait'
                 src={ContactImage.src}
-                alt="Let's connect"
+                alt='Terence Waters, CEO, founder, and main architect of Fluxline Resonance Group, seated in front of abstract paintings'
                 style={{
                   display: 'block',
                   width: '100%',
@@ -152,6 +152,15 @@ export default function ContactPage() {
               maxWidth: '60ch',
             }}
           >
+            Fluxline Resonance Group is based in Salt Lake City, Utah. We work
+            with founders, leaders, and creatives on{' '}
+            <Link href='/services/resonance-core'>
+              Resonance Core Framework™ coaching
+            </Link>
+            , <Link href='/services/consulting'>business strategy</Link>,{' '}
+            <Link href='/services/design'>brand design</Link>,{' '}
+            <Link href='/services/development'>web development</Link>, and{' '}
+            <Link href='/services/personal-training'>personal training</Link>.{' '}
             The best place to start is a free consultation — a short call where
             we explore your goals together and map out what&apos;s possible. Or
             just write us a note below.

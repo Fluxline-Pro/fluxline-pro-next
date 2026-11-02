@@ -28,7 +28,6 @@ import DesignImage from '@/assets/images/Portfolio1280x1815.jpg';
 import DevelopmentImage from '@/assets/images/GitHubPortrait.jpg';
 import PersonalTrainingImage from '@/assets/images/PersonalTrainingPortrait.jpg';
 import ResonanceCoreImage from '@/assets/images/LifeCoachingResonanceCore.jpg';
-import EducationImage from '@/assets/images/EducationTrainingPortrait.jpg';
 import ConsultingImage from '@/assets/images/ConsultingPortrait.jpg';
 import ServicesFallbackImage from '@/assets/images/OurServices1197x1600.jpg';
 
@@ -38,7 +37,6 @@ const SERVICE_IMAGES: Record<string, { src: string }> = {
   development: DevelopmentImage,
   'personal-training': PersonalTrainingImage,
   'resonance-core': ResonanceCoreImage,
-  'education-training': EducationImage,
   consulting: ConsultingImage,
 };
 
@@ -95,14 +93,6 @@ export default function ServiceDetailPage() {
         'Update your internal predictions and interpretations',
         "Choose the identity that supports who you're becoming",
         'Take aligned action from your chosen identity',
-      ],
-      'education-training': [
-        'Experiential learning and leadership workshops',
-        'Emotional intelligence development',
-        'Strategic embodiment coaching',
-        'Team leadership and influence cultivation',
-        'Custom curriculum design and delivery',
-        'Ongoing support and community building',
       ],
       consulting: [
         'Strategic systems design and operational optimization',
@@ -166,7 +156,7 @@ export default function ServiceDetailPage() {
         >
           <img
             src={serviceImage.src}
-            alt={service.title}
+            alt={service.imageAlt ?? service.title}
             style={{
               display: 'block',
               width: '100%',

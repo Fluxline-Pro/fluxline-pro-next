@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contact a Salt Lake City Coach & Consultant',
   description:
-    'Get in touch with Fluxline for design, development, consulting, and training inquiries.',
+    'Contact Fluxline Resonance Group in Salt Lake City, Utah. Book a free consultation for coaching, business strategy, brand design, web development, or training.',
   openGraph: {
-    title: 'Contact - Fluxline',
+    title: 'Contact a Salt Lake City Coach & Consultant | Fluxline.pro',
     description:
-      'Get in touch with Fluxline for design, development, consulting, and training inquiries.',
+      'Contact Fluxline Resonance Group in Salt Lake City, Utah. Book a free consultation for coaching, business strategy, brand design, web development, or training.',
     url: 'https://www.fluxline.pro/contact',
     siteName: 'Fluxline',
     type: 'website',

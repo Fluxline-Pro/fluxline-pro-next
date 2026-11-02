@@ -8,7 +8,7 @@ tags: ['Next.js', 'Web Development', 'Technology', 'Performance']
 imageUrl: '/blog/posts/embracing-next-js-16-modern-web-development/images/next-js-image.png'
 imageAlt: 'Next.js 16 Modern Web Development illustration'
 featured: true
-seoTitle: 'Embracing Next.js 16 for Modern Web Development | Fluxline Pro'
+seoTitle: 'Next.js 16 for Modern Web Development'
 seoDescription: 'Explore the powerful features of Next.js 16 and how it transforms modern web application development with enhanced performance and developer experience.'
 seoKeywords:
   [

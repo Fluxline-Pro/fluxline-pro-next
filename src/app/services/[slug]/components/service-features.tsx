@@ -39,12 +39,6 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
         'Mindset support and behavioral change strategies',
         'Flexible scheduling and remote coaching options',
       ],
-      'education-training': [
-        'Experiential learning and leadership workshops',
-        'Emotional intelligence development',
-        'Strategic embodiment coaching',
-        'Team leadership and influence cultivation',
-      ],
       'resonance-core': [
         'Understand the signals your body and emotions send',
         "Reveal the stories you've been living inside",

@@ -32,7 +32,7 @@ gallery:
     alt: 'Glyphs as teaching tools in The Resonance Core Framework™ coaching'
     caption: 'Glyphs as teaching tools in The Resonance Core Framework™ coaching'
 featured: true
-seoTitle: 'Symbolic Design & Glyph Language Case Study - Fluxline Brand Identity'
+seoTitle: 'Symbolic Design & Glyph Language Case Study'
 seoDescription: 'How Fluxline developed a proprietary glyph system to visualize transformation thresholds, creating brand differentiation and teaching utility.'
 seoKeywords:
   [

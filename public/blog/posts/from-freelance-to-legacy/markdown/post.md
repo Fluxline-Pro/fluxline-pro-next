@@ -16,8 +16,8 @@ tags:
 imageUrl: '/images/home/HomePageCover4kPortrait.jpeg'
 imageAlt: 'Fluxline: From Freelance to Legacy'
 featured: true
-seoTitle: 'Fluxline: From Freelance to Legacy - Building Systems That Endure | Fluxline Pro'
-seoDescription: 'Discover how Fluxline transforms freelance work into legacy-building. Learn the business model, principles, and philosophy behind creating ecosystems that endure beyond the gig economy.'
+seoTitle: 'From Freelance to Legacy: Systems That Endure'
+seoDescription: 'How Fluxline turns freelance work into legacy-building: the business model, principles, and philosophy behind ecosystems that endure beyond the gig economy.'
 seoKeywords:
   [
     'Fluxline',

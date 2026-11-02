@@ -67,8 +67,8 @@ export function PortfolioClientWrapper({
     <ContentListingPage
       title="Work & Projects"
       kicker="Portfolio"
-      subhead="Real systems built for real organizations."
-      description="Explore our portfolio of innovative projects spanning web applications, mobile apps, enterprise software, and more."
+      subhead="Real systems built for real organizations: brand identity, web development, and digital architecture."
+      description="Brand identity, web development, and digital architecture projects built for real organizations."
       basePath="/portfolio"
       cards={cards}
       filters={filters}

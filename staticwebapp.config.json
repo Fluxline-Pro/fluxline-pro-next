@@ -65,6 +65,11 @@
       "statusCode": 301
     },
     {
+      "route": "/services/education",
+      "redirect": "/services",
+      "statusCode": 301
+    },
+    {
       "route": "/scrolls/pdfs/RCF_INTRODUCTIONTeaser_02042026.pdf",
       "redirect": "/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf",
       "statusCode": 301
