@@ -8,7 +8,7 @@ tags: ['TypeScript', 'Programming', 'Best Practices', 'Development']
 imageUrl: '/blog/posts/typescript-best-practices-enterprise/images/typescript-best-practices.png'
 imageAlt: 'TypeScript Best Practices infographic'
 featured: false
-seoTitle: 'TypeScript Best Practices for Enterprise Applications | Fluxline Pro'
+seoTitle: 'TypeScript Best Practices for Enterprise Apps'
 seoDescription: 'Advanced TypeScript patterns and practices that ensure type safety, maintainability, and scalability in large applications.'
 seoKeywords:
   [

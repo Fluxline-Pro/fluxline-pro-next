@@ -8,6 +8,5 @@ export const SERVICE_SCROLL_MAPPING: Record<string, string> = {
   development: 'app-web-development',
   design: 'graphic-design',
   'personal-training': 'personal-training',
-  'education-training': 'education-mentoring',
   'resonance-core': 'identity-in-motion-4-week-program',
 };

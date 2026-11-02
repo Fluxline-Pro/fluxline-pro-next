@@ -18,8 +18,8 @@ technologies:
 publishedDate: '2025-12-16'
 projectDuration: '16 hours'
 featured: true
-seoTitle: 'ITIL Problem Management Case Study - Azure Static Web Apps Recovery'
-seoDescription: 'Real-world application of ITIL principles during a critical 16-hour production outage. Learn how proper event management, root cause analysis, and failover procedures restored service while minimizing business impact.'
+seoTitle: 'ITIL Case Study: Azure Static Web Apps Outage'
+seoDescription: 'ITIL principles in a 16-hour production outage: event management, root cause analysis, and failover procedures that restored service and limited impact.'
 seoKeywords:
   [
     'ITIL',

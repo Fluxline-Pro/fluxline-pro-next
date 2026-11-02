@@ -44,7 +44,7 @@ gallery:
 publishedDate: '2025-12-11'
 projectDate: '2025'
 featured: true
-seoTitle: 'The Decision Integrity Index Dashboard - Notion & M365 Business Intelligence'
+seoTitle: 'The Decision Integrity Index Dashboard'
 seoDescription: 'Strategic decision management system with emotional resonance analytics, Notion API integration, and automated Microsoft 365 workflows'
 seoKeywords:
   [

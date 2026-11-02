@@ -15,7 +15,7 @@ tags:
   ]
 imageUrl: '/blog/posts/how-we-built-fluxline-2-breakdown/images/fluxline-theming.png'
 imageAlt: 'Fluxline 2.0 platform architecture and design system'
-seoTitle: 'How We Built Fluxline 2.0 - Next.js 16 Platform Development Breakdown'
+seoTitle: 'How We Built Fluxline 2.0 on Next.js 16'
 seoDescription: 'A technical and strategic breakdown of building Fluxline 2.0: Next.js 16, 94/100 Lighthouse score, 300% traffic increase, and enterprise-grade design systems.'
 seoKeywords:
   [
@@ -72,7 +72,7 @@ Before writing a single line of code, we defined what success looked like:
 
 - Lighthouse performance score: 90+
 - Page load time: < 2 seconds
-- Accessibility: WCAG 2.1 AA compliance
+- Accessibility: built in from the start
 - Conversion rate: 5%+ visitor-to-lead
 - Organic traffic growth: 200%+ in 6 months
 
@@ -313,7 +313,7 @@ Comprehensive theming supporting:
 
 - **Dark Mode** (default): Professional, focused
 - **Light Mode**: Clean, accessible
-- **High Contrast**: WCAG AAA compliance
+- **High Contrast**: Stronger contrast for low-vision readers
 - **Colorblind Modes**: Accessible to all users
 - **System Preference**: Respects OS settings
 

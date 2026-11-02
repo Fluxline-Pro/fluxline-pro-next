@@ -40,7 +40,7 @@ export async function generateMetadata({
   if (!tag) return {};
 
   return {
-    title: `Tag: ${tag}`,
+    title: `Projects tagged ${tag}`,
     description: `Explore portfolio projects tagged with "${tag}". View our work in ${tag} and related areas.`,
     keywords: `${tag}, portfolio, projects, web development, design, case studies`,
     openGraph: {

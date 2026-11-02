@@ -90,14 +90,6 @@ export const ethosServices: EthosServicesContent = {
       link: '/services/development',
     },
     {
-      id: 'education-training',
-      title: 'Education, Leadership & Consulting',
-      description:
-        'Coaching and workshops to help you lead, teach, and communicate with clarity and confidence. Practical frameworks for founders, creatives, and teams ready to show up with purpose.',
-      icon: 'Education',
-      link: '/services/education',
-    },
-    {
       id: 'consulting',
       title: 'Business Strategy & Systems Alignment',
       description:

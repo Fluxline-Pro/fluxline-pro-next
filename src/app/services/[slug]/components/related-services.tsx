@@ -8,7 +8,7 @@ export const RelatedServices: React.FC<{ currentServiceId: string }> = ({
   currentServiceId,
 }) => {
   const relatedServices = SERVICE_CATEGORIES.filter(
-    (s) => s.id !== currentServiceId && s.id !== 'education-training'
+    (s) => s.id !== currentServiceId
   ).slice(0, 3);
 
   if (relatedServices.length === 0) return null;
@@ -29,7 +29,7 @@ export const RelatedServices: React.FC<{ currentServiceId: string }> = ({
       </div>
 
       <div
-        className="fx-g3"
+        className='fx-g3'
         style={{
           display: 'grid',
           gap: 20,

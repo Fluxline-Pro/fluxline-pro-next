@@ -16,8 +16,8 @@ tags:
 imageUrl: '/blog/posts/discipline-vs-resonance/images/discipline-resonance.jpg'
 imageAlt: 'Image showing a scale that shows discipline and resonance as a balance'
 featured: true
-seoTitle: 'Discipline vs. Resonance: How to Sustain Your Drive | Fluxline Pro'
-seoDescription: 'Discover how discipline bridges the gap between inspiration and transformation. Learn to cultivate lasting resonance through the Law of Opposites and sustainable clarity.'
+seoTitle: 'Discipline vs. Resonance: Sustain Your Drive'
+seoDescription: 'How discipline bridges the gap between inspiration and transformation. Learn to cultivate lasting resonance through the Law of Opposites and clarity.'
 seoKeywords:
   [
     'discipline',

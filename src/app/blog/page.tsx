@@ -7,15 +7,15 @@ import {
 } from './lib/blogLoader';
 
 export const metadata: Metadata = {
-  title: 'Blog',
+  title: 'Blog on Identity, Design & Web Development',
   description:
-    'Explore insights on technology, design, business transformation, and strategic thinking. Articles covering web development, consulting, and professional growth.',
+    'Essays from Fluxline on The Resonance Core Framework™, identity and personal growth, design systems, web development with Next.js, and values-led business.',
   keywords:
     'blog, technology, web development, design, business transformation, consulting, professional development, strategy, innovation',
   openGraph: {
-    title: 'Blog - Fluxline',
+    title: 'Blog on Identity, Design & Web Development | Fluxline.pro',
     description:
-      'Insights on technology, design, business transformation, and strategic thinking.',
+      'Essays from Fluxline on The Resonance Core Framework™, identity and personal growth, design systems, web development with Next.js, and values-led business.',
     url: 'https://www.fluxline.pro/blog',
     siteName: 'Fluxline',
     type: 'website',
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog - Fluxline',
+    title: 'Blog on Identity, Design & Web Development | Fluxline.pro',
     description:
-      'Insights on technology, design, business transformation, and strategic thinking.',
+      'Essays from Fluxline on The Resonance Core Framework™, identity and personal growth, design systems, web development with Next.js, and values-led business.',
     images: ['/images/FluxlineLogo.png'],
   },
   alternates: {

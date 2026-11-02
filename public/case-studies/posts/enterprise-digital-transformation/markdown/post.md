@@ -20,8 +20,8 @@ projectDuration: '6 months'
 imageUrl: '/case-studies/posts/enterprise-digital-transformation/images/resonance-philosophy.jpg'
 imageAlt: 'Fluxline Digital Transformation: From Traditional Business to Human-Centered Resonance'
 featured: true
-seoTitle: 'Fluxline Digital Transformation Case Study - Human-Centered Client Engagement'
-seoDescription: 'Discover how Fluxline transformed from traditional marketing to emotional resonance, achieving authentic client connections through livestreaming, social media, and direct human engagement.'
+seoTitle: 'Fluxline Digital Transformation Case Study'
+seoDescription: 'How Fluxline shifted from traditional marketing to emotional resonance: authentic client connections through livestreaming, social media, and direct contact.'
 seoKeywords:
   [
     'digital transformation',

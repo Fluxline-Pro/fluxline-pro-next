@@ -39,8 +39,8 @@ gallery:
 publishedDate: '2025-12-08'
 projectDate: '2019-2020'
 featured: true
-seoTitle: 'MyHealth 2.0 Healthcare Portal - React.js/React Native Unified Enterprise Project'
-seoDescription: 'Led enterprise healthcare portal rebuild from Angular to React.js/React Native in 24 months for Intermountain Health, integrating HL7 systems and delivering cross-platform patient experience.'
+seoTitle: 'MyHealth 2.0 Portal: React and React Native'
+seoDescription: 'Led the MyHealth 2.0 portal rebuild from Angular to React.js and React Native in 24 months for Intermountain Health, integrating HL7 systems across platforms.'
 seoKeywords:
   - healthcare application
   - React Native

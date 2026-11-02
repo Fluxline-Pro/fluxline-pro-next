@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Services',
+  title: 'Consulting & Coaching Services',
   description:
-    'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks. Modular by design, resonant by nature.',
+    'Five offerings for founders and leaders: Resonance Core Framework™ coaching, business strategy consulting, brand design, web development, and personal training.',
   openGraph: {
-    title: 'Services - Fluxline',
+    title: 'Consulting & Coaching Services | Fluxline Resonance Group',
     description:
-      'Strategic consulting, web development, design, personal training, coaching, and transformational frameworks.',
+      'Five offerings for founders and leaders: Resonance Core Framework™ coaching, business strategy consulting, brand design, web development, and personal training.',
     url: 'https://www.fluxline.pro/services',
     siteName: 'Fluxline',
     type: 'website',

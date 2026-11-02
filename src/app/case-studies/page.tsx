@@ -4,15 +4,15 @@ import { getAllCaseStudies } from './lib/caseStudyLoader';
 import CaseStudiesListingClient from './CaseStudiesListingClient';
 
 export const metadata: Metadata = {
-  title: 'Case Studies',
+  title: 'Consulting, Design & Coaching Case Studies',
   description:
-    'Explore client success stories and discover how strategic transformation drives measurable results across various industries. Real-world examples of business transformation.',
+    'Case studies in digital architecture, brand design, and coaching, including Azure and SharePoint infrastructure work for Intermountain Health.',
   keywords:
     'case studies, client success, transformation, business results, consulting, strategic planning, success stories',
   openGraph: {
-    title: 'Case Studies - Fluxline',
+    title: 'Consulting, Design & Coaching Case Studies | Fluxline.pro',
     description:
-      'Client success stories showcasing strategic transformation and measurable results.',
+      'Case studies in digital architecture, brand design, and coaching, including Azure and SharePoint infrastructure work for Intermountain Health.',
     url: 'https://www.fluxline.pro/case-studies',
     siteName: 'Fluxline',
     type: 'website',
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Case Studies - Fluxline',
+    title: 'Consulting, Design & Coaching Case Studies | Fluxline.pro',
     description:
-      'Client success stories showcasing strategic transformation and measurable results.',
+      'Case studies in digital architecture, brand design, and coaching, including Azure and SharePoint infrastructure work for Intermountain Health.',
     images: ['/images/FluxlineLogo.png'],
   },
   alternates: {

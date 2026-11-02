@@ -23,8 +23,8 @@ projectDuration: '8 years (2017-2025)'
 featured: true
 imageUrl: '/blog/posts/from-recovery-to-resonance-personal-journey/images/PersonalTrainingPortrait.jpg'
 imageAlt: 'Personal Training Program Growth declaration and modeling'
-seoTitle: 'Personal Training Transformation Case Study - Resonance Core Framework'
-seoDescription: 'From 120 lbs. to 185 lbs., 10% body fat, and NASM certification—discover how The Resonance Core Framework™ integrates physical training with emotional stewardship.'
+seoTitle: 'Personal Training Transformation Case Study'
+seoDescription: 'From 120 lbs. to 185 lbs., 10% body fat, and NASM certification: how The Resonance Core Framework™ joins physical training with emotional stewardship.'
 seoKeywords:
   [
     'resonance core framework',

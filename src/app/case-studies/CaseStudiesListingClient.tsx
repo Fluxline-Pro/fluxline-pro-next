@@ -70,8 +70,8 @@ export default function CaseStudiesListingClient({
     <ContentListingPage
       title="Impact in Practice"
       kicker="Case Studies"
-      subhead="Strategies and results across industries."
-      description="Explore our client success stories and discover how strategic transformation drives measurable results."
+      subhead="Business strategy, digital architecture, brand design, and coaching work across industries."
+      description="Case studies in business strategy, digital architecture, brand design, and coaching."
       basePath="/case-studies"
       cards={cards}
       filters={filters}
