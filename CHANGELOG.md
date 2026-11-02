@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [v3_5_PROD] - 2026-11-02
+
 ### Changed
 
 - Contact form reCAPTCHA (owner, 2026-10-26): the keys now live in Google Cloud (Security → reCAPTCHA) after Google's move of classic reCAPTCHA keys into Google Cloud projects. New values are set for `RECAPTCHA_SITE_KEY` (GitHub Actions secret, read at build time as `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`) and `RECAPTCHA_SECRET_KEY` (Azure Static Web App settings, test and prod). This is configuration only, with no code change, and it takes effect on the next test and prod builds.
@@ -120,6 +122,7 @@ The first production release of the Next.js rebuild of fluxline.pro, migrated fr
 
 See the [v3_0_PROD release](https://github.com/Fluxline-Pro/fluxline-pro-next/releases/tag/v3_0_PROD) for the full PR list.
 
+[v3_5_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_4.PROD...v3_5_PROD
 [v3_2_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_1_PROD...v3_2_PROD
 [v3_1_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_0_1_PROD...v3_1_PROD
 [v3_0_1_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_0_PROD...v3_0_1_PROD
