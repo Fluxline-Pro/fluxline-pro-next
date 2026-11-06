@@ -23,11 +23,25 @@ const LEGAL_DOCUMENTS: LegalDocument[] = [
     href: '/legal/terms',
   },
   {
+    id: 'preorder-terms',
+    title: 'RCF Preorder Terms',
+    description:
+      'Exactly what happens when you preorder The Resonance Core Framework: when you are charged, how to cancel, what you receive on release day, and what happens if the date moves.',
+    href: '/legal/preorder-terms',
+  },
+  {
     id: 'privacy',
     title: 'Privacy Policy',
     description:
       'Learn how we collect, use, and protect your personal information.',
     href: '/legal/privacy-policy',
+  },
+  {
+    id: 'personal-training-waiver',
+    title: 'Personal Training Waiver',
+    description:
+      'Informed Consent, Assumption of Risk, and Liability Waiver for personal training and wellness clients.',
+    href: '/legal/personal-training-waiver',
   },
   {
     id: 'stewardship',
