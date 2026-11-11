@@ -10,55 +10,45 @@ import FxButton from '@/theme/components/dsm/FxButton';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import FxCallout from '@/theme/components/dsm/FxCallout';
+import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import DriveModelDiagram from '@/assets/images/drive_model.jpg';
-import { COMPANY_VALUES } from '@/lib/siteContent';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import { COMPANY_VALUES } from '@/lib/siteContent';
+import { SERVICE_CATEGORIES } from '@/app/services/constants';
+import { BOOK_PREORDER, SERVICE_STORIES } from '@/lib/fluxlineStory';
 import {
-  DRIVE_STEPS,
-  RCF_ASSUMPTIONS,
-  RCF_EXPLAINER,
   RCF_CONCEPTS,
   RCF_FAQ,
   RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
+  RCF_PREORDER_STATUS,
   RCF_PREVIEW_PDF,
-  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_RINGS,
   RCF_TRADEMARK,
   TRI_FRAMEWORK_URL,
-  TRI_SITE_URL,
+  TRI_START_HERE_URL,
   TW_FRAMEWORK_URL,
 } from '@/lib/resonanceCore';
 
-const SECTION_GAP = 'var(--fx-space-xxxxl)';
+const SECTION_GAP = 'var(--fx-space-xxl)';
 
 const sectionTitle: React.CSSProperties = {
   fontSize: 'var(--fx-h2-size)',
   fontWeight: 700,
   color: 'var(--fx-text-heading)',
-  margin: '0 0 var(--fx-space-s)',
+  margin: '0 0 var(--fx-space-m)',
   fontFamily: 'var(--fx-font)',
   letterSpacing: '-.01em',
 };
 
-const sectionSubtitleStyle: React.CSSProperties = {
-  margin: '0 0 var(--fx-space-xl)',
+const bodyText: React.CSSProperties = {
+  fontSize: 'var(--fx-body-size)',
+  lineHeight: 'var(--fx-body-leading)',
+  color: 'var(--fx-text-body)',
+  maxWidth: '68ch',
+  margin: '0 0 var(--fx-space-m)',
 };
-
-function SectionSubtitle({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <FxCallout tone='gold' title={title} style={sectionSubtitleStyle}>
-      {children}
-    </FxCallout>
-  );
-}
 
 const cardTitle: React.CSSProperties = {
   fontSize: 'var(--fx-h4-size, 18px)',
@@ -69,147 +59,45 @@ const cardTitle: React.CSSProperties = {
 };
 
 const cardBody: React.CSSProperties = {
-  fontSize: 14,
+  fontSize: 14.5,
   lineHeight: 1.6,
-  color: 'var(--fx-text-muted)',
+  color: 'var(--fx-text-body)',
   margin: 0,
 };
 
 const gridStyle: React.CSSProperties = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
   gap: 'var(--fx-space-m)',
 };
 
 const textLink: React.CSSProperties = {
-  color: 'var(--fx-accent)',
+  color: 'var(--fx-accent-text, var(--fx-accent))',
   fontWeight: 600,
   textDecoration: 'none',
 };
 
-/**
- * A heading with its supporting copy underneath: the question-and-answer
- * treatment used on The Resonant Identity's FAQ (teal subheading with a short
- * accent rule, muted body). Used for the FAQ and the reader assumptions so
- * neither reads as a grid of clickable-looking cards or pills.
- */
-function HeadedItem({
-  kicker,
-  heading,
-  children,
-}: {
-  kicker?: string;
-  heading: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      {kicker && (
-        <div
-          style={{
-            fontSize: 'var(--fx-kicker-size)',
-            fontWeight: 700,
-            letterSpacing: 'var(--fx-kicker-tracking)',
-            textTransform: 'uppercase',
-            color: 'var(--fx-text-muted)',
-            marginBottom: 'var(--fx-space-xxs)',
-          }}
-        >
-          {kicker}
-        </div>
-      )}
-      <h3
-        style={{
-          fontSize: 'var(--fx-article-h2)',
-          fontWeight: 700,
-          lineHeight: 1.35,
-          color: 'var(--fx-teal)',
-          fontFamily: 'var(--fx-font)',
-          margin: '0 0 var(--fx-space-m)',
-          paddingBottom: 'var(--fx-space-s)',
-          position: 'relative',
-        }}
-      >
-        {heading}
-        <span
-          aria-hidden='true'
-          style={{
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            width: 'clamp(6.875rem, 25vw, 12.5rem)',
-            maxWidth: '100%',
-            borderBottom: '3px solid var(--fx-teal)',
-          }}
-        />
-      </h3>
-      <div
-        style={{
-          fontSize: 'var(--fx-body-size)',
-          lineHeight: 'var(--fx-body-leading)',
-          color: 'var(--fx-text-body)',
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
-
-const headedListStyle: React.CSSProperties = {
-  display: 'grid',
-  gap: 'var(--fx-space-xxl)',
-  maxWidth: '72ch',
+const termName: React.CSSProperties = {
+  fontSize: 16,
+  fontWeight: 700,
+  color: 'var(--fx-text-heading)',
+  margin: 0,
 };
 
-/** The ways to work with the framework — coaching, consulting, book, podcast. */
-const ENGAGEMENTS: {
-  label: string;
-  title: string;
-  body: string;
-  href: string;
-  cta: string;
-}[] = [
-  {
-    label: '1:1',
-    title: 'Coaching',
-    body: 'Work one-to-one with us to understand your patterns and make decisions that fit who you are.',
-    href: '/services/resonance-core',
-    cta: 'Resonance Core Coaching ›',
-  },
-  {
-    label: 'Teams & founders',
-    title: 'Consulting packages',
-    body: 'Apply the RCF to your strategy, decisions, and the systems your organization builds.',
-    href: '/services/consulting',
-    cta: 'Explore Consulting ›',
-  },
-  {
-    label: `Targeted for ${RCF_RELEASE_WINDOW}`,
-    title: 'The book',
-    body: 'Explore the full framework, with a companion workbook for daily practice.',
-    href: '/books',
-    cta: "See What's Coming ›",
-  },
-  {
-    label: 'Weekly',
-    title: 'The Resonant Identity Podcast',
-    body: 'Hear RCF concepts explored through everyday conversations.',
-    href: TRI_SITE_URL,
-    cta: 'Listen to the Podcast ›',
-  },
-];
+const termBody: React.CSSProperties = {
+  ...cardBody,
+  margin: 'var(--fx-space-xxs) 0 0',
+};
 
 /**
- * /resonance-core-framework — the single home of the framework on Fluxline:
- * what it is and the premise behind it, its named concepts, the DRIVE Model,
- * the six values behind The DII, who it's for (the book Introduction's five
- * reader assumptions), how to work with it, and plain-language answers to
- * common questions, including how it was developed and what it's built on.
+ * /resonance-core-framework: the short, canonical account of the framework.
+ * What it is, its three parts, its named tools, the six core values, how each
+ * Fluxline service applies it, the book, and a short FAQ. Detail beyond this
+ * belongs in the book and on the podcast; this page is the 60-second map.
  *
- * This page absorbed the former /resonance-core explainer (301-redirected in
- * staticwebapp.config.json) so the framework isn't described in two places.
- * The book lives at /books; the paid engagement at /services/resonance-core.
+ * Section and concept ids are linked from theresonantidentity.com and
+ * terencewaters.com (`#three-rings`, `#core-concepts`, each concept id,
+ * `#drive-model`, `#core-values`, `#notify`, `#faq`), so keep them stable.
  */
 export default function ResonanceCoreFrameworkClient() {
   return (
@@ -234,13 +122,13 @@ export default function ResonanceCoreFrameworkClient() {
             objectFit: 'contain',
             borderRadius: 'var(--fx-radius-card-sm)',
             border: '1px solid var(--fx-border)',
-            background: '#000',
+            background: 'var(--fx-surface-inset)',
             padding: 10,
           }}
         />
         <div style={{ flex: 1, minWidth: 260 }}>
           <FxSectionHeading
-            kicker='Coaching & Consulting'
+            kicker='The framework behind Fluxline'
             title={RCF_TRADEMARK}
             subhead={RCF_ONE_LINER}
             as='h1'
@@ -259,40 +147,48 @@ export default function ResonanceCoreFrameworkClient() {
         <FxButton variant='primary' href='/contact'>
           Book a Free Consultation
         </FxButton>
-        <FxButton variant='outline' href={TRI_SITE_URL}>
-          Listen to the Podcast
+        <FxButton variant='outline' href={BOOK_PREORDER.url}>
+          Pre-order the book
         </FxButton>
         <FxButton variant='quiet' href={RCF_PREVIEW_PDF}>
-          Download the RCF Preview
+          Read the free introduction
         </FxButton>
       </div>
 
-      {/* 1. What the framework is */}
+      {/* 1. What it is */}
+      <FxReveal>
+        <section id='overview' style={{ marginBottom: SECTION_GAP }}>
+          <FxGroupLabel>Overview</FxGroupLabel>
+          <h2 style={sectionTitle}>What the framework is</h2>
+          <p style={bodyText}>
+            The RCF helps you get clear on who you are, then make decisions that
+            fit. Resonance is alignment between your identity, values, feelings,
+            and actions. The framework gives you language for your patterns, a
+            way to test decisions against your values, and tools to track
+            alignment over time.
+          </p>
+          <FxCallout tone='gold' title='The premise, in one line.'>
+            <em>
+              People make their best decisions when they act in alignment with
+              who they are.
+            </em>
+          </FxCallout>
+        </section>
+      </FxReveal>
+
+      {/* 2. The three parts */}
       <FxReveal>
         <FxSectionPanel
-          tone='gold'
+          tone='alt'
           id='three-rings'
           style={{ marginBottom: SECTION_GAP }}
         >
-          <FxGroupLabel>Overview</FxGroupLabel>
-          <h2 style={{ ...sectionTitle, color: 'var(--fx-gold)' }}>
-            What the Framework Is
-          </h2>
-          <p
-            style={{
-              color: 'var(--fx-gold)',
-              fontSize: 17,
-              lineHeight: 'var(--fx-body-leading)',
-              maxWidth: '68ch',
-              margin: '0 0 var(--fx-space-xl)',
-            }}
-          >
-            A structured identity system for making change that lasts through
-            alignment across your inner life, actions, and wider impact.
-          </p>
+          <FxGroupLabel>Structure</FxGroupLabel>
+          <h2 style={sectionTitle}>Three parts, from the inside out</h2>
           <div style={gridStyle}>
             {RCF_RINGS.map((ring) => (
               <FxCard key={ring.title} variant='raised' style={{ padding: 22 }}>
+                <FxGroupLabel>{ring.part}</FxGroupLabel>
                 <h3 style={cardTitle}>{ring.title}</h3>
                 <p style={cardBody}>{ring.body}</p>
               </FxCard>
@@ -301,156 +197,7 @@ export default function ResonanceCoreFrameworkClient() {
         </FxSectionPanel>
       </FxReveal>
 
-      {/* ---------------------------------------------------------------- */}
-      {/* What it is                                                        */}
-      {/* ---------------------------------------------------------------- */}
-      <FxReveal>
-        <FxSectionPanel tone='alt' style={{ marginBottom: SECTION_GAP }}>
-          <FxGroupLabel>The Premise</FxGroupLabel>
-          <h2 style={sectionTitle}>Resonance, not force</h2>
-          <FxCallout
-            tone='gold'
-            title='The premise, in one line.'
-            style={{
-              marginTop: 'var(--fx-space-xl)',
-              marginBottom: 'var(--fx-space-l)',
-            }}
-          >
-            <em>
-              People make their best decisions when they act in alignment with
-              who they are.
-            </em>
-          </FxCallout>
-
-          <div
-            className='fx-g2'
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: 'var(--fx-space-l)',
-            }}
-          >
-            {RCF_EXPLAINER.map((block) => (
-              <FxCard
-                key={block.heading}
-                interactive
-                style={{ padding: '28px 28px 24px' }}
-              >
-                <h3
-                  style={{
-                    fontSize: 'var(--fx-h3-size)',
-                    fontWeight: 700,
-                    color: 'var(--fx-text-heading)',
-                    margin: '0 0 var(--fx-space-xs)',
-                    fontFamily: 'var(--fx-font)',
-                  }}
-                >
-                  {block.heading}
-                </h3>
-                <p
-                  style={{
-                    fontSize: 'var(--fx-body-size)',
-                    color: 'var(--fx-text-body)',
-                    lineHeight: 'var(--fx-body-leading)',
-                    margin: 0,
-                  }}
-                >
-                  {block.body}
-                </p>
-              </FxCard>
-            ))}
-          </div>
-        </FxSectionPanel>
-      </FxReveal>
-
-      {/* The DRIVE Model */}
-      <FxReveal>
-        <FxSectionPanel
-          tone='band'
-          id='drive-model'
-          style={{ marginBottom: SECTION_GAP }}
-        >
-          <FxGroupLabel>The DRIVE Model</FxGroupLabel>
-          <h2 style={sectionTitle}>Six steps, one loop</h2>
-          <SectionSubtitle title='From spark to lasting change'>
-            DRIVE stands for Directional, Repeatable, Identity-Aligned Virtuous
-            Expressions: repeatable actions that move you toward the person you
-            are becoming. The DRIVE Model is six stages (Spark, Coherence,
-            Activation, Momentum, Endurance, Embodiment) that carry a DRIVE from
-            first spark to lived identity.
-          </SectionSubtitle>
-
-          {/* Diagram rail on the left, step cards on the right; the split
-              collapses to a single stacked column at tablet and below. */}
-          <div className='fx-media-split'>
-            <img
-              src={DriveModelDiagram.src}
-              alt='The DRIVE Model: Spark, Coherence, Activation, Momentum, Endurance, and Embodiment arranged as a continuous alignment loop.'
-              style={{
-                display: 'block',
-                width: '100%',
-                maxWidth: 320,
-                aspectRatio: '1 / 1',
-                objectFit: 'cover',
-                borderRadius: 'var(--fx-radius-card)',
-                border: '1px solid var(--fx-border)',
-              }}
-            />
-
-            <div
-              className='fx-g2'
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: 'var(--fx-space-m)',
-                width: '100%',
-              }}
-            >
-              {DRIVE_STEPS.map((step, i) => (
-                <FxCard
-                  key={step.step}
-                  interactive
-                  variant='raised'
-                  style={{ padding: 22 }}
-                >
-                  <div
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 700,
-                      letterSpacing: '.08em',
-                      color: 'var(--fx-teal)',
-                      marginBottom: 'var(--fx-space-xs)',
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')} · {step.step.toUpperCase()}
-                  </div>
-                  <div
-                    style={{
-                      fontWeight: 700,
-                      fontSize: 16,
-                      color: 'var(--fx-text-heading)',
-                      marginBottom: 'var(--fx-space-xxs)',
-                    }}
-                  >
-                    {step.title}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 13.5,
-                      lineHeight: 1.55,
-                      color: 'var(--fx-text-muted)',
-                    }}
-                  >
-                    {step.body}
-                  </div>
-                </FxCard>
-              ))}
-            </div>
-          </div>
-        </FxSectionPanel>
-      </FxReveal>
-
-      {/* Core concepts */}
+      {/* 3. The tools */}
       <FxReveal>
         <FxSectionPanel
           tone='inset'
@@ -458,183 +205,169 @@ export default function ResonanceCoreFrameworkClient() {
           style={{ marginBottom: SECTION_GAP }}
         >
           <FxGroupLabel>Language for what you feel</FxGroupLabel>
-          <h2 style={sectionTitle}>Core Concepts</h2>
-          <SectionSubtitle title='A language for patterns'>
-            These concepts help you name what is happening and choose how to
+          <h2 style={sectionTitle}>The tools</h2>
+          <p style={bodyText}>
+            Named concepts that help you see what is happening and choose how to
             respond.
-          </SectionSubtitle>
-          <div
-            className='fx-g3'
-            style={{ ...gridStyle, gridTemplateColumns: 'repeat(3, 1fr)' }}
-          >
-            {RCF_CONCEPTS.map((c) => (
-              <div
-                key={c.id}
-                id={c.id}
-                style={{ scrollMarginTop: 96, height: '100%' }}
-              >
-                <FxCard style={{ padding: 22, height: '100%' }}>
-                  <h3 style={cardTitle}>{c.name}</h3>
-                  <p style={cardBody}>{c.summary}</p>
-                </FxCard>
-              </div>
-            ))}
+          </p>
+          <div className='fx-media-split'>
+            <div id='drive-model' style={{ scrollMarginTop: 96 }}>
+              <img
+                src={DriveModelDiagram.src}
+                alt='The DRIVE Model: Spark, Coherence, Activation, Momentum, Endurance, and Embodiment arranged as a continuous alignment loop.'
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  maxWidth: 280,
+                  aspectRatio: '1 / 1',
+                  objectFit: 'cover',
+                  borderRadius: 'var(--fx-radius-card)',
+                  border: '1px solid var(--fx-border)',
+                }}
+              />
+              <p style={{ ...cardBody, maxWidth: 280, marginTop: 12 }}>
+                DRIVE stands for Directional, Repeatable, Identity-Aligned
+                Virtuous Expressions: repeatable actions that move you toward
+                the person you are becoming.
+              </p>
+            </div>
+            <dl
+              style={{
+                ...gridStyle,
+                gap: 'var(--fx-space-l)',
+                margin: 0,
+                width: '100%',
+              }}
+            >
+              {RCF_CONCEPTS.map((concept) => (
+                <div
+                  key={concept.id}
+                  id={concept.id}
+                  style={{ scrollMarginTop: 96 }}
+                >
+                  <dt style={termName}>{concept.name}</dt>
+                  <dd style={termBody}>{concept.summary}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </FxSectionPanel>
       </FxReveal>
 
-      {/* 3. The six core values */}
+      {/* 4. The six core values */}
       <FxReveal>
         <FxSectionPanel
           tone='band'
           id='core-values'
           style={{ marginBottom: SECTION_GAP }}
         >
-          <FxGroupLabel tone='gold'>Decision Integrity</FxGroupLabel>
+          <FxGroupLabel tone='gold'>Decision integrity</FxGroupLabel>
           <h2 style={sectionTitle}>The Six Core Values</h2>
-          <SectionSubtitle title='Check decisions against your values'>
-            The DII uses six values to assess how well a decision fits who you
-            are.
-          </SectionSubtitle>
-          <div
-            className='fx-g3'
-            style={{ ...gridStyle, gridTemplateColumns: 'repeat(3, 1fr)' }}
-          >
-            {COMPANY_VALUES.map((val) => (
-              <FxCard key={val.id} variant='raised' style={{ padding: 22 }}>
-                <h3 style={cardTitle}>{val.title}</h3>
-                <p style={cardBody}>{val.description}</p>
-              </FxCard>
-            ))}
-          </div>
-        </FxSectionPanel>
-      </FxReveal>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* Who it's for                                                      */}
-      {/* ---------------------------------------------------------------- */}
-      <FxReveal>
-        <FxSectionPanel
-          tone='inset'
-          id='who-its-for'
-          style={{ marginBottom: SECTION_GAP }}
-        >
-          <FxGroupLabel>Who It&apos;s For</FxGroupLabel>
-          <h2 style={{ ...sectionTitle, marginBottom: 'var(--fx-space-l)' }}>
-            You&apos;ll recognize yourself here
-          </h2>
-          <SectionSubtitle title='For people ready to grow'>
-            For anyone seeking lasting change, clearer decisions, or better
-            alignment between who they are and how they live.
-          </SectionSubtitle>
-
-          <p
-            style={{
-              fontSize: 'var(--fx-body-size)',
-              lineHeight: 'var(--fx-body-leading)',
-              color: 'var(--fx-text-body)',
-              maxWidth: '68ch',
-              margin: '0 0 var(--fx-space-xxl)',
-            }}
-          >
-            The book&apos;s Introduction makes five assumptions about its
-            reader. If they ring true, you&apos;re right at home.
+          <p style={bodyText}>
+            The DII checks each decision against six values.
           </p>
-
-          <div style={headedListStyle}>
-            {RCF_ASSUMPTIONS.map((a, i) => (
-              <HeadedItem
-                key={a.heading}
-                kicker={`Assumption ${i + 1}`}
-                heading={a.heading}
-              >
-                <p style={{ margin: 0 }}>{a.body}</p>
-              </HeadedItem>
+          <dl style={{ ...gridStyle, gap: 'var(--fx-space-l)', margin: 0 }}>
+            {COMPANY_VALUES.map((value) => (
+              <div key={value.id}>
+                <dt style={termName}>{value.title}</dt>
+                <dd style={termBody}>{value.description}</dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </FxSectionPanel>
       </FxReveal>
 
-      {/* 4. How to work with the framework */}
+      {/* 5. How it ties into Fluxline's services */}
       <FxReveal>
         <FxSectionPanel
           tone='alt'
           id='work-with-the-framework'
           style={{ marginBottom: SECTION_GAP }}
         >
-          <FxGroupLabel>Ways In</FxGroupLabel>
-          <h2 style={sectionTitle}>How to Work with the Framework</h2>
-          <SectionSubtitle title='Choose your level of support'>
-            Explore the framework through coaching, consulting, the book, or
-            podcast.
-          </SectionSubtitle>
+          <FxGroupLabel>Ways in</FxGroupLabel>
+          <h2 style={sectionTitle}>How Fluxline applies the framework</h2>
+          <p style={bodyText}>
+            Every Fluxline service applies the RCF to a different part of your
+            life or business.
+          </p>
           <div style={gridStyle}>
-            {ENGAGEMENTS.map((e) => (
-              <FxCard
-                key={e.title}
-                variant='raised'
-                interactive
-                href={e.href}
-                style={{ padding: '24px 24px 20px', height: '100%' }}
-              >
-                <div
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    letterSpacing: '.12em',
-                    textTransform: 'uppercase',
-                    color: 'var(--fx-teal)',
-                    marginBottom: 10,
-                  }}
+            {SERVICE_STORIES.map((story) => {
+              const service = SERVICE_CATEGORIES.find((s) => s.id === story.id);
+              if (!service) return null;
+              return (
+                <FxCard
+                  key={story.id}
+                  variant='raised'
+                  interactive
+                  href={service.path}
+                  style={{ padding: 22, height: '100%' }}
                 >
-                  {e.label}
-                </div>
-                <h3 style={cardTitle}>{e.title}</h3>
-                <p style={{ ...cardBody, marginBottom: 'var(--fx-space-m)' }}>
-                  {e.body}
-                </p>
-                <span
-                  style={{
-                    fontSize: 'var(--fx-cta-link-size)',
-                    color: 'var(--fx-accent)',
-                    fontWeight: 700,
-                    letterSpacing: 'var(--fx-cta-link-tracking)',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {e.cta}
-                </span>
-              </FxCard>
-            ))}
+                  <h3 style={cardTitle}>{service.title}</h3>
+                  <p style={cardBody}>{story.rcfTie}</p>
+                  <p
+                    style={{
+                      ...cardBody,
+                      marginTop: 'var(--fx-space-s)',
+                      fontWeight: 600,
+                      color: 'var(--fx-text-bright)',
+                    }}
+                  >
+                    {story.priceLabel}
+                  </p>
+                </FxCard>
+              );
+            })}
           </div>
+          <p style={{ ...bodyText, margin: 'var(--fx-space-l) 0 0' }}>
+            <Link href='/pricing' style={textLink}>
+              Compare all pricing →
+            </Link>
+          </p>
+        </FxSectionPanel>
+      </FxReveal>
 
-          <FxCard
-            variant='inset'
-            style={{ padding: '22px 24px', marginTop: 'var(--fx-space-l)' }}
+      {/* 6. The book */}
+      <FxReveal>
+        <FxSectionPanel
+          tone='gold'
+          id='book'
+          style={{ marginBottom: SECTION_GAP }}
+        >
+          <FxGroupLabel tone='gold'>
+            Targeted for {RCF_RELEASE_WINDOW}
+          </FxGroupLabel>
+          <h2 style={sectionTitle}>The book</h2>
+          <p style={bodyText}>
+            The full framework, with a companion workbook for daily practice and
+            an audiobook narrated by the author. {RCF_PREORDER_STATUS}.{' '}
+            {BOOK_PREORDER.priceLabel}.
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              gap: 'var(--fx-space-s)',
+              flexWrap: 'wrap',
+              marginBottom: 'var(--fx-space-l)',
+            }}
           >
-            <h3 style={cardTitle}>Read the introduction first</h3>
-            <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-              The free preview introduces the framework and its tools for making
-              change last.
-            </p>
-            <a href={RCF_PREVIEW_PDF} style={textLink}>
-              Download the RCF Preview (PDF) →
-            </a>
-          </FxCard>
-
+            <FxButton variant='primary' href={BOOK_PREORDER.url}>
+              Pre-order on the Fluxline Store
+            </FxButton>
+            <FxButton variant='outline' href='/books'>
+              About the book
+            </FxButton>
+            <FxButton variant='quiet' href={RCF_PREVIEW_PDF}>
+              Read the free introduction (PDF)
+            </FxButton>
+          </div>
           <div
             id='notify'
-            style={{
-              marginTop: 'var(--fx-space-m)',
-              scrollMarginTop: 'calc(var(--fx-nav-height) + 16px)',
-            }}
+            style={{ scrollMarginTop: 'calc(var(--fx-nav-height) + 16px)' }}
           >
             <FxCard variant='inset' style={{ padding: '22px 24px' }}>
               <h3 style={cardTitle}>Be notified when the book lands</h3>
               <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-                The book is targeted for {RCF_RELEASE_WINDOW}, with preorders
-                opening in {RCF_PREORDER_WINDOW}. Join the TRI Newsletter for
-                launch updates. No spam, ever.
+                Join the TRI Newsletter for launch updates. No spam, ever.
               </p>
               <NewsletterSignup
                 size='sm'
@@ -645,103 +378,89 @@ export default function ResonanceCoreFrameworkClient() {
         </FxSectionPanel>
       </FxReveal>
 
-      {/* 5. FAQ */}
+      {/* 7. FAQ */}
       <FxReveal>
-        <FxSectionPanel
-          tone='inset'
-          id='faq'
-          style={{ marginBottom: SECTION_GAP }}
-        >
+        <section id='faq' style={{ marginBottom: SECTION_GAP }}>
           <FxGroupLabel>Questions</FxGroupLabel>
           <h2 style={sectionTitle}>Frequently Asked Questions</h2>
-          <SectionSubtitle title='Built from research and practice'>
-            The framework brings together research, systems thinking, and
-            real-world experience. Here is what it is, how it was developed,
-            and who it&apos;s for.
-          </SectionSubtitle>
-          <div style={headedListStyle}>
-            {RCF_FAQ.map((f) => (
-              <HeadedItem key={f.question} heading={f.question}>
-                <p style={{ margin: 0 }}>{f.answer}</p>
-                {f.points && (
+          <div
+            style={{
+              display: 'grid',
+              gap: 'var(--fx-space-l)',
+              maxWidth: '72ch',
+            }}
+          >
+            {RCF_FAQ.map((item) => (
+              <div key={item.question}>
+                <h3 style={{ ...cardTitle, fontSize: 17 }}>{item.question}</h3>
+                <p style={{ ...cardBody, fontSize: 'var(--fx-body-size)' }}>
+                  {item.answer}
+                </p>
+                {item.points && (
                   <ul
                     style={{
-                      margin: 'var(--fx-space-s) 0 0',
+                      ...cardBody,
+                      fontSize: 'var(--fx-body-size)',
+                      margin: 'var(--fx-space-xs) 0 0',
                       paddingLeft: 'var(--fx-space-l)',
-                      display: 'grid',
-                      gridTemplateColumns:
-                        'repeat(auto-fill, minmax(min(100%, 16rem), 1fr))',
-                      gap: 'var(--fx-space-xxs) var(--fx-space-xl)',
                       listStyle: 'disc',
                     }}
                   >
-                    {f.points.map((point) => (
+                    {item.points.map((point) => (
                       <li key={point}>{point}</li>
                     ))}
                   </ul>
                 )}
-              </HeadedItem>
+              </div>
             ))}
           </div>
-        </FxSectionPanel>
+        </section>
       </FxReveal>
 
-      {/* Cross-site + CTA */}
+      {/* Next step and the rest of the ecosystem */}
       <FxReveal>
-        <FxSectionPanel tone='band'>
-          <h2 style={sectionTitle}>Ready when you are</h2>
-          <SectionSubtitle title='Start with a conversation'>
-            Talk through where you are and find a useful next step, with no
-            pressure.
-          </SectionSubtitle>
-          <div
-            style={{
-              display: 'flex',
-              gap: 'var(--fx-space-s)',
-              flexWrap: 'wrap',
-              marginBottom: 'var(--fx-space-l)',
-            }}
-          >
-            <FxButton variant='primary' href='/contact'>
-              Book a Free Consultation
-            </FxButton>
-            <FxButton variant='outline' href={TRI_SITE_URL}>
-              Listen to the Podcast
-            </FxButton>
-            <FxButton variant='quiet' href={RCF_PREVIEW_PDF}>
-              Download the RCF Preview
-            </FxButton>
-          </div>
-          <ul
-            style={{
-              listStyle: 'none',
-              margin: 0,
-              padding: 0,
-              display: 'flex',
-              gap: '10px 28px',
-              flexWrap: 'wrap',
-            }}
-          >
-            <li>
-              <a href={TRI_FRAMEWORK_URL} style={textLink}>
-                Hear each concept on the podcast →
-              </a>
-            </li>
-            <li>
-              <a href={TW_FRAMEWORK_URL} style={textLink}>
-                About the author →
-              </a>
-            </li>
-            <li>
-              <Link
-                href='/blog/announcement-resonance-core-book'
-                style={textLink}
-              >
-                Read the origin story →
-              </Link>
-            </li>
-          </ul>
-        </FxSectionPanel>
+        <FxCTABand
+          title='Ready when you are'
+          body='Talk through where you are and find a useful next step. The first consultation is free.'
+          primaryLabel='Book a Free Consultation'
+          primaryHref='/contact'
+          secondaryLabel='See pricing'
+          secondaryHref='/pricing'
+        />
+        <ul
+          style={{
+            listStyle: 'none',
+            margin: 'var(--fx-space-l) 0 0',
+            padding: 0,
+            display: 'flex',
+            gap: '10px 28px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <li>
+            <a href={TRI_START_HERE_URL} style={textLink}>
+              Listen to The Resonant Identity Podcast →
+            </a>
+          </li>
+          <li>
+            <a href={TRI_FRAMEWORK_URL} style={textLink}>
+              Hear each concept on the podcast →
+            </a>
+          </li>
+          <li>
+            <a href={TW_FRAMEWORK_URL} style={textLink}>
+              About the author →
+            </a>
+          </li>
+          <li>
+            <Link
+              href='/blog/announcement-resonance-core-book'
+              style={textLink}
+            >
+              Read the origin story →
+            </Link>
+          </li>
+        </ul>
       </FxReveal>
     </FxContainer>
   );

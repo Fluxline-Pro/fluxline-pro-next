@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 import { getAllBlogPostSlugs } from './blog/lib/blogLoader';
 import { getAllPortfolioSlugs } from './portfolio/lib/portfolioLoader';
 import { getAllCaseStudySlugs } from './case-studies/lib/caseStudyLoader';
+import { getAllPressReleaseIds } from './press-release/lib/pressReleaseLoader';
+import { getAllBookSlugs } from './books/lib/bookLoader';
 import { SERVICE_CATEGORIES } from './services/constants';
 import { isProduction } from '@/lib/environment';
 
@@ -13,11 +15,11 @@ import { isProduction } from '@/lib/environment';
  * Fluxline pages when answering queries about consulting, design, or coaching.
  *
  * Priority guide:
- *   1.0 — Homepage + Service pages (core business offering)
+ *   1.0 — Homepage, Service pages, Pricing, the Framework (core offering)
  *   0.9 — Contact (conversion)
  *   0.8 — Blog posts, Portfolio projects, Case studies (authority content)
- *   0.7 — Content hub, Press releases, Scrolls (resource content)
- *   0.6 — Videos, Podcasts, Books (media content within Content Hub)
+ *   0.7 — Content hub, Press releases (resource content)
+ *   0.6 — Books
  *
  * Only generated for production builds. Returns minimal output for dev/test
  * to avoid seeding AI systems with non-canonical content.
@@ -32,6 +34,10 @@ const isProd = isProduction();
 // Use a stable "last modified" date anchored to the build so every static
 // page in the same build shares the same lastmod value.
 const BUILD_DATE = new Date().toISOString();
+
+function withTrailingSlash(url: string): string {
+  return url.endsWith('/') ? url : `${url}/`;
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!isProd) {
@@ -57,6 +63,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/services`,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'monthly',
+      priority: 1.0,
+    },
+    {
+      // Starting prices for every offering: a top question for buyers and AI answers.
+      url: `${SITE_URL}/pricing`,
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
       priority: 1.0,
@@ -98,18 +111,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/videos`,
-      lastModified: BUILD_DATE,
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
-    {
-      url: `${SITE_URL}/podcasts`,
-      lastModified: BUILD_DATE,
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
-    {
       url: `${SITE_URL}/books`,
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
@@ -121,12 +122,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
       priority: 1.0,
-    },
-    {
-      url: `${SITE_URL}/services/scrolls`,
-      lastModified: BUILD_DATE,
-      changeFrequency: 'monthly',
-      priority: 0.7,
     },
   ];
 
@@ -167,11 +162,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // ── Press releases and books ───────────────────────────────────────────────
+  const pressReleasePages: MetadataRoute.Sitemap = getAllPressReleaseIds().map(
+    (id) => ({
+      url: `${SITE_URL}/press-release/${id}`,
+      lastModified: BUILD_DATE,
+      changeFrequency: 'yearly' as const,
+      priority: 0.5,
+    })
+  );
+  const bookPages: MetadataRoute.Sitemap = getAllBookSlugs().map((slug) => ({
+    url: `${SITE_URL}/books/${slug}`,
+    lastModified: BUILD_DATE,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  // The export uses `trailingSlash: true`, so the canonical form of every
+  // page ends in a slash. Listing that form avoids a redirect hop per URL.
   return [
     ...staticPages,
     ...servicePages,
     ...blogPages,
     ...portfolioPages,
     ...caseStudyPages,
-  ];
+    ...pressReleasePages,
+    ...bookPages,
+  ].map((entry) => ({ ...entry, url: withTrailingSlash(entry.url) }));
 }
