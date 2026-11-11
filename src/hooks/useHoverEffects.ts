@@ -57,8 +57,8 @@ export const useHoverEffects = (config: HoverEffectsConfig) => {
       defaultBg: defaultBgColor || 'transparent',
       hoverBorder: hoverBorderColor || 'transparent',
       defaultBorder: defaultBorderColor || 'transparent',
-      hoverText: hoverTextColor || 'var(--fx-accent)',
-      defaultText: defaultTextColor || 'var(--fx-accent)',
+      hoverText: hoverTextColor || 'var(--fx-accent-text)',
+      defaultText: defaultTextColor || 'var(--fx-accent-text)',
     };
   } else {
     // button type
@@ -68,7 +68,7 @@ export const useHoverEffects = (config: HoverEffectsConfig) => {
       hoverBorder: hoverBorderColor || 'var(--fx-accent)',
       defaultBorder: defaultBorderColor || 'var(--fx-border)',
       hoverText: hoverTextColor || 'var(--fx-accent-ink)',
-      defaultText: defaultTextColor || 'var(--fx-accent)',
+      defaultText: defaultTextColor || 'var(--fx-accent-text)',
     };
   }
 

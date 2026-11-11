@@ -244,7 +244,7 @@ export default function ServiceDetailPage() {
                 >
                   <h2
                     style={{
-                      color: 'var(--fx-accent)',
+                      color: 'var(--fx-accent-text)',
                       fontSize: 'var(--fx-h2-size)',
                       fontWeight: 700,
                       margin: 0,
@@ -326,7 +326,7 @@ export default function ServiceDetailPage() {
                       >
                         <strong
                           style={{
-                            color: 'var(--fx-accent)',
+                            color: 'var(--fx-accent-text)',
                             fontWeight: 600,
                           }}
                         >

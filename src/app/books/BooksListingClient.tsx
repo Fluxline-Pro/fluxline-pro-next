@@ -534,7 +534,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
               <span
                 style={{
                   fontSize: 'var(--fx-cta-link-size)',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   fontWeight: 700,
                   letterSpacing: 'var(--fx-cta-link-tracking)',
                   textTransform: 'uppercase',
@@ -575,7 +575,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
               <span
                 style={{
                   fontSize: 'var(--fx-cta-link-size)',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   fontWeight: 700,
                   letterSpacing: 'var(--fx-cta-link-tracking)',
                   textTransform: 'uppercase',
@@ -634,7 +634,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   <span
                     style={{
                       fontSize: 'var(--fx-cta-link-size)',
-                      color: 'var(--fx-accent)',
+                      color: 'var(--fx-accent-text)',
                       fontWeight: 700,
                       letterSpacing: 'var(--fx-cta-link-tracking)',
                       textTransform: 'uppercase',
@@ -677,7 +677,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
         {RCF_TRADEMARK} is the practice underneath everything Fluxline builds.{' '}
         <Link
           href='/resonance-core-framework'
-          style={{ color: 'var(--fx-accent)' }}
+          style={{ color: 'var(--fx-accent-text)' }}
         >
           Read what the framework is →
         </Link>

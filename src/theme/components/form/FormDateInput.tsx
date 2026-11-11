@@ -58,7 +58,7 @@ export const FormDateInput: React.FC<FormDateInputProps> = ({
           padding: '0.5rem',
           borderRadius: 'var(--fx-radius-control)',
           backgroundColor: 'var(--fx-surface-input)',
-          border: '1px solid var(--fx-border)',
+          border: '1px solid var(--fx-border-control)',
           color: 'var(--fx-text-heading)',
           fontSize: 'var(--fx-body-size)',
           fontFamily: 'var(--fx-font)',
@@ -75,7 +75,7 @@ export const FormDateInput: React.FC<FormDateInputProps> = ({
           e.currentTarget.style.borderColor = 'var(--fx-accent)';
         }}
         onBlur={(e) => {
-          e.currentTarget.style.borderColor = 'var(--fx-border)';
+          e.currentTarget.style.borderColor = 'var(--fx-border-control)';
         }}
       />
     </div>

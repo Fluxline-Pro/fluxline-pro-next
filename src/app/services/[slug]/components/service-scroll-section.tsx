@@ -28,7 +28,7 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
     <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <h2
         style={{
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           fontSize: '2rem',
           fontWeight: 700,
         }}
@@ -57,7 +57,7 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
         >
           <span
             style={{
-              color: 'var(--fx-accent)',
+              color: 'var(--fx-accent-text)',
               fontSize: '1.75rem',
               lineHeight: 1,
               flexShrink: 0,
@@ -68,7 +68,7 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
           <div style={{ flex: 1 }}>
             <h3
               style={{
-                color: 'var(--fx-accent)',
+                color: 'var(--fx-accent-text)',
                 fontSize: isMobile ? '1.25rem' : '1.5rem',
                 fontWeight: 600,
                 marginBottom: 8,
@@ -105,7 +105,7 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
                   borderRadius: 8,
                   backgroundColor:
                     'color-mix(in srgb, var(--fx-accent) 10%, transparent)',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   fontSize: '0.75rem',
                   fontWeight: 600,
                   textTransform: 'uppercase',

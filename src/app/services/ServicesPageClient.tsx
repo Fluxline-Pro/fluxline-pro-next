@@ -97,7 +97,7 @@ export default function ServicesPageClient() {
                   fontWeight: 700,
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   marginBottom: 8,
                 }}
               >
@@ -164,7 +164,7 @@ export default function ServicesPageClient() {
                     <span
                       style={{
                         fontSize: 'var(--fx-cta-link-size)',
-                        color: 'var(--fx-accent)',
+                        color: 'var(--fx-accent-text)',
                         fontWeight: 700,
                         letterSpacing: 'var(--fx-cta-link-tracking)',
                         textTransform: 'uppercase',

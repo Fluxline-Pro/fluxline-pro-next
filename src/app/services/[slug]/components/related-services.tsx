@@ -21,7 +21,7 @@ export const RelatedServices: React.FC<{ currentServiceId: string }> = ({
           fontWeight: 700,
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           marginBottom: 0,
         }}
       >
@@ -67,7 +67,7 @@ export const RelatedServices: React.FC<{ currentServiceId: string }> = ({
             <span
               style={{
                 fontSize: 'var(--fx-cta-link-size)',
-                color: 'var(--fx-accent)',
+                color: 'var(--fx-accent-text)',
                 fontWeight: 700,
                 letterSpacing: 'var(--fx-cta-link-tracking)',
                 textTransform: 'uppercase',

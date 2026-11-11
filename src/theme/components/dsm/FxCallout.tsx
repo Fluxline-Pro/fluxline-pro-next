@@ -13,7 +13,7 @@ const toneMap: Record<string, { border: string; bg: string; titleColor: string }
   gold: {
     border: 'var(--fx-gold-border)',
     bg: 'var(--fx-gold-bg)',
-    titleColor: 'var(--fx-gold)',
+    titleColor: 'var(--fx-gold-text)',
   },
   success: {
     border: 'var(--fx-success-border)',
@@ -28,7 +28,7 @@ const toneMap: Record<string, { border: string; bg: string; titleColor: string }
   warning: {
     border: 'var(--fx-warning-border)',
     bg: 'var(--fx-warning-bg)',
-    titleColor: 'var(--fx-warning)',
+    titleColor: 'var(--fx-warning-text)',
   },
   info: {
     border: 'var(--fx-info-border)',

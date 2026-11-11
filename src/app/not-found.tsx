@@ -49,7 +49,7 @@ export default function NotFound() {
   return (
     <div
       style={{
-        background: 'var(--fx-gradient-hero, linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%))',
+        background: 'var(--fx-gradient-hero)',
         color: 'var(--fx-text-body)',
         minHeight: '100vh',
         display: 'flex',
@@ -70,7 +70,7 @@ export default function NotFound() {
         }}
         aria-hidden='true'
       >
-        <g stroke='#5E81A8' strokeWidth='1' opacity='.3'>
+        <g style={{ stroke: 'var(--fx-line)' }} strokeWidth='1' opacity='.3'>
           <path
             d='M-40 700 L310 520 L520 720 L780 580 L1060 740 L1290 540 L1460 640'
             fill='none'
@@ -92,7 +92,7 @@ export default function NotFound() {
             strokeDasharray='3 10'
           />
         </g>
-        <g fill='#9FB6D4'>
+        <g style={{ fill: 'var(--fx-text-mist)' }}>
           <circle cx='310' cy='520' r='3.5' opacity='0.5' />
           <circle cx='700' cy='70' r='3' opacity='0.5' />
           <circle cx='1240' cy='100' r='3.5' opacity='0.5' />
@@ -151,7 +151,7 @@ export default function NotFound() {
             style={{
               fontSize: 19,
               fontWeight: 600,
-              color: 'var(--fx-teal)',
+              color: 'var(--fx-teal-text)',
               margin: '0 0 10px',
             }}
           >
