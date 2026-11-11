@@ -66,6 +66,7 @@ jobs:
           NEXT_PUBLIC_ENVIRONMENT: test
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
           NEXT_PUBLIC_API_BASE_URL: ''
+          NEXT_PUBLIC_GTM_ID: 'GTM-KX39NN6Q'
           SITE_URL: 'https://flx-next-test.fluxline.pro'
           # Shared Entra SSO (header sign-in). Without these the site builds with
           # an empty MSAL clientId and the "Sign in" control can't acquire a token.
