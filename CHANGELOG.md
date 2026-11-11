@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Google Tag Manager (`GTM-KX39NN6Q`): the standard container snippet loads in `<head>` right after the existing Consent Mode v2 defaults (so GTM respects consent from first load), with the `<noscript>` fallback iframe as the first element in `<body>`, per Google's documented install. Gated by `NEXT_PUBLIC_GTM_ID` (empty disables it, same pattern as `NEXT_PUBLIC_GA_MEASUREMENT_ID`). The CSP report-only header allow-lists `googletagmanager.com` for `script-src`, `frame-src`, and `connect-src`.
+
 ## [v3_5_PROD] - 2026-11-02
 
 ### Changed
