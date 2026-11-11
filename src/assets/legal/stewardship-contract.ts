@@ -1,299 +1,148 @@
 export const content = `# Stewardship Contract
 
-**Effective Date:** October 12, 2025  
-**Last Updated:** October 12, 2025
+**Effective Date:** November 6, 2026  
+**Last Updated:** November 6, 2026
 
-## Our Commitment to You
+## What this is
 
-At Fluxline, we believe in the power of genuine partnership and mutual respect. This Stewardship Contract outlines our commitments to you as our client and the values that guide our work together.
-
-## 1. Philosophy of Stewardship
-
-### 1.1 What Stewardship Means to Us
-
-Stewardship is more than service delivery—it is:
-- **Emotional Intelligence:** Understanding and honoring your unique journey
-- **Sustainable Growth:** Building solutions that serve your long-term vision
-- **Authentic Partnership:** Working collaboratively with transparency and trust
-- **Ethical Practice:** Maintaining the highest standards of professional conduct
-
-### 1.2 Our Core Values
-
-- **Clarity:** We communicate openly and honestly
-- **Transformation:** We facilitate meaningful change
-- **Precision:** We deliver work with attention to detail
-- **Warmth:** We bring humanity to every interaction
-- **Inclusivity:** We welcome and celebrate diversity
-
-## 2. Client Rights and Protections
-
-### 2.1 Right to Clarity
-
-You have the right to:
-- Understand our processes, methodologies, and approaches
-- Receive clear explanations of recommendations and deliverables
-- Ask questions at any stage of our engagement
-- Access documentation and records related to our work
-
-### 2.2 Right to Privacy
-
-We commit to:
-- Protecting your confidential information
-- Using your data only for agreed-upon purposes
-- Maintaining strict confidentiality agreements
-- Respecting your boundaries and personal space
-
-### 2.3 Right to Quality
-
-You can expect:
-- Professional, high-quality service delivery
-- Work that meets or exceeds industry standards
-- Timely completion of agreed-upon deliverables
-- Ongoing support and communication
-
-### 2.4 Right to Autonomy
-
-We respect your right to:
-- Make your own decisions about your business or personal journey
-- Accept or decline our recommendations
-- Pause or discontinue services at any time
-- Seek additional opinions or alternative perspectives
-
-## 3. Our Professional Commitments
-
-### 3.1 Competence
-
-We commit to:
-- Maintaining current knowledge and skills in our fields
-- Only taking on work within our areas of expertise
-- Seeking additional resources when needed
-- Continuous professional development
-
-### 3.2 Integrity
-
-We will:
-- Be honest about what we can and cannot do
-- Avoid conflicts of interest or disclose them when they arise
-- Never make false promises or unrealistic guarantees
-- Acknowledge our mistakes and work to correct them
-
-### 3.3 Respect
-
-We honor:
-- Your time and schedule
-- Your cultural background and identity
-- Your business practices and organizational culture
-- Your personal boundaries and preferences
-
-### 3.4 Confidentiality
-
-We safeguard:
-- All information shared in confidence
-- Proprietary business information
-- Personal details and sensitive data
-- Communications and documentation
-
-## 4. Scope of Services
-
-### 4.1 Business Consulting
-
-Our consulting services include:
-- Strategic planning and business development
-- Process optimization and workflow improvement
-- Technology strategy and digital transformation
-- Change management and organizational development
-
-**Boundaries:** We provide guidance and recommendations but do not make business decisions on your behalf.
-
-### 4.2 Web & App Development
-
-Our development services include:
-- Custom web application development
-- Mobile app development
-- Software architecture and design
-- Technical consulting and code review
-
-**Boundaries:** We deliver technical solutions based on agreed specifications but do not guarantee specific business outcomes.
-
-### 4.3 Brand & Experience Design
-
-Our design services include:
-- Brand strategy and visual identity
-- User experience (UX) and user interface (UI) design
-- Marketing materials and digital assets
-- Design system development
-
-**Boundaries:** We create design solutions based on your input and feedback; final approval rests with you.
-
-### 4.4 Education & Training
-
-Our training services include:
-- Professional development workshops
-- Technical skill training
-- Leadership development
-- Custom curriculum development
-
-**Boundaries:** We provide education and resources; individual learning outcomes vary.
-
-### 4.5 Personal Training & Wellness
-
-Our wellness services include:
-- Fitness coaching and program design
-- Nutrition guidance and lifestyle coaching
-- Goal setting and accountability
-- Mind-body wellness practices
-
-**Boundaries:** We are not medical professionals; serious health concerns should be addressed with healthcare providers.
-
-### 4.6 Life Coaching: Resonance Core
-
-Our coaching services include:
-- Personal development and self-discovery
-- Emotional intelligence development
-- Goal clarification and achievement strategies
-- Life transitions and transformation support
-
-**Boundaries:** Life coaching is not therapy or medical treatment. We may refer you to mental health professionals when appropriate.
-
-## 5. Mutual Responsibilities
-
-### 5.1 Your Responsibilities as a Client
-
-To ensure successful outcomes, we ask you to:
-- Provide honest and timely information
-- Communicate your goals, needs, and concerns
-- Participate actively in the process
-- Provide feedback on our work
-- Honor payment agreements
-- Respect our time and professional boundaries
-
-### 5.2 Our Responsibilities as Service Providers
-
-We commit to:
-- Delivering work according to agreed timelines
-- Communicating proactively about challenges or delays
-- Being responsive to your questions and concerns
-- Maintaining professional standards
-- Honoring our commitments
-- Treating you with respect and dignity
-
-## 6. Conflict Resolution
-
-### 6.1 Open Communication
-
-If concerns arise, we encourage:
-- Direct, honest communication
-- Timely discussion of issues
-- Active listening and mutual understanding
-- Collaborative problem-solving
-
-### 6.2 Resolution Process
-
-When conflicts occur:
-1. **Informal Discussion:** We address concerns directly and promptly
-2. **Formal Review:** If needed, we schedule a structured review meeting
-3. **Mediation:** For unresolved issues, we may engage a neutral third party
-4. **Termination:** Either party may terminate the agreement per contract terms
-
-## 7. Ethical Standards
-
-### 7.1 Professional Conduct
-
-We adhere to:
-- Industry codes of ethics and professional standards
-- Legal and regulatory requirements
-- Best practices in our respective fields
-- Continuing education and professional development
-
-### 7.2 Inclusivity and Non-Discrimination
-
-We welcome clients of all:
-- Races and ethnicities
-- Genders and gender identities
-- Sexual orientations
-- Abilities and disabilities
-- Ages and generations
-- Religions and belief systems
-- Socioeconomic backgrounds
-
-We do not tolerate discrimination, harassment, or hate speech.
-
-### 7.3 Sustainability
-
-We are committed to:
-- Environmentally responsible business practices
-- Sustainable and ethical sourcing
-- Digital sustainability and accessibility
-- Social responsibility
-
-## 8. Termination and Transition
-
-### 8.1 Termination Rights
-
-Either party may terminate our agreement:
-- With notice as specified in the service agreement
-- Immediately for cause (breach of agreement, unethical conduct)
-- By mutual consent at any time
-
-### 8.2 Transition Support
-
-Upon termination, we will:
-- Complete any urgent or critical work in progress
-- Provide necessary documentation and deliverables
-- Transfer relevant files and information
-- Ensure a smooth transition
-
-### 8.3 Post-Termination
-
-After termination:
-- Confidentiality obligations continue
-- Final invoices must be settled
-- Mutual respect and professionalism remain
-
-## 9. Feedback and Improvement
-
-### 9.1 Continuous Improvement
-
-We value your feedback and use it to:
-- Improve our services and processes
-- Enhance client experience
-- Develop new offerings
-- Refine our approach
-
-### 9.2 Testimonials and Reviews
-
-We may request:
-- Feedback surveys
-- Testimonials (with your permission)
-- Case study participation (with anonymity if preferred)
-
-Your participation is voluntary.
-
-## 10. Contact and Support
-
-### 10.1 Getting in Touch
-
-For questions about this Stewardship Contract:
-
-**Fluxline Resonance Group, LLC**  
-Email: support [at] fluxline.pro
-Website: https://www.fluxline.pro/contact
-
-### 10.2 Office Hours
-
-We are generally available:
-- Monday - Friday: 9:00 AM - 5:00 PM (local time)
-- Emergency support: As specified in service agreement
-
-## 11. Agreement Acknowledgment
-
-By engaging our services, you acknowledge that you have:
-- Read and understood this Stewardship Contract
-- Had the opportunity to ask questions
-- Agreed to work within this framework of mutual respect and responsibility
+This is our promise about how we treat people. It is not a price list or a privacy table. It is the standard we hold ourselves to when we serve a client, answer a reader, build an app, or take a payment. The Terms of Use, Preorder Terms, Privacy Policy, and Responsible AI Usage policy say exactly what happens. This contract says how we mean to carry it out.
 
 ---
 
-**Last Updated:** October 12, 2025
+## 1. Philosophy of Stewardship
 
-This Stewardship Contract reflects our commitment to serving you with integrity, professionalism, and heart. We look forward to our journey together.`;
+Stewardship means looking after something that is not only ours: your time, your trust, your information, your growth. We approach our work through emotional intelligence, sustainable growth, authentic partnership, and ethical practice. We hold ourselves to Identity Coherence: what we say, what we build, and what we do should be one thing. A promise is a pattern held over time, and we would rather be measured by an ordinary Tuesday than by this page.
+
+Our core values are **clarity, transformation, precision, warmth, and inclusivity.**
+
+---
+
+## 2. Who This Covers
+
+This contract applies to everyone we serve: clients of our professional services; readers of our books; buyers in our store; members and users of our apps and the RCF AI Companion; and visitors, listeners, and subscribers.
+
+---
+
+## 3. Your Rights and Protections
+
+**3.1 Clarity.** You have the right to understand what you are buying, what happens next, and why. We explain our processes in plain words, and we answer questions when you ask.
+
+**3.2 Privacy.** Your information is yours. We keep as little as we can, we tell you what we keep, and we do not sell it. The Privacy Policy sets out the details.
+
+**3.3 Quality.** You have the right to work and products made with care, skill, and attention.
+
+**3.4 Autonomy.** You may accept or decline our recommendations, pause services where the arrangement allows, and seek other opinions. Your decisions are yours.
+
+---
+
+## 4. How We Build and Sell
+
+These are the commitments that sit under our products and checkout.
+
+**4.1 No dark patterns.**
+We make cancelling as easy as signing up, in one step. We do not put save offers, discounts, surveys, or guilt in the way. We do not use countdown clocks, false scarcity, or pressure. We tell you before a renewal charge, in good time. A purchase that does not need to renew will not renew by surprise.
+
+**4.2 Honest timing.**
+We give release windows and not false promises. If something is late, we tell you plainly, and we give you a fair way out.
+
+**4.3 Plain pricing.**
+We show the price before you pay. If buying through an app store costs more because of platform fees, we say so at the point of choice.
+
+**4.4 Privacy by design.**
+We design our systems so that sensitive things are not collected in the first place. We store little. Anything beyond what delivering your purchase requires is something you turn on, and you can turn it off. We do not train AI on your content. We do not sell your information, and the store and the Companion show no ads. If a free app tier shows ads, they are contextual, never built from what you write or do, and never appear in a hard moment. When you delete, we delete in a way that cannot be traced back to you.
+
+**4.5 AI that assists.**
+AI is a tool in our hands, and it is not a decision-maker over yours. We tell you when AI is in the loop. Our AI features cite their sources, do not pretend to be people, do not give personal advice, and stop rather than guess when a safety check cannot run. You can turn AI off in our apps.
+
+**4.6 Care in hard moments.**
+When someone may be at risk, we show them carefully written, clinician-reviewed words and not improvised ones. We do not sell, upsell, or pitch in those moments.
+
+**4.7 Calm by design.**
+Our apps do not shame you for being human. We do not use streaks as status, red badges, or reprimanding notifications. We make mistakes and we make small changes, and so do you.
+
+**4.8 Adults only.**
+Our services are for people 18 and older, and we write for adults. We do not ask for your birthdate to prove it. If a minor ends up with an account, we close it and make it right.
+
+**4.9 Access for everyone.**
+We build toward WCAG 2.2 AA and welcome reports of barriers.
+
+---
+
+## 5. Professional Commitments
+
+**5.1 Competence.** We work within our skills, and we say when something is outside them.
+
+**5.2 Integrity.** We are honest. We disclose conflicts of interest. We do not promise unrealistic results.
+
+**5.3 Respect.** We respect your time, your culture, and your boundaries.
+
+**5.4 Confidentiality.** What you share in a professional engagement stays confidential. That duty continues after the work ends.
+
+---
+
+## 6. Scope of Services and Boundaries
+
+We offer business consulting; web and app development; brand and experience design; education and training; personal training and wellness; and life coaching. Each has limits that we respect:
+
+- Personal training and wellness are not medical care.
+- Coaching is not therapy.
+- Our books, programs, apps, and AI features are educational and experiential. They are not medical, mental health, legal, financial, or tax advice.
+- Where you need a licensed professional, we say so.
+
+---
+
+## 7. Mutual Responsibilities
+
+**What we ask of you.** Share honest information. Take part. Give us feedback. Honor the payment terms of your agreement.
+
+**What we commit to.** Deliver to the agreed timeline. Communicate before problems grow. Treat you with respect.
+
+---
+
+## 8. Conflict Resolution
+
+If something goes wrong, we want to fix it with you.
+
+1. **Talk to us.** Write to support@fluxline.pro. We aim to resolve it informally.
+2. **Formal review.** If that does not resolve it, you can request a formal review meeting.
+3. **Mediation.** If needed, we will take part in mediation with a neutral third party.
+4. **Next steps.** If the matter is still open, the dispute resolution terms in the Terms of Use apply.
+
+---
+
+## 9. Ethical Standards
+
+We follow applicable laws and the professional codes that apply to our work. We do not discriminate on the basis of race, color, religion, sex, gender identity or expression, sexual orientation, national origin, age, disability, or any other protected characteristic. We favor sustainable practices in how we work.
+
+---
+
+## 10. Termination and Transition
+
+Either of us may end an engagement, with notice, for cause, or by mutual agreement. When an engagement ends, we will finish urgent work, hand over your files and documentation, and keep our confidentiality duties. For apps and products, leaving should not trap your data: where an app offers an export, it uses an open format that you can read with any compatible tool.
+
+---
+
+## 11. Feedback and Improvement
+
+We may ask for feedback, testimonials, or case-study participation. Taking part is always voluntary, and saying no never affects how we serve you.
+
+---
+
+## 12. What This Contract Is and Is Not
+
+This contract states the standards we hold ourselves to. It does not guarantee any particular result, it does not replace the Terms of Use or any agreement you sign, and it does not give anyone a right to damages beyond what those documents allow. If a practice described here differs from what actually happened to you, tell us at support@fluxline.pro. We will treat it as a serious problem.
+
+---
+
+## 13. Contact and Support
+
+Email: support@fluxline.pro
+Office hours: Monday to Friday, 9:00 AM to 5:00 PM Mountain Time. Emergency support for clients is described in your service agreement.
+
+If you or someone else is in immediate danger, contact your local emergency services. Fluxline is not an emergency service.
+
+---
+
+## 14. Acknowledgment
+
+By engaging with our services, you confirm that you have read this contract, have had the chance to ask questions, and understand the framework it describes.`;
