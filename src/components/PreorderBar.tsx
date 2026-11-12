@@ -8,7 +8,8 @@ import styles from './PreorderBar.module.scss';
 /**
  * The slim book pre-order bar at the top of every page, above the header. It
  * sits in normal flow, so it scrolls away and the sticky header takes the top.
- * Transparent, with Mythic Gold trim: the label, the link and the bottom rule.
+ * A faint Mythic Gold tint, with the same gold used for the label, the link
+ * and the bottom rule.
  */
 export default function PreorderBar() {
   return (
