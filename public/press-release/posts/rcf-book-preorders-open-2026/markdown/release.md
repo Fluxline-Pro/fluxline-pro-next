@@ -28,11 +28,17 @@ seoKeywords:
 
 **Salt Lake City, Utah, November 20, 2026.** Fluxline Resonance Group, LLC today opened pre-orders for **The Resonance Core Framework™**, the book by founder and CEO Terence Waters. Pre-orders are open now on the [Fluxline Store](https://store.fluxline.pro/book). Release is targeted for Q1 2027.
 
+> "It's an honor to think that my dissertation about identity-aligned decision-making and resonance would become the foundation for everything Fluxline stands for. I'm truly touched to know I will be bringing this framework to the world, fulfilling my chosen identity as a visionary and published author!"
+>
+> **Terence Waters**, Founder and CEO, Fluxline Resonance Group
+
 ## What the book is
 
 The Resonance Core Framework™ (RCF) is a practical system for making change that holds, built on alignment rather than force. Its premise is that sustainable change comes from resonance: alignment between your identity, values, feelings, and actions.
 
-Until now, the framework has been delivered through Fluxline's coaching and consulting and explored on [The Resonant Identity podcast](https://theresonantidentity.com/start-here/). The podcast is where the framework is spoken. The book is where it is mapped, across 31 chapters.
+Until now, the framework has been delivered through Fluxline's coaching and consulting and explored on [The Resonant Identity podcast](https://theresonantidentity.com/start-here/). The podcast is where the framework is spoken. The book is where it is mapped.
+
+The book runs 31 chapters in three parts: The Self, The Outward Reach, and Systemic Architecture & Legacy.
 
 ## What the framework covers
 
