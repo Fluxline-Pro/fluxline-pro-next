@@ -4,7 +4,7 @@
  */
 
 .bar {
-  background: transparent;
+  background: var(--fx-mythic-gold-bg);
   border-bottom: 1px solid var(--fx-mythic-gold);
   font-family: var(--fx-font);
 }
