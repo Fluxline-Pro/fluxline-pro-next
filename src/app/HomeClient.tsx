@@ -8,7 +8,7 @@ import FxStatCard from '@/theme/components/dsm/FxStatCard';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import FxCard from '@/theme/components/dsm/FxCard';
-import FxAnnouncement from '@/theme/components/dsm/FxAnnouncement';
+import PreorderAnnouncement from '@/components/PreorderAnnouncement';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxButton from '@/theme/components/dsm/FxButton';
 import {
@@ -929,15 +929,7 @@ export default function HomeClient() {
           cannot park the band just above the screen. */}
       <FxContainer className='fx-snap-section' style={{ width: '100%' }}>
         <FxReveal style={{ padding: '0 0 56px' }}>
-          <FxAnnouncement
-            label='Now open for pre-order'
-            title='The Resonance Core Framework™, the book'
-            ctaLabel='Pre-order the book'
-            ctaHref={RCF_STORE_BOOK_URL}
-          >
-            Pre-orders are open on the Fluxline Store. Release is targeted for{' '}
-            {RCF_RELEASE_WINDOW}.
-          </FxAnnouncement>
+          <PreorderAnnouncement />
         </FxReveal>
       </FxContainer>
 

@@ -13,6 +13,7 @@ import FxCallout from '@/theme/components/dsm/FxCallout';
 import DriveModelDiagram from '@/assets/images/drive_model.jpg';
 import { COMPANY_VALUES } from '@/lib/siteContent';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import PreorderAnnouncement from '@/components/PreorderAnnouncement';
 import {
   DRIVE_STEPS,
   RCF_ASSUMPTIONS,
@@ -265,6 +266,11 @@ export default function ResonanceCoreFrameworkClient() {
           Download the RCF Preview
         </FxButton>
       </div>
+
+      {/* Book pre-order announcement (#374): the same band as the home page. */}
+      <FxReveal style={{ marginBottom: SECTION_GAP }}>
+        <PreorderAnnouncement />
+      </FxReveal>
 
       {/* 1. What the framework is */}
       <FxReveal>
