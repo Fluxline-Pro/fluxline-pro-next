@@ -271,7 +271,7 @@ export const UnifiedMarkdownRenderer: React.FC<
           {...props}
           style={{
             backgroundColor: 'var(--fx-badge-bg)',
-            color: 'var(--fx-accent-text)',
+            color: 'var(--fx-accent)',
             padding: '0.2em 0.4em',
             borderRadius: 'var(--fx-radius-control)',
             fontFamily: 'var(--fx-font-mono)',
@@ -379,7 +379,7 @@ export const UnifiedMarkdownRenderer: React.FC<
           href={href}
           {...props}
           style={{
-            color: 'var(--fx-accent-text)',
+            color: 'var(--fx-accent)',
             textDecoration: 'underline',
             transition: 'color 0.15s ease',
           }}
@@ -387,7 +387,7 @@ export const UnifiedMarkdownRenderer: React.FC<
             e.currentTarget.style.color = 'var(--fx-text-heading)';
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.color = 'var(--fx-accent-text)';
+            e.currentTarget.style.color = 'var(--fx-accent)';
           }}
         >
           {children}

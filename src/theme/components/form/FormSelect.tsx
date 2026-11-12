@@ -100,7 +100,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
           padding: '1rem',
           borderRadius: 'var(--fx-radius-control)',
           backgroundColor: 'var(--fx-surface-card)',
-          border: '1px solid var(--fx-border-control)',
+          border: '1px solid var(--fx-border)',
         }
       : {};
 
@@ -152,7 +152,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
               padding: '0.5rem 2rem 0.5rem 0.75rem',
               borderRadius: 'var(--fx-radius-control)',
               backgroundColor: 'var(--fx-surface-input)',
-              border: `1px solid ${isOpen ? 'var(--fx-accent)' : 'var(--fx-border-control)'}`,
+              border: `1px solid ${isOpen ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
               color:
                 selectedKeys.length === 0
                   ? 'var(--fx-text-muted)'
@@ -174,7 +174,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
             }}
             onBlur={(e) => {
               if (!isOpen)
-                e.currentTarget.style.borderColor = 'var(--fx-border-control)';
+                e.currentTarget.style.borderColor = 'var(--fx-border)';
             }}
           >
             <span>{getMultiSelectDisplayText()}</span>
@@ -273,7 +273,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
               padding: '0.5rem 2rem 0.5rem 0.75rem',
               borderRadius: 'var(--fx-radius-control)',
               backgroundColor: 'var(--fx-surface-input)',
-              border: `1px solid ${isOpen ? 'var(--fx-accent)' : 'var(--fx-border-control)'}`,
+              border: `1px solid ${isOpen ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
               color:
                 !value || value === ''
                   ? 'var(--fx-text-muted)'
@@ -296,7 +296,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
             }}
             onBlur={(e) => {
               if (!isOpen)
-                e.currentTarget.style.borderColor = 'var(--fx-border-control)';
+                e.currentTarget.style.borderColor = 'var(--fx-border)';
             }}
           >
             {value
@@ -434,7 +434,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
         {icon && (
           <span
             style={{
-              color: 'var(--fx-accent-text)',
+              color: 'var(--fx-accent)',
               fontSize: '1.25rem',
               lineHeight: 1,
               flexShrink: 0,

@@ -148,7 +148,7 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
         <h3
           style={{
             padding: '16px',
-            color: 'var(--fx-accent-text)',
+            color: 'var(--fx-accent)',
             marginTop: '16px',
             marginBottom: '16px',
             marginLeft: '8px',
@@ -222,7 +222,7 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
                   ? 'var(--fx-hover-fill)'
                   : 'transparent',
                 color: isActive
-                  ? 'var(--fx-accent-text)'
+                  ? 'var(--fx-accent)'
                   : 'var(--fx-text-muted)',
                 fontWeight: isActive ? 600 : 400,
                 fontSize: '0.85rem',
@@ -255,7 +255,7 @@ export function RedAppleFilterDemo({ isModal = false }: { isModal?: boolean }) {
             fontFamily: 'var(--fx-font)',
           }}
         >
-          <strong style={{ color: 'var(--fx-accent-text)' }}>
+          <strong style={{ color: 'var(--fx-accent)' }}>
             {activeFilter.icon} {activeFilter.label}:
           </strong>{' '}
           {activeFilter.description}

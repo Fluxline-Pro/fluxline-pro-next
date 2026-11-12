@@ -68,11 +68,6 @@ export function getAccountPortalUrl(): string {
   return configuredOrigin('account').replace(/\/$/, '');
 }
 
-/** Fluxline Store origin, no trailing slash. */
-export function getStorefrontUrl(): string {
-  return configuredOrigin('storefront').replace(/\/$/, '');
-}
-
 /** Full URL for a path within a service's API. */
 export function getServiceEndpoint(service: ServiceName, path: string): string {
   const suffix = path.startsWith('/') ? path : `/${path}`;

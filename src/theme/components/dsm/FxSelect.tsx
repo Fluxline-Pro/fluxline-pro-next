@@ -35,7 +35,7 @@ export default function FxSelect({
     appearance: 'none',
     WebkitAppearance: 'none',
     background: 'var(--fx-surface-input)',
-    border: `1px solid ${focused ? 'var(--fx-border-hover)' : 'var(--fx-border-control)'}`,
+    border: `1px solid ${focused ? 'var(--fx-border-hover)' : 'var(--fx-border)'}`,
     borderRadius: 'var(--fx-radius-control)',
     padding: '12px 38px 12px 14px',
     fontSize: 14.5,

@@ -19,6 +19,7 @@
       "/case-studies/*",
       "/press-release/*",
       "/videos/*",
+      "/podcasts/*",
       "/scrolls/*",
       "/*.{css,js,png,jpg,jpeg,gif,ico,svg,woff,woff2,ttf,eot,webp,mp4,webm}"
     ]
@@ -34,41 +35,6 @@
     {
       "route": "/admin/*",
       "allowedRoles": ["authenticated"]
-    },
-    {
-      "route": "/podcasts*",
-      "redirect": "https://theresonantidentity.com/start-here/",
-      "statusCode": 301
-    },
-    {
-      "route": "/videos",
-      "redirect": "/content/",
-      "statusCode": 301
-    },
-    {
-      "route": "/cue-cards*",
-      "redirect": "/resonance-core-framework/",
-      "statusCode": 301
-    },
-    {
-      "route": "/github*",
-      "redirect": "/portfolio/",
-      "statusCode": 301
-    },
-    {
-      "route": "/book",
-      "redirect": "/contact/",
-      "statusCode": 301
-    },
-    {
-      "route": "/services/scrolls*",
-      "redirect": "/services/",
-      "statusCode": 301
-    },
-    {
-      "route": "/bookings*",
-      "redirect": "/contact/",
-      "statusCode": 301
     },
     {
       "route": "/_next/static/*",

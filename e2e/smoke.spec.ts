@@ -1,5 +1,3 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import { test, expect } from '@playwright/test';
 
 /**
@@ -7,7 +5,7 @@ import { test, expect } from '@playwright/test';
  * bitten by.
  *
  * PR #111 shipped a tag-routing bug that was invisible in `yarn dev` and only
- * appeared against built static output on Azure. These tests run against
+ * appeared against built static output on Azure. These six tests run against
  * `out/` for exactly that reason — they are the cheapest thing that would have
  * caught it before deploy.
  *
@@ -58,9 +56,7 @@ test('legacy space-encoded taxonomy URLs do not resolve', async ({ page }) => {
   expect(response?.status()).not.toBe(200);
 });
 
-test('portfolio technology route renders its display name', async ({
-  page,
-}) => {
+test('portfolio technology route renders its display name', async ({ page }) => {
   // 'Next.js 16' -> slug 'next-js-16': punctuation and a digit, collapsed to a
   // single hyphen run.
   const response = await page.goto('/portfolio/technology/next-js-16/');
@@ -69,35 +65,8 @@ test('portfolio technology route renders its display name', async ({
   await expect(page.locator('h1').first()).toContainText(/Next\.js 16/i);
 });
 
-test('contact page renders the consultation flow', async ({ page }) => {
-  const response = await page.goto('/contact/');
+test('podcast listing renders', async ({ page }) => {
+  const response = await page.goto('/podcasts/');
   expect(response?.status()).toBe(200);
-  await expect(page.locator('h1').first()).toBeVisible();
-  await expect(
-    page.getByText(/Book a Free Consultation/i).first()
-  ).toBeVisible();
-});
-
-test('retired routes are redirected in the deployed SWA config', async () => {
-  // The Azure SWA config is copied into out/ by `yarn build`; the browser
-  // serving out/ does not apply it, so assert on the built file itself.
-  const config = JSON.parse(
-    readFileSync(join(process.cwd(), 'out', 'staticwebapp.config.json'), 'utf8')
-  ) as {
-    routes: Array<{ route: string; redirect?: string; statusCode?: number }>;
-  };
-  const expected: Record<string, string> = {
-    '/podcasts*': 'https://theresonantidentity.com/start-here/',
-    '/videos': '/content/',
-    '/cue-cards*': '/resonance-core-framework/',
-    '/github*': '/portfolio/',
-    '/book': '/contact/',
-    '/services/scrolls*': '/services/',
-    '/bookings*': '/contact/',
-  };
-  for (const [route, redirect] of Object.entries(expected)) {
-    const rule = config.routes.find((r) => r.route === route);
-    expect(rule?.redirect, route).toBe(redirect);
-    expect(rule?.statusCode, route).toBe(301);
-  }
+  await expect(page.locator('h1').first()).toContainText(/PODCAST/i);
 });

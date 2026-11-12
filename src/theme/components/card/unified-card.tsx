@@ -564,7 +564,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     <span
                       style={{
                         margin: 0,
-                        color: 'var(--fx-accent-text)',
+                        color: 'var(--fx-accent)',
                         fontWeight: 600,
                         display: 'block',
                         fontSize: '0.75rem',
@@ -700,7 +700,7 @@ export const UnifiedCard: React.FC<UnifiedCardProps> = ({
                     <h6
                       style={{
                         margin: '6px 0',
-                        color: 'var(--fx-accent-text)',
+                        color: 'var(--fx-accent)',
                         lineHeight: 1.4,
                       }}
                     >

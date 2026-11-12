@@ -37,7 +37,7 @@ export default function FxChip({
       cursor: 'pointer',
       padding: '8px 16px',
       fontSize: 13,
-      border: `1px solid ${active ? 'var(--fx-accent)' : 'var(--fx-border-control)'}`,
+      border: `1px solid ${active ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
       background: active ? 'var(--fx-accent)' : 'transparent',
       color: active
         ? 'var(--fx-accent-ink)'
@@ -53,8 +53,8 @@ export default function FxChip({
       letterSpacing: '0.08em',
       textTransform: 'uppercase',
       background:
-        tone === 'gold' ? 'color-mix(in srgb, var(--fx-gold) 14%, transparent)' : 'var(--fx-teal-bg)',
-      color: tone === 'gold' ? 'var(--fx-gold-text)' : 'var(--fx-teal-text)',
+        tone === 'gold' ? 'rgba(232,185,91,0.14)' : 'var(--fx-teal-bg)',
+      color: tone === 'gold' ? 'var(--fx-gold)' : 'var(--fx-teal)',
     };
   } else if (kind === 'tag') {
     kindStyles = {
@@ -69,7 +69,7 @@ export default function FxChip({
       padding: '6px 13px',
       fontSize: 12,
       border: `1px solid ${hovered ? 'var(--fx-border-hover)' : 'var(--fx-border-strong)'}`,
-      color: hovered ? 'var(--fx-text-bright)' : 'var(--fx-accent-text)',
+      color: hovered ? 'var(--fx-text-bright)' : 'var(--fx-accent)',
     };
   }
 

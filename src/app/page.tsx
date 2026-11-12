@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import HomeClient from './HomeClient';
-import { FLUXLINE_ONE_LINER } from '@/lib/fluxlineStory';
 
-const TITLE = 'Identity Alignment Coaching & Consulting | Fluxline';
-const DESCRIPTION = `${FLUXLINE_ONE_LINER} Five services, one framework.`;
+const TITLE = 'Coaching & Consulting for Founders | Fluxline Resonance Group';
+const DESCRIPTION =
+  'Fluxline Resonance Group offers coaching and consulting for founders and leaders: business strategy, brand identity, web development, and personal training.';
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -12,11 +12,7 @@ export const metadata: Metadata = {
     'Fluxline Resonance Group',
     'The Resonance Core Framework',
     'RCF',
-    'identity alignment',
     'identity alignment coaching',
-    'identity alignment for businesses',
-    'coaching for solopreneurs',
-    'data-driven decision-making',
     'leadership coaching',
     'coaching for founders and leaders',
     'decision-making framework',

@@ -130,7 +130,7 @@ export default function ConsentBanner() {
               <Link
                 href='/legal/privacy-policy'
                 style={{
-                  color: 'var(--fx-accent-text)',
+                  color: 'var(--fx-accent)',
                   textDecoration: 'underline',
                 }}
               >

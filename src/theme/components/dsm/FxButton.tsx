@@ -28,7 +28,7 @@ const variants: Record<string, React.CSSProperties> = {
   },
   outline: {
     background: 'transparent',
-    color: 'var(--fx-accent-text)',
+    color: 'var(--fx-accent)',
     border: '1px solid var(--fx-line)',
   },
   quiet: {
@@ -75,7 +75,7 @@ export default function FxButton({
 
   if (hovered) {
     if (variant === 'primary') base.filter = 'brightness(1.08)';
-    if (variant === 'outline') base.background = 'color-mix(in srgb, var(--fx-accent) 8%, transparent)';
+    if (variant === 'outline') base.background = 'rgba(184,205,245,0.08)';
     if (variant === 'quiet') base.color = 'var(--fx-text-bright)';
   }
 

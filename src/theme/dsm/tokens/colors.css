@@ -1,73 +1,54 @@
 :root {
-  /* DSM 2.0 values (dark theme). Source: Fluxline DSM 2.0 token card.
-     DERIVED marks a token the card does not define: aliased to the nearest 2.0 token
-     or mixed from one, never an invented hex. The 1.0 website values are superseded (brand book section 3.6); archival
-     copies live in docs/dsm_v1_0/. */
-
   /* ===== Backgrounds ===== */
-  --fx-bg-page: #2e2e3a;          /* page background (Dark field, the only dark background) */
-  --fx-bg-deep: #2e2e3a;          /* nav bars, footers */
-  --fx-bg-hero-1: var(--fx-surface-alt);   /* DERIVED: hero gradient start */
-  --fx-bg-hero-2: var(--fx-bg-page);       /* DERIVED: hero gradient mid */
-  --fx-bg-hero-3: var(--fx-surface-card);  /* DERIVED: hero gradient end */
+  --fx-bg-page: #0A0D13;          /* default page background */
+  --fx-bg-deep: #07090D;          /* nav bars, footers */
+  --fx-bg-hero-1: #05070B;        /* hero gradient start */
+  --fx-bg-hero-2: #0B1019;        /* hero gradient mid */
+  --fx-bg-hero-3: #0E1523;        /* hero gradient end */
   --fx-gradient-hero: linear-gradient(160deg, var(--fx-bg-hero-1) 0%, var(--fx-bg-hero-2) 55%, var(--fx-bg-hero-3) 100%);
-  --fx-gradient-band: linear-gradient(150deg, var(--fx-surface-card), var(--fx-bg-page)); /* DERIVED @kind color */
-  --fx-gradient-feature: linear-gradient(160deg, var(--fx-surface-raised), var(--fx-surface-card)); /* DERIVED @kind color */
+  --fx-gradient-band: linear-gradient(150deg, #101826, #0C1220); /* @kind color */
+  --fx-gradient-feature: linear-gradient(160deg, #101F35, #11161F); /* @kind color */
 
   /* ===== Surfaces ===== */
-  --fx-surface-card: #363645;     /* standard card (card marks it a derived tint) */
-  --fx-surface-alt: #292933;      /* alternate section background (derived tint) */
-  --fx-hover-fill: #3d3d4e;       /* hover fill on rows, chips, outline buttons */
-  --fx-badge-bg: var(--fx-hover-fill);     /* DERIVED: neutral badge / tag fill */
-  --fx-surface-inset: var(--fx-surface-alt); /* DERIVED: nested / inset panels, quiet rows */
-  --fx-surface-raised: #3a3a4a;   /* interactive link-cards, raised elements */
-  --fx-surface-input: #2e2e3a;    /* form fields */
+  --fx-surface-card: #11161F;     /* standard card */
+  --fx-surface-alt: #0C1017;      /* alternate section background (e.g. Services band) */
+  --fx-hover-fill: #141B28;       /* hover background for outline buttons */
+  --fx-badge-bg: #1B2230;         /* neutral badge / tag fill */
+  --fx-surface-inset: #0D1117;    /* nested / inset panels, quiet rows */
+  --fx-surface-raised: #141A25;   /* interactive link-cards */
+  --fx-surface-input: #0A0D13;    /* form fields */
 
   /* ===== Borders ===== */
-  --fx-border: #4a4a5c;           /* default card / control border */
-  --fx-border-subtle: #3d3d4e;    /* hairlines, dividers inside a card */
-  --fx-border-strong: #5a7ca0;    /* emphasized cards, focus structure (Secondary Blue) */
-  --fx-border-hover: #7b9bb8;     /* hover state for any bordered element (Tertiary Blue) */
+  --fx-border: #232C3D;           /* default card / control border */
+  --fx-border-subtle: #1E2635;    /* hairlines, section dividers */
+  --fx-border-strong: #33506F;    /* emphasized cards, feature bands */
+  --fx-border-hover: #5E81A8;     /* hover state for any bordered element */
 
   /* ===== Text ===== */
-  --fx-white: #ffffff;            /* Ritual White */
+  --fx-white: #FFFFFF;            /* base white */
   --fx-text-heading-display: var(--fx-white); /* display + major (page/band) headings */
-  --fx-text-heading: #afcafc;     /* section + card headings (Mystic Mist) */
-  --fx-text-base: #f8fafc;        /* root page text color, set on every page wrapper */
-  --fx-text-bright: var(--fx-text-base);   /* DERIVED: high-emphasis text, card titles, strong */
-  --fx-text-body: #e4e9f1;        /* body copy (derived on dark) */
-  --fx-text-muted: #b8c2d0;       /* secondary copy, card descriptions */
-  --fx-text-faint: #9aa5b6;       /* metadata, timestamps, footers */
-  --fx-text-soft: var(--fx-text-heading);  /* DERIVED: quiet links, breadcrumbs, labels */
-  --fx-text-mist: var(--fx-text-muted);    /* DERIVED: body copy on gradient bands */
+  --fx-text-heading: #AEC6EE;     /* SECONDARY accent: section + card headings (periwinkle blue) */
+  --fx-text-base: #D5DAE3;        /* root page text color, set on every page wrapper */
+  --fx-text-bright: #EAF0F9;      /* high-emphasis text, card titles, strong */
+  --fx-text-body: #C2CEDA;        /* body copy */
+  --fx-text-muted: #98A2B3;       /* secondary copy, card descriptions */
+  --fx-text-faint: #7E8A99;       /* metadata, timestamps, footers */
+  --fx-text-soft: #8FA8CA;        /* quiet links, breadcrumbs, labels */
+  --fx-text-mist: #9FB6D4;        /* body copy on gradient bands */
 
   /* ===== Accents ===== */
-  --fx-accent: #4d6c96;           /* primary action FILL (Dark Primary); pair with --fx-accent-ink */
-  --fx-accent-ink: #ffffff;       /* text on primary action */
-  /* DERIVED text colours (not on the DSM card; need owner sign-off, brand book 3.7).
-     --fx-accent is a FILL. Use these for accent-coloured TEXT and links, and for status or
-     brand hues set as text: each passes 4.5:1 on that mode's page, card and alt surfaces. */
-  --fx-accent-text: var(--fx-text-heading);  /* DERIVED: accent-coloured text and links */
-  --fx-teal-text: #77b4b0;        /* DERIVED: Fluxline Teal #4a9b96 lightened 25% toward white (4.5:1 on page, card, alt, raised and hover surfaces) */
-  --fx-gold-text: var(--fx-gold);       /* DERIVED: gold as text (dark base already passes) */
-  --fx-warning-text: var(--fx-warning); /* DERIVED: warning as text (dark base already passes) */
-  --fx-rose-text: var(--fx-rose);       /* DERIVED: rose as text (dark base already passes) */
-  --fx-border-control: var(--fx-line);  /* DERIVED: form-control borders, 3:1 against the input surface */
-  --fx-teal: #4a9b96;             /* kickers, subheads, links, connected-system actions (card: --teal-accent) */
-  --fx-teal-bg: color-mix(in srgb, var(--fx-teal) 12%, transparent); /* DERIVED */
-  --fx-gold: #f5c85c;             /* Mythic Gold: decisions, completion, emphasis ONLY. Never a warning, never decoration */
-  --fx-gold-border: var(--fx-gold);        /* DERIVED (replaces the earlier amber) */
-  --fx-gold-bg: color-mix(in srgb, var(--fx-gold) 6%, transparent); /* DERIVED */
-  --fx-rose: #e89ca3;             /* Somatic Rose: embodiment and wellness accent only (not a status colour) */
-  --fx-line: #5a7ca0;             /* structural lines, outline buttons, dividers */
+  --fx-accent: #B8CDF5;           /* primary action fill (light periwinkle) */
+  --fx-accent-ink: #0A0D13;       /* text on primary action */
+  --fx-teal: #4FD1C5;             /* kickers, subheads, LEARN MORE links, success */
+  --fx-teal-bg: rgba(79, 209, 197, 0.12);
+  --fx-gold: #E8B95B;             /* featured / special callouts (TRI, milestones) */
+  --fx-gold-border: #E0A83C;
+  --fx-gold-bg: rgba(224, 168, 60, 0.06);
+  --fx-line: #5E81A8;             /* constellation lines, outline buttons, dividers */
 
   /* ===== Semantic aliases ===== */
-  --fx-success: #92c353;          /* success status, never decoration */
-  --fx-success-border: color-mix(in srgb, var(--fx-success) 40%, var(--fx-bg-page)); /* DERIVED */
-  --fx-success-bg: color-mix(in srgb, var(--fx-success) 6%, transparent); /* DERIVED */
+  --fx-success: var(--fx-teal);
+  --fx-success-border: #2E5844;
+  --fx-success-bg: rgba(79, 209, 197, 0.06);
   --fx-featured: var(--fx-gold);
-
-  /* ===== Hero (a fixed dark panel in every theme; DERIVED from Dark field and Steel Blue; neutral in grayscale and high-contrast) ===== */
-  --fx-hero-panel: rgba(46, 46, 58, 0.84);   /* Dark field at 84%: text panel over the hero image */
-  --fx-hero-overlay: linear-gradient(160deg, rgba(39, 71, 112, 0.55), rgba(46, 46, 58, 0.3)); /* Steel Blue overlay on the image */
 }

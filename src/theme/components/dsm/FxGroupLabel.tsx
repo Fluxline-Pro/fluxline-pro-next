@@ -27,7 +27,7 @@ export default function FxGroupLabel({
         fontWeight: 700,
         letterSpacing: '0.08em',
         textTransform: 'uppercase',
-        color: tone === 'gold' ? 'var(--fx-gold-text)' : 'var(--fx-accent-text)',
+        color: tone === 'gold' ? 'var(--fx-gold)' : 'var(--fx-accent)',
         marginBottom: 'var(--fx-space-s)',
         ...style,
       }}

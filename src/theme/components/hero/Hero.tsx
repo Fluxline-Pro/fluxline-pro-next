@@ -177,7 +177,7 @@ export const Hero: React.FC<HeroProps> = ({
                 width: 32,
                 height: 32,
                 fontSize: 24,
-                color: 'var(--fx-accent-text)',
+                color: 'var(--fx-accent)',
                 transition: 'transform 0.2s ease',
                 cursor: 'pointer',
                 flexShrink: 0,
@@ -201,7 +201,7 @@ export const Hero: React.FC<HeroProps> = ({
           <span
             style={{
               fontSize: isMobile ? 32 : 48,
-              color: 'var(--fx-accent-text)',
+              color: 'var(--fx-accent)',
               flexShrink: 0,
               marginTop: isMobile ? '0.25rem' : 0,
               marginRight: '1rem',
@@ -213,7 +213,7 @@ export const Hero: React.FC<HeroProps> = ({
         )}
         <h1
           style={{
-            color: 'var(--fx-accent-text)',
+            color: 'var(--fx-accent)',
             fontSize: 'clamp(2rem, 5vw, 3rem)',
             fontWeight: 700,
             lineHeight: 'clamp(1.2, 2vw, 1.3)',
