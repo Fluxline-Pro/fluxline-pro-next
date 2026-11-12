@@ -1,6 +1,6 @@
 ---
-title: 'Preorders for The Resonance Core Framework™ Open in Early November'
-excerpt: 'The last manual bottleneck in the book pipeline is gone. The eBook and the InDesign print files are now built together, so preorders for The Resonance Core Framework™ open in early November 2026. The book is targeted for Q1 2027.'
+title: 'Pre-orders for The Resonance Core Framework™ Are Open'
+excerpt: 'The last manual bottleneck in the book pipeline is gone. The eBook and the InDesign print files are now built together, and pre-orders for The Resonance Core Framework™ are open on the Fluxline Store. The book is targeted for Q1 2027.'
 author: 'Terence Waters'
 publishedDate: '2026-10-22'
 category: 'Framework Announcement'
@@ -15,8 +15,8 @@ tags:
 imageUrl: '/blog/posts/rcf-preorders-early-november/images/The-Resonance-Core-Book.jpg'
 imageAlt: 'The Resonance Core Framework™ book by Terence Waters'
 featured: true
-seoTitle: 'The Resonance Core Framework™ Preorders Open'
-seoDescription: 'Preorders for The Resonance Core Framework™ open in early November 2026, and the book is targeted for Q1 2027. See what changed in the production pipeline.'
+seoTitle: 'The Resonance Core Framework™ Pre-orders Are Open'
+seoDescription: 'Pre-orders for The Resonance Core Framework™ are open on the Fluxline Store, and the book is targeted for Q1 2027. See what changed in the production pipeline.'
 seoKeywords:
   - 'Resonance Core Framework'
   - 'RCF preorder'
@@ -30,25 +30,27 @@ seoKeywords:
   - 'fluxline'
 ---
 
-# Preorders Open in Early November
+# Pre-orders Are Open
 
-_The Resonance Core Framework™_ is a practical system for making change that holds, built on alignment rather than force. Preorders open in **early November 2026**, and the book is targeted for **Q1 2027**.
+_Updated November 20, 2026. This post first announced pre-orders for early November. They opened on November 20._
 
-[Be notified when preorders open.](https://fluxline.pro/resonance-core-framework/#notify)
+_The Resonance Core Framework™_ is a practical system for making change that holds, built on alignment rather than force. Pre-orders are **open on the Fluxline Store**, and the book is targeted for **Q1 2027**.
+
+[Pre-order the book on the Fluxline Store.](https://store.fluxline.pro/book)
 
 ---
 
 ## What is coming
 
-- **The book.** 31 chapters across four parts. It names the patterns that keep change from holding, and gives you the tools to work with them: the Judgment Loop and the Data Loop, the Window of Choice, the DRIVE Model, and The Decision Integrity Index (The DII).
+- **The book.** 31 chapters across three parts. It names the patterns that keep change from holding, and gives you the tools to work with them: the Judgment Loop and the Data Loop, the Window of Choice, the DRIVE Model, and The Decision Integrity Index (The DII).
 - **The workbook.** A companion exercise for every lesson, so each idea has a place to be practised, not just read.
 - **The audiobook.** Narrated by the author. Every chapter, in my own voice.
 
-Edition details and preorder pricing will be shared when preorders open. The newsletter hears first.
+Edition details and pre-order pricing are on the [Fluxline Store](https://store.fluxline.pro/book).
 
 ---
 
-## Why the date moved closer
+## What changed in the pipeline
 
 A book that ships in several formats is not one project. The manuscript becomes an eBook, a print book, a workbook, a Kindle file and an audiobook, and every one of them has to say the same thing.
 
@@ -70,6 +72,6 @@ AI drafts, builds and checks. It does not decide. Portions of the book's product
 
 - Read the free **Introduction Preview** on the [Resonance Core Framework page](/resonance-core-framework).
 - Listen to **The Resonant Identity** podcast, where the Framework is spoken: [theresonantidentity.com](https://theresonantidentity.com/start-here/).
-- [Join the list](https://fluxline.pro/resonance-core-framework/#notify) to hear the moment preorders open.
+- [Pre-order the book](https://store.fluxline.pro/book) on the Fluxline Store.
 
 _Structure the Shift._
