@@ -304,8 +304,7 @@ export default function FxNav({
             {/* Right-side actions: appearance button + mobile hamburger */}
             <div className={styles.navActions}>
               {preferencesButton}
-              {/* *** Hide the user menu in PROD only for now, until we have a proper login system *** */}
-              {/* <FxUserMenu /> */}
+              <FxUserMenu />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={styles.hamburgerButton}
