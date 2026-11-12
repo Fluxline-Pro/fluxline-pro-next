@@ -2,6 +2,12 @@ import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import NewsletterSignup from './NewsletterSignup';
 
+const executeRecaptchaMock = jest.fn().mockResolvedValue('test-recaptcha-token');
+
+jest.mock('react-google-recaptcha-v3', () => ({
+  useGoogleReCaptcha: () => ({ executeRecaptcha: executeRecaptchaMock }),
+}));
+
 describe('NewsletterSignup', () => {
   const originalFetch = global.fetch;
 
@@ -34,7 +40,11 @@ describe('NewsletterSignup', () => {
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toMatch(/\/api\/newsletter-subscribe$/);
     expect(init).toMatchObject({ method: 'POST' });
-    expect(JSON.parse(init.body)).toEqual({ email: 'reader@example.com' });
+    expect(JSON.parse(init.body)).toEqual({
+      email: 'reader@example.com',
+      recaptchaToken: 'test-recaptcha-token',
+    });
+    expect(executeRecaptchaMock).toHaveBeenCalledWith('newsletter_subscribe');
   });
 
   it('shows the API error when the request is rejected', async () => {

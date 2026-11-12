@@ -43,8 +43,8 @@ Goal: a first-time visitor understands what Fluxline does, who it is for, and wh
 **A6. Marks.** ™ on first use per page, title, H1, OG and Twitter text. Fix body-text uses that read "Resonance Core Framework" without ™ at first use. No ® anywhere.
 
 **A7. Cross-sell and links**
-- Footer nav currently reads "The RCF Ecosystem" with two links. Relabel it "Fluxline Ecosystem" (owner, 2026-10-19) and make its items the **shared block** in core Section 7. Do not create a new component.
-- Footer author link "Terence Waters — Author & Architect" now points to `https://terencewaters.com/about/`. Keep the visible text.
+- Footer: no cross-sell block (owner, 2026-11-12, #378). The footer is the copyright plus the short link row (Legal & Governance, Press Releases, fluxline.pro). Do not add the "Fluxline Ecosystem" rows back. (Earlier guidance, 2026-10-19, relabelled the block "Fluxline Ecosystem" and filled it from core Section 7.)
+- Footer author link: removed with the cross-sell block (2026-11-12, #378). Author links elsewhere point to `https://terencewaters.com/about/`.
 - "Explore the Podcast" (home) now points to `https://theresonantidentity.com/start-here/`.
 - Beside the book mention in the framework summary, add the link "Be notified at launch →" to `https://fluxline.pro/resonance-core-framework/#notify` (the RCF page's newsletter sign-up, owner 2026-10-19). In `/books/`, the "Want to know when it lands?" section gets the same link.
 - On `/contact`, add to the TRI Newsletter description: "Book launch updates included." Keep "No spam, ever."
@@ -57,7 +57,7 @@ Goal: a first-time visitor understands what Fluxline does, who it is for, and wh
 4. Cropped logo caption in the hero graphic ("TRUCTURE THE SHIFT"). Visual bug; report only.
 5. Resolved (owner, 2026-10-19): Creative Truth is a Core Value only.
 6. Resolved (owner, 2026-10-19): every consultation CTA says "Book a Free Consultation".
-7. Resolved (owner, 2026-10-19): the footer label is "Fluxline Ecosystem".
+7. Resolved (owner, 2026-10-19): the footer label is "Fluxline Ecosystem". Superseded 2026-11-12 (#378): the footer block is removed.
 8. Any "1 to 5" mention of the DII scale.
 9. Resolved (owner, 2026-10-19): "The RCF's Universal Truths, which shape Fluxline's ethos and mission".
 10. Resolved: the route is removed and 301-redirected.

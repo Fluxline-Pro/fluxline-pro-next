@@ -56,9 +56,9 @@ export function Providers({ children, gaMeasurementId = '' }: ProvidersProps) {
                   mini-player survive client-side navigation. */}
                 <PodcastPlayerProvider>
                   <SkipToContent />
-                  <FxNav />
+                  <FxNav onOpenPreferences={() => setPrefsOpen(true)} />
                   <FxPageTransition>{children}</FxPageTransition>
-                  <FxFooter preferencesOnClick={() => setPrefsOpen(true)} />
+                  <FxFooter />
                   <FxPreferencesDrawer
                     open={prefsOpen}
                     onClose={() => setPrefsOpen(false)}
