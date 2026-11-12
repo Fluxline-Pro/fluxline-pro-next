@@ -16,6 +16,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Pre-order wording (#368): the home, books, framework and `llms.txt` copy no longer says pre-orders open in early November 2026; it says they are open on the Fluxline Store, and the home page status link now goes to the store book page. `RCF_PREORDER_WINDOW` is replaced by `RCF_STORE_BOOK_URL`.
 
+### Security
+
+- Newsletter sign-up (`/api/newsletter-subscribe`): bot submissions were reaching the SharePoint distribution list unfiltered — the endpoint had no rate limiting and no bot check, only a loose email-format regex. Added the same per-IP rate limiting (5/hour) and reCAPTCHA v3 verification (action + hostname + score, matching `/api/contact`'s existing pattern) that the contact form already uses. `NewsletterSignup` now fetches a token via `useGoogleReCaptcha` before posting.
+
 ## [v3_5_PROD] - 2026-11-02
 
 ### Changed
