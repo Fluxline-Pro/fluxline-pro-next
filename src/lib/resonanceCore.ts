@@ -29,111 +29,23 @@ export const RCF_BOOK_IMAGE = '/images/RCF_BookConcept.jpg';
 export const RCF_RELEASE_WINDOW = 'Q1 2027';
 
 /**
- * When preorders open (owner, 2026-10-19). Naming the month is allowed for
- * the preorder date only.
+ * Pre-orders for the digital editions are open on the Fluxline Store (owner,
+ * 2026-11-11; store launch 2026-11-20). The store URL and the one quoted
+ * price live in `src/lib/fluxlineStory.ts` (`BOOK_PREORDER`).
  */
-export const RCF_PREORDER_WINDOW = 'early November 2026';
+export const RCF_PREORDER_STATUS = 'Pre-orders are open on the Fluxline Store';
 
 /** The one-sentence version, for the home page and card summaries. */
 export const RCF_ONE_LINER =
-  'A practical system for making change that holds — built on alignment rather than force.';
+  'A practical system for making change that holds, built on alignment rather than force.';
 
 /**
- * The short explanation, for the home page. Two short paragraphs: the problem,
+ * The short explanation, used on /books. Two short paragraphs: the problem,
  * then the premise. Anything longer belongs on /resonance-core-framework.
  */
 export const RCF_BRIEF: string[] = [
-  'Most self-help tells you what to do, but not how to do it — so the cycle runs inspiration, motivation, confusion, inaction, and then another book. The change never sets, because it was never built on anything structural.',
-  'The Resonance Core Framework™ starts somewhere else: people make their best decisions when they act in alignment with who they actually are. Resonance is the felt sense of coherence between your identity, values, emotions, and lived behavior. When it is present, effort compounds. When it is absent, discipline has to carry the whole load — and eventually it drops it.',
-];
-
-/**
- * The full explainer. This is the copy Terence points people at when they ask
- * what the framework actually is.
- */
-export const RCF_EXPLAINER: { heading: string; body: string }[] = [
-  {
-    heading: 'The problem it solves',
-    body: 'Most self-help tells you what to do, but not how. Without structure, inspiration fades and old patterns return.',
-  },
-  {
-    heading: 'The idea it rests on',
-    body: 'Decisions work better when they fit who you are. Resonance is alignment between your identity, values, feelings, and actions.',
-  },
-  {
-    heading: 'What it does',
-    body: 'The RCF gives you language for your patterns, a way to test decisions against your values, and tools to track alignment.',
-  },
-  {
-    heading: 'Where it came from',
-    body: 'Terence developed the framework while building Fluxline, refining it through journaling, decisions, and real-world challenges.',
-  },
-];
-
-/** The DRIVE Model — the operating sequence at the centre of the framework. */
-export const DRIVE_STEPS: { step: string; title: string; body: string }[] = [
-  {
-    step: 'Spark',
-    title: 'Sparking curiosity',
-    body: 'Notice what draws your interest before you talk yourself out of it.',
-  },
-  {
-    step: 'Coherence',
-    title: 'Testing viability',
-    body: 'Check the idea against your values, capacity, and context.',
-  },
-  {
-    step: 'Activation',
-    title: 'Initiating the loop',
-    body: 'Choose one small action. Observe, check in, and adjust.',
-  },
-  {
-    step: 'Momentum',
-    title: 'Compounding identity',
-    body: 'Repeated aligned action becomes part of how you see yourself.',
-  },
-  {
-    step: 'Endurance',
-    title: 'Sustaining the DRIVE',
-    body: 'Build routines that support you when motivation dips.',
-  },
-  {
-    step: 'Embodiment',
-    title: 'Identity evolution',
-    body: 'Let what you learn shape the next thing you pursue.',
-  },
-];
-
-/**
- * Who the framework is for: the five assumptions the book's Introduction makes
- * about its reader ("What I am assuming about you when I write this book"),
- * paraphrased for the web. Source: the RCF Preview PDF
- * (public/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf).
- */
-export const RCF_ASSUMPTIONS: { heading: string; body: string }[] = [
-  {
-    heading: 'You want to make a meaningful difference in the world.',
-    body: "You wake up knowing you're capable of more. You keep asking how to improve your situation, yourself, and the lives of the people around you. The framework asks you to answer those questions as you go.",
-  },
-  {
-    heading:
-      "You've felt the pull to change your life, even if you're not sure how.",
-    body: "Your career may not match your interests, your friendships may not reflect your growth, or your inner world may feel out of step with who you're becoming. Something feels off, but you can't name it yet. The RCF helps you see those misalignments clearly, understand why they happen, and shift your direction with intention.",
-  },
-  {
-    heading:
-      "You've accepted that change is inevitable, in yourself and everything around you.",
-    body: "Families grow, perspectives shift, and desires mature. You can't stop change, but you can choose how you adapt to it. The framework helps you notice when a shift is happening and carry it into everyday life as growth.",
-  },
-  {
-    heading:
-      "You've lived through trials and hurt that made change harder than it should be.",
-    body: "Past failures and losses can harden into a distorted sense of who you are. The RCF helps you name those patterns, see why they don't fit, and choose to let them go.",
-  },
-  {
-    heading: 'You understand that change only happens when you choose to act.',
-    body: 'Without action, nothing changes: the job that drains you, the patterns that keep you small, the relationships that stunt your growth. You play an active role in your life, and the framework asks you to take it through clarity, not force or pressure.',
-  },
+  'Most self-help tells you what to do, but not how to do it. So the cycle runs inspiration, motivation, confusion, inaction, and then another book. The change never sets, because it was never built on anything structural.',
+  'The Resonance Core Framework™ starts somewhere else: people make their best decisions when they act in alignment with who they actually are. Resonance is the felt sense of coherence between your identity, values, emotions, and lived behavior. When it is present, effort compounds. When it is absent, discipline has to carry the whole load, and eventually it drops it.',
 ];
 
 /** The Resonant Identity Podcast — an extension of the framework. */
@@ -152,6 +64,7 @@ export const TRI_SITE_URL = 'https://theresonantidentity.com';
 export const TRI_START_HERE_URL = 'https://theresonantidentity.com/start-here/';
 export const TRI_FRAMEWORK_URL = 'https://theresonantidentity.com/framework/';
 export const TW_SITE_URL = 'https://terencewaters.com';
+export const TW_ABOUT_URL = 'https://terencewaters.com/about/';
 export const TW_FRAMEWORK_URL =
   'https://terencewaters.com/resonance-core-framework';
 
@@ -164,19 +77,25 @@ export const TW_FRAMEWORK_URL =
 export const RCF_CANONICAL_PARAGRAPH =
   'The Resonance Core Framework™ is a structured identity system built on the principle that sustainable change requires alignment, not force. Developed by Terence Waters through Fluxline Resonance Group, the RCF maps three dimensions of identity (inner signal, outward expression, and systemic impact) and provides named conceptual tools: Behavioral Gravity, Identity Coherence, the Window of Choice, the DRIVE Model, and The Decision Integrity Index (The DII). Delivered through coaching and consulting at Fluxline, it is also the foundation of The Resonant Identity podcast and the forthcoming book.';
 
-/** The three dimensions (rings) of identity the framework maps. */
-export const RCF_RINGS: { title: string; body: string }[] = [
+/**
+ * The three dimensions of identity the framework maps. Each is one Part of
+ * the book: The Self, The Outward Reach, Systemic Architecture & Legacy.
+ */
+export const RCF_RINGS: { part: string; title: string; body: string }[] = [
   {
-    title: 'Inward — the inner signal',
-    body: 'Who you are beneath roles, pressure, and performance.',
+    part: 'Part I',
+    title: 'The Self',
+    body: 'The inner signal. Who you are beneath roles, pressure, and performance.',
   },
   {
-    title: 'Outward — expression',
-    body: 'How your identity shows up in relationships, work, and decisions.',
+    part: 'Part II',
+    title: 'The Outward Reach',
+    body: 'Expression. How your identity shows up in relationships, work, and decisions.',
   },
   {
-    title: 'Systemic — impact',
-    body: 'How your identity shapes the teams and systems you build.',
+    part: 'Part III',
+    title: 'Systemic Architecture & Legacy',
+    body: 'Impact. How your identity shapes the teams and systems you build.',
   },
 ];
 
@@ -204,22 +123,21 @@ export const RCF_CONCEPTS: {
   {
     id: 'identity-coherence',
     name: 'Identity Coherence',
-    summary:
-      'When your values, expression, and behavior agree. Not perfection — alignment.',
-    body: 'The state in which your inner values, outer expression, and behavioral patterns are in agreement. Not perfection — alignment. When you are coherent, decisions get simpler, because who you are and how you live point the same way.',
+    summary: 'When your values, expression, and behavior agree.',
+    body: 'The state in which your inner values, outer expression, and behavioral patterns are in agreement. It is alignment, not perfection. When you are coherent, decisions get simpler, because who you are and how you live point the same way.',
   },
   {
     id: 'window-of-choice',
     name: 'Window of Choice',
     summary:
       'The space between a trigger and your response where a conscious, identity-aligned choice becomes possible.',
-    body: 'The range of choices you can actually see and act on in any moment. It widens with presence and clarity and narrows under stress — which matters most at threshold moments, when you can respond from who you are now rather than react from who you used to be. The work is keeping it wide through grounding, presence, and emotional intelligence.',
+    body: 'The range of choices you can actually see and act on in any moment. It widens with presence and clarity and narrows under stress. That matters most at threshold moments, when you can respond from who you are now rather than react from who you used to be. The work is keeping it wide through grounding, presence, and emotional intelligence.',
   },
   {
     id: 'drive-system',
     name: 'The DRIVE Model',
     summary:
-      'How identity-rooted goals become self-sustaining instead of running on willpower.',
+      'Six stages (Spark, Coherence, Activation, Momentum, Endurance, Embodiment) that carry a DRIVE from first spark to lived identity.',
     body: 'The motivation architecture of the RCF: how identity-rooted goals become self-sustaining rather than dependent on willpower. Instead of pushing yourself toward a goal, DRIVE connects the goal to who you are, so small wins compound into momentum.',
   },
   {
@@ -239,8 +157,9 @@ export const RCF_CONCEPTS: {
   {
     id: 'dii-protocol',
     name: 'The Decision Integrity Index (The DII)',
-    summary: 'A 1–5 way to score how well a decision aligns with who you are.',
-    body: 'A structured way to score how well a decision aligns with your identity. It starts simply: journal a key decision, score it from 1 to 5, and justify the score honestly. Scores are anchored to six core values — Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, and Strategic Innovation — and are personal markers, never grades.',
+    summary:
+      "The RCF's way of checking whether a decision lines up with your identity and values.",
+    body: "The RCF's way of checking whether a decision lines up with your identity and values. It is anchored to six core values: Embodied Awareness, Modular Precision, Resilient Alignment, Somatic Discipline, Creative Truth, and Strategic Innovation. Its scores are personal markers, never grades.",
   },
   {
     id: 'decision-alignment-score',
@@ -258,32 +177,32 @@ export interface RcfFaqItem {
 }
 
 /**
- * Plain-language FAQ, including how the framework was developed (formerly a
- * separate "How it was developed" block). Rendered as H3s and as FAQPage
- * structured data. The Universal Truths list is from the book's Introduction
- * (RCF Preview PDF).
+ * Plain-language FAQ: what the framework is, who it is for, how it differs,
+ * where it came from, how it ties to the services, and the book. Rendered as
+ * H3s and as FAQPage structured data. Term definitions live in RCF_CONCEPTS,
+ * so they are not repeated here.
  */
 export const RCF_FAQ: RcfFaqItem[] = [
   {
-    question: 'What is the Resonance Core Framework?',
+    question: 'What is The Resonance Core Framework™?',
     answer:
-      'The RCF is a structured identity system that helps you make lasting change by aligning decisions with who you are.',
+      'A practical system for making change that holds, built on alignment rather than force. It helps you get clear on who you are, then check your decisions against that identity.',
+  },
+  {
+    question: 'Who is the RCF designed for?',
+    answer:
+      'Businesses, solopreneurs, and individuals: founders, leaders, creatives, and anyone seeking lasting change or clearer decisions.',
   },
   {
     question:
       'How is the RCF different from other coaching or identity frameworks?',
     answer:
-      'The RCF offers tools to understand your patterns, test decisions against your values, and track alignment over time.',
+      'The RCF offers tools to understand your patterns, test decisions against your values, and track alignment over time. It is a decision and identity framework, not therapy.',
   },
   {
-    question: 'How was the RCF developed?',
+    question: 'How was the RCF developed, and what is it built from?',
     answer:
-      'Terence Waters developed the framework while building Fluxline, refining it through journaling, decisions, and real-world challenges. As he wrote, he applied each idea to his own decisions, habits, and work with clients.',
-  },
-  {
-    question: 'What is the RCF built from?',
-    answer:
-      'It draws on psychology, systems thinking, and practice. It is a decision and identity framework, not therapy. Its six foundations are:',
+      'Terence Waters developed the framework while building Fluxline, applying each idea to his own decisions, habits, and work with clients. It draws on six foundations:',
     points: [
       "The RCF's Universal Truths, which shape Fluxline's ethos and mission",
       'Psychological research',
@@ -294,36 +213,14 @@ export const RCF_FAQ: RcfFaqItem[] = [
     ],
   },
   {
-    question: "What are the RCF's Universal Truths?",
+    question: "How does the RCF connect to Fluxline's services?",
     answer:
-      "Basic principles the framework is built around. They shape Fluxline's ethos and mission, and include:",
-    points: [
-      'Treat others as you wish to be treated',
-      'Choose with clarity and intention',
-      'Listen to emotion, logic, and intuition',
-      'Recognize bias and judgment',
-      'Trust in basic human goodness',
-      'Lean toward optimism',
-      'Notice what you attract',
-      "Understand life's natural opposites",
-      'Live by values and virtues',
-      'Stay mindful and aware',
-    ],
+      'Every Fluxline service applies the framework to a different part of your life or business: coaching applies it to you, business strategy to your decisions and operations, brand design and web development to how your identity shows up, and personal training to the body.',
   },
   {
-    question: 'What is Behavioral Gravity?',
+    question: 'When is the book available?',
     answer:
-      'The pull a steady, regulated person has on the people around them, drawing others toward calm, presence, and clarity through how they show up.',
-  },
-  {
-    question: 'What is The Decision Integrity Index (The DII)?',
-    answer:
-      'The DII scores how well a decision aligns with your identity, using six core values and a Decision Alignment Score.',
-  },
-  {
-    question: 'Who is the RCF designed for?',
-    answer:
-      'It is for founders, leaders, creatives, and anyone seeking lasting change or clearer decisions.',
+      'The book is targeted for Q1 2027. Digital editions are available for pre-order on the Fluxline Store.',
   },
 ];
 

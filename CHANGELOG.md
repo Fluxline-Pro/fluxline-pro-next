@@ -8,7 +8,30 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- `/pricing`: one page with a starting price for each of the five offerings and the book pre-order, each linking to its existing service page. Services priced by consultation say so. "Pricing" is in the header and footer on every page. The figures come from `src/lib/fluxlineStory.ts`, and a unit test fails if they stop matching `pricing-data.ts` (#364).
+- `src/lib/fluxlineStory.ts`: one source for the 60-second story (elevator pitch, how Fluxline works, who it helps, each service's outcome, starting price, and tie to The Resonance Core Framework™, the book pre-order link, and the ecosystem links). The home page, `/pricing`, `/services`, `/resonance-core-framework`, and `/llms.txt` all read from it (#364).
+- Pre-order links to the Fluxline Store (`https://store.fluxline.pro/book`) on the home page, `/resonance-core-framework`, `/books`, the book detail page, `/pricing`, and the footer ecosystem row (#364).
+- Sitemap: `/pricing`, press release pages, and book pages are listed, and every URL carries the trailing slash the site serves (#364).
 - Google Tag Manager (`GTM-KX39NN6Q`): the standard container snippet loads in `<head>` right after the existing Consent Mode v2 defaults (so GTM respects consent from first load), with the `<noscript>` fallback iframe as the first element in `<body>`, per Google's documented install. Gated by `NEXT_PUBLIC_GTM_ID` (empty disables it, same pattern as `NEXT_PUBLIC_GA_MEASUREMENT_ID`). The CSP report-only header allow-lists `googletagmanager.com` for `script-src`, `frame-src`, and `connect-src`.
+
+### Changed
+
+- Home page rebuilt to read in about 60 seconds: a descriptive `h1` ("Identity alignment for businesses, solopreneurs, and individuals."), three steps (identity, decisions, structure), three audiences, five service cards with a starting price each, the framework and book pre-order, the founder line, and one call to action. The long About block, stats tiles, core values grid, and Content Hub section are gone from the home page; the values stay on `/resonance-core-framework` and content stays under Blog, Portfolio, and Our Content (#364).
+- `/resonance-core-framework` cut from about 1,600 words to the essentials: what it is, its three parts (The Self, The Outward Reach, Systemic Architecture & Legacy), the named tools, the six core values, how each Fluxline service applies it, the book, and six FAQs. The DII gloss no longer states a scale. Section and concept anchors are unchanged so links from terencewaters.com and theresonantidentity.com keep working (#364).
+- Header: the same links on every page (Services, Pricing, The Framework, Blog, Portfolio, Our Content, Contact). The home-only "About" anchor is replaced by "Pricing" (#364).
+- `/services`: each offering shows its starting price, and the closing band links to `/pricing`. `/content` links Case studies, Books, and Press releases. Footer adds Pricing and Case Studies (#364).
+- `/books`: "Preorders open in early November" is now a live pre-order link, and the editions list matches what the store sells at pre-order (digital editions on the Fluxline Store; print and Kindle through Amazon and bookstores) (#364).
+- `llms.txt` is generated at build time from the same constants as the pages (`src/lib/llmsTxt.ts`, served by `src/app/llms.txt/route.ts`) instead of a hand-maintained file, and now carries the pitch, audiences, starting prices, and store link (#364).
+- Home title and description target identity alignment for businesses, solopreneurs, and individuals. `/unsubscribe` has its own canonical and is `noindex` (it inherited the home canonical) (#364).
+
+### Removed
+
+- Retired routes, each with a 301 in `staticwebapp.config.json`: `/podcasts` (to theresonantidentity.com/start-here/), `/videos` (to `/content/`), `/cue-cards` (to `/resonance-core-framework/`), `/github` (to `/portfolio/`), `/book` (to `/contact/`), `/services/scrolls` and its detail pages (to `/services/`). `/bookings`, which service pages linked to but never existed, also redirects to `/contact/`. White paper PDFs stay published, and service pages link straight to them. The podcast and YouTube API functions are unchanged (#364).
+- Dead code: the podcast player context and mini player, the testimonials page, data and component, the mock case study data and `FeaturedCaseStudies`, and three framework constants no longer rendered (`RCF_EXPLAINER`, `DRIVE_STEPS`, `RCF_ASSUMPTIONS`) (#364).
+
+### Fixed
+
+- Every service page's closing "Book a Free Consultation" button linked to `/bookings`, which returned a 404. It now goes to `/contact` (#364).
 
 ## [v3_5_PROD] - 2026-11-02
 

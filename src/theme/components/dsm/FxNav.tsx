@@ -24,17 +24,15 @@ interface FxNavProps {
 
 const BACK_ROUTES: Record<string, { label: string; href: string }> = {
   '/services': { label: '← Back to Home', href: '/' },
+  '/pricing': { label: '← Back to Home', href: '/' },
   '/blog': { label: '← Back to Home', href: '/' },
   '/contact': { label: '← Back to Home', href: '/' },
   '/portfolio': { label: '← Back to Home', href: '/' },
   '/books': { label: '← Back to Home', href: '/' },
   '/resonance-core-framework': { label: '← Back to Home', href: '/' },
-  '/videos': { label: '← Back to Home', href: '/' },
   '/case-studies': { label: '← Back to Home', href: '/' },
   '/press-release': { label: '← Back to Home', href: '/' },
-  '/github': { label: '← Back to Home', href: '/' },
   '/legal': { label: '← Back to Home', href: '/' },
-  '/cue-cards': { label: '← Back to Home', href: '/' },
   '/unsubscribe': { label: '← Back to Home', href: '/' },
 };
 
@@ -111,25 +109,17 @@ export default function FxNav({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks =
-    resolvedVariant === 'home'
-      ? [
-          { label: 'About', href: '#about' },
-          { label: 'Services', href: '/services' },
-          { label: 'The Framework', href: '/resonance-core-framework' },
-          { label: 'Blog', href: '/blog' },
-          { label: 'Portfolio', href: '/portfolio' },
-          { label: 'Our Content', href: '/content' },
-          { label: 'Contact', href: '/contact' },
-        ]
-      : [
-          { label: 'Services', href: '/services' },
-          { label: 'The Framework', href: '/resonance-core-framework' },
-          { label: 'Blog', href: '/blog' },
-          { label: 'Portfolio', href: '/portfolio' },
-          { label: 'Our Content', href: '/content' },
-          { label: 'Contact', href: '/contact' },
-        ];
+  // The same links on every page, so pricing and the framework are always
+  // one click away. The CTA button beside them goes to /contact.
+  const navLinks = [
+    { label: 'Services', href: '/services' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'The Framework', href: '/resonance-core-framework' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Portfolio', href: '/portfolio' },
+    { label: 'Our Content', href: '/content' },
+    { label: 'Contact', href: '/contact' },
+  ];
 
   const linkStyle = (key: string): React.CSSProperties => ({
     color:

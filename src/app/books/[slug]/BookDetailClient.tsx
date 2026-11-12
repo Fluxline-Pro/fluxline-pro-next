@@ -8,8 +8,8 @@ import FxCallout from '@/theme/components/dsm/FxCallout';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { RCF_BOOK_SLUG, RCF_OFFERINGS, STOREFRONT_URL } from '../constants';
+import { BOOK_PREORDER } from '@/lib/fluxlineStory';
 import {
-  RCF_PREORDER_WINDOW,
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
 } from '@/lib/resonanceCore';
@@ -60,9 +60,9 @@ function AvailabilitySection({ book }: { book: Book }) {
         ) : isRcf ? (
           <>
             The book and its companion workbook are in final production,
-            targeted for {RCF_RELEASE_WINDOW}. Preorders open in{' '}
-            {RCF_PREORDER_WINDOW}. At launch, every edition will be available
-            from the Fluxline store.
+            targeted for {RCF_RELEASE_WINDOW}. Digital editions are available
+            for pre-order on the Fluxline Store now. Print and Kindle editions
+            will be sold through Amazon and bookstores.
           </>
         ) : (
           <>
@@ -166,8 +166,13 @@ function AvailabilitySection({ book }: { book: Book }) {
           flexWrap: 'wrap',
         }}
       >
-        <FxButton variant='primary' href={STOREFRONT_URL}>
-          Visit the Fluxline Store
+        <FxButton
+          variant='primary'
+          href={isRcf && !isReleased ? BOOK_PREORDER.url : STOREFRONT_URL}
+        >
+          {isRcf && !isReleased
+            ? 'Pre-order on the Fluxline Store'
+            : 'Visit the Fluxline Store'}
         </FxButton>
         {isRcf && (
           <FxButton variant='outline' href={RCF_PREVIEW_PDF}>

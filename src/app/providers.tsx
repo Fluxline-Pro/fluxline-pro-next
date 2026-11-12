@@ -13,8 +13,6 @@ import FxFooter from '../theme/components/dsm/FxFooter';
 import FxPreferencesDrawer from '../theme/components/dsm/FxPreferencesDrawer';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 import ConsentBanner from '../components/ConsentBanner';
-import { PodcastPlayerProvider } from '../contexts/PodcastPlayerContext';
-import { PodcastMiniPlayer } from '../components/podcast/PodcastMiniPlayer';
 import { AuthProvider } from '../lib/auth';
 
 function FxPageTransition({ children }: { children: React.ReactNode }) {
@@ -52,23 +50,18 @@ export function Providers({ children, gaMeasurementId = '' }: ProvidersProps) {
           <ThemeOverrideProvider>
             <ReCaptchaProvider>
               <AccessGate>
-                {/* Wraps the page transition so the podcast <audio> element and
-                  mini-player survive client-side navigation. */}
-                <PodcastPlayerProvider>
-                  <SkipToContent />
-                  <FxNav />
-                  <FxPageTransition>{children}</FxPageTransition>
-                  <FxFooter preferencesOnClick={() => setPrefsOpen(true)} />
-                  <FxPreferencesDrawer
-                    open={prefsOpen}
-                    onClose={() => setPrefsOpen(false)}
-                  />
-                  <PodcastMiniPlayer />
-                  <ConsentBanner />
-                  {gaMeasurementId && (
-                    <GoogleAnalytics measurementId={gaMeasurementId} />
-                  )}
-                </PodcastPlayerProvider>
+                <SkipToContent />
+                <FxNav />
+                <FxPageTransition>{children}</FxPageTransition>
+                <FxFooter preferencesOnClick={() => setPrefsOpen(true)} />
+                <FxPreferencesDrawer
+                  open={prefsOpen}
+                  onClose={() => setPrefsOpen(false)}
+                />
+                <ConsentBanner />
+                {gaMeasurementId && (
+                  <GoogleAnalytics measurementId={gaMeasurementId} />
+                )}
               </AccessGate>
             </ReCaptchaProvider>
           </ThemeOverrideProvider>

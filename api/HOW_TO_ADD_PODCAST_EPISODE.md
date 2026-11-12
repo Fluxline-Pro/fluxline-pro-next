@@ -191,7 +191,7 @@ az storage entity insert \
 
 ### Step 5: Verify the Episode Appears
 
-1. **On your website**: Navigate to `/podcasts`
+1. **On the podcast site**: The public `/podcasts` page on fluxline.pro is retired and redirects to https://theresonantidentity.com/start-here/. Check the episode there.
    - Episode should appear in the grid
    - Newest episodes appear first (sorted by `publish_date`)
 
