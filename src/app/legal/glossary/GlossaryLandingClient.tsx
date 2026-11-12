@@ -49,7 +49,7 @@ export default function GlossaryLandingClient() {
               <Link
                 href="/legal"
                 style={{
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -74,7 +74,7 @@ export default function GlossaryLandingClient() {
               </Link>
               <h1
                 style={{
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   fontSize: 'clamp(2rem, 5vw, 3rem)',
                   fontWeight: 700,
                   lineHeight: 1.2,
@@ -131,7 +131,7 @@ export default function GlossaryLandingClient() {
               >
                 <h3
                   style={{
-                    color: 'var(--fx-accent)',
+                    color: 'var(--fx-accent-text)',
                     fontSize: '1.25rem',
                     fontWeight: 600,
                     margin: '0 0 0.5rem 0',
@@ -152,7 +152,7 @@ export default function GlossaryLandingClient() {
                 </p>
                 <span
                   style={{
-                    color: 'var(--fx-accent)',
+                    color: 'var(--fx-accent-text)',
                     fontSize: '0.875rem',
                     fontWeight: 500,
                   }}

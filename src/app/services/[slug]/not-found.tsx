@@ -43,7 +43,7 @@ export default function ServiceNotFound() {
       >
         <h1
           style={{
-            color: 'var(--fx-accent)',
+            color: 'var(--fx-accent-text)',
             fontSize: 'clamp(3rem, 8vw, 6rem)',
             fontWeight: 700,
           }}

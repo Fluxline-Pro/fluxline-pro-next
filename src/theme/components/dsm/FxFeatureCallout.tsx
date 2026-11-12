@@ -55,7 +55,7 @@ export default function FxFeatureCallout({
           fontWeight: 700,
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          color: 'var(--fx-gold)',
+          color: 'var(--fx-gold-text)',
           marginBottom: 'var(--fx-space-s)',
         }}
       >
@@ -126,7 +126,7 @@ export default function FxFeatureCallout({
           <span
             style={{
               fontSize: 'var(--fx-cta-link-size)',
-              color: 'var(--fx-gold)',
+              color: 'var(--fx-gold-text)',
               fontWeight: 700,
               letterSpacing: 'var(--fx-cta-link-tracking)',
               textTransform: 'uppercase',

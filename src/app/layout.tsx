@@ -111,7 +111,7 @@ export const metadata: Metadata = {
     // bing: 'verification_token',
   },
   other: {
-    'theme-color': '#0A0D13',
+    'theme-color': '#2e2e3a',
   },
 };
 

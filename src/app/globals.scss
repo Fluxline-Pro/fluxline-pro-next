@@ -12,7 +12,6 @@
 // Root CSS Custom Properties - Fluxline Pro Theme Variables
 :root {
   --site-max-width: 2160px;
-  --background: var(--theme-semantic-bodyBackground, #010101);
   --background-solid: var(--theme-background-solid, #010101);
   --foreground: var(--theme-semantic-bodyText, #ffffff);
   --font-inter: var(--theme-fonts-family);
@@ -165,24 +164,14 @@ body::after {
   margin-top: 64px;
 }
 
-// Apply background to html element for full viewport coverage
-// iOS Safari has issues with background-attachment: fixed, so we conditionally apply it
+// Flat page background on the html element for full viewport coverage.
+// DSM 2.0: the dark field is the only dark background and gradients are environmental
+// only, so there is no background image here (the Fluent bodyBackground gradient used to
+// fade to near-black behind the DSM wrappers). The token is theme-aware (data-fx-theme
+// on <html>), so overscroll and iOS safe areas match the page in every mode.
 html {
-  // Theme-aware page background (DSM token, updated via data-fx-theme on <html>),
-  // so overscroll and iOS safe areas are never left white on Safari.
   background-color: var(--fx-bg-page);
-  background-image: var(--background, none);
-  background-repeat: no-repeat;
-  background-position: center;
-
-  // Default (SSR/before detection): Use safe iOS-compatible styles
-  background-size: cover;
-
-  // Non-iOS override: Use fixed attachment, overriding the default
-  &.not-ios {
-    background-attachment: fixed;
-    background-size: 100dvw 100dvh;
-  }
+  background-image: none;
 }
 
 /* =============================================

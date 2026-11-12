@@ -32,13 +32,13 @@ export default function CoreMythicTermsClient() {
             gap: '0.5rem',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Link href="/legal/glossary" style={{ color: 'var(--fx-accent)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
+              <Link href="/legal/glossary" style={{ color: 'var(--fx-accent-text)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
                 <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </Link>
               <h1 style={{
-                color: 'var(--fx-accent)',
+                color: 'var(--fx-accent-text)',
                 fontSize: 'clamp(2rem, 5vw, 3rem)',
                 fontWeight: 700,
                 lineHeight: 1.2,

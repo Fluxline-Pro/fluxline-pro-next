@@ -97,7 +97,7 @@ export const FormButton: React.FC<FormButtonProps> = ({
             isHovered && !disabled
               ? 'var(--fx-hover-fill)'
               : 'transparent',
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           border: '2px solid var(--fx-accent)',
         };
 
@@ -109,7 +109,7 @@ export const FormButton: React.FC<FormButtonProps> = ({
               ? 'var(--fx-surface-card)'
               : 'var(--fx-surface-input)',
           color: 'var(--fx-text-heading)',
-          border: '1px solid var(--fx-border)',
+          border: '1px solid var(--fx-border-control)',
         };
 
       case 'outline':
@@ -120,7 +120,7 @@ export const FormButton: React.FC<FormButtonProps> = ({
           color:
             isHovered && !disabled
               ? 'var(--fx-accent-ink)'
-              : 'var(--fx-accent)',
+              : 'var(--fx-accent-text)',
           border: '2px solid var(--fx-accent)',
         };
 
@@ -143,7 +143,7 @@ export const FormButton: React.FC<FormButtonProps> = ({
               ? 'var(--fx-border)'
               : 'var(--fx-surface-card)',
           color: 'var(--fx-text-heading)',
-          border: '1px solid var(--fx-border)',
+          border: '1px solid var(--fx-border-control)',
         };
 
       default:

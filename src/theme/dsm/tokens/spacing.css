@@ -16,9 +16,10 @@
 
   /* ===== Radii ===== */
   --fx-radius-control: 8px;       /* buttons, inputs */
+  --fx-radius-small: 4px;         /* badges, inline tags (DSM 2.0) */
   --fx-radius-card-sm: 12px;      /* compact cards, callouts */
-  --fx-radius-card: 14px;         /* standard cards */
-  --fx-radius-card-lg: 16px;      /* feature cards, bands */
-  --fx-radius-band: 20px;         /* full-width CTA bands */
-  --fx-radius-pill: 999px;        /* chips, badges, platform pills */
+  --fx-radius-card: 12px;         /* standard cards and panels (DSM 2.0: 12px) */
+  --fx-radius-card-lg: 12px;      /* feature cards, bands (DSM 2.0 has one card radius) */
+  --fx-radius-band: 12px;         /* full-width CTA bands (DSM 2.0 has one card radius) */
+  --fx-radius-pill: 999px;        /* filter chips and tags ONLY (DSM 2.0) */
 }

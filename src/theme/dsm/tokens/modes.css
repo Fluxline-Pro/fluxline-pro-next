@@ -3,65 +3,57 @@
    "light" | "grayscale-dark" | "grayscale-light" | "high-contrast" | "colorblind".
    Every mode remaps the same semantic tokens — components never branch on mode. */
 
-/* ---------- Light (from the light-mode logo: navy on white, steel-blue structure) ---------- */
+/* ---------- Light (DSM 2.0: Steel Blue on white / Lightest; values from the token card) ----------
+   Tokens not listed here (text-bright, text-mist, badge-bg, surface-inset, featured,
+   gold-border, status borders and backgrounds, toast colours) are DERIVED aliases in
+   colors.css / states.css and resolve to the light values below. */
 [data-fx-theme="light"] {
-  --fx-bg-page: #F8FAFC;
-  --fx-bg-deep: #FFFFFF;
-  --fx-bg-hero-1: #FFFFFF;
-  --fx-bg-hero-2: #F2F6FB;
-  --fx-bg-hero-3: #E8EEF7;
-  --fx-gradient-band: linear-gradient(150deg, #E8EEF7, #D9E4F2); /* @kind color */
-  --fx-gradient-feature: linear-gradient(160deg, #EDF2F9, #FFFFFF); /* @kind color */
+  --fx-bg-page: #f8fafc;
+  --fx-bg-deep: #ffffff;
+  --fx-bg-hero-1: #ffffff;                       /* DERIVED */
+  --fx-bg-hero-2: var(--fx-surface-alt);         /* DERIVED */
+  --fx-bg-hero-3: var(--fx-hover-fill);          /* DERIVED */
+  --fx-gradient-band: linear-gradient(150deg, var(--fx-hover-fill), var(--fx-border)); /* DERIVED @kind color */
+  --fx-gradient-feature: linear-gradient(160deg, var(--fx-surface-alt), var(--fx-surface-card)); /* DERIVED @kind color */
 
-  --fx-surface-card: #FFFFFF;
-  --fx-surface-alt: #EFF3F9;
-  --fx-hover-fill: #E8EEF7;
-  --fx-badge-bg: #E3E9F2;
-  --fx-surface-inset: #F1F5FA;
-  --fx-surface-raised: #FFFFFF;
-  --fx-surface-input: #FFFFFF;
+  --fx-surface-card: #ffffff;
+  --fx-surface-alt: #f1f4f8;
+  --fx-hover-fill: #e6ecf4;
+  --fx-surface-raised: #ffffff;
+  --fx-surface-input: #ffffff;
 
-  --fx-border: #D5DEEA;
-  --fx-border-subtle: #E3E9F2;
-  --fx-border-strong: #A8BDD6;
-  --fx-border-hover: #4D6C96;
+  --fx-border: #d5deea;
+  --fx-border-subtle: #e6ecf4;
+  --fx-border-strong: #274770;
+  --fx-border-hover: #5a7ca0;
 
   --fx-text-heading: #274770;
-  --fx-text-heading-display: #10203A;
-  --fx-text-base: #26303F;
-  --fx-text-bright: #10203A;
-  --fx-text-body: #2E3A4E;
-  --fx-text-muted: #5B6B80;
-  --fx-text-faint: #7E8A99;
-  --fx-text-soft: #4D6C96;
-  --fx-text-mist: #33506F;
+  --fx-text-heading-display: #274770;
+  --fx-text-base: #2e2e2e;
+  --fx-text-body: #2e2e2e;
+  --fx-text-muted: #5b6b80;
+  --fx-text-faint: #657081;                      /* DERIVED: card value #6e7a8c fails 4.5:1 on page and alt; darkened ~8% */
+  --fx-text-soft: #4d6c96;                       /* DERIVED: Dark Primary (approved palette) */
+  --fx-text-mist: #274770;                       /* DERIVED: body copy on the light gradient band (muted fails 4.5:1 there) */
 
   --fx-accent: #274770;
-  --fx-accent-ink: #FFFFFF;
-  --fx-teal: #1F8079;
-  --fx-teal-bg: rgba(31, 128, 121, 0.10);
-  --fx-gold: #9A7B24;
-  --fx-gold-border: #C99B33;
-  --fx-gold-bg: rgba(224, 168, 60, 0.08);
-  --fx-line: #5E81A8;
+  --fx-accent-ink: #ffffff;
+  --fx-teal: #3b7f7b;
+  --fx-gold: #b8901e;
+  --fx-rose: #c97781;
+  --fx-accent-text: #274770;                     /* DERIVED */
+  --fx-teal-text: #397a76;                       /* DERIVED: #3b7f7b darkened ~4% (4.51:1 on alt) */
+  --fx-gold-text: #896b16;                       /* DERIVED: #b8901e darkened ~26% */
+  --fx-warning-text: #876d00;                    /* DERIVED: #c19c00 darkened ~30% */
+  --fx-rose-text: #9e5d65;                       /* DERIVED: #c97781 darkened ~22% */
+  --fx-line: #5a7ca0;
 
-  --fx-success: #1F8079;
-  --fx-success-border: #9CCFC5;
-  --fx-success-bg: rgba(31, 128, 121, 0.06);
-  --fx-featured: #9A7B24;
-  --fx-error: #B0303C;
-  --fx-error-border: #E0ADB2;
-  --fx-error-bg: rgba(176, 48, 60, 0.06);
-  --fx-warning: #8A6D00;
-  --fx-warning-border: #D6BC66;
-  --fx-warning-bg: rgba(193, 156, 0, 0.08);
+  --fx-success: #107c10;
+  --fx-error: #b0303c;
+  --fx-warning: #c19c00;
   --fx-info: #274770;
-  --fx-info-border: #A8BDD6;
-  --fx-info-bg: rgba(39, 71, 112, 0.06);
 
-  --fx-toast-bg: #FFFFFF;
-  --fx-toast-border: #A8BDD6;
-  --fx-toast-shadow: 0 8px 28px rgba(16, 32, 58, 0.16); /* @kind shadow */
+  --fx-toast-shadow: 0 8px 28px rgba(39, 71, 112, 0.16); /* @kind shadow */
   --fx-nav-bg: rgba(255, 255, 255, 0.85); /* @kind color */
 }
 
@@ -100,6 +92,9 @@
   --fx-accent-ink: #0C0C0D;
   --fx-teal: #C8C8CF;
   --fx-teal-bg: rgba(200, 200, 207, 0.10);
+  --fx-rose: #A6A6AF;
+  --fx-accent-text: var(--fx-accent);            /* DERIVED */
+  --fx-teal-text: var(--fx-teal);                /* DERIVED */
   --fx-gold: #DCDCE1;
   --fx-gold-border: #96969E;
   --fx-gold-bg: rgba(220, 220, 225, 0.06);
@@ -157,6 +152,9 @@
   --fx-accent-ink: #FFFFFF;
   --fx-teal: #4A4A54;
   --fx-teal-bg: rgba(74, 74, 84, 0.08);
+  --fx-rose: #55555E;
+  --fx-accent-text: var(--fx-accent);            /* DERIVED */
+  --fx-teal-text: var(--fx-teal);                /* DERIVED */
   --fx-gold: #63636C;
   --fx-gold-border: #A2A2AA;
   --fx-gold-bg: rgba(99, 99, 108, 0.05);
@@ -180,23 +178,23 @@
   --fx-nav-bg: rgba(255, 255, 255, 0.88); /* @kind color */
 }
 
-/* ---------- High contrast (WHCM-style: pure black field, white structure, gold links) ---------- */
+/* ---------- High contrast (WHCM-style: Monochrome Black #010101 field, white structure, gold links) ---------- */
 [data-fx-theme="high-contrast"] {
-  --fx-bg-page: #000000;
-  --fx-bg-deep: #000000;
-  --fx-bg-hero-1: #000000;
-  --fx-bg-hero-2: #000000;
-  --fx-bg-hero-3: #000000;
-  --fx-gradient-hero: linear-gradient(160deg, #000000, #000000); /* @kind color */
-  --fx-gradient-band: linear-gradient(150deg, #000000, #000000); /* @kind color */
-  --fx-gradient-feature: linear-gradient(160deg, #000000, #000000); /* @kind color */
-  --fx-surface-card: #000000;
-  --fx-surface-alt: #000000;
+  --fx-bg-page: #010101;
+  --fx-bg-deep: #010101;
+  --fx-bg-hero-1: #010101;
+  --fx-bg-hero-2: #010101;
+  --fx-bg-hero-3: #010101;
+  --fx-gradient-hero: linear-gradient(160deg, #010101, #010101); /* @kind color */
+  --fx-gradient-band: linear-gradient(150deg, #010101, #010101); /* @kind color */
+  --fx-gradient-feature: linear-gradient(160deg, #010101, #010101); /* @kind color */
+  --fx-surface-card: #010101;
+  --fx-surface-alt: #010101;
   --fx-hover-fill: #1A1A1A;
-  --fx-badge-bg: #000000;
-  --fx-surface-inset: #000000;
-  --fx-surface-raised: #000000;
-  --fx-surface-input: #000000;
+  --fx-badge-bg: #010101;
+  --fx-surface-inset: #010101;
+  --fx-surface-raised: #010101;
+  --fx-surface-input: #010101;
   --fx-border: #FFFFFF;
   --fx-border-subtle: #FFFFFF;
   --fx-border-strong: #FFFFFF;
@@ -211,10 +209,13 @@
   --fx-text-soft: #FFD335;
   --fx-text-mist: #FFFFFF;
   --fx-accent: #FFFFFF;
-  --fx-accent-ink: #000000;
+  --fx-accent-ink: #010101;
   --fx-teal: #3FF23F;
   --fx-teal-bg: transparent;
-  --fx-gold: #FFD335;
+  --fx-rose: #ffffff;
+  --fx-accent-text: #ffffff;                     /* DERIVED: keeps the white accent-text convention */
+  --fx-teal-text: var(--fx-teal);                /* DERIVED */
+  --fx-gold: #ffd335;
   --fx-gold-border: #FFD335;
   --fx-gold-bg: transparent;
   --fx-line: #FFFFFF;
@@ -228,18 +229,18 @@
   --fx-warning: #FFD335;
   --fx-warning-border: #FFD335;
   --fx-warning-bg: transparent;
-  --fx-info: #8CD2FF;
-  --fx-info-border: #8CD2FF;
+  --fx-info: #afcafc;
+  --fx-info-border: #afcafc;
   --fx-info-bg: transparent;
-  --fx-toast-bg: #000000;
+  --fx-toast-bg: #010101;
   --fx-toast-border: #FFFFFF;
   --fx-toast-shadow: none; /* @kind shadow */
-  --fx-nav-bg: #000000; /* @kind color */
+  --fx-nav-bg: #010101; /* @kind color */
   --fx-nav-blur: none; /* @kind other */
 }
 
 /* ---------- Colorblind-safe (Okabe–Ito semantics on the dark shell; brand hues unchanged —
-   periwinkle/gold/steel already avoid red–green confusion; only STATE colors are remapped) ---------- */
+   Mystic Mist/gold/steel already avoid red–green confusion; only STATE colors are remapped) ---------- */
 [data-fx-theme="colorblind"] {
   --fx-success: #56B4E9;                       /* sky blue = positive */
   --fx-success-border: #2C5A78;
@@ -250,9 +251,68 @@
   --fx-warning: #F0E442;                       /* yellow = caution */
   --fx-warning-border: #6E6A20;
   --fx-warning-bg: rgba(240, 228, 66, 0.07);
-  --fx-info: #AEC6EE;                          /* brand periwinkle = informational (neutral, CVD-safe) */
-  --fx-info-border: #46608C;
-  --fx-info-bg: rgba(174, 198, 238, 0.08);
+  --fx-info: #afcafc;                          /* Mystic Mist = informational (neutral, CVD-safe) */
+  --fx-info-border: color-mix(in srgb, var(--fx-info) 40%, var(--fx-bg-page)); /* DERIVED */
+  --fx-info-bg: color-mix(in srgb, var(--fx-info) 8%, transparent); /* DERIVED */
+  --fx-teal-text: var(--fx-teal);              /* DERIVED: keep the CVD-safe sky blue for teal text */
   --fx-teal: #56B4E9;                          /* site teal reads gray to tritanopes; shift to sky blue */
   --fx-teal-bg: rgba(86, 180, 233, 0.12);
+}
+
+/* ===== Dark-field scope (DERIVED, needs owner sign-off) =====
+   The hero places text on a fixed dark panel over photography in EVERY theme
+   (DSM 2.0 6.5: a deep steel-blue overlay whenever text sits on an image). In
+   the light themes the panel would otherwise inherit dark-on-light text
+   colours, so `.fx-on-dark` re-declares the text, line and action tokens with
+   their dark-field values. Dark, colour-blind and high-contrast themes already
+   carry suitable values and are left alone. */
+[data-fx-theme="light"] .fx-on-dark {
+  --fx-text-heading: #afcafc;
+  --fx-text-heading-display: #ffffff;
+  --fx-text-base: #f8fafc;
+  --fx-text-body: #e4e9f1;
+  --fx-text-bright: #f8fafc;
+  --fx-text-muted: #b8c2d0;
+  --fx-text-soft: #afcafc;
+  --fx-accent-text: #afcafc;
+  --fx-teal-text: #77b4b0;
+  --fx-gold-text: #f5c85c;
+  --fx-accent: #4d6c96;
+  --fx-accent-ink: #ffffff;
+  --fx-line: #5a7ca0;
+  --fx-border: #4a4a5c;
+  --fx-border-hover: #7b9bb8;
+  --fx-hover-fill: #3d3d4e;
+  color: var(--fx-text-base);
+}
+[data-fx-theme="grayscale-light"] .fx-on-dark {
+  --fx-text-heading: #D4D4DA;
+  --fx-text-heading-display: #FFFFFF;
+  --fx-text-base: #D2D2D7;
+  --fx-text-body: #D2D2D7;
+  --fx-text-bright: #FFFFFF;
+  --fx-text-muted: #A6A6AF;
+  --fx-text-soft: #D4D4DA;
+  --fx-accent-text: #D4D4DA;
+  --fx-teal-text: #D4D4DA;
+  --fx-gold-text: #D4D4DA;
+  --fx-accent: #E2E2E7;
+  --fx-accent-ink: #0C0C0D;
+  --fx-hover-fill: #202024;
+  --fx-border-hover: #8E8E98;
+  --fx-line: #8E8E98;
+  --fx-border: #55555E;
+  color: var(--fx-text-base);
+}
+
+/* The hero panel and overlay carry no colour in the grayscale and
+   high-contrast themes. */
+[data-fx-theme="grayscale-dark"],
+[data-fx-theme="grayscale-light"] {
+  --fx-hero-panel: rgba(32, 32, 36, 0.84);
+  --fx-hero-overlay: linear-gradient(160deg, rgba(70, 70, 78, 0.55), rgba(32, 32, 36, 0.3));
+}
+[data-fx-theme="high-contrast"] {
+  --fx-hero-panel: #010101;
+  --fx-hero-overlay: linear-gradient(160deg, rgba(1, 1, 1, 0.6), rgba(1, 1, 1, 0.3));
 }

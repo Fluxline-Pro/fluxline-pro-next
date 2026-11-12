@@ -84,7 +84,7 @@ export const FormInput: React.FC<FormInputProps> = ({
           padding: '0.5rem 0.5rem 0.5rem 0.75rem',
           borderRadius: 'var(--fx-radius-control)',
           backgroundColor: 'var(--fx-surface-input)',
-          border: '1px solid var(--fx-border)',
+          border: '1px solid var(--fx-border-control)',
           color: 'var(--fx-text-heading)',
           fontSize: 'var(--fx-body-size)',
           fontFamily: 'var(--fx-font)',
@@ -99,7 +99,7 @@ export const FormInput: React.FC<FormInputProps> = ({
           onFocus?.(e);
         }}
         onBlur={(e) => {
-          e.currentTarget.style.borderColor = 'var(--fx-border)';
+          e.currentTarget.style.borderColor = 'var(--fx-border-control)';
           onBlur?.(e);
         }}
       />

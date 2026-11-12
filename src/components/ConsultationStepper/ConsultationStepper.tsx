@@ -109,7 +109,7 @@ function StepIndicator({
                           : 'var(--fx-border)',
                       color:
                         isCompleted || isCurrent
-                          ? 'var(--fx-text-bright)'
+                          ? 'var(--fx-accent-ink)'
                           : 'var(--fx-text-muted)',
                       border: isCurrent ? '3px solid var(--fx-accent)' : 'none',
                       transition: 'all 0.2s ease',
@@ -121,7 +121,7 @@ function StepIndicator({
                     style={{
                       fontSize: '0.7rem',
                       color: isCurrent
-                        ? 'var(--fx-accent)'
+                        ? 'var(--fx-accent-text)'
                         : 'var(--fx-text-muted)',
                       fontWeight: isCurrent ? 600 : undefined,
                       whiteSpace: 'nowrap',
@@ -173,14 +173,14 @@ function SuccessView({ onClose }: { onClose: () => void }) {
       aria-live='polite'
     >
       <span
-        style={{ fontSize: '3rem', color: 'var(--fx-accent)' }}
+        style={{ fontSize: '3rem', color: 'var(--fx-accent-text)' }}
         aria-hidden='true'
       >
         &#10003;
       </span>
       <h3
         style={{
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           marginBottom: 0,
           fontSize: 'var(--fx-h3-size)',
           fontWeight: 'var(--fx-h3-weight)',
@@ -395,7 +395,7 @@ export const ConsultationStepper: React.FC<ConsultationStepperProps> = ({
           >
             <p
               style={{
-                color: 'var(--fx-accent)',
+                color: 'var(--fx-accent-text)',
                 fontSize: 'var(--fx-body-sm-size)',
                 fontWeight: 600,
                 margin: 0,

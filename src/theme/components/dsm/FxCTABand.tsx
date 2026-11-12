@@ -47,7 +47,7 @@ export default function FxCTABand({
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(rgba(174,198,238,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(174,198,238,.05) 1px,transparent 1px)',
+              'linear-gradient(color-mix(in srgb, var(--fx-text-heading) 5%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb, var(--fx-text-heading) 5%, transparent) 1px,transparent 1px)',
             backgroundSize: '44px 44px',
           }}
         />

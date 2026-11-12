@@ -53,9 +53,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app.
 - 📰 **Press Releases** - Markdown-based press releases with year filtering and carousel support
 - 📊 **Case Studies** - File-based case studies with industry/service filtering and metrics visualization
 - 🎨 **Portfolio** - Markdown project showcases with galleries, tags, and external links
-- 📄 **Scrolls/White Papers** - Downloadable strategic insights with metadata
-- 📹 **Video Section** - YouTube channel integration with automatic video fetching
-- 🎙️ **Podcast Section** - Azure-backed podcast episodes with RSS feed generation
+- 📄 **White Papers** - Downloadable strategic-insight PDFs linked from each service page
 - **Services** - Dynamic service pages with detailed information
 
 ### Development Tools
@@ -110,9 +108,7 @@ fluxline-pro-next/
 │   │   ├── case-studies/         # Case study pages
 │   │   ├── contact/              # Contact page
 │   │   ├── press-release/        # Press release system
-│   │   ├── services/             # Service pages
-│   │   │   └── scrolls/          # Strategic insights/white papers
-│   │   └── testimonials/         # Client testimonials
+│   │   └── services/             # Service pages (+ white-paper data)
 │   ├── animations/               # Framer Motion animations
 │   │   ├── config.ts             # Animation constants
 │   │   ├── variants.ts           # Reusable variants
@@ -339,8 +335,8 @@ See [`ANIMATIONS.md`](ANIMATIONS.md) for complete guide.
 - **[public/portfolio/posts/HOW_TO_CREATE_A_PORTFOLIO_PROJECT.md](public/portfolio/posts/HOW_TO_CREATE_A_PORTFOLIO_PROJECT.md)** - Portfolio project guide
 - **[public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md](public/press-release/posts/HOW_TO_CREATE_A_PRESS_RELEASE.md)** - Press release creation guide
 - **[public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md](public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md)** - Case study creation guide
-- **[api/HOW_TO_ADD_PODCAST_EPISODE.md](api/HOW_TO_ADD_PODCAST_EPISODE.md)** - Podcast episode upload guide
-- **[VIDEO_UPLOAD_INSTRUCTIONS.md](VIDEO_UPLOAD_INSTRUCTIONS.md)** - YouTube video instructions
+- **[api/HOW_TO_ADD_PODCAST_EPISODE.md](api/HOW_TO_ADD_PODCAST_EPISODE.md)** - Podcast episode upload guide (API only; the `/podcasts` page was retired)
+- **[VIDEO_UPLOAD_INSTRUCTIONS.md](VIDEO_UPLOAD_INSTRUCTIONS.md)** - Home-page testimonial video upload guide
 
 ## 🔗 Fluxline Ecosystem Integration
 
@@ -596,10 +592,11 @@ See [Blog Guide](FILE_BASED_BLOG_GUIDE.md) for details.
 ### Adding White Papers
 
 1. Add PDF: `public/scrolls/pdfs/my-paper.pdf`
-2. Update: `src/app/services/scrolls/scrollsData.ts`
-3. Build: `yarn build`
+2. Add an entry to `SCROLLS_DATA` in `src/app/services/scroll-data.ts`
+3. Map a service to it in `src/app/services/scroll-mapping.ts`
+4. Build: `yarn build`
 
-See [Scrolls README](src/app/services/scrolls/README.md) for details.
+White papers appear only on their service detail page (the `/services/scrolls` listing was retired and redirects to `/services/`).
 
 ### Adding Press Releases
 

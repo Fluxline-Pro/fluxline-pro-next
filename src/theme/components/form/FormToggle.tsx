@@ -48,7 +48,7 @@ export const FormToggle: React.FC<FormToggleProps> = ({
       {icon && (
         <span
           style={{
-            color: 'var(--fx-accent)',
+            color: 'var(--fx-accent-text)',
             fontSize: '1.25rem',
             lineHeight: 1,
             flexShrink: 0,

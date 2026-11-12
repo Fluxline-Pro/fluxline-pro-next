@@ -111,7 +111,7 @@ export default function UnsubscribePage() {
               <h3
                 style={{
                   fontSize: 'var(--fx-h3-size)',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   fontWeight: 700,
                   margin: 0,
                   lineHeight: 1.1,
@@ -149,7 +149,7 @@ export default function UnsubscribePage() {
               <h3
                 style={{
                   fontSize: 'var(--fx-h3-size)',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   fontWeight: 700,
                   margin: 0,
                   fontFamily: 'var(--fx-font)',

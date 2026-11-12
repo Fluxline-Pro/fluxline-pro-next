@@ -83,7 +83,7 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
               padding: '8px 18px',
               backgroundColor: 'var(--fx-surface-card)',
               borderRadius: '999px',
-              color: 'var(--fx-accent)',
+              color: 'var(--fx-accent-text)',
               fontSize: '0.875rem',
               fontFamily: 'var(--fx-font)',
               fontWeight: 600,
@@ -118,7 +118,7 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
           height: '38px',
           borderRadius: '999px',
           cursor: 'pointer',
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           backgroundColor: 'var(--fx-surface-card)',
           border: '1px solid var(--fx-border)',
           boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
@@ -144,7 +144,7 @@ export const GeneratedWithAIBadge: React.FC<{ isHero?: boolean }> = ({
       >
         <h3
           style={{
-            color: 'var(--fx-accent)',
+            color: 'var(--fx-accent-text)',
             marginBottom: '20px',
             fontSize: 'var(--fx-h3-size)',
             fontWeight: 'var(--fx-h3-weight)' as unknown as number,

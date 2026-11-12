@@ -5,7 +5,7 @@ import {
   getPressReleaseById,
 } from '../lib/pressReleaseLoader';
 import { PressReleaseDetailClient } from './PressReleaseDetailClient';
-import notFound from '@/app/services/scrolls/[scroll]/not-found';
+import { notFound } from 'next/navigation';
 
 // Generate static params for all press releases
 export async function generateStaticParams() {

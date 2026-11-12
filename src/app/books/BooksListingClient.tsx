@@ -15,14 +15,15 @@ import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import ResonanceCoreBookCover from '@/assets/images/The-Resonance-Core-Book.jpg';
 import { Book } from './types';
 import NewsletterSignup from '@/components/NewsletterSignup';
-import { RCF_LEDE, RCF_OFFERINGS, STOREFRONT_URL } from './constants';
+import { RCF_LEDE, RCF_OFFERINGS } from './constants';
+import { BOOK_PREORDER } from '@/lib/fluxlineStory';
 import {
   PODCAST_BLURB,
   RCF_BOOK_IMAGE,
   RCF_BRIEF,
   RCF_LOGO_IMAGE,
   RCF_PREVIEW_PDF,
-  RCF_PREORDER_WINDOW,
+  RCF_PREORDER_STATUS,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
   TRI_SITE_URL,
@@ -55,7 +56,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxSectionHeading
         kicker='Books'
         title={RCF_TRADEMARK}
-        subhead={`The book & companion workbook, targeted for ${RCF_RELEASE_WINDOW}. Preorders open in ${RCF_PREORDER_WINDOW}.`}
+        subhead={`The book, companion workbook, and audiobook, targeted for ${RCF_RELEASE_WINDOW}. ${RCF_PREORDER_STATUS}.`}
         as='h1'
       />
 
@@ -84,7 +85,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
           Targeted for {RCF_RELEASE_WINDOW}
         </FxChip>
         <FxChip kind='badge' tone='gold'>
-          Preorders open {RCF_PREORDER_WINDOW}
+          Pre-orders open
         </FxChip>
         <FxChip kind='tag'>Book</FxChip>
         <FxChip kind='tag'>Companion workbook</FxChip>
@@ -96,7 +97,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       {/* ---------------------------------------------------------------- */}
       <FxReveal>
         <FxSectionPanel tone='gold' style={{ marginBottom: SECTION_GAP }}>
-          <FxGroupLabel tone='gold'>Coming Soon</FxGroupLabel>
+          <FxGroupLabel tone='gold'>Pre-order</FxGroupLabel>
           <FxCard
             interactive
             variant='feature'
@@ -161,10 +162,10 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                 >
                   The complete framework, the DRIVE Model (Directional,
                   Repeatable, Identity-Aligned Virtuous Expressions), and the
-                  companion workbook that turns it into daily practice. The introduction
-                  preview is available to read right now — it covers why
-                  self-help usually fails, where the framework came from, and
-                  who it is built for.
+                  companion workbook that turns it into daily practice. The
+                  introduction preview is available to read right now. It
+                  covers why self-help usually fails, where the framework came
+                  from, and who it is built for.
                 </p>
                 <div
                   style={{
@@ -173,14 +174,14 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                     flexWrap: 'wrap',
                   }}
                 >
-                  <FxButton variant='primary' href={RCF_PREVIEW_PDF}>
+                  <FxButton variant='primary' href={BOOK_PREORDER.url}>
+                    Pre-order on the Fluxline Store
+                  </FxButton>
+                  <FxButton variant='outline' href={RCF_PREVIEW_PDF}>
                     Read the Introduction Preview
                   </FxButton>
                   {featured && (
-                    <FxButton
-                      variant='outline'
-                      href={`/books/${featured.slug}`}
-                    >
+                    <FxButton variant='quiet' href={`/books/${featured.slug}`}>
                       Full Synopsis &amp; Contents
                     </FxButton>
                   )}
@@ -256,7 +257,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
           id='offerings'
           style={{ marginBottom: SECTION_GAP }}
         >
-          <FxGroupLabel tone='gold'>Coming Soon</FxGroupLabel>
+          <FxGroupLabel tone='gold'>Pre-order</FxGroupLabel>
           <h2
             style={{
               fontSize: 'var(--fx-h2-size)',
@@ -400,11 +401,25 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
 
           <FxCallout
             tone='info'
-            title='Preorders open early November'
+            title='Pre-orders are open'
             style={{ marginTop: 'var(--fx-space-l)' }}
           >
-            Preorders open in {RCF_PREORDER_WINDOW}. We will announce them
-            here and in the TRI Newsletter.
+            Digital editions are available for pre-order on the Fluxline Store.{' '}
+            {BOOK_PREORDER.priceLabel}. Your card is charged when you pre-order.
+            Cancellation and refunds are covered in the{' '}
+            <Link
+              href={BOOK_PREORDER.termsPath}
+              style={{ color: 'inherit', fontWeight: 600 }}
+            >
+              pre-order terms
+            </Link>
+            .{' '}
+            <a
+              href={BOOK_PREORDER.url}
+              style={{ color: 'inherit', fontWeight: 600 }}
+            >
+              Pre-order on the Fluxline Store →
+            </a>
           </FxCallout>
         </FxSectionPanel>
       </FxReveal>
@@ -519,7 +534,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
               <span
                 style={{
                   fontSize: 'var(--fx-cta-link-size)',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   fontWeight: 700,
                   letterSpacing: 'var(--fx-cta-link-tracking)',
                   textTransform: 'uppercase',
@@ -554,13 +569,13 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   margin: '0 0 var(--fx-space-l)',
                 }}
               >
-                Why the framework exists, how it was built, and the
-                DRIVE Model walked through step by step.
+                Why the framework exists, how it was built, and the DRIVE Model
+                walked through step by step.
               </p>
               <span
                 style={{
                   fontSize: 'var(--fx-cta-link-size)',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   fontWeight: 700,
                   letterSpacing: 'var(--fx-cta-link-tracking)',
                   textTransform: 'uppercase',
@@ -619,7 +634,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
                   <span
                     style={{
                       fontSize: 'var(--fx-cta-link-size)',
-                      color: 'var(--fx-accent)',
+                      color: 'var(--fx-accent-text)',
                       fontWeight: 700,
                       letterSpacing: 'var(--fx-cta-link-tracking)',
                       textTransform: 'uppercase',
@@ -640,7 +655,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxReveal>
         <FxCTABand
           title='Want to know when it lands?'
-          body={`The book and workbook are targeted for ${RCF_RELEASE_WINDOW}, with preorders opening in ${RCF_PREORDER_WINDOW}. Join the TRI Newsletter and we'll let you know the moment they're available. Book launch updates included. No spam, ever.`}
+          body={`The book and workbook are targeted for ${RCF_RELEASE_WINDOW}, and digital editions are available for pre-order now. Join the TRI Newsletter for launch updates. No spam, ever.`}
           secondaryLabel='Explore Our Services →'
           secondaryHref='/services'
         >
@@ -660,7 +675,10 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
         }}
       >
         {RCF_TRADEMARK} is the practice underneath everything Fluxline builds.{' '}
-        <Link href='/resonance-core-framework' style={{ color: 'var(--fx-accent)' }}>
+        <Link
+          href='/resonance-core-framework'
+          style={{ color: 'var(--fx-accent-text)' }}
+        >
           Read what the framework is →
         </Link>
       </p>

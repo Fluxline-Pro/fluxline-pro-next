@@ -32,7 +32,7 @@ export default function FxSectionHeading({
             fontWeight: 600,
             letterSpacing: 'var(--fx-kicker-tracking)',
             textTransform: 'uppercase',
-            color: 'var(--fx-teal)',
+            color: 'var(--fx-teal-text)',
             marginBottom: 12,
           }}
         >
@@ -58,7 +58,7 @@ export default function FxSectionHeading({
           style={{
             fontSize: 'var(--fx-subhead-size)',
             fontWeight: 'var(--fx-subhead-weight)' as unknown as number,
-            color: 'var(--fx-teal)',
+            color: 'var(--fx-teal-text)',
             margin: '0 0 14px',
             lineHeight: 1.45,
           }}

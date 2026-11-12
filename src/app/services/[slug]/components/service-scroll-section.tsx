@@ -1,10 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import FxButton from '@/theme/components/dsm/FxButton';
 import { useIsMobile } from '@/theme/hooks/useMediaQuery';
-import type { ScrollItem } from '@/app/services/scrolls/types';
+import type { ScrollItem } from '@/app/services/scroll-types';
 
 interface ServiceScrollSectionProps {
   scroll: ScrollItem;
@@ -25,18 +24,11 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
     setIsMounted(true);
   }, []);
 
-  const handleDownload = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.open(scroll.pdfUrl, '_blank', 'noopener,noreferrer');
-  };
-
   return (
-    <section
-      style={{ display: 'flex', flexDirection: 'column', gap: 24 }}
-    >
+    <section style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <h2
         style={{
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           fontSize: '2rem',
           fontWeight: 700,
         }}
@@ -65,7 +57,7 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
         >
           <span
             style={{
-              color: 'var(--fx-accent)',
+              color: 'var(--fx-accent-text)',
               fontSize: '1.75rem',
               lineHeight: 1,
               flexShrink: 0,
@@ -76,7 +68,7 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
           <div style={{ flex: 1 }}>
             <h3
               style={{
-                color: 'var(--fx-accent)',
+                color: 'var(--fx-accent-text)',
                 fontSize: isMobile ? '1.25rem' : '1.5rem',
                 fontWeight: 600,
                 marginBottom: 8,
@@ -111,8 +103,9 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
                 style={{
                   padding: '0.25rem 0.75rem',
                   borderRadius: 8,
-                  backgroundColor: 'color-mix(in srgb, var(--fx-accent) 10%, transparent)',
-                  color: 'var(--fx-accent)',
+                  backgroundColor:
+                    'color-mix(in srgb, var(--fx-accent) 10%, transparent)',
+                  color: 'var(--fx-accent-text)',
                   fontSize: '0.75rem',
                   fontWeight: 600,
                   textTransform: 'uppercase',
@@ -147,18 +140,16 @@ export const ServiceScrollSection: React.FC<ServiceScrollSectionProps> = ({
             marginTop: 8,
           }}
         >
-          <FxButton
-            variant='primary'
-            size='lg'
-            onClick={handleDownload as unknown as React.MouseEventHandler<HTMLButtonElement>}
+          <a
+            href={scroll.pdfUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ textDecoration: 'none' }}
           >
-            Download White Paper
-          </FxButton>
-          <Link href={`/services/scrolls/${scroll.id}`} style={{ textDecoration: 'none' }}>
-            <FxButton variant='outline' size='lg'>
-              Learn More
+            <FxButton variant='primary' size='lg'>
+              Download White Paper
             </FxButton>
-          </Link>
+          </a>
         </div>
       </div>
     </section>
