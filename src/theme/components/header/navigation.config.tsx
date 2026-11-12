@@ -25,7 +25,14 @@ export const navItems: NavItem[] = [
     path: '/content',
     view: 'content',
     iconName: 'Documentation',
-    description: 'Explore the blog, portfolio, and more',
+    description: 'Explore blog, portfolio, videos, and podcasts',
+  },
+  {
+    label: 'scrolls',
+    path: '/services/scrolls',
+    view: 'scrolls',
+    iconName: 'DocumentSet',
+    description: 'Explore strategic insights',
   },
   {
     label: 'case studies',

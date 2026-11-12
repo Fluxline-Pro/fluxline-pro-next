@@ -43,7 +43,7 @@ const ICONS: Record<FeatureStatus['kind'], { glyph: string; color: string }> =
     included: { glyph: '✓', color: 'var(--fx-success)' },
     excluded: { glyph: '✕', color: 'var(--fx-error)' },
     addon: { glyph: '✕', color: 'var(--fx-error)' },
-    partial: { glyph: '⚠', color: 'var(--fx-warning-text)' },
+    partial: { glyph: '⚠', color: 'var(--fx-warning)' },
   };
 
 const srOnly: React.CSSProperties = {
@@ -106,7 +106,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
         <Typography
           variant='h2'
           style={{
-            color: 'var(--fx-accent-text)',
+            color: 'var(--fx-accent)',
             fontSize:
               'clamp(var(--fx-article-h2), 4vw, var(--fx-h2-size))',
             fontWeight: 700,
@@ -296,7 +296,7 @@ export const ProgramComparisonModal: React.FC<ProgramComparisonModalProps> = ({
                 <h3
                   style={{
                     margin: 0,
-                    color: 'var(--fx-accent-text)',
+                    color: 'var(--fx-accent)',
                     fontSize: 'var(--fx-article-h3)',
                     fontWeight: 700,
                   }}

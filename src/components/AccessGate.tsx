@@ -50,7 +50,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'var(--fx-bg-page)',
+          backgroundColor: 'var(--fx-surface-page)',
           color: 'var(--fx-text-heading)',
           fontFamily: 'var(--fx-font)',
           fontSize: 14,
@@ -88,7 +88,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'var(--fx-bg-page)',
+        backgroundColor: 'var(--fx-surface-page)',
         fontFamily: 'var(--fx-font)',
       }}
     >
@@ -108,7 +108,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
               fontFamily: 'var(--fx-font)',
               fontSize: 28,
               fontWeight: 600,
-              color: 'var(--fx-accent-text)',
+              color: 'var(--fx-accent)',
               margin: '0 0 16px 0',
             }}
           >
@@ -156,7 +156,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({ children }) => {
                   padding: '10px 12px',
                   fontSize: 14,
                   fontFamily: 'var(--fx-font)',
-                  backgroundColor: 'var(--fx-bg-page)',
+                  backgroundColor: 'var(--fx-surface-page)',
                   color: 'var(--fx-text-heading)',
                   border: '1px solid var(--fx-border)',
                   borderRadius: 'var(--fx-radius-control)',

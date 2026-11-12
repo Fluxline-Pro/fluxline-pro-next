@@ -101,9 +101,9 @@ export const Callout: React.FC<CalloutProps> = ({
   const getTitleColor = React.useMemo((): string => {
     switch (variant) {
       case 'accent':
-        return 'var(--fx-accent-gold, var(--fx-accent-text))';
+        return 'var(--fx-accent-gold, var(--fx-accent))';
       case 'subtle':
-        return 'var(--fx-accent-text)';
+        return 'var(--fx-accent)';
       case 'neutral':
         return 'var(--fx-text-heading)';
       default:

@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { SERVICE_CATEGORIES } from './constants';
 import { SERVICE_SCROLL_MAPPING } from './scroll-mapping';
-import { getScrollById } from './scroll-data';
+import { getScrollById } from './scrolls/scrollsData';
 
 describe('service catalog', () => {
   const visibleServices = SERVICE_CATEGORIES;

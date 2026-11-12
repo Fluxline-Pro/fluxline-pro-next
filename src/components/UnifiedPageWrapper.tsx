@@ -29,6 +29,7 @@ import FluxlineLogoDarkMode from '../assets/images/FluxlineLogoDarkMode.png';
 import FluxlineLogoLightMode from '../assets/images/FluxlineLogoLightMode.png';
 // import FluxlineTestimonials from '../assets/images/FluxlineTestimonials.png';
 import OurServicesImage from '../assets/images/OurServices1197x1600.jpg';
+import PodcastsImage from '../assets/images/Podcasts.jpg';
 import ConsultingImage from '../assets/images/ConsultingPortrait.jpg';
 import GitHubImage from '../assets/images/GitHubPortrait.jpg';
 import PersonalTrainingImage from '../assets/images/PersonalTrainingPortrait.jpg';
@@ -64,6 +65,10 @@ const PAGE_CONFIGS: Record<
   '/services': {
     image: OurServicesImage.src,
     imageText: 'Services',
+  },
+  '/services/scrolls': {
+    image: 'FLUXLINE_LOGO',
+    imageText: 'Strategic Insights',
   },
   '/content': {
     image: ContentImage.src,
@@ -138,6 +143,10 @@ const PAGE_CONFIGS: Record<
   //   image: BooksImage.src,
   //   imageText: 'Books',
   // },
+  '/github': {
+    image: GitHubImage.src,
+    imageText: 'GitHub',
+  },
   '/my-content': {
     image: ContentImage.src,
     imageText: 'My Content',
@@ -150,11 +159,19 @@ const PAGE_CONFIGS: Record<
     image: PressReleaseImage.src,
     imageText: 'Press Release',
   },
+  '/podcasts': {
+    image: PodcastsImage.src,
+    imageText: 'Podcasts',
+  },
   // Testimonials page hidden until client testimonials are available
   // '/testimonials': {
   //   image: FluxlineTestimonials.src,
   //   imageText: 'Testimonials',
   // },
+  '/cue-cards': {
+    image: 'FLUXLINE_LOGO',
+    imageText: 'The Archetypes',
+  },
 };
 
 // Special configuration for 404 page - uses FLUXLINE_LOGO placeholder
@@ -607,7 +624,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   alignItems: 'center',
                   padding: '4px',
                   borderRadius: '8px',
-                  color: 'var(--fx-accent-text)',
+                  color: 'var(--fx-accent)',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
                   flexShrink: 0,
@@ -728,7 +745,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   username='support'
                   domain='fluxline.pro'
                   style={{
-                    color: 'var(--fx-accent-text)',
+                    color: 'var(--fx-accent)',
                     textDecoration: 'underline',
                   }}
                 >

@@ -35,7 +35,7 @@ function tryTaxonomyRedirect(): boolean {
 const navCards = [
   { title: 'Home', desc: 'Start at the top.', href: '/' },
   { title: 'Services', desc: 'Five modular offerings.', href: '/services' },
-  { title: 'Content Hub', desc: 'Blog, portfolio, case studies.', href: '/blog' },
+  { title: 'Content Hub', desc: 'Blog, podcast, portfolio.', href: '/blog' },
   { title: 'Contact', desc: 'Tell us what you needed.', href: '/contact' },
 ];
 
@@ -49,7 +49,7 @@ export default function NotFound() {
   return (
     <div
       style={{
-        background: 'var(--fx-gradient-hero)',
+        background: 'var(--fx-gradient-hero, linear-gradient(160deg,#05070B 0%,#0B1019 55%,#0E1523 100%))',
         color: 'var(--fx-text-body)',
         minHeight: '100vh',
         display: 'flex',
@@ -70,7 +70,7 @@ export default function NotFound() {
         }}
         aria-hidden='true'
       >
-        <g style={{ stroke: 'var(--fx-line)' }} strokeWidth='1' opacity='.3'>
+        <g stroke='#5E81A8' strokeWidth='1' opacity='.3'>
           <path
             d='M-40 700 L310 520 L520 720 L780 580 L1060 740 L1290 540 L1460 640'
             fill='none'
@@ -92,7 +92,7 @@ export default function NotFound() {
             strokeDasharray='3 10'
           />
         </g>
-        <g style={{ fill: 'var(--fx-text-mist)' }}>
+        <g fill='#9FB6D4'>
           <circle cx='310' cy='520' r='3.5' opacity='0.5' />
           <circle cx='700' cy='70' r='3' opacity='0.5' />
           <circle cx='1240' cy='100' r='3.5' opacity='0.5' />
@@ -151,7 +151,7 @@ export default function NotFound() {
             style={{
               fontSize: 19,
               fontWeight: 600,
-              color: 'var(--fx-teal-text)',
+              color: 'var(--fx-teal)',
               margin: '0 0 10px',
             }}
           >

@@ -13,7 +13,7 @@ import { COMPANY_VALUES } from '@/lib/siteContent';
 const PAGE_URL = `https://www.fluxline.pro${RCF_FRAMEWORK_PATH}`;
 const TITLE = 'The Resonance Core Framework™ | Fluxline Resonance Group';
 const DESCRIPTION =
-  'The Resonance Core Framework™ by Terence Waters: a practical system for identity alignment and informed decisions. Its three parts, tools, six core values, and book.';
+  'The Resonance Core Framework™ by Terence Waters, a decision-making and identity framework for leaders: every concept, the DRIVE Model, and the six core values.';
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -91,7 +91,7 @@ const jsonLd = {
       // This page is the canonical glossary for the RCF's named concepts.
       '@type': 'DefinedTermSet',
       '@id': `${PAGE_URL}#terms`,
-      name: 'The Resonance Core Framework™: Core Concepts',
+      name: 'The Resonance Core Framework™ — Core Concepts',
       url: PAGE_URL,
       hasDefinedTerm: RCF_CONCEPTS.map((c) => ({
         '@type': 'DefinedTerm',

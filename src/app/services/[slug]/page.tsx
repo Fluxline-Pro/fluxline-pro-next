@@ -19,7 +19,7 @@ import {
 import { SERVICE_CATEGORIES } from '../constants';
 import { SERVICE_PRICING } from '../pricing-data';
 import { SERVICE_SCROLL_MAPPING } from '../scroll-mapping';
-import { getScrollById } from '../scroll-data';
+import { getScrollById } from '../scrolls/scrollsData';
 import { RelatedServices } from './components/related-services';
 import { ServiceScrollSection } from './components/service-scroll-section';
 import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
@@ -244,7 +244,7 @@ export default function ServiceDetailPage() {
                 >
                   <h2
                     style={{
-                      color: 'var(--fx-accent-text)',
+                      color: 'var(--fx-accent)',
                       fontSize: 'var(--fx-h2-size)',
                       fontWeight: 700,
                       margin: 0,
@@ -326,7 +326,7 @@ export default function ServiceDetailPage() {
                       >
                         <strong
                           style={{
-                            color: 'var(--fx-accent-text)',
+                            color: 'var(--fx-accent)',
                             fontWeight: 600,
                           }}
                         >
@@ -355,7 +355,7 @@ export default function ServiceDetailPage() {
               title='Ready to Begin?'
               body="Book a 20-30 minute consultation to explore your organization's goals and identity so we can unleash it amongst your leadership teams and staff."
               primaryLabel='Book a Free Consultation'
-              primaryHref='/contact'
+              primaryHref='/bookings'
             />
           </FxReveal>
 

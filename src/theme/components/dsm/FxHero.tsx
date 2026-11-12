@@ -6,12 +6,6 @@ import FxButton from './FxButton';
 interface FxHeroProps {
   eyebrow?: string;
   title?: string;
-  /**
-   * A descriptive page heading under the wordmark. When set, it becomes the
-   * page's h1 and `title` renders as the brand wordmark above it, so the h1
-   * says what the page is about instead of repeating the brand name.
-   */
-  headline?: string;
   body?: React.ReactNode;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
@@ -24,7 +18,6 @@ interface FxHeroProps {
 export default function FxHero({
   eyebrow = 'Welcome To',
   title = 'FLUXLINE',
-  headline,
   body,
   primaryCta,
   secondaryCta,
@@ -63,7 +56,8 @@ export default function FxHero({
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'var(--fx-hero-overlay)',
+          background:
+            'linear-gradient(160deg,rgba(5,7,11,.6),rgba(14,21,35,.25))',
         }}
       />
       <div
@@ -75,15 +69,12 @@ export default function FxHero({
           padding: '140px 32px 70px',
         }}
       >
-        {/* `fx-on-dark` keeps dark-field text colours on this panel in the
-            light themes, where the panel itself stays dark. */}
         <div
-          className='fx-on-dark'
           style={{
             maxWidth: 640,
-            background: 'var(--fx-hero-panel)',
+            background: 'rgba(5,7,11,.72)',
             border: '1px solid var(--fx-border)',
-            borderRadius: 'var(--fx-radius-card)',
+            borderRadius: 16,
             padding: '44px 46px',
             backdropFilter: 'blur(4px)',
           }}
@@ -99,20 +90,18 @@ export default function FxHero({
           >
             {eyebrow}
           </div>
-          {React.createElement(
-            headline ? 'div' : 'h1',
-            {
-              style: {
-                fontSize: 'var(--fx-display-size)',
-                fontWeight: 800,
-                letterSpacing: 'var(--fx-display-tracking)',
-                color: 'var(--fx-text-heading-display)',
-                margin: '0 0 22px',
-                lineHeight: 1,
-              },
-            },
-            title
-          )}
+          <h1
+            style={{
+              fontSize: 'var(--fx-display-size)',
+              fontWeight: 800,
+              letterSpacing: 'var(--fx-display-tracking)',
+              color: 'var(--fx-text-heading-display)',
+              margin: '0 0 22px',
+              lineHeight: 1,
+            }}
+          >
+            {title}
+          </h1>
           <div
             style={{
               height: 2,
@@ -121,19 +110,6 @@ export default function FxHero({
               marginBottom: 26,
             }}
           />
-          {headline && (
-            <h1
-              style={{
-                fontSize: 'var(--fx-h3-size)',
-                fontWeight: 600,
-                lineHeight: 1.3,
-                color: 'var(--fx-text-heading)',
-                margin: '0 0 14px',
-              }}
-            >
-              {headline}
-            </h1>
-          )}
           {body && (
             <div
               style={{ fontSize: 17.5, lineHeight: 1.65, margin: '0 0 30px' }}

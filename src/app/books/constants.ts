@@ -4,17 +4,14 @@
  * The framework itself is described in `src/lib/resonanceCore.ts` and explained
  * at `/resonance-core`; this file only covers the publications built on it.
  *
- * Purchase lives on store.fluxline.pro. The one pre-order figure the site
- * quotes is in `src/lib/fluxlineStory.ts` (`BOOK_PREORDER`); nothing here
- * describes prices or checkout. The offerings below mirror what the store
- * sells at pre-order (digital editions; print and Kindle are sold elsewhere),
- * per fluxline-pro-storefront-app `src/lib/catalog/catalog.ts`.
+ * Purchase lives on store.fluxline.pro — nothing here should describe prices or
+ * checkout. The offerings below mirror the storefront catalog
+ * (fluxline-pro-storefront-app, src/lib/catalog/catalog.ts) so the two stay
+ * recognisably the same product set.
  */
 
-import { getStorefrontUrl } from '@/lib/integrations/config';
-
-/** Where purchase happens. */
-export const STOREFRONT_URL = getStorefrontUrl();
+/** Where purchase actually happens once the book ships. */
+export const STOREFRONT_URL = 'https://store.fluxline.pro';
 
 /**
  * Slug of the RCF book.
@@ -28,7 +25,7 @@ export const RCF_BOOK_SLUG = 'resonance-core-framework';
 
 /** Lede under the page heading. */
 export const RCF_LEDE =
-  'The book and companion workbook that put The Resonance Core Framework™ in your hands. Both are in final production, and digital editions are available for pre-order.';
+  'The book and companion workbook that put The Resonance Core Framework™ in your hands. Both are in final production.';
 
 /**
  * What will be offered alongside the book. Mirrors the storefront catalog —
@@ -42,17 +39,20 @@ export const RCF_OFFERINGS: {
     group: 'The book',
     items: [
       {
+        name: 'Hardcover',
+        body: 'The full framework in a durable hardcover edition, printed on demand and shipped to you.',
+      },
+      {
+        name: 'Softcover',
+        body: 'The same complete text in a lighter, more portable softcover edition.',
+      },
+      {
         name: 'eBook',
-        body: 'The full framework as a PDF and EPUB, delivered to your Fluxline account library and by email on release day.',
+        body: 'Read online, hosted on Fluxline. Searchable, resumable, and available on every device you sign in from.',
       },
       {
         name: 'Audiobook',
-        body: 'The complete book in MP3, narrated by the author.',
-      },
-      {
-        name: 'Print',
-        body: 'Hardcover and softcover editions follow the digital release.',
-        note: 'Sold through Amazon and bookstores.',
+        body: 'A narrated edition for reading with your hands full. Instant digital access after purchase.',
       },
       {
         name: 'Kindle',
@@ -65,13 +65,12 @@ export const RCF_OFFERINGS: {
     group: 'The companion workbook',
     items: [
       {
-        name: 'Workbook PDF',
-        body: 'Self-assessments, guided exercises, reflection prompts, action plans, and progress tracking, readable alongside the book.',
+        name: 'Workbook — Softcover',
+        body: 'Self-assessments, guided exercises, reflection prompts, action plans, and progress tracking. Built to be written in.',
       },
       {
-        name: 'Print workbook',
-        body: 'A softcover edition built to be written in, following the print volumes.',
-        note: 'Sold through Amazon and bookstores.',
+        name: 'Workbook — eBook',
+        body: 'The same workbook in digital form, hosted on Fluxline and readable alongside the book.',
       },
     ],
   },
@@ -79,12 +78,16 @@ export const RCF_OFFERINGS: {
     group: 'Bundles',
     items: [
       {
-        name: 'eBook + Workbook',
-        body: 'The eBook and the Workbook PDF as one digital bundle.',
+        name: 'Hardcover + Workbook',
+        body: 'The hardcover book and the softcover workbook, printed and shipped together.',
       },
       {
-        name: 'Complete Bundle',
-        body: 'The eBook, the Audiobook, and the Workbook PDF together.',
+        name: 'Softcover + Workbook',
+        body: 'The softcover book and the softcover workbook, printed and shipped together.',
+      },
+      {
+        name: 'eBooks Together',
+        body: 'The book eBook and the workbook eBook as one digital bundle, with instant access to both.',
       },
     ],
   },

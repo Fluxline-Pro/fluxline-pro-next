@@ -84,7 +84,7 @@ export default function FxFilterChips({
             marginTop: 8,
             fontSize: 13,
             fontWeight: 600,
-            color: 'var(--fx-accent-text)',
+            color: 'var(--fx-accent)',
             background: 'none',
             border: 'none',
             padding: 0,
