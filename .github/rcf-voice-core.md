@@ -29,7 +29,7 @@ Owner: Terence Waters, Fluxline Resonance Group, LLC. Audit date: 2026-10-11. Au
 
 - **Creative Truth** is a Core Value, not a framework concept (owner, 2026-10-19). Do not list it among framework concepts or named tools; keep it in Core Values lists. What it means (owner): standing up for your identity when you need to, or choosing not to. It brings clarity to why you made a decision, or to a situation, or it can stay unexpressed. Like assertion, but it does not require agreement or for anyone to change their point of view. A critical Core Value in The RCF; it is a value someone practises, so mentions of it as a lived practice in posts are correct.
 - The consultation CTA reads **"Book a Free Consultation"**.
-- The footer cross-sell label is **"Fluxline Ecosystem"**.
+- The footer cross-sell label was **"Fluxline Ecosystem"**. The fluxline.pro footer no longer carries the cross-sell block (owner, 2026-11-12, #378); see Section 7.
 - **Universal Truths** wording: "The RCF's Universal Truths, which shape Fluxline's ethos and mission."
 - **Services structure:** the RCF comes first as the **Foundation**, then Strategy & Leadership, Brand & Digital Presence, Body & Practice.
 - **Stats:** unsourced counts are softened, not inflated (no "50+ Projects Delivered" or "10+ Industries Served").
@@ -96,6 +96,8 @@ Use these wording choices. Add one gloss at the **first use on each page**, then
 - Keep metadata in sync with any copy you change: page titles, descriptions, Open Graph and Twitter text, JSON-LD, `llms.txt`, sitemap labels.
 
 ## 7. Shared cross-sell block (add to each site's footer, same order)
+
+**Not used on fluxline.pro or theresonantidentity.com (owner, 2026-11-11 and 2026-11-12).** The owner found the long footer links unhelpful: both footers now hold only the copyright and a short link row. Do not add this block back to either. The wording below still applies wherever the three lines are used in body copy.
 
 Reuse the existing footer link list or nav. Do not build a new component. On the site you are already on, that line is plain text, not a link.
 

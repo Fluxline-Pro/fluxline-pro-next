@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import FxButton from './FxButton';
 import FxUserMenu from './FxUserMenu';
+import FxNavMenu, { type FxNavMenuLink } from './FxNavMenu';
 import styles from './FxNav.module.scss';
 
 interface BreadcrumbItem {
@@ -20,7 +21,21 @@ interface FxNavProps {
   breadcrumb?: (string | BreadcrumbItem)[];
   ctaLabel?: string;
   ctaHref?: string;
+  /** Opens the Display & Appearance preferences drawer. */
+  onOpenPreferences: () => void;
 }
+
+type NavItem = FxNavMenuLink | { label: string; links: FxNavMenuLink[] };
+
+const CONTENT_MENU = {
+  label: 'Our Content',
+  links: [
+    { label: 'Blog', href: '/blog' },
+    { label: 'Portfolio', href: '/portfolio' },
+    { label: 'Case Studies', href: '/case-studies' },
+    { label: 'Press Releases', href: '/press-release' },
+  ],
+};
 
 const BACK_ROUTES: Record<string, { label: string; href: string }> = {
   '/services': { label: '← Back to Home', href: '/' },
@@ -74,6 +89,7 @@ export default function FxNav({
   breadcrumb,
   ctaLabel = 'Book a Free Consultation',
   ctaHref = '/contact',
+  onOpenPreferences,
 }: FxNavProps) {
   const pathname = usePathname();
   const resolvedVariant = variant ?? (pathname === '/' ? 'home' : 'subpage');
@@ -111,23 +127,19 @@ export default function FxNav({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks =
+  const navItems: NavItem[] =
     resolvedVariant === 'home'
       ? [
           { label: 'About', href: '#about' },
           { label: 'Services', href: '/services' },
           { label: 'The Framework', href: '/resonance-core-framework' },
-          { label: 'Blog', href: '/blog' },
-          { label: 'Portfolio', href: '/portfolio' },
-          { label: 'Our Content', href: '/content' },
+          CONTENT_MENU,
           { label: 'Contact', href: '/contact' },
         ]
       : [
           { label: 'Services', href: '/services' },
           { label: 'The Framework', href: '/resonance-core-framework' },
-          { label: 'Blog', href: '/blog' },
-          { label: 'Portfolio', href: '/portfolio' },
-          { label: 'Our Content', href: '/content' },
+          CONTENT_MENU,
           { label: 'Contact', href: '/contact' },
         ];
 
@@ -155,6 +167,81 @@ export default function FxNav({
     textDecoration: 'none',
     transition: 'border-color .15s, color .15s',
   };
+
+  const desktopLinks = navItems.map((item) =>
+    'links' in item ? (
+      <FxNavMenu key={item.label} label={item.label} links={item.links} />
+    ) : (
+      <Link
+        key={item.href}
+        href={item.href}
+        className='fx-navlink'
+        style={linkStyle(item.href)}
+        onMouseEnter={() => setHoveredLink(item.href)}
+        onMouseLeave={() => setHoveredLink(null)}
+      >
+        {item.label}
+      </Link>
+    )
+  );
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+  const mobileLinks = navItems.map((item) =>
+    'links' in item ? (
+      <div key={item.label} role='group' aria-label={item.label}>
+        <div className={styles.mobileGroupLabel} aria-hidden='true'>
+          {item.label}
+        </div>
+        {item.links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={styles.mobileSubLink}
+            onClick={closeMobileMenu}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
+    ) : (
+      <Link
+        key={item.href}
+        href={item.href}
+        className={styles.mobileMenuLink}
+        onClick={closeMobileMenu}
+      >
+        {item.label}
+      </Link>
+    )
+  );
+
+  const preferencesButton = (
+    <button
+      type='button'
+      onClick={onOpenPreferences}
+      className={styles.prefsButton}
+      aria-label='Display & Appearance'
+      aria-haspopup='dialog'
+    >
+      <svg
+        width='18'
+        height='18'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        aria-hidden='true'
+      >
+        <line x1='4' y1='7' x2='6.5' y2='7' />
+        <line x1='11.5' y1='7' x2='20' y2='7' />
+        <circle cx='9' cy='7' r='2.5' />
+        <line x1='4' y1='17' x2='12.5' y2='17' />
+        <line x1='17.5' y1='17' x2='20' y2='17' />
+        <circle cx='15' cy='17' r='2.5' />
+      </svg>
+    </button>
+  );
 
   return (
     <header
@@ -192,13 +279,7 @@ export default function FxNav({
                   flexShrink: 0,
                 }}
               />
-              <span
-                style={{
-                  fontWeight: 700,
-                  fontSize: 17,
-                  color: 'var(--fx-text-heading)',
-                }}
-              >
+              <span className={styles.brandName}>
                 Fluxline Resonance Group
                 <span
                   className='fx-nav-llc'
@@ -215,24 +296,14 @@ export default function FxNav({
                 gap: 26,
               }}
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className='fx-navlink'
-                  style={linkStyle(link.href)}
-                  onMouseEnter={() => setHoveredLink(link.href)}
-                  onMouseLeave={() => setHoveredLink(null)}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {desktopLinks}
               <FxButton size='sm' href={ctaHref}>
                 {ctaLabel}
               </FxButton>
             </nav>
-            {/* Right-side actions: user avatar + mobile hamburger */}
+            {/* Right-side actions: appearance button + mobile hamburger */}
             <div className={styles.navActions}>
+              {preferencesButton}
               {/* *** Hide the user menu in PROD only for now, until we have a proper login system *** */}
               {/* <FxUserMenu /> */}
               <button
@@ -264,16 +335,7 @@ export default function FxNav({
                   exit={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
                   transition={{ duration: 0.2, ease: 'easeInOut' }}
                 >
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={styles.mobileMenuLink}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                  {mobileLinks}
                   <div className={styles.mobileMenuButtonWrapper}>
                     <FxButton
                       size='sm'
@@ -304,21 +366,11 @@ export default function FxNav({
                 gap: 26,
               }}
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className='fx-navlink'
-                  style={linkStyle(link.href)}
-                  onMouseEnter={() => setHoveredLink(link.href)}
-                  onMouseLeave={() => setHoveredLink(null)}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {desktopLinks}
             </nav>
-            {/* Right-side actions: user avatar + mobile hamburger (Subpage) */}
+            {/* Right-side actions: appearance button, user avatar, mobile hamburger (Subpage) */}
             <div className={styles.navActions}>
+              {preferencesButton}
               <FxUserMenu />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -349,16 +401,7 @@ export default function FxNav({
                   exit={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
                   transition={{ duration: 0.2, ease: 'easeInOut' }}
                 >
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={styles.mobileMenuLink}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                  {mobileLinks}
                   <div className={styles.mobileMenuButtonWrapper}>
                     <FxButton
                       size='sm'

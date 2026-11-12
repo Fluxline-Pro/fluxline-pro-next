@@ -14,6 +14,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Header and footer cleanup (#378): the footer is now just the copyright and the Legal & Governance, Press Releases and fluxline.pro links (the long Fluxline Ecosystem rows are gone). Display & Appearance moves from the footer to an icon button at the top right of the header, on desktop and in the phone layout. "Our Content" becomes a drop-down with Blog, Portfolio, Case Studies and Press Releases, so the separate Blog and Portfolio header links are removed.
 - Pre-order wording (#368): the home, books, framework and `llms.txt` copy no longer says pre-orders open in early November 2026; it says they are open on the Fluxline Store, and the home page status link now goes to the store book page. `RCF_PREORDER_WINDOW` is replaced by `RCF_STORE_BOOK_URL`.
 
 ## [v3_5_PROD] - 2026-11-02
