@@ -29,7 +29,7 @@ seoKeywords:
   ]
 ---
 
-**Salt Lake City, Utah, November 20, 2026.** Fluxline Resonance Group, LLC today opened pre-orders for **The Resonance Core Framework™**, the book by founder and CEO Terence Waters. Pre-orders are open now on the [Fluxline Store](https://store.fluxline.pro/book). Release is targeted for Q1 2027. The [pre-order options](https://store.fluxline.pro/deals) are led by the RCF Founders Pass, a founding-member pass covering every current and future digital offering.
+**Salt Lake City, Utah, November 20, 2026.** Fluxline Resonance Group, LLC today opened pre-orders for **The Resonance Core Framework™**, the book by founder and CEO Terence Waters. Pre-orders are open now on the [Fluxline Store](https://store.fluxline.pro/book). Release is targeted for Q1 2027. The [pre-order options](https://store.fluxline.pro/deals) are led by the RCF Founders Pass, a founding-member pass covering every current and future digital offering, at $89 for the first year.
 
 > "It's an honor to think that my dissertation about identity-aligned decision-making and resonance would become the foundation for everything Fluxline stands for. I'm truly touched to know I will be bringing this framework to the world, fulfilling my chosen identity as a visionary and published author!"
 >
@@ -61,12 +61,16 @@ The book is for founders, leaders, creatives, small teams, and growing businesse
 
 ## What you can pre-order
 
-Every option, including the Founders Pass, is listed side by side with pricing on the [pre-order deals page](https://store.fluxline.pro/deals).
+Every option is listed side by side on the [pre-order deals page](https://store.fluxline.pro/deals). Prices are in US dollars, before tax.
 
-- **RCF Founders Pass.** The founding-member pass: every current and future digital offering, plus the private community (on Facebook and Discord) and cohort sessions. For members who continue after the first year, it becomes the RCF All-Access Pass at $149 a year.
-- **The book in digital editions.** The eBook (PDF and EPUB), the audiobook narrated by the author, and the workbook, on their own or bundled.
-- **RCF AI Companion: First-Year Pass.** An AI chatbot for the book. Ask it a question and get a short answer with chapter citations.
-- **Identity in Motion.** An optional add-on to a book pre-order: a guided, individualized 4-week program to stop starting over. It begins after the book's release.
+- **RCF Founders Pass, $89 for the first year.** Every current and future digital offering in one pass: the audiobook, eBook and workbook, the RCF AI Companion, Identity in Motion, and lessons and training as they ship. It also includes the private Facebook Group and Discord Server, monthly group cohort sessions, and individualized trainings. Nothing renews automatically. After the first year it becomes the RCF All-Access Pass, with optional yearly renewal at $149.
+- **Complete Bundle, $69.99.** The audiobook, the eBook and the workbook.
+- **Everything Bundle, $109.99.** The Complete Bundle, the RCF AI Companion First-Year Pass and Identity in Motion. Pre-order only.
+- **Single editions.** eBook and workbook together, $39.99. eBook (PDF and EPUB), $34.99. Audiobook, narrated by the author, $34.99. Workbook, $19.99.
+- **RCF AI Companion: First-Year Pass, $29.99.** An AI chatbot for the book. Ask it a question and get a short answer with chapter citations. It is $19.99 when added to the Complete Bundle or the eBook and workbook bundle. One payment covers the first year. Available in the United States only; a US billing address is required.
+- **Identity in Motion, $49 with a book pre-order.** A guided, individualized 4-week program to stop starting over. It begins after the book's release, and is $99 after the pre-order window.
+
+Pre-order pricing on the book editions, the bundles, the $19.99 Companion price and Identity in Motion runs through January 15, 2027. The Founders Pass stays at $89 for the first year after that.
 
 ## Read the introduction first
 
