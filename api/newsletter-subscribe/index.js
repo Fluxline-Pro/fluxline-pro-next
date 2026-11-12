@@ -213,6 +213,27 @@ function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function normalizeHostname(value) {
+  const raw = String(value || '').trim().toLowerCase();
+  if (!raw) return '';
+  const input = raw.includes('://') ? raw : `https://${raw}`;
+  try {
+    return new URL(input).hostname.replace(/\.+$/, '');
+  } catch {
+    return raw.replace(/\.+$/, '');
+  }
+}
+
+/** Exact or subdomain match — unlike `.includes()`, this can't be satisfied
+ * by a domain that merely contains `expected` as a substring (e.g.
+ * `fluxline.pro.attacker.com`). */
+function hostnameMatches(expected, actual) {
+  const expectedHost = normalizeHostname(expected);
+  const actualHost = normalizeHostname(actual);
+  if (!expectedHost || !actualHost) return false;
+  return actualHost === expectedHost || actualHost.endsWith(`.${expectedHost}`);
+}
+
 module.exports = async function (context, req) {
   context.log('Newsletter subscribe request received');
 
@@ -296,7 +317,7 @@ module.exports = async function (context, req) {
       const expectedHostname = process.env.RECAPTCHA_HOSTNAME || 'fluxline.pro';
       if (
         verificationResult.hostname &&
-        !verificationResult.hostname.includes(expectedHostname)
+        !hostnameMatches(expectedHostname, verificationResult.hostname)
       ) {
         context.log.warn(
           'Newsletter subscribe: reCAPTCHA hostname mismatch. Expected:',
