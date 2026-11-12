@@ -13,6 +13,7 @@ import FxFooter from '../theme/components/dsm/FxFooter';
 import FxPreferencesDrawer from '../theme/components/dsm/FxPreferencesDrawer';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 import ConsentBanner from '../components/ConsentBanner';
+import PreorderBar from '../components/PreorderBar';
 import { PodcastPlayerProvider } from '../contexts/PodcastPlayerContext';
 import { PodcastMiniPlayer } from '../components/podcast/PodcastMiniPlayer';
 import { AuthProvider } from '../lib/auth';
@@ -56,6 +57,7 @@ export function Providers({ children, gaMeasurementId = '' }: ProvidersProps) {
                   mini-player survive client-side navigation. */}
                 <PodcastPlayerProvider>
                   <SkipToContent />
+                  <PreorderBar />
                   <FxNav onOpenPreferences={() => setPrefsOpen(true)} />
                   <FxPageTransition>{children}</FxPageTransition>
                   <FxFooter />

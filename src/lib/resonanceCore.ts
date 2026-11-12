@@ -26,9 +26,18 @@ export const RCF_BOOK_IMAGE = '/images/RCF_BookConcept.jpg';
 
 /**
  * The book's release window. Always pair it with "targeted" ("targeted for
- * Q1 2027") and never name a month for the launch itself.
+ * Q1 2027") and never name a month for the launch itself. The one exception is
+ * RCF_EXPECTED_RELEASE below.
  */
 export const RCF_RELEASE_WINDOW = 'Q1 2027';
+
+/**
+ * The expected release, in the store's own words (owner, 2026-11-12). Used
+ * only by the site-wide pre-order bar, which mirrors the store's bar; other
+ * copy keeps "targeted for Q1 2027".
+ */
+export const RCF_EXPECTED_RELEASE =
+  'late February to mid-March 2027 (subject to change)';
 
 /**
  * The book's page on the Fluxline Store, where pre-orders are taken. Built from
