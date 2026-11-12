@@ -44,6 +44,14 @@
   --fx-gold: #E8B95B;             /* featured / special callouts (TRI, milestones) */
   --fx-gold-border: #E0A83C;
   --fx-gold-bg: rgba(224, 168, 60, 0.06);
+  /* Mythic Gold: the brand gold used by the book pre-order announcement (#368).
+     Kept apart from --fx-gold (the older gold existing callouts use) so neither
+     shifts. Four roles, because one gold cannot serve fill, text and tint in
+     every theme. */
+  --fx-mythic-gold: #F5C85C;      /* border, top edge, button fill */
+  --fx-mythic-gold-ink: #0A0D13;  /* text on the gold fill */
+  --fx-mythic-gold-text: #F5C85C; /* gold used AS text (labels) */
+  --fx-mythic-gold-bg: rgba(245, 200, 92, 0.07); /* faint tint over the page */
   --fx-line: #5E81A8;             /* constellation lines, outline buttons, dividers */
 
   /* ===== Semantic aliases ===== */
