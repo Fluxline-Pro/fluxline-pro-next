@@ -43,6 +43,10 @@
   --fx-gold: #9A7B24;
   --fx-gold-border: #C99B33;
   --fx-gold-bg: rgba(224, 168, 60, 0.08);
+  --fx-mythic-gold: #F5C85C;
+  --fx-mythic-gold-ink: #0A0D13;         /* light's accent-ink is white, so it needs its own */
+  --fx-mythic-gold-text: #7F6300;        /* #F5C85C text fails on light, and so does light --fx-gold (#9A7B24, 3.6:1 on the tint); this is 5.1:1 */
+  --fx-mythic-gold-bg: rgba(245, 200, 92, 0.14);
   --fx-line: #5E81A8;
 
   --fx-success: #1F8079;
@@ -103,6 +107,10 @@
   --fx-gold: #DCDCE1;
   --fx-gold-border: #96969E;
   --fx-gold-bg: rgba(220, 220, 225, 0.06);
+  --fx-mythic-gold: var(--fx-gold);      /* grayscale themes follow the theme's own gold */
+  --fx-mythic-gold-ink: #0C0C0D;
+  --fx-mythic-gold-text: var(--fx-gold);
+  --fx-mythic-gold-bg: var(--fx-gold-bg);
   --fx-line: #8E8E98;
   --fx-success: #C8C8CF;
   --fx-success-border: #55555D;
@@ -160,6 +168,10 @@
   --fx-gold: #63636C;
   --fx-gold-border: #A2A2AA;
   --fx-gold-bg: rgba(99, 99, 108, 0.05);
+  --fx-mythic-gold: var(--fx-gold);
+  --fx-mythic-gold-ink: #FFFFFF;
+  --fx-mythic-gold-text: var(--fx-gold);
+  --fx-mythic-gold-bg: var(--fx-gold-bg);
   --fx-line: #8A8A93;
   --fx-success: #4A4A54;
   --fx-success-border: #C0C0C6;
@@ -217,6 +229,10 @@
   --fx-gold: #FFD335;
   --fx-gold-border: #FFD335;
   --fx-gold-bg: transparent;
+  --fx-mythic-gold: var(--fx-gold);
+  --fx-mythic-gold-ink: #000000;
+  --fx-mythic-gold-text: var(--fx-gold);
+  --fx-mythic-gold-bg: var(--fx-gold-bg);
   --fx-line: #FFFFFF;
   --fx-success: #3FF23F;
   --fx-success-border: #3FF23F;

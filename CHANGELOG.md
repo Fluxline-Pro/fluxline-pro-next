@@ -8,7 +8,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Home page pre-order announcement (#368): a small Mythic Gold band directly under the Resonance Core Framework section says the book is open for pre-order on the Fluxline Store, with one "Pre-order the book" button to `/book` on the store (built from `NEXT_PUBLIC_STORE_URL`, so test builds link to the test store). New `FxAnnouncement` component and `--fx-mythic-gold`, `-ink`, `-text` and `-bg` tokens (`#F5C85C`), remapped in every theme: the light theme uses a darker gold (`#7F6300`, 5.1:1) for label text, and the grayscale and high-contrast themes follow their own gold. The old `--fx-gold` is unchanged.
 - Google Tag Manager (`GTM-KX39NN6Q`): the standard container snippet loads in `<head>` right after the existing Consent Mode v2 defaults (so GTM respects consent from first load), with the `<noscript>` fallback iframe as the first element in `<body>`, per Google's documented install. Gated by `NEXT_PUBLIC_GTM_ID` (empty disables it, same pattern as `NEXT_PUBLIC_GA_MEASUREMENT_ID`). The CSP report-only header allow-lists `googletagmanager.com` for `script-src`, `frame-src`, and `connect-src`.
+
+### Changed
+
+- Pre-order wording (#368): the home, books, framework and `llms.txt` copy no longer says pre-orders open in early November 2026; it says they are open on the Fluxline Store, and the home page status link now goes to the store book page. `RCF_PREORDER_WINDOW` is replaced by `RCF_STORE_BOOK_URL`.
 
 ## [v3_5_PROD] - 2026-11-02
 

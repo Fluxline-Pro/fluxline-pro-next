@@ -22,7 +22,6 @@ import {
   RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
-  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_RINGS,
   RCF_TRADEMARK,
@@ -632,9 +631,9 @@ export default function ResonanceCoreFrameworkClient() {
             <FxCard variant='inset' style={{ padding: '22px 24px' }}>
               <h3 style={cardTitle}>Be notified when the book lands</h3>
               <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-                The book is targeted for {RCF_RELEASE_WINDOW}, with preorders
-                opening in {RCF_PREORDER_WINDOW}. Join the TRI Newsletter for
-                launch updates. No spam, ever.
+                The book is targeted for {RCF_RELEASE_WINDOW}, with pre-orders
+                open on the Fluxline Store. Join the TRI Newsletter for launch
+                updates. No spam, ever.
               </p>
               <NewsletterSignup
                 size='sm'
