@@ -50,7 +50,7 @@ export default function FxSwitch({
           flex: 'none',
           borderRadius: 999,
           position: 'relative',
-          border: `1px solid ${checked ? 'var(--fx-accent)' : 'var(--fx-border)'}`,
+          border: `1px solid ${checked ? 'var(--fx-accent)' : 'var(--fx-border-control)'}`,
           background: checked ? 'var(--fx-accent)' : 'var(--fx-surface-input)',
           transition:
             'background var(--fx-color-duration), border-color var(--fx-color-duration)',

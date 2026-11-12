@@ -63,8 +63,7 @@ export default function FxHero({
         style={{
           position: 'absolute',
           inset: 0,
-          background:
-            'linear-gradient(160deg,rgba(5,7,11,.6),rgba(14,21,35,.25))',
+          background: 'var(--fx-hero-overlay)',
         }}
       />
       <div
@@ -76,12 +75,15 @@ export default function FxHero({
           padding: '140px 32px 70px',
         }}
       >
+        {/* `fx-on-dark` keeps dark-field text colours on this panel in the
+            light themes, where the panel itself stays dark. */}
         <div
+          className='fx-on-dark'
           style={{
             maxWidth: 640,
-            background: 'rgba(5,7,11,.72)',
+            background: 'var(--fx-hero-panel)',
             border: '1px solid var(--fx-border)',
-            borderRadius: 16,
+            borderRadius: 'var(--fx-radius-card)',
             padding: '44px 46px',
             backdropFilter: 'blur(4px)',
           }}

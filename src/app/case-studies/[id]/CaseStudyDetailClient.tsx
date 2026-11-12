@@ -57,7 +57,7 @@ export default function CaseStudyDetailClient({
           >
             <h1
               style={{
-                color: 'var(--fx-accent)',
+                color: 'var(--fx-accent-text)',
                 fontSize: '3rem',
                 fontWeight: 700,
                 marginBottom: 4,

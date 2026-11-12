@@ -55,7 +55,7 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
           fontSize: 'var(--fx-h3-size)',
           fontWeight: 'var(--fx-h3-weight)',
           letterSpacing: 'var(--fx-heading-tracking)',
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           marginBottom: '4px',
         }}
       >
@@ -111,7 +111,7 @@ export const StepServiceSelection: React.FC<StepServiceSelectionProps> = ({
                   style={{
                     fontWeight: 600,
                     color: isSelected
-                      ? 'var(--fx-accent)'
+                      ? 'var(--fx-accent-text)'
                       : 'var(--fx-text-heading)',
                     margin: 0,
                     marginBottom: '2px',

@@ -27,7 +27,7 @@ const bodyCell: React.CSSProperties = {
 };
 
 const tierName: React.CSSProperties = {
-  color: 'var(--fx-accent)',
+  color: 'var(--fx-accent-text)',
   fontSize: 'var(--fx-body-size)',
   fontWeight: 600,
   margin: 0,
@@ -35,7 +35,7 @@ const tierName: React.CSSProperties = {
 
 /** A price stays on one line; the note (if any) sits under it. */
 const price: React.CSSProperties = {
-  color: 'var(--fx-accent)',
+  color: 'var(--fx-accent-text)',
   fontSize: 'var(--fx-body-size)',
   fontWeight: 600,
   whiteSpace: 'nowrap',
@@ -75,7 +75,7 @@ export const ProgramTiersTable: React.FC<ProgramTiersTableProps> = ({
       <Typography
         variant='h2'
         style={{
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           fontSize: 'var(--fx-h2-size)',
           fontWeight: 700,
           textAlign: 'center',

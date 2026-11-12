@@ -59,7 +59,7 @@ const noteStyle: React.CSSProperties = {
 };
 
 const textLink: React.CSSProperties = {
-  color: 'var(--fx-accent-text, var(--fx-accent))',
+  color: 'var(--fx-accent-text)',
   fontWeight: 600,
 };
 

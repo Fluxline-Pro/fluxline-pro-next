@@ -82,7 +82,7 @@ export default function ContentPageClient() {
                     fontWeight: 600,
                     letterSpacing: '.12em',
                     textTransform: 'uppercase',
-                    color: 'var(--fx-teal)',
+                    color: 'var(--fx-teal-text)',
                   }}
                 >
                   Read
@@ -160,7 +160,7 @@ export default function ContentPageClient() {
                     fontWeight: 600,
                     letterSpacing: '.12em',
                     textTransform: 'uppercase',
-                    color: 'var(--fx-gold)',
+                    color: 'var(--fx-gold-text)',
                   }}
                 >
                   Listen
@@ -172,7 +172,7 @@ export default function ContentPageClient() {
                     letterSpacing: '.08em',
                     textTransform: 'uppercase',
                     background: 'var(--fx-gold-bg)',
-                    color: 'var(--fx-gold)',
+                    color: 'var(--fx-gold-text)',
                     padding: '4px 10px',
                     borderRadius: 999,
                   }}
@@ -241,7 +241,7 @@ export default function ContentPageClient() {
                     fontWeight: 600,
                     letterSpacing: '.12em',
                     textTransform: 'uppercase',
-                    color: 'var(--fx-teal)',
+                    color: 'var(--fx-teal-text)',
                   }}
                 >
                   See the work

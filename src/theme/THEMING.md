@@ -326,6 +326,21 @@ setThemeMode('dark');
 toggleTheme();
 ```
 
+## DSM 2.0 Tokens (`--fx-*`)
+
+Site chrome and DSM components read `--fx-*` CSS variables from `src/theme/dsm/tokens/` (separate from the Fluent `--theme-*` variables above). Since #363 these carry **Fluxline DSM 2.0** values. `data-fx-theme` on `<html>` selects the mode (`light`, `high-contrast`, `grayscale-dark`, `grayscale-light`, `colorblind`; dark is the default).
+
+- **Palette:** the only dark background is Dark field `#2e2e3a` (`--fx-bg-page`). Cards `#363645`, alternate bands `#292933`, raised `#3a3a4a`. Headings are Mystic Mist `#afcafc` on dark and Steel Blue `#274770` on light. Teal `#4a9b96`, Mythic Gold `#f5c85c`, Somatic Rose `#e89ca3`. The light and high-contrast columns live in `modes.css`.
+- **Superseded 1.0 values** (do not reintroduce): page `#0A0D13`, surfaces `#0C1017` and `#11161F`, periwinkle `#AEC6EE` and `#B8CDF5`, teal `#4FD1C5`, gold `#E8B95B`, rose `#F08A93`, steel `#5E81A8`. Archival copies are in `docs/dsm_v1_0/`.
+- **`--fx-accent` is a fill, not a text colour.** It is `#4d6c96` on dark and carries `--fx-accent-ink` (white). For accent-coloured text and links use the derived `--fx-accent-text` (Mystic Mist on dark, Steel Blue on light).
+- **Usage rule: fills versus text.** `--fx-accent`, `--fx-teal`, `--fx-gold`, `--fx-warning` and `--fx-rose` are for fills, borders, gradients and icons. Set text and links in `--fx-accent-text`, `--fx-teal-text`, `--fx-gold-text`, `--fx-warning-text` and `--fx-rose-text`. Use `--fx-border-control` (not `--fx-border`) for the visible boundary of inputs, selects, textareas, date inputs, switches and filter chips; `--fx-border` stays for cards, panels and dividers.
+- **Page background is flat.** `html` paints `var(--fx-bg-page)` in every mode with no background image; the Fluent `bodyBackground` gradient is no longer applied.
+- **Derived text tokens** (need owner sign-off, brand book 3.7): `--fx-accent-text`, `--fx-teal-text`, `--fx-gold-text`, `--fx-warning-text`, `--fx-rose-text` and `--fx-border-control`. Each text token passes 4.5:1 on the page, card and alt surfaces of every mode (the base teal, gold, warning and rose tokens fail on some surfaces, so set text in these instead); `--fx-border-control` gives form controls a 3:1 border. Light `--fx-text-faint` is darkened from the card value `#6e7a8c` to `#657081` for the same reason.
+- **Gold marks decisions and emphasis only.** Never use it for a warning (use `--fx-warning`) or as a decorative border.
+- **Derived tokens** (`--fx-text-bright`, `--fx-text-soft`, `--fx-text-mist`, `--fx-badge-bg`, `--fx-surface-inset`, `--fx-gold-border`, status `-border` and `-bg`, toast chrome, hero and band gradients) are not on the DSM token card. They alias or mix a 2.0 token and are marked `DERIVED` in the CSS.
+- **Shape and motion:** radii 4px (`--fx-radius-small`), 8px (controls), 12px (cards), 999px (filter chips and tags only). Spacing steps 4/8/12/16/24/32/48/64 plus 88px section rhythm (`--fx-space-section`). Shadow only on floating layers (`--fx-shadow-float`; none in high-contrast). Easing `cubic-bezier(0.4, 0, 0.2, 1)`, hover 0.18s, colour 0.15s.
+- `tri.css` (The Resonant Identity) is a separate design system and is not part of this re-token.
+
 ## Best Practices
 
 ### 1. Always Use Theme Variables
@@ -440,3 +455,7 @@ const styles = mergeStyleSets({
 - [Fluent UI Documentation](https://developer.microsoft.com/en-us/fluentui)
 - [Fluent UI Theming Guide](https://developer.microsoft.com/en-us/fluentui#/controls/web/references#theming)
 - [SASS Documentation](https://sass-lang.com/documentation)
+
+### Dark-field scope: `.fx-on-dark`
+
+The hero places text on a fixed dark panel (`--fx-hero-panel`) over a photograph with a Steel Blue overlay (`--fx-hero-overlay`) in every theme. In the light themes that panel would inherit dark-on-light text colours, so the panel carries the `fx-on-dark` class, which re-declares the text, line and action tokens with their dark-field values (end of `tokens/modes.css`). Use it for any content that sits on a fixed dark panel or on photography. The grayscale and high-contrast themes override the panel and overlay with neutral values. These values are DERIVED and need owner sign-off.

@@ -195,7 +195,7 @@ export const StepContextualQuestions: React.FC<StepContextualQuestionsProps> = (
     <div>
       <h3
         style={{
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           marginBottom: '4px',
           fontSize: 'var(--fx-h3-size)',
           fontWeight: 'var(--fx-h3-weight)',

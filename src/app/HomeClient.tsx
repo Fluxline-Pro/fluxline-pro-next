@@ -60,7 +60,7 @@ const cardLink: React.CSSProperties = {
   fontWeight: 700,
   letterSpacing: 'var(--fx-cta-link-tracking)',
   textTransform: 'uppercase',
-  color: 'var(--fx-teal)',
+  color: 'var(--fx-teal-text)',
 };
 
 const priceTag: React.CSSProperties = {
@@ -71,7 +71,7 @@ const priceTag: React.CSSProperties = {
 };
 
 const textLink: React.CSSProperties = {
-  color: 'var(--fx-accent-text, var(--fx-accent))',
+  color: 'var(--fx-accent-text)',
   fontWeight: 600,
 };
 
@@ -307,7 +307,7 @@ export default function HomeClient() {
                   The book, the companion workbook, and the audiobook narrated
                   by the author. {BOOK_PREORDER.priceLabel}.
                 </p>
-                <span style={{ ...cardLink, color: 'var(--fx-gold)' }}>
+                <span style={{ ...cardLink, color: 'var(--fx-gold-text)' }}>
                   Pre-order on the Fluxline Store ›
                 </span>
               </FxCard>

@@ -81,7 +81,7 @@ function AvailabilitySection({ book }: { book: Book }) {
             fontWeight: 700,
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            color: 'var(--fx-accent)',
+            color: 'var(--fx-accent-text)',
             marginBottom: 'var(--fx-space-s)',
           }}
         >

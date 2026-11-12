@@ -75,7 +75,7 @@ export function NewsletterSignup({
             flex: 1,
             minWidth: 0,
             background: 'var(--fx-surface-input)',
-            border: '1px solid var(--fx-border)',
+            border: '1px solid var(--fx-border-control)',
             borderRadius: 8,
             padding: pad,
             fontSize,
@@ -111,7 +111,7 @@ export function NewsletterSignup({
           margin: message ? '8px 0 0' : 0,
           fontSize: 13,
           lineHeight: 1.5,
-          color: status === 'error' ? 'var(--fx-error)' : 'var(--fx-teal)',
+          color: status === 'error' ? 'var(--fx-error)' : 'var(--fx-teal-text)',
         }}
       >
         {message}

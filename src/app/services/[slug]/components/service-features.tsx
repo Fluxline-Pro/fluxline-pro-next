@@ -60,7 +60,7 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <h2
         style={{
-          color: 'var(--fx-accent)',
+          color: 'var(--fx-accent-text)',
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
           fontWeight: 600,
         }}
@@ -89,7 +89,7 @@ export const ServiceFeatures: React.FC<{ service: ServiceCategory }> = ({
           >
             <span
               style={{
-                color: 'var(--fx-accent)',
+                color: 'var(--fx-accent-text)',
                 fontSize: '1.25rem',
                 lineHeight: 1,
                 flexShrink: 0,

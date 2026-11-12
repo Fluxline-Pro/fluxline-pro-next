@@ -71,7 +71,7 @@ export const FormSlider: React.FC<FormSliderProps> = ({
       {icon && (
         <span
           style={{
-            color: 'var(--fx-accent)',
+            color: 'var(--fx-accent-text)',
             fontSize: '1.25rem',
             lineHeight: 1,
             flexShrink: 0,
@@ -102,7 +102,7 @@ export const FormSlider: React.FC<FormSliderProps> = ({
           </p>
           <span
             style={{
-              color: 'var(--fx-accent)',
+              color: 'var(--fx-accent-text)',
               fontSize: '0.875rem',
               fontWeight: 600,
             }}

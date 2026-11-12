@@ -607,7 +607,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   alignItems: 'center',
                   padding: '4px',
                   borderRadius: '8px',
-                  color: 'var(--fx-accent)',
+                  color: 'var(--fx-accent-text)',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
                   flexShrink: 0,
@@ -728,7 +728,7 @@ export const UnifiedPageWrapper: React.FC<UnifiedPageWrapperProps> = ({
                   username='support'
                   domain='fluxline.pro'
                   style={{
-                    color: 'var(--fx-accent)',
+                    color: 'var(--fx-accent-text)',
                     textDecoration: 'underline',
                   }}
                 >

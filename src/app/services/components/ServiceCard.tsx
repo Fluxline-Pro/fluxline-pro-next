@@ -47,7 +47,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
       >
         <h3
           style={{
-            color: 'var(--fx-accent)',
+            color: 'var(--fx-accent-text)',
             fontSize: 'clamp(1.25rem, 2vw, 1.5rem)',
             fontWeight: 600,
           }}
