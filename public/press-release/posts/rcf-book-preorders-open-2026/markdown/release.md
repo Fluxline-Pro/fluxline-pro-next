@@ -63,9 +63,9 @@ The book is for founders, leaders, creatives, small teams, and growing businesse
 
 Every option is listed side by side on the [pre-order deals page](https://store.fluxline.pro/deals). Prices are in US dollars, before tax.
 
-- **RCF Founders Pass, $89 for the first year.** Every current and future digital offering in one pass: the audiobook, eBook and workbook, the RCF AI Companion, Identity in Motion, and lessons and training as they ship. It also includes the private Facebook Group and Discord Server, monthly group cohort sessions, and individualized trainings. Nothing renews automatically. After the first year it becomes the RCF All-Access Pass, with optional yearly renewal at $149.
+- **RCF Founders Pass, $89 for the first year.** Every current and future digital offering in one pass: the audiobook, eBook and workbook, the RCF AI Companion, Identity in Motion, and lessons and training as they ship. It also includes the private Facebook Group and Discord Server, monthly group cohort sessions, and individualized trainings. Nothing renews automatically. After the first year it becomes the RCF All-Access Pass, with optional yearly renewal at $149. Available in the United States only; a US billing address is required.
 - **Complete Bundle, $69.99.** The audiobook, the eBook and the workbook.
-- **Everything Bundle, $109.99.** The Complete Bundle, the RCF AI Companion First-Year Pass and Identity in Motion. Pre-order only.
+- **Everything Bundle, $109.99.** The Complete Bundle, the RCF AI Companion First-Year Pass and Identity in Motion. Pre-order only. Because it includes the Companion, it is available in the United States only; a US billing address is required.
 - **Single editions.** eBook and workbook together, $39.99. eBook (PDF and EPUB), $34.99. Audiobook, narrated by the author, $34.99. Workbook, $19.99.
 - **RCF AI Companion: First-Year Pass, $29.99.** An AI chatbot for the book. Ask it a question and get a short answer with chapter citations. It is $19.99 when added to the Complete Bundle or the eBook and workbook bundle. One payment covers the first year. Available in the United States only; a US billing address is required.
 - **Identity in Motion, $49 with a book pre-order.** A guided, individualized 4-week program to stop starting over. It begins after the book's release, and is $99 after the pre-order window.
