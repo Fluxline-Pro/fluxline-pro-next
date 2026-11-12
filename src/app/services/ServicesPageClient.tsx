@@ -11,7 +11,6 @@ import {
   SERVICES_SUMMARY,
   FLUXLINE_SECONDARY_TAGLINE,
 } from './constants';
-import { getServiceStory } from '@/lib/fluxlineStory';
 
 const VISIBLE_SERVICES = SERVICE_CATEGORIES;
 
@@ -97,7 +96,7 @@ export default function ServicesPageClient() {
                   fontWeight: 700,
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  color: 'var(--fx-accent-text)',
+                  color: 'var(--fx-accent)',
                   marginBottom: 8,
                 }}
               >
@@ -151,20 +150,10 @@ export default function ServicesPageClient() {
                     >
                       {service.description}
                     </p>
-                    <div
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 600,
-                        color: 'var(--fx-text-bright)',
-                        marginBottom: 8,
-                      }}
-                    >
-                      {getServiceStory(service.id)?.priceLabel}
-                    </div>
                     <span
                       style={{
                         fontSize: 'var(--fx-cta-link-size)',
-                        color: 'var(--fx-accent-text)',
+                        color: 'var(--fx-accent)',
                         fontWeight: 700,
                         letterSpacing: 'var(--fx-cta-link-tracking)',
                         textTransform: 'uppercase',
@@ -187,8 +176,6 @@ export default function ServicesPageClient() {
           body="Share your needs in a free consultation below. Let's map out what's possible for you or your business together."
           primaryLabel='Book a Free Consultation'
           primaryHref='/contact'
-          secondaryLabel='Compare all pricing'
-          secondaryHref='/pricing'
         />
       </div>
     </FxContainer>
@@ -217,14 +204,7 @@ function FeatureSection({
       label={label}
       title={service.title}
       description={service.description}
-      blurb={
-        <>
-          {blurb}{' '}
-          <strong style={{ color: 'var(--fx-text-bright)' }}>
-            {getServiceStory(service.id)?.priceLabel}.
-          </strong>
-        </>
-      }
+      blurb={blurb}
       href={service.path}
       ctaLabel={ctaLabel}
       style={{ marginBottom: 'var(--fx-section-gap)' }}

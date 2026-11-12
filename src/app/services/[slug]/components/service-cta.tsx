@@ -20,7 +20,7 @@ export const ServiceCTA: React.FC = () => {
     >
       <h3
         style={{
-          color: 'var(--fx-accent-text)',
+          color: 'var(--fx-accent)',
           fontSize: 'clamp(1.5rem, 3vw, 2rem)',
           fontWeight: 600,
           marginBottom: '1rem',

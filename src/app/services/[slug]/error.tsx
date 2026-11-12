@@ -33,7 +33,7 @@ export default function ServiceDetailError({
       >
         <h1
           style={{
-            color: 'var(--fx-accent-text)',
+            color: 'var(--fx-accent)',
             fontSize: 'clamp(2rem, 5vw, 3rem)',
             fontWeight: 700,
             textAlign: 'center',

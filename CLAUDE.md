@@ -304,7 +304,9 @@ src/app/                    # Next.js pages and routes
   ├── portfolio/            # Portfolio projects (Markdown-based)
   ├── case-studies/         # Case studies (Markdown-based)
   ├── press-release/        # Press releases (Markdown-based)
-  ├── services/             # Services (scroll PDFs linked from service pages)
+  ├── videos/               # YouTube integration
+  ├── podcasts/             # Podcast player (Azure Storage)
+  ├── services/             # Services + scrolls/white papers
   ├── content/              # Content hub
   └── ...
 src/components/             # Shared components
@@ -322,7 +324,8 @@ src/animations/             # Framer Motion animations
 src/lib/                    # Shared utilities and app logic
   ├── environment.ts        # Environment normalization helpers
   ├── getApiUrl.ts          # API URL resolution
-  └── ethos/                # Fluxline Ethos content definitions
+  ├── ethos/                # Fluxline Ethos content definitions
+  └── testimonials/         # Testimonial types and data
 src/utils/                  # Utility functions
   ├── jsonLd.ts             # Safe JSON-LD serialization
   ├── markdownRenderer.tsx  # Markdown rendering utilities
@@ -629,7 +632,7 @@ When unsure whether a word is a construct, check the list above and the locked t
 
 **Location**: `src/components/ContentListingPage.tsx`
 
-The application uses a unified content listing system that consolidates all listing pages (Blog, Portfolio, Press Release, Case Studies) into a single, reusable component. This reduces code duplication by ~85% while maintaining flexibility for each content type.
+The application uses a unified content listing system that consolidates all listing pages (Blog, Portfolio, Press Release, Case Studies, Podcasts) into a single, reusable component. This reduces code duplication by ~85% while maintaining flexibility for each content type.
 
 **Core Architecture**:
 
@@ -799,34 +802,194 @@ For complete documentation, see `/public/press-release/posts/HOW_TO_CREATE_A_PRE
 
 For complete documentation, see `/public/case-studies/posts/HOW_TO_CREATE_A_CASE_STUDY.md`
 
-### Scrolls/White Papers
+### Scrolls/White Papers Management
 
-Scrolls are white-paper PDFs. There is no scroll listing or detail route (`/services/scrolls` 301-redirects to `/services/`). A scroll is shown only on its service detail page.
+- **Location**: `/src/app/services/scrolls/`
+- **Asset Storage**: PDFs stored in `/public/scrolls/pdfs/`
+- **Data Configuration**: Scroll metadata defined in `scrollsData.ts`
 
-- **PDFs**: `/public/scrolls/pdfs/` (still published; `staticwebapp.config.json` adds cache headers)
-- **Data**: `src/app/services/scroll-data.ts` (`SCROLLS_DATA`, `getScrollById`), types in `scroll-types.ts`
-- **Service mapping**: `src/app/services/scroll-mapping.ts` (`SERVICE_SCROLL_MAPPING`, service id -> scroll id)
-- **UI**: `src/app/services/[slug]/components/service-scroll-section.tsx` links straight to the PDF (new tab, `rel="noopener noreferrer"`)
+**Adding New Scrolls**:
 
-**Adding a scroll**: place the PDF in `/public/scrolls/pdfs/`, add an entry to `SCROLLS_DATA`, and map a service to it in `scroll-mapping.ts`.
+1. Place PDF file in `/public/scrolls/pdfs/`
+2. Update `scrollsData.ts` with scroll metadata
+3. Run `yarn build` to regenerate static pages
+4. New scroll will be automatically added to grid and detail route
 
-### Retired routes (2026-11, issue #364)
+**Component Patterns**:
 
-These routes no longer exist; each old URL has a 301 in `staticwebapp.config.json` (one rule per route: SWA ignores the trailing slash, and listing `/x` and `/x/` both is rejected at deploy as a duplicate; tested in `src/app/staticwebapp-redirects.test.ts`):
+- `ScrollCard`: Individual scroll card with download functionality
+- `ScrollsGrid`: Responsive grid layout for scroll listings
+- All scrolls use Server Components for listings
+- Client Components used only for interactive download buttons
+- Static generation for all scroll detail pages via `generateStaticParams`
 
-| Old route | Redirects to |
-| --- | --- |
-| `/podcasts` | `https://theresonantidentity.com/start-here/` |
-| `/videos` | `/content/` |
-| `/cue-cards` | `/resonance-core-framework/` |
-| `/github` | `/portfolio/` |
-| `/book` | `/contact/` |
-| `/services/scrolls`, `/services/scrolls/<id>` | `/services/` |
-| `/bookings` | `/contact/` |
+For complete scrolls documentation, see `src/app/services/scrolls/README.md`
 
-Do not add a redirect rule that could match `/books`, the media under `/videos/*` (e.g. `public/videos/home/`), or the PDFs under `/scrolls/pdfs/*`. Azure SWA applies the first matching rule, wildcards are only valid at the end of a path, and `/x/*` does not match `/x`.
+### Video Section (YouTube Integration)
 
-The podcast API (`api/podcasts-episodes`, `api/podcasts-rss`) and the YouTube API functions are kept because other sites consume them; see `/api/README.md` and `/api/HOW_TO_ADD_PODCAST_EPISODE.md`. The site-wide podcast player context and mini player were removed with the `/podcasts` page.
+- **Location**: `/src/app/video/`
+- **Data Source**: YouTube Data API v3 (fetches from @TerenceWaters channel)
+- **Architecture**: Azure Function proxy at `/api/youtube`
+
+**How It Works**:
+
+1. You upload videos directly to YouTube Studio (youtube.com)
+2. Azure Function fetches videos via YouTube Data API v3
+3. Frontend displays in responsive grid with modal player
+4. No manual updates needed - videos appear automatically
+
+**Component Architecture**:
+
+- `VideoListingClient.tsx`: Client component with three tabs (Videos, Live, Playlists)
+- `VideoCard`: Individual video card with thumbnail and metadata
+- `VideoModal`: Fullscreen modal with embedded YouTube player
+- Uses unified layout patterns with responsive grids
+- Pagination support for large video libraries
+
+**Features**:
+
+- Three content tabs: Videos, Live Streams, Playlists
+- Responsive 3-column grid (adjusts for mobile/tablet)
+- Click-to-play modal with embedded YouTube player
+- Duration badges, view counts, and publish dates
+- Automatic caching (1 hour) to reduce API calls
+- CORS-enabled for frontend consumption
+
+**Configuration**:
+
+```bash
+# Required environment variable in Azure Static Web App
+YOUTUBE_API_KEY=your-youtube-data-api-v3-key  # Server-side only
+```
+
+**Setup**:
+
+1. Get API key from Google Cloud Console (console.cloud.google.com)
+2. Enable "YouTube Data API v3" in the API Library
+3. Restrict key to YouTube Data API v3 only (security best practice)
+4. Add to Azure Static Web App application settings
+5. Upload videos to YouTube - they automatically appear on site
+
+**Azure Function** (`api/youtube/index.js`):
+
+- Proxies YouTube API to keep API key server-side
+- Handles CORS and caching headers
+- Fetches channel ID via handle (@TerenceWaters)
+- Returns video metadata (title, description, thumbnail, duration, views)
+- Error handling with graceful fallbacks
+
+**Important Notes**:
+
+- Videos are NOT uploaded through your web app
+- All video management happens in YouTube Studio
+- The app only displays videos from your YouTube channel
+- No backend storage or database needed for videos
+
+For details, see `/api/README.md` and `VIDEO_UPLOAD_INSTRUCTIONS.md`
+
+### Podcast Section (Azure Storage)
+
+- **Location**: `/src/app/podcasts/`
+- **Data Storage**: Azure Table Storage (metadata) + Azure Blob Storage (audio files)
+- **Architecture**: Azure Functions for API endpoints and RSS feed
+
+**How It Works**:
+
+1. Upload .mp3 audio files to Azure Blob Storage
+2. Add episode metadata to Azure Table Storage
+3. Frontend fetches episodes from `/api/podcasts/episodes`
+4. RSS feed auto-generated at `/api/podcasts/rss`
+
+**Component Architecture**:
+
+- `PodcastListingClient.tsx`: Client component for episode listing
+- `PodcastCard`: Individual episode card with metadata
+- `PodcastDetailModal`: Modal with HTML5 audio player
+- Uses unified `ContentListingPage` pattern
+- Server-side data loading with client-side interactivity
+
+**Azure Functions**:
+
+- `/api/podcasts/episodes` - Lists all episodes from Table Storage
+- `/api/podcasts/rss` - Generates RSS 2.0 feed for podcast platforms
+
+**Episode Metadata Schema**:
+
+```typescript
+{
+  RowKey: 'episode-1',           // Unique ID
+  episode_title: string,          // Episode title
+  description: string,            // Full description
+  audio_url: string,              // Blob storage URL
+  duration: string,               // MM:SS or ISO 8601
+  publish_date: string,           // ISO 8601 date
+  episode_number: number,         // Episode number
+  audio_size_bytes: number,       // File size in bytes
+  podcast_name: string,           // Show name (optional)
+  author_name: string,            // Host name (optional)
+  tags: string,                   // Comma-separated (optional)
+  imageUrl: string,               // Episode art URL (optional)
+  slug: string                    // URL slug (optional)
+}
+```
+
+**Environment Separation**:
+
+- **Dev/Test**: Uses `podcastsdev` table
+- **Production**: Uses `podcasts` table
+- Controlled by `NEXT_PUBLIC_ENVIRONMENT` variable
+- Blob storage typically organized by container or path (e.g., `/podcasts-dev/` vs `/podcasts/`)
+
+**Configuration**:
+
+```bash
+# Required environment variables in Azure Static Web App
+AZURE_TABLE_STORAGE_URL=https://yourstore.table.core.windows.net
+AZURE_TABLE_SAS_TOKEN=sv=2020-08-04&ss=t&srt=sco&...
+AZURE_PODCAST_TABLE_DEV=podcastsdev
+AZURE_PODCAST_TABLE_PROD=podcasts
+NEXT_PUBLIC_ENVIRONMENT=prod  # or 'dev'/'test'
+```
+
+**Adding Episodes Workflow**:
+
+1. **Prepare audio**: Export as MP3, 128-192 kbps, normalize audio levels
+2. **Upload to Blob Storage**: Via Azure Portal, Azure Storage Explorer, or CLI
+3. **Get blob URL**: Copy the public URL of the uploaded file
+4. **Add to Table Storage**: Create entity with episode metadata
+5. **Verify**: Episode automatically appears on `/podcasts` page and in RSS feed
+
+**RSS Feed Features**:
+
+- Valid RSS 2.0 format with iTunes extensions
+- Compatible with Apple Podcasts, Spotify, Spreaker
+- Includes audio enclosures with proper MIME types
+- Auto-sorted by publish date (newest first)
+- Podcast metadata configured in `api/podcasts-rss/index.js`
+
+**Storage Organization**:
+
+- Audio files can be organized by environment:
+  - `https://storage.../podcasts-dev/episode.mp3` (dev)
+  - `https://storage.../podcasts/episode.mp3` (prod)
+- Separation achieved via different URLs stored in different tables
+- No code changes needed to maintain environment separation
+
+**Important Notes**:
+
+- Audio files are NOT uploaded through the web interface
+- All uploads happen via Azure Portal, Azure Storage Explorer, or CLI
+- The app only displays metadata and streams audio from Azure
+- Table Storage provides the "database" for episode information
+- RSS feed enables distribution to major podcast platforms
+
+For complete podcast documentation, see:
+
+- `/api/HOW_TO_ADD_PODCAST_EPISODE.md` - Step-by-step episode upload guide
+- `/api/README.md` - API documentation
+- `/api/podcasts-episodes/index.js` - Episodes API implementation
+- `/api/podcasts-rss/index.js` - RSS feed implementation
+
 
 ---
 

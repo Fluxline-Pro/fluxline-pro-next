@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { BOOK_PREORDER } from '@/lib/fluxlineStory';
 import './FxFooter.css';
 
 interface FxFooterProps {
@@ -34,8 +33,7 @@ export default function FxFooter({
       }}
     >
       {/* The shared cross-sell block (Listen, Read, Work, author), in the
-          same order on all three sites, plus a Pre-order line for the store
-          (also on terencewaters.com; not yet on theresonantidentity.com). Cross-site links are plain same-tab
+          same order on all three sites. Cross-site links are plain same-tab
           anchors with rel="me" so search engines connect the three sites to
           one identity. The Work line names this site, so it is plain text. */}
       <nav
@@ -79,14 +77,6 @@ export default function FxFooter({
         >
           Read: The Resonance Core Framework™. Where the Framework is mapped.
         </Link>
-        <a
-          href={BOOK_PREORDER.url}
-          style={linkStyle('store')}
-          onMouseEnter={() => setHovered('store')}
-          onMouseLeave={() => setHovered(null)}
-        >
-          Pre-order: The RCF book, on the Fluxline Store.
-        </a>
         <span style={linkStyle('work')}>
           Work: Fluxline. Fluxline builds systems that work, brands that
           connect, and practices that last.
@@ -148,34 +138,6 @@ export default function FxFooter({
           )}
           {preferencesOnClick && (
             <>
-              <span
-                aria-hidden='true'
-                style={{ color: 'var(--fx-text-faint)', fontSize: 13 }}
-              >
-                &middot;
-              </span>
-              <Link
-                href='/pricing'
-                style={linkStyle('pricing')}
-                onMouseEnter={() => setHovered('pricing')}
-                onMouseLeave={() => setHovered(null)}
-              >
-                Pricing
-              </Link>
-              <span
-                aria-hidden='true'
-                style={{ color: 'var(--fx-text-faint)', fontSize: 13 }}
-              >
-                &middot;
-              </span>
-              <Link
-                href='/case-studies'
-                style={linkStyle('cases')}
-                onMouseEnter={() => setHovered('cases')}
-                onMouseLeave={() => setHovered(null)}
-              >
-                Case Studies
-              </Link>
               <span
                 aria-hidden='true'
                 style={{ color: 'var(--fx-text-faint)', fontSize: 13 }}

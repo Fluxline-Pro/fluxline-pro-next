@@ -14,7 +14,7 @@ export const ServiceDetailHero: React.FC<{ service: ServiceCategory }> = ({
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <h1
         style={{
-          color: 'var(--fx-accent-text)',
+          color: 'var(--fx-accent)',
           fontSize: 'clamp(2rem, 5vw, 3.5rem)',
           fontWeight: 700,
         }}

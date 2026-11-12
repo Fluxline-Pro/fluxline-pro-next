@@ -9,27 +9,19 @@ import FxCard from '@/theme/components/dsm/FxCard';
 
 const SECONDARY_LINKS: {
   label: string;
-  href: string;
+  href?: string;
+  comingSoon?: boolean;
 }[] = [
-  { label: 'Case studies', href: '/case-studies' },
-  { label: 'Books: pre-order the RCF', href: '/books' },
-  { label: 'Press releases', href: '/press-release' },
   {
-    label: 'GitHub: open source and code samples',
+    label: 'GitHub — open source & code samples',
     href: 'https://github.com/aplusandminus',
   },
   {
-    label: 'Videos: tutorials and live streams',
+    label: 'Videos — tutorials & live streams',
     href: 'https://www.youtube.com/@TerenceWaters',
   },
+  { label: 'Books', comingSoon: true },
 ];
-
-const secondaryLinkStyle: React.CSSProperties = {
-  color: 'var(--fx-text-soft)',
-  fontSize: 13.5,
-  fontWeight: 600,
-  textDecoration: 'none',
-};
 
 /**
  * Content Hub Page Client Component
@@ -82,7 +74,7 @@ export default function ContentPageClient() {
                     fontWeight: 600,
                     letterSpacing: '.12em',
                     textTransform: 'uppercase',
-                    color: 'var(--fx-teal-text)',
+                    color: 'var(--fx-teal)',
                   }}
                 >
                   Read
@@ -160,7 +152,7 @@ export default function ContentPageClient() {
                     fontWeight: 600,
                     letterSpacing: '.12em',
                     textTransform: 'uppercase',
-                    color: 'var(--fx-gold-text)',
+                    color: 'var(--fx-gold)',
                   }}
                 >
                   Listen
@@ -172,7 +164,7 @@ export default function ContentPageClient() {
                     letterSpacing: '.08em',
                     textTransform: 'uppercase',
                     background: 'var(--fx-gold-bg)',
-                    color: 'var(--fx-gold-text)',
+                    color: 'var(--fx-gold)',
                     padding: '4px 10px',
                     borderRadius: 999,
                   }}
@@ -241,7 +233,7 @@ export default function ContentPageClient() {
                     fontWeight: 600,
                     letterSpacing: '.12em',
                     textTransform: 'uppercase',
-                    color: 'var(--fx-teal-text)',
+                    color: 'var(--fx-teal)',
                   }}
                 >
                   See the work
@@ -318,16 +310,42 @@ export default function ContentPageClient() {
           {SECONDARY_LINKS.map((link, i) => (
             <React.Fragment key={link.label}>
               {i > 0 && <span style={{ color: 'var(--fx-border)' }}>·</span>}
-              {link.href.startsWith('/') ? (
-                <Link href={link.href} style={secondaryLinkStyle}>
-                  {link.label}
-                </Link>
+              {link.comingSoon ? (
+                <span
+                  style={{
+                    color: 'var(--fx-text-faint)',
+                    fontSize: 13.5,
+                    fontWeight: 600,
+                  }}
+                >
+                  {link.label}{' '}
+                  <span
+                    style={{
+                      fontSize: 10.5,
+                      fontWeight: 700,
+                      letterSpacing: '.06em',
+                      textTransform: 'uppercase',
+                      background: 'var(--fx-surface-card)',
+                      color: 'var(--fx-text-muted)',
+                      padding: '3px 8px',
+                      borderRadius: 999,
+                      marginLeft: 4,
+                    }}
+                  >
+                    Coming soon
+                  </span>
+                </span>
               ) : (
                 <a
                   href={link.href}
                   target='_blank'
                   rel='noopener noreferrer'
-                  style={secondaryLinkStyle}
+                  style={{
+                    color: 'var(--fx-text-soft)',
+                    fontSize: 13.5,
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                  }}
                 >
                   {link.label}
                 </a>

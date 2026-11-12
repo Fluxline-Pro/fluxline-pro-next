@@ -84,7 +84,7 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
     <div>
       <h3
         style={{
-          color: 'var(--fx-accent-text)',
+          color: 'var(--fx-accent)',
           marginBottom: '4px',
           fontSize: 'var(--fx-h3-size)',
           fontWeight: 'var(--fx-h3-weight)',
@@ -282,7 +282,7 @@ export const StepContactSchedule: React.FC<StepContactScheduleProps> = ({
                 href='/legal/privacy-policy'
                 target='_blank'
                 rel='noopener noreferrer'
-                style={{ color: 'var(--fx-accent-text)' }}
+                style={{ color: 'var(--fx-accent)' }}
                 aria-label='Privacy Policy (opens in new window)'
               >
                 Privacy Policy

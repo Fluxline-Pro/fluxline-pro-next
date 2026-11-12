@@ -242,7 +242,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           <code
             style={{
               background: 'var(--fx-surface-inset)',
-              color: 'var(--fx-teal-text)',
+              color: 'var(--fx-teal)',
               padding: '2px 6px',
               borderRadius: 4,
               fontSize: '0.9em',
@@ -284,8 +284,8 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
     blockquote: ({ children }: { children?: React.ReactNode }) => (
       <blockquote
         style={{
-          borderLeft: '3px solid var(--fx-line)',
-          background: 'var(--fx-surface-inset)',
+          borderLeft: '3px solid var(--fx-gold)',
+          background: 'var(--fx-gold-bg)',
           padding: '16px 20px',
           margin: '0 0 1em',
           borderRadius: '0 8px 8px 0',
@@ -305,7 +305,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
       <a
         href={href}
         style={{
-          color: 'var(--fx-teal-text)',
+          color: 'var(--fx-teal)',
           textDecoration: 'none',
           transition: 'color var(--fx-color-duration)',
         }}
@@ -313,7 +313,7 @@ export function UnifiedContentDetail({ config }: UnifiedContentDetailProps) {
           e.currentTarget.style.color = 'var(--fx-text-bright)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.color = 'var(--fx-teal-text)';
+          e.currentTarget.style.color = 'var(--fx-teal)';
         }}
       >
         {children}

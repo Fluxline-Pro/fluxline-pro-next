@@ -130,7 +130,7 @@ export const ImageCarouselModal: React.FC<ImageCarouselModalProps> = ({
     boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
     zIndex: 10,
     fontSize: '24px',
-    color: 'var(--fx-accent-text)',
+    color: 'var(--fx-accent)',
     lineHeight: 1,
     padding: 0,
   };

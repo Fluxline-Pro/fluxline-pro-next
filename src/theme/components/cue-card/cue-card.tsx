@@ -100,7 +100,7 @@ export const CueCard: React.FC<CueCardProps> = ({
     title: {
       fontSize: '1.75rem',
       fontWeight: 700,
-      color: 'var(--fx-accent-text)',
+      color: 'var(--fx-accent)',
       margin: 0,
       lineHeight: 1.2,
     },
@@ -147,7 +147,7 @@ export const CueCard: React.FC<CueCardProps> = ({
     link: {
       fontSize: '0.875rem',
       marginTop: '8px',
-      color: 'var(--fx-accent-text)',
+      color: 'var(--fx-accent)',
       textDecoration: 'underline',
       cursor: 'pointer',
       transition: 'color 0.2s ease',
@@ -262,7 +262,7 @@ export const CueCard: React.FC<CueCardProps> = ({
               style={{
                 fontSize: '1.75rem',
                 fontWeight: 700,
-                color: 'var(--fx-accent-text)',
+                color: 'var(--fx-accent)',
                 margin: 0,
                 marginBottom: '16px',
               }}
@@ -281,7 +281,7 @@ export const CueCard: React.FC<CueCardProps> = ({
                   fontWeight: 600,
                   textTransform: 'uppercase' as const,
                   letterSpacing: '0.08em',
-                  color: 'var(--fx-accent-text)',
+                  color: 'var(--fx-accent)',
                   marginBottom: '16px',
                 }}
               >
@@ -318,7 +318,7 @@ export const CueCard: React.FC<CueCardProps> = ({
                   fontWeight: 600,
                   textTransform: 'uppercase' as const,
                   letterSpacing: '0.08em',
-                  color: 'var(--fx-accent-text)',
+                  color: 'var(--fx-accent)',
                   marginBottom: '16px',
                 }}
               >
@@ -352,7 +352,7 @@ export const CueCard: React.FC<CueCardProps> = ({
                   fontWeight: 600,
                   textTransform: 'uppercase' as const,
                   letterSpacing: '0.08em',
-                  color: 'var(--fx-accent-text)',
+                  color: 'var(--fx-accent)',
                   marginBottom: '16px',
                 }}
               >
@@ -412,7 +412,7 @@ export const CueCard: React.FC<CueCardProps> = ({
                       style={{
                         fontSize: '1.25rem',
                         fontWeight: 600,
-                        color: 'var(--fx-accent-text)',
+                        color: 'var(--fx-accent)',
                         textDecoration: 'underline',
                       }}
                       onClick={() => setIsModalOpen(false)}
