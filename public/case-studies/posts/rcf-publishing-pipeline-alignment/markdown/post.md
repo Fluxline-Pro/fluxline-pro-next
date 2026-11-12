@@ -182,7 +182,9 @@ The first run built Chapter 3 and Exercise 1.3 on top of Chapter 2 and Exercise 
 
 The same principle from the original rebuild holds here. The generator does not decide. It reads the manuscript as the source of truth, it refuses what it cannot map, it reports what it could not settle, and it hands the author a file to approve rather than a file to fix. Human review is still enforced. It is just no longer spent on retyping styles.
 
-This is also what makes the next step possible: with print no longer the long pole, preorders for the RCF book open in early November 2026, and the book is targeted for Q1 2027. [Be notified when preorders open.](https://fluxline.pro/resonance-core-framework/#notify)
+This is also what makes the next step possible: with print no longer the long pole, a pre-order date could be set, and the book is targeted for Q1 2027.
+
+_Updated November 20, 2026._ Pre-orders for the RCF book are open. [Pre-order the book on the Fluxline Store.](https://store.fluxline.pro/book)
 
 ---
 
