@@ -1,9 +1,14 @@
 'use client';
 
 import React from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { getApiEndpoint } from '@/lib/getApiUrl';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
+
+/** How long a submit waits for the async reCAPTCHA script before giving up. */
+const RECAPTCHA_READY_TIMEOUT_MS = 10000;
+const RECAPTCHA_POLL_MS = 100;
 
 interface NewsletterSignupProps {
   /** `sm` matches the compact contact-page card; `md` the wider bands. */
@@ -27,6 +32,25 @@ export function NewsletterSignup({
   const [email, setEmail] = React.useState('');
   const [status, setStatus] = React.useState<Status>('idle');
   const [message, setMessage] = React.useState('');
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+  // `executeRecaptcha` is undefined until the async reCAPTCHA script finishes
+  // loading. Read it through a ref so a submit already in flight can wait for
+  // the real function instead of capturing the undefined it started with —
+  // a one-field form like this is often submitted before the script lands.
+  const executeRecaptchaRef = React.useRef(executeRecaptcha);
+  React.useEffect(() => {
+    executeRecaptchaRef.current = executeRecaptcha;
+  }, [executeRecaptcha]);
+
+  const waitForRecaptcha = React.useCallback(async () => {
+    const deadline = Date.now() + RECAPTCHA_READY_TIMEOUT_MS;
+    while (!executeRecaptchaRef.current) {
+      if (Date.now() > deadline) return null;
+      await new Promise((resolve) => setTimeout(resolve, RECAPTCHA_POLL_MS));
+    }
+    return executeRecaptchaRef.current;
+  }, []);
 
   const pad = size === 'sm' ? '10px 12px' : '12px 14px';
   const fontSize = size === 'sm' ? 13.5 : 14;
@@ -36,10 +60,20 @@ export function NewsletterSignup({
     setStatus('submitting');
     setMessage('');
     try {
+      const execute = await waitForRecaptcha();
+      if (!execute) {
+        setStatus('error');
+        setMessage(
+          'Spam protection didn’t finish loading. Refresh the page and try again.'
+        );
+        return;
+      }
+      const recaptchaToken = await execute('newsletter_subscribe');
+
       const res = await fetch(getApiEndpoint('/api/newsletter-subscribe'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim() }),
+        body: JSON.stringify({ email: email.trim(), recaptchaToken }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         message?: string;

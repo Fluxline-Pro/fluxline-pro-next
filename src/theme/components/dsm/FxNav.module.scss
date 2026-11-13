@@ -2,9 +2,10 @@
  * FxNav Component Styles
  * Mobile-responsive navigation with hamburger menu
  *
- * The full link row needs about 1,215px on the home page (seven links plus
- * the logo and the consultation button), so the hamburger takes over below
- * 1,240px rather than at the usual 1,024px tablet breakpoint.
+ * The hamburger takes over below 1,240px rather than at the usual 1,024px
+ * tablet breakpoint. That width was set for the earlier seven-link row; the
+ * row is shorter now (four links and the Our Content drop-down), so the
+ * breakpoint could come down if the design calls for it.
  */
 
 .navContainer {
@@ -95,6 +96,22 @@
 
   @media (max-width: 1239px) {
     margin-left: auto;
+  }
+
+  @media (max-width: 400px) {
+    gap: 8px;
+  }
+}
+
+/* Site name in the home header. Slightly smaller on narrow phones so it stays
+   on one line beside the appearance button and the menu button. */
+.brandName {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--fx-text-heading);
+
+  @media (max-width: 400px) {
+    font-size: 15.5px;
   }
 }
 
@@ -228,5 +245,149 @@
   &:focus-visible {
     color: var(--fx-text-heading);
     background: var(--fx-surface-raised);
+  }
+}
+
+/* Appearance (display preferences) button, top right beside the user menu */
+.prefsButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--fx-border);
+  border-radius: 8px;
+  color: var(--fx-text-soft);
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+
+  /* 44px touch target on phones and tablets */
+  @media (max-width: 1023px) {
+    width: 44px;
+    height: 44px;
+  }
+
+  &:hover {
+    color: var(--fx-text-heading);
+    border-color: var(--fx-text-soft);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--theme-palette-themePrimary);
+    outline-offset: 2px;
+  }
+}
+
+/* "Our Content" drop-down (desktop) */
+.menu {
+  position: relative;
+}
+
+.menuTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--fx-text-soft);
+  cursor: pointer;
+  transition: color 0.15s;
+
+  &:hover,
+  &[aria-expanded='true'] {
+    color: var(--fx-text-heading);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--theme-palette-themePrimary);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+.chevron {
+  transition: transform 0.15s;
+
+  .menuTrigger[aria-expanded='true'] & {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--fx-nav-bg);
+  backdrop-filter: var(--fx-nav-blur);
+  -webkit-backdrop-filter: var(--fx-nav-blur);
+  border: 1px solid var(--fx-border);
+  border-radius: 10px;
+  z-index: 1001;
+
+  /* Hover bridge across the gap so the pointer can travel from the button */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 12px;
+  }
+}
+
+.dropdownLink {
+  display: block;
+  padding: 9px 16px;
+  color: var(--fx-text-soft);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color 0.15s,
+    background-color 0.15s;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--fx-text-heading);
+    background: var(--fx-surface-raised);
+  }
+}
+
+/* "Our Content" group in the phone menu */
+.mobileGroupLabel {
+  padding: 12px 32px 4px;
+  color: var(--fx-text-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mobileSubLink {
+  display: block;
+  padding: 12px 32px 12px 48px;
+  text-decoration: none;
+  color: var(--fx-text-soft);
+  font-size: 14.5px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--fx-border);
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--fx-text-heading);
   }
 }

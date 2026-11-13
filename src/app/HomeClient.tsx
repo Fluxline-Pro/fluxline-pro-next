@@ -8,6 +8,7 @@ import FxStatCard from '@/theme/components/dsm/FxStatCard';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import FxCard from '@/theme/components/dsm/FxCard';
+import PreorderAnnouncement from '@/components/PreorderAnnouncement';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxButton from '@/theme/components/dsm/FxButton';
 import {
@@ -20,10 +21,9 @@ import {
   RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
-  RCF_PREORDER_WINDOW,
+  RCF_STORE_BOOK_URL,
   RCF_RELEASE_WINDOW,
   RCF_FRAMEWORK_PATH,
-  RCF_NOTIFY_PATH,
   RCF_TRADEMARK,
   TRI_START_HERE_URL,
 } from '@/lib/resonanceCore';
@@ -439,14 +439,14 @@ export default function HomeClient() {
                   }}
                 >
                   Available through 1:1 coaching engagements and the forthcoming
-                  book (targeted for {RCF_RELEASE_WINDOW}, with preorders
-                  opening in {RCF_PREORDER_WINDOW}).{' '}
-                  <Link
-                    href={RCF_NOTIFY_PATH}
+                  book (targeted for {RCF_RELEASE_WINDOW}, with pre-orders open
+                  on the Fluxline Store).{' '}
+                  <a
+                    href={RCF_STORE_BOOK_URL}
                     style={{ color: 'var(--fx-accent)', fontWeight: 600 }}
                   >
-                    Be notified at launch →
-                  </Link>
+                    Pre-order the book →
+                  </a>
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   <FxButton variant='primary' href='/contact'>
@@ -888,8 +888,8 @@ export default function HomeClient() {
                   }}
                 >
                   The framework in print, digital, and audio — plus the workbook
-                  that turns it into daily practice. Preorders open in{' '}
-                  {RCF_PREORDER_WINDOW}.
+                  that turns it into daily practice. Pre-orders are open on the
+                  Fluxline Store.
                 </div>
                 <span
                   style={{
@@ -921,6 +921,17 @@ export default function HomeClient() {
           </FxRailLayout>
         </FxContainer>
       </section>
+
+      {/* Book pre-order announcement (#368), directly under the RCF section. */}
+      {/* width: 100% because the page wrapper is a flex column, where the
+          container's auto margins would otherwise shrink it to its content.
+          A snap point of its own, so proximity snap to the next section's top
+          cannot park the band just above the screen. */}
+      <FxContainer className='fx-snap-section' style={{ width: '100%' }}>
+        <FxReveal style={{ padding: '0 0 56px' }}>
+          <PreorderAnnouncement />
+        </FxReveal>
+      </FxContainer>
 
       <section
         id='content'

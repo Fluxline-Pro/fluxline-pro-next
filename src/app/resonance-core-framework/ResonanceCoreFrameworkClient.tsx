@@ -13,6 +13,7 @@ import FxCallout from '@/theme/components/dsm/FxCallout';
 import DriveModelDiagram from '@/assets/images/drive_model.jpg';
 import { COMPANY_VALUES } from '@/lib/siteContent';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import PreorderAnnouncement from '@/components/PreorderAnnouncement';
 import {
   DRIVE_STEPS,
   RCF_ASSUMPTIONS,
@@ -22,7 +23,6 @@ import {
   RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
-  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_RINGS,
   RCF_TRADEMARK,
@@ -266,6 +266,11 @@ export default function ResonanceCoreFrameworkClient() {
           Download the RCF Preview
         </FxButton>
       </div>
+
+      {/* Book pre-order announcement (#374): the same band as the home page. */}
+      <FxReveal style={{ marginBottom: SECTION_GAP }}>
+        <PreorderAnnouncement />
+      </FxReveal>
 
       {/* 1. What the framework is */}
       <FxReveal>
@@ -632,9 +637,9 @@ export default function ResonanceCoreFrameworkClient() {
             <FxCard variant='inset' style={{ padding: '22px 24px' }}>
               <h3 style={cardTitle}>Be notified when the book lands</h3>
               <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-                The book is targeted for {RCF_RELEASE_WINDOW}, with preorders
-                opening in {RCF_PREORDER_WINDOW}. Join the TRI Newsletter for
-                launch updates. No spam, ever.
+                The book is targeted for {RCF_RELEASE_WINDOW}, with pre-orders
+                open on the Fluxline Store. Join the TRI Newsletter for launch
+                updates. No spam, ever.
               </p>
               <NewsletterSignup
                 size='sm'

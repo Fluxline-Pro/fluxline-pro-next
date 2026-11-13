@@ -26,6 +26,11 @@
   },
   "routes": [
     {
+      "route": "/legal/stewardship-contract*",
+      "redirect": "/legal/stewardship-charter/",
+      "statusCode": 301
+    },
+    {
       "route": "/api/*",
       "allowedRoles": ["anonymous"],
       "headers": {

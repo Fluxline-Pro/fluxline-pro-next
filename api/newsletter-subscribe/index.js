@@ -13,14 +13,25 @@
  * - SHAREPOINT_EMAIL_FIELD                 — SharePoint list field name for email address
  * - SHAREPOINT_PLATFORM_FIELD              — SharePoint list field name for platform/source
  * - SHAREPOINT_TIMESTAMP_FIELD             — SharePoint list field name for submission timestamp
+ * - RECAPTCHA_SECRET_KEY                   — Google reCAPTCHA v3 secret key for spam protection
  *
  * POST /api/newsletter-subscribe
- * Body: { email: string }
+ * Body: { email: string, recaptchaToken?: string }
  */
 
 'use strict';
 
 const https = require('https');
+
+// Simple rate limiting store (in-memory), same shape as api/contact/index.js.
+const rateLimit = new Map();
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
+const MAX_REQUESTS = 5; // 5 requests per hour per IP
+const RATE_LIMIT_MAX_KEYS = 10000;
+
+// reCAPTCHA configuration
+const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
+const RECAPTCHA_MIN_SCORE = 0.5; // Minimum score to consider valid (0.0 - 1.0)
 
 const CORS_HEADERS = {
   'Content-Type': 'application/json',
@@ -28,6 +39,89 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
 };
+
+function evictExpired(now) {
+  for (const [key, record] of rateLimit) {
+    if (now > record.resetTime) rateLimit.delete(key);
+  }
+}
+
+function getClientIp(req) {
+  const headers = req.headers || {};
+  const forwarded = headers['x-forwarded-for'];
+  if (forwarded) {
+    const chain = String(forwarded)
+      .split(',')
+      .map((part) => part.trim())
+      .filter(Boolean);
+    const closest = chain[chain.length - 1];
+    if (closest) return closest;
+  }
+  return headers['x-client-ip'] || 'unknown';
+}
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const record = rateLimit.get(ip);
+
+  if (!record || now > record.resetTime) {
+    evictExpired(now);
+    if (rateLimit.size >= RATE_LIMIT_MAX_KEYS) {
+      return false;
+    }
+    rateLimit.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+
+  if (record.count >= MAX_REQUESTS) {
+    return false;
+  }
+
+  record.count += 1;
+  return true;
+}
+
+/**
+ * Verifies a reCAPTCHA v3 token with Google's siteverify API. Mirrors the
+ * verification in api/contact/index.js (action + hostname + score checks).
+ */
+async function verifyRecaptcha(token) {
+  return new Promise((resolve, reject) => {
+    const postData = new URLSearchParams({
+      secret: RECAPTCHA_SECRET_KEY,
+      response: token,
+    }).toString();
+
+    const options = {
+      hostname: 'www.google.com',
+      path: '/recaptcha/api/siteverify',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData),
+      },
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => (data += chunk));
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(data));
+        } catch {
+          reject(new Error('Failed to parse reCAPTCHA response'));
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.setTimeout(10000, () => {
+      req.destroy(new Error('reCAPTCHA verification timed out'));
+    });
+    req.write(postData);
+    req.end();
+  });
+}
 
 /**
  * Obtains a Graph API access token using client credentials flow.
@@ -119,6 +213,27 @@ function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function normalizeHostname(value) {
+  const raw = String(value || '').trim().toLowerCase();
+  if (!raw) return '';
+  const input = raw.includes('://') ? raw : `https://${raw}`;
+  try {
+    return new URL(input).hostname.replace(/\.+$/, '');
+  } catch {
+    return raw.replace(/\.+$/, '');
+  }
+}
+
+/** Exact or subdomain match — unlike `.includes()`, this can't be satisfied
+ * by a domain that merely contains `expected` as a substring (e.g.
+ * `fluxline.pro.attacker.com`). */
+function hostnameMatches(expected, actual) {
+  const expectedHost = normalizeHostname(expected);
+  const actualHost = normalizeHostname(actual);
+  if (!expectedHost || !actualHost) return false;
+  return actualHost === expectedHost || actualHost.endsWith(`.${expectedHost}`);
+}
+
 module.exports = async function (context, req) {
   context.log('Newsletter subscribe request received');
 
@@ -137,7 +252,17 @@ module.exports = async function (context, req) {
     return;
   }
 
-  const { email } = req.body || {};
+  const ip = getClientIp(req);
+  if (!checkRateLimit(ip)) {
+    context.res = {
+      status: 429,
+      headers: CORS_HEADERS,
+      body: { error: 'Too many requests. Please try again later.' },
+    };
+    return;
+  }
+
+  const { email, recaptchaToken } = req.body || {};
 
   if (!email || !validateEmail(email)) {
     context.res = {
@@ -146,6 +271,97 @@ module.exports = async function (context, req) {
       body: { error: 'A valid email address is required.' },
     };
     return;
+  }
+
+  // Verify reCAPTCHA token (if a secret key is configured)
+  if (RECAPTCHA_SECRET_KEY) {
+    if (!recaptchaToken) {
+      context.log.warn('Newsletter subscribe: reCAPTCHA token missing');
+      context.res = {
+        status: 400,
+        headers: CORS_HEADERS,
+        body: { error: 'reCAPTCHA verification required.' },
+      };
+      return;
+    }
+
+    try {
+      const verificationResult = await verifyRecaptcha(recaptchaToken);
+
+      if (!verificationResult.success) {
+        context.log.warn(
+          'Newsletter subscribe: reCAPTCHA verification failed:',
+          verificationResult['error-codes']
+        );
+        context.res = {
+          status: 400,
+          headers: CORS_HEADERS,
+          body: { error: 'Failed to verify reCAPTCHA. Please try again.' },
+        };
+        return;
+      }
+
+      if (verificationResult.action !== 'newsletter_subscribe') {
+        context.log.warn(
+          'Newsletter subscribe: reCAPTCHA action mismatch. Expected: newsletter_subscribe, Received:',
+          verificationResult.action
+        );
+        context.res = {
+          status: 400,
+          headers: CORS_HEADERS,
+          body: { error: 'reCAPTCHA validation failed. Please try again.' },
+        };
+        return;
+      }
+
+      const expectedHostname = process.env.RECAPTCHA_HOSTNAME || 'fluxline.pro';
+      if (
+        verificationResult.hostname &&
+        !hostnameMatches(expectedHostname, verificationResult.hostname)
+      ) {
+        context.log.warn(
+          'Newsletter subscribe: reCAPTCHA hostname mismatch. Expected:',
+          expectedHostname,
+          'Received:',
+          verificationResult.hostname
+        );
+        context.res = {
+          status: 400,
+          headers: CORS_HEADERS,
+          body: { error: 'reCAPTCHA validation failed. Please try again.' },
+        };
+        return;
+      }
+
+      if (
+        typeof verificationResult.score !== 'number' ||
+        verificationResult.score < RECAPTCHA_MIN_SCORE
+      ) {
+        context.log.warn(
+          `Newsletter subscribe: reCAPTCHA score too low: ${verificationResult.score} (minimum: ${RECAPTCHA_MIN_SCORE})`
+        );
+        context.res = {
+          status: 400,
+          headers: CORS_HEADERS,
+          body: {
+            error: 'Suspicious activity detected. Please try again later.',
+          },
+        };
+        return;
+      }
+    } catch (error) {
+      context.log.error('Newsletter subscribe: reCAPTCHA verification error:', error);
+      context.res = {
+        status: 500,
+        headers: CORS_HEADERS,
+        body: { error: 'Failed to verify reCAPTCHA. Please try again.' },
+      };
+      return;
+    }
+  } else {
+    context.log.warn(
+      'Newsletter subscribe: RECAPTCHA_SECRET_KEY not configured, skipping verification.'
+    );
   }
 
   // Required environment variables
