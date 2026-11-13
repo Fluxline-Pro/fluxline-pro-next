@@ -99,3 +99,7 @@ Record of how each counsel answer was applied to the v2 masters. Effective date 
 - Crisis wording (Terms 9.11, RAI 3.5): ships November 20 with the current generic text. PENDING clinician review of the crisis-message catalog; revise both sections when review is complete (not marked final).
 - RAI intro and Charter §1 warmed voice: owner to review in the PDF.
 - All documents: Version 2.0 (waiver 1.0), effective November 20, 2026. Draft headers, markers and change summaries removed. Em dashes removed. RAI statement 2 now carries the ™.
+
+## Final wording review (owner, November 13, 2026)
+- 18+ attestation timing: Terms 2.2 and Preorder 4.3 now say the account attestation is confirmed the first time you check out with your Fluxline account, unless already confirmed. This matches the storefront flow; account.fluxline.pro has no sign-up attestation. The attestation text itself is unchanged.
+- Storefront refund summary: the delay rule (Preorder 5.3) now also shows after February 1, 2027 (storefront#150).
