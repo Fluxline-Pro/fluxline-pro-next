@@ -1,7 +1,12 @@
 # Responsible AI Usage
 
-**Effective Date:** November 6, 2026  
-**Last Updated:** November 6, 2026
+**Fluxline Resonance Group, LLC, doing business as Fluxline, and TerenceWaters.com**  
+**Version:** 2.0  
+**Effective Date:** November 20, 2026  
+**Last Updated:** November 20, 2026  
+**Replaces:** Responsible AI Usage effective November 6, 2026
+
+---
 
 Let's be direct: we use AI.
 
@@ -38,9 +43,10 @@ Some of our products let you use AI directly. These are different from Section 2
 The RCF AI Companion is a study tool for readers of *The Resonance Core Framework™*.
 
 - **Book only, cited always.** It answers only from the book (and the Workbook, for Workbook owners). Every answer cites chapter and section. If the book does not say it, the Companion says so.
+- **Disclosed as AI.** The Companion uses generative AI, and every Companion chat shows a notice that tells you so.
 - **Not a persona.** It has no name, no personality, and does not speak about itself in the first person. It is not a coach, a therapist, or a personal companion, and it does not give personal advice.
 - **Governed on every request.** Every cloud request goes through our governance system before and after the model runs. If governance is unavailable, the Companion is unavailable. It fails closed.
-- **Nothing kept.** Your questions and answers are not stored by Fluxline or retained in our own systems, except where our infrastructure provider applies temporary, automated abuse-detection logging as described in the Privacy Policy. We remove personal identifiers we can detect before a question is processed, and our governance system never receives a user identifier. The Privacy Policy explains the limits and the one exception (an answer you choose to report).
+- **Nothing kept by Fluxline.** Fluxline does not retain your questions or answers. Our AI provider, Microsoft Azure, keeps temporary automated abuse-detection logs (up to 30 days) under its policy, as described in the Privacy Policy. We remove personal identifiers we can detect before a question is processed, and our governance system never receives a user identifier. The Privacy Policy explains the limits and the one exception (an answer you choose to report).
 - **No training.** Nothing you ask is used to train any AI.
 - **Adults only.** You must be 18 or older, and the Companion checks your account's confirmation before any question reaches an AI service.
 
@@ -75,10 +81,10 @@ We use approved model families, hosted on Microsoft Azure, and a small set of do
 - We do not use AI in ways that compromise client confidentiality or data privacy.
 - We do not outsource judgment. Every decision of consequence is made by a person.
 - We do not train, fine-tune, or tune any AI model on your content.
-- We do not store your Companion questions or answers.
+- We do not retain your Companion questions or answers. Microsoft Azure's temporary abuse-detection logs are described in the Privacy Policy.
 - We do not give an AI feature a human name or a persona, or let one pretend to be a person.
 - We do not use AI to pressure you into a purchase, a renewal, or a decision.
-- We do not sell your information. The store and the Companion show no ads. Any ad in a free app tier is contextual and is never built from what you write, ask, or do.
+- We do not sell your information. The store and the Companion show no ads.
 
 ---
 
@@ -88,8 +94,8 @@ When AI meaningfully contributes to a piece of work, we say so. For example: *"T
 
 Every Fluxline consent screen carries the same five statements, word for word:
 
-1. Your questions and answers are not stored by Fluxline (see Privacy Policy for infrastructure details).
-2. This companion answers only from *The Resonance Core Framework*.
+1. Fluxline does not retain your prompts or answers. Our AI provider, Microsoft Azure, keeps temporary automated abuse-detection logs (up to 30 days) under its policy; see our Privacy Policy.
+2. This companion answers only from *The Resonance Core Framework™*.
 3. It is not a personal companion and does not give personal advice.
 4. Nothing you ask is used to train any AI.
 5. You can delete everything in one step, and nothing will link back to you.
@@ -142,5 +148,5 @@ AI changes quickly. We track developments and review this policy regularly. When
 
 If you have questions, concerns about specific content, or suggestions, we want to hear them.
 
-Email: support@fluxline.pro
+Email: support@fluxline.pro  
 Contact page: fluxline.pro/contact
