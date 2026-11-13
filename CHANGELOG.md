@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- RCF Preorder Terms (hotfix): the page no longer publishes an internal release date. The delay rule now reads "delayed beyond the late February to mid-March 2027 window" (At a glance, Key dates, 5.3, 9.2), and the sentence naming an internal release target is removed.
+
 ### Added
 
 - Home page pre-order announcement (#368): a small Mythic Gold band directly under the Resonance Core Framework section says the book is open for pre-order on the Fluxline Store, with one "Pre-order the book" button to `/book` on the store (built from `NEXT_PUBLIC_STORE_URL`, so test builds link to the test store). New `FxAnnouncement` component and `--fx-mythic-gold`, `-ink`, `-text` and `-bg` tokens (`#F5C85C`), remapped in every theme: the light theme uses a darker gold (`#7F6300`, 5.1:1) for label text, and the grayscale and high-contrast themes follow their own gold. The old `--fx-gold` is unchanged.
