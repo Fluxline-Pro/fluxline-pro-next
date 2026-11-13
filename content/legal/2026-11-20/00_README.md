@@ -20,4 +20,4 @@ Internal. The source of truth for the legal pages that go live on preorder launc
 
 ## Conventions
 
-No em dashes, exclamation points or emoji. "The Resonance Core Framework™" with the ™ until the registration certificate issues. No app names in the Terms before launch. Prices point to the live price. Only the release window is published; March 17, 2027 appears only as the delay-rule trigger. 01 to 04 always ship together.
+No em dashes, exclamation points or emoji. "The Resonance Core Framework™" with the ™ until the registration certificate issues. No app names in the Terms before launch. Prices point to the live price. Only the release window (late February to mid-March 2027) is published, including as the delay-rule trigger. The internal release target is never published. 01 to 04 always ship together.

@@ -20,7 +20,7 @@ These Preorder Terms explain exactly what happens when you preorder digital edit
 - Your **personalized early-reading sample** is available right after you order, and you keep it even if you cancel.
 - Your **release-day files** are delivered by email and in your account on release day.
 - The **expected release** is late February to mid-March 2027, **subject to change.**
-- If the release is **delayed past March 17, 2027,** cancellation reopens until the new release date.
+- If the release is **delayed beyond the late February to mid-March 2027 window,** cancellation reopens until the new release date.
 - The **RCF AI Companion First-Year Pass** is a one-time payment. **Nothing renews automatically.**
 - The **RCF Founders Pass** year starts on the day you pay. **Nothing renews unless you turn it on.**
 
@@ -35,9 +35,9 @@ All dates use Mountain Time (America/Denver).
 | Preorder prices and perks end | January 15, 2027. We email a cancellation reminder the same day. |
 | Self-serve cancellation closes | February 1, 2027 |
 | Expected release (public window) | Late February to mid-March 2027 (subject to change) |
-| Delay rule applies if release is later than | March 17, 2027 |
+| Delay rule applies if release is later than | The late February to mid-March 2027 window |
 
-March 17, 2027 is not a promised release day. It is the date that, if passed, reopens cancellation, because the delay rule needs a fixed date to be enforceable. We publish only the release window.
+We publish only the release window, not a release day. If the release moves beyond that window, the delay rule in Section 5.3 applies.
 
 ---
 
@@ -73,7 +73,7 @@ March 17, 2027 is not a promised release day. It is the date that, if passed, re
 
 **5.2 From February 1 until release.** Self-serve cancellation closes on February 1, 2027. After that, email support@fluxline.pro and we will handle exceptions case by case.
 
-**5.3 If the release is delayed.** If the release date moves later than **March 17, 2027,** cancellation reopens until the new release date, and we send every preorder customer a notice of the new date and of your right to cancel.
+**5.3 If the release is delayed.** If the release moves beyond the **late February to mid-March 2027** window, cancellation reopens until the new release date, and we send every preorder customer a notice of the new date and of your right to cancel.
 
 **5.4 After your files are delivered.** After release-day delivery, you can have a **full refund within 14 days** if you have **not downloaded any release edition.** Your early-reading sample and any bonus materials never count as a download.
 
@@ -175,7 +175,7 @@ If you do not turn on renewal before your first year ends, it cannot be turned o
 
 **10.1 Release timing.** We give the release window and not a promised day. Dates can move.
 
-**10.2 What we will do if it moves.** We will tell every preorder customer by email. If the release is delayed past March 17, 2027, your right to cancel for a full refund reopens (see 5.3).
+**10.2 What we will do if it moves.** We will tell every preorder customer by email. If the release is delayed beyond the late February to mid-March 2027 window, your right to cancel for a full refund reopens (see 5.3).
 
 **10.3 Changes to what is in your order.** If a file, format, or bonus changes materially before release, we will tell you and give you the option to cancel for a full refund.
 

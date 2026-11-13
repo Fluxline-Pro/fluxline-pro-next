@@ -94,7 +94,8 @@ Record of how each counsel answer was applied to the v2 masters. Effective date 
 - Providers: list confirmed complete. Customer notes moved from Notion to Fluxline Books (Fluxline's own Azure stack); Notion is cleared.
 - Professional-services refunds (Terms 8.7): deferred to each client agreement or SOW.
 - Cookies: no marketing cookies; Clarity recording off or masked on account, store and app pages (owner). Verify in Phase 2.
-- Preorder §2: the March 17 sentence no longer calls it the internal release target.
+- Release date (owner, November 13, 2026): the internal target is never published. The delay rule in Preorder 1, 2, 5.3 and 10.2 reads "beyond the late February to mid-March 2027 window". Same-day hotfixes removed the date from the live Preorder Terms (fluxline-pro-next#392) and the public catalog API (storefront#151).
+- Pass start: the Companion launches with the book (owner: if one fails, all fail). Preorder 7.2 rollover kept as a safeguard.
 - Crisis wording (Terms 9.11, RAI 3.5): ships November 20 with the current generic text. PENDING clinician review of the crisis-message catalog; revise both sections when review is complete (not marked final).
 - RAI intro and Charter §1 warmed voice: owner to review in the PDF.
 - All documents: Version 2.0 (waiver 1.0), effective November 20, 2026. Draft headers, markers and change summaries removed. Em dashes removed. RAI statement 2 now carries the ™.
