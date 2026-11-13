@@ -58,7 +58,8 @@ describe('FxUserMenu', () => {
       'href',
       `${ACCOUNT_PORTAL_URL}/login?returnTo=${encodeURIComponent(window.location.href)}`
     );
-    expect(screen.getByText('Sign in')).toBeInTheDocument();
+    // The toolbar shows the icon only (c7d579a); the accessible name above carries "Sign in".
+    expect(screen.queryByText('Sign in')).not.toBeInTheDocument();
   });
 
   it('carries the current page in the href so modified clicks and new tabs return here', () => {
