@@ -19,22 +19,36 @@ const LEGAL_DOCUMENTS: LegalDocument[] = [
     id: 'terms',
     title: 'Terms of Use',
     description:
-      'Review the terms and conditions governing your use of the Fluxline pro website and services.',
+      'The agreement for using Fluxline: accounts, purchases, subscriptions, refunds, the RCF AI Companion, and how disputes are handled.',
     href: '/legal/terms',
   },
   {
     id: 'preorder-terms',
     title: 'RCF Preorder Terms',
     description:
-      'Exactly what happens when you preorder The Resonance Core Framework: when you are charged, how to cancel, what you receive on release day, and what happens if the date moves.',
+      'Exactly what happens when you preorder The Resonance Core Framework™: when you are charged, how to cancel, what you receive on release day, and what happens if the date moves.',
     href: '/legal/preorder-terms',
   },
   {
     id: 'privacy',
     title: 'Privacy Policy',
     description:
-      'Learn how we collect, use, and protect your personal information.',
+      'What we collect, what we do not keep, and the choices that are yours. We keep as little as we can.',
     href: '/legal/privacy-policy',
+  },
+  {
+    id: 'ai',
+    title: 'Responsible AI Usage',
+    description:
+      'How we use AI in our work and in our products, who is accountable, and what AI will never do here.',
+    href: '/legal/responsible-ai-usage',
+  },
+  {
+    id: 'stewardship',
+    title: 'Stewardship Charter',
+    description:
+      'The standards we hold ourselves to with clients, readers, and app users: plain pricing, easy cancellation, honest timing, and care with your trust.',
+    href: '/legal/stewardship-charter',
   },
   {
     id: 'personal-training-waiver',
@@ -44,32 +58,18 @@ const LEGAL_DOCUMENTS: LegalDocument[] = [
     href: '/legal/personal-training-waiver',
   },
   {
-    id: 'stewardship',
-    title: 'Stewardship Contract',
-    description:
-      'Explore the foundational principles and commitments that guide our client relationships.',
-    href: '/legal/stewardship-contract',
-  },
-  {
     id: 'glossary',
     title: 'Glossary of Terms',
     description:
-      'Understand key concepts, methodologies, and terminology used throughout Fluxline.',
+      'The vocabulary of the Fluxline ecosystem.',
     href: '/legal/glossary',
   },
   {
     id: 'articles',
-    title: 'Articles of Conversion',
+    title: 'Articles of Conversion (PDF)',
     description:
-      'View or download the official Articles of Conversion document (PDF).',
+      'Our formal organizational document.',
     href: '/legal/articles-of-conversion',
-  },
-  {
-    id: 'ai',
-    title: 'Responsible AI Usage',
-    description:
-      'Learn how we use AI tools responsibly, transparently, and with full human accountability across our content and services.',
-    href: '/legal/responsible-ai-usage',
   },
 ];
 
@@ -97,7 +97,7 @@ export default function LegalPageClient() {
         <FxSectionHeading
           kicker='Legal'
           title='Legal &amp; Reference'
-          subhead='Access important legal documents and reference materials for the Fluxline Resonance Group.'
+          subhead='Everything about how we work with you, in the open. Last reviewed November 20, 2026. Questions? support@fluxline.pro.'
           as='h1'
           style={{ marginBottom: 36 }}
         />

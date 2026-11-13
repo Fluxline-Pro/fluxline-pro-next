@@ -1,9 +1,16 @@
 # Terms of Use
 
-**Effective Date:** November 6, 2026  
-**Last Updated:** November 6, 2026
+**Fluxline Resonance Group, LLC, doing business as Fluxline**  
+**Version:** 2.0  
+**Effective Date:** November 20, 2026  
+**Last Updated:** November 20, 2026  
+**Replaces:** Terms of Use effective November 6, 2026
 
-These Terms of Use ("Terms") are the agreement between you and Fluxline Resonance Group, LLC ("Fluxline," "we," "us," or "our") for your use of our websites, web applications, accounts, store, apps, digital products, programs, AI features, and professional services (together, the "Services"). By accessing or using the Services, creating an account, or buying anything from us, you agree to these Terms and to our Privacy Policy. If you do not agree, please do not use the Services.
+---
+
+These Terms of Use ("Terms") are the agreement between you and Fluxline Resonance Group, LLC, doing business as Fluxline ("Fluxline," "we," "us," or "our") for your use of our websites, web applications, accounts, store, apps, digital products, programs, AI features, and professional services (together, the "Services"). By accessing or using the Services, creating an account, or buying anything from us, you agree to these Terms and to our Privacy Policy. If you do not agree, please do not use the Services.
+
+**Section 20 requires mediation and individual arbitration and includes a class-action waiver. You may opt out of arbitration and the class-action waiver within 30 days (Section 20.9). Please read Section 20.**
 
 ---
 
@@ -16,10 +23,12 @@ These Terms of Use ("Terms") are the agreement between you and Fluxline Resonanc
 - The **Privacy Policy**, which explains what we collect, what we do not keep, and your choices.
 - The **RCF Preorder Terms**, which apply to any preorder.
 - The **Responsible AI Usage** policy, which explains how we use AI and how our AI features behave.
-- The **Stewardship Contract**, which sets out how we commit to treat the people we serve.
+- The **Personal Training and Wellness Informed Consent, Assumption of Risk, and Liability Waiver**, which applies to any physical training or wellness coaching client.
 - Any **statement of work, client agreement, or invoice** for professional services.
 - Any **product-specific terms** shown to you at purchase or at first use of an app or program.
 - The **Glossary of Terms** on our Legal page (fluxline.pro/legal), which explains the Fluxline vocabulary used across these documents. It explains words and adds no obligations.
+
+Our **Stewardship Charter** describes the standards Fluxline holds itself to in serving you. It is a public statement of our commitments. It is not part of your agreement with us and is not one of the documents listed above.
 
 **1.3 If documents conflict.** If a product-specific term, the RCF Preorder Terms, or a signed agreement conflicts with these Terms, that more specific document controls for that product or engagement. Otherwise these Terms control.
 
@@ -29,7 +38,7 @@ These Terms of Use ("Terms") are the agreement between you and Fluxline Resonanc
 
 **2.1 Adults only.** Every Fluxline service is for people who are **18 or older**. We write all of our content for adults. You may not use the Services if you are under 18.
 
-**2.2 How we check.** When you create a Fluxline account, you confirm this with the following attestation: *"By creating an account, you represent and warrant that you are at least eighteen (18) years of age, or the age of majority in your jurisdiction, and that the information you provide during registration is accurate and complete."* We store only that confirmation (a yes flag and the date you gave it) on your account. We do not ask for or store your birthdate anywhere. If you check out as a guest, you see this notice instead: *"Access to this service is intended for individuals eighteen (18) years of age or older. By proceeding, you confirm that you meet this requirement."* A signed-in account that has already confirmed sees a reminder, not a repeated checkbox: *"This store is for adults eighteen (18) years of age or older. Your Fluxline account already confirms this."* If we cannot verify your account's confirmation at the moment of purchase (for example, a temporary service outage), we treat you as not yet confirmed and show you the checkbox again rather than letting the purchase through unconfirmed.
+**2.2 Your confirmation.** By creating a Fluxline account or making a purchase, with or without an account, you represent and warrant that you are at least eighteen (18) years of age. When you create an account, you confirm this with the following attestation: *"By creating an account, you represent and warrant that you are at least eighteen (18) years of age, or the age of majority in your jurisdiction, and that the information you provide during registration is accurate and complete."* We store only that confirmation (a yes flag and the date you gave it) on your account. We do not ask for or store your birthdate anywhere. If you check out as a guest, you see this notice instead: *"Access to this service is intended for individuals eighteen (18) years of age or older. By proceeding, you confirm that you meet this requirement."* A signed-in account that has already confirmed sees a reminder, not a repeated checkbox: *"This store is for adults eighteen (18) years of age or older. Your Fluxline account already confirms this."* If we cannot verify your account's confirmation at the moment of purchase (for example, a temporary service outage), we treat you as not yet confirmed and show you the checkbox again rather than letting the purchase through unconfirmed.
 
 **2.3 If we learn someone is under 18.** If we learn that an account belongs to someone under 18, we will close the account and refund any purchase.
 
@@ -63,7 +72,7 @@ These Terms of Use ("Terms") are the agreement between you and Fluxline Resonanc
 
 **4.2 Personalized files.** The eBook and Workbook PDFs we deliver are stamped on every page with your name, email address, and order number. The Audiobook and other files are likewise issued to you personally. You may not share, post, upload for others, resell, or give away your files, and you may not remove the stamps.
 
-**4.3 No AI training or extraction.** You may not use our digital products to train, fine-tune, evaluate, or build any AI model, dataset, or searchable index for anyone other than yourself, and you may not use automated tools to extract or copy them in bulk.
+**4.3 No AI training or extraction.** You may use our digital products for your own personal reading, study, and comprehension, including through accessibility features or assistive tools that read, display, or adapt the content for you as the individual purchaser. You may not copy, aggregate, index, or feed the material into any AI model, searchable database, or automated system, whether commercial or non-commercial and regardless of scale. Assistive tools used under this exception must not retain, extract, or transmit the content in a form capable of being used for model training or dataset construction. **All rights not expressly granted are reserved, and no right to use the material for training any AI model is granted.**
 
 **4.4 Delivery.** Release-day files are delivered to your email and to your account library. Download links are private and expire after a short time (currently 15 minutes). A fresh link is always available from your account or delivery email. Each file may be downloaded up to 5 times (we may raise this on request through support).
 
@@ -113,7 +122,7 @@ These Terms of Use ("Terms") are the agreement between you and Fluxline Resonanc
 
 **7.6 Price changes.** If we change the price of a renewing subscription, we will tell you in the renewal notice before you are charged.
 
-**7.7 Lifetime purchases.** "Lifetime" means for the lifetime of the product, not for your lifetime. If we discontinue a product, we will give notice and will describe what you will receive in its place or refund.
+**7.7 Lifetime purchases.** "Lifetime" means for the lifetime of the product, not for your lifetime. We show this definition next to every Lifetime price before you buy. If we discontinue a Lifetime product, we will give you at least **90 days'** notice and offer you a comparable replacement. If you would rather have a refund, we will refund a pro rata share of the price you paid, based on a 5-year period from your purchase. For example, if a Lifetime product is discontinued 2 years after you bought it, we refund 60 percent of the price you paid.
 
 ---
 
@@ -145,7 +154,7 @@ This is the Fluxline **Refund and Cancellation Standard**, and it is the same ac
 
 ## 9. RCF AI Companion
 
-**9.1 What it is.** The RCF AI Companion is a study tool for readers of *The Resonance Core Framework™, First Edition*. You ask a question, and it answers from the book, with chapter and section citations. For Workbook owners, it can also draw on the Workbook. If the book does not say something, the Companion says so.
+**9.1 What it is.** The RCF AI Companion is a study tool for readers of *The Resonance Core Framework™, First Edition*. You ask a question, and it answers from the book, with chapter and section citations. For Workbook owners, it can also draw on the Workbook. If the book does not say something, the Companion says so. The Companion uses generative AI, and every Companion chat tells you so.
 
 **9.2 What it is not.** The Companion is not a coach, therapist, doctor, lawyer, financial advisor, or personal companion. It does not give personal advice, and it does not have a personality. It informs. You decide.
 
@@ -160,11 +169,11 @@ Current prices are shown at checkout and at the upgrade prompt. The Refund and C
 
 **9.5 First-Year Pass.** The First-Year Pass is a one-time payment, not a subscription. Nothing renews automatically. After launch, you may choose to continue for another year, with its own consent. See the RCF Preorder Terms for how the pass starts, ends, and renews.
 
-**9.6 Where it is available.** The Companion is available **only in the United States** at launch. We require a U.S. billing address to purchase, and we may use that to enforce this. If we cannot offer it where you are, we will say so.
+**9.6 Where it is available.** The Companion is available **only in the United States** at launch. In these Terms, the United States means the 50 states, the District of Columbia, Puerto Rico, the U.S. Virgin Islands, Guam, American Samoa, and the Northern Mariana Islands. We require a billing address in one of those places to purchase the Companion or any product that includes it, and we do not accept APO, FPO, or DPO addresses for it. We show this limit next to the price. If you move outside the United States, the Companion is not available to you while you are outside it, and moving does not by itself entitle you to a refund. If we cannot offer it where you are, we will say so.
 
 **9.7 Your account and age.** The Companion requires a Fluxline account with the 18+ confirmation from Section 2.
 
-**9.8 How your questions are handled.** Your questions and answers are not stored by Fluxline or retained in our own systems. They are processed in memory, except where our infrastructure provider applies temporary, automated abuse-detection logging as described in the Privacy Policy. Before a question is answered, we remove personal identifiers we can detect and the request passes through our governance system. We never use your questions to train or tune any AI model. Please do not type personal or sensitive information into the Companion. No filter is perfect. The Privacy Policy explains the full details, the limited exceptions, and where processing happens.
+**9.8 How your questions are handled.** Fluxline does not retain your questions or answers. They are processed in memory. Our AI provider, Microsoft Azure, keeps temporary automated abuse-detection logs (up to 30 days) under its policy, as described in the Privacy Policy. Before a question is answered, we remove personal identifiers we can detect and the request passes through our governance system. We never use your questions to train or tune any AI model. Please do not type personal or sensitive information into the Companion. No filter is perfect. The Privacy Policy explains the full details, the limited exceptions, and where processing happens.
 
 **9.9 Reporting an answer.** You may choose to report a particular answer. If you do, we keep that question, that answer, and a reference ID for **30 days**, encrypted, so we can review it, and then delete it. A report is never linked to your account, which means **we cannot reply to the person who reported it.** Reporting is optional and applies per answer.
 
@@ -202,7 +211,7 @@ Current prices are shown at checkout and at the upgrade prompt. The Refund and C
 
 **11.3 Your part.** You agree to give honest and timely information, take part as agreed, and pay as agreed. We agree to deliver as agreed, communicate proactively, and treat you with respect.
 
-**11.4 Personal training and wellness.** Talk to a qualified health professional before starting any exercise or nutrition program. Before your first personal training or wellness session, you will be asked to review and sign a separate Informed Consent, Assumption of Risk, and Liability Waiver specific to that service. That document, not this general clause, governs your assumption of risk for physical training and wellness activities.
+**11.4 Personal training and wellness.** Talk to a qualified health professional before starting any exercise or nutrition program. Before your first personal training or wellness session, you will be asked to review and sign, electronically or in person, a separate Informed Consent, Assumption of Risk, and Liability Waiver specific to that service. Agreeing to these Terms does not sign it. That document, not this general clause, governs your assumption of risk for physical training and wellness activities.
 
 ---
 
@@ -210,7 +219,7 @@ Current prices are shown at checkout and at the upgrade prompt. The Refund and C
 
 **12.1 Ownership.** Fluxline Resonance Group, LLC owns the content, software, systems, frameworks, trademarks, and branding of the Services, including *The Resonance Core Framework™*, the Resonance Core, Activation Domains, the Decision Integrity Index, somatic and emotional ROI protocols, visual maps, written guides, eBooks, and training materials, whether created by Fluxline Resonance Group, LLC directly or assigned to it by Terence Waters or another contributor. These are protected by U.S. copyright, trademark, and other laws. All rights are reserved.
 
-**12.2 Trademarks.** "Fluxline," including its logo and brand identity, "The Resonance Core Framework™," and related names and logos are trademarks of Fluxline Resonance Group, LLC. We use the ™ symbol until a registration certificate issues (expected around mid-to-late 2027). Do not use our marks without written permission.
+**12.2 Trademarks.** "Fluxline," including its logo and brand identity, "The Resonance Core Framework™," and related names and logos are trademarks of Fluxline Resonance Group, LLC. We use the ™ symbol until a registration certificate issues. Do not use our marks without written permission.
 
 **12.3 What you may do.** You may use our materials for your own personal development, coaching, and education within the scope of your license. Attribution is required when you reference Fluxline frameworks in papers, articles, or other documentation.
 
@@ -296,19 +305,21 @@ You agree to cover reasonable losses we incur from third-party claims caused by 
 
 **20.1 Talk to us first.** If something goes wrong, email support@fluxline.pro. We will review your concern in good faith and try to resolve it with you within 30 days.
 
-**20.2 Mandatory mediation.** If the informal process in 20.1 does not resolve the dispute within 30 days, either party may require the other to take part in mediation with a mutually agreed neutral mediator before either party files for arbitration. The parties will share the mediator's fees equally unless they agree otherwise. Mediation must be completed, or attempted in good faith for at least 30 days without reaching agreement, before either party may begin arbitration under 20.4.
+**20.2 Mandatory mediation.** Mediation is an express condition precedent to arbitration. If the informal process in 20.1 does not resolve the dispute within 30 days, the parties will attempt in good faith to resolve it through mediation administered by the American Arbitration Association, seated in Salt Lake County, Utah, for at least 30 days, before either party files a demand for arbitration, whether or not either party has demanded mediation. You may take part by video. Completion of mediation, or a good-faith attempt at it for at least 30 days without reaching agreement, is required before either party may begin arbitration under 20.4. Fluxline will pay the mediator's fees. This Section does not apply to claims brought under 20.7.
 
 **20.3 Governing law.** These Terms are governed by the laws of the State of Utah and applicable federal law, without regard to conflict-of-law rules. Fluxline Resonance Group, LLC is based in Salt Lake City, Utah.
 
-**20.4 Binding arbitration.** If mediation under 20.2 does not resolve the dispute, it will be resolved by final and binding arbitration administered by the American Arbitration Association under its Consumer Arbitration Rules. The arbitration will take place in **Salt Lake County, Utah**, or by video if you prefer and the arbitrator agrees. Arbitration fees, including filing and arbitrator compensation, will be allocated according to the AAA's Consumer Arbitration Rules then in effect, which generally cap what a consumer may be required to pay and require Fluxline to bear the larger share of administrative and arbitrator costs. Arbitration under this Section 20.4 applies to individual claims; see 20.6 for class and representative claims.
+**20.4 Binding arbitration.** If mediation under 20.2 does not resolve the dispute, it will be resolved by final and binding individual arbitration administered by the American Arbitration Association under its Consumer Arbitration Rules, seated in **Salt Lake County, Utah**, and governed by the laws of the State of Utah, without regard to conflict-of-laws principles. You may take part by video if you prefer and the arbitrator agrees. Arbitration fees, including filing and arbitrator compensation, will be allocated according to the AAA's Consumer Arbitration Rules then in effect, which generally cap what a consumer may be required to pay and require Fluxline to bear the larger share of administrative and arbitrator costs.
 
 **20.5 Jury trial.** For any claim that goes to arbitration under 20.4, you and Fluxline each waive the right to a jury trial, since arbitration resolves the claim in place of a court proceeding.
 
-**20.6 No class-action waiver.** Fluxline does not require you to waive your right to bring or join a class, collective, or representative action. If you bring a claim as a class or representative action, it is not subject to the individual-arbitration requirement in 20.4 and may instead be brought in a court of competent jurisdiction in Salt Lake County, Utah. An individual claim you bring on your own behalf remains subject to mediation and arbitration under 20.2 and 20.4.
+**20.6 Class-action waiver. To the fullest extent permitted by law, you and Fluxline each agree that any dispute will be brought only in an individual capacity, and not as a plaintiff or class member in any purported class, collective, consolidated, or representative proceeding. The arbitrator may not consolidate claims or preside over any class or representative proceeding. This waiver does not prevent you from bringing a claim in small-claims court, and does not waive any right to seek public injunctive relief in a court of competent jurisdiction.** If this waiver is found unenforceable for a claim, that claim proceeds in court, not in class arbitration.
 
-**20.7 What stays in court.** Either party may bring an individual claim in small claims court. Either party may ask a court for emergency relief to protect intellectual property or confidentiality.
+**20.7 What stays in court.** Either party may bring an individual claim in the small-claims court covering your residence or Salt Lake County, Utah. Either party may ask a court for emergency relief to protect intellectual property or confidentiality. A claim for public injunctive relief may be brought in a court of competent jurisdiction.
 
 **20.8 California protections.** Fluxline voluntarily follows California consumer protections as a floor, starting with subscriptions, automatic renewal, and fees. This is an operational commitment about how we treat customers, not an election of California law. It does not change the governing law, venue, or remedies set out in Section 20.3, and if anything here conflicts with Section 20.3, Section 20.3 controls.
+
+**20.9 Your right to opt out.** You may opt out of the arbitration requirement in 20.4 and the class-action waiver in 20.6 by emailing support@fluxline.pro within 30 days after you first accept these Terms. Include your name, the email address on your account or order, and a clear statement that you opt out. If you opt out, disputes that are not resolved under 20.1 and 20.2 may be brought in a court of competent jurisdiction in Salt Lake County, Utah. Opting out does not affect the rest of these Terms.
 
 ---
 
@@ -356,7 +367,7 @@ We do not tolerate discrimination, harassment, or hate speech in our community o
 
 ## 25. Contact
 
-Fluxline Resonance Group, LLC
-Salt Lake City, Utah
-Email: support@fluxline.pro
+Fluxline Resonance Group, LLC, doing business as Fluxline  
+Salt Lake City, Utah  
+Email: support@fluxline.pro  
 Privacy requests: privacy@fluxline.pro
