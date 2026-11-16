@@ -4,11 +4,11 @@ import Link from 'next/link';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import { Callout } from '@/theme/components/callout';
 import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
-import { content } from '../../../assets/legal/stewardship-contract';
+import { content } from '../../../assets/legal/stewardship-charter';
 import { FadeUp } from '@/animations/fade-animations';
 import { BookingsButton } from '@/theme/components/button/bookings-button';
 
-export default function StewardshipContractClientPage() {
+export default function StewardshipCharterClientPage() {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -46,7 +46,7 @@ export default function StewardshipContractClientPage() {
                 margin: 0,
                 fontFamily: 'var(--fx-font)',
               }}>
-                Stewardship Contract
+                Stewardship Charter
               </h1>
             </div>
             <p style={{ color: 'var(--fx-text-muted)', fontSize: '1.125rem', lineHeight: 1.6, margin: '1rem 0 0' }}>

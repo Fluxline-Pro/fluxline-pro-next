@@ -1,29 +1,29 @@
 import React from 'react';
 import { Metadata } from 'next';
-import StewardshipContractClientPage from './StewardshipContractClientPage';
+import StewardshipCharterClientPage from './StewardshipCharterClientPage';
 
 export const metadata: Metadata = {
-  title: 'Stewardship Contract',
+  title: 'Stewardship Charter',
   description:
     'Our commitment to ethical service and mutual respect. Learn about our stewardship philosophy and client relationship values.',
   keywords:
     'stewardship, ethics, professional conduct, client rights, service commitment, Fluxline',
   openGraph: {
-    title: 'Stewardship Contract - Fluxline',
+    title: 'Stewardship Charter - Fluxline',
     description:
       'Our commitment to ethical service and mutual respect. Learn about our stewardship philosophy.',
-    url: 'https://www.fluxline.pro/legal/stewardship-contract',
+    url: 'https://www.fluxline.pro/legal/stewardship-charter',
     siteName: 'Fluxline',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'Stewardship Contract - Fluxline',
+    title: 'Stewardship Charter - Fluxline',
     description:
       'Our commitment to ethical service and mutual respect. Learn about our stewardship philosophy.',
   },
   alternates: {
-    canonical: '/legal/stewardship-contract',
+    canonical: '/legal/stewardship-charter',
   },
   robots: {
     index: true,
@@ -31,6 +31,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function StewardshipContractPage() {
-  return <StewardshipContractClientPage />;
+export default function StewardshipCharterPage() {
+  return <StewardshipCharterClientPage />;
 }
