@@ -4,9 +4,9 @@ import LegalPageClient from './LegalPageClient';
 export const metadata: Metadata = {
   title: 'Legal & Reference',
   description:
-    'Access legal documents and reference materials for Fluxline Resonance Group, including terms of use, privacy policy, stewardship contract, and glossary.',
+    'Access legal documents and reference materials for Fluxline Resonance Group, including terms of use, privacy policy, stewardship charter, RCF preorder terms, and glossary.',
   keywords:
-    'legal documents, terms of use, privacy policy, stewardship contract, glossary, legal compliance, Fluxline',
+    'legal documents, terms of use, privacy policy, stewardship charter, RCF preorder terms, glossary, legal compliance, Fluxline',
   openGraph: {
     title: 'Legal & Reference - Fluxline Resonance Group',
     description:

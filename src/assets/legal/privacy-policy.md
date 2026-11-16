@@ -1,17 +1,22 @@
 # Privacy Policy
 
-**Effective Date:** November 6, 2026  
-**Last Updated:** November 6, 2026
+**Fluxline Resonance Group, LLC, doing business as Fluxline**  
+**Version:** 2.0  
+**Effective Date:** November 20, 2026  
+**Last Updated:** November 20, 2026  
+**Replaces:** Privacy Policy effective November 6, 2026
+
+---
 
 ## The short version
 
-**We keep as little as we can.** We do not store your questions to the RCF AI Companion in our own systems (see Section 5 for the one narrow exception). We do not store your birthdate, because we never ask for it. We do not train any AI on what you write or ask. We do not sell your information, and our store and the RCF AI Companion show no ads. Anything we keep beyond what is needed to deliver what you bought is something **you turn on**, and you can turn it off. This policy explains the details. Fluxline's own vocabulary is explained in the Glossary of Terms at fluxline.pro/legal.
+**We keep as little as we can.** Fluxline does not retain your questions to the RCF AI Companion or its answers. Our AI provider, Microsoft Azure, keeps temporary automated abuse-detection logs (up to 30 days) under its policy (see Section 5.6). We do not store your birthdate, because we never ask for it. We do not train any AI on what you write or ask. We do not sell your information, and our store and the RCF AI Companion show no ads. Anything we keep beyond what is needed to deliver what you bought is something **you turn on**, and you can turn it off. This policy explains the details. Fluxline's own vocabulary is explained in the Glossary of Terms at fluxline.pro/legal.
 
 ---
 
 ## 1. Who we are and what this covers
 
-Fluxline Resonance Group, LLC ("Fluxline," "we," "us") is based in Salt Lake City, Utah. This policy covers Fluxline.pro and our related sites, the Fluxline account and store, the RCF AI Companion, Fluxline apps, our digital products and programs, our podcast and social channels, and our professional services.
+Fluxline Resonance Group, LLC, doing business as Fluxline ("Fluxline," "we," "us") is based in Salt Lake City, Utah. This policy covers Fluxline.pro and our related sites, the Fluxline account and store, the RCF AI Companion, Fluxline apps, our digital products and programs, our podcast and social channels, and our professional services.
 
 ---
 
@@ -19,7 +24,7 @@ Fluxline Resonance Group, LLC ("Fluxline," "we," "us") is based in Salt Lake Cit
 
 | Question | Our answer |
 | --- | --- |
-| Do you store what I ask the RCF AI Companion? | **No,** not by Fluxline. Questions and answers are processed in memory, with one narrow exception explained in Section 5.6. |
+| Do you store what I ask the RCF AI Companion? | **No.** Fluxline does not retain them. Questions and answers are processed in memory. Our AI provider, Microsoft Azure, keeps temporary automated abuse-detection logs (up to 30 days) under its policy (see Section 5.6). |
 | Do you store my birthdate? | **No.** We never collect it. We store only a yes/no confirmation that you are 18 or older, and the date you gave it. |
 | Do you train AI on my content? | **Never.** No reader or user content trains, fine-tunes, or tunes any model. This is not offered as an option. |
 | Do you keep my journal or goal entries? | **Not by default.** In our apps, your entries stay on your device. Backups and cloud features are your choice. |
@@ -49,7 +54,7 @@ The Companion needs a Fluxline account. It processes your question to answer it,
 
 | Data | Held? | How long |
 | --- | --- | --- |
-| Question and answer text | **Never stored.** Processed in memory only. | Not kept |
+| Question and answer text | **Not retained by Fluxline.** Processed in memory only. Microsoft Azure keeps temporary automated abuse-detection logs (see Section 5.6). | Not kept by Fluxline. Up to 30 days in Microsoft Azure's abuse-detection logs. |
 | Reported answer (only if you report one) | Question, answer, and a reference ID, encrypted, with **no link to your account** | 30 days, then deleted |
 | Conversation thread (so a follow-up makes sense) | Your last two questions and their book references | The session only |
 | Your birthdate | **Never collected** | Not applicable |
@@ -69,7 +74,7 @@ Our apps are **local-first**. Your entries, goals, scores, and notes are stored 
 
 If you are a consulting, design, development, training, wellness, or coaching client, we collect what you share and what the work needs: contact and billing details, your responses to prompts and surveys, journal entries or documents you choose to share, and progress measures.
 
-**Personal training and wellness clients specifically.** Before your first session, our intake process asks for health information relevant to training you safely: medical conditions, medications, injuries and surgeries, allergies, family history of certain conditions, and pregnancy status. We ask for this because our Informed Consent, Assumption of Risk, and Liability Waiver requires it, not because you happened to volunteer it. We do not ask any other type of client (consulting, design, development, or education) for sensitive health, financial, or legal information.
+**Personal training and wellness clients specifically.** Before your first session, our intake process asks for health information relevant to training you safely: medical conditions, medications, injuries and surgeries, allergies, family history of certain conditions, and pregnancy status. We ask for this because our Informed Consent, Assumption of Risk, and Liability Waiver requires it, not because you happened to volunteer it. When you sign that waiver electronically, we keep a signature record (the date and time, your IP address, and your account email) with your signed copy. We do not ask any other type of client (consulting, design, development, or education) for sensitive health, financial, or legal information.
 
 Any sensitive information you give us, in any service line, is treated with extra care and used only for the purpose you gave it.
 
@@ -103,7 +108,7 @@ We may receive information from sign-in providers (for example, your name and em
 4. The scrubbed question is converted into numbers (an "embedding") so we can find matching passages in the book. The index holds the book, not user content.
 5. Our governance system approves the request. It receives **no user identifier of any kind**, not even a pseudonymous one. It sees only the scrubbed question, the book passages, and cost labels such as product and plan. Each run is logged only under a generic random ID.
 6. A language model writes a short answer using only those passages. A second check runs on every answer.
-7. The answer is shown to you. Nothing about the question or answer is stored.
+7. The answer is shown to you. Fluxline stores nothing about the question or answer. Microsoft Azure's temporary abuse-detection logs are described in 5.6.
 
 **5.2 Honest limits of scrubbing.** Our filters catch many personal identifiers, and no filter is perfect. **Please do not type personal, health, or other sensitive information into the Companion.**
 
@@ -113,7 +118,7 @@ We may receive information from sign-in providers (for example, your name and em
 
 **5.5 Where data is stored versus where a model runs.** All data we store stays in the **United States.** For several models, Microsoft offers only "Global" deployments in the U.S. This means that, while a model reads your scrubbed question, that request can be processed in a Microsoft Azure region outside the United States. Microsoft's terms say that data at rest stays in the U.S. and that prompts are not used to train models. Separately, the Companion is offered only in the U.S. at launch.
 
-**5.6 Microsoft's abuse monitoring.** Microsoft applies automated abuse monitoring to its AI services. Under Microsoft's standard terms, a prompt that its systems flag as potentially abusive can be retained and reviewed by Microsoft personnel. We have not yet applied for or received Microsoft's "modified abuse monitoring" status, which would turn this off for our use.
+**5.6 Microsoft's abuse monitoring.** Fluxline does not retain your questions or answers. Our AI provider, Microsoft Azure, applies automated abuse monitoring to its AI services. Under Microsoft's standard policy, Microsoft Azure keeps prompts and answers in temporary automated abuse-detection logs for up to 30 days, and content its systems flag as potentially abusive can be reviewed by authorized Microsoft personnel. We have not yet applied for or received Microsoft's "modified abuse monitoring" status, which would turn this off for our use.
 
 **5.7 Human review of AI.** Two different things happen, and we keep them distinct. (a) When we use AI to help create our own content and services, a person reviews it before it is published or delivered. (b) When you use an AI feature, such as the Companion, you receive the answer directly, and a person does not review it first. Our Responsible AI Usage policy explains both.
 
@@ -146,8 +151,6 @@ We use information to deliver and personalize what you bought; run your account 
 
 **8.1 We do not sell your information.** We do not sell, rent, or trade personal information. We do not share it for advertising. Our store and the RCF AI Companion show no ads.
 
-**8.1a Ads in free app tiers.** If a Fluxline app has a free tier that shows ads, the ads are contextual: they are matched to the screen you are on, never to what you write, ask, or do. No ad network receives your entries, your answers, or an identifier that could link them to you. Ads never appear in crisis, reflection, or check-in moments. Personalized ads are off unless you turn them on, and the app shows you exactly what would be shared before you do.
-
 **8.2 Service providers.** We use providers to run the Services. They receive only what they need. They are not allowed to use it for their own purposes.
 
 | Provider | What they do | Data they handle |
@@ -171,12 +174,13 @@ We use information to deliver and personalize what you bought; run your account 
 | --- | --- |
 | Account (name, email, 18+ flag and date) | Until you delete your account |
 | Account deletion requests | Started within 24 hours of your request and finished within 30 days |
-| Order records | As long as needed for tax, accounting, and legal purposes, and no longer |
-| Download records for personalized files | As long as needed to resolve a payment dispute, and no longer |
+| Order records | 7 years after the order |
+| Download records for personalized files | 7 years after the order, with the order record |
 | Companion data | See the table in Section 3.4 |
-| Website analytics | Per our analytics providers' own retention settings |
+| Website analytics | Up to 14 months (Google Analytics) and up to 13 months (Microsoft Clarity), under our provider settings |
 | Client files and communications | Per your agreement and legal requirements |
-| Support messages | As long as needed to resolve your request, and no longer |
+| Personal training and wellness health intake, signed waiver, and signature record | 7 years after your last session |
+| Support messages | 3 years after your last message |
 
 ---
 
@@ -200,7 +204,9 @@ To make a request, write to privacy@fluxline.pro. We respond within 45 days.
 
 **10.4 California protections.** Fluxline voluntarily gives all U.S. users the core California rights: to know, to delete, to correct, to opt out of any sale or sharing (we do neither), to limit use of sensitive information, and to be free of discrimination for using these rights.
 
-**10.5 Visitors from outside the United States.** Our apps and the Companion are offered only in the U.S. at launch. Our websites can be visited from anywhere. If you are in the European Economic Area or the UK, we process your information as needed for a contract with you, for our legitimate interests in running and securing the Services, to comply with law, or with your consent, and you may have additional rights, including to object and to complain to your local authority.
+**10.5 Visitors and customers outside the United States.** The RCF AI Companion, the RCF Founders Pass, the Identity in Motion program, and our apps are offered only in the United States at this time (see Terms of Use 9.6). Outside the United States, we offer only the digital editions of the book (the eBook, Audiobook, and Workbook PDF). If you bought one of the U.S.-only products above while living outside the United States, you may request a full refund by contacting support@fluxline.pro.
+
+If you are in the European Economic Area or the United Kingdom, Fluxline Resonance Group, LLC is responsible for your information. When you buy a digital edition or create an account, we collect your name and email address to deliver your purchase, give you access to your account, and provide support. On our websites, analytics and other non-essential cookies run only after you accept them in our cookie banner, and you can reject them at the first step. We rely on our contract with you, our legitimate interests in running and securing the Services, legal obligations, and your consent. You may ask to access, correct, delete, or export your information, object to its use, and complain to your local data protection authority. We keep your name and email while your account is open, and order records as stated in Section 9. We store information in the United States and rely on the transfer safeguards our providers offer, such as the EU-U.S. Data Privacy Framework and Standard Contractual Clauses.
 
 ---
 
@@ -212,7 +218,7 @@ We protect information with encryption in transit and at rest, access controls l
 
 ## 12. Cookies and analytics
 
-We use cookies and similar tools for: **essential** functions (sign-in, security, remembering your cart); **analytics** (Google Analytics and Microsoft Clarity, to understand how the sites are used); and **functional** settings (theme, text size, accessibility options). You can manage cookies in your browser settings.
+We use cookies and similar tools for: **essential** functions (sign-in, security, remembering your cart); **analytics** (Google Analytics and Microsoft Clarity, to understand how the sites are used); and **functional** settings (theme, text size, accessibility options). Analytics and other non-essential cookies run only after you accept them in our cookie banner, and you can accept or reject them at the first step. You can also manage cookies in your browser settings.
 
 ---
 
@@ -242,8 +248,8 @@ If our practices change, we will post the new version with a new date. For a mat
 
 ## 17. Contact
 
-Fluxline Resonance Group, LLC
-Privacy Officer
-Salt Lake City, Utah
-privacy@fluxline.pro
+Fluxline Resonance Group, LLC, doing business as Fluxline  
+Privacy Officer  
+Salt Lake City, Utah  
+privacy@fluxline.pro  
 support@fluxline.pro

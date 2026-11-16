@@ -53,7 +53,7 @@ export default function PreorderTermsClientPage() {
               </h1>
             </div>
             <p style={{ color: 'var(--fx-text-muted)', fontSize: '0.875rem', margin: '0.25rem 0 0' }}>
-              Effective: November 6, 2026 | Last Updated: November 6, 2026
+              Effective: November 20, 2026 | Last Updated: November 20, 2026
             </p>
             <p style={{ color: 'var(--fx-text-muted)', fontSize: '1.125rem', lineHeight: 1.6, margin: '1rem 0 0' }}>
               What Happens When You Preorder The Resonance Core Framework™

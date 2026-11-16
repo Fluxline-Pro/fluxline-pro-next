@@ -98,9 +98,9 @@ const PAGE_CONFIGS: Record<
     image: 'FLUXLINE_LOGO',
     imageText: 'Technical Terms',
   },
-  '/legal/stewardship-contract': {
+  '/legal/stewardship-charter': {
     image: 'FLUXLINE_LOGO',
-    imageText: 'Stewardship Contract',
+    imageText: 'Stewardship Charter',
   },
   '/legal/articles-of-conversion': {
     image: 'FLUXLINE_LOGO',
