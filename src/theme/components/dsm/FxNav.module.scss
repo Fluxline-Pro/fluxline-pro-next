@@ -103,15 +103,58 @@
   }
 }
 
-/* Site name in the home header. Slightly smaller on narrow phones so it stays
-   on one line beside the appearance button and the menu button. */
+/* Home header on phones (#396). It holds the logo, the site name and three
+   buttons (appearance 44px, account 32px, menu 24px), so at 430px and below
+   its gaps tighten to keep the name on one line without shrinking the
+   buttons. Scoped to the home variant so the subpage header is unchanged.
+   The doubled class outranks the !important .fx-nav-gap rule in globals.scss. */
+.navContainer.navContainerHome {
+  @media (max-width: 430px) {
+    gap: 8px !important;
+  }
+}
+
+.navContainerHome .navActions {
+  @media (max-width: 430px) {
+    gap: 6px;
+  }
+}
+
+/* Logo and site name in the home header. */
+.brandLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+
+  @media (max-width: 430px) {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  @media (max-width: 380px) {
+    gap: 6px;
+  }
+}
+
+/* Site name in the home header. Smaller on phones so it stays on one line
+   down to 360px; narrower than that it ends in an ellipsis instead of
+   wrapping (#396). */
 .brandName {
   font-weight: 700;
   font-size: 17px;
   color: var(--fx-text-heading);
 
-  @media (max-width: 400px) {
-    font-size: 15.5px;
+  @media (max-width: 430px) {
+    font-size: 15px;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 380px) {
+    font-size: 13.5px;
   }
 }
 
