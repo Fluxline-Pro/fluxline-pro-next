@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- Home header on phones (#396): the site name stays on one line beside the appearance, account and menu buttons from 360px up, and ends in an ellipsis on narrower screens. The buttons keep their size; other pages' headers are unchanged.
 - RCF Preorder Terms (hotfix): the page no longer publishes an internal release date. The delay rule now reads "delayed beyond the late February to mid-March 2027 window" (At a glance, Key dates, 5.3, 9.2), and the sentence naming an internal release target is removed.
 
 ### Added

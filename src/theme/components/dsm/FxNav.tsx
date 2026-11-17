@@ -258,18 +258,14 @@ export default function FxNav({
         transition: 'transform 0.3s ease-in-out',
       }}
     >
-      <div className={`fx-c fx-nav-gap ${styles.navContainer}`}>
+      <div
+        className={`fx-c fx-nav-gap ${styles.navContainer}${
+          resolvedVariant === 'home' ? ` ${styles.navContainerHome}` : ''
+        }`}
+      >
         {resolvedVariant === 'home' ? (
           <>
-            <Link
-              href='/'
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-                textDecoration: 'none',
-              }}
-            >
+            <Link href='/' className={styles.brandLink}>
               <img
                 src='/favicon.ico'
                 alt='Fluxline'
