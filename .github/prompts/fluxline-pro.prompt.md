@@ -51,7 +51,7 @@ Goal: a first-time visitor understands what Fluxline does, who it is for, and wh
 
 ## Hold (change nothing, list every occurrence in the PR)
 
-1. Resolved (owner, 2026-10-19): softened to "E2E / Projects, from concept to launch" and "Diverse / Industries served".
+1. Resolved (owner, 2026-10-19): softened to "E2E / Projects, from concept to launch" and "Diverse / Industries served". Superseded 2026-11-18 (#402): the fourth tile is "13 / Case studies".
 2. Resolved (owner, 2026-10-19): "4.72 Average Composite DII Score" is a measured figure; keep it.
 3. Resolved (owner, 2026-10-19): the RCF opens `/services/` and the home services list in its own Foundation section, ahead of the three groups.
 4. Cropped logo caption in the hero graphic ("TRUCTURE THE SHIFT"). Visual bug; report only.

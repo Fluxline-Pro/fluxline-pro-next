@@ -280,9 +280,7 @@ export default function ResonanceCoreFrameworkClient() {
           style={{ marginBottom: SECTION_GAP }}
         >
           <FxGroupLabel>Overview</FxGroupLabel>
-          <h2 style={{ ...sectionTitle, color: 'var(--fx-gold)' }}>
-            What the Framework Is
-          </h2>
+          <h2 style={sectionTitle}>What the Framework Is</h2>
           <p
             style={{
               color: 'var(--fx-gold)',

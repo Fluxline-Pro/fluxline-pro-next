@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- Home page and `/resonance-core-framework` QA fixes (#402): the About callout reads "Fluxline: We Structure the Shift" / "Modular by design. Resonant by nature."; the stat tiles center their value and label vertically, and "Various / Industries served" is now "13 / Case studies"; the "Now open for pre-order" band moves up into the Resonance Core Framework section, under the intro paragraphs; the "What the Framework Is" heading uses the standard heading color instead of gold.
 - Home header on phones (#396): the site name stays on one line beside the appearance, account and menu buttons from 360px up, and ends in an ellipsis on narrower screens. The buttons keep their size; other pages' headers are unchanged.
 - RCF Preorder Terms (hotfix): the page no longer publishes an internal release date. The delay rule now reads "delayed beyond the late February to mid-March 2027 window" (At a glance, Key dates, 5.3, 9.2), and the sentence naming an internal release target is removed.
 

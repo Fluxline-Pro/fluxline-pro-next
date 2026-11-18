@@ -20,6 +20,11 @@ export default function FxStatCard({ value, label, style }: FxStatCardProps) {
         border: `1px solid ${hovered ? 'var(--fx-border-hover)' : 'var(--fx-border)'}`,
         borderRadius: 'var(--fx-radius-card-sm)',
         padding: '20px 18px',
+        // Tiles in a row stretch to the tallest one; center the value and
+        // label vertically so short tiles have no empty gap below.
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
         textAlign: 'center',
         fontFamily: 'var(--fx-font)',
         transition: 'border-color var(--fx-color-duration), transform var(--fx-color-duration), box-shadow var(--fx-color-duration)',

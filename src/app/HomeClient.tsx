@@ -190,14 +190,11 @@ export default function HomeClient() {
                 label='Years in Design, Development, Architecture & Product Management'
               />
               <FxStatCard value='5' label='Offerings' />
-              <FxStatCard value='Various' label='Industries served' />
+              <FxStatCard value='13' label='Case studies' />
             </FxReveal>
 
             <FxReveal delay={200}>
-              <FxCallout
-                tone='gold'
-                title="We're not done yet, but we're already extraordinary."
-              >
+              <FxCallout tone='gold' title='Fluxline: We Structure the Shift'>
                 <em>Modular by design. Resonant by nature.</em>
               </FxCallout>
             </FxReveal>
@@ -808,7 +805,13 @@ export default function HomeClient() {
               ))}
             </FxReveal>
 
+            {/* Book pre-order announcement (#368), moved up under the intro
+                paragraphs (#402) so it is seen before the cards. */}
             <FxReveal delay={100}>
+              <PreorderAnnouncement as='h3' />
+            </FxReveal>
+
+            <FxReveal delay={200}>
               <FxCard
                 variant='feature'
                 interactive
@@ -850,7 +853,7 @@ export default function HomeClient() {
               </FxCard>
             </FxReveal>
 
-            <FxReveal delay={200}>
+            <FxReveal delay={300}>
               <FxCard
                 variant='raised'
                 interactive
@@ -904,7 +907,7 @@ export default function HomeClient() {
               </FxCard>
             </FxReveal>
 
-            <FxReveal delay={300}>
+            <FxReveal delay={400}>
               <FxCallout tone='gold' title='Read the introduction now.'>
                 The free RCF Preview is the book&apos;s introduction — why
                 self-help usually fails, where the framework came from, and who
@@ -921,17 +924,6 @@ export default function HomeClient() {
           </FxRailLayout>
         </FxContainer>
       </section>
-
-      {/* Book pre-order announcement (#368), directly under the RCF section. */}
-      {/* width: 100% because the page wrapper is a flex column, where the
-          container's auto margins would otherwise shrink it to its content.
-          A snap point of its own, so proximity snap to the next section's top
-          cannot park the band just above the screen. */}
-      <FxContainer className='fx-snap-section' style={{ width: '100%' }}>
-        <FxReveal style={{ padding: '0 0 56px' }}>
-          <PreorderAnnouncement />
-        </FxReveal>
-      </FxContainer>
 
       <section
         id='content'

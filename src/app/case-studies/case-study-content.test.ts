@@ -7,6 +7,20 @@ const caseStudyPaths = [
   'public/blog/posts/from-recovery-to-resonance-personal-journey/markdown/post.md',
 ];
 
+describe('case study count', () => {
+  it('matches the "13 / Case studies" tile on the home page', () => {
+    // The home page hard-codes this number (HomeClient, About stat tiles,
+    // #402). When a case study is added or removed, update the tile and this
+    // count together.
+    const posts = fs
+      .readdirSync(path.join(process.cwd(), 'public/case-studies/posts'), {
+        withFileTypes: true,
+      })
+      .filter((entry) => entry.isDirectory());
+    expect(posts).toHaveLength(13);
+  });
+});
+
 describe('personal transformation case study content', () => {
   it('does not make quantitative retention, return, or churn claims', () => {
     for (const relativePath of caseStudyPaths) {
