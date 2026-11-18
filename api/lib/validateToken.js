@@ -75,6 +75,26 @@ function verifyJwt(token, { audience, issuer }) {
 }
 
 /**
+ * The header callers put the Entra token in (#405). Azure Static Web Apps
+ * replaces `Authorization` on every request to its managed functions with a
+ * token of its own (proven on account-test, fluxline-pro-user-account #102),
+ * so the user's token is sent here instead.
+ */
+const FLUXLINE_AUTH_HEADER = 'x-fluxline-authorization';
+
+/**
+ * `X-Fluxline-Authorization` when the caller sent it (used exclusively, never
+ * mixed with the SWA-injected `Authorization`), otherwise `Authorization`
+ * (local `func start`, callers not behind SWA).
+ */
+function readAuthHeader(req) {
+  const headers = req.headers || {};
+  const custom = headers[FLUXLINE_AUTH_HEADER] || headers['X-Fluxline-Authorization'];
+  if (custom) return custom;
+  return headers.authorization || headers.Authorization || '';
+}
+
+/**
  * Validates the request's Bearer token.
  *
  * @param {object} req Azure Functions classic-model request
@@ -90,8 +110,7 @@ async function validateToken(req) {
     throw new Error('ENTRA_TENANT_ID is not configured');
   }
 
-  const authHeader =
-    (req.headers && (req.headers.authorization || req.headers.Authorization)) || '';
+  const authHeader = readAuthHeader(req);
   const [scheme, token] = authHeader.split(' ');
   if (!token || !/^Bearer$/i.test(scheme)) {
     throw new AuthError('Missing bearer token');
@@ -129,4 +148,4 @@ function _resetJwksClient() {
   jwksClient = null;
 }
 
-module.exports = { validateToken, AuthError, _resetJwksClient };
+module.exports = { validateToken, AuthError, FLUXLINE_AUTH_HEADER, _resetJwksClient };

@@ -89,3 +89,36 @@ describe('validateToken', () => {
     expect(jwt.verify.mock.calls[0][2].audience).toEqual(['api://fluxline-account', '0000-client-id']);
   });
 });
+
+describe('X-Fluxline-Authorization (#405)', () => {
+  // Static Web Apps replaces Authorization with a token of its own; the
+  // user's token arrives in X-Fluxline-Authorization instead.
+  const originalEnv = process.env;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    _resetJwksClient();
+    process.env = { ...originalEnv, ENTRA_TENANT_ID: 'test-tenant-id', ENTRA_API_AUDIENCE: 'api://fluxline-account' };
+    jwt.verify.mockImplementation((token, getKey, opts, cb) => cb(null, { oid: 'oid-1' }));
+  });
+
+  afterEach(() => {
+    process.env = originalEnv;
+  });
+
+  it('verifies the custom header, not the SWA-injected Authorization', async () => {
+    await validateToken({ headers: { authorization: 'Bearer swa-token', 'x-fluxline-authorization': 'Bearer user-token' } });
+    expect(jwt.verify.mock.calls[0][0]).toBe('user-token');
+  });
+
+  it('does not fall back to Authorization when the custom header is not Bearer', async () => {
+    const req = { headers: { authorization: 'Bearer user-token', 'x-fluxline-authorization': 'Basic abc' } };
+    await expect(validateToken(req)).rejects.toThrow(AuthError);
+    expect(jwt.verify).not.toHaveBeenCalled();
+  });
+
+  it('still reads Authorization alone (local func start)', async () => {
+    await validateToken({ headers: { authorization: 'Bearer user-token' } });
+    expect(jwt.verify.mock.calls[0][0]).toBe('user-token');
+  });
+});
