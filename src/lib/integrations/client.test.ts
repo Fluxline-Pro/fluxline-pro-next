@@ -40,6 +40,23 @@ describe('createServiceClient', () => {
       expect(init.headers.Authorization).toBe('Bearer test-token');
     });
 
+    it.each(['www', 'account', 'cms'] as const)(
+      'also sends X-Fluxline-Authorization to %s (Static Web Apps replaces Authorization, #405)',
+      async (service) => {
+        fetchMock.mockResolvedValue(jsonResponse({ ok: true }));
+        await createServiceClient(service, token).request('/thing');
+        expect(fetchMock.mock.calls[0][1].headers['X-Fluxline-Authorization']).toBe('Bearer test-token');
+      }
+    );
+
+    it('does not send X-Fluxline-Authorization to the storefront (its CORS does not allow it)', async () => {
+      fetchMock.mockResolvedValue(jsonResponse({ ok: true }));
+      await createServiceClient('storefront', token).request('/thing');
+      const headers = fetchMock.mock.calls[0][1].headers;
+      expect(headers.Authorization).toBe('Bearer test-token');
+      expect(headers['X-Fluxline-Authorization']).toBeUndefined();
+    });
+
     it('fails fast without a token when auth is required', async () => {
       const client = createServiceClient('cms', noToken);
 

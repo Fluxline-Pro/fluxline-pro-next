@@ -107,6 +107,25 @@ export interface ServiceClient {
 }
 
 /**
+ * Azure Static Web Apps replaces `Authorization` on every request to its
+ * managed functions with a token of its own, so APIs hosted there read the
+ * user's token from this header first (#405; fluxline-pro-user-account #102).
+ */
+export const FLUXLINE_AUTH_HEADER = 'X-Fluxline-Authorization';
+
+/**
+ * Services whose API runs as Static Web Apps managed functions and reads
+ * `X-Fluxline-Authorization`. Not the storefront: its API is Next.js routes,
+ * and its CORS does not allow the header, so sending it would make the
+ * browser block those calls.
+ */
+const SWA_FUNCTION_SERVICES: ReadonlySet<ServiceName> = new Set<ServiceName>([
+  'www',
+  'account',
+  'cms',
+]);
+
+/**
  * Builds a client bound to one service and one token source.
  *
  * @param service Which Fluxline app to call.
@@ -149,6 +168,9 @@ export function createServiceClient(
 
       if (token) {
         headers.Authorization = `Bearer ${token}`;
+        if (SWA_FUNCTION_SERVICES.has(service)) {
+          headers[FLUXLINE_AUTH_HEADER] = `Bearer ${token}`;
+        }
       } else if (auth === 'required') {
         throw new IntegrationError(
           service,
