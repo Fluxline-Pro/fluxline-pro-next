@@ -36,7 +36,8 @@ function getCorsHeaders(req) {
     'Access-Control-Allow-Origin': isAllowed ? origin : allowed[0],
     'Vary': 'Origin',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    // X-Fluxline-Authorization carries the Entra token past Static Web Apps (#405).
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Fluxline-Authorization',
     'Access-Control-Max-Age': '86400',
   };
 }
