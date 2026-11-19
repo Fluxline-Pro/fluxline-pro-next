@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- `/services` shows the RCF book image in a left rail from desktop width, like `/contact` (#420); tablets and phones keep one column.
 - QA polish (#417): the Book a Conversation dialog's open and close are now clearly visible (the panel rises and settles over about half a second and fades out over a quarter second) and each step slides in; reduced motion turns it off. Filter pills on the listing pages (`/portfolio`, `/blog`, `/case-studies`, `/github`, `/press-release`) truncate to two rows on desktop as well as three on phones, with Show all / Hide all; they're clamped from the first render (no shift after load), keyboard focus on a hidden pill opens the list, and a selected pill in a hidden row keeps the list open.
 - `/resonance-core-framework` opens with a small hero (#414): the RCF banner behind a card like the home page's, with the page title, the one-liner, Book a Conversation, Listen to the Podcast and Download the RCF Preview. It replaces the logo beside the heading. `FxHero` gains `compact`, `tertiaryCta`, `backgroundAlt`, `backgroundPosition`, `backgroundOpacity` and `backgroundOverlay`.
 - The Book a Conversation dialog fades in (the panel rises into place) and fades out before it closes; reduced motion turns both off (#411). Option titles in steps 1 and 3 are white and their descriptions a very light grey, as on terencewaters.com.

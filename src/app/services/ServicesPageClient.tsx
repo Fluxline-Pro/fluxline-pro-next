@@ -2,10 +2,12 @@
 
 import React from 'react';
 import FxContainer from '@/theme/components/dsm/FxContainer';
+import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
 import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxCard from '@/theme/components/dsm/FxCard';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import FxFeatureCallout from '@/theme/components/dsm/FxFeatureCallout';
+import { RCF_BOOK_IMAGE, RCF_TRADEMARK } from '@/lib/resonanceCore';
 import {
   SERVICE_CATEGORIES,
   SERVICES_SUMMARY,
@@ -41,142 +43,170 @@ const CATEGORY_SECTIONS: {
 export default function ServicesPageClient() {
   return (
     <FxContainer style={{ padding: '64px 32px 88px' }}>
-      {/* Page Header */}
-      <FxSectionHeading
-        kicker='Services'
-        title='What We Build, Train & Transform'
-        subhead={FLUXLINE_SECONDARY_TAGLINE}
-        as='h1'
-      />
-
-      <p
-        style={{
-          fontSize: 'var(--fx-body-size)',
-          color: 'var(--fx-text-body)',
-          lineHeight: 'var(--fx-body-leading)',
-          maxWidth: '68ch',
-          marginTop: 20,
-          marginBottom: 48,
-        }}
+      {/* The book in the left rail (owner, 2026-11-19), as /contact has its
+          portrait; hidden on phones, where the services come first. */}
+      <FxRailLayout
+        railClassName='fx-services-rail'
+        rail={
+          <div
+            style={{
+              background: 'var(--fx-surface-card)',
+              border: '1px solid var(--fx-border)',
+              borderRadius: 14,
+              overflow: 'hidden',
+            }}
+          >
+            <img
+              src={RCF_BOOK_IMAGE}
+              alt={`${RCF_TRADEMARK} — book concept`}
+              style={{ display: 'block', width: '100%', height: 'auto' }}
+            />
+          </div>
+        }
       >
-        {SERVICES_SUMMARY}
-      </p>
+        {/* One block child: the rail layout's column gap would otherwise add
+            to the margins below and change the page's spacing. */}
+        <div>
+          {/* Page Header */}
+          <FxSectionHeading
+            kicker='Services'
+            title='What We Build, Train & Transform'
+            subhead={FLUXLINE_SECONDARY_TAGLINE}
+            as='h1'
+          />
 
-      <FeatureSection
-        label='Foundation'
-        service={RESONANCE_CORE}
-        blurb='The method every engagement uses. Delivered through one-to-one coaching, group workshops, and speaking.'
-        ctaLabel='Explore the Framework'
-      />
+          <p
+            style={{
+              fontSize: 'var(--fx-body-size)',
+              color: 'var(--fx-text-body)',
+              lineHeight: 'var(--fx-body-leading)',
+              maxWidth: '68ch',
+              marginTop: 20,
+              marginBottom: 48,
+            }}
+          >
+            {SERVICES_SUMMARY}
+          </p>
 
-      <FeatureSection
-        label='Strategy & Leadership'
-        service={CONSULTING}
-        blurb='Strategic systems design, operational optimization, and values-aligned business consulting for founders and growing teams.'
-        ctaLabel='Explore Consulting'
-      />
+          <FeatureSection
+            label='Foundation'
+            service={RESONANCE_CORE}
+            blurb='The method every engagement uses. Delivered through one-to-one coaching, group workshops, and speaking.'
+            ctaLabel='Explore the Framework'
+          />
 
-      {/* Service Category Sections */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--fx-section-gap)',
-        }}
-      >
-        {CATEGORY_SECTIONS.map((cat) => {
-          const services = OTHER_SERVICES.filter((s) => s.category === cat.key);
-          if (services.length === 0) return null;
+          <FeatureSection
+            label='Strategy & Leadership'
+            service={CONSULTING}
+            blurb='Strategic systems design, operational optimization, and values-aligned business consulting for founders and growing teams.'
+            ctaLabel='Explore Consulting'
+          />
 
-          return (
-            <section key={cat.key} style={{ padding: '16px 0' }}>
-              <div
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--fx-accent)',
-                  marginBottom: 8,
-                }}
-              >
-                {cat.title}
-              </div>
-              <p
-                style={{
-                  fontSize: 'var(--fx-body-size)',
-                  color: 'var(--fx-text-muted)',
-                  lineHeight: 'var(--fx-body-leading)',
-                  marginBottom: 20,
-                  maxWidth: '56ch',
-                }}
-              >
-                {cat.description}
-              </p>
-              <div
-                className='fx-g2'
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: 20,
-                }}
-              >
-                {services.map((service) => (
-                  <FxCard
-                    key={service.id}
-                    interactive
-                    href={service.path}
-                    style={{ padding: '28px 28px 24px' }}
+          {/* Service Category Sections */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--fx-section-gap)',
+            }}
+          >
+            {CATEGORY_SECTIONS.map((cat) => {
+              const services = OTHER_SERVICES.filter(
+                (s) => s.category === cat.key
+              );
+              if (services.length === 0) return null;
+
+              return (
+                <section key={cat.key} style={{ padding: '16px 0' }}>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      color: 'var(--fx-accent)',
+                      marginBottom: 8,
+                    }}
                   >
-                    <h4
-                      style={{
-                        fontSize: 'var(--fx-h3-size)',
-                        fontWeight: 700,
-                        color: 'var(--fx-text-heading)',
-                        marginBottom: 8,
-                        fontFamily: 'var(--fx-font)',
-                      }}
-                    >
-                      {service.title}
-                    </h4>
-                    <p
-                      style={{
-                        fontSize: 'var(--fx-body-size)',
-                        color: 'var(--fx-text-body)',
-                        lineHeight: 'var(--fx-body-leading)',
-                        marginTop: 0,
-                        marginBottom: 20,
-                      }}
-                    >
-                      {service.description}
-                    </p>
-                    <span
-                      style={{
-                        fontSize: 'var(--fx-cta-link-size)',
-                        color: 'var(--fx-accent)',
-                        fontWeight: 700,
-                        letterSpacing: 'var(--fx-cta-link-tracking)',
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      Learn More ›
-                    </span>
-                  </FxCard>
-                ))}
-              </div>
-            </section>
-          );
-        })}
-      </div>
+                    {cat.title}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 'var(--fx-body-size)',
+                      color: 'var(--fx-text-muted)',
+                      lineHeight: 'var(--fx-body-leading)',
+                      marginBottom: 20,
+                      maxWidth: '56ch',
+                    }}
+                  >
+                    {cat.description}
+                  </p>
+                  <div
+                    className='fx-g2'
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(2, 1fr)',
+                      gap: 20,
+                    }}
+                  >
+                    {services.map((service) => (
+                      <FxCard
+                        key={service.id}
+                        interactive
+                        href={service.path}
+                        style={{ padding: '28px 28px 24px' }}
+                      >
+                        <h4
+                          style={{
+                            fontSize: 'var(--fx-h3-size)',
+                            fontWeight: 700,
+                            color: 'var(--fx-text-heading)',
+                            marginBottom: 8,
+                            fontFamily: 'var(--fx-font)',
+                          }}
+                        >
+                          {service.title}
+                        </h4>
+                        <p
+                          style={{
+                            fontSize: 'var(--fx-body-size)',
+                            color: 'var(--fx-text-body)',
+                            lineHeight: 'var(--fx-body-leading)',
+                            marginTop: 0,
+                            marginBottom: 20,
+                          }}
+                        >
+                          {service.description}
+                        </p>
+                        <span
+                          style={{
+                            fontSize: 'var(--fx-cta-link-size)',
+                            color: 'var(--fx-accent)',
+                            fontWeight: 700,
+                            letterSpacing: 'var(--fx-cta-link-tracking)',
+                            textTransform: 'uppercase',
+                          }}
+                        >
+                          Learn More ›
+                        </span>
+                      </FxCard>
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
 
-      {/* CTA Band */}
-      <div style={{ marginTop: 'var(--fx-section-gap)' }}>
-        <FxCTABand
-          title='Not sure where to start?'
-          body="Share your needs in a free consultation below. Let's map out what's possible for you or your business together."
-          primaryBooking
-        />
-      </div>
+          {/* CTA Band */}
+          <div style={{ marginTop: 'var(--fx-section-gap)' }}>
+            <FxCTABand
+              title='Not sure where to start?'
+              body="Share your needs in a free consultation below. Let's map out what's possible for you or your business together."
+              primaryBooking
+            />
+          </div>
+        </div>
+      </FxRailLayout>
     </FxContainer>
   );
 }
