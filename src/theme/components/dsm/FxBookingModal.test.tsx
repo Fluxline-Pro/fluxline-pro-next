@@ -1,10 +1,19 @@
 import { act, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { FxBookingModalProvider, FxBookingTrigger } from './FxBookingModal';
+import {
+  BOOKING_EXIT_MS,
+  FxBookingModalProvider,
+  FxBookingTrigger,
+  useBookingModal,
+} from './FxBookingModal';
 import { BOOK_A_CONVERSATION } from './bookingCopy';
 import { mount, type Mounted } from '@/test/formHarness';
 
 jest.mock('next/navigation', () => ({ usePathname: jest.fn(() => '/') }));
+const mockMotion = { reduce: false };
+jest.mock('@/theme/hooks/useReducedMotion', () => ({
+  useReducedMotion: () => ({ shouldReduceMotion: mockMotion.reduce }),
+}));
 const mockPathname = usePathname as jest.Mock;
 
 /** The full-screen Book a Conversation dialog (#408, from TW #278). */
@@ -23,6 +32,12 @@ const press = (key: string) =>
       new KeyboardEvent('keydown', { key, bubbles: true })
     );
   });
+/** Let the closing fade finish (the dialog unmounts after it). */
+const closed = () =>
+  act(
+    () =>
+      new Promise<void>((resolve) => setTimeout(resolve, BOOKING_EXIT_MS + 20))
+  );
 const nextFrame = () =>
   act(
     () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
@@ -59,6 +74,7 @@ describe('FxBookingModal (#408)', () => {
     trigger().focus();
     await page.click(trigger());
     await press('Escape');
+    await closed();
     expect(dialog()).toBeNull();
     expect(document.documentElement.style.overflow).toBe('');
     expect(document.documentElement.hasAttribute('data-booking-open')).toBe(
@@ -74,6 +90,7 @@ describe('FxBookingModal (#408)', () => {
     await page.click(
       document.querySelector<HTMLElement>('[aria-label="Close"]')!
     );
+    await closed();
     expect(dialog()).toBeNull();
 
     await page.click(trigger());
@@ -95,6 +112,7 @@ describe('FxBookingModal (#408)', () => {
         new MouseEvent('click', { bubbles: true, clientX: 10 })
       );
     });
+    await closed();
     expect(dialog()).toBeNull();
   });
 
@@ -150,6 +168,7 @@ describe('FxBookingModal (#408)', () => {
     await act(() => {
       link.click();
     });
+    await closed();
     expect(dialog()).toBeNull();
   });
 
@@ -234,6 +253,7 @@ describe('FxBookingModal (#408)', () => {
     await page.click(trigger());
     expect(page.container.querySelector('a')).toBeNull();
     await press('Escape');
+    await closed();
     await nextFrame();
     expect(document.activeElement?.id).toBe('menu-button');
   });
@@ -249,6 +269,83 @@ describe('FxBookingModal (#408)', () => {
       'consultation_stepper_opened',
       undefined
     );
+  });
+
+  it('closes at once with reduced motion (no fade)', async () => {
+    mockMotion.reduce = true;
+    try {
+      renderWithProvider();
+      await page.click(trigger());
+      await press('Escape');
+      expect(dialog()).toBeNull();
+    } finally {
+      mockMotion.reduce = false;
+    }
+  });
+
+  it('stays open when reopened during the fade-out', async () => {
+    function Reopen() {
+      const modal = useBookingModal();
+      return <button type='button' id='reopen' onClick={() => modal?.open()} />;
+    }
+    page = mount(
+      <FxBookingModalProvider>
+        <FxBookingTrigger />
+        <Reopen />
+      </FxBookingModalProvider>
+    );
+    await page.click(trigger());
+    await press('Escape');
+    expect(dialog()!.parentElement!.getAttribute('data-closing')).toBe('true');
+    await page.click('#reopen');
+    await closed();
+    expect(dialog()).not.toBeNull();
+    expect(dialog()!.parentElement!.hasAttribute('data-closing')).toBe(false);
+  });
+
+  it('a second Escape during the fade changes nothing', async () => {
+    renderWithProvider();
+    await page.click(trigger());
+    await press('Escape');
+    await press('Escape');
+    expect(dialog()).not.toBeNull();
+    await closed();
+    expect(dialog()).toBeNull();
+  });
+
+  it('with no opener (e.g. /book), focus lands on <main> after closing', async () => {
+    function AutoOpen() {
+      const modal = useBookingModal();
+      return <button type='button' id='auto' onClick={() => modal?.open()} />;
+    }
+    page = mount(
+      <FxBookingModalProvider>
+        <main>
+          <AutoOpen />
+        </main>
+      </FxBookingModalProvider>
+    );
+    (document.activeElement as HTMLElement | null)?.blur();
+    await act(async () => {
+      document
+        .getElementById('auto')!
+        .dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+    await press('Escape');
+    await closed();
+    await nextFrame();
+    expect(document.activeElement?.tagName).toBe('MAIN');
+  });
+
+  it('fades out before it unmounts', async () => {
+    renderWithProvider();
+    await page.click(trigger());
+    await press('Escape');
+    // Still there, marked as closing, while the fade runs.
+    expect(dialog()).not.toBeNull();
+    expect(dialog()!.parentElement!.getAttribute('data-closing')).toBe('true');
+    await closed();
+    expect(dialog()).toBeNull();
   });
 
   it('is a plain link outside the provider (no JavaScript fallback)', async () => {
