@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import FxContainer from '@/theme/components/dsm/FxContainer';
-import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxGroupLabel from '@/theme/components/dsm/FxGroupLabel';
 import FxCard from '@/theme/components/dsm/FxCard';
 import FxButton from '@/theme/components/dsm/FxButton';
@@ -21,12 +20,9 @@ import {
   RCF_EXPLAINER,
   RCF_CONCEPTS,
   RCF_FAQ,
-  RCF_LOGO_IMAGE,
-  RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
   RCF_RELEASE_WINDOW,
   RCF_RINGS,
-  RCF_TRADEMARK,
   TRI_FRAMEWORK_URL,
   TRI_SITE_URL,
   TW_FRAMEWORK_URL,
@@ -214,57 +210,9 @@ const ENGAGEMENTS: {
  */
 export default function ResonanceCoreFrameworkClient() {
   return (
-    <FxContainer style={{ padding: '64px 32px 88px' }}>
-      {/* Header */}
-      <div
-        className='fx-stack'
-        style={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          gap: 'var(--fx-space-xl)',
-          flexWrap: 'wrap',
-          marginBottom: 'var(--fx-space-xl)',
-        }}
-      >
-        <img
-          src={RCF_LOGO_IMAGE}
-          alt={`${RCF_TRADEMARK} logo`}
-          style={{
-            width: 120,
-            height: 120,
-            objectFit: 'contain',
-            borderRadius: 'var(--fx-radius-card-sm)',
-            border: '1px solid var(--fx-border)',
-            background: '#000',
-            padding: 10,
-          }}
-        />
-        <div style={{ flex: 1, minWidth: 260 }}>
-          <FxSectionHeading
-            kicker='Coaching & Consulting'
-            title={RCF_TRADEMARK}
-            subhead={RCF_ONE_LINER}
-            as='h1'
-          />
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: 'flex',
-          gap: 'var(--fx-space-s)',
-          flexWrap: 'wrap',
-          marginBottom: SECTION_GAP,
-        }}
-      >
-        <FxBookingTrigger variant='primary' />
-        <FxButton variant='outline' href={TRI_SITE_URL}>
-          Listen to the Podcast
-        </FxButton>
-        <FxButton variant='quiet' href={RCF_PREVIEW_PDF}>
-          Download the RCF Preview
-        </FxButton>
-      </div>
+    <FxContainer style={{ padding: '56px 32px 88px' }}>
+      {/* The page's h1, logo and first actions are in the banner hero above
+          (page.tsx, owner 2026-11-19). */}
 
       {/* Book pre-order announcement (#374): the same band as the home page. */}
       <FxReveal style={{ marginBottom: SECTION_GAP }}>
