@@ -664,3 +664,14 @@ html[data-fx-motion='reduce'] .fx-snap-container {
   --fx-accent-ink: #0c0c0d;
   --fx-line: #8e8e98;
 }
+
+/* /services: the book rail (#420) shows from desktop width only; below that
+   the page is one column, so the services keep their full width. */
+@media (max-width: 1023px) {
+  .fx-rail-layout:has(> .fx-services-rail) {
+    grid-template-columns: 1fr !important;
+  }
+  .fx-services-rail {
+    display: none !important;
+  }
+}
