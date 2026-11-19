@@ -52,18 +52,30 @@ describe('FxFilterChips', () => {
     mockNonOverflowingLayout();
     mockUseIsMobile.mockReturnValue(false);
     render(
-      <FxFilterChips options={OPTIONS} value="All" onChange={jest.fn()} />
+      <FxFilterChips options={OPTIONS} value='All' onChange={jest.fn()} />
     );
     for (const option of OPTIONS) {
       expect(screen.getByText(option)).toBeInTheDocument();
     }
   });
 
-  it('does not show a toggle link on desktop even when content overflows', () => {
+  it('truncates on desktop too when content overflows (two rows by default)', () => {
     mockOverflowingLayout();
     mockUseIsMobile.mockReturnValue(false);
+    const { container } = render(
+      <FxFilterChips options={OPTIONS} value='All' onChange={jest.fn()} />
+    );
+    expect(screen.getByText('Show all')).toBeInTheDocument();
+    // The chip row is clipped to two 40px rows (plus the gap).
+    const row = container.firstElementChild!.firstElementChild as HTMLElement;
+    expect(row.style.maxHeight).toBe('80px');
+  });
+
+  it('does not show a toggle link on desktop when content fits', () => {
+    mockNonOverflowingLayout();
+    mockUseIsMobile.mockReturnValue(false);
     render(
-      <FxFilterChips options={OPTIONS} value="All" onChange={jest.fn()} />
+      <FxFilterChips options={OPTIONS} value='All' onChange={jest.fn()} />
     );
     expect(screen.queryByText('Show all')).not.toBeInTheDocument();
   });
@@ -72,7 +84,7 @@ describe('FxFilterChips', () => {
     mockNonOverflowingLayout();
     mockUseIsMobile.mockReturnValue(true);
     render(
-      <FxFilterChips options={OPTIONS} value="All" onChange={jest.fn()} />
+      <FxFilterChips options={OPTIONS} value='All' onChange={jest.fn()} />
     );
     expect(screen.queryByText('Show all')).not.toBeInTheDocument();
   });
@@ -81,7 +93,7 @@ describe('FxFilterChips', () => {
     mockOverflowingLayout();
     mockUseIsMobile.mockReturnValue(true);
     render(
-      <FxFilterChips options={OPTIONS} value="All" onChange={jest.fn()} />
+      <FxFilterChips options={OPTIONS} value='All' onChange={jest.fn()} />
     );
 
     const toggle = screen.getByText('Show all');
@@ -100,9 +112,7 @@ describe('FxFilterChips', () => {
     mockNonOverflowingLayout();
     mockUseIsMobile.mockReturnValue(false);
     const onChange = jest.fn();
-    render(
-      <FxFilterChips options={OPTIONS} value="All" onChange={onChange} />
-    );
+    render(<FxFilterChips options={OPTIONS} value='All' onChange={onChange} />);
     fireEvent.click(screen.getByText('B'));
     expect(onChange).toHaveBeenCalledWith('B');
   });
