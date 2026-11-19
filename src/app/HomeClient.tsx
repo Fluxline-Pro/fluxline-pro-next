@@ -11,6 +11,7 @@ import FxCard from '@/theme/components/dsm/FxCard';
 import PreorderAnnouncement from '@/components/PreorderAnnouncement';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxButton from '@/theme/components/dsm/FxButton';
+import { FxBookingTrigger } from '@/theme/components/dsm/FxBookingModal';
 import {
   SERVICE_CATEGORIES,
   FLUXLINE_SECONDARY_TAGLINE,
@@ -58,12 +59,12 @@ export default function HomeClient() {
             <br />
             Fluxline partners with individuals and businesses to create
             alignment across body, brand, and business. We specialize in
-            structural transformation — the kind that lasts because it&apos;s built
-            on clarity, intention, and practice.
+            structural transformation — the kind that lasts because it&apos;s
+            built on clarity, intention, and practice.
           </>
         }
         secondaryCta={{ label: 'Explore Fluxline ↓', href: '#about' }}
-        primaryCta={{ label: 'Book a Free Consultation', href: '/contact' }}
+        primaryBooking
         backgroundImage='/images/home/HomePageMobileGeometricBackground.jpg'
       />
 
@@ -446,9 +447,7 @@ export default function HomeClient() {
                   </a>
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <FxButton variant='primary' href='/contact'>
-                    Book a Free Consultation
-                  </FxButton>
+                  <FxBookingTrigger variant='primary' />
                   <FxButton variant='outline' href={RCF_FRAMEWORK_PATH}>
                     Explore the Framework →
                   </FxButton>
@@ -1142,8 +1141,7 @@ export default function HomeClient() {
             <FxCTABand
               title='Ready to structure the shift?'
               body="Tell us where you are and where you're going. We'll map the right first step together — development, design, coaching, or strategy."
-              primaryLabel='Book a Free Consultation'
-              primaryHref='/contact'
+              primaryBooking
               secondaryLabel='Full Contact Form →'
               secondaryHref='/contact'
             />

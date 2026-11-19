@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import FxButton from './FxButton';
+import { FxBookingTrigger } from './FxBookingModal';
 import FxUserMenu from './FxUserMenu';
 import FxNavMenu, { type FxNavMenuLink } from './FxNavMenu';
 import styles from './FxNav.module.scss';
@@ -19,8 +19,6 @@ interface FxNavProps {
   backLabel?: string;
   backHref?: string;
   breadcrumb?: (string | BreadcrumbItem)[];
-  ctaLabel?: string;
-  ctaHref?: string;
   /** Opens the Display & Appearance preferences drawer. */
   onOpenPreferences: () => void;
 }
@@ -87,8 +85,6 @@ export default function FxNav({
   backLabel,
   backHref,
   breadcrumb,
-  ctaLabel = 'Book a Free Consultation',
-  ctaHref = '/contact',
   onOpenPreferences,
 }: FxNavProps) {
   const pathname = usePathname();
@@ -98,6 +94,9 @@ export default function FxNav({
   const finalBackHref = backHref ?? resolvedBack.href;
   const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  // The menu button: where focus returns after the booking dialog opened
+  // from the (then closed) mobile menu.
+  const menuButtonRef = React.useRef<HTMLButtonElement>(null);
   const [isNavHidden, setIsNavHidden] = React.useState(false);
   const lastScrollY = React.useRef(0);
 
@@ -293,15 +292,14 @@ export default function FxNav({
               }}
             >
               {desktopLinks}
-              <FxButton size='sm' href={ctaHref}>
-                {ctaLabel}
-              </FxButton>
+              <FxBookingTrigger size='sm' />
             </nav>
             {/* Right-side actions: appearance button + mobile hamburger */}
             <div className={styles.navActions}>
               {preferencesButton}
               <FxUserMenu />
               <button
+                ref={menuButtonRef}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={styles.hamburgerButton}
                 aria-label='Toggle menu'
@@ -332,13 +330,12 @@ export default function FxNav({
                 >
                   {mobileLinks}
                   <div className={styles.mobileMenuButtonWrapper}>
-                    <FxButton
+                    <FxBookingTrigger
                       size='sm'
-                      href={ctaHref}
                       style={{ width: '100%' }}
-                    >
-                      {ctaLabel}
-                    </FxButton>
+                      onOpen={() => setMobileMenuOpen(false)}
+                      returnFocusRef={menuButtonRef}
+                    />
                   </div>
                 </motion.div>
               )}
@@ -368,6 +365,7 @@ export default function FxNav({
               {preferencesButton}
               <FxUserMenu />
               <button
+                ref={menuButtonRef}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={styles.hamburgerButton}
                 aria-label='Toggle menu'
@@ -398,13 +396,12 @@ export default function FxNav({
                 >
                   {mobileLinks}
                   <div className={styles.mobileMenuButtonWrapper}>
-                    <FxButton
+                    <FxBookingTrigger
                       size='sm'
-                      href={ctaHref}
                       style={{ width: '100%' }}
-                    >
-                      {ctaLabel}
-                    </FxButton>
+                      onOpen={() => setMobileMenuOpen(false)}
+                      returnFocusRef={menuButtonRef}
+                    />
                   </div>
                 </motion.div>
               )}

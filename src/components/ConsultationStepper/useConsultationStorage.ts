@@ -41,8 +41,8 @@ interface UseConsultationStorageResult {
 
 /**
  * Reads a still-valid draft from localStorage, or null. Expired or corrupted drafts are removed.
- * Returns null on the server. Safe to call from a lazy useState initializer: the stepper only renders its
- * body after mount (`isMounted` gate), so restoring here cannot cause a hydration mismatch.
+ * Returns null on the server. Safe to call from a lazy useState initializer: the booking flow only renders
+ * inside the opened dialog (FxBookingModal, after mount), so restoring here cannot cause a hydration mismatch.
  */
 function readDraft(): (ConsultationFormData & { savedAt?: string }) | null {
   if (typeof window === 'undefined') return null;

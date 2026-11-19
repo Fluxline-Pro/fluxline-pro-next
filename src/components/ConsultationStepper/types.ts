@@ -15,6 +15,7 @@ export interface ServiceOption {
   key: ServiceKey;
   label: string;
   description: string;
+  /** Fluent icon name (kept for parity with terencewaters.com; not rendered here). */
   icon: string;
 }
 
@@ -28,7 +29,7 @@ export interface Question {
   required: boolean;
   options?: Array<{ key: string; text: string }>;
   accept?: string;
-  maxSize?: number; // bytes
+  maxSize?: number;
 }
 
 export interface QuestionSet {
@@ -75,10 +76,6 @@ export interface LeadPayload {
   preferredMeetingLength: MeetingLength;
   referralSource: string;
   consent: boolean;
-  /** TidyCal booking ID — populated by webhook after booking is confirmed */
-  tidycalBookingId?: string;
-  /** Zoom meeting link — populated by webhook after booking is confirmed */
-  zoomLink?: string;
   submittedAt: string;
   utmSource?: string;
   utmMedium?: string;

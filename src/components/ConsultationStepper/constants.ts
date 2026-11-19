@@ -3,39 +3,39 @@
  * Service options and contextual question sets
  */
 
-import { ServiceOption, QuestionSet, ServiceKey } from './types';
+import { ServiceOption, QuestionSet, ServiceKey, MeetingLength } from './types';
 
 export const SERVICE_OPTIONS: ServiceOption[] = [
   {
     key: 'personal_training',
-    label: 'Personal Training',
+    label: 'Personal Training & Wellness',
     description:
-      'Fitness coaching, workout plans, and performance optimisation.',
+      'Fitness coaching, workout plans, and performance optimization.',
     icon: 'Health',
   },
   {
     key: 'it_consulting',
-    label: 'IT Business Consulting',
+    label: 'Business Strategy & Systems Alignment',
     description:
       'Technology strategy, system audits, and digital transformation.',
     icon: 'Lightbulb',
   },
   {
     key: 'graphic_design',
-    label: 'Graphic Design',
+    label: 'Brand & Experience Design',
     description:
       'Brand identity, marketing materials, and visual storytelling.',
     icon: 'Design',
   },
   {
     key: 'web_development',
-    label: 'Web Development',
+    label: 'Web Development & Digital Architecture',
     description: 'Custom websites, web apps, and modern digital experiences.',
     icon: 'Code',
   },
   {
     key: 'resonance_coaching',
-    label: 'Resonance Core Framework Coaching',
+    label: 'The Resonance Core Framework™',
     description:
       'Mindset alignment, life strategy, and personal resonance work.',
     icon: 'HeartFill',
@@ -398,3 +398,50 @@ export const TIDYCAL_LINKS: Record<string, string> = {
 
 export const LOCAL_STORAGE_KEY = 'fluxline_consultation_draft';
 export const LOCAL_STORAGE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+/**
+ * Step 3's fields, worded as in the old stepper's contact step (moved here in
+ * #408; FxBookingFlow uses them).
+ */
+export const MEETING_LENGTHS: Array<{
+  value: MeetingLength;
+  label: string;
+  description: string;
+}> = [
+  { value: '20', label: '20 min', description: 'Quick intro & fit check' },
+  { value: '30', label: '30 min', description: 'Discovery & overview' },
+  { value: '45', label: '45 min', description: 'Deep-dive & planning' },
+];
+
+export const CONTACT_STEP_TEXT = {
+  fullName: { label: 'Full Name', placeholder: 'Your full name' },
+  email: { label: 'Email Address', placeholder: 'you@example.com' },
+  phone: { label: 'Phone (optional)', placeholder: '(555) 000-0000' },
+  company: {
+    label: 'Company (optional)',
+    placeholder: 'Your company or organization',
+  },
+  meetingLength: 'Preferred Meeting Length',
+  referral: 'How did you hear about us?',
+  referralOther: {
+    label: 'Please specify',
+    placeholder: 'Tell us how you found us…',
+  },
+  selectPlaceholder: 'Select an option…',
+  consentBefore:
+    'I consent for Fluxline Resonance Group to contact me and store my information for the sole purpose of this consultation. See our',
+  consentLink: 'Privacy Policy',
+  consentAfter: 'for more info on how we use your data.',
+  privacyUrl: '/legal/privacy-policy/',
+  errors: {
+    fullName: 'Full name is required.',
+    emailRequired: 'Email address is required.',
+    emailInvalid: 'Please enter a valid email address.',
+    referral: 'Please let us know how you heard about us.',
+    consent: 'You must consent to be contacted to proceed.',
+  },
+} as const;
+
+/** File-size message for the optional uploads (unchanged wording). */
+export const fileTooLarge = (maxSize: number) =>
+  `File too large. Maximum size is ${Math.round(maxSize / 1024 / 1024)} MB.`;
