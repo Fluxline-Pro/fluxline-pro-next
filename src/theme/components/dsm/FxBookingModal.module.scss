@@ -23,11 +23,22 @@
   background: color-mix(in srgb, var(--fx-bg-page) 82%, transparent);
   backdrop-filter: blur(6px);
 
-  animation: bookingFade 160ms ease-out;
+  animation: bookingFade 220ms var(--fx-ease) both;
   @include motion-safe-only;
 
   @include until('mobile-lg') {
     padding: 0;
+  }
+}
+
+/* Closing: the overlay fades out and the panel sinks a little (BOOKING_EXIT_MS). */
+.overlayClosing {
+  animation: bookingFadeOut 200ms var(--fx-ease) both;
+  @include motion-safe-only;
+
+  .panel {
+    animation: bookingSink 200ms var(--fx-ease) both;
+    @include motion-safe-only;
   }
 }
 
@@ -36,6 +47,9 @@
   width: 100%;
   max-width: 880px;
   margin: auto 0;
+  /* Rises into place as it fades in, like the site's reveal. */
+  animation: bookingRise 280ms var(--fx-ease) both;
+  @include motion-safe-only;
   background: var(--fx-bg-page);
   border: 1px solid var(--fx-border);
   border-radius: var(--fx-radius-card);
@@ -112,6 +126,35 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes bookingFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes bookingRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bookingSink {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateY(12px);
   }
 }
 
