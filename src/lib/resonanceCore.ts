@@ -22,6 +22,9 @@ export const RCF_PREVIEW_PDF =
   '/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf';
 
 export const RCF_LOGO_IMAGE = '/images/RCF_Logo.jpeg';
+
+/** The RCF banner (title, tagline and DRIVE compass), used as a hero backdrop. */
+export const RCF_BANNER_IMAGE = '/images/RCF_banner_logo.jpg';
 export const RCF_BOOK_IMAGE = '/images/RCF_BookConcept.jpg';
 
 /**
