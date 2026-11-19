@@ -174,8 +174,7 @@ export default function ServicesPageClient() {
         <FxCTABand
           title='Not sure where to start?'
           body="Share your needs in a free consultation below. Let's map out what's possible for you or your business together."
-          primaryLabel='Book a Free Consultation'
-          primaryHref='/contact'
+          primaryBooking
         />
       </div>
     </FxContainer>
@@ -186,7 +185,7 @@ export default function ServicesPageClient() {
  * A full-width featured service with its group label above it. Used for the
  * Foundation (the RCF, which every engagement builds on) and for Strategy &
  * Leadership, each of which holds a single service. The same callout makes the
- * free consultation the standout on /contact.
+ * Book a Conversation callout the standout on /contact.
  */
 function FeatureSection({
   label,

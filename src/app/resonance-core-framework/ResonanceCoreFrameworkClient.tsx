@@ -7,6 +7,7 @@ import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxGroupLabel from '@/theme/components/dsm/FxGroupLabel';
 import FxCard from '@/theme/components/dsm/FxCard';
 import FxButton from '@/theme/components/dsm/FxButton';
+import { FxBookingTrigger } from '@/theme/components/dsm/FxBookingModal';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import FxCallout from '@/theme/components/dsm/FxCallout';
@@ -256,9 +257,7 @@ export default function ResonanceCoreFrameworkClient() {
           marginBottom: SECTION_GAP,
         }}
       >
-        <FxButton variant='primary' href='/contact'>
-          Book a Free Consultation
-        </FxButton>
+        <FxBookingTrigger variant='primary' />
         <FxButton variant='outline' href={TRI_SITE_URL}>
           Listen to the Podcast
         </FxButton>
@@ -659,8 +658,8 @@ export default function ResonanceCoreFrameworkClient() {
           <h2 style={sectionTitle}>Frequently Asked Questions</h2>
           <SectionSubtitle title='Built from research and practice'>
             The framework brings together research, systems thinking, and
-            real-world experience. Here is what it is, how it was developed,
-            and who it&apos;s for.
+            real-world experience. Here is what it is, how it was developed, and
+            who it&apos;s for.
           </SectionSubtitle>
           <div style={headedListStyle}>
             {RCF_FAQ.map((f) => (
@@ -705,9 +704,7 @@ export default function ResonanceCoreFrameworkClient() {
               marginBottom: 'var(--fx-space-l)',
             }}
           >
-            <FxButton variant='primary' href='/contact'>
-              Book a Free Consultation
-            </FxButton>
+            <FxBookingTrigger variant='primary' />
             <FxButton variant='outline' href={TRI_SITE_URL}>
               Listen to the Podcast
             </FxButton>

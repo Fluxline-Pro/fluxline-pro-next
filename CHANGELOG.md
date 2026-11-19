@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- "Book a Conversation" replaces "Book a Free Consultation" on every booking button (#408): the header (desktop and phone menu), the home hero, Strategy & Leadership card and closing band, `/contact`, `/book`, `/services`, each service page, `/resonance-core-framework`, `/cue-cards` and the Stewardship Charter. Each one opens a new full-screen booking dialog (`FxBookingModal` + `FxBookingFlow`, ported from terencewaters.com): the same three steps (services, your needs, contact and schedule), then the prefilled TidyCal calendar, loaded only when asked. The lead still goes to `/api/lead`; if saving it fails, the dialog still offers the prefilled TidyCal link and "Send us a message". Focus stays inside the dialog and returns to the opener; Escape, the X or a tap outside closes it; the page behind does not scroll. The buttons are links to `/book/`, which opens the dialog on load and links to TidyCal without JavaScript. The service names in step 1 now match `/services` (for example "Personal Training & Wellness"); the keys sent to `/api/lead` are unchanged, and so are the `consultation_*` GA event names. The old `ConsultationStepper` modal and `BookingsButton` are removed. `FxCTABand` and `FxHero` gain `primaryBooking`; `FxButton` links now pass `onClick` and `aria-*` through.
+
 ### Fixed
 
 - Signed-in calls to this site's API (#405). Azure Static Web Apps replaces the `Authorization` header on requests to its managed functions, so `/api/entitlements` never saw the user's token. The integration client now also sends the token in `X-Fluxline-Authorization` to this site, the account API and the CMS (not the storefront, whose API is not on SWA Functions); `validateToken` reads that header first and CORS allows it.

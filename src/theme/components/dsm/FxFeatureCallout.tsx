@@ -33,7 +33,7 @@ interface FxFeatureCalloutProps {
  * The full-width featured callout used to make one thing the standout on a
  * page: a gold group label, then a feature-gradient card with a gold-to-accent
  * rule along its top edge. `/services` uses it for the Foundation (the RCF)
- * and Strategy & Leadership; `/contact` uses it for the free consultation.
+ * and Strategy & Leadership; `/contact` uses it for Book a Conversation.
  */
 export default function FxFeatureCallout({
   label,

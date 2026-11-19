@@ -2,12 +2,18 @@
 
 import React from 'react';
 import FxButton from './FxButton';
+import { FxBookingTrigger } from './FxBookingModal';
 
 interface FxCTABandProps {
   title: string;
   body?: string;
   primaryLabel?: string;
   primaryHref?: string;
+  /**
+   * The primary button opens the Book a Conversation dialog (#408) instead
+   * of following primaryHref. Its label defaults to "Book a Conversation".
+   */
+  primaryBooking?: boolean;
   secondaryLabel?: string;
   secondaryHref?: string;
   grid?: boolean;
@@ -21,6 +27,7 @@ export default function FxCTABand({
   body,
   primaryLabel,
   primaryHref,
+  primaryBooking = false,
   secondaryLabel,
   secondaryHref,
   grid = true,
@@ -84,7 +91,7 @@ export default function FxCTABand({
           <div style={{ maxWidth: 460, margin: '0 auto 24px' }}>{children}</div>
         )}
 
-        {(primaryLabel || secondaryLabel) && (
+        {(primaryLabel || primaryBooking || secondaryLabel) && (
           <div
             style={{
               display: 'flex',
@@ -93,10 +100,14 @@ export default function FxCTABand({
               flexWrap: 'wrap',
             }}
           >
-            {primaryLabel && (
-              <FxButton size='lg' href={primaryHref}>
-                {primaryLabel}
-              </FxButton>
+            {primaryBooking ? (
+              <FxBookingTrigger size='lg'>{primaryLabel}</FxBookingTrigger>
+            ) : (
+              primaryLabel && (
+                <FxButton size='lg' href={primaryHref}>
+                  {primaryLabel}
+                </FxButton>
+              )
             )}
             {secondaryLabel && (
               <FxButton size='lg' variant='outline' href={secondaryHref}>

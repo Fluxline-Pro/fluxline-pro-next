@@ -2,16 +2,23 @@
 
 import React from 'react';
 
-interface FxButtonProps {
+export interface FxButtonProps {
   variant?: 'primary' | 'outline' | 'quiet';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Runs on click. With `href` the button is a link, and the handler can
+   * call `event.preventDefault()` to act in place (e.g. open a dialog) while
+   * the link stays a real fallback.
+   */
+  onClick?: React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
   children: React.ReactNode;
   style?: React.CSSProperties;
   disabled?: boolean;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
+  'aria-label'?: string;
+  'aria-haspopup'?: React.AriaAttributes['aria-haspopup'];
 }
 
 const sizes: Record<string, React.CSSProperties> = {
@@ -49,6 +56,7 @@ export default function FxButton({
   disabled,
   className,
   type = 'button',
+  ...aria
 }: FxButtonProps) {
   const [hovered, setHovered] = React.useState(false);
 
@@ -93,7 +101,14 @@ export default function FxButton({
 
   if (href) {
     return (
-      <a href={href} className={className} style={merged} {...handlers}>
+      <a
+        href={href}
+        className={className}
+        style={merged}
+        onClick={onClick}
+        {...aria}
+        {...handlers}
+      >
         {children}
       </a>
     );
@@ -106,6 +121,7 @@ export default function FxButton({
       disabled={disabled}
       className={className}
       style={merged}
+      {...aria}
       {...handlers}
     >
       {children}

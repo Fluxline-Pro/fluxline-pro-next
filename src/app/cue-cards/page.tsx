@@ -12,7 +12,7 @@ import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxButton from '@/theme/components/dsm/FxButton';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
-import { BookingsButton } from '@/theme/components/button/bookings-button';
+import { FxBookingTrigger } from '@/theme/components/dsm/FxBookingModal';
 import { CueCardsGrid } from './components/CueCardsGrid';
 import { getAllCueCards, getFeaturedCueCards } from './cueCardsData';
 
@@ -111,7 +111,7 @@ export default function CueCardsPage() {
             primaryHref="/services"
           />
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
-            <BookingsButton isHero />
+            <FxBookingTrigger variant="outline" size="lg" />
           </div>
         </section>
       </div>
