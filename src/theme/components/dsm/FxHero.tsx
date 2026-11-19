@@ -2,12 +2,15 @@
 
 import React from 'react';
 import FxButton from './FxButton';
+import { FxBookingTrigger } from './FxBookingModal';
 
 interface FxHeroProps {
   eyebrow?: string;
   title?: string;
   body?: React.ReactNode;
   primaryCta?: { label: string; href: string };
+  /** The primary button opens the Book a Conversation dialog (#408). */
+  primaryBooking?: boolean;
   secondaryCta?: { label: string; href: string };
   backgroundImage?: string;
   tagline?: string;
@@ -20,6 +23,7 @@ export default function FxHero({
   title = 'FLUXLINE',
   body,
   primaryCta,
+  primaryBooking = false,
   secondaryCta,
   backgroundImage,
   tagline,
@@ -117,15 +121,19 @@ export default function FxHero({
               {body}
             </div>
           )}
-          {(primaryCta || secondaryCta) && (
+          {(primaryCta || primaryBooking || secondaryCta) && (
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
               {secondaryCta && (
                 <FxButton variant='outline' href={secondaryCta.href}>
                   {secondaryCta.label}
                 </FxButton>
               )}
-              {primaryCta && (
-                <FxButton href={primaryCta.href}>{primaryCta.label}</FxButton>
+              {primaryBooking ? (
+                <FxBookingTrigger />
+              ) : (
+                primaryCta && (
+                  <FxButton href={primaryCta.href}>{primaryCta.label}</FxButton>
+                )
               )}
             </div>
           )}

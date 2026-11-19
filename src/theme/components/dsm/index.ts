@@ -23,3 +23,10 @@ export { default as FxArticleCard } from './FxArticleCard';
 export { default as FxFeaturedCard } from './FxFeaturedCard';
 export { default as FxFeatureCallout } from './FxFeatureCallout';
 export { default as FxReveal } from './FxReveal';
+export { default as FxBookingFlow } from './FxBookingFlow';
+export {
+  default as FxBookingModalProvider,
+  FxBookingTrigger,
+  useBookingModal,
+} from './FxBookingModal';
+export type { FxBookingTriggerProps } from './FxBookingModal';

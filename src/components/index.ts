@@ -23,13 +23,6 @@ export type {
   ContentListingPageProps,
 } from './ContentListingPage';
 export { AccessGate } from './AccessGate';
-export { ConsultationStepper } from './ConsultationStepper';
-export type {
-  ConsultationStepperProps,
-  LeadPayload,
-  ServiceKey,
-} from './ConsultationStepper';
+export type { LeadPayload, ServiceKey } from './ConsultationStepper/types';
 export { default as GoogleAnalytics } from './GoogleAnalytics';
 export { default as ConsentBanner } from './ConsentBanner';
-
-

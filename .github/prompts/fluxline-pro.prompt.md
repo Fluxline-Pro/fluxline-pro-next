@@ -56,7 +56,7 @@ Goal: a first-time visitor understands what Fluxline does, who it is for, and wh
 3. Resolved (owner, 2026-10-19): the RCF opens `/services/` and the home services list in its own Foundation section, ahead of the three groups.
 4. Cropped logo caption in the hero graphic ("TRUCTURE THE SHIFT"). Visual bug; report only.
 5. Resolved (owner, 2026-10-19): Creative Truth is a Core Value only.
-6. Resolved (owner, 2026-10-19): every consultation CTA says "Book a Free Consultation".
+6. Resolved (owner, 2026-10-19): every consultation CTA says "Book a Free Consultation". Superseded 2026-11-18 (#408): every booking CTA says "Book a Conversation" and opens the booking dialog.
 7. Resolved (owner, 2026-10-19): the footer label is "Fluxline Ecosystem". Superseded 2026-11-12 (#378): the footer block is removed.
 8. Any "1 to 5" mention of the DII scale.
 9. Resolved (owner, 2026-10-19): "The RCF's Universal Truths, which shape Fluxline's ethos and mission".

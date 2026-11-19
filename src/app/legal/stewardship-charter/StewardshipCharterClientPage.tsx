@@ -6,7 +6,7 @@ import { Callout } from '@/theme/components/callout';
 import { UnifiedMarkdownRenderer } from '@/utils/markdownRenderer';
 import { content } from '../../../assets/legal/stewardship-charter';
 import { FadeUp } from '@/animations/fade-animations';
-import { BookingsButton } from '@/theme/components/button/bookings-button';
+import { FxBookingTrigger } from '@/theme/components/dsm/FxBookingModal';
 
 export default function StewardshipCharterClientPage() {
   const currentYear = new Date().getFullYear();
@@ -69,7 +69,7 @@ export default function StewardshipCharterClientPage() {
             variant='accent'
             title='Partner With Us'
             subtitle='Experience the difference of working with a team committed to your success.'
-            action={<BookingsButton isHero />}
+            action={<FxBookingTrigger variant='primary' />}
           />
 
           {/* Copyright Footer */}

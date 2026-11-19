@@ -1,0 +1,121 @@
+// Book a Conversation dialog (#408), ported from terencewaters.com.
+
+@use './fxBookingMixins' as *;
+
+/*
+ * Book a Conversation, full screen (#278). The overlay covers the viewport;
+ * the panel is centred and scrolls on its own. Phones get the whole screen,
+ * with the close button pinned to the top of the panel. Tokens only, so it
+ * follows every theme mode; Reduced Transparency gets an opaque overlay.
+ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  /* Above the newsletter drawer (1200/1201) and the cookie banner (900). */
+  z-index: 1300;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 32px 24px;
+  background: color-mix(in srgb, var(--fx-bg-page) 82%, transparent);
+  backdrop-filter: blur(6px);
+
+  animation: bookingFade 160ms ease-out;
+  @include motion-safe-only;
+
+  @include until('mobile-lg') {
+    padding: 0;
+  }
+}
+
+.panel {
+  position: relative;
+  width: 100%;
+  max-width: 880px;
+  margin: auto 0;
+  background: var(--fx-bg-page);
+  border: 1px solid var(--fx-border);
+  border-radius: var(--fx-radius-card);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+
+  @include until('mobile-lg') {
+    min-height: 100%;
+    max-width: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: var(--fx-bg-page);
+  border-bottom: 1px solid var(--fx-border);
+  border-radius: var(--fx-radius-card) var(--fx-radius-card) 0 0;
+
+  @include until('mobile-lg') {
+    border-radius: 0;
+  }
+}
+
+.title {
+  margin: 0;
+  font-family: var(--fx-font);
+  font-size: var(--fx-h3-size);
+  font-weight: var(--fx-h3-weight);
+  color: var(--fx-text-heading-display);
+}
+
+.close {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--fx-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--fx-text-heading);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--fx-accent);
+    color: var(--fx-accent);
+  }
+
+  @include focus-ring;
+}
+
+.body {
+  padding: 24px;
+
+  @include until('mobile-lg') {
+    padding: 16px;
+  }
+}
+
+@keyframes bookingFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* The Ko-fi widget sets its own very high z-index; hide it behind the dialog. */
+:global(html[data-booking-open] [id^='kofi-widget-overlay']) {
+  visibility: hidden !important;
+}
