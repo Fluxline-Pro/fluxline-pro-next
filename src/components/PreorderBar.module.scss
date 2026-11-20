@@ -1,0 +1,72 @@
+/**
+ * PreorderBar: the slim pre-order bar above the header.
+ * Colours come from the --fx-mythic-gold* tokens, which every theme remaps.
+ */
+
+.bar {
+  background: var(--fx-mythic-gold-bg);
+  border-bottom: 1px solid var(--fx-mythic-gold);
+  font-family: var(--fx-font);
+}
+
+.inner {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 9px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--fx-text-body);
+  text-align: center;
+
+  @media (max-width: 767px) {
+    padding: 8px 16px;
+    font-size: 12.5px;
+  }
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fx-mythic-gold-text);
+
+  @media (max-width: 767px) {
+    font-size: 11.5px;
+  }
+}
+
+/* The separator only reads well when label and text share a line. */
+.dot {
+  color: var(--fx-mythic-gold-text);
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+}
+
+.link {
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--fx-mythic-gold-text);
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* The text token, not the fill: plain gold is too pale to see as a ring on
+     the light theme. */
+  &:focus-visible {
+    outline: 2px solid var(--fx-mythic-gold-text);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+}

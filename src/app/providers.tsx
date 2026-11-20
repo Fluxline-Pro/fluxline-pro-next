@@ -11,8 +11,10 @@ import { IosDetector } from '../components/IosDetector';
 import FxNav from '../theme/components/dsm/FxNav';
 import FxFooter from '../theme/components/dsm/FxFooter';
 import FxPreferencesDrawer from '../theme/components/dsm/FxPreferencesDrawer';
+import FxBookingModalProvider from '../theme/components/dsm/FxBookingModal';
 import GoogleAnalytics from '../components/GoogleAnalytics';
 import ConsentBanner from '../components/ConsentBanner';
+import PreorderBar from '../components/PreorderBar';
 import { PodcastPlayerProvider } from '../contexts/PodcastPlayerContext';
 import { PodcastMiniPlayer } from '../components/podcast/PodcastMiniPlayer';
 import { AuthProvider } from '../lib/auth';
@@ -55,19 +57,23 @@ export function Providers({ children, gaMeasurementId = '' }: ProvidersProps) {
                 {/* Wraps the page transition so the podcast <audio> element and
                   mini-player survive client-side navigation. */}
                 <PodcastPlayerProvider>
-                  <SkipToContent />
-                  <FxNav />
-                  <FxPageTransition>{children}</FxPageTransition>
-                  <FxFooter preferencesOnClick={() => setPrefsOpen(true)} />
-                  <FxPreferencesDrawer
-                    open={prefsOpen}
-                    onClose={() => setPrefsOpen(false)}
-                  />
-                  <PodcastMiniPlayer />
-                  <ConsentBanner />
-                  {gaMeasurementId && (
-                    <GoogleAnalytics measurementId={gaMeasurementId} />
-                  )}
+                  {/* One Book a Conversation dialog for every opener (#408). */}
+                  <FxBookingModalProvider>
+                    <SkipToContent />
+                    <PreorderBar />
+                    <FxNav onOpenPreferences={() => setPrefsOpen(true)} />
+                    <FxPageTransition>{children}</FxPageTransition>
+                    <FxFooter />
+                    <FxPreferencesDrawer
+                      open={prefsOpen}
+                      onClose={() => setPrefsOpen(false)}
+                    />
+                    <PodcastMiniPlayer />
+                    <ConsentBanner />
+                    {gaMeasurementId && (
+                      <GoogleAnalytics measurementId={gaMeasurementId} />
+                    )}
+                  </FxBookingModalProvider>
                 </PodcastPlayerProvider>
               </AccessGate>
             </ReCaptchaProvider>

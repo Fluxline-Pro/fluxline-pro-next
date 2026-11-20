@@ -118,7 +118,6 @@ export default function FxUserMenu() {
           }}
         >
           <AvatarGlyph />
-          <span className={styles.signInLabel}>Sign in</span>
         </a>
       </div>
     );

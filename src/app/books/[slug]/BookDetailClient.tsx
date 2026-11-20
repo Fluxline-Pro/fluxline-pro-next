@@ -8,11 +8,7 @@ import FxCallout from '@/theme/components/dsm/FxCallout';
 import { UnifiedContentDetail } from '@/components/UnifiedContentDetail';
 import type { UnifiedContentDetailConfig } from '@/components/UnifiedContentDetail';
 import { RCF_BOOK_SLUG, RCF_OFFERINGS, STOREFRONT_URL } from '../constants';
-import {
-  RCF_PREORDER_WINDOW,
-  RCF_PREVIEW_PDF,
-  RCF_RELEASE_WINDOW,
-} from '@/lib/resonanceCore';
+import { RCF_PREVIEW_PDF, RCF_RELEASE_WINDOW } from '@/lib/resonanceCore';
 
 interface BookDetailClientProps {
   book: Book;
@@ -60,9 +56,8 @@ function AvailabilitySection({ book }: { book: Book }) {
         ) : isRcf ? (
           <>
             The book and its companion workbook are in final production,
-            targeted for {RCF_RELEASE_WINDOW}. Preorders open in{' '}
-            {RCF_PREORDER_WINDOW}. At launch, every edition will be available
-            from the Fluxline store.
+            targeted for {RCF_RELEASE_WINDOW}. Pre-orders are open on the
+            Fluxline Store.
           </>
         ) : (
           <>

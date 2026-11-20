@@ -3,29 +3,26 @@
 import React from 'react';
 import Link from 'next/link';
 import FxContainer from '@/theme/components/dsm/FxContainer';
-import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
 import FxGroupLabel from '@/theme/components/dsm/FxGroupLabel';
 import FxCard from '@/theme/components/dsm/FxCard';
 import FxButton from '@/theme/components/dsm/FxButton';
+import { FxBookingTrigger } from '@/theme/components/dsm/FxBookingModal';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxSectionPanel from '@/theme/components/dsm/FxSectionPanel';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import DriveModelDiagram from '@/assets/images/drive_model.jpg';
 import { COMPANY_VALUES } from '@/lib/siteContent';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import PreorderAnnouncement from '@/components/PreorderAnnouncement';
 import {
   DRIVE_STEPS,
   RCF_ASSUMPTIONS,
   RCF_EXPLAINER,
   RCF_CONCEPTS,
   RCF_FAQ,
-  RCF_LOGO_IMAGE,
-  RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
-  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_RINGS,
-  RCF_TRADEMARK,
   TRI_FRAMEWORK_URL,
   TRI_SITE_URL,
   TW_FRAMEWORK_URL,
@@ -213,59 +210,14 @@ const ENGAGEMENTS: {
  */
 export default function ResonanceCoreFrameworkClient() {
   return (
-    <FxContainer style={{ padding: '64px 32px 88px' }}>
-      {/* Header */}
-      <div
-        className='fx-stack'
-        style={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          gap: 'var(--fx-space-xl)',
-          flexWrap: 'wrap',
-          marginBottom: 'var(--fx-space-xl)',
-        }}
-      >
-        <img
-          src={RCF_LOGO_IMAGE}
-          alt={`${RCF_TRADEMARK} logo`}
-          style={{
-            width: 120,
-            height: 120,
-            objectFit: 'contain',
-            borderRadius: 'var(--fx-radius-card-sm)',
-            border: '1px solid var(--fx-border)',
-            background: '#000',
-            padding: 10,
-          }}
-        />
-        <div style={{ flex: 1, minWidth: 260 }}>
-          <FxSectionHeading
-            kicker='Coaching & Consulting'
-            title={RCF_TRADEMARK}
-            subhead={RCF_ONE_LINER}
-            as='h1'
-          />
-        </div>
-      </div>
+    <FxContainer style={{ padding: '56px 32px 88px' }}>
+      {/* The page's h1, logo and first actions are in the banner hero above
+          (page.tsx, owner 2026-11-19). */}
 
-      <div
-        style={{
-          display: 'flex',
-          gap: 'var(--fx-space-s)',
-          flexWrap: 'wrap',
-          marginBottom: SECTION_GAP,
-        }}
-      >
-        <FxButton variant='primary' href='/contact'>
-          Book a Free Consultation
-        </FxButton>
-        <FxButton variant='outline' href={TRI_SITE_URL}>
-          Listen to the Podcast
-        </FxButton>
-        <FxButton variant='quiet' href={RCF_PREVIEW_PDF}>
-          Download the RCF Preview
-        </FxButton>
-      </div>
+      {/* Book pre-order announcement (#374): the same band as the home page. */}
+      <FxReveal style={{ marginBottom: SECTION_GAP }}>
+        <PreorderAnnouncement />
+      </FxReveal>
 
       {/* 1. What the framework is */}
       <FxReveal>
@@ -275,9 +227,7 @@ export default function ResonanceCoreFrameworkClient() {
           style={{ marginBottom: SECTION_GAP }}
         >
           <FxGroupLabel>Overview</FxGroupLabel>
-          <h2 style={{ ...sectionTitle, color: 'var(--fx-gold)' }}>
-            What the Framework Is
-          </h2>
+          <h2 style={sectionTitle}>What the Framework Is</h2>
           <p
             style={{
               color: 'var(--fx-gold)',
@@ -632,9 +582,9 @@ export default function ResonanceCoreFrameworkClient() {
             <FxCard variant='inset' style={{ padding: '22px 24px' }}>
               <h3 style={cardTitle}>Be notified when the book lands</h3>
               <p style={{ ...cardBody, marginBottom: 'var(--fx-space-s)' }}>
-                The book is targeted for {RCF_RELEASE_WINDOW}, with preorders
-                opening in {RCF_PREORDER_WINDOW}. Join the TRI Newsletter for
-                launch updates. No spam, ever.
+                The book is targeted for {RCF_RELEASE_WINDOW}, with pre-orders
+                open on the Fluxline Store. Join the TRI Newsletter for launch
+                updates. No spam, ever.
               </p>
               <NewsletterSignup
                 size='sm'
@@ -656,8 +606,8 @@ export default function ResonanceCoreFrameworkClient() {
           <h2 style={sectionTitle}>Frequently Asked Questions</h2>
           <SectionSubtitle title='Built from research and practice'>
             The framework brings together research, systems thinking, and
-            real-world experience. Here is what it is, how it was developed,
-            and who it&apos;s for.
+            real-world experience. Here is what it is, how it was developed, and
+            who it&apos;s for.
           </SectionSubtitle>
           <div style={headedListStyle}>
             {RCF_FAQ.map((f) => (
@@ -702,9 +652,7 @@ export default function ResonanceCoreFrameworkClient() {
               marginBottom: 'var(--fx-space-l)',
             }}
           >
-            <FxButton variant='primary' href='/contact'>
-              Book a Free Consultation
-            </FxButton>
+            <FxBookingTrigger variant='primary' />
             <FxButton variant='outline' href={TRI_SITE_URL}>
               Listen to the Podcast
             </FxButton>

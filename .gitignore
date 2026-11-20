@@ -72,3 +72,6 @@ api/package-lock.json
 
 # local agent settings
 .claude/settings.local.json
+
+# yarn legal:pdf default output
+/legal-pdf-out

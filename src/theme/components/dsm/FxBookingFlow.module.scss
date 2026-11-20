@@ -1,0 +1,452 @@
+// Book a Conversation steps (#408), ported from terencewaters.com.
+
+@use './fxBookingMixins' as *;
+
+/*
+ * Book a Conversation, inline on /contact (redesign Slice 7). Design-system
+ * tokens and rem type (so the Text size setting reaches it), a card with the
+ * straight accent line like the message form, 44px targets, a real focus
+ * outline, and errors marked with "!" as well as colour.
+ */
+
+.flow {
+  background: var(--fx-surface-card);
+  border: 1px solid var(--fx-border);
+  border-radius: var(--fx-radius-card);
+  padding: 32px;
+  min-width: 0;
+  @include accent-line(top);
+
+  @include until('mobile-lg') {
+    padding: 24px;
+  }
+}
+
+.title {
+  margin: 0;
+  font-family: var(--fx-font);
+  font-size: var(--fx-h3-size);
+  font-weight: var(--fx-h3-weight);
+  line-height: 1.25;
+  color: var(--fx-text-heading-display);
+
+  /* Focus lands here by script when the step changes; no ring needed. */
+  &:focus {
+    outline: none;
+  }
+}
+
+.text {
+  margin: 12px 0 0;
+  max-width: 64ch;
+  font-family: var(--fx-font);
+  font-size: var(--fx-body-sm-size);
+  line-height: var(--fx-body-sm-leading);
+  color: var(--fx-text-body);
+}
+
+/* ===== Progress ===== */
+.progress {
+  @include label;
+  margin: 0 0 12px;
+  color: var(--fx-accent);
+}
+
+.steps {
+  display: flex;
+  gap: 12px;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.stepItem {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding-top: 12px;
+  border-top: 2px solid var(--fx-border);
+  color: var(--fx-text-muted);
+  font-family: var(--fx-font);
+  font-size: 0.8125rem;
+}
+
+.stepDone {
+  border-top-color: var(--fx-border-strong);
+  color: var(--fx-text-soft);
+}
+
+.stepCurrent {
+  border-top-color: var(--fx-accent);
+  color: var(--fx-text-heading);
+  font-weight: 700;
+
+  /* Phones: the current step gets the room its label needs. */
+  @include until('mobile-sm') {
+    flex-grow: 2.4;
+  }
+}
+
+.stepDot {
+  flex-shrink: 0;
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  .stepCurrent & {
+    background: var(--fx-accent);
+    border-color: var(--fx-accent);
+    color: var(--fx-accent-ink);
+  }
+}
+
+.stepLabel {
+  min-width: 0;
+  overflow-wrap: break-word;
+
+  @include until('mobile-sm') {
+    /* Phones: the dots and "Step n of 3" carry it; labels would wrap badly. */
+    .stepItem:not(.stepCurrent) & {
+      @include visually-hidden;
+    }
+  }
+}
+
+/* ===== Choices (services, meeting length) ===== */
+.options {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+
+  @include from('mobile-lg') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.option,
+.length {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  border: 1px solid var(--fx-border);
+  border-radius: var(--fx-radius-control);
+  background: var(--fx-surface-input);
+  cursor: pointer;
+  transition: border-color var(--fx-hover-duration) var(--fx-ease);
+
+  &:hover {
+    border-color: var(--fx-border-hover);
+  }
+
+  &:focus-within {
+    outline: 2px solid var(--fx-accent);
+    outline-offset: 2px;
+  }
+}
+
+.optionOn {
+  border-color: var(--fx-accent);
+  box-shadow: inset 0 0 0 1px var(--fx-accent);
+}
+
+.check {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0.2rem 0 0;
+  accent-color: var(--fx-accent);
+
+  /* The whole card shows focus (:focus-within above). */
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.optionText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Step 1 services and step 3 meeting lengths: white title, very light grey
+   description (owner, 2026-11-19). */
+.optionLabel {
+  font-family: var(--fx-font);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--fx-text-heading-display);
+}
+
+.optionDesc {
+  font-family: var(--fx-font);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--fx-text-body) 80%, var(--fx-text-bright));
+}
+
+.lengths {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+
+  @include from('mobile-lg') {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ===== Fields ===== */
+.fields {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.fieldPair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+
+  @include from('mobile-lg') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+
+  legend {
+    margin-bottom: 6px;
+    padding: 0;
+  }
+}
+
+.label {
+  font-family: var(--fx-font);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--fx-text-soft);
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px 14px;
+  background: var(--fx-surface-input);
+  border: 1px solid var(--fx-border);
+  border-radius: var(--fx-radius-control);
+  color: var(--fx-text-bright);
+  font-family: var(--fx-font);
+  font-size: 0.90625rem;
+  transition: border-color var(--fx-hover-duration) var(--fx-ease);
+
+  &:focus {
+    border-color: var(--fx-border-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--fx-accent);
+    outline-offset: 2px;
+  }
+
+  &::placeholder {
+    color: var(--fx-text-faint);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--fx-error-border);
+  }
+}
+
+textarea.input {
+  resize: vertical;
+}
+
+.file {
+  font-family: var(--fx-font);
+  font-size: 0.875rem;
+  color: var(--fx-text-body);
+  max-width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--fx-accent);
+    outline-offset: 2px;
+  }
+}
+
+.hint {
+  margin: 0;
+  font-family: var(--fx-font);
+  font-size: 0.8125rem;
+  color: var(--fx-text-soft);
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+
+  &:focus-within .check {
+    outline: 2px solid var(--fx-accent);
+    outline-offset: 2px;
+  }
+}
+
+.consentText {
+  font-family: var(--fx-font);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--fx-text-body);
+}
+
+.fieldError,
+.submitError p {
+  margin: 0;
+  font-family: var(--fx-font);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--fx-error);
+}
+
+.fieldError::before {
+  content: '! ';
+  content: '! ' / '';
+  font-weight: 700;
+}
+
+.submitError {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid var(--fx-error-border);
+  border-radius: var(--fx-radius-control);
+
+  p {
+    font-size: 0.875rem;
+  }
+}
+
+.textLink {
+  color: var(--fx-accent);
+  font-weight: 600;
+  text-underline-offset: 3px;
+
+  @include focus-ring;
+}
+
+/* ===== Actions ===== */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.actionsEnd {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.actionsSplit {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.busy:disabled {
+  opacity: 1;
+  cursor: progress;
+  background: var(--fx-accent);
+}
+
+/* ===== Schedule (TidyCal, click to load) ===== */
+.placeholder {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  margin-top: 24px;
+  padding: 32px;
+  border: 1px dashed var(--fx-border-hover);
+  border-radius: var(--fx-radius-control);
+  background: var(--fx-surface-input);
+
+  .text {
+    margin: 0;
+  }
+}
+
+.frameWrap {
+  margin-top: 24px;
+  border: 1px solid var(--fx-border);
+  border-radius: var(--fx-radius-control);
+  overflow: hidden;
+  background: var(--fx-surface-input);
+}
+
+.frame {
+  display: block;
+  width: 100%;
+  height: 40rem;
+  border: 0;
+}
+
+.success {
+  text-align: center;
+  padding: 24px 0;
+
+  .text {
+    margin-inline: auto;
+  }
+}
+
+.srOnly {
+  @include visually-hidden;
+}
+
+:global([data-fx-theme='high-contrast']) .input::placeholder {
+  font-style: italic;
+}
+
+/* Step to step: the new step slides in gently (off with reduced motion). */
+.pane {
+  animation: bookingStepIn 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  @include motion-safe-only;
+}
+
+@keyframes bookingStepIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

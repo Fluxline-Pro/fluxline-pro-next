@@ -6,7 +6,7 @@ import BooksListingClient from './BooksListingClient';
 export const metadata: Metadata = {
   title: 'The Resonance Core Framework™ Book & Workbook',
   description:
-    'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Preorders open in early November 2026. See what is inside.',
+    'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Pre-orders are open on the Fluxline Store. See what is inside.',
   keywords: [
     'The Resonance Core Framework book',
     'resonance core framework',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'The Resonance Core Framework™ Book & Workbook',
     description:
-      'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Preorders open in early November 2026. See what is inside.',
+      'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Pre-orders are open on the Fluxline Store. See what is inside.',
     url: 'https://www.fluxline.pro/books',
     siteName: 'Fluxline',
     type: 'website',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Resonance Core Framework™ Book & Workbook',
     description:
-      'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Preorders open in early November 2026. See what is inside.',
+      'The Resonance Core Framework™ book and companion workbook by Terence Waters, targeted for Q1 2027. Pre-orders are open on the Fluxline Store. See what is inside.',
     images: ['/images/RCF_Logo.jpeg'],
   },
   alternates: {

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Book a Free Consultation',
+  title: 'Book a Conversation',
   description:
-    'Schedule a free consultation with Fluxline. Tell us about your needs and pick a time that works for you.',
+    'Book a free conversation with Fluxline. Tell us about your needs and pick a time that works for you.',
   openGraph: {
-    title: 'Book a Free Consultation - Fluxline',
+    title: 'Book a Conversation - Fluxline',
     description:
-      'Schedule a free consultation with Fluxline. Tell us about your needs and pick a time that works for you.',
+      'Book a free conversation with Fluxline. Tell us about your needs and pick a time that works for you.',
     url: 'https://www.fluxline.pro/book',
     siteName: 'Fluxline',
     type: 'website',

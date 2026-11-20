@@ -13,6 +13,8 @@
  * describes the framework, not the service.
  */
 
+import { getStorefrontUrl } from '@/lib/integrations/config';
+
 export const RCF_TRADEMARK = 'The Resonance Core Framework™';
 
 /** Public introduction preview, already published as a scroll PDF. */
@@ -20,19 +22,31 @@ export const RCF_PREVIEW_PDF =
   '/scrolls/pdfs/resonance-core-framework-preview-terence-waters.pdf';
 
 export const RCF_LOGO_IMAGE = '/images/RCF_Logo.jpeg';
+
+/** The RCF banner (title, tagline and DRIVE compass), used as a hero backdrop. */
+export const RCF_BANNER_IMAGE = '/images/RCF_banner_logo.jpg';
 export const RCF_BOOK_IMAGE = '/images/RCF_BookConcept.jpg';
 
 /**
  * The book's release window. Always pair it with "targeted" ("targeted for
- * Q1 2027") and never name a month for the launch itself.
+ * Q1 2027") and never name a month for the launch itself. The one exception is
+ * RCF_EXPECTED_RELEASE below.
  */
 export const RCF_RELEASE_WINDOW = 'Q1 2027';
 
 /**
- * When preorders open (owner, 2026-10-19). Naming the month is allowed for
- * the preorder date only.
+ * The expected release, in the store's own words (owner, 2026-11-12). Used
+ * only by the site-wide pre-order bar, which mirrors the store's bar; other
+ * copy keeps "targeted for Q1 2027".
  */
-export const RCF_PREORDER_WINDOW = 'early November 2026';
+export const RCF_EXPECTED_RELEASE =
+  'late February to mid-March 2027 (subject to change)';
+
+/**
+ * The book's page on the Fluxline Store, where pre-orders are taken. Built from
+ * the configured storefront origin so test builds point at the test store.
+ */
+export const RCF_STORE_BOOK_URL = `${getStorefrontUrl()}/book`;
 
 /** The one-sentence version, for the home page and card summaries. */
 export const RCF_ONE_LINER =
@@ -142,9 +156,6 @@ export const PODCAST_BLURB =
 
 /** The framework's page (the former /resonance-core explainer redirects here). */
 export const RCF_FRAMEWORK_PATH = '/resonance-core-framework';
-
-/** Where every "Be notified at launch" link goes (the TRI Newsletter signup). */
-export const RCF_NOTIFY_PATH = '/resonance-core-framework#notify';
 
 /** Sister sites in the RCF ecosystem. */
 export const TRI_SITE_URL = 'https://theresonantidentity.com';

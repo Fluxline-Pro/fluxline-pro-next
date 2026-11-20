@@ -22,7 +22,6 @@ import {
   RCF_BRIEF,
   RCF_LOGO_IMAGE,
   RCF_PREVIEW_PDF,
-  RCF_PREORDER_WINDOW,
   RCF_RELEASE_WINDOW,
   RCF_TRADEMARK,
   TRI_SITE_URL,
@@ -55,7 +54,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxSectionHeading
         kicker='Books'
         title={RCF_TRADEMARK}
-        subhead={`The book & companion workbook, targeted for ${RCF_RELEASE_WINDOW}. Preorders open in ${RCF_PREORDER_WINDOW}.`}
+        subhead={`The book & companion workbook, targeted for ${RCF_RELEASE_WINDOW}. Pre-orders are open on the Fluxline Store.`}
         as='h1'
       />
 
@@ -84,7 +83,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
           Targeted for {RCF_RELEASE_WINDOW}
         </FxChip>
         <FxChip kind='badge' tone='gold'>
-          Preorders open {RCF_PREORDER_WINDOW}
+          Pre-orders open now
         </FxChip>
         <FxChip kind='tag'>Book</FxChip>
         <FxChip kind='tag'>Companion workbook</FxChip>
@@ -400,11 +399,11 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
 
           <FxCallout
             tone='info'
-            title='Preorders open early November'
+            title='Pre-orders are open'
             style={{ marginTop: 'var(--fx-space-l)' }}
           >
-            Preorders open in {RCF_PREORDER_WINDOW}. We will announce them
-            here and in the TRI Newsletter.
+            Pre-orders are open on the Fluxline Store. Join the TRI Newsletter
+            for release updates.
           </FxCallout>
         </FxSectionPanel>
       </FxReveal>
@@ -640,7 +639,7 @@ export default function BooksListingClient({ books }: BooksListingClientProps) {
       <FxReveal>
         <FxCTABand
           title='Want to know when it lands?'
-          body={`The book and workbook are targeted for ${RCF_RELEASE_WINDOW}, with preorders opening in ${RCF_PREORDER_WINDOW}. Join the TRI Newsletter and we'll let you know the moment they're available. Book launch updates included. No spam, ever.`}
+          body={`The book and workbook are targeted for ${RCF_RELEASE_WINDOW}, with pre-orders open on the Fluxline Store. Join the TRI Newsletter and we'll let you know the moment they're available. Book launch updates included. No spam, ever.`}
           secondaryLabel='Explore Our Services →'
           secondaryHref='/services'
         >

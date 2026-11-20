@@ -1,30 +1,26 @@
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxRailLayout from '@/theme/components/dsm/FxRailLayout';
-import FxButton from '@/theme/components/dsm/FxButton';
 import FxFeatureCallout from '@/theme/components/dsm/FxFeatureCallout';
-import { ConsultationStepper } from '@/components/ConsultationStepper';
+import { FxBookingTrigger } from '@/theme/components/dsm/FxBookingModal';
 import { ContactForm } from './components/ContactForm';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import ContactImage from '@/assets/images/ContactMe2400x1600.jpg';
 
 /** The booking flow, in the words the /book page uses. */
-const CONSULTATION_STEPS = [
+const BOOKING_STEPS = [
   'Choose the service(s) you need, or select "Help me choose".',
   'Answer a few short questions so we can make the most of our time.',
   'Enter your contact details, pick a meeting length, and schedule your Zoom call.',
 ];
 
 export default function ContactPage() {
-  const [stepperOpen, setStepperOpen] = React.useState(false);
-
   return (
     <FxContainer style={{ padding: '118px 32px 60px' }}>
       {/* Phones: the portrait is hidden and the Let's Connect card moves below
-          the main column, so "Book a Free Consultation" comes first. */}
+          the main column, so "Book a Conversation" comes first. */}
       <FxRailLayout
         parallax
         railClassName='fx-contact-rail'
@@ -167,13 +163,13 @@ export default function ContactPage() {
           </p>
         </div>
 
-        {/* Consultation: the standout next step (same featured callout as
+        {/* Book a Conversation: the standout next step (same featured callout as
             the RCF and Business Strategy sections on /services). The note
             form below stays available but is deliberately secondary. */}
         <FxFeatureCallout
           id='consultation'
           label='Start here'
-          title='Book a Free Consultation'
+          title='Book a Conversation'
           titleAs='h2'
           description={
             <>
@@ -198,18 +194,16 @@ export default function ContactPage() {
               maxWidth: '60ch',
             }}
           >
-            {CONSULTATION_STEPS.map((step) => (
+            {BOOKING_STEPS.map((step) => (
               <li key={step}>{step}</li>
             ))}
           </ol>
-          <FxButton
+          {/* Opens the Book a Conversation dialog (#408). */}
+          <FxBookingTrigger
             variant='primary'
             size='lg'
-            onClick={() => setStepperOpen(true)}
             className='fx-feature-callout-action'
-          >
-            Book a Free Consultation
-          </FxButton>
+          />
         </FxFeatureCallout>
 
         {/* Form card (secondary) */}
@@ -281,11 +275,6 @@ export default function ContactPage() {
           </div>
         </div>
       </FxRailLayout>
-
-      <ConsultationStepper
-        isOpen={stepperOpen}
-        onDismiss={() => setStepperOpen(false)}
-      />
     </FxContainer>
   );
 }

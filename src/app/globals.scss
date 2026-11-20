@@ -472,6 +472,10 @@ html[data-fx-motion='reduce'] *::after {
     padding-top: 120px !important;
     padding-bottom: 64px !important;
   }
+  .fx-hero-pad-compact {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
   .fx-herocard {
     padding: 28px 22px !important;
   }
@@ -628,4 +632,46 @@ html[data-fx-motion='reduce'] .fx-snap-container {
 
 [data-fx-theme='colorblind'] img {
   filter: saturate(0.7) hue-rotate(-10deg) !important;
+}
+
+/*
+ * Content on a fixed dark surface (the FxHero card, #414). In the dark themes
+ * the tokens already fit; the light themes would turn this text dark on the
+ * dark card, so it keeps the dark family's values there.
+ */
+.fx-on-dark {
+  color: var(--fx-text-base);
+}
+
+[data-fx-theme='light'] .fx-on-dark {
+  --fx-text-heading-display: #ffffff;
+  --fx-text-base: #d5dae3;
+  --fx-text-bright: #eaf0f9;
+  --fx-text-body: #c2ceda;
+  --fx-text-soft: #8fa8ca;
+  --fx-accent: #b8cdf5;
+  --fx-accent-ink: #0a0d13;
+  --fx-line: #5e81a8;
+}
+
+[data-fx-theme='grayscale-light'] .fx-on-dark {
+  --fx-text-heading-display: #ffffff;
+  --fx-text-base: #d2d2d7;
+  --fx-text-bright: #f4f4f6;
+  --fx-text-body: #c4c4ca;
+  --fx-text-soft: #a6a6af;
+  --fx-accent: #e2e2e7;
+  --fx-accent-ink: #0c0c0d;
+  --fx-line: #8e8e98;
+}
+
+/* /services: the book rail (#420) shows from desktop width only; below that
+   the page is one column, so the services keep their full width. */
+@media (max-width: 1023px) {
+  .fx-rail-layout:has(> .fx-services-rail) {
+    grid-template-columns: 1fr !important;
+  }
+  .fx-services-rail {
+    display: none !important;
+  }
 }

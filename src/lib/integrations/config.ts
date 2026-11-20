@@ -63,6 +63,14 @@ export function getServiceApiBase(service: ServiceName): string {
   return origin.endsWith('/api') ? origin : `${origin}/api`;
 }
 
+/**
+ * Storefront origin, no trailing slash. Honors NEXT_PUBLIC_STORE_URL so the
+ * test environment links to the test store.
+ */
+export function getStorefrontUrl(): string {
+  return configuredOrigin('storefront').replace(/\/$/, '');
+}
+
 /** Account Portal origin, no trailing slash. */
 export function getAccountPortalUrl(): string {
   return configuredOrigin('account').replace(/\/$/, '');

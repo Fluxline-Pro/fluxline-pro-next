@@ -1,46 +1,61 @@
 'use client';
 
 /**
- * /book — Dedicated consultation booking page
- * Opens the ConsultationStepper immediately on load.
+ * /book — Book a Conversation (#408).
+ *
+ * Opens the Book a Conversation dialog on load, and offers a button to reopen
+ * it. Every "Book a Conversation" button on the site links here, so without
+ * JavaScript this page is where they land: the TidyCal calendar link below
+ * works without it.
  */
 
 import React from 'react';
 import FxContainer from '@/theme/components/dsm/FxContainer';
 import FxSectionHeading from '@/theme/components/dsm/FxSectionHeading';
-import FxButton from '@/theme/components/dsm/FxButton';
-import { ConsultationStepper } from '@/components/ConsultationStepper';
+import {
+  FxBookingTrigger,
+  useBookingModal,
+} from '@/theme/components/dsm/FxBookingModal';
+import { BOOKING_FLOW, TIDYCAL_URL } from '@/theme/components/dsm/bookingCopy';
 
 export default function BookPage() {
-  const [stepperOpen, setStepperOpen] = React.useState(false);
+  const booking = useBookingModal();
+  const open = booking?.open;
 
-  // Auto-open stepper on page load with a short delay to allow
-  // assistive technologies to announce the page content first
+  // Open once on load, after a short delay so assistive technologies can
+  // announce the page first.
   React.useEffect(() => {
-    const timer = setTimeout(() => setStepperOpen(true), 150);
+    if (!open) return;
+    const timer = setTimeout(open, 150);
     return () => clearTimeout(timer);
-  }, []);
+  }, [open]);
 
   return (
     <FxContainer style={{ padding: '64px 32px 88px' }}>
       <FxSectionHeading
-        title='Book a Free Consultation'
-        subhead='Tell us about your needs and schedule a Zoom call — all in three quick steps.'
+        title='Book a Conversation'
+        subhead='Tell us about your needs and schedule a Zoom call, all in three quick steps.'
         as='h1'
       />
 
       <div style={{ marginTop: 20 }}>
-        <FxButton
+        <FxBookingTrigger
           variant='primary'
           size='lg'
-          onClick={() => setStepperOpen(true)}
           style={{ minWidth: '260px' }}
-        >
-          Start Your Consultation →
-        </FxButton>
+        />
       </div>
 
-      {/* Brief description for SEO / non-JS fallback */}
+      <noscript>
+        <p style={{ marginTop: 16, color: 'var(--fx-text-body)' }}>
+          {BOOKING_FLOW.noScript}{' '}
+          <a href={TIDYCAL_URL} target='_blank' rel='noopener noreferrer'>
+            {BOOKING_FLOW.noScriptLink}
+          </a>
+        </p>
+      </noscript>
+
+      {/* What the steps are, for search and for anyone reading first. */}
       <section
         style={{
           maxWidth: '640px',
@@ -71,8 +86,8 @@ export default function BookPage() {
             'Choose the service(s) you need — or select "Help me choose".',
             'Answer a few short questions so we can make the most of our time.',
             'Enter your contact details, pick a meeting length, and schedule your Zoom call.',
-          ].map((step, i) => (
-            <li key={i}>
+          ].map((step) => (
+            <li key={step}>
               <p
                 style={{
                   color: 'var(--fx-text-heading)',
@@ -88,11 +103,6 @@ export default function BookPage() {
           ))}
         </ol>
       </section>
-
-      <ConsultationStepper
-        isOpen={stepperOpen}
-        onDismiss={() => setStepperOpen(false)}
-      />
     </FxContainer>
   );
 }

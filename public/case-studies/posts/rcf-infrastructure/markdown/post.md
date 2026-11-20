@@ -62,7 +62,7 @@ metrics:
     description: 'The pipeline builds the eBook, then generates the print chapter and workbook IDMLs for the author to verify'
 challenge: 'Disparate creative practices — music production, content architecture, written thought leadership — operated as isolated disciplines sharing a single practitioner, with no coherent infrastructure linking them. Content existed in multiple places without meaningful connection, taxonomy was implicit, and the pipeline between intention and published artifact had no mechanism for preserving the original signal through multiple layers of execution.'
 solution: 'Built a systems-architecture identity under the Fluxline brand that treats emotional resonance as a first-class design parameter, not a finish coat. Developed dual creative and technical pipelines governed by the Resonant Execution Map — a proprietary signal-preservation framework — and integrated Microsoft Copilot Tasks as a production orchestration layer. Migrated to a headless CMS with resonance taxonomy to make the body of work navigable as a connected whole.'
-results: 'A living multi-modal ecosystem that produces music, writing, visual content, and technical infrastructure as natural byproducts of a single unified creative logic. Production scales without delegation risk through Copilot Tasks orchestration. The CMS encodes meaning and relationship, not just metadata. Signal degradation from intention to published output is structurally prevented rather than personally managed. In October 2026 the same logic reached the book: the RCF pipeline now builds the eBook and generates the InDesign print files for each chapter and workbook exercise, removing the manual layout bottleneck between the manuscript and preorders.'
+results: 'A living multi-modal ecosystem that produces music, writing, visual content, and technical infrastructure as natural byproducts of a single unified creative logic. Production scales without delegation risk through Copilot Tasks orchestration. The CMS encodes meaning and relationship, not just metadata. Signal degradation from intention to published output is structurally prevented rather than personally managed. In October 2026 the same logic reached the book: the RCF pipeline now builds the eBook and generates the InDesign print files for each chapter and workbook exercise, removing the manual layout bottleneck between the manuscript and pre-orders.'
 testimonial:
   quote: "I didn't build a brand. I built a nervous system."
   author: 'Terence Waters'
@@ -298,7 +298,7 @@ The system is alive. It is still being built.
 
 _Update, October 2026. The largest artifact the ecosystem has produced so far, and the bottleneck it removed._
 
-The principles above are easy to agree with in the abstract. The real test is a project large enough that a manual step stops being an inconvenience and becomes the critical path. For Fluxline, that project is the RCF book. It is 31 chapters across four parts, a companion workbook, and an audiobook I am narrating myself.
+The principles above are easy to agree with in the abstract. The real test is a project large enough that a manual step stops being an inconvenience and becomes the critical path. For Fluxline, that project is the RCF book. It is 31 chapters across three parts, a companion workbook, and an audiobook I am narrating myself.
 
 The book runs through its own pipeline, the [RCF Book Pipeline](/case-studies/rcf-publishing-pipeline-alignment), which is public on GitHub. Each chapter moves through gates: the manuscript, editorial and governance checks, design, the eBook, print and Kindle builds, the audiobook, and a release checklist. Nothing moves forward until it passes.
 
@@ -317,8 +317,8 @@ This is the Resonant Execution Map at work. The emotional intent of the book is 
 
 It is also the clearest example of orchestration over automation in the whole ecosystem. Claude builds the eBook and the print files. It does not decide. Each build checks itself (complete text, print-resolution figures, one-column pages, valid IDML) and reports what it could not settle. The first run came back about 95% of the way there, and the last 5% became written rules the same day, so the next chapter's build starts closer.
 
-> **Key Insight: Remove the Long Pole, Not the Human.** The value was not in removing me from print. It was in moving my attention from producing the layout to judging it. That one shift turned a step measured in months into one measured in review sessions, and it is what makes a preorder date possible.
+> **Key Insight: Remove the Long Pole, Not the Human.** The value was not in removing me from print. It was in moving my attention from producing the layout to judging it. That one shift turned a step measured in months into one measured in review sessions, and it is what makes a pre-order date possible.
 
-That date is now set: preorders for the RCF book open in early November 2026, and the book is targeted for Q1 2027. [Be notified when preorders open.](https://fluxline.pro/resonance-core-framework/#notify)
+_Updated November 20, 2026._ That date arrived: pre-orders for the RCF book are open, and the book is targeted for Q1 2027. [Pre-order the book on the Fluxline Store.](https://store.fluxline.pro/book)
 
 The system is still being built. Now it is building the book.

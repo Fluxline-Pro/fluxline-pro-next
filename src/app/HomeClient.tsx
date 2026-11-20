@@ -8,8 +8,10 @@ import FxStatCard from '@/theme/components/dsm/FxStatCard';
 import FxCallout from '@/theme/components/dsm/FxCallout';
 import FxCTABand from '@/theme/components/dsm/FxCTABand';
 import FxCard from '@/theme/components/dsm/FxCard';
+import PreorderAnnouncement from '@/components/PreorderAnnouncement';
 import FxReveal from '@/theme/components/dsm/FxReveal';
 import FxButton from '@/theme/components/dsm/FxButton';
+import { FxBookingTrigger } from '@/theme/components/dsm/FxBookingModal';
 import {
   SERVICE_CATEGORIES,
   FLUXLINE_SECONDARY_TAGLINE,
@@ -20,10 +22,9 @@ import {
   RCF_LOGO_IMAGE,
   RCF_ONE_LINER,
   RCF_PREVIEW_PDF,
-  RCF_PREORDER_WINDOW,
+  RCF_STORE_BOOK_URL,
   RCF_RELEASE_WINDOW,
   RCF_FRAMEWORK_PATH,
-  RCF_NOTIFY_PATH,
   RCF_TRADEMARK,
   TRI_START_HERE_URL,
 } from '@/lib/resonanceCore';
@@ -58,12 +59,12 @@ export default function HomeClient() {
             <br />
             Fluxline partners with individuals and businesses to create
             alignment across body, brand, and business. We specialize in
-            structural transformation — the kind that lasts because it&apos;s built
-            on clarity, intention, and practice.
+            structural transformation — the kind that lasts because it&apos;s
+            built on clarity, intention, and practice.
           </>
         }
         secondaryCta={{ label: 'Explore Fluxline ↓', href: '#about' }}
-        primaryCta={{ label: 'Book a Free Consultation', href: '/contact' }}
+        primaryBooking
         backgroundImage='/images/home/HomePageMobileGeometricBackground.jpg'
       />
 
@@ -190,14 +191,11 @@ export default function HomeClient() {
                 label='Years in Design, Development, Architecture & Product Management'
               />
               <FxStatCard value='5' label='Offerings' />
-              <FxStatCard value='Various' label='Industries served' />
+              <FxStatCard value='13' label='Case studies' />
             </FxReveal>
 
             <FxReveal delay={200}>
-              <FxCallout
-                tone='gold'
-                title="We're not done yet, but we're already extraordinary."
-              >
+              <FxCallout tone='gold' title='Fluxline: We Structure the Shift'>
                 <em>Modular by design. Resonant by nature.</em>
               </FxCallout>
             </FxReveal>
@@ -439,19 +437,17 @@ export default function HomeClient() {
                   }}
                 >
                   Available through 1:1 coaching engagements and the forthcoming
-                  book (targeted for {RCF_RELEASE_WINDOW}, with preorders
-                  opening in {RCF_PREORDER_WINDOW}).{' '}
-                  <Link
-                    href={RCF_NOTIFY_PATH}
+                  book (targeted for {RCF_RELEASE_WINDOW}, with pre-orders open
+                  on the Fluxline Store).{' '}
+                  <a
+                    href={RCF_STORE_BOOK_URL}
                     style={{ color: 'var(--fx-accent)', fontWeight: 600 }}
                   >
-                    Be notified at launch →
-                  </Link>
+                    Pre-order the book →
+                  </a>
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                  <FxButton variant='primary' href='/contact'>
-                    Book a Free Consultation
-                  </FxButton>
+                  <FxBookingTrigger variant='primary' />
                   <FxButton variant='outline' href={RCF_FRAMEWORK_PATH}>
                     Explore the Framework →
                   </FxButton>
@@ -808,7 +804,13 @@ export default function HomeClient() {
               ))}
             </FxReveal>
 
+            {/* Book pre-order announcement (#368), moved up under the intro
+                paragraphs (#402) so it is seen before the cards. */}
             <FxReveal delay={100}>
+              <PreorderAnnouncement as='h3' />
+            </FxReveal>
+
+            <FxReveal delay={200}>
               <FxCard
                 variant='feature'
                 interactive
@@ -850,7 +852,7 @@ export default function HomeClient() {
               </FxCard>
             </FxReveal>
 
-            <FxReveal delay={200}>
+            <FxReveal delay={300}>
               <FxCard
                 variant='raised'
                 interactive
@@ -888,8 +890,8 @@ export default function HomeClient() {
                   }}
                 >
                   The framework in print, digital, and audio — plus the workbook
-                  that turns it into daily practice. Preorders open in{' '}
-                  {RCF_PREORDER_WINDOW}.
+                  that turns it into daily practice. Pre-orders are open on the
+                  Fluxline Store.
                 </div>
                 <span
                   style={{
@@ -904,7 +906,7 @@ export default function HomeClient() {
               </FxCard>
             </FxReveal>
 
-            <FxReveal delay={300}>
+            <FxReveal delay={400}>
               <FxCallout tone='gold' title='Read the introduction now.'>
                 The free RCF Preview is the book&apos;s introduction — why
                 self-help usually fails, where the framework came from, and who
@@ -1139,8 +1141,7 @@ export default function HomeClient() {
             <FxCTABand
               title='Ready to structure the shift?'
               body="Tell us where you are and where you're going. We'll map the right first step together — development, design, coaching, or strategy."
-              primaryLabel='Book a Free Consultation'
-              primaryHref='/contact'
+              primaryBooking
               secondaryLabel='Full Contact Form →'
               secondaryHref='/contact'
             />

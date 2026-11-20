@@ -2,14 +2,36 @@
 
 import React from 'react';
 import FxButton from './FxButton';
+import { FxBookingTrigger } from './FxBookingModal';
 
 interface FxHeroProps {
   eyebrow?: string;
   title?: string;
   body?: React.ReactNode;
   primaryCta?: { label: string; href: string };
+  /** The primary button opens the Book a Conversation dialog (#408). */
+  primaryBooking?: boolean;
   secondaryCta?: { label: string; href: string };
+  /** A third, quiet action after the others (e.g. a download). */
+  tertiaryCta?: { label: string; href: string };
   backgroundImage?: string;
+  /** Describes the background when it carries meaning; decorative if unset. */
+  backgroundAlt?: string;
+  /** object-position for the background, e.g. 'right center'. */
+  backgroundPosition?: string;
+  /** Background image opacity (default 0.55, the home page's). */
+  backgroundOpacity?: number;
+  /**
+   * The wash over the background (a CSS background). Default: the home
+   * page's diagonal shade. A banner with its own lettering can darken the
+   * card side instead, so the lettering doesn't show around the card.
+   */
+  backgroundOverlay?: string;
+  /**
+   * A shorter hero for inner pages (less padding, an h1-sized title), as on
+   * /resonance-core-framework. The home page uses the full height.
+   */
+  compact?: boolean;
   tagline?: string;
   location?: string;
   style?: React.CSSProperties;
@@ -20,8 +42,15 @@ export default function FxHero({
   title = 'FLUXLINE',
   body,
   primaryCta,
+  primaryBooking = false,
   secondaryCta,
+  tertiaryCta,
   backgroundImage,
+  backgroundAlt,
+  backgroundPosition,
+  backgroundOpacity = 0.55,
+  backgroundOverlay = 'linear-gradient(160deg,rgba(5,7,11,.6),rgba(14,21,35,.25))',
+  compact = false,
   tagline,
   location,
   style,
@@ -39,15 +68,16 @@ export default function FxHero({
       {backgroundImage && (
         <img
           src={backgroundImage}
-          alt=''
-          aria-hidden
+          alt={backgroundAlt ?? ''}
+          aria-hidden={backgroundAlt ? undefined : true}
           style={{
             position: 'absolute',
             inset: 0,
             width: '100%',
             height: '100%',
             objectFit: 'cover' as const,
-            opacity: 0.55,
+            objectPosition: backgroundPosition,
+            opacity: backgroundOpacity,
           }}
         />
       )}
@@ -56,20 +86,22 @@ export default function FxHero({
         style={{
           position: 'absolute',
           inset: 0,
-          background:
-            'linear-gradient(160deg,rgba(5,7,11,.6),rgba(14,21,35,.25))',
+          background: backgroundOverlay,
         }}
       />
       <div
-        className='fx-c fx-hero-pad'
+        className={compact ? 'fx-c fx-hero-pad-compact' : 'fx-c fx-hero-pad'}
         style={{
           position: 'relative',
           maxWidth: 1220,
           margin: '0 auto',
-          padding: '140px 32px 70px',
+          padding: compact ? '72px 32px 56px' : '140px 32px 70px',
         }}
       >
+        {/* The card is always dark, so its text keeps the dark-theme colours
+            in the light themes too (.fx-on-dark, globals.scss). */}
         <div
+          className='fx-on-dark'
           style={{
             maxWidth: 640,
             background: 'rgba(5,7,11,.72)',
@@ -92,7 +124,9 @@ export default function FxHero({
           </div>
           <h1
             style={{
-              fontSize: 'var(--fx-display-size)',
+              fontSize: compact
+                ? 'var(--fx-h1-size)'
+                : 'var(--fx-display-size)',
               fontWeight: 800,
               letterSpacing: 'var(--fx-display-tracking)',
               color: 'var(--fx-text-heading-display)',
@@ -117,15 +151,24 @@ export default function FxHero({
               {body}
             </div>
           )}
-          {(primaryCta || secondaryCta) && (
+          {(primaryCta || primaryBooking || secondaryCta || tertiaryCta) && (
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
               {secondaryCta && (
                 <FxButton variant='outline' href={secondaryCta.href}>
                   {secondaryCta.label}
                 </FxButton>
               )}
-              {primaryCta && (
-                <FxButton href={primaryCta.href}>{primaryCta.label}</FxButton>
+              {primaryBooking ? (
+                <FxBookingTrigger />
+              ) : (
+                primaryCta && (
+                  <FxButton href={primaryCta.href}>{primaryCta.label}</FxButton>
+                )
+              )}
+              {tertiaryCta && (
+                <FxButton variant='quiet' href={tertiaryCta.href}>
+                  {tertiaryCta.label}
+                </FxButton>
               )}
             </div>
           )}

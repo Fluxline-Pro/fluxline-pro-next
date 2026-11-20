@@ -1,11 +1,17 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import ResonanceCoreFrameworkClient from './ResonanceCoreFrameworkClient';
+import FxHero from '@/theme/components/dsm/FxHero';
 import { safeJsonLdStringify } from '@/utils/jsonLd';
 import {
   RCF_CONCEPTS,
   RCF_FAQ,
+  RCF_BANNER_IMAGE,
   RCF_FRAMEWORK_PATH,
+  RCF_ONE_LINER,
+  RCF_PREVIEW_PDF,
+  RCF_TRADEMARK,
+  TRI_SITE_URL,
   rcfFaqAnswerText,
 } from '@/lib/resonanceCore';
 import { COMPANY_VALUES } from '@/lib/siteContent';
@@ -135,6 +141,26 @@ export default function ResonanceCoreFrameworkPage() {
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
+      />
+      {/* A small hero with the RCF banner and the home page's card (owner,
+          2026-11-19); it replaces the logo beside the heading. */}
+      <FxHero
+        compact
+        eyebrow='Coaching & Consulting'
+        title={RCF_TRADEMARK}
+        body={RCF_ONE_LINER}
+        primaryBooking
+        secondaryCta={{ label: 'Listen to the Podcast', href: TRI_SITE_URL }}
+        tertiaryCta={{
+          label: 'Download the RCF Preview',
+          href: RCF_PREVIEW_PDF,
+        }}
+        backgroundImage={RCF_BANNER_IMAGE}
+        backgroundPosition='right center'
+        backgroundOpacity={0.9}
+        // Darken the card side so the banner's own lettering stays behind it;
+        // the DRIVE compass stays bright on the right.
+        backgroundOverlay='linear-gradient(90deg,rgba(5,7,11,.98) 0%,rgba(5,7,11,.97) 60%,rgba(5,7,11,.3) 72%,rgba(5,7,11,0) 84%)'
       />
       <ResonanceCoreFrameworkClient />
     </>
