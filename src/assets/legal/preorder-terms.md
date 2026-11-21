@@ -32,7 +32,8 @@ All dates use Mountain Time (America/Denver).
 
 | What | When |
 | --- | --- |
-| Preorder prices and perks end | January 15, 2027. We email a cancellation reminder the same day. |
+| Preorder prices and perks last | Until release |
+| Cancellation reminder email | January 15, 2027 |
 | Self-serve cancellation closes | February 1, 2027 |
 | Expected release (public window) | Late February to mid-March 2027 (subject to change) |
 | Delay rule applies if release is later than | The late February to mid-March 2027 window |
@@ -47,7 +48,7 @@ We publish only the release window, not a release day. If the release moves beyo
 
 **3.2 Print and Kindle are not sold here.** Printed editions and Kindle editions are sold by third-party retailers (for example, Amazon and bookstores through IngramSpark distribution) on their own schedule, with their own terms. The store links out to them. The printed book is expected to ship separately around May 2027 as three individual volumes. The printed Workbook is expected around the same time. Those dates are estimates and are not part of this preorder. The eBook (EPUB) is also expected to be available through Apple Books at release.
 
-**3.3 Prices.** The price you pay is the price shown at checkout when you place your order, including any preorder discount. Preorder prices and perks end on January 15, 2027. After that date, some bundles and offers stop selling and prices return to their regular amounts. Pricing that is not yet set is shown on the store as "Pricing coming soon."
+**3.3 Prices.** The price you pay is the price shown at checkout when you place your order, including any preorder discount. Preorder prices and perks last until release. After release, some bundles and offers stop selling and prices return to their regular amounts. Pricing that is not yet set is shown on the store as "Pricing coming soon."
 
 **3.4 Bundles.** An order can include one bundle. If you choose another bundle, it replaces the one in your cart. A bundle removes any single editions it already includes, so you never pay twice for the same item.
 

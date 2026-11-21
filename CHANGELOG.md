@@ -13,6 +13,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - Pre-order press release ([#435](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/435)) matches the simplified store: the retired Everything Bundle ($109.99) is removed, eBook + Workbook ($39.99) is listed as its own bundle, pre-order prices hold until release instead of ending January 15, 2027, and a dated update note says so.
+- RCF Preorder Terms ([#438](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/438), owner decision): preorder prices and perks last until release instead of ending January 15, 2027 (section 2 key dates and 3.3), matching the store. The cancellation reminder email stays on January 15, 2027. The page header's Last Updated date now matches the document (November 21, 2026). The counsel-final record in `content/legal/2026-11-20/` is unchanged.
 
 ## [v3_6.PROD] - 2026-11-20
 
