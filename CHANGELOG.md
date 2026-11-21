@@ -10,6 +10,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - `next` 16.4.6 and `eslint-config-next` 16.4.6 ([#432](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/432)), for the Next.js advisories of 2026-11-19 (SVG rejection bypass in image optimization, HttpOnly cookie exposure on Edge routes, cache disclosure and poisoning, cross-client response injection) that affect 16.0.0 through 16.4.4. The `eslint-plugin-react-hooks` 7.0.1 and `minimatch` ^10.2.3 `resolutions` pins stay, although the new lint packages ask for ^7.1.0 and ^11.0.1. The new `@next/next/no-location-assign-relative-destination` rule adds 4 lint warnings (49 in all, 0 errors).
 
+### Changed
+
+- Pre-order press release ([#435](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/435)) matches the simplified store: the retired Everything Bundle ($109.99) is removed, eBook + Workbook ($39.99) is listed as its own bundle, pre-order prices hold until release instead of ending January 15, 2027, and a dated update note says so.
+
 ## [v3_6.PROD] - 2026-11-20
 
 The Resonance Core Framework™ book pre-order launch: the counsel-final legal documents, the pre-order announcements and site-wide bar, the press release, and the Book a Conversation dialog. It reaches production through PR #393 (`test` → `master`).
