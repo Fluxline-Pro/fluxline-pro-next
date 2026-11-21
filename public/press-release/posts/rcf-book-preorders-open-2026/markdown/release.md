@@ -6,6 +6,7 @@ author: 'Fluxline Resonance Group'
 # Noon UTC, not a bare date: the page formats this in the reader's time zone,
 # and a bare date (midnight UTC) shows as November 19 in the Americas.
 publishedDate: '2026-11-20T12:00:00Z'
+lastUpdated: '2026-11-21T12:00:00Z'
 category: 'Product Release'
 tags: ['Resonance Core Framework', 'book', 'pre-order', 'launch']
 imageUrl: '/books/posts/resonance-core-framework/images/The-Resonance-Core-Book.jpg'
@@ -65,12 +66,14 @@ Every option is listed side by side on the [pre-order deals page](https://store.
 
 - **RCF Founders Pass, $89 for the first year.** Every current and future digital offering in one pass: the audiobook, eBook and workbook, the RCF AI Companion, Identity in Motion, and lessons and training as they ship. It also includes the private Facebook Group and Discord Server, monthly group cohort sessions, and individualized trainings. Nothing renews automatically. After the first year it becomes the RCF All-Access Pass, with optional yearly renewal at $149. Available in the United States only; a US billing address is required.
 - **Complete Bundle, $69.99.** The audiobook, the eBook and the workbook.
-- **Everything Bundle, $109.99.** The Complete Bundle, the RCF AI Companion First-Year Pass and Identity in Motion. Pre-order only. Because it includes the Companion and Identity in Motion, it is available in the United States only; a US billing address is required.
-- **Single editions.** eBook and workbook together, $39.99. eBook (PDF and EPUB), $34.99. Audiobook, narrated by the author, $34.99. Workbook, $19.99.
+- **eBook + Workbook bundle, $39.99.**
+- **Single editions.** eBook (PDF and EPUB), $34.99. Audiobook, narrated by the author, $34.99. Workbook, $19.99.
 - **RCF AI Companion: First-Year Pass, $29.99.** An AI chatbot for the book. Ask it a question and get a short answer with chapter citations. It is $19.99 when added to the Complete Bundle or the eBook and workbook bundle. One payment covers the first year. Available in the United States only; a US billing address is required.
 - **Identity in Motion, $49 with a book pre-order.** A guided, individualized 4-week program to stop starting over. It begins after the book's release, and is $99 after the pre-order window. Available in the United States only; a US billing address is required.
 
-Pre-order pricing on the book editions, the bundles, the $19.99 Companion price and Identity in Motion runs through January 15, 2027. The Founders Pass stays at $89 for the first year after that.
+Pre-order pricing on the book editions, the bundles, the $19.99 Companion price and Identity in Motion holds until release. The Founders Pass is $89 for the first year.
+
+_Updated November 21, 2026: the Everything Bundle has been retired, since the RCF Founders Pass includes everything it did. Pre-order prices now hold until release rather than ending January 15, 2027._
 
 ## Read the introduction first
 
