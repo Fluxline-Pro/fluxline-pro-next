@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [v3_6_1.PROD] - 2026-11-21
+
+A security patch release: the Next.js 16.4.6 upgrade for the November 19, 2026 advisories, plus the pre-order wording brought in line with the store (press release and RCF Preorder Terms). It reaches production through a `test` → `master` promotion.
+
 ### Security
 
 - `next` 16.4.6 and `eslint-config-next` 16.4.6 ([#432](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/432)), for the Next.js advisories of 2026-11-19 (SVG rejection bypass in image optimization, HttpOnly cookie exposure on Edge routes, cache disclosure and poisoning, cross-client response injection) that affect 16.0.0 through 16.4.4. The `eslint-plugin-react-hooks` 7.0.1 and `minimatch` ^10.2.3 `resolutions` pins stay, although the new lint packages ask for ^7.1.0 and ^11.0.1. The new `@next/next/no-location-assign-relative-destination` rule adds 4 lint warnings (49 in all, 0 errors).
@@ -170,6 +174,7 @@ The first production release of the Next.js rebuild of fluxline.pro, migrated fr
 
 See the [v3_0_PROD release](https://github.com/Fluxline-Pro/fluxline-pro-next/releases/tag/v3_0_PROD) for the full PR list.
 
+[v3_6_1.PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_6.PROD...v3_6_1.PROD
 [v3_6.PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_5_PROD...v3_6.PROD
 [v3_5_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_4.PROD...v3_5_PROD
 [v3_2_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_1_PROD...v3_2_PROD
