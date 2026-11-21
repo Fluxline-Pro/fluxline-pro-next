@@ -8,7 +8,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [v3_6_1.PROD] - 2026-11-21
 
-A security patch release: the Next.js 16.4.6 upgrade for the November 19, 2026 advisories, plus the pre-order wording brought in line with the store (press release and RCF Preorder Terms). It reaches production through a `test` → `master` promotion.
+A security patch release: the Next.js 16.4.6 upgrade for the November 19, 2026 advisories, plus the pre-order wording brought in line with the store (press release and RCF Preorder Terms). It also records the store's checkout legal JSON and the Preorder Terms 4.4 wording, which reached production after v3_6.PROD without an entry. It reaches production through a `test` → `master` promotion.
+
+### Added
+
+- `/legal-content/<doc>.json` (`terms-of-use`, `preorder-terms`, `privacy-policy`): a force-static route that publishes the text of the documents a store buyer agrees to, built from the same `src/assets/legal` content the `/legal` pages render, so store.fluxline.pro can show the current version in a checkout modal. `staticwebapp.config.json` serves it with `Access-Control-Allow-Origin: *`.
 
 ### Security
 
@@ -16,6 +20,7 @@ A security patch release: the Next.js 16.4.6 upgrade for the November 19, 2026 a
 
 ### Changed
 
+- RCF Preorder Terms 4.4 quotes the store's new checkout agreement sentence (owner, 2026-11-21); Last Updated moves to November 21, 2026.
 - Pre-order press release ([#435](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/435)) matches the simplified store: the retired Everything Bundle ($109.99) is removed, eBook + Workbook ($39.99) is listed as its own bundle, pre-order prices hold until release instead of ending January 15, 2027, and a dated update note says so.
 - RCF Preorder Terms ([#438](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/438), owner decision): preorder prices and perks last until release instead of ending January 15, 2027 (section 2 key dates and 3.3), matching the store. The cancellation reminder email stays on January 15, 2027. The page header's Last Updated date now matches the document (November 21, 2026). The counsel-final record in `content/legal/2026-11-20/` is unchanged.
 
