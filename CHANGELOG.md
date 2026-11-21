@@ -6,12 +6,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [v3_6_1.PROD] - 2026-11-21
+
+A security patch release: the Next.js 16.4.6 upgrade for the November 19, 2026 advisories, plus the pre-order wording brought in line with the store (press release and RCF Preorder Terms). It also records the store's checkout legal JSON and the Preorder Terms 4.4 wording, which reached production after v3_6.PROD without an entry. It reaches production through a `test` → `master` promotion.
+
+### Added
+
+- `/legal-content/<doc>.json` (`terms-of-use`, `preorder-terms`, `privacy-policy`): a force-static route that publishes the text of the documents a store buyer agrees to, built from the same `src/assets/legal` content the `/legal` pages render, so store.fluxline.pro can show the current version in a checkout modal. `staticwebapp.config.json` serves it with `Access-Control-Allow-Origin: *`.
+
 ### Security
 
 - `next` 16.4.6 and `eslint-config-next` 16.4.6 ([#432](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/432)), for the Next.js advisories of 2026-11-19 (SVG rejection bypass in image optimization, HttpOnly cookie exposure on Edge routes, cache disclosure and poisoning, cross-client response injection) that affect 16.0.0 through 16.4.4. The `eslint-plugin-react-hooks` 7.0.1 and `minimatch` ^10.2.3 `resolutions` pins stay, although the new lint packages ask for ^7.1.0 and ^11.0.1. The new `@next/next/no-location-assign-relative-destination` rule adds 4 lint warnings (49 in all, 0 errors).
 
 ### Changed
 
+- RCF Preorder Terms 4.4 quotes the store's new checkout agreement sentence (owner, 2026-11-21); Last Updated moves to November 21, 2026.
 - Pre-order press release ([#435](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/435)) matches the simplified store: the retired Everything Bundle ($109.99) is removed, eBook + Workbook ($39.99) is listed as its own bundle, pre-order prices hold until release instead of ending January 15, 2027, and a dated update note says so.
 - RCF Preorder Terms ([#438](https://github.com/Fluxline-Pro/fluxline-pro-next/issues/438), owner decision): preorder prices and perks last until release instead of ending January 15, 2027 (section 2 key dates and 3.3), matching the store. The cancellation reminder email stays on January 15, 2027. The page header's Last Updated date now matches the document (November 21, 2026). The counsel-final record in `content/legal/2026-11-20/` is unchanged.
 
@@ -170,6 +179,7 @@ The first production release of the Next.js rebuild of fluxline.pro, migrated fr
 
 See the [v3_0_PROD release](https://github.com/Fluxline-Pro/fluxline-pro-next/releases/tag/v3_0_PROD) for the full PR list.
 
+[v3_6_1.PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_6.PROD...v3_6_1.PROD
 [v3_6.PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_5_PROD...v3_6.PROD
 [v3_5_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_4.PROD...v3_5_PROD
 [v3_2_PROD]: https://github.com/Fluxline-Pro/fluxline-pro-next/compare/v3_1_PROD...v3_2_PROD
