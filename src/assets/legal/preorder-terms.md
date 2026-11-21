@@ -3,7 +3,7 @@
 **Fluxline Resonance Group, LLC, doing business as Fluxline**  
 **Version:** 2.0  
 **Effective Date:** November 20, 2026  
-**Last Updated:** November 20, 2026  
+**Last Updated:** November 21, 2026  
 **Replaces:** RCF Preorder Terms effective November 6, 2026  
 **Applies to:** Preorders of digital editions of *The Resonance Core Framework™* placed on store.fluxline.pro
 
@@ -61,7 +61,7 @@ We publish only the release window, not a release day. If the release moves beyo
 
 **4.3 Adults only.** Fluxline products are for people 18 and older. By placing a preorder, you represent that you are 18 or older. If you have an account, you confirm this the first time you check out with it, unless you already have. Guest buyers see an 18+ notice at checkout.
 
-**4.4 Required agreement.** Before you pay, you tick one box, with this exact text: **"I have read and agree to the Terms of Use, RCF Preorder Terms, and Privacy Policy, including the class-action waiver, subscription renewal terms, and age attestation, and I understand Fluxline's refund policy."** Each document name links to the current version on fluxline.pro/legal. We store the version of the text you agreed to and the time you agreed with your order, as dispute evidence. If these Preorder Terms change while your checkout page is open, we reload the page so you see the current version before you can agree.
+**4.4 Required agreement.** Before you pay, you tick one box, with this exact text: **"I have read and agree to Fluxline's Terms of Use, RCF Preorder Terms, and Privacy Policy as set forth in these documents, including its class-action waiver, subscription renewal terms, and age attestation, and understand Fluxline's Refund Policy."** Each document name opens its current version. We store the version of the text you agreed to and the time you agreed with your order, as dispute evidence. If these Preorder Terms change while your checkout page is open, we reload the page so you see the current version before you can agree.
 
 **4.5 Payment.** Your payment is handled by our payment processor. Apple Pay and Google Pay may be offered. Prices are in U.S. dollars. Applicable taxes are shown before you pay.
 
